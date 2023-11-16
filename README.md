@@ -1,2 +1,3 @@
 # rigour
-Data cleaning and validation functions for FtM processing
+
+Data cleaning and validation functions for FtM processing.
