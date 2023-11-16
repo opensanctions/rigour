@@ -12,7 +12,7 @@ jobs:
             - "3.11"
             - "3.12"
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - name: Show ref
         run: |
           echo "$GITHUB_REF"
