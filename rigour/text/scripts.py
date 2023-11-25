@@ -1,3 +1,4 @@
+import unicodedata
 from functools import lru_cache
 from typing import Tuple
 
@@ -12,6 +13,21 @@ def char_tags(char: str) -> Tuple[int, ...]:
         if start <= codepoint <= end:
             return tags
     return ()
+
+
+@lru_cache(maxsize=5000)
+def is_alpha(char: str) -> bool:
+    """Check if a character is alphabetic. This improves on the function implemented on
+    `str` by including characters for the whole unicode range."""
+    category = unicodedata.category(char)[0]
+    return category == "L"
+
+
+@lru_cache(maxsize=5000)
+def is_alphanum(char: str) -> bool:
+    """Check if a character is alpha-numeric."""
+    category = unicodedata.category(char)[0]
+    return category in ("L", "N")
 
 
 def is_modern_alphabet(word: str) -> bool:
