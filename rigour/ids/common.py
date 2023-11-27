@@ -24,19 +24,19 @@ class StdnumImpl(Protocol):
 
     @classmethod
     def is_valid(cls, value: str) -> bool:
-        ...
+        ...  # pragma: no cover
 
     @classmethod
     def validate(cls, value: str) -> str:
-        ...
+        ...  # pragma: no cover
 
     @classmethod
     def compact(cls, value: str) -> str:
-        ...
+        ...  # pragma: no cover
 
     @classmethod
     def format(cls, value: str) -> str:
-        ...
+        ...  # pragma: no cover
 
 
 class StdnumType(IdentifierType):
