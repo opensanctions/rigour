@@ -9,5 +9,5 @@ def env_str(name: str, default: str) -> str:
     return default if value is None else value
 
 
-TZ_NAME = env_str("TZ_NAME", "UTC")
+TZ_NAME = env_str("TZ", "UTC")
 TZ = ZoneInfo(TZ_NAME)
