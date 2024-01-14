@@ -1,9 +1,11 @@
+from typing import Dict
+
 from rigour.ids.wikidata import WikidataQID
 from rigour.ids.stdnum_ import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI
 from rigour.ids.ogrn import OGRN
 from rigour.ids.common import IdentifierType
 
-FORMATS = {
+FORMATS: Dict[str, type[IdentifierType]] = {
     "wikidata": WikidataQID,
     "qid": WikidataQID,
     "ogrn": OGRN,
