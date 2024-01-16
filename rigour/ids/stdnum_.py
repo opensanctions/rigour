@@ -10,7 +10,7 @@ class IMO(StdnumType):
 
     TITLE = "IMO"
 
-    impl = imo  # type: ignore
+    impl = imo
 
 
 class ISIN(StdnumType):
@@ -18,7 +18,7 @@ class ISIN(StdnumType):
 
     TITLE = "ISIN"
 
-    impl = isin  # type: ignore
+    impl = isin
 
     @classmethod
     def format(cls, value: str) -> str:
@@ -30,7 +30,7 @@ class IBAN(StdnumType):
 
     TITLE = "IBAN"
 
-    impl = iban  # type: ignore
+    impl = iban
 
 
 class FIGI(StdnumType):
@@ -38,7 +38,7 @@ class FIGI(StdnumType):
 
     TITLE = "FIGI"
 
-    impl = figi  # type: ignore
+    impl = figi
 
     @classmethod
     def format(cls, value: str) -> str:
@@ -50,7 +50,7 @@ class BIC(StdnumType):
 
     TITLE = "BIC"
 
-    impl = bic  # type: ignore
+    impl = bic
 
     @classmethod
     def normalize(cls, value: str) -> Optional[str]:
@@ -65,7 +65,7 @@ class INN(StdnumType):
 
     TITLE = "INN"
 
-    impl = inn  # type: ignore
+    impl = inn
 
     @classmethod
     def format(cls, value: str) -> str:
@@ -77,7 +77,7 @@ class LEI(StdnumType):
 
     TITLE = "LEI"
 
-    impl = lei  # type: ignore
+    impl = lei
 
     @classmethod
     def format(cls, value: str) -> str:
