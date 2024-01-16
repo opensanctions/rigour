@@ -12,7 +12,9 @@ def is_qid(text: str) -> bool:
 
 
 class WikidataQID(IdentifierType):
-    """A wikidata QID."""
+    """A wikidata item identifier."""
+
+    TITLE: str = "Wikidata QID"
 
     @classmethod
     def is_valid(cls, text: str) -> bool:

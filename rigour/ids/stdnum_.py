@@ -8,13 +8,17 @@ from rigour.ids.common import StdnumType
 class IMO(StdnumType):
     """An IMO number for a ship."""
 
-    impl = imo
+    TITLE = "IMO"
+
+    impl = imo  # type: ignore
 
 
 class ISIN(StdnumType):
     """An ISIN number for a security."""
 
-    impl = isin
+    TITLE = "ISIN"
+
+    impl = isin  # type: ignore
 
     @classmethod
     def format(cls, value: str) -> str:
@@ -24,13 +28,17 @@ class ISIN(StdnumType):
 class IBAN(StdnumType):
     """An IBAN number for a bank account."""
 
-    impl = iban
+    TITLE = "IBAN"
+
+    impl = iban  # type: ignore
 
 
 class FIGI(StdnumType):
-    """A FIGI number for a security."""
+    """A FIGI number for a security, as managed by OpenFIGI."""
 
-    impl = figi
+    TITLE = "FIGI"
+
+    impl = figi  # type: ignore
 
     @classmethod
     def format(cls, value: str) -> str:
@@ -40,7 +48,9 @@ class FIGI(StdnumType):
 class BIC(StdnumType):
     """BIC (ISO 9362 Business identifier codes)."""
 
-    impl = bic
+    TITLE = "BIC"
+
+    impl = bic  # type: ignore
 
     @classmethod
     def normalize(cls, value: str) -> Optional[str]:
@@ -51,9 +61,11 @@ class BIC(StdnumType):
 
 
 class INN(StdnumType):
-    """INN (Russian tax identification number)."""
+    """Russian tax identification number."""
 
-    impl = inn
+    TITLE = "INN"
+
+    impl = inn  # type: ignore
 
     @classmethod
     def format(cls, value: str) -> str:
@@ -61,9 +73,11 @@ class INN(StdnumType):
 
 
 class LEI(StdnumType):
-    """LEI (Legal Entity Identifier)."""
+    """Legal Entity Identifier (ISO 17442)"""
 
-    impl = lei
+    TITLE = "LEI"
+
+    impl = lei  # type: ignore
 
     @classmethod
     def format(cls, value: str) -> str:

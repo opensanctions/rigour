@@ -5,6 +5,8 @@ from stdnum.exceptions import ValidationError  # type: ignore
 class IdentifierType(object):
     """Base class for identifier types."""
 
+    TITLE: str = "Generic identifier"
+
     @classmethod
     def is_valid(cls, value: str) -> bool:
         norm = cls.normalize(value)

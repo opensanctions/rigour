@@ -57,12 +57,12 @@ def clean_url_compare(text: str) -> Optional[str]:
     parsed = _clean_url(text)
     if parsed is None:
         return None
-    if parsed.scheme == 'https':
-        parsed = parsed._replace(scheme='http')
+    if parsed.scheme == "https":
+        parsed = parsed._replace(scheme="http")
     hostname = parsed.netloc.lower()
-    hostname = hostname.replace('www.', '')
+    hostname = hostname.replace("www.", "")
     parsed = parsed._replace(netloc=hostname)
-    parsed = parsed._replace(fragment='')
+    parsed = parsed._replace(fragment="")
     query = parse_qsl(parsed.query, keep_blank_values=False)
     parsed = parsed._replace(query=urlencode(sorted(query)))
     return parsed.geturl()
