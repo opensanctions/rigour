@@ -2,17 +2,17 @@ import pytest
 
 from rigour.ids import get_identifier_format, get_identifier_formats
 from rigour.ids import get_identifier_format_names
-from rigour.ids.common import IdentifierType
-from rigour.ids.strict import StrictIdentifier
+from rigour.ids.common import IdentifierFormat
+from rigour.ids.strict import StrictFormat
 
 def test_get_identifier_format():
-    assert issubclass(get_identifier_format("wikidata"), IdentifierType)
-    assert issubclass(get_identifier_format("qid"), IdentifierType)
+    assert issubclass(get_identifier_format("wikidata"), IdentifierFormat)
+    assert issubclass(get_identifier_format("qid"), IdentifierFormat)
     assert get_identifier_format("wikidata") == get_identifier_format("qid")
     assert pytest.raises(KeyError, get_identifier_format, "foo")
-    assert get_identifier_format("generic") == IdentifierType
-    assert get_identifier_format("null") == IdentifierType
-    assert get_identifier_format("strict") == StrictIdentifier
+    assert get_identifier_format("generic") == IdentifierFormat
+    assert get_identifier_format("null") == IdentifierFormat
+    assert get_identifier_format("strict") == StrictFormat
 
 def test_get_identifier_format_names():
     assert "wikidata" in get_identifier_format_names()
@@ -31,16 +31,16 @@ def test_get_identifier_formats():
         assert len(fmt['title']) > 1, fmt
 
 def test_generic_identifier():
-    assert IdentifierType.is_valid("foo") is True
-    assert IdentifierType.is_valid("") is False
-    assert IdentifierType.normalize("foo") == 'foo'
-    assert IdentifierType.normalize("foo ") == 'foo'
+    assert IdentifierFormat.is_valid("foo") is True
+    assert IdentifierFormat.is_valid("") is False
+    assert IdentifierFormat.normalize("foo") == 'foo'
+    assert IdentifierFormat.normalize("foo ") == 'foo'
 
 def test_strict_identifier():
-    assert StrictIdentifier.is_valid("foo") is True
-    assert StrictIdentifier.is_valid("") is False
-    assert StrictIdentifier.normalize("foo") == 'FOO'
-    assert StrictIdentifier.normalize("foo ") == 'FOO'
-    assert StrictIdentifier.normalize("F-OO") == 'FOO'
-    assert StrictIdentifier.normalize("FäOO") == 'FAOO'
-    assert StrictIdentifier.normalize("") is None
+    assert StrictFormat.is_valid("foo") is True
+    assert StrictFormat.is_valid("") is False
+    assert StrictFormat.normalize("foo") == 'FOO'
+    assert StrictFormat.normalize("foo ") == 'FOO'
+    assert StrictFormat.normalize("F-OO") == 'FOO'
+    assert StrictFormat.normalize("FäOO") == 'FAOO'
+    assert StrictFormat.normalize("") is None

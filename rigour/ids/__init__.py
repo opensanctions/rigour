@@ -4,7 +4,7 @@ from typing_extensions import TypedDict
 from rigour.ids.wikidata import WikidataQID
 from rigour.ids.stdnum_ import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI
 from rigour.ids.ogrn import OGRN
-from rigour.ids.strict import StrictIdentifier
+from rigour.ids.strict import StrictFormat
 from rigour.ids.common import IdentifierFormat
 
 FORMATS: Dict[str, Type[IdentifierFormat]] = {
@@ -22,7 +22,7 @@ FORMATS: Dict[str, Type[IdentifierFormat]] = {
     "lei": LEI,
     "generic": IdentifierFormat,
     "null": IdentifierFormat,
-    "strict": StrictIdentifier,
+    "strict": StrictFormat,
 }
 
 
