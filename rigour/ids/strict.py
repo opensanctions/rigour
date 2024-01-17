@@ -1,10 +1,10 @@
 from typing import Optional
 from normality.transliteration import ascii_text
 
-from rigour.ids.common import IdentifierType
+from rigour.ids.common import IdentifierFormat
 
 
-class StrictIdentifier(IdentifierType):
+class StrictIdentifier(IdentifierFormat):
     """A generic identifier type that applies harsh normalization."""
 
     TITLE: str = "Strict identifier"

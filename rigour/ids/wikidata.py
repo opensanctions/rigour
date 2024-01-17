@@ -1,7 +1,7 @@
 import re
 from typing import Optional
 
-from rigour.ids.common import IdentifierType
+from rigour.ids.common import IdentifierFormat
 
 QID = re.compile(r"^Q(\d+)$")
 
@@ -11,7 +11,7 @@ def is_qid(text: str) -> bool:
     return QID.match(text) is not None
 
 
-class WikidataQID(IdentifierType):
+class WikidataQID(IdentifierFormat):
     """A wikidata item identifier."""
 
     TITLE: str = "Wikidata QID"

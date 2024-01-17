@@ -2,10 +2,10 @@ from typing import Optional
 from stdnum import imo, isin, iban, figi, bic, lei  # type: ignore
 from stdnum.ru import inn  # type: ignore
 
-from rigour.ids.common import StdnumType
+from rigour.ids.common import StdnumFormat
 
 
-class IMO(StdnumType):
+class IMO(StdnumFormat):
     """An IMO number for a ship."""
 
     TITLE = "IMO"
@@ -13,7 +13,7 @@ class IMO(StdnumType):
     impl = imo
 
 
-class ISIN(StdnumType):
+class ISIN(StdnumFormat):
     """An ISIN number for a security."""
 
     TITLE = "ISIN"
@@ -25,7 +25,7 @@ class ISIN(StdnumType):
         return value.upper()
 
 
-class IBAN(StdnumType):
+class IBAN(StdnumFormat):
     """An IBAN number for a bank account."""
 
     TITLE = "IBAN"
@@ -33,7 +33,7 @@ class IBAN(StdnumType):
     impl = iban
 
 
-class FIGI(StdnumType):
+class FIGI(StdnumFormat):
     """A FIGI number for a security, as managed by OpenFIGI."""
 
     TITLE = "FIGI"
@@ -45,7 +45,7 @@ class FIGI(StdnumType):
         return value.upper()
 
 
-class BIC(StdnumType):
+class BIC(StdnumFormat):
     """BIC (ISO 9362 Business identifier codes)."""
 
     TITLE = "BIC"
@@ -60,7 +60,7 @@ class BIC(StdnumType):
         return norm
 
 
-class INN(StdnumType):
+class INN(StdnumFormat):
     """Russian tax identification number."""
 
     TITLE = "INN"
@@ -72,7 +72,7 @@ class INN(StdnumType):
         return value
 
 
-class LEI(StdnumType):
+class LEI(StdnumFormat):
     """Legal Entity Identifier (ISO 17442)"""
 
     TITLE = "LEI"

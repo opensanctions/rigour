@@ -2,7 +2,7 @@ from typing import Optional, Protocol
 from stdnum.exceptions import ValidationError  # type: ignore
 
 
-class IdentifierType(object):
+class IdentifierFormat(object):
     """Base class for identifier types."""
 
     TITLE: str = "Generic identifier"
@@ -41,7 +41,7 @@ class StdnumImpl(Protocol):
         ...  # pragma: no cover
 
 
-class StdnumType(IdentifierType):
+class StdnumFormat(IdentifierFormat):
     """Base class for stdnum-based identifier types."""
 
     impl: StdnumImpl

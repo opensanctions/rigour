@@ -1,12 +1,12 @@
 import re
 from typing import Optional
 
-from rigour.ids.common import IdentifierType
+from rigour.ids.common import IdentifierFormat
 
 OGRN_RE = re.compile(r"\b(\d{13}|\d{15})\b")
 
 
-class OGRN(IdentifierType):
+class OGRN(IdentifierFormat):
     """Primary State Registration Number (Russian company registration)."""
 
     TITLE: str = "OGRN"

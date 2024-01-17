@@ -1,13 +1,13 @@
-from typing import Dict, List
+from typing import Dict, List, Type
 from typing_extensions import TypedDict
 
 from rigour.ids.wikidata import WikidataQID
 from rigour.ids.stdnum_ import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI
 from rigour.ids.ogrn import OGRN
 from rigour.ids.strict import StrictIdentifier
-from rigour.ids.common import IdentifierType
+from rigour.ids.common import IdentifierFormat
 
-FORMATS: Dict[str, type[IdentifierType]] = {
+FORMATS: Dict[str, Type[IdentifierFormat]] = {
     "wikidata": WikidataQID,
     "qid": WikidataQID,
     "ogrn": OGRN,
@@ -20,8 +20,8 @@ FORMATS: Dict[str, type[IdentifierType]] = {
     "swift": BIC,
     "inn": INN,
     "lei": LEI,
-    "generic": IdentifierType,
-    "null": IdentifierType,
+    "generic": IdentifierFormat,
+    "null": IdentifierFormat,
     "strict": StrictIdentifier,
 }
 
@@ -34,7 +34,7 @@ class FormatSpec(TypedDict):
     description: str
 
 
-def get_identifier_format(name: str) -> type[IdentifierType]:
+def get_identifier_format(name: str) -> Type[IdentifierFormat]:
     """Get the identifier type class for the given format name."""
     return FORMATS[name]
 
