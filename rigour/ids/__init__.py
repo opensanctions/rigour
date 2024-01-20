@@ -59,7 +59,8 @@ def get_identifier_formats() -> List[FormatSpec]:
 
 
 __all__ = [
-    "IdentifierType",
+    "IdentifierFormat",
+    "StrictFormat",
     "WikidataQID",
     "OGRN",
     "IMO",
