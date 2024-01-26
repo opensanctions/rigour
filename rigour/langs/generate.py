@@ -17,7 +17,7 @@ ISO2_MAP: Dict[str, str] = %r  # noqa
 """
 
 
-def update_data():
+def update_data() -> None:
     iso3_ids = set()
     iso2_map = {}
     iso3_map = {}
