@@ -40,3 +40,5 @@ markdown_extensions:
 
 nav:
   - Overview: index.md
+  - Identifiers: ids.md
+  - Languages: langs.md
