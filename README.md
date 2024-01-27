@@ -13,3 +13,8 @@ You can just grab the library from PyPI:
 pip install -U rigour
 ```
 
+## Usage & documentation 
+
+See: https://opensanctions.github.io/rigour/
+
+

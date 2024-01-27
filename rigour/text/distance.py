@@ -10,11 +10,11 @@ MAX_TEXT = 128
 @lru_cache(maxsize=CACHE)
 def dam_levenshtein(left: str, right: str) -> int:
     """Compute the Damerau-Levenshtein distance between two strings.
-    
+
     Args:
         left: A string.
         right: A string.
-        
+
     Returns:
         An integer of changed characters.
     """
@@ -26,11 +26,11 @@ def dam_levenshtein(left: str, right: str) -> int:
 @lru_cache(maxsize=CACHE)
 def levenshtein(left: str, right: str) -> int:
     """Compute the Levenshtein distance between two strings.
-    
+
     Args:
         left: A string.
         right: A string.
-        
+
     Returns:
         An integer of changed characters.
     """
@@ -47,13 +47,13 @@ def levenshtein_similarity(
 ) -> float:
     """Compute the levenshtein similarity of two strings. The similiarity is
     the percentage distance measured against the length of the longest string.
-    
+
     Args:
         left: A string.
         right: A string.
         max_edits: The maximum number of edits allowed.
         max_percent: The maximum percentage of edits allowed.
-        
+
     Returns:
         A float between 0.0 and 1.0.
     """
@@ -73,14 +73,13 @@ def levenshtein_similarity(
 @lru_cache(maxsize=CACHE)
 def jaro_winkler(left: str, right: str) -> float:
     """Compute the Jaro-Winkler similarity of two strings.
-    
+
     Args:
         left: A string.
         right: A string.
-        
+
     Returns:
         A float between 0.0 and 1.0.
     """
     score = jaro_winkler_similarity(left[:MAX_TEXT], right[:MAX_TEXT])
     return score if score > 0.6 else 0.0
-
