@@ -1,3 +1,7 @@
+.PHONY: docs
+
+check: build typecheck test
+
 typecheck:
 	mypy --strict rigour
 
@@ -9,3 +13,6 @@ build-iso639:
 
 build: build-iso639
 	black rigour/data
+
+docs:
+	mkdocs build -c -d site

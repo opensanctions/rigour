@@ -54,6 +54,13 @@ setup(
             "types-PyYAML",
             "coverage>=4.1",
         ],
+        "docs": [
+            "pillow",
+            "cairosvg",
+            "mkdocs",
+            "mkdocstrings[python]",
+            "mkdocs-material",
+        ],
     },
     entry_points={
         "babel.extractors": {},

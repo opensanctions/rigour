@@ -1,0 +1,3 @@
+# rigour 
+
+Data processing library
