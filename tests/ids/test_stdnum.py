@@ -1,4 +1,4 @@
-from rigour.ids import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI
+from rigour.ids import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI, CPF
 
 
 def test_imo():
@@ -76,3 +76,14 @@ def test_lei():
     assert LEI.normalize("1595VL9OPPQ5THEK2X30") == "1595VL9OPPQ5THEK2X30"
     assert LEI.normalize("1595VL9OPPQ5THEK") is None
     assert LEI.normalize("") is None
+
+
+def test_cpf():
+    assert CPF.is_valid("11144477735")
+    assert not CPF.is_valid("1114447773")
+    assert not CPF.is_valid("111444777355")
+    assert not CPF.is_valid("")
+    assert CPF.format("11144477735") == "11144477735"
+    assert CPF.normalize("11144477735") == "11144477735"
+    assert CPF.normalize("1114447773") is None
+    assert CPF.normalize("") is None

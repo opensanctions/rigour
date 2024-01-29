@@ -1,6 +1,7 @@
 from typing import Optional
 from stdnum import imo, isin, iban, figi, bic, lei  # type: ignore
 from stdnum.ru import inn  # type: ignore
+from stdnum.br import cpf  # type: ignore
 
 from rigour.ids.common import StdnumFormat
 
@@ -78,6 +79,18 @@ class LEI(StdnumFormat):
     TITLE = "LEI"
 
     impl = lei
+
+    @classmethod
+    def format(cls, value: str) -> str:
+        return value.upper()
+
+
+class CPF(StdnumFormat):
+    """Cadastro de Pessoas Físicas, Brazilian national identifier"""
+
+    TITLE = "CPF"
+
+    impl = cpf
 
     @classmethod
     def format(cls, value: str) -> str:
