@@ -44,6 +44,7 @@ setup(
             "bump2version",
             "wheel>=0.29.0",
             "black",
+            "build",
             "twine",
             "mypy",
             "pytest",
