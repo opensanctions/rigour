@@ -1,4 +1,4 @@
-from rigour.ids import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI, CPF
+from rigour.ids import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI, CPF, CNPJ
 
 
 def test_imo():
@@ -88,3 +88,14 @@ def test_cpf():
     assert CPF.normalize("044.858.476-08") == '04485847608'
     assert CPF.normalize("1114447773") is None
     assert CPF.normalize("") is None
+
+def test_cnpj():
+    assert CNPJ.is_valid("00000000000191")
+    assert not CNPJ.is_valid("0000000000191")
+    assert not CNPJ.is_valid("111447355")
+    assert not CNPJ.is_valid("")
+    assert CNPJ.format("00000000000191") == "00.000.000/0001-91"
+    assert CNPJ.normalize("00000000000191") == "00000000000191"
+    assert CNPJ.normalize("00.000.000/0001-91") == "00000000000191"
+    assert CNPJ.normalize("0000000000019") is None
+    assert CNPJ.normalize("") is None
