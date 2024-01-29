@@ -84,23 +84,10 @@ def test_cpf():
     assert not CPF.is_valid("111444777355")
     assert not CPF.is_valid("")
     assert CPF.format("11144477735") == "11144477735"
-    assert CPF.normalize("11144477735") == "11144477735"
-    assert CPF.normalize("1114447773") == ""
-    assert CPF.normalize("") == ""
-    assert CPF.normalize("123.456.789-00") == "12345678900"
-    assert CPF.normalize("123456.789-00") == "12345678900"
-    assert CPF.normalize("123..456.789-00") == "12345678900"
-    assert CPF.normalize("123..456.789-000") == "123456789000"
 
 def test_cnpj():
-    # expected input
-     assert CNPJ.normalize("12.345.678/9101-12") == "12345678910112"
-
-     # if it's already clean, then returns as is
-     assert CNPJ.normalize("12345678910112") == "12345678910112"
-
-     # if it's invalid then returns without punctuation
-     assert CNPJ.normalize("abc") == "abc"
-
-     # if it's invalid then returns without the CNPJ punctuation
-     assert CNPJ.normalize("12345678910112)[]") == "12345678910112)[]"
+     assert CNPJ.is_valid("00000000000191")
+     assert not CNPJ.is_valid("00020000000191")
+     assert not CNPJ.is_valid("000200000191")
+     assert not CNPJ.is_valid("")
+     assert CNPJ.format("00000000000191") == "00000000000191"

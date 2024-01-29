@@ -96,23 +96,6 @@ class CPF(StdnumFormat):
     def format(cls, value: str) -> str:
         return value.upper()
 
-    @classmethod
-    def normalize(cls, value: str) -> str:
-        """Remove punctuation from a CPF number.
-        If it is already clean, it will return it as is.
-        The CPF number is a Brazilian tax identification number for individuals
-        that is formatted with punctuation (XXX.XXX.XXX-XX) to make it easier to
-        read. However, when saving the CPF number in the database, it's common
-        to remove the punctuation.
-        Args:
-            cpf: The CPF number to be cleaned.
-        Returns:
-            The cleaned CPF number.
-        """
-
-        # Remove formatting characters
-        return value.replace(".", "").replace("-", "")
-
 class CNPJ(StdnumFormat):
     """Cadastro Nacional de Pessoas Jurídicas, Brazilian companies national identifier"""
 
@@ -123,20 +106,3 @@ class CNPJ(StdnumFormat):
     @classmethod
     def format(cls, value: str) -> str:
         return value.upper()
-
-    @classmethod
-    def normalize(cls, value: str) -> str:
-        """Remove punctuation from a CNPJ number.
-        If it is already clean, it will return it as is.
-        The CNPJ number is a Brazilian tax identification number for companies
-        that is typically formatted with punctuation (XX.XXX.XXX/XXXX-XX) to make
-        it easier to read. However, when saving the CNPJ number in a database, 
-        it's common to remove the punctuation.
-        Args:
-            cnpj: The CNPJ number to be cleaned.
-        Returns:
-            The cleaned CNPJ number or an empty string if the CNPJ is not valid.
-        """
-
-        # Remove formatting characters
-        return cnpj.replace(".", "").replace("/", "").replace("-", "")
