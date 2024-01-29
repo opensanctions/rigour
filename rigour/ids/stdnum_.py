@@ -94,4 +94,4 @@ class CPF(StdnumFormat):
 
     @classmethod
     def format(cls, value: str) -> str:
-        return value.upper()
+        return str(cpf.format(value))

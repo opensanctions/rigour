@@ -79,12 +79,12 @@ def test_lei():
 
 
 def test_cpf():
-    assert CPF.is_valid("11144477735")
-    assert not CPF.is_valid("1114447773")
-    assert not CPF.is_valid("111444777355")
+    assert CPF.is_valid("04485847608")
+    assert not CPF.is_valid("334")
+    assert not CPF.is_valid("33467854")
     assert not CPF.is_valid("")
-    assert CPF.format("11144477735") == "11144477735"
-    assert CPF.normalize("11144477735") == "11144477735"
-    assert CPF.normalize("334.678.543-90") == '33467854390'
+    assert CPF.format("33467854390") == "334.678.543-90"
+    assert CPF.normalize("04485847608") == "04485847608"
+    assert CPF.normalize("044.858.476-08") == '04485847608'
     assert CPF.normalize("1114447773") is None
     assert CPF.normalize("") is None
