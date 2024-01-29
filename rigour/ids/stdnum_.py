@@ -1,7 +1,7 @@
 from typing import Optional
 from stdnum import imo, isin, iban, figi, bic, lei  # type: ignore
 from stdnum.ru import inn  # type: ignore
-from stdnum.br import cpf  # type: ignore
+from stdnum.br import cpf, cnpj  # type: ignore
 
 from rigour.ids.common import StdnumFormat
 
@@ -95,3 +95,14 @@ class CPF(StdnumFormat):
     @classmethod
     def format(cls, value: str) -> str:
         return str(cpf.format(value))
+
+class CNPJ(StdnumFormat):
+    """Cadastro Nacional de Pessoas Jurídicas, Brazilian national companies identifier"""
+
+    TITLE = "CNPJ"
+
+    impl = cnpj
+
+    @classmethod
+    def format(cls, value: str) -> str:
+        return str(cnpj.format(value))
