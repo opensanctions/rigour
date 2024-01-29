@@ -3,7 +3,7 @@ from typing_extensions import TypedDict
 
 from rigour.ids.wikidata import WikidataQID
 from rigour.ids.stdnum_ import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI
-from rigour.ids.stdnum_ import CPF
+from rigour.ids.stdnum_ import CPF, CNPJ
 from rigour.ids.ogrn import OGRN
 from rigour.ids.strict import StrictFormat
 from rigour.ids.common import IdentifierFormat
@@ -22,6 +22,7 @@ FORMATS: Dict[str, Type[IdentifierFormat]] = {
     "inn": INN,
     "lei": LEI,
     "cpf": CPF,
+    "cnpj": CNPJ,
     "generic": IdentifierFormat,
     "null": IdentifierFormat,
     "strict": StrictFormat,
