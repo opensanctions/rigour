@@ -85,5 +85,6 @@ def test_cpf():
     assert not CPF.is_valid("")
     assert CPF.format("11144477735") == "11144477735"
     assert CPF.normalize("11144477735") == "11144477735"
+    assert CPF.normalize("334.678.543-90") == '33467854390'
     assert CPF.normalize("1114447773") is None
     assert CPF.normalize("") is None
