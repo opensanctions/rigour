@@ -84,6 +84,11 @@ def test_cpf():
     assert not CPF.is_valid("111444777355")
     assert not CPF.is_valid("")
     assert CPF.format("11144477735") == "11144477735"
+    assert CPF.normalize("11144477735") == "11144477735"
+    assert CPF.normalize("1114447773") == "1114447773"
+    assert CPF.normalize("") == ""  
+    assert CPF.normalize("111.444.777-35") == "11144477735"
+    assert CPF.normalize("111.444.777=35") == "111444777=35"
 
 def test_cnpj():
      assert CNPJ.is_valid("00000000000191")
@@ -91,3 +96,7 @@ def test_cnpj():
      assert not CNPJ.is_valid("000200000191")
      assert not CNPJ.is_valid("")
      assert CNPJ.format("00000000000191") == "00000000000191"
+     assert CNPJ.normalize("00000000000191") == "00000000000191"
+     assert CNPJ.normalize("") == ""
+     assert CNPJ.normalize("00.000.000/0001-91") == "00000000000191"
+     assert CNPJ.normalize("00.000.000/0001=91") == "000000000001=91"

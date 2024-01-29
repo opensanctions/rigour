@@ -96,6 +96,10 @@ class CPF(StdnumFormat):
     def format(cls, value: str) -> str:
         return value.upper()
 
+    @classmethod
+    def normalize(cls, value: str) -> str:
+        return super().compact(value)
+
 class CNPJ(StdnumFormat):
     """Cadastro Nacional de Pessoas Jurídicas, Brazilian companies national identifier"""
 
@@ -106,3 +110,7 @@ class CNPJ(StdnumFormat):
     @classmethod
     def format(cls, value: str) -> str:
         return value.upper()
+
+    @classmethod
+    def normalize(cls, value: str) -> str:
+        return super().compact(value)
