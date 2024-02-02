@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Any
 from functools import cached_property
 from normality import ascii_text, WS
 
@@ -40,9 +40,9 @@ class NamePart(object):
                 return out
         return None
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: Any) -> bool:
         try:
-            return self.lower == other.lower
+            return not other.lower != self.lower
         except AttributeError:
             return False
 
