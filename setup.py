@@ -5,7 +5,7 @@ with open("README.md") as f:
 
 setup(
     name="rigour",
-    version="0.4.3",
+    version="0.4.4",
     author="OpenSanctions",
     author_email="tech@opensanctions.org",
     url="https://followthemoney.tech/",
