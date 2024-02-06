@@ -9,7 +9,7 @@ setup(
     version="0.4.5",
     author="OpenSanctions",
     author_email="tech@opensanctions.org",
-    url="https://followthemoney.tech/",
+    url="https://opensanctions.github.io/rigour/",
     long_description=long_description,
     long_description_content_type="text/markdown",
     license="MIT",

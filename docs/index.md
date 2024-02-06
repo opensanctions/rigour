@@ -4,4 +4,6 @@ Data cleaning and validation functions for processing various types of text eman
 and country codes, corporate and tax identifiers, etc.
 
 * [Identifiers](ids.md)
+* [Person and organisation names](names.md)
 * [Languages](langs.md)
+* [NIME types](mime.md)
