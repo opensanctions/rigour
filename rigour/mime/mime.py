@@ -1,4 +1,5 @@
 from typing import Optional
+
 from rigour.mime.parse import MIMEType
 from rigour.mime.types import DEFAULT, PLAIN
 

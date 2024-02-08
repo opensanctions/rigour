@@ -77,3 +77,18 @@ def test_pick_titlecase():
     name = pick_name(names)
     assert name is not None
     assert "Putin" in name, names
+
+
+def test_pick_weird():
+    values = ["Banana", "banana", "nanana", "Batman"]
+    assert pick_name(values) == "Banana"
+    assert pick_name(["Banana"]) == "Banana"
+    assert pick_name([]) is None
+    values = ["Robert Smith", "Rob Smith", "Robert SMITH"]
+    assert pick_name(values) == "Robert SMITH"
+
+    # handle dirty edgecases
+    values = ["", "(", "Peter"]
+    assert pick_name(values) == "Peter"
+    values = ["", "("]
+    assert pick_name(values) is None
