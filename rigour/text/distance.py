@@ -1,3 +1,4 @@
+import math
 from typing import Optional
 from functools import lru_cache
 from jellyfish import damerau_levenshtein_distance, levenshtein_distance
@@ -63,7 +64,7 @@ def levenshtein_similarity(
     if left_len == 0 or right_len == 0:
         return 0.0
     # Skip results with an overall distance of more than N characters:
-    pct_edits = min(left_len, right_len) * max_percent
+    pct_edits = math.ceil(min(left_len, right_len) * max_percent)
     max_edits_ = min(max_edits, pct_edits) if max_edits is not None else pct_edits
     if distance > max_edits_:
         return 0.0
