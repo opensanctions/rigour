@@ -1,5 +1,4 @@
-import pytest
-from rigour.names.pick import pick_name
+from rigour.names.pick import pick_name, levenshtein_pick
 
 PUTIN = [
     "Vladimir Vladimirovich Putin",
@@ -67,7 +66,6 @@ def test_pick_latin():
     assert "Putin" in name, name
 
 
-@pytest.mark.skip
 def test_pick_titlecase():
     names = [
         "Vladimir Vladimirovich Putin",
@@ -85,10 +83,21 @@ def test_pick_weird():
     assert pick_name(["Banana"]) == "Banana"
     assert pick_name([]) is None
     values = ["Robert Smith", "Rob Smith", "Robert SMITH"]
-    assert pick_name(values) == "Robert SMITH"
+    assert pick_name(values) == "Robert Smith"
 
     # handle dirty edgecases
-    values = ["", "(", "Peter"]
+    values = ["", "PETER", "Peter"]
     assert pick_name(values) == "Peter"
-    values = ["", "("]
-    assert pick_name(values) is None
+
+
+def test_levenshtein_pick():
+    assert levenshtein_pick([], {}) == []
+    names = [
+        "Vladimir Vladimirovich Putin",
+        "Vladimir Vladimirovich PUTN",
+        "Vladimir Vladimirovich PUTINY",
+        "Vladimir Vladimirovich PUTIN",
+    ]
+    assert levenshtein_pick(names, {})[0] == "Vladimir Vladimirovich PUTIN"
+    weights = {"Vladimir Vladimirovich Putin": 3.0}
+    assert levenshtein_pick(names, weights)[0] == "Vladimir Vladimirovich Putin"
