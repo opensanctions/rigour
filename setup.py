@@ -6,7 +6,7 @@ with open("README.md") as f:
 setup(
     name="rigour",
     description="Business data validation and normalization library.",
-    version="0.5.0",
+    version="0.5.1",
     author="OpenSanctions",
     author_email="tech@opensanctions.org",
     url="https://opensanctions.github.io/rigour/",
