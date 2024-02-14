@@ -30,17 +30,19 @@ def test_levenshtein_similarity():
     assert levenshtein_similarity("foo", "foo") == 1.0
     assert levenshtein_similarity("foo", "xxx") == 0.0
     assert levenshtein_similarity("", "") == 0.0
-    assert levenshtein_similarity("banana", "banao") > 0.5
-    assert levenshtein_similarity("banana", "banao") < 1.0
+    assert levenshtein_similarity("banana", "banao", max_percent=0.5) > 0.5
+    assert levenshtein_similarity("banana", "banao", max_percent=0.5) < 1.0
     assert levenshtein_similarity("banana", "banao", max_percent=0.2) == 0.0
 
 
 def test_compare_levenshtein():
     assert levenshtein_similarity("John Smith", "John Smith") == 1.0
-    johnny = levenshtein_similarity("John Smith", "Johnny Smith")
+    johnny = levenshtein_similarity("John Smith", "Johnny Smith", max_percent=0.5)
     assert johnny < 1.0
     assert johnny > 0.5
-    johnathan = levenshtein_similarity("John Smith", "Johnathan Smith")
+    johnathan = levenshtein_similarity("John Smith", "Johnathan Smith", max_percent=0.2)
+    assert johnathan == 0.0
+    johnathan = levenshtein_similarity("John Smith", "Johnathan Smith", max_percent=0.5, max_edits=6)
     assert johnathan < 1.0
     assert johnathan > 0.0
     assert levenshtein_similarity("John Smith", "Fredrick Smith") < 0.5

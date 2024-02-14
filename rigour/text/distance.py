@@ -4,7 +4,9 @@ from functools import lru_cache
 from jellyfish import damerau_levenshtein_distance, levenshtein_distance
 from jellyfish import jaro_winkler_similarity
 
-CACHE = 1024
+from rigour import env
+
+CACHE = 2048
 MAX_TEXT = 128
 
 
@@ -43,8 +45,8 @@ def levenshtein(left: str, right: str) -> int:
 def levenshtein_similarity(
     left: str,
     right: str,
-    max_edits: Optional[int] = None,
-    max_percent: float = 0.5,
+    max_edits: Optional[int] = env.LEVENSHTEIN_MAX_EDITS,
+    max_percent: float = env.LEVENSHTEIN_MAX_PERCENT,
 ) -> float:
     """Compute the levenshtein similarity of two strings. The similiarity is
     the percentage distance measured against the length of the longest string.
