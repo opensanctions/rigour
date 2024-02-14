@@ -1,6 +1,7 @@
 from rigour.text.distance import levenshtein, dam_levenshtein
 from rigour.text.distance import jaro_winkler
 from rigour.text.distance import levenshtein_similarity
+from rigour.text.distance import is_levenshtein_plausible
 
 
 def test_levenshtein():
@@ -46,3 +47,15 @@ def test_compare_levenshtein():
     assert johnathan < 1.0
     assert johnathan > 0.0
     assert levenshtein_similarity("John Smith", "Fredrick Smith") < 0.5
+
+
+def test_is_levenshtein_plausible():
+    assert is_levenshtein_plausible("John Smith", "John Smith")
+    assert is_levenshtein_plausible("Rotenberg", "Rothenberg")
+    assert is_levenshtein_plausible("Rotenberg", "Rothenburg")
+    assert not is_levenshtein_plausible("Rotenberg", "Rothenburgy")
+    assert not is_levenshtein_plausible("Oleg", "Olga")
+    assert not is_levenshtein_plausible("John", "Johnny")
+
+    # TODO: flip this via lists?
+    assert is_levenshtein_plausible("Alexandra", "Alexander")

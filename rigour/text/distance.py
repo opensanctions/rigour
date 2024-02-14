@@ -73,6 +73,30 @@ def levenshtein_similarity(
     return 1.0 - (float(distance) / max(left_len, right_len))
 
 
+def is_levenshtein_plausible(
+    left: str,
+    right: str,
+    max_edits: Optional[int] = env.LEVENSHTEIN_MAX_EDITS,
+    max_percent: float = env.LEVENSHTEIN_MAX_PERCENT,
+) -> bool:
+    """A sanity check to post-filter name matching results based on a budget
+    of allowed Levenshtein distance. This basically cuts off results where
+    the Jaro-Winkler or Metaphone comparison was too lenient.
+    
+    Args:
+        left: A string.
+        right: A string.
+        max_edits: The maximum number of edits allowed.
+        max_percent: The maximum percentage of edits allowed.
+
+    Returns:
+        A boolean.
+    """
+    pct_edits = math.ceil(min(len(left), len(right)) * max_percent)
+    max_edits_ = min(max_edits, pct_edits) if max_edits is not None else pct_edits
+    return dam_levenshtein(left, right) <= max_edits_
+
+
 @lru_cache(maxsize=CACHE)
 def jaro_winkler(left: str, right: str) -> float:
     """Compute the Jaro-Winkler similarity of two strings.
