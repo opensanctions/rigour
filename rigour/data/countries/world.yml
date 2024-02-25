@@ -1,0 +1,3468 @@
+ad:
+  country: true
+  full_name: Andorra
+  name: Andorra
+  region: Europe
+  subregion: Southern Europe
+  see:
+    - fr
+    - es
+  summary: >
+    Andorra, officially the Principality of Andorra, is a sovereign landlocked
+    country and microstate on the Iberian Peninsula, in the eastern Pyrenees, bordered
+    by France to the north and Spain to the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Andorra
+ae:
+  country: false
+  full_name: United Arab Emirates
+  name: United Arab Emirates
+  region: Asia
+  subregion: Western Asia
+  summary: >
+    The United Arab Emirates, or simply the Emirates, is a country in West
+    Asia, in the Middle East. It is located at the eastern end of the Arabian Peninsula
+    and shares borders with Oman and Saudi Arabia, while also having maritime borders
+    in the Persian Gulf with Qatar and Iran.
+  wikipedia_url: https://en.wikipedia.org/wiki/United_Arab_Emirates
+ae-aj:
+  country: false
+  full_name: ‘Ajmān (United Arab Emirates)
+  name: ‘Ajmān
+  parent: ae
+ae-az:
+  country: false
+  full_name: Abu Dhabi (United Arab Emirates)
+  name: Abu Dhabi
+  parent: ae
+ae-du:
+  country: false
+  full_name: Dubai (United Arab Emirates)
+  name: Dubai
+  parent: ae
+ae-fu:
+  country: false
+  full_name: Fujairah (United Arab Emirates)
+  name: Fujairah
+  parent: ae
+ae-rk:
+  country: false
+  full_name: Ras Al Khaimah (United Arab Emirates)
+  name: Ras Al Khaimah
+  parent: ae
+ae-sh:
+  country: false
+  full_name: Sharjah (United Arab Emirates)
+  name: Sharjah
+  parent: ae
+ae-uq:
+  country: false
+  full_name: Umm Al Quwain (United Arab Emirates)
+  name: Umm Al Quwain
+  parent: ae
+af:
+  country: true
+  full_name: Afghanistan
+  name: Afghanistan
+  region: Asia
+  subregion: Southern Asia
+  summary: Afghanistan, officially the Islamic Emirate of Afghanistan, is a landlocked
+    country located at the crossroads of Central Asia and South Asia.
+  wikipedia_url: https://en.wikipedia.org/wiki/Afghanistan
+ag:
+  country: true
+  full_name: Antigua and Barbuda
+  name: Antigua and Barbuda
+  region: Americas
+  subregion: Caribbean
+  summary: Antigua and Barbuda is a sovereign island country in the West Indies. It
+    lies at the conjuncture of the Caribbean Sea and the Atlantic Ocean in the Leeward
+    Islands part of the Lesser Antilles.
+  wikipedia_url: https://en.wikipedia.org/wiki/Antigua_&_Barbuda
+ai:
+  country: true
+  full_name: Anguilla
+  name: Anguilla
+  region: Americas
+  subregion: Caribbean
+  summary: Anguilla is a British Overseas Territory in the Caribbean. It is one of
+    the most northerly of the Leeward Islands in the Lesser Antilles, lying east of
+    Puerto Rico and the Virgin Islands and directly north of Saint Martin.
+  wikipedia_url: https://en.wikipedia.org/wiki/Anguilla
+al:
+  country: true
+  full_name: Albania
+  name: Albania
+  region: Europe
+  subregion: Southern Europe
+  summary: >
+    Albania, officially the Republic of Albania, is a country in Southeast Europe.
+  wikipedia_url: https://en.wikipedia.org/wiki/Albania
+am:
+  country: true
+  full_name: Armenia
+  name: Armenia
+  region: Asia
+  subregion: Western Asia
+  summary: Armenia, officially the Republic of Armenia, is a landlocked country in
+    the Armenian Highlands of West Asia, with geopolitical ties to Europe. It is a
+    part of the Caucasus region and is bordered by Turkey to the west, Georgia to
+    the north and Azerbaijan to the east, and Iran and the Azerbaijani exclave of
+    Nakhchivan to the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Armenia
+ao:
+  country: true
+  full_name: Angola
+  name: Angola
+  region: Africa
+  subregion: Middle Africa
+  summary: Angola, officially the Republic of Angola, is a country on the west-central
+    coast of Southern Africa. It is the second-largest Lusophone country in both total
+    area and population, and is the seventh-largest country in Africa.
+  wikipedia_url: https://en.wikipedia.org/wiki/Angola
+aq:
+  country: true
+  full_name: Antarctica
+  name: Antarctica
+ar:
+  country: true
+  full_name: Argentina
+  name: Argentina
+  region: Americas
+  subregion: South America
+  summary: Argentina, officially the Argentine Republic, is a country in the southern
+    half of South America. Argentina covers an area of 2,780,400 square kilometres,
+    making it the second-largest country in South America after Brazil, the fourth-largest
+    country in the Americas, and the eighth-largest country in the world.
+  wikipedia_url: https://en.wikipedia.org/wiki/Argentina
+as:
+  country: true
+  full_name: American Samoa
+  name: American Samoa
+  region: Oceania
+  subregion: Polynesia
+  summary: American Samoa is an unincorporated territory of the United States located
+    in the South Pacific Ocean, southeast of the island country of Samoa.
+  wikipedia_url: https://en.wikipedia.org/wiki/American_Samoa
+at:
+  country: true
+  full_name: Republic of Austria
+  name: Austria
+  region: Europe
+  see:
+  - eu
+  subregion: Central Europe
+  summary: Austria, formally the Republic of Austria, is a landlocked country in Central
+    Europe, lying in the Eastern Alps. It is a federation of nine provinces, one of
+    which is the capital, Vienna, the most populous city and province.
+  wikipedia_url: https://en.wikipedia.org/wiki/Austria
+au:
+  country: true
+  full_name: Australia
+  name: Australia
+  region: Oceania
+  subregion: Australia and New Zealand
+  summary: Australia, officially the Commonwealth of Australia, is a sovereign country
+    comprising the mainland of the Australian continent, the island of Tasmania, and
+    numerous smaller islands. Australia is the largest country by area in Oceania
+    and the world's sixth-largest country.
+  wikipedia_url: https://en.wikipedia.org/wiki/Australia
+aw:
+  country: true
+  full_name: Aruba
+  name: Aruba
+  region: Americas
+  subregion: Caribbean
+  summary: Aruba, officially the Country of Aruba, is a constituent country of the
+    Kingdom of the Netherlands physically located in the mid-south of the Caribbean
+    Sea, about 29 kilometres north of the Venezuela peninsula of Paraguaná and 80
+    kilometres northwest of Curaçao.
+  wikipedia_url: https://en.wikipedia.org/wiki/Aruba
+ax:
+  country: true
+  full_name: Åland Islands
+  name: Åland Islands
+  region: Europe
+  subregion: Northern Europe
+  summary: 'Åland (Finnish: Ahvenanmaa) is an autonomous and demilitarised region
+    of Finland. Receiving its autonomy by a 1920 decision of the League of Nations,
+    it is the smallest region of Finland by both area (1,580 square kilometres) and
+    population (30,129), constituting 0.51% of Finland''s land area and 0.54% of its
+    population.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Åland_Islands
+az:
+  country: true
+  full_name: Azerbaijan
+  name: Azerbaijan
+  region: Asia
+  subregion: Western Asia
+  summary: Azerbaijan, officially the Republic of Azerbaijan, is a transcontinental
+    country located at the boundary of Eastern Europe and West Asia. It is a part
+    of the South Caucasus region and is bounded by the Caspian Sea to the east, Russia
+    to the north, Georgia to the northwest, Armenia and Turkey to the west, and Iran
+    to the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Azerbaijan
+az-nk:
+  country: false
+  full_name: Nagorno-Karabakh (Artsakh)
+  name: Artsakh
+  region: Asia
+  parent: am
+  see:
+  - az
+  subregion: Western Asia
+  summary: 'Nagorno-Karabakh is a region located in the South Caucasus, covering
+
+    the southeastern stretch of the Lesser Caucasus mountain range. Nagorno-Karabakh
+
+    is a disputed territory, with both Armenia and Azerbaijan claiming it.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Nagorno-Karabakh
+ba:
+  country: true
+  full_name: Bosnia and Herzegovina
+  name: Bosnia and Herzegovina
+  region: Europe
+  subregion: Southern Europe
+  summary: Bosnia and Herzegovina is a country in Southeast Europe, located in the
+    Balkans. Bosnia and Herzegovina borders Serbia to the east, Montenegro to the
+    southeast, and Croatia to the north and southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Bosnia_&_Herzegovina
+bb:
+  country: true
+  full_name: Barbados
+  name: Barbados
+  region: Americas
+  subregion: Caribbean
+  summary: Barbados is an island country and microstate in the Lesser Antilles of
+    the West Indies, in the Caribbean region of the Americas, and the most easterly
+    of the Caribbean Islands. It lies on the boundary of the South American and the
+    Caribbean Plates.
+  wikipedia_url: https://en.wikipedia.org/wiki/Barbados
+bd:
+  country: true
+  full_name: Bangladesh
+  name: Bangladesh
+  region: Asia
+  subregion: Southern Asia
+  summary: Bangladesh, officially the People's Republic of Bangladesh, is a country
+    in South Asia. It is the eighth-most-populous and among the most densely populated
+    countries, with a population of around 169 million in an area of 148,460 square
+    kilometres
+  wikipedia_url: https://en.wikipedia.org/wiki/Bangladesh
+be:
+  country: false
+  full_name: Belgium
+  name: Belgium
+  region: Europe
+  see:
+  - eu
+  subregion: Western Europe
+  summary: Belgium, officially the Kingdom of Belgium, is a country in Northwestern
+    Europe. The country is bordered by the Netherlands to the north, Germany to the
+    east, Luxembourg to the southeast, France to the southwest, and the North Sea
+    to the northwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Belgium
+be-vlg:
+  country: false
+  full_name: Flemish Region (Belgium)
+  name: Flemish Region (Belgium)
+  parent: be
+bf:
+  country: true
+  full_name: Burkina Faso
+  name: Burkina Faso
+  region: Africa
+  subregion: Western Africa
+  summary: Burkina Faso is a landlocked country in West Africa, bordered by Mali to
+    the northwest, Niger to the northeast, Benin to the southeast, Togo and Ghana
+    to the south, and the Ivory Coast to the southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Burkina_Faso
+bg:
+  country: true
+  full_name: Bulgaria
+  name: Bulgaria
+  region: Europe
+  see:
+  - eu
+  subregion: Eastern Europe
+  summary: Bulgaria, officially the Republic of Bulgaria, is a country in Southeast
+    Europe.
+  wikipedia_url: https://en.wikipedia.org/wiki/Bulgaria
+bh:
+  country: true
+  full_name: Bahrain
+  name: Bahrain
+  region: Asia
+  subregion: Western Asia
+  summary: Bahrain, officially the Kingdom of Bahrain, is an island country in West
+    Asia. It is situated on the Persian Gulf, and comprises a small archipelago made
+    up of 50 natural islands and an additional 33 artificial islands, centered on
+    Bahrain Island which makes up around 83 per cent of the country's landmass.
+  wikipedia_url: https://en.wikipedia.org/wiki/Bahrain
+bi:
+  country: true
+  full_name: Burundi
+  name: Burundi
+  region: Africa
+  subregion: Eastern Africa
+  summary: Burundi, officially the Republic of Burundi, is a landlocked country in
+    the Great Rift Valley at the junction between the African Great Lakes region and
+    East Africa. It is bordered by Rwanda to the north, Tanzania to the east and southeast,
+    and the Democratic Republic of the Congo to the west; Lake Tanganyika lies along
+    its southwestern border.
+  wikipedia_url: https://en.wikipedia.org/wiki/Burundi
+bj:
+  country: true
+  full_name: Benin
+  name: Benin
+  region: Africa
+  subregion: Western Africa
+  summary: Benin, officially the Republic of Benin, and formerly Dahomey, is a country
+    in West Africa. It is bordered by Togo to the west, Nigeria to the east, Burkina
+    Faso to the north-west, and Niger to the north-east.
+  wikipedia_url: https://en.wikipedia.org/wiki/Benin
+bl:
+  country: true
+  full_name: Saint Barthélemy
+  name: Saint Barthélemy
+  region: Americas
+  subregion: Caribbean
+  summary: Saint Barthélemy, officially the Collectivité territoriale de Saint-Barthélemy,
+    also known as St. Barts, is an overseas collectivity of France in the Caribbean.
+    The island lies about 30 kilometres (19 mi) southeast of the island of Saint Martin;
+    it is northeast of the Dutch islands of Saba and Sint Eustatius, as well as north
+    of the independent country of Saint Kitts and Nevis.
+  wikipedia_url: https://en.wikipedia.org/wiki/St._Barthélemy
+bm:
+  country: true
+  full_name: Bermuda
+  name: Bermuda
+  region: Americas
+  subregion: Northern America
+  summary: Bermuda is a British Overseas Territory in the North Atlantic Ocean. The
+    closest land outside the territory is in the American state of North Carolina,
+    approximately 1,035 km to the west-northwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Bermuda
+bn:
+  country: true
+  full_name: Brunei Darussalam
+  name: Brunei Darussalam
+  region: Asia
+  subregion: South-eastern Asia
+  summary: Brunei, formally Brunei Darussalam, is a country in Southeast Asia, situated
+    on the northern coast of the island of Borneo. Apart from its coastline on the
+    South China Sea, it is completely surrounded by the Malaysian state of Sarawak,
+    with its territory bifurcated by the Sarawak district of Limbang.
+  wikipedia_url: https://en.wikipedia.org/wiki/Brunei
+bo:
+  country: true
+  full_name: Plurinational State of Bolivia
+  name: Bolivia
+  region: Americas
+  subregion: South America
+  summary: Bolivia, officially the Plurinational State of Bolivia, is a landlocked
+    country located in western-central South America. It is bordered by Brazil to
+    the north and east, Paraguay to the southeast, Argentina to the south, Chile to
+    the southwest, and Peru to the west.
+  wikipedia_url: https://en.wikipedia.org/wiki/Bolivia
+bq:
+  country: true
+  full_name: Bonaire, Sint Eustatius and Saba
+  name: Bonaire, Sint Eustatius and Saba
+  region: Americas
+  subregion: Caribbean
+br:
+  country: true
+  full_name: Brazil
+  name: Brazil
+  region: Americas
+  subregion: South America
+  summary: Brazil, officially the Federative Republic of Brazil, is the largest country
+    in South America and in Latin America. Brazil is the world's fifth-largest country
+    by area and the seventh most populous.
+  wikipedia_url: https://en.wikipedia.org/wiki/Brazil
+bs:
+  country: true
+  full_name: Bahamas
+  name: Bahamas
+  region: Americas
+  subregion: Caribbean
+  summary: The Bahamas, officially the Commonwealth of The Bahamas, is an island country
+    within the Lucayan Archipelago of the West Indies in the North Atlantic. It takes
+    up 97% of the Lucayan Archipelago's land area and is home to 88% of the archipelago's
+    population.
+  wikipedia_url: https://en.wikipedia.org/wiki/Bahamas
+bt:
+  country: true
+  full_name: Bhutan
+  name: Bhutan
+  region: Asia
+  subregion: Southern Asia
+  summary: Bhutan, officially the Kingdom of Bhutan, is a landlocked South Asian country,
+    which is situated in the Eastern Himalayas, between China in the north and India
+    in the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Bhutan
+bv:
+  country: true
+  full_name: Bouvet Island
+  name: Bouvet Island
+  region: Americas
+  subregion: South America
+bw:
+  country: true
+  full_name: Botswana
+  name: Botswana
+  region: Africa
+  subregion: Southern Africa
+  summary: Botswana, officially the Republic of Botswana, is a landlocked country
+    in Southern Africa. Botswana is topographically flat, with approximately 70 per
+    cent of its territory being the Kalahari Desert.
+  wikipedia_url: https://en.wikipedia.org/wiki/Botswana
+by:
+  country: true
+  full_name: Belarus
+  name: Belarus
+  region: Europe
+  see:
+  - ru
+  subregion: Eastern Europe
+  summary: >
+    Belarus, officially the Republic of Belarus, is a landlocked country in
+    Eastern Europe. It is bordered by Russia to the east and northeast, Ukraine to
+    the south, Poland to the west, and Lithuania and Latvia to the northwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Belarus
+bz:
+  country: true
+  full_name: Belize
+  name: Belize
+  region: Americas
+  subregion: Central America
+  summary: >
+    Belize is a country on the north-eastern coast of Central America. It is
+    bordered by Mexico to the north, the Caribbean Sea to the east, and Guatemala
+    to the west and south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Belize
+ca:
+  country: false
+  full_name: Canada
+  name: Canada
+  region: Americas
+  subregion: Northern America
+  summary: >
+    Canada is a country in North America. Its ten provinces and three territories
+    extend from the Atlantic Ocean to the Pacific Ocean and northward into the Arctic
+    Ocean, making it the world's second-largest country by total area, with the world's
+    longest coastline.
+  wikipedia_url: https://en.wikipedia.org/wiki/Canada
+ca-ab:
+  country: false
+  full_name: Alberta (Canada)
+  name: Alberta (Canada)
+  parent: ca
+ca-bc:
+  country: false
+  full_name: British Columbia (Canada)
+  name: British Columbia (Canada)
+  parent: ca
+ca-mb:
+  country: false
+  full_name: Manitoba (Canada)
+  name: Manitoba (Canada)
+  parent: ca
+ca-nb:
+  country: false
+  full_name: New Brunswick (Canada)
+  name: New Brunswick (Canada)
+  parent: ca
+ca-nl:
+  country: false
+  full_name: Newfoundland and Labrador (Canada)
+  name: Newfoundland and Labrador (Canada)
+  parent: ca
+ca-ns:
+  country: false
+  full_name: Nova Scotia (Canada)
+  name: Nova Scotia (Canada)
+  parent: ca
+ca-nt:
+  country: false
+  full_name: Northwest Territories (Canada)
+  name: Northwest Territories (Canada)
+  parent: ca
+ca-nu:
+  country: false
+  full_name: Nunavut (Canada)
+  name: Nunavut (Canada)
+  parent: ca
+ca-on:
+  country: false
+  full_name: Ontario (Canada)
+  name: Ontario (Canada)
+  parent: ca
+ca-pe:
+  country: false
+  full_name: Prince Edward Island (Canada)
+  name: Prince Edward Island (Canada)
+  parent: ca
+ca-qc:
+  country: false
+  full_name: Quebec (Canada)
+  name: Quebec (Canada)
+  parent: ca
+ca-sk:
+  country: false
+  full_name: Saskatchewan (Canada)
+  name: Saskatchewan (Canada)
+  parent: ca
+ca-yt:
+  country: false
+  full_name: Yukon (Canada)
+  name: Yukon (Canada)
+  parent: ca
+cc:
+  country: true
+  full_name: Cocos (Keeling) Islands
+  name: Cocos (Keeling) Islands
+  region: Oceania
+  subregion: Australia and New Zealand
+  summary: The Cocos (Keeling) Islands, officially the Territory of Cocos (Keeling)
+    Islands, are an Australian external territory in the Indian Ocean, comprising
+    a small archipelago approximately midway between Australia and Sri Lanka and relatively
+    close to the Indonesian island of Sumatra.
+  wikipedia_url: https://en.wikipedia.org/wiki/Cocos_(Keeling)_Islands
+cd:
+  country: true
+  full_name: Democratic Republic of the Congo
+  name: DR Congo
+  region: Africa
+  subregion: Middle Africa
+  summary: The Democratic Republic of the Congo, also known as Congo-Kinshasa, is
+    a country in Central Africa. By land area, the DRC is the second-largest country
+    in Africa and the 11th-largest in the world.
+  wikipedia_url: https://en.wikipedia.org/wiki/Congo_-_Kinshasa
+cf:
+  country: true
+  full_name: Central African Republic
+  name: Central African Republic
+  region: Africa
+  subregion: Middle Africa
+  summary: The Central African Republic, formerly known as Ubangi-Shari, is a landlocked
+    country in Central Africa. It is bordered by Chad to the north, Sudan to the northeast,
+    South Sudan to the east, the Democratic Republic of the Congo to the south, the
+    Republic of the Congo to the southwest, and Cameroon to the west.
+  wikipedia_url: https://en.wikipedia.org/wiki/Central_African_Republic
+cg:
+  country: true
+  full_name: The Republic of the Congo
+  name: Congo-Brazzaville
+  region: Africa
+  subregion: Middle Africa
+  summary: The Republic of the Congo, also known as Congo-Brazzaville, the Congo Republic
+    or simply either Congo or the Congo, is a country located on the western coast
+    of Central Africa to the west of the Congo River. It is bordered to the west by
+    Gabon, to its northwest by Cameroon and its northeast by the Central African Republic,
+    to the southeast by the Democratic Republic of the Congo, to its south by the
+    Angolan exclave of Cabinda and to its southwest by the Atlantic Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/Congo_-_Brazzaville
+ch:
+  country: true
+  full_name: Swiss Confederation
+  name: Switzerland
+  region: Europe
+  subregion: Western Europe
+  summary: >
+    Switzerland, officially the Swiss Confederation, is a landlocked
+    country located in the Alps. It is not part of the European Union.
+ci:
+  country: true
+  full_name: Côte d'Ivoire
+  name: Côte d'Ivoire
+  region: Africa
+  subregion: Western Africa
+  summary: Ivory Coast, officially the Republic of Côte d'Ivoire, also known as Côte
+    d'Ivoire, is a country on the southern coast of West Africa. Its capital is Yamoussoukro,
+    in the centre of the country, while its largest city and economic centre is the
+    port city of Abidjan.
+  wikipedia_url: https://en.wikipedia.org/wiki/Côte_d’Ivoire
+ck:
+  country: true
+  full_name: Cook Islands
+  name: Cook Islands
+  region: Oceania
+  subregion: Polynesia
+  summary: The Cook Islands is a self-governing island country in the South Pacific
+    Ocean in free association with New Zealand. It comprises 15 islands whose total
+    land area is 236.
+  wikipedia_url: https://en.wikipedia.org/wiki/Cook_Islands
+cl:
+  country: true
+  full_name: Chile
+  name: Chile
+  region: Americas
+  subregion: South America
+  summary: Chile, officially the Republic of Chile, is a country located in western
+    South America. It is the southernmost country in the world and the closest to
+    Antarctica, stretching along a narrow strip of land between the Andes Mountains
+    and the Pacific Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/Chile
+cm:
+  country: true
+  full_name: Cameroon
+  name: Cameroon
+  region: Africa
+  subregion: Middle Africa
+  summary: Cameroon, officially the Republic of Cameroon, is a country in Central
+    Africa. It shares boundaries with Nigeria to the west and north, Chad to the northeast,
+    the Central African Republic to the east, and Equatorial Guinea, Gabon and the
+    Republic of the Congo to the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Cameroon
+cn:
+  country: true
+  full_name: China
+  name: China
+  region: Asia
+  subregion: Eastern Asia
+  summary: China, officially the People's Republic of China, is a country in East
+    Asia. It is the world's second-most populous country with a population exceeding
+    1.4 billion.
+  wikipedia_url: https://en.wikipedia.org/wiki/China
+cn-xz:
+  country: false
+  full_name: Tibet
+  name: Tibet
+  region: Asia
+  subregion: Eastern Asia
+  parent: cn
+  summary: >
+    Tibet (Tibetan: བོད་; Chinese: 西藏) is a region in the central part of
+    East Asia, covering much of the Tibetan Plateau. It is the homeland of the Tibetan
+    people. Since the annexation of Tibet by the People's Republic of China in 1951,
+    the entire plateau has been under the administration of the People''s Republic
+    of China.
+  wikipedia_url: https://en.wikipedia.org/wiki/Tibet
+co:
+  country: true
+  full_name: Colombia
+  name: Colombia
+  region: Americas
+  subregion: South America
+  summary: Colombia, officially the Republic of Colombia, is a country mostly in South
+    America with insular regions in North America. The Colombian mainland is bordered
+    by the Caribbean Sea to the north, Venezuela to the east and northeast, Brazil
+    to the southeast, Ecuador and Peru to the south and southwest, the Pacific Ocean
+    to the west, and Panama to the northwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Colombia
+cr:
+  country: true
+  full_name: Costa Rica
+  name: Costa Rica
+  region: Americas
+  subregion: Central America
+  summary: Costa Rica, officially the Republic of Costa Rica, is a country in the
+    Central American region of North America. Costa Rica is bordered by Nicaragua
+    to the north, the Caribbean Sea to the northeast, Panama to the southeast, and
+    the Pacific Ocean to the southwest, as well as maritime border with Ecuador to
+    the south of Cocos Island.
+  wikipedia_url: https://en.wikipedia.org/wiki/Costa_Rica
+cshh:
+  country: true
+  full_name: Czechoslovakia
+  name: Czechoslovakia
+  region: Europe
+  see:
+  - cz
+  - sk
+  subregion: Central Europe
+  summary: Czechoslovakia was a landlocked state in Central Europe. On 31 December
+    1992, Czechoslovakia split into the two sovereign states of the Czech Republic
+    and Slovakia.
+  wikipedia_url: https://en.wikipedia.org/wiki/Czechoslovakia
+csxx:
+  country: true
+  full_name: Serbia and Montenegro
+  name: Serbia and Montenegro
+  region: Europe
+  see:
+  - yucs
+  - rs
+  - me
+  subregion: Southern Europe
+  summary: Serbia and Montenegro, known until 2003 as the Federal Republic of Yugoslavia,
+    FR Yugoslavia or simply Yugoslavia, was a country in Southeast Europe located
+    in the Balkans that existed from 1992 to 2006, following the breakup of the Socialist
+    Federal Republic of Yugoslavia. The country bordered Hungary to the north, Romania
+    to the northeast, Bulgaria to the southeast, North Macedonia to the south, Croatia
+    and Bosnia and Herzegovina to the west, and Albania to the southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Serbia_and_Montenegro
+cu:
+  country: true
+  full_name: Cuba
+  name: Cuba
+  region: Americas
+  subregion: Caribbean
+  summary: >
+    Cuba, officially the Republic of Cuba, is located where the northern Caribbean
+    Sea, Gulf of Mexico, and Atlantic Ocean meet.
+  wikipedia_url: https://en.wikipedia.org/wiki/Cuba
+cv:
+  country: true
+  full_name: Cabo Verde
+  name: Cabo Verde
+  region: Africa
+  subregion: Western Africa
+  summary: Cape Verde or Cabo Verde, officially the Republic of Cabo Verde, is an
+    archipelago and island country in the central Atlantic Ocean, consisting of ten
+    volcanic islands with a combined land area of about 4,033 square kilometres (1,557
+    sq mi).
+  wikipedia_url: https://en.wikipedia.org/wiki/Cape_Verde
+cw:
+  country: true
+  full_name: Curaçao
+  name: Curaçao
+  region: Americas
+  subregion: Caribbean
+  summary: Curaçao, officially the Country of Curaçao, is a Lesser Antilles island
+    in the southern Caribbean Sea and the Dutch Caribbean region, about 65 km north
+    of the Venezuela coast. It is a constituent country of the Kingdom of the Netherlands.
+  wikipedia_url: https://en.wikipedia.org/wiki/Curaçao
+cx:
+  country: true
+  full_name: Christmas Island
+  name: Christmas Island
+  region: Oceania
+  subregion: Australia and New Zealand
+  parent: au
+  summary: >
+    The Territory of Christmas Island is an Australian external territory comprising
+    the island of the same name. It is located in the Indian Ocean around 350 kilometres
+    (190 nautical miles) south of Java and Sumatra and about 1,550 km (840 nmi) northwest
+    of the closest point on the Australian mainland.
+  wikipedia_url: https://en.wikipedia.org/wiki/Christmas_Island
+cy:
+  country: true
+  full_name: Cyprus
+  name: Cyprus
+  region: Asia
+  see:
+  - eu
+  subregion: Western Asia
+  summary: Cyprus, officially the Republic of Cyprus, is an island country situated
+    in the Mediterranean Sea. It lies between the continental mainlands of Europe
+    and Asia, but is culturally and geopolitically Southeast European.
+  wikipedia_url: https://en.wikipedia.org/wiki/Cyprus
+cy-trnc:
+  country: false
+  full_name: Northern Cyprus
+  name: Northern Cyprus
+  region: Asia
+  see:
+  - cy
+  - tr
+  subregion: Western Asia
+  summary: Northern Cyprus, officially the Turkish Republic of Northern Cyprus, is
+    a de facto state that comprises the northeastern portion of the island of Cyprus.
+    It is recognised only by Turkey and its territory is considered by the international
+    community to be part of the Republic of Cyprus.
+  wikipedia_url: https://en.wikipedia.org/wiki/Northern_Cyprus
+cz:
+  country: true
+  full_name: Czech Republic
+  name: Czechia
+  region: Europe
+  see:
+  - eu
+  subregion: Central Europe
+  summary: >
+    The Czech Republic, or Czechia, is a landlocked country in Central Europe.
+    Historically known as Bohemia, it is bordered by Austria to the south, Germany
+    to the west, Poland to the northeast, and Slovakia to the southeast.
+  wikipedia_url: https://en.wikipedia.org/wiki/Czech_Republic
+dd:
+  country: true
+  full_name: East Germany
+  name: East Germany
+  region: Europe
+  see:
+  - de
+  subregion: Central Europe
+  summary: East Germany, officially the German Democratic Republic, was a country
+    in Central Europe that existed from its creation on 7 October 1949 until its dissolution
+    on 3 October 1990.
+  wikipedia_url: https://en.wikipedia.org/wiki/East_Germany
+de:
+  country: true
+  full_name: Germany
+  name: Germany
+  region: Europe
+  see:
+  - eu
+  subregion: Central Europe
+  summary: Germany, officially the Federal Republic of Germany, is a country in the
+    western region of Central Europe. It is the second-most populous country in Europe
+    after Russia, and the most populous member state of the European Union.
+  wikipedia_url: https://en.wikipedia.org/wiki/Germany
+dj:
+  country: true
+  full_name: Djibouti
+  name: Djibouti
+  region: Africa
+  subregion: Eastern Africa
+  summary: Djibouti, officially the Republic of Djibouti, is a country in the Horn
+    of Africa, bordered by Somalia to the south, Ethiopia to the southwest, Eritrea
+    in the north, and the Red Sea and the Gulf of Aden to the east. The country has
+    an area of 23,200 square kilometres.
+  wikipedia_url: https://en.wikipedia.org/wiki/Djibouti
+dk:
+  country: true
+  full_name: Denmark
+  name: Denmark
+  region: Europe
+  see:
+  - eu
+  subregion: Northern Europe
+  summary: Denmark is a Nordic country in Northern Europe. It is the metropolitan
+    part of and the most populous constituent of the Kingdom of Denmark, a constitutionally
+    unitary state that includes the autonomous territories of the Faroe Islands and
+    Greenland in the North Atlantic Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/Denmark
+dm:
+  country: true
+  full_name: Dominica
+  name: Dominica
+  region: Americas
+  subregion: Caribbean
+  summary: Dominica, officially the Commonwealth of Dominica, is an island country
+    in the Caribbean. The capital, Roseau, is located on the western side of the island.
+  wikipedia_url: https://en.wikipedia.org/wiki/Dominica
+do:
+  country: true
+  full_name: Dominican Republic
+  name: Dominican Republic
+  region: Americas
+  subregion: Caribbean
+  summary: The Dominican Republic is a country located on the island of Hispaniola
+    in the Greater Antilles archipelago of the Caribbean region. It occupies the eastern
+    five-eighths of the island, which it shares with Haiti, making Hispaniola one
+    of only two Caribbean islands, along with Saint Martin, that is shared by two
+    sovereign states.
+  wikipedia_url: https://en.wikipedia.org/wiki/Dominican_Republic
+dz:
+  country: true
+  full_name: Algeria
+  name: Algeria
+  region: Africa
+  subregion: Northern Africa
+  summary: Algeria, officially the People's Democratic Republic of Algeria, is a country
+    in North Africa. Algeria is bordered to the northeast by Tunisia; to the east
+    by Libya; to the southeast by Niger; to the southwest by Mali, Mauritania, and
+    Western Sahara; to the west by Morocco; and to the north by the Mediterranean
+    Sea.
+  wikipedia_url: https://en.wikipedia.org/wiki/Algeria
+ec:
+  country: true
+  full_name: Ecuador
+  name: Ecuador
+  region: Americas
+  subregion: South America
+  summary: Ecuador, officially the Republic of Ecuador, is a country in northwestern
+    South America, bordered by Colombia on the north, Peru on the east and south,
+    and the Pacific Ocean on the west. Ecuador also includes the Galápagos Islands
+    in the Pacific, about 1,000 kilometers west of the mainland.
+  wikipedia_url: https://en.wikipedia.org/wiki/Ecuador
+ee:
+  country: true
+  full_name: Estonia
+  name: Estonia
+  region: Europe
+  see:
+  - eu
+  subregion: Northern Europe
+  summary: Estonia, officially the Republic of Estonia, is a country by the Baltic
+    Sea in Northern Europe. It is bordered to the north by the Gulf of Finland across
+    from Finland, to the west by the sea across from Sweden, to the south by Latvia,
+    and to the east by Lake Peipus and Russia.
+  wikipedia_url: https://en.wikipedia.org/wiki/Estonia
+eg:
+  country: true
+  full_name: Egypt
+  name: Egypt
+  region: Africa
+  subregion: Northern Africa
+  summary: Egypt, officially the Arab Republic of Egypt, is a transcontinental country
+    spanning the northeast corner of Africa and the Sinai Peninsula in the southwest
+    corner of Asia. It is bordered by the Mediterranean Sea to the north, the Gaza
+    Strip of Palestine and Israel to the northeast, the Red Sea to the east, Sudan
+    to the south, and Libya to the west.
+  wikipedia_url: https://en.wikipedia.org/wiki/Egypt
+eh:
+  country: true
+  full_name: Western Sahara* (*Provisional name)
+  name: Western Sahara
+  region: Africa
+  subregion: Northern Africa
+  summary: Western Sahara is a disputed territory on the northwest coast and in the
+    Maghreb region of North and West Africa. The Western Sahara, given its name in
+    1975 by the UN, is the last African colonial state yet to achieve its independence.
+    About 20% of the territory is controlled by the self-proclaimed Sahrawi Arab Democratic
+    Republic; the remaining 80% of the territory is occupied and administered by neighboring
+    Morocco.
+  wikipedia_url: https://en.wikipedia.org/wiki/Western_Sahara
+er:
+  country: true
+  full_name: Eritrea
+  name: Eritrea
+  region: Africa
+  subregion: Eastern Africa
+  summary: 'Eritrea (Tigrinya: ኤርትራ), officially the State of Eritrea, is a country
+    in the Horn of Africa region of Eastern Africa, with its capital and largest city
+    at Asmara. It is bordered by Ethiopia in the south, Sudan in the west, and Djibouti
+    in the southeast.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Eritrea
+es:
+  country: true
+  full_name: Spain
+  name: Spain
+  region: Europe
+  see:
+  - eu
+  subregion: Southern Europe
+  summary: Spain, or the Kingdom of Spain, is a country located in Southwestern Europe,
+    with parts of its territory in the Atlantic Ocean, in the Mediterranean Sea and
+    in Africa. It is the largest country in Southern Europe and the fourth-most populous
+    European Union member state.
+  wikipedia_url: https://en.wikipedia.org/wiki/Spain
+et:
+  country: true
+  full_name: Ethiopia
+  name: Ethiopia
+  region: Africa
+  subregion: Eastern Africa
+  summary: Ethiopia, officially the Federal Democratic Republic of Ethiopia, is a
+    landlocked country located in the Horn of Africa region of East Africa. It shares
+    borders with Eritrea to the north, Djibouti to the northeast, Somalia to the east
+    and southeast, Kenya to the south, South Sudan to the west, and Sudan to the northwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Ethiopia
+eu:
+  country: true
+  full_name: European Union
+  name: European Union
+  region: Supranational
+  see:
+  - at
+  - be
+  - bg
+  - cy
+  - de
+  - dk
+  - ee
+  - es
+  - fi
+  - fr
+  - gr
+  - hr
+  - hu
+  - ie
+  - it
+  - lt
+  - lu
+  - lv
+  - mt
+  - nl
+  - pl
+  - pt
+  - ro
+  - se
+  - si
+  - sk
+  summary: > 
+    The European Union is a supranational political and economic union of
+    27 member states that are located primarily in Europe. The member states
+    have a joint policy regarding international sanctions and embargoes.
+fi:
+  country: true
+  full_name: Finland
+  name: Finland
+  region: Europe
+  see:
+  - eu
+  subregion: Northern Europe
+  summary: Finland, officially the Republic of Finland, is a Nordic country in Northern
+    Europe. It borders Sweden to the northwest, Norway to the north, and Russia to
+    the east, with the Gulf of Bothnia to the west and the Gulf of Finland to the
+    south, opposite Estonia.
+  wikipedia_url: https://en.wikipedia.org/wiki/Finland
+fj:
+  country: true
+  full_name: Fiji
+  name: Fiji
+  region: Oceania
+  subregion: Melanesia
+  summary: Fiji, officially the Republic of Fiji, is an island country in Melanesia,
+    part of Oceania in the South Pacific Ocean. It lies about 1,100 nautical miles
+    north-northeast of New Zealand.
+  wikipedia_url: https://en.wikipedia.org/wiki/Fiji
+fk:
+  country: true
+  full_name: Falkland Islands [Malvinas]
+  name: Falkland Islands
+  region: Americas
+  subregion: South America
+  summary: 'The Falkland Islands (Spanish: Islas Malvinas) is an archipelago in the
+    South Atlantic Ocean on the Patagonian Shelf. The principal islands are about
+    300 mi east of South America''s southern Patagonian coast and about 752 mi from
+    Cape Dubouzet at the northern tip of the Antarctic Peninsula.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Falkland_Islands
+fm:
+  country: true
+  full_name: Federated States of Micronesia
+  name: Micronesia
+  region: Oceania
+  subregion: Micronesia
+  summary: 'Micronesia is a subregion of Oceania, consisting of about 2,000 small
+    islands in the Northwestern Pacific Ocean. It has a close shared cultural history
+    with three other island regions: Maritime Southeast Asia to the west, Polynesia
+    to the east, and Melanesia to the south—as well as with the wider community of
+    Austronesian peoples.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Micronesia
+fo:
+  country: true
+  full_name: Faroe Islands
+  name: Faroe Islands
+  region: Europe
+  subregion: Northern Europe
+  parent: dk
+  summary: >
+    The Faroe or Faeroe Islands, or simply the Faroes (Faroese: Føroyar; Danish:
+    Færøerne), is a North Atlantic island group and an autonomous territory of the
+    Kingdom of Denmark.
+  wikipedia_url: https://en.wikipedia.org/wiki/Faroe_Islands
+fr:
+  country: true
+  full_name: France
+  name: France
+  region: Europe
+  see:
+  - eu
+  subregion: Western Europe
+  summary: France, officially the French Republic, is a country located in Western
+    Europe. It also includes overseas regions and territories in the Americas and
+    the Atlantic, Pacific and Indian oceans, giving it one of the largest discontiguous
+    exclusive economic zones in the world.
+  wikipedia_url: https://en.wikipedia.org/wiki/France
+ga:
+  country: true
+  full_name: Gabon
+  name: Gabon
+  region: Africa
+  subregion: Middle Africa
+  summary: Gabon, officially the Gabonese Republic, is a country on the Atlantic coast
+    of West Central Africa. Located on the equator, it is bordered by Equatorial Guinea
+    to the northwest, Cameroon to the north, the Republic of the Congo on the east
+    and south, and the Gulf of Guinea to the west.
+  wikipedia_url: https://en.wikipedia.org/wiki/Gabon
+gb:
+  country: false
+  full_name: United Kingdom of Great Britain and Northern Ireland
+  name: United Kingdom of Great Britain and Northern Ireland
+  region: Europe
+  subregion: Northern Europe
+  summary: The United Kingdom of Great Britain and Northern Ireland, commonly known
+    as the United Kingdom or Britain, is an island country in Northwestern Europe,
+    off the north-western coast of the continental mainland. It comprises England,
+    Scotland, Wales, and Northern Ireland.
+  wikipedia_url: https://en.wikipedia.org/wiki/United_Kingdom
+gb-nir:
+  country: false
+  full_name: Northern Ireland (United Kingdom of Great Britain and Northern Ireland)
+  name: Northern Ireland (United Kingdom of Great Britain and Northern Ireland)
+  parent: gb
+  region: Europe
+  subregion: Northern Europe
+  summary: 'Northern Ireland (Irish: Tuaisceart Éireann; Ulster-Scots: Norlin Airlann)
+    is a part of the United Kingdom in the north-east of the island of Ireland that
+    is variously described as a country, province or region. Northern Ireland shares
+    an open border to the south and west with the Republic of Ireland.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Northern_Ireland
+gb-sct:
+  country: false
+  full_name: Scotland (United Kingdom of Great Britain and Northern Ireland)
+  name: Scotland (United Kingdom of Great Britain and Northern Ireland)
+  parent: gb
+  region: Europe
+  subregion: Northern Europe
+  summary: Scotland is a country that is part of the United Kingdom. Covering the
+    northern third of the island of Great Britain, Scotland is the second-largest
+    country in the United Kingdom, and accounted for 8% of the population in 2019.
+  wikipedia_url: https://en.wikipedia.org/wiki/Scotland
+gb-wls:
+  country: false
+  full_name: Wales
+  name: Wales
+  region: Europe
+  parent: gb
+  subregion: Northern Europe
+  summary: Wales is a country that is part of the United Kingdom. It is bordered by
+    England to the east, the Irish Sea to the north and west, the Celtic Sea to the
+    southwest and the Bristol Channel to the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Wales
+gd:
+  country: true
+  full_name: Grenada
+  name: Grenada
+  region: Americas
+  subregion: Caribbean
+  summary: Grenada is an island country in the West Indies in the Caribbean Sea at
+    the southern end of the Grenadines island chain. Grenada consists of the island
+    of Grenada itself, two smaller islands, Carriacou and Petite Martinique, and several
+    small islands which lie to the north of the main island and are a part of the
+    Grenadines.
+  wikipedia_url: https://en.wikipedia.org/wiki/Grenada
+ge:
+  country: true
+  full_name: Georgia
+  name: Georgia
+  region: Asia
+  subregion: Western Asia
+  summary: 'Georgia (Georgian: საქართველო) is a country located in Eastern Europe
+    and West Asia. It is part of the Caucasus region, bounded by the Black Sea to
+    the west, Russia to the north and northeast, Turkey to the southwest, Armenia
+    to the south, and by Azerbaijan to the southeast.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Georgia_(country)
+ge-ab:
+  country: false
+  full_name: Abkhazia
+  name: Abkhazia
+  region: Asia
+  parent: ge
+  subregion: Western Asia
+  summary: >
+    The Republic of Abkhazia, is a partially recognised state in the South
+    Caucasus. It is located within the Republic of Georgia, and its strive
+    for independence has met with Russian attempts to destabilise Georgian
+    sovereignty.
+gf:
+  country: true
+  full_name: French Guiana
+  name: French Guiana
+  region: Americas
+  subregion: South America
+  summary: French Guiana is an overseas department of France located on the northern
+    coast of South America in the Guianas. Bordered by Suriname to the west and Brazil
+    to the east and south, French Guiana covers a land area of 83,534 square kilometres,
+    and is inhabited by 301,099 people.
+  wikipedia_url: https://en.wikipedia.org/wiki/French_Guiana
+gg:
+  country: true
+  full_name: Guernsey
+  name: Guernsey
+  region: Europe
+  see:
+  - gb
+  - gg-srk
+  subregion: Northern Europe
+  summary: Guernsey is the second largest island in the Channel Islands, located 27
+    miles west of the Cotentin Peninsula, Normandy. It forms the major part of the
+    jurisdiction of the same name, which also comprises three other inhabited islands
+    and many small islets and rocks.
+  wikipedia_url: https://en.wikipedia.org/wiki/Guernsey
+gg-srk:
+  country: false
+  full_name: Sark
+  name: Sark
+  region: Europe
+  parent: gg
+  see:
+  - gb
+  subregion: Northern Europe
+  summary: Sark is a part of the Channel Islands in the southwestern English Channel,
+    off the coast of Normandy, France. It is a royal fief, which forms part of the
+    Bailiwick of Guernsey, with its own set of laws based on Norman law and its own
+    parliament.
+  wikipedia_url: https://en.wikipedia.org/wiki/Sark
+gh:
+  country: true
+  full_name: Ghana
+  name: Ghana
+  region: Africa
+  subregion: Western Africa
+  summary: Ghana, officially the Republic of Ghana, is a country in West Africa. It
+    abuts the Gulf of Guinea and the Atlantic Ocean to the south, sharing borders
+    with Ivory Coast in the west, Burkina Faso in the north, and Togo in the east.
+  wikipedia_url: https://en.wikipedia.org/wiki/Ghana
+gi:
+  country: true
+  full_name: Gibraltar
+  name: Gibraltar
+  region: Europe
+  see:
+  - gb
+  subregion: Southern Europe
+  summary: Gibraltar is a British Overseas Territory and city located at the southern
+    tip of the Iberian Peninsula. It has an area of 6.7 square kilometres (2.6 sq
+    mi) and is bordered to the north by Spain (Campo de Gibraltar). Gibraltar's status
+    as a British territory is disputed by Spain, while the United Nations regards
+    it as a Non-Self-Governing Territory.
+  wikipedia_url: https://en.wikipedia.org/wiki/Gibraltar
+gl:
+  country: true
+  full_name: Greenland
+  name: Greenland
+  region: Americas
+  subregion: Northern America
+  parent: dk
+  summary: Greenland is a North American autonomous territory of the Kingdom of Denmark.
+    It is the largest country within the Kingdom and one of three countries which
+    form the Kingdom, the others being Denmark proper and the Faroe Islands; the citizens
+    of all three countries are citizens of Denmark.
+  wikipedia_url: https://en.wikipedia.org/wiki/Greenland
+gm:
+  country: true
+  full_name: Gambia
+  name: Gambia
+  region: Africa
+  subregion: Western Africa
+  summary: The Gambia, officially the Republic of The Gambia, is a country in West
+    Africa. It is the smallest country within mainland Africa and is surrounded by
+    Senegal, except for its western coast on the Atlantic Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/Gambia
+gn:
+  country: true
+  full_name: Guinea
+  name: Guinea
+  region: Africa
+  subregion: Western Africa
+  summary: Guinea, officially the Republic of Guinea, is a coastal country in West
+    Africa. It borders the Atlantic Ocean to the west, Guinea-Bissau to the northwest,
+    Senegal to the north, Mali to the northeast, Cote d'Ivoire to the southeast, and
+    Sierra Leone and Liberia to the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Guinea
+gp:
+  country: true
+  full_name: Guadeloupe
+  name: Guadeloupe
+  region: Americas
+  subregion: Caribbean
+gq:
+  country: true
+  full_name: Equatorial Guinea
+  name: Equatorial Guinea
+  region: Africa
+  subregion: Middle Africa
+  summary: Equatorial Guinea, also rarely known as Equatoguinea, officially the Republic
+    of Equatorial Guinea, is a country on the west coast of Central Africa, with an
+    area of 28,000 square kilometres. Formerly the colony of Spanish Guinea, its post-independence
+    name refers to its location near both the Equator and in the African region of
+    Guinea.
+  wikipedia_url: https://en.wikipedia.org/wiki/Equatorial_Guinea
+gr:
+  country: true
+  full_name: Greece
+  name: Greece
+  region: Europe
+  see:
+  - eu
+  subregion: Southern Europe
+  summary: Greece, officially the Hellenic Republic, is a country in Southeast Europe,
+    situated on the southern tip of the Balkan peninsula. Greece shares land borders
+    with Albania to the northwest, North Macedonia and Bulgaria to the north, and
+    Turkey to the east.
+  wikipedia_url: https://en.wikipedia.org/wiki/Greece
+gs:
+  country: true
+  full_name: South Georgia and the South Sandwich Islands
+  name: South Georgia and the South Sandwich Islands
+  region: Americas
+  subregion: South America
+gt:
+  country: true
+  full_name: Guatemala
+  name: Guatemala
+  region: Americas
+  subregion: Central America
+  summary: Guatemala, officially the Republic of Guatemala, is a country in Central
+    America. It is bordered to the north and west by Mexico, to the northeast by Belize,
+    to the east by Honduras, to the southeast by El Salvador.
+  wikipedia_url: https://en.wikipedia.org/wiki/Guatemala
+gu:
+  country: true
+  full_name: Guam
+  name: Guam
+  region: Oceania
+  subregion: Micronesia
+  summary: Guam is an organized, unincorporated territory of the United States in
+    the Micronesia subregion of the western Pacific Ocean. Guam's capital is Hagåtña,
+    and the most populous village is Dededo.
+  wikipedia_url: https://en.wikipedia.org/wiki/Guam
+gw:
+  country: true
+  full_name: Guinea-Bissau
+  name: Guinea-Bissau
+  region: Africa
+  subregion: Western Africa
+  summary: >
+    Guinea-Bissau, officially the Republic of Guinea-Bissau, is a country in
+    West Africa that covers 36,125 square kilometres with an estimated population
+    of 2,026,778. It borders Senegal to its north and Guinea to its southeast.
+  wikipedia_url: https://en.wikipedia.org/wiki/Guinea-Bissau
+gy:
+  country: true
+  full_name: Guyana
+  name: Guyana
+  region: Americas
+  subregion: South America
+  summary: Guyana, officially the Co-operative Republic of Guyana, is a country on
+    the northern mainland of South America. Guyana is most probably an indigenous
+    word which means "Land of Many Waters". The capital city is Georgetown.
+  wikipedia_url: https://en.wikipedia.org/wiki/Guyana
+hk:
+  country: true
+  full_name: Hong Kong
+  name: Hong Kong
+  parent: cn
+  region: Asia
+  subregion: Eastern Asia
+  summary: Hong Kong, officially the Hong Kong Special Administrative Region of the
+    People's Republic of China, is a city and a special administrative region in China.
+  wikipedia_url: https://en.wikipedia.org/wiki/Hong_Kong_SAR_China
+hm:
+  country: true
+  full_name: Heard Island and McDonald Islands
+  name: Heard Island and McDonald Islands
+  region: Oceania
+  subregion: Australia and New Zealand
+hn:
+  country: true
+  full_name: Honduras
+  name: Honduras
+  region: Americas
+  subregion: Central America
+  summary: Honduras, officially the Republic of Honduras, is a country in Central
+    America. The republic of Honduras is bordered to the west by Guatemala, to the
+    southwest by El Salvador, to the southeast by Nicaragua, to the south by the Pacific
+    Ocean at the Gulf of Fonseca, and to the north by the Gulf of Honduras, a large
+    inlet of the Caribbean Sea.
+  wikipedia_url: https://en.wikipedia.org/wiki/Honduras
+hr:
+  country: true
+  full_name: Croatia
+  name: Croatia
+  region: Europe
+  see:
+  - eu
+  subregion: Southern Europe
+  summary: Croatia, officially the Republic of Croatia), is a country located at the
+    crossroads of Central and Southeast Europe. Its coast lies entirely on the Adriatic
+    Sea.
+  wikipedia_url: https://en.wikipedia.org/wiki/Croatia
+ht:
+  country: true
+  full_name: Haiti
+  name: Haiti
+  region: Americas
+  subregion: Caribbean
+  summary: Haiti, officially the Republic of Haiti, and formerly known as Hayti, is
+    a country located on the island of Hispaniola in the Greater Antilles archipelago
+    of the Caribbean Sea, east of Cuba and Jamaica, and south of The Bahamas and the
+    Turks and Caicos Islands. It occupies the western three-eighths of the island
+    which it shares with the Dominican Republic.
+  wikipedia_url: https://en.wikipedia.org/wiki/Haiti
+hu:
+  country: true
+  full_name: Hungary
+  name: Hungary
+  region: Europe
+  see:
+  - eu
+  subregion: Central Europe
+  summary: Hungary is a landlocked country in Central Europe. Spanning 93,030 square
+    kilometres of the Carpathian Basin, it is bordered by Slovakia to the north, Ukraine
+    to the northeast, Romania to the east and southeast, Serbia to the south, Croatia
+    and Slovenia to the southwest, and Austria to the west.
+  wikipedia_url: https://en.wikipedia.org/wiki/Hungary
+id:
+  country: true
+  full_name: Indonesia
+  name: Indonesia
+  region: Asia
+  subregion: South-eastern Asia
+  summary: Indonesia, officially the Republic of Indonesia, is an island nation in
+    Southeast Asia and Oceania between the Indian and Pacific oceans. It consists
+    of over 17,000 islands, including Sumatra, Java, Sulawesi, and parts of Borneo
+    and New Guinea.
+  wikipedia_url: https://en.wikipedia.org/wiki/Indonesia
+ie:
+  country: true
+  full_name: Ireland
+  name: Ireland
+  region: Europe
+  see:
+  - eu
+  subregion: Northern Europe
+  summary: Ireland, also known as the Republic of Ireland, is a country in north-western
+    Europe consisting of 26 of the 32 counties of the island of Ireland. The capital
+    and largest city is Dublin, on the eastern side of the island.
+  wikipedia_url: https://en.wikipedia.org/wiki/Republic_of_Ireland
+il:
+  country: true
+  full_name: Israel
+  name: Israel
+  region: Asia
+  subregion: Western Asia
+  see:
+  - ps
+  summary: Israel, officially the State of Israel, is a country in West Asia. It is
+    bordered by Lebanon to the north, by Syria to the northeast, by Jordan to the
+    east, by the Red Sea to the south, by Egypt to the southwest, by the Mediterranean
+    Sea to the west, and by the Palestinian territories – the West Bank along the
+    east and the Gaza Strip along the southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Israel
+im:
+  country: true
+  full_name: Isle of Man
+  name: Isle of Man
+  region: Europe
+  subregion: Northern Europe
+  see:
+  - gb
+  summary: The Isle of Man, also known as Mann, is a self-governing British Crown
+    Dependency in the Irish Sea between Great Britain and Ireland. As head of state,
+    Charles III holds the title Lord of Mann and is represented by a Lieutenant Governor.
+  wikipedia_url: https://en.wikipedia.org/wiki/Isle_of_Man
+in:
+  country: true
+  full_name: India
+  name: India
+  region: Asia
+  subregion: Southern Asia
+  summary: India, officially the Republic of India, is a country in South Asia. It
+    is the seventh-largest country by area; the most populous country as of June 2023;
+    and from the time of its independence in 1947, the world's most populous democracy.
+  wikipedia_url: https://en.wikipedia.org/wiki/India
+io:
+  country: true
+  full_name: British Indian Ocean Territory
+  name: British Indian Ocean Territory
+  region: Africa
+  subregion: Eastern Africa
+  summary: The British Indian Ocean Territory is an Overseas Territory of the United
+    Kingdom situated in the Indian Ocean, halfway between Tanzania and Indonesia.
+    The territory comprises the seven atolls of the Chagos Archipelago with over 1,000
+    individual islands – many very small – amounting to a total land area of 60 square
+    kilometres.
+  wikipedia_url: https://en.wikipedia.org/wiki/British_Indian_Ocean_Territory
+iq:
+  country: true
+  full_name: Iraq
+  name: Iraq
+  region: Asia
+  subregion: Western Asia
+  summary: Iraq, officially the Republic of Iraq, is a country in the Middle East.
+    It is a federal parliamentary republic that consists of 19 governorates.
+  wikipedia_url: https://en.wikipedia.org/wiki/Iraq
+ir:
+  country: true
+  full_name: Islamic Republic of Iran
+  name: Iran
+  region: Asia
+  subregion: Southern Asia
+  summary: >
+    Iran, also known officially as the Islamic Republic of Iran, is a
+    country in West Asia. The government of Iran has been the subject of severe
+    international sanctions, especially those put in place by the United States.
+is:
+  country: true
+  full_name: Iceland
+  name: Iceland
+  region: Europe
+  subregion: Northern Europe
+  summary: Iceland is a Nordic island country between the North Atlantic and Arctic
+    Oceans, on the Mid-Atlantic Ridge between North America and Europe. It is linked
+    culturally and politically with Europe, and is the region's most sparsely populated
+    country.
+  wikipedia_url: https://en.wikipedia.org/wiki/Iceland
+it:
+  country: true
+  full_name: Italy
+  name: Italy
+  region: Europe
+  see:
+  - eu
+  subregion: Southern Europe
+  summary: >
+    Italy, officially the Italian Republic or the Republic of Italy, is a country
+    in Southern and Western Europe. Located in the middle of the Mediterranean Sea,
+    it consists of a peninsula delimited by the Alps and surrounded by several islands.
+  wikipedia_url: https://en.wikipedia.org/wiki/Italy
+je:
+  country: true
+  full_name: Jersey
+  name: Jersey
+  region: Europe
+  see:
+  - gb
+  subregion: Northern Europe
+  summary: Jersey, also known as the Bailiwick of Jersey, is an island country and
+    self-governing British Crown Dependency near the coast of north-west France. It
+    is the largest of the Channel Islands.
+  wikipedia_url: https://en.wikipedia.org/wiki/Jersey
+jm:
+  country: true
+  full_name: Jamaica
+  name: Jamaica
+  region: Americas
+  subregion: Caribbean
+  summary: Jamaica is an island country situated in the Caribbean Sea. Spanning 10,990
+    square kilometres in area, it is the third largest island — after Cuba and Hispaniola
+    — of the Greater Antilles and the Caribbean.
+  wikipedia_url: https://en.wikipedia.org/wiki/Jamaica
+jo:
+  country: true
+  full_name: Jordan
+  name: Jordan
+  region: Asia
+  subregion: Western Asia
+  summary: Jordan, officially the Hashemite Kingdom of Jordan, is a country in West
+    Asia. It is situated at the crossroads of Asia, Africa, and Europe, within the
+    Levant region, on the East Bank of the Jordan River.
+  wikipedia_url: https://en.wikipedia.org/wiki/Jordan
+jp:
+  country: true
+  full_name: Japan
+  name: Japan
+  region: Asia
+  subregion: Eastern Asia
+  summary: Japan is an island country in East Asia. It is situated in the northwest
+    Pacific Ocean and is bordered on the west by the Sea of Japan, extending from
+    the Sea of Okhotsk in the north toward the East China Sea, Philippine Sea, and
+    Taiwan in the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Japan
+ke:
+  country: true
+  full_name: Kenya
+  name: Kenya
+  region: Africa
+  subregion: Eastern Africa
+  summary: Kenya, officially the Republic of Kenya, is a country in East Africa. It
+    is bordered by South Sudan to the northwest, Ethiopia to the north, Somalia to
+    the east, Uganda to the west, Tanzania to the south, and the Indian Ocean to the
+    southeast.
+  wikipedia_url: https://en.wikipedia.org/wiki/Kenya
+kg:
+  country: true
+  full_name: Kyrgyzstan
+  name: Kyrgyzstan
+  region: Asia
+  subregion: Central Asia
+  summary: >
+    Kyrgyzstan, officially the Kyrgyz Republic, is a landlocked country in
+    Central Asia, lying in the Tian Shan and Pamir mountain ranges.
+  wikipedia_url: https://en.wikipedia.org/wiki/Kyrgyzstan
+kh:
+  country: true
+  full_name: Cambodia
+  name: Cambodia
+  region: Asia
+  subregion: South-eastern Asia
+  summary: Cambodia, officially the Kingdom of Cambodia, is a country in Mainland
+    Southeast Asia, bordered by Thailand to the northwest, Laos to the north, Vietnam
+    to the east, and the Gulf of Thailand to the southwest. The capital and most populous
+    city is Phnom Penh.
+  wikipedia_url: https://en.wikipedia.org/wiki/Cambodia
+ki:
+  country: true
+  full_name: Kiribati
+  name: Kiribati
+  region: Oceania
+  subregion: Micronesia
+  summary: Kiribati, officially the Republic of Kiribati, is an island country in
+    the Micronesia subregion of Oceania in the central Pacific Ocean. Its permanent
+    population is over 119,000 as of the 2020 census, with more than half living on
+    Tarawa atoll.
+  wikipedia_url: https://en.wikipedia.org/wiki/Kiribati
+km:
+  country: true
+  full_name: Comoros
+  name: Comoros
+  region: Africa
+  subregion: Eastern Africa
+  summary: The Comoros, officially the Union of the Comoros, is an archipelagic country
+    made up of three islands in Southeastern Africa, located at the northern end of
+    the Mozambique Channel in the Indian Ocean. Its capital and largest city is Moroni.
+  wikipedia_url: https://en.wikipedia.org/wiki/Comoros
+kn:
+  country: false
+  full_name: Saint Kitts and Nevis
+  name: Saint Kitts and Nevis
+  parent: kn
+  region: Americas
+  subregion: Caribbean
+  summary: Saint Kitts and Nevis, officially the Federation of Saint Christopher and
+    Nevis, is an island country and microstate consisting of the two islands of Saint
+    Kitts and Nevis, both located in the West Indies, in the Leeward Islands chain
+    of the Lesser Antilles. With 261 square kilometres of territory, and roughly 50,000
+    inhabitants, it is the smallest sovereign state in the Western Hemisphere, in
+    both area and population, as well as the world's smallest sovereign federation.
+  wikipedia_url: https://en.wikipedia.org/wiki/St._Kitts_&_Nevis
+kn-n:
+  country: false
+  full_name: Nevis (Saint Kitts and Nevis)
+  name: Nevis (Saint Kitts and Nevis)
+  parent: kn
+kp:
+  country: true
+  full_name: Democratic People's Republic of Korea
+  name: North Korea
+  region: Asia
+  subregion: Eastern Asia
+  see:
+  - kr
+  summary: >
+    North Korea, officially the Democratic People's Republic of Korea, is
+    a hereditary dictatorship under severe sanctions restrictions.
+  wikipedia_url: https://en.wikipedia.org/wiki/North_Korea
+kr:
+  country: true
+  full_name: Republic of Korea
+  name: South Korea
+  region: Asia
+  subregion: Eastern Asia
+  see:
+  - kp
+  summary: >
+    South Korea, officially the Republic of Korea, is a country in East Asia.
+    It constitutes the southern part of the Korean Peninsula and borders North Korea
+    along the Korean Demilitarized Zone.
+  wikipedia_url: https://en.wikipedia.org/wiki/South_Korea
+kw:
+  country: true
+  full_name: Kuwait
+  name: Kuwait
+  region: Asia
+  subregion: Western Asia
+  summary: Kuwait, officially the State of Kuwait, is a country in the Middle East.
+    It is situated in the northern edge of Eastern Arabia at the tip of the Persian
+    Gulf, bordering Iraq to the north and Saudi Arabia to the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Kuwait
+ky:
+  country: true
+  full_name: Cayman Islands
+  name: Cayman Islands
+  region: Americas
+  subregion: Caribbean
+  summary: "The Cayman Islands is a self-governing British Overseas Territory, and\
+    \ the\nlargest by population. Tax Justice Network ranks it #2 amongst Corporate\
+    \ Tax \nHavens."
+kz:
+  country: true
+  full_name: Kazakhstan
+  name: Kazakhstan
+  region: Asia
+  subregion: Central Asia
+  summary: Kazakhstan is a landlocked country mostly in Central Asia, with a small
+    part in Eastern Europe.
+  wikipedia_url: https://en.wikipedia.org/wiki/Kazakhstan
+la:
+  country: true
+  full_name: Lao People's Democratic Republic
+  name: Laos
+  region: Asia
+  subregion: South-eastern Asia
+  summary: Laos, officially the Lao People's Democratic Republic, is a landlocked
+    country in Southeast Asia. At the heart of the Indochinese Peninsula, Laos is
+    bordered by Myanmar and China to the northwest, Vietnam to the east, Cambodia
+    to the southeast, and Thailand to the west and southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Laos
+lb:
+  country: true
+  full_name: Lebanon
+  name: Lebanon
+  region: Asia
+  subregion: Western Asia
+  summary: 'Lebanon (Arabic: لُبْنَان French: Liban), officially the Republic of Lebanon,
+    is a country in West Asia. It is bordered by Syria to the north and east, by Israel
+    to the south, and by the Mediterranean Sea to the west.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Lebanon
+lc:
+  country: true
+  full_name: Saint Lucia
+  name: Saint Lucia
+  region: Americas
+  subregion: Caribbean
+  summary: Saint Lucia is a constitutional monarchy and an island country of the West
+    Indies in the eastern Caribbean. The island was previously called Iouanalao and
+    later Hewanorra, names given by the native Arawaks and Caribs, two Amerindian
+    peoples.
+  wikipedia_url: https://en.wikipedia.org/wiki/St._Lucia
+li:
+  country: true
+  full_name: Liechtenstein
+  name: Liechtenstein
+  region: Europe
+  subregion: Western Europe
+  summary: Liechtenstein, officially the Principality of Liechtenstein, is a German-speaking
+    and doubly landlocked country and microstate located in the Alps between Austria
+    and Switzerland.
+  wikipedia_url: https://en.wikipedia.org/wiki/Liechtenstein
+lk:
+  country: true
+  full_name: Sri Lanka
+  name: Sri Lanka
+  region: Asia
+  subregion: Southern Asia
+  summary: 'Sri Lanka (Sinhala: ශ්‍රී ලංකා; Tamil: இலங்கை), historically known as
+    Ceylon and officially the Democratic Socialist Republic of Sri Lanka, is an island
+    country in South Asia. It lies in the Indian Ocean, southwest of the Bay of Bengal,
+    separated from the Indian peninsula by the Gulf of Mannar and the Palk Strait.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Sri_Lanka
+lr:
+  country: true
+  full_name: Liberia
+  name: Liberia
+  region: Africa
+  subregion: Western Africa
+  summary: Liberia, officially the Republic of Liberia, is a country on the West African
+    coast. It is bordered by Sierra Leone to its northwest, Guinea to its north, Ivory
+    Coast to its east, and the Atlantic Ocean to its south and southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Liberia
+ls:
+  country: true
+  full_name: Lesotho
+  name: Lesotho
+  region: Africa
+  subregion: Southern Africa
+  summary: Lesotho, formally the Kingdom of Lesotho, is a landlocked country in Southern
+    Africa. As an enclave of South Africa, with which it shares a 1,106 km border,
+    it is the only sovereign enclave in the world outside of the Italian peninsula.
+  wikipedia_url: https://en.wikipedia.org/wiki/Lesotho
+lt:
+  country: true
+  full_name: Lithuania
+  name: Lithuania
+  region: Europe
+  see:
+  - eu
+  subregion: Northern Europe
+  summary: Lithuania, officially the Republic of Lithuania, is a country in the Baltic
+    region of Europe. It is one of three Baltic states and lies on the eastern shore
+    of the Baltic Sea.
+  wikipedia_url: https://en.wikipedia.org/wiki/Lithuania
+lu:
+  country: true
+  full_name: Luxembourg
+  name: Luxembourg
+  region: Europe
+  see:
+  - eu
+  subregion: Western Europe
+  summary: >
+    Luxembourg (Luxembourgish: Lëtzebuerg), officially the Grand Duchy of
+    Luxembourg, is a small landlocked country in Western Europe. It borders Belgium
+    to the west and north, Germany to the east, and France to the south.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Luxembourg
+lv:
+  country: true
+  full_name: Latvia
+  name: Latvia
+  region: Europe
+  see:
+  - eu
+  subregion: Northern Europe
+  summary: Latvia, officially the Republic of Latvia, is a country in the Baltic region
+    of Northern Europe. It is one of the three Baltic states, along with Estonia to
+    the north and Lithuania to the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Latvia
+ly:
+  country: true
+  full_name: Libya
+  name: Libya
+  region: Africa
+  subregion: Northern Africa
+  summary: Libya, officially the State of Libya, is a country in the Maghreb region
+    of North Africa. It is bordered by the Mediterranean Sea to the north, Egypt to
+    the east, Sudan to the southeast, Chad to the south, Niger to the southwest, Algeria
+    to the west, and Tunisia to the northwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Libya
+ma:
+  country: true
+  full_name: Morocco
+  name: Morocco
+  region: Africa
+  subregion: Northern Africa
+  summary: Morocco, officially the Kingdom of Morocco, is a country in the Maghreb
+    region of North Africa. Morocco also claims the Spanish exclaves of Ceuta,
+    Melilla and Peñón de Vélez de la Gomera, and several small Spanish-controlled
+    islands off its coast.
+  wikipedia_url: https://en.wikipedia.org/wiki/Morocco
+mc:
+  country: true
+  full_name: Monaco
+  name: Monaco
+  region: Europe
+  subregion: Western Europe
+  summary: Monaco, officially the Principality of Monaco, is a sovereign city-state
+    and microstate on the French Riviera a few kilometres west of the Italian region
+    of Liguria, in Western Europe, on the Mediterranean Sea. It is bordered by France
+    to the north, east and west.
+  wikipedia_url: https://en.wikipedia.org/wiki/Monaco
+md:
+  country: true
+  full_name: Republic of Moldova
+  name: Moldova
+  region: Europe
+  see:
+  - md-pmr
+  subregion: Eastern Europe
+  summary: Moldova, officially the Republic of Moldova, is a landlocked country in
+    Eastern Europe, on the northeastern corner of the Balkans. The country is bordered
+    by Romania to the west and Ukraine to the north, east, and south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Moldova
+md-pmr:
+  country: false
+  full_name: Transnistria
+  name: Transnistria
+  region: Europe
+  parent: md
+  see:
+  - ru
+  subregion: Eastern Europe
+  summary: >
+    Transnistria, officially the Pridnestrovian Moldavian Republic,
+    is an unrecognised state internationally considered to be part of Moldova.
+me:
+  country: true
+  full_name: Montenegro
+  name: Montenegro
+  region: Europe
+  subregion: Southern Europe
+  summary: >
+    Montenegro is a country in Southeast Europe. It is bordered by Bosnia and
+    Herzegovina to the north, Serbia to the northeast, Kosovo to the east, Albania
+    to the southeast, and Croatia and the Adriatic Sea to the northwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Montenegro
+mf:
+  country: true
+  full_name: Saint Martin (French Part)
+  name: Saint Martin (French Part)
+  region: Americas
+  subregion: Caribbean
+  summary: 'The Collectivity of Saint Martin (French: Collectivité de Saint-Martin),
+    commonly known as simply Saint Martin, is an overseas collectivity of France in
+    the West Indies in the Caribbean, on the northern half of the island of Saint
+    Martin, as well as some smaller adjacent islands. Saint Martin is separated from
+    the island of Anguilla by the Anguilla Channel.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Collectivity_of_Saint_Martin
+mg:
+  country: true
+  full_name: Madagascar
+  name: Madagascar
+  region: Africa
+  subregion: Eastern Africa
+  summary: Madagascar, officially the Republic of Madagascar, is an island country
+    lying off the southeastern coast of Africa. It is the world's fourth largest island,
+    the second-largest island country and the 46th largest country in the world.
+  wikipedia_url: https://en.wikipedia.org/wiki/Madagascar
+mh:
+  country: true
+  full_name: Marshall Islands
+  name: Marshall Islands
+  region: Oceania
+  subregion: Micronesia
+  summary: The Marshall Islands, officially the Republic of the Marshall Islands,
+    is an island country near Kiribati in the Pacific Ocean, slightly west of the
+    International Date Line and just north of the equator. Geographically, the country
+    is part of the larger island group of Micronesia.
+  wikipedia_url: https://en.wikipedia.org/wiki/Marshall_Islands
+mk:
+  country: true
+  full_name: North Macedonia
+  name: North Macedonia
+  region: Europe
+  subregion: Southern Europe
+  summary: North Macedonia, officially the Republic of North Macedonia, is a landlocked
+    country in Southeast Europe. It shares land borders with Kosovo to the northwest,
+    Serbia to the north, Bulgaria to the east, Greece to the south, and Albania to
+    the west.
+  wikipedia_url: https://en.wikipedia.org/wiki/North_Macedonia
+ml:
+  country: true
+  full_name: Mali
+  name: Mali
+  region: Africa
+  subregion: Western Africa
+  summary: >
+    Mali, officially the Republic of Mali, is a landlocked country in West
+    Africa. Mali is the eighth-largest country in Africa, with an area of over
+    1,241,238 square kilometres.
+  wikipedia_url: https://en.wikipedia.org/wiki/Mali
+mm:
+  country: true
+  full_name: Myanmar
+  name: Myanmar
+  region: Asia
+  subregion: South-eastern Asia
+  summary: >
+    Myanmar (Burmese: မြန်မာ), officially the Republic of the Union of Myanmar,
+    also known as Burma (the official name until 1989), is a country in Southeast
+    Asia. It is bordered by Bangladesh and India to its northwest, China to its northeast,
+    Laos and Thailand to its east and southeast, and the Andaman Sea and the Bay of
+    Bengal to its south and southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Myanmar
+mn:
+  country: true
+  full_name: Mongolia
+  name: Mongolia
+  region: Asia
+  subregion: Eastern Asia
+  summary: Mongolia is a landlocked country in East Asia, bordered by Russia to the
+    north and China to the south. The western extremity of Mongolia is only 23 km
+    from Kazakhstan, and this area can resemble a quadripoint when viewed on a map.
+  wikipedia_url: https://en.wikipedia.org/wiki/Mongolia
+mo:
+  country: true
+  full_name: Macao
+  name: Macao
+  region: Asia
+  subregion: Eastern Asia
+  summary: 'Macau or Macao (Chinese: 澳門), officially the Macao Special Administrative
+    Region of the People''s Republic of China (MSAR), is a city and special administrative
+    region of China in the western Pearl River Delta by the South China Sea.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Macau
+mp:
+  country: true
+  full_name: Northern Mariana Islands
+  name: Northern Mariana Islands
+  region: Oceania
+  subregion: Micronesia
+  summary: The Northern Mariana Islands, officially the Commonwealth of the Northern
+    Mariana Islands, is an unincorporated territory and commonwealth of the United
+    States consisting of 14 islands in the northwestern Pacific Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
+mq:
+  country: true
+  full_name: Martinique
+  name: Martinique
+  region: Americas
+  subregion: Caribbean
+mr:
+  country: true
+  full_name: Mauritania
+  name: Mauritania
+  region: Africa
+  subregion: Western Africa
+  summary: Mauritania, officially the Islamic Republic of Mauritania, is a sovereign
+    country in Northwest Africa. It is bordered by the Atlantic Ocean to the west,
+    Western Sahara to the north and northwest, Algeria to the northeast, Mali to the
+    east and southeast, and Senegal to the southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Mauritania
+ms:
+  country: true
+  full_name: Montserrat
+  name: Montserrat
+  region: Americas
+  see:
+  - gb
+  subregion: Caribbean
+  summary: Montserrat is a British Overseas Territory in the Caribbean. It is part
+    of the Leeward Islands, the northern portion of the Lesser Antilles chain of the
+    West Indies.
+  wikipedia_url: https://en.wikipedia.org/wiki/Montserrat
+mt:
+  country: true
+  full_name: Malta
+  name: Malta
+  region: Europe
+  see:
+  - eu
+  subregion: Southern Europe
+  summary: Malta, officially the Republic of Malta, is an island country in Southern
+    Europe, located in the Mediterranean Sea. It consists of an archipelago between
+    Italy and Libya.
+  wikipedia_url: https://en.wikipedia.org/wiki/Malta
+mu:
+  country: true
+  full_name: Mauritius
+  name: Mauritius
+  region: Africa
+  subregion: Eastern Africa
+  summary: 'Mauritius (French: Maurice; Mauritian Creole: Moris), officially the Republic
+    of Mauritius, is an island country in the Indian Ocean, about 2,000 kilometres
+    (1,100 nautical miles) off the southeastern coast of East Africa, east of Madagascar.
+    It includes the main island (also called Mauritius) and Rodrigues, Agaléga, and
+    St. Brandon.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Mauritius
+mv:
+  country: true
+  full_name: Maldives
+  name: Maldives
+  region: Asia
+  subregion: Southern Asia
+  summary: The Maldives, officially the Republic of Maldives, is an archipelagic state
+    and country in South Asia, situated in the Indian Ocean. It lies southwest of
+    Sri Lanka and India, about 750 kilometres from the Asian continent's mainland.
+  wikipedia_url: https://en.wikipedia.org/wiki/Maldives
+mw:
+  country: true
+  full_name: Malawi
+  name: Malawi
+  region: Africa
+  subregion: Eastern Africa
+  summary: Malawi, officially the Republic of Malawi, is a landlocked country in Southeastern
+    Africa that was formerly known as Nyasaland. It is bordered by Zambia to the west,
+    Tanzania to the north and northeast, and Mozambique to the east, south and southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Malawi
+mx:
+  country: true
+  full_name: Mexico
+  name: Mexico
+  region: Americas
+  subregion: Central America
+  summary: Mexico, officially the United Mexican States, is a country in the southern
+    portion of North America. It is bordered to the north by the United States; to
+    the south and west by the Pacific Ocean; to the southeast by Guatemala, Belize,
+    and the Caribbean Sea; and to the east by the Gulf of Mexico.
+  wikipedia_url: https://en.wikipedia.org/wiki/Mexico
+my:
+  country: false
+  full_name: Malaysia
+  name: Malaysia
+  parent: my
+  region: Asia
+  subregion: South-eastern Asia
+  summary: >
+    Malaysia is a country in Southeast Asia. The federal constitutional monarchy
+    consists of 13 states and three federal territories, separated by the South China
+    Sea into two regions: Peninsular Malaysia and Borneo's East Malaysia.
+  wikipedia_url: https://en.wikipedia.org/wiki/Malaysia
+my-15:
+  country: false
+  full_name: Labuan (Malaysia)
+  name: Labuan
+  parent: my
+mz:
+  country: true
+  full_name: Mozambique
+  name: Mozambique
+  region: Africa
+  subregion: Eastern Africa
+  summary: Mozambique, officially the Republic of Mozambique, is a country located
+    in southeastern Africa bordered by the Indian Ocean to the east, Tanzania to the
+    north, Malawi and Zambia to the northwest, Zimbabwe to the west, and Eswatini
+    and South Africa to the southwest. The sovereign state is separated from the Comoros,
+    Mayotte and Madagascar by the Mozambique Channel to the east.
+  wikipedia_url: https://en.wikipedia.org/wiki/Mozambique
+na:
+  country: true
+  full_name: Namibia
+  name: Namibia
+  region: Africa
+  subregion: Southern Africa
+  summary: Namibia, officially the Republic of Namibia, is a country in Southern Africa.
+    Its western border is the Atlantic Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/Namibia
+nc:
+  country: true
+  full_name: New Caledonia
+  name: New Caledonia
+  region: Oceania
+  subregion: Melanesia
+  summary: 'New Caledonia (French: Nouvelle-Calédonie) is a sui generis collectivity
+    of overseas France in the southwest Pacific Ocean, south of Vanuatu, about 1,210
+    km (750 mi) east of Australia. The archipelago, part of the Melanesia subregion,
+    includes the main island of Grande Terre, the Loyalty Islands, the Chesterfield
+    Islands, the Belep archipelago, the Isle of Pines, and a few remote islets.'
+  wikipedia_url: https://en.wikipedia.org/wiki/New_Caledonia
+ne:
+  country: true
+  full_name: Niger
+  name: Niger
+  region: Africa
+  subregion: Western Africa
+  summary: Niger or the Niger, officially the Republic of the Niger, is a landlocked
+    country in West Africa. It is a unitary state bordered by Libya to the northeast,
+    Chad to the east, Nigeria to the south, Benin and Burkina Faso to the southwest,
+    Mali to the west, and Algeria to the northwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Niger
+nf:
+  country: true
+  full_name: Norfolk Island
+  name: Norfolk Island
+  region: Oceania
+  subregion: Australia and New Zealand
+  summary: Norfolk Island is an external territory of Australia located in the Pacific
+    Ocean between New Zealand and New Caledonia, 1,412 kilometres directly east of
+    Australia's Evans Head and about 900 kilometres from Lord Howe Island. Together
+    with the neighbouring Phillip Island and Nepean Island, the three islands collectively
+    form the Territory of Norfolk Island.
+  wikipedia_url: https://en.wikipedia.org/wiki/Norfolk_Island
+ng:
+  country: true
+  full_name: Nigeria
+  name: Nigeria
+  region: Africa
+  subregion: Western Africa
+  summary: Nigeria, officially the Federal Republic of Nigeria, is a country in West
+    Africa. It is situated between the Sahel to the north and the Gulf of Guinea to
+    the south in the Atlantic Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/Nigeria
+ni:
+  country: true
+  full_name: Nicaragua
+  name: Nicaragua
+  region: Americas
+  subregion: Central America
+  summary: Nicaragua, officially the Republic of Nicaragua, is the largest country
+    in Central America, bordered by Honduras to the north, the Caribbean to the east,
+    Costa Rica to the south, and the Pacific Ocean to the west. Managua is the country's
+    capital and largest city.
+  wikipedia_url: https://en.wikipedia.org/wiki/Nicaragua
+nl:
+  country: true
+  full_name: Kingdom of the Netherlands
+  name: Netherlands
+  region: Europe
+  see:
+  - eu
+  subregion: Western Europe
+  summary: The Netherlands, informally Holland, is a country located in northwestern
+    Europe with overseas territories in the Caribbean. It is the largest of four constituent
+    countries of the Kingdom of the Netherlands.
+  wikipedia_url: https://en.wikipedia.org/wiki/Netherlands
+'no':
+  country: true
+  full_name: Norway
+  name: Norway
+  region: Europe
+  subregion: Northern Europe
+  summary: Norway, formally the Kingdom of Norway, is a Nordic country in Northern
+    Europe, the mainland territory of which comprises the western and northernmost
+    portion of the Scandinavian Peninsula. The remote Arctic island of Jan Mayen and
+    the archipelago of Svalbard also form part of Norway.
+  wikipedia_url: https://en.wikipedia.org/wiki/Norway
+np:
+  country: true
+  full_name: Nepal
+  name: Nepal
+  region: Asia
+  subregion: Southern Asia
+  summary: Nepal, officially the Federal Democratic Republic of Nepal, is a landlocked
+    country in South Asia. It is mainly situated in the Himalayas, but also includes
+    parts of the Indo-Gangetic Plain.
+  wikipedia_url: https://en.wikipedia.org/wiki/Nepal
+nr:
+  country: true
+  full_name: Nauru
+  name: Nauru
+  region: Oceania
+  subregion: Micronesia
+  summary: Nauru, officially the Republic of Nauru and formerly known as Pleasant
+    Island, is an island country and microstate in Micronesia, part of Oceania in
+    the Central Pacific. Its nearest neighbour is Banaba of Kiribati, about 300 km
+    to the east.
+  wikipedia_url: https://en.wikipedia.org/wiki/Nauru
+nu:
+  country: true
+  full_name: Niue
+  name: Niue
+  region: Oceania
+  subregion: Polynesia
+  summary: Niue is a self-governing island state in free association with New Zealand.
+    It is situated in the South Pacific Ocean and is part of Polynesia, and predominantly
+    inhabited by Polynesians.
+  wikipedia_url: https://en.wikipedia.org/wiki/Niue
+nz:
+  country: true
+  full_name: New Zealand
+  name: New Zealand
+  region: Oceania
+  subregion: Australia and New Zealand
+  summary: New Zealand is an island country in the southwestern Pacific Ocean. It
+    consists of two main landmasses—the North Island and the South Island—and over
+    700 smaller islands.
+  wikipedia_url: https://en.wikipedia.org/wiki/New_Zealand
+om:
+  country: true
+  full_name: Oman
+  name: Oman
+  region: Asia
+  subregion: Western Asia
+  summary: 'Oman (Arabic: عُمَان), officially the Sultanate of Oman, is a country
+    located in West Asia. It is situated on the southeastern coast of the Arabian
+    Peninsula, and spans the mouth of the Persian Gulf. It shares land borders with
+    Saudi Arabia, United Arab Emirates, and Yemen, while sharing maritime borders
+    with Iran and Pakistan.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Oman
+pa:
+  country: true
+  full_name: Panama
+  name: Panama
+  region: Americas
+  subregion: Central America
+  summary: Panama, officially the Republic of Panama, is a transcontinental country
+    in Central America, spanning the southern tip of North America into the northern
+    part of South America. It is bordered by Costa Rica to the west, Colombia to the
+    southeast, the Caribbean Sea to the north, and the Pacific Ocean to the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Panama
+pe:
+  country: true
+  full_name: Peru
+  name: Peru
+  region: Americas
+  subregion: South America
+  summary: Peru, officially the Republic of Peru, is a country in western South America.
+    It is bordered in the north by Ecuador and Colombia, in the east by Brazil, in
+    the southeast by Bolivia, in the south by Chile, and in the south and west by
+    the Pacific Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/Peru
+pf:
+  country: true
+  full_name: French Polynesia
+  name: French Polynesia
+  region: Oceania
+  subregion: Polynesia
+  summary: French Polynesia is an overseas collectivity of France and its sole overseas
+    country. It comprises 121 geographically dispersed islands and atolls stretching
+    over more than 2,000 kilometres in the South Pacific Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/French_Polynesia
+pg:
+  country: true
+  full_name: Papua New Guinea
+  name: Papua New Guinea
+  region: Oceania
+  subregion: Melanesia
+  summary: Papua New Guinea, officially the Independent State of Papua New Guinea,
+    is a country in Oceania that comprises the eastern half of the island of New Guinea
+    and its offshore islands in Melanesia (a region of the southwestern Pacific Ocean
+    north of Australia).
+  wikipedia_url: https://en.wikipedia.org/wiki/Papua_New_Guinea
+ph:
+  country: true
+  full_name: Philippines
+  name: Philippines
+  region: Asia
+  subregion: South-eastern Asia
+  summary: 'The Philippines, officially the Republic of the Philippines, is an archipelagic
+    country in Southeast Asia. In the western Pacific Ocean, it consists of 7,641
+    islands which are broadly categorized in three main geographical divisions from
+    north to south: Luzon, Visayas, and Mindanao.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Philippines
+pk:
+  country: true
+  full_name: Pakistan
+  name: Pakistan
+  region: Asia
+  subregion: Southern Asia
+  summary: 'Pakistan (Urdu: پَاکِسْتَان), officially the Islamic Republic of Pakistan,
+    is a country in South Asia. It is bordered by India to the east, Afghanistan to
+    the west, Iran to the southwest, and China to the northeast. It is separated from
+    Tajikistan by Afghanistan''s narrow Wakhan Corridor in the north, and also shares
+    a maritime border with Oman.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Pakistan
+pl:
+  country: true
+  full_name: Poland
+  name: Poland
+  region: Europe
+  see:
+  - eu
+  subregion: Central Europe
+  summary: Poland, officially the Republic of Poland, is a country in Central Europe.
+    It is divided into 16 administrative provinces called voivodeships, covering an
+    area of 313,931 square kilometres.
+  wikipedia_url: https://en.wikipedia.org/wiki/Poland
+pm:
+  country: true
+  full_name: Saint Pierre and Miquelon
+  name: Saint Pierre and Miquelon
+  region: Americas
+  subregion: Northern America
+  summary: Saint Pierre and Miquelon, officially the Territorial Collectivity of Saint-Pierre
+    and Miquelon, is a self-governing territorial overseas collectivity of France
+    in the northwestern Atlantic Ocean near the Canadian province of Newfoundland
+    and Labrador.
+  wikipedia_url: https://en.wikipedia.org/wiki/Saint_Pierre_and_Miquelon
+pn:
+  country: true
+  full_name: Pitcairn
+  name: Pitcairn
+  region: Oceania
+  subregion: Polynesia
+  summary: The Pitcairn Islands, officially the Pitcairn, Henderson, Ducie and Oeno
+    Islands, is a group of four volcanic islands in the southern Pacific Ocean that
+    form the sole British Overseas Territory in the Pacific Ocean. The four islands—Pitcairn,
+    Henderson, Ducie and Oeno—are scattered across several hundred miles of ocean
+    and have a combined land area of about 18 square miles.
+  wikipedia_url: https://en.wikipedia.org/wiki/Pitcairn_Islands
+pr:
+  country: true
+  full_name: Puerto Rico
+  name: Puerto Rico
+  region: Americas
+  subregion: Caribbean
+  summary: Puerto Rico, officially the Commonwealth of Puerto Rico, is a Caribbean
+    island and unincorporated territory of the United States with official Commonwealth
+    status. It is located in the northeast Caribbean Sea, approximately 1,000 miles
+    southeast of Miami, Florida, between the Dominican Republic and the U.S. Virgin
+    Islands.
+  wikipedia_url: https://en.wikipedia.org/wiki/Puerto_Rico
+ps:
+  country: true
+  full_name: State of Palestine
+  name: Palestine
+  region: Asia
+  subregion: Western Asia
+  see:
+  - il
+  summary: 'The Palestinian territories are the two regions of the former British
+    Mandate for Palestine that have been militarily occupied by Israel since the Six-Day
+    War of 1967, namely: the West Bank and the Gaza Strip. The International Court
+    of Justice has referred to the West Bank, including East Jerusalem, as "the Occupied
+    Palestinian Territory", and this term was used as the legal definition by the
+    ICJ in its advisory opinion of July 2004.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Palestinian_Territories
+pt:
+  country: false
+  full_name: Portugal
+  name: Portugal
+  region: Europe
+  see:
+  - eu
+  subregion: Southern Europe
+  summary: Portugal, officially the Portuguese Republic, is a country located on the
+    Iberian Peninsula, in Southwestern Europe, and whose territory also includes the
+    macaronesian archipelagos of the Azores, Madeira, and the Savage Islands. It features
+    the westernmost point in continental Europe, and its Iberian portion is bordered
+    to the west and south by the Atlantic Ocean and to the north and east by Spain,
+    the sole country to have a land border with Portugal.
+  wikipedia_url: https://en.wikipedia.org/wiki/Portugal
+pt-20:
+  country: false
+  full_name: Região Autónoma dos Açores (Portugal)
+  name: Azores
+  parent: pt
+pt-30:
+  country: false
+  full_name: Madeira (Portugal)
+  name: Madeira
+  parent: pt
+pw:
+  country: true
+  full_name: Palau
+  name: Palau
+  region: Oceania
+  subregion: Micronesia
+  summary: Palau is an island country in the Micronesia subregion of Oceania in the
+    western Pacific. The republic consists of approximately 340 islands and connects
+    the western chain of the Caroline Islands with parts of the Federated States of
+    Micronesia.
+  wikipedia_url: https://en.wikipedia.org/wiki/Palau
+py:
+  country: true
+  full_name: Paraguay
+  name: Paraguay
+  region: Americas
+  subregion: South America
+  summary: Paraguay, officially the Republic of Paraguay, is a landlocked country
+    in South America. It is bordered by Argentina to the south and southwest, Brazil
+    to the east and northeast, and Bolivia to the northwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Paraguay
+qa:
+  country: true
+  full_name: Qatar
+  name: Qatar
+  region: Asia
+  subregion: Western Asia
+  summary: Qatar, officially the State of Qatar, is a country in West Asia. It occupies
+    the Qatar Peninsula on the northeastern coast of the Arabian Peninsula in the
+    Middle East; it shares its sole land border with Saudi Arabia to the south, with
+    the rest of its territory surrounded by the Persian Gulf.
+  wikipedia_url: https://en.wikipedia.org/wiki/Qatar
+re:
+  country: true
+  full_name: Réunion
+  name: Réunion
+  region: Africa
+  subregion: Eastern Africa
+ro:
+  country: true
+  full_name: Romania
+  name: Romania
+  region: Europe
+  see:
+  - eu
+  subregion: Eastern Europe
+  summary: Romania is a country in Central, Eastern and Southeast Europe. It borders
+    Ukraine to the north, Hungary to the west, Serbia to the southwest, Bulgaria to
+    the south, Moldova to the east, and the Black Sea to the southeast.
+  wikipedia_url: https://en.wikipedia.org/wiki/Romania
+rs:
+  country: true
+  full_name: Serbia
+  name: Serbia
+  region: Europe
+  subregion: Southern Europe
+  summary: Serbia, officially the Republic of Serbia, is a landlocked country in Southeast
+    and Central Europe, situated at the crossroads of the Pannonian Basin and the
+    Balkans. It shares land borders with Hungary to the north, Romania to the northeast,
+    Bulgaria to the southeast, North Macedonia to the south, Croatia and Bosnia and
+    Herzegovina to the west, and Montenegro to the southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Serbia
+ru:
+  country: true
+  full_name: Russian Federation
+  name: Russia
+  region: Europe
+  subregion: Eastern Europe
+  summary: >
+    Russia, or the Russian Federation, is a country spanning Eastern Europe
+    and Northern Asia. It is the largest country in the world by area, extends across
+    eleven time zones, and shares land boundaries with fourteen countries.
+  wikipedia_url: https://en.wikipedia.org/wiki/Russia
+rw:
+  country: true
+  full_name: Rwanda
+  name: Rwanda
+  region: Africa
+  subregion: Eastern Africa
+  summary: Rwanda, officially the Republic of Rwanda, is a landlocked country in the
+    Great Rift Valley of Central Africa, where the African Great Lakes region and
+    Southeast Africa converge. Located a few degrees south of the Equator, Rwanda
+    is bordered by Uganda, Tanzania, Burundi, and the Democratic Republic of the Congo.
+  wikipedia_url: https://en.wikipedia.org/wiki/Rwanda
+sa:
+  country: true
+  full_name: Saudi Arabia
+  name: Saudi Arabia
+  region: Asia
+  subregion: Western Asia
+  summary: Saudi Arabia, officially the Kingdom of Saudi Arabia, is a country in West
+    Asia. It covers the bulk of the Arabian Peninsula and has a land area of about
+    2,150,000 square kilometres, making it the fifth-largest country in Asia, the
+    second-largest in the Arab world, and the largest in West Asia and the Middle
+    East.
+  wikipedia_url: https://en.wikipedia.org/wiki/Saudi_Arabia
+sb:
+  country: true
+  full_name: Solomon Islands
+  name: Solomon Islands
+  region: Oceania
+  subregion: Melanesia
+  summary: Solomon Islands is a country consisting of six major islands and over 900
+    smaller islands in Melanesia, part of Oceania, to the northeast of Australia.
+    It is directly adjacent to Papua New Guinea to the northwest, Australia to the
+    southwest, New Caledonia and Vanuatu to the southeast, Fiji, Wallis and Futuna
+    and Tuvalu to the east, Nauru and the Federated States of Micronesia to the north.
+  wikipedia_url: https://en.wikipedia.org/wiki/Solomon_Islands
+sc:
+  country: true
+  full_name: Seychelles
+  name: Seychelles
+  region: Africa
+  subregion: Eastern Africa
+  summary: Seychelles, officially the Republic of Seychelles, is an island country
+    and archipelagic state consisting of 155 islands (as per the Constitution) in
+    the Indian Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/Seychelles
+sd:
+  country: true
+  full_name: Sudan
+  name: Sudan
+  region: Africa
+  subregion: Northern Africa
+  summary: Sudan, officially the Republic of the Sudan, is a country in Northeast
+    Africa. It borders the Central African Republic to the southwest, Chad to the
+    west, Egypt to the north, Eritrea to the northeast, Ethiopia to the southeast,
+    Libya to the northwest, South Sudan to the south, and the Red Sea.
+  wikipedia_url: https://en.wikipedia.org/wiki/Sudan
+se:
+  country: true
+  full_name: Sweden
+  name: Sweden
+  region: Europe
+  see:
+  - eu
+  subregion: Northern Europe
+  summary: Sweden, formally the Kingdom of Sweden, is a Nordic country located on
+    the Scandinavian Peninsula in Northern Europe. It borders Norway to the west and
+    north, Finland to the east, and is connected to Denmark in the southwest by a
+    bridge–tunnel across the Öresund.
+  wikipedia_url: https://en.wikipedia.org/wiki/Sweden
+sg:
+  country: true
+  full_name: Singapore
+  name: Singapore
+  region: Asia
+  subregion: South-eastern Asia
+  summary: Singapore, officially the Republic of Singapore, is an island country and
+    city-state in maritime Southeast Asia. It is located about one degree of latitude
+    north of the equator, off the southern tip of the Malay Peninsula, bordering the
+    Strait of Malacca to the west, the Singapore Strait to the south, the South China
+    Sea to the east, and the Straits of Johor to the north.
+  wikipedia_url: https://en.wikipedia.org/wiki/Singapore
+sh:
+  country: true
+  full_name: Saint Helena, Ascension and Tristan da Cunha
+  name: Saint Helena, Ascension and Tristan da Cunha
+  region: Africa
+  subregion: Western Africa
+  summary: Saint Helena is a British overseas territory located in the South Atlantic
+    Ocean. It is a remote volcanic tropical island 1,950 km (1,210 mi) west of the
+    coast of south-western Africa, and 4,000 km (2,500 mi) east of Rio de Janeiro
+    in South America. It is one of three constituent parts of the British Overseas
+    Territory of Saint Helena, Ascension and Tristan da Cunha.
+  wikipedia_url: https://en.wikipedia.org/wiki/St._Helena
+si:
+  country: true
+  full_name: Slovenia
+  name: Slovenia
+  region: Europe
+  see:
+  - eu
+  subregion: Central Europe
+  summary: Slovenia, officially the Republic of Slovenia, is a country in southern
+    Central Europe. It is bordered by Italy to the west, Austria to the north, Hungary
+    to the northeast, Croatia to the southeast, and the Adriatic Sea to the southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Slovenia
+sj:
+  country: true
+  full_name: Svalbard and Jan Mayen
+  name: Svalbard and Jan Mayen
+  region: Europe
+  subregion: Northern Europe
+  summary: 'Svalbard and Jan Mayen is a statistical designation defined by ISO 3166-1
+    for a collective grouping of two remote jurisdictions of Norway: Svalbard and
+    Jan Mayen. While the two are combined for the purposes of the International Organization
+    for Standardization (ISO) category, they are not administratively related.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Svalbard_and_Jan_Mayen
+sk:
+  country: true
+  full_name: Slovakia
+  name: Slovakia
+  region: Europe
+  see:
+  - eu
+  subregion: Eastern Europe
+  summary: Slovakia, officially the Slovak Republic, is a landlocked country in Central
+    Europe. It is bordered by Poland to the north, Ukraine to the east, Hungary to
+    the south, Austria to the west, and the Czech Republic to the northwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Slovakia
+sl:
+  country: true
+  full_name: Sierra Leone
+  name: Sierra Leone
+  region: Africa
+  subregion: Western Africa
+  summary: Sierra Leone, officially the Republic of Sierra Leone, is a country on
+    the southwest coast of West Africa. It shares its southeastern border with Liberia,
+    and the northern half of the nation is surrounded by Guinea.
+  wikipedia_url: https://en.wikipedia.org/wiki/Sierra_Leone
+sm:
+  country: true
+  full_name: San Marino
+  name: San Marino
+  region: Europe
+  subregion: Southern Europe
+  summary: San Marino, officially the Republic of San Marino and also known as the
+    Most Serene Republic of San Marino, is a European microstate and country enclaved
+    by Italy. Located on the northeastern side of the Apennine Mountains, San Marino
+    is the fifth-smallest country in the world.
+  wikipedia_url: https://en.wikipedia.org/wiki/San_Marino
+sn:
+  country: true
+  full_name: Senegal
+  name: Senegal
+  region: Africa
+  subregion: Western Africa
+  summary: Senegal, officially the Republic of Senegal, is a country in West Africa,
+    on the Atlantic Ocean coastline. Senegal is bordered by Mauritania to the north,
+    Mali to the east, Guinea to the southeast and Guinea-Bissau to the southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Senegal
+so:
+  country: true
+  full_name: Somalia
+  name: Somalia
+  region: Africa
+  see:
+  - so-som
+  subregion: Eastern Africa
+  summary: Somalia, officially the Federal Republic of Somalia, is a country in the
+    Horn of Africa. The country is bordered by Ethiopia to the west, Djibouti to the
+    northwest, the Gulf of Aden to the north, the Indian Ocean to the east, and Kenya
+    to the southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Somalia
+so-som:
+  country: false
+  full_name: Somaliland
+  name: Somaliland
+  region: Africa
+  parent: so
+  subregion: Eastern Africa
+  summary: Somaliland, officially the Republic of Somaliland, is an unrecognised sovereign
+    state in the Horn of Africa, recognised internationally as de jure part of Somalia.
+    It is located in the southern coast of the Gulf of Aden and bordered by Djibouti
+    to the northwest, Ethiopia to the south and west, and Somalia to the east.
+  wikipedia_url: https://en.wikipedia.org/wiki/Somaliland
+sr:
+  country: true
+  full_name: Suriname
+  name: Suriname
+  region: Americas
+  subregion: South America
+  summary: Suriname, officially the Republic of Suriname, is a country in northern
+    South America. It is bordered by the Atlantic Ocean to the north, French Guiana
+    to the east, Guyana to the west, and Brazil to the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Suriname
+ss:
+  country: true
+  full_name: South Sudan
+  name: South Sudan
+  region: Africa
+  subregion: Eastern Africa
+  summary: >
+    South Sudan gained independence from Sudan on 9 July 2011, and after a
+    brief period of democratic stability has been engulfed in civil war.
+st:
+  country: true
+  full_name: Sao Tome and Principe
+  name: Sao Tome and Principe
+  region: Africa
+  subregion: Middle Africa
+  summary: São Tomé and Príncipe, officially the Democratic Republic of São Tomé and
+    Príncipe, is an island country in the Gulf of Guinea, off the western equatorial
+    coast of Central Africa. It consists of two archipelagos around the two main islands
+    of São Tomé and Príncipe, about 150 km (93.21 mi) apart and about 250 and 225
+    km (155 and 140 mi) off the northwestern coast of Gabon.
+  wikipedia_url: https://en.wikipedia.org/wiki/S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe
+suhh:
+  country: true
+  full_name: Soviet Union
+  name: Soviet Union
+  region: Supranational
+  see:
+  - ru
+  - ua
+  - by
+  - kz
+  - uz
+  - kg
+  - tj
+  - ee
+  - lv
+  - lt
+  - md
+  - ge
+  - az
+  - am
+  summary: >
+    The Soviet Union, officially the Union of Soviet Socialist Republics (USSR),
+    was disbanded in 1991. It exists in our database because it is still the stated
+    country of birth of a number of designated persons.
+sv:
+  country: true
+  full_name: El Salvador
+  name: El Salvador
+  region: Americas
+  subregion: Central America
+  summary: El Salvador, officially the Republic of El Salvador, is a country in Central
+    America region of North America. It is bordered on the northeast by Honduras,
+    on the northwest by Guatemala, and on the south by the Pacific Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/El_Salvador
+sx:
+  country: true
+  full_name: Sint Maarten
+  name: Sint Maarten
+  region: Americas
+  see:
+  - nl
+  subregion: Caribbean
+  summary: Sint Maarten is a constituent country of the Kingdom of the Netherlands
+    in the Caribbean. With a population of 41,486 as of January 2019 on an area of
+    34 square kilometres, it encompasses the southern 44% of the divided island of
+    Saint Martin, while the northern 56% of the island constitutes the French overseas
+    collectivity of Saint Martin.
+  wikipedia_url: https://en.wikipedia.org/wiki/Sint_Maarten
+sy:
+  country: true
+  full_name: Syrian Arab Republic
+  name: Syria
+  region: Asia
+  subregion: Western Asia
+  summary: Syria, officially the Syrian Arab Republic, is a West Asian country located
+    in the Eastern Mediterranean and the Levant. It is bounded by the Mediterranean
+    Sea to the west, Turkey to the north, Iraq to the east and southeast, Jordan to
+    the south, and Israel and Lebanon to the southwest.
+  wikipedia_url: https://en.wikipedia.org/wiki/Syria
+sz:
+  country: true
+  full_name: Eswatini
+  name: Eswatini
+  region: Africa
+  subregion: Southern Africa
+  summary: Eswatini, formally the Kingdom of Eswatini and also known by its former
+    official name Swaziland, is a landlocked country in Southern Africa. It is bordered
+    by Mozambique to its northeast and South Africa to its north, west, south, and
+    southeast.
+  wikipedia_url: https://en.wikipedia.org/wiki/Eswatini
+tc:
+  country: true
+  full_name: Turks and Caicos Islands
+  name: Turks and Caicos Islands
+  region: Americas
+  subregion: Caribbean
+  summary: The Turks and Caicos Islands are a British Overseas Territory consisting
+    of the larger Caicos Islands and smaller Turks Islands, two groups of tropical
+    islands in the Lucayan Archipelago of the Atlantic Ocean and northern West Indies.
+    They are known primarily for tourism and as an offshore financial centre.
+  wikipedia_url: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
+td:
+  country: true
+  full_name: Chad
+  name: Chad
+  region: Africa
+  subregion: Middle Africa
+  summary: Chad, officially the Republic of Chad, is a landlocked country at the crossroads
+    of North and Central Africa. It is bordered by Libya to the north, Sudan to the
+    east, the Central African Republic to the south, Cameroon to the southwest, Nigeria
+    to the southwest, and Niger to the west.
+  wikipedia_url: https://en.wikipedia.org/wiki/Chad
+tf:
+  country: true
+  full_name: French Southern Territories
+  name: French Southern Territories
+  region: Africa
+  see:
+  - fr
+  subregion: Eastern Africa
+  summary: 'The French Southern and Antarctic Lands (French: Terres australes et antarctiques
+    françaises, TAAF) consists of Adélie Land (Terre Adélie); Crozet Islands (Îles
+    Crozet); Kerguelen Islands (Archipel des Kerguelen); Saint Paul and Amsterdam
+    Islands (Îles Saint Paul et Amsterdam); and Scattered Islands (Îles Éparses)'
+  wikipedia_url: https://en.wikipedia.org/wiki/French_Southern_and_Antarctic_Lands
+tg:
+  country: true
+  full_name: Togo
+  name: Togo
+  region: Africa
+  subregion: Western Africa
+  summary: Togo, officially the Togolese Republic, is a country in West Africa. It
+    is bordered by Ghana to the west, Benin to the east and Burkina Faso to the north.
+  wikipedia_url: https://en.wikipedia.org/wiki/Togo
+th:
+  country: true
+  full_name: Thailand
+  name: Thailand
+  region: Asia
+  subregion: South-eastern Asia
+tj:
+  country: true
+  full_name: Tajikistan
+  name: Tajikistan
+  region: Asia
+  subregion: Central Asia
+  summary: Tajikistan, officially the Republic of Tajikistan, is a landlocked country
+    in Central Asia. It is bordered by Afghanistan to the south, Uzbekistan to the
+    west, Kyrgyzstan to the north, and China to the east.
+  wikipedia_url: https://en.wikipedia.org/wiki/Tajikistan
+tk:
+  country: true
+  full_name: Tokelau
+  name: Tokelau
+  region: Oceania
+  subregion: Polynesia
+  summary: 'Tokelau, known previously as the Union Islands, and, until 1976, known
+    officially as the Tokelau Islands, is a dependent territory of New Zealand in
+    the southern Pacific Ocean. It consists of three tropical coral atolls: Atafu,
+    Nukunonu, and Fakaofo. In addition to these three, Swains Island, which forms
+    part of the same archipelago, is the subject of an ongoing territorial dispute;
+    it is currently administered by the United States as part of American Samoa.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Tokelau
+tl:
+  country: true
+  full_name: Timor-Leste
+  name: Timor-Leste
+  region: Asia
+  subregion: South-eastern Asia
+  summary: East Timor, also known as Timor-Leste, officially the Democratic Republic
+    of Timor-Leste, is a country in Southeast Asia. It comprises the eastern half
+    of the island of Timor, of which the western half is administered by Indonesia,
+    the exclave of Oecusse on the island's north-western half, and the minor islands
+    of Atauro and Jaco.
+  wikipedia_url: https://en.wikipedia.org/wiki/Timor-Leste
+tm:
+  country: true
+  full_name: Turkmenistan
+  name: Turkmenistan
+  region: Asia
+  subregion: Central Asia
+  summary: Turkmenistan is a landlocked country in Central Asia bordered by Kazakhstan
+    to the northwest, Uzbekistan to the north, east and northeast, Afghanistan to
+    the southeast, Iran to the south and southwest and the Caspian Sea to the west.
+    Ashgabat is the capital and largest city.
+  wikipedia_url: https://en.wikipedia.org/wiki/Turkmenistan
+tn:
+  country: true
+  full_name: Tunisia
+  name: Tunisia
+  region: Africa
+  subregion: Northern Africa
+  summary: Tunisia, officially the Republic of Tunisia, is the northernmost country
+    in Africa. It is a part of the Maghreb region of North Africa, bordered by Algeria
+    to the west and southwest, Libya to the southeast, and the Mediterranean Sea to
+    the north and east.
+  wikipedia_url: https://en.wikipedia.org/wiki/Tunisia
+to:
+  country: true
+  full_name: Tonga
+  name: Tonga
+  region: Oceania
+  subregion: Polynesia
+  summary: Tonga, officially the Kingdom of Tonga, is an island country in Polynesia,
+    part of Oceania. The country has 171 islands – of which 45 are inhabited.
+  wikipedia_url: https://en.wikipedia.org/wiki/Tonga
+tr:
+  country: true
+  full_name: Türkiye
+  name: Türkiye
+  region: Asia
+  subregion: Western Asia
+  summary: >
+    Turkey, officially the Republic of Türkiye, is a transcontinental country
+    located at the juncture of Southeast Europe and West Asia.
+  wikipedia_url: https://en.wikipedia.org/wiki/Turkey
+tt:
+  country: true
+  full_name: Trinidad and Tobago
+  name: Trinidad and Tobago
+  region: Americas
+  subregion: Caribbean
+  summary: Trinidad and Tobago, officially the Republic of Trinidad and Tobago, is
+    the southernmost island country in the Caribbean. Consisting of the main islands
+    Trinidad and Tobago and numerous much smaller islands, it is situated 11 kilometres
+    off the coast of northeastern Venezuela and 130 kilometres south of Grenada.
+  wikipedia_url: https://en.wikipedia.org/wiki/Trinidad_&_Tobago
+tv:
+  country: true
+  full_name: Tuvalu
+  name: Tuvalu
+  region: Oceania
+  subregion: Polynesia
+  summary: Tuvalu, formerly known as the Ellice Islands, is an island country in the
+    Polynesian subregion of Oceania in the Pacific Ocean. Its islands are situated
+    about midway between Hawaii and Australia.
+  wikipedia_url: https://en.wikipedia.org/wiki/Tuvalu
+tw:
+  country: true
+  full_name: Taiwan (Province of China)
+  name: Taiwan
+  region: Asia
+  subregion: Eastern Asia
+  summary: Taiwan, officially the Republic of China, is a country in East Asia. It
+    is located at the junction of the East and South China Seas in the northwestern
+    Pacific Ocean, with the People's Republic of China to the northwest, Japan to
+    the northeast, and the Philippines to the south.
+  wikipedia_url: https://en.wikipedia.org/wiki/Taiwan
+tz:
+  country: true
+  full_name: United Republic of Tanzania
+  name: Tanzania
+  region: Africa
+  subregion: Eastern Africa
+  summary: Tanzania, officially the United Republic of Tanzania, is a country in East
+    Africa within the African Great Lakes region. It borders Uganda to the north;
+    Kenya to the northeast; the Indian Ocean to the east; Mozambique and Malawi to
+    the south; Zambia to the southwest; and Rwanda, Burundi, and the Democratic Republic
+    of the Congo to the west.
+  wikipedia_url: https://en.wikipedia.org/wiki/Tanzania
+ua:
+  country: true
+  full_name: Ukraine
+  name: Ukraine
+  region: Europe
+  subregion: Eastern Europe
+  summary: >
+    Ukraine is a country in Eastern Europe. Following the full-scale invasion
+    by Russia's army in 2022, Ukraine has started playing a key role in the identification
+    and designation of Russian persons and companies involved in the aggression.
+ua-cri:
+  country: false
+  full_name: Crimea (Occupied Ukraine)
+  name: Crimea (Occupied Ukraine)
+  region: Europe
+  parent: ua
+  see:
+  - ru
+  subregion: Eastern Europe
+  summary: >
+    Crimea is a part of Ukraine. It is a peninsula on the northern coast of
+    the Black Sea, almost entirely surrounded by the Black Sea and the smaller Sea
+    of Azov. In 2014, the peninsula was illegally occupied and annexed by Russia.
+ua-dpr:
+  country: false
+  full_name: Donetsk (Occupied Ukraine)
+  name: Donetsk (Occupied Ukraine)
+  region: Europe
+  parent: ua
+  see:
+  - ru
+  subregion: Eastern Europe
+  summary: >
+    The Donetsk People's Republic (DPR, Russian: Донецкая Народная Республика)
+    is a region in Ukraine's Donetsk Oblast that has been occupied by Russia. The
+    DPR was infiltrated by Russian-backed paramilitaries in 2014, and it initially
+    operated as a breakaway state until it was annexed by Russia in 2022.
+ua-lpr:
+  country: false
+  full_name: Luhansk (Occupied Ukraine)
+  name: Luhansk (Occupied Ukraine)
+  region: Europe
+  parent: ua
+  see:
+  - ru
+  subregion: Eastern Europe
+  summary: >
+    The Luhansk People's Republic or Lugansk People's Republic (LPR, Russian:
+    Луга́нская Наро́дная Респу́блика) is a region in Ukraine''s Luhansk Oblast that
+    has been occupied by Russia. The LPR was infiltrated by Russian-backed paramilitaries
+    in 2014, and it initially operated as a breakaway state until it was annexed by
+    Russia in 2022.
+ug:
+  country: true
+  full_name: Uganda
+  name: Uganda
+  region: Africa
+  subregion: Eastern Africa
+  summary: Uganda, officially the Republic of Uganda, is a landlocked country in East
+    Africa. The country is bordered to the east by Kenya, to the north by South Sudan,
+    to the west by the Democratic Republic of the Congo, to the south-west by Rwanda,
+    and to the south by Tanzania.
+  wikipedia_url: https://en.wikipedia.org/wiki/Uganda
+um:
+  country: true
+  full_name: United States Minor Outlying Islands
+  name: U.S. Minor Outlying Islands
+  region: Oceania
+  see:
+  - us
+  subregion: Micronesia
+  summary: The United States Minor Outlying Islands is a statistical designation defined
+    by the International Organization for Standardization's ISO 3166-1 code. The minor
+    outlying islands and groups of islands consist of eight United States insular
+    areas in the Pacific Ocean (Baker Island, Howland Island, Jarvis Island, Johnston
+    Atoll, Kingman Reef, Midway Atoll, Palmyra Atoll, and Wake Island) and one in
+    the Caribbean Sea (Navassa Island).
+  wikipedia_url: https://en.wikipedia.org/wiki/United_States_Minor_Outlying_Islands
+un:
+  full_name: United Nations
+  name: United Nations
+us:
+  country: false
+  full_name: United States of America
+  name: United States of America
+  region: Americas
+  subregion: Northern America
+  summary: >
+    The United States is one of the key sanctions-making jurisdictions in
+    the World, including multiple lists published by the Treasury, State
+    and other departments.
+us-ak:
+  country: false
+  full_name: Alaska (United States of America)
+  name: Alaska (United States of America)
+  parent: us
+us-al:
+  country: false
+  full_name: Alabama (United States of America)
+  name: Alabama (United States of America)
+  parent: us
+us-ar:
+  country: false
+  full_name: Arkansas (United States of America)
+  name: Arkansas (United States of America)
+  parent: us
+us-az:
+  country: false
+  full_name: Arizona (United States of America)
+  name: Arizona (United States of America)
+  parent: us
+us-ca:
+  country: false
+  full_name: California (United States of America)
+  name: California (United States of America)
+  parent: us
+us-co:
+  country: false
+  full_name: Colorado (United States of America)
+  name: Colorado (United States of America)
+  parent: us
+us-ct:
+  country: false
+  full_name: Connecticut (United States of America)
+  name: Connecticut (United States of America)
+  parent: us
+us-dc:
+  country: false
+  full_name: District of Columbia (United States of America)
+  name: District of Columbia (United States of America)
+  parent: us
+us-de:
+  country: false
+  full_name: Delaware (United States of America)
+  name: Delaware (United States of America)
+  parent: us
+us-fl:
+  country: false
+  full_name: Florida (United States of America)
+  name: Florida (United States of America)
+  parent: us
+us-ga:
+  country: false
+  full_name: Georgia (United States of America)
+  name: Georgia (United States of America)
+  parent: us
+us-hi:
+  country: false
+  full_name: Hawaii (United States of America)
+  name: Hawaii (United States of America)
+  parent: us
+us-ia:
+  country: false
+  full_name: Iowa (United States of America)
+  name: Iowa (United States of America)
+  parent: us
+us-id:
+  country: false
+  full_name: Idaho (United States of America)
+  name: Idaho (United States of America)
+  parent: us
+us-il:
+  country: false
+  full_name: Illinois (United States of America)
+  name: Illinois (United States of America)
+  parent: us
+us-in:
+  country: false
+  full_name: Indiana (United States of America)
+  name: Indiana (United States of America)
+  parent: us
+us-ks:
+  country: false
+  full_name: Kansas (United States of America)
+  name: Kansas (United States of America)
+  parent: us
+us-ky:
+  country: false
+  full_name: Kentucky (United States of America)
+  name: Kentucky (United States of America)
+  parent: us
+us-la:
+  country: false
+  full_name: Louisiana (United States of America)
+  name: Louisiana (United States of America)
+  parent: us
+us-ma:
+  country: false
+  full_name: Massachusetts (United States of America)
+  name: Massachusetts (United States of America)
+  parent: us
+us-md:
+  country: false
+  full_name: Maryland (United States of America)
+  name: Maryland (United States of America)
+  parent: us
+us-me:
+  country: false
+  full_name: Maine (United States of America)
+  name: Maine (United States of America)
+  parent: us
+us-mi:
+  country: false
+  full_name: Michigan (United States of America)
+  name: Michigan (United States of America)
+  parent: us
+us-mn:
+  country: false
+  full_name: Minnesota (United States of America)
+  name: Minnesota (United States of America)
+  parent: us
+us-mo:
+  country: false
+  full_name: Missouri (United States of America)
+  name: Missouri (United States of America)
+  parent: us
+us-ms:
+  country: false
+  full_name: Mississippi (United States of America)
+  name: Mississippi (United States of America)
+  parent: us
+us-mt:
+  country: false
+  full_name: Montana (United States of America)
+  name: Montana (United States of America)
+  parent: us
+us-nc:
+  country: false
+  full_name: North Carolina (United States of America)
+  name: North Carolina (United States of America)
+  parent: us
+us-nd:
+  country: false
+  full_name: North Dakota (United States of America)
+  name: North Dakota (United States of America)
+  parent: us
+us-ne:
+  country: false
+  full_name: Nebraska (United States of America)
+  name: Nebraska (United States of America)
+  parent: us
+us-nh:
+  country: false
+  full_name: New Hampshire (United States of America)
+  name: New Hampshire (United States of America)
+  parent: us
+us-nj:
+  country: false
+  full_name: New Jersey (United States of America)
+  name: New Jersey (United States of America)
+  parent: us
+us-nm:
+  country: false
+  full_name: New Mexico (United States of America)
+  name: New Mexico (United States of America)
+  parent: us
+us-nv:
+  country: false
+  full_name: Nevada (United States of America)
+  name: Nevada (United States of America)
+  parent: us
+us-ny:
+  country: false
+  full_name: New York (United States of America)
+  name: New York (United States of America)
+  parent: us
+us-oh:
+  country: false
+  full_name: Ohio (United States of America)
+  name: Ohio (United States of America)
+  parent: us
+us-ok:
+  country: false
+  full_name: Oklahoma (United States of America)
+  name: Oklahoma (United States of America)
+  parent: us
+us-or:
+  country: false
+  full_name: Oregon (United States of America)
+  name: Oregon (United States of America)
+  parent: us
+us-pa:
+  country: false
+  full_name: Pennsylvania (United States of America)
+  name: Pennsylvania (United States of America)
+  parent: us
+us-ri:
+  country: false
+  full_name: Rhode Island (United States of America)
+  name: Rhode Island (United States of America)
+  parent: us
+us-sc:
+  country: false
+  full_name: South Carolina (United States of America)
+  name: South Carolina (United States of America)
+  parent: us
+us-sd:
+  country: false
+  full_name: South Dakota (United States of America)
+  name: South Dakota (United States of America)
+  parent: us
+us-tn:
+  country: false
+  full_name: Tennessee (United States of America)
+  name: Tennessee (United States of America)
+  parent: us
+us-tx:
+  country: false
+  full_name: Texas (United States of America)
+  name: Texas (United States of America)
+  parent: us
+us-ut:
+  country: false
+  full_name: Utah (United States of America)
+  name: Utah (United States of America)
+  parent: us
+us-va:
+  country: false
+  full_name: Virginia (United States of America)
+  name: Virginia (United States of America)
+  parent: us
+us-vt:
+  country: false
+  full_name: Vermont (United States of America)
+  name: Vermont (United States of America)
+  parent: us
+us-wa:
+  country: false
+  full_name: Washington (United States of America)
+  name: Washington (United States of America)
+  parent: us
+us-wi:
+  country: false
+  full_name: Wisconsin (United States of America)
+  name: Wisconsin (United States of America)
+  parent: us
+us-wv:
+  country: false
+  full_name: West Virginia (United States of America)
+  name: West Virginia (United States of America)
+  parent: us
+us-wy:
+  country: false
+  full_name: Wyoming (United States of America)
+  name: Wyoming (United States of America)
+  parent: us
+uy:
+  country: true
+  full_name: Uruguay
+  name: Uruguay
+  region: Americas
+  subregion: South America
+  summary: Uruguay, officially the Oriental Republic of Uruguay or the Eastern Republic
+    of Uruguay, is a country in South America. It shares borders with Argentina to
+    its west and southwest and Brazil to its north and northeast, while bordering
+    the Río de la Plata to the south and the Atlantic Ocean to the southeast.
+  wikipedia_url: https://en.wikipedia.org/wiki/Uruguay
+uz:
+  country: true
+  full_name: Uzbekistan
+  name: Uzbekistan
+  region: Asia
+  subregion: Central Asia
+  summary: 'Uzbekistan, officially the Republic of Uzbekistan, is a doubly landlocked
+    country located in Central Asia. It is surrounded by five landlocked countries:
+    Kazakhstan to the north; Kyrgyzstan to the northeast; Tajikistan to the southeast;
+    Afghanistan to the south; and Turkmenistan to the southwest.'
+  wikipedia_url: https://en.wikipedia.org/wiki/Uzbekistan
+va:
+  country: true
+  full_name: Holy See (Vatican)
+  name: Holy See
+  region: Europe
+  see:
+  - it
+  subregion: Southern Europe
+  summary: Vatican City, officially the Vatican City State, is a landlocked independent
+    country, city-state, microstate, and enclave within Rome, Italy. It became independent
+    from Italy in 1929 with the Lateran Treaty, and it is a distinct territory under
+    "full ownership, exclusive dominion, and sovereign authority and jurisdiction"
+    of the Holy See.
+  wikipedia_url: https://en.wikipedia.org/wiki/Vatican_City
+vc:
+  country: true
+  full_name: Saint Vincent and the Grenadines
+  name: Saint Vincent and the Grenadines
+  region: Americas
+  subregion: Caribbean
+  summary: Saint Vincent and the Grenadines is an island country in the Caribbean.
+    It is located in the southeast Windward Islands of the Lesser Antilles, which
+    lie in the West Indies, at the southern end of the eastern border of the Caribbean
+    Sea, where the latter meets the Atlantic Ocean.
+  wikipedia_url: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
+ve:
+  country: true
+  full_name: Bolivarian Republic of Venezuela
+  name: Venezuela
+  region: Americas
+  subregion: South America
+  summary: Venezuela, officially the Bolivarian Republic of Venezuela, is a country
+    on the northern coast of South America, consisting of a continental landmass and
+    many islands and islets in the Caribbean Sea.
+  wikipedia_url: https://en.wikipedia.org/wiki/Venezuela
+vg:
+  country: true
+  full_name: British Virgin Islands
+  name: British Virgin Islands
+  region: Americas
+  subregion: Caribbean
+  see:
+  - gb
+  summary: The British Virgin Islands, officially the Virgin Islands, is a British
+    Overseas Territory in the Caribbean, to the east of Puerto Rico and the US Virgin
+    Islands and north-west of Anguilla. The islands are geographically part of the
+    Virgin Islands archipelago and are located in the Leeward Islands of the Lesser
+    Antilles and part of the West Indies.
+  wikipedia_url: https://en.wikipedia.org/wiki/British_Virgin_Islands
+vi:
+  country: true
+  full_name: U.S. Virgin Islands
+  name: U.S. Virgin Islands
+  region: Americas
+  see:
+  - us
+  subregion: Caribbean
+  summary: The United States Virgin Islands, officially the Virgin Islands of the
+    United States, are a group of Caribbean islands and an unincorporated and organized
+    territory of the United States. The islands are geographically part of the Virgin
+    Islands archipelago and are located in the Leeward Islands of the Lesser Antilles.
+  wikipedia_url: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
+vn:
+  country: true
+  full_name: Viet Nam
+  name: Viet Nam
+  region: Asia
+  subregion: South-eastern Asia
+  summary: Vietnam, officially the Socialist Republic of Vietnam, is a country at
+    the eastern edge of mainland Southeast Asia, with an area of 331,212 square kilometres
+    (127,882 sq mi) and a population of over 100 million, making it the world's fifteenth-most
+    populous country. Vietnam shares land borders with China to the north, and Laos
+    and Cambodia to the west.
+  wikipedia_url: https://en.wikipedia.org/wiki/Vietnam
+vu:
+  country: true
+  full_name: Vanuatu
+  name: Vanuatu
+  region: Oceania
+  subregion: Melanesia
+  summary: Vanuatu, officially the Republic of Vanuatu, is an island country in Melanesia,
+    located in the South Pacific Ocean. The archipelago, which is of volcanic origin,
+    is 1,750 km east of northern Australia, 540 km northeast of New Caledonia, east
+    of New Guinea, southeast of Solomon Islands, and west of Fiji.
+  wikipedia_url: https://en.wikipedia.org/wiki/Vanuatu
+wf:
+  country: true
+  full_name: Wallis and Futuna
+  name: Wallis and Futuna
+  region: Oceania
+  see:
+  - fr
+  subregion: Polynesia
+  summary: Wallis and Futuna, officially the Territory of the Wallis and Futuna Islands,
+    is a French island collectivity in the South Pacific, situated between Tuvalu
+    to the northwest, Fiji to the southwest, Tonga to the southeast, Samoa to the
+    east, and Tokelau to the northeast.
+  wikipedia_url: https://en.wikipedia.org/wiki/Wallis_and_Futuna
+ws:
+  country: true
+  full_name: Samoa
+  name: Samoa
+  region: Oceania
+  subregion: Polynesia
+  summary: Samoa, officially the Independent State of Samoa and until 1997 known as
+    Western Samoa, is a Polynesian island country consisting of two main islands;
+    two smaller, inhabited islands; and several smaller, uninhabited islands, including
+    the Aleipata Islands. Samoa is located 64 km west of American Samoa, 889 km northeast
+    of Tonga, 1,152 km northeast of Fiji, 483 km east of Wallis and Futuna, 1,151
+    km southeast of Tuvalu, 519 km south of Tokelau, 4,190 km southwest of Hawaii,
+    and 610 km northwest of Niue.
+  wikipedia_url: https://en.wikipedia.org/wiki/Samoa
+x-so:
+  country: false
+  full_name: South Ossetia (Occupied Georgia)
+  name: South Ossetia (Occupied Georgia)
+  region: Asia
+  parent: ge
+  see:
+  - ru
+  subregion: Western Asia
+  summary: >
+    South Ossetia is an internationally unrecognized break-away region of
+    Georgia that \nfunctions as a Russian client state and is occupied by the Russian
+    army.
+xk:
+  country: true
+  full_name: Kosovo
+  name: Kosovo
+  region: Europe
+  see:
+  - rs
+  subregion: Southern Europe
+  summary: >
+    Kosovo, officially the Republic of Kosovo, is a partially recognized country
+    in Southeast Europe. It declared its independence from Serbia in 2008, and
+    has been recognized by most Western governments.
+ye:
+  country: true
+  full_name: Yemen
+  name: Yemen
+  region: Asia
+  subregion: Western Asia
+  summary: >
+    Yemen, officially the Republic of Yemen, is a country in West Asia. It
+    is located in the southern end of the Arabian Peninsula, and borders Saudi Arabia
+    to the north and Oman to the northeast.
+  wikipedia_url: https://en.wikipedia.org/wiki/Yemen
+yt:
+  country: true
+  full_name: Mayotte
+  name: Mayotte
+  region: Africa
+  subregion: Eastern Africa
+yucs:
+  country: true
+  full_name: Yugoslavia
+  name: Yugoslavia
+  region: Europe
+  see:
+  - si
+  - hr
+  - ba
+  - rs
+  - me
+  - xk
+  - mk
+  subregion: Eastern Europe
+  summary: Yugoslavia was a country in Southeast and Central Europe that existed from
+    1918 to 1992.
+  wikipedia_url: https://en.wikipedia.org/wiki/Yugoslavia
+za:
+  country: true
+  full_name: South Africa
+  name: South Africa
+  region: Africa
+  subregion: Southern Africa
+  summary: South Africa, officially the Republic of South Africa, is the southernmost
+    country in Africa. It is bounded to the south by 2,798 kilometres of coastline
+    that stretches along the South Atlantic and Indian Oceans; to the north by the
+    neighbouring countries of Namibia, Botswana, and Zimbabwe; and to the east and
+    northeast by Mozambique and Eswatini.
+  wikipedia_url: https://en.wikipedia.org/wiki/South_Africa
+zm:
+  country: true
+  full_name: Zambia
+  name: Zambia
+  region: Africa
+  subregion: Eastern Africa
+  summary: >
+    Zambia, officially the Republic of Zambia, is a landlocked country at the
+    crossroads of Central, Southern and East Africa. It is typically referred to being
+    in South-Central Africa or Southern Africa.
+  wikipedia_url: https://en.wikipedia.org/wiki/Zambia
+zr:
+  country: true
+  full_name: Zaire
+  name: Zaire
+  region: Africa
+  see:
+  - cd
+  subregion: Middle Africa
+  summary: >
+    Zaire, officially the Republic of Zaire, was the name of the Democratic
+    Republic of the Congo from 1965 to 1997. Zaire was located in Central Africa and
+    was, by area, the third-largest country in Africa (after Sudan and Algeria).
+  wikipedia_url: https://en.wikipedia.org/wiki/Zaire
+zw:
+  country: true
+  full_name: Zimbabwe
+  name: Zimbabwe
+  region: Africa
+  subregion: Eastern Africa
+  summary: Zimbabwe, officially the Republic of Zimbabwe, is a landlocked country
+    in Southern Africa, between the Zambezi and Limpopo Rivers, bordered by South
+    Africa to the south, Botswana to the southwest, Zambia to the north, and Mozambique
+    to the east. The capital and largest city is Harare, and the second largest is
+    Bulawayo.
+  wikipedia_url: https://en.wikipedia.org/wiki/Zimbabwe
+zz:
+  country: true
+  full_name: Global
+  name: Global
+  region: Supranational
+  summary: The global region is used in OpenSanctions to denote datasets and entities
+    which can not be scoped to any more specific single national or supranational
+    region.
