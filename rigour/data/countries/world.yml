@@ -13,7 +13,7 @@ ad:
     by France to the north and Spain to the south.
   wikipedia_url: https://en.wikipedia.org/wiki/Andorra
 ae:
-  country: false
+  country: true
   full_name: United Arab Emirates
   name: United Arab Emirates
   region: Asia
@@ -120,7 +120,7 @@ ao:
     area and population, and is the seventh-largest country in Africa.
   wikipedia_url: https://en.wikipedia.org/wiki/Angola
 aq:
-  country: true
+  country: false
   full_name: Antarctica
   name: Antarctica
 ar:
@@ -140,7 +140,9 @@ as:
   name: American Samoa
   region: Oceania
   subregion: Polynesia
-  summary: American Samoa is an unincorporated territory of the United States located
+  parent: us
+  summary: >
+    American Samoa is an unincorporated territory of the United States located
     in the South Pacific Ocean, southeast of the island country of Samoa.
   wikipedia_url: https://en.wikipedia.org/wiki/American_Samoa
 at:
@@ -249,7 +251,7 @@ bd:
     kilometres
   wikipedia_url: https://en.wikipedia.org/wiki/Bangladesh
 be:
-  country: false
+  country: true
   full_name: Belgium
   name: Belgium
   region: Europe
@@ -442,7 +444,7 @@ bz:
     to the west and south.
   wikipedia_url: https://en.wikipedia.org/wiki/Belize
 ca:
-  country: false
+  country: true
   full_name: Canada
   name: Canada
   region: Americas
@@ -610,7 +612,8 @@ cm:
   name: Cameroon
   region: Africa
   subregion: Middle Africa
-  summary: Cameroon, officially the Republic of Cameroon, is a country in Central
+  summary: >
+    Cameroon, officially the Republic of Cameroon, is a country in Central
     Africa. It shares boundaries with Nigeria to the west and north, Chad to the northeast,
     the Central African Republic to the east, and Equatorial Guinea, Gabon and the
     Republic of the Congo to the south.
@@ -645,7 +648,8 @@ co:
   name: Colombia
   region: Americas
   subregion: South America
-  summary: Colombia, officially the Republic of Colombia, is a country mostly in South
+  summary: >
+    Colombia, officially the Republic of Colombia, is a country mostly in South
     America with insular regions in North America. The Colombian mainland is bordered
     by the Caribbean Sea to the north, Venezuela to the east and northeast, Brazil
     to the southeast, Ecuador and Peru to the south and southwest, the Pacific Ocean
@@ -657,7 +661,8 @@ cr:
   name: Costa Rica
   region: Americas
   subregion: Central America
-  summary: Costa Rica, officially the Republic of Costa Rica, is a country in the
+  summary: >
+    Costa Rica, officially the Republic of Costa Rica, is a country in the
     Central American region of North America. Costa Rica is bordered by Nicaragua
     to the north, the Caribbean Sea to the northeast, Panama to the southeast, and
     the Pacific Ocean to the southwest, as well as maritime border with Ecuador to
@@ -668,7 +673,7 @@ cshh:
   full_name: Czechoslovakia
   name: Czechoslovakia
   region: Europe
-  see:
+  successors:
   - cz
   - sk
   subregion: Central Europe
@@ -681,10 +686,11 @@ csxx:
   full_name: Serbia and Montenegro
   name: Serbia and Montenegro
   region: Europe
+  successors:
+  - rs
+  - me 
   see:
   - yucs
-  - rs
-  - me
   subregion: Southern Europe
   summary: Serbia and Montenegro, known until 2003 as the Federal Republic of Yugoslavia,
     FR Yugoslavia or simply Yugoslavia, was a country in Southeast Europe located
@@ -1062,7 +1068,7 @@ ga:
 gb:
   country: false
   full_name: United Kingdom of Great Britain and Northern Ireland
-  name: United Kingdom of Great Britain and Northern Ireland
+  name: United Kingdom
   region: Europe
   subregion: Northern Europe
   summary: The United Kingdom of Great Britain and Northern Ireland, commonly known
@@ -2636,7 +2642,7 @@ suhh:
   full_name: Soviet Union
   name: Soviet Union
   region: Supranational
-  see:
+  successors:
   - ru
   - ua
   - by
@@ -2953,7 +2959,7 @@ un:
   full_name: United Nations
   name: United Nations
 us:
-  country: false
+  country: true
   full_name: United States of America
   name: United States of America
   region: Americas
@@ -2965,257 +2971,257 @@ us:
 us-ak:
   country: false
   full_name: Alaska (United States of America)
-  name: Alaska (United States of America)
+  name: Alaska
   parent: us
 us-al:
   country: false
   full_name: Alabama (United States of America)
-  name: Alabama (United States of America)
+  name: Alabama
   parent: us
 us-ar:
   country: false
   full_name: Arkansas (United States of America)
-  name: Arkansas (United States of America)
+  name: Arkansas
   parent: us
 us-az:
   country: false
   full_name: Arizona (United States of America)
-  name: Arizona (United States of America)
+  name: Arizona
   parent: us
 us-ca:
   country: false
   full_name: California (United States of America)
-  name: California (United States of America)
+  name: California
   parent: us
 us-co:
   country: false
   full_name: Colorado (United States of America)
-  name: Colorado (United States of America)
+  name: Colorado
   parent: us
 us-ct:
   country: false
   full_name: Connecticut (United States of America)
-  name: Connecticut (United States of America)
+  name: Connecticut
   parent: us
 us-dc:
   country: false
   full_name: District of Columbia (United States of America)
-  name: District of Columbia (United States of America)
+  name: District of Columbia
   parent: us
 us-de:
   country: false
   full_name: Delaware (United States of America)
-  name: Delaware (United States of America)
+  name: Delaware
   parent: us
 us-fl:
   country: false
   full_name: Florida (United States of America)
-  name: Florida (United States of America)
+  name: Florida
   parent: us
 us-ga:
   country: false
   full_name: Georgia (United States of America)
-  name: Georgia (United States of America)
+  name: Georgia
   parent: us
 us-hi:
   country: false
   full_name: Hawaii (United States of America)
-  name: Hawaii (United States of America)
+  name: Hawaii
   parent: us
 us-ia:
   country: false
   full_name: Iowa (United States of America)
-  name: Iowa (United States of America)
+  name: Iowa
   parent: us
 us-id:
   country: false
   full_name: Idaho (United States of America)
-  name: Idaho (United States of America)
+  name: Idaho
   parent: us
 us-il:
   country: false
   full_name: Illinois (United States of America)
-  name: Illinois (United States of America)
+  name: Illinois
   parent: us
 us-in:
   country: false
   full_name: Indiana (United States of America)
-  name: Indiana (United States of America)
+  name: Indiana
   parent: us
 us-ks:
   country: false
   full_name: Kansas (United States of America)
-  name: Kansas (United States of America)
+  name: Kansas
   parent: us
 us-ky:
   country: false
   full_name: Kentucky (United States of America)
-  name: Kentucky (United States of America)
+  name: Kentucky
   parent: us
 us-la:
   country: false
   full_name: Louisiana (United States of America)
-  name: Louisiana (United States of America)
+  name: Louisiana
   parent: us
 us-ma:
   country: false
   full_name: Massachusetts (United States of America)
-  name: Massachusetts (United States of America)
+  name: Massachusetts
   parent: us
 us-md:
   country: false
   full_name: Maryland (United States of America)
-  name: Maryland (United States of America)
+  name: Maryland
   parent: us
 us-me:
   country: false
   full_name: Maine (United States of America)
-  name: Maine (United States of America)
+  name: Maine
   parent: us
 us-mi:
   country: false
   full_name: Michigan (United States of America)
-  name: Michigan (United States of America)
+  name: Michigan
   parent: us
 us-mn:
   country: false
   full_name: Minnesota (United States of America)
-  name: Minnesota (United States of America)
+  name: Minnesota
   parent: us
 us-mo:
   country: false
   full_name: Missouri (United States of America)
-  name: Missouri (United States of America)
+  name: Missouri
   parent: us
 us-ms:
   country: false
   full_name: Mississippi (United States of America)
-  name: Mississippi (United States of America)
+  name: Mississippi
   parent: us
 us-mt:
   country: false
   full_name: Montana (United States of America)
-  name: Montana (United States of America)
+  name: Montana
   parent: us
 us-nc:
   country: false
   full_name: North Carolina (United States of America)
-  name: North Carolina (United States of America)
+  name: North Carolina
   parent: us
 us-nd:
   country: false
   full_name: North Dakota (United States of America)
-  name: North Dakota (United States of America)
+  name: North Dakota
   parent: us
 us-ne:
   country: false
   full_name: Nebraska (United States of America)
-  name: Nebraska (United States of America)
+  name: Nebraska
   parent: us
 us-nh:
   country: false
   full_name: New Hampshire (United States of America)
-  name: New Hampshire (United States of America)
+  name: New Hampshire
   parent: us
 us-nj:
   country: false
   full_name: New Jersey (United States of America)
-  name: New Jersey (United States of America)
+  name: New Jersey
   parent: us
 us-nm:
   country: false
   full_name: New Mexico (United States of America)
-  name: New Mexico (United States of America)
+  name: New Mexico
   parent: us
 us-nv:
   country: false
   full_name: Nevada (United States of America)
-  name: Nevada (United States of America)
+  name: Nevada
   parent: us
 us-ny:
   country: false
   full_name: New York (United States of America)
-  name: New York (United States of America)
+  name: New York
   parent: us
 us-oh:
   country: false
   full_name: Ohio (United States of America)
-  name: Ohio (United States of America)
+  name: Ohio
   parent: us
 us-ok:
   country: false
   full_name: Oklahoma (United States of America)
-  name: Oklahoma (United States of America)
+  name: Oklahoma
   parent: us
 us-or:
   country: false
   full_name: Oregon (United States of America)
-  name: Oregon (United States of America)
+  name: Oregon
   parent: us
 us-pa:
   country: false
   full_name: Pennsylvania (United States of America)
-  name: Pennsylvania (United States of America)
+  name: Pennsylvania
   parent: us
 us-ri:
   country: false
   full_name: Rhode Island (United States of America)
-  name: Rhode Island (United States of America)
+  name: Rhode Island
   parent: us
 us-sc:
   country: false
   full_name: South Carolina (United States of America)
-  name: South Carolina (United States of America)
+  name: South Carolina
   parent: us
 us-sd:
   country: false
   full_name: South Dakota (United States of America)
-  name: South Dakota (United States of America)
+  name: South Dakota
   parent: us
 us-tn:
   country: false
   full_name: Tennessee (United States of America)
-  name: Tennessee (United States of America)
+  name: Tennessee
   parent: us
 us-tx:
   country: false
   full_name: Texas (United States of America)
-  name: Texas (United States of America)
+  name: Texas
   parent: us
 us-ut:
   country: false
   full_name: Utah (United States of America)
-  name: Utah (United States of America)
+  name: Utah
   parent: us
 us-va:
   country: false
   full_name: Virginia (United States of America)
-  name: Virginia (United States of America)
+  name: Virginia
   parent: us
 us-vt:
   country: false
   full_name: Vermont (United States of America)
-  name: Vermont (United States of America)
+  name: Vermont
   parent: us
 us-wa:
   country: false
   full_name: Washington (United States of America)
-  name: Washington (United States of America)
+  name: Washington
   parent: us
 us-wi:
   country: false
   full_name: Wisconsin (United States of America)
-  name: Wisconsin (United States of America)
+  name: Wisconsin
   parent: us
 us-wv:
   country: false
   full_name: West Virginia (United States of America)
-  name: West Virginia (United States of America)
+  name: West Virginia
   parent: us
 us-wy:
   country: false
   full_name: Wyoming (United States of America)
-  name: Wyoming (United States of America)
+  name: Wyoming
   parent: us
 uy:
   country: true
@@ -3398,12 +3404,11 @@ yucs:
   full_name: Yugoslavia
   name: Yugoslavia
   region: Europe
-  see:
+  successors:
   - si
   - hr
   - ba
-  - rs
-  - me
+  - cshh
   - xk
   - mk
   subregion: Eastern Europe
@@ -3438,7 +3443,7 @@ zr:
   full_name: Zaire
   name: Zaire
   region: Africa
-  see:
+  successors:
   - cd
   subregion: Middle Africa
   summary: >
@@ -3459,7 +3464,7 @@ zw:
     Bulawayo.
   wikipedia_url: https://en.wikipedia.org/wiki/Zimbabwe
 zz:
-  country: true
+  country: false
   full_name: Global
   name: Global
   region: Supranational
