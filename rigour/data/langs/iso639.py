@@ -16190,6 +16190,15 @@ ISO3_MAP: Dict[str, str] = {
     "zza": "zza",
     "zaza": "zza",
     "zuojiang zhuang": "zzj",
+    "mo": "ron",
+    "mol": "ron",
+    "scc": "srp",
+    "scr": "hrv",
+    "jw": "jav",
+    "jaw": "jav",
+    "iw": "heb",
+    "in": "ind",
+    "ji": "yid",
 }  # noqa
 ISO2_MAP: Dict[str, str] = {
     "aar": "aa",
