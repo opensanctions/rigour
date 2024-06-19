@@ -37,8 +37,6 @@ def levenshtein(left: str, right: str) -> int:
     Returns:
         An integer of changed characters.
     """
-    if left == right:
-        return 0
     return levenshtein_distance(left[:MAX_TEXT], right[:MAX_TEXT])
 
 
@@ -55,7 +53,7 @@ def levenshtein_similarity(
         left: A string.
         right: A string.
         max_edits: The maximum number of edits allowed.
-        max_percent: The maximum percentage of edits allowed.
+        max_percent: The maximum fraction of the shortest string that is allowed to be edited.
 
     Returns:
         A float between 0.0 and 1.0.
