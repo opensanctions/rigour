@@ -37,8 +37,6 @@ def levenshtein(left: str, right: str) -> int:
     Returns:
         An integer of changed characters.
     """
-    if left == right:
-        return 0
     return levenshtein_distance(left[:MAX_TEXT], right[:MAX_TEXT])
 
 
@@ -55,19 +53,23 @@ def levenshtein_similarity(
         left: A string.
         right: A string.
         max_edits: The maximum number of edits allowed.
-        max_percent: The maximum percentage of edits allowed.
+        max_percent: The maximum fraction of the shortest string that is allowed to be edited.
 
     Returns:
         A float between 0.0 and 1.0.
     """
-    distance = dam_levenshtein(left, right)
     left_len = len(left)
     right_len = len(right)
     if left_len == 0 or right_len == 0:
         return 0.0
+
     # Skip results with an overall distance of more than N characters:
     pct_edits = math.ceil(min(left_len, right_len) * max_percent)
     max_edits_ = min(max_edits, pct_edits) if max_edits is not None else pct_edits
+    if abs(left_len - right_len) > max_edits_:
+        return 0.0
+
+    distance = dam_levenshtein(left, right)
     if distance > max_edits_:
         return 0.0
     return 1.0 - (float(distance) / max(left_len, right_len))
@@ -82,7 +84,7 @@ def is_levenshtein_plausible(
     """A sanity check to post-filter name matching results based on a budget
     of allowed Levenshtein distance. This basically cuts off results where
     the Jaro-Winkler or Metaphone comparison was too lenient.
-    
+
     Args:
         left: A string.
         right: A string.
