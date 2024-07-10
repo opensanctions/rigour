@@ -11,7 +11,10 @@ test:
 build-iso639:
 	python rigour/langs/generate.py
 
-build: build-iso639
+build-countries:
+	python rigour/countries/generate.py
+
+build: build-iso639 build-countries
 	black rigour/data
 
 docs:
