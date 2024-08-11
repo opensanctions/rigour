@@ -1,4 +1,0 @@
-include README.md
-include LICENSE
-include rigour/py.typed
-prune tests

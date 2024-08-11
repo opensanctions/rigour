@@ -29,7 +29,7 @@ jobs:
           version: 1.0
       - name: Install dependencies
         run: |
-          pip install wheel pyicu setuptools
+          pip install -U wheel pyicu setuptools
           pip install -e ".[dev]"
       - name: Run the tests
         run: |
