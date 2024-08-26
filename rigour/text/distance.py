@@ -10,7 +10,12 @@ MAX_TEXT = 128
 
 
 @lru_cache(maxsize=CACHE)
-def dam_levenshtein(left: str, right: str, max_length: int = MAX_TEXT) -> int:
+def dam_levenshtein(
+    left: str,
+    right: str,
+    max_length: int = MAX_TEXT,
+    max_edits: Optional[int] = None,
+) -> int:
     """Compute the Damerau-Levenshtein distance between two strings.
 
     Args:
@@ -22,7 +27,11 @@ def dam_levenshtein(left: str, right: str, max_length: int = MAX_TEXT) -> int:
     """
     if left == right:
         return 0
-    return DamerauLevenshtein.distance(left[:max_length], right[:max_length])
+    return DamerauLevenshtein.distance(
+        left[:max_length],
+        right[:max_length],
+        score_cutoff=max_edits,
+    )
 
 
 @lru_cache(maxsize=CACHE)
@@ -69,7 +78,7 @@ def levenshtein_similarity(
     if abs(left_len - right_len) > max_edits_:
         return 0.0
 
-    distance = dam_levenshtein(left, right, max_length=max_length)
+    distance = dam_levenshtein(left, right, max_length=max_length, max_edits=max_edits_)
     if distance > max_edits_:
         return 0.0
     return 1.0 - (float(distance) / max(left_len, right_len))
@@ -99,7 +108,7 @@ def is_levenshtein_plausible(
     right = right[:max_length]
     pct_edits = math.ceil(min(len(left), len(right)) * max_percent)
     max_edits_ = min(max_edits, pct_edits) if max_edits is not None else pct_edits
-    distance = DamerauLevenshtein.distance(left, right, score_cutoff=max_edits_)
+    distance = dam_levenshtein(left, right, max_length, max_edits=max_edits_)
     return distance <= max_edits_
 
 
