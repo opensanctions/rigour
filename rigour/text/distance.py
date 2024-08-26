@@ -1,8 +1,7 @@
 import math
 from typing import Optional
 from functools import lru_cache
-from jellyfish import damerau_levenshtein_distance, levenshtein_distance
-from jellyfish import jaro_winkler_similarity
+from rapidfuzz.distance import Levenshtein, DamerauLevenshtein, JaroWinkler
 
 from rigour import env
 
@@ -23,7 +22,7 @@ def dam_levenshtein(left: str, right: str) -> int:
     """
     if left == right:
         return 0
-    return damerau_levenshtein_distance(left[:MAX_TEXT], right[:MAX_TEXT])
+    return DamerauLevenshtein.distance(left[:MAX_TEXT], right[:MAX_TEXT])
 
 
 @lru_cache(maxsize=CACHE)
@@ -37,7 +36,7 @@ def levenshtein(left: str, right: str) -> int:
     Returns:
         An integer of changed characters.
     """
-    return levenshtein_distance(left[:MAX_TEXT], right[:MAX_TEXT])
+    return Levenshtein.distance(left[:MAX_TEXT], right[:MAX_TEXT])
 
 
 def levenshtein_similarity(
@@ -46,7 +45,7 @@ def levenshtein_similarity(
     max_edits: Optional[int] = env.LEVENSHTEIN_MAX_EDITS,
     max_percent: float = env.LEVENSHTEIN_MAX_PERCENT,
 ) -> float:
-    """Compute the levenshtein similarity of two strings. The similiarity is
+    """Compute the Damerau Levenshtein similarity of two strings. The similiarity is
     the percentage distance measured against the length of the longest string.
 
     Args:
@@ -96,7 +95,9 @@ def is_levenshtein_plausible(
     """
     pct_edits = math.ceil(min(len(left), len(right)) * max_percent)
     max_edits_ = min(max_edits, pct_edits) if max_edits is not None else pct_edits
-    return dam_levenshtein(left, right) <= max_edits_
+    return (
+        DamerauLevenshtein.distance(left, right, score_cutoff=max_edits_) <= max_edits_
+    )
 
 
 @lru_cache(maxsize=CACHE)
@@ -110,5 +111,5 @@ def jaro_winkler(left: str, right: str) -> float:
     Returns:
         A float between 0.0 and 1.0.
     """
-    score = jaro_winkler_similarity(left[:MAX_TEXT], right[:MAX_TEXT])
+    score = JaroWinkler.normalized_similarity(left[:MAX_TEXT], right[:MAX_TEXT])
     return score if score > 0.6 else 0.0
