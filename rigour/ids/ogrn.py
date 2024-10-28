@@ -17,7 +17,7 @@ VALID_FEDERAL_SUBJECT_CODES = {
 VALID_REGISTRATION_TYPES = {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
 
-class GRN(IdentifierFormat):
+class OGRN(IdentifierFormat):
     """Primary State Registration Number (Russian company registration)."""
 
     TITLE: str = "OGRN"
@@ -27,7 +27,26 @@ class GRN(IdentifierFormat):
     @classmethod
     def is_valid(cls, text: str) -> bool:
         """Determine if the given string is a valid OGRN."""
-        return OGRN_RE.match(text) is not None
+        if OGRN_RE.match(text) is None:
+            return False
+
+        if len(text) not in {13, 15}:
+            return False  # Check length for GRN or GRNIP
+
+        registration_type = int(text[0])
+        federal_subject_code = int(text[3:5])
+        
+        # Validate registration type
+        if registration_type not in VALID_REGISTRATION_TYPES:
+            return False
+        
+        # Validate federal subject code
+        if federal_subject_code not in VALID_FEDERAL_SUBJECT_CODES:
+            return False
+        
+        # Validate control digit logic
+        return cls.validate_control_digit(text)
+        
 
     @classmethod
     def normalize(cls, text: str) -> Optional[str]:
@@ -37,64 +56,22 @@ class GRN(IdentifierFormat):
             return None
         return match.group(1)
 
-def validate_grn(grn: str) -> bool:
-    if len(grn) not in {13, 15}:
-        return False  # Check length for GRN or GRNIP
-    registration_type = int(grn[0])
-    federal_subject_code = int(grn[3:5])
-    
-    # Validate registration type
-    if registration_type not in VALID_REGISTRATION_TYPES:
+    @classmethod
+    def calculate_control_digit(cls, grn: str) -> int:
+        if len(grn) == 13:
+            number = int(grn[:12])
+            return number % 11 if number % 11 != 10 else 0
+        elif len(grn) == 15:
+            number = int(grn[:14])
+            return number % 13 if number % 13 != 10 else 0
+        return -1
+
+    @classmethod
+    def validate_control_digit(cls, grn: str) -> bool:
+        if len(grn) == 13:
+            control_digit = int(grn[12])
+            return control_digit == cls.calculate_control_digit(grn)
+        elif len(grn) == 15:
+            control_digit = int(grn[14])
+            return control_digit == cls.calculate_control_digit(grn)
         return False
-    
-    # Validate federal subject code
-    if federal_subject_code not in VALID_FEDERAL_SUBJECT_CODES:
-        return False
-    
-    # Validate control digit logic
-    return validate_control_digit(grn)
-
-def calculate_control_digit(grn: str) -> int:
-    if len(grn) == 13:
-        number = int(grn[:12])
-        return number % 11 if number % 11 != 10 else 0
-    elif len(grn) == 15:
-        number = int(grn[:14])
-        return number % 13 if number % 13 != 10 else 0
-    return -1
-
-def validate_control_digit(grn: str) -> bool:
-    if len(grn) == 13:
-        control_digit = int(grn[12])
-        return control_digit == calculate_control_digit(grn)
-    elif len(grn) == 15:
-        control_digit = int(grn[14])
-        return control_digit == calculate_control_digit(grn)
-    return False
-
-def test_grn_validator():
-    # Valid GRNs (You should replace these examples with real ones, depending on business logic)
-    valid_grn_egryul = "1137847171846"  # An example 13-digit GRN
-    # valid_grn_egrip = "1159102022738"  # An example 15-digit GRN
-
-    # Invalid GRNs
-    invalid_grn_short = "11677"  # Too short
-    invalid_grn_long = "315774600002662123"  # Too long
-    invalid_grn_control_digit = "1167746691302"  # Wrong control digit
-    invalid_grn_registration_type = "9167746691301"  # Invalid registration type
-
-    assert GRN.is_valid(valid_grn_egryul), "Validation failed for valid ЕГРЮЛ GRN."
-    # assert GRN.is_valid(valid_grn_egrip), "Validation failed for valid ЕГРИП GRN."
-    
-    assert not GRN.is_valid(invalid_grn_short), "Incorrect validation result for short GRN."
-    assert not GRN.is_valid(invalid_grn_long), "Incorrect validation result for long GRN."
-    assert not GRN.is_valid(invalid_grn_control_digit), "Incorrect validation for control digit."
-    assert not GRN.is_valid(invalid_grn_registration_type), "Incorrect validation for registration type."
-
-    # Normalization checks
-    assert GRN.normalize(valid_grn_egryul) == valid_grn_egryul, "Normalization failed for ЕГРЮЛ."
-    # assert GRN.normalize(valid_grn_egrip) == valid_grn_egrip, "Normalization failed for ЕГРИП."
-
-if __name__ == "__main__":
-    test_grn_validator()
-    print("All tests passed!")
