@@ -60,18 +60,26 @@ class OGRN(IdentifierFormat):
     def calculate_control_digit(cls, grn: str) -> int:
         if len(grn) == 13:
             number = int(grn[:12])
-            return number % 11 if number % 11 != 10 else 0
+            mod_result = number % 11
+            calculated_digit = mod_result if mod_result != 10 else 0
+            print(f"GRN (13 digits): {grn}, Number: {number}, Mod 11: {mod_result}")
+            return calculated_digit
         elif len(grn) == 15:
             number = int(grn[:14])
-            return number % 13 if number % 13 != 10 else 0
+            mod_result = number % 13
+            calculated_digit = mod_result if mod_result != 10 else 0
+            print(f"GRN (15 digits): {grn}, Number: {number}, Mod 13: {mod_result}")
+            return calculated_digit
         return -1
 
     @classmethod
     def validate_control_digit(cls, grn: str) -> bool:
         if len(grn) == 13:
             control_digit = int(grn[12])
+            print(f"Control digit: {control_digit}")
             return control_digit == cls.calculate_control_digit(grn)
         elif len(grn) == 15:
             control_digit = int(grn[14])
+            print(f"Control digit: {control_digit}")
             return control_digit == cls.calculate_control_digit(grn)
         return False
