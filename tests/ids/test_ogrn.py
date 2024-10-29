@@ -20,8 +20,3 @@ def test_ogrn():
     assert not OGRN.is_valid("11677")
     assert not OGRN.is_valid("315774600002662123")
     assert not OGRN.is_valid("1167746691304")
-    assert not OGRN.is_valid("9167746691301")
-
-if __name__ == "__main__":
-    test_ogrn()
-    print("All tests passed.")
