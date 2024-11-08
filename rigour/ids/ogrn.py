@@ -60,10 +60,5 @@ class OGRN(IdentifierFormat):
 
     @classmethod
     def validate_control_digit(cls, grn: str) -> bool:
-        if len(grn) == 13:
-            control_digit = int(grn[12])
-            return control_digit == cls.calculate_control_digit(grn)
-        elif len(grn) == 15:
-            control_digit = int(grn[14])
-            return control_digit == cls.calculate_control_digit(grn)
-        return False
+        control_digit = int(grn[-1])
+        return control_digit == cls.calculate_control_digit(grn)
