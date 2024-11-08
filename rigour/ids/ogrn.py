@@ -4,6 +4,7 @@ from typing import Optional
 from rigour.ids.common import IdentifierFormat
 
 OGRN_RE = re.compile(r"\b(\d{13}|\d{15})\b")
+VALID_FEDERAL_SUBJECT_CODES = set(range(1, 80)) | {83, 86, 87, 89, 91, 92, 99}
 
 
 class OGRN(IdentifierFormat):
@@ -16,7 +17,21 @@ class OGRN(IdentifierFormat):
     @classmethod
     def is_valid(cls, text: str) -> bool:
         """Determine if the given string is a valid OGRN."""
-        return OGRN_RE.match(text) is not None
+        if OGRN_RE.match(text) is None:
+            return False
+
+        # Validate registration type
+        if text[0] == "0":
+            return False
+
+        # Validate federal subject code
+        federal_subject_code = int(text[3:5])
+        if federal_subject_code not in VALID_FEDERAL_SUBJECT_CODES:
+            return False
+
+        # Validate control digit logic
+        control_digit = int(text[-1])
+        return control_digit == cls.calculate_control_digit(text)
 
     @classmethod
     def normalize(cls, text: str) -> Optional[str]:
@@ -25,3 +40,17 @@ class OGRN(IdentifierFormat):
         if match is None:
             return None
         return match.group(1)
+
+    @classmethod
+    def calculate_control_digit(cls, grn: str) -> Optional[int]:
+        if len(grn) == 13:
+            number = int(grn[:12])
+            mod_result = number % 11
+            calculated_digit = mod_result if mod_result != 10 else 0
+            return calculated_digit
+        elif len(grn) == 15:
+            number = int(grn[:14])
+            mod_result = number % 13
+            calculated_digit = mod_result if mod_result != 10 else 0
+            return calculated_digit
+        return None
