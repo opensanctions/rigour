@@ -1,1 +1,1 @@
-::: rigour.langs
+::: rigour.mime
