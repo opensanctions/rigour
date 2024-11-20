@@ -25,6 +25,8 @@ def env_float(name: str, default: float) -> float:
         return default
 
 
+ENCODING = env_str("RR_ENCODING", "utf-8")
+
 # Timezone information:
 TZ_NAME = env_str("TZ", "UTC")
 TZ = ZoneInfo(TZ_NAME)

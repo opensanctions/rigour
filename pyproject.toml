@@ -7,8 +7,8 @@ name = "rigour"
 version = "0.6.2"
 description = "Financial crime domain data validation and normalization library."
 readme = "README.md"
-license = {file = "LICENSE"}
-authors = [{name = "OpenSanctions", email = "tech@opensanctions.org"}]
+license = { file = "LICENSE" }
+authors = [{ name = "OpenSanctions", email = "tech@opensanctions.org" }]
 classifiers = [
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
@@ -25,6 +25,7 @@ dependencies = [
     "rapidfuzz >= 3.9.0, < 4.0.0",
     "fingerprints >= 1.0.1, < 2.0.0",
     "python-stdnum >= 1.16, < 2.0.0",
+    "jinja2 >= 3.1.0, < 4.0.0",
     "pytz >= 2021.1",
 ]
 
@@ -70,6 +71,4 @@ universal = true
 branch = true
 
 [tool.coverage.report]
-omit = [
-    "rigour/langs/generate.py"
-]
+omit = ["rigour/langs/generate.py"]
