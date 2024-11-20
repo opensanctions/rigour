@@ -54,7 +54,7 @@ def _format(address: Dict[str, Optional[str]], country: Optional[str] = None) ->
     for key, value in address.items():
         if value is None:
             continue
-        value = value.strip()
+        value = str(value).strip()
         if len(value):
             cleaned_address[key] = value
 
