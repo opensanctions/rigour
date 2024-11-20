@@ -1,6 +1,6 @@
 import yaml
 from typing import Dict, Optional, TypedDict
-from functools import cache, lru_cache
+from functools import cache
 from jinja2 import Template, Environment
 
 from rigour.data import DATA_PATH
@@ -63,13 +63,41 @@ def _format(address: Dict[str, Optional[str]], country: Optional[str] = None) ->
     return tpl.render(**cleaned_address)
 
 
-@lru_cache(maxsize=20000)
-def format(address: Dict[str, Optional[str]], country: Optional[str] = None) -> str:
-    return clean_address(_format(address, country=country))
+def format_address(
+    address: Dict[str, Optional[str]], country: Optional[str] = None
+) -> str:
+    """Format the given address part into a multi-line string that matches the
+    conventions of the country of the given address.
+
+    Args:
+        address: The address parts to be combined. Common parts include:
+            summary: A short description of the address.
+            po_box: The PO box/mailbox number.
+            street: The street or road name.
+            house: The descriptive name of the house.
+            house_number: The number of the house on the street.
+            postal_code: The postal code or ZIP code.
+            city: The city or town name.
+            county: The county or district name.
+            state: The state or province name.
+            state_district: The state or province district name.
+            state_code: The state or province code.
+            country: The name of the country (words, not ISO code).
+            country_code: A pre-normalized country code.
+        country: ISO code for the country of the address.
+
+    Returns:
+        A single-line string with the formatted address.
+    """
+    text = _format(address, country=country)
+    prev: Optional[str] = None
+    while prev != text:
+        prev = text
+        text = text.replace("\n\n", "\n").strip()
+    return text
 
 
-@lru_cache(maxsize=20000)
-def format_one_line(
+def format_address_line(
     address: Dict[str, Optional[str]], country: Optional[str] = None
 ) -> str:
     """Format the given address part into a single-line string that matches the
