@@ -30,10 +30,10 @@ def _load_template(template: str) -> Template:
 
 
 def _format(address: Dict[str, Optional[str]], country: Optional[str] = None) -> str:
-    country = country.upper()
+    country = country.upper() if country is not None else "default"
     formats = _load_formats()
     fmt = formats.get(country)
-    if fmt is None and "-" in country:
+    if fmt is None and country is not None and "-" in country:
         country, _ = country.split("-", 1)
         fmt = formats.get(country)
     if fmt is None:
@@ -51,12 +51,12 @@ def _format(address: Dict[str, Optional[str]], country: Optional[str] = None) ->
         return _format(address, country=use_country)
 
     cleaned_address: Dict[str, str] = {}
-    for key, value in address.items():
-        if value is None:
+    for part, pvalue in address.items():
+        if pvalue is None:
             continue
-        value = str(value).strip()
-        if len(value):
-            cleaned_address[key] = value
+        pvalue = str(pvalue).strip()
+        if len(pvalue):
+            cleaned_address[part] = pvalue
 
     tpl_str = fmt.get("address_template")
     tpl = _load_template(tpl_str)

@@ -3,7 +3,7 @@ import re
 REPL = re.compile(r"(\s{2,}|\s,|,{2,}|^[,\s]|[,\s]$)", re.UNICODE)
 
 
-def _sub_match(match: re.Match) -> str:
+def _sub_match(match: re.Match[str]) -> str:
     text = match.group()
     if len(text) == 1:
         return ""
