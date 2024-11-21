@@ -7,3 +7,4 @@ and country codes, corporate and tax identifiers, etc.
 * [Person and organisation names](names.md)
 * [Languages](langs.md)
 * [MIME types](mime.md)
+* [Addresses](addresses.md)
