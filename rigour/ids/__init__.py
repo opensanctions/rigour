@@ -5,6 +5,7 @@ from rigour.ids.wikidata import WikidataQID
 from rigour.ids.stdnum_ import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI
 from rigour.ids.stdnum_ import CPF, CNPJ
 from rigour.ids.ogrn import OGRN
+from rigour.ids.npi import NPI
 from rigour.ids.strict import StrictFormat
 from rigour.ids.common import IdentifierFormat
 
@@ -20,6 +21,7 @@ FORMATS: Dict[str, Type[IdentifierFormat]] = {
     "bic": BIC,
     "swift": BIC,
     "inn": INN,
+    "npi": NPI,
     "lei": LEI,
     "cpf": CPF,
     "cnpj": CNPJ,
@@ -73,6 +75,7 @@ __all__ = [
     "BIC",
     "INN",
     "LEI",
+    "NPI",
     "get_identifier_format",
     "get_identifier_formats",
     "get_identifier_format_names",
