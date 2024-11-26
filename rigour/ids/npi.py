@@ -1,6 +1,6 @@
 import re
 from typing import Optional
-from stdnum import luhn
+from stdnum import luhn  # type: ignore
 
 from rigour.ids.common import IdentifierFormat
 
@@ -23,7 +23,7 @@ class NPI(IdentifierFormat):
         if len(text) == 10:
             text = "80840" + text
 
-        return luhn.is_valid(text)
+        return bool(luhn.is_valid(text))
 
     @classmethod
     def normalize(cls, text: str) -> Optional[str]:
