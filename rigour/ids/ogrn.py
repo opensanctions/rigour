@@ -39,7 +39,10 @@ class OGRN(IdentifierFormat):
         match = OGRN_RE.search(text)
         if match is None:
             return None
-        return match.group(1)
+        value = match.group(1)
+        if cls.is_valid(value):
+            return value
+        return None
 
     @classmethod
     def calculate_control_digit(cls, grn: str) -> Optional[int]:
