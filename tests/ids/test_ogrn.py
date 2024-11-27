@@ -25,6 +25,11 @@ def test_ogrn():
     assert OGRN.is_valid("1022300000502")
     assert OGRN.is_valid("1022200531484")
     assert OGRN.is_valid("1022200525819")
+    assert OGRN.is_valid("385768585948949")
+    assert not OGRN.is_valid("385768585948948")
+    assert not OGRN.is_valid("38576858")
+    assert not OGRN.is_valid("0022200525819")
+    assert not OGRN.is_valid("1029790525819")
 
     # === Invalid Cases ===
     # Too short
@@ -43,6 +48,7 @@ def test_ogrn():
     # === Normalization Tests ===
     # Correct normalization of standard format
     assert OGRN.normalize("1027739552642") == "1027739552642"
+    assert OGRN.normalize("1027739552643") is None
 
     # Normalization removes extra text
     assert OGRN.normalize("OGRN 1027739552642") == "1027739552642"

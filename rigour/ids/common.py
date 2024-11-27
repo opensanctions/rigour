@@ -6,6 +6,7 @@ class IdentifierFormat(object):
     """Base class for identifier types."""
 
     TITLE: str = "Generic identifier"
+    STRONG: bool = False
 
     @classmethod
     def is_valid(cls, value: str) -> bool:
@@ -25,20 +26,16 @@ class StdnumImpl(Protocol):
     """Protocol for stdnum implementations."""
 
     @classmethod
-    def is_valid(cls, value: str) -> bool:
-        ...  # pragma: no cover
+    def is_valid(cls, value: str) -> bool: ...  # pragma: no cover
 
     @classmethod
-    def validate(cls, value: str) -> str:
-        ...  # pragma: no cover
+    def validate(cls, value: str) -> str: ...  # pragma: no cover
 
     @classmethod
-    def compact(cls, value: str) -> str:
-        ...  # pragma: no cover
+    def compact(cls, value: str) -> str: ...  # pragma: no cover
 
     @classmethod
-    def format(cls, value: str) -> str:
-        ...  # pragma: no cover
+    def format(cls, value: str) -> str: ...  # pragma: no cover
 
 
 class StdnumFormat(IdentifierFormat):

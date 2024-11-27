@@ -1,3 +1,4 @@
+from functools import cache
 from typing import Dict, List, Type
 from typing_extensions import TypedDict
 
@@ -61,6 +62,12 @@ def get_identifier_formats() -> List[FormatSpec]:
         }
         formats.append(fmt)
     return sorted(formats, key=lambda f: f["title"])
+
+
+@cache
+def get_strong_format_names() -> List[str]:
+    """Get a list of all strong identifier type names."""
+    return [name for name, cls in FORMATS.items() if cls.STRONG]
 
 
 __all__ = [

@@ -10,6 +10,7 @@ class IMO(StdnumFormat):
     """An IMO number for a ship."""
 
     TITLE = "IMO"
+    STRONG: bool = True
 
     impl = imo
 
@@ -18,6 +19,7 @@ class ISIN(StdnumFormat):
     """An ISIN number for a security."""
 
     TITLE = "ISIN"
+    STRONG: bool = True
 
     impl = isin
 
@@ -30,6 +32,7 @@ class IBAN(StdnumFormat):
     """An IBAN number for a bank account."""
 
     TITLE = "IBAN"
+    STRONG: bool = True
 
     impl = iban
 
@@ -38,6 +41,7 @@ class FIGI(StdnumFormat):
     """A FIGI number for a security, as managed by OpenFIGI."""
 
     TITLE = "FIGI"
+    STRONG: bool = True
 
     impl = figi
 
@@ -50,6 +54,7 @@ class BIC(StdnumFormat):
     """BIC (ISO 9362 Business identifier codes)."""
 
     TITLE = "BIC"
+    STRONG: bool = True
 
     impl = bic
 
@@ -58,7 +63,9 @@ class BIC(StdnumFormat):
         norm = super().normalize(value)
         if norm is not None:
             norm = norm[:8]
-        return norm
+        if cls.is_valid(norm):
+            return norm
+        return None
 
 
 class INN(StdnumFormat):
@@ -77,6 +84,7 @@ class LEI(StdnumFormat):
     """Legal Entity Identifier (ISO 17442)"""
 
     TITLE = "LEI"
+    STRONG: bool = True
 
     impl = lei
 
@@ -96,10 +104,12 @@ class CPF(StdnumFormat):
     def format(cls, value: str) -> str:
         return str(cpf.format(value))
 
+
 class CNPJ(StdnumFormat):
     """Cadastro Nacional de Pessoas Jurídicas, Brazilian national companies identifier"""
 
     TITLE = "CNPJ"
+    STRONG: bool = True
 
     impl = cnpj
 

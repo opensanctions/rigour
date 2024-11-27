@@ -11,6 +11,7 @@ class OGRN(IdentifierFormat):
     """Primary State Registration Number (Russian company registration)."""
 
     TITLE: str = "OGRN"
+    STRONG: bool = True
 
     # cf. https://docs.trellix.com/de-DE/bundle/data-loss-prevention-11.10.x-classification-definitions-reference-guide/page/GUID-945B4343-861E-4A57-8E60-8B6028871BA1.html
 

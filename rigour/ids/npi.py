@@ -11,6 +11,7 @@ class NPI(IdentifierFormat):
     """National Provider Identifier."""
 
     TITLE: str = "NPI"
+    STRONG: bool = True
 
     # cf. https://www.johndcook.com/blog/2024/06/26/npi-number/
 
