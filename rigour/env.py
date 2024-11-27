@@ -31,7 +31,9 @@ ENCODING = env_str("RR_ENCODING", "utf-8")
 TZ_NAME = env_str("TZ", "UTC")
 TZ = ZoneInfo(TZ_NAME)
 
+# Person and company name length:
+MAX_NAME_LENGTH = env_int("RR_MAX_NAME_LENGTH", 384)
 
-# Levenshtein tolerance settings
+# Levenshtein tolerance settings:
 LEVENSHTEIN_MAX_EDITS = env_int("RR_LEVENSHTEIN_MAX_EDITS", 4)
 LEVENSHTEIN_MAX_PERCENT = env_float("RR_LEVENSHTEIN_MAX_PCT", 0.2)

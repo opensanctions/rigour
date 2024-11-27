@@ -5,15 +5,14 @@ from rapidfuzz.distance import Levenshtein, DamerauLevenshtein, JaroWinkler
 
 from rigour import env
 
-CACHE = 4096
-MAX_TEXT = 128
+CACHE = 5000
 
 
 @lru_cache(maxsize=CACHE)
 def dam_levenshtein(
     left: str,
     right: str,
-    max_length: int = MAX_TEXT,
+    max_length: int = env.MAX_NAME_LENGTH,
     max_edits: Optional[int] = None,
 ) -> int:
     """Compute the Damerau-Levenshtein distance between two strings.
@@ -35,7 +34,7 @@ def dam_levenshtein(
 
 
 @lru_cache(maxsize=CACHE)
-def levenshtein(left: str, right: str, max_length: int = MAX_TEXT) -> int:
+def levenshtein(left: str, right: str, max_length: int = env.MAX_NAME_LENGTH) -> int:
     """Compute the Levenshtein distance between two strings.
 
     Args:
@@ -53,7 +52,7 @@ def levenshtein_similarity(
     right: str,
     max_edits: Optional[int] = env.LEVENSHTEIN_MAX_EDITS,
     max_percent: float = env.LEVENSHTEIN_MAX_PERCENT,
-    max_length: int = MAX_TEXT,
+    max_length: int = env.MAX_NAME_LENGTH,
 ) -> float:
     """Compute the Damerau Levenshtein similarity of two strings. The similiarity is
     the percentage distance measured against the length of the longest string.
@@ -89,7 +88,7 @@ def is_levenshtein_plausible(
     right: str,
     max_edits: Optional[int] = env.LEVENSHTEIN_MAX_EDITS,
     max_percent: float = env.LEVENSHTEIN_MAX_PERCENT,
-    max_length: int = MAX_TEXT,
+    max_length: int = env.MAX_NAME_LENGTH,
 ) -> bool:
     """A sanity check to post-filter name matching results based on a budget
     of allowed Levenshtein distance. This basically cuts off results where
@@ -113,7 +112,7 @@ def is_levenshtein_plausible(
 
 
 @lru_cache(maxsize=CACHE)
-def jaro_winkler(left: str, right: str, max_length: int = MAX_TEXT) -> float:
+def jaro_winkler(left: str, right: str, max_length: int = env.MAX_NAME_LENGTH) -> float:
     """Compute the Jaro-Winkler similarity of two strings.
 
     Args:
