@@ -63,8 +63,8 @@ class BIC(StdnumFormat):
         norm = super().normalize(value)
         if norm is not None:
             norm = norm[:8]
-        if cls.is_valid(norm):
-            return norm
+            if cls.is_valid(norm):
+                return norm
         return None
 
 

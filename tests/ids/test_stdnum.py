@@ -52,6 +52,7 @@ def test_bic():
     assert BIC.format("deutdeff") == "DEUTDEFF"
     assert BIC.normalize("deutdeff") == "DEUTDEFF"
     assert BIC.normalize("ARMJAM22") == "ARMJAM22"
+    assert BIC.normalize("armjam22") == "ARMJAM22"
     assert BIC.normalize("ARMJ") is None
     assert BIC.normalize("ARMJXXXXXX22") is None
     assert BIC.normalize("ARMJAM22XXX") == "ARMJAM22"

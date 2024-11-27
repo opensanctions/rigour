@@ -36,7 +36,8 @@ def iso_639_alpha3(code: str) -> Optional[str]:
     norm = normalize_code(code)
     if norm is not None:
         norm = ISO3_MAP.get(norm, norm)
-    norm = LANG_REWRITE.get(norm, norm)
+    if norm is not None:
+        norm = LANG_REWRITE.get(norm, norm)
     if norm not in ISO3_ALL:
         return None
     return norm
