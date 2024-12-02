@@ -5,6 +5,7 @@ from stdnum import luhn  # type: ignore
 from rigour.ids.common import IdentifierFormat
 
 NPI_RE = re.compile(r"\b(\d{10}|\d{15})\b")
+INVALID = ("0000000000", "000000000000000", "808400000000000")
 
 
 class NPI(IdentifierFormat):
@@ -21,6 +22,9 @@ class NPI(IdentifierFormat):
         if NPI_RE.match(text) is None:
             return False
 
+        if text in INVALID:
+            return False
+
         if len(text) == 10:
             text = "80840" + text
 
@@ -33,6 +37,6 @@ class NPI(IdentifierFormat):
         if match is None:
             return None
         value = match.group(1)
-        if cls.is_valid(value):
+        if cls.is_valid(value) and value not in INVALID:
             return value
         return None
