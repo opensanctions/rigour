@@ -1,18 +1,32 @@
 from typing import Optional
 from stdnum import imo, isin, iban, figi, bic, lei  # type: ignore
 from stdnum.ru import inn  # type: ignore
+from stdnum.us import ssn  # type: ignore
 from stdnum.br import cpf, cnpj  # type: ignore
 
 from rigour.ids.common import StdnumFormat
 
 
 class IMO(StdnumFormat):
-    """An IMO number for a ship."""
+    """An IMO number for a ship or shipping company"""
 
     TITLE = "IMO"
     STRONG: bool = True
 
     impl = imo
+
+    @classmethod
+    def normalize(cls, value: str) -> Optional[str]:
+        norm = super().normalize(value)
+        if norm is None:
+            return None
+        return f"IMO{norm}"
+
+    @classmethod
+    def format(cls, value: str) -> str:
+        if not value.startswith("IMO"):
+            value = f"IMO{value}"
+        return value
 
 
 class ISIN(StdnumFormat):
@@ -61,10 +75,11 @@ class BIC(StdnumFormat):
     @classmethod
     def normalize(cls, value: str) -> Optional[str]:
         norm = super().normalize(value)
-        if norm is not None:
-            norm = norm[:8]
-            if cls.is_valid(norm):
-                return norm
+        if norm is None:
+            return None
+        norm = norm[:8].upper()
+        if cls.is_valid(norm):
+            return norm
         return None
 
 
@@ -91,6 +106,19 @@ class LEI(StdnumFormat):
     @classmethod
     def format(cls, value: str) -> str:
         return value.upper()
+
+
+class SSN(StdnumFormat):
+    """US Social Security Number"""
+
+    TITLE = "SSN"
+    STRONG: bool = False
+
+    impl = ssn
+
+    @classmethod
+    def format(cls, value: str) -> str:
+        return str(ssn.format(value))
 
 
 class CPF(StdnumFormat):

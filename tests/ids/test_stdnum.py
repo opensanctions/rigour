@@ -4,10 +4,18 @@ from rigour.ids import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI, CPF, CNPJ
 def test_imo():
     assert IMO.is_valid("IMO 9126819")
     assert IMO.is_valid("9126819")
-    assert IMO.normalize("IMO 9126819") == "9126819"
+    assert IMO.normalize("IMO 9126819") == "IMO9126819"
+    assert IMO.normalize("IMO9126819") == "IMO9126819"
+    assert IMO.normalize("9126819") == "IMO9126819"
+    assert IMO.normalize("IMO 912681") is None
     assert not IMO.is_valid("IMO 9126")
     assert not IMO.is_valid("9126")
     assert not IMO.is_valid("")
+    assert IMO.format("9126819") == "IMO9126819"
+    assert IMO.format("IMO9126819") == "IMO9126819"
+
+    # TODO: this would be cool:
+    assert IMO.normalize("IMO number: 9126819") is None
 
 
 def test_isin():
@@ -52,6 +60,7 @@ def test_bic():
     assert BIC.format("deutdeff") == "DEUTDEFF"
     assert BIC.normalize("deutdeff") == "DEUTDEFF"
     assert BIC.normalize("ARMJAM22") == "ARMJAM22"
+    assert BIC.normalize("ARMJAM22XXX") == "ARMJAM22"
     assert BIC.normalize("armjam22") == "ARMJAM22"
     assert BIC.normalize("ARMJ") is None
     assert BIC.normalize("ARMJXXXXXX22") is None
