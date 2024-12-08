@@ -5,6 +5,7 @@ def test_ship_imo():
     assert IMO.normalize("IMO 9126819") == "IMO9126819"
     assert IMO.normalize("IMO9126819") == "IMO9126819"
     assert IMO.normalize("9126819") == "IMO9126819"
+    assert IMO.normalize("91268191") is None
     assert IMO.normalize("IMO 912681") is None
     assert IMO.is_valid("IMO 9126819")
     assert IMO.is_valid("9126819")
@@ -19,6 +20,7 @@ def test_ship_imo():
 def test_org_imo():
     assert IMO.normalize("IMO 6459297") == "IMO6459297"
     assert IMO.is_valid("IMO 6459297")
+    assert not IMO.is_valid("IMO 64592971")
     assert IMO.format("IMO6459297") == "IMO6459297"
     assert IMO.is_valid("IMO 2041999")
 

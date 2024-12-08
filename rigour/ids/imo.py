@@ -17,10 +17,8 @@ class IMO(IdentifierFormat):
         """Determine if the given string is a valid IMO number."""
         match = IMO_RE.search(text)
         if match is None:
-            return None
-        value = match.group(2)
-        if len(value) != 7:
             return False
+        value = match.group(2)
         digits = [int(d) for d in value]
 
         # Check if it's a vessel IMO number:
