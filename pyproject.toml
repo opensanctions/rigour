@@ -8,7 +8,7 @@ version = "0.7.4"
 description = "Financial crime domain data validation and normalization library."
 readme = "README.md"
 license = { file = "LICENSE" }
-authors = [{ name = "OpenSanctions", email = "tech@opensanctions.org" }]
+authors = [{ name = "OpenSanctions", email = "info@opensanctions.org" }]
 classifiers = [
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
