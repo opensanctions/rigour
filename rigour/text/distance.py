@@ -34,7 +34,12 @@ def dam_levenshtein(
 
 
 @lru_cache(maxsize=CACHE)
-def levenshtein(left: str, right: str, max_length: int = env.MAX_NAME_LENGTH) -> int:
+def levenshtein(
+    left: str,
+    right: str,
+    max_length: int = env.MAX_NAME_LENGTH,
+    max_edits: Optional[int] = None,
+) -> int:
     """Compute the Levenshtein distance between two strings.
 
     Args:
@@ -44,7 +49,13 @@ def levenshtein(left: str, right: str, max_length: int = env.MAX_NAME_LENGTH) ->
     Returns:
         An integer of changed characters.
     """
-    return Levenshtein.distance(left[:max_length], right[:max_length])
+    if left == right:
+        return 0
+    return Levenshtein.distance(
+        left[:max_length],
+        right[:max_length],
+        score_cutoff=max_edits,
+    )
 
 
 def levenshtein_similarity(
@@ -77,7 +88,7 @@ def levenshtein_similarity(
     if abs(left_len - right_len) > max_edits_:
         return 0.0
 
-    distance = dam_levenshtein(left, right, max_length=max_length, max_edits=max_edits_)
+    distance = levenshtein(left, right, max_length=max_length, max_edits=max_edits_)
     if distance > max_edits_:
         return 0.0
     return 1.0 - (float(distance) / max(left_len, right_len))
@@ -107,7 +118,7 @@ def is_levenshtein_plausible(
     right = right[:max_length]
     pct_edits = math.ceil(min(len(left), len(right)) * max_percent)
     max_edits_ = min(max_edits, pct_edits) if max_edits is not None else pct_edits
-    distance = dam_levenshtein(left, right, max_length, max_edits=max_edits_)
+    distance = levenshtein(left, right, max_length, max_edits=max_edits_)
     return distance <= max_edits_
 
 
