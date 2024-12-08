@@ -3,11 +3,12 @@ from typing import Dict, List, Type
 from typing_extensions import TypedDict
 
 from rigour.ids.wikidata import WikidataQID
-from rigour.ids.stdnum_ import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI
+from rigour.ids.stdnum_ import ISIN, IBAN, FIGI, BIC, INN, LEI
 from rigour.ids.stdnum_ import CPF, CNPJ, SSN
 from rigour.ids.ogrn import OGRN
 from rigour.ids.npi import NPI
 from rigour.ids.uei import UEI
+from rigour.ids.imo import IMO
 from rigour.ids.strict import StrictFormat
 from rigour.ids.common import IdentifierFormat
 

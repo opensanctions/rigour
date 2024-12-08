@@ -1,21 +1,4 @@
-from rigour.ids import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI, CPF, CNPJ
-
-
-def test_imo():
-    assert IMO.is_valid("IMO 9126819")
-    assert IMO.is_valid("9126819")
-    assert IMO.normalize("IMO 9126819") == "IMO9126819"
-    assert IMO.normalize("IMO9126819") == "IMO9126819"
-    assert IMO.normalize("9126819") == "IMO9126819"
-    assert IMO.normalize("IMO 912681") is None
-    assert not IMO.is_valid("IMO 9126")
-    assert not IMO.is_valid("9126")
-    assert not IMO.is_valid("")
-    assert IMO.format("9126819") == "IMO9126819"
-    assert IMO.format("IMO9126819") == "IMO9126819"
-
-    # TODO: this would be cool:
-    assert IMO.normalize("IMO number: 9126819") is None
+from rigour.ids import ISIN, IBAN, FIGI, BIC, INN, LEI, CPF, CNPJ
 
 
 def test_isin():
