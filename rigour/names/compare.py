@@ -1,12 +1,10 @@
+from typing import Dict, List, Tuple
 from itertools import permutations, product, zip_longest
-from typing import Callable, Dict, List, Tuple
 
 from rigour.text.distance import levenshtein
 
 
-def align_name_parts(
-    left: List[str], right: List[str], func: Callable[[str, str], str] = levenshtein
-) -> List[Tuple[str, str]]:
+def align_name_parts(left: List[str], right: List[str]) -> List[Tuple[str, str]]:
     """Align two names for comparison by sorting in the levenshtein-cheapest manner.
 
     Args:
@@ -22,7 +20,7 @@ def align_name_parts(
         if le == ri:
             distances[(le, ri)] = 0
         elif (le, ri) not in distances:
-            distances[(le, ri)] = func(le, ri)
+            distances[(le, ri)] = levenshtein(le, ri)
         distances[(ri, le)] = distances[(le, ri)]
 
     long, short = (left, right) if len(left) > len(right) else (right, left)

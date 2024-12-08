@@ -51,15 +51,15 @@ def tokenize_name(text: str, min_length: int = 1) -> List[str]:
         if char in ".'’":
             continue
         cat = unicodedata.category(char)
-        char = TOKEN_SEP_CATEGORIES.get(cat, char)
-        if char is None:
+        chr = TOKEN_SEP_CATEGORIES.get(cat, char)
+        if chr is None:
             continue
-        if char == WS:
+        if chr == WS:
             if len(token) >= min_length:
                 tokens.append("".join(token))
             token.clear()
             continue
-        token.append(char)
+        token.append(chr)
 
     if len(token) >= min_length:
         tokens.append("".join(token))
