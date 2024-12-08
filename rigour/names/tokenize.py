@@ -1,11 +1,9 @@
 import unicodedata
-from typing import Dict, List, Tuple
+from typing import List
 from normality.constants import WS
 from normality.cleaning import category_replace, collapse_spaces
 from normality.util import Categories
 from fingerprints.cleanup import CHARACTERS_REMOVE_RE
-
-from rigour.text.distance import levenshtein
 
 TOKEN_SEP_CATEGORIES: Categories = {
     "Cc": WS,
