@@ -37,7 +37,6 @@ def test_ogrn():
     assert not OGRN.is_valid("385768585948948")
     assert not OGRN.is_valid("38576858")
     assert not OGRN.is_valid("0022200525819")
-    # assert not OGRN.is_valid("1029790525819")
 
     # === Invalid Cases ===
     # Too short
