@@ -23,6 +23,8 @@ def test_org_imo():
     assert not IMO.is_valid("IMO 64592971")
     assert IMO.format("IMO6459297") == "IMO6459297"
     assert IMO.is_valid("IMO 2041999")
+    assert IMO.is_valid("IMO 1865817")
+    assert IMO.normalize("IMO 1865817") == "IMO1865817"
 
     assert IMO.normalize("IMO 6459298") is None
     assert not IMO.is_valid("IMO 6459298")
