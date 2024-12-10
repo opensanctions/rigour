@@ -4,7 +4,6 @@ from typing import Optional
 from rigour.ids.common import IdentifierFormat
 
 OGRN_RE = re.compile(r"\b(\d{13}|\d{15})\b")
-VALID_FEDERAL_SUBJECT_CODES = set(range(1, 80)) | {83, 86, 87, 89, 91, 92, 99}
 
 
 class OGRN(IdentifierFormat):
@@ -23,11 +22,6 @@ class OGRN(IdentifierFormat):
 
         # Validate registration type
         if text[0] == "0":
-            return False
-
-        # Validate federal subject code
-        federal_subject_code = int(text[3:5])
-        if federal_subject_code not in VALID_FEDERAL_SUBJECT_CODES:
             return False
 
         # Validate control digit logic

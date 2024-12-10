@@ -25,11 +25,18 @@ def test_ogrn():
     assert OGRN.is_valid("1022300000502")
     assert OGRN.is_valid("1022200531484")
     assert OGRN.is_valid("1022200525819")
+    assert OGRN.is_valid("1109847033625")
+    assert OGRN.is_valid("1069659059777")
+    assert OGRN.is_valid("1089847255453")
+    assert OGRN.is_valid("1129847026297")
+    assert OGRN.is_valid("1089847262317")
+    assert OGRN.is_valid("1038200840017")
+    assert OGRN.is_valid("1089847034045")
+    assert OGRN.is_valid("1169658005032")
     assert OGRN.is_valid("385768585948949")
     assert not OGRN.is_valid("385768585948948")
     assert not OGRN.is_valid("38576858")
     assert not OGRN.is_valid("0022200525819")
-    assert not OGRN.is_valid("1029790525819")
 
     # === Invalid Cases ===
     # Too short
