@@ -5,6 +5,7 @@ from normality.cleaning import category_replace, collapse_spaces
 from normality.util import Categories
 from fingerprints.cleanup import CHARACTERS_REMOVE_RE
 
+# PREFIXES = ["el", "al", "il"]
 TOKEN_SEP_CATEGORIES: Categories = {
     "Cc": WS,
     "Cf": None,
@@ -50,11 +51,15 @@ def tokenize_name(text: str, min_length: int = 1) -> List[str]:
     for char in text:
         if char in ".'’":
             continue
+        # TODO: do we want to special case Arabic name parts like
+        # al-, el-, il- ?
         cat = unicodedata.category(char)
         chr = TOKEN_SEP_CATEGORIES.get(cat, char)
         if chr is None:
             continue
         if chr == WS:
+            # TODO: do we want to support throwing away name prefixes
+            # (like Mr., Sir, etc.) here?
             if len(token) >= min_length:
                 tokens.append("".join(token))
             token.clear()
