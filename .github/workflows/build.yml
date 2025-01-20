@@ -10,8 +10,6 @@ jobs:
     strategy:
         matrix:
           python:
-            - "3.9"
-            - "3.10"
             - "3.11"
             - "3.12"
     steps:
@@ -38,8 +36,6 @@ jobs:
         run: |
           make typecheck
       - name: Build a distribution
-        if: matrix.python == '3.12'
-        # python setup.py sdist bdist_wheel
         run: |
           python3 -m build --wheel
       - name: Publish a Python distribution to PyPI
