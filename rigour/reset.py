@@ -13,7 +13,7 @@ from rigour.text.scripts import (
 from rigour.addresses.format import _load_formats, _load_template
 
 
-def reset_caches():
+def reset_caches() -> None:
     """Reset LRU caches in the rigour module. This is meant to be used
     in long-lived processes to prevent memory expansion."""
     latinize_text.cache_clear()
