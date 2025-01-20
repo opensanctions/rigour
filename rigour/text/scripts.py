@@ -3,9 +3,10 @@ from functools import lru_cache
 from typing import Tuple, Optional
 
 from rigour.text.script_data import BLOCK_TAGS, ALPHABET, HISTORIC, FUNKY, LATIN
+from rigour.util import MEMO_MEDIUM
 
 
-@lru_cache(maxsize=5000)
+@lru_cache(maxsize=MEMO_MEDIUM)
 def char_tags(char: str) -> Tuple[int, ...]:
     """Get the tags applicable to a particular character."""
     codepoint = ord(char)
@@ -15,7 +16,7 @@ def char_tags(char: str) -> Tuple[int, ...]:
     return ()
 
 
-@lru_cache(maxsize=5000)
+@lru_cache(maxsize=MEMO_MEDIUM)
 def is_alpha(char: str) -> bool:
     """Check if a character is alphabetic. This improves on the function implemented on
     `str` by including characters for the whole unicode range."""
@@ -23,14 +24,14 @@ def is_alpha(char: str) -> bool:
     return category == "L"
 
 
-@lru_cache(maxsize=5000)
+@lru_cache(maxsize=MEMO_MEDIUM)
 def is_alphanum(char: str) -> bool:
     """Check if a character is alpha-numeric."""
     category = unicodedata.category(char)[0]
     return category in ("L", "N")
 
 
-@lru_cache(maxsize=5000)
+@lru_cache(maxsize=MEMO_MEDIUM)
 def is_modern_alphabet_char(char: str) -> Optional[bool]:
     tags = char_tags(char)
     if not len(tags):
@@ -54,7 +55,7 @@ def is_modern_alphabet(word: str) -> bool:
     return True
 
 
-@lru_cache(maxsize=5000)
+@lru_cache(maxsize=MEMO_MEDIUM)
 def is_latin_char(char: str) -> Optional[bool]:
     tags = char_tags(char)
     if not len(tags):
