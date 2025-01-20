@@ -4,11 +4,10 @@ from functools import lru_cache
 from rapidfuzz.distance import Levenshtein, DamerauLevenshtein, JaroWinkler
 
 from rigour import env
+from rigour.util import MEMO_SMALL
 
-CACHE = 5000
 
-
-@lru_cache(maxsize=CACHE)
+@lru_cache(maxsize=MEMO_SMALL)
 def dam_levenshtein(
     left: str,
     right: str,
@@ -33,7 +32,7 @@ def dam_levenshtein(
     )
 
 
-@lru_cache(maxsize=CACHE)
+@lru_cache(maxsize=MEMO_SMALL)
 def levenshtein(
     left: str,
     right: str,
@@ -122,7 +121,7 @@ def is_levenshtein_plausible(
     return distance <= max_edits_
 
 
-@lru_cache(maxsize=CACHE)
+@lru_cache(maxsize=MEMO_SMALL)
 def jaro_winkler(left: str, right: str, max_length: int = env.MAX_NAME_LENGTH) -> float:
     """Compute the Jaro-Winkler similarity of two strings.
 
