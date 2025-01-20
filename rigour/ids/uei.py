@@ -8,14 +8,17 @@ UEI_RE = re.compile(r"\b([0-9ABCDEFGHJKLMNPQRSTUVWXYZ]{12})\b", re.I)
 class UEI(IdentifierFormat):
     """US GSA Unique Entity ID."""
 
-    TITLE: str = "NPI"
-    STRONG: bool = True
     # https://www.gsa.gov/about-us/organization/federal-acquisition-service/integrated-award-environment-iae/iae-systems-information-kit/uei-technical-specifications-and-api-information
+
+    TITLE: str = "NPI"
+    STRONG: bool = False
+    """Marked false because the SAM database is massively duplicated, and entities in 
+    SAM conflate companies and their owners. This makes UEIs more like cluster IDs than
+    unique entity identifiers."""
 
     @classmethod
     def is_valid(cls, text: str) -> bool:
         """Determine if the given string is a valid NPI."""
-        print("XXX", text)
         if UEI_RE.match(text) is None:
             return False
 

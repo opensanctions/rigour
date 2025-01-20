@@ -8,4 +8,6 @@ def test_uei():
     assert not UEI.is_valid("F5L4T8IUYC68")
     assert UEI.normalize("F5L4T8Cuyc68") == "F5L4T8CUYC68"
     assert UEI.normalize("UEI F5L4T8Cuyc68") == "F5L4T8CUYC68"
+    assert UEI.normalize("UEI F5L") is None
+    assert UEI.normalize("0F5L4T8Cuyc7") is None
     assert UEI.format("F5L4T8Cuyc68") == "F5L4T8CUYC68"
