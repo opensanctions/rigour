@@ -2,5 +2,7 @@ name: Martinique
 full_name: Martinique
 region: Americas
 subregion: Caribbean
-is_country: true
+qid: Q17054
+is_country: false
 is_ftm: true
+parent: fr

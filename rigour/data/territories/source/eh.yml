@@ -4,11 +4,12 @@ region: Africa
 subregion: Northern Africa
 qid: Q40362
 other_qids:
-- Q6250
+  - Q6250
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: Western Sahara is a disputed territory on the northwest coast and in the
+summary:
+  Western Sahara is a disputed territory on the northwest coast and in the
   Maghreb region of North and West Africa. The Western Sahara, given its name in 1975
   by the UN, is the last African colonial state yet to achieve its independence. About
   20% of the territory is controlled by the self-proclaimed Sahrawi Arab Democratic

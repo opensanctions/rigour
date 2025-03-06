@@ -2,11 +2,14 @@ name: Svalbard and Jan Mayen
 full_name: Svalbard and Jan Mayen
 region: Europe
 subregion: Northern Europe
-is_country: true
+qid: Q25231
+parent: "no"
+is_country: false
 is_ftm: true
 is_jurisdiction: true
-summary: 'Svalbard and Jan Mayen is a statistical designation defined by ISO 3166-1
+summary:
+  "Svalbard and Jan Mayen is a statistical designation defined by ISO 3166-1
   for a collective grouping of two remote jurisdictions of Norway: Svalbard and Jan
   Mayen. While the two are combined for the purposes of the International Organization
-  for Standardization (ISO) category, they are not administratively related.'
+  for Standardization (ISO) category, they are not administratively related."
 wikipedia_url: https://en.wikipedia.org/wiki/Svalbard_and_Jan_Mayen

@@ -1,5 +1,6 @@
 name: Antarctica
 full_name: Antarctica
-is_country: true
+qid: Q51
+is_country: false
 is_ftm: true
 is_jurisdiction: true

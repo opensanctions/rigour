@@ -7,11 +7,9 @@ is_country: false
 is_ftm: true
 parent: am
 see:
-- am
-- az
-summary: 'Nagorno-Karabakh is a region located in the South Caucasus, covering
-
+  - am
+  - az
+summary: "Nagorno-Karabakh is a region located in the South Caucasus, covering
   the southeastern stretch of the Lesser Caucasus mountain range. Nagorno-Karabakh
-
-  is a disputed territory, with both Armenia and Azerbaijan claiming it.'
+  is a disputed territory, with both Armenia and Azerbaijan claiming it."
 wikipedia_url: https://en.wikipedia.org/wiki/Nagorno-Karabakh

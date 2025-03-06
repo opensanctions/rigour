@@ -2,5 +2,7 @@ name: Guadeloupe
 full_name: Guadeloupe
 region: Americas
 subregion: Caribbean
-is_country: true
+qid: Q17012
+is_country: false
 is_ftm: true
+parent: fr

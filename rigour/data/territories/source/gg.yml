@@ -7,9 +7,10 @@ is_country: true
 is_ftm: true
 is_jurisdiction: true
 see:
-- gb
-- gg-srk
-summary: Guernsey is the second largest island in the Channel Islands, located 27
+  - gb
+  - gg-srk
+summary:
+  Guernsey is the second largest island in the Channel Islands, located 27
   miles west of the Cotentin Peninsula, Normandy. It forms the major part of the jurisdiction
   of the same name, which also comprises three other inhabited islands and many small
   islets and rocks.
