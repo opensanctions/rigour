@@ -23,16 +23,8 @@ class Territory(object):
 
     def _validate(self) -> None:
         assert self.code is not None, f"Missing code: {self.name}"
-        if self.qid is None:
-            from urllib.parse import quote
-
-            print(
-                self.code,
-                " -> ",
-                f"https://www.wikidata.org/w/index.php?go=Go&search={quote(self.name)}&title=Special%3ASearch&ns0=1&ns120=1",
-            )
-        # assert self.qid is not None, f"Missing QID: {self.code}"
-        # assert is_qid(self.qid), f"Invalid QID: {self.code}"
+        assert self.qid is not None, f"Missing QID: {self.code}"
+        assert is_qid(self.qid), f"Invalid QID: {self.code}"
         for other_qid in self.other_qids:
             assert is_qid(other_qid), f"Invalid QID: {other_qid}"
         if self._parent is not None:

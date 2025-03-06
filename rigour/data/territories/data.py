@@ -967,6 +967,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-sd": {
         "name": "South Dakota",
         "full_name": "South Dakota (United States of America)",
+        "qid": "Q1211",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1108,6 +1109,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-la": {
         "name": "Louisiana",
         "full_name": "Louisiana (United States of America)",
+        "qid": "Q1588",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1140,6 +1142,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-me": {
         "name": "Maine",
         "full_name": "Maine (United States of America)",
+        "qid": "Q724",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1183,6 +1186,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-ut": {
         "name": "Utah",
         "full_name": "Utah (United States of America)",
+        "qid": "Q829",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1303,6 +1307,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-md": {
         "name": "Maryland",
         "full_name": "Maryland (United States of America)",
+        "qid": "Q1391",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1336,6 +1341,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-ms": {
         "name": "Mississippi",
         "full_name": "Mississippi (United States of America)",
+        "qid": "Q1494",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1344,6 +1350,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-nh": {
         "name": "New Hampshire",
         "full_name": "New Hampshire (United States of America)",
+        "qid": "Q759",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1352,6 +1359,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-co": {
         "name": "Colorado",
         "full_name": "Colorado (United States of America)",
+        "qid": "Q1261",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1392,6 +1400,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-nj": {
         "name": "New Jersey",
         "full_name": "New Jersey (United States of America)",
+        "qid": "Q1408",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1461,6 +1470,7 @@ TERRITORIES: Dict[str, Any] = {
     "ca-on": {
         "name": "Ontario",
         "full_name": "Ontario (Canada)",
+        "qid": "Q1904",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1521,6 +1531,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-wi": {
         "name": "Wisconsin",
         "full_name": "Wisconsin (United States of America)",
+        "qid": "Q1537",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1684,6 +1695,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-mt": {
         "name": "Montana",
         "full_name": "Montana (United States of America)",
+        "qid": "Q1212",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1871,6 +1883,8 @@ TERRITORIES: Dict[str, Any] = {
     "us-ny": {
         "name": "New York",
         "full_name": "New York (United States of America)",
+        "qid": "Q1384",
+        "other_qids": ["Q60"],
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1879,6 +1893,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-oh": {
         "name": "Ohio",
         "full_name": "Ohio (United States of America)",
+        "qid": "Q1397",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1950,6 +1965,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-wy": {
         "name": "Wyoming",
         "full_name": "Wyoming (United States of America)",
+        "qid": "Q1214",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -1958,6 +1974,7 @@ TERRITORIES: Dict[str, Any] = {
     "ca-nl": {
         "name": "Newfoundland and Labrador",
         "full_name": "Newfoundland and Labrador (Canada)",
+        "qid": "Q2003",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2026,6 +2043,7 @@ TERRITORIES: Dict[str, Any] = {
     "ca-ab": {
         "name": "Alberta",
         "full_name": "Alberta (Canada)",
+        "qid": "Q1951",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2034,6 +2052,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-nm": {
         "name": "New Mexico",
         "full_name": "New Mexico (United States of America)",
+        "qid": "Q1522",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2063,6 +2082,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-ma": {
         "name": "Massachusetts",
         "full_name": "Massachusetts (United States of America)",
+        "qid": "Q771",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2095,6 +2115,8 @@ TERRITORIES: Dict[str, Any] = {
     "ae-uq": {
         "name": "Umm Al Quwain",
         "full_name": "Umm Al Quwain (United Arab Emirates)",
+        "qid": "Q175021",
+        "other_qids": ["Q2788830"],
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2168,6 +2190,7 @@ TERRITORIES: Dict[str, Any] = {
     "ca-bc": {
         "name": "British Columbia",
         "full_name": "British Columbia (Canada)",
+        "qid": "Q1973",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2176,6 +2199,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-tn": {
         "name": "Tennessee",
         "full_name": "Tennessee (United States of America)",
+        "qid": "Q1509",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2197,6 +2221,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-tx": {
         "name": "Texas",
         "full_name": "Texas (United States of America)",
+        "qid": "Q1439",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2305,6 +2330,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-or": {
         "name": "Oregon",
         "full_name": "Oregon (United States of America)",
+        "qid": "Q824",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2313,6 +2339,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-nv": {
         "name": "Nevada",
         "full_name": "Nevada (United States of America)",
+        "qid": "Q1227",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2355,6 +2382,8 @@ TERRITORIES: Dict[str, Any] = {
     "ae-az": {
         "name": "Abu Dhabi",
         "full_name": "Abu Dhabi (United Arab Emirates)",
+        "qid": "Q187712",
+        "other_qids": ["Q1519"],
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2363,6 +2392,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-al": {
         "name": "Alabama",
         "full_name": "Alabama (United States of America)",
+        "qid": "Q173",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2383,6 +2413,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-mo": {
         "name": "Missouri",
         "full_name": "Missouri (United States of America)",
+        "qid": "Q1581",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2403,6 +2434,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-nc": {
         "name": "North Carolina",
         "full_name": "North Carolina (United States of America)",
+        "qid": "Q1454",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2460,6 +2492,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-wv": {
         "name": "West Virginia",
         "full_name": "West Virginia (United States of America)",
+        "qid": "Q1371",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2491,6 +2524,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-wa": {
         "name": "Washington",
         "full_name": "Washington (United States of America)",
+        "qid": "Q1223",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2511,6 +2545,7 @@ TERRITORIES: Dict[str, Any] = {
     "ca-nb": {
         "name": "New Brunswick",
         "full_name": "New Brunswick (Canada)",
+        "qid": "Q1965",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2519,6 +2554,7 @@ TERRITORIES: Dict[str, Any] = {
     "ca-nu": {
         "name": "Nunavut",
         "full_name": "Nunavut (Canada)",
+        "qid": "Q2023",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2615,6 +2651,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-mn": {
         "name": "Minnesota",
         "full_name": "Minnesota (United States of America)",
+        "qid": "Q1527",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2623,6 +2660,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-az": {
         "name": "Arizona",
         "full_name": "Arizona (United States of America)",
+        "qid": "Q816",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2644,6 +2682,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-ca": {
         "name": "California",
         "full_name": "California (United States of America)",
+        "qid": "Q99",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2748,6 +2787,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-va": {
         "name": "Virginia",
         "full_name": "Virginia (United States of America)",
+        "qid": "Q1370",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2849,6 +2889,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-ne": {
         "name": "Nebraska",
         "full_name": "Nebraska (United States of America)",
+        "qid": "Q1553",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2869,6 +2910,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-mi": {
         "name": "Michigan",
         "full_name": "Michigan (United States of America)",
+        "qid": "Q1166",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2902,6 +2944,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-vt": {
         "name": "Vermont",
         "full_name": "Vermont (United States of America)",
+        "qid": "Q16551",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -2923,6 +2966,7 @@ TERRITORIES: Dict[str, Any] = {
     "ca-ns": {
         "name": "Nova Scotia",
         "full_name": "Nova Scotia (Canada)",
+        "qid": "Q1952",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -3040,6 +3084,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-nd": {
         "name": "North Dakota",
         "full_name": "North Dakota (United States of America)",
+        "qid": "Q1207",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -3048,6 +3093,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-ct": {
         "name": "Connecticut",
         "full_name": "Connecticut (United States of America)",
+        "qid": "Q779",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -3056,6 +3102,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-ak": {
         "name": "Alaska",
         "full_name": "Alaska (United States of America)",
+        "qid": "Q797",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -3317,6 +3364,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-ky": {
         "name": "Kentucky",
         "full_name": "Kentucky (United States of America)",
+        "qid": "Q1603",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -3381,6 +3429,8 @@ TERRITORIES: Dict[str, Any] = {
     "ae-du": {
         "name": "Dubai",
         "full_name": "Dubai (United Arab Emirates)",
+        "qid": "Q613",
+        "other_qids": ["Q612"],
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -3399,6 +3449,8 @@ TERRITORIES: Dict[str, Any] = {
     "us-dc": {
         "name": "District of Columbia",
         "full_name": "District of Columbia (United States of America)",
+        "qid": "Q3551781",
+        "other_qids": ["Q61"],
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -3420,6 +3472,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-id": {
         "name": "Idaho",
         "full_name": "Idaho (United States of America)",
+        "qid": "Q1221",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -3652,14 +3705,17 @@ TERRITORIES: Dict[str, Any] = {
     "ca-qc": {
         "name": "Quebec",
         "full_name": "Quebec (Canada)",
+        "qid": "Q176",
+        "other_qids": ["Q2145"],
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
     },
     "ca-sk": {
-        "name": "Saskatchewa",
+        "name": "Saskatchewan",
         "full_name": "Saskatchewan (Canada)",
+        "qid": "Q1989",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -3707,6 +3763,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-ia": {
         "name": "Iowa",
         "full_name": "Iowa (United States of America)",
+        "qid": "Q1546",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -3887,6 +3944,8 @@ TERRITORIES: Dict[str, Any] = {
     "ae-rk": {
         "name": "Ras Al Khaimah",
         "full_name": "Ras Al Khaimah (United Arab Emirates)",
+        "qid": "Q170024",
+        "other_qids": ["Q2126436"],
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
@@ -4039,6 +4098,7 @@ TERRITORIES: Dict[str, Any] = {
     "us-ri": {
         "name": "Rhode Island",
         "full_name": "Rhode Island (United States of America)",
+        "qid": "Q1387",
         "is_country": False,
         "is_ftm": False,
         "is_jurisdiction": True,
