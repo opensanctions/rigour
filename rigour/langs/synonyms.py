@@ -1,7 +1,7 @@
 # This is a set of synonyms for pragmatic usage in NLP. It is based on
 # working with Tesseract 3.04, but should be applicable elsewhere.
 from functools import cache
-from typing import Iterable
+from typing import Dict, Iterable, Optional
 
 
 LANG_SYNONYMS = [
@@ -31,6 +31,38 @@ LANG_SYNONYMS = [
     ("nep", "npi"),
     ("bur", "mya", "int", "tvn", "tco", "rki", "rmz"),
 ]
+
+LANG_REWRITE: Dict[str, Optional[str]] = {
+    "arb": "ara",
+    "arz": "ara",
+    "apc": "ara",
+    "acm": "ara",
+    "nno": "nor",
+    "non": "nor",
+    "bur": "mya",
+    "cze": "ces",
+    "ger": "deu",
+    "gre": "ell",
+    "per": "fas",
+    "rum": "ron",
+    "fre": "fra",
+    "geo": "kat",
+    "arm": "hye",
+    "ice": "isl",
+    "mac": "mkd",
+    "chi": "zho",
+    "chi_sim": "zho",
+    "chi_tra": "zho",
+    "aze_cyrl": "aze",
+    "may": "msa",
+    "dut": "nld",
+    "slo": "slk",
+    "alb": "sqi",
+    "mis": None,
+    "mul": None,
+    "und": None,
+    "xzz": None,
+}
 
 
 @cache

@@ -1,13 +1,4 @@
-from rigour.ids import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI, CPF, CNPJ
-
-
-def test_imo():
-    assert IMO.is_valid("IMO 9126819")
-    assert IMO.is_valid("9126819")
-    assert IMO.normalize("IMO 9126819") == "9126819"
-    assert not IMO.is_valid("IMO 9126")
-    assert not IMO.is_valid("9126")
-    assert not IMO.is_valid("")
+from rigour.ids import ISIN, IBAN, FIGI, BIC, INN, LEI, CPF, CNPJ
 
 
 def test_isin():
@@ -53,6 +44,10 @@ def test_bic():
     assert BIC.normalize("deutdeff") == "DEUTDEFF"
     assert BIC.normalize("ARMJAM22") == "ARMJAM22"
     assert BIC.normalize("ARMJAM22XXX") == "ARMJAM22"
+    assert BIC.normalize("armjam22") == "ARMJAM22"
+    assert BIC.normalize("ARMJ") is None
+    assert BIC.normalize("ARMJXXXXXX22") is None
+    assert BIC.normalize("ARMJAM22XXX") == "ARMJAM22"
 
 
 def test_inn():
@@ -85,9 +80,10 @@ def test_cpf():
     assert not CPF.is_valid("")
     assert CPF.format("33467854390") == "334.678.543-90"
     assert CPF.normalize("04485847608") == "04485847608"
-    assert CPF.normalize("044.858.476-08") == '04485847608'
+    assert CPF.normalize("044.858.476-08") == "04485847608"
     assert CPF.normalize("1114447773") is None
     assert CPF.normalize("") is None
+
 
 def test_cnpj():
     assert CNPJ.is_valid("00000000000191")

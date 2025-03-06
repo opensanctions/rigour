@@ -1,10 +1,14 @@
+from functools import cache
 from typing import Dict, List, Type
 from typing_extensions import TypedDict
 
 from rigour.ids.wikidata import WikidataQID
-from rigour.ids.stdnum_ import IMO, ISIN, IBAN, FIGI, BIC, INN, LEI
-from rigour.ids.stdnum_ import CPF, CNPJ
+from rigour.ids.stdnum_ import ISIN, IBAN, FIGI, BIC, INN, LEI
+from rigour.ids.stdnum_ import CPF, CNPJ, SSN
 from rigour.ids.ogrn import OGRN
+from rigour.ids.npi import NPI
+from rigour.ids.uei import UEI
+from rigour.ids.imo import IMO
 from rigour.ids.strict import StrictFormat
 from rigour.ids.common import IdentifierFormat
 
@@ -20,7 +24,10 @@ FORMATS: Dict[str, Type[IdentifierFormat]] = {
     "bic": BIC,
     "swift": BIC,
     "inn": INN,
+    "npi": NPI,
     "lei": LEI,
+    "uei": UEI,
+    "ssn": SSN,
     "cpf": CPF,
     "cnpj": CNPJ,
     "generic": IdentifierFormat,
@@ -61,6 +68,12 @@ def get_identifier_formats() -> List[FormatSpec]:
     return sorted(formats, key=lambda f: f["title"])
 
 
+@cache
+def get_strong_format_names() -> List[str]:
+    """Get a list of all strong identifier type names."""
+    return [name for name, cls in FORMATS.items() if cls.STRONG]
+
+
 __all__ = [
     "IdentifierFormat",
     "StrictFormat",
@@ -73,6 +86,11 @@ __all__ = [
     "BIC",
     "INN",
     "LEI",
+    "NPI",
+    "UEI",
+    "SSN",
+    "CPF",
+    "CPNJ",
     "get_identifier_format",
     "get_identifier_formats",
     "get_identifier_format_names",

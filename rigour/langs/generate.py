@@ -49,7 +49,21 @@ def update_data() -> None:
             if ref_name is not None and len(ref_name) > 3:
                 iso3_map[ref_name] = iso3
 
-            # print(row)
+    # Hack in some outdated/extra aliases:
+    iso3_map.update(
+        {
+            "mo": "ron",
+            "mol": "ron",
+            "scc": "srp",
+            "scr": "hrv",
+            "jw": "jav",
+            "jv": "jav",
+            "jaw": "jav",
+            "iw": "heb",
+            "in": "ind",
+            "ji": "yid",
+        }
+    )
 
     with open(lang_path / "iso639.py", "w", encoding="utf-8") as ofh:
         data = TEMPLATE % (list(sorted(iso3_ids)), iso3_map, iso2_map)

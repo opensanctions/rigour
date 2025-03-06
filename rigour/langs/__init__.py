@@ -20,7 +20,7 @@ from typing import Iterable, Optional, Set
 from banal import ensure_list
 
 from rigour.data.langs.iso639 import ISO3_ALL, ISO2_MAP, ISO3_MAP
-from rigour.langs.synonyms import expand_synonyms
+from rigour.langs.synonyms import expand_synonyms, LANG_REWRITE
 from rigour.langs.util import normalize_code
 
 
@@ -36,6 +36,8 @@ def iso_639_alpha3(code: str) -> Optional[str]:
     norm = normalize_code(code)
     if norm is not None:
         norm = ISO3_MAP.get(norm, norm)
+    if norm is not None:
+        norm = LANG_REWRITE.get(norm, norm)
     if norm not in ISO3_ALL:
         return None
     return norm

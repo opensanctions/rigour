@@ -1,19 +1,26 @@
 from rigour.langs import iso_639_alpha3, iso_639_alpha2
 from rigour.langs import list_to_alpha3
 
+
 def test_alpha3():
     assert iso_639_alpha3("") is None
     assert iso_639_alpha3("banana") is None
     assert iso_639_alpha3("gub") == "gub"
     assert iso_639_alpha3("en") == "eng"
     assert iso_639_alpha3("eng") == "eng"
+    assert iso_639_alpha3("de") == "deu"
+    assert iso_639_alpha3("ger") == "deu"
     assert iso_639_alpha3("yu") is None
+    assert iso_639_alpha3("mul") is None
+    assert iso_639_alpha3("mul") is None
+
 
 def test_alpha2():
     assert iso_639_alpha2("") is None
     assert iso_639_alpha2("banana") is None
     assert iso_639_alpha2("gub") is None
     assert iso_639_alpha2("eng") == "en"
+
 
 def test_list():
     assert "srp" in list_to_alpha3("bs")
