@@ -1,0 +1,18 @@
+name: India
+full_name: India
+region: Asia
+subregion: Southern Asia
+qid: Q668
+other_qids:
+- Q6744020
+- Q1193
+- Q266923
+- Q167639
+- Q1061
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary: India, officially the Republic of India, is a country in South Asia. It is
+  the seventh-largest country by area; the most populous country as of June 2023;
+  and from the time of its independence in 1947, the world's most populous democracy.
+wikipedia_url: https://en.wikipedia.org/wiki/India

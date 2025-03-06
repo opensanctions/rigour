@@ -1,0 +1,13 @@
+name: Kazakhstan
+full_name: Kazakhstan
+region: Asia
+subregion: Central Asia
+qid: Q232
+other_qids:
+- Q168811
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary: Kazakhstan is a landlocked country mostly in Central Asia, with a small part
+  in Eastern Europe.
+wikipedia_url: https://en.wikipedia.org/wiki/Kazakhstan

@@ -1,3 +1,9 @@
+iq-kr:
+  name: Kurdistan
+  region: Asia
+  subregion: Western Asia
+  full_name: Region of Kurdistan
+  is_country: false
 ad:
   flag: ad.svg
   in_sentence: null

@@ -1,0 +1,17 @@
+name: Netherlands
+full_name: Kingdom of the Netherlands
+region: Europe
+subregion: Western Europe
+qid: Q29999
+other_qids:
+- Q55
+- Q6581823
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+- eu
+summary: The Netherlands, informally Holland, is a country located in northwestern
+  Europe with overseas territories in the Caribbean. It is the largest of four constituent
+  countries of the Kingdom of the Netherlands.
+wikipedia_url: https://en.wikipedia.org/wiki/Netherlands

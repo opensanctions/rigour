@@ -1,0 +1,17 @@
+name: Poland
+full_name: Poland
+region: Europe
+subregion: Central Europe
+qid: Q36
+other_qids:
+- Q211274
+- Q221457
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+- eu
+summary: Poland, officially the Republic of Poland, is a country in Central Europe.
+  It is divided into 16 administrative provinces called voivodeships, covering an
+  area of 313,931 square kilometres.
+wikipedia_url: https://en.wikipedia.org/wiki/Poland
