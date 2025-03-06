@@ -6,7 +6,8 @@ qid: Q800
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: Costa Rica, officially the Republic of Costa Rica, is a country in the Central
+summary:
+  Costa Rica, officially the Republic of Costa Rica, is a country in the Central
   American region of North America. Costa Rica is bordered by Nicaragua to the north,
   the Caribbean Sea to the northeast, Panama to the southeast, and the Pacific Ocean
   to the southwest, as well as maritime border with Ecuador to the south of Cocos

@@ -5,7 +5,7 @@ from rigour.territories.territory import Territory
 
 
 @cache
-def _get_index():
+def _get_index() -> Dict[str, Territory]:
     index: Dict[str, Territory] = {}
     for code, data in TERRITORIES.items():
         index[code] = Territory(index, code, data)

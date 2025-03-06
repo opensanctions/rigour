@@ -1,8 +1,7 @@
-from ast import Dict
 import os
-from typing import Any
 import yaml
 import logging
+from typing import Any, Dict
 
 from rigour.data import DATA_PATH
 from rigour.territories.territory import Territory

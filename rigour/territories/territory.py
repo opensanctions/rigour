@@ -16,7 +16,7 @@ class Territory(object):
         self.is_country: bool = data.get("is_country", False)
         self.is_ftm: bool = data.get("is_ftm", False)
         self.is_jurisdiction: bool = data.get("is_jurisdiction", self.is_country)
-        self.qid: str = data.get("qid")
+        self.qid: str = str(data.get("qid"))
         self.other_qids: List[str] = data.get("other_qids", [])
         self._parent: Optional[str] = data.get("parent")
         self._see: List[str] = data.get("see", [])
@@ -34,6 +34,7 @@ class Territory(object):
 
     @property
     def parent(self) -> Optional["Territory"]:
+        """Return the governing territory."""
         if self._parent is None:
             return None
         return self.index[self._parent]
@@ -49,7 +50,8 @@ class Territory(object):
 
     @property
     def see(self) -> List["Territory"]:
-        return [self.index.get(s) for s in self._see]
+        """Return a list of related territories."""
+        return [self.index[s] for s in self._see]
 
     def __repr__(self) -> str:
         return f"<Territory({self.code!r})>"
