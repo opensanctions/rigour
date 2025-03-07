@@ -3,10 +3,13 @@ full_name: Panama
 region: Americas
 subregion: Central America
 qid: Q804
+other_codes:
+  - pz
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: Panama, officially the Republic of Panama, is a transcontinental country
+summary:
+  Panama, officially the Republic of Panama, is a transcontinental country
   in Central America, spanning the southern tip of North America into the northern
   part of South America. It is bordered by Costa Rica to the west, Colombia to the
   southeast, the Caribbean Sea to the north, and the Pacific Ocean to the south.

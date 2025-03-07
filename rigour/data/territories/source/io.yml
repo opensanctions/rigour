@@ -4,7 +4,6 @@ region: Africa
 subregion: Eastern Africa
 qid: Q43448
 other_qids:
-  - Q184851
   - Q192188
 is_country: false
 is_ftm: true

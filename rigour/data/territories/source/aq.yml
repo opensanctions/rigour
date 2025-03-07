@@ -4,3 +4,5 @@ qid: Q51
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+other_codes:
+  - nq

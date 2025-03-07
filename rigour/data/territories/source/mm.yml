@@ -1,8 +1,10 @@
 name: Myanmar
-full_name: Myanmar
+full_name: Myanmar (Burma)
 region: Asia
 subregion: South-eastern Asia
 qid: Q836
+other_qids:
+  - Q105234803 # SAC
 other_codes:
   - bu
   - bumm

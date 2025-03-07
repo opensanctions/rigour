@@ -1,12 +1,13 @@
-name: Sao Tome and Principe
-full_name: Sao Tome and Principe
+name: São Tomé and Príncipe
+full_name: Democratic Republic of São Tomé and Príncipe
 region: Africa
 subregion: Middle Africa
 qid: Q1039
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: São Tomé and Príncipe, officially the Democratic Republic of São Tomé and
+summary:
+  São Tomé and Príncipe, officially the Democratic Republic of São Tomé and
   Príncipe, is an island country in the Gulf of Guinea, off the western equatorial
   coast of Central Africa. It consists of two archipelagos around the two main islands
   of São Tomé and Príncipe, about 150 km (93.21 mi) apart and about 250 and 225 km

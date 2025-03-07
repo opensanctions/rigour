@@ -1,5 +1,6 @@
-name: U.S. Minor Outlying Islands
+name: U.S. Outlying Islands
 full_name: United States Minor Outlying Islands
+in_sentence: the United States Minor Outlying Islands
 region: Oceania
 subregion: Micronesia
 qid: Q16645
@@ -23,6 +24,8 @@ other_codes:
   - xv
   - xl
   - qw
+  - jt
+  - mi
   - us-um
 is_country: false
 is_ftm: true

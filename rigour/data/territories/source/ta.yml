@@ -3,7 +3,9 @@ full_name: Tristan da Cunha (Saint Helena, Ascension and Tristan da Cunha)
 region: Africa
 subregion: Western Africa
 qid: Q220982
-is_country: false
-is_ftm: false
-is_jurisdiction: true
 parent: sh
+other_codes:
+  - sh-ta
+is_country: false
+is_ftm: true
+is_jurisdiction: false

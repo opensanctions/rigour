@@ -1,7 +1,7 @@
 name: Canary Islands
 full_name: Canary Islands (Spain)
 is_country: false
-is_ftm: false
+is_ftm: true
 is_jurisdiction: false
 parent: es
 qid: Q5813

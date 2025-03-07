@@ -4,6 +4,7 @@ import logging
 from typing import Any, Dict, Set
 
 from rigour.data import DATA_PATH
+from rigour.ids.wikidata import is_qid
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes
 
@@ -41,8 +42,32 @@ def update_data() -> None:
             data["see"] = clean_codes(data.get("see", []))
             territories[code] = Territory(territories, code, data)
 
-    for territory in territories.values():
-        territory._validate()
+    for terr in territories.values():
+        assert terr.name is not None, f"Must have a name: {terr.code}"
+        assert terr.code is not None, f"Missing code: {terr.name}"
+        assert terr.qid is not None, f"Missing QID: {terr.code}"
+        assert is_qid(terr.qid), f"Invalid QID: {terr.code}"
+        for other_qid in terr.other_qids:
+            assert is_qid(other_qid), f"Invalid QID: {other_qid}"
+        if terr._parent is not None:
+            assert terr._parent != terr.code, f"Cannot be its own parent: {terr.code}"
+            if terr._parent not in territories:
+                msg = "Invalid parent: %s (country: %r)" % (terr._parent, terr.code)
+                raise RuntimeError(msg)
+
+        for successor in terr._successors:
+            if successor not in territories:
+                msg = "Invalid successor: %s (country: %r)" % (successor, terr.code)
+                raise RuntimeError(msg)
+
+        for see in terr._see:
+            if see not in territories:
+                msg = "Invalid see: %s (country: %r)" % (see, terr.code)
+                raise RuntimeError(msg)
+
+        if terr.is_country and not terr.is_jurisdiction:
+            msg = "Country is not a jurisdiction: %r" % terr.code
+            raise RuntimeError(msg)
 
     with open(DATA_PATH / "territories" / "data.py", "w", encoding="utf-8") as ofh:
         data = TEMPLATE % raw_territories

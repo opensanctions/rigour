@@ -27,8 +27,6 @@ def _get_index() -> Dict[str, Territory]:
     for territory in list(index.values()):
         for other in territory.other_codes:
             index[other] = territory
-    for territory in index.values():
-        territory._validate()
     return index
 
 

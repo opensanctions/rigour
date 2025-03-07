@@ -7,8 +7,9 @@ is_ftm: true
 is_jurisdiction: true
 parent: fr
 qid: Q30971
+other_codes:
+  - fr-pf
 other_qids:
-  - Q161258
   - Q930426
   - Q140298
   - Q1999082

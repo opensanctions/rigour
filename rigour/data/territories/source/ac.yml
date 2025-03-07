@@ -1,7 +1,11 @@
 name: Ascension Island
 full_name: Ascension Island (Saint Helena, Ascension and Tristan da Cunha)
+region: Africa
+subregion: Western Africa
+qid: Q46197
+other_codes:
+  - sh-ac
 parent: sh
 is_country: false
-is_ftm: false
-is_jurisdiction: true
-qid: Q46197
+is_ftm: true
+is_jurisdiction: false

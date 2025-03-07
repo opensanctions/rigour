@@ -1,8 +1,6 @@
 from typing import Dict, Any, List, Optional, Set
 from functools import total_ordering
 
-from rigour.ids.wikidata import is_qid
-
 
 @total_ordering
 class Territory(object):
@@ -25,29 +23,6 @@ class Territory(object):
         self._successors: List[str] = data.get("successors", [])
         self._parent: Optional[str] = data.get("parent")
         self._see: List[str] = data.get("see", [])
-
-    def _validate(self) -> None:
-        assert self.name is not None, f"Must have a name: {self.code}"
-        assert self.code is not None, f"Missing code: {self.name}"
-        assert self.qid is not None, f"Missing QID: {self.code}"
-        assert is_qid(self.qid), f"Invalid QID: {self.code}"
-        for other_qid in self.other_qids:
-            assert is_qid(other_qid), f"Invalid QID: {other_qid}"
-        if self._parent is not None:
-            assert self._parent != self.code, f"Cannot be its own parent: {self.code}"
-            if self._parent not in self.index:
-                msg = "Invalid parent: %s (country: %r)" % (self._parent, self.code)
-                raise RuntimeError(msg)
-
-        for successor in self._successors:
-            if successor not in self.index:
-                msg = "Invalid successor: %s (country: %r)" % (successor, self.code)
-                raise RuntimeError(msg)
-
-        for see in self._see:
-            if see not in self.index:
-                msg = "Invalid see: %s (country: %r)" % (see, self.code)
-                raise RuntimeError(msg)
 
     @property
     def parent(self) -> Optional["Territory"]:

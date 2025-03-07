@@ -1,4 +1,4 @@
-name: Brunei Darussalam
+name: Brunei
 full_name: Brunei Darussalam
 region: Asia
 subregion: South-eastern Asia
@@ -6,7 +6,8 @@ qid: Q921
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: Brunei, formally Brunei Darussalam, is a country in Southeast Asia, situated
+summary:
+  Brunei, formally Brunei Darussalam, is a country in Southeast Asia, situated
   on the northern coast of the island of Borneo. Apart from its coastline on the South
   China Sea, it is completely surrounded by the Malaysian state of Sarawak, with its
   territory bifurcated by the Sarawak district of Limbang.

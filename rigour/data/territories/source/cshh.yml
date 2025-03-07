@@ -5,6 +5,8 @@ subregion: Central Europe
 qid: Q33946
 other_qids:
   - Q853348
+other_codes:
+  - cs
 is_country: true
 is_ftm: true
 is_historical: true
