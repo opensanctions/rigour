@@ -20,6 +20,12 @@ address_text = format_one_line(address, country="DE")
 """
 
 from rigour.addresses.cleaning import clean_address
+from rigour.addresses.normalize import normalize_address
 from rigour.addresses.format import format_address, format_address_line
 
-__all__ = ["clean_address", "format_address", "format_address_line"]
+__all__ = [
+    "clean_address",
+    "normalize_address",
+    "format_address",
+    "format_address_line",
+]
