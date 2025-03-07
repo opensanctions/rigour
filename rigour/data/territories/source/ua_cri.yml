@@ -3,6 +3,10 @@ full_name: Crimea (Occupied Ukraine)
 region: Europe
 subregion: Eastern Europe
 qid: Q15925436
+other_qids:
+  - Q7835
+  - Q15966495
+  - Q2677944
 is_country: false
 is_ftm: true
 parent: ua

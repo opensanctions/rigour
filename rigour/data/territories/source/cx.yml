@@ -3,7 +3,7 @@ full_name: Christmas Island
 region: Oceania
 subregion: Australia and New Zealand
 qid: Q31063
-is_country: true
+is_country: false
 is_ftm: true
 is_jurisdiction: true
 parent: au

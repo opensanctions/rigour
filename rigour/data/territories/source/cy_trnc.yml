@@ -5,6 +5,7 @@ subregion: Western Asia
 qid: Q23681
 is_country: false
 is_ftm: true
+parent: cy
 see:
   - cy
   - tr

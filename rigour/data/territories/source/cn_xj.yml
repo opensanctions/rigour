@@ -1,0 +1,11 @@
+name: Xinjiang
+full_name: Xinjiang Uyghur Autonomous Region
+region: Asia
+subregion: Eastern Asia
+qid: Q34800
+parent: cn
+other_qids:
+  - Q121841103
+is_country: false
+is_ftm: false
+is_jurisdiction: false

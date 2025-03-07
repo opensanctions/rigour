@@ -3,6 +3,9 @@ full_name: Donetsk (Occupied Ukraine)
 region: Europe
 subregion: Eastern Europe
 qid: Q16150196
+other_qids:
+  - Q2012050
+  - Q43070
 is_country: false
 is_ftm: true
 parent: ua

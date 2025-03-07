@@ -3,6 +3,16 @@ full_name: United States Minor Outlying Islands
 region: Oceania
 subregion: Micronesia
 qid: Q16645
+other_qids:
+  - Q46879
+  - Q131305
+  - Q62218
+  - Q131008
+  - Q130895
+  - Q47863
+  - Q123076
+  - Q43296
+  - Q25359
 other_codes:
   - xb
   - xh

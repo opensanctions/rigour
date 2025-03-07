@@ -3,6 +3,9 @@ full_name: Luhansk (Occupied Ukraine)
 region: Europe
 subregion: Eastern Europe
 qid: Q16746854
+other_qids:
+  - Q134279
+  - Q171965
 is_country: false
 is_ftm: true
 parent: ua
