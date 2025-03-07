@@ -2,6 +2,7 @@ from functools import cache
 from typing import Dict, Optional
 from rigour.data.territories.data import TERRITORIES
 from rigour.territories.territory import Territory
+from rigour.territories.util import clean_code
 
 
 @cache
@@ -9,6 +10,9 @@ def _get_index() -> Dict[str, Territory]:
     index: Dict[str, Territory] = {}
     for code, data in TERRITORIES.items():
         index[code] = Territory(index, code, data)
+    for territory in list(index.values()):
+        for other in territory.other_codes:
+            index[other] = territory
     for territory in index.values():
         territory._validate()
     return index
@@ -24,6 +28,7 @@ def get_territory(code: str) -> Optional[Territory]:
         A territory object.
     """
     index = _get_index()
+    code = clean_code(code)
     return index.get(code)
 
 

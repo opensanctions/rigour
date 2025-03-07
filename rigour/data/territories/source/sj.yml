@@ -4,6 +4,9 @@ region: Europe
 subregion: Northern Europe
 qid: Q25231
 parent: "no"
+other_codes:
+  - no-21
+  - no-22
 is_country: false
 is_ftm: true
 is_jurisdiction: true

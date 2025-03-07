@@ -3,8 +3,10 @@ full_name: Sark
 region: Europe
 subregion: Northern Europe
 qid: Q3405693
+other_codes:
+  - gg-srk
 is_country: false
-is_ftm: false
+is_ftm: true
 parent: gg
 see:
   - gg

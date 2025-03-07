@@ -3,6 +3,8 @@ full_name: Northern Mariana Islands
 region: Oceania
 subregion: Micronesia
 qid: Q16644
+other_codes:
+  - us-mp
 is_country: false
 is_ftm: true
 is_jurisdiction: true

@@ -3,6 +3,8 @@ full_name: Åland Islands
 region: Europe
 subregion: Northern Europe
 qid: Q5689
+other_codes:
+  - fi-01
 is_country: true
 is_ftm: true
 is_jurisdiction: true

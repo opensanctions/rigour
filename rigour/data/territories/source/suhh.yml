@@ -16,8 +16,12 @@ other_qids:
   - Q2184
   - Q484578
   - Q130280
+other_codes:
+  - su
+  - byaa
 is_country: true
 is_ftm: true
+is_historical: true
 see:
   - ru
   - ua

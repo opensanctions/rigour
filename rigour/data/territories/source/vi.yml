@@ -3,6 +3,8 @@ full_name: U.S. Virgin Islands
 region: Americas
 subregion: Caribbean
 qid: Q11703
+other_codes:
+  - us-vi
 is_country: true
 is_ftm: true
 is_jurisdiction: true

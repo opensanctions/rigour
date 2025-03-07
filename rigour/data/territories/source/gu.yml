@@ -3,6 +3,8 @@ full_name: Guam
 region: Oceania
 subregion: Micronesia
 qid: Q16635
+other_codes:
+  - us-gu
 is_country: false
 is_ftm: true
 is_jurisdiction: true

@@ -3,6 +3,8 @@ full_name: Macao
 region: Asia
 subregion: Eastern Asia
 qid: Q14773
+other_codes:
+  - cn-mo
 is_country: false
 is_ftm: true
 is_jurisdiction: true

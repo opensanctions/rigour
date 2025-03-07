@@ -71,4 +71,4 @@ universal = true
 branch = true
 
 [tool.coverage.report]
-omit = ["rigour/langs/generate.py"]
+omit = ["rigour/langs/generate.py", "rigour/territories/generate.py"]

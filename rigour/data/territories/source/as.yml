@@ -3,6 +3,8 @@ full_name: American Samoa
 region: Oceania
 subregion: Polynesia
 qid: Q16641
+other_codes:
+  - us-as
 is_country: false
 is_ftm: true
 is_jurisdiction: true

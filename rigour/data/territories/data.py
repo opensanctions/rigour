@@ -10,6 +10,7 @@ TERRITORIES: Dict[str, Any] = {
         "qid": "Q6500954",
         "is_country": True,
         "is_ftm": True,
+        "other_codes": ["zrcd"],
         "see": ["cd"],
         "successors": ["cd"],
         "summary": "Zaire, officially the Republic of Zaire, was the name of the Democratic Republic of the Congo from 1965 to 1997. Zaire was located in Central Africa and was, by area, the third-largest country in Africa (after Sudan and Algeria).",
@@ -27,6 +28,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Tunisia, officially the Republic of Tunisia, is the northernmost country in Africa. It is a part of the Maghreb region of North Africa, bordered by Algeria to the west and southwest, Libya to the southeast, and the Mediterranean Sea to the north and east.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Tunisia",
+        "other_codes": [],
+        "see": [],
     },
     "us-in": {
         "name": "Indiana",
@@ -36,6 +39,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "parent": "us",
         "qid": "Q1415",
+        "other_codes": [],
+        "see": [],
     },
     "bt": {
         "name": "Bhutan",
@@ -48,6 +53,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Bhutan, officially the Kingdom of Bhutan, is a landlocked South Asian country, which is situated in the Eastern Himalayas, between China in the north and India in the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Bhutan",
+        "other_codes": [],
+        "see": [],
     },
     "ao": {
         "name": "Angola",
@@ -60,6 +67,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Angola, officially the Republic of Angola, is a country on the west-central coast of Southern Africa. It is the second-largest Lusophone country in both total area and population, and is the seventh-largest country in Africa.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Angola",
+        "other_codes": [],
+        "see": [],
     },
     "cg": {
         "name": "Congo-Brazzaville",
@@ -72,6 +81,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Republic of the Congo, also known as Congo-Brazzaville, the Congo Republic or simply either Congo or the Congo, is a country located on the western coast of Central Africa to the west of the Congo River. It is bordered to the west by Gabon, to its northwest by Cameroon and its northeast by the Central African Republic, to the southeast by the Democratic Republic of the Congo, to its south by the Angolan exclave of Cabinda and to its southwest by the Atlantic Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Congo_-_Brazzaville",
+        "other_codes": [],
+        "see": [],
     },
     "ax": {
         "name": "Åland Islands",
@@ -79,11 +90,13 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Europe",
         "subregion": "Northern Europe",
         "qid": "Q5689",
+        "other_codes": ["fi-01"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "Åland (Finnish: Ahvenanmaa) is an autonomous and demilitarised region of Finland. Receiving its autonomy by a 1920 decision of the League of Nations, it is the smallest region of Finland by both area (1,580 square kilometres) and population (30,129), constituting 0.51% of Finland's land area and 0.54% of its population.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Åland_Islands",
+        "see": [],
     },
     "ml": {
         "name": "Mali",
@@ -96,6 +109,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Mali, officially the Republic of Mali, is a landlocked country in West Africa. Mali is the eighth-largest country in Africa, with an area of over 1,241,238 square kilometres.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Mali",
+        "other_codes": [],
+        "see": [],
     },
     "mz": {
         "name": "Mozambique",
@@ -108,6 +123,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Mozambique, officially the Republic of Mozambique, is a country located in southeastern Africa bordered by the Indian Ocean to the east, Tanzania to the north, Malawi and Zambia to the northwest, Zimbabwe to the west, and Eswatini and South Africa to the southwest. The sovereign state is separated from the Comoros, Mayotte and Madagascar by the Mozambique Channel to the east.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Mozambique",
+        "other_codes": [],
+        "see": [],
     },
     "na": {
         "name": "Namibia",
@@ -120,6 +137,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Namibia, officially the Republic of Namibia, is a country in Southern Africa. Its western border is the Atlantic Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Namibia",
+        "other_codes": [],
+        "see": [],
     },
     "mm": {
         "name": "Myanmar",
@@ -127,11 +146,13 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Asia",
         "subregion": "South-eastern Asia",
         "qid": "Q836",
+        "other_codes": ["bu", "bumm"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "Myanmar (Burmese: မြန်မာ), officially the Republic of the Union of Myanmar, also known as Burma (the official name until 1989), is a country in Southeast Asia. It is bordered by Bangladesh and India to its northwest, China to its northeast, Laos and Thailand to its east and southeast, and the Andaman Sea and the Bay of Bengal to its south and southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Myanmar",
+        "see": [],
     },
     "li": {
         "name": "Liechtenstein",
@@ -144,6 +165,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Liechtenstein, officially the Principality of Liechtenstein, is a German-speaking and doubly landlocked country and microstate located in the Alps between Austria and Switzerland.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Liechtenstein",
+        "other_codes": [],
+        "see": [],
     },
     "bb": {
         "name": "Barbados",
@@ -156,6 +179,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Barbados is an island country and microstate in the Lesser Antilles of the West Indies, in the Caribbean region of the Americas, and the most easterly of the Caribbean Islands. It lies on the boundary of the South American and the Caribbean Plates.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Barbados",
+        "other_codes": [],
+        "see": [],
     },
     "kn-n": {
         "name": "Nevis (Saint Kitts and Nevis)",
@@ -165,6 +190,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "parent": "kn",
         "qid": "Q207794",
+        "other_codes": [],
+        "see": [],
     },
     "cf": {
         "name": "Central African Republic",
@@ -177,6 +204,37 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Central African Republic, formerly known as Ubangi-Shari, is a landlocked country in Central Africa. It is bordered by Chad to the north, Sudan to the northeast, South Sudan to the east, the Democratic Republic of the Congo to the south, the Republic of the Congo to the southwest, and Cameroon to the west.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Central_African_Republic",
+        "other_codes": [],
+        "see": [],
+    },
+    "an": {
+        "name": "Netherlands Antilles",
+        "full_name": "Netherlands Antilles",
+        "region": "Americas",
+        "subregion": "Caribbean",
+        "qid": "Q25227",
+        "other_codes": ["anhh"],
+        "successors": ["bq", "cw", "sx"],
+        "parent": "nl",
+        "is_country": False,
+        "is_ftm": False,
+        "is_jurisdiction": False,
+        "is_historical": True,
+        "see": [],
+    },
+    "cq": {
+        "name": "Sark",
+        "full_name": "Sark",
+        "region": "Europe",
+        "subregion": "Northern Europe",
+        "qid": "Q3405693",
+        "other_codes": ["gg-srk"],
+        "is_country": False,
+        "is_ftm": True,
+        "parent": "gg",
+        "see": ["gg", "gb"],
+        "summary": "Sark is a part of the Channel Islands in the southwestern English Channel, off the coast of Normandy, France. It is a royal fief, which forms part of the Bailiwick of Guernsey, with its own set of laws based on Norman law and its own parliament.",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Sark",
     },
     "vg": {
         "name": "British Virgin Islands",
@@ -190,6 +248,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["gb"],
         "summary": "The British Virgin Islands, officially the Virgin Islands, is a British Overseas Territory in the Caribbean, to the east of Puerto Rico and the US Virgin Islands and north-west of Anguilla. The islands are geographically part of the Virgin Islands archipelago and are located in the Leeward Islands of the Lesser Antilles and part of the West Indies.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/British_Virgin_Islands",
+        "other_codes": [],
     },
     "to": {
         "name": "Tonga",
@@ -202,6 +261,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Tonga, officially the Kingdom of Tonga, is an island country in Polynesia, part of Oceania. The country has 171 islands – of which 45 are inhabited.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Tonga",
+        "other_codes": [],
+        "see": [],
     },
     "suhh": {
         "name": "Soviet Union",
@@ -221,9 +282,12 @@ TERRITORIES: Dict[str, Any] = {
             "Q192180",
             "Q2184",
             "Q484578",
+            "Q130280",
         ],
+        "other_codes": ["su", "byaa"],
         "is_country": True,
         "is_ftm": True,
+        "is_historical": True,
         "see": [
             "ru",
             "ua",
@@ -258,19 +322,6 @@ TERRITORIES: Dict[str, Any] = {
         ],
         "summary": "The Soviet Union, officially the Union of Soviet Socialist Republics (USSR), was disbanded in 1991. It exists in our database because it is still the stated country of birth of a number of designated persons.",
     },
-    "gg-srk": {
-        "name": "Sark",
-        "full_name": "Sark",
-        "region": "Europe",
-        "subregion": "Northern Europe",
-        "qid": "Q3405693",
-        "is_country": False,
-        "is_ftm": False,
-        "parent": "gg",
-        "see": ["gg", "gb"],
-        "summary": "Sark is a part of the Channel Islands in the southwestern English Channel, off the coast of Normandy, France. It is a royal fief, which forms part of the Bailiwick of Guernsey, with its own set of laws based on Norman law and its own parliament.",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/Sark",
-    },
     "us-hi": {
         "name": "Hawaii",
         "full_name": "Hawaii (United States of America)",
@@ -279,6 +330,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "tm": {
         "name": "Turkmenistan",
@@ -291,6 +344,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Turkmenistan is a landlocked country in Central Asia bordered by Kazakhstan to the northwest, Uzbekistan to the north, east and northeast, Afghanistan to the southeast, Iran to the south and southwest and the Caspian Sea to the west. Ashgabat is the capital and largest city.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Turkmenistan",
+        "other_codes": [],
+        "see": [],
     },
     "ve": {
         "name": "Venezuela",
@@ -303,6 +358,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Venezuela, officially the Bolivarian Republic of Venezuela, is a country on the northern coast of South America, consisting of a continental landmass and many islands and islets in the Caribbean Sea.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Venezuela",
+        "other_codes": [],
+        "see": [],
     },
     "tz": {
         "name": "Tanzania",
@@ -315,6 +372,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Tanzania, officially the United Republic of Tanzania, is a country in East Africa within the African Great Lakes region. It borders Uganda to the north; Kenya to the northeast; the Indian Ocean to the east; Mozambique and Malawi to the south; Zambia to the southwest; and Rwanda, Burundi, and the Democratic Republic of the Congo to the west.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Tanzania",
+        "other_codes": [],
+        "see": [],
     },
     "bw": {
         "name": "Botswana",
@@ -327,6 +386,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Botswana, officially the Republic of Botswana, is a landlocked country in Southern Africa. Botswana is topographically flat, with approximately 70 per cent of its territory being the Kalahari Desert.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Botswana",
+        "other_codes": [],
+        "see": [],
     },
     "al": {
         "name": "Albania",
@@ -340,6 +401,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Albania, officially the Republic of Albania, is a country in Southeast Europe.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Albania",
+        "other_codes": [],
+        "see": [],
     },
     "cd": {
         "name": "DR Congo",
@@ -352,6 +415,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Democratic Republic of the Congo, also known as Congo-Kinshasa, is a country in Central Africa. By land area, the DRC is the second-largest country in Africa and the 11th-largest in the world.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Congo_-_Kinshasa",
+        "other_codes": [],
+        "see": [],
     },
     "mo": {
         "name": "Macao",
@@ -359,12 +424,14 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Asia",
         "subregion": "Eastern Asia",
         "qid": "Q14773",
+        "other_codes": ["cn-mo"],
         "is_country": False,
         "is_ftm": True,
         "is_jurisdiction": True,
         "parent": "cn",
         "summary": "Macau or Macao (Chinese: 澳門), officially the Macao Special Administrative Region of the People's Republic of China (MSAR), is a city and special administrative region of China in the western Pearl River Delta by the South China Sea.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Macau",
+        "see": [],
     },
     "lk": {
         "name": "Sri Lanka",
@@ -377,6 +444,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Sri Lanka (Sinhala: ශ්\u200dරී ලංකා; Tamil: இலங்கை), historically known as Ceylon and officially the Democratic Socialist Republic of Sri Lanka, is an island country in South Asia. It lies in the Indian Ocean, southwest of the Bay of Bengal, separated from the Indian peninsula by the Gulf of Mannar and the Palk Strait.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Sri_Lanka",
+        "other_codes": [],
+        "see": [],
     },
     "us-sc": {
         "name": "South Carolina",
@@ -386,6 +455,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "nc": {
         "name": "New Caledonia",
@@ -399,6 +470,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "fr",
         "summary": "New Caledonia (French: Nouvelle-Calédonie) is a sui generis collectivity of overseas France in the southwest Pacific Ocean, south of Vanuatu, about 1,210 km (750 mi) east of Australia. The archipelago, part of the Melanesia subregion, includes the main island of Grande Terre, the Loyalty Islands, the Chesterfield Islands, the Belep archipelago, the Isle of Pines, and a few remote islets.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/New_Caledonia",
+        "other_codes": [],
+        "see": [],
     },
     "mx": {
         "name": "Mexico",
@@ -412,6 +485,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Mexico, officially the United Mexican States, is a country in the southern portion of North America. It is bordered to the north by the United States; to the south and west by the Pacific Ocean; to the southeast by Guatemala, Belize, and the Caribbean Sea; and to the east by the Gulf of Mexico.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Mexico",
+        "other_codes": [],
+        "see": [],
     },
     "my": {
         "name": "Malaysia",
@@ -426,6 +501,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "my",
         "summary": "Malaysia is a country in Southeast Asia. The federal constitutional monarchy consists of 13 states and three federal territories, separated by the South China Sea into two regions: Peninsular Malaysia and Borneo's East Malaysia.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Malaysia",
+        "other_codes": [],
+        "see": [],
     },
     "nu": {
         "name": "Niue",
@@ -438,6 +515,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Niue is a self-governing island state in free association with New Zealand. It is situated in the South Pacific Ocean and is part of Polynesia, and predominantly inhabited by Polynesians.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Niue",
+        "other_codes": [],
+        "see": [],
     },
     "mn": {
         "name": "Mongolia",
@@ -451,6 +530,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Mongolia is a landlocked country in East Asia, bordered by Russia to the north and China to the south. The western extremity of Mongolia is only 23 km from Kazakhstan, and this area can resemble a quadripoint when viewed on a map.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Mongolia",
+        "other_codes": [],
+        "see": [],
     },
     "ba": {
         "name": "Bosnia and Herzegovina",
@@ -464,6 +545,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Bosnia and Herzegovina is a country in Southeast Europe, located in the Balkans. Bosnia and Herzegovina borders Serbia to the east, Montenegro to the southeast, and Croatia to the north and southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Bosnia_&_Herzegovina",
+        "other_codes": [],
+        "see": [],
     },
     "az": {
         "name": "Azerbaijan",
@@ -477,6 +560,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Azerbaijan, officially the Republic of Azerbaijan, is a transcontinental country located at the boundary of Eastern Europe and West Asia. It is a part of the South Caucasus region and is bounded by the Caspian Sea to the east, Russia to the north, Georgia to the northwest, Armenia and Turkey to the west, and Iran to the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Azerbaijan",
+        "other_codes": [],
+        "see": [],
     },
     "cr": {
         "name": "Costa Rica",
@@ -489,6 +574,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Costa Rica, officially the Republic of Costa Rica, is a country in the Central American region of North America. Costa Rica is bordered by Nicaragua to the north, the Caribbean Sea to the northeast, Panama to the southeast, and the Pacific Ocean to the southwest, as well as maritime border with Ecuador to the south of Cocos Island.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Costa_Rica",
+        "other_codes": [],
+        "see": [],
     },
     "am": {
         "name": "Armenia",
@@ -502,6 +589,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Armenia, officially the Republic of Armenia, is a landlocked country in the Armenian Highlands of West Asia, with geopolitical ties to Europe. It is a part of the Caucasus region and is bordered by Turkey to the west, Georgia to the north and Azerbaijan to the east, and Iran and the Azerbaijani exclave of Nakhchivan to the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Armenia",
+        "other_codes": [],
+        "see": [],
     },
     "bv": {
         "name": "Bouvet Island",
@@ -513,6 +602,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": True,
         "is_jurisdiction": True,
         "parent": "dk",
+        "other_codes": [],
+        "see": [],
     },
     "us-il": {
         "name": "Illinois",
@@ -522,6 +613,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "tl": {
         "name": "Timor-Leste",
@@ -529,11 +622,13 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Asia",
         "subregion": "South-eastern Asia",
         "qid": "Q574",
+        "other_codes": ["tp", "tptl"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "East Timor, also known as Timor-Leste, officially the Democratic Republic of Timor-Leste, is a country in Southeast Asia. It comprises the eastern half of the island of Timor, of which the western half is administered by Indonesia, the exclave of Oecusse on the island's north-western half, and the minor islands of Atauro and Jaco.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Timor-Leste",
+        "see": [],
     },
     "us-ks": {
         "name": "Kansas",
@@ -543,6 +638,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "ae-fu": {
         "name": "Fujairah",
@@ -552,6 +649,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ae",
+        "other_codes": [],
+        "see": [],
     },
     "xk": {
         "name": "Kosovo",
@@ -565,6 +664,7 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "see": ["rs"],
         "summary": "Kosovo, officially the Republic of Kosovo, is a partially recognized country in Southeast Europe. It declared its independence from Serbia in 2008, and has been recognized by most Western governments.",
+        "other_codes": [],
     },
     "th": {
         "name": "Thailand",
@@ -576,6 +676,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
+        "other_codes": [],
+        "see": [],
     },
     "ws": {
         "name": "Samoa",
@@ -588,6 +690,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Samoa, officially the Independent State of Samoa and until 1997 known as Western Samoa, is a Polynesian island country consisting of two main islands; two smaller, inhabited islands; and several smaller, uninhabited islands, including the Aleipata Islands. Samoa is located 64 km west of American Samoa, 889 km northeast of Tonga, 1,152 km northeast of Fiji, 483 km east of Wallis and Futuna, 1,151 km southeast of Tuvalu, 519 km south of Tokelau, 4,190 km southwest of Hawaii, and 610 km northwest of Niue.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Samoa",
+        "other_codes": [],
+        "see": [],
     },
     "be": {
         "name": "Belgium",
@@ -601,6 +705,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Belgium, officially the Kingdom of Belgium, is a country in Northwestern Europe. The country is bordered by the Netherlands to the north, Germany to the east, Luxembourg to the southeast, France to the southwest, and the North Sea to the northwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Belgium",
+        "other_codes": [],
     },
     "ca": {
         "name": "Canada",
@@ -614,6 +719,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "ca",
         "summary": "Canada is a country in North America. Its ten provinces and three territories extend from the Atlantic Ocean to the Pacific Ocean and northward into the Arctic Ocean, making it the world's second-largest country by total area, with the world's longest coastline.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Canada",
+        "other_codes": [],
+        "see": [],
     },
     "br": {
         "name": "Brazil",
@@ -627,6 +734,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Brazil, officially the Federative Republic of Brazil, is the largest country in South America and in Latin America. Brazil is the world's fifth-largest country by area and the seventh most populous.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Brazil",
+        "other_codes": [],
+        "see": [],
     },
     "ai": {
         "name": "Anguilla",
@@ -639,6 +748,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Anguilla is a British Overseas Territory in the Caribbean. It is one of the most northerly of the Leeward Islands in the Lesser Antilles, lying east of Puerto Rico and the Virgin Islands and directly north of Saint Martin.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Anguilla",
+        "other_codes": [],
+        "see": [],
     },
     "cv": {
         "name": "Cabo Verde",
@@ -651,6 +762,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Cape Verde or Cabo Verde, officially the Republic of Cabo Verde, is an archipelago and island country in the central Atlantic Ocean, consisting of ten volcanic islands with a combined land area of about 4,033 square kilometres (1,557 sq mi).",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Cape_Verde",
+        "other_codes": [],
+        "see": [],
     },
     "nf": {
         "name": "Norfolk Island",
@@ -663,6 +776,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Norfolk Island is an external territory of Australia located in the Pacific Ocean between New Zealand and New Caledonia, 1,412 kilometres directly east of Australia's Evans Head and about 900 kilometres from Lord Howe Island. Together with the neighbouring Phillip Island and Nepean Island, the three islands collectively form the Territory of Norfolk Island.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Norfolk_Island",
+        "other_codes": [],
+        "see": [],
     },
     "ly": {
         "name": "Libya",
@@ -676,6 +791,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Libya, officially the State of Libya, is a country in the Maghreb region of North Africa. It is bordered by the Mediterranean Sea to the north, Egypt to the east, Sudan to the southeast, Chad to the south, Niger to the southwest, Algeria to the west, and Tunisia to the northwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Libya",
+        "other_codes": [],
+        "see": [],
     },
     "np": {
         "name": "Nepal",
@@ -688,6 +805,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Nepal, officially the Federal Democratic Republic of Nepal, is a landlocked country in South Asia. It is mainly situated in the Himalayas, but also includes parts of the Indo-Gangetic Plain.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Nepal",
+        "other_codes": [],
+        "see": [],
     },
     "mk": {
         "name": "North Macedonia",
@@ -701,6 +820,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "North Macedonia, officially the Republic of North Macedonia, is a landlocked country in Southeast Europe. It shares land borders with Kosovo to the northwest, Serbia to the north, Bulgaria to the east, Greece to the south, and Albania to the west.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/North_Macedonia",
+        "other_codes": [],
+        "see": [],
     },
     "ng": {
         "name": "Nigeria",
@@ -721,6 +842,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Nigeria, officially the Federal Republic of Nigeria, is a country in West Africa. It is situated between the Sahel to the north and the Gulf of Guinea to the south in the Atlantic Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Nigeria",
+        "other_codes": [],
+        "see": [],
     },
     "cw": {
         "name": "Curaçao",
@@ -728,12 +851,14 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Americas",
         "subregion": "Caribbean",
         "qid": "Q25279",
+        "other_codes": ["nl-cw"],
         "is_country": False,
         "is_ftm": True,
         "is_jurisdiction": True,
         "parent": "nl",
         "summary": "Curaçao, officially the Country of Curaçao, is a Lesser Antilles island in the southern Caribbean Sea and the Dutch Caribbean region, about 65 km north of the Venezuela coast. It is a constituent country of the Kingdom of the Netherlands.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Curaçao",
+        "see": [],
     },
     "bs": {
         "name": "Bahamas",
@@ -746,6 +871,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Bahamas, officially the Commonwealth of The Bahamas, is an island country within the Lucayan Archipelago of the West Indies in the North Atlantic. It takes up 97% of the Lucayan Archipelago's land area and is home to 88% of the archipelago's population.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Bahamas",
+        "other_codes": [],
+        "see": [],
     },
     "bd": {
         "name": "Bangladesh",
@@ -758,6 +885,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Bangladesh, officially the People's Republic of Bangladesh, is a country in South Asia. It is the eighth-most-populous and among the most densely populated countries, with a population of around 169 million in an area of 148,460 square kilometres",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Bangladesh",
+        "other_codes": [],
+        "see": [],
     },
     "um": {
         "name": "U.S. Minor Outlying Islands",
@@ -765,6 +894,7 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Oceania",
         "subregion": "Micronesia",
         "qid": "Q16645",
+        "other_codes": ["xb", "xh", "xq", "xu", "xm", "qm", "xv", "xl", "qw", "us-um"],
         "is_country": False,
         "is_ftm": True,
         "is_jurisdiction": True,
@@ -785,6 +915,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Uzbekistan, officially the Republic of Uzbekistan, is a doubly landlocked country located in Central Asia. It is surrounded by five landlocked countries: Kazakhstan to the north; Kyrgyzstan to the northeast; Tajikistan to the southeast; Afghanistan to the south; and Turkmenistan to the southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Uzbekistan",
+        "other_codes": [],
+        "see": [],
     },
     "va": {
         "name": "Holy See",
@@ -798,6 +930,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["it"],
         "summary": 'Vatican City, officially the Vatican City State, is a landlocked independent country, city-state, microstate, and enclave within Rome, Italy. It became independent from Italy in 1929 with the Lateran Treaty, and it is a distinct territory under "full ownership, exclusive dominion, and sovereign authority and jurisdiction" of the Holy See.',
         "wikipedia_url": "https://en.wikipedia.org/wiki/Vatican_City",
+        "other_codes": [],
     },
     "sh-hl": {
         "name": "Saint Helena",
@@ -809,6 +942,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "sh",
+        "other_codes": [],
+        "see": [],
     },
     "pk-km": {
         "name": "Kashmir",
@@ -818,6 +953,7 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": True,
         "is_jurisdiction": False,
         "see": ["in", "pk"],
+        "other_codes": [],
     },
     "cn-xz": {
         "name": "Tibet",
@@ -831,6 +967,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "cn",
         "summary": "Tibet (Tibetan: བོད་; Chinese: 西藏) is a region in the central part of East Asia, covering much of the Tibetan Plateau. It is the homeland of the Tibetan people. Since the annexation of Tibet by the People's Republic of China in 1951, the entire plateau has been under the administration of the People''s Republic of China.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Tibet",
+        "other_codes": [],
+        "see": [],
     },
     "iq-kr": {
         "name": "Kurdistan",
@@ -841,6 +979,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_country": False,
         "is_ftm": True,
         "parent": "iq",
+        "other_codes": [],
+        "see": [],
     },
     "ua-dpr": {
         "name": "Donetsk (Occupied Ukraine)",
@@ -853,6 +993,7 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "ua",
         "see": ["ua", "ru"],
         "summary": "The Donetsk People's Republic (DPR, Russian: Донецкая Народная Республика) is a region in Ukraine's Donetsk Oblast that has been occupied by Russia. The DPR was infiltrated by Russian-backed paramilitaries in 2014, and it initially operated as a breakaway state until it was annexed by Russia in 2022.",
+        "other_codes": [],
     },
     "zw": {
         "name": "Zimbabwe",
@@ -861,11 +1002,13 @@ TERRITORIES: Dict[str, Any] = {
         "subregion": "Eastern Africa",
         "qid": "Q954",
         "other_qids": ["Q217169", "Q890120"],
+        "other_codes": ["rh"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "Zimbabwe, officially the Republic of Zimbabwe, is a landlocked country in Southern Africa, between the Zambezi and Limpopo Rivers, bordered by South Africa to the south, Botswana to the southwest, Zambia to the north, and Mozambique to the east. The capital and largest city is Harare, and the second largest is Bulawayo.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Zimbabwe",
+        "see": [],
     },
     "vc": {
         "name": "Saint Vincent and the Grenadines",
@@ -878,6 +1021,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Saint Vincent and the Grenadines is an island country in the Caribbean. It is located in the southeast Windward Islands of the Lesser Antilles, which lie in the West Indies, at the southern end of the eastern border of the Caribbean Sea, where the latter meets the Atlantic Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines",
+        "other_codes": [],
+        "see": [],
     },
     "tk": {
         "name": "Tokelau",
@@ -891,6 +1036,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "nz",
         "summary": "Tokelau, known previously as the Union Islands, and, until 1976, known officially as the Tokelau Islands, is a dependent territory of New Zealand in the southern Pacific Ocean. It consists of three tropical coral atolls: Atafu, Nukunonu, and Fakaofo. In addition to these three, Swains Island, which forms part of the same archipelago, is the subject of an ongoing territorial dispute; it is currently administered by the United States as part of American Samoa.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Tokelau",
+        "other_codes": [],
+        "see": [],
     },
     "bf": {
         "name": "Burkina Faso",
@@ -898,11 +1045,13 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Africa",
         "subregion": "Western Africa",
         "qid": "Q965",
+        "other_codes": ["hf"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "Burkina Faso is a landlocked country in West Africa, bordered by Mali to the northwest, Niger to the northeast, Benin to the southeast, Togo and Ghana to the south, and the Ivory Coast to the southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Burkina_Faso",
+        "see": [],
     },
     "cu": {
         "name": "Cuba",
@@ -915,6 +1064,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Cuba, officially the Republic of Cuba, is located where the northern Caribbean Sea, Gulf of Mexico, and Atlantic Ocean meet.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Cuba",
+        "other_codes": [],
+        "see": [],
     },
     "bq": {
         "name": "Bonaire, Sint Eustatius and Saba",
@@ -927,6 +1078,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": True,
         "is_jurisdiction": True,
         "parent": "nl",
+        "other_codes": [],
+        "see": [],
     },
     "ne": {
         "name": "Niger",
@@ -939,6 +1092,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Niger or the Niger, officially the Republic of the Niger, is a landlocked country in West Africa. It is a unitary state bordered by Libya to the northeast, Chad to the east, Nigeria to the south, Benin and Burkina Faso to the southwest, Mali to the west, and Algeria to the northwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Niger",
+        "other_codes": [],
+        "see": [],
     },
     "nr": {
         "name": "Nauru",
@@ -951,6 +1106,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Nauru, officially the Republic of Nauru and formerly known as Pleasant Island, is an island country and microstate in Micronesia, part of Oceania in the Central Pacific. Its nearest neighbour is Banaba of Kiribati, about 300 km to the east.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Nauru",
+        "other_codes": [],
+        "see": [],
     },
     "mh": {
         "name": "Marshall Islands",
@@ -963,6 +1120,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Marshall Islands, officially the Republic of the Marshall Islands, is an island country near Kiribati in the Pacific Ocean, slightly west of the International Date Line and just north of the equator. Geographically, the country is part of the larger island group of Micronesia.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Marshall_Islands",
+        "other_codes": [],
+        "see": [],
     },
     "us-sd": {
         "name": "South Dakota",
@@ -972,6 +1131,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "bg": {
         "name": "Bulgaria",
@@ -986,6 +1147,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Bulgaria, officially the Republic of Bulgaria, is a country in Southeast Europe.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Bulgaria",
+        "other_codes": [],
     },
     "cc": {
         "name": "Cocos (Keeling) Islands",
@@ -999,6 +1161,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "au",
         "summary": "The Cocos (Keeling) Islands, officially the Territory of Cocos (Keeling) Islands, are an Australian external territory in the Indian Ocean, comprising a small archipelago approximately midway between Australia and Sri Lanka and relatively close to the Indonesian island of Sumatra.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Cocos_(Keeling)_Islands",
+        "other_codes": [],
+        "see": [],
     },
     "vu": {
         "name": "Vanuatu",
@@ -1011,6 +1175,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Vanuatu, officially the Republic of Vanuatu, is an island country in Melanesia, located in the South Pacific Ocean. The archipelago, which is of volcanic origin, is 1,750 km east of northern Australia, 540 km northeast of New Caledonia, east of New Guinea, southeast of Solomon Islands, and west of Fiji.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Vanuatu",
+        "other_codes": [],
+        "see": [],
     },
     "un": {
         "name": "United Nations",
@@ -1020,6 +1186,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": False,
         "qid": "Q1065",
         "other_qids": ["Q160016", "Q61964031"],
+        "other_codes": [],
+        "see": [],
     },
     "tj": {
         "name": "Tajikistan",
@@ -1032,6 +1200,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Tajikistan, officially the Republic of Tajikistan, is a landlocked country in Central Asia. It is bordered by Afghanistan to the south, Uzbekistan to the west, Kyrgyzstan to the north, and China to the east.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Tajikistan",
+        "other_codes": [],
+        "see": [],
     },
     "uy": {
         "name": "Uruguay",
@@ -1044,6 +1214,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Uruguay, officially the Oriental Republic of Uruguay or the Eastern Republic of Uruguay, is a country in South America. It shares borders with Argentina to its west and southwest and Brazil to its north and northeast, while bordering the Río de la Plata to the south and the Atlantic Ocean to the southeast.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Uruguay",
+        "other_codes": [],
+        "see": [],
     },
     "wf": {
         "name": "Wallis and Futuna",
@@ -1057,6 +1229,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["fr"],
         "summary": "Wallis and Futuna, officially the Territory of the Wallis and Futuna Islands, is a French island collectivity in the South Pacific, situated between Tuvalu to the northwest, Fiji to the southwest, Tonga to the southeast, Samoa to the east, and Tokelau to the northeast.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Wallis_and_Futuna",
+        "other_codes": [],
     },
     "za": {
         "name": "South Africa",
@@ -1070,6 +1243,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "South Africa, officially the Republic of South Africa, is the southernmost country in Africa. It is bounded to the south by 2,798 kilometres of coastline that stretches along the South Atlantic and Indian Oceans; to the north by the neighbouring countries of Namibia, Botswana, and Zimbabwe; and to the east and northeast by Mozambique and Eswatini.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/South_Africa",
+        "other_codes": [],
+        "see": [],
     },
     "us-ga": {
         "name": "Georgia",
@@ -1079,6 +1254,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "si": {
         "name": "Slovenia",
@@ -1092,6 +1269,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Slovenia, officially the Republic of Slovenia, is a country in southern Central Europe. It is bordered by Italy to the west, Austria to the north, Hungary to the northeast, Croatia to the southeast, and the Adriatic Sea to the southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Slovenia",
+        "other_codes": [],
     },
     "pr": {
         "name": "Puerto Rico",
@@ -1099,12 +1277,14 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Americas",
         "subregion": "Caribbean",
         "qid": "Q1183",
+        "other_codes": ["us-pr"],
         "is_country": False,
         "is_ftm": True,
         "is_jurisdiction": True,
         "parent": "us",
         "summary": "Puerto Rico, officially the Commonwealth of Puerto Rico, is a Caribbean island and unincorporated territory of the United States with official Commonwealth status. It is located in the northeast Caribbean Sea, approximately 1,000 miles southeast of Miami, Florida, between the Dominican Republic and the U.S. Virgin Islands.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Puerto_Rico",
+        "see": [],
     },
     "us-la": {
         "name": "Louisiana",
@@ -1114,6 +1294,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "qa": {
         "name": "Qatar",
@@ -1126,6 +1308,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Qatar, officially the State of Qatar, is a country in West Asia. It occupies the Qatar Peninsula on the northeastern coast of the Arabian Peninsula in the Middle East; it shares its sole land border with Saudi Arabia to the south, with the rest of its territory surrounded by the Persian Gulf.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Qatar",
+        "other_codes": [],
+        "see": [],
     },
     "pe": {
         "name": "Peru",
@@ -1138,6 +1322,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Peru, officially the Republic of Peru, is a country in western South America. It is bordered in the north by Ecuador and Colombia, in the east by Brazil, in the southeast by Bolivia, in the south by Chile, and in the south and west by the Pacific Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Peru",
+        "other_codes": [],
+        "see": [],
     },
     "us-me": {
         "name": "Maine",
@@ -1147,6 +1333,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "es": {
         "name": "Spain",
@@ -1161,6 +1349,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Spain, or the Kingdom of Spain, is a country located in Southwestern Europe, with parts of its territory in the Atlantic Ocean, in the Mediterranean Sea and in Africa. It is the largest country in Southern Europe and the fourth-most populous European Union member state.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Spain",
+        "other_codes": [],
     },
     "gl": {
         "name": "Greenland",
@@ -1174,6 +1363,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "dk",
         "summary": "Greenland is a North American autonomous territory of the Kingdom of Denmark. It is the largest country within the Kingdom and one of three countries which form the Kingdom, the others being Denmark proper and the Faroe Islands; the citizens of all three countries are citizens of Denmark.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Greenland",
+        "other_codes": [],
+        "see": [],
     },
     "au-hm": {
         "name": "Heard Island and McDonald Islands",
@@ -1182,6 +1373,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "qid": "Q131198",
         "parent": "au",
+        "other_codes": [],
+        "see": [],
     },
     "us-ut": {
         "name": "Utah",
@@ -1191,6 +1384,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "ht": {
         "name": "Haiti",
@@ -1203,6 +1398,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Haiti, officially the Republic of Haiti, and formerly known as Hayti, is a country located on the island of Hispaniola in the Greater Antilles archipelago of the Caribbean Sea, east of Cuba and Jamaica, and south of The Bahamas and the Turks and Caicos Islands. It occupies the western three-eighths of the island which it shares with the Dominican Republic.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Haiti",
+        "other_codes": [],
+        "see": [],
     },
     "ky": {
         "name": "Cayman Islands",
@@ -1214,6 +1411,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "The Cayman Islands is a self-governing British Overseas Territory, and the\nlargest by population. Tax Justice Network ranks it #2 amongst Corporate Tax \nHavens.",
+        "other_codes": [],
+        "see": [],
     },
     "hu": {
         "name": "Hungary",
@@ -1227,6 +1426,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Hungary is a landlocked country in Central Europe. Spanning 93,030 square kilometres of the Carpathian Basin, it is bordered by Slovakia to the north, Ukraine to the northeast, Romania to the east and southeast, Serbia to the south, Croatia and Slovenia to the southwest, and Austria to the west.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Hungary",
+        "other_codes": [],
     },
     "kn": {
         "name": "Saint Kitts and Nevis",
@@ -1240,6 +1440,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "kn",
         "summary": "Saint Kitts and Nevis, officially the Federation of Saint Christopher and Nevis, is an island country and microstate consisting of the two islands of Saint Kitts and Nevis, both located in the West Indies, in the Leeward Islands chain of the Lesser Antilles. With 261 square kilometres of territory, and roughly 50,000 inhabitants, it is the smallest sovereign state in the Western Hemisphere, in both area and population, as well as the world's smallest sovereign federation.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/St._Kitts_&_Nevis",
+        "other_codes": [],
+        "see": [],
     },
     "iq": {
         "name": "Iraq",
@@ -1253,6 +1455,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Iraq, officially the Republic of Iraq, is a country in the Middle East. It is a federal parliamentary republic that consists of 19 governorates.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Iraq",
+        "other_codes": [],
+        "see": [],
     },
     "ee": {
         "name": "Estonia",
@@ -1266,6 +1470,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Estonia, officially the Republic of Estonia, is a country by the Baltic Sea in Northern Europe. It is bordered to the north by the Gulf of Finland across from Finland, to the west by the sea across from Sweden, to the south by Latvia, and to the east by Lake Peipus and Russia.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Estonia",
+        "other_codes": [],
     },
     "gm": {
         "name": "Gambia",
@@ -1278,6 +1483,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Gambia, officially the Republic of The Gambia, is a country in West Africa. It is the smallest country within mainland Africa and is surrounded by Senegal, except for its western coast on the Atlantic Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Gambia",
+        "other_codes": [],
+        "see": [],
     },
     "fi": {
         "name": "Finland",
@@ -1291,6 +1498,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Finland, officially the Republic of Finland, is a Nordic country in Northern Europe. It borders Sweden to the northwest, Norway to the north, and Russia to the east, with the Gulf of Bothnia to the west and the Gulf of Finland to the south, opposite Estonia.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Finland",
+        "other_codes": [],
     },
     "er": {
         "name": "Eritrea",
@@ -1303,6 +1511,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Eritrea (Tigrinya: ኤርትራ), officially the State of Eritrea, is a country in the Horn of Africa region of Eastern Africa, with its capital and largest city at Asmara. It is bordered by Ethiopia in the south, Sudan in the west, and Djibouti in the southeast.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Eritrea",
+        "other_codes": [],
+        "see": [],
     },
     "us-md": {
         "name": "Maryland",
@@ -1312,6 +1522,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "ps": {
         "name": "Palestine",
@@ -1319,12 +1531,13 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Asia",
         "subregion": "Western Asia",
         "qid": "Q219060",
-        "is_country": True,
+        "is_country": False,
         "is_ftm": True,
         "is_jurisdiction": True,
         "see": ["il"],
         "summary": 'The Palestinian territories are the two regions of the former British Mandate for Palestine that have been militarily occupied by Israel since the Six-Day War of 1967, namely: the West Bank and the Gaza Strip. The International Court of Justice has referred to the West Bank, including East Jerusalem, as "the Occupied Palestinian Territory", and this term was used as the legal definition by the ICJ in its advisory opinion of July 2004.',
         "wikipedia_url": "https://en.wikipedia.org/wiki/Palestinian_Territories",
+        "other_codes": [],
     },
     "sh": {
         "name": "Saint Helena, Ascension and Tristan da Cunha",
@@ -1337,6 +1550,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Saint Helena is a British overseas territory located in the South Atlantic Ocean. It is a remote volcanic tropical island 1,950 km (1,210 mi) west of the coast of south-western Africa, and 4,000 km (2,500 mi) east of Rio de Janeiro in South America. It is one of three constituent parts of the British Overseas Territory of Saint Helena, Ascension and Tristan da Cunha.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/St._Helena",
+        "other_codes": [],
+        "see": [],
     },
     "us-ms": {
         "name": "Mississippi",
@@ -1346,6 +1561,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "us-nh": {
         "name": "New Hampshire",
@@ -1355,6 +1572,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "us-co": {
         "name": "Colorado",
@@ -1364,6 +1583,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "cshh": {
         "name": "Czechoslovakia",
@@ -1374,10 +1595,12 @@ TERRITORIES: Dict[str, Any] = {
         "other_qids": ["Q853348"],
         "is_country": True,
         "is_ftm": True,
+        "is_historical": True,
         "see": ["cz", "sk"],
         "successors": ["cz", "sk"],
         "summary": "Czechoslovakia was a landlocked state in Central Europe. On 31 December 1992, Czechoslovakia split into the two sovereign states of the Czech Republic and Slovakia.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Czechoslovakia",
+        "other_codes": [],
     },
     "us-ar": {
         "name": "Arkansas",
@@ -1387,6 +1610,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "ca-yt": {
         "name": "Yukon",
@@ -1396,6 +1621,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "us-nj": {
         "name": "New Jersey",
@@ -1405,6 +1632,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "sj": {
         "name": "Svalbard and Jan Mayen",
@@ -1413,11 +1642,13 @@ TERRITORIES: Dict[str, Any] = {
         "subregion": "Northern Europe",
         "qid": "Q25231",
         "parent": "no",
+        "other_codes": ["no-21", "no-22"],
         "is_country": False,
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "Svalbard and Jan Mayen is a statistical designation defined by ISO 3166-1 for a collective grouping of two remote jurisdictions of Norway: Svalbard and Jan Mayen. While the two are combined for the purposes of the International Organization for Standardization (ISO) category, they are not administratively related.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Svalbard_and_Jan_Mayen",
+        "see": [],
     },
     "pf": {
         "name": "French Polynesia",
@@ -1432,6 +1663,8 @@ TERRITORIES: Dict[str, Any] = {
         "other_qids": ["Q161258", "Q930426", "Q140298", "Q1999082", "Q183963"],
         "summary": "French Polynesia is an overseas collectivity of France and its sole overseas country. It comprises 121 geographically dispersed islands and atolls stretching over more than 2,000 kilometres in the South Pacific Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/French_Polynesia",
+        "other_codes": [],
+        "see": [],
     },
     "fk": {
         "name": "Falkland Islands",
@@ -1444,6 +1677,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Falkland Islands (Spanish: Islas Malvinas) is an archipelago in the South Atlantic Ocean on the Patagonian Shelf. The principal islands are about 300 mi east of South America's southern Patagonian coast and about 752 mi from Cape Dubouzet at the northern tip of the Antarctic Peninsula.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Falkland_Islands",
+        "other_codes": [],
+        "see": [],
     },
     "be-vlg": {
         "name": "Flanders",
@@ -1453,6 +1688,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "be",
+        "other_codes": [],
+        "see": [],
     },
     "eg": {
         "name": "Egypt",
@@ -1466,6 +1703,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Egypt, officially the Arab Republic of Egypt, is a transcontinental country spanning the northeast corner of Africa and the Sinai Peninsula in the southwest corner of Asia. It is bordered by the Mediterranean Sea to the north, the Gaza Strip of Palestine and Israel to the northeast, the Red Sea to the east, Sudan to the south, and Libya to the west.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Egypt",
+        "other_codes": [],
+        "see": [],
     },
     "ca-on": {
         "name": "Ontario",
@@ -1475,6 +1714,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "is": {
         "name": "Iceland",
@@ -1487,6 +1728,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Iceland is a Nordic island country between the North Atlantic and Arctic Oceans, on the Mid-Atlantic Ridge between North America and Europe. It is linked culturally and politically with Europe, and is the region's most sparsely populated country.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Iceland",
+        "other_codes": [],
+        "see": [],
     },
     "id": {
         "name": "Indonesia",
@@ -1500,6 +1743,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Indonesia, officially the Republic of Indonesia, is an island nation in Southeast Asia and Oceania between the Indian and Pacific oceans. It consists of over 17,000 islands, including Sumatra, Java, Sulawesi, and parts of Borneo and New Guinea.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Indonesia",
+        "other_codes": [],
+        "see": [],
     },
     "ie": {
         "name": "Ireland",
@@ -1514,6 +1759,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Ireland, also known as the Republic of Ireland, is a country in north-western Europe consisting of 26 of the 32 counties of the island of Ireland. The capital and largest city is Dublin, on the eastern side of the island.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Republic_of_Ireland",
+        "other_codes": [],
     },
     "kz": {
         "name": "Kazakhstan",
@@ -1527,6 +1773,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Kazakhstan is a landlocked country mostly in Central Asia, with a small part in Eastern Europe.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Kazakhstan",
+        "other_codes": [],
+        "see": [],
     },
     "us-wi": {
         "name": "Wisconsin",
@@ -1536,6 +1784,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "ir": {
         "name": "Iran",
@@ -1548,6 +1798,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "Iran, also known officially as the Islamic Republic of Iran, is a country in West Asia. The government of Iran has been the subject of severe international sanctions, especially those put in place by the United States.",
+        "other_codes": [],
+        "see": [],
     },
     "km": {
         "name": "Comoros",
@@ -1560,6 +1812,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Comoros, officially the Union of the Comoros, is an archipelagic country made up of three islands in Southeastern Africa, located at the northern end of the Mozambique Channel in the Indian Ocean. Its capital and largest city is Moroni.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Comoros",
+        "other_codes": [],
+        "see": [],
     },
     "gy": {
         "name": "Guyana",
@@ -1572,6 +1826,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": 'Guyana, officially the Co-operative Republic of Guyana, is a country on the northern mainland of South America. Guyana is most probably an indigenous word which means "Land of Many Waters". The capital city is Georgetown.',
         "wikipedia_url": "https://en.wikipedia.org/wiki/Guyana",
+        "other_codes": [],
+        "see": [],
     },
     "fj": {
         "name": "Fiji",
@@ -1584,6 +1840,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Fiji, officially the Republic of Fiji, is an island country in Melanesia, part of Oceania in the South Pacific Ocean. It lies about 1,100 nautical miles north-northeast of New Zealand.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Fiji",
+        "other_codes": [],
+        "see": [],
     },
     "gn": {
         "name": "Guinea",
@@ -1597,6 +1855,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Guinea, officially the Republic of Guinea, is a coastal country in West Africa. It borders the Atlantic Ocean to the west, Guinea-Bissau to the northwest, Senegal to the north, Mali to the northeast, Cote d'Ivoire to the southeast, and Sierra Leone and Liberia to the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Guinea",
+        "other_codes": [],
+        "see": [],
     },
     "pg": {
         "name": "Papua New Guinea",
@@ -1609,6 +1869,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Papua New Guinea, officially the Independent State of Papua New Guinea, is a country in Oceania that comprises the eastern half of the island of New Guinea and its offshore islands in Melanesia (a region of the southwestern Pacific Ocean north of Australia).",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Papua_New_Guinea",
+        "other_codes": [],
+        "see": [],
     },
     "ro": {
         "name": "Romania",
@@ -1623,6 +1885,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Romania is a country in Central, Eastern and Southeast Europe. It borders Ukraine to the north, Hungary to the west, Serbia to the southwest, Bulgaria to the south, Moldova to the east, and the Black Sea to the southeast.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Romania",
+        "other_codes": [],
     },
     "sk": {
         "name": "Slovakia",
@@ -1637,6 +1900,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Slovakia, officially the Slovak Republic, is a landlocked country in Central Europe. It is bordered by Poland to the north, Ukraine to the east, Hungary to the south, Austria to the west, and the Czech Republic to the northwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Slovakia",
+        "other_codes": [],
     },
     "gb-wls": {
         "name": "Wales",
@@ -1650,16 +1914,19 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["gb"],
         "summary": "Wales is a country that is part of the United Kingdom. It is bordered by England to the east, the Irish Sea to the north and west, the Celtic Sea to the southwest and the Bristol Channel to the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Wales",
+        "other_codes": [],
     },
     "sx": {
         "name": "Sint Maarten",
-        "full_name": "Sint Maarten",
+        "full_name": "Sint Maarten (Dutch part)",
         "region": "Americas",
         "subregion": "Caribbean",
         "qid": "Q26273",
+        "other_codes": ["nl-sx"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
+        "parent": "nl",
         "see": ["nl"],
         "summary": "Sint Maarten is a constituent country of the Kingdom of the Netherlands in the Caribbean. With a population of 41,486 as of January 2019 on an area of 34 square kilometres, it encompasses the southern 44% of the divided island of Saint Martin, while the northern 56% of the island constitutes the French overseas collectivity of Saint Martin.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Sint_Maarten",
@@ -1676,6 +1943,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["so-som"],
         "summary": "Somalia, officially the Federal Republic of Somalia, is a country in the Horn of Africa. The country is bordered by Ethiopia to the west, Djibouti to the northwest, the Gulf of Aden to the north, the Indian Ocean to the east, and Kenya to the southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Somalia",
+        "other_codes": [],
     },
     "pt": {
         "name": "Portugal",
@@ -1691,6 +1959,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Portugal, officially the Portuguese Republic, is a country located on the Iberian Peninsula, in Southwestern Europe, and whose territory also includes the macaronesian archipelagos of the Azores, Madeira, and the Savage Islands. It features the westernmost point in continental Europe, and its Iberian portion is bordered to the west and south by the Atlantic Ocean and to the north and east by Spain, the sole country to have a land border with Portugal.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Portugal",
+        "other_codes": [],
     },
     "us-mt": {
         "name": "Montana",
@@ -1700,6 +1969,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "us-ok": {
         "name": "Oklahoma",
@@ -1710,6 +1981,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "us",
         "qid": "Q1649",
         "other_qids": ["Q5103726", "Q6940348", "Q14708404"],
+        "other_codes": [],
+        "see": [],
     },
     "eu": {
         "name": "European Union",
@@ -1747,6 +2020,7 @@ TERRITORIES: Dict[str, Any] = {
             "sk",
         ],
         "summary": "The European Union is a supranational political and economic union of 27 member states that are located primarily in Europe. The member states have a joint policy regarding international sanctions and embargoes.",
+        "other_codes": [],
     },
     "ki": {
         "name": "Kiribati",
@@ -1759,6 +2033,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Kiribati, officially the Republic of Kiribati, is an island country in the Micronesia subregion of Oceania in the central Pacific Ocean. Its permanent population is over 119,000 as of the 2020 census, with more than half living on Tarawa atoll.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Kiribati",
+        "other_codes": [],
+        "see": [],
     },
     "hr": {
         "name": "Croatia",
@@ -1773,6 +2049,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["hr"],
         "summary": "Croatia, officially the Republic of Croatia), is a country located at the crossroads of Central and Southeast Europe. Its coast lies entirely on the Adriatic Sea.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Croatia",
+        "other_codes": [],
     },
     "jm": {
         "name": "Jamaica",
@@ -1785,6 +2062,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Jamaica is an island country situated in the Caribbean Sea. Spanning 10,990 square kilometres in area, it is the third largest island — after Cuba and Hispaniola — of the Greater Antilles and the Caribbean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Jamaica",
+        "other_codes": [],
+        "see": [],
     },
     "kh": {
         "name": "Cambodia",
@@ -1797,6 +2076,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Cambodia, officially the Kingdom of Cambodia, is a country in Mainland Southeast Asia, bordered by Thailand to the northwest, Laos to the north, Vietnam to the east, and the Gulf of Thailand to the southwest. The capital and most populous city is Phnom Penh.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Cambodia",
+        "other_codes": [],
+        "see": [],
     },
     "ca-mb": {
         "name": "Manitoba",
@@ -1806,6 +2087,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "fo": {
         "name": "Faroe Islands",
@@ -1819,6 +2102,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "dk",
         "summary": "The Faroe or Faeroe Islands, or simply the Faroes (Faroese: Føroyar; Danish: Færøerne), is a North Atlantic island group and an autonomous territory of the Kingdom of Denmark.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Faroe_Islands",
+        "other_codes": [],
+        "see": [],
     },
     "et": {
         "name": "Ethiopia",
@@ -1831,6 +2116,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Ethiopia, officially the Federal Democratic Republic of Ethiopia, is a landlocked country located in the Horn of Africa region of East Africa. It shares borders with Eritrea to the north, Djibouti to the northeast, Somalia to the east and southeast, Kenya to the south, South Sudan to the west, and Sudan to the northwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Ethiopia",
+        "other_codes": [],
+        "see": [],
     },
     "sh-ta": {
         "name": "Tristan da Cunha",
@@ -1842,6 +2129,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "sh",
+        "other_codes": [],
+        "see": [],
     },
     "ec": {
         "name": "Ecuador",
@@ -1854,6 +2143,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Ecuador, officially the Republic of Ecuador, is a country in northwestern South America, bordered by Colombia on the north, Peru on the east and south, and the Pacific Ocean on the west. Ecuador also includes the Galápagos Islands in the Pacific, about 1,000 kilometers west of the mainland.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Ecuador",
+        "other_codes": [],
+        "see": [],
     },
     "sn": {
         "name": "Senegal",
@@ -1866,6 +2157,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Senegal, officially the Republic of Senegal, is a country in West Africa, on the Atlantic Ocean coastline. Senegal is bordered by Mauritania to the north, Mali to the east, Guinea to the southeast and Guinea-Bissau to the southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Senegal",
+        "other_codes": [],
+        "see": [],
     },
     "sy": {
         "name": "Syria",
@@ -1879,6 +2172,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Syria, officially the Syrian Arab Republic, is a West Asian country located in the Eastern Mediterranean and the Levant. It is bounded by the Mediterranean Sea to the west, Turkey to the north, Iraq to the east and southeast, Jordan to the south, and Israel and Lebanon to the southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Syria",
+        "other_codes": [],
+        "see": [],
     },
     "us-ny": {
         "name": "New York",
@@ -1889,6 +2184,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "us-oh": {
         "name": "Ohio",
@@ -1898,6 +2195,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "sl": {
         "name": "Sierra Leone",
@@ -1910,6 +2209,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Sierra Leone, officially the Republic of Sierra Leone, is a country on the southwest coast of West Africa. It shares its southeastern border with Liberia, and the northern half of the nation is surrounded by Guinea.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Sierra_Leone",
+        "other_codes": [],
+        "see": [],
     },
     "pw": {
         "name": "Palau",
@@ -1922,6 +2223,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Palau is an island country in the Micronesia subregion of Oceania in the western Pacific. The republic consists of approximately 340 islands and connects the western chain of the Caroline Islands with parts of the Federated States of Micronesia.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Palau",
+        "other_codes": [],
+        "see": [],
     },
     "de": {
         "name": "Germany",
@@ -1936,6 +2239,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Germany, officially the Federal Republic of Germany, is a country in the western region of Central Europe. It is the second-most populous country in Europe after Russia, and the most populous member state of the European Union.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Germany",
+        "other_codes": [],
     },
     "fm": {
         "name": "Micronesia",
@@ -1948,6 +2252,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Micronesia is a subregion of Oceania, consisting of about 2,000 small islands in the Northwestern Pacific Ocean. It has a close shared cultural history with three other island regions: Maritime Southeast Asia to the west, Polynesia to the east, and Melanesia to the south—as well as with the wider community of Austronesian peoples.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Micronesia",
+        "other_codes": [],
+        "see": [],
     },
     "gi": {
         "name": "Gibraltar",
@@ -1961,6 +2267,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["gb"],
         "summary": "Gibraltar is a British Overseas Territory and city located at the southern tip of the Iberian Peninsula. It has an area of 6.7 square kilometres (2.6 sq mi) and is bordered to the north by Spain (Campo de Gibraltar). Gibraltar's status as a British territory is disputed by Spain, while the United Nations regards it as a Non-Self-Governing Territory.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Gibraltar",
+        "other_codes": [],
     },
     "us-wy": {
         "name": "Wyoming",
@@ -1970,6 +2277,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "ca-nl": {
         "name": "Newfoundland and Labrador",
@@ -1979,6 +2288,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "it": {
         "name": "Italy",
@@ -1993,6 +2304,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Italy, officially the Italian Republic or the Republic of Italy, is a country in Southern and Western Europe. Located in the middle of the Mediterranean Sea, it consists of a peninsula delimited by the Alps and surrounded by several islands.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Italy",
+        "other_codes": [],
     },
     "jo": {
         "name": "Jordan",
@@ -2005,6 +2317,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Jordan, officially the Hashemite Kingdom of Jordan, is a country in West Asia. It is situated at the crossroads of Asia, Africa, and Europe, within the Levant region, on the East Bank of the Jordan River.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Jordan",
+        "other_codes": [],
+        "see": [],
     },
     "ic": {
         "name": "Canary Islands",
@@ -2015,6 +2329,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "es",
         "qid": "Q5813",
         "other_qids": ["Q99976", "Q95080", "Q11974", "Q14328"],
+        "other_codes": [],
+        "see": [],
     },
     "gh": {
         "name": "Ghana",
@@ -2027,6 +2343,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Ghana, officially the Republic of Ghana, is a country in West Africa. It abuts the Gulf of Guinea and the Atlantic Ocean to the south, sharing borders with Ivory Coast in the west, Burkina Faso in the north, and Togo in the east.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Ghana",
+        "other_codes": [],
+        "see": [],
     },
     "dd": {
         "name": "East Germany",
@@ -2039,6 +2357,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["de"],
         "summary": "East Germany, officially the German Democratic Republic, was a country in Central Europe that existed from its creation on 7 October 1949 until its dissolution on 3 October 1990.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/East_Germany",
+        "other_codes": [],
     },
     "ca-ab": {
         "name": "Alberta",
@@ -2048,6 +2367,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "us-nm": {
         "name": "New Mexico",
@@ -2057,6 +2378,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "sm": {
         "name": "San Marino",
@@ -2069,6 +2392,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "San Marino, officially the Republic of San Marino and also known as the Most Serene Republic of San Marino, is a European microstate and country enclaved by Italy. Located on the northeastern side of the Apennine Mountains, San Marino is the fifth-smallest country in the world.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/San_Marino",
+        "other_codes": [],
+        "see": [],
     },
     "sh-ac": {
         "name": "Ascension Island",
@@ -2078,6 +2403,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "qid": "Q46197",
+        "other_codes": [],
+        "see": [],
     },
     "us-ma": {
         "name": "Massachusetts",
@@ -2087,6 +2414,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "sz": {
         "name": "Eswatini",
@@ -2099,6 +2428,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Eswatini, formally the Kingdom of Eswatini and also known by its former official name Swaziland, is a landlocked country in Southern Africa. It is bordered by Mozambique to its northeast and South Africa to its north, west, south, and southeast.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Eswatini",
+        "other_codes": [],
+        "see": [],
     },
     "pa": {
         "name": "Panama",
@@ -2111,6 +2442,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Panama, officially the Republic of Panama, is a transcontinental country in Central America, spanning the southern tip of North America into the northern part of South America. It is bordered by Costa Rica to the west, Colombia to the southeast, the Caribbean Sea to the north, and the Pacific Ocean to the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Panama",
+        "other_codes": [],
+        "see": [],
     },
     "ae-uq": {
         "name": "Umm Al Quwain",
@@ -2121,6 +2454,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ae",
+        "other_codes": [],
+        "see": [],
     },
     "ua-cri": {
         "name": "Crimea (Occupied Ukraine)",
@@ -2133,6 +2468,7 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "ua",
         "see": ["ua", "ru"],
         "summary": "Crimea is a part of Ukraine. It is a peninsula on the northern coast of the Black Sea, almost entirely surrounded by the Black Sea and the smaller Sea of Azov. In 2014, the peninsula was illegally occupied and annexed by Russia.",
+        "other_codes": [],
     },
     "pl": {
         "name": "Poland",
@@ -2147,10 +2483,11 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Poland, officially the Republic of Poland, is a country in Central Europe. It is divided into 16 administrative provinces called voivodeships, covering an area of 313,931 square kilometres.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Poland",
+        "other_codes": [],
     },
     "rs": {
         "name": "Serbia",
-        "full_name": "Serbia",
+        "full_name": "Republic of Serbia",
         "region": "Europe",
         "subregion": "Southern Europe",
         "qid": "Q403",
@@ -2159,6 +2496,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Serbia, officially the Republic of Serbia, is a landlocked country in Southeast and Central Europe, situated at the crossroads of the Pannonian Basin and the Balkans. It shares land borders with Hungary to the north, Romania to the northeast, Bulgaria to the southeast, North Macedonia to the south, Croatia and Bosnia and Herzegovina to the west, and Montenegro to the southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Serbia",
+        "other_codes": [],
+        "see": [],
     },
     "gr": {
         "name": "Greece",
@@ -2166,13 +2505,14 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Europe",
         "subregion": "Southern Europe",
         "qid": "Q41",
-        "other_qids": ["Q209065"],
+        "other_qids": ["Q209065", "Q56692361"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
         "see": ["eu"],
         "summary": "Greece, officially the Hellenic Republic, is a country in Southeast Europe, situated on the southern tip of the Balkan peninsula. Greece shares land borders with Albania to the northwest, North Macedonia and Bulgaria to the north, and Turkey to the east.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Greece",
+        "other_codes": [],
     },
     "ge": {
         "name": "Georgia",
@@ -2186,6 +2526,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Georgia (Georgian: საქართველო) is a country located in Eastern Europe and West Asia. It is part of the Caucasus region, bounded by the Black Sea to the west, Russia to the north and northeast, Turkey to the southwest, Armenia to the south, and by Azerbaijan to the southeast.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Georgia_(country)",
+        "other_codes": [],
+        "see": [],
     },
     "ca-bc": {
         "name": "British Columbia",
@@ -2195,6 +2537,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "us-tn": {
         "name": "Tennessee",
@@ -2204,6 +2548,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "in": {
         "name": "India",
@@ -2217,6 +2563,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "India, officially the Republic of India, is a country in South Asia. It is the seventh-largest country by area; the most populous country as of June 2023; and from the time of its independence in 1947, the world's most populous democracy.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/India",
+        "other_codes": [],
+        "see": [],
     },
     "us-tx": {
         "name": "Texas",
@@ -2226,6 +2574,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "kg": {
         "name": "Kyrgyzstan",
@@ -2238,6 +2588,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Kyrgyzstan, officially the Kyrgyz Republic, is a landlocked country in Central Asia, lying in the Tian Shan and Pamir mountain ranges.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Kyrgyzstan",
+        "other_codes": [],
+        "see": [],
     },
     "io": {
         "name": "British Indian Ocean Territory",
@@ -2252,6 +2604,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "gb",
         "summary": "The British Indian Ocean Territory is an Overseas Territory of the United Kingdom situated in the Indian Ocean, halfway between Tanzania and Indonesia. The territory comprises the seven atolls of the Chagos Archipelago with over 1,000 individual islands – many very small – amounting to a total land area of 60 square kilometres.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/British_Indian_Ocean_Territory",
+        "other_codes": [],
+        "see": [],
     },
     "kp": {
         "name": "North Korea",
@@ -2266,6 +2620,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["kr"],
         "summary": "North Korea, officially the Democratic People's Republic of Korea, is a hereditary dictatorship under severe sanctions restrictions.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/North_Korea",
+        "other_codes": [],
     },
     "hk": {
         "name": "Hong Kong",
@@ -2274,12 +2629,14 @@ TERRITORIES: Dict[str, Any] = {
         "subregion": "Eastern Asia",
         "qid": "Q8646",
         "other_qids": ["Q1054923"],
-        "is_country": True,
+        "other_codes": ["cn-hk"],
+        "is_country": False,
         "is_ftm": True,
         "is_jurisdiction": True,
         "parent": "cn",
         "summary": "Hong Kong, officially the Hong Kong Special Administrative Region of the People's Republic of China, is a city and a special administrative region in China.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Hong_Kong_SAR_China",
+        "see": [],
     },
     "gd": {
         "name": "Grenada",
@@ -2287,11 +2644,13 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Americas",
         "subregion": "Caribbean",
         "qid": "Q769",
+        "other_codes": ["wg"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "Grenada is an island country in the West Indies in the Caribbean Sea at the southern end of the Grenadines island chain. Grenada consists of the island of Grenada itself, two smaller islands, Carriacou and Petite Martinique, and several small islands which lie to the north of the main island and are a part of the Grenadines.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Grenada",
+        "see": [],
     },
     "gs": {
         "name": "South Georgia and the South Sandwich Islands",
@@ -2302,6 +2661,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
+        "other_codes": [],
+        "see": [],
     },
     "re": {
         "name": "Réunion",
@@ -2313,6 +2674,7 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": True,
         "parent": "fr",
         "see": ["fr"],
+        "other_codes": [],
     },
     "sa": {
         "name": "Saudi Arabia",
@@ -2326,6 +2688,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Saudi Arabia, officially the Kingdom of Saudi Arabia, is a country in West Asia. It covers the bulk of the Arabian Peninsula and has a land area of about 2,150,000 square kilometres, making it the fifth-largest country in Asia, the second-largest in the Arab world, and the largest in West Asia and the Middle East.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Saudi_Arabia",
+        "other_codes": [],
+        "see": [],
     },
     "us-or": {
         "name": "Oregon",
@@ -2335,6 +2699,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "us-nv": {
         "name": "Nevada",
@@ -2344,6 +2710,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "sv": {
         "name": "El Salvador",
@@ -2356,6 +2724,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "El Salvador, officially the Republic of El Salvador, is a country in Central America region of North America. It is bordered on the northeast by Honduras, on the northwest by Guatemala, and on the south by the Pacific Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/El_Salvador",
+        "other_codes": [],
+        "see": [],
     },
     "pm": {
         "name": "Saint Pierre and Miquelon",
@@ -2369,6 +2739,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "fr",
         "summary": "Saint Pierre and Miquelon, officially the Territorial Collectivity of Saint-Pierre and Miquelon, is a self-governing territorial overseas collectivity of France in the northwestern Atlantic Ocean near the Canadian province of Newfoundland and Labrador.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Saint_Pierre_and_Miquelon",
+        "other_codes": [],
+        "see": [],
     },
     "my-15": {
         "name": "Labuan",
@@ -2378,6 +2750,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "my",
+        "other_codes": [],
+        "see": [],
     },
     "ae-az": {
         "name": "Abu Dhabi",
@@ -2388,6 +2762,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ae",
+        "other_codes": [],
+        "see": [],
     },
     "us-al": {
         "name": "Alabama",
@@ -2397,6 +2773,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "st": {
         "name": "Sao Tome and Principe",
@@ -2409,6 +2787,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "São Tomé and Príncipe, officially the Democratic Republic of São Tomé and Príncipe, is an island country in the Gulf of Guinea, off the western equatorial coast of Central Africa. It consists of two archipelagos around the two main islands of São Tomé and Príncipe, about 150 km (93.21 mi) apart and about 250 and 225 km (155 and 140 mi) off the northwestern coast of Gabon.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe",
+        "other_codes": [],
+        "see": [],
     },
     "us-mo": {
         "name": "Missouri",
@@ -2418,6 +2798,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "sc": {
         "name": "Seychelles",
@@ -2430,6 +2812,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Seychelles, officially the Republic of Seychelles, is an island country and archipelagic state consisting of 155 islands (as per the Constitution) in the Indian Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Seychelles",
+        "other_codes": [],
+        "see": [],
     },
     "us-nc": {
         "name": "North Carolina",
@@ -2439,6 +2823,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "gq": {
         "name": "Equatorial Guinea",
@@ -2451,6 +2837,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Equatorial Guinea, also rarely known as Equatoguinea, officially the Republic of Equatorial Guinea, is a country on the west coast of Central Africa, with an area of 28,000 square kilometres. Formerly the colony of Spanish Guinea, its post-independence name refers to its location near both the Equator and in the African region of Guinea.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Equatorial_Guinea",
+        "other_codes": [],
+        "see": [],
     },
     "dj": {
         "name": "Djibouti",
@@ -2463,6 +2851,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Djibouti, officially the Republic of Djibouti, is a country in the Horn of Africa, bordered by Somalia to the south, Ethiopia to the southwest, Eritrea in the north, and the Red Sea and the Gulf of Aden to the east. The country has an area of 23,200 square kilometres.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Djibouti",
+        "other_codes": [],
+        "see": [],
     },
     "gf": {
         "name": "French Guiana",
@@ -2475,6 +2865,8 @@ TERRITORIES: Dict[str, Any] = {
         "qid": "Q3769",
         "summary": "French Guiana is an overseas department of France located on the northern coast of South America in the Guianas. Bordered by Suriname to the west and Brazil to the east and south, French Guiana covers a land area of 83,534 square kilometres, and is inhabited by 301,099 people.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/French_Guiana",
+        "other_codes": [],
+        "see": [],
     },
     "im": {
         "name": "Isle of Man",
@@ -2488,6 +2880,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["gb"],
         "summary": "The Isle of Man, also known as Mann, is a self-governing British Crown Dependency in the Irish Sea between Great Britain and Ireland. As head of state, Charles III holds the title Lord of Mann and is represented by a Lieutenant Governor.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Isle_of_Man",
+        "other_codes": [],
     },
     "us-wv": {
         "name": "West Virginia",
@@ -2497,6 +2890,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "ca-nt": {
         "name": "Northwest Territories",
@@ -2506,6 +2901,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "kr": {
         "name": "South Korea",
@@ -2520,6 +2917,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["kp"],
         "summary": "South Korea, officially the Republic of Korea, is a country in East Asia. It constitutes the southern part of the Korean Peninsula and borders North Korea along the Korean Demilitarized Zone.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/South_Korea",
+        "other_codes": [],
     },
     "us-wa": {
         "name": "Washington",
@@ -2529,6 +2927,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "ke": {
         "name": "Kenya",
@@ -2541,6 +2941,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Kenya, officially the Republic of Kenya, is a country in East Africa. It is bordered by South Sudan to the northwest, Ethiopia to the north, Somalia to the east, Uganda to the west, Tanzania to the south, and the Indian Ocean to the southeast.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Kenya",
+        "other_codes": [],
+        "see": [],
     },
     "ca-nb": {
         "name": "New Brunswick",
@@ -2550,6 +2952,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "ca-nu": {
         "name": "Nunavut",
@@ -2559,6 +2963,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "il": {
         "name": "Israel",
@@ -2572,6 +2978,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["ps"],
         "summary": "Israel, officially the State of Israel, is a country in West Asia. It is bordered by Lebanon to the north, by Syria to the northeast, by Jordan to the east, by the Red Sea to the south, by Egypt to the southwest, by the Mediterranean Sea to the west, and by the Palestinian territories – the West Bank along the east and the Gaza Strip along the southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Israel",
+        "other_codes": [],
     },
     "gg": {
         "name": "Guernsey",
@@ -2582,9 +2989,10 @@ TERRITORIES: Dict[str, Any] = {
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
-        "see": ["gb", "gg-srk"],
+        "see": ["gb", "cq"],
         "summary": "Guernsey is the second largest island in the Channel Islands, located 27 miles west of the Cotentin Peninsula, Normandy. It forms the major part of the jurisdiction of the same name, which also comprises three other inhabited islands and many small islets and rocks.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Guernsey",
+        "other_codes": [],
     },
     "dk": {
         "name": "Denmark",
@@ -2599,6 +3007,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Denmark is a Nordic country in Northern Europe. It is the metropolitan part of and the most populous constituent of the Kingdom of Denmark, a constitutionally unitary state that includes the autonomous territories of the Faroe Islands and Greenland in the North Atlantic Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Denmark",
+        "other_codes": [],
     },
     "gp": {
         "name": "Guadeloupe",
@@ -2609,6 +3018,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_country": False,
         "is_ftm": True,
         "parent": "fr",
+        "other_codes": [],
+        "see": [],
     },
     "py": {
         "name": "Paraguay",
@@ -2622,6 +3033,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Paraguay, officially the Republic of Paraguay, is a landlocked country in South America. It is bordered by Argentina to the south and southwest, Brazil to the east and northeast, and Bolivia to the northwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Paraguay",
+        "other_codes": [],
+        "see": [],
     },
     "sb": {
         "name": "Solomon Islands",
@@ -2635,10 +3048,12 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Solomon Islands is a country consisting of six major islands and over 900 smaller islands in Melanesia, part of Oceania, to the northeast of Australia. It is directly adjacent to Papua New Guinea to the northwest, Australia to the southwest, New Caledonia and Vanuatu to the southeast, Fiji, Wallis and Futuna and Tuvalu to the east, Nauru and the Federated States of Micronesia to the north.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Solomon_Islands",
+        "other_codes": [],
+        "see": [],
     },
     "pn": {
         "name": "Pitcairn",
-        "full_name": "Pitcairn",
+        "full_name": "Pitcairn Islands",
         "region": "Oceania",
         "subregion": "Polynesia",
         "qid": "Q35672",
@@ -2647,6 +3062,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Pitcairn Islands, officially the Pitcairn, Henderson, Ducie and Oeno Islands, is a group of four volcanic islands in the southern Pacific Ocean that form the sole British Overseas Territory in the Pacific Ocean. The four islands—Pitcairn, Henderson, Ducie and Oeno—are scattered across several hundred miles of ocean and have a combined land area of about 18 square miles.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Pitcairn_Islands",
+        "other_codes": [],
+        "see": [],
     },
     "us-mn": {
         "name": "Minnesota",
@@ -2656,6 +3073,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "us-az": {
         "name": "Arizona",
@@ -2665,6 +3084,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "az-nk": {
         "name": "Artsakh",
@@ -2678,6 +3099,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["am", "az"],
         "summary": "Nagorno-Karabakh is a region located in the South Caucasus, covering the southeastern stretch of the Lesser Caucasus mountain range. Nagorno-Karabakh is a disputed territory, with both Armenia and Azerbaijan claiming it.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Nagorno-Karabakh",
+        "other_codes": [],
     },
     "us-ca": {
         "name": "California",
@@ -2687,6 +3109,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "ru": {
         "name": "Russia",
@@ -2709,6 +3133,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Russia, or the Russian Federation, is a country spanning Eastern Europe and Northern Asia. It is the largest country in the world by area, extends across eleven time zones, and shares land boundaries with fourteen countries.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Russia",
+        "other_codes": [],
+        "see": [],
     },
     "so-som": {
         "name": "Somaliland",
@@ -2723,6 +3149,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["so"],
         "summary": "Somaliland, officially the Republic of Somaliland, is an unrecognised sovereign state in the Horn of Africa, recognised internationally as de jure part of Somalia. It is located in the southern coast of the Gulf of Aden and bordered by Djibouti to the northwest, Ethiopia to the south and west, and Somalia to the east.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Somaliland",
+        "other_codes": [],
     },
     "md-pmr": {
         "name": "Transnistria",
@@ -2735,6 +3162,7 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "md",
         "see": ["md", "ru"],
         "summary": "Transnistria, officially the Pridnestrovian Moldavian Republic, is an unrecognised state internationally considered to be part of Moldova.",
+        "other_codes": [],
     },
     "gt": {
         "name": "Guatemala",
@@ -2747,6 +3175,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Guatemala, officially the Republic of Guatemala, is a country in Central America. It is bordered to the north and west by Mexico, to the northeast by Belize, to the east by Honduras, to the southeast by El Salvador.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Guatemala",
+        "other_codes": [],
+        "see": [],
     },
     "do": {
         "name": "Dominican Republic",
@@ -2760,6 +3190,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Dominican Republic is a country located on the island of Hispaniola in the Greater Antilles archipelago of the Caribbean region. It occupies the eastern five-eighths of the island, which it shares with Haiti, making Hispaniola one of only two Caribbean islands, along with Saint Martin, that is shared by two sovereign states.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Dominican_Republic",
+        "other_codes": [],
+        "see": [],
     },
     "kw": {
         "name": "Kuwait",
@@ -2772,6 +3204,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Kuwait, officially the State of Kuwait, is a country in the Middle East. It is situated in the northern edge of Eastern Arabia at the tip of the Persian Gulf, bordering Iraq to the north and Saudi Arabia to the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Kuwait",
+        "other_codes": [],
+        "see": [],
     },
     "hm": {
         "name": "Heard Island and McDonald Islands",
@@ -2783,6 +3217,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": True,
         "is_jurisdiction": True,
         "parent": "au",
+        "other_codes": [],
+        "see": [],
     },
     "us-va": {
         "name": "Virginia",
@@ -2792,6 +3228,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "je": {
         "name": "Jersey",
@@ -2805,6 +3243,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["gb"],
         "summary": "Jersey, also known as the Bailiwick of Jersey, is an island country and self-governing British Crown Dependency near the coast of north-west France. It is the largest of the Channel Islands.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Jersey",
+        "other_codes": [],
     },
     "gu": {
         "name": "Guam",
@@ -2812,12 +3251,14 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Oceania",
         "subregion": "Micronesia",
         "qid": "Q16635",
+        "other_codes": ["us-gu"],
         "is_country": False,
         "is_ftm": True,
         "is_jurisdiction": True,
         "parent": "us",
         "summary": "Guam is an organized, unincorporated territory of the United States in the Micronesia subregion of the western Pacific Ocean. Guam's capital is Hagåtña, and the most populous village is Dededo.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Guam",
+        "see": [],
     },
     "gb": {
         "name": "United Kingdom",
@@ -2833,6 +3274,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["gb-nir", "gb-sct", "gb-wls"],
         "summary": "The United Kingdom of Great Britain and Northern Ireland, commonly known as the United Kingdom or Britain, is an island country in Northwestern Europe, off the north-western coast of the continental mainland. It comprises England, Scotland, Wales, and Northern Ireland.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/United_Kingdom",
+        "other_codes": [],
     },
     "gb-sct": {
         "name": "Scotland",
@@ -2847,6 +3289,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["gb"],
         "summary": "Scotland is a country that is part of the United Kingdom. Covering the northern third of the island of Great Britain, Scotland is the second-largest country in the United Kingdom, and accounted for 8% of the population in 2019.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Scotland",
+        "other_codes": [],
     },
     "pk": {
         "name": "Pakistan",
@@ -2860,6 +3303,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Pakistan (Urdu: پَاکِسْتَان), officially the Islamic Republic of Pakistan, is a country in South Asia. It is bordered by India to the east, Afghanistan to the west, Iran to the southwest, and China to the northeast. It is separated from Tajikistan by Afghanistan's narrow Wakhan Corridor in the north, and also shares a maritime border with Oman.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Pakistan",
+        "other_codes": [],
+        "see": [],
     },
     "sg": {
         "name": "Singapore",
@@ -2872,6 +3317,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Singapore, officially the Republic of Singapore, is an island country and city-state in maritime Southeast Asia. It is located about one degree of latitude north of the equator, off the southern tip of the Malay Peninsula, bordering the Strait of Malacca to the west, the Singapore Strait to the south, the South China Sea to the east, and the Straits of Johor to the north.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Singapore",
+        "other_codes": [],
+        "see": [],
     },
     "se": {
         "name": "Sweden",
@@ -2885,6 +3332,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Sweden, formally the Kingdom of Sweden, is a Nordic country located on the Scandinavian Peninsula in Northern Europe. It borders Norway to the west and north, Finland to the east, and is connected to Denmark in the southwest by a bridge–tunnel across the Öresund.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Sweden",
+        "other_codes": [],
     },
     "us-ne": {
         "name": "Nebraska",
@@ -2894,6 +3342,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "sr": {
         "name": "Suriname",
@@ -2906,6 +3356,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Suriname, officially the Republic of Suriname, is a country in northern South America. It is bordered by the Atlantic Ocean to the north, French Guiana to the east, Guyana to the west, and Brazil to the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Suriname",
+        "other_codes": [],
+        "see": [],
     },
     "us-mi": {
         "name": "Michigan",
@@ -2915,6 +3367,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "gw": {
         "name": "Guinea-Bissau",
@@ -2927,10 +3381,12 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Guinea-Bissau, officially the Republic of Guinea-Bissau, is a country in West Africa that covers 36,125 square kilometres with an estimated population of 2,026,778. It borders Senegal to its north and Guinea to its southeast.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Guinea-Bissau",
+        "other_codes": [],
+        "see": [],
     },
     "eh": {
         "name": "Western Sahara",
-        "full_name": "Western Sahara* (*Provisional name)",
+        "full_name": "Sahrawi Arab Democratic Republic",
         "region": "Africa",
         "subregion": "Northern Africa",
         "qid": "Q40362",
@@ -2940,6 +3396,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Western Sahara is a disputed territory on the northwest coast and in the Maghreb region of North and West Africa. The Western Sahara, given its name in 1975 by the UN, is the last African colonial state yet to achieve its independence. About 20% of the territory is controlled by the self-proclaimed Sahrawi Arab Democratic Republic; the remaining 80% of the territory is occupied and administered by neighboring Morocco.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Western_Sahara",
+        "other_codes": [],
+        "see": [],
     },
     "us-vt": {
         "name": "Vermont",
@@ -2949,6 +3407,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "jp": {
         "name": "Japan",
@@ -2962,6 +3422,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Japan is an island country in East Asia. It is situated in the northwest Pacific Ocean and is bordered on the west by the Sea of Japan, extending from the Sea of Okhotsk in the north toward the East China Sea, Philippine Sea, and Taiwan in the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Japan",
+        "other_codes": [],
+        "see": [],
     },
     "ca-ns": {
         "name": "Nova Scotia",
@@ -2971,6 +3433,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "hn": {
         "name": "Honduras",
@@ -2983,6 +3447,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Honduras, officially the Republic of Honduras, is a country in Central America. The republic of Honduras is bordered to the west by Guatemala, to the southwest by El Salvador, to the southeast by Nicaragua, to the south by the Pacific Ocean at the Gulf of Fonseca, and to the north by the Gulf of Honduras, a large inlet of the Caribbean Sea.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Honduras",
+        "other_codes": [],
+        "see": [],
     },
     "fr": {
         "name": "France",
@@ -2997,6 +3463,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "France, officially the French Republic, is a country located in Western Europe. It also includes overseas regions and territories in the Americas and the Atlantic, Pacific and Indian oceans, giving it one of the largest discontiguous exclusive economic zones in the world.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/France",
+        "other_codes": [],
     },
     "dm": {
         "name": "Dominica",
@@ -3009,6 +3476,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Dominica, officially the Commonwealth of Dominica, is an island country in the Caribbean. The capital, Roseau, is located on the western side of the island.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Dominica",
+        "other_codes": [],
+        "see": [],
     },
     "ga": {
         "name": "Gabon",
@@ -3021,6 +3490,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Gabon, officially the Gabonese Republic, is a country on the Atlantic coast of West Central Africa. Located on the equator, it is bordered by Equatorial Guinea to the northwest, Cameroon to the north, the Republic of the Congo on the east and south, and the Gulf of Guinea to the west.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Gabon",
+        "other_codes": [],
+        "see": [],
     },
     "dz": {
         "name": "Algeria",
@@ -3033,6 +3504,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Algeria, officially the People's Democratic Republic of Algeria, is a country in North Africa. Algeria is bordered to the northeast by Tunisia; to the east by Libya; to the southeast by Niger; to the southwest by Mali, Mauritania, and Western Sahara; to the west by Morocco; and to the north by the Mediterranean Sea.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Algeria",
+        "other_codes": [],
+        "see": [],
     },
     "rw": {
         "name": "Rwanda",
@@ -3045,6 +3518,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Rwanda, officially the Republic of Rwanda, is a landlocked country in the Great Rift Valley of Central Africa, where the African Great Lakes region and Southeast Africa converge. Located a few degrees south of the Equator, Rwanda is bordered by Uganda, Tanzania, Burundi, and the Democratic Republic of the Congo.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Rwanda",
+        "other_codes": [],
+        "see": [],
     },
     "ss": {
         "name": "South Sudan",
@@ -3056,6 +3531,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "South Sudan gained independence from Sudan on 9 July 2011, and after a brief period of democratic stability has been engulfed in civil war.",
+        "other_codes": [],
+        "see": [],
     },
     "ph": {
         "name": "Philippines",
@@ -3068,6 +3545,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Philippines, officially the Republic of the Philippines, is an archipelagic country in Southeast Asia. In the western Pacific Ocean, it consists of 7,641 islands which are broadly categorized in three main geographical divisions from north to south: Luzon, Visayas, and Mindanao.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Philippines",
+        "other_codes": [],
+        "see": [],
     },
     "sd": {
         "name": "Sudan",
@@ -3080,6 +3559,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Sudan, officially the Republic of the Sudan, is a country in Northeast Africa. It borders the Central African Republic to the southwest, Chad to the west, Egypt to the north, Eritrea to the northeast, Ethiopia to the southeast, Libya to the northwest, South Sudan to the south, and the Red Sea.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Sudan",
+        "other_codes": [],
+        "see": [],
     },
     "us-nd": {
         "name": "North Dakota",
@@ -3089,6 +3570,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "us-ct": {
         "name": "Connecticut",
@@ -3098,6 +3581,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "us-ak": {
         "name": "Alaska",
@@ -3107,6 +3592,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "ae-aj": {
         "name": "‘Ajmān",
@@ -3116,6 +3603,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "parent": "ae",
         "qid": "Q159477",
+        "other_codes": [],
+        "see": [],
     },
     "ae-sh": {
         "name": "Sharjah",
@@ -3125,6 +3614,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ae",
+        "other_codes": [],
+        "see": [],
     },
     "ca-pe": {
         "name": "Prince Edward Island",
@@ -3135,6 +3626,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "tg": {
         "name": "Togo",
@@ -3147,6 +3640,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Togo, officially the Togolese Republic, is a country in West Africa. It is bordered by Ghana to the west, Benin to the east and Burkina Faso to the north.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Togo",
+        "other_codes": [],
+        "see": [],
     },
     "aq": {
         "name": "Antarctica",
@@ -3155,6 +3650,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_country": False,
         "is_ftm": True,
         "is_jurisdiction": True,
+        "other_codes": [],
+        "see": [],
     },
     "bj": {
         "name": "Benin",
@@ -3162,11 +3659,13 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Africa",
         "subregion": "Western Africa",
         "qid": "Q962",
+        "other_codes": ["dy"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "Benin, officially the Republic of Benin, and formerly Dahomey, is a country in West Africa. It is bordered by Togo to the west, Nigeria to the east, Burkina Faso to the north-west, and Niger to the north-east.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Benin",
+        "see": [],
     },
     "cn": {
         "name": "China",
@@ -3180,6 +3679,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "China, officially the People's Republic of China, is a country in East Asia. It is the world's second-most populous country with a population exceeding 1.4 billion.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/China",
+        "other_codes": [],
+        "see": [],
     },
     "af": {
         "name": "Afghanistan",
@@ -3193,6 +3694,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Afghanistan, officially the Islamic Emirate of Afghanistan, is a landlocked country located at the crossroads of Central Asia and South Asia.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Afghanistan",
+        "other_codes": [],
+        "see": [],
     },
     "cy": {
         "name": "Cyprus",
@@ -3207,6 +3710,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Cyprus, officially the Republic of Cyprus, is an island country situated in the Mediterranean Sea. It lies between the continental mainlands of Europe and Asia, but is culturally and geopolitically Southeast European.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Cyprus",
+        "other_codes": [],
     },
     "ni": {
         "name": "Nicaragua",
@@ -3219,6 +3723,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Nicaragua, officially the Republic of Nicaragua, is the largest country in Central America, bordered by Honduras to the north, the Caribbean to the east, Costa Rica to the south, and the Pacific Ocean to the west. Managua is the country's capital and largest city.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Nicaragua",
+        "other_codes": [],
+        "see": [],
     },
     "mr": {
         "name": "Mauritania",
@@ -3232,6 +3738,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Mauritania, officially the Islamic Republic of Mauritania, is a sovereign country in Northwest Africa. It is bordered by the Atlantic Ocean to the west, Western Sahara to the north and northwest, Algeria to the northeast, Mali to the east and southeast, and Senegal to the southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Mauritania",
+        "other_codes": [],
+        "see": [],
     },
     "om": {
         "name": "Oman",
@@ -3245,6 +3753,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Oman (Arabic: عُمَان), officially the Sultanate of Oman, is a country located in West Asia. It is situated on the southeastern coast of the Arabian Peninsula, and spans the mouth of the Persian Gulf. It shares land borders with Saudi Arabia, United Arab Emirates, and Yemen, while sharing maritime borders with Iran and Pakistan.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Oman",
+        "other_codes": [],
+        "see": [],
     },
     "lv": {
         "name": "Latvia",
@@ -3259,6 +3769,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Latvia, officially the Republic of Latvia, is a country in the Baltic region of Northern Europe. It is one of the three Baltic states, along with Estonia to the north and Lithuania to the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Latvia",
+        "other_codes": [],
     },
     "me": {
         "name": "Montenegro",
@@ -3271,6 +3782,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Montenegro is a country in Southeast Europe. It is bordered by Bosnia and Herzegovina to the north, Serbia to the northeast, Kosovo to the east, Albania to the southeast, and Croatia and the Adriatic Sea to the northwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Montenegro",
+        "other_codes": [],
+        "see": [],
     },
     "la": {
         "name": "Laos",
@@ -3283,6 +3796,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Laos, officially the Lao People's Democratic Republic, is a landlocked country in Southeast Asia. At the heart of the Indochinese Peninsula, Laos is bordered by Myanmar and China to the northwest, Vietnam to the east, Cambodia to the southeast, and Thailand to the west and southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Laos",
+        "other_codes": [],
+        "see": [],
     },
     "md": {
         "name": "Moldova",
@@ -3296,6 +3811,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["md-pmr"],
         "summary": "Moldova, officially the Republic of Moldova, is a landlocked country in Eastern Europe, on the northeastern corner of the Balkans. The country is bordered by Romania to the west and Ukraine to the north, east, and south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Moldova",
+        "other_codes": [],
     },
     "ms": {
         "name": "Montserrat",
@@ -3309,6 +3825,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["gb"],
         "summary": "Montserrat is a British Overseas Territory in the Caribbean. It is part of the Leeward Islands, the northern portion of the Lesser Antilles chain of the West Indies.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Montserrat",
+        "other_codes": [],
     },
     "cx": {
         "name": "Christmas Island",
@@ -3322,6 +3839,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "au",
         "summary": "The Territory of Christmas Island is an Australian external territory comprising the island of the same name. It is located in the Indian Ocean around 350 kilometres (190 nautical miles) south of Java and Sumatra and about 1,550 km (840 nmi) northwest of the closest point on the Australian mainland.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Christmas_Island",
+        "other_codes": [],
+        "see": [],
     },
     "ag": {
         "name": "Antigua and Barbuda",
@@ -3334,6 +3853,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Antigua and Barbuda is a sovereign island country in the West Indies. It lies at the conjuncture of the Caribbean Sea and the Atlantic Ocean in the Leeward Islands part of the Lesser Antilles.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Antigua_&_Barbuda",
+        "other_codes": [],
+        "see": [],
     },
     "co": {
         "name": "Colombia",
@@ -3346,6 +3867,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Colombia, officially the Republic of Colombia, is a country mostly in South America with insular regions in North America. The Colombian mainland is bordered by the Caribbean Sea to the north, Venezuela to the east and northeast, Brazil to the southeast, Ecuador and Peru to the south and southwest, the Pacific Ocean to the west, and Panama to the northwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Colombia",
+        "other_codes": [],
+        "see": [],
     },
     "tf": {
         "name": "French Southern Territories",
@@ -3360,6 +3883,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["fr"],
         "summary": "The French Southern and Antarctic Lands (French: Terres australes et antarctiques françaises, TAAF) consists of Adélie Land (Terre Adélie); Crozet Islands (Îles Crozet); Kerguelen Islands (Archipel des Kerguelen); Saint Paul and Amsterdam Islands (Îles Saint Paul et Amsterdam); and Scattered Islands (Îles Éparses)",
         "wikipedia_url": "https://en.wikipedia.org/wiki/French_Southern_and_Antarctic_Lands",
+        "other_codes": [],
     },
     "us-ky": {
         "name": "Kentucky",
@@ -3369,6 +3893,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "vn": {
         "name": "Viet Nam",
@@ -3382,6 +3908,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Vietnam, officially the Socialist Republic of Vietnam, is a country at the eastern edge of mainland Southeast Asia, with an area of 331,212 square kilometres (127,882 sq mi) and a population of over 100 million, making it the world's fifteenth-most populous country. Vietnam shares land borders with China to the north, and Laos and Cambodia to the west.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Vietnam",
+        "other_codes": [],
+        "see": [],
     },
     "zz": {
         "name": "Global",
@@ -3391,6 +3919,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_country": False,
         "is_ftm": True,
         "summary": "The global region is used in OpenSanctions to denote datasets and entities which can not be scoped to any more specific single national or supranational region.",
+        "other_codes": [],
+        "see": [],
     },
     "zm": {
         "name": "Zambia",
@@ -3403,6 +3933,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Zambia, officially the Republic of Zambia, is a landlocked country at the crossroads of Central, Southern and East Africa. It is typically referred to being in South-Central Africa or Southern Africa.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Zambia",
+        "other_codes": [],
+        "see": [],
     },
     "pt-30": {
         "name": "Madeira",
@@ -3412,6 +3944,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "pt",
+        "other_codes": [],
+        "see": [],
     },
     "csxx": {
         "name": "Serbia and Montenegro",
@@ -3421,10 +3955,12 @@ TERRITORIES: Dict[str, Any] = {
         "qid": "Q37024",
         "is_country": True,
         "is_ftm": True,
+        "is_historical": True,
         "see": ["yucs", "rs", "me"],
         "successors": ["rs", "me"],
         "summary": "Serbia and Montenegro, known until 2003 as the Federal Republic of Yugoslavia, FR Yugoslavia or simply Yugoslavia, was a country in Southeast Europe located in the Balkans that existed from 1992 to 2006, following the breakup of the Socialist Federal Republic of Yugoslavia. The country bordered Hungary to the north, Romania to the northeast, Bulgaria to the southeast, North Macedonia to the south, Croatia and Bosnia and Herzegovina to the west, and Albania to the southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Serbia_and_Montenegro",
+        "other_codes": [],
     },
     "ae-du": {
         "name": "Dubai",
@@ -3435,6 +3971,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ae",
+        "other_codes": [],
+        "see": [],
     },
     "yt": {
         "name": "Mayotte",
@@ -3445,6 +3983,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_country": False,
         "is_ftm": True,
         "parent": "fr",
+        "other_codes": [],
+        "see": [],
     },
     "us-dc": {
         "name": "District of Columbia",
@@ -3455,6 +3995,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "td": {
         "name": "Chad",
@@ -3468,6 +4010,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Chad, officially the Republic of Chad, is a landlocked country at the crossroads of North and Central Africa. It is bordered by Libya to the north, Sudan to the east, the Central African Republic to the south, Cameroon to the southwest, Nigeria to the southwest, and Niger to the west.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Chad",
+        "other_codes": [],
+        "see": [],
     },
     "us-id": {
         "name": "Idaho",
@@ -3477,6 +4021,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "cm": {
         "name": "Cameroon",
@@ -3490,6 +4036,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Cameroon, officially the Republic of Cameroon, is a country in Central Africa. It shares boundaries with Nigeria to the west and north, Chad to the northeast, the Central African Republic to the east, and Equatorial Guinea, Gabon and the Republic of the Congo to the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Cameroon",
+        "other_codes": [],
+        "see": [],
     },
     "ar": {
         "name": "Argentina",
@@ -3502,6 +4050,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Argentina, officially the Argentine Republic, is a country in the southern half of South America. Argentina covers an area of 2,780,400 square kilometres, making it the second-largest country in South America after Brazil, the fourth-largest country in the Americas, and the eighth-largest country in the world.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Argentina",
+        "other_codes": [],
+        "see": [],
     },
     "bi": {
         "name": "Burundi",
@@ -3514,6 +4064,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Burundi, officially the Republic of Burundi, is a landlocked country in the Great Rift Valley at the junction between the African Great Lakes region and East Africa. It is bordered by Rwanda to the north, Tanzania to the east and southeast, and the Democratic Republic of the Congo to the west; Lake Tanganyika lies along its southwestern border.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Burundi",
+        "other_codes": [],
+        "see": [],
     },
     "cz": {
         "name": "Czechia",
@@ -3527,6 +4079,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "The Czech Republic, or Czechia, is a landlocked country in Central Europe. Historically known as Bohemia, it is bordered by Austria to the south, Germany to the west, Poland to the northeast, and Slovakia to the southeast.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Czech_Republic",
+        "other_codes": [],
     },
     "ae": {
         "name": "United Arab Emirates",
@@ -3541,6 +4094,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "ae",
         "summary": "The United Arab Emirates, or simply the Emirates, is a country in West Asia, in the Middle East. It is located at the eastern end of the Arabian Peninsula and shares borders with Oman and Saudi Arabia, while also having maritime borders in the Persian Gulf with Qatar and Iran.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/United_Arab_Emirates",
+        "other_codes": [],
+        "see": [],
     },
     "lu": {
         "name": "Luxembourg",
@@ -3554,6 +4109,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Luxembourg (Luxembourgish: Lëtzebuerg), officially the Grand Duchy of Luxembourg, is a small landlocked country in Western Europe. It borders Belgium to the west and north, Germany to the east, and France to the south.'",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Luxembourg",
+        "other_codes": [],
     },
     "mq": {
         "name": "Martinique",
@@ -3564,6 +4120,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_country": False,
         "is_ftm": True,
         "parent": "fr",
+        "other_codes": [],
+        "see": [],
     },
     "lb": {
         "name": "Lebanon",
@@ -3576,6 +4134,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Lebanon (Arabic: لُبْنَان French: Liban), officially the Republic of Lebanon, is a country in West Asia. It is bordered by Syria to the north and east, by Israel to the south, and by the Mediterranean Sea to the west.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Lebanon",
+        "other_codes": [],
+        "see": [],
     },
     "mf": {
         "name": "Saint Martin (French Part)",
@@ -3588,6 +4148,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "fr",
         "summary": "The Collectivity of Saint Martin (French: Collectivité de Saint-Martin), commonly known as simply Saint Martin, is an overseas collectivity of France in the West Indies in the Caribbean, on the northern half of the island of Saint Martin, as well as some smaller adjacent islands. Saint Martin is separated from the island of Anguilla by the Anguilla Channel.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Collectivity_of_Saint_Martin",
+        "other_codes": [],
+        "see": [],
     },
     "mg": {
         "name": "Madagascar",
@@ -3600,6 +4162,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Madagascar, officially the Republic of Madagascar, is an island country lying off the southeastern coast of Africa. It is the world's fourth largest island, the second-largest island country and the 46th largest country in the world.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Madagascar",
+        "other_codes": [],
+        "see": [],
     },
     "lc": {
         "name": "Saint Lucia",
@@ -3612,6 +4176,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Saint Lucia is a constitutional monarchy and an island country of the West Indies in the eastern Caribbean. The island was previously called Iouanalao and later Hewanorra, names given by the native Arawaks and Caribs, two Amerindian peoples.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/St._Lucia",
+        "other_codes": [],
+        "see": [],
     },
     "mp": {
         "name": "Northern Mariana Islands",
@@ -3619,12 +4185,14 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Oceania",
         "subregion": "Micronesia",
         "qid": "Q16644",
+        "other_codes": ["us-mp"],
         "is_country": False,
         "is_ftm": True,
         "is_jurisdiction": True,
         "parent": "us",
         "summary": "The Northern Mariana Islands, officially the Commonwealth of the Northern Mariana Islands, is an unincorporated territory and commonwealth of the United States consisting of 14 islands in the northwestern Pacific Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Northern_Mariana_Islands",
+        "see": [],
     },
     "lt": {
         "name": "Lithuania",
@@ -3638,6 +4206,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Lithuania, officially the Republic of Lithuania, is a country in the Baltic region of Europe. It is one of three Baltic states and lies on the eastern shore of the Baltic Sea.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Lithuania",
+        "other_codes": [],
     },
     "ad": {
         "name": "Andorra",
@@ -3651,6 +4220,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["fr", "es"],
         "summary": "Andorra, officially the Principality of Andorra, is a sovereign landlocked country and microstate on the Iberian Peninsula, in the eastern Pyrenees, bordered by France to the north and Spain to the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Andorra",
+        "other_codes": [],
     },
     "bh": {
         "name": "Bahrain",
@@ -3664,6 +4234,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Bahrain, officially the Kingdom of Bahrain, is an island country in West Asia. It is situated on the Persian Gulf, and comprises a small archipelago made up of 50 natural islands and an additional 33 artificial islands, centered on Bahrain Island which makes up around 83 per cent of the country's landmass.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Bahrain",
+        "other_codes": [],
+        "see": [],
     },
     "as": {
         "name": "American Samoa",
@@ -3671,12 +4243,14 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Oceania",
         "subregion": "Polynesia",
         "qid": "Q16641",
+        "other_codes": ["us-as"],
         "is_country": False,
         "is_ftm": True,
         "is_jurisdiction": True,
         "parent": "us",
         "summary": "American Samoa is an unincorporated territory of the United States located in the South Pacific Ocean, southeast of the island country of Samoa.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/American_Samoa",
+        "see": [],
     },
     "cl": {
         "name": "Chile",
@@ -3689,6 +4263,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Chile, officially the Republic of Chile, is a country located in western South America. It is the southernmost country in the world and the closest to Antarctica, stretching along a narrow strip of land between the Andes Mountains and the Pacific Ocean.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Chile",
+        "other_codes": [],
+        "see": [],
     },
     "ua": {
         "name": "Ukraine",
@@ -3701,6 +4277,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "Ukraine is a country in Eastern Europe. Following the full-scale invasion by Russia's army in 2022, Ukraine has started playing a key role in the identification and designation of Russian persons and companies involved in the aggression.",
+        "other_codes": [],
+        "see": [],
     },
     "ca-qc": {
         "name": "Quebec",
@@ -3711,6 +4289,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "ca-sk": {
         "name": "Saskatchewan",
@@ -3720,6 +4300,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ca",
+        "other_codes": [],
+        "see": [],
     },
     "tr": {
         "name": "Türkiye",
@@ -3732,6 +4314,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Turkey, officially the Republic of Türkiye, is a transcontinental country located at the juncture of Southeast Europe and West Asia.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Turkey",
+        "other_codes": [],
+        "see": [],
     },
     "yucs": {
         "name": "Yugoslavia",
@@ -3742,10 +4326,12 @@ TERRITORIES: Dict[str, Any] = {
         "other_qids": ["Q36704", "Q838261", "Q191077", "Q1290149"],
         "is_country": True,
         "is_ftm": True,
+        "is_historical": True,
         "see": ["si", "hr", "ba", "rs", "me", "xk", "mk"],
         "successors": ["si", "hr", "ba", "cshh", "xk", "mk"],
         "summary": "Yugoslavia was a country in Southeast and Central Europe that existed from 1945 to 1992.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Yugoslavia",
+        "other_codes": [],
     },
     "ge-ab": {
         "name": "Abkhazia",
@@ -3759,6 +4345,7 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "ge",
         "see": ["ge"],
         "summary": "The Republic of Abkhazia, is a partially recognised state in the South Caucasus. It is located within the Republic of Georgia, and its strive for independence has met with Russian attempts to destabilise Georgian sovereignty.",
+        "other_codes": [],
     },
     "us-ia": {
         "name": "Iowa",
@@ -3768,6 +4355,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "tv": {
         "name": "Tuvalu",
@@ -3780,6 +4369,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Tuvalu, formerly known as the Ellice Islands, is an island country in the Polynesian subregion of Oceania in the Pacific Ocean. Its islands are situated about midway between Hawaii and Australia.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Tuvalu",
+        "other_codes": [],
+        "see": [],
     },
     "vi": {
         "name": "U.S. Virgin Islands",
@@ -3787,6 +4378,7 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Americas",
         "subregion": "Caribbean",
         "qid": "Q11703",
+        "other_codes": ["us-vi"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
@@ -3804,6 +4396,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "Switzerland, officially the Swiss Confederation, is a landlocked country located in the Alps. It is not part of the European Union.",
+        "other_codes": [],
+        "see": [],
     },
     "aw": {
         "name": "Aruba",
@@ -3811,11 +4405,14 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Americas",
         "subregion": "Caribbean",
         "qid": "Q21203",
+        "other_codes": ["nl-aw"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
+        "parent": "nl",
         "summary": "Aruba, officially the Country of Aruba, is a constituent country of the Kingdom of the Netherlands physically located in the mid-south of the Caribbean Sea, about 29 kilometres north of the Venezuela peninsula of Paraguaná and 80 kilometres northwest of Curaçao.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Aruba",
+        "see": [],
     },
     "bl": {
         "name": "Saint Barthélemy",
@@ -3828,6 +4425,8 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "fr",
         "summary": "Saint Barthélemy, officially the Collectivité territoriale de Saint-Barthélemy, also known as St. Barts, is an overseas collectivity of France in the Caribbean. The island lies about 30 kilometres (19 mi) southeast of the island of Saint Martin; it is northeast of the Dutch islands of Saba and Sint Eustatius, as well as north of the independent country of Saint Kitts and Nevis.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/St._Barthélemy",
+        "other_codes": [],
+        "see": [],
     },
     "mc": {
         "name": "Monaco",
@@ -3840,6 +4439,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Monaco, officially the Principality of Monaco, is a sovereign city-state and microstate on the French Riviera a few kilometres west of the Italian region of Liguria, in Western Europe, on the Mediterranean Sea. It is bordered by France to the north, east and west.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Monaco",
+        "other_codes": [],
+        "see": [],
     },
     "no": {
         "name": "Norway",
@@ -3852,6 +4453,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Norway, formally the Kingdom of Norway, is a Nordic country in Northern Europe, the mainland territory of which comprises the western and northernmost portion of the Scandinavian Peninsula. The remote Arctic island of Jan Mayen and the archipelago of Svalbard also form part of Norway.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Norway",
+        "other_codes": [],
+        "see": [],
     },
     "mt": {
         "name": "Malta",
@@ -3866,6 +4469,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Malta, officially the Republic of Malta, is an island country in Southern Europe, located in the Mediterranean Sea. It consists of an archipelago between Italy and Libya.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Malta",
+        "other_codes": [],
     },
     "mu": {
         "name": "Mauritius",
@@ -3878,6 +4482,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Mauritius (French: Maurice; Mauritian Creole: Moris), officially the Republic of Mauritius, is an island country in the Indian Ocean, about 2,000 kilometres (1,100 nautical miles) off the southeastern coast of East Africa, east of Madagascar. It includes the main island (also called Mauritius) and Rodrigues, Agaléga, and St. Brandon.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Mauritius",
+        "other_codes": [],
+        "see": [],
     },
     "bm": {
         "name": "Bermuda",
@@ -3890,6 +4496,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Bermuda is a British Overseas Territory in the North Atlantic Ocean. The closest land outside the territory is in the American state of North Carolina, approximately 1,035 km to the west-northwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Bermuda",
+        "other_codes": [],
+        "see": [],
     },
     "ci": {
         "name": "Côte d'Ivoire",
@@ -3902,6 +4510,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Ivory Coast, officially the Republic of Côte d'Ivoire, also known as Côte d'Ivoire, is a country on the southern coast of West Africa. Its capital is Yamoussoukro, in the centre of the country, while its largest city and economic centre is the port city of Abidjan.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Côte_d’Ivoire",
+        "other_codes": [],
+        "see": [],
     },
     "bz": {
         "name": "Belize",
@@ -3915,6 +4525,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Belize is a country on the north-eastern coast of Central America. It is bordered by Mexico to the north, the Caribbean Sea to the east, and Guatemala to the west and south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Belize",
+        "other_codes": [],
+        "see": [],
     },
     "us": {
         "name": "United States of America",
@@ -3928,6 +4540,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "parent": "us",
         "summary": "The United States is one of the key sanctions-making jurisdictions in the World, including multiple lists published by the Treasury, State and other departments.",
+        "other_codes": [],
+        "see": [],
     },
     "tw": {
         "name": "Taiwan",
@@ -3935,11 +4549,13 @@ TERRITORIES: Dict[str, Any] = {
         "region": "Asia",
         "subregion": "Eastern Asia",
         "qid": "Q865",
+        "other_codes": ["cn-tw"],
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
         "summary": "Taiwan, officially the Republic of China, is a country in East Asia. It is located at the junction of the East and South China Seas in the northwestern Pacific Ocean, with the People's Republic of China to the northwest, Japan to the northeast, and the Philippines to the south.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Taiwan",
+        "see": [],
     },
     "ae-rk": {
         "name": "Ras Al Khaimah",
@@ -3950,6 +4566,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "ae",
+        "other_codes": [],
+        "see": [],
     },
     "gb-nir": {
         "name": "Northern Ireland",
@@ -3964,6 +4582,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["gb"],
         "summary": "Northern Ireland (Irish: Tuaisceart Éireann; Ulster-Scots: Norlin Airlann) is a part of the United Kingdom in the north-east of the island of Ireland that is variously described as a country, province or region. Northern Ireland shares an open border to the south and west with the Republic of Ireland.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Northern_Ireland",
+        "other_codes": [],
     },
     "pt-20": {
         "name": "Azores",
@@ -3973,6 +4592,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "pt",
+        "other_codes": [],
+        "see": [],
     },
     "x-so": {
         "name": "South Ossetia (Occupied Georgia)",
@@ -3985,6 +4606,7 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "ge",
         "see": ["ge", "ru"],
         "summary": "South Ossetia is an internationally unrecognized break-away region of Georgia that \\nfunctions as a Russian client state and is occupied by the Russian army.",
+        "other_codes": [],
     },
     "us-de": {
         "name": "Delaware",
@@ -3994,6 +4616,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "ye": {
         "name": "Yemen",
@@ -4007,6 +4631,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Yemen, officially the Republic of Yemen, is a country in West Asia. It is located in the southern end of the Arabian Peninsula, and borders Saudi Arabia to the north and Oman to the northeast.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Yemen",
+        "other_codes": [],
+        "see": [],
     },
     "ua-lpr": {
         "name": "Luhansk (Occupied Ukraine)",
@@ -4019,6 +4645,7 @@ TERRITORIES: Dict[str, Any] = {
         "parent": "ua",
         "see": ["ua", "ru"],
         "summary": "The Luhansk People's Republic or Lugansk People's Republic (LPR, Russian: Луга́нская Наро́дная Респу́блика) is a region in Ukraine''s Luhansk Oblast that has been occupied by Russia. The LPR was infiltrated by Russian-backed paramilitaries in 2014, and it initially operated as a breakaway state until it was annexed by Russia in 2022.",
+        "other_codes": [],
     },
     "at": {
         "name": "Austria",
@@ -4032,6 +4659,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "Austria, formally the Republic of Austria, is a landlocked country in Central Europe, lying in the Eastern Alps. It is a federation of nine provinces, one of which is the capital, Vienna, the most populous city and province.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Austria",
+        "other_codes": [],
     },
     "bo": {
         "name": "Bolivia",
@@ -4044,6 +4672,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Bolivia, officially the Plurinational State of Bolivia, is a landlocked country located in western-central South America. It is bordered by Brazil to the north and east, Paraguay to the southeast, Argentina to the south, Chile to the southwest, and Peru to the west.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Bolivia",
+        "other_codes": [],
+        "see": [],
     },
     "ck": {
         "name": "Cook Islands",
@@ -4056,6 +4686,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Cook Islands is a self-governing island country in the South Pacific Ocean in free association with New Zealand. It comprises 15 islands whose total land area is 236.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Cook_Islands",
+        "other_codes": [],
+        "see": [],
     },
     "nl": {
         "name": "Netherlands",
@@ -4070,6 +4702,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["eu"],
         "summary": "The Netherlands, informally Holland, is a country located in northwestern Europe with overseas territories in the Caribbean. It is the largest of four constituent countries of the Kingdom of the Netherlands.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Netherlands",
+        "other_codes": [],
     },
     "mw": {
         "name": "Malawi",
@@ -4082,6 +4715,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Malawi, officially the Republic of Malawi, is a landlocked country in Southeastern Africa that was formerly known as Nyasaland. It is bordered by Zambia to the west, Tanzania to the north and northeast, and Mozambique to the east, south and southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Malawi",
+        "other_codes": [],
+        "see": [],
     },
     "ls": {
         "name": "Lesotho",
@@ -4094,6 +4729,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Lesotho, formally the Kingdom of Lesotho, is a landlocked country in Southern Africa. As an enclave of South Africa, with which it shares a 1,106 km border, it is the only sovereign enclave in the world outside of the Italian peninsula.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Lesotho",
+        "other_codes": [],
+        "see": [],
     },
     "us-ri": {
         "name": "Rhode Island",
@@ -4103,6 +4740,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "lr": {
         "name": "Liberia",
@@ -4115,6 +4754,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Liberia, officially the Republic of Liberia, is a country on the West African coast. It is bordered by Sierra Leone to its northwest, Guinea to its north, Ivory Coast to its east, and the Atlantic Ocean to its south and southwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Liberia",
+        "other_codes": [],
+        "see": [],
     },
     "mv": {
         "name": "Maldives",
@@ -4127,6 +4768,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Maldives, officially the Republic of Maldives, is an archipelagic state and country in South Asia, situated in the Indian Ocean. It lies southwest of Sri Lanka and India, about 750 kilometres from the Asian continent's mainland.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Maldives",
+        "other_codes": [],
+        "see": [],
     },
     "nz": {
         "name": "New Zealand",
@@ -4139,6 +4782,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "New Zealand is an island country in the southwestern Pacific Ocean. It consists of two main landmasses—the North Island and the South Island—and over 700 smaller islands.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/New_Zealand",
+        "other_codes": [],
+        "see": [],
     },
     "ma": {
         "name": "Morocco",
@@ -4151,6 +4796,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Morocco, officially the Kingdom of Morocco, is a country in the Maghreb region of North Africa. Morocco also claims the Spanish exclaves of Ceuta, Melilla and Peñón de Vélez de la Gomera, and several small Spanish-controlled islands off its coast.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Morocco",
+        "other_codes": [],
+        "see": [],
     },
     "us-pa": {
         "name": "Pennsylvania",
@@ -4160,6 +4807,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
     "bn": {
         "name": "Brunei Darussalam",
@@ -4172,6 +4821,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Brunei, formally Brunei Darussalam, is a country in Southeast Asia, situated on the northern coast of the island of Borneo. Apart from its coastline on the South China Sea, it is completely surrounded by the Malaysian state of Sarawak, with its territory bifurcated by the Sarawak district of Limbang.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Brunei",
+        "other_codes": [],
+        "see": [],
     },
     "au": {
         "name": "Australia",
@@ -4184,6 +4835,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Australia, officially the Commonwealth of Australia, is a sovereign country comprising the mainland of the Australian continent, the island of Tasmania, and numerous smaller islands. Australia is the largest country by area in Oceania and the world's sixth-largest country.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Australia",
+        "other_codes": [],
+        "see": [],
     },
     "cy-trnc": {
         "name": "Northern Cyprus",
@@ -4196,6 +4849,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["cy", "tr"],
         "summary": "Northern Cyprus, officially the Turkish Republic of Northern Cyprus, is a de facto state that comprises the northeastern portion of the island of Cyprus. It is recognised only by Turkey and its territory is considered by the international community to be part of the Republic of Cyprus.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Northern_Cyprus",
+        "other_codes": [],
     },
     "by": {
         "name": "Belarus",
@@ -4210,6 +4864,7 @@ TERRITORIES: Dict[str, Any] = {
         "see": ["ru"],
         "summary": "Belarus, officially the Republic of Belarus, is a landlocked country in Eastern Europe. It is bordered by Russia to the east and northeast, Ukraine to the south, Poland to the west, and Lithuania and Latvia to the northwest.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Belarus",
+        "other_codes": [],
     },
     "tt": {
         "name": "Trinidad and Tobago",
@@ -4222,6 +4877,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Trinidad and Tobago, officially the Republic of Trinidad and Tobago, is the southernmost island country in the Caribbean. Consisting of the main islands Trinidad and Tobago and numerous much smaller islands, it is situated 11 kilometres off the coast of northeastern Venezuela and 130 kilometres south of Grenada.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Trinidad_&_Tobago",
+        "other_codes": [],
+        "see": [],
     },
     "tc": {
         "name": "Turks and Caicos Islands",
@@ -4234,6 +4891,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "The Turks and Caicos Islands are a British Overseas Territory consisting of the larger Caicos Islands and smaller Turks Islands, two groups of tropical islands in the Lucayan Archipelago of the Atlantic Ocean and northern West Indies. They are known primarily for tourism and as an offshore financial centre.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands",
+        "other_codes": [],
+        "see": [],
     },
     "ug": {
         "name": "Uganda",
@@ -4246,6 +4905,8 @@ TERRITORIES: Dict[str, Any] = {
         "is_jurisdiction": True,
         "summary": "Uganda, officially the Republic of Uganda, is a landlocked country in East Africa. The country is bordered to the east by Kenya, to the north by South Sudan, to the west by the Democratic Republic of the Congo, to the south-west by Rwanda, and to the south by Tanzania.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Uganda",
+        "other_codes": [],
+        "see": [],
     },
     "us-fl": {
         "name": "Florida",
@@ -4255,5 +4916,7 @@ TERRITORIES: Dict[str, Any] = {
         "is_ftm": False,
         "is_jurisdiction": True,
         "parent": "us",
+        "other_codes": [],
+        "see": [],
     },
 }

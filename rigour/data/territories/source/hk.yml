@@ -5,7 +5,9 @@ subregion: Eastern Asia
 qid: Q8646
 other_qids:
   - Q1054923
-is_country: true
+other_codes:
+  - cn-hk
+is_country: false
 is_ftm: true
 is_jurisdiction: true
 parent: cn

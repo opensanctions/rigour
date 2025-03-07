@@ -1,8 +1,10 @@
 from typing import Dict, Any, List, Optional
+from functools import total_ordering
 
 from rigour.ids.wikidata import is_qid
 
 
+@total_ordering
 class Territory(object):
     """A territory - country, sub-national, historic, or supranational."""
 
@@ -16,8 +18,11 @@ class Territory(object):
         self.is_country: bool = data.get("is_country", False)
         self.is_ftm: bool = data.get("is_ftm", False)
         self.is_jurisdiction: bool = data.get("is_jurisdiction", self.is_country)
+        self.is_historical: bool = data.get("is_historical", False)
         self.qid: str = str(data.get("qid"))
         self.other_qids: List[str] = data.get("other_qids", [])
+        self.other_codes: List[str] = data.get("other_codes", [])
+        self._successors: List[str] = data.get("successors", [])
         self._parent: Optional[str] = data.get("parent")
         self._see: List[str] = data.get("see", [])
 
@@ -32,12 +37,32 @@ class Territory(object):
                 msg = "Invalid parent: %s (country: %r)" % (self._parent, self.code)
                 raise RuntimeError(msg)
 
+        for successor in self._successors:
+            if successor not in self.index:
+                msg = "Invalid successor: %s (country: %r)" % (successor, self.code)
+                raise RuntimeError(msg)
+
+        for see in self._see:
+            if see not in self.index:
+                msg = "Invalid see: %s (country: %r)" % (see, self.code)
+                raise RuntimeError(msg)
+
     @property
     def parent(self) -> Optional["Territory"]:
         """Return the governing territory."""
         if self._parent is None:
             return None
         return self.index[self._parent]
+
+    @property
+    def successors(self) -> List["Territory"]:
+        """Return a list of successor countries."""
+        return [self.index[s] for s in self._successors]
+
+    @property
+    def see(self) -> List["Territory"]:
+        """Return a list of related territories."""
+        return [self.index[s] for s in self._see]
 
     @property
     def ftm_country(self) -> Optional[str]:
@@ -48,10 +73,20 @@ class Territory(object):
             return self.parent.ftm_country
         return None
 
-    @property
-    def see(self) -> List["Territory"]:
-        """Return a list of related territories."""
-        return [self.index[s] for s in self._see]
+    def __eq__(self, other: Any) -> bool:
+        try:
+            return self.code == other.code  # type: ignore
+        except AttributeError:
+            return False
+
+    def __hash__(self) -> int:
+        return hash(self.code)
+
+    def __le__(self, other: Any) -> bool:
+        try:
+            return self.code <= other.code  # type: ignore
+        except AttributeError:
+            return True
 
     def __repr__(self) -> str:
         return f"<Territory({self.code!r})>"

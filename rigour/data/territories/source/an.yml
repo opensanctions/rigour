@@ -1,0 +1,16 @@
+name: Netherlands Antilles
+full_name: Netherlands Antilles
+region: Americas
+subregion: Caribbean
+qid: Q25227
+other_codes:
+  - anhh
+successors:
+  - bq
+  - cw
+  - sx
+parent: nl
+is_country: false
+is_ftm: false
+is_jurisdiction: false
+is_historical: true

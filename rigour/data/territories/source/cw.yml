@@ -3,6 +3,8 @@ full_name: Curaçao
 region: Americas
 subregion: Caribbean
 qid: Q25279
+other_codes:
+  - nl-cw
 is_country: false
 is_ftm: true
 is_jurisdiction: true

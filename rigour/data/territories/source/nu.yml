@@ -6,7 +6,8 @@ qid: Q34020
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: Niue is a self-governing island state in free association with New Zealand.
+summary:
+  Niue is a self-governing island state in free association with New Zealand.
   It is situated in the South Pacific Ocean and is part of Polynesia, and predominantly
   inhabited by Polynesians.
 wikipedia_url: https://en.wikipedia.org/wiki/Niue

@@ -1,10 +1,11 @@
 import os
 import yaml
 import logging
-from typing import Any, Dict
+from typing import Any, Dict, Set
 
 from rigour.data import DATA_PATH
 from rigour.territories.territory import Territory
+from rigour.territories.util import clean_code, clean_codes
 
 log = logging.getLogger(__name__)
 
@@ -20,14 +21,24 @@ def update_data() -> None:
     path = os.path.dirname(__file__)
     raw_territories: Dict[str, Any] = {}
     territories: Dict[str, Territory] = {}
+    seen_codes: Set[str] = set()
     for filename in os.listdir(countries_dir):
         if not filename.endswith(".yml"):
             continue
         source_file = os.path.join(path, countries_dir / filename)
-        code = filename.replace(".yml", "").replace("_", "-")
+        code = clean_code(filename.replace(".yml", ""))
+        if code in seen_codes:
+            print(f"Duplicate code: {code}")
+            continue
+        seen_codes.add(code)
         with open(source_file, "r", encoding="utf-8") as ufh:
             data = yaml.safe_load(ufh.read())
             raw_territories[code] = data
+            data["other_codes"] = clean_codes(data.get("other_codes", []))
+            for other in data["other_codes"]:
+                if other in territories:
+                    log.warning("Duplicate code: %s", other)
+            data["see"] = clean_codes(data.get("see", []))
             territories[code] = Territory(territories, code, data)
 
     for territory in territories.values():

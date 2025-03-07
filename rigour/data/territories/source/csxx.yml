@@ -5,14 +5,16 @@ subregion: Southern Europe
 qid: Q37024
 is_country: true
 is_ftm: true
+is_historical: true
 see:
-- yucs
-- rs
-- me
+  - yucs
+  - rs
+  - me
 successors:
-- rs
-- me
-summary: Serbia and Montenegro, known until 2003 as the Federal Republic of Yugoslavia,
+  - rs
+  - me
+summary:
+  Serbia and Montenegro, known until 2003 as the Federal Republic of Yugoslavia,
   FR Yugoslavia or simply Yugoslavia, was a country in Southeast Europe located in
   the Balkans that existed from 1992 to 2006, following the breakup of the Socialist
   Federal Republic of Yugoslavia. The country bordered Hungary to the north, Romania

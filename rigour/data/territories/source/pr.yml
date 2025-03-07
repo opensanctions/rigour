@@ -3,6 +3,8 @@ full_name: Puerto Rico
 region: Americas
 subregion: Caribbean
 qid: Q1183
+other_codes:
+  - us-pr
 is_country: false
 is_ftm: true
 is_jurisdiction: true
