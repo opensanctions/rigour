@@ -11,7 +11,10 @@ test:
 build-iso639:
 	python rigour/langs/generate.py
 
-build: build-iso639
+build-territories:
+	python rigour/territories/generate.py
+
+build: build-iso639 build-territories
 	black rigour/data
 
 docs:

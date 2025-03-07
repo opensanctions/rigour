@@ -1,0 +1,16 @@
+name: Belgium
+full_name: Belgium
+region: Europe
+subregion: Western Europe
+qid: Q31
+is_country: false
+is_ftm: true
+is_jurisdiction: true
+see:
+  - eu
+summary:
+  Belgium, officially the Kingdom of Belgium, is a country in Northwestern
+  Europe. The country is bordered by the Netherlands to the north, Germany to the
+  east, Luxembourg to the southeast, France to the southwest, and the North Sea to
+  the northwest.
+wikipedia_url: https://en.wikipedia.org/wiki/Belgium

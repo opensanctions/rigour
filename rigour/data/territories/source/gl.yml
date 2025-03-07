@@ -1,0 +1,15 @@
+name: Greenland
+full_name: Greenland
+region: Americas
+subregion: Northern America
+qid: Q223
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+parent: dk
+summary:
+  Greenland is a North American autonomous territory of the Kingdom of Denmark.
+  It is the largest country within the Kingdom and one of three countries which form
+  the Kingdom, the others being Denmark proper and the Faroe Islands; the citizens
+  of all three countries are citizens of Denmark.
+wikipedia_url: https://en.wikipedia.org/wiki/Greenland

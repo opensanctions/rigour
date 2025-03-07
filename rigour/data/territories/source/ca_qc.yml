@@ -1,0 +1,9 @@
+name: Quebec
+full_name: Quebec (Canada)
+qid: Q176
+other_qids:
+  - Q2145
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ca

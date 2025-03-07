@@ -1,0 +1,17 @@
+name: Georgia
+full_name: Georgia
+region: Asia
+subregion: Western Asia
+qid: Q230
+other_qids:
+  - Q245160
+  - Q130229
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary:
+  "Georgia (Georgian: საქართველო) is a country located in Eastern Europe and
+  West Asia. It is part of the Caucasus region, bounded by the Black Sea to the west,
+  Russia to the north and northeast, Turkey to the southwest, Armenia to the south,
+  and by Azerbaijan to the southeast."
+wikipedia_url: https://en.wikipedia.org/wiki/Georgia_(country)

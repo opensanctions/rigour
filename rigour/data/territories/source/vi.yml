@@ -1,0 +1,18 @@
+name: U.S. Virgin Islands
+full_name: U.S. Virgin Islands
+region: Americas
+subregion: Caribbean
+qid: Q11703
+other_codes:
+  - us-vi
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+  - us
+summary:
+  The United States Virgin Islands, officially the Virgin Islands of the United
+  States, are a group of Caribbean islands and an unincorporated and organized territory
+  of the United States. The islands are geographically part of the Virgin Islands
+  archipelago and are located in the Leeward Islands of the Lesser Antilles.
+wikipedia_url: https://en.wikipedia.org/wiki/U.S._Virgin_Islands

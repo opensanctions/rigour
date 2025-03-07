@@ -1,0 +1,16 @@
+name: Åland Islands
+full_name: Åland Islands
+region: Europe
+subregion: Northern Europe
+qid: Q5689
+other_codes:
+  - fi-01
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary:
+  "Åland (Finnish: Ahvenanmaa) is an autonomous and demilitarised region of
+  Finland. Receiving its autonomy by a 1920 decision of the League of Nations, it
+  is the smallest region of Finland by both area (1,580 square kilometres) and population
+  (30,129), constituting 0.51% of Finland's land area and 0.54% of its population."
+wikipedia_url: https://en.wikipedia.org/wiki/Åland_Islands

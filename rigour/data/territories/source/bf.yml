@@ -1,0 +1,15 @@
+name: Burkina Faso
+full_name: Burkina Faso
+region: Africa
+subregion: Western Africa
+qid: Q965
+other_codes:
+  - hf
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary:
+  Burkina Faso is a landlocked country in West Africa, bordered by Mali to
+  the northwest, Niger to the northeast, Benin to the southeast, Togo and Ghana to
+  the south, and the Ivory Coast to the southwest.
+wikipedia_url: https://en.wikipedia.org/wiki/Burkina_Faso

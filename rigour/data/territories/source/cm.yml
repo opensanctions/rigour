@@ -1,0 +1,15 @@
+name: Cameroon
+full_name: Cameroon
+region: Africa
+subregion: Middle Africa
+qid: Q1009
+other_qids:
+- Q1028848
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary: Cameroon, officially the Republic of Cameroon, is a country in Central Africa.
+  It shares boundaries with Nigeria to the west and north, Chad to the northeast,
+  the Central African Republic to the east, and Equatorial Guinea, Gabon and the Republic
+  of the Congo to the south.
+wikipedia_url: https://en.wikipedia.org/wiki/Cameroon

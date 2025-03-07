@@ -1,0 +1,16 @@
+name: Belarus
+full_name: Belarus
+region: Europe
+subregion: Eastern Europe
+qid: Q184
+other_qids:
+- Q2895
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+- ru
+summary: Belarus, officially the Republic of Belarus, is a landlocked country in Eastern
+  Europe. It is bordered by Russia to the east and northeast, Ukraine to the south,
+  Poland to the west, and Lithuania and Latvia to the northwest.
+wikipedia_url: https://en.wikipedia.org/wiki/Belarus

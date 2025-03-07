@@ -1,0 +1,30 @@
+name: U.S. Minor Outlying Islands
+full_name: United States Minor Outlying Islands
+region: Oceania
+subregion: Micronesia
+qid: Q16645
+other_codes:
+  - xb
+  - xh
+  - xq
+  - xu
+  - xm
+  - qm
+  - xv
+  - xl
+  - qw
+  - us-um
+is_country: false
+is_ftm: true
+is_jurisdiction: true
+parent: us
+see:
+  - us
+summary:
+  The United States Minor Outlying Islands is a statistical designation defined
+  by the International Organization for Standardization's ISO 3166-1 code. The minor
+  outlying islands and groups of islands consist of eight United States insular areas
+  in the Pacific Ocean (Baker Island, Howland Island, Jarvis Island, Johnston Atoll,
+  Kingman Reef, Midway Atoll, Palmyra Atoll, and Wake Island) and one in the Caribbean
+  Sea (Navassa Island).
+wikipedia_url: https://en.wikipedia.org/wiki/United_States_Minor_Outlying_Islands

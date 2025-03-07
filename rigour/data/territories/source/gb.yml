@@ -1,0 +1,25 @@
+name: United Kingdom
+full_name: United Kingdom of Great Britain and Northern Ireland
+region: Europe
+subregion: Northern Europe
+qid: Q145
+other_qids:
+  - Q174193
+  - Q21
+  - Q161885
+  - Q5613380
+  - Q179876
+  - Q4970586
+is_country: false
+is_ftm: true
+is_jurisdiction: true
+see:
+  - gb-nir
+  - gb-sct
+  - gb-wls
+summary:
+  The United Kingdom of Great Britain and Northern Ireland, commonly known
+  as the United Kingdom or Britain, is an island country in Northwestern Europe, off
+  the north-western coast of the continental mainland. It comprises England, Scotland,
+  Wales, and Northern Ireland.
+wikipedia_url: https://en.wikipedia.org/wiki/United_Kingdom

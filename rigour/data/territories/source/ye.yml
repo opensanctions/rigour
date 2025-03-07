@@ -1,0 +1,16 @@
+name: Yemen
+full_name: Yemen
+region: Asia
+subregion: Western Asia
+qid: Q805
+other_qids:
+- Q199841
+- Q267584
+- Q580188
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary: Yemen, officially the Republic of Yemen, is a country in West Asia. It is
+  located in the southern end of the Arabian Peninsula, and borders Saudi Arabia to
+  the north and Oman to the northeast.
+wikipedia_url: https://en.wikipedia.org/wiki/Yemen

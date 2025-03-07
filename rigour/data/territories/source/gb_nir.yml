@@ -1,0 +1,17 @@
+name: Northern Ireland
+full_name: Northern Ireland (United Kingdom of Great Britain and Northern Ireland)
+region: Europe
+subregion: Northern Europe
+qid: Q26
+is_country: false
+is_ftm: true
+is_jurisdiction: true
+parent: gb
+see:
+  - gb
+summary:
+  "Northern Ireland (Irish: Tuaisceart Éireann; Ulster-Scots: Norlin Airlann)
+  is a part of the United Kingdom in the north-east of the island of Ireland that
+  is variously described as a country, province or region. Northern Ireland shares
+  an open border to the south and west with the Republic of Ireland."
+wikipedia_url: https://en.wikipedia.org/wiki/Northern_Ireland

@@ -1,0 +1,17 @@
+name: Holy See
+full_name: Holy See (Vatican)
+region: Europe
+subregion: Southern Europe
+qid: Q237
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+  - it
+summary:
+  Vatican City, officially the Vatican City State, is a landlocked independent
+  country, city-state, microstate, and enclave within Rome, Italy. It became independent
+  from Italy in 1929 with the Lateran Treaty, and it is a distinct territory under
+  "full ownership, exclusive dominion, and sovereign authority and jurisdiction" of
+  the Holy See.
+wikipedia_url: https://en.wikipedia.org/wiki/Vatican_City

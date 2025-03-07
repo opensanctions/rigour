@@ -1,0 +1,9 @@
+name: United Nations
+full_name: United Nations
+is_ftm: true
+is_country: false
+is_jurisdiction: false
+qid: Q1065
+other_qids:
+  - Q160016
+  - Q61964031

@@ -1,0 +1,9 @@
+name: Prince Edward Island
+full_name: Prince Edward Island (Canada)
+qid: Q1978
+other_qids:
+  - Q15120268
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ca

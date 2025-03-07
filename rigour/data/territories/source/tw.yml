@@ -1,0 +1,16 @@
+name: Taiwan
+full_name: Taiwan (Province of China)
+region: Asia
+subregion: Eastern Asia
+qid: Q865
+other_codes:
+  - cn-tw
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary:
+  Taiwan, officially the Republic of China, is a country in East Asia. It is
+  located at the junction of the East and South China Seas in the northwestern Pacific
+  Ocean, with the People's Republic of China to the northwest, Japan to the northeast,
+  and the Philippines to the south.
+wikipedia_url: https://en.wikipedia.org/wiki/Taiwan

@@ -1,0 +1,58 @@
+name: Soviet Union
+full_name: Soviet Union
+region: Supranational
+qid: Q15180
+other_qids:
+  - Q2895
+  - Q133356
+  - Q243610
+  - Q2305208
+  - Q131337
+  - Q130229
+  - Q132856
+  - Q199707
+  - Q168811
+  - Q192180
+  - Q2184
+  - Q484578
+  - Q130280
+other_codes:
+  - su
+  - byaa
+is_country: true
+is_ftm: true
+is_historical: true
+see:
+  - ru
+  - ua
+  - by
+  - kz
+  - uz
+  - kg
+  - tj
+  - ee
+  - lv
+  - lt
+  - md
+  - ge
+  - az
+  - am
+successors:
+  - ru
+  - ua
+  - by
+  - kz
+  - uz
+  - kg
+  - tj
+  - ee
+  - lv
+  - lt
+  - md
+  - ge
+  - az
+  - am
+summary:
+  The Soviet Union, officially the Union of Soviet Socialist Republics (USSR),
+  was disbanded in 1991. It exists in our database because it is still the stated
+  country of birth of a number of designated persons.

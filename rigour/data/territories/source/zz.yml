@@ -1,0 +1,9 @@
+name: Global
+full_name: Global
+region: Supranational
+qid: Q2
+is_country: false
+is_ftm: true
+summary:
+  The global region is used in OpenSanctions to denote datasets and entities
+  which can not be scoped to any more specific single national or supranational region.

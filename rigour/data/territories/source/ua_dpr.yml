@@ -1,0 +1,16 @@
+name: Donetsk (Occupied Ukraine)
+full_name: Donetsk (Occupied Ukraine)
+region: Europe
+subregion: Eastern Europe
+qid: Q16150196
+is_country: false
+is_ftm: true
+parent: ua
+see:
+  - ua
+  - ru
+summary:
+  "The Donetsk People's Republic (DPR, Russian: Донецкая Народная Республика)
+  is a region in Ukraine's Donetsk Oblast that has been occupied by Russia. The DPR
+  was infiltrated by Russian-backed paramilitaries in 2014, and it initially operated
+  as a breakaway state until it was annexed by Russia in 2022."
