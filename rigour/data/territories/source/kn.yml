@@ -3,11 +3,11 @@ full_name: Saint Kitts and Nevis
 region: Americas
 subregion: Caribbean
 qid: Q763
-is_country: false
+is_country: true
 is_ftm: true
 is_jurisdiction: true
-parent: kn
-summary: Saint Kitts and Nevis, officially the Federation of Saint Christopher and
+summary:
+  Saint Kitts and Nevis, officially the Federation of Saint Christopher and
   Nevis, is an island country and microstate consisting of the two islands of Saint
   Kitts and Nevis, both located in the West Indies, in the Leeward Islands chain of
   the Lesser Antilles. With 261 square kilometres of territory, and roughly 50,000

@@ -13,7 +13,6 @@ other_qids:
 is_country: false
 is_ftm: true
 is_jurisdiction: true
-parent: gb
 see:
   - gb-nir
   - gb-sct

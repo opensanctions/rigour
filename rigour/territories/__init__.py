@@ -1,5 +1,5 @@
 from functools import cache
-from typing import Dict, Optional
+from typing import Dict, List, Optional, Set
 from rigour.data.territories.data import TERRITORIES
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code
@@ -32,6 +32,7 @@ def get_territory(code: str) -> Optional[Territory]:
     return index.get(code)
 
 
+@cache
 def get_territory_by_qid(qid: str) -> Optional[Territory]:
     """Get a territory object for the given Wikidata QID.
 
@@ -42,8 +43,21 @@ def get_territory_by_qid(qid: str) -> Optional[Territory]:
         A territory object.
     """
     for territory in _get_index().values():
-        if territory.qid == qid:
-            return territory
-        if qid in territory.other_qids:
+        if qid in territory.qids:
             return territory
     return None
+
+
+@cache
+def get_ftm_countries() -> List[Territory]:
+    """Get all the countries that were supported by the FtM `country`
+    property type.
+
+    Returns:
+        A list of territories.
+    """
+    territories: Set[Territory] = set()
+    for territory in _get_index().values():
+        if territory.is_ftm:
+            territories.add(territory)
+    return sorted(territories)

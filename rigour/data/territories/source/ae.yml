@@ -4,12 +4,12 @@ region: Asia
 subregion: Western Asia
 qid: Q878
 other_qids:
-- Q1852345
-is_country: false
+  - Q1852345
+is_country: true
 is_ftm: true
 is_jurisdiction: true
-parent: ae
-summary: The United Arab Emirates, or simply the Emirates, is a country in West Asia,
+summary:
+  The United Arab Emirates, or simply the Emirates, is a country in West Asia,
   in the Middle East. It is located at the eastern end of the Arabian Peninsula and
   shares borders with Oman and Saudi Arabia, while also having maritime borders in
   the Persian Gulf with Qatar and Iran.

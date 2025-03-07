@@ -1,10 +1,15 @@
 from rigour.territories import get_territory, get_territory_by_qid
+from rigour.territories import get_ftm_countries
 
 
 def test_world_real():
     gb = get_territory("gb")
     assert gb.name == "United Kingdom"
+    assert gb.parent is None
     assert get_territory_by_qid("Q145") == gb
+    assert gb.qid == "Q145"
+    assert get_territory_by_qid("Q2914461") == get_territory("ge-ab")
+    assert get_territory("ge-ab").qid != "Q2914461"
     nir = get_territory("gb-nir")
     assert nir is not None
     assert nir.parent == gb
@@ -46,3 +51,10 @@ def test_territory_ftm():
 
     # antilles = get_territory("anhh")
     # assert antilles.ftm_country is None
+
+    countries = get_ftm_countries()
+    assert len(countries) > 200
+    assert len(countries) < 400
+    for terr in countries:
+        assert terr.is_ftm
+        assert terr.ftm_country == terr.code
