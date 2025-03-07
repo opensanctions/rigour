@@ -1,0 +1,18 @@
+name: Denmark
+full_name: Denmark
+region: Europe
+subregion: Northern Europe
+qid: Q756617
+other_qids:
+  - Q35
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+  - eu
+summary:
+  Denmark is a Nordic country in Northern Europe. It is the metropolitan part
+  of and the most populous constituent of the Kingdom of Denmark, a constitutionally
+  unitary state that includes the autonomous territories of the Faroe Islands and
+  Greenland in the North Atlantic Ocean.
+wikipedia_url: https://en.wikipedia.org/wiki/Denmark

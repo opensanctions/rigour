@@ -1,0 +1,9 @@
+name: District of Columbia
+full_name: District of Columbia (United States of America)
+qid: Q3551781
+other_qids:
+  - Q61
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: us

@@ -1,0 +1,17 @@
+name: Hong Kong
+full_name: Hong Kong Special Administrative Region
+region: Asia
+subregion: Eastern Asia
+qid: Q8646
+other_qids:
+  - Q1054923
+other_codes:
+  - cn-hk
+is_country: false
+is_ftm: true
+is_jurisdiction: true
+parent: cn
+summary:
+  Hong Kong, officially the Hong Kong Special Administrative Region of the
+  People's Republic of China, is a city and a special administrative region in China.
+wikipedia_url: https://en.wikipedia.org/wiki/Hong_Kong_SAR_China

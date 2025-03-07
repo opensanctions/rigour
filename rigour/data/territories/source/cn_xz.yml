@@ -1,0 +1,16 @@
+name: Tibet
+full_name: Tibet
+region: Asia
+subregion: Eastern Asia
+qid: Q17252
+other_qids:
+  - Q2444884
+is_country: false
+is_ftm: true
+parent: cn
+summary:
+  "Tibet (Tibetan: བོད་; Chinese: 西藏) is a region in the central part of East
+  Asia, covering much of the Tibetan Plateau. It is the homeland of the Tibetan people.
+  Since the annexation of Tibet by the People's Republic of China in 1951, the entire
+  plateau has been under the administration of the People''s Republic of China."
+wikipedia_url: https://en.wikipedia.org/wiki/Tibet

@@ -1,0 +1,17 @@
+name: Romania
+full_name: Romania
+region: Europe
+subregion: Eastern Europe
+qid: Q218
+other_qids:
+- Q842794
+- Q191071
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+- eu
+summary: Romania is a country in Central, Eastern and Southeast Europe. It borders
+  Ukraine to the north, Hungary to the west, Serbia to the southwest, Bulgaria to
+  the south, Moldova to the east, and the Black Sea to the southeast.
+wikipedia_url: https://en.wikipedia.org/wiki/Romania

@@ -1,0 +1,9 @@
+name: New York
+full_name: New York (United States of America)
+qid: Q1384
+other_qids:
+  - Q60
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: us

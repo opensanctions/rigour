@@ -1,0 +1,19 @@
+name: Syria
+full_name: Syrian Arab Republic
+region: Asia
+subregion: Western Asia
+qid: Q858
+other_qids:
+- Q146885
+- Q131404661
+- Q26234937
+- Q146880
+- Q146562
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary: Syria, officially the Syrian Arab Republic, is a West Asian country located
+  in the Eastern Mediterranean and the Levant. It is bounded by the Mediterranean
+  Sea to the west, Turkey to the north, Iraq to the east and southeast, Jordan to
+  the south, and Israel and Lebanon to the southwest.
+wikipedia_url: https://en.wikipedia.org/wiki/Syria

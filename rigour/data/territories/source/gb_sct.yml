@@ -1,0 +1,16 @@
+name: Scotland
+full_name: Scotland (United Kingdom of Great Britain and Northern Ireland)
+region: Europe
+subregion: Northern Europe
+qid: Q22
+is_country: false
+is_ftm: true
+is_jurisdiction: true
+parent: gb
+see:
+  - gb
+summary:
+  Scotland is a country that is part of the United Kingdom. Covering the northern
+  third of the island of Great Britain, Scotland is the second-largest country in
+  the United Kingdom, and accounted for 8% of the population in 2019.
+wikipedia_url: https://en.wikipedia.org/wiki/Scotland

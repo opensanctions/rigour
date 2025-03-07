@@ -1,0 +1,18 @@
+name: Ireland
+full_name: Ireland
+region: Europe
+subregion: Northern Europe
+qid: Q27
+other_qids:
+- Q22890
+- Q215530
+- Q1140152
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+- eu
+summary: Ireland, also known as the Republic of Ireland, is a country in north-western
+  Europe consisting of 26 of the 32 counties of the island of Ireland. The capital
+  and largest city is Dublin, on the eastern side of the island.
+wikipedia_url: https://en.wikipedia.org/wiki/Republic_of_Ireland

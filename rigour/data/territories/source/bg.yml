@@ -1,0 +1,16 @@
+name: Bulgaria
+full_name: Bulgaria
+region: Europe
+subregion: Eastern Europe
+qid: Q219
+other_qids:
+  - Q121932
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+  - eu
+summary:
+  Bulgaria, officially the Republic of Bulgaria, is a country in Southeast
+  Europe.
+wikipedia_url: https://en.wikipedia.org/wiki/Bulgaria

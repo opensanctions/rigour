@@ -1,0 +1,19 @@
+name: Greece
+full_name: Greece
+region: Europe
+subregion: Southern Europe
+qid: Q41
+other_qids:
+  - Q209065
+  - Q56692361
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+  - eu
+summary:
+  Greece, officially the Hellenic Republic, is a country in Southeast Europe,
+  situated on the southern tip of the Balkan peninsula. Greece shares land borders
+  with Albania to the northwest, North Macedonia and Bulgaria to the north, and Turkey
+  to the east.
+wikipedia_url: https://en.wikipedia.org/wiki/Greece

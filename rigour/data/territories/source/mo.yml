@@ -1,0 +1,16 @@
+name: Macao
+full_name: Macao
+region: Asia
+subregion: Eastern Asia
+qid: Q14773
+other_codes:
+  - cn-mo
+is_country: false
+is_ftm: true
+is_jurisdiction: true
+parent: cn
+summary:
+  "Macau or Macao (Chinese: 澳門), officially the Macao Special Administrative
+  Region of the People's Republic of China (MSAR), is a city and special administrative
+  region of China in the western Pearl River Delta by the South China Sea."
+wikipedia_url: https://en.wikipedia.org/wiki/Macau

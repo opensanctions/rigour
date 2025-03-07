@@ -1,0 +1,32 @@
+name: Yugoslavia
+full_name: Yugoslavia
+region: Europe
+subregion: Eastern Europe
+qid: Q83286
+other_qids:
+  - Q36704
+  - Q838261
+  - Q191077
+  - Q1290149
+is_country: true
+is_ftm: true
+is_historical: true
+see:
+  - si
+  - hr
+  - ba
+  - rs
+  - me
+  - xk
+  - mk
+successors:
+  - si
+  - hr
+  - ba
+  - cshh
+  - xk
+  - mk
+summary:
+  Yugoslavia was a country in Southeast and Central Europe that existed from
+  1945 to 1992.
+wikipedia_url: https://en.wikipedia.org/wiki/Yugoslavia

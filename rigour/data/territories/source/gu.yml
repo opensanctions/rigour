@@ -1,0 +1,16 @@
+name: Guam
+full_name: Guam
+region: Oceania
+subregion: Micronesia
+qid: Q16635
+other_codes:
+  - us-gu
+is_country: false
+is_ftm: true
+is_jurisdiction: true
+parent: us
+summary:
+  Guam is an organized, unincorporated territory of the United States in the
+  Micronesia subregion of the western Pacific Ocean. Guam's capital is Hagåtña, and
+  the most populous village is Dededo.
+wikipedia_url: https://en.wikipedia.org/wiki/Guam

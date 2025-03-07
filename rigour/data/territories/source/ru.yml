@@ -1,0 +1,22 @@
+name: Russia
+full_name: Russian Federation
+region: Europe
+subregion: Eastern Europe
+qid: Q159
+other_qids:
+  - Q186096
+  - Q34266
+  - Q210036
+  - Q2305208
+  - Q5187
+  - Q2184
+  - Q5481
+  - Q139319
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary:
+  Russia, or the Russian Federation, is a country spanning Eastern Europe and
+  Northern Asia. It is the largest country in the world by area, extends across eleven
+  time zones, and shares land boundaries with fourteen countries.
+wikipedia_url: https://en.wikipedia.org/wiki/Russia

@@ -1,0 +1,23 @@
+name: Serbia and Montenegro
+full_name: Serbia and Montenegro
+region: Europe
+subregion: Southern Europe
+qid: Q37024
+is_country: true
+is_ftm: true
+is_historical: true
+see:
+  - yucs
+  - rs
+  - me
+successors:
+  - rs
+  - me
+summary:
+  Serbia and Montenegro, known until 2003 as the Federal Republic of Yugoslavia,
+  FR Yugoslavia or simply Yugoslavia, was a country in Southeast Europe located in
+  the Balkans that existed from 1992 to 2006, following the breakup of the Socialist
+  Federal Republic of Yugoslavia. The country bordered Hungary to the north, Romania
+  to the northeast, Bulgaria to the southeast, North Macedonia to the south, Croatia
+  and Bosnia and Herzegovina to the west, and Albania to the southwest.
+wikipedia_url: https://en.wikipedia.org/wiki/Serbia_and_Montenegro

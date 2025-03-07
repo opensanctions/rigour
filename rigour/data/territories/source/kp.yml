@@ -1,0 +1,15 @@
+name: North Korea
+full_name: Democratic People's Republic of Korea
+region: Asia
+subregion: Eastern Asia
+qid: Q423
+other_qids:
+- Q705044
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+- kr
+summary: North Korea, officially the Democratic People's Republic of Korea, is a hereditary
+  dictatorship under severe sanctions restrictions.
+wikipedia_url: https://en.wikipedia.org/wiki/North_Korea

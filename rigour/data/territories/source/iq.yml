@@ -1,0 +1,14 @@
+name: Iraq
+full_name: Iraq
+region: Asia
+subregion: Western Asia
+qid: Q796
+other_qids:
+  - Q3108185
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary:
+  Iraq, officially the Republic of Iraq, is a country in the Middle East. It
+  is a federal parliamentary republic that consists of 19 governorates.
+wikipedia_url: https://en.wikipedia.org/wiki/Iraq

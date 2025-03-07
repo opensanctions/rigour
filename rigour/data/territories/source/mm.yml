@@ -1,0 +1,18 @@
+name: Myanmar
+full_name: Myanmar
+region: Asia
+subregion: South-eastern Asia
+qid: Q836
+other_codes:
+  - bu
+  - bumm
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary:
+  "Myanmar (Burmese: မြန်မာ), officially the Republic of the Union of Myanmar,
+  also known as Burma (the official name until 1989), is a country in Southeast Asia.
+  It is bordered by Bangladesh and India to its northwest, China to its northeast,
+  Laos and Thailand to its east and southeast, and the Andaman Sea and the Bay of
+  Bengal to its south and southwest."
+wikipedia_url: https://en.wikipedia.org/wiki/Myanmar

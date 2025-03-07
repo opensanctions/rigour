@@ -1,0 +1,15 @@
+name: Malaysia
+full_name: Malaysia
+region: Asia
+subregion: South-eastern Asia
+qid: Q833
+other_qids:
+  - Q1479726
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary:
+  "Malaysia is a country in Southeast Asia. The federal constitutional monarchy
+  consists of 13 states and three federal territories, separated by the South China
+  Sea into two regions: Peninsular Malaysia and Borneo's East Malaysia."
+wikipedia_url: https://en.wikipedia.org/wiki/Malaysia

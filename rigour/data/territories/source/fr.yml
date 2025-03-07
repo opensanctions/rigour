@@ -1,0 +1,20 @@
+name: France
+full_name: France
+region: Europe
+subregion: Western Europe
+qid: Q142
+other_qids:
+- Q70972
+- Q71084
+- Q70802
+- Q22011067
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+- eu
+summary: France, officially the French Republic, is a country located in Western Europe.
+  It also includes overseas regions and territories in the Americas and the Atlantic,
+  Pacific and Indian oceans, giving it one of the largest discontiguous exclusive
+  economic zones in the world.
+wikipedia_url: https://en.wikipedia.org/wiki/France

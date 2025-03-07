@@ -1,0 +1,9 @@
+name: Abu Dhabi
+full_name: Abu Dhabi (United Arab Emirates)
+qid: Q187712
+other_qids:
+  - Q1519
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ae

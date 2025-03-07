@@ -1,0 +1,15 @@
+name: American Samoa
+full_name: American Samoa
+region: Oceania
+subregion: Polynesia
+qid: Q16641
+other_codes:
+  - us-as
+is_country: false
+is_ftm: true
+is_jurisdiction: true
+parent: us
+summary:
+  American Samoa is an unincorporated territory of the United States located
+  in the South Pacific Ocean, southeast of the island country of Samoa.
+wikipedia_url: https://en.wikipedia.org/wiki/American_Samoa

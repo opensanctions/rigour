@@ -1,0 +1,13 @@
+name: China
+full_name: China
+region: Asia
+subregion: Eastern Asia
+qid: Q148
+other_qids:
+- Q29520
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary: China, officially the People's Republic of China, is a country in East Asia.
+  It is the world's second-most populous country with a population exceeding 1.4 billion.
+wikipedia_url: https://en.wikipedia.org/wiki/China

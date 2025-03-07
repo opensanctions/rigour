@@ -1,0 +1,16 @@
+name: Italy
+full_name: Italy
+region: Europe
+subregion: Southern Europe
+qid: Q38
+other_qids:
+- Q172579
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+- eu
+summary: Italy, officially the Italian Republic or the Republic of Italy, is a country
+  in Southern and Western Europe. Located in the middle of the Mediterranean Sea,
+  it consists of a peninsula delimited by the Alps and surrounded by several islands.
+wikipedia_url: https://en.wikipedia.org/wiki/Italy

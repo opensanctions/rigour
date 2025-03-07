@@ -1,0 +1,21 @@
+name: Portugal
+full_name: Portugal
+region: Europe
+subregion: Southern Europe
+qid: Q45
+other_qids:
+  - Q45670
+  - Q104472514
+is_country: false
+is_ftm: true
+is_jurisdiction: true
+see:
+  - eu
+summary:
+  Portugal, officially the Portuguese Republic, is a country located on the
+  Iberian Peninsula, in Southwestern Europe, and whose territory also includes the
+  macaronesian archipelagos of the Azores, Madeira, and the Savage Islands. It features
+  the westernmost point in continental Europe, and its Iberian portion is bordered
+  to the west and south by the Atlantic Ocean and to the north and east by Spain,
+  the sole country to have a land border with Portugal.
+wikipedia_url: https://en.wikipedia.org/wiki/Portugal

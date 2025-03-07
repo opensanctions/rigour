@@ -1,0 +1,15 @@
+name: Artsakh
+full_name: Nagorno-Karabakh (Artsakh)
+region: Asia
+subregion: Western Asia
+qid: Q244165
+is_country: false
+is_ftm: true
+parent: am
+see:
+  - am
+  - az
+summary: "Nagorno-Karabakh is a region located in the South Caucasus, covering
+  the southeastern stretch of the Lesser Caucasus mountain range. Nagorno-Karabakh
+  is a disputed territory, with both Armenia and Azerbaijan claiming it."
+wikipedia_url: https://en.wikipedia.org/wiki/Nagorno-Karabakh

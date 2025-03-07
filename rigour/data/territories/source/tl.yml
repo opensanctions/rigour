@@ -1,0 +1,18 @@
+name: Timor-Leste
+full_name: Timor-Leste
+region: Asia
+subregion: South-eastern Asia
+qid: Q574
+other_codes:
+  - tp
+  - tptl
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary:
+  East Timor, also known as Timor-Leste, officially the Democratic Republic
+  of Timor-Leste, is a country in Southeast Asia. It comprises the eastern half of
+  the island of Timor, of which the western half is administered by Indonesia, the
+  exclave of Oecusse on the island's north-western half, and the minor islands of
+  Atauro and Jaco.
+wikipedia_url: https://en.wikipedia.org/wiki/Timor-Leste

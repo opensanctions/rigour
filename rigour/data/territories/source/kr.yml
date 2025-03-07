@@ -1,0 +1,17 @@
+name: South Korea
+full_name: Republic of Korea
+region: Asia
+subregion: Eastern Asia
+qid: Q884
+other_qids:
+  - Q18097
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+  - kp
+summary:
+  South Korea, officially the Republic of Korea, is a country in East Asia.
+  It constitutes the southern part of the Korean Peninsula and borders North Korea
+  along the Korean Demilitarized Zone.
+wikipedia_url: https://en.wikipedia.org/wiki/South_Korea

@@ -1,0 +1,14 @@
+name: Luxembourg
+full_name: Luxembourg
+region: Europe
+subregion: Western Europe
+qid: Q32
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+see:
+- eu
+summary: 'Luxembourg (Luxembourgish: Lëtzebuerg), officially the Grand Duchy of Luxembourg,
+  is a small landlocked country in Western Europe. It borders Belgium to the west
+  and north, Germany to the east, and France to the south.'''
+wikipedia_url: https://en.wikipedia.org/wiki/Luxembourg

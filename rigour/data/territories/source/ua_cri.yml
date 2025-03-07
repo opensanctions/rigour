@@ -1,0 +1,15 @@
+name: Crimea (Occupied Ukraine)
+full_name: Crimea (Occupied Ukraine)
+region: Europe
+subregion: Eastern Europe
+qid: Q15925436
+is_country: false
+is_ftm: true
+parent: ua
+see:
+  - ua
+  - ru
+summary:
+  Crimea is a part of Ukraine. It is a peninsula on the northern coast of the
+  Black Sea, almost entirely surrounded by the Black Sea and the smaller Sea of Azov.
+  In 2014, the peninsula was illegally occupied and annexed by Russia.

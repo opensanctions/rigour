@@ -1,0 +1,18 @@
+name: Somaliland
+full_name: Somaliland
+region: Africa
+subregion: Eastern Africa
+qid: Q34754
+other_qids:
+  - Q662653
+is_country: false
+is_ftm: true
+parent: so
+see:
+  - so
+summary:
+  Somaliland, officially the Republic of Somaliland, is an unrecognised sovereign
+  state in the Horn of Africa, recognised internationally as de jure part of Somalia.
+  It is located in the southern coast of the Gulf of Aden and bordered by Djibouti
+  to the northwest, Ethiopia to the south and west, and Somalia to the east.
+wikipedia_url: https://en.wikipedia.org/wiki/Somaliland

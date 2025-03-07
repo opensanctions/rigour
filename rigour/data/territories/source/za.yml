@@ -1,0 +1,17 @@
+name: South Africa
+full_name: South Africa
+region: Africa
+subregion: Southern Africa
+qid: Q258
+other_qids:
+  - Q550374
+is_country: true
+is_ftm: true
+is_jurisdiction: true
+summary:
+  South Africa, officially the Republic of South Africa, is the southernmost
+  country in Africa. It is bounded to the south by 2,798 kilometres of coastline that
+  stretches along the South Atlantic and Indian Oceans; to the north by the neighbouring
+  countries of Namibia, Botswana, and Zimbabwe; and to the east and northeast by Mozambique
+  and Eswatini.
+wikipedia_url: https://en.wikipedia.org/wiki/South_Africa
