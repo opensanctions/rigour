@@ -93,7 +93,7 @@ def format_address(
     prev: Optional[str] = None
     while prev != text:
         prev = text
-        text = text.replace("\n\n", "\n").strip()
+        text = text.replace("\n\n", "\n").replace("\n ", "\n").strip()
     return text
 
 

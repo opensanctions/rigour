@@ -13,7 +13,7 @@ generic1: &generic1 |
 # postcode after city
 generic2: &generic2 |
   {{attention}}
-  {{house}}, {{quarter or house}}
+  {{house}}{%- if house and quarter -%}, {%- endif -%}{{quarter}}
   {{house_number}} {{road}}
   {{village or city or town or municipality or county}} {{postcode}}
   {{country or state}}
