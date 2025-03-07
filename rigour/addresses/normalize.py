@@ -102,9 +102,11 @@ def normalize_address(
 
     parts: List[str] = []
     for token in tokens:
-        token_str = "".join(token)
+        token_str: Optional[str] = "".join(token)
         if latinize:
             token_str = ascii_text(token_str)
+        if token_str is None:
+            continue
         token_str = COMMON.get(token_str, token_str)
         parts.append(token_str)
     norm_address = "".join(parts)
