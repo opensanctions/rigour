@@ -8,3 +8,4 @@ and country codes, corporate and tax identifiers, etc.
 * [Languages](langs.md)
 * [MIME types](mime.md)
 * [Addresses](addresses.md)
+* [Territories](territories.md)

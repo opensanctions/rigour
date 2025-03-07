@@ -1,3 +1,17 @@
+"""
+# Political geography
+
+This module provides a set of classes and functions to work with countries, territories and
+jurisdictions. It is based on the notion that a territory is any political entity that may
+be referred to by a code, such as a country, a territory or a jurisdiction. Jurisdictions are
+most countries, but also sub-national entities like states, especially if they have their own
+legal incorporation regime.
+
+For all territories, mappings to Wikidata QIDs are provided, as well as a set of other codes
+that may be used to refer to the same territory. The module also provides a set of functions
+to retrieve territories by their codes or QIDs.
+"""
+
 from functools import cache
 from typing import Dict, List, Optional, Set
 from rigour.data.territories.data import TERRITORIES
