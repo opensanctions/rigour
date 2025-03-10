@@ -27,6 +27,8 @@ def _get_index() -> Dict[str, Territory]:
     for territory in list(index.values()):
         for other in territory.other_codes:
             index[other] = territory
+        if territory.alpha3:
+            index[territory.alpha3] = territory
     return index
 
 
@@ -42,6 +44,15 @@ def get_territory(code: str) -> Optional[Territory]:
     index = _get_index()
     code = clean_code(code)
     return index.get(code)
+
+
+def get_territories() -> List[Territory]:
+    """Get all the territories in the index.
+
+    Returns:
+        A list of territories.
+    """
+    return sorted(set(_get_index().values()))
 
 
 @cache

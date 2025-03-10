@@ -13,6 +13,7 @@ class Territory(object):
         self.code = code
         self.name: str = data["name"]
         self.full_name: str = data.get("full_name", self.name)
+        self.alpha3: Optional[str] = data.get("alpha3")
         self.is_country: bool = data.get("is_country", False)
         self.is_ftm: bool = data.get("is_ftm", False)
         self.is_jurisdiction: bool = data.get("is_jurisdiction", self.is_country)

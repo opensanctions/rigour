@@ -1,5 +1,5 @@
 from rigour.territories import get_territory, get_territory_by_qid
-from rigour.territories import get_ftm_countries
+from rigour.territories import get_ftm_countries, get_territories
 
 
 def test_world_real():
@@ -58,3 +58,20 @@ def test_territory_ftm():
     for terr in countries:
         assert terr.is_ftm
         assert terr.ftm_country == terr.code
+
+
+def test_list_access():
+    territories = get_territories()
+    assert len(territories) > 200
+    assert len(territories) < 400
+    for terr in territories:
+        assert terr == get_territory(terr.code)
+        assert terr == get_territory_by_qid(terr.qid)
+        for qid in terr.qids:
+            assert terr == get_territory_by_qid(qid)
+        for qid in terr.other_qids:
+            assert terr == get_territory_by_qid(qid)
+        for code in terr.other_codes:
+            assert terr == get_territory(code)
+        for see in terr.see:
+            assert see in territories
