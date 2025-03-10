@@ -2,6 +2,7 @@ name: France
 full_name: France
 region: Europe
 subregion: Western Europe
+alpha3: fra
 qid: Q142
 other_qids:
   - Q70972

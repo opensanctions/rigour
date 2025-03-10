@@ -2,11 +2,13 @@ name: Morocco
 full_name: Morocco
 region: Africa
 subregion: Northern Africa
+alpha3: mar
 qid: Q1028
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: Morocco, officially the Kingdom of Morocco, is a country in the Maghreb region
+summary:
+  Morocco, officially the Kingdom of Morocco, is a country in the Maghreb region
   of North Africa. Morocco also claims the Spanish exclaves of Ceuta, Melilla and
   Peñón de Vélez de la Gomera, and several small Spanish-controlled islands off its
   coast.

@@ -2,11 +2,13 @@ name: Samoa
 full_name: Samoa
 region: Oceania
 subregion: Polynesia
+alpha3: wsm
 qid: Q683
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: Samoa, officially the Independent State of Samoa and until 1997 known as
+summary:
+  Samoa, officially the Independent State of Samoa and until 1997 known as
   Western Samoa, is a Polynesian island country consisting of two main islands; two
   smaller, inhabited islands; and several smaller, uninhabited islands, including
   the Aleipata Islands. Samoa is located 64 km west of American Samoa, 889 km northeast

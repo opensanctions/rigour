@@ -2,6 +2,7 @@ name: Vietnam
 full_name: Viet Nam
 region: Asia
 subregion: South-eastern Asia
+alpha3: vnm
 qid: Q881
 other_qids:
   - Q180573

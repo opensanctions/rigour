@@ -2,6 +2,7 @@ name: New Caledonia
 full_name: New Caledonia
 region: Oceania
 subregion: Melanesia
+alpha3: ncl
 qid: Q33788
 is_country: false
 is_ftm: true

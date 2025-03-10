@@ -2,6 +2,7 @@ name: French Guiana
 full_name: French Guiana
 region: Americas
 subregion: South America
+alpha3: guf
 is_country: false
 is_ftm: true
 parent: fr

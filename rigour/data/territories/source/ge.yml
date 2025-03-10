@@ -2,6 +2,7 @@ name: Georgia
 full_name: Georgia
 region: Asia
 subregion: Western Asia
+alpha3: geo
 qid: Q230
 other_qids:
   - Q245160

@@ -2,15 +2,17 @@ name: Latvia
 full_name: Latvia
 region: Europe
 subregion: Northern Europe
+alpha3: lva
 qid: Q211
 other_qids:
-- Q192180
+  - Q192180
 is_country: true
 is_ftm: true
 is_jurisdiction: true
 see:
-- eu
-summary: Latvia, officially the Republic of Latvia, is a country in the Baltic region
+  - eu
+summary:
+  Latvia, officially the Republic of Latvia, is a country in the Baltic region
   of Northern Europe. It is one of the three Baltic states, along with Estonia to
   the north and Lithuania to the south.
 wikipedia_url: https://en.wikipedia.org/wiki/Latvia

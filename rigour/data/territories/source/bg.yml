@@ -2,6 +2,7 @@ name: Bulgaria
 full_name: Bulgaria
 region: Europe
 subregion: Eastern Europe
+alpha3: bgr
 qid: Q219
 other_qids:
   - Q121932

@@ -2,6 +2,7 @@ name: Macao SAR
 full_name: Macao Special Administrative Region
 region: Asia
 subregion: Eastern Asia
+alpha3: mac
 qid: Q14773
 other_codes:
   - cn-mo

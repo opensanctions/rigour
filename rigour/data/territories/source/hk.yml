@@ -2,6 +2,7 @@ name: Hong Kong SAR
 full_name: Hong Kong Special Administrative Region
 region: Asia
 subregion: Eastern Asia
+alpha3: hkg
 qid: Q8646
 other_qids:
   - Q1054923

@@ -2,11 +2,15 @@ name: Seychelles
 full_name: Seychelles
 region: Africa
 subregion: Eastern Africa
+alpha3: syc
 qid: Q1042
+other_qids:
+  - Q129619467
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: Seychelles, officially the Republic of Seychelles, is an island country and
+summary:
+  Seychelles, officially the Republic of Seychelles, is an island country and
   archipelagic state consisting of 155 islands (as per the Constitution) in the Indian
   Ocean.
 wikipedia_url: https://en.wikipedia.org/wiki/Seychelles

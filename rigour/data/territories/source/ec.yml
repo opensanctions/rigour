@@ -2,6 +2,7 @@ name: Ecuador
 full_name: Ecuador
 region: Americas
 subregion: South America
+alpha3: ecu
 qid: Q736
 is_country: true
 is_ftm: true

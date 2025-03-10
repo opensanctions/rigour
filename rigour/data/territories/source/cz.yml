@@ -2,6 +2,7 @@ name: Czechia
 full_name: Czech Republic
 region: Europe
 subregion: Central Europe
+alpha3: cze
 qid: Q213
 is_country: true
 is_ftm: true

@@ -2,6 +2,7 @@ name: Canada
 full_name: Canada
 region: Americas
 subregion: Northern America
+alpha3: can
 qid: Q16
 is_country: true
 is_ftm: true

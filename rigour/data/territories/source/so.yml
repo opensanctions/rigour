@@ -2,13 +2,15 @@ name: Somalia
 full_name: Somalia
 region: Africa
 subregion: Eastern Africa
+alpha3: som
 qid: Q1045
 is_country: true
 is_ftm: true
 is_jurisdiction: true
 see:
-- so-som
-summary: Somalia, officially the Federal Republic of Somalia, is a country in the
+  - so-som
+summary:
+  Somalia, officially the Federal Republic of Somalia, is a country in the
   Horn of Africa. The country is bordered by Ethiopia to the west, Djibouti to the
   northwest, the Gulf of Aden to the north, the Indian Ocean to the east, and Kenya
   to the southwest.

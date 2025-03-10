@@ -2,9 +2,11 @@ name: Cuba
 full_name: Cuba
 region: Americas
 subregion: Caribbean
+alpha3: cub
 qid: Q241
 other_qids:
   - Q115027
+  - Q14905932
 is_country: true
 is_ftm: true
 is_jurisdiction: true

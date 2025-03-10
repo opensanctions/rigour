@@ -2,6 +2,7 @@ name: Costa Rica
 full_name: Costa Rica
 region: Americas
 subregion: Central America
+alpha3: cri
 qid: Q800
 is_country: true
 is_ftm: true

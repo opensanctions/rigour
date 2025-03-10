@@ -2,6 +2,7 @@ name: Panama
 full_name: Panama
 region: Americas
 subregion: Central America
+alpha3: pan
 qid: Q804
 other_codes:
   - pz

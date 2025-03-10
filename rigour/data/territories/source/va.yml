@@ -2,6 +2,7 @@ name: Holy See
 full_name: Holy See (Vatican)
 region: Europe
 subregion: Southern Europe
+alpha3: vat
 qid: Q237
 is_country: true
 is_ftm: true

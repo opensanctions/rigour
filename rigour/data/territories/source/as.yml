@@ -2,6 +2,7 @@ name: American Samoa
 full_name: American Samoa
 region: Oceania
 subregion: Polynesia
+alpha3: asm
 qid: Q16641
 other_codes:
   - us-as

@@ -2,6 +2,7 @@ name: Portugal
 full_name: Portugal
 region: Europe
 subregion: Southern Europe
+alpha3: prt
 qid: Q45
 other_qids:
   - Q45670

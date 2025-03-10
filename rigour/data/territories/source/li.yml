@@ -2,6 +2,7 @@ name: Liechtenstein
 full_name: Liechtenstein
 region: Europe
 subregion: Western Europe
+alpha3: lie
 qid: Q347
 is_country: true
 is_ftm: true

@@ -2,11 +2,13 @@ name: Rwanda
 full_name: Rwanda
 region: Africa
 subregion: Eastern Africa
+alpha3: rwa
 qid: Q1037
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: Rwanda, officially the Republic of Rwanda, is a landlocked country in the
+summary:
+  Rwanda, officially the Republic of Rwanda, is a landlocked country in the
   Great Rift Valley of Central Africa, where the African Great Lakes region and Southeast
   Africa converge. Located a few degrees south of the Equator, Rwanda is bordered
   by Uganda, Tanzania, Burundi, and the Democratic Republic of the Congo.

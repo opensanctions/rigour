@@ -2,12 +2,14 @@ name: Germany
 full_name: Germany
 region: Europe
 subregion: Central Europe
+alpha3: deu
 qid: Q183
 other_qids:
   - Q713750
   - Q7318
   - Q159631
   - Q980
+  - Q43287
 is_country: true
 is_ftm: true
 is_jurisdiction: true

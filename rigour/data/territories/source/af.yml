@@ -2,15 +2,17 @@ name: Afghanistan
 full_name: Afghanistan
 region: Asia
 subregion: Southern Asia
+alpha3: afg
 qid: Q889
 other_qids:
-- Q1138904
-- Q30747910
-- Q427941
-- Q476757
+  - Q1138904
+  - Q30747910
+  - Q427941
+  - Q476757
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: Afghanistan, officially the Islamic Emirate of Afghanistan, is a landlocked
+summary:
+  Afghanistan, officially the Islamic Emirate of Afghanistan, is a landlocked
   country located at the crossroads of Central Asia and South Asia.
 wikipedia_url: https://en.wikipedia.org/wiki/Afghanistan

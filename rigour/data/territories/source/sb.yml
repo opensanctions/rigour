@@ -2,13 +2,15 @@ name: Solomon Islands
 full_name: Solomon Islands
 region: Oceania
 subregion: Melanesia
+alpha3: slb
 qid: Q685
 other_qids:
-- Q13410267
+  - Q13410267
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: Solomon Islands is a country consisting of six major islands and over 900
+summary:
+  Solomon Islands is a country consisting of six major islands and over 900
   smaller islands in Melanesia, part of Oceania, to the northeast of Australia. It
   is directly adjacent to Papua New Guinea to the northwest, Australia to the southwest,
   New Caledonia and Vanuatu to the southeast, Fiji, Wallis and Futuna and Tuvalu to

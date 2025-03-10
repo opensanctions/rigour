@@ -2,6 +2,7 @@ name: Belgium
 full_name: Belgium
 region: Europe
 subregion: Western Europe
+alpha3: bel
 qid: Q31
 is_country: false
 is_ftm: true

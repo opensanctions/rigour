@@ -2,9 +2,11 @@ name: Iran
 full_name: Islamic Republic of Iran
 region: Asia
 subregion: Southern Asia
+alpha3: irn
 qid: Q794
 other_qids:
   - Q107258515
+  - Q125422413
 is_country: true
 is_ftm: true
 is_jurisdiction: true

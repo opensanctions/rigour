@@ -2,6 +2,7 @@ name: Russia
 full_name: Russian Federation
 region: Europe
 subregion: Eastern Europe
+alpha3: rus
 qid: Q159
 other_qids:
   - Q186096
@@ -12,6 +13,7 @@ other_qids:
   - Q2184
   - Q5481
   - Q139319
+  - Q166110 # union state
 is_country: true
 is_ftm: true
 is_jurisdiction: true

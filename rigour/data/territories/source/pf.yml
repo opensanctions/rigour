@@ -2,6 +2,7 @@ name: French Polynesia
 full_name: French Polynesia
 region: Oceania
 subregion: Polynesia
+alpha3: pyf
 is_country: false
 is_ftm: true
 is_jurisdiction: true

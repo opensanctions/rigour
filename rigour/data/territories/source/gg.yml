@@ -2,6 +2,7 @@ name: Guernsey
 full_name: Guernsey
 region: Europe
 subregion: Northern Europe
+alpha3: ggy
 qid: Q25230
 is_country: true
 is_ftm: true

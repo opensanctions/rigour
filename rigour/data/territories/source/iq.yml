@@ -2,6 +2,7 @@ name: Iraq
 full_name: Iraq
 region: Asia
 subregion: Western Asia
+alpha3: irq
 qid: Q796
 other_qids:
   - Q3108185

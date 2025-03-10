@@ -2,11 +2,13 @@ name: Congo-Brazzaville
 full_name: The Republic of the Congo
 region: Africa
 subregion: Middle Africa
+alpha3: cog
 qid: Q971
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary: The Republic of the Congo, also known as Congo-Brazzaville, the Congo Republic
+summary:
+  The Republic of the Congo, also known as Congo-Brazzaville, the Congo Republic
   or simply either Congo or the Congo, is a country located on the western coast of
   Central Africa to the west of the Congo River. It is bordered to the west by Gabon,
   to its northwest by Cameroon and its northeast by the Central African Republic,

@@ -2,6 +2,7 @@ name: Cyprus
 full_name: Cyprus
 region: Asia
 subregion: Western Asia
+alpha3: cyp
 qid: Q229
 other_qids:
   - Q15240466

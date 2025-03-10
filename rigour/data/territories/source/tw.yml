@@ -2,6 +2,7 @@ name: Taiwan
 full_name: Taiwan (Province of China)
 region: Asia
 subregion: Eastern Asia
+alpha3: twn
 qid: Q865
 other_codes:
   - cn-tw

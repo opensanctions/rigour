@@ -2,9 +2,10 @@ name: Albania
 full_name: Albania
 region: Europe
 subregion: Southern Europe
+alpha3: alb
 qid: Q222
 other_qids:
-- Q467864
+  - Q467864
 is_country: true
 is_ftm: true
 is_jurisdiction: true

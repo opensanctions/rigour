@@ -2,6 +2,7 @@ name: United States of America
 full_name: United States of America
 region: Americas
 subregion: Northern America
+alpha3: usa
 qid: Q30
 other_qids:
   - Q1783171

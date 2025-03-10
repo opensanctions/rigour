@@ -2,6 +2,7 @@ name: South Korea
 full_name: Republic of Korea
 region: Asia
 subregion: Eastern Asia
+alpha3: kor
 qid: Q884
 other_qids:
   - Q18097

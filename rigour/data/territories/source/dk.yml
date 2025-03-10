@@ -2,6 +2,7 @@ name: Denmark
 full_name: Denmark
 region: Europe
 subregion: Northern Europe
+alpha3: dnk
 qid: Q756617
 other_qids:
   - Q35

@@ -2,6 +2,7 @@ name: Greenland
 full_name: Greenland
 region: Americas
 subregion: Northern America
+alpha3: grl
 qid: Q223
 is_country: true
 is_ftm: true
