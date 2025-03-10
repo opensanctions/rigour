@@ -1,0 +1,12 @@
+name: Ukrainian SSR
+full_name: Ukrainian Soviet Federative Socialist Republic
+region: Europe
+subregion: Eastern Europe
+qid: Q133356
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - ua

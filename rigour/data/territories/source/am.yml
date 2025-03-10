@@ -4,8 +4,6 @@ region: Asia
 subregion: Western Asia
 alpha3: arm
 qid: Q399
-other_qids:
-  - Q132856
 is_country: true
 is_ftm: true
 is_jurisdiction: true

@@ -1,0 +1,12 @@
+name: Estonian SSR
+full_name: Estonian Soviet Socialist Republic
+region: Europe
+subregion: Northern Europe
+qid: Q130280
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - ee

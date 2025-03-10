@@ -1,0 +1,12 @@
+name: Armenian SSR
+full_name: Armenian Soviet Socialist Republic
+region: Asia
+subregion: Western Asia
+qid: Q132856
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - am

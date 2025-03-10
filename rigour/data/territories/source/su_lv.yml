@@ -1,0 +1,12 @@
+name: Latvian SSR
+full_name: Latvian Soviet Socialist Republic
+region: Europe
+subregion: Northern Europe
+qid: Q192180
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - lv

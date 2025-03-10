@@ -1,0 +1,12 @@
+name: Turkmen SSR
+full_name: Turkmen Soviet Socialist Republic
+region: Asia
+subregion: Central Asia
+qid: Q199707
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - tm

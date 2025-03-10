@@ -1,0 +1,14 @@
+name: Kazakh SSR
+full_name: Kazakh Soviet Socialist Republic
+region: Asia
+subregion: Central Asia
+qid: Q168811
+other_qids:
+  - Q2332797
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - kz

@@ -4,8 +4,6 @@ region: Europe
 subregion: Northern Europe
 alpha3: lva
 qid: Q211
-other_qids:
-  - Q192180
 is_country: true
 is_ftm: true
 is_jurisdiction: true

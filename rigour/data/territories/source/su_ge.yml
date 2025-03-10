@@ -1,0 +1,12 @@
+name: Georgian SSR
+full_name: Georgian Soviet Socialist Republic
+region: Asia
+subregion: Western Asia
+qid: Q130229
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - ge

@@ -1,0 +1,14 @@
+name: Russian SSR
+full_name: Russian Soviet Federative Socialist Republic
+region: Europe
+subregion: Eastern Europe
+qid: Q2184
+other_qids:
+  - Q2305208
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - ru

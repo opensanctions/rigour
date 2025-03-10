@@ -1,0 +1,13 @@
+name: Moldavian SSR
+full_name: Moldavian Soviet Socialist Republic
+region: Europe
+subregion: Eastern Europe
+qid: Q170895
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - md
+  - md-pmr

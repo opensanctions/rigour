@@ -1,0 +1,12 @@
+name: Azerbaijan SSR
+full_name: Azerbaijan Soviet Socialist Republic
+region: Asia
+subregion: Western Asia
+qid: Q131337
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - az

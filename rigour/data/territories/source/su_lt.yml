@@ -1,0 +1,12 @@
+name: Lithuanian SSR
+full_name: Lithuanian Soviet Socialist Republic
+region: Europe
+subregion: Northern Europe
+qid: Q173761
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - lt

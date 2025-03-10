@@ -2,22 +2,8 @@ name: Soviet Union
 full_name: Soviet Union
 region: Supranational
 qid: Q15180
-other_qids:
-  # - Q2895  # byelarussian ssr
-  # - Q133356  # ukrainian ssr
-  # - Q243610  # ukranian ssr
-  # - Q2305208  # russian ssr
-  - Q131337
-  # - Q130229  # georgian ssr
-  - Q199707
-  # - Q168811  # kazakh ssr
-  # - Q192180  # latvian ssr
-  # - Q2184  # russian ssr
-  # - Q484578  # uzbek ssr
-  - Q130280
 other_codes:
   - su
-  - byaa
 is_country: true
 is_ftm: true
 is_historical: true

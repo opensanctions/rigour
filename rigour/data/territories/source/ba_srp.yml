@@ -1,0 +1,12 @@
+name: Republika Srpska
+full_name: Republika Srpska
+region: Europe
+subregion: Southern Europe
+parent: ba
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: false
+qid: Q11196
+other_qids:
+  - Q16761250

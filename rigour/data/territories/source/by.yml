@@ -4,8 +4,6 @@ region: Europe
 subregion: Eastern Europe
 alpha3: blr
 qid: Q184
-other_qids:
-  - Q2895
 is_country: true
 is_ftm: true
 is_jurisdiction: true

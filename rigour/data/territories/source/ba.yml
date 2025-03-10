@@ -6,11 +6,7 @@ alpha3: bih
 qid: Q225
 other_qids:
   - Q208545
-  - Q16761250
   - Q1274468
-  - Q11196 # rep srpska
-  - Q194483 # brcko
-  - Q11198 # fbih
 is_country: true
 is_ftm: true
 is_jurisdiction: true

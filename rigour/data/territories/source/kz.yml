@@ -4,8 +4,6 @@ region: Asia
 subregion: Central Asia
 alpha3: kaz
 qid: Q232
-other_qids:
-  - Q168811
 is_country: true
 is_ftm: true
 is_jurisdiction: true

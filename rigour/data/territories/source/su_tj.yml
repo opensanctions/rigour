@@ -1,0 +1,12 @@
+name: Tajik SSR
+full_name: Tajik Soviet Socialist Republic
+region: Asia
+subregion: Central Asia
+qid: Q199711
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - tj

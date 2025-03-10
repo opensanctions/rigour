@@ -5,14 +5,12 @@ subregion: Eastern Europe
 alpha3: rus
 qid: Q159
 other_qids:
-  - Q186096
-  - Q34266
-  - Q210036
-  - Q2305208
-  - Q5187
-  - Q2184
-  - Q5481
-  - Q139319
+  - Q186096 # tsardom
+  - Q34266 # ru empire
+  - Q210036 # Chechen Republic of Ichkeria
+  - Q5187 # Chechnya
+  - Q5481 # Tatarstan
+  - Q139319 # Russian Republic
   - Q166110 # union state
 is_country: true
 is_ftm: true

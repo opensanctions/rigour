@@ -1,0 +1,15 @@
+name: Byelorussian SSR
+full_name: Byelorussian Soviet Socialist Republic
+region: Europe
+subregion: Eastern Europe
+qid: Q2895
+alpha3: bys
+other_codes:
+  - byaa
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+is_historical: true
+parent: suhh
+successors:
+  - by

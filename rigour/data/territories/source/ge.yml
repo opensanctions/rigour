@@ -6,7 +6,6 @@ alpha3: geo
 qid: Q230
 other_qids:
   - Q245160
-  - Q130229
 is_country: true
 is_ftm: true
 is_jurisdiction: true

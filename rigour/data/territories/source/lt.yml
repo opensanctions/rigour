@@ -4,8 +4,6 @@ region: Europe
 subregion: Northern Europe
 alpha3: ltu
 qid: Q37
-other_qids:
-  - Q173761
 is_country: true
 is_ftm: true
 is_jurisdiction: true
