@@ -7,6 +7,7 @@ other_qids:
   - Q662653
 is_country: false
 is_ftm: true
+is_jurisdiction: true
 parent: so
 see:
   - so

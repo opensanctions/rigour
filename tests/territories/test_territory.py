@@ -35,6 +35,9 @@ def test_territory_class_functions():
     assert hash(fr) == hash(get_territory("fr"))
     assert hash(fr) != hash(get_territory("de"))
 
+    assert fr.region == "Europe"
+    assert fr.subregion == "Western Europe"
+
     assert fr != "fr"
     assert fr > get_territory("de")
 

@@ -5,6 +5,7 @@ subregion: Western Asia
 qid: Q23427
 is_country: false
 is_ftm: true
+is_jurisdiction: true
 parent: ge
 see:
   - ge

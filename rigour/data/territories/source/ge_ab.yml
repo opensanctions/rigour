@@ -8,6 +8,7 @@ other_qids:
   - Q2914461
 is_country: false
 is_ftm: true
+is_jurisdiction: true
 parent: ge
 see:
   - ge

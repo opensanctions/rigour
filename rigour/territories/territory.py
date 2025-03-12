@@ -18,6 +18,8 @@ class Territory(object):
         self.is_ftm: bool = data.get("is_ftm", False)
         self.is_jurisdiction: bool = data.get("is_jurisdiction", self.is_country)
         self.is_historical: bool = data.get("is_historical", False)
+        self._region: Optional[str] = data.get("region", None)
+        self._subregion: Optional[str] = data.get("subregion", None)
         self.qid: str = str(data.get("qid"))
         self.other_qids: List[str] = data.get("other_qids", [])
         self.other_codes: List[str] = data.get("other_codes", [])
@@ -31,6 +33,24 @@ class Territory(object):
         if self._parent is None:
             return None
         return self.index[self._parent]
+
+    @property
+    def region(self) -> Optional[str]:
+        """Return the global region name."""
+        if self._region:
+            return self._region
+        if self.parent:
+            return self.parent.region
+        return None
+
+    @property
+    def subregion(self) -> Optional[str]:
+        """Return the subregion name."""
+        if self._subregion:
+            return self._subregion
+        if self.parent:
+            return self.parent.subregion
+        return None
 
     @property
     def successors(self) -> List["Territory"]:

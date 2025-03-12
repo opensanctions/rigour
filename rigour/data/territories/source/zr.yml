@@ -5,6 +5,7 @@ subregion: Middle Africa
 qid: Q6500954
 is_country: true
 is_ftm: true
+is_historical: true
 other_codes:
   - zrcd
 see:

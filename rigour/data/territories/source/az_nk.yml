@@ -5,6 +5,7 @@ subregion: Western Asia
 qid: Q244165
 is_country: false
 is_ftm: true
+is_jurisdiction: true
 parent: am
 see:
   - am
