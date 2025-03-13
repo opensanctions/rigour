@@ -48,10 +48,8 @@ def fetch_territory(qid: str, code: str) -> None:
             mainsnak = statement.get("mainsnak", {})
             if mainsnak.get("snaktype") == "value":
                 iso_codes.append(mainsnak["datavalue"].get("value", "").lower())
-
     if not iso_codes:
         print(f"Warning: No ISO 3166-2 code found for '{name}' ({qid})")
-        return
 
     iso_code_wikidata = iso_codes[1] if len(iso_codes) > 1 else iso_codes[0]
     iso_code_wikidata = iso_code_wikidata.lower().replace("-", "_")
@@ -61,6 +59,8 @@ def fetch_territory(qid: str, code: str) -> None:
             f"Warning: Mismatch between provided code '{code}' and Wikidata code '{iso_code_wikidata}'"
         )
         return
+    if len(iso_codes) > 1:
+        data["other_codes"] = iso_codes[1:]
 
     with open(path, "w") as wfh:
         yaml.dump(data, wfh, indent=2, allow_unicode=True, sort_keys=True)
