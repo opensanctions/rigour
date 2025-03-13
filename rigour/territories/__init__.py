@@ -13,7 +13,7 @@ to retrieve territories by their codes or QIDs.
 """
 
 from functools import cache
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional
 from rigour.data.territories.data import TERRITORIES
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code

@@ -71,7 +71,7 @@ COMMON = {
 
 
 def normalize_address(
-    address: str, latinize: bool = False, min_length: int = 4
+    address: str, latinize: bool = False, min_length: int = 4, sep: str = ""
 ) -> Optional[str]:
     """Normalize the given address string for comparison, in a way that is destructive to
     the ability for displaying it (makes it ugly).
@@ -109,7 +109,7 @@ def normalize_address(
             continue
         token_str = COMMON.get(token_str, token_str)
         parts.append(token_str)
-    norm_address = "".join(parts)
+    norm_address = sep.join(parts)
     if len(norm_address) < min_length:
         return None
     return norm_address
