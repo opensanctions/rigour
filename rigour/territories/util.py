@@ -8,4 +8,4 @@ def clean_code(code: str) -> str:
 
 def clean_codes(codes: List[str]) -> List[str]:
     """Clean up a list of territory codes."""
-    return [clean_code(code) for code in codes]
+    return [clean_code(code) for code in codes if len(clean_code(code)) > 1]

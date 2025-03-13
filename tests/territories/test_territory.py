@@ -1,5 +1,6 @@
 from rigour.territories import get_territory, get_territory_by_qid
 from rigour.territories import get_ftm_countries, get_territories
+from rigour.territories.util import clean_codes
 
 
 def test_world_real():
@@ -14,6 +15,7 @@ def test_world_real():
     assert nir is not None
     assert nir.parent == gb
     assert get_territory("gb-nirvana") is None
+    assert get_territory_by_qid("Q232323312") is None
 
     cq = get_territory("cq")
     srk = get_territory("gg-srk")
@@ -40,6 +42,10 @@ def test_territory_class_functions():
 
     assert fr != "fr"
     assert fr > get_territory("de")
+
+    dubai = get_territory("ae-du")
+    assert dubai.region == "Asia"
+    assert dubai.subregion == "Western Asia"
 
 
 def test_territory_ftm():
@@ -78,3 +84,9 @@ def test_list_access():
             assert terr == get_territory(code)
         for see in terr.see:
             assert see in territories
+
+
+def test_clean_code():
+    assert clean_codes(["GB", "US", "FR"]) == ["gb", "us", "fr"]
+    assert clean_codes(["GB_NIR"]) == ["gb-nir"]
+    assert clean_codes([""]) == []

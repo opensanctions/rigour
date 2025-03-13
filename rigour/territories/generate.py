@@ -39,7 +39,11 @@ def update_data() -> None:
             for other in data["other_codes"]:
                 if other in territories:
                     log.warning("Duplicate code: %s", other)
+            if len(data["other_codes"]) == 0:
+                data.pop("other_codes")
             data["see"] = clean_codes(data.get("see", []))
+            if len(data["see"]) == 0:
+                data.pop("see")
             territories[code] = Territory(territories, code, data)
 
     for terr in territories.values():

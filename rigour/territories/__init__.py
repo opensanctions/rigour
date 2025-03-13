@@ -46,6 +46,7 @@ def get_territory(code: str) -> Optional[Territory]:
     return index.get(code)
 
 
+@cache
 def get_territories() -> List[Territory]:
     """Get all the territories in the index.
 
@@ -71,7 +72,6 @@ def get_territory_by_qid(qid: str) -> Optional[Territory]:
     return None
 
 
-@cache
 def get_ftm_countries() -> List[Territory]:
     """Get all the countries that were supported by the FtM `country`
     property type.
@@ -79,8 +79,8 @@ def get_ftm_countries() -> List[Territory]:
     Returns:
         A list of territories.
     """
-    territories: Set[Territory] = set()
-    for territory in _get_index().values():
+    territories: List[Territory] = []
+    for territory in get_territories():
         if territory.is_ftm:
-            territories.add(territory)
-    return sorted(territories)
+            territories.append(territory)
+    return territories
