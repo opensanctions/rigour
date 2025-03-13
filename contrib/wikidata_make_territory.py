@@ -39,6 +39,29 @@ def fetch_territory(qid: str, code: str) -> None:
             data["full_name"] = f"{name} ({parent_terr.name})"
     else:
         data["full_name"] = name
+
+    # Extract second ISO 3166-2 code from Wikidata (P300 - external ID)
+    claims = entity.get("claims", {})
+    iso_codes = []
+    if "P300" in claims:
+        for statement in claims["P300"]:
+            mainsnak = statement.get("mainsnak", {})
+            if mainsnak.get("snaktype") == "value":
+                iso_codes.append(mainsnak["datavalue"].get("value", "").lower())
+    if not iso_codes:
+        print(f"Warning: No ISO 3166-2 code found for '{name}' ({qid})")
+
+    iso_code_wikidata = iso_codes[1] if len(iso_codes) > 1 else iso_codes[0]
+    iso_code_wikidata = iso_code_wikidata.lower().replace("-", "_")
+    # Compare ISO codes
+    if iso_code_wikidata != code:
+        print(
+            f"Warning: Mismatch between provided code '{code}' and Wikidata code '{iso_code_wikidata}'"
+        )
+        return
+    if len(iso_codes) > 1:
+        data["other_codes"] = iso_codes[1:]
+
     with open(path, "w") as wfh:
         yaml.dump(data, wfh, indent=2, allow_unicode=True, sort_keys=True)
 
