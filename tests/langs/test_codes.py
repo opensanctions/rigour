@@ -1,5 +1,13 @@
 from rigour.langs import iso_639_alpha3, iso_639_alpha2
 from rigour.langs import list_to_alpha3
+from rigour.langs import PREFERRED_LANG, PREFFERED_LANGS
+
+
+def test_preferred():
+    assert iso_639_alpha3(PREFERRED_LANG) == PREFERRED_LANG
+    for lang in PREFFERED_LANGS:
+        assert iso_639_alpha3(lang) == lang
+        assert iso_639_alpha2(lang) is not None
 
 
 def test_alpha3():

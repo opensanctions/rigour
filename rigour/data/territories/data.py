@@ -1551,8 +1551,6 @@ TERRITORIES: Dict[str, Any] = {
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
-        "summary": "Saint Helena is a British overseas territory located in the South Atlantic Ocean. It is a remote volcanic tropical island 1,950 km (1,210 mi) west of the coast of south-western Africa, and 4,000 km (2,500 mi) east of Rio de Janeiro in South America. It is one of three constituent parts of the British Overseas Territory of Saint Helena, Ascension and Tristan da Cunha.",
-        "wikipedia_url": "https://en.wikipedia.org/wiki/St._Helena",
     },
     "us-ms": {
         "name": "Mississippi",
@@ -3685,6 +3683,7 @@ TERRITORIES: Dict[str, Any] = {
         "is_country": True,
         "is_ftm": True,
         "is_jurisdiction": True,
+        "see": ["ss"],
         "summary": "Sudan, officially the Republic of the Sudan, is a country in Northeast Africa. It borders the Central African Republic to the southwest, Chad to the west, Egypt to the north, Eritrea to the northeast, Ethiopia to the southeast, Libya to the northwest, South Sudan to the south, and the Red Sea.",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Sudan",
     },

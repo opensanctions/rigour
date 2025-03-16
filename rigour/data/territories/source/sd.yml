@@ -7,6 +7,8 @@ qid: Q1049
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+see:
+  - ss
 summary:
   Sudan, officially the Republic of the Sudan, is a country in Northeast Africa.
   It borders the Central African Republic to the southwest, Chad to the west, Egypt

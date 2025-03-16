@@ -22,6 +22,36 @@ from banal import ensure_list
 from rigour.data.langs.iso639 import ISO3_ALL, ISO2_MAP, ISO3_MAP
 from rigour.langs.synonyms import expand_synonyms, LANG_REWRITE
 from rigour.langs.util import normalize_code
+from rigour.env import PREFERRED_LANG as PREFERRED_LANG_
+
+# The world is a cruel and dark place so here we're picking a list of
+# languages that are most widely readable. The bias is towards European
+# languages using a latin script.
+# https://en.wikipedia.org/wiki/List_of_languages_by_number_of_native_speakers
+PREFERRED_LANG = PREFERRED_LANG_  # env: RR_PREFERRED_LANG/eng
+PREFFERED_LANGS = [
+    "eng",
+    "spa",
+    "fra",
+    "por",
+    "deu",
+    "nld",
+    "ita",
+    "tur",
+    "pol",
+    "ron",
+    "ces",
+    "srp",
+    "hrv",
+    "dan",
+    "nor",
+    "rus",
+    "ukr",
+    "ara",
+    "fas",
+    "urd",
+    "zho",
+]
 
 
 def iso_639_alpha3(code: str) -> Optional[str]:
