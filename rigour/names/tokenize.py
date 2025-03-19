@@ -1,9 +1,7 @@
 import unicodedata
 from typing import List
 from normality.constants import WS
-from normality.cleaning import category_replace, collapse_spaces
 from normality.util import Categories
-from fingerprints.cleanup import CHARACTERS_REMOVE_RE
 
 # PREFIXES = ["el", "al", "il"]
 TOKEN_SEP_CATEGORIES: Categories = {
@@ -32,15 +30,6 @@ TOKEN_SEP_CATEGORIES: Categories = {
     "Sk": None,
     "So": WS,
 }
-
-
-def prepare_tokenize_name(text: str) -> str:
-    """Prepare a name for tokenization."""
-    text = text.lower()
-    text = CHARACTERS_REMOVE_RE.sub("", text)
-    text = category_replace(text, replacements=TOKEN_SEP_CATEGORIES) or ""
-    text = collapse_spaces(text) or ""
-    return text
 
 
 def tokenize_name(text: str, min_length: int = 1) -> List[str]:
