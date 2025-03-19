@@ -29,7 +29,7 @@ class Name(object):
         self._parts = parts
 
     @property
-    def parts(self):
+    def parts(self) -> List[NamePart]:
         if self._parts is None:
             self._parts = []
             for i, form in enumerate(tokenize_name(self.form)):
