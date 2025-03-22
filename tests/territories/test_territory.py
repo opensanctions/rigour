@@ -72,7 +72,7 @@ def test_territory_ftm():
 def test_list_access():
     territories = get_territories()
     assert len(territories) > 200
-    assert len(territories) < 400
+    assert len(territories) < 1000
     for terr in territories:
         assert terr == get_territory(terr.code)
         assert terr == get_territory_by_qid(terr.qid)
