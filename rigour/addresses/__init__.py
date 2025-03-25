@@ -17,6 +17,13 @@ address = {
 }
 address_text = format_one_line(address, country="DE")
 ```
+
+### Acknowledgements
+
+The address formatting database contained in `rigour/data/addresses/formats.yml` is
+derived from `worldwide.yml` in the [OpenCageData address-formatting
+repository](https://github.com/OpenCageData/address-formatting). It is used to
+format addresses according to customs in the country that is been encoded.
 """
 
 from rigour.addresses.cleaning import clean_address

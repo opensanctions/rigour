@@ -1,5 +1,6 @@
 #
 # generic mappings, specific territories get mapped to these
+# derived from: https://github.com/OpenCageData/address-formatting
 #
 # postcode before city
 generic1: &generic1 |
