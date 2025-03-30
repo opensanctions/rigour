@@ -74,8 +74,9 @@ def update_data() -> None:
             raise RuntimeError(msg)
 
     content = TEMPLATE % raw_territories
-    path = DATA_PATH / "territories" / "data.py"
-    write_python(path, content)
+    out_path = DATA_PATH / "territories"
+    out_path = out_path / "data.py"
+    write_python(out_path, content)
 
 
 if __name__ == "__main__":

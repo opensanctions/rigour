@@ -1,7 +1,7 @@
 from functools import cache
 import re
 import unicodedata
-from typing import Dict, List, Optional
+from typing import Callable, Dict, List, Optional
 from normality.constants import WS
 from normality.transliteration import ascii_text
 from normality.util import Categories
@@ -36,9 +36,7 @@ TOKEN_SEP_CATEGORIES: Categories = {
 }
 
 
-def _normalize_address_text(
-    address: str, latinize: bool = False, sep: str = WS
-) -> Optional[str]:
+def _normalize_address_text(address: str, latinize: bool = False, sep: str = WS) -> str:
     tokens: List[List[str]] = []
     token: List[str] = []
     for char in address.lower():
@@ -67,7 +65,7 @@ def _normalize_address_text(
 
 
 @cache
-def _common_replacer(latinize: bool = False):
+def _common_replacer(latinize: bool = False) -> Callable[[str], str]:
     """Create a function that replaces common address tokens with their normalized forms.
 
     Args:
@@ -88,7 +86,7 @@ def _common_replacer(latinize: bool = False):
     mappings = "|".join(mapping.keys())
     regex = re.compile(f"\\b({mappings})\\b", re.UNICODE)
 
-    def _replace_match(match: re.Match) -> str:
+    def _replace_match(match: re.Match[str]) -> str:
         matched_text = match.group(1)
         return mapping.get(matched_text, matched_text)
 

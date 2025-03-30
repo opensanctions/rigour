@@ -17,6 +17,8 @@ normalizations:
     - bâtiment
   rm:
     - room
+    - Komnata
+    - kom
   bldg:
     - building
     - будинок
@@ -82,6 +84,14 @@ normalizations:
     - office
     - bureau
     - büro
+  kab:
+    - cabinet
+    - Kabinet
+  pom:
+    - Pomeshch
+    - Pomeshchenie
+    - Помещ
+    - Пом
   hwy:
     - highway
   us:
