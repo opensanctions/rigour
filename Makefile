@@ -14,7 +14,10 @@ build-iso639:
 build-territories:
 	python rigour/territories/generate.py
 
-build: build-iso639 build-territories
+build-addresses:
+	python rigour/addresses/generate.py
+
+build: build-iso639 build-territories build-addresses
 	black rigour/data
 
 docs:

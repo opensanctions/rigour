@@ -1,0 +1,109 @@
+normalizations:
+  apt:
+    - apartment
+    - квартира
+  av:
+    - avenue
+    - ave
+    - авеню
+  rd:
+    - road
+  "no":
+    - number
+    - nr
+  d:
+    - dom
+  bat:
+    - bâtiment
+  rm:
+    - room
+  bldg:
+    - building
+    - будинок
+    - буд
+  blvd:
+    - boulevard
+    - бульвар
+  st:
+    - strasse
+    - strase
+    - street
+    - str
+    - Pr-kt
+    - Prospekt
+    - проспект
+  ul:
+    - ulitsa
+    - улица
+  dr:
+    - drive
+  pl:
+    - platz
+    - place
+  sq:
+    - square
+  "co":
+    - c o
+    - c/o
+  plz:
+    - plaza
+  pza:
+    - piazza
+  ctr:
+    - center
+    - centre
+    - central
+  pk:
+    - park
+  gd:
+    - garden
+    - gardens
+  rep:
+    - republic
+    - republik
+    - republique
+    - repubblica
+  w:
+    - west
+  e:
+    - east
+  n:
+    - north
+  s:
+    - south
+  ste:
+    - suite
+  fl:
+    - floor
+    - flat
+  dept:
+    - department
+  off:
+    - office
+    - bureau
+    - büro
+  hwy:
+    - highway
+  us:
+    - united states
+    - united states of america
+    - usa
+  lvl:
+    - level
+  ny:
+    - new york
+  pobox:
+    - po box
+    - p o box
+    - P.O. Box
+    - Post Office Box
+  lit:
+    - letter
+    - liter
+    - літера
+  rgn:
+    - region
+    - регіон
+    - обл
+    - область
+    - oblast

@@ -3,7 +3,7 @@ import yaml
 import logging
 from typing import Any, Dict, Set
 
-from rigour.data import DATA_PATH
+from rigour.data import DATA_PATH, write_python
 from rigour.ids.wikidata import is_qid
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes
@@ -73,9 +73,9 @@ def update_data() -> None:
             msg = "Country is not a jurisdiction: %r" % terr.code
             raise RuntimeError(msg)
 
-    with open(DATA_PATH / "territories" / "data.py", "w", encoding="utf-8") as ofh:
-        data = TEMPLATE % raw_territories
-        ofh.write(data)
+    content = TEMPLATE % raw_territories
+    path = DATA_PATH / "territories" / "data.py"
+    write_python(path, content)
 
 
 if __name__ == "__main__":

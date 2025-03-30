@@ -2,7 +2,7 @@ import os
 import csv
 import logging
 
-from rigour.data import DATA_PATH
+from rigour.data import DATA_PATH, write_python
 from rigour.langs.util import normalize_code
 
 # https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab
@@ -65,22 +65,8 @@ def update_data() -> None:
         }
     )
 
-    with open(lang_path / "iso639.py", "w", encoding="utf-8") as ofh:
-        data = TEMPLATE % (list(sorted(iso3_ids)), iso3_map, iso2_map)
-        ofh.write(data)
-
-    # doc = html.fromstring(res.content)
-    # for row in doc.findall('.//table//table/tr'):
-    #     cells = [c.text_content().strip() for c in row.findall('.//td')]
-    #     if len(cells) != 5:
-    #         continue
-    #     iso3, iso2, english, french, german = cells
-    #     if not len(iso2):
-    #         iso2 = None
-    #     iso3 = iso3.split(')')
-    #     iso3 = [c.split('(')[0].strip() for c in iso3]
-    #     iso3 = [c for c in iso3 if len(c)]
-    #     print(iso3, iso2)
+    content = TEMPLATE % (list(sorted(iso3_ids)), iso3_map, iso2_map)
+    write_python(lang_path / "iso639.py", content)
 
 
 if __name__ == "__main__":

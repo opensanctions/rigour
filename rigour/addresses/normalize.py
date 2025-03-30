@@ -1,8 +1,12 @@
+from functools import cache
+import re
 import unicodedata
-from typing import List, Optional
+from typing import Dict, List, Optional
 from normality.constants import WS
 from normality.transliteration import ascii_text
 from normality.util import Categories
+
+from rigour.data.addresses.data import NORMALISATIONS
 
 TOKEN_SEP_CATEGORIES: Categories = {
     "Cc": WS,
@@ -31,59 +35,10 @@ TOKEN_SEP_CATEGORIES: Categories = {
     "So": WS,
 }
 
-COMMON = {
-    "street": "st",
-    "road": "rd",
-    "number": "no",
-    "avenue": "ave",
-    "room": "rm",
-    "building": "bldg",
-    "boulevard": "blvd",
-    "strasse": "str",
-    "strase": "str",
-    "ulitsa": "ul",
-    "drive": "dr",
-    "platz": "pl",
-    "square": "sq",
-    "plaza": "plz",
-    "piazza": "pza",
-    "place": "pl",
-    "center": "ctr",
-    "centre": "ctr",
-    "park": "pk",
-    "garden": "gd",
-    "gardens": "gd",
-    "republic": "rep",
-    "republik": "rep",
-    "republique": "rep",
-    "repubblica": "rep",
-    "west": "w",
-    "east": "e",
-    "north": "n",
-    "south": "s",
-    "apartment": "apt",
-    "apartments": "apt",
-    "apts": "apt",
-    "suite": "ste",
-    "floor": "fl",
-    "department": "dept",
-}
 
-
-def normalize_address(
-    address: str, latinize: bool = False, min_length: int = 4, sep: str = ""
+def _normalize_address_text(
+    address: str, latinize: bool = False, sep: str = WS
 ) -> Optional[str]:
-    """Normalize the given address string for comparison, in a way that is destructive to
-    the ability for displaying it (makes it ugly).
-
-    Args:
-        address: The address to be normalized.
-        latinize: Whether to convert non-Latin characters to their Latin equivalents.
-        min_length: Minimum length of the normalized address.
-
-    Returns:
-        The normalized address.
-    """
     tokens: List[List[str]] = []
     token: List[str] = []
     for char in address.lower():
@@ -107,9 +62,60 @@ def normalize_address(
             token_str = ascii_text(token_str)
         if token_str is None:
             continue
-        token_str = COMMON.get(token_str, token_str)
         parts.append(token_str)
-    norm_address = sep.join(parts)
+    return sep.join(parts)
+
+
+@cache
+def _common_replacer(latinize: bool = False):
+    """Create a function that replaces common address tokens with their normalized forms.
+
+    Args:
+        sep: The separator to use for joining the normalized tokens.
+        latinize: Whether to convert non-Latin characters to their Latin equivalents.
+
+    Returns:
+        A function that takes a string and returns its normalized form.
+    """
+    mapping: Dict[str, str] = {}
+    for repl, values in NORMALISATIONS.items():
+        repl_norm = _normalize_address_text(repl, latinize=latinize, sep=WS)
+        for value in values:
+            value_norm = _normalize_address_text(value, latinize=latinize, sep=WS)
+            if value_norm != repl_norm:
+                mapping[value_norm] = repl_norm
+
+    mappings = "|".join(mapping.keys())
+    regex = re.compile(f"\\b({mappings})\\b", re.UNICODE)
+
+    def _replace_match(match: re.Match) -> str:
+        matched_text = match.group(1)
+        return mapping.get(matched_text, matched_text)
+
+    def _replacer(text: str) -> str:
+        return regex.sub(_replace_match, text)
+
+    return _replacer
+
+
+def normalize_address(
+    address: str, latinize: bool = False, min_length: int = 4, sep: str = WS
+) -> Optional[str]:
+    """Normalize the given address string for comparison, in a way that is destructive to
+    the ability for displaying it (makes it ugly).
+
+    Args:
+        address: The address to be normalized.
+        latinize: Whether to convert non-Latin characters to their Latin equivalents.
+        min_length: Minimum length of the normalized address.
+
+    Returns:
+        The normalized address.
+    """
+    norm_address = _normalize_address_text(address, latinize=latinize, sep=WS)
+    norm_address = _common_replacer(latinize)(norm_address)
+    if sep != WS:
+        norm_address = norm_address.replace(WS, sep)
     if len(norm_address) < min_length:
         return None
     return norm_address
