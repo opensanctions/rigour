@@ -1,6 +1,7 @@
-from functools import cache
 import re
+import logging
 import unicodedata
+from functools import cache
 from typing import Callable, Dict, List, Optional
 from normality.constants import WS
 from normality.transliteration import ascii_text
@@ -34,6 +35,8 @@ TOKEN_SEP_CATEGORIES: Categories = {
     "Sk": None,
     "So": WS,
 }
+
+log = logging.getLogger(__name__)
 
 
 def _normalize_address_text(address: str, latinize: bool = False, sep: str = WS) -> str:
@@ -81,6 +84,8 @@ def _common_replacer(latinize: bool = False) -> Callable[[str], str]:
         for value in values:
             value_norm = _normalize_address_text(value, latinize=latinize, sep=WS)
             if value_norm != repl_norm:
+                if value_norm in mapping:
+                    log.warning("Duplicate mapping for %s", value_norm)
                 mapping[value_norm] = repl_norm
 
     mappings = "|".join(mapping.keys())

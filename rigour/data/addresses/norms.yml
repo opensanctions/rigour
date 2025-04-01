@@ -1,10 +1,12 @@
 normalizations:
   apt:
     - apartment
+    - appartement
     - квартира
   av:
     - avenue
     - ave
+    - avenida
     - авеню
   rd:
     - road
@@ -13,6 +15,13 @@ normalizations:
     - nr
   d:
     - dom
+  condo:
+    - condominium
+  twr:
+    - tower
+    - towers
+  c:
+    - calle
   bat:
     - bâtiment
   rm:
@@ -23,6 +32,11 @@ normalizations:
     - building
     - будинок
     - буд
+  sec:
+    - section
+    - сектор
+  wing:
+    - крыло
   blvd:
     - boulevard
     - бульвар
@@ -30,23 +44,66 @@ normalizations:
     - strasse
     - strase
     - street
+    - strada
     - str
+  pr:
     - Pr-kt
     - Prospekt
     - проспект
   ul:
     - ulitsa
     - улица
+  kv:
+    - kvartal
+    - квартал
+  mk:
+    - mikrorayon
+    - микрорайон
+    - мкр
   dr:
     - drive
+  ln:
+    - lane
+  ct:
+    - court
+  cir:
+    - circle
+  ter:
+    - terrace
+  pkwy:
+    - parkway
+  expy:
+    - expressway
+  fwy:
+    - freeway
+  tpke:
+    - turnpike
+  vl:
+    - villa
+    - village
+  rte:
+    - route
+  br:
+    - branch
+  unt:
+    - unit
+  loft:
+    - studios
   pl:
     - platz
     - place
   sq:
     - square
+  sub:
+    - subdivision
+  brgh:
+    - borough
+  dst:
+    - district
   "co":
     - c o
     - c/o
+    - care of
   plz:
     - plaza
   pza:
@@ -65,14 +122,40 @@ normalizations:
     - republik
     - republique
     - repubblica
+  est:
+    - estate
+    - estates
+  ind:
+    - industrial
+  cmrc:
+    - commercial
+  res:
+    - residential
   w:
     - west
+    - westward
   e:
     - east
   n:
     - north
   s:
     - south
+  ne:
+    - northeast
+    - north east
+    - northeaster
+  nw:
+    - northwest
+    - north west
+    - northwester
+  se:
+    - southeast
+    - south east
+    - southeaster
+  sw:
+    - southwest
+    - south west
+    - southwester
   ste:
     - suite
   fl:
@@ -80,10 +163,24 @@ normalizations:
     - flat
   dept:
     - department
-  off:
+  dist:
+    - district
+  "&":
+    - and
+    - or
+    - und
+    - et
+  of:
     - office
+    - officier
+    - офис
+  b:
     - bureau
     - büro
+  hq:
+    - headquarters
+    - head office
+    - headquarter
   kab:
     - cabinet
     - Kabinet
@@ -107,11 +204,20 @@ normalizations:
     - p o box
     - P.O. Box
     - Post Office Box
+  zip:
+    - zipcode
+    - zip code
+    - postal code
+    - postcode
+    - plz
+    - postleitzahl
+    - post code
   lit:
     - letter
     - liter
+    - litera
     - літера
-  rgn:
+  rn:
     - region
     - регіон
     - обл
