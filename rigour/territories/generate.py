@@ -3,7 +3,8 @@ import yaml
 import logging
 from typing import Any, Dict, Set
 
-from rigour.data import DATA_PATH, write_python
+from rigour.data import DATA_PATH
+from rigour.data.genutil import write_python
 from rigour.ids.wikidata import is_qid
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes

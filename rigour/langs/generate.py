@@ -2,7 +2,8 @@ import os
 import csv
 import logging
 
-from rigour.data import DATA_PATH, write_python
+from rigour.data import DATA_PATH
+from rigour.data.genutil import write_python
 from rigour.langs.util import normalize_code
 
 # https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab

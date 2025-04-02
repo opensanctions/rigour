@@ -1,7 +1,8 @@
 import yaml
 import logging
 
-from rigour.data import DATA_PATH, write_python
+from rigour.data import DATA_PATH
+from rigour.data.genutil import write_python
 
 log = logging.getLogger(__name__)
 
