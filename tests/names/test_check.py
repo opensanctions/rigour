@@ -8,3 +8,5 @@ def test_is_name():
     assert not is_name("")
     assert not is_name(" ")
     assert not is_name("---")
+    assert is_name("(Mr Bean)")
+    assert not is_name("( )")
