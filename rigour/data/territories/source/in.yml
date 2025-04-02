@@ -4,12 +4,6 @@ region: Asia
 subregion: Southern Asia
 alpha3: ind
 qid: Q668
-other_qids:
-  - Q6744020
-  - Q1193
-  - Q266923
-  - Q167639
-  - Q1061
 is_country: true
 is_ftm: true
 is_jurisdiction: true
