@@ -28,6 +28,7 @@ normalizations:
     - room
     - Komnata
     - kom
+    - кімната
   bldg:
     - building
     - будинок
@@ -56,6 +57,11 @@ normalizations:
   kv:
     - kvartal
     - квартал
+    - kvartira
+    - квартира
+  k:
+    - корпус
+    - korpus
   mk:
     - mikrorayon
     - микрорайон
@@ -64,6 +70,8 @@ normalizations:
     - drive
   ln:
     - lane
+    - переулок
+    - pereulok
   ct:
     - court
   cir:
@@ -161,6 +169,8 @@ normalizations:
   fl:
     - floor
     - flat
+    - etazh
+    - этаж
   dept:
     - department
   dist:
@@ -174,6 +184,7 @@ normalizations:
     - office
     - officier
     - офис
+    - ofis
   b:
     - bureau
     - büro
