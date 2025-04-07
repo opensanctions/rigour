@@ -1,0 +1,75 @@
+PERSON_NAME_PREFIXES:
+  - "Mr"
+  - "Ms"
+  - "Mrs"
+  - "Mister"
+  - "Miss"
+  - "Madam"
+  - "Madame"
+  - "Monsieur"
+  - "Honorable"
+  - "Honourable"
+  - "The Honorable"
+  - "The Honourable"
+  - "Rt Hon"
+  - "President"
+  - "Professor"
+  - "The Reverend"
+  - "Reverend"
+  - "King"
+  - "Queen"
+  - "His Majesty"
+  - "Her Majesty"
+  - "Mme"
+  - "Mmme"
+  - "Herr"
+  - "Hr"
+  - "Frau"
+  - "Fr"
+  - "The"
+  - "Fräulein"
+  - "Senor"
+  - "Senorita"
+  - "Sheik"
+  - "Sheikh"
+  - "Shaikh"
+  - "Sr"
+  - "Sir"
+  - "Lady"
+  - "The"
+BASIC_STOPWORDS:
+  - "de"
+  - "of"
+  - "and"
+  - "&"
+COMPANY_STOPWORDS:
+  - Company
+  - Business
+  - Asset
+  - Management
+  - International
+  - Intl
+  - Corporation
+  - Corp
+  - Fund
+  - Holding
+  - Holdings
+  - Trading
+  - Import
+  - Export
+  - Trust
+  - Services
+  - Industries
+  - Consulting
+  - Partner
+  - Partners
+  - Solutions
+  - Group
+  - Foundation
+  # - Fdn
+  - Commercial
+COMPANY_STOPWORDS_BROAD:
+  - Development
+  - Financial
+  - Investment
+  - Investments

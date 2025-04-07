@@ -1,4 +1,4 @@
-.PHONY: docs
+.PHONY: docs build typecheck test build-iso639 build-territories build-addresses build-names
 
 check: build typecheck test
 
@@ -17,8 +17,10 @@ build-territories:
 build-addresses:
 	python rigour/addresses/generate.py
 
-build: build-iso639 build-territories build-addresses
-	black rigour/data
+build-names:
+	python rigour/names/generate.py
+
+build: build-iso639 build-territories build-addresses build-names
 
 docs:
 	mkdocs build -c -d site

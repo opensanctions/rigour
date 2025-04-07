@@ -1,45 +1,12 @@
 import re
+from rigour.data.names.data import PERSON_NAME_PREFIXES
 
-PREFIXES_RAW_LIST = [
-    "Mr",
-    "Ms",
-    "Mrs",
-    "Mister",
-    "Miss",
-    "Madam",
-    "Madame",
-    "Monsieur",
-    "Honorable",
-    "Honourable",
-    "Mme",
-    "Mmme",
-    "Herr",
-    "Hr",
-    "Frau",
-    "Fr",
-    "The",
-    "Fräulein",
-    "Senor",
-    "Senorita",
-    "Sheik",
-    "Sheikh",
-    "Shaikh",
-    "Sr",
-    "Sir",
-    "Lady",
-    "The",
-    "de",
-    "of",
-]
-PREFIXES_RAW = "|".join(PREFIXES_RAW_LIST)
-NAME_PATTERN_ = r"^\W*((%s)\.?\s+)*(?P<term>.*?)([\'’]s)?\W*$"
-NAME_PATTERN_ = NAME_PATTERN_ % PREFIXES_RAW
-PREFIXES = re.compile(NAME_PATTERN_, re.I | re.U)
+PERSON_NAME_PREFIXES_ = "|".join(PERSON_NAME_PREFIXES)
+PREFIX_PATTERN_ = r"^\W*((%s)\.?\s+)*"
+PREFIX_PATTERN_ = PREFIX_PATTERN_ % PERSON_NAME_PREFIXES_
+PREFIXES = re.compile(PREFIX_PATTERN_, re.I | re.U)
 
 
 def remove_person_prefixes(name: str) -> str:
     """Remove prefixes like Mr., Mrs., etc."""
-    match = PREFIXES.match(name)
-    if match is not None:
-        name = match.group("term")
-    return name
+    return PREFIXES.sub("", name)
