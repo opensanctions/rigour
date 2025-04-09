@@ -66,7 +66,6 @@ types:
   - display: S.C.e I.
     compare: scei
     aliases:
-      - S.C.e I.
       - scei
       - Sociedad de Capital e Industria
       - sociedad de capital e industria
@@ -109,6 +108,7 @@ types:
       - S.A. DE C.V.
       - S.A. DE C.V
       - S.A.P.I. DE C.V.
+      - S.A.P.I. DE C.V
       - SA de CV
       - S.A DE C.V
   - display: S DE RL DE CV
@@ -425,12 +425,14 @@ types:
       - Anonim Ortaklık
       - anonim şirketi
   - display: ASBL
+    compare: NGO
     aliases:
       - aisbl
       - A.S.B.L.
       - association internationale sans but lucratif
       - association sans but lucratif
   - display: ASC
+    compare: NGO
     aliases:
       - açıq səhmdar cəmiyyəti
   - display: ay

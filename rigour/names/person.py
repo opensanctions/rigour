@@ -1,12 +1,18 @@
 import re
+from functools import cache
 from rigour.data.names.data import PERSON_NAME_PREFIXES
 
-PERSON_NAME_PREFIXES_ = "|".join(PERSON_NAME_PREFIXES)
-PREFIX_PATTERN_ = r"^\W*((%s)\.?\s+)*"
-PREFIX_PATTERN_ = PREFIX_PATTERN_ % PERSON_NAME_PREFIXES_
-PREFIXES = re.compile(PREFIX_PATTERN_, re.I | re.U)
+
+@cache
+def re_person_prefixes() -> re.Pattern:
+    """Compile a regex pattern to match common person prefixes."""
+    # e.g. Mr., Mrs., Dr., etc.
+    person_name_prefixes = "|".join(PERSON_NAME_PREFIXES)
+    prefix_pattern = r"^\W*((%s)\.?\s+)*"
+    prefix_pattern_ = prefix_pattern % person_name_prefixes
+    return re.compile(prefix_pattern_, re.I | re.U)
 
 
 def remove_person_prefixes(name: str) -> str:
     """Remove prefixes like Mr., Mrs., etc."""
-    return PREFIXES.sub("", name)
+    return re_person_prefixes().sub("", name)
