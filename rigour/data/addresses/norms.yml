@@ -2,7 +2,6 @@ normalizations:
   apt:
     - apartment
     - appartement
-    - квартира
   av:
     - avenue
     - ave
@@ -15,6 +14,7 @@ normalizations:
     - nr
   d:
     - dom
+    - дом
   condo:
     - condominium
   twr:
@@ -29,10 +29,25 @@ normalizations:
     - Komnata
     - kom
     - кімната
+    - кімн
   bldg:
     - building
     - будинок
     - буд
+    - зд
+    - здание
+  ed:
+    - edificio
+    - edifice
+  blk:
+    - block
+    - блок
+  nat:
+    - national
+  fed:
+    - federal
+  int:
+    - international
   sec:
     - section
     - сектор
@@ -47,18 +62,23 @@ normalizations:
     - street
     - strada
     - str
+    - стр
   pr:
     - Pr-kt
     - Prospekt
+    - просп
     - проспект
   ul:
     - ulitsa
     - улица
+    - вул
+    - ул
   kv:
     - kvartal
     - квартал
     - kvartira
     - квартира
+    - кв
   k:
     - корпус
     - korpus
@@ -72,6 +92,9 @@ normalizations:
     - lane
     - переулок
     - pereulok
+    - пер
+  pt:
+    - point
   ct:
     - court
   cir:
@@ -100,12 +123,30 @@ normalizations:
   pl:
     - platz
     - place
+    - plot
+  cty:
+    - county
+    - counties
+  prov:
+    - province
+  obl:
+    - oblast
   sq:
     - square
+  cnr:
+    - corner
   sub:
     - subdivision
   brgh:
     - borough
+  ft:
+    - fort
+  hts:
+    - heights
+  mt:
+    - mount
+    - montaña
+    - mountain
   dst:
     - district
   "co":
@@ -173,8 +214,6 @@ normalizations:
     - этаж
   dept:
     - department
-  dist:
-    - district
   "&":
     - and
     - or
@@ -185,6 +224,7 @@ normalizations:
     - officier
     - офис
     - ofis
+    - офіс
   b:
     - bureau
     - büro
@@ -202,10 +242,9 @@ normalizations:
     - Пом
   hwy:
     - highway
-  us:
-    - united states
-    - united states of america
-    - usa
+    - shosse
+    - шоссе
+    - шосе
   lvl:
     - level
   ny:
@@ -227,10 +266,45 @@ normalizations:
     - letter
     - liter
     - litera
+    - лит
+    - литера
     - літера
+    - литер
   rn:
     - region
     - регіон
     - обл
     - область
     - oblast
+  ru:
+    - russia
+    - russian federation
+    - russian
+    - россия
+    - российская федерация
+  us:
+    - united states
+    - united states of america
+    - u.s. of a
+    - u.s.
+    - usa
+    - america
+  ir:
+    - iran
+    - islamic republic of iran
+    - исламистская республика иран
+    - irn
+  ae:
+    - united arab emirates
+    - uae
+    - арабские эмираты
+  hk:
+    - hong kong
+    - хонг конг
+  gb:
+    - united kingdom
+    - great britain
+    - united kingdom of great britain and northern ireland
+    - великобритания
+    - великобританія
+    - великобританії

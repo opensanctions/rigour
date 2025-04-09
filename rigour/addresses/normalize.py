@@ -84,7 +84,7 @@ def _common_replacer(latinize: bool = False) -> Callable[[str], str]:
         for value in values:
             value_norm = _normalize_address_text(value, latinize=latinize, sep=WS)
             if value_norm != repl_norm:
-                if value_norm in mapping:
+                if value_norm in mapping and mapping[value_norm] != repl_norm:
                     log.warning("Duplicate mapping for %s", value_norm)
                 mapping[value_norm] = repl_norm
 
