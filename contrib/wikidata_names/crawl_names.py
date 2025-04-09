@@ -22,9 +22,9 @@ out_path.mkdir(exist_ok=True, parents=True)
 # Crawl wikidata for names
 CLASSES = {
     "Q12308941": "given",  # male given name
-    # "Q11879590": "given",  # female given name
-    # "Q202444": "given",  # given name
-    # "Q122067883": "given",  # given name component
+    "Q11879590": "given",  # female given name
+    "Q202444": "given",  # given name
+    "Q122067883": "given",  # given name component
     "Q245025": "given",  # middle name
     "Q101352": "family",  # family name
     "Q4116295": "family",  # surname
