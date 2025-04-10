@@ -4,7 +4,7 @@ from rigour.data.names.data import PERSON_NAME_PREFIXES
 
 
 @cache
-def re_person_prefixes() -> re.Pattern:
+def re_person_prefixes() -> re.Pattern[str]:
     """Compile a regex pattern to match common person prefixes."""
     # e.g. Mr., Mrs., Dr., etc.
     person_name_prefixes = "|".join(PERSON_NAME_PREFIXES)
