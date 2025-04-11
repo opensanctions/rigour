@@ -27,6 +27,7 @@ out_path.mkdir(exist_ok=True, parents=True)
 CLASSES = {
     "Q12308941": "given",  # male given name
     "Q11879590": "given",  # female given name
+    "Q3409032": "given",  # unisex given name
     "Q202444": "given",  # given name
     "Q122067883": "given",  # given name component
     "Q245025": "given",  # middle name
@@ -106,17 +107,27 @@ def build_mappings():
         counter = Counter()
         unique = set()
         main_name = None
-        for label in item.labels:
+        labels = list(item.labels)
+        # add aliases
+        # add P1705 native label
+        # add P2440 transliteration or transcription
+        labels.extend(item.aliases)
+        for claim in item.claims:
+            if claim.property in ("P1705", "P2440"):
+                labels.append(claim.text)
+
+        for label in labels:
             name = label.text
             for name in clean_name(label.text):
-                if label.lang == "eng":
-                    main_name = name
+                # if label.lang == "eng":
+                #     main_name = name
                 unique.add(name)
                 counter[name] += 1
         if len(unique) < 1:
             continue
         if main_name is None:
             main_name = counter.most_common(1)[0][0]
+        # main_name = item.id
         inverted[main_name].update(unique)
         # forms = ", ".join(unique)
         # out = f"{forms} => {main_name}"
