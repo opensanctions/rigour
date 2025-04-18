@@ -8,6 +8,14 @@ and to facilitate name matching on organizations and companies.
 This previous existed as part of `fingerprints` library. The implementation in `rigour` tries to
 make a clearer separation between other string cleaning a user may want to perform on a company name
 (eg. romanisation) and the company type detection logic. This module only handles the latter.
+
+The required database is originally based on three different sources:
+
+* A [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1Cw2xQ3hcZOAgnnzejlY5Sv3OeMxKePTqcRhXQU8rCAw/edit?ts=5e7754cf#gid=0)
+  created by OCCRP.
+* The ISO 20275: [Entity Legal Forms Code List](https://www.gleif.org/en/about-lei/code-lists/iso-20275-entity-legal-forms-code-list)
+* Wikipedia maintains an index of [types of business entity](https://en.wikipedia.org/wiki/Types_of_business_entity).
+
 """
 
 import logging

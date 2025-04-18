@@ -1,8 +1,8 @@
 from rigour.names.org_types import replace_org_types_display as replace_display
 from rigour.names.org_types import replace_org_types_compare as replace_compare
 from rigour.names.org_types import extract_org_types
-from rigour.names.org_types import _normalize_compare
-from rigour.names.org_types import normalize_display
+# from rigour.names.org_types import _normalize_compare
+# from rigour.names.org_types import normalize_display
 
 
 def test_display_form():
