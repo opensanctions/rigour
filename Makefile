@@ -9,16 +9,16 @@ test:
 	pytest --cov rigour --cov-report term-missing tests
 
 build-iso639:
-	python rigour/langs/generate.py
+	python genscripts/generate_langs.py
 
 build-territories:
-	python rigour/territories/generate.py
+	python genscripts/generate_territories.py
 
 build-addresses:
-	python rigour/addresses/generate.py
+	python genscripts/generate_addresses.py
 
 build-names:
-	python rigour/names/generate.py
+	python genscripts/generate_names.py
 
 build: build-iso639 build-territories build-addresses build-names
 

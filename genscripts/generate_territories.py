@@ -3,11 +3,10 @@ import yaml
 import logging
 from typing import Any, Dict, Set
 
-from rigour.data import DATA_PATH
-from rigour.data.genutil import write_python
 from rigour.ids.wikidata import is_qid
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes
+from genscripts.util import write_python, RESOURCES_PATH, CODE_PATH
 
 log = logging.getLogger(__name__)
 
@@ -18,7 +17,7 @@ TERRITORIES: Dict[str, Any] = %r
 
 
 def update_data() -> None:
-    countries_dir = DATA_PATH / "territories" / "source"
+    countries_dir = RESOURCES_PATH / "territories"
     path = os.path.dirname(__file__)
     raw_territories: Dict[str, Any] = {}
     territories: Dict[str, Territory] = {}
@@ -74,8 +73,7 @@ def update_data() -> None:
             raise RuntimeError(msg)
 
     content = TEMPLATE % raw_territories
-    out_path = DATA_PATH / "territories"
-    out_path = out_path / "data.py"
+    out_path = CODE_PATH / "territories" / "data.py"
     write_python(out_path, content)
 
 

@@ -7,8 +7,6 @@ from normality.constants import WS
 from normality.transliteration import ascii_text
 from normality.util import Categories
 
-from rigour.data.addresses.data import NORMALISATIONS
-
 TOKEN_SEP_CATEGORIES: Categories = {
     "Cc": WS,
     "Cf": None,
@@ -78,8 +76,10 @@ def _common_replacer(latinize: bool = False) -> Callable[[str], str]:
     Returns:
         A function that takes a string and returns its normalized form.
     """
+    from rigour.data.addresses.data import FORMS
+
     mapping: Dict[str, str] = {}
-    for repl, values in NORMALISATIONS.items():
+    for repl, values in FORMS.items():
         repl_norm = _normalize_address_text(repl, latinize=latinize, sep=WS)
         for value in values:
             value_norm = _normalize_address_text(value, latinize=latinize, sep=WS)

@@ -1,10 +1,8 @@
-import os
 import csv
 import logging
 
-from rigour.data import DATA_PATH
-from rigour.data.genutil import write_python
 from rigour.langs.util import normalize_code
+from genscripts.util import write_python, CODE_PATH, RESOURCES_PATH
 
 # https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab
 log = logging.getLogger(__name__)
@@ -22,10 +20,8 @@ def update_data() -> None:
     iso2_map = {}
     iso3_map = {}
 
-    lang_path = DATA_PATH / "langs"
-    path = os.path.dirname(__file__)
-    source_file = os.path.join(path, lang_path / "iso-639-3.tab")
-    with open(source_file, "r", encoding="utf-8") as ufh:
+    source_path = RESOURCES_PATH / "langs" / "iso-639-3.tab"
+    with open(source_path, "r", encoding="utf-8") as ufh:
         for row in csv.DictReader(ufh, delimiter="\t"):
             iso3 = normalize_code(row.pop("Id"))
             if iso3 is None or len(iso3) != 3:
@@ -65,8 +61,9 @@ def update_data() -> None:
         }
     )
 
+    output_path = CODE_PATH / "langs" / "iso639.py"
     content = TEMPLATE % (list(sorted(iso3_ids)), iso3_map, iso2_map)
-    write_python(lang_path / "iso639.py", content)
+    write_python(output_path, content)
 
 
 if __name__ == "__main__":

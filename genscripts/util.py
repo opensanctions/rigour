@@ -1,7 +1,12 @@
 import black
+import logging
 from pathlib import Path
 
-RESOURCES_PATH = Path(__file__).parent.parent / "resources"
+REPO_ROOT = Path(__file__).parent.parent
+RESOURCES_PATH = REPO_ROOT / "resources"
+CODE_PATH = REPO_ROOT / "rigour" / "data"
+
+logging.basicConfig(level=logging.INFO)
 
 
 def write_python(file_path: Path, content: str) -> None:

@@ -6,30 +6,14 @@ legal forms - in an entity name. The objective is to standardize the representat
 and to facilitate name matching on organizations and companies.
 """
 
-import yaml
 import logging
 from functools import cache
 from normality import collapse_spaces
-from typing import Dict, List, Optional, TypedDict
+from typing import Dict, Optional
 
-from rigour.data import DATA_PATH
 from rigour.text.dictionary import Normalizer, Replacer
 
 log = logging.getLogger(__name__)
-
-
-class OrgTypeSpec(TypedDict):
-    display: str
-    compare: str
-    aliases: List[str]
-
-
-def read_org_types() -> List[OrgTypeSpec]:
-    """Read the organization types database."""
-    path = DATA_PATH / "names" / "org_types.yml"
-    with open(path, "r") as fh:
-        data: Dict[str, List[OrgTypeSpec]] = yaml.safe_load(fh)
-    return data["types"]
 
 
 def _normalize_display(text: Optional[str]) -> Optional[str]:
@@ -40,8 +24,10 @@ def _normalize_display(text: Optional[str]) -> Optional[str]:
 @cache
 def get_display_replacer(normalizer: Normalizer = _normalize_display) -> Replacer:
     """Get a replacer for the display names of organization types."""
+    from rigour.data.names.org_types import ORG_TYPES
+
     mapping: Dict[str, str] = {}
-    for org_type in read_org_types():
+    for org_type in ORG_TYPES:
         display_norm = normalizer(org_type.get("display"))
         if display_norm is None:
             continue

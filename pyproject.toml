@@ -64,17 +64,13 @@ docs = [
 
 [tool.hatch.build.targets.sdist]
 only-include = ["rigour", "LICENSE", "README.md"]
+exclude = ['genscripts']
+
+[tool.hatch.build.targets.wheel]
+exclude = ["genscripts"]
 
 [tool.distutils.bdist_wheel]
 universal = true
 
 [tool.coverage.run]
 branch = true
-
-[tool.coverage.report]
-omit = [
-    "rigour/langs/generate.py",
-    "rigour/territories/generate.py",
-    "rigour/addresses/generate.py",
-    "rigour/names/generate.py",
-]
