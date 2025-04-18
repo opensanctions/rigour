@@ -12,6 +12,7 @@ normalizations:
   "no":
     - number
     - nr
+    - №
   d:
     - dom
     - дом
