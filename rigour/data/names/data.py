@@ -21,6 +21,7 @@ PERSON_NAME_PREFIXES: List[str] = [
     "The Honourable",
     "Rt Hon",
     "President",
+    "Präsident",
     "Professor",
     "The Reverend",
     "Reverend",

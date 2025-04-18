@@ -234,7 +234,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "GmbH",
-        "compare": "Ltd",
+        "compare": "LLC",
         "aliases": [
             "Gesellschaft mit beschränkter Haftung",
             "g.m.b.h",
@@ -707,7 +707,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "Ltd",
-        "compare": "Ltd",
+        "compare": "LLC",
         "aliases": [
             "Limited",
             "Ltd",
@@ -726,10 +726,6 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "private company with limited liability",
             "private limited company",
             "private limited liability company",
-            "pte ltd.",
-            "pte. ltd.",
-            "sociedada limitada",
-            "sociedade limitada",
             "компания с ограниченной ответственностью",
             "лимитед",
             "Лімітед",
@@ -778,11 +774,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "odo",
-        "aliases": [
-            "obshchestvo s dopolnitel'noj otvetstvennost'yu",
-            "общество с дополнительной ответственностью",
-            "одо",
-        ],
+        "aliases": ["obshchestvo s dopolnitel'noj otvetstvennost'yu", "одо"],
     },
     {"display": "oeg", "aliases": ["offene erwerbsgesellschaft"]},
     {"display": "og", "aliases": ["offene gesellschaft"]},
@@ -950,13 +942,19 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {"display": "SLL", "aliases": ["sociedad limitada laboral"]},
     {
         "display": "SLNE",
-        "compare": "Ltd",
+        "compare": "LLC",
         "aliases": ["s.l.n.e.", "sociedad limitada nueva empresa"],
     },
     {
         "display": "Pte Ltd",
-        "compare": "Ltd",
-        "aliases": ["Pte. Ltd.", "Pte Ltd", "Single Member Private Limited Company"],
+        "compare": "LLC",
+        "aliases": [
+            "Pte. Ltd.",
+            "Pte Ltd",
+            "pte ltd.",
+            "pte. ltd.",
+            "Single Member Private Limited Company",
+        ],
     },
     {"display": "smba", "aliases": ["selskab med begrænset ansvar"]},
     {"display": "snc", "aliases": ["société en nom collectif"]},
@@ -1021,7 +1019,11 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "socitate cu responsabilitate limitata",
         ],
     },
-    {"display": "Ltda", "compare": "Ltd", "aliases": ["Sociedade limitada"]},
+    {
+        "display": "Ltda",
+        "compare": "LLC",
+        "aliases": ["Sociedade limitada", "sociedada limitada"],
+    },
     {
         "display": "sro",
         "compare": "LLC",

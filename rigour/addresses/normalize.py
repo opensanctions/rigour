@@ -1,3 +1,4 @@
+import string
 import logging
 import unicodedata
 from functools import cache
@@ -8,7 +9,7 @@ from normality.util import Categories
 
 from rigour.text.dictionary import Replacer
 
-CHARS_ALLOWED = "&№"
+CHARS_ALLOWED = "&№" + string.ascii_letters + string.digits
 TOKEN_SEP_CATEGORIES: Categories = {
     "Cc": WS,
     "Cf": None,
@@ -57,7 +58,7 @@ def normalize_address(
     token: List[str] = []
     for char in address.lower():
         if char in CHARS_ALLOWED:
-            chr = char
+            chr: Optional[str] = char
         else:
             cat = unicodedata.category(char)
             chr = TOKEN_SEP_CATEGORIES.get(cat, char)
@@ -118,7 +119,7 @@ def _address_replacer(latinize: bool = False) -> Replacer:
                         value_norm,
                         repl_norm,
                         mapping[value_norm],
-                    )
+                    )  # pragma: no cover
                 mapping[value_norm] = repl_norm
     return Replacer(mapping, ignore_case=True)
 
