@@ -28,11 +28,14 @@ format addresses according to customs in the country that is been encoded.
 
 from rigour.addresses.cleaning import clean_address
 from rigour.addresses.normalize import normalize_address
+from rigour.addresses.normalize import remove_address_keywords, shorten_address_keywords
 from rigour.addresses.format import format_address, format_address_line
 
 __all__ = [
     "clean_address",
     "normalize_address",
+    "remove_address_keywords",
+    "shorten_address_keywords",
     "format_address",
     "format_address_line",
 ]

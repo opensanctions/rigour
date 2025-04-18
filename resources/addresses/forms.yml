@@ -16,6 +16,8 @@ forms:
   d:
     - dom
     - дом
+    - house
+    - hse
   condo:
     - condominium
   twr:
@@ -123,6 +125,7 @@ forms:
     - studios
   pl:
     - platz
+    - plaza
     - place
     - plot
   cty:
@@ -130,8 +133,6 @@ forms:
     - counties
   prov:
     - province
-  obl:
-    - oblast
   sq:
     - square
   cnr:
@@ -154,8 +155,6 @@ forms:
     - c o
     - c/o
     - care of
-  plz:
-    - plaza
   pza:
     - piazza
   ctr:

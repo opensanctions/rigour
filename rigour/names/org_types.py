@@ -22,7 +22,7 @@ def _normalize_display(text: Optional[str]) -> Optional[str]:
 
 
 @cache
-def get_display_replacer(normalizer: Normalizer = _normalize_display) -> Replacer:
+def _display_replacer(normalizer: Normalizer = _normalize_display) -> Replacer:
     """Get a replacer for the display names of organization types."""
     from rigour.data.names.org_types import ORG_TYPES
 
@@ -60,7 +60,7 @@ def replace_org_types_display(
     if normalized is None:
         return text
     is_uppercase = normalized.isupper()
-    replacer = get_display_replacer(normalizer=normalizer)
+    replacer = _display_replacer(normalizer=normalizer)
     out_text = replacer(text)
     if out_text is None:
         return text

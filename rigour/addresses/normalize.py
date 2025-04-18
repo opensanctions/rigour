@@ -1,12 +1,14 @@
-import re
 import logging
 import unicodedata
 from functools import cache
-from typing import Callable, Dict, List, Optional
+from typing import Dict, List, Optional
 from normality.constants import WS
 from normality.transliteration import ascii_text
 from normality.util import Categories
 
+from rigour.text.dictionary import Replacer
+
+CHARS_ALLOWED = "&№"
 TOKEN_SEP_CATEGORIES: Categories = {
     "Cc": WS,
     "Cf": None,
@@ -37,12 +39,28 @@ TOKEN_SEP_CATEGORIES: Categories = {
 log = logging.getLogger(__name__)
 
 
-def _normalize_address_text(address: str, latinize: bool = False, sep: str = WS) -> str:
+def normalize_address(
+    address: str, latinize: bool = False, min_length: int = 4
+) -> Optional[str]:
+    """Normalize the given address string for comparison, in a way that is destructive to
+    the ability for displaying it (makes it ugly).
+
+    Args:
+        address: The address to be normalized.
+        latinize: Whether to convert non-Latin characters to their Latin equivalents.
+        min_length: Minimum length of the normalized address.
+
+    Returns:
+        The normalized address.
+    """
     tokens: List[List[str]] = []
     token: List[str] = []
     for char in address.lower():
-        cat = unicodedata.category(char)
-        chr = TOKEN_SEP_CATEGORIES.get(cat, char)
+        if char in CHARS_ALLOWED:
+            chr = char
+        else:
+            cat = unicodedata.category(char)
+            chr = TOKEN_SEP_CATEGORIES.get(cat, char)
         if chr is None:
             continue
         if chr == WS:
@@ -62,11 +80,14 @@ def _normalize_address_text(address: str, latinize: bool = False, sep: str = WS)
         if token_str is None:
             continue
         parts.append(token_str)
-    return sep.join(parts)
+    norm_address = WS.join(parts)
+    if len(norm_address) < min_length:
+        return None
+    return norm_address
 
 
 @cache
-def _common_replacer(latinize: bool = False) -> Callable[[str], str]:
+def _address_replacer(latinize: bool = False) -> Replacer:
     """Create a function that replaces common address tokens with their normalized forms.
 
     Args:
@@ -80,45 +101,59 @@ def _common_replacer(latinize: bool = False) -> Callable[[str], str]:
 
     mapping: Dict[str, str] = {}
     for repl, values in FORMS.items():
-        repl_norm = _normalize_address_text(repl, latinize=latinize, sep=WS)
+        repl_norm = normalize_address(repl, latinize=latinize, min_length=1)
+        if repl_norm is None:
+            log.warning("Replacement is normalized to null: %r", repl)
+            continue
+        mapping[repl_norm] = repl_norm
         for value in values:
-            value_norm = _normalize_address_text(value, latinize=latinize, sep=WS)
+            value_norm = normalize_address(value, latinize=latinize, min_length=1)
+            if value_norm is None:
+                log.warning("Value is normalized to null [%r]: %r", repl, value)
+                continue
             if value_norm != repl_norm:
                 if value_norm in mapping and mapping[value_norm] != repl_norm:
-                    log.warning("Duplicate mapping for %s", value_norm)
+                    log.warning(
+                        "Duplicate mapping for %s (%s and %s)",
+                        value_norm,
+                        repl_norm,
+                        mapping[value_norm],
+                    )
                 mapping[value_norm] = repl_norm
-
-    mappings = "|".join(mapping.keys())
-    regex = re.compile(f"\\b({mappings})\\b", re.UNICODE)
-
-    def _replace_match(match: re.Match[str]) -> str:
-        matched_text = match.group(1)
-        return mapping.get(matched_text, matched_text)
-
-    def _replacer(text: str) -> str:
-        return regex.sub(_replace_match, text)
-
-    return _replacer
+    return Replacer(mapping, ignore_case=True)
 
 
-def normalize_address(
-    address: str, latinize: bool = False, min_length: int = 4, sep: str = WS
+def remove_address_keywords(
+    address: str, latinize: bool = False, replacement: str = WS
 ) -> Optional[str]:
-    """Normalize the given address string for comparison, in a way that is destructive to
-    the ability for displaying it (makes it ugly).
+    """Remove common address keywords (such as "street", "road", "south", etc.) from the
+    given address string. The address string is assumed to have already been normalized
+    using `normalize_address`.
+
+    The output may contain multiple consecutive whitespace characters, which are not collapsed.
 
     Args:
-        address: The address to be normalized.
+        address: The address to be cleaned.
         latinize: Whether to convert non-Latin characters to their Latin equivalents.
-        min_length: Minimum length of the normalized address.
 
     Returns:
-        The normalized address.
+        The address, without any stopwords.
     """
-    norm_address = _normalize_address_text(address, latinize=latinize, sep=WS)
-    norm_address = _common_replacer(latinize)(norm_address)
-    if sep != WS:
-        norm_address = norm_address.replace(WS, sep)
-    if len(norm_address) < min_length:
-        return None
-    return norm_address
+    replacer = _address_replacer(latinize=latinize)
+    return replacer.remove(address, replacement=replacement)
+
+
+def shorten_address_keywords(address: str, latinize: bool = False) -> Optional[str]:
+    """Shorten common address keywords (such as "street", "road", "south", etc.) in the
+    given address string. The address string is assumed to have already been normalized
+    using `normalize_address`.
+
+    Args:
+        address: The address to be cleaned.
+        latinize: Whether to convert non-Latin characters to their Latin equivalents.
+
+    Returns:
+        The address, with keywords shortened.
+    """
+    replacer = _address_replacer(latinize=latinize)
+    return replacer(address)
