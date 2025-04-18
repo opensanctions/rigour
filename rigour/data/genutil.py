@@ -1,6 +1,8 @@
 import black
 from pathlib import Path
 
+RESOURCES_PATH = Path(__file__).parent.parent / "resources"
+
 
 def write_python(file_path: Path, content: str) -> None:
     mode = black.Mode()
