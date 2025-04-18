@@ -59,10 +59,6 @@ types:
       - S.C.p.A.
       - SCpA
       - Sociedad en Comandita por Acciones
-  - display: Soc.Col.
-    compare: GP
-    aliases:
-      - Sociedad Colectiva
   - display: S.C.e I.
     compare: scei
     aliases:

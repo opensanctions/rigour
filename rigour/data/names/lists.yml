@@ -62,7 +62,7 @@ PERSON_NAME_PREFIXES:
   - "Dott.sr"
   - "Dott.sra"
   - "Dott.ssa"
-BASIC_STOPWORDS:
+STOPWORDS:
   - "de"
   - "of"
   - "and"
@@ -93,8 +93,8 @@ COMPANY_STOPWORDS:
   - Foundation
   # - Fdn
   - Commercial
-COMPANY_STOPWORDS_BROAD:
-  - Development
-  - Financial
-  - Investment
-  - Investments
+  # - Development
+  # - Financial
+  # - Investment
+  # - Investments
+  # - Ventures
