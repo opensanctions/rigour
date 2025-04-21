@@ -291,6 +291,7 @@ types:
       - Aktiengesellschaft
       - AG & Co. KG
       - AG & Co KG
+      - AG & Co. KGaA
   - display: KG
     compare: LP
     aliases:
