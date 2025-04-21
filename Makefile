@@ -8,6 +8,11 @@ typecheck:
 test:
 	pytest --cov rigour --cov-report term-missing tests
 
+fetch-scripts:
+	curl -o resources/text/scripts.txt https://www.unicode.org/Public/UCD/latest/ucd/Scripts.txt
+
+fetch: fetch-scripts
+
 build-iso639:
 	python genscripts/generate_langs.py
 
