@@ -5,7 +5,7 @@ and it provides a common interface for validation and formatting.
 
 Currently, identifers can be accessed using short aliases, such as "imo" or "isin". In the future, we will
 need to introduce a proper, structured identification scheme for identifiers, with qualifiers for country
-(e.g. "ru:nalog:inn", "us:sam:uei").
+(e.g. `ru:nalog:inn`, `us:sam:uei`).
 """
 
 from functools import cache

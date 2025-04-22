@@ -42,7 +42,10 @@ nav:
   - Overview: index.md
   - Names: names.md
   - Identifiers: ids.md
+  - Territories: territories.md
+  - Addresses: addresses.md
   - Languages: langs.md
   - MIME types: mime.md
-  - Addresses: addresses.md
-  - Territories: territories.md
+  - URLs: urls.md
+  - Text: text.md
+  - Other: misc.md

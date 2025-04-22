@@ -1,6 +1,4 @@
 """
-# Political geography
-
 This module provides a set of classes and functions to work with countries, territories and
 jurisdictions. It is based on the notion that a territory is any political entity that may
 be referred to by a code, such as a country, a territory or a jurisdiction. Jurisdictions are

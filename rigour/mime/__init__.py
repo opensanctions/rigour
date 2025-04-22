@@ -1,7 +1,6 @@
 """
-``rigour.mime`` handles the parsing and normalisation of internet MIME types in
-Python. This can be useful to normalise invalid, or misformatted MIME types
-emitted by remote web servers.
+This module handles the parsing and normalisation of internet MIME types in Python. This can be useful
+to normalise invalid, or misformatted MIME types emitted by remote web servers.
 
 ## Usage
 
@@ -16,8 +15,8 @@ assert normalize_mimetype(None) == 'application/octet-stream'
 assert normalize_mimetype('') == 'application/octet-stream'
 ```
 
-Internally, `rigour.mime` uses a `MIMEType` object to handle parsing. It can
-be used to access more specific information, like human readable labels:
+Internally, `rigour.mime` uses a `MIMEType` object to handle parsing. It can be used to access more
+specific information, like human readable labels:
 
 ```python
 from rigour.mime import parse_mimetype
@@ -30,8 +29,7 @@ assert parsed.label == 'Plain text'
 
 ## Open issues
 
-* Internationalisation, i.e. make the human-readable labels available in
-  multiple languages.
+* Internationalisation, i.e. make the human-readable labels available in multiple languages.
 * Expand replacements for specific MIME types.
 
 This module is an inlined version of the `pantomime` library.
