@@ -10,7 +10,12 @@ def to_form(text: str) -> str:
 
 
 class Name(object):
-    """A name of a thing, such as a person, organization or object."""
+    """A name of a thing, such as a person, organization or object. Each name consists of a
+    sequence of parts, each of which has a form and a tag. The form is the text of the part, and the tag
+    is a label indicating the type of part. For example, in the name "John Smith", "John" is a given name
+    and "Smith" is a family name. The tag for "John" would be `NamePartTag.GIVEN` and the tag for "Smith"
+    would be `NamePartTag.FAMILY`. The form for both parts would be the text of the part itself.
+    """
 
     __slots__ = ["original", "form", "tag", "lang", "_parts"]
 

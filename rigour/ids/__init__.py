@@ -1,3 +1,13 @@
+"""
+Handling of person, organisation and object identifiers. This module contains a collection of validation
+and formatting tools for identifiers. The `IdentifierFormat` class is the base class for all identifier formats,
+and it provides a common interface for validation and formatting.
+
+Currently, identifers can be accessed using short aliases, such as "imo" or "isin". In the future, we will
+need to introduce a proper, structured identification scheme for identifiers, with qualifiers for country
+(e.g. "ru:nalog:inn", "us:sam:uei").
+"""
+
 from functools import cache
 from typing import Dict, List, Type
 from typing_extensions import TypedDict
