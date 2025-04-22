@@ -12,10 +12,14 @@ theme:
 
 extra:
   social:
-    - icon: material/slack
-      link: https://www.opensanctions.org/slack/
+    - icon: material/forum
+      link: https://discuss.opensanctions.org/
     - icon: material/github
       link: https://github.com/opensanctions/rigour
+    - icon: material/linkedin
+      link: https://www.linkedin.com/company/opensanctions/
+    - icon: material/web
+      link: https://www.opensanctions.org
 
 plugins:
   - autorefs
