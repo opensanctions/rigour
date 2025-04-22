@@ -1,4 +1,4 @@
-from rigour.names.pick import pick_name, levenshtein_pick
+from rigour.names.pick import pick_name, levenshtein_pick, pick_case
 
 PUTIN = [
     "Vladimir Vladimirovich Putin",
@@ -101,3 +101,14 @@ def test_levenshtein_pick():
     assert levenshtein_pick(names, {})[0] == "Vladimir Vladimirovich PUTIN"
     weights = {"Vladimir Vladimirovich Putin": 3.0}
     assert levenshtein_pick(names, weights)[0] == "Vladimir Vladimirovich Putin"
+
+
+def test_pick_case():
+    cases = [
+        "Vladimir Putin",
+        "Vladimir PUTIN",
+        "VLADIMIR PUTIN",
+    ]
+    assert pick_case(cases) == "Vladimir Putin"
+    assert pick_case([]) is None
+    assert pick_case(["VLADIMIR PUTIN"]) == "VLADIMIR PUTIN"

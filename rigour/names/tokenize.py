@@ -32,7 +32,7 @@ TOKEN_SEP_CATEGORIES: Categories = {
 }
 
 
-def tokenize_name(text: str, min_length: int = 1) -> List[str]:
+def tokenize_name(text: str, token_min_length: int = 1) -> List[str]:
     """Split a person or entity's name into name parts."""
     # FIXME: Do we want to support CJK scripts at some stage?
     tokens: List[str] = []
@@ -40,21 +40,17 @@ def tokenize_name(text: str, min_length: int = 1) -> List[str]:
     for char in text:
         if char in ".'’":
             continue
-        # TODO: do we want to special case Arabic name parts like
-        # al-, el-, il- ?
         cat = unicodedata.category(char)
         chr = TOKEN_SEP_CATEGORIES.get(cat, char)
         if chr is None:
             continue
         if chr == WS:
-            # TODO: do we want to support throwing away name prefixes
-            # (like Mr., Sir, etc.) here?
-            if len(token) >= min_length:
+            if len(token) >= token_min_length:
                 tokens.append("".join(token))
             token.clear()
             continue
         token.append(chr)
 
-    if len(token) >= min_length:
+    if len(token) >= token_min_length:
         tokens.append("".join(token))
     return tokens

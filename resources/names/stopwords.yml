@@ -1,0 +1,104 @@
+# Each prefix will match either as-is, or with a trailing dot (Mr, Mr.)
+PERSON_NAME_PREFIXES:
+  - "Mr"
+  - "Ms"
+  - "Mrs"
+  - "Mister"
+  - "Miss"
+  - "Madam"
+  - "Madame"
+  - "Dr"
+  - "Doctor"
+  - "Prof"
+  - "Prof. Dr"
+  - "Professor Dr"
+  - "Monsieur"
+  - "Honorable"
+  - "Honourable"
+  - "The Honorable"
+  - "The Honourable"
+  - "Rt Hon"
+  - "President"
+  - "Präsident"
+  - "Professor"
+  - "The Reverend"
+  - "Reverend"
+  - "King"
+  - "Queen"
+  - "His Majesty"
+  - "Her Majesty"
+  - "His Excellency"
+  - "Her Excellency"
+  - "Excellency"
+  - "Ambassador"
+  - "Amb"
+  - "Mme"
+  - "Mmme"
+  - "Herr"
+  - "Hr"
+  - "Frau"
+  - "Fr"
+  - "The"
+  - "Fräulein"
+  - "Senor"
+  - "Senorita"
+  - "Sheik"
+  - "Sheikh"
+  - "Shaikh"
+  - "Sr"
+  - "Sir"
+  - "Lady"
+  - "The"
+  - "Lord"
+  - "Dame"
+  - "Baroness"
+  - "Commodore"
+  - "Captain"
+  - "General"
+  - "Baron"
+  - "Dottore"
+  - "Dott"
+  - "Dott.ssa"
+  - "Dottor"
+  - "Dott.sr"
+  - "Dott.sra"
+  - "Dott.ssa"
+  - "Dott.sr"
+  - "Dott.sra"
+  - "Dott.ssa"
+STOPWORDS:
+  - "de"
+  - "of"
+  - "and"
+  - "&"
+COMPANY_STOPWORDS:
+  - Company
+  - Business
+  - Asset
+  - Management
+  - International
+  - Intl
+  - Corporation
+  - Corp
+  - Fund
+  - Holding
+  - Holdings
+  - Trading
+  - Import
+  - Export
+  - Trust
+  - Services
+  - Industries
+  - Consulting
+  - Partner
+  - Partners
+  - Solutions
+  - Group
+  - Foundation
+  # - Fdn
+  - Commercial
+  # - Development
+  # - Financial
+  # - Investment
+  # - Investments
+  # - Ventures

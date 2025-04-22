@@ -11,6 +11,7 @@ from rigour.text.scripts import (
     is_latin_char,
 )
 from rigour.addresses.format import _load_formats, _load_template
+from rigour.names.org_types import _compare_replacer, _display_replacer
 
 
 def reset_caches() -> None:
@@ -29,4 +30,6 @@ def reset_caches() -> None:
     is_alphanum.cache_clear()
     _load_formats.cache_clear()
     _load_template.cache_clear()
+    _compare_replacer.cache_clear()
+    _display_replacer.cache_clear()
     gc.collect()

@@ -63,9 +63,32 @@ def pick_name(names: List[str]) -> Optional[str]:
 
     if len(latin_names) == 1:
         return latin_names[0]
-    
+
     for form in levenshtein_pick(list(weights.keys()), weights):
         for surface in levenshtein_pick(forms.get(form, []), {}):
             if surface in names:
                 return surface
     return None
+
+
+def pick_case(names: List[str]) -> Optional[str]:
+    """Pick the best mix of lower- and uppercase characters from a set of names
+    that are identical except for case.
+
+    Args:
+        names (List[str]): A list of identical names in different cases.
+
+    Returns:
+        Optional[str]: The best name for display.
+    """
+    if len(names) == 0:
+        return None
+    if len(names) == 1:
+        return names[0]
+    reference = names[0].title()
+    difference: Dict[str, int] = {n: 0 for n in names}
+    for i, char in enumerate(reference):
+        for name in names:
+            if name[i] != char:
+                difference[name] += 1
+    return min(difference.items(), key=lambda x: x[1])[0]

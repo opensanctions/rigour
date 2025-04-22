@@ -13,6 +13,12 @@ You can just grab the library from PyPI:
 pip install -U rigour
 ```
 
+### Acknowledgements
+
+The address formatting database contained in `rigour/data/addresses/formats.yml` is derived from `worldwide.yml` in the [OpenCageData address-formatting repository](https://github.com/OpenCageData/address-formatting). It is used to format addresses according to customs in the country that is been encoded.
+
+`rigour` consolidates and includes a set of older Python libraries into a single codebase: `languagecodes`, `pantomime`, `fingerprints`. The development of these libraries was funded by OCCRP as part of the Aleph software project.
+
 ## Usage & documentation 
 
 See: https://opensanctions.github.io/rigour/

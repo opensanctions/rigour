@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "rigour"
-version = "0.9.6"
+version = "0.9.10"
 description = "Financial crime domain data validation and normalization library."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -64,12 +64,13 @@ docs = [
 
 [tool.hatch.build.targets.sdist]
 only-include = ["rigour", "LICENSE", "README.md"]
+exclude = ['genscripts']
+
+[tool.hatch.build.targets.wheel]
+exclude = ["genscripts"]
 
 [tool.distutils.bdist_wheel]
 universal = true
 
 [tool.coverage.run]
 branch = true
-
-[tool.coverage.report]
-omit = ["rigour/langs/generate.py", "rigour/territories/generate.py"]
