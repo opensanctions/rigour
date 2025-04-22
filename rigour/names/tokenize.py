@@ -37,6 +37,8 @@ def tokenize_name(text: str, token_min_length: int = 1) -> List[str]:
     # FIXME: Do we want to support CJK scripts at some stage?
     tokens: List[str] = []
     token: List[str] = []
+    # TODO: Do we want to do some form of unicode normalization here?
+    # text = unicodedata.normalize("NFC", text)
     for char in text:
         if char in ".'’":
             continue

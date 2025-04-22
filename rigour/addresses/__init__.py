@@ -1,5 +1,9 @@
 """
-# Postal/location address handling
+This module provides a set of tools for handling postal/geographic addresses. It includes functions
+for normalising addresses for comparison purposes, and for formatting addresses given in parts for
+display as a single string.
+
+## Postal address formatting
 
 This set of helpers is designed to help with the processing of real-world
 addresses, including composing an address from individual parts, and cleaning it up.
