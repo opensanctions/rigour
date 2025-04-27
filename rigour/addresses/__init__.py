@@ -9,7 +9,7 @@ This set of helpers is designed to help with the processing of real-world
 addresses, including composing an address from individual parts, and cleaning it up.
 
 ```python
-import rigour.addresses as format_one_line
+from rigour.addresses import format_address_line
 
 address = {
     "road": "Bahnhofstr.",
@@ -19,7 +19,7 @@ address = {
     "state": "Bayern",
     "country": "Germany",
 }
-address_text = format_one_line(address, country="DE")
+address_text = format_address_line(address, country="DE")
 ```
 
 ### Acknowledgements
