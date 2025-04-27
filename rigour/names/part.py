@@ -41,12 +41,12 @@ class NamePart(object):
 
     def __eq__(self, other: Any) -> bool:
         try:
-            return other.form == self.form  # type: ignore
+            return other.form == self.form and other.index == self.index  # type: ignore
         except AttributeError:
             return False
 
     def __hash__(self) -> int:
-        return hash(self.form)
+        return hash((self.index, self.form))
 
     def __len__(self) -> int:
         return len(self.form)

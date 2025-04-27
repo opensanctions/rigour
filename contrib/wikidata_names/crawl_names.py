@@ -1,7 +1,8 @@
-from functools import lru_cache
+import gzip
 import logging
 import requests
 from pathlib import Path
+from functools import lru_cache
 from collections import Counter, defaultdict
 from typing import Dict, Generator, List, Optional, Set
 from concurrent.futures import Future, ThreadPoolExecutor, as_completed
@@ -11,7 +12,7 @@ from nomenklatura.dataset import Dataset
 from nomenklatura.wikidata import WikidataClient, Item
 from rigour.names import is_name
 from fingerprints import clean_brackets
-from rigour.text.emoji import remove_emoji
+from rigour.text.cleaning import remove_emoji
 
 log = logging.getLogger(__name__)
 dataset = Dataset.make({"name": "synonames", "title": "Synonames"})
@@ -60,9 +61,8 @@ def clean_name(name: Optional[str]) -> List[str]:
             continue
         if len(part) > 30:
             continue
-        # if " " in part or "," in part or "-" in part or "(" in part or "/" in part:
-        if "," in part or "(" in part or "/" in part:
-            print("Skipping: ", part)
+        if "," in part or "(" in part or "/" in part or "=" in part:
+            # print("Skipping: ", part)
             continue
         names.append(part)
     return names
@@ -119,19 +119,15 @@ def build_mappings():
         for label in labels:
             name = label.text
             for name in clean_name(label.text):
-                # if label.lang == "eng":
-                #     main_name = name
+                if label.lang == "eng":
+                    main_name = name
                 unique.add(name)
                 counter[name] += 1
         if len(unique) < 1:
             continue
         if main_name is None:
             main_name = counter.most_common(1)[0][0]
-        # main_name = item.id
         inverted[main_name].update(unique)
-        # forms = ", ".join(unique)
-        # out = f"{forms} => {main_name}"
-        # print(out)
 
     with open(out_path / "wd_names_strict.txt", "w", encoding="utf-8") as fh:
         for main_name, aliases in inverted.items():
@@ -143,6 +139,38 @@ def build_mappings():
             fh.write(out + "\n")
 
 
+def build_canonicalisations():
+    inverted: Dict[str, Set[str]] = defaultdict(set)
+    for item in iterate_name_items():
+        if item.id in CLASSES:
+            continue
+        unique = set()
+        labels = list(item.labels)
+        labels.extend(item.aliases)
+        for claim in item.claims:
+            # add P1705 native label
+            # add P2440 transliteration or transcription
+            if claim.property in ("P1705", "P2440"):
+                labels.append(claim.text)
+
+        for label in labels:
+            name = label.text
+            for name in clean_name(label.text):
+                unique.add(name)
+        if len(unique) < 1:
+            continue
+        inverted[item.id].update(unique)
+
+    with gzip.open(out_path / "names.gz", "wt", encoding="utf-8") as fh:
+        for qid, aliases in inverted.items():
+            if len(aliases) < 2:
+                continue
+            forms = ", ".join(sorted(aliases))
+            out = f"{forms} => {qid}"
+            fh.write(out + "\n")
+
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    build_mappings()
+    # build_mappings()
+    build_canonicalisations()

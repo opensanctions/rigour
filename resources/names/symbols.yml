@@ -95,6 +95,7 @@ org_symbols:
     - fabbrica
   intl:
     - intl
+    - int'l
     - international
     - интернациональный
     - интернациональная
@@ -185,3 +186,37 @@ person_symbols:
   sr:
     - "Sr"
     - "Senior"
+  esq:
+    - "Esq"
+    - "Esquire"
+  dr:
+    - "Dr"
+    - "Doctor"
+  prof:
+    - "Prof"
+    - "Professor"
+  md:
+    - "MD"
+    - "Doctor of Medicine"
+  dds:
+    - "DDS"
+    - "Doctor of Dental Surgery"
+  dvm:
+    - "DVM"
+    - "Doctor of Veterinary Medicine"
+  phd:
+    - "PhD"
+    - "Doctor of Philosophy"
+  cpa:
+    - "CPA"
+    - "Certified Public Accountant"
+  cfa:
+    - "CFA"
+    - "Chartered Financial Analyst"
+  cma:
+    - "CMA"
+    - "Certified Management Accountant"
+  csa:
+    - "CSA"
+    - "Certified Senior Advisor"
+    - "Certified Senior Associate"
