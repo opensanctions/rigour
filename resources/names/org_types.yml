@@ -1,4 +1,33 @@
 types:
+  # TODO: these are general terms, not types:
+  # - compare: Exp
+  #   aliases:
+  #     - export
+  # - display: exp corp
+  #   aliases:
+  #     - exp.corp
+  # - display: imp
+  #   aliases:
+  #     - import
+  # - display: imp and
+  #   aliases:
+  #     - imp.and
+  # - compare: tpb
+  #   aliases:
+  #     - corporația de rachete balistice tactice
+  #     - društvo za taktičke projektile
+  #     - tactical missile company
+  #     - tactical missile corporation
+  #     - takticheskoe raketnoe vooruzhenie
+  #     - тактическое ракетное вооружение
+  #     - тактичне ракетне озброєння
+  # - compare: fa
+  #   aliases:
+  #     - firma
+  # - compare: loj
+  #   aliases:
+  #     - lojistik
+
   # The local abbreviation or term (e.g., "LLC").
   # Must be a single string.
   - display: PLC
@@ -14,7 +43,7 @@ types:
       - ሃላፊነቱ የተወሰነ የግል ማህበር
       - 股份有限公司
   - display: Sh.p.k.
-    compare: Ltd
+    compare: LLC
     aliases:
       - Shpk
       - Sh.p.k.
@@ -39,15 +68,6 @@ types:
     compare: LLC
     aliases:
       - Free Zone Company
-  - compare: Fdn
-    aliases:
-      - Foundation
-      - Fondacion
-      - Fondacioni
-      - Fundación
-  - compare: Fdn
-    aliases:
-      - Stiftung
   - display: SCS
     compare: LP
     aliases:
@@ -60,7 +80,7 @@ types:
       - SCpA
       - Sociedad en Comandita por Acciones
   - display: S.C.e I.
-    compare: scei
+    compare: LP
     aliases:
       - scei
       - Sociedad de Capital e Industria
@@ -74,7 +94,7 @@ types:
       - S.G.R.
       - Sociedad de Garantía Reciproca
   - display: SAS
-    compare: Ltd
+    compare: LLC
     aliases:
       - Sociedad por Acciones Simplificada
   - display: SAU
@@ -103,14 +123,22 @@ types:
       - Sociedad Anónima de Capital Variable
       - S.A. DE C.V.
       - S.A. DE C.V
-      - S.A.P.I. DE C.V.
-      - S.A.P.I. DE C.V
+      - SA. DE CV.
       - SA de CV
       - S.A DE C.V
-  - display: S DE RL DE CV
+  - display: S.A.P.I de C.V.
+    compare: JSC
+    aliases:
+      - Sociedad Anónima Promotora de Inversión de Capital Variable
+      - S.A.P.I. DE C.V.
+      - S.A.P.I. DE C.V
+      - SA.P.I. DE C.V.
+      - SA.P.I. DE C.V
+  - display: S. DE R.L. DE C.V.
     compare: LLC
     aliases:
       - S. DE R.L. DE C.V.
+      - S DE RL DE CV
       - Sociedad de Responsabilidad Limitada de Capital Variable
   - display: Ε.Π.Ε.
     compare: LLC
@@ -126,12 +154,12 @@ types:
     aliases:
       - Incorporated limited partnership
   - display: NA
-    compare: NA
+    compare: FIN
     aliases:
       - N.A.
       - National Association
   - display: NT&SA
-    compare: NTSA
+    compare: FIN
     aliases:
       - National Trust and Savings Association
   - display: NL
@@ -143,15 +171,16 @@ types:
     aliases:
       - Індывідуальны прадпрымальнік
   - display: ПУП
+    compare: SP
     aliases:
       - Прыватнае унітарнае прадпрыемства
   - display: d.d.
-    compare: dd
+    compare: JSC
     aliases:
       - dioničko društvo
       - d.d.
   - display: a.d.
-    compare: ad
+    compare: JSC
     aliases:
       - akcionarsko društvo
       - a.d
@@ -159,38 +188,40 @@ types:
       - akcionarsko društvo
       - aktsionerno druzhestvo
   - display: а.д.
-    compare: ad
+    compare: JSC
     aliases:
       - а.д
       - ад
       - акционарско друштво
       - акционерно дружество
   - display: d.n.o.
+    compare: LLC
     aliases:
       - društvo s neograničenom solidarnom odgovornošću
   - display: d.o.o.
-    compare: Ltd
+    compare: LLC
     aliases:
       - društvo s ograničenom odgovornošću
       - družba z omejeno odgovornostjo
   - display: k.d.
-    compare: kd
+    compare: LP
     aliases:
       - komanditno društvo
       - k.d.
       - komanditno druzhestvo
       - komanditno društvo
   - display: к.д.
-    compare: kd
+    compare: LP
     aliases:
       - кд
       - командитно дружество
       - командитно друштво
   - display: s.p.
+    compare: SP
     aliases:
       - samostalni preduzetnik
   - display: EIRELI
-    compare: Ltd
+    compare: LLC
     aliases:
       - Empresa Individual de Responsabilidade Limitada
   - compare: SP
@@ -198,25 +229,31 @@ types:
       - Sole Proprietorship
       - Private Enterprise
   - display: GP
+    compare: GP
     aliases:
       - General Partnership
   - display: LP
+    compare: LP
     aliases:
       - Limited Partnership
   - display: PEEC
+    compare: SOE
     aliases:
       - Public Establishment with Economic characteristics
   - display: LP
+    compare: LP
     aliases:
       - Limited Partnership
   - display: SpA
+    compare: JSC
     aliases:
       - Sociedad por acciones
   - display: SPA
+    compare: JSC
     aliases:
       - S.P.A.
   - display: EIRL
-    compare: EI
+    compare: LLC
     aliases:
       - Empresa Individual de Responsabilidad Limitada
       - empresa individual de responsabilidad limitada
@@ -244,7 +281,7 @@ types:
       - eingetragenes einzelunternehmen
       - empresa unipersonal
   - display: C. por A.
-    compare: PLC
+    compare: JSC
     aliases:
       - Compañía por Acciones
   - display: EP
@@ -267,18 +304,18 @@ types:
       - mit beschränkter haftung
       - гмбх
   - display: gGmbH
-    compare: Ltd
+    compare: LLC
     aliases:
       - gGmbH
       - gemeinnützige GmbH
   - display: UG
-    compare: Ltd
+    compare: LLC
     aliases:
       - UG (haftungsbeschränkt)
       - Unternehmergesellschaft haftungsbeschränkt
       - Unternehmergesellschaft
   - display: GmbH & Co. KG
-    compare: Ltd
+    compare: LLC
     aliases:
       - gmbh & co.
       - gmbh & co. kg
@@ -301,11 +338,11 @@ types:
       - e. K.
       - eingetragener Kaufmann
   - display: KGaA
-    compare: KG
+    compare: LP
     aliases:
       - Kommanditgesellschaft auf Aktien
   - display: Sp. z o.o.
-    compare: Ltd
+    compare: LLC
     aliases:
       - spzoo
       - sp zoo
@@ -320,7 +357,7 @@ types:
     aliases:
       - закрытае ацыянернае таварыства
   - display: ААТ
-    compare: OJSC
+    compare: JSC
     aliases:
       - adkritaye aktsiyanernaye tavaristva
       - adkrytae akcyyanernae tavarystva
@@ -357,12 +394,12 @@ types:
     aliases:
       - andelslag
   - display: ано
-    compare: ANO
+    compare: NGO
     aliases:
       - автономная некоммерческая организация
       - ано
   - display: anpo
-    compare: ANO
+    compare: NGO
     aliases:
       - autonomous non-profit organization
   - display: JSC
@@ -373,14 +410,14 @@ types:
       - Joint-stock Company
       - JointStock Company
   - display: PJSC
-    compare: PJSC
+    compare: JSC
     aliases:
       - Public Stock Company
       - public stock company (PJSC)
       - Public Joint-Stock Company
       - Public joint stock company
   - display: OJSC
-    compare: OJSC
+    compare: JSC
     aliases:
       - otwarta spółka akcyjna
       - Open Joint-Stock Company
@@ -399,11 +436,11 @@ types:
       - акціонерного товариства
       - Акціонерне товариство
   - display: КБ
-    compare: КБ
+    compare: FIN
     aliases:
       - Коммерческий банк
   - display: ApS
-    compare: Ltd
+    compare: LLC
     aliases:
       - anpartsselskab
   - display: AS
@@ -436,39 +473,30 @@ types:
     aliases:
       - avoin yhtiö
   - display: bhd
+    compare: LLC
     aliases:
       - berhad
   - display: BV
+    compare: LLC
     aliases:
       - B.V.
       - besloten vennootschap
   - display: bvba
+    compare: LLC
     aliases:
       - besloten vennootschap met beperkte aansprakelijkheid
   - display: ca
+    compare: LLC
     aliases:
       - compañía anónima
-  - compare: co
-    aliases:
-      - company
-      - kompani
-      - kompania
-      - компания
-  - compare: intl
-    aliases:
-      - international
-      - internationale
-      - інтернейшнл
-      - internazionale
-      - internazionali
   - display: Co Ltd
-    compare: Ltd
+    compare: LLC
     aliases:
       - cia ltda
       - co., ltd.
       - co.ltd
       - compañía limitada
-  - compare: Coop
+  - compare: COOP
     aliases:
       - co-op
       - cooperation
@@ -480,25 +508,26 @@ types:
       - sociedad cooperativa
       - spółdzielni
       - кооперация
-  - compare: Corp
-    aliases:
-      - corporation
-  - compare: cp
+  - compare: FUND
     aliases:
       - fond commun de placement
-  - compare: cs
+  - compare: COOP
     aliases:
       - ህብረት ስራ ማህበራት
-  - compare: cty cp
+  - display: cty cp
+    compare: JSC
     aliases:
       - công ty cổ phần
   - display: cty tnhh
+    compare: LLC
     aliases:
       - công ty trách nhiệm hữu hạn
   - display: cty tnhh mtv
+    compare: LLC
     aliases:
       - công ty trách nhiệm hữu hạn một thành viên
   - display: cv
+    compare: LP
     aliases:
       - comm. v
       - commanditaire vennootschap
@@ -526,6 +555,7 @@ types:
     aliases:
       - doanh nghiệp tư nhân
   - display: d.o.o.
+    compare: LLC
     aliases:
       - društvo s ograničenom odgovornošću
       - društvo sa ograničenom odgovornošću
@@ -533,11 +563,13 @@ types:
       - доо
       - друштво са ограниченом одговорношћу
   - display: dp
+    compare: LLC
     aliases:
       - društveno preduzeće
       - дп
       - друштвено предузеће
   - display: dtnn
+    compare: LLC
     aliases:
       - doanh nghiệp có vốn đầu tư nước ngoài
   - display: dzzd
@@ -565,6 +597,7 @@ types:
       - европейско обединение по икономически интереси
       - еоии
   - display: e.G.
+    compare: COOP
     aliases:
       - eingetragene genossenschaft
       - genossenschaft
@@ -576,9 +609,11 @@ types:
     aliases:
       - entreprise individuelle
   - display: ek. för.
+    compare: COOP
     aliases:
       - ekonomisk förening
   - display: ekd
+    compare: COOP
     aliases:
       - evropeysko kooperativno druzhestvo
       - eвропейско кооперативно дружество
@@ -604,18 +639,9 @@ types:
     compare: NGO
     aliases:
       - eingetragener verein
-  - compare: Exp
-    aliases:
-      - export
-  - compare: exp corp
-    aliases:
-      - exp.corp
   - display: f:ma
     aliases:
       - enskild näringsidkare
-  - compare: fa
-    aliases:
-      - firma
   - display: fie
     aliases:
       - füüsilisest isikust ettevõtja
@@ -639,7 +665,8 @@ types:
   - display: gmk
     aliases:
       - 合名会社
-  - compare: gnpp
+  - display: GNPP
+    compare: SOE
     aliases:
       - gosudarstvennoe nauchno proizvodstvennoe predpriyatie
       - scientific & production enterprise
@@ -650,19 +677,23 @@ types:
     aliases:
       - gensidigt selskab
   - display: gsk
+    compare: LP
     aliases:
       - 合資会社
   - display: haao
+    compare: JSC
     aliases:
       - halka açık anonim ortaklık
   - display: Hf.
-    compare: Ltd
+    compare: LLC
     aliases:
       - hlutafélag
   - display: htx
+    compare: COOP
     aliases:
       - hợp tác xã
   - display: huf
+    compare: SOE
     aliases:
       - hindu undivided family
   - display: II
@@ -686,18 +717,16 @@ types:
       - întreprinzător individual
       - întreprinzătorul individual
   - display: ik
+    compare: SOE
     aliases:
       - individuālais komersants
   - display: im
+    compare: SOE
     aliases:
       - întreprinderea municipală
-  - display: imp
-    aliases:
-      - import
-  - display: imp and
-    aliases:
-      - imp.and
+
   - display: Inc
+    compare: LLC
     aliases:
       - incorp
       - incorporated
@@ -711,7 +740,7 @@ types:
     aliases:
       - ins.oto.san.tic
   - display: IS
-    compare: IS
+    compare: SOE
     aliases:
       - interessentskab
       - intreprindere de stat alimentatiei publice
@@ -734,12 +763,12 @@ types:
     aliases:
       - joint stock commercial bank
   - display: jtd
+    compare: JSC
     aliases:
       - j.t.d.
       - javno trgovačko društvo
-  - display: ju
+  - compare: JSC
     aliases:
-      - (ju)
       - jusikhoesa
       - ㈜
       - 주식회사
@@ -768,21 +797,25 @@ types:
     aliases:
       - 株式会社
   - display: koll. şti.
-    compare: koll
+    compare: GP
     aliases:
       - kolektif şirket
   - display: kom. şti
+    compare: LP
     aliases:
       - komandit şirket
   - display: koop
+    compare: COOP
     aliases:
       - kooperatif şirket
   - display: ks
+    compare: LP
     aliases:
       - komanditní společnost
       - komandītsabiedrība
       - kommanditselskab
   - display: ky
+    compare: LP
     aliases:
       - kommandiittiyhtiö
   - display: ТОВ
@@ -800,12 +833,11 @@ types:
     aliases:
       - tavaristva z abmezhavanaj adkaznastsiu
   - display: lo
+    compare: LP
     aliases:
       - limited ortaklık
-  - compare: loj
-    aliases:
-      - lojistik
   - display: LP
+    compare: LP
     aliases:
       - limited partnership
       - L.P.
@@ -847,7 +879,7 @@ types:
       - בע"מ
       - 有限公司
   - display: Ltd Sti
-    compare: Ltd
+    compare: LLC
     aliases:
       - Ltd. Sti.
       - limited şirket
@@ -857,12 +889,15 @@ types:
       - Ltd Sti
       - Ltd. Sti
       - limited sti
+      - limited şirket
+      - limited şirketi
   - display: mchj
+    compare: LLC
     aliases:
       - mas'uliyati cheklangan jamiyat
       - масъулияти чекланган жамият
   - display: MMC
-    compare: Ltd
+    compare: LLC
     aliases:
       - məhdud məsuliyyətli cəmiyyət
   - display: mtü
@@ -888,7 +923,8 @@ types:
       - N.V.
       - N.V
       - naamloze vennootschap
-  - display: oaj
+  - display: OAJ
+    compare: JSC
     aliases:
       - ochiq aksiyadorlik jamiyati
       - очиқ акциядорлик жамияти
@@ -988,7 +1024,7 @@ types:
     aliases:
       - perseroan terbatas terbuka
   - display: Pty Ltd
-    compare: Ltd
+    compare: LLC
     aliases:
       - proprietary limited
       - proprietary limited company
@@ -1068,7 +1104,7 @@ types:
       - société à responsabilité limitée
       - شّركة ذات مسؤوليّات محدودة ش.م.م
   - display: SAS
-    compare: Ltd
+    compare: LLC
     aliases:
       - sociedades por acciones simplificada
       - société par actions simplifiée
@@ -1127,7 +1163,7 @@ types:
       - S.G.R.
 
   - display: SIA
-    compare: Ltd
+    compare: LLC
     aliases:
       - sabiedrība ar ierobežotu atbildību
       - Sabiedrība ar ierobežotu atbildību
@@ -1186,7 +1222,7 @@ types:
       - société privée à responsabilité limitée unipersonnelle
 
   - display: Sp. z o.o.
-    compare: Ltd
+    compare: LLC
     aliases:
       - sp zoo
       - sp. z o.o.
@@ -1197,7 +1233,7 @@ types:
       - spółka z ograniczoną odpowiedzialnością
 
   - display: SRL
-    compare: Ltd
+    compare: LLC
     aliases:
       - intreprinderea cu responsabilitate limitata
       - s.r.l
@@ -1237,6 +1273,7 @@ types:
     aliases:
       - s.r.o
       - společnost s ručením omezeným
+
   - display: StG
     aliases:
       - stille gesellschaft
@@ -1249,69 +1286,71 @@ types:
     aliases:
       - oiminimi
 
-  - compare: tes
-    aliases:
-      - tesisat
+  # - display: Tes
+  #   aliases:
+  #     - tesisat
 
-  - compare: sti
+  - display: Sti
+    compare: LLC
     aliases:
       - sirketi
       - şirketi
       - şti
 
-  - compare: tes tek dis
-    aliases:
-      - tes.tek.dis
-
-  - compare: tic
-    aliases:
-      - ticaret
-
-  - compare: san tic
-    aliases:
-      - san.tic
-      - sanayi ve ticaret
-      - sanayi ticaret
-      - SANAYI VE TICARET
-
-  - compare: san ve
-    aliases:
-      - san.ve
+  # - display: Tes Tek Dis
+  #   aliases:
+  #     - tes.tek.dis
+  #     - Tesisler Teknoloji Dış
+  # - display: Tic
+  #   aliases:
+  #     - ticaret
+  # - display: San Tic
+  #   aliases:
+  #     - san.tic
+  #     - san. tic.
+  #     - sanayi ve ticaret
+  #     - sanayi ticaret
+  #     - SANAYI VE TICARET
+  # - display: Tic Sti
+  #   aliases:
+  #     - Ticaret Şirketi
+  # - compare: San. ve
+  #   aliases:
+  #     - san.ve
 
   - display: tk
+    compare: LP
     aliases:
       - tokumei kumiai
       - 匿名組合
-  - display: too
+
+  - display: ТОО
+    compare: LLP
     aliases:
       - товарищество с ограниченной ответственностью
 
-  - compare: tpb
-    aliases:
-      - corporația de rachete balistice tactice
-      - društvo za taktičke projektile
-      - tactical missile company
-      - tactical missile corporation
-      - takticheskoe raketnoe vooruzhenie
-      - тактическое ракетное вооружение
-      - тактичне ракетне озброєння
   - display: tü
+    compare: LP
     aliases:
       - täisühing
-  - display: uab
+
+  - display: UAB
+    compare: LLC
     aliases:
       - uždaroji akcinė bendrovė
       - uždarosios akcinės bendrovės
+
   - display: ud
     aliases:
       - usaha dagang
+
   - display: uk
     aliases:
       - unitar korxona
       - унитар корхона
 
   - display: Pty
-    compare: Pty
+    compare: SP
     aliases:
       - unlimited
       - unlimited company
@@ -1358,7 +1397,7 @@ types:
       - уп
 
   - display: FGBU
-    compare: FGBU
+    compare: SOE
     aliases:
       - federalnoe gosudarstvennoe byudzhetnoe uchrezhdenie
 
@@ -1368,10 +1407,12 @@ types:
       - usaldusühing
 
   - display: vof
+    compare: SP
     aliases:
       - vennootschap onder firma
 
   - display: vos
+    compare: SP
     aliases:
       - veřejná obchodní společnost
 
@@ -1383,6 +1424,7 @@ types:
       - vereinigung ohne gewinnerzielungsabsicht
       - vereniging zonder winstoogmerk
       - vog
+
   - display: xk
     aliases:
       - xususiy korxona
@@ -1392,16 +1434,20 @@ types:
     aliases:
       - xususiy tadbirkorlik
       - хусусий тадбиркорлик
+
   - display: yk
+    compare: LLC
     aliases:
       - 有限会社
 
   - display: yoaj
+    compare: JSC
     aliases:
       - yopiq aksiyadorlik jamiyati
       - ёпиқ акциядорлик жамияти
 
   - display: yu
+    compare: LLC
     aliases:
       - (yu)
       - (유)
@@ -1409,20 +1455,20 @@ types:
       - 유한회사
 
   - display: CJSC
-    compare: CJSC
+    compare: JSC
     aliases:
       - cjsc
       - closed joint stock company
       - CLOSED JOINT-STOCK COMPANY
 
   - display: ZAO
-    compare: CJSC
+    compare: JSC
     aliases:
       - zakrytoe akcionernoe obshchestvo
       - zao
 
   - display: ЗАТ
-    compare: CJSC
+    compare: JSC
     aliases:
       - zakritaye aktsiyanernaye tavaristva
       - zakrytae akcyyanernae tavarystva
@@ -1440,19 +1486,21 @@ types:
       - şube
 
   - display: тда
+    compare: LLC
     aliases:
       - tavarystva z dadatkovaj adkaznascyu
       - таварыства з дадатковай адказнасцю
       - тда
 
   - display: ТАА
-    compare: Ltd
+    compare: LLC
     aliases:
       - tavarystva z abmezhavanay adkaznastsyu
       - tavarystva z abmezhavanaj adkaznascyu
       - таварыства з абмежаванай адказнасцю
 
   - display: тбб
+    compare: NGO
     aliases:
       - төрийн бус байгууллага
 
@@ -1462,6 +1510,7 @@ types:
       - товарищество собственников недвижимости
 
   - display: хк
+    compare: JSC
     aliases:
       - хувьцаат компани
 
@@ -1471,30 +1520,29 @@ types:
       - хязгаарлагдмал хариуцлагатай компани
 
   - display: ОТДЕЛ ГПС
-    compare: ОТДЕЛ ГПС
+    compare: SOE
     aliases:
       - ОТДЕЛ ГОСУДАРСТВЕННОЙ ПРОТИВОПОЖАРНОЙ СЛУЖБЫ # DEPARTMENT OF THE STATE FIRE SERVICE
 
   - display: Д/С
-    compare: ДС
     aliases:
       - Д/С
       - ДЕТСКИЙ САД # KINDERGARTEN
 
   - display: МОУ # муниципальное образовательное учреждение
-    compare: МОУ
+    compare: SOE
     aliases:
       - МОУ
       - МУНИЦИПАЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # MUNICIPAL EDUCATIONAL INSTITUTION
 
   - display: МАУ # муниципальное автономное учреждение
-    compare: МАУ
+    compare: SOE
     aliases:
       - МАУ
       - МУНИЦИПАЛЬНОЕ АВТОНОМНОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # MUNICIPAL AUTONOMOUS PRESCHOOL EDUCATIONAL INSTITUTION
 
   - display: МБОУ # муниципальное бюджетное общеобразовательное учреждение
-    compare: МБОУ
+    compare: SOE
     aliases:
       - МБОУ
       - МУНИЦИПАЛЬНОЕ БЮДЖЕТНОЕ ОБЩЕОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # MUNICIPAL BUDGETARY GENERAL EDUCATIONAL INSTITUTION
@@ -1502,80 +1550,80 @@ types:
       - МУНИЦИПАЛЬНОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ
 
   - display: МБДОУ # муниципальное бюджетное дошкольное образовательное учреждение
-    compare: МБДОУ
+    compare: SOE
     aliases:
       - МБДОУ
       - МУНИЦИПАЛЬНОЕ БЮДЖЕТНОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # MUNICIPAL BUDGETARY PRESCHOOL EDUCATIONAL INSTITUTION
 
   - display: МБУ ДО
-    compare: МБУ ДО
+    compare: SOE
     aliases:
       - МБУ ДО
       - МУНИЦИПАЛЬНОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ # MUNICIPAL BUDGETARY ADDITIONAL EDUCATION INSTITUTION
 
   - display: МК ДОУ
-    compare: МК ДОУ
+    compare: SOE
     aliases:
       - МК ДОУ
       - МУНИЦИПАЛЬНОЕ КАЗЕННОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # MUNICIPAL TREASURY PRESCHOOL EDUCATIONAL INSTITUTION
 
   - display: ГУ # государственное учреждение
-    compare: ГУ
+    compare: SOE
     aliases:
       - ГУ
       - ГОСУДАРСТВЕННОЕ УЧРЕЖДЕНИЕ # STATE INSTITUTION
 
   - display: ОГУ # окружное государственное учреждение
-    compare: ОГУ
+    compare: SOE
     aliases:
       - ОГУ
       - ОКРУЖНОЕ ГОСУДАРСТВЕННОЕ УЧРЕЖДЕНИЕ # DISTRICT STATE INSTITUTION
 
   - display: ГОУ # государственное образовательное учреждение
-    compare: ГОУ
+    compare: SOE
     aliases:
       - ГОУ
       - ГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # STATE EDUCATIONAL INSTITUTION
       - ГОСУДАРСТВЕННОЕ ОБЩЕОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # STATE GENERAL EDUCATIONAL INSTITUTION
 
   - display: ГБОУ # государственное бюджетное общеобразовательное учреждение
-    compare: ГБОУ
+    compare: SOE
     aliases:
       - ГБОУ
       - ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБЩЕОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # STATE BUDGET GENERAL EDUCATIONAL INSTITUTION
 
   - display: ГКОУ
-    compare: ГОУ
+    compare: SOE
     aliases:
       - ГКОУ
       - ГОСУДАРСТВЕННОЕ КАЗЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # STATE TREASURY EDUCATIONAL INSTITUTION
 
   - display: ГО ШК-Инт
-    compare: ГОУ
+    compare: SOE
     aliases:
       - ГО ШК-Инт
       - ГОСУДАРСТВЕННАЯ ОБЩЕОБРАЗОВАТЕЛЬНАЯ ШКОЛА-ИНТЕРНАТ # STATE GENERAL EDUCATIONAL BOARDING SCHOOL
 
   - display: ГОУ ДДМШВ
-    compare: ГОУ
+    compare: SOE
     aliases:
       - ГОУ ДДМШВ
       - ГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДЛЯ ДЕТЕЙ ДОШКОЛЬНОГО И МЛАДШЕГО ШКОЛЬНОГО ВОЗРАСТА
 
   - display: ГАУСО
-    compare: ГАУСО
+    compare: SOE
     aliases:
       - ГАУСО
       - ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ УЧРЕЖДЕНИЕ СОЦИАЛЬНОГО ОБСЛУЖИВАНИЯ
 
   - display: ГБСКОУ # государственное бюджетное образовательное учреждение
-    compare: ГОУ
+    compare: SOE
     aliases:
       - ГБСКОУ
       - ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ СПЕЦИАЛЬНОЕ (КОРРЕКЦИОННОЕ) ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДЛЯ ОБУЧАЮЩИХСЯ, ВОСПИТАННИКОВ С ОГРАНИЧЕННЫМИ ВОЗМОЖНОСТЯМИ ЗДОРОВЬЯ # STATE BUDGET SPECIAL (CORRECTIONAL) EDUCATIONAL INSTITUTION FOR STUDENTS, TRAINEES WITH DISABILITIES
 
   - display: ГСКОУ
-    compare: ГОУ
+    compare: SOE
     aliases:
       - ГСКОУ
       - ГОСУДАРСТВЕННОЕ СПЕЦИАЛЬНОЕ (КОРРЕКЦИОННОЕ) ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ
@@ -1583,142 +1631,142 @@ types:
       - ГОСУДАРСТВЕННОЕ СПЕЦИАЛЬНОЕ (КОРРЕКЦИОННОЕ) ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДЛЯ ОБУЧАЮЩИХСЯ С ОТКЛОНЕНИЯМИ В РАЗВИТИИ -
 
   - display: ГДОУ # государственное дошкольное образовательное учреждение
-    compare: ГОУ
+    compare: SOE
     aliases:
       - ГДОУ
       - ГОСУДАРСТВЕННОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # STATE PRESCHOOL EDUCATIONAL INSTITUTION
 
   - display: ГДОУ - Д/С # государственное дошкольное образовательное учреждение - детский сад
-    compare: ГОУ
+    compare: SOE
     aliases:
       - ГДОУ - Д/С
       - ГОСУДАРСТВЕННОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ - ДЕТСКИЙ САД # STATE PRESCHOOL EDUCATIONAL INSTITUTION - KINDERGARTEN
 
   - display: ГКУ # государственное казенное учреждение
-    compare: ГКУ
+    compare: SOE
     aliases:
       - ГКУ
       - ГОСУДАРСТВЕННОЕ КАЗЁННОЕ УЧРЕЖДЕНИЕ # STATE TREASURY INSTITUTION
 
   - display: ГКС(к)ОУ # государственное казённое специальное (коррекционное) образовательное учреждение
-    compare: ГКС
+    compare: SOE
     aliases:
       - ГКС(к)ОУ
       - ГОСУДАРСТВЕННОЕ КАЗЕННОЕ СПЕЦИАЛЬНОЕ (КОРРЕКЦИОННОЕ) ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # STATE TREASURY SPECIAL (CORRECTIONAL) EDUCATIONAL INSTITUTION
 
   - display: ГНУ # государственное научное учреждение
-    compare: ГНУ
+    compare: SOE
     aliases:
       - ГНУ
       - ГОСУДАРСТВЕННОЕ НАУЧНОЕ УЧРЕЖДЕНИЕ # STATE SCIENTIFIC INSTITUTION
 
   - display: ГосНИИ
-    compare: ГНУ
+    compare: SOE
     aliases:
       - ГОСУДАРСТВЕННЫЙ НАУЧНО-ИССЛЕДОВАТЕЛЬСКИЙ ИНСТИТУТ # STATE RESEARCH INSTITUTE
 
   - display: ГОУ ВПО # can also be ГОУ ДПО in this case
-    compare: ГОУ
+    compare: SOE
     aliases:
       - ГОУ ВПО
       - ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ
       - ГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ # STATE EDUCATIONAL INSTITUTION OF HIGHER PROFESSIONAL EDUCATION
 
   - display: ОУ ДПО # образовательное учреждение дополнительного профессионального образования
-    compare: ОУ
+    compare: SOE
     aliases:
       - ОУ ДПО
       - ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ # ADDITIONAL PROFESSIONAL EDUCATION INSTITUTION
 
   - display: ГОУ ДПО # государственное образовательное учреждение дополнительного профессионального образования
-    compare: ГОУ
+    compare: SOE
     aliases:
       - ГОУ ДПО
       - ГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ (ПОВЫШЕНИЯ КВАЛИФИКАЦИИ) СПЕЦИАЛИСТОВ # STATE EDUCATIONAL INSTITUTION OF FURTHER PROFESSIONAL EDUCATION (QUALIFICATION IMPROVEMENT)
 
   - display: НОЧУ ДПО # негосударственное образовательное частное учреждение дополнительного профессионального образования
-    compare: НОЧУ
+    compare: SOE
     aliases:
       - НОЧУ ДПО
       - НЕГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ ЧАСТНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ
 
   - display: ПОУ
-    compare: ПОУ
+    compare: SOE
     aliases:
       - ПОУ
       - ПРОФЕССИОНАЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ
 
   - display: ГП
-    compare: ГП
+    compare: SOE
     aliases:
       - ГОСУДАРСТВЕННОЕ ПРЕДПРИЯТИЕ # STATE ENTERPRISE
       - Государственное предприятие
 
   - display: ГУП # государственное унитарное предприятие
-    compare: ГУП
+    compare: SOE
     aliases:
       - ГУП
       - ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ # SUBSIDIARY STATE UNITARY ENTERPRISE
 
   - display: ДГУП
-    compare: ДГУП
+    compare: SOE
     aliases:
       - ДГУП
       - ДОЧЕРНЕЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ # SUBSIDIARY STATE UNITARY ENTERPRISE
       - ДОЧЕРНЕЕ ГОСУДАРСТВЕНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ
 
   - display: ГУСП
-    compare: ГУСП
+    compare: SOE
     aliases:
       - ГУСП
       - ГОСУДАРСТВЕННОЕ УНИТАРНОЕ СЕЛЬСКОХОЗЯЙСТВЕННОЕ ПРЕДПРИЯТИЕ # STATE UNITARY AGRICULTURAL ENTERPRISE
 
   - display: ГУДП
-    compare: ГУДП
+    compare: SOE
     aliases:
       - ГУДП
       - ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ДОЧЕРНЕЕ ПРЕДПРИЯТИЕ # STATE UNITARY SUBSIDIARY ENTERPRISE
       - ГОСУДАРСТВЕННОЕ УНИТАРНОЕ (ДОЧЕРНЕЕ) ПРЕДПРИЯТИЕ
 
   - display: ФГНУ # федеральное государственное научное учреждение
-    compare: ФГНУ
+    compare: SOE
     aliases:
       - ФГНУ
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ НАУЧНОЕ УЧРЕЖДЕНИЕ # FEDERAL STATE SCIENTIFIC INSTITUTION
 
   - display: ФГУП # федеральное государственное унитарное предприятие
-    compare: ФГУП
+    compare: SOE
     aliases:
       - ФГУП
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ # FEDERAL STATE UNITARY ENTERPRISE
 
   - display: ДОЧЕРНЕЕ ФГУП
-    compare: ФГУП
+    compare: SOE
     aliases:
       - ДОЧЕРНЕЕ ФГУП
       - ФЕДЕРАЛЬНОЕ ДОЧЕРНЕЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ # FEDERAL SUBSIDIARY STATE UNITARY ENTERPRISE
       - ФЕДЕРАЛЬНОЕ ДОЧЕРНЕЕ ГОСУДАРСТВЕННОЕ  УНИТАРНОЕ ПРЕДПРИЯТИЕ
 
   - display: ФГБДОУ
-    compare: ФГБУ
+    compare: SOE
     aliases:
       - ФГБДОУ
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # FEDERAL STATE BUDGETARY PRESCHOOL EDUCATIONAL INSTITUTION
 
   - display: ФГБОУ ДПО # федеральное государственное бюджетное образовательное учреждение
-    compare: ФГОУ
+    compare: SOE
     aliases:
       - ФГБОУ ДПО
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ # FEDERAL STATE BUDGETARY EDUCATIONAL INSTITUTION OF FURTHER PROFESSIONAL EDUCATION
 
   - display: ФГАОУ ДПО
-    compare: ФГОУ
+    compare: SOE
     aliases:
       - ФГАОУ ДПО
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ
 
   - display: ФГБОУ ВО # федеральное государственное бюджетное образовательное учреждение высшего образования
-    compare: ФГОУ ВО
+    compare: SOE
     aliases:
       - ФГБОУ ВО
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ # FEDERAL STATE BUDGETARY EDUCATIONAL INSTITUTION OF HIGHER EDUCATION
@@ -1727,202 +1775,204 @@ types:
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ  БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ
 
   - display: ФГОУ ВПО # федеральное государственное образовательное учреждение высшего профессионального образования
-    compare: ФГОУ
+    compare: SOE
     aliases:
       - ФГОУ ВПО
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ # FEDERAL STATE EDUCATIONAL INSTITUTION OF HIGHER PROFESSIONAL EDUCATION
 
   - display: ФГКВОУ ВПО # федеральное государственное казенное военное образовательное учреждение высшего образования
-    compare: ФГКВОУ ВПО
+    compare: SOE
     aliases:
       - ФГКВОУ ВПО
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ КАЗЕННОЕ ВОЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ # FEDERAL STATE TREASURY MILITARY EDUCATIONAL INSTITUTION OF HIGHER EDUCATION
 
   - display: МАОУ # муниципальное автономное общеобразовательное учреждение
-    compare: МАОУ
+    compare: SOE
     aliases:
       - МАОУ
       - МУНИЦИПАЛЬНОЕ АВТОНОМНОЕ ОБЩЕОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ МУНИЦИПАЛЬНОГО ОБРАЗОВАНИЯ ГОРОД КРАСНОДАР # MUNICIPAL AUTONOMOUS GENERAL EDUCATIONAL INSTITUTION OF THE CITY OF KRASNODAR
 
   - display: МКУ # муниципальное казенное учреждение
-    compare: МКУ
+    compare: SOE
     aliases:
       - МКУ
       - МУНИЦИПАЛЬНОЕ КАЗЕННОЕ УЧРЕЖДЕНИЕ # MUNICIPAL TREASURY INSTITUTION
 
   - display: МРО
-    compare: МРО
+    compare: REL
     aliases:
       - МРО
       - МЕСТНАЯ ПРАВОСЛАВНАЯ РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ # LOCAL ORTHODOX RELIGIOUS ORGANIZATION
       - МЕСТНАЯ РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ # LOCAL RELIGIOUS ORGANIZATION
 
   - display: ЦРО # центральная религиозная организация
-    compare: ЦРО
+    compare: REL
     aliases:
       - ЦРО
       - ЦЕНТРАЛЬНАЯ РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ # CENTRAL RELIGIOUS ORGANIZATION
 
   - display: РО # религиозная организация
-    compare: РО
+    compare: REL
     aliases:
       - РО
       - РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ # RELIGIOUS ORGANIZATION
 
   - display: ФГУ # федеральное государственное учреждение
-    compare: ФГУ
+    compare: SOE
     aliases:
       - ФГУ
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ УЧРЕЖДЕНИЕ # FEDERAL STATE INSTITUTION
 
   - display: ФГКУ # федеральное государственное казенное учреждение
+    compare: SOE
     aliases:
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ КАЗЕННОЕ УЧРЕЖДЕНИЕ # FEDERAL STATE TREASURY INSTITUTION
 
   - display: ФКУ # федеральное казенное учреждение
-    compare: ФКУ
+    compare: SOE
     aliases:
       - ФКУ
       - ФЕДЕРАЛЬНОЕ КАЗЕННОЕ УЧРЕЖДЕНИЕ # FEDERAL TREASURY INSTITUTION
 
   - display: ФКП # федеральное казенное предприятие
+    compare: SOE
     aliases:
       - ФЕДЕРАЛЬНОЕ КАЗЕННОЕ ПРЕДПРИЯТИЕ
 
   - display: ФГБВОУ ВО # федеральное государственное бюджетное военное образовательное учреждение высшего образования
-    compare: ФГОУ ВО
+    compare: SOE
     aliases:
       - ФГБВОУ ВО
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ВОЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ # FEDERAL STATE BUDGETARY MILITARY EDUCATIONAL INSTITUTION OF HIGHER EDUCATION
 
   - display: ФГКВОУ ВО
-    compare: ФГОУ ВО
+    compare: SOE
     aliases:
       - ФГКВОУ
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ КАЗЕННОЕ ВОЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ # FEDERAL STATE TREASURY MILITARY EDUCATIONAL INSTITUTION OF HIGHER EDUCATION
 
   - display: ФГАОУ ВО
-    compare: ФГОУ ВО
+    compare: SOE
     aliases:
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ # FEDERAL STATE AUTONOMOUS EDUCATIONAL INSTITUTION OF HIGHER EDUCATION
 
   - display: ФГКОУ ДПО # федеральное государственное казенное образовательное учреждение
-    compare: ФГКОУ ДПО
+    compare: SOE
     aliases:
       - ФГКОУ ДПО
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ КАЗЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ (ПЕРЕПОДГОТОВКИ И ПОВЫШЕНИЯ КВАЛИФИКАЦИИ)
 
   - display: ФГОУ ДПО # федеральное государственное казенное образовательное учреждение высшего профессионального образования
-    compare: ФГОУ
+    compare: SOE
     aliases:
       - ФГОУ ДПО
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ СПЕЦИАЛИСТОВ # FEDERAL STATE EDUCATIONAL INSTITUTION OF FURTHER PROFESSIONAL EDUCATION (SPECIALISTS)
 
   - display: ФГДОУ # федеральное государственное дошкольное образовательное учреждение
-    compare: ФГДОУ
+    compare: SOE
     aliases:
       - ФГДОУ
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # FEDERAL STATE PRESCHOOL EDUCATIONAL INSTITUTION
 
   - display: ФГБУ # федеральное государственное бюджетное учреждение
-    compare: ФГБУ
+    compare: SOE
     aliases:
       - ФГБУ
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ # FEDERAL STATE BUDGETARY INSTITUTION
 
   - display: ФГБУ ДПО
-    compare: ФГБУ
+    compare: SOE
     aliases:
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ
 
   - display: ОППО
-    compare: ППО
+    compare: SOE
     aliases:
       - ОБЪЕДИНЕННАЯ ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ
       - ОБЪЕДИНЕННАЯ (ТЕРРИТОРИАЛЬНАЯ) ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ
 
   - display: ППО # первичная профсоюзная организация
-    compare: ППО
+    compare: SOE
     aliases:
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ # PRIMARY TRADE UNION ORGANIZATION
       - ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ РАБОТНИКОВ # TRADE UNION ORGANIZATION OF WORKERS
 
   - display: ППО ООО # первичная профсоюзная организация общества с ограниченной ответственностью
-    compare: ППО
+    compare: SOE
     aliases:
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ОБЩЕСТВА С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ # PRIMARY TRADE UNION ORGANIZATION OF LIMITED LIABILITY COMPANY
 
   - display: ППО ДОЧЕРНЕГО ООО
-    compare: ППО
+    compare: SOE
     aliases:
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ РАБОТНИКОВ ДОЧЕРНЕГО ОБЩЕСТВА С ОГРАНИЧЕНОЙ ОТВЕТСТВЕННОСТЬЮ # PRIMARY TRADE UNION ORGANIZATION OF WORKERS OF A SUBSIDIARY LIMITED LIABILITY COMPANY
 
   - display: ППО ОАО # первичная профсоюзная организация открытого акционерного общества
-    compare: ППО
+    compare: SOE
     aliases:
       - ППО ОАО
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ОТКРЫТОГО АКЦИОНЕРНОГО ОБЩЕСТВА # PRIMARY TRADE UNION ORGANIZATION OF AN OPEN JOINT-STOCK COMPANY
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ РАБОТНИКОВ ОТКРЫТОГО АКЦИОНЕРНОГО ОБЩЕСТВА # PRIMARY TRADE UNION ORGANIZATION OF WORKERS OF AN OPEN JOINT-STOCK COMPANY
 
   - display: ППО ГОУСПО # первичная профсоюзная организация государственного образовательного учреждения
-    compare: ППО
+    compare: SOE
     aliases:
       - ППО ГОУСПО
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОГО ОБРАЗОВАТЕЛЬНОГО УЧРЕЖДЕНИЯ СРЕДНЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОГО УЧРЕЖДЕНИЯ СРЕДНЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ
 
   - display: ППО ФГБУ # первичная профсоюзная организация федерального государственного бюджетного учреждения
-    compare: ФГБУ
+    compare: SOE
     aliases:
       - ППО ФГБУ
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ФЕДЕРАЛЬНОГО ГОСУДАРСТВЕННОГО БЮДЖЕТНОГО УЧРЕЖДЕНИЯ # PRIMARY TRADE UNION ORGANIZATION OF THE FEDERAL STATE BUDGETARY INSTITUTION
 
   - display: ППО ФГБОУ ВО
-    compare: ППО
+    compare: SOE
     aliases:
       - ППО ФГБОУ ВО
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ФЕДЕРАЛЬНОГО ГОСУДАРСТВЕННОГО БЮДЖЕТНОГО ОБРАЗОВАТЕЛЬНОГО УЧРЕЖДЕНИЯ ВЫСШЕГО ОБРАЗОВАНИЯ # PRIMARY TRADE UNION ORGANIZATION OF THE FEDERAL STATE BUDGETARY EDUCATIONAL INSTITUTION OF HIGHER EDUCATION
       - ПЕРВИЧНАЯ ОРГАНИЗАЦИЯ ПРОФСОЮЗА СОТРУДНИКОВ ФЕДЕРАЛЬНОГО ГОСУДАРСТВЕННОГО БЮДЖЕТНОГО ОБРАЗОВАТЕЛЬНОГО УЧРЕЖДЕНИЯ ВЫСШЕГО ОБРАЗОВАНИЯ
 
   - display: ППО ФКУ # первичная профсоюзная организация федерального казенного учреждения
-    compare: ППО
+    compare: SOE
     aliases:
       - ППО ФКУ
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ФЕДЕРАЛЬНОГО КАЗЕННОГО УЧРЕЖДЕНИЯ # PRIMARY TRADE UNION ORGANIZATION OF THE FEDERAL TREASURY INSTITUTION
 
   - display: ППО ГБУ
-    compare: ППО
+    compare: SOE
     aliases:
       - ППО ГБУ
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОГО БЮДЖЕТНОГО УЧРЕЖДЕНИЯ # PRIMARY TRADE UNION ORGANIZATION OF THE STATE BUDGETARY INSTITUTION
 
   - display: ППО ГБОУ # первичная профсоюзная организация государственного бюджетного образовательного учреждения
-    compare: ППО
+    compare: SOE
     aliases:
       - ППО ГБОУ
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОГО БЮДЖЕТНОГО ОБРАЗОВАТЕЛЬНОГО УЧРЕЖДЕНИЯ # PRIMARY TRADE UNION ORGANIZATION OF THE STATE BUDGETARY EDUCATIONAL INSTITUTION
 
   - display: ППО ФБУ
-    compare: ППО
+    compare: SOE
     aliases:
       - ППО ФБУ
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ФЕДЕРАЛЬНОГО БЮДЖЕТНОГО УЧРЕЖДЕНИЯ # PRIMARY TRADE UNION ORGANIZATION OF THE FEDERAL BUDGETARY INSTITUTION
 
   - display: ППО ФГУП # первичная профсоюзная организация федерального государственного унитарного предприятия
-    compare: ППО
+    compare: SOE
     aliases:
       - ППО ФГУП
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ СОТРУДНИКОВ ФЕДЕРАЛЬНОГО ГОСУДАРСТВЕННОГО УНИТАРНОГО ПРЕДПРИЯТИЯ # PRIMARY TRADE UNION ORGANIZATION OF THE FEDERAL STATE UNITARY ENTERPRISE
 
   - display: ППО ГУП # первичная профсоюзная организация государственного унитарного предприятия
-    compare: ППО
+    compare: SOE
     aliases:
       - ППО ГУП
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОГО УНИТАРНОГО ПРЕДПРИЯТИЯ # PRIMARY TRADE UNION ORGANIZATION OF THE STATE UNITARY ENTERPRISE
 
   - display: ППО ПСРЗ
-    compare: ППО
+    compare: SOE
     aliases:
       - ППО ПСРЗ
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ПРОФСОЮЗА РАБОТНИКОВ ЗДРАВООХРАНЕНИЯ # PRIMARY TRADE UNION ORGANIZATION OF THE HEALTHCARE WORKERS UNION
@@ -1930,13 +1980,13 @@ types:
       - ПЕРВИЧНАЯ ОРГАНИЗАЦИЯ ПРОФЕССИОНАЛЬНОГО СОЮЗА РАБОТНИКОВ ЗДРАВООХРАНЕНИЯ
 
   - display: ППОО # первичная профсоюзная общественная организация
-    compare: ППО
+    compare: SOE
     aliases:
       - ППОО
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ # PRIMARY TRADE UNION PUBLIC ORGANIZATION
 
   - display: ППОО АО # первичная профсоюзная общественная организация акционерного общества
-    compare: ППО
+    compare: SOE
     aliases:
       - ППОО АО
       - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ АКЦИОНЕРНОГО ОБЩЕСТВА # PRIMARY TRADE UNION PUBLIC ORGANIZATION OF THE JOINT-STOCK COMPANY
@@ -1952,10 +2002,12 @@ types:
       - ПЕРВИЧНАЯ ОРГАНИЗАЦИЯ ПРОФСОЮЗА РАБОТНИКОВ ЗДРАВООХРАНЕНИЯ # PRIMARY TRADE UNION ORGANIZATION OF HEALTHCARE WORKERS
 
   - display: УПРАВЛЕНИЕ ФСБ РФ
+    compare: SOE
     aliases:
       - УПРАВЛЕНИЕ ФЕДЕРАЛЬНОЙ СЛУЖБЫ БЕЗОПАСНОСТИ РОССИЙСКОЙ ФЕДЕРАЦИИ # FEDERAL SECURITY SERVICE OF THE RUSSIAN FEDERATION
 
   - display: ОГКОУ # областное государственное казенное образовательное учреждение
+    compare: SOE
     aliases:
       - ОГКОУ
       - ОБЛАСТНОЕ ГОСУДАРСТВЕННОЕ КАЗЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # REGIONAL STATE TREASURY EDUCATIONAL INSTITUTION
@@ -1963,14 +2015,14 @@ types:
       - ОБЛАСТНОЕ ГОСУДАРСТВЕННОЕ КАЗЁННОЕ ОБЩЕОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ
 
   - display: МОО # местная общественная организация
-    compare: МОО
+    compare: NGO
     aliases:
       - МОО
       - МЕСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ # LOCAL PUBLIC ORGANIZATION
       - МЕСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ - # LOCAL PUBLIC ORGANIZATION
 
   - display: МОО - ППО # местная общественная организация - первичная профсоюзная организация
-    compare: МОО
+    compare: NGO
     aliases:
       - МОО - ППО
       - МЕСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ # LOCAL PUBLIC ORGANIZATION - PRIMARY TRADE UNION
@@ -1979,12 +2031,13 @@ types:
       - МЕСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ – ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ # LOCAL PUBLIC ORGANIZATION-PRIMARY TRADE UNION ORGANIZATION
 
   - display: МОО - ППО ГУП # местная общественная организация - первичная профсоюзная организация государственного унитарного предприятия
-    compare: МОО
+    compare: NGO
     aliases:
       - МОО - ППО ГУП
       - МЕСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ-ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОГО УНИТАРНОГО ПРЕДПРИЯТИЯ # LOCAL PUBLIC ORGANIZATION PRIMARY TRADE UNION ORGANIZATION OF THE STATE UNITARY ENTERPRISE
 
   - display: МЧС России
+    compare: SOE
     aliases:
       - МЧС РОССИИ
       - МИНИСТЕРСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ ПОДЕЛАМ ГРАЖДАНСКОЙ ОБОРОНЫ, ЧРЕЗВЫЧАЙНЫМ СИТУАЦИЯМ И ЛИКВИДАЦИИ ПОСЛЕДСТВИЙ СИХИЙНЫХ БЕДСТВИЙ
@@ -1998,12 +2051,12 @@ types:
       - МИНИСТЕРСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ ПО ДЕЛАМ ГРАЖДАНСКОЙ ОБОРОНЫ, ЧРЕЗВЫЧАЙНЫХ СИТУАЦИЙ И ЛИКВИДАЦИИ ПОСЛЕДСТВИЙ СТИХИЙНИХ БЕДСТВИЙ
 
   - display: ОО # неправительственная организация
-    compare: ОО
+    compare: NGO
     aliases:
       - ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ # NGO
 
   - display: НОУ ДПО # негосударственное образовательное учреждение дополнительного профессионального образования
-    compare: НОУ
+    compare: NGO
     aliases:
       - НЕГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ # NON-STATE EDUCATIONAL INSTITUTION OF FURTHER PROFESSIONAL EDUCATION
       - НЕГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ НАЧАЛЬНОГО И ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ # NON-STATE EDUCATIONAL INSTITUTION OF INITIAL AND FURTHER PROFESSIONAL EDUCATION
@@ -2016,7 +2069,7 @@ types:
       - СТРАХОВАЯ АКЦИОНЕР.КОМПАНИЯ
 
   - display: ЗАО # закрытое акционерное общество
-    compare: CJSC
+    compare: JSC
     aliases:
       - закрите акціонерне товариство
       - закрытое акционерное общество
@@ -2037,7 +2090,7 @@ types:
       - АКЦИОНЕРОНОЕ ОБЩЕСТВО ЗАКРЫТОГО ТИПА
 
   - display: ОАО # открытое акционерное общество
-    compare: PJSC
+    compare: JSC
     aliases:
       - ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО
       - ОТКРЫТОЕ АКЦИОНЕРГОЕ ОБЩЕСТВО
@@ -2050,7 +2103,8 @@ types:
       - Відкрите акціонерне товариство
       - otkrytoe akcionernoe obshchestvo
       - otkrytoe aktsionernoe obshchestvo
-  - compare: PJSC
+
+  - compare: JSC
     aliases:
       - atviroji akcinė bendrovė
       - atviroji akcinė bendrovė
@@ -2073,50 +2127,49 @@ types:
       - AKTSIONERNOE OBSHCHESTVO
       - ao
   - display: PAO
-    compare: PJSC
+    compare: JSC
     aliases:
       - Publichne aktsionerne tovarystvo
 
   - display: ПАО # публичное акционерное общество
-    compare: PJSC
+    compare: JSC
     aliases:
       - ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО # PUBLIC JOINT-STOCK COMPANY
       - пао
       - приватне акціонерне товариство
       - публичное акционерное общество
   - display: ПАТ # публічне акціонерне товариство
-    compare: PJSC
+    compare: JSC
     aliases:
       - Публічне акціонерне товариство
 
   - display: НАО # некоммерческое акционерное общество
-    compare: CJSC
+    compare: JSC
     aliases:
       - НЕПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО # NON-PUBLIC JOINT-STOCK COMPANY
 
   - display: СПК # сельскохозяйственный производственный кооператив
-    compare: СПК
+    compare: COOP
     aliases:
       - СЕЛЬСКОХОЗЯЙСТВЕННЫЙ ПРОИЗВОДСТВЕННЫЙ КООПЕРАТИВ # AGRICULTURAL PRODUCTION COOPERATIVE
 
   - display: СУ СК РФ
-    compare: СУ СК
+    compare: SOE
     aliases:
       - СЛЕДСТВЕННОЕ УПРАВЛЕНИЕ СЛЕДСТВЕННОГО КОМИТЕТА РОССИЙСКОЙ ФЕДЕРАЦИИ
 
   - display: МУП # муниципальное унитарное предприятие
-    compare: UP
+    compare: SOE
     aliases:
       - МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ # MUNICIPAL UNITARY ENTERPRISE
 
   - display: АНО # автономная некоммерческая организация
-    compare: ANO
+    compare: NGO
     aliases:
       - АНО
       - АВТОНОМНАЯ НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ # AUTONOMOUS NON-COMMERCIAL ORGANIZATION
 
   - display: КФХ # крестьянское (фермерское) хозяйство
-    compare: ""
     aliases:
       - КРЕСТЬЯНСКОЕ (ФЕРМЕРСКОЕ) ХОЗЯЙСТВО # FARM (FARMING) HOUSEHOLD
       - КРЕСТЬЯНСКОЕ ФЕРМЕРСКОЕ ХОЗЯЙСТВО
@@ -2134,48 +2187,45 @@ types:
       - ПОЛНОЕ ТОВАРИЩЕСТВО # FULL PARTNERSHIP
 
   - display: ДОУ # дошкольное образовательное учреждение
-    compare: ДОУ
     aliases:
       - ДОУ
       - ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # PRESCHOOL EDUCATIONAL INSTITUTION
 
   - display: ПКООП # потребительский кооператив
-    compare: ПКООП
+    compare: COOP
     aliases:
       - ПКООП
       - ПОТРЕБИТЕЛЬСКИЙ КООПЕРАТИВ # CONSUMER COOPERATIVE
 
   - display: ПК # производственный кооператив
-    compare: ПК
+    compare: COOP
     aliases:
       - ПРОИЗВОДСТВЕННЫЙ КООПЕРАТИВ # PRODUCTION COOPERATIVE
 
   - display: НЦ # научный центр
-    compare: НЦ
     aliases:
       - НЦ
       - НАУЧНЫЙ ЦЕНТР # SCIENTIFIC CENTER
 
   - display: ОЮЛ # oбъединение юридических лиц
-    compare: ОЮЛ
     aliases:
       - ОЮЛ
       - ОБЪЕДИНЕНИЕ ЮРИДИЧЕСКИХ ЛИЦ # ASSOCIATION OF LEGAL ENTITIES
 
   - display: НП # некоммерческое партнёрство
-    compare: НП
+    compare: NGO
     aliases:
       - НЕКОММЕРЧЕСКОЕ ПАРТНЁРСТВО # NON-COMMERCIAL PARTNERSHIP
 
   - display: НОУДО # негосударственное образовательное учреждение дополнительного образования
-    compare: НОУДО
+    compare: NGO
     aliases:
       - НОУДО
       - НЕГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ # NON-STATE EDUCATIONAL INSTITUTION OF ADDITIONAL EDUCATION
       - НЕГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ ДЕТЕЙ # NON-STATE EDUCATIONAL INSTITUTION OF ADDITIONAL EDUCATION FOR CHILDREN
 
   - display: ОНОСС
-    compare: ОНОСС
+    compare: NGO
     aliases:
       - ОНОСС
       - ОРГАНИЗАЦИЯ НАУЧНОГО ОБСЛУЖИВАНИЯ И СОЦИАЛЬНОЙ СФЕРЫ

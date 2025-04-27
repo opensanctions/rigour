@@ -21,7 +21,7 @@ The required database is originally based on three different sources:
 import logging
 from functools import cache
 from normality import collapse_spaces
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 from rigour.text.dictionary import Normalizer, Replacer
 
@@ -47,13 +47,16 @@ def _display_replacer(normalizer: Normalizer = normalize_display) -> Replacer:
     from rigour.data.names.org_types import ORG_TYPES
 
     mapping: Dict[str, str] = {}
+    clashes: Set[str] = set()
     for org_type in ORG_TYPES:
         display_norm = normalizer(org_type.get("display"))
         if display_norm is None:
             continue
         for alias in org_type["aliases"]:
             alias_norm = normalizer(alias)
-            if alias_norm is None or alias_norm == display_norm:
+            if alias_norm is None or len(alias_norm.strip()) == 0:
+                continue
+            if alias_norm == display_norm:
                 continue
             if alias_norm in mapping and mapping[alias_norm] != display_norm:
                 log.warning(
@@ -62,7 +65,10 @@ def _display_replacer(normalizer: Normalizer = normalize_display) -> Replacer:
                     display_norm,
                     mapping[alias_norm],
                 )  # pragma: no cover
+                clashes.add(alias_norm)
             mapping[alias_norm] = display_norm
+    for alias in clashes:
+        mapping.pop(alias, None)
     return Replacer(mapping, ignore_case=True)
 
 

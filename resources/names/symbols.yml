@@ -1,0 +1,187 @@
+org_symbols:
+  co:
+    - company
+    - компания
+    - kompani
+    - kompania
+    - компани
+    - компания
+    - co
+    - компанія
+    - شركة
+    - compañía
+    - compania
+    - companie
+    - firma
+    - firm
+    - Εταιρεία
+    - Etaireia
+  org:
+    - organization
+    - organisation
+    - org
+    - организація
+    - orhanizatsiia
+    - orhanizatsiya
+    - Οργανισμός
+    - Organismos
+  corp:
+    - corporation
+    - corp
+    - корпорация
+    - корпорація
+    - مؤسسة
+    - corporación
+    - корпорації
+    - società
+    - Εταιρικός Όμιλος
+  coop:
+    - co-op
+    - cooperation
+    - cooperative
+    - coopératif
+    - coopération
+    - coopérative
+    - kooperatsia
+    - sociedad cooperativa
+    - spółdzielni
+    - кооперация
+    - Συνεταιρισμός
+    - Synetairismos
+  center:
+    - центр
+    - tsentr
+  holding:
+    - holding
+    - holdings
+    - проведение
+    - холдинг
+    - холдинг
+    - القابضة
+    - Συμμετοχών
+    - Symmetochon
+    - Συμμετοχές
+    - Symmetoches
+  business:
+    - business
+    - businesses
+    - бизнес
+    - бізнес
+    - أعمال
+    - деловой
+    - деловая
+    - Επιχείρηση
+    - Μπίζνες
+  concern:
+    - kontsern
+    - concern
+    - konzern
+    - концерн
+    - مجموعة
+    - consorcio
+  factory:
+    - factory
+    - фабрика
+    - fabrika
+    - rasteniye
+    - растение
+    - usine
+    - zavod
+    - завод
+    - fabriek
+    - fabrik
+    - fabrique
+    - fabbriche
+    - fabbrica
+  intl:
+    - intl
+    - international
+    - интернациональный
+    - интернациональная
+    - internationale
+    - інтернейшнл
+    - internazionale
+    - internazionali
+  grp:
+    - group
+    - группа
+    - групп
+    - groupement
+    - groupe
+    - grup
+    - Όμιλος
+    - Grupa
+  mgmt:
+    - management
+    - менеджмент
+    - менеджмента
+    - менеджменту
+    - إدارة
+    - управление
+    - управления
+    - gestión
+    - Διαχείριση
+    - Epicheirisi
+  fed:
+    - federal
+    - федеральное
+    - федеральной
+  institute:
+    - institute
+    - institut
+    - школа
+    - институт
+    - Ινστιτούτο
+  foundation:
+    - foundation
+    - фонд
+    - fundacja
+    - fundacion
+    - fondation
+    - Foundation
+    - Fondacion
+    - Fondacioni
+    - Fundación
+    - Stiftung
+    - Stichting
+    - Ίδρυμα
+    - fdn
+  trade:
+    - trade
+    - trading
+    - торговля
+    - торгівля
+    - comercio
+    - comercio
+    - commercio
+    - impex
+    - imp. exp.
+    - sanayi ve ticaret
+    - ticaret
+    - san.tic
+    - san. tic.
+    - san.ve
+    - San. ve Tic.
+    - sanayi ve ticaret
+    - sanayi ticaret
+    - SANAYI VE TICARET
+    - tes.tek.dis
+    - tes.tek.dış
+    - Tesisler Teknoloji Dış
+    - Tesisler Teknoloji Dış Ticaret
+    - Εμπορική
+  tpb:
+    - corporația de rachete balistice tactice
+    - društvo za taktičke projektile
+    - tactical missile company
+    - tactical missile corporation
+    - takticheskoe raketnoe vooruzhenie
+    - тактическое ракетное вооружение
+    - тактичне ракетне озброєння
+person_symbols:
+  jr:
+    - "Jr"
+    - "Junior"
+  sr:
+    - "Sr"
+    - "Senior"
