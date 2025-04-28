@@ -1,4 +1,4 @@
-from rigour.text.dictionary import Scanner
+from rigour.text.dictionary import Scanner, noop_normalizer
 
 
 def test_scanner():
@@ -20,3 +20,13 @@ def test_scanner():
 
     found = scanner.extract("I'm a banana!")
     assert found == []
+
+
+def test_noop_normalizer():
+    assert noop_normalizer(None) is None
+    assert noop_normalizer("") is None
+    assert noop_normalizer("  ") is None
+    assert noop_normalizer("  hello  ") == "hello"
+    assert noop_normalizer("hello") == "hello"
+    assert noop_normalizer("Hello") == "Hello"
+    assert noop_normalizer("  hello world  ") == "hello world"
