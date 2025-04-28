@@ -1,6 +1,6 @@
 # Each prefix will match either as-is, or with a trailing dot (Mr, Mr.)
 PERSON_NAME_PREFIXES:
-# Regular titles
+  # Regular titles
   - "Mister"
   - "Mr"
   - "Misses"
@@ -20,7 +20,7 @@ PERSON_NAME_PREFIXES:
   - "Senorita"
   - "Herr"
   - "Hr"
-#Academic and professional titles
+  # Academic and professional titles
   - "Dr"
   - "Doctor"
   - "Prof"
@@ -37,13 +37,13 @@ PERSON_NAME_PREFIXES:
   - "Dott.sr"
   - "Dott.sra"
   - "Dott.ssa"
-# Presidents
+  # Presidents
   - "President"
   - "Präsident"
-# Diplomatic titles
+  # Diplomatic titles
   - "Ambassador"
   - "Amb"
-# Military titles
+  # Military titles
   - "Field Marshal"
   - "Admiral"
   - "General"
@@ -89,7 +89,7 @@ PERSON_NAME_PREFIXES:
   - "HRH"
   - "His Higness"
   - "Her Higness"
-#Aristocratic titles
+  # Aristocratic titles
   - "Lord"
   - "Lady"
   - "Dame"
@@ -99,12 +99,12 @@ PERSON_NAME_PREFIXES:
   - "Countess"
   - "Sr"
   - "Sir"
-# Religious titles
+  # Religious titles
   - "The Reverend"
   - "Reverend"
-# The definite article
+  # The definite article
   - "The"
-# Other/unsorted
+  # Other/unsorted
   - "Honourable"
   - "Honorable"
   - "The Honourable"
@@ -120,10 +120,10 @@ PERSON_NAME_PREFIXES:
   - "The Right Honorable"
   - "Rt Hon"
   - "Rt. Hon."
-  - "The Most Honourable""
+  - "The Most Honourable"
   - "The Most Honorable"
-  - "The Most Hon" 
-  - "The Most Hon." 
+  - "The Most Hon"
+  - "The Most Hon."
   - "The Most Honble"
   - "The Much Honoured"
   - "The Much Honored"
