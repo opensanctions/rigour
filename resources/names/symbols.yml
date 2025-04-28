@@ -220,3 +220,123 @@ person_symbols:
     - "CSA"
     - "Certified Senior Advisor"
     - "Certified Senior Associate"
+# UK Orders of Knighthood — letters that appear after people's names (post-nominals)
+# (i) Order of the British Empire
+  gbe:	
+    - "GBE"	
+    - "Knight Grand Cross of the Most Excellent Order of the British Empire"
+    - "Dame Grand Cross of the Most Excellent Order of the British Empire"
+    - "Knight Grand Cross of the Order of the British Empire"
+    - "Dame Grand Cross of the Order of the British Empire"
+  kbe:	
+    - "KBE"	
+    - "Knight Commander of the Most Excellent Order of the British Empire"	
+    - "Knight Commander of the Order of the British Empire"	
+  dbe:	
+    - "DBE"	
+    - "Dame Commander of the Most Excellent Order of the British Empire"
+    - "Dame Commander of the Order of the British Empire"	
+  cbe:	
+    - "CBE"	
+    - "Commander of the Most Excellent Order of the British Empire"	
+    - "Commander of the Order of the British Empire"	
+  obe:	
+    - "OBE"	
+    - "Officer of the Most Excellent Order of the British Empire"	
+    - "Officer of the Order of the British Empire"	
+  mbe:
+    - "MBE"	
+    - "Member of the Most Excellent Order of the British Empire"	
+    - "Member of the Order of the British Empire"	
+  bem:
+    - "BEM"	
+    - "Recipient of the British Empire Medal"	
+# (ii) Royal Victorian Order
+  gcvo:
+    - "GCVO"
+    - "Knight Grand Cross of the Royal Victorian Order"	
+    - "Dame Grand Cross of the Royal Victorian Order"
+  kcvo:
+    - "KCVO"
+    - "Knight Commander of the Royal Victorian Order"	
+  dcvo:
+    - "DCVO"
+    - "Dame Commander of the Royal Victorian Order"	
+  cvo:	
+    - "CVO"
+    - "Commander of the Royal Victorian Order"	
+  lvo:
+    - "LVO"	
+    - "Lieutenant of the Royal Victorian Order"	
+  mvo:
+    - "MVO"	
+    - "Member of the Royal Victorian Order"	
+  rvm:
+    - "RVM"	
+    - "Recipient of the Royal Victorian Order Medal"	
+# (iii) Order of Merit
+  om:	
+    - "OM"	
+    - "Order of Merit"	
+# (iv) Order of St Michael and St George
+  gcmg:
+    - "GCMG"
+    - "Knight Grand Cross of the Order of St Michael and St George"	
+    - "Dame Grand Cross of the Order of St Michael and St George"
+  kcmg:
+    - "KCMG"
+    - "Knight Commander of the Order of St Michael and St George"	
+  dcmg:
+    - "DCMG"
+    - "Dame Commander of the Order of St Michael and St George "	
+  cmg:
+    - "CMG"
+    - "Companion of the Order of St Michael and St George"	
+# (v) Order of the Bath
+  gcb:
+    - "GCB"
+    - "Knight Grand Cross of the Most Honourable Order of the Bath"	
+    - "Dame Grand Cross of the Most Honourable Order of the Bath"	
+    - "Knight Grand Cross of the Order of the Bath"	
+    - "Dame Grand Cross of the Order of the Bath"		
+  kcb:	
+    - "KCB"
+    - "Knight Commander of the Most Honourable Order of the Bath"	
+    - "Knight Commander of the Order of the Bath"
+  dcb:
+    - "DCB"	
+    - "Dame Commander of the Most Honourable Order of the Bath"	
+    - "Dame Commander of the Order of the Bath"
+  cb:
+    - "CB"
+    - "Companion of the Most Honourable Order of the Bath"	
+    - "Companion of the Order of the Bath"
+  # (vi) Order of the Garter
+  kg:	
+    - "KG"
+    - "Knight Companion of the Order of the Garter"
+    - "Knight of the Order of the Garter"	
+    - "Knight of the Garter"			
+  lg:	
+    - "LG"
+    - "Lady Companion of the Order of the Garter"	
+    - "Lady of the Order of the Garter"	
+    - "Lady of the Garter"		
+# (vii) Order of the Thistle
+  kt:	
+    - "KT"	
+    - "Knight of the Order of the Thistle"	
+  lt:	
+    - "LT"	
+    - "Lady of the Order of the Thistle"	
+ # (viii) Order of the Companions of Honour
+  ch:
+    - "CH"
+    - "Order of the Companions of Honour"
+# (ix) Imperial Service Order
+   iso:
+    - "ISO"
+    - "Companion of the Imperial Service Order"
+  ism:	
+    - "ISM"	
+    - "Recipient of the Imperial Service Medal"	
