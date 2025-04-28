@@ -8,9 +8,9 @@ def test_name_part():
     assert john.metaphone == "JN"
     assert john.is_modern_alphabet is True
     assert len(john) == 4
-    assert hash(john) == hash("john")
+    assert hash(john) == hash((0, "john"))
     assert john == NamePart("john", 0)
-    assert john == NamePart("john", 1)
+    assert john != NamePart("john", 1)
     assert repr(john) == "<NamePart('john', 0, 'ANY')>"
 
     petro = NamePart("Петро́", 0)
