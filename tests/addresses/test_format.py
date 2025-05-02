@@ -1,4 +1,4 @@
-from rigour.addresses.format import format_address, format_address_line
+from rigour.addresses.format import format_address, format_address_line, _load_formats
 
 
 def test_format_address():
@@ -84,3 +84,28 @@ def test_format_address_line():
     addr = {"road": "Main Street", "house_number": "16", "city": "Guerntown"}
     expect = "16 Main Street, Guerntown, Guernsey, Channel Islands"
     assert format_address_line(addr, country="GG") == expect
+
+
+def test_all_formats_valid():
+    fields = {
+        "building": "Embassy of the Federal Republic of Germany",
+        "city": "Luanda",
+        "country": "Angola",
+        "country_code": "ao",
+        "house_number": "120",
+        "neighbourhood": "Mutamba",
+        "road": "Avenida 4 de Fevereiro",
+        "state": "Luanda",
+        "postcode": "0000",
+        "archipelago": "São Tomé and Príncipe",
+        "suburb": "Mutamba",
+    }
+
+    formats = _load_formats()
+    for country in formats.keys():
+        try:
+            format_address(fields, country=country)
+        except Exception as e:
+            raise RuntimeError(
+                f"Failed to format address for country {country}: {e}"
+            ) from e
