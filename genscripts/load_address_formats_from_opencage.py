@@ -300,7 +300,7 @@ def jinja_tree_to_template(t: M2JNode, depth: int = 0) -> str:
         raise ValueError(f"Got unexpected tag type {t.tag_type}")
 
 
-def mustache_to_jinja(template: str, dbg: bool = False) -> str:
+def mustache_to_jinja(template: str) -> str:
     jinja_template = ""
 
     tree = _convert_tree(create_mustache_tree(template))
@@ -321,9 +321,9 @@ def collapse_newlines(text: str) -> str:
     return text
 
 
-def update_mustache_field(yaml_obj: dict, field: str, dbg: bool = False) -> LiteralScalarString:
+def update_mustache_field(yaml_obj: dict, field: str) -> LiteralScalarString:
     current_anchor = yaml_obj[field].yaml_anchor()
-    txt = mustache_to_jinja(str(yaml_obj[field]), dbg=dbg)
+    txt = mustache_to_jinja(str(yaml_obj[field]))
     if not txt.endswith("\n"):
         txt += "\n"
     yaml_obj[field] = LiteralScalarString(txt)
@@ -410,8 +410,7 @@ def load_address_formats_from_opencage() -> None:
 
         if k.startswith("generic") or k.startswith("fallback"):
             orig_fields_by_value[v] = k
-            # new_fields[k] = update_mustache_field(yaml_obj, k, dbg=k == 'generic2')
-            new_fields[k] = update_mustache_field(yaml_obj, k, dbg=False)
+            new_fields[k] = update_mustache_field(yaml_obj, k)
         elif isinstance(v, dict):
             for k2, v2 in v.items():
                 # update references to the original mustache fields for countries that reference them.
@@ -420,7 +419,7 @@ def load_address_formats_from_opencage() -> None:
 
                 # one-off templates need to be converted to jinja.
                 elif k2 in {"address_template", "fallback_template"}:
-                    update_mustache_field(v, k2, dbg=k == 'CA_en')
+                    update_mustache_field(v, k2)
 
             if "change_country" in v or "add_component" in v:
                 attach_trailing = normalize_add_component(v)
