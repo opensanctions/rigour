@@ -1,13 +1,18 @@
 # Each prefix will match either as-is, or with a trailing dot (Mr, Mr.)
 PERSON_NAME_PREFIXES:
   # Regular titles
-  - "Mister"
   - "Mr"
-  - "Misses"
-  - "Mrs"
+  - "Mister"
   - "Master"
+  - "Mrs"
+  - "Misses"
+  - "Missis"
+  - "Missus"
+  - "Mistress"
   - "Miss"
   - "Ms"
+  - "Mx"
+  - "Mixter"
   - "Madam"
   - "Madame"
   - "Mme"
