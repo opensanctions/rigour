@@ -16,6 +16,10 @@ org_symbols:
     - firm
     - Εταιρεία
     - Etaireia
+    - 公司
+    - 企業
+    - ファーム
+    - 企业
   org:
     - organization
     - organisation
@@ -25,16 +29,24 @@ org_symbols:
     - orhanizatsiya
     - Οργανισμός
     - Organismos
+    - ファーム
+    - 団体
+    - 協会
   corp:
     - corporation
+    - corporate
     - corp
     - корпорация
     - корпорація
     - مؤسسة
     - corporación
     - корпорації
+    - корпораций
     - società
     - Εταιρικός Όμιλος
+    - 協力的な
+    - 生活協同組合
+    - 合作社
   coop:
     - co-op
     - cooperation
@@ -51,6 +63,11 @@ org_symbols:
   center:
     - центр
     - tsentr
+    - center
+    - centre
+    - centr
+    - centro
+    - مركز
   holding:
     - holding
     - holdings
@@ -62,6 +79,9 @@ org_symbols:
     - Symmetochon
     - Συμμετοχές
     - Symmetoches
+    - 集体
+    - 保持
+    - 保有資産
   business:
     - business
     - businesses
@@ -72,6 +92,8 @@ org_symbols:
     - деловая
     - Επιχείρηση
     - Μπίζνες
+    - 商业
+    - 商
   concern:
     - kontsern
     - concern
@@ -93,6 +115,10 @@ org_symbols:
     - fabrique
     - fabbriche
     - fabbrica
+    - 工厂
+    - 厂
+    - 厂家
+    - 厂子
   intl:
     - intl
     - int'l
@@ -103,6 +129,10 @@ org_symbols:
     - інтернейшнл
     - internazionale
     - internazionali
+    - 国際的
+    - 国際
+    - 国际的
+    - 国际
   grp:
     - group
     - группа
@@ -112,6 +142,9 @@ org_symbols:
     - grup
     - Όμιλος
     - Grupa
+    - 团体
+    - 团
+    - 集体
   mgmt:
     - management
     - менеджмент
@@ -123,6 +156,9 @@ org_symbols:
     - gestión
     - Διαχείριση
     - Epicheirisi
+    - 管理
+    - 辖
+    - 机场
   fed:
     - federal
     - федеральное
@@ -133,6 +169,11 @@ org_symbols:
     - школа
     - институт
     - Ινστιτούτο
+    - institutu
+    - instituta
+    - instituti
+    - 研究所
+    - 学院
   foundation:
     - foundation
     - фонд
@@ -147,6 +188,99 @@ org_symbols:
     - Stichting
     - Ίδρυμα
     - fdn
+    - 財団
+    - 基金
+    - 設立
+  industry:
+    - industry
+    - industries
+    - индустрия
+    - индустрии
+    - industria
+    - industrie
+    - industrie
+    - industrier
+    - indústrias
+    - industriële
+    - industriële
+    - industriell
+    - 業界
+  engineering:
+    - engineering
+    - инженерия
+    - инжиниринг
+    - engineering
+    - ingenierie
+    - ingeniérie
+    - ingeniería
+    - inženýrství
+    - inženiring
+    - 工学
+    - エンジニアリング
+  bank:
+    - bank
+    - banking
+    - investment bank
+    - investment banking
+    - commercial bank
+    - trade bank
+    - merchant bank
+    - clearing bank
+    - savings and loan
+    - savings bank
+    - savings and loan association
+    - банка
+    - банк
+    - инвестиционный банк
+    - коммерческий банк
+    - банківська
+    - банківська установа
+    - τράπεζα
+    - banque
+    - banco
+    - banki
+    - 銀行
+  commercial:
+    - commercial
+    - коммерческий
+    - коммерческая
+    - коммерческое
+    - коммерческой
+    - коммерческих
+    - comercial
+    - commerciale
+    - commercieel
+    - commerciale
+    - εμπορική
+    - 商業
+  offshore:
+    - offshore
+    - оффшор
+    - оффшорный
+    - оффшорная
+    - оффшорные
+    - оффшорной
+    - оффшорного
+    - offshores
+    - オフショア
+  gov:
+    - gov
+    - govmnt
+    - government
+    - government of
+    - regierung
+    - regierung von
+    - 政府
+    - 辖
+    - state
+    - state of
+    - правительство
+    - gouvernement
+    - gouvernement de
+    - gobierno
+    - gobierno de
+    - κυβερνηση
+    - κυβερνητική
   trade:
     - trade
     - trading
@@ -157,6 +291,7 @@ org_symbols:
     - commercio
     - impex
     - imp. exp.
+    - usaha dagang
     - sanayi ve ticaret
     - ticaret
     - san.tic
@@ -171,6 +306,11 @@ org_symbols:
     - Tesisler Teknoloji Dış
     - Tesisler Teknoloji Dış Ticaret
     - Εμπορική
+    - 贸易
+    - 行业
+    - 商业
+    - 商行
+    - 贸易公司
   tpb:
     - corporația de rachete balistice tactice
     - društvo za taktičke projektile

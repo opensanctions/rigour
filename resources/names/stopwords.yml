@@ -155,6 +155,10 @@ PERSON_NAME_PREFIXES:
   - "His Excellency"
   - "Her Excellency"
   - "Excellency"
+ORG_NAME_PREFIXES:
+  - The
+  - Le
+  - La
 STOPWORDS:
   - "de"
   - "of"
