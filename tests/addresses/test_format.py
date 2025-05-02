@@ -19,7 +19,7 @@ def test_format_address():
         "city": "Birmingham",
         "postcode": "B15 1DT",
     }
-    expect = "160 Broad St\nBirmingham B15 1DT"
+    expect = "160 Broad St\nBirmingham\nB15 1DT"
     assert format_address(data, country="GB") == expect
 
     data = {
@@ -28,9 +28,27 @@ def test_format_address():
         "city": "London",
         "postcode": "SW1Y 5HX",
     }
-    expect = "Marlborough House\nPall Mall\nLondon SW1Y 5HX"
+    expect = "Marlborough House\nPall Mall\nLondon\nSW1Y 5HX"
     assert format_address(data, country="GB") == expect
 
+    data = {
+        "suburb": "Beverley",
+        "road": "Beverley Rd",
+        "city": "Kingston",
+        "state": "Ontario",
+    }
+    expect = "Beverley\nKingston, Ontario"
+    assert format_address(data, country="CA") == expect
+
+    data = {
+        "suburb": "Beverley",
+        "road": "Beverley Rd",
+        "house_number": "10",
+        "city": "Kingston",
+        "state": "Ontario",
+    }
+    expect = "10 Beverley Rd\nKingston, Ontario"
+    assert format_address(data, country="CA") == expect
 
 def test_format_address_line():
     addr = {
