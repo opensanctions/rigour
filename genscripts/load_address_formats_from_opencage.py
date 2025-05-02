@@ -65,7 +65,7 @@ def _convert_tree(t: MustacheTreeNode) -> M2JNode:
     return j
 
 
-def _split_space(t: M2JNode):
+def split_space(t: M2JNode):
     """
     Find any literal nodes that contain spaces.
     Trim the spaces from the beginning and end of the literal when the literal is up against a boundary.
@@ -85,7 +85,7 @@ def _split_space(t: M2JNode):
         n = t.children[i]
 
         if n.children:
-            _split_space(n)
+            split_space(n)
 
         if not _can_split(n) or SPACE_LITERAL not in n.data:
             i += 1
@@ -107,7 +107,7 @@ def _split_space(t: M2JNode):
             t.children.pop(i)
 
 
-def _split_or(t: M2JNode):
+def split_or(t: M2JNode):
     """
     Split any literal nodes that contain the OR mustache literal into separate nodes.
     """
@@ -126,7 +126,7 @@ def _split_or(t: M2JNode):
         n = t.children[i]
 
         if n.children:
-            _split_or(n)
+            split_or(n)
 
         if _is_boundary(n) or PRIMARY_OR_MUSTACHE_LITERAL not in n.data:
             i += 1
@@ -152,7 +152,7 @@ def _split_or(t: M2JNode):
             i += 1
 
 
-def _drop_vars_and_simplify(t: M2JNode):
+def drop_vars_and_simplify(t: M2JNode):
     def _is_boundary(n: M2JNode):
         return n.tag_type in {M2JType.OR} or n.tag_type == M2JType.LITERAL and n.data == '\n'
 
@@ -167,7 +167,7 @@ def _drop_vars_and_simplify(t: M2JNode):
     i = 0
     while i < len(t.children):
         c = t.children[i]
-        _drop_vars_and_simplify(c)
+        drop_vars_and_simplify(c)
 
         is_against_boundary = (
             (i > 0 and _is_boundary(t.children[i - 1]))
@@ -232,12 +232,12 @@ def _drop_vars_and_simplify(t: M2JNode):
         i += 1
 
 
-def _split_string_concat(t: M2JNode):
+def split_string_concat(t: M2JNode):
     if not t.children:
         return
 
     for c in t.children:
-        _split_string_concat(c)
+        split_string_concat(c)
 
     # outside of sections, we don't need to handle concats around ORs
     if t.tag_type not in {M2JType.SECTION, M2JType.INVERTED_SECTION}:
@@ -304,10 +304,10 @@ def mustache_to_jinja(template: str) -> str:
     jinja_template = ""
 
     tree = _convert_tree(create_mustache_tree(template))
-    _split_or(tree)
-    _split_space(tree)
-    _drop_vars_and_simplify(tree)
-    _split_string_concat(tree)
+    split_or(tree)
+    split_space(tree)
+    drop_vars_and_simplify(tree)
+    split_string_concat(tree)
 
     jinja_template = jinja_tree_to_template(tree)
     return collapse_newlines(jinja_template)
