@@ -194,8 +194,10 @@ org_symbols:
   industry:
     - industry
     - industries
+    - industrial
     - индустрия
     - индустрии
+    - индустриальный
     - industria
     - industrie
     - industrie
@@ -229,6 +231,8 @@ org_symbols:
     - savings and loan
     - savings bank
     - savings and loan association
+    - handelsbank
+    - handelsbanken
     - банка
     - банк
     - инвестиционный банк
@@ -311,6 +315,14 @@ org_symbols:
     - 商业
     - 商行
     - 贸易公司
+  solution:
+    - solution
+    - solutions
+    - λύση
+    - λύσεις
+    - λύσεων
+    - решение
+    - решения
   tpb:
     - corporația de rachete balistice tactice
     - društvo za taktičke projektile

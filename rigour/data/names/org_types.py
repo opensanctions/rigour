@@ -285,10 +285,26 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {
         "display": "AG",
         "compare": "JSC",
-        "aliases": ["Aktiengesellschaft", "AG & Co. KG", "AG & Co KG", "AG & Co. KGaA"],
+        "aliases": [
+            "Aktiengesellschaft",
+            "Aktien Gesellschaft",
+            "AktG",
+            "Akt Ges",
+            "AG & Co. KG",
+            "AG & Co KG",
+            "AG & Co. KGaA",
+        ],
     },
-    {"display": "KG", "compare": "LP", "aliases": ["Kommanditgesellschaft"]},
-    {"display": "e.K.", "aliases": ["e. K.", "eingetragener Kaufmann"]},
+    {
+        "display": "KG",
+        "compare": "LP",
+        "aliases": ["Kommanditgesellschaft", "Kommandit-Gesellschaft"],
+    },
+    {
+        "display": "e.K.",
+        "compare": "GP",
+        "aliases": ["e. K.", "eingetragener Kaufmann"],
+    },
     {
         "display": "KGaA",
         "compare": "LP",

@@ -326,6 +326,9 @@ types:
     compare: JSC
     aliases:
       - Aktiengesellschaft
+      - Aktien Gesellschaft
+      - AktG
+      - Akt Ges
       - AG & Co. KG
       - AG & Co KG
       - AG & Co. KGaA
@@ -333,7 +336,9 @@ types:
     compare: LP
     aliases:
       - Kommanditgesellschaft
+      - Kommandit-Gesellschaft
   - display: e.K.
+    compare: GP
     aliases:
       - e. K.
       - eingetragener Kaufmann

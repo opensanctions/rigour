@@ -100,6 +100,7 @@ def iterate_name_items() -> Generator[Item, None, None]:
                 if idx % 100 == 0:
                     print("Crawled: ", idx)
                     client.cache.flush()
+                    cache.flush()
 
 
 def build_mappings():
