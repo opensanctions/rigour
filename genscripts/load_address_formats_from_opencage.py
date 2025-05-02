@@ -377,6 +377,15 @@ FORMATS_DEST_PATH = CODE_PATH / "addresses" / "formats.yml"
 
  
 def load_address_formats_from_opencage() -> None:
+    """
+    Load address formats from OpenCageData's address-formatting repo.
+    Converts the mustache templates to jinja2 format.
+    Uses the following conventions for mustache to jinja2 conversion:
+    - literals between variables in a `first` block explicitly concatenated with ~
+    - relies on a macro "format_if" to handle concatenated strings in `first` blocks that contain only delimiters.
+        - e.g. if we have {{#first}} {{{house_number}}}, {{{road}}} || {{{suburb}}} {{/first}}
+        - we only want to use {{{house_number}}}, {{{road}}} if both `house_number` and `road` are present.
+    """
     commit_hash = subprocess.check_output(
         ["git", "ls-remote", "--heads", "https://github.com/OpenCageData/address-formatting.git", OPENCAGE_REF]
     ).decode("utf-8").split()[0]
