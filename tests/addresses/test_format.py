@@ -111,7 +111,10 @@ def test_all_formats_valid():
     formats = _load_formats()
     for country in formats.keys():
         try:
-            format_address(fields, country=country)
+            result = format_address(fields, country=country)
+            assert result is not None and len(result) > 0, (
+                f"Formatting failed for country {country} with fields: {fields}"
+            )
         except Exception as e:
             raise RuntimeError(
                 f"Failed to format address for country {country}: {e}"
