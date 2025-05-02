@@ -33,11 +33,18 @@ def test_format_address():
 
     data = {
         "suburb": "Beverley",
-        "road": "Beverley Rd",
         "city": "Kingston",
         "state": "Ontario",
     }
     expect = "Beverley\nKingston, Ontario"
+    assert format_address(data, country="CA") == expect
+
+    data = {
+        "road": "Beverley Rd",
+        "city": "Kingston",
+        "state": "Ontario",
+    }
+    expect = "Beverley Rd\nKingston, Ontario"
     assert format_address(data, country="CA") == expect
 
     data = {

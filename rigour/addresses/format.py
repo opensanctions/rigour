@@ -8,7 +8,7 @@ from rigour.env import ENCODING
 from rigour.addresses.cleaning import clean_address
 
 def format_if(value: str, *args: str) -> str:
-    return value if all(args) else ""
+    return value if any(args) else ""
 
 env = Environment()
 env.globals.update(format_if=format_if)

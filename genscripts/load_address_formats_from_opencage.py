@@ -378,7 +378,7 @@ def load_address_formats_from_opencage() -> None:
     - literals between variables in a `first` block explicitly concatenated with ~
     - relies on a macro "format_if" to handle concatenated strings in `first` blocks that contain only delimiters.
         - e.g. if we have {{#first}} {{{house_number}}}, {{{road}}} || {{{suburb}}} {{/first}}
-        - we only want to use {{{house_number}}}, {{{road}}} if both `house_number` and `road` are present.
+        - we only want to use {{{house_number}}}, {{{road}}} if both `house_number` and `road` are non-empty.
     """
     commit_hash = subprocess.check_output(
         ["git", "ls-remote", "--heads", "https://github.com/OpenCageData/address-formatting.git", OPENCAGE_REF]
