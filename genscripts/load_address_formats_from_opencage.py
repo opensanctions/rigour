@@ -14,13 +14,7 @@ DROP_VARS = {"hamlet", "place"}
 
 SPACE_LITERAL = " "
 PRIMARY_OR_MUSTACHE_LITERAL = "||"
-OR_MUSTACHE_LITERALS = {" || ", "|| ", "||", " ||"}
 OR_JINJA_LITERAL = " or "
-LITERAL_TOKEN = "literal"
-OR_TOKEN = "or"
-SECTION_TOKEN = "section"
-END_TOKEN = "end"
-NO_ESCAPE_VAR_TOKEN = "no escape"
 
 
 class M2JType(Enum):
