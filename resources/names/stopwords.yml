@@ -115,6 +115,9 @@ PERSON_NAME_PREFIXES:
   - "Baron"
   - "Count"
   - "Countess"
+  - "Marchioness"
+  - "Marquess"
+  - "Seigneur"
   - "Sr"
   - "Sir"
   # Religious titles
