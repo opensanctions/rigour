@@ -115,8 +115,12 @@ PERSON_NAME_PREFIXES:
   - "Baron"
   - "Baroness"
   - "Baronet"
+  - "Baronetess"
   - "Count"
   - "Countess"
+  # "Duke" is also a male given name and so not currently included here
+  - "Duchess"
+  # "Earl" is also a male given name and so not currently included here
   - "Marchioness"
   - "Marquess"
   - "Seigneur"
