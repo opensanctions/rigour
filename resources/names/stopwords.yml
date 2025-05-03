@@ -131,7 +131,7 @@ PERSON_NAME_PREFIXES:
   - "Reverend"
   # The definite article
   - "The"
-  # Other/unsorted
+  # Titles based around the word "honour" or "honor" 
   - "Honourable"
   - "Honorable"
   - "The Honourable"
@@ -156,6 +156,7 @@ PERSON_NAME_PREFIXES:
   - "The Much Honored"
   - "The Much Hon"
   - "The Much Hon."
+   # Other/unsorted
   - "The Most Noble"
   - "His Grace"
   - "Her Grace"
