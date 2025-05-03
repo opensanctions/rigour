@@ -118,6 +118,11 @@ PERSON_NAME_PREFIXES:
   - "Sr"
   - "Sir"
   # Religious titles
+  - "Brother"
+  - "Father"
+  - "Mother"
+  - "Mother Superior"
+  - "Sister"
   - "The Reverend"
   - "Reverend"
   # The definite article
