@@ -326,6 +326,9 @@ types:
     compare: JSC
     aliases:
       - Aktiengesellschaft
+      - Aktien Gesellschaft
+      - AktG
+      - Akt Ges
       - AG & Co. KG
       - AG & Co KG
       - AG & Co. KGaA
@@ -333,7 +336,9 @@ types:
     compare: LP
     aliases:
       - Kommanditgesellschaft
+      - Kommandit-Gesellschaft
   - display: e.K.
+    compare: GP
     aliases:
       - e. K.
       - eingetragener Kaufmann
@@ -382,17 +387,19 @@ types:
     aliases:
       - anónimi etería
       - ανώνυμη εταιρεία
-  - display: AG
+  - compare: JSC
     aliases:
       - aksiyadorlik jamiyati
-      - aktiengesellschaft
       - акциядорлик жамияти
-  - display: amba
+  - display: a.s.
+    compare: LLC
     aliases:
       - andelsselskab med begrænset ansvar
   - display: anl
+    compare: COOP
     aliases:
       - andelslag
+      - andelslag med begrænset ansvar
   - display: ано
     compare: NGO
     aliases:
@@ -470,6 +477,7 @@ types:
     aliases:
       - açıq səhmdar cəmiyyəti
   - display: ay
+    compare: GP
     aliases:
       - avoin yhtiö
   - display: bhd
@@ -508,9 +516,10 @@ types:
       - sociedad cooperativa
       - spółdzielni
       - кооперация
-  - compare: FUND
+  - compare: FIN
     aliases:
       - fond commun de placement
+      - fond de placement
   - compare: COOP
     aliases:
       - ህብረት ስራ ማህበራት
@@ -533,25 +542,32 @@ types:
       - commanditaire vennootschap
       - gewone commanditaire vennootschap
   - display: cva
+    compare: LP
     aliases:
       - comm. va
       - commanditaire vennootschap op aandelen
   - display: cvba
+    compare: COOP
     aliases:
       - coöperatieve vennootschap met beperkte aansprakelijkheid
   - display: cvoa
+    compare: COOP
     aliases:
       - coöperatieve vennootschap met onbeperkte aansprakelijkheid
   - display: cía
+    compare: LLC
     aliases:
       - compañía
   - display: dis tic ltd
+    compare: LLC
     aliases:
       - dis.tic.ltd
   - display: dnnn
+    compare: SOE
     aliases:
       - doanh nghiệp nhà nước
   - display: dntn
+    compare: LLC
     aliases:
       - doanh nghiệp tư nhân
   - display: d.o.o.
@@ -562,8 +578,7 @@ types:
       - д.о.о.
       - доо
       - друштво са ограниченом одговорношћу
-  - display: dp
-    compare: LLC
+  - compare: LLC
     aliases:
       - društveno preduzeće
       - дп
@@ -572,25 +587,30 @@ types:
     compare: LLC
     aliases:
       - doanh nghiệp có vốn đầu tư nước ngoài
-  - display: dzzd
+  - display: ДЗЗД
+    compare: LLC
     aliases:
       - druzhestvo uchredeno po zakona za zadalzheniyata i dogovorite
       - дззд
       - дружество учредено по закона за задълженията и договорите
-  - display: ead
+  - display: ЕАД
+    compare: JSC
     aliases:
       - ednolichno aktsionerno druzhestvo
       - еад
       - еднолично акционерно дружество
-  - display: ebvba
+  - display: éénpersoons-BVBA
+    compare: LLC
     aliases:
+      - éénpersoons-BVBA
       - eenpersoons besloten vennootschap met beperkte aansprakelijkheid
-  - display: ed
+  - compare: JSC
     aliases:
       - evropeysko druzhestvo
       - eвропейско дружество
       - ед
   - display: EEIG
+    compare: COOP
     aliases:
       - european economic interest grouping
       - evropeysko obedinenie po ikonomicheski interesi
@@ -602,6 +622,7 @@ types:
       - eingetragene genossenschaft
       - genossenschaft
   - display: ehf.
+    compare: LLC
     aliases:
       - einkahlutafélag
   - display: ei
@@ -618,15 +639,18 @@ types:
       - evropeysko kooperativno druzhestvo
       - eвропейско кооперативно дружество
       - екд
-  - display: eood
+  - display: ЕООД
+    compare: LLC
     aliases:
       - ednolichno druzhestvo s ogranichena otgovornost
       - еднолично дружество с ограничена отговорност
       - еоод
   - display: esv
+    compare: COOP
     aliases:
       - economisch samenwerkingsverband
-  - display: et
+  - display: ЕТ
+    compare: SP
     aliases:
       - ednolichen targovets
       - едноличен търговец
@@ -639,6 +663,8 @@ types:
     compare: NGO
     aliases:
       - eingetragener verein
+      - eingetragener Verein
+      - eingetragene vereinigung
   - display: f:ma
     aliases:
       - enskild näringsidkare
@@ -653,16 +679,20 @@ types:
     aliases:
       - gesbr
       - gesellschaft des bürgerlichen rechts
-  - display: gie
+      - gesellschaft bürgerlichen rechts
+      - ges bür rechts
+  - display: GIE
+    compare: COOP
     aliases:
       - groupement d'intérêt économique
-  - display: giu
+  - compare: COOP
     aliases:
       - gospodarsko interesno udruženje
-  - display: gk
+  - display: GK
+    compare: LLC
     aliases:
       - 合同会社
-  - display: gmk
+  - compare: GP
     aliases:
       - 合名会社
   - display: GNPP
@@ -673,11 +703,10 @@ types:
       - scientific and production enterprise
       - государственное научно-производственное предприятие
       - державне науково-виробниче підприємство
-  - display: gs
+  - compare: COOP
     aliases:
       - gensidigt selskab
-  - display: gsk
-    compare: LP
+  - compare: LP
     aliases:
       - 合資会社
   - display: haao
@@ -733,12 +762,6 @@ types:
       - Incorporated
       - incorporée
       - Inc.
-  - display: Ins
-    aliases:
-      - insaat
-  - display: ins oto san tic
-    aliases:
-      - ins.oto.san.tic
   - display: IS
     compare: SOE
     aliases:
@@ -747,17 +770,22 @@ types:
       - intreprinderea de stat
       - întreprinderea de stat
   - display: ivs
+    compare: LLC
     aliases:
       - iværksætterselskab
   - display: jdoo
+    compare: LLC
     aliases:
       - j.d.o.o
       - jednostavno društvo s ograničenom odgovornošću
-  - display: jp
+  - display: ЈП
+    compare: SOE
     aliases:
       - javno preduzeće
       - јавно предузеће
-      - јп
+      - ЈП
+      - Ј.П.
+      - Ј. П.
   - display: JSCB
     compare: JSC
     aliases:
@@ -776,11 +804,15 @@ types:
     aliases:
       - joint venture
   - display: kb
+    compare: LP
     aliases:
       - kommanditbolag
   - display: kda
+    compare: LP
     aliases:
       - komanditno druzhestvo s aktsii
+      - komanditno druzhestvo s aktsiyami
+      - komanditno druzhestvo s aktsiyami
       - кда
       - командитно дружество с акции
   - display: keG
@@ -788,12 +820,13 @@ types:
     aliases:
       - kommanditerwerbsgesellschaft
   - display: Kft.
+    compare: LLC
     aliases:
       - kft
       - korlatolt felelossegu tarsasag
       - korlátolt felelősségü társaság, organizační složka
       - korlátolt felelősségű társaság
-  - display: kk
+  - compare: JSC
     aliases:
       - 株式会社
   - display: koll. şti.
@@ -832,8 +865,7 @@ types:
   - compare: LLC
     aliases:
       - tavaristva z abmezhavanaj adkaznastsiu
-  - display: lo
-    compare: LP
+  - compare: LP
     aliases:
       - limited ortaklık
   - display: LP
@@ -891,7 +923,7 @@ types:
       - limited sti
       - limited şirket
       - limited şirketi
-  - display: mchj
+  - display: МЧЖ
     compare: LLC
     aliases:
       - mas'uliyati cheklangan jamiyat
@@ -901,6 +933,7 @@ types:
     aliases:
       - məhdud məsuliyyətli cəmiyyət
   - display: mtü
+    compare: NGO
     aliases:
       - mittetulundusühing
   - display: NA
@@ -908,11 +941,12 @@ types:
       - N.A
       - N.A.
       - national association
-  - display: nk
+  - compare: FIN
     aliases:
       - nin'i kumiai
       - 任意組合
   - display: нп
+    compare: NGO
     aliases:
       - некоммерческое партнерство
       - некоммерческое партнёрство
@@ -928,29 +962,32 @@ types:
     aliases:
       - ochiq aksiyadorlik jamiyati
       - очиқ акциядорлик жамияти
-
   - display: od
+    compare: LLC
     aliases:
       - o.d.
       - ortačko društvo
       - о.д.
       - од
       - ортачко друштво
-  - display: odo
+  - display: ОДО
+    compare: LLC
     aliases:
       - obshchestvo s dopolnitel'noj otvetstvennost'yu
       - одо
+      - общество с дополнительной ответственностью
   - display: oeg
     aliases:
       - offene erwerbsgesellschaft
   - display: og
     aliases:
       - offene gesellschaft
-  - display: ok
+  - compare: SP
     aliases:
       - oilaviy korxona
       - оилавий корхона
-  - display: ong
+  - display: ONG
+    compare: NGO
     aliases:
       - organização não governamental
   - display: ood
@@ -961,28 +998,42 @@ types:
       - druzhestvo s ogranichena otgovornost
       - дружество с ограничена отговорност
       - оод
-  - display: opg
+  - display: OPG
+    compare: SP
     aliases:
       - obiteljsko poljoprivredno gospodarstvo
   - display: ops
+    compare: NGO
     aliases:
       - obecně prospěšná společnost
-  - display: os
+      - o.p.s.
+      - o.p.s
+  - compare: NGO
     aliases:
       - občanské sdružení.
-  - display: oscip
+  - display: OSCIP
+    compare: NGO
     aliases:
       - organização da sociedade civil de interesse público
   - display: osk
     aliases:
       - osuuskunta
   - display: owm
+    compare: FIN
     aliases:
       - onderlinge waarborgmaatschappij
   - display: oy
+    compare: LLC
     aliases:
       - osakeyhtiö
+      - Osakeyhtiö
+      - Ab Company Oy
+      - Oy Company Ab
+      - Company Oy Ab
+      - O.Y.
+      - O/Y
   - display: oyj
+    compare: JSC
     aliases:
       - julkinen osakeyhtiö
   - display: oü
@@ -1051,9 +1102,19 @@ types:
     aliases:
       - säätiö
   - display: ry
+    compare: NGO
     aliases:
       - rekisteröity yhdistys
+      - rekisteröity yhdistys ry
+      - rekisteröity yhdistys ry.
+      - rekisteröity yhdistys ry.
+  - display: rf
+    compare: NGO
+    aliases:
+      - reykjavikurfélag
+      - Registrerad förening
   - display: s.cra.
+    compare: LP
     aliases:
       - sociedad comanditaria
   - display: SA
@@ -1086,19 +1147,24 @@ types:
     compare: JSC
     aliases:
       - sociedad anónima deportiva
-  - display: sae
+  - compare: JSC
     aliases:
       - sharikat al-mossahamah
+      - شـركـة الـمـسـاهـمـة
   - display: saoc
+    compare: JSC
     aliases:
       - société anonyme omanaise close
   - display: saog
+    compare: JSC
     aliases:
       - société anonyme omanaise générale
   - display: sapa
+    compare: LP
     aliases:
       - società in accomandita per azioni
   - display: SARL
+    compare: LLC
     aliases:
       - S.A.R.L.
       - société à responsabilité limitée
@@ -1109,18 +1175,22 @@ types:
       - sociedades por acciones simplificada
       - société par actions simplifiée
   - display: scc
+    compare: LLC
     aliases:
       - société commerciale canadienne
   - display: sce
+    compare: COOP
     aliases:
       - societas cooperativa europaea
   - display: scop
+    compare: COOP
     aliases:
       - société coopérative de production
   - display: scpa
     aliases:
       - sociedad civil privada
   - display: SCS
+    compare: LP
     aliases:
       - secs
       - s.c.s.
@@ -1128,6 +1198,7 @@ types:
       - société en commandite simple
 
   - display: SD
+    compare: LLC
     aliases:
       - s-ie
       - sabiratelno druzhestvo (sd)/sadruzhie
@@ -1138,6 +1209,7 @@ types:
       - събирателно дружество (сд)/съдружие
 
   - display: Sdn Bhd
+    compare: LLC
     aliases:
       - Sdn. Bhd.
       - sendirian berhad
@@ -1147,15 +1219,18 @@ types:
     aliases:
       - societas europaea
   - display: sem
+    compare: COOP
     aliases:
       - société d'économie mixte
-  - display: sep
+  - compare: COOP
     aliases:
       - société en participation
   - display: sf
+    compare: GP
     aliases:
       - sameignarfélag
   - display: SGR
+    compare: COOP
     aliases:
       - sociedad de garantia reciproca
       - sociedad de garantía reciproca
@@ -1170,12 +1245,15 @@ types:
       - S.I.A.
       - сиа
   - display: sicaf
+    compare: FIN
     aliases:
       - société d'investissement à capital fixe
   - display: SICAV
+    compare: FIN
     aliases:
       - société d'investissement à capital variable
   - display: SLL
+    compare: LLC
     aliases:
       - sociedad limitada laboral
   - display: SLNE
@@ -1192,12 +1270,15 @@ types:
       - pte. ltd.
       - Single Member Private Limited Company
   - display: smba
+    compare: LLC
     aliases:
       - selskab med begrænset ansvar
   - display: snc
+    compare: LP
     aliases:
       - société en nom collectif
   - display: snt
+    compare: LP
     aliases:
       - садоводческое некоммерческое товарищество
   - compare: SP
@@ -1210,13 +1291,12 @@ types:
     aliases:
       - società per azioni
       - SOCIETA' PER AZIONI
-  - display: SPE
-    aliases:
-      - societas privata europaea
   - display: spf
+    compare: NGO
     aliases:
       - stichting particulier fonds
   - display: SPRL
+    compare: LLC
     aliases:
       - société privée à responsabilité limitée
       - société privée à responsabilité limitée unipersonnelle
@@ -1279,6 +1359,7 @@ types:
       - stille gesellschaft
 
   - display: suarl
+    compare: LLC
     aliases:
       - شّركة فردية ذات مسؤوليّات محدودة
 
@@ -1318,8 +1399,7 @@ types:
   #   aliases:
   #     - san.ve
 
-  - display: tk
-    compare: LP
+  - compare: LP
     aliases:
       - tokumei kumiai
       - 匿名組合
@@ -1340,11 +1420,7 @@ types:
       - uždaroji akcinė bendrovė
       - uždarosios akcinės bendrovės
 
-  - display: ud
-    aliases:
-      - usaha dagang
-
-  - display: uk
+  - compare: SOE
     aliases:
       - unitar korxona
       - унитар корхона
@@ -1396,10 +1472,12 @@ types:
       - унітарнае прадпрыемства
       - уп
 
-  - display: FGBU
+  - display: ФГБУ
     compare: SOE
     aliases:
       - federalnoe gosudarstvennoe byudzhetnoe uchrezhdenie
+      - федеральное государственное бюджетное учреждение
+      - федеральное государственное унитарное предприятие
 
   - display: UÜ
     compare: LP
@@ -2393,7 +2471,6 @@ types:
       - ОБЩЕСТВО С ОГРА НИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ
       - Общество с ограниченной ответственность
       - Общество с ограниченной ответственостью
-      - Общество с дополнительной ответственностью
       - Общество с ограниченной ответственностьюм
       - Общество с Ограниченной Ответственностью
       - общество с ограниченной ответственностью

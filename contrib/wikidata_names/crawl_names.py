@@ -19,7 +19,7 @@ dataset = Dataset.make({"name": "synonames", "title": "Synonames"})
 cache = Cache.make_default(dataset)
 # cache.preload(f"{WikidataClient.WD_API}%")
 session = requests.Session()
-client = WikidataClient(cache, session=session, cache_days=90)
+client = WikidataClient(cache, session=session, cache_days=30)
 out_path = Path(__file__).parent / "out"
 out_path.mkdir(exist_ok=True, parents=True)
 
@@ -42,6 +42,7 @@ CLASSES = {
     "Q130443889": "matronymic",  # feminine matronymic name
     "Q130443873": "matronymic",  # masculine matronymic name
 }
+IGNORE = {"Q211024", "Q13198636"}
 # Same as relation: https://www.wikidata.org/wiki/Property:P460
 SPARQL = """
 SELECT DISTINCT ?item WHERE { ?item wdt:P31 wd:%s . }
@@ -88,6 +89,8 @@ def iterate_name_items() -> Generator[Item, None, None]:
                 qid = result.plain("item")
                 if qid is None or qid.startswith("L"):
                     continue
+                if qid in IGNORE:
+                    continue
                 futures.append(executor.submit(fetch_item_safe, qid))
             for idx, future in enumerate(as_completed(futures)):
                 item = future.result()
@@ -97,6 +100,7 @@ def iterate_name_items() -> Generator[Item, None, None]:
                 if idx % 100 == 0:
                     print("Crawled: ", idx)
                     client.cache.flush()
+                    cache.flush()
 
 
 def build_mappings():
