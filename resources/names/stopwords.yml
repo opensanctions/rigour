@@ -110,6 +110,7 @@ PERSON_NAME_PREFIXES:
   # Aristocratic titles
   - "Lord"
   - "Lady"
+  - "Laird"
   - "Dame"
   - "Baroness"
   - "Baron"
