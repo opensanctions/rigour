@@ -1,9 +1,8 @@
 # Ordinal numbers
 # Covers 1 to 30 — see also https://github.com/opensanctions/rigour/issues/38
-# Languages covered at least in part: de, en, es, fr, pt, sv
+# Languages covered at least in part: de, en, es, fr, it, nl, pt, sv
 # Also covers Roman Numerals e.g. VIIIth (for 8th).
 # Covers certain variants e.g. IIIIth as well as IVth for 4th.
-# 2d and 3d are non-standard English versions of 2nd and 3rd.
 # First (1st) 
 first:
 -"First"
@@ -13,7 +12,7 @@ first:
 -"1.ª"
 -"1.º"
 -"1ª"
--"1a"
+# "1a" — could also be other things e.g. a flat/apartment number.
 -"1ª."
 -"1er"
 -"1ere"
@@ -30,9 +29,9 @@ second:
 -"2.ª"
 -"2.º"
 -"2ª"
--"2a"
+# "2a" — could also be other things e.g. a flat/apartment number.
 -"2ª."
--"2d"
+# "2d" — en variant of 2nd could also be other things e.g. a flat/apartment number.
 -"2e"
 -"2º"
 -"2o"
@@ -47,9 +46,9 @@ third:
 -"3.ª"
 -"3.º"
 -"3ª"
--"3a"
+# "3a" — could also be other things e.g. a flat/apartment number.
 -"3ª."
--"3d"
+# "3d" — en variant of 2nd could also be other things e.g. a flat/apartment number.
 -"3e"
 -"3º"
 -"3o"
@@ -64,7 +63,7 @@ fourth:
 -"4.ª"
 -"4.º"
 -"4ª"
--"4a"
+# "4a" — could also be other things e.g. a flat/apartment number.
 -"4ª."
 -"4e"
 -"4º"
@@ -81,7 +80,7 @@ fifth:
 -"5.ª"
 -"5.º"
 -"5ª"
--"5a"
+# "5a" — could also be other things e.g. a flat/apartment number.
 -"5ª."
 -"5e"
 -"5º"
@@ -97,7 +96,7 @@ sixth:
 -"6.ª"
 -"6.º"
 -"6ª"
--"6a"
+# "6a" — could also be other things e.g. a flat/apartment number.
 -"6ª."
 -"6e"
 -"6º"
@@ -113,7 +112,7 @@ seventh:
 -"7.ª"
 -"7.º"
 -"7ª"
--"7a"
+# "7a" — could also be other things e.g. a flat/apartment number.
 -"7ª."
 -"7e"
 -"7º"
@@ -129,7 +128,7 @@ eighth:
 -"8.ª"
 -"8.º"
 -"8ª"
--"8a"
+# "8a" — could also be other things e.g. a flat/apartment number.
 -"8ª."
 -"8e"
 -"8º"
@@ -145,7 +144,7 @@ ninth:
 -"9.ª"
 -"9.º"
 -"9ª"
--"9a"
+# "9a" — could also be other things e.g. a flat/apartment number.
 -"9ª."
 -"9e"
 -"9º"
@@ -162,7 +161,7 @@ tenth:
 -"10.ª"
 -"10.º"
 -"10ª"
--"10a"
+# "10a" — could also be other things e.g. a flat/apartment number.
 -"10ª."
 -"10e"
 -"10º"
@@ -178,7 +177,7 @@ eleventh:
 -"11.ª"
 -"11.º"
 -"11ª"
--"11a"
+# "11a" — could also be other things e.g. a flat/apartment number.
 -"11ª."
 -"11e"
 -"11º"
@@ -194,7 +193,7 @@ twelfth:
 -"12.ª"
 -"12.º"
 -"12ª"
--"12a"
+# "12a" — could also be other things e.g. a flat/apartment number.
 -"12ª."
 -"12e"
 -"12º"
@@ -210,7 +209,7 @@ thirteenth:
 -"13.ª"
 -"13.º"
 -"13ª"
--"13a"
+# "13a" — could also be other things e.g. a flat/apartment number.
 -"13ª."
 -"13e"
 -"13º"
@@ -226,7 +225,7 @@ fourteenth:
 -"14.ª"
 -"14.º"
 -"14ª"
--"14a"
+# "14a" — could also be other things e.g. a flat/apartment number.
 -"14ª."
 -"14e"
 -"14º"
@@ -243,7 +242,7 @@ fifteenth:
 -"15.ª"
 -"15.º"
 -"15ª"
--"15a"
+# "15a" — could also be other things e.g. a flat/apartment number.
 -"15ª."
 -"15e"
 -"15º"
@@ -259,7 +258,7 @@ sixteenth:
 -"16.ª"
 -"16.º"
 -"16ª"
--"16a"
+# "16a" — could also be other things e.g. a flat/apartment number.
 -"16ª."
 -"16e"
 -"16º"
@@ -275,7 +274,7 @@ seventeenth:
 -"17.ª"
 -"17.º"
 -"17ª"
--"17a"
+# "17a" — could also be other things e.g. a flat/apartment number.
 -"17ª."
 -"17e"
 -"17º"
@@ -291,7 +290,7 @@ eighteenth:
 -"18.ª"
 -"18.º"
 -"18ª"
--"18a"
+# "18a" — could also be other things e.g. a flat/apartment number.
 -"18ª."
 -"18e"
 -"18º"
@@ -307,7 +306,7 @@ nineteenth:
 -"19.ª"
 -"19.º"
 -"19ª"
--"19a"
+#"19a" — could also be other things e.g. a flat/apartment number.
 -"19ª."
 -"19e"
 -"19º"
@@ -324,7 +323,7 @@ twentieth:
 -"20.ª"
 -"20.º"
 -"20ª"
--"20a"
+# "20a" — could also be other things e.g. a flat/apartment number.
 -"20ª."
 -"20e"
 -"20º"
@@ -340,7 +339,7 @@ twenty-first:
 -"21.ª"
 -"21.º"
 -"21ª"
--"21a"
+# "21a" — could also be other things e.g. a flat/apartment number.
 -"21ª."
 -"21e"
 -"21º"
@@ -356,7 +355,7 @@ twenty-second:
 -"22.ª"
 -"22.º"
 -"22ª"
--"22a"
+# "22a" — could also be other things e.g. a flat/apartment number.
 -"22ª."
 -"22e"
 -"22º"
@@ -372,7 +371,7 @@ twenty-third:
 -"23.ª"
 -"23.º"
 -"23ª"
--"23a"
+# "23a" — could also be other things e.g. a flat/apartment number.
 -"23ª."
 -"23e"
 -"23º"
@@ -388,7 +387,7 @@ twenty-fourth:
 -"24.ª"
 -"24.º"
 -"24ª"
--"24a"
+# "24a" — could also be other things e.g. a flat/apartment number.
 -"24ª."
 -"24e"
 -"24º"
@@ -405,7 +404,7 @@ twenty-fifth:
 -"25.ª"
 -"25.º"
 -"25ª"
--"25a"
+# "25a" — could also be other things e.g. a flat/apartment number.
 -"25ª."
 -"25e"
 -"25º"
@@ -421,7 +420,7 @@ twenty-sixth:
 -"26.ª"
 -"26.º"
 -"26ª"
--"26a"
+# "26a" — could also be other things e.g. a flat/apartment number.
 -"26ª."
 -"26e"
 -"26º"
@@ -437,7 +436,7 @@ twenty-seventh:
 -"27.ª"
 -"27.º"
 -"27ª"
--"27a"
+# "27a" — could also be other things e.g. a flat/apartment number.
 -"27ª."
 -"27e"
 -"27º"
@@ -453,7 +452,7 @@ twenty-eight:
 -"28.ª"
 -"28.º"
 -"28ª"
--"28a"
+# "28a" — could also be other things e.g. a flat/apartment number.
 -"28ª."
 -"28e"
 -"28º"
@@ -469,7 +468,7 @@ twenty-ninth:
 -"29.ª"
 -"29.º"
 -"29ª"
--"29a"
+# "29a" — could also be other things e.g. a flat/apartment number.
 -"29ª."
 -"29e"
 -"29º"
@@ -486,7 +485,7 @@ thirtieth:
 -"30.ª"
 -"30.º"
 -"30ª"
--"30a"
+# "30a" — could also be other things e.g. a flat/apartment number.
 -"30ª."
 -"30e"
 -"30º"
