@@ -1,6 +1,6 @@
 # Ordinal numbers
 # Covers 1 to 30 — see also https://github.com/opensanctions/rigour/issues/38
-# Languages covered at least in part: de, en, es, fr, it, nl, pt, sv
+# Languages covered at least in part: de, en, es, fr, ga, it, nl, pt, sv
 # Also covers Roman Numerals e.g. VIIIth (for 8th).
 # Covers certain variants e.g. IIIIth as well as IVth for 4th.
 # First (1st) 
@@ -18,6 +18,7 @@ first:
 -"1ere"
 -"1º"
 -"1o"
+-"1ú"
 -"1º."
 -"Ist"
 # Second (2nd) 
@@ -35,6 +36,7 @@ second:
 -"2e"
 -"2º"
 -"2o"
+-"2ú"
 -"2º."
 -"IInd"
 # Third (3rd) 
@@ -52,6 +54,7 @@ third:
 -"3e"
 -"3º"
 -"3o"
+-"3ú"
 -"3º."
 -"IIIrd"
 # Fourth (4th) 
@@ -68,6 +71,7 @@ fourth:
 -"4e"
 -"4º"
 -"4o"
+-"4ú"
 -"4º."
 -"IVth"
 -"IIIIth"
@@ -85,6 +89,7 @@ fifth:
 -"5e"
 -"5º"
 -"5o"
+-"5ú"
 -"5º."
 -"Vth"
 # Sixth (6th) 
@@ -101,6 +106,7 @@ sixth:
 -"6e"
 -"6º"
 -"6o"
+-"6ú"
 -"6º."
 -"VIth"
 # Seventh (7th) 
@@ -117,6 +123,7 @@ seventh:
 -"7e"
 -"7º"
 -"7o"
+-"7ú"
 -"7º."
 -"VIIth"
 # Eighth (8th) 
@@ -133,6 +140,7 @@ eighth:
 -"8e"
 -"8º"
 -"8o"
+-"8ú"
 -"8º."
 -"VIIIth"
 # Ninth (9th) 
@@ -149,6 +157,7 @@ ninth:
 -"9e"
 -"9º"
 -"9o"
+-"9ú"
 -"9º."
 -"IXth"
 -"VIIIIth"
@@ -166,6 +175,7 @@ tenth:
 -"10e"
 -"10º"
 -"10o"
+-"10ú"
 -"10º."
 -"Xth"
 # Eleventh (11th) 
@@ -182,6 +192,7 @@ eleventh:
 -"11e"
 -"11º"
 -"11o"
+-"11ú"
 -"11º."
 -"XIth"
 # Twelfth (12th) 
@@ -198,6 +209,7 @@ twelfth:
 -"12e"
 -"12º"
 -"12o"
+-"12ú"
 -"12º."
 -"XIIth"
 # Thirteenth (13th) 
@@ -214,6 +226,7 @@ thirteenth:
 -"13e"
 -"13º"
 -"13o"
+-"13ú"
 -"13º."
 -"XIIIth"
 # Fourteenth (14th) 
@@ -230,6 +243,7 @@ fourteenth:
 -"14e"
 -"14º"
 -"14o"
+-"14ú"
 -"14º."
 -"XIVth"
 -"XIIIIth"
@@ -247,6 +261,7 @@ fifteenth:
 -"15e"
 -"15º"
 -"15o"
+-"15ú"
 -"15º."
 -"XVth"
 # Sixteenth (16th) 
@@ -263,6 +278,7 @@ sixteenth:
 -"16e"
 -"16º"
 -"16o"
+-"16ú"
 -"16º."
 -"XVIth"
 # Seventeenth (17th) 
@@ -279,6 +295,7 @@ seventeenth:
 -"17e"
 -"17º"
 -"17o"
+-"17ú"
 -"17º."
 -"XVIIth"
 # Eighteenth (18th) 
@@ -295,6 +312,7 @@ eighteenth:
 -"18e"
 -"18º"
 -"18o"
+-"18ú"
 -"18º."
 -"XVIIIth"
 # Nineteenth (19th) 
@@ -311,6 +329,7 @@ nineteenth:
 -"19e"
 -"19º"
 -"19o"
+-"19ú"
 -"19º."
 -"XIXth"
 -"XVIIIIth"
@@ -328,6 +347,7 @@ twentieth:
 -"20e"
 -"20º"
 -"20o"
+-"20ú"
 -"20º."
 -"XXth"
 # Twenty-first (21st) 
@@ -344,6 +364,7 @@ twenty-first:
 -"21e"
 -"21º"
 -"21o"
+-"21ú"
 -"21º."
 -"XXIst"
 # Twenty-second (22nd) 
@@ -360,6 +381,7 @@ twenty-second:
 -"22e"
 -"22º"
 -"22o"
+-"22ú"
 -"22º."
 -"XXIInd"
 # Twenty-third (23rd) 
@@ -376,6 +398,7 @@ twenty-third:
 -"23e"
 -"23º"
 -"23o"
+-"23ú"
 -"23º."
 -"XXIIIrd"
 # Twenty-fourth (24th) 
@@ -392,6 +415,7 @@ twenty-fourth:
 -"24e"
 -"24º"
 -"24o"
+-"24ú"
 -"24º."
 -"XXIVth"
 -"XXIIIIth"
@@ -409,6 +433,7 @@ twenty-fifth:
 -"25e"
 -"25º"
 -"25o"
+-"25ú"
 -"25º."
 -"XXVth"
 # Twenty-sixth (26th) 
@@ -425,6 +450,7 @@ twenty-sixth:
 -"26e"
 -"26º"
 -"26o"
+-"26ú"
 -"26º."
 -"XXVIth"
 # Twenty-seventh (27th) 
@@ -441,6 +467,7 @@ twenty-seventh:
 -"27e"
 -"27º"
 -"27o"
+-"27u"
 -"27º."
 -"XXVIIth"
 # Twenty-eight (28th) 
@@ -457,6 +484,7 @@ twenty-eight:
 -"28e"
 -"28º"
 -"28o"
+-"28ú"
 -"28º."
 -"XXVIIIth"
 # Twenty-ninth (29th) 
@@ -473,6 +501,7 @@ twenty-ninth:
 -"29e"
 -"29º"
 -"29o"
+-"29ú"
 -"29º."
 -"XXIXth"
 -"XXVIIIIth"
@@ -490,5 +519,6 @@ thirtieth:
 -"30e"
 -"30º"
 -"30o"
+-"30ú"
 -"30º."
 -"XXXth"
