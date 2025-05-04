@@ -1,6 +1,4 @@
-# Generated from OpenCageData address-formatting repo
-# commit: e8df874f42b18cbc1272b9cb491e460b72c29bc8
-# https://raw.githubusercontent.com/OpenCageData/address-formatting/e8df874f42b18cbc1272b9cb491e460b72c29bc8/conf/countries/worldwide.yaml
+# Derived from: https://github.com/OpenCageData/address-formatting
 #
 # generic mappings, specific territories get mapped to these
 #
