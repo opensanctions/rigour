@@ -2,7 +2,7 @@
 from typing import Dict, List
 
 FORMS: Dict[str, List[str]] = {
-    "apt": ["apartment", "appartement"],
+    "apt": ["apartment", "appartement", "flat"],
     "av": ["avenue", "ave", "avenida", "авеню"],
     "rd": ["road"],
     "no": ["number", "nr", "№"],
@@ -72,7 +72,7 @@ FORMS: Dict[str, List[str]] = {
     "se": ["southeast", "south east", "southeaster"],
     "sw": ["southwest", "south west", "southwester"],
     "ste": ["suite"],
-    "fl": ["floor", "flat", "etazh", "этаж"],
+    "fl": ["floor", "story", "storey", "etazh", "этаж"],
     "dept": ["department"],
     "&": ["and", "or", "und", "et"],
     "of": ["office", "officier", "офис", "ofis", "офіс"],
