@@ -27,7 +27,16 @@ ORG_TYPES: List[OrgTypeSpec] = [
         "aliases": ["Shoqëri komandite", "Sh.K.", "ShK.", "Sh K."],
     },
     {"display": "FZE", "compare": "LLC", "aliases": ["Free Zone Establishment"]},
-    {"display": "FZCO", "compare": "LLC", "aliases": ["Free Zone Company"]},
+    {
+        "display": "FZCO",
+        "compare": "LLC",
+        "aliases": [
+            "FZ-LLC",
+            "Free Zone Company",
+            "Free Zone Limited Liability Company",
+            "Free Zone Co.",
+        ],
+    },
     {
         "display": "SCS",
         "compare": "LP",

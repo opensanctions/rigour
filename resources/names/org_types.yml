@@ -67,7 +67,10 @@ types:
   - display: FZCO
     compare: LLC
     aliases:
+      - FZ-LLC
       - Free Zone Company
+      - Free Zone Limited Liability Company
+      - Free Zone Co.
   - display: SCS
     compare: LP
     aliases:

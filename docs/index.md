@@ -30,3 +30,7 @@ This library is built to provide foundational functionality for a broader ecosys
 > . . . In that Empire, the Art of Cartography attained such Perfection that the map of a single Province occupied an entire City, and the map of the Empire, an entire Province. In time, these Excessive Maps did not satisfy and the Schools of Cartographers built a Map of the Empire, that was of the Size of the Empire, and which coincided point for point with it. Less Addicted to the Study of Cartography, the Following Generations understood that that dilated Map was Useless and not without Pitilessness they delivered it to the Inclemencies of the Sun and the Winters. In the Deserts of the West endure broken Ruins of the Map, inhabited by Animals and Beggars; in the whole country there is no other relic of the Disciplines of Geography.
 > 
 > Suárez Miranda: Viajes de varones prudentes, libro cuarto, cap. XLV, Lérida, 1658.
+
+## Acknowledgements
+
+* [github.com/confirmordeny](https://github.com/confirmordeny)
