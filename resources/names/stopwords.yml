@@ -110,11 +110,20 @@ PERSON_NAME_PREFIXES:
   # Aristocratic titles
   - "Lord"
   - "Lady"
+  - "Laird"
   - "Dame"
-  - "Baroness"
   - "Baron"
+  - "Baroness"
+  - "Baronet"
+  - "Baronetess"
   - "Count"
   - "Countess"
+  # "Duke" is also a male given name and so not currently included here
+  - "Duchess"
+  # "Earl" is also a male given name and so not currently included here
+  - "Marchioness"
+  - "Marquess"
+  - "Seigneur"
   - "Sr"
   - "Sir"
   # Religious titles
@@ -122,13 +131,17 @@ PERSON_NAME_PREFIXES:
   - "Reverend"
   # The definite article
   - "The"
-  # Other/unsorted
+  # Titles based around the word "honour" or "honor" 
   - "Honourable"
   - "Honorable"
+  - "Hon"
+  - "His Honour"
+  - "Her Honour"
+  - "His Honor"
+  - "Her Honor"
   - "The Honourable"
   - "The Honorable"
   - "The Hon"
-  - "The Hon."
   - "The Honble"
   - "The Honourable Lady"
   - "The Honorable Lady"
@@ -147,9 +160,11 @@ PERSON_NAME_PREFIXES:
   - "The Much Honored"
   - "The Much Hon"
   - "The Much Hon."
+   # Other/unsorted
   - "The Most Noble"
   - "His Grace"
   - "Her Grace"
+  - "HG"
   - "The Worshipful"
   - "Worshipful"
   - "His Excellency"
