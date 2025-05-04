@@ -97,7 +97,7 @@ def iterate_name_items() -> Generator[Item, None, None]:
                 if item is None:
                     continue
                 yield item
-                if idx % 100 == 0:
+                if idx > 0 and idx % 1000 == 0:
                     print("Crawled: ", idx)
                     client.cache.flush()
                     cache.flush()
