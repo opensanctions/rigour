@@ -119,6 +119,14 @@ org_symbols:
     - 厂
     - 厂家
     - 厂子
+  fund:
+    - fund
+    - fond
+    - fondo
+    - fonds
+    - fundo
+    - фонд
+    - صندوق
   intl:
     - intl
     - int'l
