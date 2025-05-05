@@ -390,7 +390,7 @@ person_symbols:
 
 ordinals:
   # Ordinal numbers
-  # Languages covered at least in part: de, en, es, fr, ga, it, nl, pt, sv
+  # Languages covered at least in part: de, en, es, fr, ga, it, nl, pt, ru, sv
   # Also covers Roman Numerals e.g. VIIIth (for 8th).
   # Covers certain variants e.g. IIIIth as well as IVth for 4th.
   # First (1st)
