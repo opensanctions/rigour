@@ -413,6 +413,10 @@ ordinals:
     - "1ú"
     - "1º."
     - "No 1"
+    - "No.1"
+    - "No. 1
+    - "№1"
+    - "№ 1"
     - "Ist"
     - "I." # see if this backfires
   # Second (2nd)
@@ -435,6 +439,10 @@ ordinals:
     - "2ú"
     - "2º."
     - "No 2"
+    - "No.2"
+    - "No. 2"
+    - "№2"
+    - "№ 2"
     - "IInd"
     - "II" # see if this backfires
   # Third (3rd)
@@ -457,6 +465,10 @@ ordinals:
     - "3ú"
     - "3º."
     - "No 3"
+    - "No.3"
+    - "No. 3"
+    - "№3"
+    - "№ 3"
     - "IIIrd"
     - "III" # see if this backfires
   # Fourth (4th)
@@ -478,6 +490,10 @@ ordinals:
     - "4ú"
     - "4º."
     - "No 4"
+    - "No.4"
+    - "No. 4"
+    - "№4"
+    - "№ 4"
     - "IVth"
     - "IIIIth"
     - "IV"
@@ -500,6 +516,10 @@ ordinals:
     - "5ú"
     - "5º."
     - "No 5"
+    - "No.5"
+    - "No. 5"
+    - "№5"
+    - "№ 5"
     - "Vth"
     - "V." # see if this backfires
   # Sixth (6th)
@@ -521,6 +541,10 @@ ordinals:
     - "6ú"
     - "6º."
     - "No 6"
+    - "No.6"
+    - "No. 6"
+    - "№6"
+    - "№ 6"
     - "VIth"
     - "VI"
   # Seventh (7th)
@@ -542,6 +566,10 @@ ordinals:
     - "7ú"
     - "7º."
     - "No 7"
+    - "No.7"
+    - "No. 7"
+    - "№7"
+    - "№ 7"
     - "VIIth"
     - "VII"
   # Eighth (8th)
@@ -563,6 +591,10 @@ ordinals:
     - "8ú"
     - "8º."
     - "No 8"
+    - "No.8"
+    - "No. 8"
+    - "№8"
+    - "№ 8"
     - "VIIIth"
     - "VIII"
   # Ninth (9th)
@@ -585,6 +617,10 @@ ordinals:
     - "9º."
     - "IXth"
     - "No 9"
+    - "No.9"
+    - "No. 9"
+    - "№9"
+    - "№ 9"
     - "VIIIIth"
     - "IX"
   # Tenth (10th)
@@ -606,6 +642,10 @@ ordinals:
     - "10ú"
     - "10º."
     - "No 10"
+    - "No.10"
+    - "No. 10"
+    - "№10"
+    - "№ 10"
     - "Xth"
   # Eleventh (11th)
   eleventh:
@@ -625,7 +665,11 @@ ordinals:
     - "11o"
     - "11ú"
     - "11º."
-    - "No 11"
+    - "No 11"   
+    - "No.11"
+    - "No. 11"
+    - "№11"
+    - "№ 11"
     - "XIth"
   # Twelfth (12th)
   twelfth:
@@ -646,6 +690,10 @@ ordinals:
     - "12ú"
     - "12º."
     - "No 12"
+    - "No.12"
+    - "No. 12"
+    - "№12"
+    - "№ 12"
     - "XIIth"
   # Thirteenth (13th)
   thirteenth:
@@ -666,6 +714,10 @@ ordinals:
     - "13ú"
     - "13º."
     - "No 13"
+    - "No.13"
+    - "No. 13"
+    - "№13"
+    - "№ 13"
     - "XIIIth"
   # Fourteenth (14th)
   fourteenth:
@@ -686,6 +738,10 @@ ordinals:
     - "14ú"
     - "14º."
     - "No 14"
+    - "No.14"
+    - "No. 14"
+    - "№14"
+    - "№ 14"
     - "XIVth"
     - "XIIIIth"
   # Fifteenth (15th)
@@ -707,6 +763,10 @@ ordinals:
     - "15ú"
     - "15º."
     - "No 15"
+    - "No.15"
+    - "No. 15"
+    - "№15"
+    - "№ 15"
     - "XVth"
   # Sixteenth (16th)
   sixteenth:
@@ -727,6 +787,10 @@ ordinals:
     - "16ú"
     - "16º."
     - "No 16"
+    - "No.16"
+    - "No. 16"
+    - "№16"
+    - "№ 16"
     - "XVIth"
   # Seventeenth (17th)
   seventeenth:
@@ -747,6 +811,10 @@ ordinals:
     - "17ú"
     - "17º."
     - "No 17"
+    - "No.17"
+    - "No. 17"
+    - "№17"
+    - "№ 17"
     - "XVIIth"
   # Eighteenth (18th)
   eighteenth:
@@ -767,6 +835,10 @@ ordinals:
     - "18ú"
     - "18º."
     - "No 18"
+    - "No.18"
+    - "No. 18"
+    - "№18"
+    - "№ 18"
     - "XVIIIth"
   # Nineteenth (19th)
   nineteenth:
@@ -787,6 +859,10 @@ ordinals:
     - "19ú"
     - "19º."
     - "No 19"
+    - "No.19"
+    - "No. 19"
+    - "№19"
+    - "№ 19"
     - "XIXth"
     - "XVIIIIth"
   # Twentieth (20th)
@@ -808,6 +884,10 @@ ordinals:
     - "20ú"
     - "20º."
     - "No 20"
+    - "No.20"
+    - "No. 20"
+    - "№20"
+    - "№ 20"
     - "XXth"
   # Twenty-first (21st)
   twentyfirst:
@@ -828,6 +908,10 @@ ordinals:
     - "21ú"
     - "21º."
     - "No 21"
+    - "No.21"
+    - "No. 21"
+    - "№21"
+    - "№ 21"
     - "XXIst"
   # Twenty-second (22nd)
   twentysecond:
@@ -848,6 +932,10 @@ ordinals:
     - "22ú"
     - "22º."
     - "No 22"
+    - "No.22"
+    - "No. 22"
+    - "№22"
+    - "№ 22"
     - "XXIInd"
   # Twenty-third (23rd)
   twentythird:
@@ -868,6 +956,10 @@ ordinals:
     - "23ú"
     - "23º."
     - "No 23"
+    - "No.23"
+    - "No. 23"
+    - "№23"
+    - "№ 23"
     - "XXIIIrd"
   # Twenty-fourth (24th)
   twentyfourth:
@@ -886,6 +978,10 @@ ordinals:
     - "24ú"
     - "24º."
     - "No 24"
+    - "No.24"
+    - "No. 24"
+    - "№24"
+    - "№ 24"
     - "XXIVth"
     - "XXIIIIth"
   # Twenty-fifth (25th)
@@ -905,6 +1001,10 @@ ordinals:
     - "25ú"
     - "25º."
     - "No 25"
+    - "No.25"
+    - "No. 25"
+    - "№25"
+    - "№ 25"
     - "XXVth"
   # Twenty-sixth (26th)
   twentysixth:
@@ -923,6 +1023,10 @@ ordinals:
     - "26ú"
     - "26º."
     - "No 26"
+    - "No.26"
+    - "No. 26"
+    - "№26"
+    - "№ 26"
     - "XXVIth"
   # Twenty-seventh (27th)
   twentyseventh:
@@ -941,6 +1045,10 @@ ordinals:
     - "27u"
     - "27º."
     - "No 27"
+    - "No.27"
+    - "No. 27"
+    - "№27"
+    - "№ 27"
     - "XXVIIth"
   # Twenty-eight (28th)
   twentyeight:
@@ -959,6 +1067,10 @@ ordinals:
     - "28ú"
     - "28º."
     - "No 28"
+    - "No.28"
+    - "No. 28"
+    - "№28"
+    - "№ 28"
     - "XXVIIIth"
   # Twenty-ninth (29th)
   twentyninth:
@@ -977,6 +1089,10 @@ ordinals:
     - "29ú"
     - "29º."
     - "No 29"
+    - "No.29"
+    - "No. 29"
+    - "№29"
+    - "№ 29"
     - "XXIXth"
     - "XXVIIIIth"
   # Thirtieth (30th)
@@ -997,6 +1113,10 @@ ordinals:
     - "30o"
     - "30ú"
     - "No 30"
+    - "No.30"
+    - "No. 30"
+    - "№30"
+    - "№ 30"
     - "30º."
     - "XXXth"
   fourtieth:
@@ -1015,6 +1135,10 @@ ordinals:
     - "40o"
     - "40ú"
     - "No 40"
+    - "No.40"
+    - "No. 40"
+    - "№40"
+    - "№ 40"
     - "XXXXth"
     - "XXXX"
     - "XLth"
@@ -1034,3 +1158,7 @@ ordinals:
     - "50o"
     - "50ú"
     - "No 50"
+    - "No.50"
+    - "No. 50"
+    - "№50"
+    - "№ 50"
