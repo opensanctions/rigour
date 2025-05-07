@@ -1,6 +1,6 @@
 import re
 from typing import Optional
-from stdnum import luhn  # type: ignore
+from stdnum import luhn
 
 from rigour.ids.common import IdentifierFormat
 

@@ -1,35 +1,54 @@
 from typing import Optional
-from stdnum import isin, iban, figi, bic, lei  # type: ignore
-from stdnum.ru import inn  # type: ignore
-from stdnum.us import ssn  # type: ignore
-from stdnum.br import cpf, cnpj  # type: ignore
+from stdnum import isin, iban, figi, bic, lei
+from stdnum.ru import inn
+from stdnum.us import ssn
+from stdnum.br import cpf, cnpj
 
-from rigour.ids.common import StdnumFormat
+from rigour.ids.common import IdentifierFormat
+from stdnum.exceptions import ValidationError
 
 
-class ISIN(StdnumFormat):
+class ISIN(IdentifierFormat):
     """An ISIN number for a security."""
 
     TITLE = "ISIN"
     STRONG: bool = True
 
-    impl = isin
+    @classmethod
+    def is_valid(cls, value: str) -> bool:
+        return isin.is_valid(value)
 
     @classmethod
-    def format(cls, value: str) -> str:
-        return value.upper()
+    def normalize(cls, value: str) -> Optional[str]:
+        try:
+            return isin.compact(isin.validate(value))
+        except ValidationError:
+            return None
 
 
-class IBAN(StdnumFormat):
+class IBAN(IdentifierFormat):
     """An IBAN number for a bank account."""
 
     TITLE = "IBAN"
     STRONG: bool = True
 
-    impl = iban
+    @classmethod
+    def is_valid(cls, value: str) -> bool:
+        return iban.is_valid(value)
+
+    @classmethod
+    def normalize(cls, value: str) -> Optional[str]:
+        try:
+            return iban.compact(iban.validate(value))
+        except ValidationError:
+            return None
+
+    @classmethod
+    def format(cls, value: str) -> str:
+        return iban.format(value)
 
 
-class FIGI(StdnumFormat):
+class FIGI(IdentifierFormat):
     """A FIGI number for a security, as managed by OpenFIGI."""
 
     TITLE = "FIGI"
@@ -38,87 +57,138 @@ class FIGI(StdnumFormat):
     impl = figi
 
     @classmethod
-    def format(cls, value: str) -> str:
-        return value.upper()
+    def is_valid(cls, value: str) -> bool:
+        return figi.is_valid(value)
+
+    @classmethod
+    def normalize(cls, value: str) -> Optional[str]:
+        try:
+            return figi.compact(figi.validate(value))
+        except ValidationError:
+            return None
 
 
-class BIC(StdnumFormat):
+class BIC(IdentifierFormat):
     """BIC (ISO 9362 Business identifier codes)."""
 
     TITLE = "BIC"
     STRONG: bool = True
 
-    impl = bic
+    @classmethod
+    def is_valid(cls, value: str) -> bool:
+        return bic.is_valid(value)
 
     @classmethod
     def normalize(cls, value: str) -> Optional[str]:
-        norm = super().normalize(value)
-        if norm is None:
-            return None
-        norm = norm[:8].upper()
-        if cls.is_valid(norm):
+        try:
+            norm = bic.compact(bic.validate(value))
+            norm = norm[:8].upper()
+            if not cls.is_valid(norm):
+                return None
             return norm
-        return None
+        except ValidationError:
+            return None
+
+    @classmethod
+    def format(cls, value: str) -> str:
+        return bic.format(value)
 
 
-class INN(StdnumFormat):
+class INN(IdentifierFormat):
     """Russian tax identification number."""
 
     TITLE = "INN"
 
-    impl = inn
+    @classmethod
+    def is_valid(cls, value: str) -> bool:
+        return inn.is_valid(value)
 
     @classmethod
-    def format(cls, value: str) -> str:
-        return value
+    def normalize(cls, value: str) -> Optional[str]:
+        try:
+            return inn.compact(inn.validate(value))
+        except ValidationError:
+            return None
 
 
-class LEI(StdnumFormat):
+class LEI(IdentifierFormat):
     """Legal Entity Identifier (ISO 17442)"""
 
     TITLE = "LEI"
     STRONG: bool = True
 
-    impl = lei
+    @classmethod
+    def is_valid(cls, value: str) -> bool:
+        return lei.is_valid(value)
 
     @classmethod
-    def format(cls, value: str) -> str:
-        return value.upper()
+    def normalize(cls, value: str) -> Optional[str]:
+        try:
+            return lei.compact(lei.validate(value))
+        except ValidationError:
+            return None
 
 
-class SSN(StdnumFormat):
+class SSN(IdentifierFormat):
     """US Social Security Number"""
 
     TITLE = "SSN"
     STRONG: bool = False
 
-    impl = ssn
+    @classmethod
+    def is_valid(cls, value: str) -> bool:
+        return ssn.is_valid(value)
+
+    @classmethod
+    def normalize(cls, value: str) -> Optional[str]:
+        try:
+            return ssn.compact(ssn.validate(value))
+        except ValidationError:
+            return None
 
     @classmethod
     def format(cls, value: str) -> str:
-        return str(ssn.format(value))
+        return ssn.format(value)
 
 
-class CPF(StdnumFormat):
+class CPF(IdentifierFormat):
     """Cadastro de Pessoas Físicas, Brazilian national identifier"""
 
     TITLE = "CPF"
 
-    impl = cpf
+    @classmethod
+    def is_valid(cls, value: str) -> bool:
+        return cpf.is_valid(value)
+
+    @classmethod
+    def normalize(cls, value: str) -> Optional[str]:
+        try:
+            return cpf.compact(cpf.validate(value))
+        except ValidationError:
+            return None
 
     @classmethod
     def format(cls, value: str) -> str:
-        return str(cpf.format(value))
+        return cpf.format(value)
 
 
-class CNPJ(StdnumFormat):
+class CNPJ(IdentifierFormat):
     """Cadastro Nacional de Pessoas Jurídicas, Brazilian national companies identifier"""
 
     TITLE = "CNPJ"
     STRONG: bool = True
 
-    impl = cnpj
+    @classmethod
+    def is_valid(cls, value: str) -> bool:
+        return cnpj.is_valid(value)
+
+    @classmethod
+    def normalize(cls, value: str) -> Optional[str]:
+        try:
+            return cnpj.compact(cnpj.validate(value))
+        except ValidationError:
+            return None
 
     @classmethod
     def format(cls, value: str) -> str:
-        return str(cnpj.format(value))
+        return cnpj.format(value)

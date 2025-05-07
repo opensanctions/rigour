@@ -1,4 +1,4 @@
-from rigour.ids import ISIN, IBAN, FIGI, BIC, INN, LEI, CPF, CNPJ
+from rigour.ids import ISIN, IBAN, FIGI, BIC, INN, LEI, CPF, CNPJ, SSN
 
 
 def test_isin():
@@ -8,6 +8,8 @@ def test_isin():
     assert not ISIN.is_valid("US037833100")
     assert not ISIN.is_valid("037833100")
     assert not ISIN.is_valid("")
+    assert ISIN.normalize("us0378331005") == "US0378331005"
+    assert ISIN.normalize("banana") is None
     assert ISIN.format("us0378331005") == "US0378331005"
 
 
@@ -22,6 +24,8 @@ def test_iban():
     assert not IBAN.is_valid("DE89 3704 0044 0532 0130 0")
     assert not IBAN.is_valid("DE89 3704 0044 0532 0130 0")
     assert not IBAN.is_valid("")
+    assert IBAN.normalize("DE89370400440532013000") == "DE89370400440532013000"
+    assert IBAN.normalize("banana") is None
     assert IBAN.format("de89370400440532013000") == "DE89 3704 0044 0532 0130 00"
 
 
@@ -31,6 +35,8 @@ def test_figi():
     assert not FIGI.is_valid("BBG000B9XRY")
     assert not FIGI.is_valid("BBG000B9XRY44")
     assert not FIGI.is_valid("")
+    assert FIGI.normalize("bbg000b9xry4") == "BBG000B9XRY4"
+    assert FIGI.normalize("banana") is None
     assert FIGI.format("bbg000b9xry4") == "BBG000B9XRY4"
 
 
@@ -83,6 +89,13 @@ def test_cpf():
     assert CPF.normalize("044.858.476-08") == "04485847608"
     assert CPF.normalize("1114447773") is None
     assert CPF.normalize("") is None
+
+
+def test_ssn():
+    assert SSN.is_valid("123-45-6789")
+    assert SSN.normalize("123-45-6789  ") == "123456789"
+    assert SSN.normalize("SOCIAL") is None
+    assert SSN.format("123456789") == "123-45-6789"
 
 
 def test_cnpj():
