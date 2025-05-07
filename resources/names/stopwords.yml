@@ -32,6 +32,7 @@ PERSON_NAME_PREFIXES:
   - "Prof. Dr"
   - "Professor Dr"
   - "Professor"
+  - "Associate Professor" # used in Singapore
   - "Dott"
   - "Dottore"
   - "Dott.ssa"
