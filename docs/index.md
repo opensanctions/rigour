@@ -33,4 +33,4 @@ This library is built to provide foundational functionality for a broader ecosys
 
 ## Acknowledgements
 
-* [github.com/confirmordeny](https://github.com/confirmordeny)
+* [github.com/confirmordeny](https://github.com/confirmordeny) - extensive cultural data

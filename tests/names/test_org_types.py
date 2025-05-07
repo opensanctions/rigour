@@ -1,6 +1,6 @@
 from rigour.names.org_types import replace_org_types_display as replace_display
 from rigour.names.org_types import replace_org_types_compare as replace_compare
-from rigour.names.org_types import extract_org_types
+from rigour.names.org_types import extract_org_types, remove_org_types
 # from rigour.names.org_types import _normalize_compare
 # from rigour.names.org_types import normalize_display
 
@@ -34,3 +34,10 @@ def test_extract_org_types():
     ]
     assert extract_org_types("siemens g.m.b.h") == [("g.m.b.h", "llc")]
     assert extract_org_types("siemens") == []
+
+
+def test_remove_org_types():
+    assert remove_org_types("siemens aktiengesellschaft").strip() == "siemens"
+    assert remove_org_types("siemens g.m.b.h").strip() == "siemens"
+    assert remove_org_types("siemens") == "siemens"
+    assert remove_org_types("siemens aktiengesellschaft gmbh").strip() == "siemens"
