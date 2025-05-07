@@ -170,4 +170,19 @@ def extract_org_types(
     return matches
 
 
-# TODO: do we need remove_org_types?
+def remove_org_types(
+    name: str, replacement: str = "", normalizer: Normalizer = _normalize_compare
+) -> str:
+    """Match any organization type designation (e.g. LLC, Inc, GmbH) in the given entity name and
+    replace it with the given fixed string (empty by default, which signals removal).
+
+    Args:
+        name (str): The text to be processed. It is assumed to be already normalized (see below).
+        normalizer (Callable[[str | None], str | None]): A text normalization function to run on the
+            lookup values before matching to remove text anomalies and make matches more likely.
+
+    Returns:
+        str: The text with organization types replaced/removed.
+    """
+    replacer = _compare_replacer(normalizer=normalizer)
+    return replacer.remove(name, replacement=replacement)
