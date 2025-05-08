@@ -181,6 +181,8 @@ STOPWORDS:
   - "&"
 # Terms used to indicate aliases/alternative names including old names
 - "also known as"
+- "a.k.a"
+- "A.K.A"
 - "a/k/a"
 - "A/K/A"
 - "earlier known as"
