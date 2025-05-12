@@ -504,6 +504,7 @@ types:
     compare: LLC
     aliases:
       - cia ltda
+      - coltd
       - co., ltd.
       - co.ltd
       - compañía limitada
@@ -516,6 +517,7 @@ types:
       - coopération
       - coopérative
       - kooperatsia
+      - kooperatif
       - sociedad cooperativa
       - spółdzielni
       - кооперация

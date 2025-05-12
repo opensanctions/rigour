@@ -467,7 +467,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {
         "display": "Co Ltd",
         "compare": "LLC",
-        "aliases": ["cia ltda", "co., ltd.", "co.ltd", "compañía limitada"],
+        "aliases": ["cia ltda", "coltd", "co., ltd.", "co.ltd", "compañía limitada"],
     },
     {
         "compare": "COOP",
@@ -479,6 +479,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "coopération",
             "coopérative",
             "kooperatsia",
+            "kooperatif",
             "sociedad cooperativa",
             "spółdzielni",
             "кооперация",

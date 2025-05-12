@@ -177,4 +177,6 @@ STOPWORDS:
   - "de"
   - "of"
   - "and"
+  - for
+  - для # for
   - "&"

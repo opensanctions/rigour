@@ -1,17 +1,29 @@
 org_symbols:
   co:
     - company
+    - сompany
     - компания
     - kompani
     - kompania
+    - komaniya
+    - kompaniy
+    - kampaniia
+    - kompaniia
+    - kompaniya
+    - kompanii
+    - къмпани
     - компани
     - компания
+    - коспания
+    - компаний
+    - компана
     - co
     - компанія
     - شركة
     - compañía
     - compania
     - companie
+    - companhia
     - firma
     - firm
     - Εταιρεία
@@ -23,10 +35,28 @@ org_symbols:
   org:
     - organization
     - organisation
+    - organisations
     - org
     - организація
     - orhanizatsiia
     - orhanizatsiya
+    - organisasjon
+    - organisasjonen
+    - organisatie
+    - organzation
+    - orhanizatsiino
+    - organizatsiya
+    - organizacion
+    - organizacja
+    - organizace
+    - органищация
+    - организациями
+    - организация
+    - организации
+    - organizatsii
+    - organizația
+    - organización
+    - organisaatio
     - Οργανισμός
     - Organismos
     - ファーム
@@ -34,12 +64,24 @@ org_symbols:
     - 協会
   corp:
     - corporation
+    - corporaton
     - corporate
+    - сorporation
     - corp
     - корпорация
     - корпорація
     - مؤسسة
     - corporación
+    - koroporatsiya
+    - korporatsiyi
+    - corporația
+    - corporaciia
+    - korporatsiia
+    - korporatsiya
+    - corporations
+    - corporacion
+    - корпорации
+    - корпарация
     - корпорації
     - корпораций
     - società
@@ -57,11 +99,19 @@ org_symbols:
     - co-operative society
     - coop society
     - co-op society
+    - koperasi
     - cooperative society
     - coopératif
+    - kooperatif
     - coopération
     - coopérative
     - kooperatsia
+    - cooperatieve
+    - cooperatives
+    - cooperativo
+    - cooperativa
+    - corporativo
+    - corporativos
     - sociedad cooperativa
     - spółdzielni
     - кооперация
@@ -70,10 +120,13 @@ org_symbols:
   center:
     - центр
     - tsentr
+    - cntr
     - center
     - centre
     - centr
     - centro
+    - tsentrov
+    - центров
     - مركز
   holding:
     - holding
@@ -81,6 +134,9 @@ org_symbols:
     - проведение
     - холдинг
     - холдинг
+    - хлдинг
+    - xoлдиhг
+    - kholdyng
     - القابضة
     - Συμμετοχών
     - Symmetochon
@@ -108,16 +164,89 @@ org_symbols:
     - концерн
     - مجموعة
     - consorcio
+  consortium:
+    - consortium
+    - consorcio
+    - consortum
+    - konsortsium
+    - consortile
+  service:
+    - service
+    - службы
+    - служба
   defence:
     - defence
     - defense
     - défense
     - defensie
+    - defensiv
     - defesa
     - difesa
     - försvar
     - Verteidigung
+    - defensa
     - оборонный
+    - оборон
+  tech:
+    - technology
+    - технология
+    - технологии
+    - техника
+    - тэхники
+    - тэхніка
+    - технікал
+    - технологія
+    - технології
+    - тэхналогіі
+    - тэхналогій
+    - технологій
+    - технологий
+    - технолоджі
+    - технолоджи
+    - технологиями
+    - технологічне
+    - technalohiy
+    - tekhnolohiia
+    - technológiai
+    - tecnologia
+    - technológií
+    - tehnologie
+    - tehnologiju
+    - tekhnology
+    - tekhnologi
+    - teknologiya
+    - technik
+    - teknologii
+    - tekhnolohiyi
+    - tekhnologii
+    - technologií
+    - tecnología
+    - tehnologii
+    - tekhnologiya
+    - technológiák
+    - technologie
+    - technologia
+    - technologies
+    - technologijų
+    - technologii
+    - tecnologias
+    - tekhnolohii
+    - 技术
+    - 工艺学
+    - τεχνολογία
+    - τεχνολογίες
+    - τεχνολογίας
+  insurance:
+    - insurance
+    - insurans
+    - insurance company
+    - versicherung
+    - versicherungen
+    - versicherungsgesellschaft
+    - verzekeringsmaatschappij
+    - verzekeringsmaatschappijen
+    - страхового
+    - страховая
   factory:
     - factory
     - фабрика
@@ -142,15 +271,23 @@ org_symbols:
     - fondo
     - fonds
     - fundo
+    - fondovy
     - фонд
     - صندوق
   intl:
     - intl
     - int'l
     - international
+    - internantional
+    - internatsionale
+    - internasional
     - интернациональный
     - интернациональная
+    - интернациональные
     - internationale
+    - internacional
+    - internacionais
+    - internacionales
     - інтернейшнл
     - internazionale
     - internazionali
@@ -172,12 +309,19 @@ org_symbols:
     - 集体
   mgmt:
     - management
+    - мanagement
     - менеджмент
+    - упрвлению
     - менеджмента
     - менеджменту
     - إدارة
     - управление
     - управления
+    - ўпраўлення
+    - упарвлению
+    - упарвления
+    - управлениe
+    - управлению
     - gestión
     - Διαχείριση
     - Epicheirisi
@@ -187,20 +331,72 @@ org_symbols:
   fed:
     - federal
     - федеральное
+    - федеральноая
+    - федеpальное
+    - федералное
+    - федеоальная
+    - федерельная
+    - федералльная
+    - фдеральная
     - федеральной
+    - федерпальное
+    - федеарльная
+    - федералная
+    - федеральне
+    - феднральная
+    - федеральные
+    - фeдеральное
+    - федеральными
+    - федеральных
+    - федеральному
+    - федеральна
+    - федральное
+    - федеральний
+    - федерального
+    - федеральный
+    - федеральная
+    - глсударственное
+    - федеральным
+    - федеральних
+    - федеральном
+    - федеральної
+    - federalnyy
+    - federatsyy
+    - federální
+    - federálny
   institute:
     - institute
     - institut
     - школа
     - институт
+    - інститут
     - Ινστιτούτο
     - institutu
     - instituta
+    - instituto
     - instituti
+    - inštitut
+    - instituição
+    - ynstytut
+    - institiut
+    - instituut
+    - instytut
+    - istituto
+    - institutas
+    - institutul
     - 研究所
     - 学院
+  institution:
+    - учреждение
+    - institution
+    - institucija
+    - instituția
+    - учраждение
+    - учреджение
+    - учреждениение
   foundation:
     - foundation
+    - foudation
     - фонд
     - fundacja
     - fundacion
@@ -209,6 +405,7 @@ org_symbols:
     - Fondacion
     - Fondacioni
     - Fundación
+    - fundația
     - Stiftung
     - Stichting
     - Ίδρυμα
@@ -219,31 +416,123 @@ org_symbols:
   industry:
     - industry
     - industries
+    - indastris
     - industrial
+    - industriyi
+    - industriilor
+    - industrialnyi
+    - indastri
     - индустрия
     - индустрии
     - индустриальный
+    - индустральный
+    - industrijo
     - industria
+    - industriia
+    - industriala
+    - industriji
+    - industriales
+    - indastrial
+    - industriel
+    - industriale
+    - industrialny
     - industrie
-    - industrie
+    - industra
     - industrier
     - indústrias
     - industriële
     - industriële
     - industriell
+    - industrija
+    - industrias
+    - industrialna
+    - industriais
+    - indústria
+    - endustriyel
     - 業界
   engineering:
     - engineering
     - инженерия
     - инжиниринг
+    - иинжиниринг
+    - иинженерно
+    - инжинириум
     - engineering
     - ingenierie
+    - ingegneri
     - ingeniérie
     - ingeniería
     - inženýrství
     - inženiring
     - 工学
     - エンジニアリング
+  associates:
+    - associates
+    - ассоциированные
+  investment:
+    - investment
+    - investmet
+    - invest
+    - investments
+    - инвестиции
+    - инвестиционный
+    - инвестиционная
+    - инвестиционные
+    - инвестиционных
+    - иинвестиционный
+    - инвестиционной
+    - інвестиционный
+    - инвестиционного
+    - investicni
+    - investimenti
+    - investimento
+    - investeringen
+    - investimentos
+    - 投資
+  dev:
+    - development
+    - dev
+    - devt
+    - devt.
+    - development company
+    - development corporation
+    - development group
+    - development organization
+    - development project
+    - ανάπτυξη
+    - развитие
+    - развития
+    - ανάπτυξης
+  enterprise:
+    - enterprise
+    - enterprises
+    - entreprise
+    - enterprises
+    - enterpraizes
+    - entreprises
+    - interprise
+    - предприятие
+    - пpедпpиятие
+    - предприиятие
+    - предприятия
+    - предпрятие
+    - предприятий
+  professional:
+    - professional
+    - professionel
+    - профессионального
+    - профессионольного
+    - профессиональоного
+    - профессонального
+    - профессиональная
+    - профессиональное
+    - профессионально
+    - профессиональных
+  operations:
+    - operations
+    - operation
+    - operating
+    - операциях
   bank:
     - bank
     - banking
@@ -267,6 +556,7 @@ org_symbols:
     - τράπεζα
     - banque
     - banco
+    - bankası
     - banki
     - 銀行
   commercial:
@@ -276,14 +566,20 @@ org_symbols:
     - коммерческое
     - коммерческой
     - коммерческих
+    - коммерческого
+    - комерческий
     - comercial
     - commerciale
+    - commerciaux
     - commercieel
     - commerciale
+    - commerciële
+    - kommercial
     - εμπορική
     - 商業
   offshore:
     - offshore
+    - ofshor
     - оффшор
     - оффшорный
     - оффшорная
@@ -297,6 +593,7 @@ org_symbols:
     - govmnt
     - government
     - government of
+    - governmental
     - regierung
     - regierung von
     - 政府
@@ -306,18 +603,65 @@ org_symbols:
     - правительство
     - gouvernement
     - gouvernement de
+    - государственное
+    - государственная
+    - государственный
+    - государственне
+    - государственноый
+    - госудаственным
+    - гомударственной
+    - государсвенным
+    - государствнный
+    - госудаpственное
+    - государсовенный
+    - госудрарственное
+    - государственном
+    - государственно
+    - государственного
+    - государственной
+    - государственным
+    - государственные
+    - государственных
+    - правительсто
+    - госпредприятие # soe
+    - казенное
     - gobierno
     - gobierno de
     - κυβερνηση
     - κυβερνητική
+  named:
+    - im
+    - имени
+    - named after
+    - named for
+  ministry:
+    - ministry
+    - мinistry
+    - ministère
+    - ministeru
+    - ministero
+    - ministerul
+    - ministerium
+    - ministerie
+  export:
+    - export
+    - exports
+    - eksportu
   trade:
     - trade
     - trading
     - торговля
     - торгівля
+    - торговьй
+    - торговый
+    - торгово
+    - торговая
+    - trэid
+    - торговы
     - comercio
     - comercio
     - commercio
+    - comércio
     - impex
     - imp. exp.
     - usaha dagang
@@ -348,11 +692,62 @@ org_symbols:
     - λύσεων
     - решение
     - решения
+    - решению
+  capital:
+    - capital
+    - κεφάλαιο
+    - κεφαλαιακή
+    - капитал
+    - kapital
+  trust:
+    - trust
+    - trusts
+    - фонд
+    - траст
+    - трастовий
+    - трастова
+    - трастові
+    - трастової
+    - трастового
+    - фондовий
+    - фондова
+    - фондові
+  union:
+    - union
+    - союз
+  university:
+    - university
+    - университет
+    - університет
+    - унивирситет
+    - университнт
+    - университи
+    - университета
+    - universidad
+    - université
+    - universtiy
+    - universitet
+    - univ
+    - uni
+    - univ.
+    - univ. of
+    - univ. of the
+  military:
+    - военный
+    - military
+    - militare
+    #  - militsii
+  manufacturing:
+    - manufacturing
+    - manufakturynh
+    - manufacturies
   tpb:
     - corporația de rachete balistice tactice
     - društvo za taktičke projektile
     - tactical missile company
+    - tactical missiles company
     - tactical missile corporation
+    - tactical missiles corporation
     - takticheskoe raketnoe vooruzhenie
     - тактическое ракетное вооружение
     - тактичне ракетне озброєння
@@ -428,7 +823,7 @@ ordinals:
     - "No1"
     - "No 1"
     - "No.1"
-    - "No. 1
+    - "No. 1"
     - "№1"
     - "№ 1"
     - "Ist"
@@ -719,7 +1114,7 @@ ordinals:
     - "11ú"
     - "11º."
     - "No11"
-    - "No 11"   
+    - "No 11"
     - "No.11"
     - "No. 11"
     - "№11"
