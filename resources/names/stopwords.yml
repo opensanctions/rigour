@@ -21,8 +21,13 @@ PERSON_NAME_PREFIXES:
   - "Fräulein"
   - "Frau"
   - "Fr"
+  - "Señor"
+  - "Señora"
   - "Senor"
+  - "Senora"
+  - "Señorita"
   - "Senorita"
+  - "Srta"
   - "Herr"
   - "Hr"
   # Academic and professional titles
