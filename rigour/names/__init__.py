@@ -19,6 +19,7 @@ from rigour.names.pick import pick_name, pick_case
 from rigour.names.check import is_name
 from rigour.names.tokenize import tokenize_name
 from rigour.names.person import remove_person_prefixes, load_person_names
+from rigour.names.person import load_person_names_mapping
 from rigour.names.org_types import replace_org_types_display
 from rigour.names.org_types import replace_org_types_compare
 from rigour.names.org_types import extract_org_types, remove_org_types
@@ -34,6 +35,7 @@ __all__ = [
     "NameTypeTag",
     "remove_person_prefixes",
     "load_person_names",
+    "load_person_names_mapping",
     "replace_org_types_display",
     "replace_org_types_compare",
     "extract_org_types",
