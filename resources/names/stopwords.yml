@@ -32,6 +32,7 @@ PERSON_NAME_PREFIXES:
   - "Señora"
   - "Senor"
   - "Senora"
+  - "Sr"
   - "Srª"
   - "Sra"
   - "Señorita"
@@ -128,7 +129,7 @@ PERSON_NAME_PREFIXES:
   - "HRH"
   - "His Higness"
   - "Her Higness"
-  # Aristocratic titles
+  # Aristocratic titles — English (en)
   - "Lord"
   - "Lady"
   - "Laird"
@@ -144,13 +145,15 @@ PERSON_NAME_PREFIXES:
   # "Earl" is also a male given name and so not currently included here
   - "Marchioness"
   - "Marquess"
-  - "Seigneur"
-  - "Sr"
   - "Sir"
-  # Religious titles  — English (en)
+  # Aristocratic titles — French (fr)
+  - "Seigneur"
+  # Aristocratic titles — Indonesian (id)
+  - "Raja Muda" # Viceroy
+  # Religious titles — English (en)
   - "The Reverend"
   - "Reverend"
-  # Religious titles  — Welsh (cy)
+  # Religious titles — Welsh (cy)
   - "Parchedig" # Reverend
   - "Parch" # Rev
   - "Yr Esgob" # Bishop
