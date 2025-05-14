@@ -1,4 +1,3 @@
-import time
 import random
 import logging
 import requests
@@ -16,6 +15,7 @@ from nomenklatura.wikidata import WikidataClient
 from rigour.names import is_name
 from fingerprints import clean_brackets
 from rigour.text.cleaning import remove_emoji
+from rigour.text.scripts import is_modern_alphabet
 
 log = logging.getLogger(__name__)
 settings.DB_STMT_TIMEOUT = 10000 * 100000
@@ -66,6 +66,9 @@ def clean_name(name: Optional[str]) -> List[str]:
         if not is_name(part):
             continue
         if len(part) > 30:
+            continue
+        if is_modern_alphabet(part) and len(part) < 2:
+            print("Too short %r -> %r" % (name, part))
             continue
         if "," in part or "(" in part or "/" in part or "=" in part:
             # print("Skipping: ", part)
@@ -130,6 +133,23 @@ def build_canonicalisations():
                     # client.cache.flush()
                     cache.flush()
 
+    print("Deduplicating name QIDs...")
+    by_names: Dict[str, Set[str]] = defaultdict(set)
+    for qid, aliases in inverted.items():
+        for alias in aliases:
+            by_names[alias].add(qid)
+    for nqid, naliases in sorted(inverted.items()):
+        other_qids = set()
+        for alias in naliases:
+            other_qids.update(by_names[alias])
+        other_qids.discard(nqid)
+        for oqid in other_qids:
+            oaliases = inverted[oqid]
+            if naliases.issubset(oaliases):
+                print("Removing: ", nqid, "->", oqid, ": ", naliases)
+                inverted.pop(nqid, None)
+
+    print("Write out names file...")
     with open(out_path / "persons.txt", "w", encoding="utf-8") as fh:
         for qid, aliases in sorted(inverted.items()):
             if len(aliases) < 2:
