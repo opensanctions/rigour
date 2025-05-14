@@ -1,6 +1,6 @@
 # Each prefix will match either as-is, or with a trailing dot (Mr, Mr.)
 PERSON_NAME_PREFIXES:
-  # Regular titles
+  # Regular titles — English (en)
   - "Mr"
   - "Mister"
   - "Master"
@@ -13,23 +13,32 @@ PERSON_NAME_PREFIXES:
   - "Ms"
   - "Mx"
   - "Mixter"
+   # Regular titles — French (fr)
   - "Madam"
   - "Madame"
   - "Mme"
   - "Mmme"
   - "Monsieur"
+  # Regular titles — German (de)
   - "Fräulein"
   - "Frau"
   - "Fr"
+  - "Herr"
+  - "Hr"
+  # Regular titles — Spanish (es)
   - "Señor"
   - "Señora"
   - "Senor"
   - "Senora"
+  - "Srª"
+  - "Sra"
   - "Señorita"
   - "Senorita"
   - "Srta"
-  - "Herr"
-  - "Hr"
+  # Regular titles — Portugese (pt)
+  - "Senhor"
+  - "Senhora"
+  - "Senhorita"
   # Academic and professional titles
   - "Dr"
   - "Doctor"
