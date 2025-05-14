@@ -1,4 +1,6 @@
 # Each prefix will match either as-is, or with a trailing dot (Mr, Mr.)
+# Source for certain English and Welth titles recognised for the purposes of issuining driving licences:
+# https://www.whatdotheyknow.com/request/titles_on_driving_licence/response/1744309/attach/html/3/FOIR8909%20Annex.doc.html
 PERSON_NAME_PREFIXES:
   # Regular titles — English (en)
   - "Mr"
@@ -39,13 +41,14 @@ PERSON_NAME_PREFIXES:
   - "Senhor"
   - "Senhora"
   - "Senhorita"
-  # Academic and professional titles
+  # Academic and professional titles — English (en)
   - "Dr"
   - "Doctor"
   - "Prof"
   - "Prof. Dr"
   - "Professor Dr"
   - "Professor"
+  # Academic and professional titles — Italian (it)
   - "Dott"
   - "Dottore"
   - "Dott.ssa"
@@ -56,6 +59,10 @@ PERSON_NAME_PREFIXES:
   - "Dott.sr"
   - "Dott.sra"
   - "Dott.ssa"
+  # Academic and professional titles — Welsh (cy)
+  - "Yr Athro" # Professor
+  - "Y Doctor" # Doctor
+  - "Y Meddy G" # Doctor
   # Presidents
   - "President"
   - "Präsident"
