@@ -488,7 +488,17 @@ org_symbols:
     - investimento
     - investeringen
     - investimentos
+    - inversión
+    - investissement
+    - investitorii
+    - 투자
     - 投資
+    - השקעה
+    - investasi
+    - investice
+    - investicija
+    - invesment
+    - invesmenti
   dev:
     - development
     - dev
@@ -502,6 +512,7 @@ org_symbols:
     - ανάπτυξη
     - развитие
     - развития
+    - развитию
     - ανάπτυξης
   enterprise:
     - enterprise
@@ -517,6 +528,13 @@ org_symbols:
     - предприятия
     - предпрятие
     - предприятий
+    - empresa
+    - impresa
+    - предприемство
+    - підприємство
+    - 기업
+    - प्रतिष्ठान
+    - yritys
   professional:
     - professional
     - professionel
@@ -533,6 +551,21 @@ org_symbols:
     - operation
     - operating
     - операциях
+    - операции
+    - operaciones
+    - operações
+    - opérations
+    - operativa
+    - operazioni
+    - operasional
+    - operativní
+    - operationeel
+    - operasyonel
+    - operacyjne
+    - オペレーション
+    - 运营
+  kombinat:
+    - комбинат
   bank:
     - bank
     - banking
@@ -546,11 +579,13 @@ org_symbols:
     - savings bank
     - savings and loan association
     - handelsbank
+    - Kreditanstalt
     - handelsbanken
     - банка
     - банк
     - инвестиционный банк
     - коммерческий банк
+    - муниципально-коммерческий банк
     - банківська
     - банківська установа
     - τράπεζα
@@ -577,6 +612,11 @@ org_symbols:
     - kommercial
     - εμπορική
     - 商業
+    - commerciell
+    - קומרציאלי
+    - 상업적
+    - kommersiel
+    - 商业的
   offshore:
     - offshore
     - ofshor
