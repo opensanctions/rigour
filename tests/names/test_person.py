@@ -17,3 +17,9 @@ def test_load_person_names_mapping():
 
     # filtered out by the wikidata crawler:
     assert "a" not in mapping
+
+    def banananorm(name: str) -> str:
+        return "banana"
+
+    mapping = load_person_names_mapping(normalizer=banananorm)
+    assert len(mapping) == 1
