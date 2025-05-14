@@ -147,9 +147,13 @@ PERSON_NAME_PREFIXES:
   - "Seigneur"
   - "Sr"
   - "Sir"
-  # Religious titles
+  # Religious titles  — English (en)
   - "The Reverend"
   - "Reverend"
+  # Religious titles  — Welsh (cy)
+  - "Parchedig" # Reverend
+  - "Parch" # Rev
+  - "Yr Esgob" # Bishop
   # The definite article
   - "The"
   # Titles based around the word "honour" or "honor"
@@ -191,13 +195,13 @@ PERSON_NAME_PREFIXES:
   - "Her Excellency"
   - "Excellency"
 ORG_NAME_PREFIXES:
-  - The
-  - Le
-  - La
+  - "The"
+  - "Le"
+  - "La"
 STOPWORDS:
   - "de"
   - "of"
   - "and"
-  - for
-  - для # for
+  - "for"
+  - "для" # for
   - "&"
