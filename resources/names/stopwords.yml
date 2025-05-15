@@ -15,6 +15,10 @@ PERSON_NAME_PREFIXES:
   - "Ms"
   - "Mx"
   - "Mixter"
+   # Regular titles — Dutch (nl)
+  - "de heer" # Mister
+  - "mevrouw" # Misses
+  - "mevr" # Mrs
    # Regular titles — French (fr)
   - "Madam"
   - "Madame"
