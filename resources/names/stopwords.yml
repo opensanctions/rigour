@@ -33,11 +33,12 @@ PERSON_NAME_PREFIXES:
   - "Senor"
   - "Senora"
   - "Sr"
-  - "Srª"
   - "Sra"
+  - "Srª"
   - "Señorita"
   - "Senorita"
   - "Srta"
+  - "Srtª"
   # Regular titles — Portugese (pt)
   - "Senhor"
   - "Senhora"
