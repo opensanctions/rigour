@@ -61,6 +61,9 @@ PERSON_NAME_PREFIXES:
   - "Dott.sr"
   - "Dott.sra"
   - "Dott.ssa"
+  # Academic and professional titles — Spanish (es)
+  - "Profesor" # Professor (masculine)
+  - "Profesora" # Professor (feminine)
   # Academic and professional titles — Welsh (cy)
   - "Yr Athro" # Professor
   - "Y Doctor" # Doctor
@@ -154,6 +157,9 @@ PERSON_NAME_PREFIXES:
   # Religious titles — English (en)
   - "The Reverend"
   - "Reverend"
+  # Religious titles — Spanish (es)
+  - "Reverendo" # Reverend (masculine)
+  - "Reverenda" # Reverend (feminine)
   # Religious titles — Welsh (cy)
   - "Parchedig" # Reverend
   - "Parch" # Rev
