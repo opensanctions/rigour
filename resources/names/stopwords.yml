@@ -174,9 +174,25 @@ ORG_NAME_PREFIXES:
   - Le
   - La
 STOPWORDS:
+# Conjunctions/joining words
   - "de"
   - "of"
   - "and"
   - for
   - для # for
   - "&"
+# Terms used to indicate aliases/alternative names including old names
+- "also known as"
+- "a.k.a"
+- "a.k.a."
+- "A.K.A"
+- "a/k/a"
+- "A/K/A"
+- "earlier known as"
+- "formerly known as"
+- "f/k/a"
+- "F/K/A"
+- "formerly"
+- "presently known as"
+- "previously known as"
+- "trading as"
