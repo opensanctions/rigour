@@ -33,7 +33,7 @@ class NamePart(object):
         return ascii_text(self.form)
 
     @property
-    def maybe_ascii(self) -> Optional[str]:
+    def maybe_ascii(self) -> str:
         if not self.is_modern_alphabet:
             return self.form
         if self.ascii is None:
