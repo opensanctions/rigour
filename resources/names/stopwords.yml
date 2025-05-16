@@ -180,3 +180,5 @@ STOPWORDS:
   - for
   - для # for
   - "&"
+  - "(sic)"
+  - "[sic]"
