@@ -1,6 +1,8 @@
 # Each prefix will match either as-is, or with a trailing dot (Mr, Mr.)
+# Source for certain English and Welth titles recognised for the purposes of issuining driving licences:
+# https://www.whatdotheyknow.com/request/titles_on_driving_licence/response/1744309/attach/html/3/FOIR8909%20Annex.doc.html
 PERSON_NAME_PREFIXES:
-  # Regular titles
+  # Regular titles — English (en)
   - "Mr"
   - "Mister"
   - "Master"
@@ -13,25 +15,46 @@ PERSON_NAME_PREFIXES:
   - "Ms"
   - "Mx"
   - "Mixter"
+   # Regular titles — Dutch (nl)
+  - "de heer" # Mister
+  - "mevrouw" # Misses
+  - "mevr" # Mrs
+   # Regular titles — French (fr)
   - "Madam"
   - "Madame"
   - "Mme"
   - "Mmme"
   - "Monsieur"
+  # Regular titles — German (de)
   - "Fräulein"
   - "Frau"
   - "Fr"
-  - "Senor"
-  - "Senorita"
   - "Herr"
   - "Hr"
-  # Academic and professional titles
+  # Regular titles — Spanish (es)
+  - "Señor"
+  - "Señora"
+  - "Senor"
+  - "Senora"
+  - "Sr"
+  - "Sra"
+  - "Srª"
+  - "Señorita"
+  - "Senorita"
+  - "Srta"
+  - "Srtª"
+  # Regular titles — Portugese (pt)
+  - "Senhor"
+  - "Senhora"
+  - "Senhorita"
+  # Academic and professional titles — English (en)
   - "Dr"
   - "Doctor"
   - "Prof"
   - "Prof. Dr"
   - "Professor Dr"
   - "Professor"
+  # Academic and professional titles — Italian (it)
   - "Dott"
   - "Dottore"
   - "Dott.ssa"
@@ -42,13 +65,20 @@ PERSON_NAME_PREFIXES:
   - "Dott.sr"
   - "Dott.sra"
   - "Dott.ssa"
+  # Academic and professional titles — Spanish (es)
+  - "Profesor" # Professor (masculine)
+  - "Profesora" # Professor (feminine)
+  # Academic and professional titles — Welsh (cy)
+  - "Yr Athro" # Professor
+  - "Y Doctor" # Doctor
+  - "Y Meddyg" # Doctor
   # Presidents
   - "President"
   - "Präsident"
-  # Diplomatic titles
+  # Diplomatic titles — English (en)
   - "Ambassador"
   - "Amb"
-  # Military titles
+  # Military titles — English (en)
   - "Field Marshal"
   - "Admiral"
   - "General"
@@ -66,7 +96,7 @@ PERSON_NAME_PREFIXES:
   - "Rear Admiral"
   - "Private"
   - "Pvt."
-  # Corporate offices and executive job titles
+  # Corporate offices and executive job titles — English (en)
   - "Chair"
   - "Chairman"
   - "Chairwoman"
@@ -79,7 +109,7 @@ PERSON_NAME_PREFIXES:
   - "Ex-Managing Director"
   - "Company Secretary"
   - "Ex-Company Secretary"
-  # Royal titles
+  # Royal titles — English (en)
   - "Emperor"
   - "Empress"
   - "King"
@@ -107,7 +137,7 @@ PERSON_NAME_PREFIXES:
   - "HRH"
   - "His Higness"
   - "Her Higness"
-  # Aristocratic titles
+  # Aristocratic titles — English (en)
   - "Lord"
   - "Lady"
   - "Laird"
@@ -123,12 +153,21 @@ PERSON_NAME_PREFIXES:
   # "Earl" is also a male given name and so not currently included here
   - "Marchioness"
   - "Marquess"
-  - "Seigneur"
-  - "Sr"
   - "Sir"
-  # Religious titles
+  # Aristocratic titles — French (fr)
+  - "Seigneur"
+  # Aristocratic titles — Indonesian (id)
+  - "Raja Muda" # Viceroy
+  # Religious titles — English (en)
   - "The Reverend"
   - "Reverend"
+  # Religious titles — Spanish (es)
+  - "Reverendo" # Reverend (masculine)
+  - "Reverenda" # Reverend (feminine)
+  # Religious titles — Welsh (cy)
+  - "Parchedig" # Reverend
+  - "Parch" # Rev
+  - "Yr Esgob" # Bishop
   # The definite article
   - "The"
   # Titles based around the word "honour" or "honor"
@@ -160,7 +199,7 @@ PERSON_NAME_PREFIXES:
   - "The Much Honored"
   - "The Much Hon"
   - "The Much Hon."
-    # Other/unsorted
+    # Other/unsorted titles — English (en)
   - "The Most Noble"
   - "His Grace"
   - "Her Grace"
@@ -170,13 +209,13 @@ PERSON_NAME_PREFIXES:
   - "Her Excellency"
   - "Excellency"
 ORG_NAME_PREFIXES:
-  - The
-  - Le
-  - La
+  - "The"
+  - "Le"
+  - "La"
 STOPWORDS:
   - "de"
   - "of"
   - "and"
-  - for
-  - для # for
+  - "for"
+  - "для" # for
   - "&"
