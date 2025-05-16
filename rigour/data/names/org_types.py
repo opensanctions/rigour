@@ -406,6 +406,8 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "otwarta spółka akcyjna",
             "Open Joint-Stock Company",
             "openbare aandelenvennootschap",
+            "vennootschap op aandelen",
+            "Openbare vennootschap op aandelen",
             "sociedad limitada por acciones abierta",
             "sociedade por ações aberta",
             "société par actions ouverte",
@@ -699,7 +701,14 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {
         "display": "Inc",
         "compare": "LLC",
-        "aliases": ["incorp", "incorporated", "Incorporated", "incorporée", "Inc."],
+        "aliases": [
+            "incorp",
+            "incorporated",
+            "Incorporated",
+            "incorporation",
+            "incorporée",
+            "Inc.",
+        ],
     },
     {
         "display": "IS",
@@ -766,6 +775,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
         "aliases": [
             "kft",
             "korlatolt felelossegu tarsasag",
+            "Korlátolt Felelősségű Társaság",
             "korlátolt felelősségü társaság, organizační složka",
             "korlátolt felelősségű társaság",
         ],
@@ -807,6 +817,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "Limited Liability Company",
             "limited liability company",
             "LIMITED LIABILITY COMPANY",
+            "FOREIGN LIMITED LIABILITY COMPANY",
             "L.L.C",
             "L.L.C.",
         ],
@@ -1211,6 +1222,23 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "socitate cu responsabilitate limitata",
         ],
     },
+    {"display": "Rt.", "compare": "JSC", "aliases": ["részvénytársaság"]},
+    {
+        "display": "Nyrt.",
+        "compare": "JSC",
+        "aliases": [
+            "nyilvánosan működő részvénytársaság",
+            "Nyilvánosan működő részvénytársaság",
+        ],
+    },
+    {
+        "display": "Zrt.",
+        "compare": "JSC",
+        "aliases": ["Zártkörűen Működő Részvénytársaság"],
+    },
+    {"display": "Bt.", "compare": "LP", "aliases": ["Betéti Társaság"]},
+    {"display": "Kkt.", "compare": "GP", "aliases": ["Közkereseti Társaság"]},
+    {"compare": "SP", "aliases": ["Egyéni Vállalkozó", "Egyéni Cég"]},
     {
         "display": "Ltda",
         "compare": "LLC",
@@ -2353,6 +2381,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "общество с ограниченной ответственностью частная охранная организация",
             "общество с ограниченной ответственностью частное охранное предприятие",
             "ооо",
+            "Иностранное общество с ограниченной ответственностью",
         ],
     },
 ]
