@@ -3,6 +3,7 @@ from stdnum import isin, iban, figi, bic, lei
 from stdnum.ru import inn
 from stdnum.us import ssn
 from stdnum.br import cpf, cnpj
+from stdnum.cn import uscc
 
 from rigour.ids.common import IdentifierFormat
 from stdnum.exceptions import ValidationError
@@ -98,6 +99,7 @@ class INN(IdentifierFormat):
     """Russian tax identification number."""
 
     TITLE = "INN"
+    STRONG: bool = True
 
     @classmethod
     def is_valid(cls, value: str) -> bool:
@@ -192,3 +194,25 @@ class CNPJ(IdentifierFormat):
     @classmethod
     def format(cls, value: str) -> str:
         return cnpj.format(value)
+
+
+class USCC(IdentifierFormat):
+    """Unified Social Credit Identifier, a Chinese national identifier"""
+
+    TITLE = "USCC"
+    STRONG: bool = True
+
+    @classmethod
+    def is_valid(cls, value: str) -> bool:
+        return uscc.is_valid(value)
+
+    @classmethod
+    def normalize(cls, value: str) -> Optional[str]:
+        try:
+            return uscc.compact(uscc.validate(value))
+        except ValidationError:
+            return None
+
+    @classmethod
+    def format(cls, value: str) -> str:
+        return uscc.format(value)
