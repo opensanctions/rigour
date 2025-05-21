@@ -341,6 +341,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "商",
         "商业",
     ],
+    "branch": ["branch", "branch of", "filiale", "zweigstelle", "филиал"],
     "concern": [
         "concern",
         "consorcio",
@@ -1168,6 +1169,10 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "govmnt",
         "regierung",
         "regierung von",
+        "staat",
+        "staatlich",
+        "staatliche",
+        "staatliches",
         "state",
         "state of",
         "κυβερνηση",

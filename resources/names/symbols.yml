@@ -175,6 +175,12 @@ org_symbols:
     - Μπίζνες
     - 商业
     - 商
+  branch:
+    - branch
+    - branch of
+    - филиал
+    - filiale
+    - zweigstelle
   concern:
     - kontsern
     - concern
@@ -1020,6 +1026,10 @@ org_symbols:
     - governmental
     - regierung
     - regierung von
+    - staat
+    - staatlich
+    - staatliche
+    - staatliches
     - 政府
     - 辖
     - state

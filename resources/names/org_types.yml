@@ -394,9 +394,10 @@ types:
     aliases:
       - aksiyadorlik jamiyati
       - акциядорлик жамияти
-  - display: a.s.
+  - display: a.m.b.a.
     compare: LLC
     aliases:
+      - amba
       - andelsselskab med begrænset ansvar
   - display: anl
     compare: COOP

@@ -360,9 +360,9 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {"display": "ae", "aliases": ["anónimi etería", "ανώνυμη εταιρεία"]},
     {"compare": "JSC", "aliases": ["aksiyadorlik jamiyati", "акциядорлик жамияти"]},
     {
-        "display": "a.s.",
+        "display": "a.m.b.a.",
         "compare": "LLC",
-        "aliases": ["andelsselskab med begrænset ansvar"],
+        "aliases": ["amba", "andelsselskab med begrænset ansvar"],
     },
     {
         "display": "anl",
