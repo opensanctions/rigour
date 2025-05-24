@@ -32,6 +32,7 @@ PERSON_NAME_PREFIXES: List[str] = [
     "Prof. Dr",
     "Professor Dr",
     "Professor",
+    "Associate Professor",
     "Dott",
     "Dottore",
     "Dott.ssa",
@@ -1346,7 +1347,7 @@ PERSON_SYMBOLS: Dict[str, List[str]] = {
 }
 
 ORDINALS: Dict[str, List[str]] = {
-    "first": [
+    "1st": [
         "1-e",
         "1-й",
         "1-я",
@@ -1372,10 +1373,11 @@ ORDINALS: Dict[str, List[str]] = {
         "No. 1",
         "No.1",
         "No1",
+        "One",
         "№ 1",
         "№1",
     ],
-    "second": [
+    "2nd": [
         "2-e",
         "2-й",
         "2-я",
@@ -1398,12 +1400,13 @@ ORDINALS: Dict[str, List[str]] = {
         "No.2",
         "No2",
         "Second",
+        "Two",
         "Zweite",
         "Zweiter",
         "№ 2",
         "№2",
     ],
-    "third": [
+    "3rd": [
         "3-e",
         "3-й",
         "3-я",
@@ -1428,10 +1431,11 @@ ORDINALS: Dict[str, List[str]] = {
         "No.3",
         "No3",
         "Third",
+        "Three",
         "№ 3",
         "№3",
     ],
-    "fourth": [
+    "4th": [
         "4-e",
         "4-й",
         "4-я",
@@ -1447,6 +1451,7 @@ ORDINALS: Dict[str, List[str]] = {
         "4º",
         "4º.",
         "4ú",
+        "Four",
         "Fourth",
         "IIIIth",
         "IV",
@@ -1460,7 +1465,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 4",
         "№4",
     ],
-    "fifth": [
+    "5th": [
         "5-e",
         "5-й",
         "5-я",
@@ -1477,6 +1482,7 @@ ORDINALS: Dict[str, List[str]] = {
         "5º.",
         "5ú",
         "Fifth",
+        "Five",
         "Fünfte",
         "Fünfter",
         "No 5",
@@ -1488,7 +1494,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 5",
         "№5",
     ],
-    "sixth": [
+    "6th": [
         "6-e",
         "6-й",
         "6-я",
@@ -1510,13 +1516,14 @@ ORDINALS: Dict[str, List[str]] = {
         "No6",
         "Sechste",
         "Sechster",
+        "Six",
         "Sixth",
         "VI",
         "VIth",
         "№ 6",
         "№6",
     ],
-    "seventh": [
+    "7th": [
         "7-e",
         "7-й",
         "7-я",
@@ -1536,6 +1543,7 @@ ORDINALS: Dict[str, List[str]] = {
         "No. 7",
         "No.7",
         "No7",
+        "Seven",
         "Seventh",
         "Siebte",
         "Siebter",
@@ -1544,7 +1552,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 7",
         "№7",
     ],
-    "eighth": [
+    "8th": [
         "8-e",
         "8-й",
         "8-я",
@@ -1562,6 +1570,7 @@ ORDINALS: Dict[str, List[str]] = {
         "8ú",
         "Achte",
         "Achter",
+        "Eight",
         "Eighth",
         "No 8",
         "No. 8",
@@ -1572,7 +1581,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 8",
         "№8",
     ],
-    "ninth": [
+    "9th": [
         "9-e",
         "9-й",
         "9-я",
@@ -1592,6 +1601,7 @@ ORDINALS: Dict[str, List[str]] = {
         "IXth",
         "Neunte",
         "Neunter",
+        "Nine",
         "Ninth",
         "No 9",
         "No. 9",
@@ -1601,7 +1611,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 9",
         "№9",
     ],
-    "tenth": [
+    "10th": [
         "10-e",
         "10-й",
         "10-я",
@@ -1621,6 +1631,7 @@ ORDINALS: Dict[str, List[str]] = {
         "No. 10",
         "No.10",
         "No10",
+        "Ten",
         "Tenth",
         "Xth",
         "Zehnte",
@@ -1628,7 +1639,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 10",
         "№10",
     ],
-    "eleventh": [
+    "11th": [
         "11-e",
         "11-й",
         "11-я",
@@ -1644,6 +1655,7 @@ ORDINALS: Dict[str, List[str]] = {
         "11º",
         "11º.",
         "11ú",
+        "Eleven",
         "Eleventh",
         "Elfte",
         "Elfter",
@@ -1655,7 +1667,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 11",
         "№11",
     ],
-    "twelfth": [
+    "12th": [
         "12-e",
         "12-й",
         "12-я",
@@ -1676,13 +1688,14 @@ ORDINALS: Dict[str, List[str]] = {
         "No.12",
         "No12",
         "Twelfth",
+        "Twelve",
         "XIIth",
         "Zwölfte",
         "Zwölfter",
         "№ 12",
         "№12",
     ],
-    "thirteenth": [
+    "13th": [
         "13-e",
         "13-й",
         "13-я",
@@ -1704,12 +1717,13 @@ ORDINALS: Dict[str, List[str]] = {
         "No. 13",
         "No.13",
         "No13",
+        "Thirteen",
         "Thirteenth",
         "XIIIth",
         "№ 13",
         "№13",
     ],
-    "fourteenth": [
+    "14th": [
         "14-e",
         "14-й",
         "14-я",
@@ -1725,6 +1739,7 @@ ORDINALS: Dict[str, List[str]] = {
         "14º",
         "14º.",
         "14ú",
+        "Fourteen",
         "Fourteenth",
         "No 14",
         "No. 14",
@@ -1737,7 +1752,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 14",
         "№14",
     ],
-    "fifteenth": [
+    "15th": [
         "15-e",
         "15-й",
         "15-я",
@@ -1753,6 +1768,7 @@ ORDINALS: Dict[str, List[str]] = {
         "15º",
         "15º.",
         "15ú",
+        "Fifteen",
         "Fifteenth",
         "Fünfzehnte",
         "Fünfzehnter",
@@ -1764,7 +1780,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 15",
         "№15",
     ],
-    "sixteenth": [
+    "16th": [
         "16-e",
         "16-й",
         "16-я",
@@ -1786,12 +1802,13 @@ ORDINALS: Dict[str, List[str]] = {
         "No16",
         "Sechzehnte",
         "Sechzehnter",
+        "Sixteen",
         "Sixteenth",
         "XVIth",
         "№ 16",
         "№16",
     ],
-    "seventeenth": [
+    "17th": [
         "17-e",
         "17-й",
         "17-я",
@@ -1811,6 +1828,7 @@ ORDINALS: Dict[str, List[str]] = {
         "No. 17",
         "No.17",
         "No17",
+        "Seventeen",
         "Seventeenth",
         "Siebzehnte",
         "Siebzehnter",
@@ -1818,7 +1836,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 17",
         "№17",
     ],
-    "eighteenth": [
+    "18th": [
         "18-e",
         "18-й",
         "18-я",
@@ -1836,6 +1854,7 @@ ORDINALS: Dict[str, List[str]] = {
         "18ú",
         "Achtzehnte",
         "Achtzehnter",
+        "Eighteen",
         "Eighteenth",
         "No 18",
         "No. 18",
@@ -1845,7 +1864,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 18",
         "№18",
     ],
-    "nineteenth": [
+    "19th": [
         "19-e",
         "19-й",
         "19-я",
@@ -1863,6 +1882,7 @@ ORDINALS: Dict[str, List[str]] = {
         "19ú",
         "Neunzehnte",
         "Neunzehnter",
+        "Nineteen",
         "Nineteenth",
         "No 19",
         "No. 19",
@@ -1873,7 +1893,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 19",
         "№19",
     ],
-    "twentieth": [
+    "20th": [
         "20-e",
         "20-й",
         "20-я",
@@ -1894,13 +1914,14 @@ ORDINALS: Dict[str, List[str]] = {
         "No.20",
         "No20",
         "Twentieth",
+        "Twenty",
         "XXth",
         "Zwanzigste",
         "Zwanzigster",
         "№ 20",
         "№20",
     ],
-    "twentyfirst": [
+    "21st": [
         "21-e",
         "21-й",
         "21-я",
@@ -1923,11 +1944,14 @@ ORDINALS: Dict[str, List[str]] = {
         "No.21",
         "No21",
         "Twenty-first",
+        "Twenty-one",
+        "Twentyfirst",
+        "Twentyone",
         "XXIst",
         "№ 21",
         "№21",
     ],
-    "twentysecond": [
+    "22nd": [
         "22-e",
         "22-й",
         "22-я",
@@ -1948,13 +1972,16 @@ ORDINALS: Dict[str, List[str]] = {
         "No.22",
         "No22",
         "Twenty-second",
+        "Twenty-two",
+        "Twentysecond",
+        "Twentytwo",
         "XXIInd",
         "Zweiundzwanzigste",
         "Zweiundzwanzigster",
         "№ 22",
         "№22",
     ],
-    "twentythird": [
+    "23rd": [
         "23-e",
         "23-й",
         "23-я",
@@ -1977,11 +2004,14 @@ ORDINALS: Dict[str, List[str]] = {
         "No.23",
         "No23",
         "Twenty-third",
+        "Twenty-three",
+        "Twentythird",
+        "Twentythree",
         "XXIIIrd",
         "№ 23",
         "№23",
     ],
-    "twentyfourth": [
+    "24th": [
         "24-e",
         "24-й",
         "24-я",
@@ -2001,13 +2031,18 @@ ORDINALS: Dict[str, List[str]] = {
         "No. 24",
         "No.24",
         "No24",
+        "Twenty-four",
         "Twenty-fourth",
+        "Twentyfour",
+        "Twentyfourth",
+        "Vierundzwanzigste",
+        "Vierundzwanzigster",
         "XXIIIIth",
         "XXIVth",
         "№ 24",
         "№24",
     ],
-    "twentyfifth": [
+    "25th": [
         "25-e",
         "25-й",
         "25-я",
@@ -2028,11 +2063,14 @@ ORDINALS: Dict[str, List[str]] = {
         "No.25",
         "No25",
         "Twenty-fifth",
+        "Twenty-five",
+        "Twentyfifth",
+        "Twentyfive",
         "XXVth",
         "№ 25",
         "№25",
     ],
-    "twentysixth": [
+    "26th": [
         "26-e",
         "26-й",
         "26-я",
@@ -2052,12 +2090,15 @@ ORDINALS: Dict[str, List[str]] = {
         "No. 26",
         "No.26",
         "No26",
+        "Twenty-six",
         "Twenty-sixth",
+        "Twentysix",
+        "Twentysixth",
         "XXVIth",
         "№ 26",
         "№26",
     ],
-    "twentyseventh": [
+    "27th": [
         "27-e",
         "27-й",
         "27-я",
@@ -2077,12 +2118,14 @@ ORDINALS: Dict[str, List[str]] = {
         "No. 27",
         "No.27",
         "No27",
+        "Twenty-seven",
         "Twenty-seventh",
+        "Twentyseven",
         "XXVIIth",
         "№ 27",
         "№27",
     ],
-    "twentyeight": [
+    "28th": [
         "28-e",
         "28-й",
         "28-я",
@@ -2103,11 +2146,13 @@ ORDINALS: Dict[str, List[str]] = {
         "No.28",
         "No28",
         "Twenty-eight",
+        "Twenty-eighth",
+        "Twentyeight",
         "XXVIIIth",
         "№ 28",
         "№28",
     ],
-    "twentyninth": [
+    "29th": [
         "29-e",
         "29-й",
         "29-я",
@@ -2127,13 +2172,15 @@ ORDINALS: Dict[str, List[str]] = {
         "No. 29",
         "No.29",
         "No29",
+        "Twenty-nine",
         "Twenty-ninth",
+        "Twentynine",
         "XXIXth",
         "XXVIIIIth",
         "№ 29",
         "№29",
     ],
-    "thirtieth": [
+    "30th": [
         "30-e",
         "30-й",
         "30-я",
@@ -2156,11 +2203,12 @@ ORDINALS: Dict[str, List[str]] = {
         "No.30",
         "No30",
         "Thirtieth",
+        "Thirty",
         "XXXth",
         "№ 30",
         "№30",
     ],
-    "fourtieth": [
+    "40th": [
         "40-e",
         "40-й",
         "40-я",
@@ -2176,6 +2224,7 @@ ORDINALS: Dict[str, List[str]] = {
         "40º",
         "40ú",
         "Fortieth",
+        "Fourty",
         "No 40",
         "No. 40",
         "No.40",
@@ -2188,7 +2237,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 40",
         "№40",
     ],
-    "fiftieth": [
+    "50th": [
         "50-e",
         "50-й",
         "50-я",
@@ -2204,6 +2253,7 @@ ORDINALS: Dict[str, List[str]] = {
         "50º",
         "50ú",
         "Fiftieth",
+        "Fiftyth",
         "Fünfzigste",
         "Fünfzigster",
         "No 50",

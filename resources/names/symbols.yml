@@ -1251,8 +1251,9 @@ ordinals:
   # Also covers Roman Numerals e.g. VIIIth (for 8th).
   # Covers certain variants e.g. IIIIth as well as IVth for 4th.
   # First (1st)
-  first:
+  1st:
     - "First"
+    - "One"
     - "Erste"
     - "Erster"
     - "1st"
@@ -1281,8 +1282,9 @@ ordinals:
     - "Ist"
     - "I." # see if this backfires
   # Second (2nd)
-  second:
+  2nd:
     - "Second"
+    - "Two"
     - "Zweite"
     - "Zweiter"
     - "2nd"
@@ -1311,8 +1313,9 @@ ordinals:
     - "IInd"
     - "II" # see if this backfires
   # Third (3rd)
-  third:
+  3rd:
     - "Third"
+    - "Three"
     - "Dritte"
     - "Dritter"
     - "3rd"
@@ -1341,8 +1344,9 @@ ordinals:
     - "IIIrd"
     - "III" # see if this backfires
   # Fourth (4th)
-  fourth:
+  4th:
     - "Fourth"
+    - "Four"
     - "Vierte"
     - "Vierter"
     - "4th"
@@ -1371,8 +1375,9 @@ ordinals:
     - "IIIIth"
     - "IV"
   # Fifth (5th)
-  fifth:
+  5th:
     - "Fifth"
+    - "Five"
     - "Fünfte"
     - "Fünfter"
     - "5th"
@@ -1400,8 +1405,9 @@ ordinals:
     - "Vth"
     - "V." # see if this backfires
   # Sixth (6th)
-  sixth:
+  6th:
     - "Sixth"
+    - "Six"
     - "Sechste"
     - "Sechster"
     - "6th"
@@ -1429,8 +1435,9 @@ ordinals:
     - "VIth"
     - "VI"
   # Seventh (7th)
-  seventh:
+  7th:
     - "Seventh"
+    - "Seven"
     - "Siebte"
     - "Siebter"
     - "7th"
@@ -1458,8 +1465,9 @@ ordinals:
     - "VIIth"
     - "VII"
   # Eighth (8th)
-  eighth:
+  8th:
     - "Eighth"
+    - "Eight"
     - "Achte"
     - "Achter"
     - "8th"
@@ -1487,8 +1495,9 @@ ordinals:
     - "VIIIth"
     - "VIII"
   # Ninth (9th)
-  ninth:
+  9th:
     - "Ninth"
+    - "Nine"
     - "Neunte"
     - "Neunter"
     - "9th"
@@ -1517,8 +1526,9 @@ ordinals:
     - "VIIIIth"
     - "IX"
   # Tenth (10th)
-  tenth:
+  10th:
     - "Tenth"
+    - "Ten"
     - "Zehnte"
     - "Zehnter"
     - "10th"
@@ -1545,8 +1555,9 @@ ordinals:
     - "№ 10"
     - "Xth"
   # Eleventh (11th)
-  eleventh:
+  11th:
     - "Eleventh"
+    - "Eleven"
     - "Elfte"
     - "Elfter"
     - "11th"
@@ -1573,8 +1584,9 @@ ordinals:
     - "№ 11"
     - "XIth"
   # Twelfth (12th)
-  twelfth:
+  12th:
     - "Twelfth"
+    - "Twelve"
     - "Zwölfte"
     - "Zwölfter"
     - "12th"
@@ -1601,8 +1613,9 @@ ordinals:
     - "№ 12"
     - "XIIth"
   # Thirteenth (13th)
-  thirteenth:
+  13th:
     - "Thirteenth"
+    - "Thirteen"
     - "Dreizehnte"
     - "Dreizehnter"
     - "13th"
@@ -1629,8 +1642,9 @@ ordinals:
     - "№ 13"
     - "XIIIth"
   # Fourteenth (14th)
-  fourteenth:
+  14th:
     - "Fourteenth"
+    - "Fourteen"
     - "Vierzehnte"
     - "Vierzehnter"
     - "14th"
@@ -1658,8 +1672,9 @@ ordinals:
     - "XIVth"
     - "XIIIIth"
   # Fifteenth (15th)
-  fifteenth:
+  15th:
     - "Fifteenth"
+    - "Fifteen"
     - "Fünfzehnte"
     - "Fünfzehnter"
     - "15th"
@@ -1686,8 +1701,9 @@ ordinals:
     - "№ 15"
     - "XVth"
   # Sixteenth (16th)
-  sixteenth:
+  16th:
     - "Sixteenth"
+    - "Sixteen"
     - "Sechzehnte"
     - "Sechzehnter"
     - "16th"
@@ -1714,8 +1730,9 @@ ordinals:
     - "№ 16"
     - "XVIth"
   # Seventeenth (17th)
-  seventeenth:
+  17th:
     - "Seventeenth"
+    - "Seventeen"
     - "Siebzehnte"
     - "Siebzehnter"
     - "17th"
@@ -1742,8 +1759,9 @@ ordinals:
     - "№ 17"
     - "XVIIth"
   # Eighteenth (18th)
-  eighteenth:
+  18th:
     - "Eighteenth"
+    - "Eighteen"
     - "Achtzehnte"
     - "Achtzehnter"
     - "18th"
@@ -1770,8 +1788,9 @@ ordinals:
     - "№ 18"
     - "XVIIIth"
   # Nineteenth (19th)
-  nineteenth:
+  19th:
     - "Nineteenth"
+    - "Nineteen"
     - "Neunzehnte"
     - "Neunzehnter"
     - "19th"
@@ -1799,8 +1818,9 @@ ordinals:
     - "XIXth"
     - "XVIIIIth"
   # Twentieth (20th)
-  twentieth:
+  20th:
     - "Twentieth"
+    - "Twenty"
     - "Zwanzigste"
     - "Zwanzigster"
     - "20th"
@@ -1827,8 +1847,11 @@ ordinals:
     - "№ 20"
     - "XXth"
   # Twenty-first (21st)
-  twentyfirst:
+  21st:
     - "Twenty-first"
+    - "Twenty-one"
+    - "Twentyone"
+    - "Twentyfirst"
     - "Einundzwanzigste"
     - "Einundzwanzigster"
     - "21st"
@@ -1855,8 +1878,11 @@ ordinals:
     - "№ 21"
     - "XXIst"
   # Twenty-second (22nd)
-  twentysecond:
+  22nd:
     - "Twenty-second"
+    - "Twenty-two"
+    - "Twentytwo"
+    - "Twentysecond"
     - "Zweiundzwanzigste"
     - "Zweiundzwanzigster"
     - "22nd"
@@ -1883,8 +1909,11 @@ ordinals:
     - "№ 22"
     - "XXIInd"
   # Twenty-third (23rd)
-  twentythird:
+  23rd:
     - "Twenty-third"
+    - "Twenty-three"
+    - "Twentythird"
+    - "Twentythree"
     - "Dreiundzwanzigste"
     - "Dreiundzwanzigster"
     - "23rd"
@@ -1911,8 +1940,13 @@ ordinals:
     - "№ 23"
     - "XXIIIrd"
   # Twenty-fourth (24th)
-  twentyfourth:
+  24th:
     - "Twenty-fourth"
+    - "Twenty-four"
+    - "Twentyfourth"
+    - "Twentyfour"
+    - "Vierundzwanzigste"
+    - "Vierundzwanzigster"
     - "24th"
     - "24-й"
     - "24-я"
@@ -1938,8 +1972,11 @@ ordinals:
     - "XXIVth"
     - "XXIIIIth"
   # Twenty-fifth (25th)
-  twentyfifth:
+  25th:
     - "Twenty-fifth"
+    - "Twenty-five"
+    - "Twentyfive"
+    - "Twentyfifth"
     - "25th"
     - "25-й"
     - "25-я"
@@ -1964,8 +2001,11 @@ ordinals:
     - "№ 25"
     - "XXVth"
   # Twenty-sixth (26th)
-  twentysixth:
+  26th:
     - "Twenty-sixth"
+    - "Twenty-six"
+    - "Twentysixth"
+    - "Twentysix"
     - "26th"
     - "26-й"
     - "26-я"
@@ -1990,8 +2030,10 @@ ordinals:
     - "№ 26"
     - "XXVIth"
   # Twenty-seventh (27th)
-  twentyseventh:
+  27th:
     - "Twenty-seventh"
+    - "Twenty-seven"
+    - "Twentyseven"
     - "27th"
     - "27-й"
     - "27-я"
@@ -2016,8 +2058,10 @@ ordinals:
     - "№ 27"
     - "XXVIIth"
   # Twenty-eight (28th)
-  twentyeight:
+  28th:
     - "Twenty-eight"
+    - "Twenty-eighth"
+    - "Twentyeight"
     - "28th"
     - "28-й"
     - "28-я"
@@ -2042,8 +2086,10 @@ ordinals:
     - "№ 28"
     - "XXVIIIth"
   # Twenty-ninth (29th)
-  twentyninth:
+  29th:
     - "Twenty-ninth"
+    - "Twenty-nine"
+    - "Twentynine"
     - "29th"
     - "29-й"
     - "29-я"
@@ -2069,8 +2115,9 @@ ordinals:
     - "XXIXth"
     - "XXVIIIIth"
   # Thirtieth (30th)
-  thirtieth:
+  30th:
     - "Thirtieth"
+    - "Thirty"
     - "Dreißigste"
     - "Dreißigster"
     - "30th"
@@ -2096,8 +2143,9 @@ ordinals:
     - "№ 30"
     - "30º."
     - "XXXth"
-  fourtieth:
+  40th:
     - "Fortieth"
+    - "Fourty"
     - "Vierzigste"
     - "Vierzigster"
     - "40th"
@@ -2123,8 +2171,9 @@ ordinals:
     - "XXXXth"
     - "XXXX"
     - "XLth"
-  fiftieth:
+  50th:
     - "Fiftieth"
+    - "Fiftyth"
     - "Fünfzigste"
     - "Fünfzigster"
     - "50th"
