@@ -1,4 +1,4 @@
-from rigour.addresses.format import format_address, format_address_line
+from rigour.addresses.format import format_address, format_address_line, _load_formats
 
 
 def test_format_address():
@@ -19,7 +19,7 @@ def test_format_address():
         "city": "Birmingham",
         "postcode": "B15 1DT",
     }
-    expect = "160 Broad St\nBirmingham B15 1DT"
+    expect = "160 Broad St\nBirmingham\nB15 1DT"
     assert format_address(data, country="GB") == expect
 
     data = {
@@ -28,9 +28,34 @@ def test_format_address():
         "city": "London",
         "postcode": "SW1Y 5HX",
     }
-    expect = "Marlborough House\nPall Mall\nLondon SW1Y 5HX"
+    expect = "Marlborough House\nPall Mall\nLondon\nSW1Y 5HX"
     assert format_address(data, country="GB") == expect
 
+    data = {
+        "suburb": "Beverley",
+        "city": "Kingston",
+        "state": "Ontario",
+    }
+    expect = "Beverley\nKingston, Ontario"
+    assert format_address(data, country="CA") == expect
+
+    data = {
+        "road": "Beverley Rd",
+        "city": "Kingston",
+        "state": "Ontario",
+    }
+    expect = "Beverley Rd\nKingston, Ontario"
+    assert format_address(data, country="CA") == expect
+
+    data = {
+        "suburb": "Beverley",
+        "road": "Beverley Rd",
+        "house_number": "10",
+        "city": "Kingston",
+        "state": "Ontario",
+    }
+    expect = "10 Beverley Rd\nKingston, Ontario"
+    assert format_address(data, country="CA") == expect
 
 def test_format_address_line():
     addr = {
@@ -66,3 +91,31 @@ def test_format_address_line():
     addr = {"road": "Main Street", "house_number": "16", "city": "Guerntown"}
     expect = "16 Main Street, Guerntown, Guernsey, Channel Islands"
     assert format_address_line(addr, country="GG") == expect
+
+
+def test_all_formats_valid():
+    fields = {
+        "building": "Embassy of the Federal Republic of Germany",
+        "city": "Luanda",
+        "country": "Angola",
+        "country_code": "ao",
+        "house_number": "120",
+        "neighbourhood": "Mutamba",
+        "road": "Avenida 4 de Fevereiro",
+        "state": "Luanda",
+        "postcode": "0000",
+        "archipelago": "São Tomé and Príncipe",
+        "suburb": "Mutamba",
+    }
+
+    formats = _load_formats()
+    for country in formats.keys():
+        try:
+            result = format_address(fields, country=country)
+            assert result is not None and len(result) > 0, (
+                f"Formatting failed for country {country} with fields: {fields}"
+            )
+        except Exception as e:
+            raise RuntimeError(
+                f"Failed to format address for country {country}: {e}"
+            ) from e
