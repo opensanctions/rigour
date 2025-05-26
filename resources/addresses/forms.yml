@@ -40,6 +40,13 @@ forms:
     - буд
     - зд
     - здание
+    - строение
+  zone:
+    - zone
+    - зона
+  area:
+    - area
+    - район
   ed:
     - edificio
     - edifice
@@ -50,6 +57,12 @@ forms:
     - national
   fed:
     - federal
+  alley:
+    - alley
+    - аллея
+    - проезд
+    - проїзд
+    - proezd
   int:
     - international
   sec:
@@ -66,10 +79,12 @@ forms:
     - street
     - strada
     - str
+    - rue
     - стр
   pr:
     - Pr-kt
     - Prospekt
+    - prospekt
     - просп
     - проспект
   ul:
@@ -134,6 +149,7 @@ forms:
     - counties
   prov:
     - province
+    - пров
   sq:
     - square
   cnr:
@@ -172,6 +188,7 @@ forms:
     - republik
     - republique
     - repubblica
+    - республіки
   est:
     - estate
     - estates
@@ -213,6 +230,7 @@ forms:
     - story
     - storey
     - etazh
+    - поверх
     - этаж
   dept:
     - department
@@ -268,6 +286,7 @@ forms:
     - letter
     - liter
     - litera
+    - літер
     - лит
     - литера
     - літера
