@@ -68,6 +68,13 @@ def test_align_person_name_order():
     assert amt.query_sorted[1].form == "john"
     assert amt.query_extra[0].form == "richard"
 
+    query = make("Vladimir Vladimirovitch Putin")
+    result = make("Vladimir Putin")
+    amt = align_person_name_order(query, result)
+    assert len(amt.query_sorted) == 2
+    assert amt.query_sorted[0].form == "vladimir"
+    assert amt.query_extra[0].form == "vladimirovitch"
+
     # TODO:
     # Ali Al-Sabah vs Ali Alsabah
     # Ali Al-Sabah vs Alsabah, Ali
