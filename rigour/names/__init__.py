@@ -15,7 +15,7 @@ is used to represent individual parts of a name, such as the first name, middle 
 from rigour.names.name import Name
 from rigour.names.part import NamePart
 from rigour.names.tag import NamePartTag, NameTypeTag
-from rigour.names.pick import pick_name, pick_case
+from rigour.names.pick import pick_name, pick_case, reduce_names
 from rigour.names.check import is_name
 from rigour.names.tokenize import tokenize_name
 from rigour.names.person import remove_person_prefixes, load_person_names
@@ -27,6 +27,7 @@ from rigour.names.org_types import extract_org_types, remove_org_types
 __all__ = [
     "pick_name",
     "pick_case",
+    "reduce_names",
     "tokenize_name",
     "is_name",
     "Name",

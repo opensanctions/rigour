@@ -1,9 +1,13 @@
+import logging
 from itertools import combinations
 from collections import defaultdict
 from typing import Dict, Optional, List
 from normality import ascii_text
+from rigour.names.check import is_name
 from rigour.text.distance import levenshtein
 from rigour.text.scripts import is_latin_char, is_modern_alphabet_char
+
+log = logging.getLogger(__name__)
 
 
 def latin_share(text: str) -> float:
@@ -92,3 +96,32 @@ def pick_case(names: List[str]) -> Optional[str]:
             if name[i] != char:
                 difference[name] += 1
     return min(difference.items(), key=lambda x: x[1])[0]
+
+
+def reduce_names(names: List[str]) -> List[str]:
+    """Select a reduced set of names from a list of names. This is used to
+    prepare the set of names linked to a person, organization, or other entity
+    for publication.
+
+    Args:
+        names (List[str]): A list of names.
+
+    Returns:
+        List[str]: The reduced list of names.
+    """
+    if len(names) < 2:
+        return []
+    lower = defaultdict(list)
+    for name in names:
+        # Filter names that are not valid (e.g. empty or do not contain any letters)
+        if not is_name(name):
+            log.warning("Invalid name found: %r", name)
+            continue
+        lower[name.lower()].append(name)
+    reduced: List[str] = []
+    for group in lower.values():
+        name = pick_case(group)
+        if name is None:
+            continue
+        reduced.append(name)
+    return reduced
