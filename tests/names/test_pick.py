@@ -131,6 +131,13 @@ def test_reduce_names():
     assert len(reduced) == 1
     assert reduced[0] == "Vladimir Putin"
 
+    names = ["."]
+    reduced = reduce_names(names)
+    assert len(reduced) == 0, reduced
+
+    reduced = reduce_names([])
+    assert len(reduced) == 0, reduced
+
     names = [".", "6161", " / "]
     reduced = reduce_names(names)
     assert len(reduced) == 0, reduced

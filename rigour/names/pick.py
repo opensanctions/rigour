@@ -110,7 +110,7 @@ def reduce_names(names: List[str]) -> List[str]:
         List[str]: The reduced list of names.
     """
     if len(names) < 2:
-        return []
+        return [n for n in names if is_name(n)]
     lower = defaultdict(list)
     for name in names:
         # Filter names that are not valid (e.g. empty or do not contain any letters)

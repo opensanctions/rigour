@@ -30,6 +30,18 @@ def test_align_name_slop():
     # NOVY GAZMASH vs GAZMASH NOVY
 
 
+def test_align_slop_special_cases():
+    query = make("Bank")
+    result = make("Kling")
+    amt = align_name_slop(query, result)
+    assert len(amt.query_sorted) == 1
+    assert len(amt.result_sorted) == 1
+
+    amt = align_name_slop([], [])
+    assert len(amt.query_sorted) == 0
+    assert len(amt.result_sorted) == 0
+
+
 def test_align_person_name_order():
     query = make("John Doe")
     result = make("Doe, John")
@@ -75,10 +87,29 @@ def test_align_person_name_order():
     assert amt.query_sorted[0].form == "vladimir"
     assert amt.query_extra[0].form == "vladimirovitch"
 
+    query = make("Vladimir Putin")
+    result = make("Vladimir Vladimirovitch Putin")
+    amt = align_person_name_order(query, result)
+    assert len(amt.query_sorted) == 2
+    assert amt.result_sorted[0].form == "vladimir"
+    assert amt.result_extra[0].form == "vladimirovitch"
+
     # TODO:
     # Ali Al-Sabah vs Ali Alsabah
     # Ali Al-Sabah vs Alsabah, Ali
     # Mohammed Abd Al-Rahman vs Abdalrahman, Mohammed
+
+
+def test_align_person_special_cases():
+    query = make("John")
+    result = make("Doe")
+    amt = align_person_name_order(query, result)
+    assert len(amt.query_sorted) == 1
+    assert len(amt.result_sorted) == 1
+
+    amt = align_person_name_order([], [])
+    assert len(amt.query_sorted) == 0
+    assert len(amt.result_sorted) == 0
 
 
 def test_align_tagged_person_name_parts():
