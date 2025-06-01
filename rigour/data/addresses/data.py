@@ -46,7 +46,7 @@ FORMS: Dict[str, List[str]] = {
     "pt": ["point"],
     "ct": ["court"],
     "cir": ["circle"],
-    "ter": ["terrace"],
+    "ter": ["terr", "terrace"],
     "pkwy": ["parkway"],
     "expy": ["expressway"],
     "fwy": ["freeway"],

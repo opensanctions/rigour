@@ -127,6 +127,7 @@ forms:
   cir:
     - circle
   ter:
+    - terr
     - terrace
   pkwy:
     - parkway
