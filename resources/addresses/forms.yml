@@ -93,6 +93,7 @@ forms:
     - Pr-kt
     - Prospekt
     - prospekt
+    - prospect
     - просп
     - проспект
   ul:
@@ -119,6 +120,7 @@ forms:
     - lane
     - переулок
     - pereulok
+    - per
     - пер
   pt:
     - point
@@ -156,6 +158,8 @@ forms:
   cty:
     - county
     - counties
+    - Okrug
+    - okr
   prov:
     - province
     - пров
@@ -248,6 +252,7 @@ forms:
     - et
   of:
     - office
+    - KOM./OFFICE
     - officier
     - офис
     - ofis
@@ -265,8 +270,25 @@ forms:
   pom:
     - Pomeshch
     - Pomeshchenie
+    - Pomeshtenie
+    - pomeshcheniye
+    - Floor/Pomeshch.
     - Помещ
     - Пом
+  nab:
+    - naberezhnaya
+    - naberezhnye
+    - NABEREZHNAYA
+    - nab.
+    - набережная
+    - набережн
+    - embankment
+    - embankments
+  muni:
+    - municipal
+    - municipality
+    - MUNICIPAL
+    - Munitsipal'nyi
   hwy:
     - highway
     - shosse
@@ -310,6 +332,12 @@ forms:
     - russian
     - россия
     - российская федерация
+  moscow:
+    - moscow
+    - москвa
+    - москви
+    - москва
+    - moskau
   us:
     - united states
     - united states of america
