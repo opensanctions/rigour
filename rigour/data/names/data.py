@@ -162,7 +162,28 @@ PERSON_NAME_PREFIXES: List[str] = [
 
 ORG_NAME_PREFIXES: List[str] = ["The", "Le", "La"]
 
-STOPWORDS: List[str] = ["de", "of", "and", "for", "для", "&"]
+STOPWORDS: List[str] = [
+    "de",
+    "of",
+    "and",
+    "for",
+    "для",
+    "&",
+    "also known as",
+    "a.k.a",
+    "a.k.a.",
+    "A.K.A",
+    "a/k/a",
+    "A/K/A",
+    "earlier known as",
+    "formerly known as",
+    "f/k/a",
+    "F/K/A",
+    "formerly",
+    "presently known as",
+    "previously known as",
+    "trading as",
+]
 
 ORG_SYMBOLS: Dict[str, List[str]] = {
     "co": [
