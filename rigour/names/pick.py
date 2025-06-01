@@ -120,8 +120,8 @@ def reduce_names(names: List[str]) -> List[str]:
         lower[name.lower()].append(name)
     reduced: List[str] = []
     for group in lower.values():
-        name = pick_case(group)
-        if name is None:
+        picked = pick_case(group)
+        if picked is None:
             continue
-        reduced.append(name)
+        reduced.append(picked)
     return reduced
