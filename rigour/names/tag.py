@@ -16,7 +16,7 @@ class NamePartTag(Enum):
 
     ANY = "ANY"
 
-    TILTLE = "TITLE"
+    TITLE = "TITLE"
     GIVEN = "GIVEN"
     MIDDLE = "MIDDLE"
     FAMILY = "FAMILY"
