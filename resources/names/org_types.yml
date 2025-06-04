@@ -394,6 +394,7 @@ types:
     aliases:
       - aksiyadorlik jamiyati
       - акциядорлик жамияти
+      - Det offentligretlige aktieselskab
   - display: a.m.b.a.
     compare: LLC
     aliases:
@@ -420,6 +421,8 @@ types:
       - Joint-Stock Company
       - Joint-stock Company
       - JointStock Company
+      - Kumpanija b’Ishma Konġunti
+      - Aandelenvennootschap
   - display: PJSC
     compare: JSC
     aliases:
@@ -427,20 +430,34 @@ types:
       - public stock company (PJSC)
       - Public Joint-Stock Company
       - Public joint stock company
+      - Sociedade pública por ações
+      - Kumpanija b’ishma konġunti pubbliċi
+      - Javno dioničko društvo
+      - Javna delniška družba
+      - állami tulajdonban lévő részvénytársaság
+      - Viešoji akcinė bendrovė
   - display: OJSC
     compare: JSC
     aliases:
       - otwarta spółka akcyjna
       - Open Joint-Stock Company
       - openbare aandelenvennootschap
+      - Публично акционерно дружество
+      - Δημόσια συμμετοχική εταιρεία
+      - Państwowa Spółka Akcyjna
       - vennootschap op aandelen
       - Openbare vennootschap op aandelen
+      - Openbare publiek-private vennootschap op aandelen
       - sociedad limitada por acciones abierta
       - sociedade por ações aberta
       - société par actions ouverte
+      - Verejná akciová spoločnosť
+      - Société publique par actions
+      - Societatea publică pe acțiuni
       - offene aktiengesellschaft
       - open joint stock company
       - veřejná akciová společnost
+      - Aktiebolaget
   - display: AT
     compare: JSC
     aliases:
@@ -499,6 +516,7 @@ types:
     compare: LLC
     aliases:
       - besloten vennootschap met beperkte aansprakelijkheid
+      - vennootschap met beperkte aansprakelijkheid
   - display: ca
     compare: LLC
     aliases:
@@ -589,6 +607,7 @@ types:
   - compare: LLC
     aliases:
       - društveno preduzeće
+      - Ribotos atsakomybės bendrovė
       - дп
       - друштвено предузеће
   - display: dtnn
@@ -1158,6 +1177,7 @@ types:
       - societate pe acțiuni
       - societatea pe actiuni
       - societatea pe acţiuni
+      - Societatea pe acțiuni
       - societateare pe actiuni
       - società anonima
       - société anonyme
@@ -1315,6 +1335,7 @@ types:
     aliases:
       - società per azioni
       - SOCIETA' PER AZIONI
+      - Sociedade por ações
   - display: spf
     compare: NGO
     aliases:
@@ -1506,6 +1527,11 @@ types:
       - federalna budżetowa instytucja
       - föderales staatseigenes unternehmen
       - gosudarstvennoe unitarnoe predpriyatie
+      - Întreprinderea unitară a statului federal
+      - Empresa Pública Unitária Federal
+      - Entreprise unitaire publique fédérale
+      - federalne państwowe przedsiębiorstwo unitarne
+      - Staatsinformatieagentschap
       - impresa unitaria statale
       - staatliches einheitsunternehmen
       - staatskonzern

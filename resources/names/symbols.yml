@@ -141,6 +141,9 @@ org_symbols:
     - cntr
     - center
     - centre
+    - centras
+    - Centro
+    - Centrum
     - centr
     - centro
     - tsentrov
@@ -189,6 +192,7 @@ org_symbols:
     - مجموعة
     - consorcio
     - consórcio
+    - group of companies
   consortium:
     - consortium
     - consorcio
@@ -212,9 +216,19 @@ org_symbols:
     - difesa
     - försvar
     - Verteidigung
+    - verdediging
+    - protecția
+    - försvar
     - defensa
     - оборонный
     - оборон
+  special:
+    - Specjalnych
+    - specială
+    - special
+    - Speciaal
+    - Specijalni
+    - Специальный
   tech:
     - technology
     - технология
@@ -356,8 +370,14 @@ org_symbols:
     - групп
     - groupement
     - groupe
+    - Grupa
+    - grupė
+    - Grupul
+    - Grúpa
     - grup
     - Όμιλος
+    - Ομάδα
+    - Skupina
     - Grupa
     - 团体
     - 团
