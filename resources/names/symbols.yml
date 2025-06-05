@@ -222,6 +222,18 @@ org_symbols:
     - defensa
     - оборонный
     - оборон
+  department:
+    - department
+    - dept.
+    - département
+    - departament
+    - departamento
+    - departamentul
+    - dipartimento
+    - Abteilung
+    - afdeling
+    - afdelingen
+    - отдел
   special:
     - Specjalnych
     - specială
