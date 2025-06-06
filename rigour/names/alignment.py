@@ -60,6 +60,8 @@ def best_alignment(
 def align_name_slop(
     query: List[NamePart], result: List[NamePart], max_slop: int = 2
 ) -> Alignment:
+    print("\n\nquery", [n.form for n in query])
+    print("result", [n.form for n in result])
     """Align name parts of companies and organizations. The idea here is to allow
     skipping tokens within the entity name if this improves overall match quality,
     but never to re-order name parts. The resulting alignment will contain the
@@ -102,10 +104,12 @@ def align_name_slop(
             alignment.result_extra,
         )
         # get the best alignment of query to result
+        print("query")
         query_best = best_alignment(
             query[query_index], result[result_index : result_index + max_slop + 1]
         )
         # get the best alignment of result to query
+        print("result")
         result_best = best_alignment(
             result[result_index],
             query[query_index : query_index + max_slop + 1],
@@ -143,6 +147,9 @@ def align_name_slop(
         # move to the step after the aligned parts
         query_index = best.left.index + 1
         result_index = best.right.index + 1
+    # add any remaining parts to extra
+    alignment.query_extra.extend(query[query_index:])
+    alignment.result_extra.extend(result[result_index:])
 
     print(
         query_index,

@@ -45,7 +45,7 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_sorted, ["deutsche", "bank", "ag"])
     assert tokens_eq(amt.result_sorted, ["deutsche", "bank", "ag"])
     assert tokens_eq(amt.query_extra, ["schweiz"])
-    assert tokens_eq
+    assert tokens_eq(amt.result_extra, [])
 
     # Multiple extra
     query = make("Deutsche Bank (Schweiz) AG")
