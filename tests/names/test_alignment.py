@@ -93,7 +93,7 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_extra, ["goo"])
     assert tokens_eq(amt.result_extra, ["goo"])
 
-    # NOVY GAZMASH vs GAZMASH NOVY
+    # don't reorder - just take whatever aligns with slop in order
     query = make("NOVY GAZMASH")
     result = make("GAZMASH NOVY")
     amt = align_name_slop(query, result, max_slop=2)
@@ -103,6 +103,19 @@ def test_align_name_slop():
     assert tokens_eq(amt.result_sorted, ["novy"])
     assert tokens_eq(amt.query_extra, ["gazmash"])
     assert tokens_eq(amt.result_extra, ["gazmash"])
+
+    # beyond slop
+    query = make("Blue flowers, trees, and bird song")
+    result = make("Blue bird song")
+    amt = align_name_slop(query, result)
+    assert tokens_eq(amt.query_sorted, ["blue"])
+    assert tokens_eq(amt.result_sorted, ["blue"])
+
+    # extend slop
+    amt = align_name_slop(query, result, max_slop=3)
+    assert tokens_eq(amt.query_sorted, ["blue", "bird", "song"])
+    assert tokens_eq(amt.result_sorted, ["blue", "bird", "song"])
+
 
     # TODO:
     # It'd be nice if longer alignments were preferred over shorter ones
