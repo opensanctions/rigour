@@ -83,7 +83,8 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_extra, [])
     assert tokens_eq(amt.result_extra, ["production", "enterprise"])
 
-    # While goo is within slop, we can't reorder to align it
+    # slop gets penalised:
+    # we choose blue over goo because the goos are further apart
     query = make("Goo Blue Flowers")
     result = make("Blue Flowers Goo")
     amt = align_name_slop(query, result, max_slop=2)
@@ -102,6 +103,9 @@ def test_align_name_slop():
     assert tokens_eq(amt.result_sorted, ["novy"])
     assert tokens_eq(amt.query_extra, ["gazmash"])
     assert tokens_eq(amt.result_extra, ["gazmash"])
+
+    # TODO:
+    # It'd be nice if longer alignments were preferred over shorter ones
 
 
 def test_align_slop_special_cases():

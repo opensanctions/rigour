@@ -47,9 +47,12 @@ def best_alignment(
     part: NamePart, candidates: List[NamePart], swap=False
 ) -> Optional[Pair]:
     pairs: List[Pair] = []
-    for candidate in candidates:
+    num = len(candidates)
+    for i, candidate in enumerate(candidates):
+        slop_penalty = (num - i) / num
         pair = check_similarity(part, candidate)
         if pair is not None:
+            pair.score = pair.score * slop_penalty
             pairs.append(pair)
     maximal = max(pairs, key=lambda p: p.score, default=None)
     if swap and maximal is not None:
