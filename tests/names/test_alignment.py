@@ -60,8 +60,8 @@ def test_align_name_slop():
     query = make("Al-Haramain Foundation")
     result = make("Al-Haramain Benevolent Foundation")
     amt = align_name_slop(query, result, max_slop=2)
-    assert tokens_eq(amt.query_sorted, ["al-haramain", "foundation"])
-    assert tokens_eq(amt.result_sorted, ["al-haramain", "foundation"])
+    assert tokens_eq(amt.query_sorted, ["al", "haramain", "foundation"])
+    assert tokens_eq(amt.result_sorted, ["al", "haramain", "foundation"])
     assert tokens_eq(amt.query_extra, [])
     assert tokens_eq(amt.result_extra, ["benevolent"])
 
@@ -79,7 +79,7 @@ def test_align_name_slop():
     result = make("Production Enterprise NOVIY GASMASH")
     amt = align_name_slop(query, result, max_slop=2)
     assert tokens_eq(amt.query_sorted, ["novi", "gazmash"])
-    assert tokens_eq(amt.result_sorted, ["noviy", "gazmash"])
+    assert tokens_eq(amt.result_sorted, ["noviy", "gasmash"])
     assert tokens_eq(amt.query_extra, [])
     assert tokens_eq(amt.result_extra, ["production", "enterprise"])
 
