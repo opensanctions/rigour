@@ -358,7 +358,14 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {"display": "ae", "aliases": ["anónimi etería", "ανώνυμη εταιρεία"]},
-    {"compare": "JSC", "aliases": ["aksiyadorlik jamiyati", "акциядорлик жамияти"]},
+    {
+        "compare": "JSC",
+        "aliases": [
+            "aksiyadorlik jamiyati",
+            "акциядорлик жамияти",
+            "Det offentligretlige aktieselskab",
+        ],
+    },
     {
         "display": "a.m.b.a.",
         "compare": "LLC",
@@ -387,6 +394,8 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "Joint-Stock Company",
             "Joint-stock Company",
             "JointStock Company",
+            "Kumpanija b’Ishma Konġunti",
+            "Aandelenvennootschap",
         ],
     },
     {
@@ -397,6 +406,12 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "public stock company (PJSC)",
             "Public Joint-Stock Company",
             "Public joint stock company",
+            "Sociedade pública por ações",
+            "Kumpanija b’ishma konġunti pubbliċi",
+            "Javno dioničko društvo",
+            "Javna delniška družba",
+            "állami tulajdonban lévő részvénytársaság",
+            "Viešoji akcinė bendrovė",
         ],
     },
     {
@@ -406,14 +421,22 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "otwarta spółka akcyjna",
             "Open Joint-Stock Company",
             "openbare aandelenvennootschap",
+            "Публично акционерно дружество",
+            "Δημόσια συμμετοχική εταιρεία",
+            "Państwowa Spółka Akcyjna",
             "vennootschap op aandelen",
             "Openbare vennootschap op aandelen",
+            "Openbare publiek-private vennootschap op aandelen",
             "sociedad limitada por acciones abierta",
             "sociedade por ações aberta",
             "société par actions ouverte",
+            "Verejná akciová spoločnosť",
+            "Société publique par actions",
+            "Societatea publică pe acțiuni",
             "offene aktiengesellschaft",
             "open joint stock company",
             "veřejná akciová společnost",
+            "Aktiebolaget",
         ],
     },
     {
@@ -463,7 +486,10 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {
         "display": "bvba",
         "compare": "LLC",
-        "aliases": ["besloten vennootschap met beperkte aansprakelijkheid"],
+        "aliases": [
+            "besloten vennootschap met beperkte aansprakelijkheid",
+            "vennootschap met beperkte aansprakelijkheid",
+        ],
     },
     {"display": "ca", "compare": "LLC", "aliases": ["compañía anónima"]},
     {
@@ -539,7 +565,15 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "друштво са ограниченом одговорношћу",
         ],
     },
-    {"compare": "LLC", "aliases": ["društveno preduzeće", "дп", "друштвено предузеће"]},
+    {
+        "compare": "LLC",
+        "aliases": [
+            "društveno preduzeće",
+            "Ribotos atsakomybės bendrovė",
+            "дп",
+            "друштвено предузеће",
+        ],
+    },
     {
         "display": "dtnn",
         "compare": "LLC",
@@ -1023,6 +1057,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "societate pe acțiuni",
             "societatea pe actiuni",
             "societatea pe acţiuni",
+            "Societatea pe acțiuni",
             "societateare pe actiuni",
             "società anonima",
             "société anonyme",
@@ -1166,7 +1201,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {
         "display": "SpA",
         "compare": "JSC",
-        "aliases": ["società per azioni", "SOCIETA' PER AZIONI"],
+        "aliases": ["società per azioni", "SOCIETA' PER AZIONI", "Sociedade por ações"],
     },
     {"display": "spf", "compare": "NGO", "aliases": ["stichting particulier fonds"]},
     {
@@ -1299,6 +1334,11 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "federalna budżetowa instytucja",
             "föderales staatseigenes unternehmen",
             "gosudarstvennoe unitarnoe predpriyatie",
+            "Întreprinderea unitară a statului federal",
+            "Empresa Pública Unitária Federal",
+            "Entreprise unitaire publique fédérale",
+            "federalne państwowe przedsiębiorstwo unitarne",
+            "Staatsinformatieagentschap",
             "impresa unitaria statale",
             "staatliches einheitsunternehmen",
             "staatskonzern",
