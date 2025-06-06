@@ -37,14 +37,13 @@ class Pair:
 
 def check_similarity(left: NamePart, right: NamePart) -> Optional[Pair]:
     score = levenshtein_similarity(left.form, right.form, MAX_EDITS, MAX_PERCENT)
-    print("  ", left.form, right.form, "score=", score)
     if score >= MIN_SIMILARITY:
         return Pair(left=left, right=right, score=score)
     return None
 
 
 def best_alignment(
-    part: NamePart, candidates: List[NamePart], swap=False
+    part: NamePart, candidates: List[NamePart], swap: bool = False
 ) -> Optional[Pair]:
     pairs: List[Pair] = []
     num = len(candidates)
@@ -63,8 +62,6 @@ def best_alignment(
 def align_name_slop(
     query: List[NamePart], result: List[NamePart], max_slop: int = 2
 ) -> Alignment:
-    print("\n\nquery", [n.form for n in query])
-    print("result", [n.form for n in result])
     """Align name parts of companies and organizations. The idea here is to allow
     skipping tokens within the entity name if this improves overall match quality,
     but never to re-order name parts. The resulting alignment will contain the
@@ -94,25 +91,11 @@ def align_name_slop(
     query_index = 0
     result_index = 0
     while query_index < len(query) and result_index < len(result):
-        print(
-            query_index,
-            result_index,
-            "qs=",
-            alignment.query_sorted,
-            "rs=",
-            alignment.result_sorted,
-            "qe=",
-            alignment.query_extra,
-            "re=",
-            alignment.result_extra,
-        )
         # get the best alignment of query to result
-        print("query")
         query_best = best_alignment(
             query[query_index], result[result_index : result_index + max_slop + 1]
         )
         # get the best alignment of result to query
-        print("result")
         result_best = best_alignment(
             result[result_index],
             query[query_index : query_index + max_slop + 1],
@@ -143,8 +126,6 @@ def align_name_slop(
         # if we skip any, add them to extra
         assert best.left.index is not None, best.left
         assert best.right.index is not None, best.right
-        print("     ", query_index, best.left.index, best.left.form)
-        print("     ", result_index, best.right.index, best.right.form)
         alignment.query_extra.extend(query[query_index : best.left.index])
         alignment.result_extra.extend(result[result_index : best.right.index])
         # move to the step after the aligned parts
@@ -154,18 +135,6 @@ def align_name_slop(
     alignment.query_extra.extend(query[query_index:])
     alignment.result_extra.extend(result[result_index:])
 
-    print(
-        query_index,
-        result_index,
-        "qs=",
-        alignment.query_sorted,
-        "rs=",
-        alignment.result_sorted,
-        "qe=",
-        alignment.query_extra,
-        "re=",
-        alignment.result_extra,
-    )
     return alignment
 
 
