@@ -26,30 +26,35 @@ class Alignment:
 class Pair:
     """A pair of name parts from query and result."""
 
-    def __init__(self, query: NamePart, result: NamePart, score: float) -> None:
-        self.query = query
-        self.result = result
+    def __init__(self, left: NamePart, right: NamePart, score: float) -> None:
+        self.left = left
+        self.right = right
         self.score = score
 
     def __repr__(self) -> str:
-        return f"Pair(query={self.query}, result={self.result}, score={self.score})"
+        return f"Pair(left={self.left}, result={self.right}, score={self.right})"
 
 
 def check_similarity(left: NamePart, right: NamePart) -> Optional[Pair]:
     score = levenshtein_similarity(left.form, right.form, MAX_EDITS, MAX_PERCENT)
     print("  ", left.form, right.form, "score=", score)
     if score >= MIN_SIMILARITY:
-        return Pair(query=left, result=right, score=score)
+        return Pair(left=left, right=right, score=score)
     return None
 
 
-def best_alignment(part: NamePart, candidates: List[NamePart]) -> Optional[Pair]:
+def best_alignment(
+    part: NamePart, candidates: List[NamePart], swap=False
+) -> Optional[Pair]:
     pairs: List[Pair] = []
     for candidate in candidates:
         pair = check_similarity(part, candidate)
         if pair is not None:
             pairs.append(pair)
-    return max(pairs, key=lambda p: p.score, default=None)
+    maximal = max(pairs, key=lambda p: p.score, default=None)
+    if swap and maximal is not None:
+        return Pair(left=maximal.right, right=maximal.left, score=maximal.score)
+    return maximal
 
 
 def align_name_slop(
@@ -102,7 +107,9 @@ def align_name_slop(
         )
         # get the best alignment of result to query
         result_best = best_alignment(
-            result[result_index], query[query_index : query_index + max_slop + 1]
+            result[result_index],
+            query[query_index : query_index + max_slop + 1],
+            swap=True,
         )
         # take the best of both
         if query_best is None and result_best is None:
@@ -113,7 +120,10 @@ def align_name_slop(
             result_index += 1
             continue
         elif query_best is not None and result_best is not None:
-            best = max(query_best, result_best, key=lambda p: p.score)
+            if query_best.score >= result_best.score:
+                best = query_best
+            else:
+                best = result_best
         elif query_best is not None:
             best = query_best
         elif result_best is not None:
@@ -121,17 +131,31 @@ def align_name_slop(
         else:
             raise ValueError("Shouldn't reach here.")
         # add the best alignment to the Alignment
-        alignment.query_sorted.append(best.query)
-        alignment.result_sorted.append(best.result)
+        alignment.query_sorted.append(best.left)
+        alignment.result_sorted.append(best.right)
         # if we skip any, add them to extra
-        assert best.query.index is not None, best.query
-        assert best.result.index is not None, best.result
-        alignment.query_extra.extend(query[query_index : best.query.index])
-        alignment.result_extra.extend(result[result_index : best.result.index])
+        assert best.left.index is not None, best.left
+        assert best.right.index is not None, best.right
+        print("     ", query_index, best.left.index, best.left.form)
+        print("     ", result_index, best.right.index, best.right.form)
+        alignment.query_extra.extend(query[query_index : best.left.index])
+        alignment.result_extra.extend(result[result_index : best.right.index])
         # move to the step after the aligned parts
-        query_index = best.query.index + 1
-        result_index = best.result.index + 1
+        query_index = best.left.index + 1
+        result_index = best.right.index + 1
 
+    print(
+        query_index,
+        result_index,
+        "qs=",
+        alignment.query_sorted,
+        "rs=",
+        alignment.result_sorted,
+        "qe=",
+        alignment.query_extra,
+        "re=",
+        alignment.result_extra,
+    )
     return alignment
 
 
