@@ -2,6 +2,7 @@
 # These appear in Red Notice reports for wanted persons and on OpenSanctions.
 # Similar coding systems are used by national law enforcement agencies.
 # Source: https://web.archive.org/web/20240613035903/https://www.interpol.int/content/download/13972/file/InterpolImplementationV5-03.pdf (page 78)
+# There are notes at the end of the file.
 Eye colour classifications:
   BLK:
     Interpol code: BLK
@@ -111,7 +112,7 @@ Eye colour classifications:
       - Maroon # en
   MUL:
     Interpol code: MUL
-    Title: Multicolored
+    Title: Multicolored # [See Note 3.]
     Wikidata code: [No specific code.]
     Description en US: Multicolored
     Description en GB: Multicoloured
@@ -124,8 +125,8 @@ Eye colour classifications:
       - Multicolores # es, fr
       - Multicoloured # en (GB spelling)
   PNK:
-    Interpol code: PNK
-    Title: Pink
+    Interpol code: PNK 
+    Title: Pink # [See Note 2.]
     Wikidata code: Q59318252
     Description en US: Pink
     Description en GB: Pink 
@@ -165,7 +166,10 @@ Eye colour classifications:
       - Unknown # en
       - U/K # en (abbreviation)
 # Notes: 
+# Note 1: 
 # The Interpol codes are designed for practical use and do not precisely align to the six
 # eye colours recognised in science from genetics.
+# Note 2:
 # Pink/red eye colour is rare but can arise where people have albinism.
+# Note 3:
 # The multicoloured classification may be used where the individual has Heterochromia.
