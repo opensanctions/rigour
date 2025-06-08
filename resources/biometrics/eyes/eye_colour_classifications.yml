@@ -1,9 +1,9 @@
-# Interpol uses standard classification codes for eye colour.
+# Interpol uses standard classification codes for eye color.
 # These appear in Red Notice reports for wanted persons and on OpenSanctions.
 # Similar coding systems are used by national law enforcement agencies.
 # Source: https://web.archive.org/web/20240613035903/https://www.interpol.int/content/download/13972/file/InterpolImplementationV5-03.pdf (page 78)
 # There are notes at the end of this file.
-Eye colour classifications:
+Eye color classifications:
   BLK:
     Interpol code: BLK
     Title: Black
@@ -168,8 +168,8 @@ Eye colour classifications:
 # Notes: 
 # Note 1: 
 # The Interpol codes are designed for practical use and do not precisely align to the six
-# eye colours recognised in science from genetics.
+# eye colors recognised in science from genetics.
 # Note 2:
-# Pink/red eye colour is rare but can arise where people have albinism.
+# Pink/red eye color is rare but can arise where people have albinism.
 # Note 3:
-# The multicoloured classification may be used where the individual has Heterochromia.
+# The multicolored classification may be used where the individual has Heterochromia.
