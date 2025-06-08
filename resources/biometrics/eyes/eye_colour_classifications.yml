@@ -2,168 +2,168 @@
 # These appear in Red Notice reports for wanted persons and on OpenSanctions.
 # Similar coding systems are used by national law enforcement agencies.
 # Source: https://web.archive.org/web/20240613035903/https://www.interpol.int/content/download/13972/file/InterpolImplementationV5-03.pdf (page 78)
-# There are notes at the end of the file.
+# There are notes at the end of this file.
 Eye colour classifications:
   BLK:
     Interpol code: BLK
     Title: Black
     Wikidata code: Q17244465
-    Description en US: Black
-    Description en GB: Black
-    Description es: Negros
-    Description fr: Noirs
-    Description de: Schwarze
+    Description en US: black
+    Description en GB: black
+    Description es: negros
+    Description fr: noirs
+    Description de: schwarze
     Labels: 
-      - Black # en
-      - Negros # es
-      - Noirs # fr
-      - Schwarze # de
-      - Very dark brown # en (more literal description)
+      - black # en
+      - negros # es
+      - noirs # fr
+      - schwarze # de
+      - very dark brown # en (more literal description)
   BLU:
     Interpol code: BLU
     Title: Blue
     Wikidata code: Q17122834
-    Description en US: Blue
-    Description en GB: Blue
-    Description es: Azules
-    Description fr: Bleus
-    Description de: Blau
+    Description en US: blue
+    Description en GB: blue
+    Description es: azules
+    Description fr: bleus
+    Description de: blau
     Labels:
-      - Azules # es
-      - Blau # de
-      - Bleus # fr
-      - Blue  # en
+      - azules # es
+      - blau # de
+      - bleus # fr
+      - blue  # en
   BRO:
     Interpol code: BRO
     Title: Brown
     Wikidata code: Q17122705
-    Description en US: Brown
-    Description en GB: Brown
-    Description es: Castaños
-    Description fr: Marron
-    Description de: Braune
+    Description en US: brown
+    Description en GB: brown
+    Description es: castaños
+    Description fr: marron
+    Description de: braune
     Labels:
-    # Brown
-      - Braune # de
-      - Brown # en
-      - Castaños # es
-      - Marron # fr
-    # Amber
-      - Ambarinos # es
-      - Amber # en
-      - Ambre # fr
-      - Bernsteinfarben # de
+    # amber
+      - ambarinos # es
+      - amber # en
+      - ambre # fr
+      - bernsteinfarben # de
+    # brown
+      - braune # de
+      - brown # en
+      - castaños # es
+      - marron # fr
   GRY:
     Interpol code: GRY
     Title: Gray
     Wikidata code: Q17245659
-    Description en US: Gray
-    Description en GB: Grey
-    Description es: Grises
-    Description fr: Gris
-    Description de: Grau
+    Description en US: gray
+    Description en GB: grey
+    Description es: grises
+    Description fr: gris
+    Description de: grau
     Labels: 
-      - Grau # de
-      - Gray # en (US spelling)
-      - Grey # en (GB spelling)
-      - Gris # fr
-      - Grises # es
+      - grau # de
+      - gray # en US
+      - grey # en GB
+      - gris # fr
+      - grises # es
   GRN:
     Interpol code: GRN
     Title: Green
     Wikidata code: Q17122854
-    Description en US: Green
-    Description en GB: Green
-    Description es: Verdes
-    Description fr: Verts
-    Description de: Grüne
+    Description en US: green
+    Description en GB: green
+    Description es: verdes
+    Description fr: verts
+    Description de: grüne
     Labels:
-      - Green # en
-      - Grüne # de
-      - Verdes # es
-      - Verts # fr
+      - green # en
+      - grüne # de
+      - verdes # es
+      - verts # fr
   HAZ:
     Interpol code: HAZ
     Title: Hazel
     Wikidata code: Q17122740
-    Description en US: Hazel
-    Description en GB: Hazel
-    Description es: Avellana
-    Description fr: Noisette
-    Description de: Hasel
+    Description en US: hazel
+    Description en GB: hazel
+    Description es: avellana
+    Description fr: noisette
+    Description de: hasel
     Labels:
-      - Avellana # es
-      - Hasel # de
-      - Hazel # en
-      - Noisette # fr
+      - avellana # es
+      - hasel # de
+      - hazel # en
+      - noisette # fr
   MAR:
     Interpol code: MAR
     Title: Maroon
     Wikidata code: [No specific code.]
-    Description en US: Maroon
-    Description en GB: Maroon
-    Description es: Granates
-    Description fr: Grenat
-    Description de: Kastanienbraune
+    Description en US: maroon
+    Description en GB: maroon
+    Description es: granates
+    Description fr: grenat
+    Description de: kastanienbraune
     Labels:
-      - Granates # es
-      - Grenat # fr
-      - Kastanienbraune # de
-      - Maroon # en
+      - granates # es
+      - grenat # fr
+      - kastanienbraune # de
+      - maroon # en
   MUL:
     Interpol code: MUL
     Title: Multicolored # [See Note 3.]
     Wikidata code: [No specific code.]
-    Description en US: Multicolored
-    Description en GB: Multicoloured
-    Description es: Multicolores
-    Description fr: Multicolores
-    Description de: Mehrfarbig
+    Description en US: multicolored
+    Description en GB: multicoloured
+    Description es: multicolores
+    Description fr: multicolores
+    Description de: mehrfarbig
     Labels: 
-      - Mehrfarbig # de
-      - Multicolored # en (US spelling)
-      - Multicolores # es, fr
-      - Multicoloured # en (GB spelling)
+      - mehrfarbig # de
+      - multicolored # en (US spelling)
+      - multicolores # es, fr
+      - multicoloured # en (GB spelling)
   PNK:
     Interpol code: PNK 
     Title: Pink # [See Note 2.]
     Wikidata code: Q59318252
-    Description en US: Pink
-    Description en GB: Pink 
-    Description es: Rosados
-    Description fr: Roses
-    Description de: Rosa
+    Description en US: pink
+    Description en GB: pink 
+    Description es: rosados
+    Description fr: roses
+    Description de: rosa
     Labels:
-    # Pink
-      - Pink # en
-      - Rosa # de
-      - Rosados # es
-      - Roses # fr
-    # Red
-      - Red # en
-      - Rojos # es
-      - Rote # de
-      - Rouges # fr
-    # Violet
-      - Violet # en
-      - Violets # fr
-      - Violett # de
-      - Violetas # es
+    # pink
+      - pink # en
+      - rosa # de
+      - rosados # es
+      - roses # fr
+    # red
+      - red # en
+      - rojos # es
+      - rote # de
+      - rouges # fr
+    # violet
+      - violet # en
+      - violets # fr
+      - violett # de
+      - violetas # es
   XXX:
     Interpol code: XXX
     Title: Unknown
     Wikidata code: [No specific code.]
-    Description en US: Unknown
-    Description en GB: Unknown
-    Description es: Desconocido
-    Description fr: Inconnue
-    Description de: Unbekannte
+    Description en US: unknown
+    Description en GB: unknown
+    Description es: desconocido
+    Description fr: inconnue
+    Description de: unbekannte
     Labels:
-      - Desconocido # es
-      - Inconnue # fr
-      - Unbekannte # de
-      - Undeterminable # en
-      - Unknown # en
+      - desconocido # es
+      - inconnue # fr
+      - unbekannte # de
+      - undeterminable # en
+      - unknown # en
       - U/K # en (abbreviation)
 # Notes: 
 # Note 1: 
