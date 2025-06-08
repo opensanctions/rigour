@@ -1,8 +1,8 @@
-# Interpol uses standard classification codes for hair colour.
+# Interpol uses standard classification codes for hair color.
 # These appear in Red Notice reports for wanted persons and on OpenSanctions.
 # Source: https://web.archive.org/web/20240613035903/https://www.interpol.int/content/download/13972/file/InterpolImplementationV5-03.pdf (page 78)
 # There are notes at the end of this file.
-Hair colour classifications:
+Hair color classifications:
   BAL:
     Interpol code: BAL
     Title: Bald
@@ -54,7 +54,7 @@ Hair colour classifications:
       - rubia # es (feminine)
       - rubio # es (masculine)
       - strawberry # en
-      - yellow # en (common as a colour but not often used for hair)
+      - yellow # en (common as a color but not often used for hair)
   BLU:
     Interpol code: BLU
     Title: Blue
@@ -258,11 +258,11 @@ Hair colour classifications:
 # Notes: 
 # Note 1: 
 # The Interpol codes are designed for practical use and therefore include
-# hair colours such as blue and green that do not arise naturally.
+# hair colors such as blue and green that do not arise naturally.
 # Note 2:
 # Some of the terms used in the labels such as "redhead" are informal. 
 # It is not intended that these are used in outputs but they may be helpful
 # in handling inputs.
 # Note 3:
-# Wikidata codes are specific to hair colours e.g. Q152357 correspondss to 
+# Wikidata codes are specific to hair colors e.g. Q152357 correspondss to 
 # 'red hair' and not merely to 'red'.
