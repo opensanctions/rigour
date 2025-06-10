@@ -36,6 +36,10 @@ UNITS = {
     "ruble": "₽",
     "russian ruble": "₽",
     "russian rubles": "₽",
+    "seconds": "s",
+    "millisecond": "ms",
+    "milliseconds": "ms",
+    "hertz": "Hz",
 }
 
 
