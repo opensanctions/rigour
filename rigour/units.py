@@ -20,6 +20,8 @@ UNITS = {
     "square meters": "m²",
     "square metres": "m²",
     "sqm": "m²",
+    "hectare": "ha",
+    "hectares": "ha",
     "tons": "t",
     "tonnes": "t",
     "eur": "€",
