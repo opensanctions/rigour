@@ -8,5 +8,10 @@ def test_tokenize_name():
     assert tokenize_name("Bashar al-Assad") == ["Bashar", "al", "Assad"]
     assert tokenize_name("Bashar al-Assad", token_min_length=3) == ["Bashar", "Assad"]
     assert tokenize_name("بشار الأسد") == ["بشار", "الأسد"]
+    assert tokenize_name("维克托·亚历山德罗维奇·卢卡申科") == [
+        "维克托",
+        "亚历山德罗维奇",
+        "卢卡申科",
+    ]
     # I have no idea if this works for Burmese:
     assert tokenize_name("အောင်ဆန်းစုကြည်") == ["အ", "ငဆန", "စက", "ည"]
