@@ -5,6 +5,11 @@ from rigour.names.tag import FAMILY_NAME_TAGS, GIVEN_NAME_TAGS, NamePartTag
 from rigour.text.distance import levenshtein_similarity
 
 
+MAX_EDITS = 4
+MAX_PERCENT = 0.5
+MIN_SIMILARITY = 0.5
+
+
 class Alignment:
     """Data object to hold the alignment of name parts between query and result."""
 
@@ -16,6 +21,42 @@ class Alignment:
 
     def __len__(self) -> int:
         return max(len(self.query_sorted), len(self.result_sorted))
+
+
+class Pair:
+    """A pair of name parts from query and result."""
+
+    def __init__(self, left: NamePart, right: NamePart, score: float) -> None:
+        self.left = left
+        self.right = right
+        self.score = score
+
+    def __repr__(self) -> str:
+        return f"Pair(left={self.left}, result={self.right}, score={self.right})"
+
+
+def check_similarity(left: NamePart, right: NamePart) -> Optional[Pair]:
+    score = levenshtein_similarity(left.form, right.form, MAX_EDITS, MAX_PERCENT)
+    if score >= MIN_SIMILARITY:
+        return Pair(left=left, right=right, score=score)
+    return None
+
+
+def best_alignment(
+    part: NamePart, candidates: List[NamePart], swap: bool = False
+) -> Optional[Pair]:
+    pairs: List[Pair] = []
+    num = len(candidates)
+    for i, candidate in enumerate(candidates):
+        slop_penalty = (num - i) / num
+        pair = check_similarity(part, candidate)
+        if pair is not None:
+            pair.score = pair.score * slop_penalty
+            pairs.append(pair)
+    maximal = max(pairs, key=lambda p: p.score, default=None)
+    if swap and maximal is not None:
+        return Pair(left=maximal.right, right=maximal.left, score=maximal.score)
+    return maximal
 
 
 def align_name_slop(
@@ -47,8 +88,53 @@ def align_name_slop(
         alignment.result_sorted = result
         return alignment
 
-    # TODO: the programming
-    # see test_alignment.py for examples
+    query_index = 0
+    result_index = 0
+    while query_index < len(query) and result_index < len(result):
+        # get the best alignment of query to result
+        query_best = best_alignment(
+            query[query_index], result[result_index : result_index + max_slop + 1]
+        )
+        # get the best alignment of result to query
+        result_best = best_alignment(
+            result[result_index],
+            query[query_index : query_index + max_slop + 1],
+            swap=True,
+        )
+        # take the best of both
+        if query_best is None and result_best is None:
+            # no alignment found, skip both
+            alignment.query_extra.append(query[query_index])
+            alignment.result_extra.append(result[result_index])
+            query_index += 1
+            result_index += 1
+            continue
+        elif query_best is not None and result_best is not None:
+            if query_best.score >= result_best.score:
+                best = query_best
+            else:
+                best = result_best
+        elif query_best is not None:
+            best = query_best
+        elif result_best is not None:
+            best = result_best
+        else:
+            raise ValueError("Shouldn't reach here.")
+        # add the best alignment to the Alignment
+        alignment.query_sorted.append(best.left)
+        alignment.result_sorted.append(best.right)
+        # if we skip any, add them to extra
+        assert best.left.index is not None, best.left
+        assert best.right.index is not None, best.right
+        alignment.query_extra.extend(query[query_index : best.left.index])
+        alignment.result_extra.extend(result[result_index : best.right.index])
+        # move to the step after the aligned parts
+        query_index = best.left.index + 1
+        result_index = best.right.index + 1
+    # add any remaining parts to extra
+    alignment.query_extra.extend(query[query_index:])
+    alignment.result_extra.extend(result[result_index:])
+
     return alignment
 
 

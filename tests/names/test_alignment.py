@@ -10,24 +10,115 @@ def make(name: str) -> List[NamePart]:
     return obj.parts
 
 
+def tokens_eq(a: List[NamePart], b: List[str]) -> bool:
+    if len(a) != len(b):
+        return False
+    for i, part in enumerate(a):
+        if part.form != b[i]:
+            return False
+    return True
+
+
 def test_align_name_slop():
+    # Extra
     query = make("Deutsche Bank AG")
     result = make("Deutsche Bank Aktiengesellschaft")
     amt = align_name_slop(query, result, max_slop=2)
-    assert amt is not None
+    assert tokens_eq(amt.query_sorted, ["deutsche", "bank"])
+    assert tokens_eq(amt.result_sorted, ["deutsche", "bank"])
+    assert tokens_eq(amt.query_extra, ["ag"])
+    assert tokens_eq(amt.result_extra, ["aktiengesellschaft"])
 
-    # Example test cases:
-    # Deutsche Bank AG vs Deutsche Bank Aktiengesellschaft
-    # Deutsche Bank AG vs Deutsche Bahn AG
-    # Deutsche Bank (Schweiz) AG vs Deutsche Bank AG
-    # Deutsche Bank (Schweiz) AG vs Deutsche Bank Aktiengesellschaft
-    # Al-Haramain Foundation vs Al-Haramain Benevolent Foundation
-    # Production Enterprise NOVI GAZMASH vs NOVY GAZMASH
-    # Production Enterprise NOVI GAZMASH vs NOVIY GASMASH
+    # Fuzzy
+    query = make("Deutsche Bank AG")
+    result = make("Deutsche Bahn AG")
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["deutsche", "bank", "ag"])
+    assert tokens_eq(amt.result_sorted, ["deutsche", "bahn", "ag"])
+    assert tokens_eq(amt.query_extra, [])
+    assert tokens_eq(amt.result_extra, [])
 
-    # Meant to fail:
-    # Deutsche Bank AG vs Bank Deutsch AG
-    # NOVY GAZMASH vs GAZMASH NOVY
+    # Extra in the middle of query
+    query = make("Deutsche Bank (Schweiz) AG")
+    result = make("Deutsche Bank AG")
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["deutsche", "bank", "ag"])
+    assert tokens_eq(amt.result_sorted, ["deutsche", "bank", "ag"])
+    assert tokens_eq(amt.query_extra, ["schweiz"])
+    assert tokens_eq(amt.result_extra, [])
+
+    # Multiple extra
+    query = make("Deutsche Bank (Schweiz) AG")
+    result = make("Deutsche Bank Aktiengesellschaft")
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["deutsche", "bank"])
+    assert tokens_eq(amt.result_sorted, ["deutsche", "bank"])
+    assert tokens_eq(amt.query_extra, ["schweiz", "ag"])
+    assert tokens_eq(amt.result_extra, ["aktiengesellschaft"])
+
+    # Extra in the middle of result
+    query = make("Al-Haramain Foundation")
+    result = make("Al-Haramain Benevolent Foundation")
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["al", "haramain", "foundation"])
+    assert tokens_eq(amt.result_sorted, ["al", "haramain", "foundation"])
+    assert tokens_eq(amt.query_extra, [])
+    assert tokens_eq(amt.result_extra, ["benevolent"])
+
+    # Extra at the start of query, fuzzy
+    query = make("Production Enterprise NOVI GAZMASH")
+    result = make("NOVY GAZMASH")
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["novi", "gazmash"])
+    assert tokens_eq(amt.result_sorted, ["novy", "gazmash"])
+    assert tokens_eq(amt.query_extra, ["production", "enterprise"])
+    assert tokens_eq(amt.result_extra, [])
+
+    # Extra at the start of result, fuzzy
+    query = make("NOVI GAZMASH")
+    result = make("Production Enterprise NOVIY GASMASH")
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["novi", "gazmash"])
+    assert tokens_eq(amt.result_sorted, ["noviy", "gasmash"])
+    assert tokens_eq(amt.query_extra, [])
+    assert tokens_eq(amt.result_extra, ["production", "enterprise"])
+
+    # slop gets penalised:
+    # we choose blue over goo because the goos are further apart
+    query = make("Goo Blue Flowers")
+    result = make("Blue Flowers Goo")
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["blue", "flowers"])
+    assert tokens_eq(amt.result_sorted, ["blue", "flowers"])
+    assert tokens_eq(amt.query_extra, ["goo"])
+    assert tokens_eq(amt.result_extra, ["goo"])
+
+    # don't reorder - just take whatever aligns with slop in order
+    query = make("NOVY GAZMASH")
+    result = make("GAZMASH NOVY")
+    amt = align_name_slop(query, result, max_slop=2)
+    # Both keeping GAZMASH is better because it's longer
+    # but perhaps either is valid and that can be an enhancement
+    assert tokens_eq(amt.query_sorted, ["novy"])
+    assert tokens_eq(amt.result_sorted, ["novy"])
+    assert tokens_eq(amt.query_extra, ["gazmash"])
+    assert tokens_eq(amt.result_extra, ["gazmash"])
+
+    # beyond slop
+    query = make("Blue flowers, trees, and bird song")
+    result = make("Blue bird song")
+    amt = align_name_slop(query, result)
+    assert tokens_eq(amt.query_sorted, ["blue"])
+    assert tokens_eq(amt.result_sorted, ["blue"])
+
+    # extend slop
+    amt = align_name_slop(query, result, max_slop=3)
+    assert tokens_eq(amt.query_sorted, ["blue", "bird", "song"])
+    assert tokens_eq(amt.result_sorted, ["blue", "bird", "song"])
+
+
+    # TODO:
+    # It'd be nice if longer alignments were preferred over shorter ones
 
 
 def test_align_slop_special_cases():
