@@ -1055,9 +1055,11 @@ org_symbols:
     - govmnt
     - government
     - government of
+    - government of the
     - governmental
     - regierung
     - regierung von
+    - regierung der
     - staat
     - staatlich
     - staatliche
@@ -1102,6 +1104,24 @@ org_symbols:
     - imeni
     - named after
     - named for
+  socalled: # EU slang
+    - SO-CALLED
+    - Self-proclaimed
+    - the so-called
+    - Așa-numita
+    - Den såkaldte
+    - Takozvana
+    - Sogenannte
+    - L-hekk imsejħa
+    - soi-disant
+    - Soi-disant
+    - Javni pokret
+    - mar a ghairtear de
+    - Tā sauktā
+    - Samhällsrörelsen
+    - népi mozgalom
+    - Tzv.
+    - Т.нар.
   ministry:
     - ministry
     - мinistry
