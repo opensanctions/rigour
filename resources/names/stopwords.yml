@@ -182,6 +182,8 @@ STOPWORDS:
   - for
   - для # for
   - "&"
+  - "(sic)"
+  - "[sic]"
   # Terms used to indicate aliases/alternative names including old names
   - "also known as"
   - "a.k.a"
