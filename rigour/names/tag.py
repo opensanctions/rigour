@@ -16,7 +16,7 @@ class NamePartTag(Enum):
 
     ANY = "ANY"
 
-    TILTLE = "TITLE"
+    TITLE = "TITLE"
     GIVEN = "GIVEN"
     MIDDLE = "MIDDLE"
     FAMILY = "FAMILY"
@@ -29,3 +29,21 @@ class NamePartTag(Enum):
 
     STOP = "STOP"  # Stopword
     LEGAL = "LEGAL"  # Legal form of an organisation
+
+
+GIVEN_NAME_TAGS = {
+    NamePartTag.GIVEN,
+    NamePartTag.MIDDLE,
+    NamePartTag.PATRONYMIC,
+    NamePartTag.MATRONYMIC,
+    NamePartTag.HONORIFIC,
+    # NamePartTag.NICK,
+}
+FAMILY_NAME_TAGS = {
+    NamePartTag.PATRONYMIC,
+    NamePartTag.MATRONYMIC,
+    NamePartTag.FAMILY,
+    NamePartTag.SUFFIX,
+    NamePartTag.TRIBAL,
+    NamePartTag.HONORIFIC,
+}

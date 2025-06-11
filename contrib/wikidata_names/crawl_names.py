@@ -1,37 +1,35 @@
-import gzip
+import random
 import logging
 import requests
+import unicodedata
 from pathlib import Path
 from functools import lru_cache
-from collections import Counter, defaultdict
-from typing import Dict, Generator, List, Optional, Set
+from collections import defaultdict
+from typing import Dict, List, Optional, Set, Tuple
 from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 
+from nomenklatura import settings
 from nomenklatura.cache import Cache
 from nomenklatura.dataset import Dataset
-from nomenklatura.wikidata import WikidataClient, Item
+from nomenklatura.wikidata import WikidataClient
 from rigour.names import is_name
 from fingerprints import clean_brackets
 from rigour.text.cleaning import remove_emoji
+from rigour.text.scripts import is_modern_alphabet
 
 log = logging.getLogger(__name__)
+settings.DB_STMT_TIMEOUT = 10000 * 100000
 dataset = Dataset.make({"name": "synonames", "title": "Synonames"})
 cache = Cache.make_default(dataset)
 # cache.preload(f"{WikidataClient.WD_API}%")
 session = requests.Session()
-client = WikidataClient(cache, session=session, cache_days=30)
+client = WikidataClient(cache, session=session, cache_days=60)
 out_path = Path(__file__).parent / "out"
 out_path.mkdir(exist_ok=True, parents=True)
 
 
 # Crawl wikidata for names
 CLASSES = {
-    "Q12308941": "given",  # male given name
-    "Q11879590": "given",  # female given name
-    "Q3409032": "given",  # unisex given name
-    "Q202444": "given",  # given name
-    "Q122067883": "given",  # given name component
-    "Q245025": "given",  # middle name
     "Q101352": "family",  # family name
     "Q4116295": "family",  # surname
     "Q120707496": "family",  # second family name
@@ -41,6 +39,12 @@ CLASSES = {
     "Q130444179": "patronymic",  # feminine patronymic name
     "Q130443889": "matronymic",  # feminine matronymic name
     "Q130443873": "matronymic",  # masculine matronymic name
+    "Q12308941": "given",  # male given name
+    "Q11879590": "given",  # female given name
+    "Q3409032": "given",  # unisex given name
+    "Q202444": "given",  # given name
+    "Q122067883": "given",  # given name component
+    "Q245025": "given",  # middle name
 }
 IGNORE = {"Q211024", "Q13198636"}
 # Same as relation: https://www.wikidata.org/wiki/Property:P460
@@ -54,6 +58,7 @@ def clean_name(name: Optional[str]) -> List[str]:
     if name is None:
         return []
     names: List[str] = []
+    name = unicodedata.normalize("NFC", name)
     name = clean_brackets(name)
     name = remove_emoji(name)
     for part in name.split("/"):
@@ -62,6 +67,9 @@ def clean_name(name: Optional[str]) -> List[str]:
             continue
         if len(part) > 30:
             continue
+        if is_modern_alphabet(part) and len(part) < 2:
+            print("Too short %r -> %r" % (name, part))
+            continue
         if "," in part or "(" in part or "/" in part or "=" in part:
             # print("Skipping: ", part)
             continue
@@ -69,85 +77,12 @@ def clean_name(name: Optional[str]) -> List[str]:
     return names
 
 
-def iterate_name_items() -> Generator[Item, None, None]:
-    def fetch_item_safe(qid: str) -> Item:
-        # Helper function to safely fetch an item
-        while True:
-            try:
-                return client.fetch_item(qid)
-            except requests.RequestException as e:
-                log.error(f"Error fetching item {qid}: {e}")
-
-    with ThreadPoolExecutor(max_workers=6) as executor:
-        for cls, cls_name in CLASSES.items():
-            print("Crawling: ", cls, cls_name)
-            query = SPARQL % cls
-            response = client.query(query)
-            print("Results: ", len(response.results))
-            futures: Future[Item] = []
-            for result in response.results:
-                qid = result.plain("item")
-                if qid is None or qid.startswith("L"):
-                    continue
-                if qid in IGNORE:
-                    continue
-                futures.append(executor.submit(fetch_item_safe, qid))
-            for idx, future in enumerate(as_completed(futures)):
-                item = future.result()
-                if item is None:
-                    continue
-                yield item
-                if idx > 0 and idx % 1000 == 0:
-                    print("Crawled: ", idx)
-                    client.cache.flush()
-                    cache.flush()
-
-
-def build_mappings():
-    inverted: Dict[str, Set[str]] = defaultdict(set)
-    for item in iterate_name_items():
-        if item.id in CLASSES:
-            continue
-        counter = Counter()
-        unique = set()
-        main_name = None
-        labels = list(item.labels)
-        # add aliases
-        # add P1705 native label
-        # add P2440 transliteration or transcription
-        labels.extend(item.aliases)
-        for claim in item.claims:
-            if claim.property in ("P1705", "P2440"):
-                labels.append(claim.text)
-
-        for label in labels:
-            name = label.text
-            for name in clean_name(label.text):
-                if label.lang == "eng":
-                    main_name = name
-                unique.add(name)
-                counter[name] += 1
-        if len(unique) < 1:
-            continue
-        if main_name is None:
-            main_name = counter.most_common(1)[0][0]
-        inverted[main_name].update(unique)
-
-    with open(out_path / "wd_names_strict.txt", "w", encoding="utf-8") as fh:
-        for main_name, aliases in inverted.items():
-            aliases.remove(main_name)
-            if len(aliases) < 2:
-                continue
-            forms = ", ".join(sorted(aliases))
-            out = f"{forms} => {main_name}"
-            fh.write(out + "\n")
-
-
-def build_canonicalisations():
-    inverted: Dict[str, Set[str]] = defaultdict(set)
-    for item in iterate_name_items():
-        if item.id in CLASSES:
-            continue
+def process_item(qid: str) -> Tuple[str, Set[str]]:
+    # Helper function to safely fetch an item
+    try:
+        item = client.fetch_item(qid)
+        if item is None or item.id in CLASSES:
+            return None
         unique = set()
         labels = list(item.labels)
         labels.extend(item.aliases)
@@ -162,11 +97,61 @@ def build_canonicalisations():
             for name in clean_name(label.text):
                 unique.add(name)
         if len(unique) < 1:
-            continue
-        inverted[item.id].update(unique)
+            return None
+        return (qid, unique)
+    except requests.RequestException as e:
+        log.error(f"Error fetching item {qid}: {e}")
+        # time.sleep(1)
+        return None
 
-    with gzip.open(out_path / "names.gz", "wt", encoding="utf-8") as fh:
-        for qid, aliases in inverted.items():
+
+def build_canonicalisations():
+    inverted: Dict[str, Set[str]] = defaultdict(set)
+    with ThreadPoolExecutor(max_workers=6) as executor:
+        for cls, cls_name in CLASSES.items():
+            print("Crawling: ", cls, cls_name)
+            query = SPARQL % cls
+            response = client.query(query)
+            print("Results: ", len(response.results))
+            futures: Future[Tuple[str, Set[str]]] = []
+            random.shuffle(response.results)
+            for result in response.results:
+                qid = result.plain("item")
+                if qid is None or qid.startswith("L"):
+                    continue
+                if qid in IGNORE:
+                    continue
+                futures.append(executor.submit(process_item, qid))
+            for idx, future in enumerate(as_completed(futures)):
+                result = future.result()
+                if result is None:
+                    continue
+                qid, uniques = result
+                inverted[qid].update(uniques)
+                if idx > 0 and idx % 1000 == 0:
+                    print("Crawled: ", idx)
+                    # client.cache.flush()
+                    cache.flush()
+
+    print("Deduplicating name QIDs...")
+    by_names: Dict[str, Set[str]] = defaultdict(set)
+    for qid, aliases in inverted.items():
+        for alias in aliases:
+            by_names[alias].add(qid)
+    for nqid, naliases in sorted(inverted.items()):
+        other_qids = set()
+        for alias in naliases:
+            other_qids.update(by_names[alias])
+        other_qids.discard(nqid)
+        for oqid in other_qids:
+            oaliases = inverted[oqid]
+            if naliases.issubset(oaliases):
+                print("Removing: ", nqid, "->", oqid, ": ", naliases)
+                inverted.pop(nqid, None)
+
+    print("Write out names file...")
+    with open(out_path / "persons.txt", "w", encoding="utf-8") as fh:
+        for qid, aliases in sorted(inverted.items()):
             if len(aliases) < 2:
                 continue
             forms = ", ".join(sorted(aliases))

@@ -15,17 +15,20 @@ is used to represent individual parts of a name, such as the first name, middle 
 from rigour.names.name import Name
 from rigour.names.part import NamePart
 from rigour.names.tag import NamePartTag, NameTypeTag
-from rigour.names.pick import pick_name, pick_case
+from rigour.names.pick import pick_name, pick_case, reduce_names
 from rigour.names.check import is_name
 from rigour.names.tokenize import tokenize_name
-from rigour.names.person import remove_person_prefixes
+from rigour.names.person import remove_person_prefixes, load_person_names
+from rigour.names.person import load_person_names_mapping
 from rigour.names.org_types import replace_org_types_display
 from rigour.names.org_types import replace_org_types_compare
 from rigour.names.org_types import extract_org_types, remove_org_types
+from rigour.names.alignment import align_person_name_order
 
 __all__ = [
     "pick_name",
     "pick_case",
+    "reduce_names",
     "tokenize_name",
     "is_name",
     "Name",
@@ -33,8 +36,11 @@ __all__ = [
     "NamePartTag",
     "NameTypeTag",
     "remove_person_prefixes",
+    "load_person_names",
+    "load_person_names_mapping",
     "replace_org_types_display",
     "replace_org_types_compare",
+    "align_person_name_order",
     "extract_org_types",
     "remove_org_types",
 ]

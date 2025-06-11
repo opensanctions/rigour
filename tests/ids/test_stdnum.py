@@ -1,4 +1,4 @@
-from rigour.ids import ISIN, IBAN, FIGI, BIC, INN, LEI, CPF, CNPJ, SSN
+from rigour.ids import ISIN, IBAN, FIGI, BIC, INN, LEI, CPF, CNPJ, SSN, USCC
 
 
 def test_isin():
@@ -108,3 +108,15 @@ def test_cnpj():
     assert CNPJ.normalize("00.000.000/0001-91") == "00000000000191"
     assert CNPJ.normalize("0000000000019") is None
     assert CNPJ.normalize("") is None
+
+
+def test_uscc():
+    assert USCC.is_valid("111000000000116154")
+    assert not USCC.is_valid("111000000000116156")
+    assert not USCC.is_valid("11100000000")
+    assert not USCC.is_valid("")
+    assert USCC.normalize("71310106424845496E") == "71310106424845496E"
+    assert USCC.normalize("71310106424845496e") == "71310106424845496E"
+    assert USCC.normalize("123-45-6789") is None
+    assert USCC.normalize("") is None
+    assert USCC.format("111000000000116154") == "111000000000116154"

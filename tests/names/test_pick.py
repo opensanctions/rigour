@@ -1,4 +1,4 @@
-from rigour.names.pick import pick_name, levenshtein_pick, pick_case
+from rigour.names.pick import pick_name, levenshtein_pick, pick_case, reduce_names
 
 PUTIN = [
     "Vladimir Vladimirovich Putin",
@@ -112,3 +112,32 @@ def test_pick_case():
     assert pick_case(cases) == "Vladimir Putin"
     assert pick_case([]) is None
     assert pick_case(["VLADIMIR PUTIN"]) == "VLADIMIR PUTIN"
+
+
+def test_reduce_names():
+    names = [
+        "Vladimir Vladimirovich Putin",
+        "Vladimir Vladimirovich PUTIN",
+        "Vladimir Vladimirovich PUTINY",
+        "Vladimir Vladimirovich PUTIN",
+    ]
+    reduced = reduce_names(names)
+    assert len(reduced) == 2
+    assert "Vladimir Vladimirovich Putin" in reduced
+    assert "Vladimir Vladimirovich PUTINY" in reduced
+
+    names = ["Vladimir Putin", "Vladimir PUTIN", "VLADIMIR PUTIN"]
+    reduced = reduce_names(names)
+    assert len(reduced) == 1
+    assert reduced[0] == "Vladimir Putin"
+
+    names = ["."]
+    reduced = reduce_names(names)
+    assert len(reduced) == 0, reduced
+
+    reduced = reduce_names([])
+    assert len(reduced) == 0, reduced
+
+    names = [".", "6161", " / "]
+    reduced = reduce_names(names)
+    assert len(reduced) == 0, reduced

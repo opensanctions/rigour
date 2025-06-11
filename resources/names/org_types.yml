@@ -37,7 +37,21 @@ types:
       - Public Limited Co.
       - Public Ltd. Co.
       - Public Limited Company
+      - Public Limited
       - Plc. Ltd.
+      - PLC Ltd.
+      - PLC Company
+      - P.L.Co.
+      - Public Limited Corporation
+      - Publicly Limited Company
+      - Pub. Limited Co.
+      - Pub. Ltd. Co.
+      - Public Limted Company
+      - Public Limited Compnay
+      - Public Limitd Company
+      - Pubic Limited Company
+      - Public Limitied Company
+      - Public Limitted Company
   - compare: JSC
     aliases:
       - ሃላፊነቱ የተወሰነ የግል ማህበር
@@ -52,6 +66,7 @@ types:
     compare: JSC
     aliases:
       - Shoqëri Aksionere
+      - Shoqëri Anonime
       - Sh.A.
   - display: Sh.K.
     compare: LP
@@ -64,10 +79,24 @@ types:
     compare: LLC
     aliases:
       - Free Zone Establishment
+      - FZ Establishment
+      - Free Zone Enterprise
+      - FZ Enterprise
+      - Free Zone Entity
+      - FZ Entity
   - display: FZCO
     compare: LLC
     aliases:
       - FZ-LLC
+      - FZLLC
+      - FZ-L.L.C.
+      - Free Zone Co.
+      - FreeZone Company
+      - Free Economic Zone LLC
+      - Trade Free Zone Company
+      - Special Economic Zone LLC
+      - Free Zone L.L.C.
+      - F.Z. Co.
       - Free Zone Company
       - Free Zone Limited Liability Company
       - Free Zone Co.
@@ -124,19 +153,28 @@ types:
     compare: JSC
     aliases:
       - Sociedad Anónima de Capital Variable
+      - SOCIEDAD ANONIMA DE CAPITAL VARIABLE
+      - Soc. Anón. de Cap. Var.
+      - S.A.C.V.
       - S.A. DE C.V.
       - S.A. DE C.V
       - SA. DE CV.
       - SA de CV
       - S.A DE C.V
+      - SAdeCV
+      - SA. de C.V.
   - display: S.A.P.I de C.V.
     compare: JSC
     aliases:
       - Sociedad Anónima Promotora de Inversión de Capital Variable
+      - SOCIEDAD ANONIMA PROMOTORA DE INVERSION DE CAPITAL VARIABLE
+      - Soc. Anón. Prom. de Inv. de Cap. Var.
       - S.A.P.I. DE C.V.
       - S.A.P.I. DE C.V
       - SA.P.I. DE C.V.
       - SA.P.I. DE C.V
+      - SAPI de C.V.
+
   - display: S. DE R.L. DE C.V.
     compare: LLC
     aliases:
@@ -297,15 +335,22 @@ types:
     aliases:
       - Gesellschaft mit beschränkter Haftung
       - g.m.b.h
+      - gmb.h
       - Gesellschaft mit besch Haftung
       - Gesellschaft mit besch. Haftung
       - Gesellschaft mit beschr Haftung
       - Gesellschaft mit beschr. Haftung
       - Gesellschaft mit beschränkter Haftung
+      - Gesellschaft mit beschraenkter Haftung
+      - Gesellschaft mit beschraenker Haftung
+      - Gesellschaft mit beschränkter Haftng
+      - Ges. mit beschr. Haftung
+      - Ges. mit besch. Haftung
       - mit besch haftung
       - mit beschr haftung
       - mit beschränkter haftung
       - гмбх
+      - г.м.б.х.
   - display: gGmbH
     compare: LLC
     aliases:
@@ -315,8 +360,13 @@ types:
     compare: LLC
     aliases:
       - UG (haftungsbeschränkt)
+      - UG (haftungsbeschr.)
+      - UG (h.b.)
       - Unternehmergesellschaft haftungsbeschränkt
+      - Unternehmerges. (haftungsbeschränkt)
       - Unternehmergesellschaft
+      - Unternehmerges.
+      - Unternehmerg.
   - display: GmbH & Co. KG
     compare: LLC
     aliases:
@@ -360,7 +410,6 @@ types:
       - sp. zoo
       - spolka z ograniczona odpowiedzialnoscia
       - spółka z ograniczoną odpowiedzialnością
-      - Spółka z ograniczoną odpowiedzialnością
   - display: 3AT
     aliases:
       - закрытае ацыянернае таварыства
@@ -394,9 +443,13 @@ types:
     aliases:
       - aksiyadorlik jamiyati
       - акциядорлик жамияти
-  - display: a.s.
+      - Det offentligretlige aktieselskab
+      - Kumpanija b’Ishma Konġunti
+      - Aandelenvennootschap
+  - display: a.m.b.a.
     compare: LLC
     aliases:
+      - amba
       - andelsselskab med begrænset ansvar
   - display: anl
     compare: COOP
@@ -419,25 +472,46 @@ types:
       - Joint-Stock Company
       - Joint-stock Company
       - JointStock Company
+      - Joint Stock Co.
+      - JS Co.
+      - JSC Company
   - display: PJSC
     compare: JSC
     aliases:
       - Public Stock Company
+      - public jsc
       - public stock company (PJSC)
       - Public Joint-Stock Company
       - Public joint stock company
+      - Sociedade pública por ações
+      - Kumpanija b’ishma konġunti pubbliċi
+      - Javno dioničko društvo
+      - Javna delniška družba
+      - állami tulajdonban lévő részvénytársaság
+      - Viešoji akcinė bendrovė
   - display: OJSC
     compare: JSC
     aliases:
       - otwarta spółka akcyjna
       - Open Joint-Stock Company
       - openbare aandelenvennootschap
+      - Публично акционерно дружество
+      - Δημόσια συμμετοχική εταιρεία
+      - Państwowa Spółka Akcyjna
+      - vennootschap op aandelen
+      - Openbare vennootschap op aandelen
+      - Openbare publiek-private vennootschap op aandelen
       - sociedad limitada por acciones abierta
       - sociedade por ações aberta
       - société par actions ouverte
+      - Verejná akciová spoločnosť
+      - Société publique par actions
+      - Societatea publică pe acțiuni
       - offene aktiengesellschaft
       - open joint stock company
+      - open jsc
       - veřejná akciová společnost
+      - Aktiebolaget
   - display: AT
     compare: JSC
     aliases:
@@ -479,6 +553,7 @@ types:
     compare: NGO
     aliases:
       - açıq səhmdar cəmiyyəti
+      - Açıq Səhmdar Cəmiyyəti
   - display: ay
     compare: GP
     aliases:
@@ -496,6 +571,7 @@ types:
     compare: LLC
     aliases:
       - besloten vennootschap met beperkte aansprakelijkheid
+      - vennootschap met beperkte aansprakelijkheid
   - display: ca
     compare: LLC
     aliases:
@@ -521,6 +597,7 @@ types:
       - sociedad cooperativa
       - spółdzielni
       - кооперация
+      - кооператив
   - compare: FIN
     aliases:
       - fond commun de placement
@@ -580,12 +657,23 @@ types:
     aliases:
       - društvo s ograničenom odgovornošću
       - društvo sa ograničenom odgovornošću
+      - DRUŠTVO SA OGRANIČENOM ODGOVORNOŠĆU
+      - društvo sa ograničenom odgovornošću
+      - drustvo s ogranicenom odgovornoscu
+      - drustvo sa ogranicenom odgovornoscu
+      - društvo s ograničenom odgovornosću
+      - društvo sa ograničenom odgovornosću
+      - društvo s ogranicenom odgovornošću
+      - društvo sa ogranicenom odgovornošću
+      - društvo s ograničenom odgovornoscu
+      - društvo sa ograničenom odgovornoscu
       - д.о.о.
       - доо
       - друштво са ограниченом одговорношћу
   - compare: LLC
     aliases:
       - društveno preduzeće
+      - Ribotos atsakomybės bendrovė
       - дп
       - друштвено предузеће
   - display: dtnn
@@ -765,6 +853,7 @@ types:
       - incorp
       - incorporated
       - Incorporated
+      - incorporation
       - incorporée
       - Inc.
   - display: IS
@@ -795,6 +884,19 @@ types:
     compare: JSC
     aliases:
       - joint stock commercial bank
+  - display: АКБ
+    compare: JSC
+    aliases:
+      - АКЦИОНЕРНЫЙ КОММЕРЧЕСКИЙ БАНК
+      - акционерный коммерческий банк
+      - Aktsionerny Kommercheskiy Bank
+      - АКЦИОНЕРНЫЙ КОМЕРЧЕСКИЙ БАНК
+      - АКЦЫОНЕРНЫЙ КОММЕРЧЕСКИЙ БАНК
+      - АКЦИОНЕРНЫ КОММЕРЧЕСКИЙ БАНК
+      - АКЦИОНЕРНЫЙ КОМЕРЧЕСКИ БАНК
+  - compare: JSC
+    aliases:
+      - Акционерное общество Финансово-строительная компания
   - display: jtd
     compare: JSC
     aliases:
@@ -829,6 +931,7 @@ types:
     aliases:
       - kft
       - korlatolt felelossegu tarsasag
+      - Korlátolt Felelősségű Társaság
       - korlátolt felelősségü társaság, organizační složka
       - korlátolt felelősségű társaság
   - compare: JSC
@@ -888,6 +991,7 @@ types:
       - Limited Liability Company
       - limited liability company
       - LIMITED LIABILITY COMPANY
+      - FOREIGN LIMITED LIABILITY COMPANY
       - L.L.C
       - L.L.C.
   - display: Ltd
@@ -1139,6 +1243,7 @@ types:
       - societate pe acțiuni
       - societatea pe actiuni
       - societatea pe acţiuni
+      - Societatea pe acțiuni
       - societateare pe actiuni
       - società anonima
       - société anonyme
@@ -1296,6 +1401,7 @@ types:
     aliases:
       - società per azioni
       - SOCIETA' PER AZIONI
+      - Sociedade por ações
   - display: spf
     compare: NGO
     aliases:
@@ -1346,6 +1452,37 @@ types:
       - societete cu răspundere limitată
       - società a responsabilità limitata
       - socitate cu responsabilitate limitata
+
+  - display: Rt.
+    compare: JSC
+    aliases:
+      - részvénytársaság
+
+  - display: Nyrt.
+    compare: JSC
+    aliases:
+      - nyilvánosan működő részvénytársaság
+      - Nyilvánosan működő részvénytársaság
+
+  - display: Zrt.
+    compare: JSC
+    aliases:
+      - Zártkörűen Működő Részvénytársaság
+
+  - display: Bt.
+    compare: LP
+    aliases:
+      - Betéti Társaság
+
+  - display: Kkt.
+    compare: GP
+    aliases:
+      - Közkereseti Társaság
+
+  - compare: SP
+    aliases:
+      - Egyéni Vállalkozó
+      - Egyéni Cég
 
   - display: Ltda
     compare: LLC
@@ -1456,6 +1593,11 @@ types:
       - federalna budżetowa instytucja
       - föderales staatseigenes unternehmen
       - gosudarstvennoe unitarnoe predpriyatie
+      - Întreprinderea unitară a statului federal
+      - Empresa Pública Unitária Federal
+      - Entreprise unitaire publique fédérale
+      - federalne państwowe przedsiębiorstwo unitarne
+      - Staatsinformatieagentschap
       - impresa unitaria statale
       - staatliches einheitsunternehmen
       - staatskonzern
@@ -1541,6 +1683,7 @@ types:
     compare: JSC
     aliases:
       - cjsc
+      - closed jsc
       - closed joint stock company
       - CLOSED JOINT-STOCK COMPANY
 
@@ -2171,21 +2314,65 @@ types:
       - АКЦОНЕРНОЕ ОБЩЕСТВО ЗАКРЫТОГО ТИПА
       - АКЦИОНЕРНОГО ОБЩЕСТВА ЗАКРЫТОГО ТИПА
       - АКЦИОНЕРОНОЕ ОБЩЕСТВО ЗАКРЫТОГО ТИПА
+      - ZAKRYTOE AKTSIONERNOE OBSHCHESTVO
+      - zakrytoe aktsionernoe obshchestvo
+      - Zakrytoye Aktsionernoye Obshchestvo
+      - zakrytoe akcionernoe obshchestvo
+      - zakrytoe aktsionernoe obshhestvo
+      - Zakrytoje Akcionernoje Obshchestvo
+      - Zakryte Akcjonarne Obschtschestwo
+      - ЗАКРЫТОE АКЦИОНЕРНОЕ ОБЩEСТВО
+      - закрытоe акционерное общeство
+      - zakritoe aktsionernoe obshchestvo
+      - закритое акционерное общество
+      - ЗАКРЫТОЕ АКЦИОНЕРНОЕ ОБЩEСТВО
+      - Закрытое акционерное общество # Closed Joint-Stock Company
+      - Закрытое акціонерне товариство
+      - Закрите акціонерне товариство
 
   - display: ОАО # открытое акционерное общество
     compare: JSC
     aliases:
+      - OAO # Open Joint-Stock Company
+      - O.A.O.
+      - О.А.О.
+      - Otkrytoe Aktsionernoye Obshestvo
       - ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО
       - ОТКРЫТОЕ АКЦИОНЕРГОЕ ОБЩЕСТВО
       - АКЦИОНЕPНОЕ ОБЩЕСТВО ОТКPЫТОГО ТИПА
       - АКЦОНЕРНОЕ ОБЩЕСТВО ОТКРЫТОГО ТИПА
       - otkrytoe aktsionernoe obshchestvo
       - открытое акционерное общество
-      - Vidkryte aktsionerne tovarystvo
       - відкрите акціонерне товариство
       - Відкрите акціонерне товариство
       - otkrytoe akcionernoe obshchestvo
       - otkrytoe aktsionernoe obshchestvo
+      - OTKRYTOE AKTSIONERNOE OBSHCHESTVO
+      - Otkrytoye Aktsionernoye Obshchestvo
+      - Otkrytoye Aktsionernoye Obshchestvo
+      - Otkrytoe Akcionernoe Obshhestvo
+      - открытое акционерное общeство
+      - ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩEСТВО
+      - Акционерное общество открытого типа
+      - aktsionernoe obshchestvo otkrytogo tipa
+      - otkritoe aktsionernoe obshchestvo
+      - otkrytoe aktsionernoe obschestvo
+      - Otkrytoye Aktsionernoye Obshchestvo
+      - открытоe акционерное общeство
+      - открытое акционернoe общество
+      - АКЦІОНЕРНЕ ТОВАРИСТВО ВІДКРИТОГО ТИПУ
+      - OTKR AKTS OBSHCH
+      - Odkryte Akcjonarne Obschtschestwo
+      - Otkrytoye Aktsionernoye Obshchestvo
+      - Otkrytoje Akcionernoje Obshchestvo
+
+  - display: ВАТ # відкрите акціонерне товариство
+    compare: JSC
+    aliases:
+      - Vidkryte aktsionerne tovarystvo
+      - Vidkrite Akcionerne Tovaristvo
+      - відкрите акціонерне товариство
+      - В.А.T.
 
   - compare: JSC
     aliases:
@@ -2194,6 +2381,7 @@ types:
       - avatud aktsiaselts
       - avoin osakeyhtiö
       - cuideachta comhstoic oscailte
+
   - display: АО # акционерное общество
     compare: JSC
     aliases:
@@ -2312,6 +2500,12 @@ types:
     aliases:
       - ОНОСС
       - ОРГАНИЗАЦИЯ НАУЧНОГО ОБСЛУЖИВАНИЯ И СОЦИАЛЬНОЙ СФЕРЫ
+
+  - compare: FIN
+    aliases:
+      - Интервальный комбинированный паевой инвестиционный фонд
+      - Закрытый комбинированный паевой инвестиционный фонд
+      - Биржевой паевой инвестиционный фонд рыночных финансовых инструментов
 
   - display: OOO # latin
     compare: LLC
@@ -2491,3 +2685,4 @@ types:
       - общество с ограниченной ответственностью частная охранная организация
       - общество с ограниченной ответственностью частное охранное предприятие
       - ооо
+      - Иностранное общество с ограниченной ответственностью

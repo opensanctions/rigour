@@ -13,7 +13,7 @@ from typing import Dict, List, Type
 from typing_extensions import TypedDict
 
 from rigour.ids.wikidata import WikidataQID
-from rigour.ids.stdnum_ import ISIN, IBAN, FIGI, BIC, INN, LEI
+from rigour.ids.stdnum_ import ISIN, IBAN, FIGI, BIC, INN, LEI, USCC
 from rigour.ids.stdnum_ import CPF, CNPJ, SSN
 from rigour.ids.ogrn import OGRN
 from rigour.ids.npi import NPI
@@ -40,6 +40,7 @@ FORMATS: Dict[str, Type[IdentifierFormat]] = {
     "ssn": SSN,
     "cpf": CPF,
     "cnpj": CNPJ,
+    "uscc": USCC,
     "generic": IdentifierFormat,
     "null": IdentifierFormat,
     "strict": StrictFormat,
@@ -100,7 +101,8 @@ __all__ = [
     "UEI",
     "SSN",
     "CPF",
-    "CPNJ",
+    "CNPJ",
+    "USCC",
     "get_identifier_format",
     "get_identifier_formats",
     "get_identifier_format_names",

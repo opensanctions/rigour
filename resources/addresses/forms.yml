@@ -40,6 +40,21 @@ forms:
     - буд
     - зд
     - здание
+    - строение
+  zone:
+    - zone
+    - зона
+  area:
+    - area
+    - район
+    - neighborhood
+    - nachbarschaft
+    - neighbourhood
+    - район
+    - райончик
+    - district
+    - bezirk
+    - distrikt
   ed:
     - edificio
     - edifice
@@ -50,6 +65,12 @@ forms:
     - national
   fed:
     - federal
+  alley:
+    - alley
+    - аллея
+    - проезд
+    - проїзд
+    - proezd
   int:
     - international
   sec:
@@ -66,10 +87,13 @@ forms:
     - street
     - strada
     - str
+    - rue
     - стр
   pr:
     - Pr-kt
     - Prospekt
+    - prospekt
+    - prospect
     - просп
     - проспект
   ul:
@@ -96,6 +120,7 @@ forms:
     - lane
     - переулок
     - pereulok
+    - per
     - пер
   pt:
     - point
@@ -104,6 +129,7 @@ forms:
   cir:
     - circle
   ter:
+    - terr
     - terrace
   pkwy:
     - parkway
@@ -132,8 +158,11 @@ forms:
   cty:
     - county
     - counties
+    - Okrug
+    - okr
   prov:
     - province
+    - пров
   sq:
     - square
   cnr:
@@ -145,13 +174,12 @@ forms:
   ft:
     - fort
   hts:
+    - hgts
     - heights
   mt:
     - mount
     - montaña
     - mountain
-  dst:
-    - district
   "co":
     - c o
     - c/o
@@ -172,9 +200,24 @@ forms:
     - republik
     - republique
     - repubblica
+    - республіки
   est:
     - estate
     - estates
+  stn:
+    - stazione
+    - station
+    - gare
+    - estación
+    - bahnhof
+    - hauptbahnhof
+    - hbf
+    - станция
+    - станція
+    - станц
+    - станц.
+    - вокзал
+    - 车站
   ind:
     - industrial
   cmrc:
@@ -213,6 +256,7 @@ forms:
     - story
     - storey
     - etazh
+    - поверх
     - этаж
   dept:
     - department
@@ -223,6 +267,7 @@ forms:
     - et
   of:
     - office
+    - KOM./OFFICE
     - officier
     - офис
     - ofis
@@ -234,14 +279,33 @@ forms:
     - headquarters
     - head office
     - headquarter
+    - главный офис
+    - головний офіс
   kab:
     - cabinet
     - Kabinet
   pom:
     - Pomeshch
     - Pomeshchenie
+    - Pomeshtenie
+    - pomeshcheniye
+    - Floor/Pomeshch.
     - Помещ
     - Пом
+  nab:
+    - naberezhnaya
+    - naberezhnye
+    - NABEREZHNAYA
+    - nab.
+    - набережная
+    - набережн
+    - embankment
+    - embankments
+  muni:
+    - municipal
+    - municipality
+    - MUNICIPAL
+    - Munitsipal'nyi
   hwy:
     - highway
     - shosse
@@ -256,6 +320,7 @@ forms:
     - p o box
     - P.O. Box
     - Post Office Box
+    - Post Box
   zip:
     - zipcode
     - zip code
@@ -268,6 +333,7 @@ forms:
     - letter
     - liter
     - litera
+    - літер
     - лит
     - литера
     - літера
@@ -284,6 +350,12 @@ forms:
     - russian
     - россия
     - российская федерация
+  moscow:
+    - moscow
+    - москвa
+    - москви
+    - москва
+    - moskau
   us:
     - united states
     - united states of america

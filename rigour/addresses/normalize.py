@@ -99,9 +99,12 @@ def _address_replacer(latinize: bool = False) -> Replacer:
         A function that takes a string and returns its normalized form.
     """
     from rigour.data.addresses.data import FORMS
+    from rigour.data.names.data import ORDINALS
+
+    forms = list(FORMS.items()) + list(ORDINALS.items())
 
     mapping: Dict[str, str] = {}
-    for repl, values in FORMS.items():
+    for repl, values in forms:
         repl_norm = normalize_address(repl, latinize=latinize, min_length=1)
         if repl_norm is None:
             log.warning("Replacement is normalized to null: %r", repl)

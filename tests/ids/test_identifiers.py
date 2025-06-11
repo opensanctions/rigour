@@ -41,7 +41,7 @@ def test_get_strong_format_names():
     assert "iban" in get_strong_format_names()
     assert "figi" in get_strong_format_names()
     assert "bic" in get_strong_format_names()
-    assert "inn" not in get_strong_format_names()
+    assert "strict" not in get_strong_format_names()
     assert "generic" not in get_strong_format_names()
 
 

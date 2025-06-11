@@ -1,4 +1,8 @@
 org_symbols:
+  # This file contains a list of common descriptors used in company and organization names. It is
+  # partially derived from OpenSanctions name data. The idea is to provide mappings between different
+  # spellings, languages and other variations of the same term. This can be used as a matching
+  # mechanism that circumvents the need for fuzzy matching or other complex algorithms.
   co:
     - company
     - сompany
@@ -10,6 +14,8 @@ org_symbols:
     - kampaniia
     - kompaniia
     - kompaniya
+    - kompānija
+    - kampaniya
     - kompanii
     - къмпани
     - компани
@@ -24,6 +30,7 @@ org_symbols:
     - compania
     - companie
     - companhia
+    - întreprinderea
     - firma
     - firm
     - Εταιρεία
@@ -48,7 +55,14 @@ org_symbols:
     - organizatsiya
     - organizacion
     - organizacja
+    - organizácie
+    - organizácia
+    - organizaciju
     - organizace
+    - organizacije
+    - organizacija
+    - organizaci
+    - organizatia
     - органищация
     - организациями
     - организация
@@ -78,6 +92,7 @@ org_symbols:
     - corporaciia
     - korporatsiia
     - korporatsiya
+    - korporacija
     - corporations
     - corporacion
     - корпорации
@@ -103,7 +118,10 @@ org_symbols:
     - cooperative society
     - coopératif
     - kooperatif
+    - kooperativa
+    - kooperattiva
     - coopération
+    - cooperativă
     - coopérative
     - kooperatsia
     - cooperatieve
@@ -123,6 +141,9 @@ org_symbols:
     - cntr
     - center
     - centre
+    - centras
+    - Centro
+    - Centrum
     - centr
     - centro
     - tsentrov
@@ -157,6 +178,12 @@ org_symbols:
     - Μπίζνες
     - 商业
     - 商
+  branch:
+    - branch
+    - branch of
+    - филиал
+    - filiale
+    - zweigstelle
   concern:
     - kontsern
     - concern
@@ -164,14 +191,19 @@ org_symbols:
     - концерн
     - مجموعة
     - consorcio
+    - consórcio
+    - group of companies
   consortium:
     - consortium
     - consorcio
+    - consórcio
     - consortum
     - konsortsium
     - consortile
   service:
     - service
+    - services
+    - servicios
     - службы
     - служба
   defence:
@@ -184,9 +216,31 @@ org_symbols:
     - difesa
     - försvar
     - Verteidigung
+    - verdediging
+    - protecția
+    - försvar
     - defensa
     - оборонный
     - оборон
+  department:
+    - department
+    - dept.
+    - département
+    - departament
+    - departamento
+    - departamentul
+    - dipartimento
+    - Abteilung
+    - afdeling
+    - afdelingen
+    - отдел
+  special:
+    - Specjalnych
+    - specială
+    - special
+    - Speciaal
+    - Specijalni
+    - Специальный
   tech:
     - technology
     - технология
@@ -208,6 +262,13 @@ org_symbols:
     - technalohiy
     - tekhnolohiia
     - technológiai
+    - tehnologiei
+    - tehnologică
+    - technologickou
+    - technological
+    - technologique
+    - tehnološko
+    - tecnologies
     - tecnologia
     - technológií
     - tehnologie
@@ -215,6 +276,10 @@ org_symbols:
     - tekhnology
     - tekhnologi
     - teknologiya
+    - tehnološki
+    - teknoloġija
+    - tehnologia
+    - technologická
     - technik
     - teknologii
     - tekhnolohiyi
@@ -223,6 +288,7 @@ org_symbols:
     - tecnología
     - tehnologii
     - tekhnologiya
+    - tekhnologiy
     - technológiák
     - technologie
     - technologia
@@ -247,8 +313,20 @@ org_symbols:
     - verzekeringsmaatschappijen
     - страхового
     - страховая
+  property:
+    - property
+    - properties
+    - собственность
+    - собственностью
+    - собственностью
+    - собственностью
+    - собственностью
+    - собственностью
+    - собственностью
+    - собственности
   factory:
     - factory
+    - factories
     - фабрика
     - fabrika
     - rasteniye
@@ -265,6 +343,7 @@ org_symbols:
     - 厂
     - 厂家
     - 厂子
+    - plant
   fund:
     - fund
     - fond
@@ -278,8 +357,10 @@ org_symbols:
     - intl
     - int'l
     - international
+    - internațional
     - internantional
     - internatsionale
+    - internationales
     - internasional
     - интернациональный
     - интернациональная
@@ -301,8 +382,14 @@ org_symbols:
     - групп
     - groupement
     - groupe
+    - Grupa
+    - grupė
+    - Grupul
+    - Grúpa
     - grup
     - Όμιλος
+    - Ομάδα
+    - Skupina
     - Grupa
     - 团体
     - 团
@@ -364,9 +451,60 @@ org_symbols:
     - federatsyy
     - federální
     - federálny
+    - federalny
+    - federalna
+    - federāla
+  national:
+    - national
+    - национальный
+    - национальная
+    - национальные
+    - национального
+    - национальной
+    - национальных
+    - национальнoе
+    - национальнaя
+    - национальнoй
+    - национальнoго
+    - национальнoе
+    - национальнoй
+    - nationalnyy
+    - nacionalnyy
+    - nacionalna
+    - nazionale
+    - nacional
+    - nationell
+    - nasjonale
+    - ulusal
+    - narodowy
+    - národní
+    - landelijk
+    - valstybinis
+    - 国立
+    - 国家的
+  republic:
+    - republic
+    - republics
+    - республика
+    - республиканский
+    - республиканская
+    - республиканские
+    - республиканского
+    - республиканской
+    - république
+    - republik
+    - repubblica
+    - republika
+    - república
+    - 共和国
+    - cumhuriyet
+    - جمهورية
+    - respublika
+    - respublik
   institute:
     - institute
     - institut
+    - inštitút
     - школа
     - институт
     - інститут
@@ -379,11 +517,18 @@ org_symbols:
     - instituição
     - ynstytut
     - institiut
+    - institūts
+    - instytutu
     - instituut
     - instytut
     - istituto
     - institutas
     - institutul
+    - instituutti
+    - industite
+    - instituutin
+    - inštituta
+    - institutului
     - 研究所
     - 学院
   institution:
@@ -401,6 +546,8 @@ org_symbols:
     - fundacja
     - fundacion
     - fondation
+    - fundație
+    - fundacija
     - Foundation
     - Fondacion
     - Fondacioni
@@ -431,10 +578,16 @@ org_symbols:
     - industriia
     - industriala
     - industriji
+    - industrji
+    - industrije
+    - industriya
+    - industriei
+    - industriju
     - industriales
     - indastrial
     - industriel
     - industriale
+    - industrială
     - industrialny
     - industrie
     - industra
@@ -464,11 +617,37 @@ org_symbols:
     - ingeniería
     - inženýrství
     - inženiring
+    - inzhiniring
     - 工学
     - エンジニアリング
+  scientific:
+    - scientific
+    - science
+    - science and technology
+    - научный
+    - научная
+    - научные
+    - научных
+    - научного
+    - научной
+    - научно-исследовательский
+  health:
+    - health
+    - healthcare
+  pharmacy:
+    - pharmacy
+    - фармацевтический
+    - apotheke
   associates:
     - associates
     - ассоциированные
+  network:
+    - network
+    - networks
+    - netzwerk
+    - сетевой
+    - сетевые
+    - сетевое
   investment:
     - investment
     - investmet
@@ -484,11 +663,22 @@ org_symbols:
     - інвестиционный
     - инвестиционного
     - investicni
+    - investitsiy
     - investimenti
     - investimento
     - investeringen
     - investimentos
+    - inversión
+    - investissement
+    - investitorii
+    - 투자
     - 投資
+    - השקעה
+    - investasi
+    - investice
+    - investicija
+    - invesment
+    - invesmenti
   dev:
     - development
     - dev
@@ -502,6 +692,7 @@ org_symbols:
     - ανάπτυξη
     - развитие
     - развития
+    - развитию
     - ανάπτυξης
   enterprise:
     - enterprise
@@ -517,9 +708,105 @@ org_symbols:
     - предприятия
     - предпрятие
     - предприятий
+    - predpriyatie
+    - empresa
+    - impresa
+    - предприемство
+    - підприємство
+    - 기업
+    - प्रतिष्ठान
+    - yritys
+  islamic:
+    - islamic
+    - исламский
+    - исламская
+    - исламские
+    - исламских
+    - исламского
+    - исламской
+    - islamitische
+    - islamique
+    - islamskiej
+    - islámských
+    - islamských
+    - islamiske
+    - islam
+    - islamo
+    - islâmico
+  research:
+    - research
+    - исследование
+    - исследовательский
+    - изучение
+    - forschung
+  shipping:
+    - shipping
+    - shipping company
+    - shipping line
+    - shipping lines
+  production:
+    - production
+    - productions
+    - proizvodstvennoe
+    - производственное
+  construction:
+    - construction
+  consulting:
+    - consulting
+    - консалтинг
+    - konsulting
+    - consultancy
+    - consulenza
+    - conseils
+    - beratung
+    - コンサルティング
+  design:
+    - design
+    - designer
+    - designers
+    - designing
+    - diseño
+    - diseñador
+    - dizayn
+    - progettazione
+    - デザイン
+    - проектирование
+    - проектировщик
+    - проектировщики
+    - проектировщица
+    - проектировщицы
+    - проектировщиц
+  revolutionary:
+    - revolutionary
+    - revolutsioonilise
+    - revolutsionny
+    - rewolucji
+    - révolution
+    - revolucio
+    - revolution
+    - revolučných
+    - revolučních
+    - revoliucijos
+    - revolucionarne
+    - revolucionāro
+    - rivoluzionarie
+    - revolutionaire
+    - революционный
+    - революционная
+    - революционные
+    - революционных
+  committee:
+    - committee
+    - committees
+    - комитет
+    - комитеты
+    - комітет
+    - комітети
+    - комитету
   professional:
     - professional
     - professionel
+    - professionalnyi
     - профессионального
     - профессионольного
     - профессиональоного
@@ -533,6 +820,171 @@ org_symbols:
     - operation
     - operating
     - операциях
+    - операции
+    - operaciones
+    - operações
+    - opérations
+    - operativos
+    - operativa
+    - operazioni
+    - operasional
+    - operativní
+    - operationeel
+    - operasyonel
+    - operacyjne
+    - オペレーション
+    - 运营
+  kombinat:
+    - kombinat
+    - комбинат
+    - Kombinatas
+  central:
+    - central
+    - centrala
+    - centrale
+    - centralele
+    - centrali
+    - центральный
+    - центральная
+    - центральные
+    - центрального
+    - центральной
+  general:
+    - general
+    - генеральный
+    - генеральная
+    - генеральные
+    - генерального
+    - генеральной
+    - генеральных
+  mechanical:
+    - mechanical
+    - механический
+    - механическая
+    - механические
+    - механического
+    - механической
+    - механических
+  transport:
+    - transport
+    - transportation
+    - транспорт
+    - транспортный
+    - транспортная
+    - транспортные
+    - транспортировке
+    - транспортировок
+    - транспортировке
+  financial:
+    - financial
+    - finance
+    - finances
+    - финансирование
+    - финансирования
+    - финансовый
+    - финансовая
+    - финансовые
+    - финансовых
+    - финансового
+    - финансовой
+  comms:
+    - communications
+    - communication
+    - kommunikation
+    - comms
+    - коммюникации
+    - коммуникация
+    - коммуникации
+    - коммуникаций
+  information:
+    - information
+    - info
+    - information
+    - informatics
+    - informatyka
+    - informatica
+    - informatyki
+    - информация
+    - информациями
+    - информацией
+    - информационное
+    - информационные
+    - информационных
+  electronic:
+    - electronic
+    - electronics
+    - elektronisch
+    - elektronische
+    - электронный
+    - электронная
+    - электронные
+    - электронных
+    - электроника
+    - электроники
+  chemical:
+    - chemical
+    - chemicals
+    - химический
+    - химическая
+    - химические
+    - химических
+    - химического
+    - химической
+  global:
+    - global
+    - weltweit
+    - mondial
+    - mondiale
+    - globální
+    - globalny
+    - küresel
+    - глобальный
+    - глобальная
+    - глобальные
+    - глобального
+    - глобальной
+    - глобальных
+    - глобально
+  system:
+    - system
+    - systems
+    - systeme
+    - система
+    - системы
+    - sistema
+    - sistemas
+    - système
+    - systèmes
+    - システム
+    - システムズ
+  association:
+    - association
+    - associations
+    - ассоциация
+    - ассоциации
+  bureau:
+    - bureau
+    - бюро
+    - бюро
+    - бюрo
+    - bürö
+    - bürö
+    - büro
+    - büron
+    - büron
+    - büronü
+    - büronü
+  logistics:
+    - logistic
+    - logistics
+    - логистика
+    - логистики
+    - логистическая
+    - логистической
+    - логистических
+    - логистическому
+    - логистическому
+    - логистической
   bank:
     - bank
     - banking
@@ -546,11 +998,13 @@ org_symbols:
     - savings bank
     - savings and loan association
     - handelsbank
+    - Kreditanstalt
     - handelsbanken
     - банка
     - банк
     - инвестиционный банк
     - коммерческий банк
+    - муниципально-коммерческий банк
     - банківська
     - банківська установа
     - τράπεζα
@@ -573,10 +1027,18 @@ org_symbols:
     - commerciaux
     - commercieel
     - commerciale
+    - comerciale
     - commerciële
     - kommercial
+    - commerical
+    - comercială
     - εμπορική
     - 商業
+    - commerciell
+    - קומרציאלי
+    - 상업적
+    - kommersiel
+    - 商业的
   offshore:
     - offshore
     - ofshor
@@ -593,9 +1055,15 @@ org_symbols:
     - govmnt
     - government
     - government of
+    - government of the
     - governmental
     - regierung
     - regierung von
+    - regierung der
+    - staat
+    - staatlich
+    - staatliche
+    - staatliches
     - 政府
     - 辖
     - state
@@ -603,6 +1071,7 @@ org_symbols:
     - правительство
     - gouvernement
     - gouvernement de
+    - gouvernementale
     - государственное
     - государственная
     - государственный
@@ -632,17 +1101,41 @@ org_symbols:
   named:
     - im
     - имени
+    - imeni
     - named after
     - named for
+  socalled: # EU slang
+    - SO-CALLED
+    - Self-proclaimed
+    - the so-called
+    - Așa-numita
+    - Den såkaldte
+    - Takozvana
+    - Sogenannte
+    - L-hekk imsejħa
+    - soi-disant
+    - Soi-disant
+    - Javni pokret
+    - mar a ghairtear de
+    - Tā sauktā
+    - Samhällsrörelsen
+    - népi mozgalom
+    - Tzv.
+    - Т.нар.
   ministry:
     - ministry
     - мinistry
     - ministère
     - ministeru
     - ministero
+    - ministerio
     - ministerul
     - ministerium
     - ministerie
+    - ministrerio
+    - ministerstvo
+    - ministerului
+    - ministerij
   export:
     - export
     - exports
@@ -715,6 +1208,16 @@ org_symbols:
   union:
     - union
     - союз
+    - союза
+    - unión
+    - União
+    - ユニオン
+    - 組合
+    - 联盟
+    - zveza
+    - związek
+    - savez
+    - szakszervezet
   university:
     - university
     - университет
@@ -727,6 +1230,7 @@ org_symbols:
     - université
     - universtiy
     - universitet
+    - universität
     - univ
     - uni
     - univ.
@@ -799,8 +1303,9 @@ ordinals:
   # Also covers Roman Numerals e.g. VIIIth (for 8th).
   # Covers certain variants e.g. IIIIth as well as IVth for 4th.
   # First (1st)
-  first:
+  1st:
     - "First"
+    - "One"
     - "Erste"
     - "Erster"
     - "1st"
@@ -829,8 +1334,9 @@ ordinals:
     - "Ist"
     - "I." # see if this backfires
   # Second (2nd)
-  second:
+  2nd:
     - "Second"
+    - "Two"
     - "Zweite"
     - "Zweiter"
     - "2nd"
@@ -859,8 +1365,9 @@ ordinals:
     - "IInd"
     - "II" # see if this backfires
   # Third (3rd)
-  third:
+  3rd:
     - "Third"
+    - "Three"
     - "Dritte"
     - "Dritter"
     - "3rd"
@@ -889,8 +1396,9 @@ ordinals:
     - "IIIrd"
     - "III" # see if this backfires
   # Fourth (4th)
-  fourth:
+  4th:
     - "Fourth"
+    - "Four"
     - "Vierte"
     - "Vierter"
     - "4th"
@@ -919,8 +1427,9 @@ ordinals:
     - "IIIIth"
     - "IV"
   # Fifth (5th)
-  fifth:
+  5th:
     - "Fifth"
+    - "Five"
     - "Fünfte"
     - "Fünfter"
     - "5th"
@@ -948,8 +1457,9 @@ ordinals:
     - "Vth"
     - "V." # see if this backfires
   # Sixth (6th)
-  sixth:
+  6th:
     - "Sixth"
+    - "Six"
     - "Sechste"
     - "Sechster"
     - "6th"
@@ -977,8 +1487,9 @@ ordinals:
     - "VIth"
     - "VI"
   # Seventh (7th)
-  seventh:
+  7th:
     - "Seventh"
+    - "Seven"
     - "Siebte"
     - "Siebter"
     - "7th"
@@ -1006,8 +1517,9 @@ ordinals:
     - "VIIth"
     - "VII"
   # Eighth (8th)
-  eighth:
+  8th:
     - "Eighth"
+    - "Eight"
     - "Achte"
     - "Achter"
     - "8th"
@@ -1035,8 +1547,9 @@ ordinals:
     - "VIIIth"
     - "VIII"
   # Ninth (9th)
-  ninth:
+  9th:
     - "Ninth"
+    - "Nine"
     - "Neunte"
     - "Neunter"
     - "9th"
@@ -1065,8 +1578,9 @@ ordinals:
     - "VIIIIth"
     - "IX"
   # Tenth (10th)
-  tenth:
+  10th:
     - "Tenth"
+    - "Ten"
     - "Zehnte"
     - "Zehnter"
     - "10th"
@@ -1093,8 +1607,9 @@ ordinals:
     - "№ 10"
     - "Xth"
   # Eleventh (11th)
-  eleventh:
+  11th:
     - "Eleventh"
+    - "Eleven"
     - "Elfte"
     - "Elfter"
     - "11th"
@@ -1121,8 +1636,9 @@ ordinals:
     - "№ 11"
     - "XIth"
   # Twelfth (12th)
-  twelfth:
+  12th:
     - "Twelfth"
+    - "Twelve"
     - "Zwölfte"
     - "Zwölfter"
     - "12th"
@@ -1149,8 +1665,9 @@ ordinals:
     - "№ 12"
     - "XIIth"
   # Thirteenth (13th)
-  thirteenth:
+  13th:
     - "Thirteenth"
+    - "Thirteen"
     - "Dreizehnte"
     - "Dreizehnter"
     - "13th"
@@ -1177,8 +1694,9 @@ ordinals:
     - "№ 13"
     - "XIIIth"
   # Fourteenth (14th)
-  fourteenth:
+  14th:
     - "Fourteenth"
+    - "Fourteen"
     - "Vierzehnte"
     - "Vierzehnter"
     - "14th"
@@ -1206,8 +1724,9 @@ ordinals:
     - "XIVth"
     - "XIIIIth"
   # Fifteenth (15th)
-  fifteenth:
+  15th:
     - "Fifteenth"
+    - "Fifteen"
     - "Fünfzehnte"
     - "Fünfzehnter"
     - "15th"
@@ -1234,8 +1753,9 @@ ordinals:
     - "№ 15"
     - "XVth"
   # Sixteenth (16th)
-  sixteenth:
+  16th:
     - "Sixteenth"
+    - "Sixteen"
     - "Sechzehnte"
     - "Sechzehnter"
     - "16th"
@@ -1262,8 +1782,9 @@ ordinals:
     - "№ 16"
     - "XVIth"
   # Seventeenth (17th)
-  seventeenth:
+  17th:
     - "Seventeenth"
+    - "Seventeen"
     - "Siebzehnte"
     - "Siebzehnter"
     - "17th"
@@ -1290,8 +1811,9 @@ ordinals:
     - "№ 17"
     - "XVIIth"
   # Eighteenth (18th)
-  eighteenth:
+  18th:
     - "Eighteenth"
+    - "Eighteen"
     - "Achtzehnte"
     - "Achtzehnter"
     - "18th"
@@ -1318,8 +1840,9 @@ ordinals:
     - "№ 18"
     - "XVIIIth"
   # Nineteenth (19th)
-  nineteenth:
+  19th:
     - "Nineteenth"
+    - "Nineteen"
     - "Neunzehnte"
     - "Neunzehnter"
     - "19th"
@@ -1347,8 +1870,9 @@ ordinals:
     - "XIXth"
     - "XVIIIIth"
   # Twentieth (20th)
-  twentieth:
+  20th:
     - "Twentieth"
+    - "Twenty"
     - "Zwanzigste"
     - "Zwanzigster"
     - "20th"
@@ -1375,8 +1899,11 @@ ordinals:
     - "№ 20"
     - "XXth"
   # Twenty-first (21st)
-  twentyfirst:
+  21st:
     - "Twenty-first"
+    - "Twenty-one"
+    - "Twentyone"
+    - "Twentyfirst"
     - "Einundzwanzigste"
     - "Einundzwanzigster"
     - "21st"
@@ -1403,8 +1930,11 @@ ordinals:
     - "№ 21"
     - "XXIst"
   # Twenty-second (22nd)
-  twentysecond:
+  22nd:
     - "Twenty-second"
+    - "Twenty-two"
+    - "Twentytwo"
+    - "Twentysecond"
     - "Zweiundzwanzigste"
     - "Zweiundzwanzigster"
     - "22nd"
@@ -1431,8 +1961,11 @@ ordinals:
     - "№ 22"
     - "XXIInd"
   # Twenty-third (23rd)
-  twentythird:
+  23rd:
     - "Twenty-third"
+    - "Twenty-three"
+    - "Twentythird"
+    - "Twentythree"
     - "Dreiundzwanzigste"
     - "Dreiundzwanzigster"
     - "23rd"
@@ -1459,8 +1992,13 @@ ordinals:
     - "№ 23"
     - "XXIIIrd"
   # Twenty-fourth (24th)
-  twentyfourth:
+  24th:
     - "Twenty-fourth"
+    - "Twenty-four"
+    - "Twentyfourth"
+    - "Twentyfour"
+    - "Vierundzwanzigste"
+    - "Vierundzwanzigster"
     - "24th"
     - "24-й"
     - "24-я"
@@ -1486,8 +2024,11 @@ ordinals:
     - "XXIVth"
     - "XXIIIIth"
   # Twenty-fifth (25th)
-  twentyfifth:
+  25th:
     - "Twenty-fifth"
+    - "Twenty-five"
+    - "Twentyfive"
+    - "Twentyfifth"
     - "25th"
     - "25-й"
     - "25-я"
@@ -1512,8 +2053,11 @@ ordinals:
     - "№ 25"
     - "XXVth"
   # Twenty-sixth (26th)
-  twentysixth:
+  26th:
     - "Twenty-sixth"
+    - "Twenty-six"
+    - "Twentysixth"
+    - "Twentysix"
     - "26th"
     - "26-й"
     - "26-я"
@@ -1538,8 +2082,10 @@ ordinals:
     - "№ 26"
     - "XXVIth"
   # Twenty-seventh (27th)
-  twentyseventh:
+  27th:
     - "Twenty-seventh"
+    - "Twenty-seven"
+    - "Twentyseven"
     - "27th"
     - "27-й"
     - "27-я"
@@ -1564,8 +2110,10 @@ ordinals:
     - "№ 27"
     - "XXVIIth"
   # Twenty-eight (28th)
-  twentyeight:
+  28th:
     - "Twenty-eight"
+    - "Twenty-eighth"
+    - "Twentyeight"
     - "28th"
     - "28-й"
     - "28-я"
@@ -1590,8 +2138,10 @@ ordinals:
     - "№ 28"
     - "XXVIIIth"
   # Twenty-ninth (29th)
-  twentyninth:
+  29th:
     - "Twenty-ninth"
+    - "Twenty-nine"
+    - "Twentynine"
     - "29th"
     - "29-й"
     - "29-я"
@@ -1617,8 +2167,9 @@ ordinals:
     - "XXIXth"
     - "XXVIIIIth"
   # Thirtieth (30th)
-  thirtieth:
+  30th:
     - "Thirtieth"
+    - "Thirty"
     - "Dreißigste"
     - "Dreißigster"
     - "30th"
@@ -1644,8 +2195,9 @@ ordinals:
     - "№ 30"
     - "30º."
     - "XXXth"
-  fourtieth:
+  40th:
     - "Fortieth"
+    - "Fourty"
     - "Vierzigste"
     - "Vierzigster"
     - "40th"
@@ -1671,8 +2223,9 @@ ordinals:
     - "XXXXth"
     - "XXXX"
     - "XLth"
-  fiftieth:
+  50th:
     - "Fiftieth"
+    - "Fiftyth"
     - "Fünfzigste"
     - "Fünfzigster"
     - "50th"
