@@ -116,7 +116,6 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_sorted, ["blue", "bird", "song"])
     assert tokens_eq(amt.result_sorted, ["blue", "bird", "song"])
 
-
     # TODO:
     # It'd be nice if longer alignments were preferred over shorter ones
 
@@ -196,11 +195,23 @@ def test_align_person_special_cases():
     result = make("Doe")
     amt = align_person_name_order(query, result)
     assert len(amt.query_sorted) == 1
-    assert len(amt.result_sorted) == 1
+    assert len(amt.result_sorted) == 0
 
     amt = align_person_name_order([], [])
     assert len(amt.query_sorted) == 0
     assert len(amt.result_sorted) == 0
+
+    query = make("Sergei Ivanovich")
+    result = make("Sergei")
+    amt = align_person_name_order(query, result)
+    assert len(amt.query_sorted) == 1
+    assert len(amt.result_sorted) == 1
+
+    query = make("Sergei")
+    result = make("Sergei Ivanovich")
+    amt = align_person_name_order(query, result)
+    assert len(amt.query_sorted) == 1
+    assert len(amt.result_sorted) == 1
 
 
 def test_align_tagged_person_name_parts():
@@ -250,5 +261,6 @@ def test_align_tagged_person_name_parts():
     ]
     aligned = align_person_name_order(query, result)
     assert len(aligned) == 2, (aligned.query_sorted, aligned.result_sorted)
-    assert aligned.query_sorted[0].form != aligned.result_sorted[0].form
-    assert aligned.query_sorted[1].form != aligned.result_sorted[1].form
+    assert not len(aligned.result_sorted)
+    # assert aligned.query_sorted[0].form != aligned.result_sorted[0].form
+    # assert aligned.query_sorted[1].form != aligned.result_sorted[1].form

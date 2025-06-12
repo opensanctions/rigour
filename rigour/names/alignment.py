@@ -170,10 +170,6 @@ def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Al
         Alignment: An object containing the aligned name parts and any extra parts.
     """
     alignment = Alignment()
-    if len(query) < 2 or len(result) < 2:
-        alignment.query_sorted = query
-        alignment.result_sorted = result
-        return alignment
 
     for qpart in sorted(query, key=len, reverse=True):
         best_match: Optional[NamePart] = None
@@ -203,7 +199,7 @@ def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Al
 
     if not len(alignment.query_sorted):
         alignment.query_sorted = query
-        alignment.result_sorted = result
+        alignment.result_extra = result
         return alignment
 
     for rpart in result:
