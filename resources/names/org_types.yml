@@ -100,6 +100,15 @@ types:
       - Free Zone Company
       - Free Zone Limited Liability Company
       - Free Zone Co.
+  - display: DMCC
+    compare: LLC
+    aliases:
+      - Dubai Multi Commodities Centre
+      - Dubai Multi Commodities Centre Company
+      - DMCC Company
+      - DMCC Co.
+      - DMCC LLC
+      - DMCC Free Zone
   - display: SCS
     compare: LP
     aliases:

@@ -76,6 +76,18 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
+        "display": "DMCC",
+        "compare": "LLC",
+        "aliases": [
+            "Dubai Multi Commodities Centre",
+            "Dubai Multi Commodities Centre Company",
+            "DMCC Company",
+            "DMCC Co.",
+            "DMCC LLC",
+            "DMCC Free Zone",
+        ],
+    },
+    {
         "display": "SCS",
         "compare": "LP",
         "aliases": ["S.C.S.", "Sociedad en Comandita Simple"],

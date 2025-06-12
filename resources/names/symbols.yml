@@ -324,6 +324,48 @@ org_symbols:
     - собственностью
     - собственностью
     - собственности
+  aviation:
+    - aviation
+    - aviación
+    - luftfahrt
+    - авиация
+    - авиационный
+  airline:
+    - airline
+    - airlines
+    - авиакомпания
+    - авиакомпании
+    - авиакомпаний
+    - авиакомпанию
+    - авиаперевозчик
+    - авиаперевозчики
+    - авиаперевозчика
+    - авиаперевозчиках
+    - авиаперевозчикам
+  flight:
+    - flight
+    - flights
+    - полет
+    - полеты
+    - полетах
+    - полетам
+    - полетами
+    - полете
+    - полетов
+    - рейс
+    - рейсы
+    - рейсов
+  maritime:
+    - maritime
+    - maritim
+    - морская
+    - морской
+    - морские
+    - морских
+    - морского
+  naval:
+    - naval
+    - navy
   factory:
     - factory
     - factories
@@ -684,11 +726,6 @@ org_symbols:
     - dev
     - devt
     - devt.
-    - development company
-    - development corporation
-    - development group
-    - development organization
-    - development project
     - ανάπτυξη
     - развитие
     - развития
@@ -751,6 +788,8 @@ org_symbols:
     - производственное
   construction:
     - construction
+    - строительство
+    - строительный
   consulting:
     - consulting
     - консалтинг
