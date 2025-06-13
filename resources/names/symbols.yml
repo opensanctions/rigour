@@ -324,6 +324,32 @@ org_symbols:
     - собственностью
     - собственностью
     - собственности
+  realty:
+    - realty
+    - realtor
+    - real estate
+    - недвижимость
+    - недвижимостью
+    - недвижимостями
+    - недвижимостях
+    - недвижимостью
+  supply:
+    - supply
+    - supplies
+    - supplier
+  equipment:
+    - equipment
+    - equipement
+    - оборудование
+    - обрудование
+    - обрудования
+    - обрудованиями
+    - обрудованиях
+    - обрудованиям
+    - обрудованиями
+    - обрудовании
+    - оборудованиe
+    - оборудованию
   aviation:
     - aviation
     - aviación
@@ -342,6 +368,64 @@ org_symbols:
     - авиаперевозчика
     - авиаперевозчиках
     - авиаперевозчикам
+  airport:
+    - airport
+    - airports
+    - аэропорт
+    - aerodrome
+    - aerodromes
+    - flughafen
+    - flughäfen
+    - lufthaven
+    - aéroport
+    - aéroports
+    - aérodrome
+    - aérodromes
+    - aeropuerto
+    - aeropuertos
+    - aeródromo
+    - aeródromos
+    - aeroporto
+    - aeroporti
+    - aerodromo
+    - aerodromi
+    - aeroporto
+    - aeroportos
+    - aeródromo
+    - aeródromos
+    - luchthaven
+    - luchthavens
+    - аэропорт
+    - аэропорты
+    - аэропорта
+    - аэропортов
+    - летное поле
+    - авиапорт
+    - аеропорт
+    - аеропорти
+    - летовище
+    - lotnisko
+    - lotniska
+    - port lotniczy
+    - letiště
+    - letiští
+    - letištní
+    - аеродром
+    - аеродроми
+    - aerodrom
+    - havaalanı
+    - 机场
+    - 航空港
+    - 飞机场
+    - 機場
+    - 航空港
+    - 飛機場
+    - 空港
+    - エアポート
+    - 飛行場
+    - 공항
+    - 비행장
+    - 항공항
   flight:
     - flight
     - flights
@@ -795,6 +879,10 @@ org_symbols:
     - консалтинг
     - konsulting
     - consultancy
+    - constultants
+    - консалтинговая
+    - consult
+    - konsult
     - consulenza
     - conseils
     - beratung
@@ -952,14 +1040,55 @@ org_symbols:
   electronic:
     - electronic
     - electronics
+    - electronical
     - elektronisch
     - elektronische
+    - électronique
+    - elettronico
+    - elettronica
+    - electrónico
+    - electrónica
+    - elektronisk
+    - електронний
+    - електронна
+    - електронски
     - электронный
     - электронная
     - электронные
     - электронных
     - электроника
     - электроники
+    - 电子
+    - 電子
+    - 電子の
+    - 전자
+    - 전자의
+  energy:
+    - energy
+    - energies
+    - energie
+    - energia
+    - energía
+    - énergie
+    - énergies
+    - energias
+    - energieën
+    - energi
+    - energier
+    - energií
+    - energije
+    - energija
+    - энергия
+    - энергии
+    - енергія
+    - енергії
+    - енергија
+    - енергије
+    - 能源
+    - 能量
+    - 能源
+    - エネルギー
+    - 에너지
   chemical:
     - chemical
     - chemicals
@@ -1140,9 +1269,12 @@ org_symbols:
   named:
     - im
     - имени
+    - им
     - imeni
     - named after
     - named for
+    - named in honor of
+    - named in memory of
   socalled: # EU slang
     - SO-CALLED
     - Self-proclaimed
@@ -1179,6 +1311,20 @@ org_symbols:
     - export
     - exports
     - eksportu
+    - экспорт
+    - экспорты
+  import:
+    - import
+    - imports
+    - импорт
+    - импорты
+    - импорта
+    - импортный
+    - импортная
+    - импортные
+    - импортных
+    - импортного
+    - импортной
   trade:
     - trade
     - trading
@@ -1225,6 +1371,10 @@ org_symbols:
     - решение
     - решения
     - решению
+  distrib:
+    - distributors
+    - distributor
+    - distribution
   capital:
     - capital
     - κεφάλαιο
@@ -1284,6 +1434,34 @@ org_symbols:
     - manufacturing
     - manufakturynh
     - manufacturies
+    - производство
+    - production
+    - производственный
+    - производственная
+  medical:
+    - medical
+    - медичний
+    - медична
+    - медичні
+    - медичних
+    - медицинский
+    - медицинская
+    - медицинские
+    - медицинского
+    - медицинской
+  hospital:
+    - hospital
+    - hospitals
+    - госпиталь
+    - госпиталя
+    - госпиталях
+    - госпиталям
+    - госпиталями
+    - госпитале
+    - больница
+    - больницы
+    - больницах
+    - больницам
   tpb:
     - corporația de rachete balistice tactice
     - društvo za taktičke projektile

@@ -1701,6 +1701,14 @@ types:
     aliases:
       - zakrytoe akcionernoe obshchestvo
       - zao
+      - ZAKRYTOE AKTSIONERNOE OBSHCHESTVO
+      - zakrytoe aktsionernoe obshchestvo
+      - Zakrytoye Aktsionernoye Obshchestvo
+      - zakrytoe akcionernoe obshchestvo
+      - zakrytoe aktsionernoe obshhestvo
+      - Zakrytoje Akcionernoje Obshchestvo
+      - Zakryte Akcjonarne Obschtschestwo
+      - zakritoe aktsionernoe obshchestvo
 
   - display: ЗАТ
     compare: JSC
@@ -2323,16 +2331,8 @@ types:
       - АКЦОНЕРНОЕ ОБЩЕСТВО ЗАКРЫТОГО ТИПА
       - АКЦИОНЕРНОГО ОБЩЕСТВА ЗАКРЫТОГО ТИПА
       - АКЦИОНЕРОНОЕ ОБЩЕСТВО ЗАКРЫТОГО ТИПА
-      - ZAKRYTOE AKTSIONERNOE OBSHCHESTVO
-      - zakrytoe aktsionernoe obshchestvo
-      - Zakrytoye Aktsionernoye Obshchestvo
-      - zakrytoe akcionernoe obshchestvo
-      - zakrytoe aktsionernoe obshhestvo
-      - Zakrytoje Akcionernoje Obshchestvo
-      - Zakryte Akcjonarne Obschtschestwo
       - ЗАКРЫТОE АКЦИОНЕРНОЕ ОБЩEСТВО
       - закрытоe акционерное общeство
-      - zakritoe aktsionernoe obshchestvo
       - закритое акционерное общество
       - ЗАКРЫТОЕ АКЦИОНЕРНОЕ ОБЩEСТВО
       - Закрытое акционерное общество # Closed Joint-Stock Company
@@ -2352,8 +2352,6 @@ types:
       - АКЦОНЕРНОЕ ОБЩЕСТВО ОТКРЫТОГО ТИПА
       - otkrytoe aktsionernoe obshchestvo
       - открытое акционерное общество
-      - відкрите акціонерне товариство
-      - Відкрите акціонерне товариство
       - otkrytoe akcionernoe obshchestvo
       - otkrytoe aktsionernoe obshchestvo
       - OTKRYTOE AKTSIONERNOE OBSHCHESTVO
