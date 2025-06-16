@@ -450,6 +450,33 @@ org_symbols:
   naval:
     - naval
     - navy
+  nuclear: 
+    - niwclear # cy
+    - nuclear # en, es, pt
+    - nucleair # nl
+    - nucleare # it
+    - nucleares # pt (plural)
+    - nucléaire # fr singular
+    - nucléaires # fr plural
+    - nuklear # de
+    - nükleer # tr
+    - nyuklia # sw
+    - nuklearny # pl (masculine)
+    - nuklearna # pl (f) 
+    - nuklearne # pl (neuter)
+    - πυρηνικός # el (masculine)
+    - πυρηνική # el (feminine)
+    - πυρηνικό # el (neuter)
+    - ядерный # ru (masculine)
+    - ядерная # ru (feminine)
+    - ядерное # ru (neuter)
+    - ядерные # ru (plural)
+    - ядерний # uk (masculine)
+    - ядерна # uk (feminine)
+    - ядерне # uk (neuter)
+    - ядерні # uk (plural)
+    - 核能 # zh
+    - 核的 # zh
   factory:
     - factory
     - factories
