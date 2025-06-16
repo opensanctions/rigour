@@ -194,7 +194,7 @@ def test_align_person_special_cases():
     query = make("John")
     result = make("Doe")
     amt = align_person_name_order(query, result)
-    assert len(amt.query_sorted) == 1
+    assert len(amt.query_sorted) == 0
     assert len(amt.result_sorted) == 0
 
     amt = align_person_name_order([], [])
@@ -260,7 +260,18 @@ def test_align_tagged_person_name_parts():
         NamePart("john", 1, NamePartTag.FAMILY),
     ]
     aligned = align_person_name_order(query, result)
-    assert len(aligned) == 2, (aligned.query_sorted, aligned.result_sorted)
+    assert len(aligned) == 0, (aligned.query_sorted, aligned.result_sorted)
     assert not len(aligned.result_sorted)
     # assert aligned.query_sorted[0].form != aligned.result_sorted[0].form
     # assert aligned.query_sorted[1].form != aligned.result_sorted[1].form
+
+    query = [
+        NamePart("hans", 0, NamePartTag.GIVEN),
+        NamePart("friedrich", 1, NamePartTag.FAMILY),
+    ]
+    result = [
+        NamePart("hans", 0, NamePartTag.FAMILY),
+        NamePart("friedrich", 1, NamePartTag.GIVEN),
+    ]
+    aligned = align_person_name_order(query, result)
+    assert len(aligned) == 0

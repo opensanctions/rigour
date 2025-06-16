@@ -1,7 +1,6 @@
 from typing import List, Optional
 
 from rigour.names.part import NamePart
-from rigour.names.tag import FAMILY_NAME_TAGS, GIVEN_NAME_TAGS, NamePartTag
 from rigour.text.distance import levenshtein_similarity
 
 
@@ -21,6 +20,9 @@ class Alignment:
 
     def __len__(self) -> int:
         return max(len(self.query_sorted), len(self.result_sorted))
+
+    def __repr__(self) -> str:
+        return f"<Alignment({self.query_sorted!r} <> {self.result_sorted!r}, qe={self.query_extra!r}, re={self.result_extra!r})>"
 
 
 class Pair:
@@ -138,26 +140,6 @@ def align_name_slop(
     return alignment
 
 
-def _check_align_tags(query: NamePart, result: NamePart) -> bool:
-    """
-    Check if the tags of the query and result name parts can be aligned.
-
-    Args:
-        query (NamePart): The name part from the query.
-        result (NamePart): The name part from the result.
-
-    Returns:
-        bool: True if the tags can be aligned, False otherwise.
-    """
-    if NamePartTag.ANY in (query.tag, result.tag):
-        return True
-    if query.tag in GIVEN_NAME_TAGS and result.tag in FAMILY_NAME_TAGS:
-        return False
-    if query.tag in FAMILY_NAME_TAGS and result.tag in GIVEN_NAME_TAGS:
-        return False
-    return True
-
-
 def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Alignment:
     """Aligns the name parts of a person name for the query and result based on their
     tags and their string similarity such that the most similar name parts are matched.
@@ -177,7 +159,7 @@ def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Al
         for rpart in sorted(result, key=len, reverse=True):
             if rpart in alignment.result_sorted:
                 continue
-            if not _check_align_tags(qpart, rpart):
+            if not qpart.can_match(rpart):
                 continue
             min_len = min(len(qpart.maybe_ascii), len(rpart.maybe_ascii))
             score = levenshtein_similarity(
@@ -198,8 +180,8 @@ def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Al
             alignment.query_extra.append(qpart)
 
     if not len(alignment.query_sorted):
-        alignment.query_sorted = query
-        alignment.result_extra = result
+        alignment.query_sorted = NamePart.tag_sort(query)
+        alignment.result_sorted = NamePart.tag_sort(result)
         return alignment
 
     for rpart in result:
