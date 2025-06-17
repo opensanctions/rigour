@@ -227,12 +227,14 @@ def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Al
             # no match found, break out of the loop
             break
 
-        alignment.query_sorted.extend(best_query_parts)
-        for qp in best_query_parts:
-            query_left.remove(qp)
-        alignment.result_sorted.extend(best_result_parts)
-        for rp in best_result_parts:
-            result_left.remove(rp)
+        if best_query_parts is not None:
+            alignment.query_sorted.extend(best_query_parts)
+            for qp in best_query_parts:
+                query_left.remove(qp)
+        if best_result_parts is not None:
+            alignment.result_sorted.extend(best_result_parts)
+            for rp in best_result_parts:
+                result_left.remove(rp)
 
     if not len(alignment.query_sorted):
         alignment.query_sorted = NamePart.tag_sort(query)
