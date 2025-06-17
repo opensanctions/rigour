@@ -1,7 +1,8 @@
+from itertools import product
 from typing import List, Optional
 
 from rigour.names.part import NamePart
-from rigour.text.distance import levenshtein_similarity, levenshtein
+from rigour.text.distance import levenshtein_similarity, dam_levenshtein
 
 
 MAX_EDITS = 4
@@ -85,7 +86,7 @@ def align_name_slop(
         Alignment: An object containing the aligned name parts and any extra parts.
     """
     alignment = Alignment()
-    if len(query) < 2 or len(result) < 2:
+    if len(query) < 3 and len(result) < 3:
         alignment.query_sorted = query
         alignment.result_sorted = result
         return alignment
@@ -140,6 +141,44 @@ def align_name_slop(
     return alignment
 
 
+def _name_levenshtein(query: str, result: str) -> float:
+    max_len = max(len(query), len(result))
+    if query == result or max_len == 0:
+        return 1.0
+    distance = dam_levenshtein(query, result)
+    score = 1 - (distance / max_len)
+    if score < 0.3:
+        return 0.0
+    return score
+
+
+def _pack_short_parts(
+    part: NamePart, other: NamePart, options: List[NamePart]
+) -> List[NamePart]:
+    others: List[NamePart] = [other]
+    for op in options:
+        if op in others:
+            continue
+        if not part.can_match(op):
+            continue
+        base_str = "".join([o.maybe_ascii for o in others])
+        if len(base_str) >= len(part.form):
+            break
+        best_score = _name_levenshtein(part.form, base_str)
+        best_others = None
+        for i in range(len(others)):
+            next_others = list(others)
+            next_others.insert(i, op)
+            next_str = "".join([o.maybe_ascii for o in next_others])
+            next_score = _name_levenshtein(part.form, next_str)
+            if next_score > best_score:
+                best_score = next_score
+                best_others = next_others
+        if best_others is not None:
+            others = best_others
+    return others
+
+
 def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Alignment:
     """Aligns the name parts of a person name for the query and result based on their
     tags and their string similarity such that the most similar name parts are matched.
@@ -152,157 +191,48 @@ def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Al
         Alignment: An object containing the aligned name parts and any extra parts.
     """
     alignment = Alignment()
-
-    for qpart in sorted(query, key=len, reverse=True):
-        best_match: Optional[NamePart] = None
-        best_score = 0.0
-        for rpart in sorted(result, key=len, reverse=True):
-            if rpart in alignment.result_sorted:
-                continue
-            if not qpart.can_match(rpart):
-                continue
-            min_len = min(len(qpart.maybe_ascii), len(rpart.maybe_ascii))
-            score = levenshtein_similarity(
-                qpart.maybe_ascii,
-                rpart.maybe_ascii,
-                max_edits=min_len // 2,
-                max_percent=1.0,
-            )
-            score = score * min_len
-            if score > best_score:
-                best_score = score
-                best_match = rpart
-
-        if best_match is not None:
-            alignment.query_sorted.append(qpart)
-            alignment.result_sorted.append(best_match)
-        else:
-            alignment.query_extra.append(qpart)
-
-    if not len(alignment.query_sorted):
-        alignment.query_sorted = NamePart.tag_sort(query)
-        alignment.result_sorted = NamePart.tag_sort(result)
-        return alignment
-
-    for rpart in result:
-        if rpart not in alignment.result_sorted:
-            alignment.result_extra.append(rpart)
-
-    return alignment
-
-
-def sausage_press_names(query: List[NamePart], result: List[NamePart]) -> Alignment:
-    """Aligns the name parts of a query and result. This is done by incrementally building two
-    name prefixes, one for the query and one for the result, with the lowest Levenshtein distance
-    between the two prefixes.
-
-    Args:
-        query (List[NamePart]): The name parts from the query.
-        result (List[NamePart]): The name parts from the result.
-
-    Returns:
-        Alignment: An object containing the aligned name parts and any extra parts.
-    """
-    block_length = 5
-    alignment = Alignment()
     if not len(query):
         alignment.result_sorted = result
         return alignment
 
-    query_prefix = query[0].maybe_ascii + ""
-    query_left = list(query)
-    query_left.remove(query[0])
-    alignment.query_sorted.append(query[0])
-
-    result_prefix = ""
-    result_left = sorted(result, key=len)
-
-    # Step 1: precise matches
-    # for qn, rn in product(query, result):
-    #     if qn.can_match(rn) and qn.form == rn.form:
-    #         query_aligned.append(qn)
-    #         result_aligned.append(rn)
-    #         query_prefix += qn.maybe_ascii + ""
-    #         result_prefix += rn.maybe_ascii + ""
-
-    while len(query_left) > 0 or len(result_left) > 0:
-        # Step 2: find the best match for the next block
+    query_left = sorted(query, key=len, reverse=True)
+    result_left = sorted(result, key=len, reverse=True)
+    while len(query_left) > 0 and len(result_left) > 0:
         best_score = 0.0
-        best_query_part: Optional[NamePart] = None
-        best_result_part: Optional[NamePart] = None
-        # offset = max(0, min(len(query_prefix), len(result_prefix)) - block_length)
-
-        for rn in result_left:
-            if best_score == 1.0:
-                # perfect match, no need to check further
+        best_query_parts: Optional[List[NamePart]] = None
+        best_result_parts: Optional[List[NamePart]] = None
+        for qp, rp in product(query_left, result_left):
+            if not qp.can_match(rp):
+                continue
+            if qp.maybe_ascii == rp.maybe_ascii:
+                best_score = 1.0
+                best_query_parts = [qp]
+                best_result_parts = [rp]
                 break
-            # offset = max(0, len(result_prefix) - block_length)
-            # result_next = result_prefix[offset:] + rn.maybe_ascii[:block_length]
-            result_next = result_prefix + rn.maybe_ascii[:block_length]
-            min_len = max(len(query_prefix), len(result_next))
-            distance = levenshtein(query_prefix, result_next, max_edits=min_len * 2)
-            score = 1 - (distance / min_len)
-            print(
-                "result_next:",
-                result_next,
-                # "offset:",
-                # offset,
-                "score:",
-                score,
-                "query_prefix:",
-                query_prefix,
-            )
-            if score >= best_score:
+            # check the Levenshtein distance between the two parts
+            score = _name_levenshtein(qp.maybe_ascii, rp.maybe_ascii)
+            if score > best_score:
+                qps = [qp]
+                rps = [rp]
+                if len(qp.form) > len(rp.form):
+                    rps = _pack_short_parts(qp, rp, result_left)
+                elif len(rp.form) > len(qp.form):
+                    qps = _pack_short_parts(rp, qp, query_left)
+
                 best_score = score
-                best_query_part = None
-                best_result_part = rn
+                best_query_parts = qps
+                best_result_parts = rps
 
-        for qn in query_left:
-            if best_score == 1.0:
-                # perfect match, no need to check further
-                break
-            # offset = max(0, len(query_prefix) - block_length)
-            query_next = query_prefix + qn.maybe_ascii[:block_length]
-
-            min_len = max(len(query_next), len(result_prefix))
-            distance = levenshtein(query_next, result_prefix, max_edits=min_len * 2)
-            score = 1 - (distance / min_len)
-            print(
-                "query_next:",
-                query_next,
-                # "offset:",
-                # offset,
-                "score:",
-                score,
-                "result_prefix:",
-                result_prefix,
-            )
-            if score >= best_score:
-                best_score = score
-                best_query_part = qn
-                best_result_part = None
-
-        print(
-            "> best score:",
-            query_prefix,
-            result_prefix,
-            best_score,
-            best_query_part,
-            best_result_part,
-        )
-
-        if best_query_part is None and best_result_part is None:
+        if best_score == 0.0:
+            # no match found, break out of the loop
             break
 
-        # Step 3: add the best match to the aligned lists
-        if best_query_part is not None:
-            alignment.query_sorted.append(best_query_part)
-            query_prefix += best_query_part.maybe_ascii + ""
-            query_left.remove(best_query_part)
-        if best_result_part is not None:
-            alignment.result_sorted.append(best_result_part)
-            result_prefix += best_result_part.maybe_ascii + ""
-            result_left.remove(best_result_part)
+        alignment.query_sorted.extend(best_query_parts)
+        for qp in best_query_parts:
+            query_left.remove(qp)
+        alignment.result_sorted.extend(best_result_parts)
+        for rp in best_result_parts:
+            result_left.remove(rp)
 
     if not len(alignment.query_sorted):
         alignment.query_sorted = NamePart.tag_sort(query)
@@ -312,16 +242,3 @@ def sausage_press_names(query: List[NamePart], result: List[NamePart]) -> Alignm
     alignment.query_extra.extend(query_left)
     alignment.result_extra.extend(result_left)
     return alignment
-
-
-if __name__ == "__main__":
-    # Example usage
-    query_parts = [NamePart("John", 0), NamePart("William", 1), NamePart("Doe", 2)]
-    result_parts = [NamePart("Doe", 0), NamePart("John", 1)]
-    alignment_sausage = sausage_press_names(query_parts, result_parts)
-    print(alignment_sausage)
-
-    query_parts = [NamePart("RamiMakhlouf", 0)]
-    result_parts = [NamePart("Rami", 0), NamePart("Makhlouf", 1)]
-    alignment_sausage = sausage_press_names(query_parts, result_parts)
-    print(alignment_sausage)
