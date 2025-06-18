@@ -2538,6 +2538,7 @@ ordinals:
   40th:
     - "Fortieth"
     - "Fourty"
+    - "Forty"
     - "Vierzigste"
     - "Vierzigster"
     - "40th"
@@ -2566,6 +2567,7 @@ ordinals:
   41st:
     - "Forty-first"
     - "Fourty-first"
+    - "Fortyfirst"
     - "Vierundvierzigste"
     - "Vierundvierzigster"
     - "41st"
@@ -2589,6 +2591,9 @@ ordinals:
   44th:
     - "Forty-fourth"
     - "Fourty-four"
+    - "Fourtyfourth"
+    - "Forty-Four"
+    - "Fortyfour"
     - "Vierundvierzigste"
     - "Vierundvierzigster"
     - "44th"
@@ -2613,6 +2618,7 @@ ordinals:
   50th:
     - "Fiftieth"
     - "Fiftyth"
+    - "Fifty"
     - "Fünfzigste"
     - "Fünfzigster"
     - "50th"
