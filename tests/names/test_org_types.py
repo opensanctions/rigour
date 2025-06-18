@@ -21,18 +21,18 @@ def test_display_form():
 
 
 def test_compare_form():
-    assert replace_compare("siemens aktiengesellschaft") == "siemens jsc"
-    assert replace_compare("siemens ag") == "siemens jsc"
+    assert replace_compare("siemens aktiengesellschaft") == "siemens ag"
+    assert replace_compare("siemens ag") == "siemens ag"
 
     long = "siemens gesellschaft mit beschränkter Haftung"
-    assert replace_compare(long) == "siemens llc"
+    assert replace_compare(long) == "siemens gmbh"
 
 
 def test_extract_org_types():
     assert extract_org_types("siemens aktiengesellschaft") == [
-        ("aktiengesellschaft", "jsc")
+        ("aktiengesellschaft", "ag")
     ]
-    assert extract_org_types("siemens g.m.b.h") == [("g.m.b.h", "llc")]
+    assert extract_org_types("siemens g.m.b.h") == [("g.m.b.h", "gmbh")]
     assert extract_org_types("siemens") == []
 
 

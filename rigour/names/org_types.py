@@ -106,10 +106,11 @@ def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
 
     mapping: Dict[str, str] = {}
     for org_type in ORG_TYPES:
-        compare_norm = normalizer(org_type.get("compare"))
+        compare_norm = normalizer(org_type.get("compare", org_type.get("display")))
         if compare_norm is None:
             continue
-        for alias in org_type["aliases"]:
+        aliases = org_type.get("aliases", [])
+        for alias in aliases:
             alias_norm = normalizer(alias)
             if alias_norm is None or alias_norm == compare_norm:
                 continue
@@ -132,8 +133,8 @@ def replace_org_types_compare(
 ) -> str:
     """Replace any organization type indicated in the given entity name (often as a prefix or suffix)
     with a heavily normalized form label. This will re-write country-specific entity types (eg. GmbH)
-    into a globally normalized set of types (LLC). The resulting text is meant to be used in comparison
-    processes, but no longer fit for presentation to a user.
+    into a simplified spelling suitable for comparison using string distance. The resulting text is
+    meant to be used in comparison processes, but no longer fit for presentation to a user.
 
     Args:
         name (str): The text to be processed. It is assumed to be already normalized (see below).

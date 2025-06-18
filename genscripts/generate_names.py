@@ -1,6 +1,6 @@
 from collections import Counter
 import yaml
-from typing import Dict, List, Set
+from typing import Dict, List
 from normality import collapse_spaces
 
 from rigour.data.types import OrgTypeSpec
@@ -47,21 +47,27 @@ def generate_data_file() -> None:
 
 def generate_org_type_file() -> None:
     content = ORG_TYPE_TEMPLATE
-    compare_forms: Set[str] = set()
     types_path = RESOURCES_PATH / "names" / "org_types.yml"
-    compare_types = Counter()
+    generic_types = Counter()
     with open(types_path, "r", encoding="utf-8") as ofh:
         data: Dict[str, List[OrgTypeSpec]] = yaml.safe_load(ofh.read())
         clean_types: List[OrgTypeSpec] = []
         for spec in data.get("types", []):
-            out: OrgTypeSpec = {"display": None, "compare": None, "aliases": []}
+            out: OrgTypeSpec = {
+                "display": None,
+                "compare": None,
+                "generic": None,
+                "aliases": [],
+            }
             display = collapse_spaces(spec.get("display", ""))
             if display is not None and len(display) > 0:
                 out["display"] = display
-            compare = collapse_spaces(spec.get("compare", ""))
-            if compare is not None and len(compare) > 0:
+            generic = collapse_spaces(spec.get("generic"))
+            if generic is not None and len(generic) > 0:
+                out["generic"] = generic
+            compare = collapse_spaces(spec.get("compare"))
+            if compare is not None:
                 out["compare"] = compare
-                compare_forms.add(compare)
             aliases_ = [collapse_spaces(a) for a in spec.get("aliases", [])]
             aliases = [a for a in aliases_ if a is not None and len(a) > 0]
             if not len(aliases):
@@ -72,13 +78,15 @@ def generate_org_type_file() -> None:
                 out.pop("display")
             if out["compare"] is None:
                 out.pop("compare")
+            if out["generic"] is None:
+                out.pop("generic")
             else:
-                compare_types.update([out["compare"]])
+                generic_types.update([out["generic"]])
             clean_types.append(out)
         content += f"ORG_TYPES: List[OrgTypeSpec] = {clean_types!r}\n"
 
     print("Compare types:")
-    for k, v in compare_types.most_common():
+    for k, v in generic_types.most_common():
         print(f"  {k}: {v}")
 
     out_path = CODE_PATH / "names" / "org_types.py"
