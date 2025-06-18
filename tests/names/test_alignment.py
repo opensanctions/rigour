@@ -203,6 +203,12 @@ def test_name_packing():
     assert len(amt.query_sorted) == 1
     assert len(amt.result_sorted) == 2
 
+    query = make("AlisherUsmanov")
+    result = make("Alisher Usmanov")
+    amt = align_person_name_order(query, result)
+    assert len(amt.query_sorted) == 1
+    assert len(amt.result_sorted) == 2
+
 
 def test_align_person_special_cases():
     query = make("John")

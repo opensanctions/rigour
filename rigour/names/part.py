@@ -31,7 +31,10 @@ class NamePart(object):
 
     @cached_property
     def ascii(self) -> Optional[str]:
-        return ascii_text(self.form)
+        out = ascii_text(self.form)
+        if out is None:
+            return None
+        return "".join(o for o in out if o.isalnum())
 
     @property
     def maybe_ascii(self) -> str:

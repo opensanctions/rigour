@@ -141,11 +141,13 @@ def align_name_slop(
     return alignment
 
 
-def _name_levenshtein(query: str, result: str) -> float:
-    max_len = max(len(query), len(result))
-    if query == result or max_len == 0:
+def _name_levenshtein(query: List[NamePart], result: List[NamePart]) -> float:
+    query_str = "".join([p.maybe_ascii for p in query])
+    result_str = "".join([p.maybe_ascii for p in result])
+    max_len = max(len(query_str), len(result_str))
+    if query_str == result_str or max_len == 0:
         return 1.0
-    distance = dam_levenshtein(query, result)
+    distance = dam_levenshtein(query_str, result_str)
     score = 1 - (distance / max_len)
     if score < 0.3:
         return 0.0
@@ -155,28 +157,27 @@ def _name_levenshtein(query: str, result: str) -> float:
 def _pack_short_parts(
     part: NamePart, other: NamePart, options: List[NamePart]
 ) -> List[NamePart]:
-    others: List[NamePart] = [other]
+    packed: List[NamePart] = [other]
     for op in options:
-        if op in others:
+        if op in packed:
             continue
         if not part.can_match(op):
             continue
-        base_str = "".join([o.maybe_ascii for o in others])
+        base_str = "".join([p.maybe_ascii for p in packed])
         if len(base_str) >= len(part.form):
             break
-        best_score = _name_levenshtein(part.form, base_str)
-        best_others = None
-        for i in range(len(others)):
-            next_others = list(others)
-            next_others.insert(i, op)
-            next_str = "".join([o.maybe_ascii for o in next_others])
-            next_score = _name_levenshtein(part.form, next_str)
+        best_score = _name_levenshtein([part], packed)
+        best_packed = None
+        for i in range(len(packed) + 1):
+            next_packed = packed.copy()
+            next_packed.insert(i, op)
+            next_score = _name_levenshtein([part], next_packed)
             if next_score > best_score:
                 best_score = next_score
-                best_others = next_others
-        if best_others is not None:
-            others = best_others
-    return others
+                best_packed = next_packed
+        if best_packed is not None:
+            packed = best_packed
+    return packed
 
 
 def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Alignment:
@@ -210,18 +211,15 @@ def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Al
                 best_result_parts = [rp]
                 break
             # check the Levenshtein distance between the two parts
-            score = _name_levenshtein(qp.maybe_ascii, rp.maybe_ascii)
+            score = _name_levenshtein([qp], [rp])
             if score > best_score:
-                qps = [qp]
-                rps = [rp]
+                best_query_parts = [qp]
+                best_result_parts = [rp]
                 if len(qp.form) > len(rp.form):
-                    rps = _pack_short_parts(qp, rp, result_left)
+                    best_result_parts = _pack_short_parts(qp, rp, result_left)
                 elif len(rp.form) > len(qp.form):
-                    qps = _pack_short_parts(rp, qp, query_left)
-
-                best_score = score
-                best_query_parts = qps
-                best_result_parts = rps
+                    best_query_parts = _pack_short_parts(rp, qp, query_left)
+                best_score = _name_levenshtein(best_query_parts, best_result_parts)
 
         if best_score == 0.0:
             # no match found, break out of the loop
