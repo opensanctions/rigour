@@ -758,7 +758,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "éénpersoons-BVBA",
-        "compare": "",
+        "compare": "bvba",
         "generic": "LLC",
         "aliases": [
             "éénpersoons-BVBA",
@@ -1475,6 +1475,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
+        "compare": "",
         "generic": "SOE",
         "aliases": [
             "consorzio statale",
@@ -1510,6 +1511,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "FGBU",
+        "compare": "",
         "generic": "SOE",
         "aliases": [
             "federal state budgetary enterprise",
@@ -2015,13 +2017,13 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГУП",
-        "compare": "FGBU",
+        "compare": "",
         "generic": "SOE",
         "aliases": ["ФГУП", "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ"],
     },
     {
         "display": "ФГБУ",
-        "compare": "FGBU",
+        "compare": "",
         "generic": "SOE",
         "aliases": [
             "ФГБУ",
@@ -2032,7 +2034,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГБУ ДПО",
-        "compare": "FGBU",
+        "compare": "",
         "generic": "SOE",
         "aliases": [
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ"
@@ -2449,6 +2451,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
         "generic": "NGO",
         "aliases": ["ОНОСС", "ОРГАНИЗАЦИЯ НАУЧНОГО ОБСЛУЖИВАНИЯ И СОЦИАЛЬНОЙ СФЕРЫ"],
     },
+    {"compare": "", "aliases": ["ОБЛАСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ"]},
     {
         "generic": "FIN",
         "aliases": [
