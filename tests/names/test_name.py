@@ -21,10 +21,21 @@ def test_name_object():
     assert name.parts[0].ascii == "john"
     assert name.parts[0].tag == NamePartTag.ANY
 
+    assert name.maybe_ascii == "john spencer"
+
+
+def test_cjk_name():
+    name = Name("维克托·亚历山德罗维奇·卢卡申科", lang="zho")
+    assert name.form == "维克托·亚历山德罗维奇·卢卡申科"
+    assert name.maybe_ascii == "维克托 亚历山德罗维奇 卢卡申科"
+    assert len(name.parts) == 3
+    assert name.parts[0].tag == NamePartTag.ANY
+    assert name.parts[1].tag == NamePartTag.ANY
+
 
 def test_name_tag_text():
     name = Name("Hans-Peter Mueller")
-    name.parts[0].tag == NamePartTag.ANY
+    assert name.parts[0].tag == NamePartTag.ANY
 
     name.tag_text("Hans-Peter", NamePartTag.GIVEN)
     assert name.parts[0].tag == NamePartTag.GIVEN

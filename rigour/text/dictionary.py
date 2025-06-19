@@ -30,11 +30,11 @@ class Scanner:
         ignore_case: bool = True,
     ) -> None:
         self.ignore_case = ignore_case
-        if ignore_case:
-            forms = [form.lower() for form in forms]
+        # if ignore_case:
+        #     forms = [form.lower() for form in forms]
         forms = sorted(set(forms), key=len, reverse=True)
         forms = [re.escape(form) for form in forms]
-        forms_regex = "\\b(%s)\\b" % "|".join(forms)
+        forms_regex = r"(?<!\w)(%s)(?!\w)" % "|".join(forms)
         flags = re.U | re.I if ignore_case else re.U
         self.pattern = re.compile(forms_regex, flags)
 

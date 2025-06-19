@@ -41,6 +41,11 @@ class Name(object):
                 self._parts.append(NamePart(form, i))
         return self._parts
 
+    @property
+    def maybe_ascii(self) -> str:
+        """Return the ASCII representation of the name, if available."""
+        return " ".join(part.maybe_ascii for part in self.parts)
+
     def tag_text(self, text: str, tag: NamePartTag, max_matches: int = 1) -> None:
         tokens = tokenize_name(to_form(text))
         matches = 0
