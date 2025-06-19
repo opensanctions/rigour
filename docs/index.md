@@ -12,6 +12,8 @@ Data cleaning and validation functions for processing various types of text eman
 * [Text processing](text.md)
 * [Other utilities](misc.md)
 
+Part of the functionalities provided by `rigour` are based on encoding cultural information into [core reference data](data.md). Much of this data has been manually composed or collected and is openly licensed. We [provide a data overview](data.md) for potential re-users.
+
 ## Related resources
 
 This library is built to provide foundational functionality for a broader ecosystem of tools.
