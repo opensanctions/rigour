@@ -23,6 +23,7 @@ def test_display_form():
 def test_compare_form():
     assert replace_compare("siemens aktiengesellschaft") == "siemens ag"
     assert replace_compare("siemens ag") == "siemens ag"
+    assert replace_compare("siemens ag", generic=True) == "siemens jsc"
 
     long = "siemens gesellschaft mit beschränkter Haftung"
     assert replace_compare(long) == "siemens gmbh"
@@ -30,10 +31,7 @@ def test_compare_form():
     norm = _normalize_compare("FABERLIC EUROPE Sp. z o.o.")
     assert norm is not None
     assert extract_org_types(norm) == [("sp. z o.o.", "spzoo")]
-
-    assert (
-        replace_compare(norm, normalizer=_normalize_compare) == "faberlic europe spzoo"
-    )
+    assert replace_compare(norm) == "faberlic europe spzoo"
 
 
 def test_extract_org_types():
@@ -41,6 +39,7 @@ def test_extract_org_types():
         ("aktiengesellschaft", "ag")
     ]
     assert extract_org_types("siemens g.m.b.h") == [("g.m.b.h", "gmbh")]
+    assert extract_org_types("siemens g.m.b.h", generic=True) == [("g.m.b.h", "llc")]
     assert extract_org_types("siemens") == []
 
 

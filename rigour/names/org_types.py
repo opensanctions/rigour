@@ -136,8 +136,37 @@ def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
     return Replacer(mapping, ignore_case=True)
 
 
+@cache
+def _generic_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
+    """Get a replacer for the names of organization types, mapping them to generic types like LLC, JSC."""
+    from rigour.data.names.org_types import ORG_TYPES
+
+    mapping: Dict[str, str] = {}
+    for org_type in ORG_TYPES:
+        generic_norm = normalizer(org_type.get("generic"))
+        if generic_norm is None:
+            continue
+        for alias in org_type.get("aliases", []):
+            alias_norm = normalizer(alias)
+            if alias_norm is None:
+                continue
+            if alias_norm in mapping and mapping[alias_norm] != generic_norm:
+                log.warning(
+                    "Duplicate alias: %r (for %r, and %r)",
+                    alias_norm,
+                    generic_norm,
+                    mapping[alias_norm],
+                )  # pragma: no cover
+            mapping[alias_norm] = generic_norm
+
+        display_norm = normalizer(org_type.get("display"))
+        if display_norm is not None and display_norm not in mapping:
+            mapping[display_norm] = generic_norm
+    return Replacer(mapping, ignore_case=True)
+
+
 def replace_org_types_compare(
-    name: str, normalizer: Normalizer = _normalize_compare
+    name: str, normalizer: Normalizer = _normalize_compare, generic: bool = False
 ) -> str:
     """Replace any organization type indicated in the given entity name (often as a prefix or suffix)
     with a heavily normalized form label. This will re-write country-specific entity types (eg. GmbH)
@@ -148,16 +177,19 @@ def replace_org_types_compare(
         name (str): The text to be processed. It is assumed to be already normalized (see below).
         normalizer (Callable[[str | None], str | None]): A text normalization function to run on the
             lookup values before matching to remove text anomalies and make matches more likely.
+        generic (bool): If True, return the generic form of the organization type (e.g. LLC, JSC) instead
+            of the type-specific comparison form (GmbH, AB, NV).
 
     Returns:
         Optional[str]: The text with organization types replaced.
     """
-    replacer = _compare_replacer(normalizer=normalizer)
+    _func = _generic_replacer if generic else _compare_replacer
+    replacer = _func(normalizer=normalizer)
     return replacer(name) or name
 
 
 def extract_org_types(
-    name: str, normalizer: Normalizer = _normalize_compare
+    name: str, normalizer: Normalizer = _normalize_compare, generic: bool = False
 ) -> List[Tuple[str, str]]:
     """Match any organization type designation (e.g. LLC, Inc, GmbH) in the given entity name and
     return the extracted type.
@@ -168,11 +200,14 @@ def extract_org_types(
         name (str): The text to be processed. It is assumed to be already normalized (see below).
         normalizer (Callable[[str | None], str | None]): A text normalization function to run on the
             lookup values before matching to remove text anomalies and make matches more likely.
+        generic (bool): If True, return the generic form of the organization type (e.g. LLC, JSC) instead
+            of the type-specific comparison form (GmbH, AB, NV).
 
     Returns:
         Tuple[str, str]: Tuple of the org type as matched, and the compare form of it.
     """
-    replacer = _compare_replacer(normalizer=normalizer)
+    _func = _generic_replacer if generic else _compare_replacer
+    replacer = _func(normalizer=normalizer)
     matches: List[Tuple[str, str]] = []
     for matched in replacer.extract(name):
         matches.append((matched, replacer.mapping.get(matched, matched)))
