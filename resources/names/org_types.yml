@@ -384,34 +384,46 @@ types:
     generic: JSC
     aliases:
       - Aktiengesellschaft
+      - Aktiengeselschaft
       - Aktien Gesellschaft
+      - Aktien ges
+      - Aktienges
       - AktG
       - Akt Ges
       - AG & Co. KG
       - AG & Co KG
+      - AG und Co KG
       - AG & Co. KGaA
+
   - display: KG
     generic: LP
     aliases:
       - Kommanditgesellschaft
       - Kommandit-Gesellschaft
+
   - display: e.K.
     compare: eK
     generic: GP
     aliases:
       - e. K.
       - eingetragener Kaufmann
+
   - display: KGaA
     generic: LP
     aliases:
       - Kommanditgesellschaft auf Aktien
+
   - display: Sp. z o.o.
     compare: Spzoo
     generic: LLC
     aliases:
       - spzoo
       - sp zoo
+      - spz o.o.
+      - spz oo.
       - sp. z o.o.
+      - Sp. z o.o.
+      - Sp. z o.o.
       - sp. z o.o. sp.k
       - sp. z oo
       - sp. zoo
@@ -483,6 +495,8 @@ types:
       - Joint-Stock Company
       - Joint-stock Company
       - JointStock Company
+      - Joint Stock Compan
+      - Joint Stock Companie
       - Joint Stock Co.
       - JS Co.
       - JSC Company
@@ -595,6 +609,8 @@ types:
       - coltd
       - co., ltd.
       - co.ltd
+      - CO.,LTD
+      - CO., LTD
       - compañía limitada
   - generic: COOP
     aliases:
@@ -706,7 +722,7 @@ types:
       - еад
       - еднолично акционерно дружество
   - display: éénpersoons-BVBA
-    compare: ""
+    compare: bvba
     generic: LLC
     aliases:
       - éénpersoons-BVBA
@@ -1026,8 +1042,6 @@ types:
       - limitée
       - ltd.
       - ltd. co.
-      - CO.,LTD
-      - CO., LTD
       - ltda
       - private company with limited liability
       - private limited company
@@ -1586,6 +1600,7 @@ types:
       - Unlimited Proprietary
 
   - generic: SOE
+    compare: ""
     aliases:
       - consorzio statale
       - den føderale statsejede budgetinstitution
@@ -1594,17 +1609,7 @@ types:
       - empresa unitária estatal
       - entità statali
       - entreprise unitaire d’état
-      - federal state budgetary enterprise
-      - federal state budgetary institution
-      - federal state institution
-      - federal state unitary enterprise
-      - federalna budżetowa instytucja
-      - föderales staatseigenes unternehmen
       - gosudarstvennoe unitarnoe predpriyatie
-      - Întreprinderea unitară a statului federal
-      - Empresa Pública Unitária Federal
-      - Entreprise unitaire publique fédérale
-      - federalne państwowe przedsiębiorstwo unitarne
       - Staatsinformatieagentschap
       - impresa unitaria statale
       - staatliches einheitsunternehmen
@@ -1627,12 +1632,21 @@ types:
       - унітарнае прадпрыемства
       - уп
 
-  - display: ФГБУ
+  - display: FGBU
+    compare: ""
     generic: SOE
     aliases:
-      - federalnoe gosudarstvennoe byudzhetnoe uchrezhdenie
-      - федеральное государственное бюджетное учреждение
-      - федеральное государственное унитарное предприятие
+      - federal state budgetary enterprise
+      - federal state budgetary institution
+      - federal state institution
+      - federal state unitary enterprise
+      - FEDERAL STATE BUDGETARY INSTITUTION
+      - federalna budżetowa instytucja
+      - föderales staatseigenes unternehmen
+      - Întreprinderea unitară a statului federal
+      - Empresa Pública Unitária Federal
+      - Entreprise unitaire publique fédérale
+      - federalne państwowe przedsiębiorstwo unitarne
 
   - display: UÜ
     generic: LP
@@ -1976,12 +1990,6 @@ types:
       - ФГНУ
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ НАУЧНОЕ УЧРЕЖДЕНИЕ # FEDERAL STATE SCIENTIFIC INSTITUTION
 
-  - display: ФГУП # федеральное государственное унитарное предприятие
-    generic: SOE
-    aliases:
-      - ФГУП
-      - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ # FEDERAL STATE UNITARY ENTERPRISE
-
   - display: ДОЧЕРНЕЕ ФГУП
     generic: SOE
     aliases:
@@ -2116,13 +2124,24 @@ types:
       - ФГДОУ
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # FEDERAL STATE PRESCHOOL EDUCATIONAL INSTITUTION
 
+  - display: ФГУП
+    compare: ""
+    generic: SOE
+    aliases:
+      - ФГУП
+      - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ # FEDERAL STATE UNITARY ENTERPRISE
+
   - display: ФГБУ # федеральное государственное бюджетное учреждение
+    compare: ""
     generic: SOE
     aliases:
       - ФГБУ
+      - federalnoe gosudarstvennoe byudzhetnoe uchrezhdenie
+      - федеральное государственное бюджетное учреждение
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ # FEDERAL STATE BUDGETARY INSTITUTION
 
   - display: ФГБУ ДПО
+    compare: ""
     generic: SOE
     aliases:
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ
@@ -2358,6 +2377,8 @@ types:
       - Otkrytoye Aktsionernoye Obshchestvo
       - Otkrytoe Akcionernoe Obshhestvo
       - открытое акционерное общeство
+      - PUBLICHNOE AKTSIONERNOE OBSHCHESTVO
+      - Otkrytoe Aktsionernoe Obschchestvo
       - ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩEСТВО
       - Акционерное общество открытого типа
       - aktsionernoe obshchestvo otkrytogo tipa

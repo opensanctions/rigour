@@ -106,13 +106,20 @@ def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
 
     mapping: Dict[str, str] = {}
     for org_type in ORG_TYPES:
-        compare_norm = normalizer(org_type.get("compare", org_type.get("display")))
+        display_form = normalizer(org_type.get("display"))
+        compare_form = org_type.get("compare", display_form)
+        # Allow for empty compare forms, which are used to indicate that the
+        # organization type be removed before comparison:
+        compare_norm = (
+            normalizer(compare_form)
+            if compare_form is None or len(compare_form) > 0
+            else ""
+        )
         if compare_norm is None:
             continue
-        aliases = org_type.get("aliases", [])
-        for alias in aliases:
+        for alias in org_type.get("aliases", []):
             alias_norm = normalizer(alias)
-            if alias_norm is None or alias_norm == compare_norm:
+            if alias_norm is None:
                 continue
             if alias_norm in mapping and mapping[alias_norm] != compare_norm:
                 log.warning(
@@ -122,7 +129,8 @@ def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
                     mapping[alias_norm],
                 )  # pragma: no cover
             mapping[alias_norm] = compare_norm
-        display_norm = normalizer(org_type.get("display"))
+
+        display_norm = normalizer(display_form)
         if display_norm is not None and display_norm not in mapping:
             mapping[display_norm] = compare_norm
     return Replacer(mapping, ignore_case=True)
