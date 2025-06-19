@@ -115,6 +115,13 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_sorted, ["blue", "bird", "song"])
     assert tokens_eq(amt.result_sorted, ["blue", "bird", "song"])
 
+    # query = make("Academy of Military Medical Sciences, Insitute of Medical Equipment")
+    # result = make(
+    #     "Academy of Military Medical Sciences, Institute of Micobiology and Epidemiology"
+    # )
+    # amt = align_name_slop(query, result, max_slop=1)
+    # assert len(amt.result_extra) + len(amt.query_extra) == 1
+
     # TODO:
     # It'd be nice if longer alignments were preferred over shorter ones
 
