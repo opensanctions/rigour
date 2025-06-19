@@ -5,7 +5,7 @@ from rigour.data.types import OrgTypeSpec
 ORG_TYPES: List[OrgTypeSpec] = [
     {
         "display": "PLC",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "Public Limited Company",
             "Public Limited Co.",
@@ -28,25 +28,28 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "Public Limitted Company",
         ],
     },
-    {"compare": "JSC", "aliases": ["ሃላፊነቱ የተወሰነ የግል ማህበር", "股份有限公司"]},
+    {"generic": "JSC", "aliases": ["ሃላፊነቱ የተወሰነ የግል ማህበር", "股份有限公司"]},
     {
         "display": "Sh.p.k.",
-        "compare": "LLC",
+        "compare": "Shpk",
+        "generic": "LLC",
         "aliases": ["Shpk", "Sh.p.k.", "Shoqëri me përgjegjësi të kufizuar"],
     },
     {
         "display": "Sh.A.",
-        "compare": "JSC",
+        "compare": "ShA",
+        "generic": "JSC",
         "aliases": ["Shoqëri Aksionere", "Shoqëri Anonime", "Sh.A."],
     },
     {
         "display": "Sh.K.",
-        "compare": "LP",
+        "compare": "ShK",
+        "generic": "LP",
         "aliases": ["Shoqëri komandite", "Sh.K.", "ShK.", "Sh K."],
     },
     {
         "display": "FZE",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "Free Zone Establishment",
             "FZ Establishment",
@@ -58,7 +61,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "FZCO",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "FZ-LLC",
             "FZLLC",
@@ -77,7 +80,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "DMCC",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "Dubai Multi Commodities Centre",
             "Dubai Multi Commodities Centre Company",
@@ -89,58 +92,69 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "SCS",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": ["S.C.S.", "Sociedad en Comandita Simple"],
     },
     {
         "display": "SCpA",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": ["S.C.p.A.", "SCpA", "Sociedad en Comandita por Acciones"],
     },
     {
         "display": "S.C.e I.",
-        "compare": "LP",
+        "compare": "SCeI",
+        "generic": "LP",
         "aliases": [
             "scei",
             "Sociedad de Capital e Industria",
             "sociedad de capital e industria",
         ],
     },
-    {"display": "S.E.", "compare": "SOE", "aliases": ["Sociedad del Estado"]},
+    {
+        "display": "S.E.",
+        "compare": "SE",
+        "generic": "SOE",
+        "aliases": ["Sociedad del Estado"],
+    },
     {"display": "SGR", "aliases": ["S.G.R.", "Sociedad de Garantía Reciproca"]},
     {
         "display": "SAS",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["Sociedad por Acciones Simplificada"],
     },
-    {"display": "SAU", "compare": "SP", "aliases": ["Sociedad Anónima Unipersonal"]},
+    {"display": "SAU", "generic": "SP", "aliases": ["Sociedad Anónima Unipersonal"]},
     {
         "display": "S.A.I.C.A.",
-        "compare": "JSC",
+        "compare": "SAICA",
+        "generic": "JSC",
         "aliases": ["Sociedades anónimas inscritas de capital abierto"],
     },
     {
         "display": "S.A.C.I. y F.",
-        "compare": "JSC",
+        "compare": "SACIF",
+        "generic": "JSC",
         "aliases": ["Sociedad Anónima Comercial Industrial y Financiera"],
     },
     {
         "display": "S.A.C.I.F.I.",
-        "compare": "JSC",
+        "compare": "SACIFI",
+        "generic": "JSC",
         "aliases": [
             "Sociedad Anónima, Comercial, Industrial, Financiera e Inmobiliaria"
         ],
     },
     {
         "display": "S.A.C.I.F.I. y A.",
-        "compare": "JSC",
+        "compare": "SACIFIA",
+        "generic": "JSC",
         "aliases": [
             "Sociedad Anónima, Comercial, Industrial, Financiera, Inmobiliaria y Agropecuaria"
         ],
     },
     {
         "display": "SA de CV",
-        "compare": "JSC",
+        "compare": "SACV",
+        "generic": "JSC",
         "aliases": [
             "Sociedad Anónima de Capital Variable",
             "SOCIEDAD ANONIMA DE CAPITAL VARIABLE",
@@ -157,7 +171,8 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "S.A.P.I de C.V.",
-        "compare": "JSC",
+        "compare": "SAPICV",
+        "generic": "JSC",
         "aliases": [
             "Sociedad Anónima Promotora de Inversión de Capital Variable",
             "SOCIEDAD ANONIMA PROMOTORA DE INVERSION DE CAPITAL VARIABLE",
@@ -171,7 +186,8 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "S. DE R.L. DE C.V.",
-        "compare": "LLC",
+        "compare": "SRLCV",
+        "generic": "LLC",
         "aliases": [
             "S. DE R.L. DE C.V.",
             "S DE RL DE CV",
@@ -180,36 +196,42 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "Ε.Π.Ε.",
-        "compare": "LLC",
+        "compare": "ΕPΕ",
+        "generic": "LLC",
         "aliases": ["εταιρία περιορισμένης ευθύνης"],
     },
     {
         "display": "LLP",
-        "compare": "LLP",
+        "generic": "LLP",
         "aliases": ["Limited liability partnership", "有限責任事業組合"],
     },
     {
         "display": "ILP",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": ["Incorporated limited partnership"],
     },
-    {"display": "NA", "compare": "FIN", "aliases": ["N.A.", "National Association"]},
+    {"display": "NA", "generic": "FIN", "aliases": ["N.A.", "National Association"]},
     {
         "display": "NT&SA",
-        "compare": "FIN",
+        "generic": "FIN",
         "aliases": ["National Trust and Savings Association"],
     },
     {"display": "NL", "aliases": ["No liability"]},
-    {"display": "ІП", "compare": "SP", "aliases": ["Індывідуальны прадпрымальнік"]},
+    {"display": "ІП", "generic": "SP", "aliases": ["Індывідуальны прадпрымальнік"]},
     {
         "display": "ПУП",
-        "compare": "SP",
+        "generic": "SP",
         "aliases": ["Прыватнае унітарнае прадпрыемства"],
     },
-    {"display": "d.d.", "compare": "JSC", "aliases": ["dioničko društvo", "d.d."]},
+    {
+        "display": "d.d.",
+        "compare": "dd",
+        "generic": "JSC",
+        "aliases": ["dioničko društvo", "d.d."],
+    },
     {
         "display": "a.d.",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "akcionarsko društvo",
             "a.d",
@@ -220,17 +242,20 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "а.д.",
-        "compare": "JSC",
+        "compare": "ад",
+        "generic": "JSC",
         "aliases": ["а.д", "ад", "акционарско друштво", "акционерно дружество"],
     },
     {
         "display": "d.n.o.",
-        "compare": "LLC",
+        "compare": "dno",
+        "generic": "LLC",
         "aliases": ["društvo s neograničenom solidarnom odgovornošću"],
     },
     {
         "display": "d.o.o.",
-        "compare": "LLC",
+        "compare": "doo",
+        "generic": "LLC",
         "aliases": [
             "društvo s ograničenom odgovornošću",
             "družba z omejeno odgovornostjo",
@@ -238,7 +263,8 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "k.d.",
-        "compare": "LP",
+        "compare": "kd",
+        "generic": "LP",
         "aliases": [
             "komanditno društvo",
             "k.d.",
@@ -248,29 +274,35 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "к.д.",
-        "compare": "LP",
+        "compare": "",
+        "generic": "LP",
         "aliases": ["кд", "командитно дружество", "командитно друштво"],
     },
-    {"display": "s.p.", "compare": "SP", "aliases": ["samostalni preduzetnik"]},
+    {
+        "display": "s.p.",
+        "compare": "",
+        "generic": "SP",
+        "aliases": ["samostalni preduzetnik"],
+    },
     {
         "display": "EIRELI",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["Empresa Individual de Responsabilidade Limitada"],
     },
-    {"compare": "SP", "aliases": ["Sole Proprietorship", "Private Enterprise"]},
-    {"display": "GP", "compare": "GP", "aliases": ["General Partnership"]},
-    {"display": "LP", "compare": "LP", "aliases": ["Limited Partnership"]},
+    {"generic": "SP", "aliases": ["Sole Proprietorship", "Private Enterprise"]},
+    {"display": "GP", "generic": "GP", "aliases": ["General Partnership"]},
+    {"display": "LP", "generic": "LP", "aliases": ["Limited Partnership"]},
     {
         "display": "PEEC",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["Public Establishment with Economic characteristics"],
     },
-    {"display": "LP", "compare": "LP", "aliases": ["Limited Partnership"]},
-    {"display": "SpA", "compare": "JSC", "aliases": ["Sociedad por acciones"]},
-    {"display": "SPA", "compare": "JSC", "aliases": ["S.P.A."]},
+    {"display": "LP", "generic": "LP", "aliases": ["Limited Partnership"]},
+    {"display": "SpA", "generic": "JSC", "aliases": ["Sociedad por acciones"]},
+    {"display": "SPA", "generic": "JSC", "aliases": ["S.P.A."]},
     {
         "display": "EIRL",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "Empresa Individual de Responsabilidad Limitada",
             "empresa individual de responsabilidad limitada",
@@ -278,7 +310,8 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "S.C.",
-        "compare": "GP",
+        "compare": "SC",
+        "generic": "GP",
         "aliases": [
             "Sociedad Colectiva",
             "compania comerciala si de productie societatea cu responsabilitate limitata",
@@ -287,10 +320,16 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "አክሲዩን ማህበር",
         ],
     },
-    {"display": "S. en C.", "compare": "LP", "aliases": ["Comandita Simple"]},
+    {
+        "display": "S. en C.",
+        "compare": "SC",
+        "generic": "LP",
+        "aliases": ["Comandita Simple"],
+    },
     {
         "display": "S.C.A.",
-        "compare": "JSC",
+        "compare": "SCA",
+        "generic": "JSC",
         "aliases": [
             "Comandita por Acciones",
             "comandita por acciones",
@@ -298,22 +337,27 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
-        "compare": "SP",
+        "generic": "SP",
         "aliases": [
             "Empresa Unipersonal",
             "eingetragenes einzelunternehmen",
             "empresa unipersonal",
         ],
     },
-    {"display": "C. por A.", "compare": "JSC", "aliases": ["Compañía por Acciones"]},
+    {
+        "display": "C. por A.",
+        "compare": "CpA",
+        "generic": "JSC",
+        "aliases": ["Compañía por Acciones"],
+    },
     {
         "display": "EP",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["Empresa Pública", "empresa pública"],
     },
     {
         "display": "GmbH",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "Gesellschaft mit beschränkter Haftung",
             "g.m.b.h",
@@ -335,10 +379,10 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "г.м.б.х.",
         ],
     },
-    {"display": "gGmbH", "compare": "LLC", "aliases": ["gGmbH", "gemeinnützige GmbH"]},
+    {"display": "gGmbH", "generic": "LLC", "aliases": ["gGmbH", "gemeinnützige GmbH"]},
     {
         "display": "UG",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "UG (haftungsbeschränkt)",
             "UG (haftungsbeschr.)",
@@ -352,7 +396,8 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "GmbH & Co. KG",
-        "compare": "LLC",
+        "compare": "GmbHCoKG",
+        "generic": "LLC",
         "aliases": [
             "gmbh & co.",
             "gmbh & co. kg",
@@ -363,50 +408,62 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "AG",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "Aktiengesellschaft",
+            "Aktiengeselschaft",
             "Aktien Gesellschaft",
+            "Aktien ges",
+            "Aktienges",
             "AktG",
             "Akt Ges",
             "AG & Co. KG",
             "AG & Co KG",
+            "AG und Co KG",
             "AG & Co. KGaA",
         ],
     },
     {
         "display": "KG",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": ["Kommanditgesellschaft", "Kommandit-Gesellschaft"],
     },
     {
         "display": "e.K.",
-        "compare": "GP",
+        "compare": "eK",
+        "generic": "GP",
         "aliases": ["e. K.", "eingetragener Kaufmann"],
     },
     {
         "display": "KGaA",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": ["Kommanditgesellschaft auf Aktien"],
     },
     {
         "display": "Sp. z o.o.",
-        "compare": "LLC",
+        "compare": "Spzoo",
+        "generic": "LLC",
         "aliases": [
             "spzoo",
             "sp zoo",
+            "spz o.o.",
+            "spz oo.",
             "sp. z o.o.",
+            "Sp. z o.o.",
+            "Sp. z o.o.",
             "sp. z o.o. sp.k",
             "sp. z oo",
             "sp. zoo",
             "spolka z ograniczona odpowiedzialnoscia",
             "spółka z ograniczoną odpowiedzialnością",
+            "spółka z o.o.",
+            "spółka z o.o. sp.k.",
         ],
     },
     {"display": "3AT", "aliases": ["закрытае ацыянернае таварыства"]},
     {
         "display": "ААТ",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "adkritaye aktsiyanernaye tavaristva",
             "adkrytae akcyyanernae tavarystva",
@@ -428,7 +485,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {"display": "ae", "aliases": ["anónimi etería", "ανώνυμη εταιρεία"]},
     {
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "aksiyadorlik jamiyati",
             "акциядорлик жамияти",
@@ -439,32 +496,35 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "a.m.b.a.",
-        "compare": "LLC",
+        "compare": "amba",
+        "generic": "LLC",
         "aliases": ["amba", "andelsselskab med begrænset ansvar"],
     },
     {
         "display": "anl",
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": ["andelslag", "andelslag med begrænset ansvar"],
     },
     {
         "display": "ано",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": ["автономная некоммерческая организация", "ано"],
     },
     {
         "display": "anpo",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": ["autonomous non-profit organization"],
     },
     {
         "display": "JSC",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "Joint Stock Company",
             "Joint-Stock Company",
             "Joint-stock Company",
             "JointStock Company",
+            "Joint Stock Compan",
+            "Joint Stock Companie",
             "Joint Stock Co.",
             "JS Co.",
             "JSC Company",
@@ -472,7 +532,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "PJSC",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "Public Stock Company",
             "public jsc",
@@ -489,7 +549,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "OJSC",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "otwarta spółka akcyjna",
             "Open Joint-Stock Company",
@@ -515,7 +575,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "AT",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "акціонерне товариство",
             "Aktsionerne tovarystvo",
@@ -523,11 +583,11 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "Акціонерне товариство",
         ],
     },
-    {"display": "КБ", "compare": "FIN", "aliases": ["Коммерческий банк"]},
-    {"display": "ApS", "compare": "LLC", "aliases": ["anpartsselskab"]},
+    {"display": "КБ", "generic": "FIN", "aliases": ["Коммерческий банк"]},
+    {"display": "ApS", "generic": "LLC", "aliases": ["anpartsselskab"]},
     {
         "display": "AS",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "akciju sabiedrība",
             "akciová společnost",
@@ -545,7 +605,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ASBL",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": [
             "aisbl",
             "A.S.B.L.",
@@ -555,28 +615,37 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ASC",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": ["açıq səhmdar cəmiyyəti", "Açıq Səhmdar Cəmiyyəti"],
     },
-    {"display": "ay", "compare": "GP", "aliases": ["avoin yhtiö"]},
-    {"display": "bhd", "compare": "LLC", "aliases": ["berhad"]},
-    {"display": "BV", "compare": "LLC", "aliases": ["B.V.", "besloten vennootschap"]},
+    {"display": "ay", "generic": "GP", "aliases": ["avoin yhtiö"]},
+    {"display": "bhd", "generic": "LLC", "aliases": ["berhad"]},
+    {"display": "BV", "generic": "LLC", "aliases": ["B.V.", "besloten vennootschap"]},
     {
         "display": "bvba",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "besloten vennootschap met beperkte aansprakelijkheid",
             "vennootschap met beperkte aansprakelijkheid",
         ],
     },
-    {"display": "ca", "compare": "LLC", "aliases": ["compañía anónima"]},
+    {"display": "ca", "generic": "LLC", "aliases": ["compañía anónima"]},
     {
         "display": "Co Ltd",
-        "compare": "LLC",
-        "aliases": ["cia ltda", "coltd", "co., ltd.", "co.ltd", "compañía limitada"],
+        "compare": "CoLtd",
+        "generic": "LLC",
+        "aliases": [
+            "cia ltda",
+            "coltd",
+            "co., ltd.",
+            "co.ltd",
+            "CO.,LTD",
+            "CO., LTD",
+            "compañía limitada",
+        ],
     },
     {
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": [
             "co-op",
             "cooperation",
@@ -592,22 +661,22 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "кооператив",
         ],
     },
-    {"compare": "FIN", "aliases": ["fond commun de placement", "fond de placement"]},
-    {"compare": "COOP", "aliases": ["ህብረት ስራ ማህበራት"]},
-    {"display": "cty cp", "compare": "JSC", "aliases": ["công ty cổ phần"]},
+    {"generic": "FIN", "aliases": ["fond commun de placement", "fond de placement"]},
+    {"generic": "COOP", "aliases": ["ህብረት ስራ ማህበራት"]},
+    {"display": "cty cp", "generic": "JSC", "aliases": ["công ty cổ phần"]},
     {
         "display": "cty tnhh",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["công ty trách nhiệm hữu hạn"],
     },
     {
         "display": "cty tnhh mtv",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["công ty trách nhiệm hữu hạn một thành viên"],
     },
     {
         "display": "cv",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": [
             "comm. v",
             "commanditaire vennootschap",
@@ -616,26 +685,27 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "cva",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": ["comm. va", "commanditaire vennootschap op aandelen"],
     },
     {
         "display": "cvba",
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": ["coöperatieve vennootschap met beperkte aansprakelijkheid"],
     },
     {
         "display": "cvoa",
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": ["coöperatieve vennootschap met onbeperkte aansprakelijkheid"],
     },
-    {"display": "cía", "compare": "LLC", "aliases": ["compañía"]},
-    {"display": "dis tic ltd", "compare": "LLC", "aliases": ["dis.tic.ltd"]},
-    {"display": "dnnn", "compare": "SOE", "aliases": ["doanh nghiệp nhà nước"]},
-    {"display": "dntn", "compare": "LLC", "aliases": ["doanh nghiệp tư nhân"]},
+    {"display": "cía", "generic": "LLC", "aliases": ["compañía"]},
+    {"display": "dis tic ltd", "generic": "LLC", "aliases": ["dis.tic.ltd"]},
+    {"display": "dnnn", "generic": "SOE", "aliases": ["doanh nghiệp nhà nước"]},
+    {"display": "dntn", "generic": "LLC", "aliases": ["doanh nghiệp tư nhân"]},
     {
         "display": "d.o.o.",
-        "compare": "LLC",
+        "compare": "doo",
+        "generic": "LLC",
         "aliases": [
             "društvo s ograničenom odgovornošću",
             "društvo sa ograničenom odgovornošću",
@@ -655,7 +725,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "društveno preduzeće",
             "Ribotos atsakomybės bendrovė",
@@ -665,12 +735,12 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "dtnn",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["doanh nghiệp có vốn đầu tư nước ngoài"],
     },
     {
         "display": "ДЗЗД",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "druzhestvo uchredeno po zakona za zadalzheniyata i dogovorite",
             "дззд",
@@ -679,7 +749,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ЕАД",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "ednolichno aktsionerno druzhestvo",
             "еад",
@@ -688,19 +758,20 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "éénpersoons-BVBA",
-        "compare": "LLC",
+        "compare": "",
+        "generic": "LLC",
         "aliases": [
             "éénpersoons-BVBA",
             "eenpersoons besloten vennootschap met beperkte aansprakelijkheid",
         ],
     },
     {
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["evropeysko druzhestvo", "eвропейско дружество", "ед"],
     },
     {
         "display": "EEIG",
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": [
             "european economic interest grouping",
             "evropeysko obedinenie po ikonomicheski interesi",
@@ -710,15 +781,21 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "e.G.",
-        "compare": "COOP",
+        "compare": "eG",
+        "generic": "COOP",
         "aliases": ["eingetragene genossenschaft", "genossenschaft"],
     },
-    {"display": "ehf.", "compare": "LLC", "aliases": ["einkahlutafélag"]},
-    {"display": "ei", "compare": "SP", "aliases": ["entreprise individuelle"]},
-    {"display": "ek. för.", "compare": "COOP", "aliases": ["ekonomisk förening"]},
+    {"display": "ehf.", "generic": "LLC", "aliases": ["einkahlutafélag"]},
+    {"display": "ei", "generic": "SP", "aliases": ["entreprise individuelle"]},
+    {
+        "display": "ek. för.",
+        "compare": "ekfor",
+        "generic": "COOP",
+        "aliases": ["ekonomisk förening"],
+    },
     {
         "display": "ekd",
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": [
             "evropeysko kooperativno druzhestvo",
             "eвропейско кооперативно дружество",
@@ -727,7 +804,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ЕООД",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "ednolichno druzhestvo s ogranichena otgovornost",
             "еднолично дружество с ограничена отговорност",
@@ -736,22 +813,23 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "esv",
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": ["economisch samenwerkingsverband"],
     },
     {
         "display": "ЕТ",
-        "compare": "SP",
+        "generic": "SP",
         "aliases": ["ednolichen targovets", "едноличен търговец", "ет"],
     },
     {
         "display": "EURL",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["entreprise unipersonnelle à responsabilité limitée"],
     },
     {
         "display": "e.V.",
-        "compare": "NGO",
+        "compare": "eV",
+        "generic": "NGO",
         "aliases": [
             "eingetragener verein",
             "eingetragener Verein",
@@ -763,7 +841,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {"display": "fmba", "aliases": ["forening med begrænset ansvar"]},
     {
         "display": "GbR",
-        "compare": "SP",
+        "generic": "SP",
         "aliases": [
             "gesbr",
             "gesellschaft des bürgerlichen rechts",
@@ -773,15 +851,15 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "GIE",
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": ["groupement d'intérêt économique"],
     },
-    {"compare": "COOP", "aliases": ["gospodarsko interesno udruženje"]},
-    {"display": "GK", "compare": "LLC", "aliases": ["合同会社"]},
-    {"compare": "GP", "aliases": ["合名会社"]},
+    {"generic": "COOP", "aliases": ["gospodarsko interesno udruženje"]},
+    {"display": "GK", "generic": "LLC", "aliases": ["合同会社"]},
+    {"generic": "GP", "aliases": ["合名会社"]},
     {
         "display": "GNPP",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "gosudarstvennoe nauchno proizvodstvennoe predpriyatie",
             "scientific & production enterprise",
@@ -790,15 +868,15 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "державне науково-виробниче підприємство",
         ],
     },
-    {"compare": "COOP", "aliases": ["gensidigt selskab"]},
-    {"compare": "LP", "aliases": ["合資会社"]},
-    {"display": "haao", "compare": "JSC", "aliases": ["halka açık anonim ortaklık"]},
-    {"display": "Hf.", "compare": "LLC", "aliases": ["hlutafélag"]},
-    {"display": "htx", "compare": "COOP", "aliases": ["hợp tác xã"]},
-    {"display": "huf", "compare": "SOE", "aliases": ["hindu undivided family"]},
+    {"generic": "COOP", "aliases": ["gensidigt selskab"]},
+    {"generic": "LP", "aliases": ["合資会社"]},
+    {"display": "haao", "generic": "JSC", "aliases": ["halka açık anonim ortaklık"]},
+    {"display": "Hf.", "compare": "Hf", "generic": "LLC", "aliases": ["hlutafélag"]},
+    {"display": "htx", "generic": "COOP", "aliases": ["hợp tác xã"]},
+    {"display": "huf", "generic": "SOE", "aliases": ["hindu undivided family"]},
     {
         "display": "II",
-        "compare": "SP",
+        "generic": "SP",
         "aliases": [
             "inteprinderea individuala",
             "interprinderea individuală",
@@ -819,11 +897,11 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "întreprinzătorul individual",
         ],
     },
-    {"display": "ik", "compare": "SOE", "aliases": ["individuālais komersants"]},
-    {"display": "im", "compare": "SOE", "aliases": ["întreprinderea municipală"]},
+    {"display": "ik", "generic": "SOE", "aliases": ["individuālais komersants"]},
+    {"display": "im", "generic": "SOE", "aliases": ["întreprinderea municipală"]},
     {
         "display": "Inc",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "incorp",
             "incorporated",
@@ -835,7 +913,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "IS",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "interessentskab",
             "intreprindere de stat alimentatiei publice",
@@ -843,21 +921,21 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "întreprinderea de stat",
         ],
     },
-    {"display": "ivs", "compare": "LLC", "aliases": ["iværksætterselskab"]},
+    {"display": "ivs", "generic": "LLC", "aliases": ["iværksætterselskab"]},
     {
         "display": "jdoo",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["j.d.o.o", "jednostavno društvo s ograničenom odgovornošću"],
     },
     {
         "display": "ЈП",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["javno preduzeće", "јавно предузеће", "ЈП", "Ј.П.", "Ј. П."],
     },
-    {"display": "JSCB", "compare": "JSC", "aliases": ["joint stock commercial bank"]},
+    {"display": "JSCB", "generic": "JSC", "aliases": ["joint stock commercial bank"]},
     {
         "display": "АКБ",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "АКЦИОНЕРНЫЙ КОММЕРЧЕСКИЙ БАНК",
             "акционерный коммерческий банк",
@@ -869,20 +947,20 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["Акционерное общество Финансово-строительная компания"],
     },
     {
         "display": "jtd",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["j.t.d.", "javno trgovačko društvo"],
     },
-    {"compare": "JSC", "aliases": ["jusikhoesa", "㈜", "주식회사"]},
+    {"generic": "JSC", "aliases": ["jusikhoesa", "㈜", "주식회사"]},
     {"display": "jv", "aliases": ["joint venture"]},
-    {"display": "kb", "compare": "LP", "aliases": ["kommanditbolag"]},
+    {"display": "kb", "generic": "LP", "aliases": ["kommanditbolag"]},
     {
         "display": "kda",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": [
             "komanditno druzhestvo s aktsii",
             "komanditno druzhestvo s aktsiyami",
@@ -891,10 +969,10 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "командитно дружество с акции",
         ],
     },
-    {"display": "keG", "compare": "GP", "aliases": ["kommanditerwerbsgesellschaft"]},
+    {"display": "keG", "generic": "GP", "aliases": ["kommanditerwerbsgesellschaft"]},
     {
         "display": "Kft.",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "kft",
             "korlatolt felelossegu tarsasag",
@@ -903,39 +981,39 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "korlátolt felelősségű társaság",
         ],
     },
-    {"compare": "JSC", "aliases": ["株式会社"]},
-    {"display": "koll. şti.", "compare": "GP", "aliases": ["kolektif şirket"]},
-    {"display": "kom. şti", "compare": "LP", "aliases": ["komandit şirket"]},
-    {"display": "koop", "compare": "COOP", "aliases": ["kooperatif şirket"]},
+    {"generic": "JSC", "aliases": ["株式会社"]},
+    {"display": "koll. şti.", "generic": "GP", "aliases": ["kolektif şirket"]},
+    {"display": "kom. şti", "generic": "LP", "aliases": ["komandit şirket"]},
+    {"display": "koop", "generic": "COOP", "aliases": ["kooperatif şirket"]},
     {
         "display": "ks",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": ["komanditní společnost", "komandītsabiedrība", "kommanditselskab"],
     },
-    {"display": "ky", "compare": "LP", "aliases": ["kommandiittiyhtiö"]},
+    {"display": "ky", "generic": "LP", "aliases": ["kommandiittiyhtiö"]},
     {
         "display": "ТОВ",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["товариство з обмеженою відповідальністю", "тов", "тзов"],
     },
     {
         "display": "TOV",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "tovarystvo z obmezhenoyu vidpovidalnistyu",
             "Tovarystvo z obmezhenoiu vidpovidalnistiu",
         ],
     },
-    {"compare": "LLC", "aliases": ["tavaristva z abmezhavanaj adkaznastsiu"]},
-    {"compare": "LP", "aliases": ["limited ortaklık"]},
+    {"generic": "LLC", "aliases": ["tavaristva z abmezhavanaj adkaznastsiu"]},
+    {"generic": "LP", "aliases": ["limited ortaklık"]},
     {
         "display": "LP",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": ["limited partnership", "L.P.", "L.P", "Л.П.", "Л.П", "兩合公司"],
     },
     {
         "display": "LLC",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "Limited Liability Company",
             "limited liability company",
@@ -947,7 +1025,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "Ltd",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "Limited",
             "Ltd",
@@ -960,8 +1038,6 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "limitée",
             "ltd.",
             "ltd. co.",
-            "CO.,LTD",
-            "CO., LTD",
             "ltda",
             "private company with limited liability",
             "private limited company",
@@ -975,7 +1051,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "Ltd Sti",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "Ltd. Sti.",
             "limited şirket",
@@ -991,36 +1067,36 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "МЧЖ",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["mas'uliyati cheklangan jamiyat", "масъулияти чекланган жамият"],
     },
-    {"display": "MMC", "compare": "LLC", "aliases": ["məhdud məsuliyyətli cəmiyyət"]},
-    {"display": "mtü", "compare": "NGO", "aliases": ["mittetulundusühing"]},
+    {"display": "MMC", "generic": "LLC", "aliases": ["məhdud məsuliyyətli cəmiyyət"]},
+    {"display": "mtü", "generic": "NGO", "aliases": ["mittetulundusühing"]},
     {"display": "NA", "aliases": ["N.A", "N.A.", "national association"]},
-    {"compare": "FIN", "aliases": ["nin'i kumiai", "任意組合"]},
+    {"generic": "FIN", "aliases": ["nin'i kumiai", "任意組合"]},
     {
         "display": "нп",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": ["некоммерческое партнерство", "некоммерческое партнёрство", "нп"],
     },
     {
         "display": "NV",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["N.V.", "N.V", "naamloze vennootschap"],
     },
     {
         "display": "OAJ",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["ochiq aksiyadorlik jamiyati", "очиқ акциядорлик жамияти"],
     },
     {
         "display": "od",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["o.d.", "ortačko društvo", "о.д.", "од", "ортачко друштво"],
     },
     {
         "display": "ОДО",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "obshchestvo s dopolnitel'noj otvetstvennost'yu",
             "одо",
@@ -1029,11 +1105,11 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {"display": "oeg", "aliases": ["offene erwerbsgesellschaft"]},
     {"display": "og", "aliases": ["offene gesellschaft"]},
-    {"compare": "SP", "aliases": ["oilaviy korxona", "оилавий корхона"]},
-    {"display": "ONG", "compare": "NGO", "aliases": ["organização não governamental"]},
+    {"generic": "SP", "aliases": ["oilaviy korxona", "оилавий корхона"]},
+    {"display": "ONG", "generic": "NGO", "aliases": ["organização não governamental"]},
     {
         "display": "ood",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "drujestvo s ogranichena otgovornost",
             "druzestvo s ogranicena otgovornost",
@@ -1044,29 +1120,29 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "OPG",
-        "compare": "SP",
+        "generic": "SP",
         "aliases": ["obiteljsko poljoprivredno gospodarstvo"],
     },
     {
         "display": "ops",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": ["obecně prospěšná společnost", "o.p.s.", "o.p.s"],
     },
-    {"compare": "NGO", "aliases": ["občanské sdružení."]},
+    {"generic": "NGO", "aliases": ["občanské sdružení."]},
     {
         "display": "OSCIP",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": ["organização da sociedade civil de interesse público"],
     },
     {"display": "osk", "aliases": ["osuuskunta"]},
     {
         "display": "owm",
-        "compare": "FIN",
+        "generic": "FIN",
         "aliases": ["onderlinge waarborgmaatschappij"],
     },
     {
         "display": "oy",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "osakeyhtiö",
             "Osakeyhtiö",
@@ -1077,12 +1153,12 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "O/Y",
         ],
     },
-    {"display": "oyj", "compare": "JSC", "aliases": ["julkinen osakeyhtiö"]},
+    {"display": "oyj", "generic": "JSC", "aliases": ["julkinen osakeyhtiö"]},
     {"display": "oü", "aliases": ["osaühing"]},
     {"display": "pc", "aliases": ["ኮርፖሬሽን"]},
     {"display": "pe", "aliases": ["የመንግስት ልማት ድርጅቶች"]},
-    {"display": "ПП", "compare": "SP", "aliases": ["приватне підприємство"]},
-    {"display": "PP", "compare": "SP", "aliases": ["Pryvatne pidpryiemstvo"]},
+    {"display": "ПП", "generic": "SP", "aliases": ["приватне підприємство"]},
+    {"display": "PP", "generic": "SP", "aliases": ["Pryvatne pidpryiemstvo"]},
     {"display": "pr", "aliases": ["preduzetnik", "пр", "предузетник"]},
     {"display": "ps", "aliases": ["partnerselskab", "pilnsabiedrība"]},
     {"display": "pse", "aliases": ["public sector enterprise"]},
@@ -1091,7 +1167,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {"display": "pt tbk", "aliases": ["perseroan terbatas terbuka"]},
     {
         "display": "Pty Ltd",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "proprietary limited",
             "proprietary limited company",
@@ -1114,7 +1190,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {"display": "rs", "aliases": ["säätiö"]},
     {
         "display": "ry",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": [
             "rekisteröity yhdistys",
             "rekisteröity yhdistys ry",
@@ -1124,13 +1200,18 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "rf",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": ["reykjavikurfélag", "Registrerad förening"],
     },
-    {"display": "s.cra.", "compare": "LP", "aliases": ["sociedad comanditaria"]},
+    {
+        "display": "s.cra.",
+        "compare": "scra",
+        "generic": "LP",
+        "aliases": ["sociedad comanditaria"],
+    },
     {
         "display": "SA",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "s.a.",
             "S.A.",
@@ -1158,26 +1239,26 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "شركة خفية الإسم",
         ],
     },
-    {"display": "SAD", "compare": "JSC", "aliases": ["sociedad anónima deportiva"]},
-    {"compare": "JSC", "aliases": ["sharikat al-mossahamah", "شـركـة الـمـسـاهـمـة"]},
+    {"display": "SAD", "generic": "JSC", "aliases": ["sociedad anónima deportiva"]},
+    {"generic": "JSC", "aliases": ["sharikat al-mossahamah", "شـركـة الـمـسـاهـمـة"]},
     {
         "display": "saoc",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["société anonyme omanaise close"],
     },
     {
         "display": "saog",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["société anonyme omanaise générale"],
     },
     {
         "display": "sapa",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": ["società in accomandita per azioni"],
     },
     {
         "display": "SARL",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "S.A.R.L.",
             "société à responsabilité limitée",
@@ -1186,23 +1267,23 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "SAS",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "sociedades por acciones simplificada",
             "société par actions simplifiée",
         ],
     },
-    {"display": "scc", "compare": "LLC", "aliases": ["société commerciale canadienne"]},
-    {"display": "sce", "compare": "COOP", "aliases": ["societas cooperativa europaea"]},
+    {"display": "scc", "generic": "LLC", "aliases": ["société commerciale canadienne"]},
+    {"display": "sce", "generic": "COOP", "aliases": ["societas cooperativa europaea"]},
     {
         "display": "scop",
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": ["société coopérative de production"],
     },
     {"display": "scpa", "aliases": ["sociedad civil privada"]},
     {
         "display": "SCS",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": [
             "secs",
             "s.c.s.",
@@ -1212,7 +1293,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "SD",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "s-ie",
             "sabiratelno druzhestvo (sd)/sadruzhie",
@@ -1225,16 +1306,16 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "Sdn Bhd",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["Sdn. Bhd.", "sendirian berhad"],
     },
-    {"display": "SE", "compare": "JSC", "aliases": ["societas europaea"]},
-    {"display": "sem", "compare": "COOP", "aliases": ["société d'économie mixte"]},
-    {"compare": "COOP", "aliases": ["société en participation"]},
-    {"display": "sf", "compare": "GP", "aliases": ["sameignarfélag"]},
+    {"display": "SE", "generic": "JSC", "aliases": ["societas europaea"]},
+    {"display": "sem", "generic": "COOP", "aliases": ["société d'économie mixte"]},
+    {"generic": "COOP", "aliases": ["société en participation"]},
+    {"display": "sf", "generic": "GP", "aliases": ["sameignarfélag"]},
     {
         "display": "SGR",
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": [
             "sociedad de garantia reciproca",
             "sociedad de garantía reciproca",
@@ -1244,7 +1325,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "SIA",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "sabiedrība ar ierobežotu atbildību",
             "Sabiedrība ar ierobežotu atbildību",
@@ -1254,23 +1335,23 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "sicaf",
-        "compare": "FIN",
+        "generic": "FIN",
         "aliases": ["société d'investissement à capital fixe"],
     },
     {
         "display": "SICAV",
-        "compare": "FIN",
+        "generic": "FIN",
         "aliases": ["société d'investissement à capital variable"],
     },
-    {"display": "SLL", "compare": "LLC", "aliases": ["sociedad limitada laboral"]},
+    {"display": "SLL", "generic": "LLC", "aliases": ["sociedad limitada laboral"]},
     {
         "display": "SLNE",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["s.l.n.e.", "sociedad limitada nueva empresa"],
     },
     {
         "display": "Pte Ltd",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "Pte. Ltd.",
             "Pte Ltd",
@@ -1279,44 +1360,31 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "Single Member Private Limited Company",
         ],
     },
-    {"display": "smba", "compare": "LLC", "aliases": ["selskab med begrænset ansvar"]},
-    {"display": "snc", "compare": "LP", "aliases": ["société en nom collectif"]},
+    {"display": "smba", "generic": "LLC", "aliases": ["selskab med begrænset ansvar"]},
+    {"display": "snc", "generic": "LP", "aliases": ["société en nom collectif"]},
     {
         "display": "snt",
-        "compare": "LP",
+        "generic": "LP",
         "aliases": ["садоводческое некоммерческое товарищество"],
     },
-    {"compare": "SP", "aliases": ["s.p.", "samostalni preduzetnik", "státní podnik"]},
+    {"generic": "SP", "aliases": ["s.p.", "samostalni preduzetnik", "státní podnik"]},
     {
         "display": "SpA",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["società per azioni", "SOCIETA' PER AZIONI", "Sociedade por ações"],
     },
-    {"display": "spf", "compare": "NGO", "aliases": ["stichting particulier fonds"]},
+    {"display": "spf", "generic": "NGO", "aliases": ["stichting particulier fonds"]},
     {
         "display": "SPRL",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "société privée à responsabilité limitée",
             "société privée à responsabilité limitée unipersonnelle",
         ],
     },
     {
-        "display": "Sp. z o.o.",
-        "compare": "LLC",
-        "aliases": [
-            "sp zoo",
-            "sp. z o.o.",
-            "sp. z o.o. sp.k",
-            "sp. z oo",
-            "sp. zoo",
-            "spolka z ograniczona odpowiedzialnoscia",
-            "spółka z ograniczoną odpowiedzialnością",
-        ],
-    },
-    {
         "display": "SRL",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "intreprinderea cu responsabilitate limitata",
             "s.r.l",
@@ -1346,10 +1414,10 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "socitate cu responsabilitate limitata",
         ],
     },
-    {"display": "Rt.", "compare": "JSC", "aliases": ["részvénytársaság"]},
+    {"display": "Rt.", "generic": "JSC", "aliases": ["részvénytársaság"]},
     {
         "display": "Nyrt.",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "nyilvánosan működő részvénytársaság",
             "Nyilvánosan működő részvénytársaság",
@@ -1357,46 +1425,46 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "Zrt.",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["Zártkörűen Működő Részvénytársaság"],
     },
-    {"display": "Bt.", "compare": "LP", "aliases": ["Betéti Társaság"]},
-    {"display": "Kkt.", "compare": "GP", "aliases": ["Közkereseti Társaság"]},
-    {"compare": "SP", "aliases": ["Egyéni Vállalkozó", "Egyéni Cég"]},
+    {"display": "Bt.", "generic": "LP", "aliases": ["Betéti Társaság"]},
+    {"display": "Kkt.", "generic": "GP", "aliases": ["Közkereseti Társaság"]},
+    {"generic": "SP", "aliases": ["Egyéni Vállalkozó", "Egyéni Cég"]},
     {
         "display": "Ltda",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["Sociedade limitada", "sociedada limitada"],
     },
     {
         "display": "sro",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["s.r.o", "společnost s ručením omezeným"],
     },
     {"display": "StG", "aliases": ["stille gesellschaft"]},
     {
         "display": "suarl",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["شّركة فردية ذات مسؤوليّات محدودة"],
     },
     {"display": "t:mi", "aliases": ["oiminimi"]},
-    {"display": "Sti", "compare": "LLC", "aliases": ["sirketi", "şirketi", "şti"]},
-    {"compare": "LP", "aliases": ["tokumei kumiai", "匿名組合"]},
+    {"display": "Sti", "generic": "LLC", "aliases": ["sirketi", "şirketi", "şti"]},
+    {"generic": "LP", "aliases": ["tokumei kumiai", "匿名組合"]},
     {
         "display": "ТОО",
-        "compare": "LLP",
+        "generic": "LLP",
         "aliases": ["товарищество с ограниченной ответственностью"],
     },
-    {"display": "tü", "compare": "LP", "aliases": ["täisühing"]},
+    {"display": "tü", "generic": "LP", "aliases": ["täisühing"]},
     {
         "display": "UAB",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["uždaroji akcinė bendrovė", "uždarosios akcinės bendrovės"],
     },
-    {"compare": "SOE", "aliases": ["unitar korxona", "унитар корхона"]},
+    {"generic": "SOE", "aliases": ["unitar korxona", "унитар корхона"]},
     {
-        "display": "Pty",
-        "compare": "SP",
+        "display": "Ultd",
+        "generic": "SP",
         "aliases": [
             "unlimited",
             "unlimited company",
@@ -1407,7 +1475,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "consorzio statale",
             "den føderale statsejede budgetinstitution",
@@ -1416,17 +1484,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "empresa unitária estatal",
             "entità statali",
             "entreprise unitaire d’état",
-            "federal state budgetary enterprise",
-            "federal state budgetary institution",
-            "federal state institution",
-            "federal state unitary enterprise",
-            "federalna budżetowa instytucja",
-            "föderales staatseigenes unternehmen",
             "gosudarstvennoe unitarnoe predpriyatie",
-            "Întreprinderea unitară a statului federal",
-            "Empresa Pública Unitária Federal",
-            "Entreprise unitaire publique fédérale",
-            "federalne państwowe przedsiębiorstwo unitarne",
             "Staatsinformatieagentschap",
             "impresa unitaria statale",
             "staatliches einheitsunternehmen",
@@ -1451,20 +1509,28 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
-        "display": "ФГБУ",
-        "compare": "SOE",
+        "display": "FGBU",
+        "generic": "SOE",
         "aliases": [
-            "federalnoe gosudarstvennoe byudzhetnoe uchrezhdenie",
-            "федеральное государственное бюджетное учреждение",
-            "федеральное государственное унитарное предприятие",
+            "federal state budgetary enterprise",
+            "federal state budgetary institution",
+            "federal state institution",
+            "federal state unitary enterprise",
+            "FEDERAL STATE BUDGETARY INSTITUTION",
+            "federalna budżetowa instytucja",
+            "föderales staatseigenes unternehmen",
+            "Întreprinderea unitară a statului federal",
+            "Empresa Pública Unitária Federal",
+            "Entreprise unitaire publique fédérale",
+            "federalne państwowe przedsiębiorstwo unitarne",
         ],
     },
-    {"display": "UÜ", "compare": "LP", "aliases": ["usaldusühing"]},
-    {"display": "vof", "compare": "SP", "aliases": ["vennootschap onder firma"]},
-    {"display": "vos", "compare": "SP", "aliases": ["veřejná obchodní společnost"]},
+    {"display": "UÜ", "generic": "LP", "aliases": ["usaldusühing"]},
+    {"display": "vof", "generic": "SP", "aliases": ["vennootschap onder firma"]},
+    {"display": "vos", "generic": "SP", "aliases": ["veřejná obchodní společnost"]},
     {
         "display": "vzw",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": [
             "internationale vereniging zonder winstoogmerk",
             "ivzw",
@@ -1475,20 +1541,20 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {"display": "xk", "aliases": ["xususiy korxona", "хусусий корхона"]},
     {"display": "xt", "aliases": ["xususiy tadbirkorlik", "хусусий тадбиркорлик"]},
-    {"display": "yk", "compare": "LLC", "aliases": ["有限会社"]},
+    {"display": "yk", "generic": "LLC", "aliases": ["有限会社"]},
     {
         "display": "yoaj",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["yopiq aksiyadorlik jamiyati", "ёпиқ акциядорлик жамияти"],
     },
     {
         "display": "yu",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["(yu)", "(유)", "yuhanhoesa", "유한회사"],
     },
     {
         "display": "CJSC",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "cjsc",
             "closed jsc",
@@ -1498,7 +1564,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ZAO",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "zakrytoe akcionernoe obshchestvo",
             "zao",
@@ -1514,7 +1580,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ЗАТ",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "zakritaye aktsiyanernaye tavaristva",
             "zakrytae akcyyanernae tavarystva",
@@ -1522,11 +1588,11 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "зат",
         ],
     },
-    {"display": "zs", "compare": "NGO", "aliases": ["z.s.", "zapsaný spolek"]},
+    {"display": "zs", "generic": "NGO", "aliases": ["z.s.", "zapsaný spolek"]},
     {"display": "şb", "aliases": ["şube"]},
     {
         "display": "тда",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "tavarystva z dadatkovaj adkaznascyu",
             "таварыства з дадатковай адказнасцю",
@@ -1535,14 +1601,14 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ТАА",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "tavarystva z abmezhavanay adkaznastsyu",
             "tavarystva z abmezhavanaj adkaznascyu",
             "таварыства з абмежаванай адказнасцю",
         ],
     },
-    {"display": "тбб", "compare": "NGO", "aliases": ["төрийн бус байгууллага"]},
+    {"display": "тбб", "generic": "NGO", "aliases": ["төрийн бус байгууллага"]},
     {
         "display": "тсж",
         "aliases": [
@@ -1550,26 +1616,26 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "товарищество собственников недвижимости",
         ],
     },
-    {"display": "хк", "compare": "JSC", "aliases": ["хувьцаат компани"]},
+    {"display": "хк", "generic": "JSC", "aliases": ["хувьцаат компани"]},
     {
         "display": "ххк",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": ["хязгаарлагдмал хариуцлагатай компани"],
     },
     {
         "display": "ОТДЕЛ ГПС",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ОТДЕЛ ГОСУДАРСТВЕННОЙ ПРОТИВОПОЖАРНОЙ СЛУЖБЫ"],
     },
     {"display": "Д/С", "aliases": ["Д/С", "ДЕТСКИЙ САД"]},
     {
         "display": "МОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["МОУ", "МУНИЦИПАЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "МАУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "МАУ",
             "МУНИЦИПАЛЬНОЕ АВТОНОМНОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ",
@@ -1577,7 +1643,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "МБОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "МБОУ",
             "МУНИЦИПАЛЬНОЕ БЮДЖЕТНОЕ ОБЩЕОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ",
@@ -1587,7 +1653,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "МБДОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "МБДОУ",
             "МУНИЦИПАЛЬНОЕ БЮДЖЕТНОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ",
@@ -1595,7 +1661,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "МБУ ДО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "МБУ ДО",
             "МУНИЦИПАЛЬНОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ",
@@ -1603,7 +1669,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "МК ДОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "МК ДОУ",
             "МУНИЦИПАЛЬНОЕ КАЗЕННОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ",
@@ -1611,17 +1677,17 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ГУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ГУ", "ГОСУДАРСТВЕННОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "ОГУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ОГУ", "ОКРУЖНОЕ ГОСУДАРСТВЕННОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "ГОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ГОУ",
             "ГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ",
@@ -1630,22 +1696,22 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ГБОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ГБОУ", "ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБЩЕОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "ГКОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ГКОУ", "ГОСУДАРСТВЕННОЕ КАЗЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "ГО ШК-Инт",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ГО ШК-Инт", "ГОСУДАРСТВЕННАЯ ОБЩЕОБРАЗОВАТЕЛЬНАЯ ШКОЛА-ИНТЕРНАТ"],
     },
     {
         "display": "ГОУ ДДМШВ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ГОУ ДДМШВ",
             "ГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДЛЯ ДЕТЕЙ ДОШКОЛЬНОГО И МЛАДШЕГО ШКОЛЬНОГО ВОЗРАСТА",
@@ -1653,7 +1719,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ГАУСО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ГАУСО",
             "ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ УЧРЕЖДЕНИЕ СОЦИАЛЬНОГО ОБСЛУЖИВАНИЯ",
@@ -1661,7 +1727,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ГБСКОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ГБСКОУ",
             "ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ СПЕЦИАЛЬНОЕ (КОРРЕКЦИОННОЕ) ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДЛЯ ОБУЧАЮЩИХСЯ, ВОСПИТАННИКОВ С ОГРАНИЧЕННЫМИ ВОЗМОЖНОСТЯМИ ЗДОРОВЬЯ",
@@ -1669,7 +1735,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ГСКОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ГСКОУ",
             "ГОСУДАРСТВЕННОЕ СПЕЦИАЛЬНОЕ (КОРРЕКЦИОННОЕ) ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ",
@@ -1679,12 +1745,12 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ГДОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ГДОУ", "ГОСУДАРСТВЕННОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "ГДОУ - Д/С",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ГДОУ - Д/С",
             "ГОСУДАРСТВЕННОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ - ДЕТСКИЙ САД",
@@ -1692,12 +1758,12 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ГКУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ГКУ", "ГОСУДАРСТВЕННОЕ КАЗЁННОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "ГКС(к)ОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ГКС(к)ОУ",
             "ГОСУДАРСТВЕННОЕ КАЗЕННОЕ СПЕЦИАЛЬНОЕ (КОРРЕКЦИОННОЕ) ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ",
@@ -1705,17 +1771,17 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ГНУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ГНУ", "ГОСУДАРСТВЕННОЕ НАУЧНОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "ГосНИИ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ГОСУДАРСТВЕННЫЙ НАУЧНО-ИССЛЕДОВАТЕЛЬСКИЙ ИНСТИТУТ"],
     },
     {
         "display": "ГОУ ВПО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ГОУ ВПО",
             "ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ",
@@ -1724,7 +1790,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ОУ ДПО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ОУ ДПО",
             "ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ",
@@ -1732,7 +1798,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ГОУ ДПО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ГОУ ДПО",
             "ГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ (ПОВЫШЕНИЯ КВАЛИФИКАЦИИ) СПЕЦИАЛИСТОВ",
@@ -1740,7 +1806,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "НОЧУ ДПО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "НОЧУ ДПО",
             "НЕГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ ЧАСТНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ",
@@ -1748,22 +1814,22 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ПОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ПОУ", "ПРОФЕССИОНАЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "ГП",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ГОСУДАРСТВЕННОЕ ПРЕДПРИЯТИЕ", "Государственное предприятие"],
     },
     {
         "display": "ГУП",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ГУП", "ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ"],
     },
     {
         "display": "ДГУП",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ДГУП",
             "ДОЧЕРНЕЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ",
@@ -1772,7 +1838,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ГУСП",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ГУСП",
             "ГОСУДАРСТВЕННОЕ УНИТАРНОЕ СЕЛЬСКОХОЗЯЙСТВЕННОЕ ПРЕДПРИЯТИЕ",
@@ -1780,7 +1846,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ГУДП",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ГУДП",
             "ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ДОЧЕРНЕЕ ПРЕДПРИЯТИЕ",
@@ -1789,17 +1855,12 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГНУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ФГНУ", "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ НАУЧНОЕ УЧРЕЖДЕНИЕ"],
     },
     {
-        "display": "ФГУП",
-        "compare": "SOE",
-        "aliases": ["ФГУП", "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ"],
-    },
-    {
         "display": "ДОЧЕРНЕЕ ФГУП",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ДОЧЕРНЕЕ ФГУП",
             "ФЕДЕРАЛЬНОЕ ДОЧЕРНЕЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ",
@@ -1808,7 +1869,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГБДОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФГБДОУ",
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ",
@@ -1816,7 +1877,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГБОУ ДПО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФГБОУ ДПО",
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ",
@@ -1824,7 +1885,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГАОУ ДПО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФГАОУ ДПО",
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ",
@@ -1832,7 +1893,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГБОУ ВО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФГБОУ ВО",
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ",
@@ -1843,7 +1904,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГОУ ВПО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФГОУ ВПО",
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ",
@@ -1851,7 +1912,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГКВОУ ВПО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФГКВОУ ВПО",
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ КАЗЕННОЕ ВОЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ",
@@ -1859,7 +1920,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "МАОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "МАОУ",
             "МУНИЦИПАЛЬНОЕ АВТОНОМНОЕ ОБЩЕОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ МУНИЦИПАЛЬНОГО ОБРАЗОВАНИЯ ГОРОД КРАСНОДАР",
@@ -1867,12 +1928,12 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "МКУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["МКУ", "МУНИЦИПАЛЬНОЕ КАЗЕННОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "МРО",
-        "compare": "REL",
+        "generic": "REL",
         "aliases": [
             "МРО",
             "МЕСТНАЯ ПРАВОСЛАВНАЯ РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ",
@@ -1881,33 +1942,33 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ЦРО",
-        "compare": "REL",
+        "generic": "REL",
         "aliases": ["ЦРО", "ЦЕНТРАЛЬНАЯ РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ"],
     },
-    {"display": "РО", "compare": "REL", "aliases": ["РО", "РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ"]},
+    {"display": "РО", "generic": "REL", "aliases": ["РО", "РЕЛИГИОЗНАЯ ОРГАНИЗАЦИЯ"]},
     {
         "display": "ФГУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ФГУ", "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "ФГКУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ КАЗЕННОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "ФКУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ФКУ", "ФЕДЕРАЛЬНОЕ КАЗЕННОЕ УЧРЕЖДЕНИЕ"],
     },
     {
         "display": "ФКП",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ФЕДЕРАЛЬНОЕ КАЗЕННОЕ ПРЕДПРИЯТИЕ"],
     },
     {
         "display": "ФГБВОУ ВО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФГБВОУ ВО",
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ВОЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ",
@@ -1915,7 +1976,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГКВОУ ВО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФГКВОУ",
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ КАЗЕННОЕ ВОЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ",
@@ -1923,14 +1984,14 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГАОУ ВО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ АВТОНОМНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ"
         ],
     },
     {
         "display": "ФГКОУ ДПО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФГКОУ ДПО",
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ КАЗЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ (ПЕРЕПОДГОТОВКИ И ПОВЫШЕНИЯ КВАЛИФИКАЦИИ)",
@@ -1938,7 +1999,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГОУ ДПО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФГОУ ДПО",
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ СПЕЦИАЛИСТОВ",
@@ -1946,27 +2007,40 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ФГДОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ФГДОУ",
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ",
         ],
     },
     {
+        "display": "ФГУП",
+        "compare": "FGBU",
+        "generic": "SOE",
+        "aliases": ["ФГУП", "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ"],
+    },
+    {
         "display": "ФГБУ",
-        "compare": "SOE",
-        "aliases": ["ФГБУ", "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ"],
+        "compare": "FGBU",
+        "generic": "SOE",
+        "aliases": [
+            "ФГБУ",
+            "federalnoe gosudarstvennoe byudzhetnoe uchrezhdenie",
+            "федеральное государственное бюджетное учреждение",
+            "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ",
+        ],
     },
     {
         "display": "ФГБУ ДПО",
-        "compare": "SOE",
+        "compare": "FGBU",
+        "generic": "SOE",
         "aliases": [
             "ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ"
         ],
     },
     {
         "display": "ОППО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ОБЪЕДИНЕННАЯ ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ",
             "ОБЪЕДИНЕННАЯ (ТЕРРИТОРИАЛЬНАЯ) ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ",
@@ -1974,7 +2048,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ",
             "ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ РАБОТНИКОВ",
@@ -1982,21 +2056,21 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО ООО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ОБЩЕСТВА С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ"
         ],
     },
     {
         "display": "ППО ДОЧЕРНЕГО ООО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ РАБОТНИКОВ ДОЧЕРНЕГО ОБЩЕСТВА С ОГРАНИЧЕНОЙ ОТВЕТСТВЕННОСТЬЮ"
         ],
     },
     {
         "display": "ППО ОАО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППО ОАО",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ОТКРЫТОГО АКЦИОНЕРНОГО ОБЩЕСТВА",
@@ -2005,7 +2079,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО ГОУСПО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППО ГОУСПО",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОГО ОБРАЗОВАТЕЛЬНОГО УЧРЕЖДЕНИЯ СРЕДНЕГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ",
@@ -2014,7 +2088,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО ФГБУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППО ФГБУ",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ФЕДЕРАЛЬНОГО ГОСУДАРСТВЕННОГО БЮДЖЕТНОГО УЧРЕЖДЕНИЯ",
@@ -2022,7 +2096,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО ФГБОУ ВО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППО ФГБОУ ВО",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ФЕДЕРАЛЬНОГО ГОСУДАРСТВЕННОГО БЮДЖЕТНОГО ОБРАЗОВАТЕЛЬНОГО УЧРЕЖДЕНИЯ ВЫСШЕГО ОБРАЗОВАНИЯ",
@@ -2031,7 +2105,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО ФКУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППО ФКУ",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ФЕДЕРАЛЬНОГО КАЗЕННОГО УЧРЕЖДЕНИЯ",
@@ -2039,7 +2113,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО ГБУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППО ГБУ",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ УЧРЕЖДЕНИЕ",
@@ -2048,7 +2122,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО ГБОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППО ГБОУ",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОГО БЮДЖЕТНОГО ОБРАЗОВАТЕЛЬНОГО УЧРЕЖДЕНИЯ",
@@ -2056,7 +2130,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО ФБУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППО ФБУ",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ФЕДЕРАЛЬНОГО БЮДЖЕТНОГО УЧРЕЖДЕНИЯ",
@@ -2064,7 +2138,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО ФГУП",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППО ФГУП",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ СОТРУДНИКОВ ФЕДЕРАЛЬНОГО ГОСУДАРСТВЕННОГО УНИТАРНОГО ПРЕДПРИЯТИЯ",
@@ -2072,7 +2146,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО ГУП",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППО ГУП",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОГО УНИТАРНОГО ПРЕДПРИЯТИЯ",
@@ -2080,7 +2154,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППО ПСРЗ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППО ПСРЗ",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ПРОФСОЮЗА РАБОТНИКОВ ЗДРАВООХРАНЕНИЯ",
@@ -2090,12 +2164,12 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ППОО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["ППОО", "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ"],
     },
     {
         "display": "ППОО АО",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ППОО АО",
             "ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ АКЦИОНЕРНОГО ОБЩЕСТВА",
@@ -2117,12 +2191,12 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "УПРАВЛЕНИЕ ФСБ РФ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["УПРАВЛЕНИЕ ФЕДЕРАЛЬНОЙ СЛУЖБЫ БЕЗОПАСНОСТИ РОССИЙСКОЙ ФЕДЕРАЦИИ"],
     },
     {
         "display": "ОГКОУ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "ОГКОУ",
             "ОБЛАСТНОЕ ГОСУДАРСТВЕННОЕ КАЗЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ",
@@ -2132,7 +2206,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "МОО",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": [
             "МОО",
             "МЕСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ",
@@ -2141,7 +2215,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "МОО - ППО",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": [
             "МОО - ППО",
             "МЕСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ - ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ",
@@ -2152,7 +2226,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "МОО - ППО ГУП",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": [
             "МОО - ППО ГУП",
             "МЕСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ-ПЕРВИЧНАЯ ПРОФСОЮЗНАЯ ОРГАНИЗАЦИЯ ГОСУДАРСТВЕННОГО УНИТАРНОГО ПРЕДПРИЯТИЯ",
@@ -2160,7 +2234,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "МЧС России",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "МЧС РОССИИ",
             "МИНИСТЕРСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ ПОДЕЛАМ ГРАЖДАНСКОЙ ОБОРОНЫ, ЧРЕЗВЫЧАЙНЫМ СИТУАЦИЯМ И ЛИКВИДАЦИИ ПОСЛЕДСТВИЙ СИХИЙНЫХ БЕДСТВИЙ",
@@ -2174,10 +2248,10 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "МИНИСТЕРСТВО РОССИЙСКОЙ ФЕДЕРАЦИИ ПО ДЕЛАМ ГРАЖДАНСКОЙ ОБОРОНЫ, ЧРЕЗВЫЧАЙНЫХ СИТУАЦИЙ И ЛИКВИДАЦИИ ПОСЛЕДСТВИЙ СТИХИЙНИХ БЕДСТВИЙ",
         ],
     },
-    {"display": "ОО", "compare": "NGO", "aliases": ["ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ"]},
+    {"display": "ОО", "generic": "NGO", "aliases": ["ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ"]},
     {
         "display": "НОУ ДПО",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": [
             "НЕГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ",
             "НЕГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ НАЧАЛЬНОГО И ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ",
@@ -2186,12 +2260,12 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "САК",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["СТРАХОВАЯ АКЦИОНЕРНАЯ КОМПАНИЯ", "СТРАХОВАЯ АКЦИОНЕР.КОМПАНИЯ"],
     },
     {
         "display": "ЗАО",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "закрите акціонерне товариство",
             "закрытое акционерное общество",
@@ -2221,7 +2295,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ОАО",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "OAO",
             "O.A.O.",
@@ -2240,6 +2314,8 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "Otkrytoye Aktsionernoye Obshchestvo",
             "Otkrytoe Akcionernoe Obshhestvo",
             "открытое акционерное общeство",
+            "PUBLICHNOE AKTSIONERNOE OBSHCHESTVO",
+            "Otkrytoe Aktsionernoe Obschchestvo",
             "ОТКРЫТОЕ АКЦИОНЕРНОЕ ОБЩEСТВО",
             "Акционерное общество открытого типа",
             "aktsionernoe obshchestvo otkrytogo tipa",
@@ -2257,7 +2333,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ВАТ",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "Vidkryte aktsionerne tovarystvo",
             "Vidkrite Akcionerne Tovaristvo",
@@ -2266,7 +2342,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "atviroji akcinė bendrovė",
             "atviroji akcinė bendrovė",
@@ -2277,7 +2353,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "АО",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "АКЦИОНЕРНОЕ ОБЩЕСТВО",
             "АКЦИОНЕРНЫЕ ОБЩЕСТВА",
@@ -2289,17 +2365,17 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "AO",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["aktsionernoe obschestvo", "AKTSIONERNOE OBSHCHESTVO", "ao"],
     },
     {
         "display": "PAO",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["Publichne aktsionerne tovarystvo"],
     },
     {
         "display": "ПАО",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": [
             "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО",
             "пао",
@@ -2307,32 +2383,32 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "публичное акционерное общество",
         ],
     },
-    {"display": "ПАТ", "compare": "JSC", "aliases": ["Публічне акціонерне товариство"]},
+    {"display": "ПАТ", "generic": "JSC", "aliases": ["Публічне акціонерне товариство"]},
     {
         "display": "НАО",
-        "compare": "JSC",
+        "generic": "JSC",
         "aliases": ["НЕПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО"],
     },
     {
         "display": "СПК",
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": ["СЕЛЬСКОХОЗЯЙСТВЕННЫЙ ПРОИЗВОДСТВЕННЫЙ КООПЕРАТИВ"],
     },
     {
         "display": "СУ СК РФ",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": [
             "СЛЕДСТВЕННОЕ УПРАВЛЕНИЕ СЛЕДСТВЕННОГО КОМИТЕТА РОССИЙСКОЙ ФЕДЕРАЦИИ"
         ],
     },
     {
         "display": "МУП",
-        "compare": "SOE",
+        "generic": "SOE",
         "aliases": ["МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ"],
     },
     {
         "display": "АНО",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": ["АНО", "АВТОНОМНАЯ НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ"],
     },
     {
@@ -2345,23 +2421,23 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ООП",
-        "compare": "LLP",
+        "generic": "LLP",
         "aliases": ["ООП", "ПАРТНЁРСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ"],
     },
-    {"display": "ПТ", "compare": "GP", "aliases": ["ПОЛНОЕ ТОВАРИЩЕСТВО"]},
+    {"display": "ПТ", "generic": "GP", "aliases": ["ПОЛНОЕ ТОВАРИЩЕСТВО"]},
     {"display": "ДОУ", "aliases": ["ДОУ", "ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ"]},
     {
         "display": "ПКООП",
-        "compare": "COOP",
+        "generic": "COOP",
         "aliases": ["ПКООП", "ПОТРЕБИТЕЛЬСКИЙ КООПЕРАТИВ"],
     },
-    {"display": "ПК", "compare": "COOP", "aliases": ["ПРОИЗВОДСТВЕННЫЙ КООПЕРАТИВ"]},
+    {"display": "ПК", "generic": "COOP", "aliases": ["ПРОИЗВОДСТВЕННЫЙ КООПЕРАТИВ"]},
     {"display": "НЦ", "aliases": ["НЦ", "НАУЧНЫЙ ЦЕНТР"]},
     {"display": "ОЮЛ", "aliases": ["ОЮЛ", "ОБЪЕДИНЕНИЕ ЮРИДИЧЕСКИХ ЛИЦ"]},
-    {"display": "НП", "compare": "NGO", "aliases": ["НЕКОММЕРЧЕСКОЕ ПАРТНЁРСТВО"]},
+    {"display": "НП", "generic": "NGO", "aliases": ["НЕКОММЕРЧЕСКОЕ ПАРТНЁРСТВО"]},
     {
         "display": "НОУДО",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": [
             "НОУДО",
             "НЕГОСУДАРСТВЕННОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ОБРАЗОВАНИЯ",
@@ -2370,11 +2446,11 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ОНОСС",
-        "compare": "NGO",
+        "generic": "NGO",
         "aliases": ["ОНОСС", "ОРГАНИЗАЦИЯ НАУЧНОГО ОБСЛУЖИВАНИЯ И СОЦИАЛЬНОЙ СФЕРЫ"],
     },
     {
-        "compare": "FIN",
+        "generic": "FIN",
         "aliases": [
             "Интервальный комбинированный паевой инвестиционный фонд",
             "Закрытый комбинированный паевой инвестиционный фонд",
@@ -2383,7 +2459,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "OOO",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "Obshchestvo s ohranychennoi otvetstvennostiu",
             "obshchestvo s ogranichennoj otvetstvennost'yu",
@@ -2394,7 +2470,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "ООО",
-        "compare": "LLC",
+        "generic": "LLC",
         "aliases": [
             "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ",
             "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ",

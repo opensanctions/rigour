@@ -21,6 +21,12 @@ def test_scanner():
     found = scanner.extract("I'm a banana!")
     assert found == []
 
+    # Escapes
+    scanner = Scanner(["C.I.A.", "Space Invaders"])
+    found = scanner.extract("The Space Invaders are run by the C.I.A.")
+    assert "C.I.A." in found
+    assert "Space Invaders" in found
+
 
 def test_noop_normalizer():
     assert noop_normalizer(None) is None

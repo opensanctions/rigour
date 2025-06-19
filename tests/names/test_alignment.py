@@ -97,12 +97,11 @@ def test_align_name_slop():
     query = make("NOVY GAZMASH")
     result = make("GAZMASH NOVY")
     amt = align_name_slop(query, result, max_slop=2)
-    # Both keeping GAZMASH is better because it's longer
-    # but perhaps either is valid and that can be an enhancement
-    assert tokens_eq(amt.query_sorted, ["novy"])
-    assert tokens_eq(amt.result_sorted, ["novy"])
-    assert tokens_eq(amt.query_extra, ["gazmash"])
-    assert tokens_eq(amt.result_extra, ["gazmash"])
+    # Two very short names will not be aligned:
+    assert tokens_eq(amt.query_sorted, ["novy", "gazmash"])
+    assert tokens_eq(amt.result_sorted, ["gazmash", "novy"])
+    assert tokens_eq(amt.query_extra, [])
+    assert tokens_eq(amt.result_extra, [])
 
     # beyond slop
     query = make("Blue flowers, trees, and bird song")
@@ -166,8 +165,8 @@ def test_align_person_name_order():
     amt = align_person_name_order(query, result)
 
     assert len(amt.query_sorted) == 2
-    assert amt.query_sorted[0].form == "smyth"
-    assert amt.query_sorted[1].form == "john"
+    assert amt.query_sorted[0].form == "john"
+    assert amt.query_sorted[1].form == "smyth"
     assert amt.query_extra[0].form == "richard"
 
     query = make("Vladimir Vladimirovitch Putin")
@@ -184,18 +183,45 @@ def test_align_person_name_order():
     assert amt.result_sorted[0].form == "vladimir"
     assert amt.result_extra[0].form == "vladimirovitch"
 
-    # TODO:
-    # Ali Al-Sabah vs Ali Alsabah
-    # Ali Al-Sabah vs Alsabah, Ali
-    # Mohammed Abd Al-Rahman vs Abdalrahman, Mohammed
+
+def test_name_packing():
+    query = make("Ali Al-Sabah")
+    result = make("Alsabah, Ali")
+    amt = align_person_name_order(query, result)
+    assert len(amt.query_sorted) == 3
+    assert len(amt.result_sorted) == 2
+
+    query = make("Mohammed Abd Al-Rahman")
+    result = make("Abdalrahman, Mohammed")
+    amt = align_person_name_order(query, result)
+    assert len(amt.query_sorted) == 4
+    assert len(amt.result_sorted) == 2
+
+    query = make("RamiMakhlouf")
+    result = make("Maklouf, Ramy")
+    amt = align_person_name_order(query, result)
+    assert len(amt.query_sorted) == 1
+    assert len(amt.result_sorted) == 2
+
+    query = make("AlisherUsmanov")
+    result = make("Alisher Usmanov")
+    amt = align_person_name_order(query, result)
+    assert len(amt.query_sorted) == 1
+    assert len(amt.result_sorted) == 2
+
+    query = make("Alisher Usmanov")
+    result = make("AlisherUsmanov")
+    amt = align_person_name_order(query, result)
+    assert len(amt.query_sorted) == 2
+    assert len(amt.result_sorted) == 1
 
 
 def test_align_person_special_cases():
     query = make("John")
     result = make("Doe")
     amt = align_person_name_order(query, result)
-    assert len(amt.query_sorted) == 0
-    assert len(amt.result_sorted) == 0
+    assert len(amt.query_sorted) == 1
+    assert len(amt.result_sorted) == 1
 
     amt = align_person_name_order([], [])
     assert len(amt.query_sorted) == 0
@@ -260,10 +286,9 @@ def test_align_tagged_person_name_parts():
         NamePart("john", 1, NamePartTag.FAMILY),
     ]
     aligned = align_person_name_order(query, result)
-    assert len(aligned) == 0, (aligned.query_sorted, aligned.result_sorted)
-    assert not len(aligned.result_sorted)
-    # assert aligned.query_sorted[0].form != aligned.result_sorted[0].form
-    # assert aligned.query_sorted[1].form != aligned.result_sorted[1].form
+    assert len(aligned) == 2, (aligned.query_sorted, aligned.result_sorted)
+    assert aligned.query_sorted[0].form != aligned.result_sorted[0].form
+    assert aligned.query_sorted[1].form != aligned.result_sorted[1].form
 
     query = [
         NamePart("hans", 0, NamePartTag.GIVEN),
@@ -274,4 +299,4 @@ def test_align_tagged_person_name_parts():
         NamePart("friedrich", 1, NamePartTag.GIVEN),
     ]
     aligned = align_person_name_order(query, result)
-    assert len(aligned) == 0
+    assert len(aligned) == 2

@@ -1,7 +1,8 @@
+from itertools import product
 from typing import List, Optional
 
 from rigour.names.part import NamePart
-from rigour.text.distance import levenshtein_similarity
+from rigour.text.distance import levenshtein_similarity, dam_levenshtein
 
 
 MAX_EDITS = 4
@@ -85,7 +86,7 @@ def align_name_slop(
         Alignment: An object containing the aligned name parts and any extra parts.
     """
     alignment = Alignment()
-    if len(query) < 2 or len(result) < 2:
+    if len(query) < 3 and len(result) < 3:
         alignment.query_sorted = query
         alignment.result_sorted = result
         return alignment
@@ -140,6 +141,45 @@ def align_name_slop(
     return alignment
 
 
+def _name_levenshtein(query: List[NamePart], result: List[NamePart]) -> float:
+    query_str = "".join([p.maybe_ascii for p in query])
+    result_str = "".join([p.maybe_ascii for p in result])
+    max_len = max(len(query_str), len(result_str))
+    if query_str == result_str or max_len == 0:
+        return 1.0
+    distance = dam_levenshtein(query_str, result_str)
+    score = 1 - (distance / max_len)
+    if score < 0.3:
+        return 0.0
+    return score
+
+
+def _pack_short_parts(
+    part: NamePart, other: NamePart, options: List[NamePart]
+) -> List[NamePart]:
+    packed: List[NamePart] = [other]
+    for op in options:
+        if op in packed:
+            continue
+        if not part.can_match(op):
+            continue
+        base_str = "".join([p.maybe_ascii for p in packed])
+        if len(base_str) >= len(part.form):
+            break
+        best_score = _name_levenshtein([part], packed)
+        best_packed = None
+        for i in range(len(packed) + 1):
+            next_packed = packed.copy()
+            next_packed.insert(i, op)
+            next_score = _name_levenshtein([part], next_packed)
+            if next_score > best_score:
+                best_score = next_score
+                best_packed = next_packed
+        if best_packed is not None:
+            packed = best_packed
+    return packed
+
+
 def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Alignment:
     """Aligns the name parts of a person name for the query and result based on their
     tags and their string similarity such that the most similar name parts are matched.
@@ -152,40 +192,53 @@ def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Al
         Alignment: An object containing the aligned name parts and any extra parts.
     """
     alignment = Alignment()
+    if not len(query):
+        alignment.result_sorted = result
+        return alignment
 
-    for qpart in sorted(query, key=len, reverse=True):
-        best_match: Optional[NamePart] = None
+    query_left = sorted(query, key=len, reverse=True)
+    result_left = sorted(result, key=len, reverse=True)
+    while len(query_left) > 0 and len(result_left) > 0:
         best_score = 0.0
-        for rpart in sorted(result, key=len, reverse=True):
-            if rpart in alignment.result_sorted:
+        best_query_parts: Optional[List[NamePart]] = None
+        best_result_parts: Optional[List[NamePart]] = None
+        for qp, rp in product(query_left, result_left):
+            if not qp.can_match(rp):
                 continue
-            if not qpart.can_match(rpart):
-                continue
-            min_len = min(len(qpart.maybe_ascii), len(rpart.maybe_ascii))
-            score = levenshtein_similarity(
-                qpart.maybe_ascii,
-                rpart.maybe_ascii,
-                max_edits=min_len // 2,
-                max_percent=1.0,
-            )
-            score = score * min_len
+            if qp.maybe_ascii == rp.maybe_ascii:
+                best_score = 1.0
+                best_query_parts = [qp]
+                best_result_parts = [rp]
+                break
+            # check the Levenshtein distance between the two parts
+            score = _name_levenshtein([qp], [rp])
             if score > best_score:
-                best_score = score
-                best_match = rpart
+                best_query_parts = [qp]
+                best_result_parts = [rp]
+                if len(qp.form) > len(rp.form):
+                    best_result_parts = _pack_short_parts(qp, rp, result_left)
+                elif len(rp.form) > len(qp.form):
+                    best_query_parts = _pack_short_parts(rp, qp, query_left)
+                best_score = _name_levenshtein(best_query_parts, best_result_parts)
 
-        if best_match is not None:
-            alignment.query_sorted.append(qpart)
-            alignment.result_sorted.append(best_match)
-        else:
-            alignment.query_extra.append(qpart)
+        if best_score == 0.0:
+            # no match found, break out of the loop
+            break
+
+        if best_query_parts is not None:
+            alignment.query_sorted.extend(best_query_parts)
+            for qp in best_query_parts:
+                query_left.remove(qp)
+        if best_result_parts is not None:
+            alignment.result_sorted.extend(best_result_parts)
+            for rp in best_result_parts:
+                result_left.remove(rp)
 
     if not len(alignment.query_sorted):
         alignment.query_sorted = NamePart.tag_sort(query)
         alignment.result_sorted = NamePart.tag_sort(result)
         return alignment
 
-    for rpart in result:
-        if rpart not in alignment.result_sorted:
-            alignment.result_extra.append(rpart)
-
+    alignment.query_extra.extend(query_left)
+    alignment.result_extra.extend(result_left)
     return alignment

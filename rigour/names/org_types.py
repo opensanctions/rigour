@@ -106,12 +106,20 @@ def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
 
     mapping: Dict[str, str] = {}
     for org_type in ORG_TYPES:
-        compare_norm = normalizer(org_type.get("compare"))
+        display_form = normalizer(org_type.get("display"))
+        compare_form = org_type.get("compare", display_form)
+        # Allow for empty compare forms, which are used to indicate that the
+        # organization type be removed before comparison:
+        compare_norm = (
+            normalizer(compare_form)
+            if compare_form is None or len(compare_form) > 0
+            else ""
+        )
         if compare_norm is None:
             continue
-        for alias in org_type["aliases"]:
+        for alias in org_type.get("aliases", []):
             alias_norm = normalizer(alias)
-            if alias_norm is None or alias_norm == compare_norm:
+            if alias_norm is None:
                 continue
             if alias_norm in mapping and mapping[alias_norm] != compare_norm:
                 log.warning(
@@ -121,7 +129,8 @@ def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
                     mapping[alias_norm],
                 )  # pragma: no cover
             mapping[alias_norm] = compare_norm
-        display_norm = normalizer(org_type.get("display"))
+
+        display_norm = normalizer(display_form)
         if display_norm is not None and display_norm not in mapping:
             mapping[display_norm] = compare_norm
     return Replacer(mapping, ignore_case=True)
@@ -132,8 +141,8 @@ def replace_org_types_compare(
 ) -> str:
     """Replace any organization type indicated in the given entity name (often as a prefix or suffix)
     with a heavily normalized form label. This will re-write country-specific entity types (eg. GmbH)
-    into a globally normalized set of types (LLC). The resulting text is meant to be used in comparison
-    processes, but no longer fit for presentation to a user.
+    into a simplified spelling suitable for comparison using string distance. The resulting text is
+    meant to be used in comparison processes, but no longer fit for presentation to a user.
 
     Args:
         name (str): The text to be processed. It is assumed to be already normalized (see below).
