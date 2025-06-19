@@ -31,5 +31,6 @@ This library does not perform geocoding and treats address matching as a text co
 * [forms.yml](https://github.com/opensanctions/rigour/blob/main/resources/addresses/forms.yml)
 
 See also: 
+
 * [libpostal](https://github.com/openvenues/libpostal) is a fully developed C library for address parsing and normalisation that is trained on OpenStreetMap data.
 * [addressformatting](https://github.com/OpenCageData/address-formatting) solves the inverse problem: given a set of address components (like street, city, postal code), it will create a text representation that is in line with local expectations in the given country.
