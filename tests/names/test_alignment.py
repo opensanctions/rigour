@@ -19,8 +19,7 @@ def tokens_eq(a: List[NamePart], b: List[str]) -> bool:
     return True
 
 
-def test_align_name_slop():
-    # Extra
+def test_align_name_slop_extra():
     query = make("Deutsche Bank AG")
     result = make("Deutsche Bank Aktiengesellschaft")
     amt = align_name_slop(query, result, max_slop=2)
@@ -29,7 +28,8 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_extra, ["ag"])
     assert tokens_eq(amt.result_extra, ["aktiengesellschaft"])
 
-    # Fuzzy
+
+def test_align_name_slop_fuzzy():
     query = make("Deutsche Bank AG")
     result = make("Deutsche Bahn AG")
     amt = align_name_slop(query, result, max_slop=2)
@@ -38,7 +38,8 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_extra, [])
     assert tokens_eq(amt.result_extra, [])
 
-    # Extra in the middle of query
+
+def test_align_name_slop_extra_middle():
     query = make("Deutsche Bank (Schweiz) AG")
     result = make("Deutsche Bank AG")
     amt = align_name_slop(query, result, max_slop=2)
@@ -47,7 +48,8 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_extra, ["schweiz"])
     assert tokens_eq(amt.result_extra, [])
 
-    # Multiple extra
+
+def test_align_name_slop_multiple_extra():
     query = make("Deutsche Bank (Schweiz) AG")
     result = make("Deutsche Bank Aktiengesellschaft")
     amt = align_name_slop(query, result, max_slop=2)
@@ -56,7 +58,8 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_extra, ["schweiz", "ag"])
     assert tokens_eq(amt.result_extra, ["aktiengesellschaft"])
 
-    # Extra in the middle of result
+
+def test_align_name_slop_extra_only_result():
     query = make("Al-Haramain Foundation")
     result = make("Al-Haramain Benevolent Foundation")
     amt = align_name_slop(query, result, max_slop=2)
@@ -65,7 +68,8 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_extra, [])
     assert tokens_eq(amt.result_extra, ["benevolent"])
 
-    # Extra at the start of query, fuzzy
+
+def test_align_name_slop_extra_start_query():
     query = make("Production Enterprise NOVI GAZMASH")
     result = make("NOVY GAZMASH")
     amt = align_name_slop(query, result, max_slop=2)
@@ -74,7 +78,8 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_extra, ["production", "enterprise"])
     assert tokens_eq(amt.result_extra, [])
 
-    # Extra at the start of result, fuzzy
+
+def test_align_name_slop_extra_start_result():
     query = make("NOVI GAZMASH")
     result = make("Production Enterprise NOVIY GASMASH")
     amt = align_name_slop(query, result, max_slop=2)
@@ -83,6 +88,8 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_extra, [])
     assert tokens_eq(amt.result_extra, ["production", "enterprise"])
 
+
+def test_align_name_slop_prefer_closer_segments():
     # slop gets penalised:
     # we choose blue over goo because the goos are further apart
     query = make("Goo Blue Flowers")
@@ -93,6 +100,8 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_extra, ["goo"])
     assert tokens_eq(amt.result_extra, ["goo"])
 
+
+def test_align_name_slop_dont_reorder():
     # don't reorder - just take whatever aligns with slop in order
     query = make("NOVY GAZMASH")
     result = make("GAZMASH NOVY")
@@ -103,27 +112,40 @@ def test_align_name_slop():
     assert tokens_eq(amt.query_extra, [])
     assert tokens_eq(amt.result_extra, [])
 
-    # beyond slop
+
+def test_align_name_slop_beyond_slop():
+    # no match within slop -> advance with unaligned parts
     query = make("Blue flowers, trees, and bird song")
     result = make("Blue bird song")
-    amt = align_name_slop(query, result)
-    assert tokens_eq(amt.query_sorted, ["blue"])
-    assert tokens_eq(amt.result_sorted, ["blue"])
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["blue", "flowers", "bird", "song"])
+    assert tokens_eq(amt.result_sorted, ["blue", "bird"])
+    assert tokens_eq(amt.query_extra, ["trees", "and"])
+    assert tokens_eq(amt.result_extra, ["song"])
 
     # extend slop
     amt = align_name_slop(query, result, max_slop=3)
     assert tokens_eq(amt.query_sorted, ["blue", "bird", "song"])
     assert tokens_eq(amt.result_sorted, ["blue", "bird", "song"])
+    assert tokens_eq(amt.query_extra, ["flowers", "trees", "and"])
+    assert tokens_eq(amt.result_extra, [])
 
-    # query = make("Academy of Military Medical Sciences, Insitute of Medical Equipment")
-    # result = make(
-    #     "Academy of Military Medical Sciences, Institute of Micobiology and Epidemiology"
-    # )
-    # amt = align_name_slop(query, result, max_slop=1)
-    # assert len(amt.result_extra) + len(amt.query_extra) == 1
 
-    # TODO:
-    # It'd be nice if longer alignments were preferred over shorter ones
+def test_align_name_slop_trail_in_sorted():
+    # only slop goes into extra. Unaligned parts beyond slop stay in sorted.
+    query = make("Academy of Military Medical Sciences, Insitute of Medical Equipment")
+    result = make(
+        "Academy of Military Medical Sciences, Institute of Micobiology and Epidemiology"
+    )
+    amt = align_name_slop(query, result, max_slop=1)
+    # fmt: off
+    assert tokens_eq(amt.query_sorted, ["academy", "of", "military", "medical", "sciences", "insitute", "of", "medical"])
+    assert tokens_eq(amt.result_sorted, ["academy", "of", "military", "medical", "sciences", "institute", "of", "micobiology", "epidemiology"])
+    # fmt: on
+    # slop skipped at the end
+    assert tokens_eq(amt.query_extra, ["equipment"])
+    assert tokens_eq(amt.result_extra, ["and"])
+    assert len(amt.result_extra) + len(amt.query_extra) == 2
 
 
 def test_align_slop_special_cases():
