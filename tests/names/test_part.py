@@ -29,6 +29,15 @@ def test_name_part():
     assert osama.metaphone is None
 
 
+def test_name_part_empty():
+    # Should never exist
+    empty = NamePart("", 0)
+    assert empty.ascii is None
+    assert empty.comparable == ""
+    assert empty.metaphone is None
+    assert empty.is_modern_alphabet is True
+
+
 def test_name_part_tags():
     john = NamePart("john", 0)
     steven = NamePart("steven", 0, NamePartTag.GIVEN)

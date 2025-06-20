@@ -6,7 +6,7 @@ typecheck:
 	mypy --strict rigour
 
 test:
-	pytest --cov rigour --cov-report term-missing tests
+	pytest --cov rigour --cov-report term-missing --cov-report html tests
 
 fetch-scripts:
 	curl -o resources/text/scripts.txt https://www.unicode.org/Public/UCD/latest/ucd/Scripts.txt

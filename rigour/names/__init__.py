@@ -13,7 +13,8 @@ is used to represent individual parts of a name, such as the first name, middle 
 """
 
 from rigour.names.name import Name
-from rigour.names.part import NamePart
+from rigour.names.symbol import Symbol
+from rigour.names.part import NamePart, Span
 from rigour.names.tag import NamePartTag, NameTypeTag
 from rigour.names.pick import pick_name, pick_case, reduce_names
 from rigour.names.check import is_name
@@ -33,6 +34,8 @@ __all__ = [
     "tokenize_name",
     "is_name",
     "Name",
+    "Symbol",
+    "Span",
     "NamePart",
     "NamePartTag",
     "NameTypeTag",

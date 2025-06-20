@@ -85,6 +85,8 @@ def test_name_symbols():
     nspan = name.spans[1]
     assert nspan.symbol == nsymbol
     assert len(nspan.parts) == 2
+    assert nspan == nspan
+    assert "wesson" in repr(nspan)
 
     bsymbol = Symbol(Symbol.Category.NAME, "BANANA")
     name.apply_phrase("banana", bsymbol)
@@ -97,3 +99,51 @@ def test_name_symbols():
     map = name.symbol_map()
     assert len(map) == 1
     assert len(map[rsymbol]) == 2
+
+
+def test_name_contains_per():
+    name1 = Name("John Smith", tag=NameTypeTag.PER)
+    assert name1.contains(name1) is False
+    name2 = Name("John Smith Jr.", tag=NameTypeTag.PER)
+    name3 = Name("John Smith Sr.", tag=NameTypeTag.PER)
+    name4 = Name("Jane Smith", tag=NameTypeTag.PER)
+
+    assert name1.contains(name2) is False
+    assert name2.contains(name1) is True
+    assert name1.contains(name3) is False
+    assert name3.contains(name1) is True
+    assert name1.contains(name4) is False
+    assert name4.contains(name1) is False
+
+    # Test with same names but different tags
+    name5 = Name("John Randolph Smith", tag=NameTypeTag.PER)
+    assert name1.contains(name5) is False
+    assert name5.contains(name1) is True
+
+    symbol = Symbol(Symbol.Category.INITIAL, "r")
+    name5.apply_phrase("randolph", symbol)
+
+    name6 = Name("John R. Smith", tag=NameTypeTag.PER)
+    name6.apply_phrase("r", symbol)
+    assert name5.contains(name6) is True
+    assert name6.contains(name5) is False
+
+
+def test_name_contains_org():
+    comp1 = Name("Banana Republic Inc.", tag=NameTypeTag.ORG)
+    comp2 = Name("Banana Republic", tag=NameTypeTag.ORG)
+    assert comp1.contains(comp2) is True
+    assert comp2.contains(comp1) is False
+
+    # Should this match?
+    comp1 = Name("Banana Republics Inc.", tag=NameTypeTag.ORG)
+    comp2 = Name("Banana Republic", tag=NameTypeTag.ORG)
+    assert comp1.contains(comp2) is True
+    assert comp2.contains(comp1) is False
+
+
+def test_name_contains_unk():
+    # Unknwon type never matches
+    name1 = Name("John Smith", tag=NameTypeTag.UNK)
+    name2 = Name("John Smith Jr.", tag=NameTypeTag.UNK)
+    assert name1.contains(name2) is False

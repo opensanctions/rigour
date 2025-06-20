@@ -98,10 +98,7 @@ class Span:
         return hash((self.parts, self.symbol))
 
     def __eq__(self, other: Any) -> bool:
-        try:
-            return bool(self.symbol == other.symbol and self.parts == other.parts)
-        except AttributeError:
-            return False
+        return hash(self) == hash(other)
 
     def __repr__(self) -> str:
         return f"<Span({self.parts!r}, {self.symbol})>"

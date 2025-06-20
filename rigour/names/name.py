@@ -103,11 +103,10 @@ class Name(object):
             return False
         if len(self.parts) < len(other.parts):
             return False
+        forms = [part.comparable for part in self.parts]
+        other_forms = [part.comparable for part in other.parts]
+        common_forms = list_intersection(forms, other_forms)
         if self.tag == NameTypeTag.PER:
-            forms = [part.form for part in self.parts]
-            other_forms = [part.form for part in other.parts]
-            common_forms = list_intersection(forms, other_forms)
-
             # we want to make this support middle initials so that
             # "John Smith" can match "J. Smith"
             for ospan in other.spans:
@@ -118,10 +117,10 @@ class Name(object):
                         if span.symbol == ospan.symbol:
                             common_forms.append(ospan.comparable)
 
-            # If every part of the other name is represented in the common forms,
-            # we consider it a match.
-            if len(common_forms) == len(other_forms):
-                return True
+        # If every part of the other name is represented in the common forms,
+        # we consider it a match.
+        if len(common_forms) == len(other_forms):
+            return True
 
         return other.norm_form in self.norm_form
 
