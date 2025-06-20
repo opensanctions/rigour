@@ -106,9 +106,12 @@ def align_name_slop(
         )
         # take the best of both
         if query_best is None and result_best is None:
-            # no alignment found, skip both
-            alignment.query_extra.append(query[query_index])
-            alignment.result_extra.append(result[result_index])
+            # No alignment found within slop, move forward with bad alignment
+            # unless we are at the end of either list.
+            if query_index == len(query) - 1 or result_index == len(result) - 1:
+                break
+            alignment.query_sorted.append(query[query_index])
+            alignment.result_sorted.append(result[result_index])
             query_index += 1
             result_index += 1
             continue
@@ -134,9 +137,13 @@ def align_name_slop(
         # move to the step after the aligned parts
         query_index = best.left.index + 1
         result_index = best.right.index + 1
-    # add any remaining parts to extra
-    alignment.query_extra.extend(query[query_index:])
-    alignment.result_extra.extend(result[result_index:])
+    # Add slop remaining parts to extra and the rest to sorted.
+    # We do this because max_slop parts are allowed to be ignored, but anything
+    # beyond that should penalise any similarity comparison on the sorted parts.
+    alignment.query_extra.extend(query[query_index : query_index + max_slop])
+    alignment.query_sorted.extend(query[query_index + max_slop :])
+    alignment.result_extra.extend(result[result_index : result_index + max_slop])
+    alignment.result_sorted.extend(result[result_index + max_slop :])
 
     return alignment
 

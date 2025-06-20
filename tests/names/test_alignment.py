@@ -69,7 +69,7 @@ def test_align_name_slop_extra_only_result():
     assert tokens_eq(amt.result_extra, ["benevolent"])
 
 
-def test_align_name_slop_extra_start():
+def test_align_name_slop_extra_start_query():
     query = make("Production Enterprise NOVI GAZMASH")
     result = make("NOVY GAZMASH")
     amt = align_name_slop(query, result, max_slop=2)
@@ -114,14 +114,14 @@ def test_align_name_slop_dont_reorder():
 
 
 def test_align_name_slop_beyond_slop():
-    # beyond slop
+    # no match within slop -> advance with unaligned parts
     query = make("Blue flowers, trees, and bird song")
     result = make("Blue bird song")
-    amt = align_name_slop(query, result)
-    assert tokens_eq(amt.query_sorted, ["blue"])
-    assert tokens_eq(amt.result_sorted, ["blue"])
-    assert tokens_eq(amt.query_extra, ["flowers", "trees", "and", "bird", "song"])
-    assert tokens_eq(amt.result_extra, ["bird", "song"])
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["blue", "flowers", "bird", "song"])
+    assert tokens_eq(amt.result_sorted, ["blue", "bird"])
+    assert tokens_eq(amt.query_extra, ["trees", "and"])
+    assert tokens_eq(amt.result_extra, ["song"])
 
     # extend slop
     amt = align_name_slop(query, result, max_slop=3)
@@ -138,7 +138,14 @@ def test_align_name_slop_trail_in_sorted():
         "Academy of Military Medical Sciences, Institute of Micobiology and Epidemiology"
     )
     amt = align_name_slop(query, result, max_slop=1)
-    assert len(amt.result_extra) + len(amt.query_extra) == 1
+    # fmt: off
+    assert tokens_eq(amt.query_sorted, ["academy", "of", "military", "medical", "sciences", "insitute", "of", "medical"])
+    assert tokens_eq(amt.result_sorted, ["academy", "of", "military", "medical", "sciences", "institute", "of", "micobiology", "epidemiology"])
+    # fmt: on
+    # slop skipped at the end
+    assert tokens_eq(amt.query_extra, ["equipment"])
+    assert tokens_eq(amt.result_extra, ["and"])
+    assert len(amt.result_extra) + len(amt.query_extra) == 2
 
 
 def test_align_slop_special_cases():
