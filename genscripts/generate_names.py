@@ -28,7 +28,7 @@ def generate_data_file() -> None:
         values = tuple(sorted([str(v) for v in value if len(str(v)) > 0]))
         if isinstance(key, str):
             key = key.strip().upper()
-        content += f"{key.upper()}: Tuple[str] = {values!r}\n\n"
+        content += f"{key.upper()}: Tuple[str, ...] = {values!r}\n\n"
 
     symbols_path = RESOURCES_PATH / "names" / "symbols.yml"
     with open(symbols_path, "r", encoding="utf-8") as ufh:
@@ -48,7 +48,7 @@ def generate_data_file() -> None:
                     continue
             items = tuple(sorted(set([str(v) for v in items if len(str(v)) > 0])))
             mapping[group] = items
-        content += f"{section}: Dict[{group_type}, Tuple[str]] = {mapping!r}\n\n"
+        content += f"{section}: Dict[{group_type}, Tuple[str, ...]] = {mapping!r}\n\n"
 
     out_path = CODE_PATH / "names" / "data.py"
     write_python(out_path, content)
