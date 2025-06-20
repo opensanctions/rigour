@@ -6,7 +6,11 @@ from rigour.text.distance import levenshtein
 from normality.cleaning import compose_nfc
 
 from rigour.names import tokenize_name
-from rigour.names.org_types import replace_org_types_display, normalize_display
+from rigour.names.org_types import (
+    remove_org_types,
+    replace_org_types_display,
+    normalize_display,
+)
 from rigour.data.names import data
 from rigour.text.scripts import is_modern_alphabet
 
@@ -46,6 +50,8 @@ def parse_names(file_path):
             dataset = row["dataset"]
             if dataset not in (
                 "eu_fsf",
+                "ext_ru_egrul",
+                "ua_nsdc_sanctions",
                 "us_ofac_sdn",
                 "us_ofac_cons",
                 "ch_seco_sanctions",
@@ -61,7 +67,9 @@ def parse_names(file_path):
             # if count > 500000:
             #     break
             value = normalize_display(row["value"])
-            value = replace_org_types_display(value)
+            if value is None:
+                continue
+            value = remove_org_types(value)
             for token in tokenize_name(value.lower()):
                 if len(token) < 2 or token in ignored:
                     continue

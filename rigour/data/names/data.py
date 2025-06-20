@@ -188,7 +188,7 @@ STOPWORDS: List[str] = [
 ]
 
 ORG_SYMBOLS: Dict[str, List[str]] = {
-    "co": [
+    "CO": [
         "Etaireia",
         "co",
         "companhia",
@@ -196,6 +196,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "companie",
         "company",
         "compañía",
+        "corporation",
         "firm",
         "firma",
         "kampaniia",
@@ -224,7 +225,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "企業",
         "公司",
     ],
-    "org": [
+    "ORG": [
         "Organismos",
         "org",
         "organisaatio",
@@ -262,7 +263,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "協会",
         "団体",
     ],
-    "corp": [
+    "CORP": [
         "corp",
         "corporaciia",
         "corporacion",
@@ -291,7 +292,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "合作社",
         "生活協同組合",
     ],
-    "coop": [
+    "COOP": [
         "Synetairismos",
         "co-op",
         "co-op society",
@@ -323,7 +324,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "Συνεταιρισμός",
         "кооперация",
     ],
-    "center": [
+    "CENTER": [
         "Centro",
         "Centrum",
         "center",
@@ -338,7 +339,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "центров",
         "مركز",
     ],
-    "holding": [
+    "HOLDING": [
         "Symmetoches",
         "Symmetochon",
         "holding",
@@ -355,7 +356,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "保有資産",
         "集体",
     ],
-    "business": [
+    "BUSINESS": [
         "business",
         "businesses",
         "Επιχείρηση",
@@ -368,8 +369,8 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "商",
         "商业",
     ],
-    "branch": ["branch", "branch of", "filiale", "zweigstelle", "филиал"],
-    "concern": [
+    "BRANCH": ["branch", "branch of", "filiale", "zweigstelle", "филиал"],
+    "CONCERN": [
         "concern",
         "consorcio",
         "consórcio",
@@ -379,7 +380,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "концерн",
         "مجموعة",
     ],
-    "consortium": [
+    "CONSORTIUM": [
         "consorcio",
         "consortile",
         "consortium",
@@ -387,8 +388,8 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "consórcio",
         "konsortsium",
     ],
-    "service": ["service", "services", "servicios", "служба", "службы"],
-    "defence": [
+    "SERVICE": ["service", "services", "servicios", "служба", "службы"],
+    "DEFENCE": [
         "Verteidigung",
         "defence",
         "defensa",
@@ -404,7 +405,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "оборон",
         "оборонный",
     ],
-    "department": [
+    "DEPARTMENT": [
         "Abteilung",
         "afdeling",
         "afdelingen",
@@ -417,7 +418,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "département",
         "отдел",
     ],
-    "special": [
+    "SPECIAL": [
         "Speciaal",
         "Specijalni",
         "Specjalnych",
@@ -425,7 +426,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "specială",
         "Специальный",
     ],
-    "tech": [
+    "TECH": [
         "technalohiy",
         "technik",
         "technologia",
@@ -487,7 +488,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "工艺学",
         "技术",
     ],
-    "insurance": [
+    "INSURANCE": [
         "insurance",
         "insurance company",
         "insurans",
@@ -499,14 +500,14 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "страховая",
         "страхового",
     ],
-    "property": [
+    "PROPERTY": [
         "properties",
         "property",
         "собственности",
         "собственность",
         "собственностью",
     ],
-    "realty": [
+    "REALTY": [
         "real estate",
         "realtor",
         "realty",
@@ -515,8 +516,8 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "недвижимостями",
         "недвижимостях",
     ],
-    "supply": ["supplier", "supplies", "supply"],
-    "equipment": [
+    "SUPPLY": ["supplier", "supplies", "supply"],
+    "EQUIPMENT": [
         "equipement",
         "equipment",
         "оборудованиe",
@@ -529,8 +530,8 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "обрудованиями",
         "обрудованиях",
     ],
-    "aviation": ["aviación", "aviation", "luftfahrt", "авиационный", "авиация"],
-    "airline": [
+    "AVIATION": ["aviación", "aviation", "luftfahrt", "авиационный", "авиация"],
+    "AIRLINE": [
         "airline",
         "airlines",
         "авиакомпании",
@@ -543,7 +544,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "авиаперевозчиках",
         "авиаперевозчики",
     ],
-    "airport": [
+    "AIRPORT": [
         "aerodrom",
         "aerodrome",
         "aerodromes",
@@ -597,7 +598,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "비행장",
         "항공항",
     ],
-    "flight": [
+    "FLIGHT": [
         "flight",
         "flights",
         "полет",
@@ -611,7 +612,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "рейсов",
         "рейсы",
     ],
-    "maritime": [
+    "MARITIME": [
         "maritim",
         "maritime",
         "морская",
@@ -620,8 +621,8 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "морского",
         "морской",
     ],
-    "naval": ["naval", "navy"],
-    "nuclear": [
+    "NAVAL": ["naval", "navy"],
+    "NUCLEAR": [
         "niwclear",
         "nucleair",
         "nuclear",
@@ -649,7 +650,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "核的",
         "核能",
     ],
-    "factory": [
+    "FACTORY": [
         "fabbrica",
         "fabbriche",
         "fabriek",
@@ -670,8 +671,8 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "厂家",
         "工厂",
     ],
-    "fund": ["fond", "fondo", "fondovy", "fonds", "fund", "fundo", "фонд", "صندوق"],
-    "intl": [
+    "FUND": ["fond", "fondo", "fondovy", "fonds", "fund", "fundo", "фонд", "صندوق"],
+    "INTL": [
         "int'l",
         "internacionais",
         "internacional",
@@ -695,7 +696,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "国際",
         "国際的",
     ],
-    "grp": [
+    "GRP": [
         "Grupa",
         "Grupul",
         "Grúpa",
@@ -713,7 +714,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "团体",
         "集体",
     ],
-    "mgmt": [
+    "MGMT": [
         "Epicheirisi",
         "gestión",
         "management",
@@ -735,7 +736,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "管理",
         "辖",
     ],
-    "fed": [
+    "FED": [
         "federal",
         "federalna",
         "federalny",
@@ -775,7 +776,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "феднральная",
         "федральное",
     ],
-    "national": [
+    "NATIONAL": [
         "landelijk",
         "nacional",
         "nacionalna",
@@ -802,7 +803,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "国家的",
         "国立",
     ],
-    "republic": [
+    "REPUBLIC": [
         "cumhuriyet",
         "repubblica",
         "republic",
@@ -822,7 +823,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "جمهورية",
         "共和国",
     ],
-    "institute": [
+    "INSTITUTE": [
         "industite",
         "institiut",
         "instituição",
@@ -853,7 +854,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "学院",
         "研究所",
     ],
-    "institution": [
+    "INSTITUTION": [
         "institucija",
         "institution",
         "instituția",
@@ -862,7 +863,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "учреждение",
         "учреждениение",
     ],
-    "foundation": [
+    "FOUNDATION": [
         "Fondacion",
         "Fondacioni",
         "Foundation",
@@ -884,7 +885,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "設立",
         "財団",
     ],
-    "industry": [
+    "INDUSTRY": [
         "endustriyel",
         "indastri",
         "indastrial",
@@ -927,7 +928,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "индустрия",
         "業界",
     ],
-    "engineering": [
+    "ENGINEERING": [
         "engineering",
         "ingegneri",
         "ingenierie",
@@ -944,7 +945,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "エンジニアリング",
         "工学",
     ],
-    "scientific": [
+    "SCIENTIFIC": [
         "science",
         "science and technology",
         "scientific",
@@ -956,11 +957,11 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "научный",
         "научных",
     ],
-    "health": ["health", "healthcare"],
-    "pharmacy": ["apotheke", "pharmacy", "фармацевтический"],
-    "associates": ["associates", "ассоциированные"],
-    "network": ["network", "networks", "netzwerk", "сетевое", "сетевой", "сетевые"],
-    "investment": [
+    "HEALTH": ["health", "healthcare"],
+    "PHARMACY": ["apotheke", "pharmacy", "фармацевтический"],
+    "ASSOCIATES": ["associates", "ассоциированные"],
+    "NETWORK": ["network", "networks", "netzwerk", "сетевое", "сетевой", "сетевые"],
+    "INVESTMENT": [
         "inversión",
         "invesment",
         "invesmenti",
@@ -992,7 +993,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "投資",
         "투자",
     ],
-    "dev": [
+    "DEV": [
         "dev",
         "development",
         "devt",
@@ -1003,7 +1004,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "развитию",
         "развития",
     ],
-    "enterprise": [
+    "ENTERPRISE": [
         "empresa",
         "enterpraizes",
         "enterprise",
@@ -1025,7 +1026,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "प्रतिष्ठान",
         "기업",
     ],
-    "islamic": [
+    "ISLAMIC": [
         "islam",
         "islamic",
         "islamique",
@@ -1043,17 +1044,17 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "исламского",
         "исламской",
     ],
-    "research": [
+    "RESEARCH": [
         "forschung",
         "research",
         "изучение",
         "исследование",
         "исследовательский",
     ],
-    "shipping": ["shipping", "shipping company", "shipping line", "shipping lines"],
-    "production": ["production", "productions", "proizvodstvennoe", "производственное"],
-    "construction": ["construction", "строительный", "строительство"],
-    "consulting": [
+    "SHIPPING": ["shipping", "shipping company", "shipping line", "shipping lines"],
+    "PRODUCTION": ["production", "productions", "proizvodstvennoe", "производственное"],
+    "CONSTRUCTION": ["construction", "строительный", "строительство"],
+    "CONSULTING": [
         "beratung",
         "conseils",
         "constultants",
@@ -1067,7 +1068,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "консалтинговая",
         "コンサルティング",
     ],
-    "design": [
+    "DESIGN": [
         "design",
         "designer",
         "designers",
@@ -1084,7 +1085,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "проектировщицы",
         "デザイン",
     ],
-    "revolutionary": [
+    "REVOLUTIONARY": [
         "revoliucijos",
         "revolucio",
         "revolucionarne",
@@ -1104,7 +1105,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "революционный",
         "революционных",
     ],
-    "committee": [
+    "COMMITTEE": [
         "committee",
         "committees",
         "комитет",
@@ -1113,7 +1114,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "комітет",
         "комітети",
     ],
-    "professional": [
+    "PROFESSIONAL": [
         "professional",
         "professionalnyi",
         "professionel",
@@ -1126,7 +1127,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "профессионольного",
         "профессонального",
     ],
-    "operations": [
+    "OPERATIONS": [
         "operaciones",
         "operacyjne",
         "operasional",
@@ -1146,8 +1147,8 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "オペレーション",
         "运营",
     ],
-    "kombinat": ["Kombinatas", "kombinat", "комбинат"],
-    "central": [
+    "KOMBINAT": ["Kombinatas", "kombinat", "комбинат"],
+    "CENTRAL": [
         "central",
         "centrala",
         "centrale",
@@ -1159,7 +1160,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "центральные",
         "центральный",
     ],
-    "general": [
+    "GENERAL": [
         "general",
         "генеральная",
         "генерального",
@@ -1168,7 +1169,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "генеральный",
         "генеральных",
     ],
-    "mechanical": [
+    "MECHANICAL": [
         "mechanical",
         "механическая",
         "механические",
@@ -1177,7 +1178,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "механического",
         "механической",
     ],
-    "transport": [
+    "TRANSPORT": [
         "transport",
         "transportation",
         "транспорт",
@@ -1187,7 +1188,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "транспортные",
         "транспортный",
     ],
-    "financial": [
+    "FINANCIAL": [
         "finance",
         "finances",
         "financial",
@@ -1200,7 +1201,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "финансовый",
         "финансовых",
     ],
-    "comms": [
+    "COMMS": [
         "comms",
         "communication",
         "communications",
@@ -1210,7 +1211,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "коммуникация",
         "коммюникации",
     ],
-    "information": [
+    "INFORMATION": [
         "info",
         "informatica",
         "informatics",
@@ -1224,7 +1225,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "информация",
         "информациями",
     ],
-    "electronic": [
+    "ELECTRONIC": [
         "electronic",
         "electronical",
         "electronics",
@@ -1251,7 +1252,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "전자",
         "전자의",
     ],
-    "energy": [
+    "ENERGY": [
         "energi",
         "energia",
         "energias",
@@ -1277,7 +1278,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "能量",
         "에너지",
     ],
-    "chemical": [
+    "CHEMICAL": [
         "chemical",
         "chemicals",
         "химическая",
@@ -1287,7 +1288,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "химического",
         "химической",
     ],
-    "global": [
+    "GLOBAL": [
         "global",
         "globalny",
         "globální",
@@ -1303,7 +1304,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "глобальный",
         "глобальных",
     ],
-    "system": [
+    "SYSTEM": [
         "sistema",
         "sistemas",
         "system",
@@ -1316,9 +1317,9 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "システム",
         "システムズ",
     ],
-    "association": ["association", "associations", "ассоциации", "ассоциация"],
-    "bureau": ["bureau", "büro", "büron", "büronü", "bürö", "бюрo", "бюро"],
-    "logistics": [
+    "ASSOCIATION": ["association", "associations", "ассоциации", "ассоциация"],
+    "BUREAU": ["bureau", "büro", "büron", "büronü", "bürö", "бюрo", "бюро"],
+    "LOGISTICS": [
         "logistic",
         "logistics",
         "логистика",
@@ -1328,7 +1329,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "логистической",
         "логистическому",
     ],
-    "bank": [
+    "BANK": [
         "Kreditanstalt",
         "banco",
         "bank",
@@ -1357,7 +1358,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "муниципально-коммерческий банк",
         "銀行",
     ],
-    "commercial": [
+    "COMMERCIAL": [
         "comercial",
         "comerciale",
         "comercială",
@@ -1383,7 +1384,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "商業",
         "상업적",
     ],
-    "offshore": [
+    "OFFSHORE": [
         "offshore",
         "offshores",
         "ofshor",
@@ -1395,7 +1396,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "оффшорный",
         "オフショア",
     ],
-    "gov": [
+    "GOV": [
         "gobierno",
         "gobierno de",
         "gouvernement",
@@ -1444,7 +1445,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "政府",
         "辖",
     ],
-    "named": [
+    "NAMED": [
         "im",
         "imeni",
         "named after",
@@ -1454,7 +1455,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "им",
         "имени",
     ],
-    "socalled": [
+    "SOCALLED": [
         "Așa-numita",
         "Den såkaldte",
         "Javni pokret",
@@ -1473,7 +1474,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "the so-called",
         "Т.нар.",
     ],
-    "ministry": [
+    "MINISTRY": [
         "ministerie",
         "ministerij",
         "ministerio",
@@ -1488,8 +1489,8 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "ministère",
         "мinistry",
     ],
-    "export": ["eksportu", "export", "exports", "экспорт", "экспорты"],
-    "import": [
+    "EXPORT": ["eksportu", "export", "exports", "экспорт", "экспорты"],
+    "IMPORT": [
         "import",
         "imports",
         "импорт",
@@ -1502,7 +1503,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "импортных",
         "импорты",
     ],
-    "trade": [
+    "TRADE": [
         "SANAYI VE TICARET",
         "San. ve Tic.",
         "Tesisler Teknoloji Dış",
@@ -1538,7 +1539,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "贸易",
         "贸易公司",
     ],
-    "solution": [
+    "SOLUTION": [
         "solution",
         "solutions",
         "λύσεις",
@@ -1548,9 +1549,9 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "решению",
         "решения",
     ],
-    "distrib": ["distribution", "distributor", "distributors"],
-    "capital": ["capital", "kapital", "κεφάλαιο", "κεφαλαιακή", "капитал"],
-    "trust": [
+    "DISTRIB": ["distribution", "distributor", "distributors"],
+    "CAPITAL": ["capital", "kapital", "κεφάλαιο", "κεφαλαιακή", "капитал"],
+    "TRUST": [
         "trust",
         "trusts",
         "траст",
@@ -1564,7 +1565,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "фондовий",
         "фондові",
     ],
-    "union": [
+    "UNION": [
         "União",
         "savez",
         "szakszervezet",
@@ -1578,7 +1579,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "組合",
         "联盟",
     ],
-    "university": [
+    "UNIVERSITY": [
         "uni",
         "univ",
         "univ.",
@@ -1597,8 +1598,8 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "унивирситет",
         "університет",
     ],
-    "military": ["militare", "military", "военный"],
-    "manufacturing": [
+    "MILITARY": ["militare", "military", "военный"],
+    "MANUFACTURING": [
         "manufacturies",
         "manufacturing",
         "manufakturynh",
@@ -1607,7 +1608,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "производственный",
         "производство",
     ],
-    "medical": [
+    "MEDICAL": [
         "medical",
         "медицинская",
         "медицинские",
@@ -1619,7 +1620,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "медичних",
         "медичні",
     ],
-    "hospital": [
+    "HOSPITAL": [
         "hospital",
         "hospitals",
         "больница",
@@ -1633,7 +1634,7 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
         "госпиталями",
         "госпиталях",
     ],
-    "tpb": [
+    "TPB": [
         "corporația de rachete balistice tactice",
         "društvo za taktičke projektile",
         "tactical missile company",
@@ -1647,23 +1648,23 @@ ORG_SYMBOLS: Dict[str, List[str]] = {
 }
 
 PERSON_SYMBOLS: Dict[str, List[str]] = {
-    "jr": ["Jr", "Junior"],
-    "sr": ["Senior", "Sr"],
-    "esq": ["Esq", "Esquire"],
-    "dr": ["Doctor", "Dr"],
-    "prof": ["Prof", "Professor"],
-    "md": ["Doctor of Medicine", "MD"],
-    "dds": ["DDS", "Doctor of Dental Surgery"],
-    "dvm": ["DVM", "Doctor of Veterinary Medicine"],
-    "phd": ["Doctor of Philosophy", "PhD"],
-    "cpa": ["CPA", "Certified Public Accountant"],
-    "cfa": ["CFA", "Chartered Financial Analyst"],
-    "cma": ["CMA", "Certified Management Accountant"],
-    "csa": ["CSA", "Certified Senior Advisor", "Certified Senior Associate"],
+    "JR": ["Jr", "Junior"],
+    "SR": ["Senior", "Sr"],
+    "ESQ": ["Esq", "Esquire"],
+    "DR": ["Doctor", "Dr"],
+    "PROF": ["Prof", "Professor"],
+    "MD": ["Doctor of Medicine", "MD"],
+    "DDS": ["DDS", "Doctor of Dental Surgery"],
+    "DVM": ["DVM", "Doctor of Veterinary Medicine"],
+    "PHD": ["Doctor of Philosophy", "PhD"],
+    "CPA": ["CPA", "Certified Public Accountant"],
+    "CFA": ["CFA", "Chartered Financial Analyst"],
+    "CMA": ["CMA", "Certified Management Accountant"],
+    "CSA": ["CSA", "Certified Senior Advisor", "Certified Senior Associate"],
 }
 
-ORDINALS: Dict[str, List[str]] = {
-    "1st": [
+ORDINALS: Dict[int, List[str]] = {
+    1: [
         "1-e",
         "1-й",
         "1-я",
@@ -1693,7 +1694,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 1",
         "№1",
     ],
-    "2nd": [
+    2: [
         "2-e",
         "2-й",
         "2-я",
@@ -1722,7 +1723,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 2",
         "№2",
     ],
-    "3rd": [
+    3: [
         "3-e",
         "3-й",
         "3-я",
@@ -1751,7 +1752,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 3",
         "№3",
     ],
-    "4th": [
+    4: [
         "4-e",
         "4-й",
         "4-я",
@@ -1769,6 +1770,7 @@ ORDINALS: Dict[str, List[str]] = {
         "4ú",
         "Four",
         "Fourth",
+        "IIII",
         "IIIIth",
         "IV",
         "IVth",
@@ -1781,7 +1783,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 4",
         "№4",
     ],
-    "5th": [
+    5: [
         "5-e",
         "5-й",
         "5-я",
@@ -1810,7 +1812,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 5",
         "№5",
     ],
-    "6th": [
+    6: [
         "6-e",
         "6-й",
         "6-я",
@@ -1839,7 +1841,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 6",
         "№6",
     ],
-    "7th": [
+    7: [
         "7-e",
         "7-й",
         "7-я",
@@ -1868,7 +1870,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 7",
         "№7",
     ],
-    "8th": [
+    8: [
         "8-e",
         "8-й",
         "8-я",
@@ -1897,7 +1899,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 8",
         "№8",
     ],
-    "9th": [
+    9: [
         "9-e",
         "9-й",
         "9-я",
@@ -1927,7 +1929,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 9",
         "№9",
     ],
-    "10th": [
+    10: [
         "10-e",
         "10-й",
         "10-я",
@@ -1955,7 +1957,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 10",
         "№10",
     ],
-    "11th": [
+    11: [
         "11-e",
         "11-й",
         "11-я",
@@ -1983,7 +1985,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 11",
         "№11",
     ],
-    "12th": [
+    12: [
         "12-e",
         "12-й",
         "12-я",
@@ -2011,7 +2013,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 12",
         "№12",
     ],
-    "13th": [
+    13: [
         "13-e",
         "13-й",
         "13-я",
@@ -2039,7 +2041,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 13",
         "№13",
     ],
-    "14th": [
+    14: [
         "14-e",
         "14-й",
         "14-я",
@@ -2068,7 +2070,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 14",
         "№14",
     ],
-    "15th": [
+    15: [
         "15-e",
         "15-й",
         "15-я",
@@ -2096,7 +2098,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 15",
         "№15",
     ],
-    "16th": [
+    16: [
         "16-e",
         "16-й",
         "16-я",
@@ -2124,7 +2126,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 16",
         "№16",
     ],
-    "17th": [
+    17: [
         "17-e",
         "17-й",
         "17-я",
@@ -2152,7 +2154,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 17",
         "№17",
     ],
-    "18th": [
+    18: [
         "18-e",
         "18-й",
         "18-я",
@@ -2180,7 +2182,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 18",
         "№18",
     ],
-    "19th": [
+    19: [
         "19-e",
         "19-й",
         "19-я",
@@ -2209,7 +2211,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 19",
         "№19",
     ],
-    "20th": [
+    20: [
         "20-e",
         "20-й",
         "20-я",
@@ -2237,7 +2239,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 20",
         "№20",
     ],
-    "21st": [
+    21: [
         "21-e",
         "21-й",
         "21-я",
@@ -2267,7 +2269,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 21",
         "№21",
     ],
-    "22nd": [
+    22: [
         "22-e",
         "22-й",
         "22-я",
@@ -2297,7 +2299,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 22",
         "№22",
     ],
-    "23rd": [
+    23: [
         "23-e",
         "23-й",
         "23-я",
@@ -2327,7 +2329,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 23",
         "№23",
     ],
-    "24th": [
+    24: [
         "24-e",
         "24-й",
         "24-я",
@@ -2358,7 +2360,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 24",
         "№24",
     ],
-    "25th": [
+    25: [
         "25-e",
         "25-й",
         "25-я",
@@ -2386,7 +2388,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 25",
         "№25",
     ],
-    "26th": [
+    26: [
         "26-e",
         "26-й",
         "26-я",
@@ -2414,7 +2416,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 26",
         "№26",
     ],
-    "27th": [
+    27: [
         "27-e",
         "27-й",
         "27-я",
@@ -2441,7 +2443,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 27",
         "№27",
     ],
-    "28th": [
+    28: [
         "28-e",
         "28-й",
         "28-я",
@@ -2468,7 +2470,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 28",
         "№28",
     ],
-    "29th": [
+    29: [
         "29-e",
         "29-й",
         "29-я",
@@ -2496,7 +2498,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 29",
         "№29",
     ],
-    "30th": [
+    30: [
         "30-e",
         "30-й",
         "30-я",
@@ -2524,7 +2526,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 30",
         "№30",
     ],
-    "31st": [
+    31: [
         "31-e",
         "31-й",
         "31-я",
@@ -2550,7 +2552,7 @@ ORDINALS: Dict[str, List[str]] = {
         "Thirtyfirst",
         "Thirtyone",
     ],
-    "32nd": [
+    32: [
         "32-e",
         "32-й",
         "32-я",
@@ -2576,7 +2578,7 @@ ORDINALS: Dict[str, List[str]] = {
         "Zweiunddreißigste",
         "Zweiunddreißigster",
     ],
-    "33rd": [
+    33: [
         "33-e",
         "33-й",
         "33-я",
@@ -2602,7 +2604,7 @@ ORDINALS: Dict[str, List[str]] = {
         "Thirtythird",
         "Thirtythree",
     ],
-    "34th": [
+    34: [
         "34-e",
         "34-й",
         "34-я",
@@ -2628,7 +2630,7 @@ ORDINALS: Dict[str, List[str]] = {
         "Vierunddreißigste",
         "Vierunddreißigster",
     ],
-    "35th": [
+    35: [
         "35-e",
         "35-й",
         "35-я",
@@ -2652,7 +2654,7 @@ ORDINALS: Dict[str, List[str]] = {
         "Thirtyfifth",
         "Thirtyfive",
     ],
-    "40th": [
+    40: [
         "40-e",
         "40-й",
         "40-я",
@@ -2682,7 +2684,7 @@ ORDINALS: Dict[str, List[str]] = {
         "№ 40",
         "№40",
     ],
-    "41st": [
+    41: [
         "41-e",
         "41-й",
         "41-я",
@@ -2707,7 +2709,7 @@ ORDINALS: Dict[str, List[str]] = {
         "Vierundvierzigste",
         "Vierundvierzigster",
     ],
-    "44th": [
+    44: [
         "44",
         "44-e",
         "44-й",
@@ -2735,7 +2737,7 @@ ORDINALS: Dict[str, List[str]] = {
         "Vierundvierzigste",
         "Vierundvierzigster",
     ],
-    "50th": [
+    50: [
         "50-e",
         "50-й",
         "50-я",

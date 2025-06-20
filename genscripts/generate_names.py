@@ -26,20 +26,28 @@ def generate_data_file() -> None:
 
     for key, value in stopword_lists.items():
         values = [str(v) for v in value if len(str(v)) > 0]
+        if isinstance(key, str):
+            key = key.strip().upper()
         content += f"{key.upper()}: List[str] = {values!r}\n\n"
 
     symbols_path = RESOURCES_PATH / "names" / "symbols.yml"
     with open(symbols_path, "r", encoding="utf-8") as ufh:
         symbols_mappings: Dict[str, Dict[str, str]] = yaml.safe_load(ufh.read())
 
-    for key, value in symbols_mappings.items():
+    for section, value in symbols_mappings.items():
         mapping = {}
+        group_type = "str"
         for group, items in value.items():
-            if group is None or len(group) == 0:
+            if group is None:
                 continue
+            group_type = "int" if isinstance(group, int) else "str"
+            if group_type == "str":
+                group = group.strip().upper()
+                if len(group) == 0:
+                    continue
             items = sorted(set([str(v) for v in items if len(str(v)) > 0]))
             mapping[group] = items
-        content += f"{key.upper()}: Dict[str, List[str]] = {mapping!r}\n\n"
+        content += f"{section.upper()}: Dict[{group_type}, List[str]] = {mapping!r}\n\n"
 
     out_path = CODE_PATH / "names" / "data.py"
     write_python(out_path, content)

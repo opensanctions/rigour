@@ -6,6 +6,7 @@ org_symbols:
   co:
     - company
     - сompany
+    - corporation
     - компания
     - kompani
     - kompania
@@ -222,7 +223,7 @@ org_symbols:
     - defensa
     - оборонный
     - оборон
-  department:
+  dept:
     - department
     - dept.
     - département
@@ -450,7 +451,7 @@ org_symbols:
   naval:
     - naval
     - navy
-  nuclear: 
+  nuclear:
     - niwclear # cy
     - nuclear # en, es, pt
     - nucleair # nl
@@ -462,7 +463,7 @@ org_symbols:
     - nükleer # tr
     - nyuklia # sw
     - nuklearny # pl (masculine)
-    - nuklearna # pl (f) 
+    - nuklearna # pl (f)
     - nuklearne # pl (neuter)
     - πυρηνικός # el (masculine)
     - πυρηνική # el (feminine)
@@ -607,7 +608,7 @@ org_symbols:
     - federalny
     - federalna
     - federāla
-  national:
+  natl:
     - national
     - национальный
     - национальная
@@ -692,7 +693,7 @@ org_symbols:
     - учраждение
     - учреджение
     - учреждениение
-  foundation:
+  fdn:
     - foundation
     - foudation
     - фонд
@@ -756,7 +757,7 @@ org_symbols:
     - indústria
     - endustriyel
     - 業界
-  engineering:
+  eng:
     - engineering
     - инженерия
     - инжиниринг
@@ -1547,7 +1548,7 @@ ordinals:
   # Also covers Roman Numerals e.g. VIIIth (for 8th).
   # Covers certain variants e.g. IIIIth as well as IVth for 4th.
   # First (1st)
-  1st:
+  1:
     - "First"
     - "One"
     - "Erste"
@@ -1578,7 +1579,7 @@ ordinals:
     - "Ist"
     - "I." # see if this backfires
   # Second (2nd)
-  2nd:
+  2:
     - "Second"
     - "Two"
     - "Zweite"
@@ -1609,7 +1610,7 @@ ordinals:
     - "IInd"
     - "II" # see if this backfires
   # Third (3rd)
-  3rd:
+  3:
     - "Third"
     - "Three"
     - "Dritte"
@@ -1640,7 +1641,7 @@ ordinals:
     - "IIIrd"
     - "III" # see if this backfires
   # Fourth (4th)
-  4th:
+  4:
     - "Fourth"
     - "Four"
     - "Vierte"
@@ -1669,9 +1670,10 @@ ordinals:
     - "№ 4"
     - "IVth"
     - "IIIIth"
+    - "IIII"
     - "IV"
   # Fifth (5th)
-  5th:
+  5:
     - "Fifth"
     - "Five"
     - "Fünfte"
@@ -1701,7 +1703,7 @@ ordinals:
     - "Vth"
     - "V." # see if this backfires
   # Sixth (6th)
-  6th:
+  6:
     - "Sixth"
     - "Six"
     - "Sechste"
@@ -1731,7 +1733,7 @@ ordinals:
     - "VIth"
     - "VI"
   # Seventh (7th)
-  7th:
+  7:
     - "Seventh"
     - "Seven"
     - "Siebte"
@@ -1761,7 +1763,7 @@ ordinals:
     - "VIIth"
     - "VII"
   # Eighth (8th)
-  8th:
+  8:
     - "Eighth"
     - "Eight"
     - "Achte"
@@ -1791,7 +1793,7 @@ ordinals:
     - "VIIIth"
     - "VIII"
   # Ninth (9th)
-  9th:
+  9:
     - "Ninth"
     - "Nine"
     - "Neunte"
@@ -1822,7 +1824,7 @@ ordinals:
     - "VIIIIth"
     - "IX"
   # Tenth (10th)
-  10th:
+  10:
     - "Tenth"
     - "Ten"
     - "Zehnte"
@@ -1851,7 +1853,7 @@ ordinals:
     - "№ 10"
     - "Xth"
   # Eleventh (11th)
-  11th:
+  11:
     - "Eleventh"
     - "Eleven"
     - "Elfte"
@@ -1880,7 +1882,7 @@ ordinals:
     - "№ 11"
     - "XIth"
   # Twelfth (12th)
-  12th:
+  12:
     - "Twelfth"
     - "Twelve"
     - "Zwölfte"
@@ -1909,7 +1911,7 @@ ordinals:
     - "№ 12"
     - "XIIth"
   # Thirteenth (13th)
-  13th:
+  13:
     - "Thirteenth"
     - "Thirteen"
     - "Dreizehnte"
@@ -1938,7 +1940,7 @@ ordinals:
     - "№ 13"
     - "XIIIth"
   # Fourteenth (14th)
-  14th:
+  14:
     - "Fourteenth"
     - "Fourteen"
     - "Vierzehnte"
@@ -1968,7 +1970,7 @@ ordinals:
     - "XIVth"
     - "XIIIIth"
   # Fifteenth (15th)
-  15th:
+  15:
     - "Fifteenth"
     - "Fifteen"
     - "Fünfzehnte"
@@ -1997,7 +1999,7 @@ ordinals:
     - "№ 15"
     - "XVth"
   # Sixteenth (16th)
-  16th:
+  16:
     - "Sixteenth"
     - "Sixteen"
     - "Sechzehnte"
@@ -2026,7 +2028,7 @@ ordinals:
     - "№ 16"
     - "XVIth"
   # Seventeenth (17th)
-  17th:
+  17:
     - "Seventeenth"
     - "Seventeen"
     - "Siebzehnte"
@@ -2055,7 +2057,7 @@ ordinals:
     - "№ 17"
     - "XVIIth"
   # Eighteenth (18th)
-  18th:
+  18:
     - "Eighteenth"
     - "Eighteen"
     - "Achtzehnte"
@@ -2084,7 +2086,7 @@ ordinals:
     - "№ 18"
     - "XVIIIth"
   # Nineteenth (19th)
-  19th:
+  19:
     - "Nineteenth"
     - "Nineteen"
     - "Neunzehnte"
@@ -2114,7 +2116,7 @@ ordinals:
     - "XIXth"
     - "XVIIIIth"
   # Twentieth (20th)
-  20th:
+  20:
     - "Twentieth"
     - "Twenty"
     - "Zwanzigste"
@@ -2143,7 +2145,7 @@ ordinals:
     - "№ 20"
     - "XXth"
   # Twenty-first (21st)
-  21st:
+  21:
     - "Twenty-first"
     - "Twenty-one"
     - "Twentyone"
@@ -2174,7 +2176,7 @@ ordinals:
     - "№ 21"
     - "XXIst"
   # Twenty-second (22nd)
-  22nd:
+  22:
     - "Twenty-second"
     - "Twenty-two"
     - "Twentytwo"
@@ -2205,7 +2207,7 @@ ordinals:
     - "№ 22"
     - "XXIInd"
   # Twenty-third (23rd)
-  23rd:
+  23:
     - "Twenty-third"
     - "Twenty-three"
     - "Twentythird"
@@ -2236,7 +2238,7 @@ ordinals:
     - "№ 23"
     - "XXIIIrd"
   # Twenty-fourth (24th)
-  24th:
+  24:
     - "Twenty-fourth"
     - "Twenty-four"
     - "Twentyfourth"
@@ -2268,7 +2270,7 @@ ordinals:
     - "XXIVth"
     - "XXIIIIth"
   # Twenty-fifth (25th)
-  25th:
+  25:
     - "Twenty-fifth"
     - "Twenty-five"
     - "Twentyfive"
@@ -2297,7 +2299,7 @@ ordinals:
     - "№ 25"
     - "XXVth"
   # Twenty-sixth (26th)
-  26th:
+  26:
     - "Twenty-sixth"
     - "Twenty-six"
     - "Twentysixth"
@@ -2326,7 +2328,7 @@ ordinals:
     - "№ 26"
     - "XXVIth"
   # Twenty-seventh (27th)
-  27th:
+  27:
     - "Twenty-seventh"
     - "Twenty-seven"
     - "Twentyseven"
@@ -2354,7 +2356,7 @@ ordinals:
     - "№ 27"
     - "XXVIIth"
   # Twenty-eight (28th)
-  28th:
+  28:
     - "Twenty-eight"
     - "Twenty-eighth"
     - "Twentyeight"
@@ -2382,7 +2384,7 @@ ordinals:
     - "№ 28"
     - "XXVIIIth"
   # Twenty-ninth (29th)
-  29th:
+  29:
     - "Twenty-ninth"
     - "Twenty-nine"
     - "Twentynine"
@@ -2411,7 +2413,7 @@ ordinals:
     - "XXIXth"
     - "XXVIIIIth"
   # Thirtieth (30th)
-  30th:
+  30:
     - "Thirtieth"
     - "Thirty"
     - "Dreißigste"
@@ -2439,7 +2441,7 @@ ordinals:
     - "№ 30"
     - "30º."
     - "XXXth"
-  31st:
+  31:
     - "Thirty-first"
     - "Thirty-one"
     - "Thirtyone"
@@ -2464,7 +2466,7 @@ ordinals:
     - "No 31"
     - "No.31"
     - "No. 31"
-  32nd:
+  32:
     - "Thirty-second"
     - "Thirty-two"
     - "Thirtytwo"
@@ -2489,7 +2491,7 @@ ordinals:
     - "No 32"
     - "No.32"
     - "No. 32"
-  33rd:
+  33:
     - "Thirty-third"
     - "Thirty-three"
     - "Thirtythree"
@@ -2514,7 +2516,7 @@ ordinals:
     - "No 33"
     - "No.33"
     - "No. 33"
-  34th:
+  34:
     - "Thirty-fourth"
     - "Thirty-four"
     - "Thirtyfourth"
@@ -2539,7 +2541,7 @@ ordinals:
     - "No 34"
     - "No.34"
     - "No. 34"
-  35th:
+  35:
     - "Thirty-fifth"
     - "Thirty-five"
     - "Thirtyfive"
@@ -2562,7 +2564,7 @@ ordinals:
     - "No 35"
     - "No.35"
     - "No. 35"
-  40th:
+  40:
     - "Fortieth"
     - "Fourty"
     - "Forty"
@@ -2591,7 +2593,7 @@ ordinals:
     - "XXXXth"
     - "XXXX"
     - "XLth"
-  41st:
+  41:
     - "Forty-first"
     - "Fourty-first"
     - "Fortyfirst"
@@ -2615,7 +2617,7 @@ ordinals:
     - "No 41"
     - "No.41"
     - "No. 41"
-  44th:
+  44:
     - "Forty-fourth"
     - "Fourty-four"
     - "Fourtyfourth"
@@ -2642,7 +2644,7 @@ ordinals:
     - "No 44"
     - "No.44"
     - "No. 44"
-  50th:
+  50:
     - "Fiftieth"
     - "Fiftyth"
     - "Fifty"

@@ -372,6 +372,8 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "Gesellschaft mit beschränkter Haftng",
             "Ges. mit beschr. Haftung",
             "Ges. mit besch. Haftung",
+            "G.m.beschr. Haftung",
+            "G.m.besch. Haftung",
             "mit besch haftung",
             "mit beschr haftung",
             "mit beschränkter haftung",
