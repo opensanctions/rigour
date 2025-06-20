@@ -142,8 +142,8 @@ def align_name_slop(
 
 
 def _name_levenshtein(query: List[NamePart], result: List[NamePart]) -> float:
-    query_str = "".join([p.maybe_ascii for p in query])
-    result_str = "".join([p.maybe_ascii for p in result])
+    query_str = "".join([p.comparable for p in query])
+    result_str = "".join([p.comparable for p in result])
     max_len = max(len(query_str), len(result_str))
     if query_str == result_str or max_len == 0:
         return 1.0
@@ -163,7 +163,7 @@ def _pack_short_parts(
             continue
         if not part.can_match(op):
             continue
-        base_str = "".join([p.maybe_ascii for p in packed])
+        base_str = "".join([p.comparable for p in packed])
         if len(base_str) >= len(part.form):
             break
         best_score = _name_levenshtein([part], packed)
@@ -205,7 +205,7 @@ def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Al
         for qp, rp in product(query_left, result_left):
             if not qp.can_match(rp):
                 continue
-            if qp.maybe_ascii == rp.maybe_ascii:
+            if qp.comparable == rp.comparable:
                 best_score = 1.0
                 best_query_parts = [qp]
                 best_result_parts = [rp]

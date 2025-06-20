@@ -1,10 +1,10 @@
-from functools import cached_property
-from typing import Any, Optional
+from typing import Any, List, Optional
 
 from normality import ascii_text
 from rigour.text.scripts import is_modern_alphabet
 from rigour.text.phonetics import metaphone
 from rigour.names.tag import NamePartTag
+from rigour.names.symbol import Symbol
 from rigour.names.tag import FAMILY_NAME_TAGS, GIVEN_NAME_TAGS, NAME_TAGS_ORDER
 
 
@@ -13,7 +13,7 @@ class NamePart(object):
     and match names. It generates and caches representations of the name in various processing
     forms."""
 
-    #  __slots__ = ["form", "index", "tag"]
+    __slots__ = ["form", "index", "tag", "is_modern_alphabet", "_ascii"]
 
     def __init__(
         self,
@@ -24,20 +24,18 @@ class NamePart(object):
         self.form = form
         self.index = index
         self.tag = tag
-
-    @cached_property
-    def is_modern_alphabet(self) -> bool:
-        return is_modern_alphabet(self.form)
-
-    @cached_property
-    def ascii(self) -> Optional[str]:
-        out = ascii_text(self.form)
-        if out is None:
-            return None
-        return "".join(o for o in out if o.isalnum())
+        self.is_modern_alphabet = is_modern_alphabet(form)
+        self._ascii: Optional[str] = None
 
     @property
-    def maybe_ascii(self) -> str:
+    def ascii(self) -> Optional[str]:
+        if self._ascii is None:
+            out = ascii_text(self.form) or ""
+            self._ascii = "".join(o for o in out if o.isalnum())
+        return self._ascii if len(self._ascii) > 0 else None
+
+    @property
+    def comparable(self) -> str:
         if not self.is_modern_alphabet:
             return self.form
         if self.ascii is None:
@@ -80,3 +78,30 @@ class NamePart(object):
     def tag_sort(cls, parts: list["NamePart"]) -> list["NamePart"]:
         """Sort name parts by their index."""
         return sorted(parts, key=lambda np: NAME_TAGS_ORDER.index(np.tag))
+
+
+class Span:
+    """A span is a set of parts of a name that have been tagged with a symbol."""
+
+    __slots__ = ["parts", "symbol"]
+
+    def __init__(self, parts: List[NamePart], symbol: Symbol) -> None:
+        self.parts = tuple(parts)
+        self.symbol = symbol
+
+    @property
+    def comparable(self) -> str:
+        """Return the comparison-suited string representation of the span."""
+        return " ".join([part.comparable for part in self.parts])
+
+    def __hash__(self) -> int:
+        return hash((self.parts, self.symbol))
+
+    def __eq__(self, other: Any) -> bool:
+        try:
+            return bool(self.symbol == other.symbol and self.parts == other.parts)
+        except AttributeError:
+            return False
+
+    def __repr__(self) -> str:
+        return f"<Span({self.parts!r}, {self.symbol})>"

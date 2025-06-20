@@ -1,8 +1,10 @@
-from typing import Optional, List, Any
+from typing import Optional, List, Dict, Any, Set
 
-from rigour.names.part import NamePart
+from rigour.names.part import NamePart, Span
+from rigour.names.symbol import Symbol
 from rigour.names.tag import NameTypeTag, NamePartTag
 from rigour.names.tokenize import tokenize_name
+from rigour.util import list_intersection
 
 
 def to_form(text: str) -> str:
@@ -17,7 +19,7 @@ class Name(object):
     would be `NamePartTag.FAMILY`. The form for both parts would be the text of the part itself.
     """
 
-    __slots__ = ["original", "form", "tag", "lang", "_parts"]
+    __slots__ = ["original", "form", "tag", "lang", "_parts", "spans"]
 
     def __init__(
         self,
@@ -32,6 +34,7 @@ class Name(object):
         self.tag = tag
         self.lang = lang
         self._parts = parts
+        self.spans: List[Span] = []
 
     @property
     def parts(self) -> List[NamePart]:
@@ -42,9 +45,14 @@ class Name(object):
         return self._parts
 
     @property
-    def maybe_ascii(self) -> str:
+    def comparable(self) -> str:
         """Return the ASCII representation of the name, if available."""
-        return " ".join(part.maybe_ascii for part in self.parts)
+        return " ".join(part.comparable for part in self.parts)
+
+    @property
+    def norm_form(self) -> str:
+        """Return the normalized form of the name by joining name parts."""
+        return " ".join([part.form for part in self.parts])
 
     def tag_text(self, text: str, tag: NamePartTag, max_matches: int = 1) -> None:
         tokens = tokenize_name(to_form(text))
@@ -64,6 +72,67 @@ class Name(object):
                 if matches >= max_matches:
                     return
                 matching = []
+
+    def apply_phrase(self, phrase: str, symbol: Symbol) -> None:
+        """Apply a symbol to a phrase in the name."""
+        matching: List[NamePart] = []
+        tokens = phrase.split(" ")
+        for part in self.parts:
+            next_token = tokens[len(matching)]
+            if part.form == next_token:
+                matching.append(part)
+            if len(matching) == len(tokens):
+                self.spans.append(Span(matching, symbol))
+                matching = []
+
+    def apply_part(self, part: NamePart, symbol: Symbol) -> None:
+        """Apply a symbol to a part of the name."""
+        self.spans.append(Span([part], symbol))
+
+    @property
+    def symbols(self) -> Set[Symbol]:
+        """Return a dictionary of symbols applied to the name."""
+        symbols: Set[Symbol] = set()
+        for span in self.spans:
+            symbols.add(span.symbol)
+        return symbols
+
+    def contains(self, other: "Name") -> bool:
+        """Check if this name contains another name."""
+        if self == other or self.tag == NameTypeTag.UNK:
+            return False
+        if len(self.parts) < len(other.parts):
+            return False
+        if self.tag == NameTypeTag.PER:
+            forms = [part.form for part in self.parts]
+            other_forms = [part.form for part in other.parts]
+            common_forms = list_intersection(forms, other_forms)
+
+            # we want to make this support middle initials so that
+            # "John Smith" can match "J. Smith"
+            for ospan in other.spans:
+                if ospan.symbol.category == Symbol.Category.INITIAL:
+                    if len(ospan.parts[0].form) > 1:
+                        continue
+                    for span in self.spans:
+                        if span.symbol == ospan.symbol:
+                            common_forms.append(ospan.comparable)
+
+            # If every part of the other name is represented in the common forms,
+            # we consider it a match.
+            if len(common_forms) == len(other_forms):
+                return True
+
+        return other.norm_form in self.norm_form
+
+    def symbol_map(self) -> Dict[Symbol, List[Span]]:
+        """Return a mapping of symbols to their string representations."""
+        symbol_map: Dict[Symbol, List[Span]] = {}
+        for span in self.spans:
+            if span.symbol not in symbol_map:
+                symbol_map[span.symbol] = []
+            symbol_map[span.symbol].append(span)
+        return symbol_map
 
     def __eq__(self, other: Any) -> bool:
         try:
