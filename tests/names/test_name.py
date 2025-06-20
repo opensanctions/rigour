@@ -142,6 +142,23 @@ def test_name_contains_org():
     assert comp2.contains(comp1) is False
 
 
+def test_name_contains_order():
+    name1 = Name("John Smith", tag=NameTypeTag.PER)
+    name2 = Name("Smith, John", tag=NameTypeTag.PER)
+    assert name1.contains(name2) is True
+    assert name2.contains(name1) is True
+
+    name1 = Name("John Smith", tag=NameTypeTag.PER)
+    name2 = Name("Smith, John Richard", tag=NameTypeTag.PER)
+    assert name1.contains(name2) is False
+    assert name2.contains(name1) is True
+
+    name1 = Name("Republic Banana Inc", tag=NameTypeTag.ORG)
+    name2 = Name("Banana Republic Inc", tag=NameTypeTag.ORG)
+    assert name1.contains(name2) is False
+    assert name2.contains(name1) is False
+
+
 def test_name_contains_unk():
     # Unknwon type never matches
     name1 = Name("John Smith", tag=NameTypeTag.UNK)

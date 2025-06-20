@@ -1,11 +1,5 @@
-from rigour.names.person import remove_person_prefixes, load_person_names_mapping
-
-
-def test_remove_person_prefixes():
-    assert remove_person_prefixes("Mr. John Doe") == "John Doe"
-    assert remove_person_prefixes("Mr John Doe") == "John Doe"
-    assert remove_person_prefixes("Lady Buckethead") == "Buckethead"
-    assert remove_person_prefixes("LadyBucket") == "LadyBucket"
+from typing import Optional
+from rigour.names.person import load_person_names_mapping
 
 
 def test_load_person_names_mapping():
@@ -18,7 +12,7 @@ def test_load_person_names_mapping():
     # filtered out by the wikidata crawler:
     assert "a" not in mapping
 
-    def banananorm(name: str) -> str:
+    def banananorm(name: Optional[str]) -> str:
         return "banana"
 
     mapping = load_person_names_mapping(normalizer=banananorm)

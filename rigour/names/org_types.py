@@ -9,7 +9,11 @@ This previous existed as part of `fingerprints` library. The implementation in `
 make a clearer separation between other string cleaning a user may want to perform on a company name
 (eg. romanisation) and the company type detection logic. This module only handles the latter.
 
-The required database is originally based on three different sources:
+Please improve this by adding more organization types to the database located here:
+
+* [org_types.yml](https://github.com/opensanctions/rigour/blob/main/resources/names/org_types.yml)
+
+The database is originally based on three different sources:
 
 * A [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1Cw2xQ3hcZOAgnnzejlY5Sv3OeMxKePTqcRhXQU8rCAw/edit?ts=5e7754cf#gid=0)
   created by OCCRP.
@@ -18,6 +22,7 @@ The required database is originally based on three different sources:
 
 """
 
+import sys
 import logging
 from functools import cache
 from normality import collapse_spaces
@@ -117,6 +122,7 @@ def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
         )
         if compare_norm is None:
             continue
+        compare_norm = sys.intern(compare_norm)
         for alias in org_type.get("aliases", []):
             alias_norm = normalizer(alias)
             if alias_norm is None:
@@ -146,6 +152,7 @@ def _generic_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
         generic_norm = normalizer(org_type.get("generic"))
         if generic_norm is None:
             continue
+        generic_norm = sys.intern(generic_norm)
         for alias in org_type.get("aliases", []):
             alias_norm = normalizer(alias)
             if alias_norm is None:

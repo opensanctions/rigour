@@ -3,12 +3,8 @@ from typing import Optional, List, Dict, Any, Set
 from rigour.names.part import NamePart, Span
 from rigour.names.symbol import Symbol
 from rigour.names.tag import NameTypeTag, NamePartTag
-from rigour.names.tokenize import tokenize_name
+from rigour.names.tokenize import tokenize_name, prenormalize_name
 from rigour.util import list_intersection
-
-
-def to_form(text: str) -> str:
-    return text.lower()
 
 
 class Name(object):
@@ -30,7 +26,7 @@ class Name(object):
         parts: Optional[List[NamePart]] = None,
     ):
         self.original = original
-        self.form = form or to_form(original)
+        self.form = form or prenormalize_name(original)
         self.tag = tag
         self.lang = lang
         self._parts = parts
@@ -55,7 +51,7 @@ class Name(object):
         return " ".join([part.form for part in self.parts])
 
     def tag_text(self, text: str, tag: NamePartTag, max_matches: int = 1) -> None:
-        tokens = tokenize_name(to_form(text))
+        tokens = tokenize_name(prenormalize_name(text))
         matches = 0
         matching: List[NamePart] = []
         for part in self.parts:
@@ -103,10 +99,12 @@ class Name(object):
             return False
         if len(self.parts) < len(other.parts):
             return False
-        forms = [part.comparable for part in self.parts]
-        other_forms = [part.comparable for part in other.parts]
-        common_forms = list_intersection(forms, other_forms)
+
         if self.tag == NameTypeTag.PER:
+            forms = [part.comparable for part in self.parts]
+            other_forms = [part.comparable for part in other.parts]
+            common_forms = list_intersection(forms, other_forms)
+
             # we want to make this support middle initials so that
             # "John Smith" can match "J. Smith"
             for ospan in other.spans:
@@ -117,10 +115,10 @@ class Name(object):
                         if span.symbol == ospan.symbol:
                             common_forms.append(ospan.comparable)
 
-        # If every part of the other name is represented in the common forms,
-        # we consider it a match.
-        if len(common_forms) == len(other_forms):
-            return True
+            # If every part of the other name is represented in the common forms,
+            # we consider it a match.
+            if len(common_forms) == len(other_forms):
+                return True
 
         return other.norm_form in self.norm_form
 

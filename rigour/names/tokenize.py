@@ -1,5 +1,5 @@
 import unicodedata
-from typing import List
+from typing import List, Optional
 from normality.constants import WS
 from normality.util import Categories
 
@@ -56,3 +56,11 @@ def tokenize_name(text: str, token_min_length: int = 1) -> List[str]:
     if len(token) >= token_min_length:
         tokens.append("".join(token))
     return tokens
+
+
+def prenormalize_name(name: Optional[str]) -> str:
+    """Prepare a name for tokenization and matching."""
+    if name is None:
+        return ""
+    name = unicodedata.normalize("NFC", name)
+    return name.lower()
