@@ -101,7 +101,8 @@ def _address_replacer(latinize: bool = False) -> Replacer:
     from rigour.data.addresses.data import FORMS
     from rigour.data.names.data import ORDINALS
 
-    forms = list(FORMS.items()) + list(ORDINALS.items())
+    ordinals = [(str(k), v) for k, v in ORDINALS.items()]
+    forms = list(FORMS.items()) + ordinals
 
     mapping: Dict[str, str] = {}
     for repl, values in forms:

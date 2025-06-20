@@ -1,12 +1,12 @@
 import re
-from typing import List
+from typing import Tuple
 from functools import cache
 
 from rigour.data.names.data import PERSON_NAME_PREFIXES, ORG_NAME_PREFIXES
 
 
 @cache
-def re_prefixes(prefixes: List[str]) -> re.Pattern[str]:
+def re_prefixes(prefixes: Tuple[str, ...]) -> re.Pattern[str]:
     """Compile a regex pattern to match common name prefixes."""
     # e.g. Mr., Mrs., Dr., etc. for people, The for organizations, etc.
     person_name_prefixes = "|".join(prefixes)

@@ -2,17 +2,11 @@ from functools import lru_cache
 import sys
 import csv
 from collections import Counter
-from rigour.text.distance import levenshtein
 from normality.cleaning import compose_nfc
 
 from rigour.names import tokenize_name
-from rigour.names.org_types import (
-    remove_org_types,
-    replace_org_types_display,
-    normalize_display,
-)
+from rigour.names.org_types import remove_org_types, normalize_display
 from rigour.data.names import data
-from rigour.text.scripts import is_modern_alphabet
 
 
 @lru_cache(maxsize=20000)
