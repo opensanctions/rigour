@@ -1649,9 +1649,9 @@ ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {
 
 PERSON_SYMBOLS: Dict[str, Tuple[str, ...]] = {
     "JR": ("Jr", "Junior"),
-    "SR": ("Senior", "Sr"),
+    "SR": ("Senior", "Snr", "Sr"),
     "ESQ": ("Esq", "Esquire"),
-    "DR": ("Doctor", "Dr"),
+    "DR": ("Doctor", "Doktor", "Doktorin", "Dr"),
     "PROF": ("Prof", "Professor"),
     "MD": ("Doctor of Medicine", "MD"),
     "DDS": ("DDS", "Doctor of Dental Surgery"),
@@ -1661,6 +1661,28 @@ PERSON_SYMBOLS: Dict[str, Tuple[str, ...]] = {
     "CFA": ("CFA", "Chartered Financial Analyst"),
     "CMA": ("CMA", "Certified Management Accountant"),
     "CSA": ("CSA", "Certified Senior Advisor", "Certified Senior Associate"),
+    "BIN": (
+        "ben",
+        "bin",
+        "bint",
+        "ibn",
+        "ibn al",
+        "ibn ul",
+        "ould",
+        "בן",
+        "בר",
+        "ابن",
+        "ابن ال",
+        "بن",
+        "بنت",
+    ),
+    "BINT": ("bat", "bint", "mint", "ult", "בת", "بنت"),
+    "ABU": ("Abdul", "Abu", "Abu al", "Abul", "أبو"),
+    "UMM": ("Umm", "Umm al", "Ummul"),
+    "BEN": ("Ben", "Benedict", "Benjamin"),
+    "BOB": ("Bob", "Rob", "Robert", "Roberto"),
+    "DICK": ("Dick", "Richard"),
+    "WILL": ("will", "william"),
 }
 
 ORDINALS: Dict[int, Tuple[str, ...]] = {

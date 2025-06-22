@@ -1545,6 +1545,59 @@ person_symbols:
     - "Certified Senior Advisor"
     - "Certified Senior Associate"
 
+  # MENA name parts:
+  bin:
+    - "ben"
+    - "bin"
+    - "bint"
+    - "ibn"
+    - "ibn al"
+    - "ibn ul"
+    - ould
+    - בן
+    - בר
+    - بن
+    - بنت
+    - ابن
+    - ابن ال
+    - ابن ال
+  bint:
+    - bint
+    - ult
+    - mint
+    - bat
+    - בת
+    - بنت
+  abu:
+    - "Abu"
+    - "Abu al"
+    - "Abul"
+    - "Abdul"
+    - أبو
+  umm:
+    - "Umm"
+    - "Umm al"
+    - "Ummul"
+  ben:
+    - "Ben"
+    - "Benedict"
+    - "Benjamin"
+
+  # We could get these en masse from Wikidata, but I want to keep the nickname
+  # thing at bay until we have collected some more data about how this works into
+  # matching.
+  bob:
+    - "Bob"
+    - "Robert"
+    - "Roberto"
+    - "Rob"
+  dick:
+    - Dick
+    - Richard
+  will:
+    - will
+    - william
+
 ordinals:
   # Ordinal numbers
   # Languages covered at least in part: de, en, es, fr, ga, it, nl, pt, ru, sv
