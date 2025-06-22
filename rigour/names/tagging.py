@@ -58,7 +58,7 @@ def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
 
 
 @cache
-def get_org_tagger(normalizer: Normalizer) -> Tagger:
+def _get_org_tagger(normalizer: Normalizer) -> Tagger:
     """Get the organization name tagger."""
     from rigour.data.names.data import ORG_SYMBOLS
     from rigour.data.names.org_types import ORG_TYPES
@@ -108,7 +108,7 @@ def get_org_tagger(normalizer: Normalizer) -> Tagger:
 
 def tag_org_name(name: Name, normalizer: Normalizer) -> Name:
     """Tag the name with the organization type and symbol tags."""
-    tagger = get_org_tagger(normalizer)
+    tagger = _get_org_tagger(normalizer)
     for phrase, symbol in tagger(name.norm_form):
         name.apply_phrase(phrase, symbol)
     for span in name.spans:
@@ -124,7 +124,7 @@ def tag_org_name(name: Name, normalizer: Normalizer) -> Name:
 
 
 @cache
-def get_person_tagger(normalizer) -> Tagger:
+def _get_person_tagger(normalizer: Normalizer) -> Tagger:
     """Get the person name tagger."""
     from rigour.data.names.data import PERSON_SYMBOLS
 
@@ -167,7 +167,7 @@ def tag_person_name(
             name.apply_part(part, sym)
 
     # tag the name with person symbols
-    tagger = get_person_tagger(normalizer)
+    tagger = _get_person_tagger(normalizer)
     for phrase, symbol in tagger(name.norm_form):
         name.apply_phrase(phrase, symbol)
     return name
