@@ -57,7 +57,7 @@ def _display_replacer(normalizer: Normalizer = normalize_display) -> Replacer:
         display_norm = normalizer(org_type.get("display"))
         if display_norm is None:
             continue
-        for alias in org_type["aliases"]:
+        for alias in org_type.get("aliases", []):
             alias_norm = normalizer(alias)
             if alias_norm is None or len(alias_norm.strip()) == 0:
                 continue
