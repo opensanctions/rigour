@@ -49,6 +49,24 @@ def test_align_name_slop_extra_middle():
     assert tokens_eq(amt.result_extra, [])
 
 
+def test_align_name_slop_extra_middle_cleaned():
+    # when symbols (bank) and type (ag) are removed
+    query = make("Deutsche (Schweiz)")
+    result = make("Deutsche")
+    amt = align_name_slop(query, result, max_slop=1)
+    assert tokens_eq(amt.query_sorted, ["deutsche"])
+    assert tokens_eq(amt.result_sorted, ["deutsche"])
+    assert tokens_eq(amt.query_extra, ["schweiz"])
+    assert tokens_eq(amt.result_extra, [])
+    query = make("Deutsche")
+    result = make("Deutsche (Schweiz)")
+    amt = align_name_slop(query, result, max_slop=1)
+    assert tokens_eq(amt.query_sorted, ["deutsche"])
+    assert tokens_eq(amt.result_sorted, ["deutsche"])
+    assert tokens_eq(amt.query_extra, [])
+    assert tokens_eq(amt.result_extra, ["schweiz"])
+
+
 def test_align_name_slop_multiple_extra():
     query = make("Deutsche Bank (Schweiz) AG")
     result = make("Deutsche Bank Aktiengesellschaft")
