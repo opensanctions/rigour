@@ -1,5 +1,8 @@
 import logging
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Type
+
+import click
 
 from rigour.names.person import load_person_names_mapping
 from rigour.names.symbol import Symbol
@@ -9,6 +12,7 @@ from rigour.names.tagging import Tagger as RETagger
 from rigour.names import prenormalize_name
 
 log = logging.getLogger(__name__)
+InPath = click.Path(dir_okay=False, readable=True, path_type=Path, allow_dash=True)
 
 
 def load_scanner_class(name: str) -> Type[REScanner]:
@@ -27,6 +31,7 @@ def load_tagger_class(Scanner: Type[REScanner]) -> Type[RETagger]:
         """A class to manage a dictionary of words and their aliases. This is used to perform
         replacement on those aliases or the word itself in a text.
         """
+
         def __init__(self, mapping: Dict[str, List[Symbol]]) -> None:
             forms = list(mapping.keys())
             super().__init__(forms, ignore_case=False)
@@ -88,8 +93,46 @@ def normalizer(text: Optional[str]) -> Optional[str]:
     return " ".join(text.split())
 
 
-if __name__ == "__main__":
-    Scanner = load_scanner_class("re2")
+@click.group()
+def cli() -> None:
+    pass
+
+
+@cli.command("normalize")
+@click.argument("names_path", type=InPath)
+def normalize(names_path: Path) -> None:
+    """Normalize names from a file."""
+    with open(names_path, "r", encoding="utf-8") as f:
+        for line in f:
+            name = line.strip()
+            if not name:
+                continue
+            normalized_name = normalizer(name)
+            if normalized_name:
+                print(normalized_name)
+
+
+@cli.command("bench")
+@click.argument("library", type=str)
+@click.argument("names_path", type=InPath)
+def bench(library: str, names_path: Path) -> None:
+    Scanner = load_scanner_class(library)
     Tagger = load_tagger_class(Scanner)
     tag = Tagger(_get_person_name_mapping(normalizer))
-    print(tag(normalizer("John Doe")))
+    with open(names_path, "r", encoding="utf-8") as f:
+        for line in f:
+            print(tag(line.strip()))
+
+
+@cli.command("demo")
+@click.argument("library", type=str)
+@click.argument("demo_string", type=str)
+def demo(library: str, demo_string: str) -> None:
+    Scanner = load_scanner_class(library)
+    Tagger = load_tagger_class(Scanner)
+    tag = Tagger(_get_person_name_mapping(normalizer))
+    print(tag(normalizer(demo_string)))
+
+
+if __name__ == "__main__":
+    cli()
