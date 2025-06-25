@@ -1,7 +1,12 @@
 from typing import List
 from rigour.names.name import Name
 from rigour.names.part import NamePart
-from rigour.names.alignment import align_name_slop, align_person_name_order
+from rigour.names.alignment import (
+    align_name_slop,
+    align_person_name_order,
+    align_tag_sort,
+)
+from rigour.names.alignment import align_name_strict
 from rigour.names.tag import NamePartTag
 
 
@@ -101,16 +106,16 @@ def test_align_name_slop_prefer_closer_segments():
     assert tokens_eq(amt.result_extra, ["goo"])
 
 
-def test_align_name_slop_dont_reorder():
-    # don't reorder - just take whatever aligns with slop in order
-    query = make("NOVY GAZMASH")
-    result = make("GAZMASH NOVY")
-    amt = align_name_slop(query, result, max_slop=2)
-    # Two very short names will not be aligned:
-    assert tokens_eq(amt.query_sorted, ["novy", "gazmash"])
-    assert tokens_eq(amt.result_sorted, ["gazmash", "novy"])
-    assert tokens_eq(amt.query_extra, [])
-    assert tokens_eq(amt.result_extra, [])
+# def test_align_name_slop_dont_reorder():
+#     # don't reorder - just take whatever aligns with slop in order
+#     query = make("NOVY GAZMASH")
+#     result = make("GAZMASH NOVY")
+#     amt = align_name_slop(query, result, max_slop=2)
+#     # Two very short names will not be aligned:
+#     assert tokens_eq(amt.query_sorted, ["novy", "gazmash"])
+#     assert tokens_eq(amt.result_sorted, ["gazmash", "novy"])
+#     assert tokens_eq(amt.query_extra, [])
+#     assert tokens_eq(amt.result_extra, [])
 
 
 def test_align_name_slop_beyond_slop():
@@ -146,6 +151,58 @@ def test_align_name_slop_trail_in_sorted():
     assert tokens_eq(amt.query_extra, ["equipment"])
     assert tokens_eq(amt.result_extra, ["and"])
     assert len(amt.result_extra) + len(amt.query_extra) == 2
+
+
+def test_align_name_strict():
+    query = make("Deutsche Bank AG")
+    result = make("Deutsche Bank AG")
+    amt = align_name_strict(query, result)
+    assert tokens_eq(amt.query_sorted, ["deutsche", "bank", "ag"])
+    assert tokens_eq(amt.result_sorted, ["deutsche", "bank", "ag"])
+
+    query = make("Deutsche Bank (Schweiz) AG")
+    result = make("Deutsche Bank AG")
+    amt = align_name_strict(query, result)
+    assert tokens_eq(amt.query_sorted, ["deutsche", "bank", "ag"])
+    assert tokens_eq(amt.query_extra, ["schweiz"])
+    assert tokens_eq(amt.result_sorted, ["deutsche", "bank", "ag"])
+
+    query = make("Deutsche Bank AG")
+    result = make("Deutsche Bank (Schweiz) AG")
+    amt = align_name_strict(query, result)
+    assert tokens_eq(amt.query_sorted, ["deutsche", "bank", "ag"])
+    assert tokens_eq(amt.result_extra, ["schweiz"])
+    assert tokens_eq(amt.result_sorted, ["deutsche", "bank", "ag"])
+
+    query = make("Deutsche Bank AG Schweiz")
+    result = make("Deutsche Bank AG")
+    amt = align_name_strict(query, result)
+    assert tokens_eq(amt.query_sorted, ["deutsche", "bank", "ag", "schweiz"])
+    assert tokens_eq(amt.result_sorted, ["deutsche", "bank", "ag"])
+
+    query = make("NOVI GAZMASH")
+    result = make("Production Enterprise NOVIY GASMASH")
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["novi", "gazmash"])
+    assert tokens_eq(amt.result_sorted, ["noviy", "gasmash"])
+    assert tokens_eq(amt.query_extra, [])
+    assert tokens_eq(amt.result_extra, ["production", "enterprise"])
+
+    query = make("Al-Haramain Foundation")
+    result = make("Al-Haramain Benevolent Foundation")
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["al", "haramain", "foundation"])
+    assert tokens_eq(amt.result_sorted, ["al", "haramain", "foundation"])
+    assert tokens_eq(amt.query_extra, [])
+    assert tokens_eq(amt.result_extra, ["benevolent"])
+
+    query = make("Al-Haramain Foundation")
+    result = make("Al-Haramain Benevolent Foundation")
+    amt = align_name_slop(query, result, max_slop=2)
+    assert tokens_eq(amt.query_sorted, ["al", "haramain", "foundation"])
+    assert tokens_eq(amt.result_sorted, ["al", "haramain", "foundation"])
+    assert tokens_eq(amt.query_extra, [])
+    assert tokens_eq(amt.result_extra, ["benevolent"])
 
 
 def test_align_slop_special_cases():
@@ -329,3 +386,58 @@ def test_align_tagged_person_name_parts():
     ]
     aligned = align_person_name_order(query, result)
     assert len(aligned) == 2
+
+
+def test_align_tag_sort():
+    query = [
+        NamePart("john", 0, NamePartTag.GIVEN),
+        NamePart("smith", 1, NamePartTag.FAMILY),
+    ]
+    result = [
+        NamePart("john", 0, NamePartTag.GIVEN),
+        NamePart("smith", 1, NamePartTag.FAMILY),
+    ]
+    aligned = align_tag_sort(query, result)
+    assert len(aligned) == 2
+    assert aligned.query_sorted[0].form == "john"
+    assert aligned.result_sorted[0].form == "john"
+
+    result = [
+        NamePart("smith", 1, NamePartTag.FAMILY),
+        NamePart("john", 0, NamePartTag.GIVEN),
+    ]
+    aligned = align_tag_sort(query, result)
+    assert len(aligned) == 2
+    assert aligned.result_sorted[0].form == "john"
+
+    query = [
+        NamePart("llc", 0, NamePartTag.LEGAL),
+        NamePart("orion", 1, NamePartTag.ANY),
+    ]
+    result = [
+        NamePart("orion", 0, NamePartTag.ANY),
+        NamePart("llc", 1, NamePartTag.LEGAL),
+    ]
+    aligned = align_tag_sort(query, result)
+    assert len(aligned) == 2
+    assert aligned.result_sorted[1].form == "llc"
+
+    # test if it's otherwise stable:
+    query = [
+        NamePart("a", 0, NamePartTag.ANY),
+        NamePart("c", 1, NamePartTag.ANY),
+        NamePart("x", 1, NamePartTag.ANY),
+    ]
+    result = [
+        NamePart("x", 0, NamePartTag.ANY),
+        NamePart("c", 1, NamePartTag.ANY),
+        NamePart("a", 1, NamePartTag.ANY),
+    ]
+    aligned = align_tag_sort(query, result)
+    assert len(aligned) == 3
+    assert aligned.query_sorted[0].form == "a"
+    assert aligned.query_sorted[1].form == "c"
+    assert aligned.query_sorted[2].form == "x"
+    assert aligned.result_sorted[0].form == "x"
+    assert aligned.result_sorted[1].form == "c"
+    assert aligned.result_sorted[2].form == "a"

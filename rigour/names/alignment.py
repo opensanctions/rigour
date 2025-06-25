@@ -62,8 +62,28 @@ def best_alignment(
     return maximal
 
 
+def align_tag_sort(query: List[NamePart], result: List[NamePart]) -> Alignment:
+    """Align name parts of companies and organizations by sorting them by their tags.
+    This is a simple alignment that does not allow for any slop or re-ordering of name
+    parts, but it is useful for cases where the names are already well-formed and
+    comparable.
+
+    Args:
+        query (List[NamePart]): The name parts of the query.
+        result (List[NamePart]): The name parts of the result.
+    Returns:
+        Alignment: An object containing the aligned name parts and any extra parts.
+    """
+    alignment = Alignment()
+    alignment.query_sorted = NamePart.tag_sort(query)
+    alignment.result_sorted = NamePart.tag_sort(result)
+    return alignment
+
+
 def align_name_slop(
-    query: List[NamePart], result: List[NamePart], max_slop: int = 2
+    query: List[NamePart],
+    result: List[NamePart],
+    max_slop: int = 2,
 ) -> Alignment:
     """Align name parts of companies and organizations. The idea here is to allow
     skipping tokens within the entity name if this improves overall match quality,
@@ -86,7 +106,7 @@ def align_name_slop(
         Alignment: An object containing the aligned name parts and any extra parts.
     """
     alignment = Alignment()
-    if len(query) < 3 and len(result) < 3:
+    if len(query) < 2 and len(result) < 2:
         alignment.query_sorted = query
         alignment.result_sorted = result
         return alignment
@@ -144,7 +164,62 @@ def align_name_slop(
     alignment.query_sorted.extend(query[query_index + max_slop :])
     alignment.result_extra.extend(result[result_index : result_index + max_slop])
     alignment.result_sorted.extend(result[result_index + max_slop :])
+    return alignment
 
+
+def align_name_strict(
+    query: List[NamePart], result: List[NamePart], max_slop: int = 2
+) -> Alignment:
+    """Align name parts of companies and organizations strictly by their token sequence. This
+    implementation does not use fuzzy matching or Levenshtein distance, but rather aligns
+    names only if individual name parts match exactly.
+
+    Args:
+        query (List[NamePart]): The name parts of the query.
+        result (List[NamePart]): The name parts of the result.
+    Returns:
+        Alignment: An object containing the aligned name parts and any extra parts.
+    """
+    alignment = Alignment()
+    if len(query) < 2 or len(result) < 2:
+        alignment.query_sorted = query
+        alignment.result_sorted = result
+        return alignment
+    query = NamePart.tag_sort(query)
+    result = NamePart.tag_sort(result)
+    query_offset = 0
+    result_offset = 0
+    while True:
+        if query_offset >= len(query) or result_offset >= len(result):
+            break
+        slop_used = len(alignment.query_extra) + len(alignment.result_extra)
+        slop_remaining = max(0, max_slop - slop_used)
+        for i in range(slop_remaining + 1):
+            query_next = query_offset + i
+            if query_next < len(query):
+                query_part = query[query_next]
+                if query_part.comparable == result[result_offset].comparable:
+                    alignment.query_sorted.append(query_part)
+                    alignment.result_sorted.append(result[result_offset])
+                    alignment.query_extra.extend(query[query_offset:query_next])
+                    query_offset += i
+                    break
+            result_next = result_offset + i
+            if result_next < len(result):
+                result_part = result[result_next]
+                if result_part.comparable == query[query_offset].comparable:
+                    alignment.query_sorted.append(query[query_offset])
+                    alignment.result_sorted.append(result_part)
+                    alignment.result_extra.extend(result[result_offset:result_next])
+                    result_offset += i
+                    break
+
+        query_offset += 1
+        result_offset += 1
+
+    # Add any remaining parts to extra and the rest to sorted.
+    alignment.query_sorted.extend(query[query_offset:])
+    alignment.result_sorted.extend(result[result_offset:])
     return alignment
 
 
@@ -242,9 +317,7 @@ def align_person_name_order(query: List[NamePart], result: List[NamePart]) -> Al
                 result_left.remove(rp)
 
     if not len(alignment.query_sorted):
-        alignment.query_sorted = NamePart.tag_sort(query)
-        alignment.result_sorted = NamePart.tag_sort(result)
-        return alignment
+        return align_tag_sort(query, result)
 
     alignment.query_extra.extend(query_left)
     alignment.result_extra.extend(result_left)
