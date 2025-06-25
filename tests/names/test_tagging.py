@@ -62,6 +62,10 @@ def test_tag_person_multiple():
     assert "claude" in stexts
     assert "jean claude" in stexts
 
+    name = Name("Jean-Claude, 2", tag=NameTypeTag.PER)
+    tagged_name = tag_person_name(name, _per_normalizer)
+    assert tagged_name.parts[-1].tag == NamePartTag.NUMERIC
+
 
 def test_tag_org_name():
     """Test tagging an organization name."""
@@ -107,6 +111,7 @@ def test_tag_org_name_ordinals():
     for var in vars:
         name = Name(var, tag=NameTypeTag.ENT)
         tagged_name = tag_org_name(name, _org_normalizer)
+        assert tagged_name.parts[0].tag == NamePartTag.NUMERIC
         assert len(tagged_name.symbols) > 0
         assert any(
             symbol.category == Symbol.Category.ORDINAL and symbol.id == 5

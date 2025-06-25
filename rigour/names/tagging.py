@@ -106,21 +106,36 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
     return Tagger(mapping)
 
 
-def tag_org_name(name: Name, normalizer: Normalizer) -> Name:
-    """Tag the name with the organization type and symbol tags."""
-    tagger = _get_org_tagger(normalizer)
-    for phrase, symbol in tagger(name.norm_form):
-        name.apply_phrase(phrase, symbol)
+def _infer_part_tags(name: Name) -> Name:
+    """Infer the tags of the name parts based on the name type."""
     for span in name.spans:
         if span.symbol.category == Symbol.Category.ORG_CLASS:
             if name.tag == NameTypeTag.ENT:
-                # If an entity name contains an organization type, we can tag it as an organization.
+                # If an untyped entity name contains an organization type, we can tag
+                # it as an organization.
                 name.tag = NameTypeTag.ORG
             # If a name part is an organization class or type, we can tag it as legal.
             for part in span.parts:
                 if part.tag == NamePartTag.ANY:
                     part.tag = NamePartTag.LEGAL
+        if span.symbol.category == Symbol.Category.ORDINAL:
+            if len(span.parts) == 1 and span.parts[0].tag == NamePartTag.ANY:
+                # If an ordinal symbol is present and the part is not tagged, we can
+                # tag it as numeric.
+                span.parts[0].tag = NamePartTag.NUMERIC
+    for part in name.parts:
+        if part.form.isnumeric() and part.tag == NamePartTag.ANY:
+            # If a name part is numeric, we can tag it as numeric.
+            part.tag = NamePartTag.NUMERIC
     return name
+
+
+def tag_org_name(name: Name, normalizer: Normalizer) -> Name:
+    """Tag the name with the organization type and symbol tags."""
+    tagger = _get_org_tagger(normalizer)
+    for phrase, symbol in tagger(name.norm_form):
+        name.apply_phrase(phrase, symbol)
+    return _infer_part_tags(name)
 
 
 @cache
@@ -170,4 +185,5 @@ def tag_person_name(
     tagger = _get_person_tagger(normalizer)
     for phrase, symbol in tagger(name.norm_form):
         name.apply_phrase(phrase, symbol)
-    return name
+
+    return _infer_part_tags(name)
