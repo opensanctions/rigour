@@ -15,45 +15,16 @@ log = logging.getLogger(__name__)
 InPath = click.Path(dir_okay=False, readable=True, path_type=Path, allow_dash=True)
 
 
-def load_scanner_class(name: str) -> Type[REScanner]:
+def load_tagger_class(name: str) -> Type[RETagger]:
     """Load a scanner class by name."""
     if name == "re2":
-        from impl.dictionary_re2 import Scanner
+        from impl.dictionary_re2 import Tagger
     elif name == "re":
-        Scanner = REScanner
+        Tagger = RETagger
+    elif name == "hyperscan":
+        from impl.dictionary_hyperscan import Tagger
     else:
         raise ValueError(f"Unknown scanner type: {name}")
-    return Scanner
-
-
-def load_tagger_class(Scanner: Type[REScanner]) -> Type[RETagger]:
-    class Tagger(Scanner):
-        """A class to manage a dictionary of words and their aliases. This is used to perform
-        replacement on those aliases or the word itself in a text.
-        """
-
-        def __init__(self, mapping: Dict[str, List[Symbol]]) -> None:
-            forms = list(mapping.keys())
-            super().__init__(forms, ignore_case=False)
-            self.mapping = mapping
-
-        def __call__(self, text: Optional[str]) -> List[Tuple[str, Symbol]]:
-            """Apply the tagger on a piece of pre-normalized text."""
-            if text is None:
-                return []
-            symbols: List[Tuple[str, Symbol]] = []
-            for match in self.pattern.finditer(text):
-                value = match.group(1)
-                for symbol in self.mapping.get(value, []):
-                    symbols.append((value, symbol))
-
-            for token in text.split(" "):
-                if token in self.mapping:
-                    for symbol in self.mapping[token]:
-                        if (token, symbol) not in symbols:
-                            symbols.append((token, symbol))
-            return symbols
-
     return Tagger
 
 
@@ -79,7 +50,7 @@ def _get_person_name_mapping(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
             sym = Symbol(Symbol.Category.NAME, int(qid[1:]))
             mapping[name].append(sym)
 
-    log.info("Loaded person tagger (%s terms).", len(mapping))
+    print("Loaded person tagger (%s terms).", len(mapping))
     return mapping
 
 
@@ -115,24 +86,43 @@ def normalize(names_path: Path) -> None:
 @cli.command("bench")
 @click.argument("library", type=str)
 @click.argument("names_path", type=InPath)
-def bench(library: str, names_path: Path) -> None:
-    Scanner = load_scanner_class(library)
-    Tagger = load_tagger_class(Scanner)
+@click.option("--verbose", is_flag=True, help="Print out each line and its results")
+def bench(library: str, names_path: Path, verbose: bool) -> None:
+    Tagger = load_tagger_class(library)
     tag = Tagger(_get_person_name_mapping(normalizer))
+    if library == "hyperscan":
+        tag.load()
     with open(names_path, "r", encoding="utf-8") as f:
-        for line in f:
-            print(tag(line.strip()))
+        for idx, line in enumerate(f):
+            if idx > 0 and idx % 1000 == 0:
+                print(f"Processed {idx} lines")
+            tag_result = tag(line.strip())
+            if verbose:
+                print(f"{line.strip()} -> {tag_result}")
+
 
 
 @cli.command("demo")
 @click.argument("library", type=str)
 @click.argument("demo_string", type=str)
 def demo(library: str, demo_string: str) -> None:
-    Scanner = load_scanner_class(library)
-    Tagger = load_tagger_class(Scanner)
+    print("Loading tagger")
+    Tagger = load_tagger_class(library)
+    print("Instantiating tagger")
     tag = Tagger(_get_person_name_mapping(normalizer))
+    if library == "hyperscan":
+        tag.load()
+    print("Tagging demo string")
     print(tag(normalizer(demo_string)))
 
+
+@cli.command("compile-hyperscan")
+def compile_hyperscan() -> None:
+    """Compile the hyperscan database."""
+    from impl.dictionary_hyperscan import Tagger
+
+    tagger = Tagger(_get_person_name_mapping(normalizer))
+    tagger.compile()
 
 if __name__ == "__main__":
     cli()

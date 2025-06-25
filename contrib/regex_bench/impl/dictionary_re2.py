@@ -1,7 +1,9 @@
 import re
 import re2
 from normality.constants import WS
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
+
+from rigour.names.symbol import Symbol
 
 
 class Scanner:
@@ -56,30 +58,29 @@ class Scanner:
         return self.pattern.sub(replacement, text)
 
 
-class Replacer(Scanner):
-    """A class to manage a dictionary of words and their aliases. This is used to perform replacement
-    on those aliases or the word itself in a text.
+class Tagger(Scanner):
+    """A class to manage a dictionary of words and their aliases. This is used to perform
+    replacement on those aliases or the word itself in a text.
     """
 
-    def __init__(
-        self,
-        mapping: Dict[str, str],
-        ignore_case: bool = True,
-    ) -> None:
+    def __init__(self, mapping: Dict[str, List[Symbol]]) -> None:
         forms = list(mapping.keys())
-        super().__init__(forms, ignore_case=ignore_case)
-        if ignore_case:
-            mapping = {k.lower(): v for k, v in mapping.items()}
+        super().__init__(forms, ignore_case=False)
         self.mapping = mapping
 
-    def _get(self, match: re.Match[str]) -> str:
-        """Internal: given a match, return the replacement value. Called by the regex."""
-        value = match.group(1)
-        lookup = value.lower() if self.ignore_case else value
-        return self.mapping.get(lookup, value)
-
-    def __call__(self, text: Optional[str]) -> Optional[str]:
-        """Apply the replacer on a piece of pre-normalized text."""
+    def __call__(self, text: Optional[str]) -> List[Tuple[str, Symbol]]:
+        """Apply the tagger on a piece of pre-normalized text."""
         if text is None:
-            return None
-        return self.pattern.sub(self._get, text)
+            return []
+        symbols: List[Tuple[str, Symbol]] = []
+        for match in self.pattern.finditer(text):
+            value = match.group(1)
+            for symbol in self.mapping.get(value, []):
+                symbols.append((value, symbol))
+
+        for token in text.split(" "):
+            if token in self.mapping:
+                for symbol in self.mapping[token]:
+                    if (token, symbol) not in symbols:
+                        symbols.append((token, symbol))
+        return symbols
