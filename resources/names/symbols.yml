@@ -1020,6 +1020,12 @@ org_symbols:
     - механического
     - механической
     - механических
+    - механика
+    - mechanický
+    - mécanique
+    - МЕХАНИЧЕСКИЙ
+    - Mekhanicheskiy
+    - Mecánica
   transport:
     - transport
     - transportation
@@ -1500,6 +1506,29 @@ org_symbols:
     - takticheskoe raketnoe vooruzhenie
     - тактическое ракетное вооружение
     - тактичне ракетне озброєння
+  npp:
+    - research and production association
+    - npp
+    - НПП
+    - research and production enterprise
+    - research and production corporation
+    - research & production corporation
+    - research & production
+    - research and production
+    - research and production company
+    - research & production association
+    - Naukovo-vyrobnyche pidpryiemstvo
+    - NAUCHNO-PROIZVODSTVENNOE PREDPRIYATIE
+    - ENGINEERING AND CONSTRUCTION
+    - Kutató- és Termelővállalat
+    - Întreprinderea de cercetare și producție
+    - Corporația de cercetare și producție
+    - Scientific and Production Enterprise
+    - Scientific and Production
+    - Научно-производственное предприятие
+    - Научно-производственное
+    - Науково-виробниче підприємство
+    - Науково-виробниче
 person_symbols:
   jr:
     - "Jr"
