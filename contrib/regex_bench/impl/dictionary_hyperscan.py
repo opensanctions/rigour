@@ -5,6 +5,8 @@ import re
 from rigour.names.symbol import Symbol
 
 
+REGEX_TOKENS = re.compile(r"(?<!\w)(\w+)(?!\w)")
+
 
 class Scanner:
     """Core class for scanning text for forms. It uses a regex pattern to match the list of
@@ -22,7 +24,7 @@ class Scanner:
         print("making forms")
         forms = [re.escape(form) for form in self.forms]
         print("forms", forms[:5])
-        expressions = [br"\b%s\b" % form.encode("utf8") for form in forms]
+        expressions = [br"%s" % form.encode("utf8") for form in forms]
         print("expressions", expressions[:5])
         flags = hyperscan.HS_FLAG_UTF8 | hyperscan.HS_FLAG_SOM_LEFTMOST
         if self.ignore_case:
@@ -64,6 +66,12 @@ class Tagger(Scanner):
         matches = []
         results = []
 
+        # Find boundaries of tokens in the text
+        boundaries = set()
+        for match in REGEX_TOKENS.finditer(text):
+            boundaries.add(match.start())
+            boundaries.add(match.end())
+
         def match_handler(id, from_offset, to_offset, flags, context):
             matches.append((id, from_offset, to_offset))
             return 0
@@ -71,18 +79,11 @@ class Tagger(Scanner):
         self.db.scan(text.encode("utf8"), match_handler)
 
         for id, from_offset, to_offset in matches:
+            if from_offset not in boundaries or to_offset not in boundaries:
+                continue
             match = text[from_offset:to_offset]
             symbols = self.index[id]
             for symbol in symbols:
                 results.append((match, symbol))
-            #value = match.group(1)
-            #for symbol in self.mapping.get(value, []):
-            #    symbols.append((value, symbol))
-
-        #for token in text.split(" "):
-        #    if token in self.mapping:
-        #        for symbol in self.mapping[token]:
-        #            if (token, symbol) not in symbols:
-        #                symbols.append((token, symbol))
         return results
 
