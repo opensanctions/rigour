@@ -4,7 +4,7 @@ from collections import defaultdict
 from typing import Dict, List, Optional, Tuple, Type, cast
 import re
 
-from rigour.text.dictionary import Scanner, Normalizer
+from rigour.text.dictionary import Scanner, Normalizer, REGEX_TOKENS
 from rigour.names import Symbol, Name
 from rigour.names import load_person_names_mapping
 from rigour.names.tag import NameTypeTag, NamePartTag, GIVEN_NAME_TAGS
@@ -12,7 +12,6 @@ from rigour.names.tag import NameTypeTag, NamePartTag, GIVEN_NAME_TAGS
 import ahocorasick_rs
 
 log = logging.getLogger(__name__)
-REGEX_TOKENS = re.compile(r"(?<!\w)(\w+)(?!\w)")
 
 
 class Tagger(Scanner):
