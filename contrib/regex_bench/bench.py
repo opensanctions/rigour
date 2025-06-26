@@ -23,8 +23,10 @@ def load_tagger_class(name: str) -> Type[RETagger]:
         Tagger = RETagger
     elif name == "hyperscan":
         from impl.dictionary_hyperscan import Tagger
+    elif name == "ahocorasick":
+        from impl.dictionary_ahocorasick import Tagger
     else:
-        raise ValueError(f"Unknown scanner type: {name}")
+        raise ValueError(f"Unknown tagger type: {name}")
     return Tagger
 
 
