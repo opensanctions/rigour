@@ -1,5 +1,5 @@
 from typing import Dict, List, Optional, Tuple
-import ahocorasick
+import ahocorasick_rs
 from normality import WS
 import re
 
@@ -24,10 +24,8 @@ class Tagger(Scanner):
     """
 
     def __init__(self, mapping: Dict[str, List[Symbol]]) -> None:
-        self.automaton = ahocorasick.Automaton()
-        for form, symbols in mapping.items():
-            self.automaton.add_word(form, (len(form), symbols))
-        self.automaton.make_automaton()
+        self.symbols = list(mapping.values())
+        self.automaton = ahocorasick_rs.AhoCorasick(mapping.keys())
 
     def __call__(self, text: Optional[str]) -> List[Tuple[str, Symbol]]:
         """Apply the tagger on a piece of pre-normalized text."""
@@ -39,17 +37,16 @@ class Tagger(Scanner):
         boundaries = set()
         for match in REGEX_TOKENS.finditer(text):
             boundaries.add(match.start())
-            boundaries.add(match.end()-1)
-        
-        self.automaton.make_automaton()
-        for end_index, (form_length, symbols) in self.automaton.iter(text):
-            start_index = end_index - form_length + 1
-            is_in_boundaries = start_index in boundaries and end_index in boundaries
+            boundaries.add(match.end())
+
+        for pattern_index, start, end in self.automaton.find_matches_as_indexes(
+            text, overlapping=True
+        ):
             # Skip any matches that aren't along token boundaries
-            if not is_in_boundaries:
+            if start not in boundaries or end not in boundaries:
                 continue
-            match = text[start_index:end_index + 1]
-            for symbol in symbols:
+            match = text[start:end]
+            for symbol in self.symbols[pattern_index]:
                 results.append((match, symbol))
-            
+
         return results
