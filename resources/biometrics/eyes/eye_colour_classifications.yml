@@ -1,0 +1,175 @@
+# Interpol uses standard classification codes for eye color.
+# These appear in Red Notice reports for wanted persons and on OpenSanctions.
+# Similar coding systems are used by national law enforcement agencies.
+# Source: https://web.archive.org/web/20240613035903/https://www.interpol.int/content/download/13972/file/InterpolImplementationV5-03.pdf (page 78)
+# There are notes at the end of this file.
+Eye color classifications:
+  BLK:
+    Interpol code: BLK
+    Title: Black
+    Wikidata code: Q17244465
+    Description en US: black
+    Description en GB: black
+    Description es: negros
+    Description fr: noirs
+    Description de: schwarze
+    Labels: 
+      - black # en
+      - negros # es
+      - noirs # fr
+      - schwarze # de
+      - very dark brown # en (more literal description)
+  BLU:
+    Interpol code: BLU
+    Title: Blue
+    Wikidata code: Q17122834
+    Description en US: blue
+    Description en GB: blue
+    Description es: azules
+    Description fr: bleus
+    Description de: blau
+    Labels:
+      - azules # es
+      - blau # de
+      - bleus # fr
+      - blue  # en
+  BRO:
+    Interpol code: BRO
+    Title: Brown
+    Wikidata code: Q17122705
+    Description en US: brown
+    Description en GB: brown
+    Description es: castaños
+    Description fr: marron
+    Description de: braune
+    Labels:
+    # amber
+      - ambarinos # es
+      - amber # en
+      - ambre # fr
+      - bernsteinfarben # de
+    # brown
+      - braune # de
+      - brown # en
+      - castaños # es
+      - marron # fr
+  GRY:
+    Interpol code: GRY
+    Title: Gray
+    Wikidata code: Q17245659
+    Description en US: gray
+    Description en GB: grey
+    Description es: grises
+    Description fr: gris
+    Description de: grau
+    Labels: 
+      - grau # de
+      - gray # en US
+      - grey # en GB
+      - gris # fr
+      - grises # es
+  GRN:
+    Interpol code: GRN
+    Title: Green
+    Wikidata code: Q17122854
+    Description en US: green
+    Description en GB: green
+    Description es: verdes
+    Description fr: verts
+    Description de: grüne
+    Labels:
+      - green # en
+      - grüne # de
+      - verdes # es
+      - verts # fr
+  HAZ:
+    Interpol code: HAZ
+    Title: Hazel
+    Wikidata code: Q17122740
+    Description en US: hazel
+    Description en GB: hazel
+    Description es: avellana
+    Description fr: noisette
+    Description de: hasel
+    Labels:
+      - avellana # es
+      - hasel # de
+      - hazel # en
+      - noisette # fr
+  MAR:
+    Interpol code: MAR
+    Title: Maroon
+    Wikidata code: [No specific code.]
+    Description en US: maroon
+    Description en GB: maroon
+    Description es: granates
+    Description fr: grenat
+    Description de: kastanienbraune
+    Labels:
+      - granates # es
+      - grenat # fr
+      - kastanienbraune # de
+      - maroon # en
+  MUL:
+    Interpol code: MUL
+    Title: Multicolored # [See Note 3.]
+    Wikidata code: [No specific code.]
+    Description en US: multicolored
+    Description en GB: multicoloured
+    Description es: multicolores
+    Description fr: multicolores
+    Description de: mehrfarbig
+    Labels: 
+      - mehrfarbig # de
+      - multicolored # en (US spelling)
+      - multicolores # es, fr
+      - multicoloured # en (GB spelling)
+  PNK:
+    Interpol code: PNK 
+    Title: Pink # [See Note 2.]
+    Wikidata code: Q59318252
+    Description en US: pink
+    Description en GB: pink 
+    Description es: rosados
+    Description fr: roses
+    Description de: rosa
+    Labels:
+    # pink
+      - pink # en
+      - rosa # de
+      - rosados # es
+      - roses # fr
+    # red
+      - red # en
+      - rojos # es
+      - rote # de
+      - rouges # fr
+    # violet
+      - violet # en
+      - violets # fr
+      - violett # de
+      - violetas # es
+  XXX:
+    Interpol code: XXX
+    Title: Unknown
+    Wikidata code: [No specific code.]
+    Description en US: unknown
+    Description en GB: unknown
+    Description es: desconocido
+    Description fr: inconnue
+    Description de: unbekannte
+    Labels:
+      - desconocido # es
+      - inconnue # fr
+      - unbekannte # de
+      - undeterminable # en
+      - unknown # en
+      - U/K # en (abbreviation)
+# Notes: 
+# Note 1: 
+# The Interpol codes are designed for practical use and do not precisely align to the six
+# eye colors recognised in science from genetics.
+# Note 2:
+# Pink/red eye color is rare but can arise where people have albinism.
+# Note 3:
+# The multicolored classification may be used where the individual has Heterochromia.
