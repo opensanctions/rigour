@@ -2,7 +2,7 @@ import string
 import logging
 import unicodedata
 from functools import cache
-from typing import Dict, List, Optional, Type
+from typing import Dict, List, Optional, Type, cast
 from normality.constants import WS
 from normality.transliteration import ascii_text
 from normality.util import Categories
@@ -101,7 +101,7 @@ def _address_replacer(latinize: bool = False, replacer_name: str = Replacer.__na
     from rigour.data.addresses.data import FORMS
     from rigour.data.names.data import ORDINALS
 
-    replacer_class = globals()[replacer_name]
+    replacer_class = cast(Type[Replacer], globals()[replacer_name])
 
     ordinals = [(str(k), v) for k, v in ORDINALS.items()]
     forms = list(FORMS.items()) + ordinals

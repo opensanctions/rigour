@@ -1,5 +1,5 @@
 import re
-from typing import Callable, Dict, Generator, List, Optional, Tuple
+from typing import Callable, Dict, Generator, List, Optional, Set, Tuple
 
 from normality.constants import WS
 from ahocorasick_rs import AhoCorasick, MatchKind
@@ -122,7 +122,7 @@ def word_boundary_matches(
 def non_overlapping(matches: List[Tuple[int, int, int]]) -> List[Tuple[int, int, int]]:
     """Keep only non-overlapping matches in pattern index order."""
     non_overlapping_matches: List[Tuple[int, int, int]] = []
-    covered = set()
+    covered: Set[int] = set()
     for pattern_index, start, end in sorted(matches, key=lambda x: x[0]):
         # Check if this match overlaps with any previously selected match
         if any(pos in covered for pos in range(start, end)):
