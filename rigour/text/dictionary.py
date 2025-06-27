@@ -100,41 +100,69 @@ class Replacer(Scanner):
         return self.pattern.sub(self._get, text)
 
 
+def word_boundary_matches(
+    text: str, matches: List[Tuple[int, int, int]]
+) -> List[Tuple[int, int, int]]:
+    """Keep only matches starting and ending on some token boundary in the text"""
+    # Find boundaries of tokens in the text
+    boundaries = set()
+    for word_match in REGEX_TOKENS.finditer(text):
+        boundaries.add(word_match.start())
+        boundaries.add(word_match.end())
+
+    token_matches: List[Tuple[int, int, int]] = []
+    for pattern_index, start, end in matches:
+        # Skip any matches that aren't along token boundaries
+        if start not in boundaries or end not in boundaries:
+            continue
+        token_matches.append((pattern_index, start, end))
+    return token_matches
+
+
+def non_overlapping(matches: List[Tuple[int, int, int]]) -> List[Tuple[int, int, int]]:
+    """Keep only non-overlapping matches in pattern index order."""
+    non_overlapping_matches: List[Tuple[int, int, int]] = []
+    covered = set()
+    for pattern_index, start, end in sorted(matches, key=lambda x: x[0]):
+        # Check if this match overlaps with any previously selected match
+        if any(pos in covered for pos in range(start, end)):
+            continue
+        non_overlapping_matches.append((pattern_index, start, end))
+        covered.update(range(start, end))
+    return non_overlapping_matches
+
+
 class AhoCorReplacer(Replacer):
     """A class to manage a dictionary of words and their aliases using Aho-Corasick algorithm.
     This is used to perform replacement on those aliases or the word itself in a text.
     """
 
     def __init__(self, mapping: Dict[str, str], ignore_case: bool = True) -> None:
-        # TODO: change replacer accessors to try and get rid of mapping to save memory.
         self.ignore_case = ignore_case
         self.mapping = mapping
         self.replacements = []
         forms = []
         for k, v in mapping.items():
-            # Skip empty key
+            # Skip empty keys
             if not k:
                 continue
             self.replacements.append(v)
             forms.append(k.lower() if ignore_case else k)
-        self.automaton = AhoCorasick(forms, matchkind=MatchKind.LeftmostFirst)
+        self.automaton = AhoCorasick(forms)
 
-    def _match(self, text: str) -> Generator[Tuple[int, int, int], None, None]:
+    def _match(self, text: str) -> List[Tuple[int, int, int]]:
+        """Find all the non-overlapping matches, preferring earlier patterns over later ones."""
         if self.ignore_case:
             text = text.lower()
 
-        # Find boundaries of tokens in the text
-        boundaries = set()
-        for word_match in REGEX_TOKENS.finditer(text):
-            boundaries.add(word_match.start())
-            boundaries.add(word_match.end())
-
-        matches = self.automaton.find_matches_as_indexes(text, overlapping=False)
-        for pattern_index, start, end in matches:
-            # Skip any matches that aren't along token boundaries
-            if start not in boundaries or end not in boundaries:
-                continue
-            yield start, end, pattern_index
+        # We want all matches from Aho Corasick, including overlapping, so that when we remove
+        # matches that didn't fall on token boundaries, we're left with matches that might
+        # have come later in form order than others that didn't fall on token boundaries.
+        matches = self.automaton.find_matches_as_indexes(text, overlapping=True)
+        matches = word_boundary_matches(text, matches)
+        # We then need to get rid of the remaining matches that do overlap.
+        matches = non_overlapping(matches)
+        return matches
 
     def extract(self, text: str) -> List[str]:
         """Extract all matching forms from the text. The text is assumed to have been
@@ -147,7 +175,7 @@ class AhoCorReplacer(Replacer):
             List[str]: A list of matched forms.
         """
         matches = []
-        for start, end, pattern_index in self._match(text):
+        for _pattern_index, start, end in self._match(text):
             matches.append(text[start:end])
         return matches
 
@@ -155,7 +183,7 @@ class AhoCorReplacer(Replacer):
         """Apply the replacer on a piece of pre-normalized text."""
         if text is None:
             return None
-        for start, end, pattern_index in self._match(text):
+        for pattern_index, start, end in self._match(text):
             replacement = self.replacements[pattern_index]
             text = text[:start] + replacement + text[end:]
 
@@ -165,7 +193,7 @@ class AhoCorReplacer(Replacer):
         original_text = text
         segments = []
         ranges = []
-        for start, end, pattern_index in self._match(text):
+        for pattern_index, start, end in self._match(text):
             ranges.append((start, end))
         if not ranges:
             return text
