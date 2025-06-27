@@ -1,0 +1,268 @@
+# Interpol uses standard classification codes for hair color.
+# These appear in Red Notice reports for wanted persons and on OpenSanctions.
+# Source: https://web.archive.org/web/20240613035903/https://www.interpol.int/content/download/13972/file/InterpolImplementationV5-03.pdf (page 78)
+# There are notes at the end of this file.
+Hair color classifications:
+  BAL:
+    Interpol code: BAL
+    Title: Bald
+    Wikidata code: Q181391
+    Description en US: bald
+    Description en GB: bald
+    Description es: calvo/a
+    Description fr: chauve
+    Description de: mit Glatze
+    Labels: 
+      - bald # en
+      - bald-headed # en
+      - calva # es (feminine)
+      - calvo # es (masculine)
+      - chauve # fr
+      - mit Glatze # de
+      - no hair  # en
+      - shaved # en
+      - shaven # en
+  BLK:
+    Interpol code: BLK
+    Title: Black
+    Wikidata code: Q1922956
+    Description en US: black
+    Description en GB: black
+    Description es: negro
+    Description fr: noir
+    Description de: schwarz
+    Labels: 
+      - black # en
+      - jet black # en
+      - negro # es
+      - noir # fr
+      - raven # en
+      - schwarz # de
+  BLN:
+    Interpol code: BLN
+    Title: Blonde or Strawberry
+    Wikidata code: Q202466
+    Description en US: blonde
+    Description en GB: blonde
+    Description es: rubio
+    Description fr: blond
+    Description de: blond
+    Labels: 
+      - blond # de, en (masculine), fr (masculine), pl
+      - blonde # en (feminine), fr (feminine)
+      - fair # en
+      - rubia # es (feminine)
+      - rubio # es (masculine)
+      - strawberry # en
+      - yellow # en (common as a color but not often used for hair)
+  BLU:
+    Interpol code: BLU
+    Title: Blue
+    Wikidata code: Q4930092
+    Description en US: blue
+    Description en GB: blue
+    Description es: azul
+    Description fr: bleu
+    Description de: blau
+    Labels: 
+      - azul # es
+      - blau # de
+      - bleu # fr
+      - blue # en
+  BRO:
+    Interpol code: BRO
+    Title: Brown
+    Wikidata code: Q2367101
+    Description en US: brown
+    Description en GB: brown
+    Description es: castaño
+    Description fr: châtain
+    Description de: braun
+    Labels: 
+      - braun # de
+      - brown # en
+      - brun # fr (masculine)
+      - brune # fr (feminine)
+      - brunet # pl
+      - brunette # en
+      - castaño # es
+      - châtain # fr
+      - morena # es (feminine) (can also refer to a dark complexion more generally)
+      - moreno # es (masculine) (can also refer to a dark complexion more generally)
+      - szatyn # pl (masculine) (brown haired man)
+  GRN:
+    Interpol code: GRN
+    Title: Green
+    Wikidata code: Q26449910
+    Description en US: green
+    Description en GB: green
+    Description es: verde
+    Description fr: vert
+    Description de: grün
+    Labels: 
+      - green # en
+      - grün # de
+      - verde # es
+      - vert # fr
+  GRY:
+    Interpol code: GRY
+    Title: Gray or Partially Gray
+    Wikidata code: Q10509939
+    Description en US: gray
+    Description en GB: grey
+    Description es: gris
+    Description fr: gris
+    Description de: grau
+    Labels: 
+      # grey
+      - canosa # es (feminine)
+      - canoso # es (masculine)
+      - grau # de
+      - gray # en US
+      - grey # en GB
+      - gris # es, fr
+      # partially grey
+      - partially gray # en US
+      - partially grey # en GB
+      # salt and pepper
+      - poivre et sel # fr (informal)
+      - salt and pepper # en (informal)
+      # silver
+      - silbergrau # de
+      - silver # en
+  ONG:
+    Interpol code: ONG
+    Title: Orange
+    Wikidata code: Q19916539
+    Description en US: orange
+    Description en GB: orange
+    Description es: naranja
+    Description fr: orange
+    Description de: orangefarben
+    Labels: 
+      - naranja # es
+      - orange # en, fr
+      - orangefarben # de
+  PLE:
+    Interpol code: PLE
+    Title: Purple
+    Wikidata code: Q27790873
+    Description en US: purple
+    Description en GB: purple
+    Description es: púrpura
+    Description fr: violet
+    Description de: lila
+    Labels: 
+      # lilac
+      - lilac # en
+      # purple
+      - lila # de
+      - purple # en
+      - púrpura # es
+      # violet
+      - violet # en, fr
+      - violeta # es
+      - violett # de
+  PNK:
+    Interpol code: PNK
+    Title: Pink
+    Wikidata code: Q28962042
+    Description en US: pink
+    Description en GB: pink
+    Description es: rosa
+    Description fr: rose
+    Description de: rosa
+    Labels: 
+      - pink # en
+      - rosa # de, es
+      - rosado # es
+      - rose # fr
+  RED:
+    Interpol code: RED
+    Title: Red or Auburn
+    Wikidata code: Q152357
+    Description en US: red
+    Description en GB: red
+    Description es: rojo
+    Description fr: rouge
+    Description de: rot
+    Labels: 
+      # red
+      - auburn # en
+      - crimson # en
+      - ginger # en
+      - red # en
+      - rojo # es
+      - rouge # fr
+      - rot # de
+      - scarlet # en
+      # redhead
+      - pelirroja # es (feminine)
+      - pelirrojo # es (masculine)
+      - redhead # en
+      - rothaarig # de
+      - rousse # fr (feminine)
+      - roux # fr (masculine)
+  SDY:
+    Interpol code: SDY
+    Title: Sandy
+    Wikidata code: [No specific code.]
+    Description en US: sandy
+    Description en GB: sandy
+    Description es: rubio oscuro
+    Description fr: blond foncé
+    Description de: sandfarben
+    Labels: 
+      - blond cendré # fr
+      - blond foncé # fr
+      - blond sable # fr
+      - ciemnoblond # pl
+      - dark blond # en
+      - dark blonde # en
+      - dunkelblond # de
+      - rubio oscuro # es
+      - sandfarben # de
+      - sandy # en
+  WHI:
+    Interpol code: WHI
+    Title: White
+    Wikidata code: Q6933946
+    Description en US: white
+    Description en GB: white
+    Description es: blanco
+    Description fr: blanc
+    Description de: weiß
+    Labels: 
+      - blanc # fr
+      - blanco # es
+      - weiß # de
+      - white # en
+  XXX:
+    Interpol code: XXX
+    Title: Unspecified or unknown
+    Wikidata code: [No specific code.]
+    Description en US: unspecified
+    Description en GB: unspecified
+    Description es: desconocido
+    Description fr: inconnu
+    Description de: unbekannt
+    Labels:
+      - desconocido # es
+      - inconnu # fr
+      - not known # en
+      - unbekannt # de
+      - undeterminable # en
+      - unknown # en
+      - unspecified # en
+      - U/K # en (abbreviation for "unknown")
+# Notes: 
+# Note 1: 
+# The Interpol codes are designed for practical use and therefore include
+# hair colors such as blue and green that do not arise naturally.
+# Note 2:
+# Some of the terms used in the labels such as "redhead" are informal. 
+# It is not intended that these are used in outputs but they may be helpful
+# in handling inputs.
+# Note 3:
+# Wikidata codes are specific to hair colors e.g. Q152357 correspondss to 
+# 'red hair' and not merely to 'red'.
