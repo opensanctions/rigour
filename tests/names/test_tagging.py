@@ -1,8 +1,10 @@
 from typing import Optional
 
+import pytest
+
 from rigour.names import Name, Symbol, NamePartTag, NameTypeTag
 from rigour.names.part import NamePart
-from rigour.names.tagging import tag_person_name, tag_org_name
+from rigour.names.tagging import AhoCorTagger, Tagger, tag_person_name, tag_org_name
 from rigour.names.tokenize import prenormalize_name, tokenize_name
 
 # For testing purposes, we only load these names by hacking the normalizer.
@@ -21,10 +23,11 @@ def _org_normalizer(name: Optional[str]) -> Optional[str]:
     return " ".join(tokenize_name(pre)) if pre else ""
 
 
-def test_tag_person_name():
+@pytest.mark.parametrize("tagger_class", [Tagger, AhoCorTagger])
+def test_tag_person_name(tagger_class):
     """Test tagging a person name."""
     name = Name("John Doe")
-    tagged_name = tag_person_name(name, _per_normalizer)
+    tagged_name = tag_person_name(name, _per_normalizer, tagger_class)
 
     # this might change a lot?
     john = Symbol(Symbol.Category.NAME, 4925477)
@@ -39,20 +42,25 @@ def test_tag_person_name():
 
     name.tag_text("john", NamePartTag.GIVEN)
     name.tag_text("doe", NamePartTag.FAMILY)
-    tagged_name = tag_person_name(name, _per_normalizer)
+    tagged_name = tag_person_name(name, _per_normalizer, tagger_class)
     assert jsym in tagged_name.symbols
     name = Name("J Doe", tag=NameTypeTag.PER)
-    tagged_name = tag_person_name(name, _per_normalizer, any_initials=False)
+    tagged_name = tag_person_name(
+        name, _per_normalizer, any_initials=False, tagger_class=tagger_class
+    )
     assert tagged_name is not None
     assert jsym not in tagged_name.symbols
 
     name = Name("J Doe", tag=NameTypeTag.PER)
-    tagged_name = tag_person_name(name, _per_normalizer, any_initials=True)
+    tagged_name = tag_person_name(
+        name, _per_normalizer, any_initials=True, tagger_class=tagger_class
+    )
     assert tagged_name is not None
     assert jsym in tagged_name.symbols
 
 
-def test_tag_person_multiple():
+@pytest.mark.parametrize("tagger_class", [Tagger, AhoCorTagger])
+def test_tag_person_multiple(tagger_class):
     """Test tagging a person name with multiple parts."""
     name = Name("Jean-Claude")
     tagged_name = tag_person_name(name, _per_normalizer)
@@ -63,14 +71,15 @@ def test_tag_person_multiple():
     assert "jean claude" in stexts
 
     name = Name("Jean-Claude, 2", tag=NameTypeTag.PER)
-    tagged_name = tag_person_name(name, _per_normalizer)
+    tagged_name = tag_person_name(name, _per_normalizer, tagger_class)
     assert tagged_name.parts[-1].tag == NamePartTag.NUMERIC
 
 
-def test_tag_org_name():
+@pytest.mark.parametrize("tagger_class", [Tagger, AhoCorTagger])
+def test_tag_org_name(tagger_class):
     """Test tagging an organization name."""
     name = Name("Doe Industries, Inc.")
-    tagged_name = tag_org_name(name, _org_normalizer)
+    tagged_name = tag_org_name(name, _org_normalizer, tagger_class)
 
     assert tagged_name is not None
     assert tagged_name.comparable == "doe industries inc"
@@ -86,31 +95,34 @@ def test_tag_org_name():
             assert part.tag == NamePartTag.LEGAL
 
 
-def test_tag_org_name_sorting():
+@pytest.mark.parametrize("tagger_class", [Tagger, AhoCorTagger])
+def test_tag_org_name_sorting(tagger_class):
     # Legal tagged name parts go last in the sort order.
     name = Name("OOO ORION", tag=NameTypeTag.ORG)
-    tagged_name = tag_org_name(name, _org_normalizer)
+    tagged_name = tag_org_name(name, _org_normalizer, tagger_class)
     sorted = NamePart.tag_sort(tagged_name.parts)
     assert sorted[0].form == "orion"
 
 
-def test_tag_org_name_type_cast():
+@pytest.mark.parametrize("tagger_class", [Tagger, AhoCorTagger])
+def test_tag_org_name_type_cast(tagger_class):
     name = Name("Benevolent Foundation", tag=NameTypeTag.ENT)
-    tagged_name = tag_org_name(name, _org_normalizer)
+    tagged_name = tag_org_name(name, _org_normalizer, tagger_class)
     assert tagged_name is not None
     assert tagged_name.tag == NameTypeTag.ENT
 
     name = Name("Benevolent, LLC", tag=NameTypeTag.ENT)
-    tagged_name = tag_org_name(name, _org_normalizer)
+    tagged_name = tag_org_name(name, _org_normalizer, tagger_class)
     assert tagged_name is not None
     assert tagged_name.tag == NameTypeTag.ORG
 
 
-def test_tag_org_name_ordinals():
+@pytest.mark.parametrize("tagger_class", [Tagger, AhoCorTagger])
+def test_tag_org_name_ordinals(tagger_class):
     vars = ["5. Batallion", "5 Batallion", "Fifth Batallion"]
     for var in vars:
         name = Name(var, tag=NameTypeTag.ENT)
-        tagged_name = tag_org_name(name, _org_normalizer)
+        tagged_name = tag_org_name(name, _org_normalizer, tagger_class)
         assert tagged_name.parts[0].tag == NamePartTag.NUMERIC
         assert len(tagged_name.symbols) > 0
         assert any(

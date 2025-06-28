@@ -26,9 +26,10 @@ import sys
 import logging
 from functools import cache
 from normality import collapse_spaces
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple, Type, cast
 
-from rigour.text.dictionary import Normalizer, Replacer
+# Import to access via globals()
+from rigour.text.dictionary import Normalizer, Replacer, AhoCorReplacer
 
 log = logging.getLogger(__name__)
 
@@ -47,9 +48,13 @@ def _normalize_compare(text: Optional[str]) -> Optional[str]:
 
 
 @cache
-def _display_replacer(normalizer: Normalizer = normalize_display) -> Replacer:
+def _display_replacer(
+    normalizer: Normalizer = normalize_display, replacer_name: str = Replacer.__name__
+) -> Replacer:
     """Get a replacer for the display names of organization types."""
     from rigour.data.names.org_types import ORG_TYPES
+
+    replacer_class = cast(Type[Replacer], globals()[replacer_name])
 
     mapping: Dict[str, str] = {}
     clashes: Set[str] = set()
@@ -74,11 +79,13 @@ def _display_replacer(normalizer: Normalizer = normalize_display) -> Replacer:
             mapping[alias_norm] = display_norm
     for alias in clashes:
         mapping.pop(alias, None)
-    return Replacer(mapping, ignore_case=True)
+    return replacer_class(mapping, ignore_case=True)
 
 
 def replace_org_types_display(
-    name: str, normalizer: Normalizer = normalize_display
+    name: str,
+    normalizer: Normalizer = normalize_display,
+    replacer_class: Type[Replacer] = Replacer,
 ) -> str:
     """Replace organization types in the text with their shortened form. This will perform
     a display-safe (light) form of normalization, useful for shortening spelt-out legal forms
@@ -95,7 +102,9 @@ def replace_org_types_display(
         Optional[str]: The text with organization types replaced.
     """
     is_uppercase = name.isupper()
-    replacer = _display_replacer(normalizer=normalizer)
+    replacer = _display_replacer(
+        normalizer=normalizer, replacer_name=replacer_class.__name__
+    )
     out_text = replacer(name)
     if out_text is None:
         return name
@@ -105,9 +114,13 @@ def replace_org_types_display(
 
 
 @cache
-def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
+def _compare_replacer(
+    normalizer: Normalizer = _normalize_compare, replacer_name: str = Replacer.__name__
+) -> Replacer:
     """Get a replacer for the display names of organization types."""
     from rigour.data.names.org_types import ORG_TYPES
+
+    replacer_class = cast(Type[Replacer], globals()[replacer_name])
 
     mapping: Dict[str, str] = {}
     for org_type in ORG_TYPES:
@@ -139,13 +152,17 @@ def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
         display_norm = normalizer(display_form)
         if display_norm is not None and display_norm not in mapping:
             mapping[display_norm] = compare_norm
-    return Replacer(mapping, ignore_case=True)
+    return replacer_class(mapping, ignore_case=True)
 
 
 @cache
-def _generic_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
+def _generic_replacer(
+    normalizer: Normalizer = _normalize_compare, replacer_name: str = Replacer.__name__
+) -> Replacer:
     """Get a replacer for the names of organization types, mapping them to generic types like LLC, JSC."""
     from rigour.data.names.org_types import ORG_TYPES
+
+    replacer_class = cast(Type[Replacer], globals()[replacer_name])
 
     mapping: Dict[str, str] = {}
     for org_type in ORG_TYPES:
@@ -169,11 +186,14 @@ def _generic_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
         display_norm = normalizer(org_type.get("display"))
         if display_norm is not None and display_norm not in mapping:
             mapping[display_norm] = generic_norm
-    return Replacer(mapping, ignore_case=True)
+    return replacer_class(mapping, ignore_case=True)
 
 
 def replace_org_types_compare(
-    name: str, normalizer: Normalizer = _normalize_compare, generic: bool = False
+    name: str,
+    normalizer: Normalizer = _normalize_compare,
+    generic: bool = False,
+    replacer_class: Type[Replacer] = Replacer,
 ) -> str:
     """Replace any organization type indicated in the given entity name (often as a prefix or suffix)
     with a heavily normalized form label. This will re-write country-specific entity types (eg. GmbH)
@@ -191,12 +211,15 @@ def replace_org_types_compare(
         Optional[str]: The text with organization types replaced.
     """
     _func = _generic_replacer if generic else _compare_replacer
-    replacer = _func(normalizer=normalizer)
+    replacer = _func(normalizer=normalizer, replacer_name=replacer_class.__name__)
     return replacer(name) or name
 
 
 def extract_org_types(
-    name: str, normalizer: Normalizer = _normalize_compare, generic: bool = False
+    name: str,
+    normalizer: Normalizer = _normalize_compare,
+    generic: bool = False,
+    replacer_class: Type[Replacer] = Replacer,
 ) -> List[Tuple[str, str]]:
     """Match any organization type designation (e.g. LLC, Inc, GmbH) in the given entity name and
     return the extracted type.
@@ -214,7 +237,7 @@ def extract_org_types(
         Tuple[str, str]: Tuple of the org type as matched, and the compare form of it.
     """
     _func = _generic_replacer if generic else _compare_replacer
-    replacer = _func(normalizer=normalizer)
+    replacer = _func(normalizer=normalizer, replacer_name=replacer_class.__name__)
     matches: List[Tuple[str, str]] = []
     for matched in replacer.extract(name):
         matches.append((matched, replacer.mapping.get(matched, matched)))
@@ -222,7 +245,10 @@ def extract_org_types(
 
 
 def remove_org_types(
-    name: str, replacement: str = "", normalizer: Normalizer = _normalize_compare
+    name: str,
+    replacement: str = "",
+    normalizer: Normalizer = _normalize_compare,
+    replacer_class: Type[Replacer] = Replacer,
 ) -> str:
     """Match any organization type designation (e.g. LLC, Inc, GmbH) in the given entity name and
     replace it with the given fixed string (empty by default, which signals removal).
@@ -235,5 +261,7 @@ def remove_org_types(
     Returns:
         str: The text with organization types replaced/removed.
     """
-    replacer = _compare_replacer(normalizer=normalizer)
+    replacer = _compare_replacer(
+        normalizer=normalizer, replacer_name=replacer_class.__name__
+    )
     return replacer.remove(name, replacement=replacement)
