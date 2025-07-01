@@ -3,6 +3,7 @@ from typing import Callable, Dict, Generator, List, Optional, Set, Tuple
 
 from normality.constants import WS
 from ahocorasick_rs import AhoCorasick, MatchKind
+from abc import ABC, abstractmethod
 
 Normalizer = Callable[[Optional[str]], Optional[str]]
 REGEX_TOKENS = re.compile(r"(?<!\w)([\w.-]+)(?!\w)")
@@ -18,7 +19,30 @@ def noop_normalizer(text: Optional[str]) -> Optional[str]:
     return text
 
 
-class Scanner:
+class BaseScanner(ABC):
+    """Abstract base class for scanners."""
+
+    @abstractmethod
+    def extract(self, text: str) -> List[str]:
+        """Extract forms from the text."""
+        pass
+
+    @abstractmethod
+    def remove(self, text: str, replacement: str = WS) -> str:
+        """Remove forms from the text."""
+        pass
+
+
+class BaseReplacer(BaseScanner):
+    """Abstract base class for replacers."""
+
+    @abstractmethod
+    def __call__(self, text: Optional[str]) -> Optional[str]:
+        """Apply the replacer on a piece of text."""
+        pass
+
+
+class Scanner(BaseScanner):
     """Core class for scanning text for forms. It uses a regex pattern to match the list of
     given forms in the text, trying to match the longest form first."""
 
@@ -71,7 +95,7 @@ class Scanner:
         return self.pattern.sub(replacement, text)
 
 
-class Replacer(Scanner):
+class Replacer(Scanner, BaseReplacer):
     """A class to manage a dictionary of words and their aliases. This is used to perform replacement
     on those aliases or the word itself in a text.
     """
@@ -132,22 +156,12 @@ def non_overlapping(matches: List[Tuple[int, int, int]]) -> List[Tuple[int, int,
     return non_overlapping_matches
 
 
-class AhoCorReplacer(Replacer):
-    """A class to manage a dictionary of words and their aliases using Aho-Corasick algorithm.
-    This is used to perform replacement on those aliases or the word itself in a text.
-    """
-
-    def __init__(self, mapping: Dict[str, str], ignore_case: bool = True) -> None:
+class AhoCorScanner(BaseScanner):
+    def __init__(self, forms: List[str], ignore_case: bool = True) -> None:
         self.ignore_case = ignore_case
-        self.mapping = mapping
-        self.replacements = []
         forms = []
-        for k, v in mapping.items():
-            # Skip empty keys
-            if not k:
-                continue
-            self.replacements.append(v)
-            forms.append(k.lower() if ignore_case else k)
+        for form in forms:
+            forms.append(form.lower() if ignore_case else form)
         self.automaton = AhoCorasick(forms)
 
     def _match(self, text: str) -> List[Tuple[int, int, int]]:
@@ -179,16 +193,6 @@ class AhoCorReplacer(Replacer):
             matches.append(text[start:end])
         return matches
 
-    def __call__(self, text: Optional[str]) -> Optional[str]:
-        """Apply the replacer on a piece of pre-normalized text."""
-        if text is None:
-            return None
-        for pattern_index, start, end in self._match(text):
-            replacement = self.replacements[pattern_index]
-            text = text[:start] + replacement + text[end:]
-
-        return text
-
     def remove(self, text: str, replacement: str = WS) -> str:
         original_text = text
         segments = []
@@ -209,3 +213,31 @@ class AhoCorReplacer(Replacer):
         segments.append(original_text[ranges[-1][1] :])
 
         return "".join(segments)
+
+
+class AhoCorReplacer(AhoCorScanner, BaseReplacer):
+    """A class to manage a dictionary of words and their aliases using Aho-Corasick algorithm.
+    This is used to perform replacement on those aliases or the word itself in a text.
+    """
+
+    def __init__(self, mapping: Dict[str, str], ignore_case: bool = True) -> None:
+        self.mapping = mapping
+        self.replacements = []
+        forms = []
+        for k, v in mapping.items():
+            # Skip empty keys
+            if not k:
+                continue
+            self.replacements.append(v)
+            forms.append(k)
+        super().__init__(forms, ignore_case=ignore_case)
+
+    def __call__(self, text: Optional[str]) -> Optional[str]:
+        """Apply the replacer on a piece of pre-normalized text."""
+        if text is None:
+            return None
+        for pattern_index, start, end in self._match(text):
+            replacement = self.replacements[pattern_index]
+            text = text[:start] + replacement + text[end:]
+
+        return text
