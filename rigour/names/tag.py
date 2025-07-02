@@ -27,9 +27,9 @@ class NamePartTag(Enum):
     SUFFIX = "SUFFIX"
     NICK = "NICK"
 
-    # STOP = "STOP"  # Stopword
+    STOP = "STOP"  # Stopword
+    NUM = "NUM"
     LEGAL = "LEGAL"  # Legal form of an organisation
-    NUMERIC = "NUMERIC"
 
 
 GIVEN_NAME_TAGS = {
@@ -47,7 +47,7 @@ FAMILY_NAME_TAGS = {
     NamePartTag.SUFFIX,
     NamePartTag.TRIBAL,
     NamePartTag.HONORIFIC,
-    NamePartTag.NUMERIC,
+    NamePartTag.NUM,
 }
 
 # All models are lies, but some are useful.
@@ -61,7 +61,7 @@ NAME_TAGS_ORDER = (
     NamePartTag.ANY,
     NamePartTag.FAMILY,
     NamePartTag.TRIBAL,
-    NamePartTag.NUMERIC,
+    NamePartTag.NUM,
     NamePartTag.SUFFIX,
     NamePartTag.LEGAL,
 )

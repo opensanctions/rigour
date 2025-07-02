@@ -74,6 +74,7 @@ def get_identifier_formats() -> List[FormatSpec]:
             "names": names,
             "title": type_.TITLE,
             "description": type_.__doc__ or "",
+            "strong": type_.STRONG,
         }
         formats.append(fmt)
     return sorted(formats, key=lambda f: f["title"])
