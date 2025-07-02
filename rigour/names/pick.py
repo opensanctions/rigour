@@ -94,11 +94,11 @@ def pick_case(names: List[str]) -> str:
     for i, char in enumerate(reference):
         for name in names:
             if len(name) <= i:
-                raise ValueError("Name length mismatch: %r vs %r", name, reference)
+                raise ValueError("Name length mismatch: %r vs %r" % (name, reference))
             nchar = name[i]
             if nchar != char:
                 if nchar.lower() != char.lower():
-                    raise ValueError("Names mismatch: %r vs %r", name, reference)
+                    raise ValueError("Names mismatch: %r vs %r" % (name, reference))
                 difference[name] += 1
     return min(difference.items(), key=lambda x: x[1])[0]
 
@@ -129,7 +129,7 @@ def reduce_names(names: List[str]) -> List[str]:
             picked = pick_case(group)
             reduced.append(picked)
         except (ValueError, IndexError, KeyError) as e:
-            log.warning("Failed to pick case for group %r: %s", group, e)
+            log.warning("Failed to pick case: %s", e)
             # If we cannot pick a case, add all
             reduced.extend(group)
     return reduced
