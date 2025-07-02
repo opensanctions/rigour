@@ -7,7 +7,7 @@ from ahocorasick_rs import AhoCorasick
 from abc import ABC, abstractmethod
 
 Normalizer = Callable[[Optional[str]], Optional[str]]
-REGEX_TOKENS = re.compile(r"(?<!\w)([\w.-]+)(?!\w)")
+REGEX_TOKENS = re.compile(r"(?<!\w)([\w\.-]+)(?!\w)")
 
 
 def noop_normalizer(text: Optional[str]) -> Optional[str]:

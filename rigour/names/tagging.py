@@ -90,7 +90,7 @@ class AhoCorTagger(AhoCorScanner, Tagger):
 
         matches = self.automaton.find_matches_as_indexes(text, overlapping=True)
         matches = word_boundary_matches(text, matches)
-        for pattern_index, start, end in matches:
+        for pattern_index, start, end in sorted(matches, key=lambda x: x[0]):
             match_string = text[start:end]
             for symbol in self._symbols[pattern_index]:
                 results.append((match_string, symbol))

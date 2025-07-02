@@ -4,11 +4,12 @@ import pytest
 
 from rigour.names import Name, Symbol, NamePartTag, NameTypeTag
 from rigour.names.part import NamePart
-from rigour.names.tagging import TaggerType, tag_person_name, tag_org_name
+from rigour.names.tagging import TaggerType, _get_person_tagger, tag_person_name, tag_org_name
 from rigour.names.tokenize import prenormalize_name, tokenize_name
 
 # For testing purposes, we only load these names by hacking the normalizer.
-LOAD_ONLY = ["john", "doe", "Dr", "Doktor", "jean", "claude", "jean-claude"]
+LOAD_COMPOUND = ["jae", "ho", "jae-ho", "jeong", "jeong-jae"]
+LOAD_ONLY = ["john", "doe", "Dr", "Doktor", "jean", "claude", "jean-claude"] + LOAD_COMPOUND
 
 
 def _per_normalizer(name: Optional[str]) -> Optional[str]:
@@ -27,7 +28,7 @@ def _org_normalizer(name: Optional[str]) -> Optional[str]:
 def test_tag_person_name(tagger_type):
     """Test tagging a person name."""
     name = Name("John Doe")
-    tagged_name = tag_person_name(name, _per_normalizer, tagger_type)
+    tagged_name = tag_person_name(name, _per_normalizer, tagger_type=tagger_type)
 
     # this might change a lot?
     john = Symbol(Symbol.Category.NAME, 4925477)
@@ -42,7 +43,7 @@ def test_tag_person_name(tagger_type):
 
     name.tag_text("john", NamePartTag.GIVEN)
     name.tag_text("doe", NamePartTag.FAMILY)
-    tagged_name = tag_person_name(name, _per_normalizer, tagger_type)
+    tagged_name = tag_person_name(name, _per_normalizer, tagger_type=tagger_type)
     assert jsym in tagged_name.symbols
     name = Name("J Doe", tag=NameTypeTag.PER)
     tagged_name = tag_person_name(
@@ -57,6 +58,27 @@ def test_tag_person_name(tagger_type):
     )
     assert tagged_name is not None
     assert jsym in tagged_name.symbols
+
+
+def test_tag_person_name_overlapping():
+    """
+    Just documenting for now that jae-ho is not tagged by RE but jeong-jae is
+
+    Same sort of thing for
+    - বর য ন (3894860) in বর য ন ব রক
+    - "da silva" in "adaias rodrigues da silva"
+    - "james anthony" in "jonathan james anthony naden"
+    """
+    tagged_re = tag_person_name(Name("jeong jae ho"), _per_normalizer, tagger_type=TaggerType.RE)
+    tagged_aho_cor = tag_person_name(Name("jeong jae ho"), _per_normalizer, tagger_type=TaggerType.AHO_COR)
+    jae_ho = Symbol(Symbol.Category.NAME, 17151901)
+    jeong = Symbol(Symbol.Category.NAME, 37489860)
+    jeong_jae = Symbol(Symbol.Category.NAME, 69509157)
+    ho = Symbol(Symbol.Category.NAME, 104377081)
+    jae = Symbol(Symbol.Category.NAME, 16255943)
+    all = {jae_ho, jeong, jeong_jae, ho, jae}
+    assert all - tagged_re.symbols == {jae_ho}
+    assert all - tagged_aho_cor.symbols == set()
 
 
 @pytest.mark.parametrize("tagger_type", [TaggerType.RE, TaggerType.AHO_COR])
