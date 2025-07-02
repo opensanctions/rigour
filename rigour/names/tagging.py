@@ -122,11 +122,11 @@ def _infer_part_tags(name: Name) -> Name:
             if len(span.parts) == 1 and span.parts[0].tag == NamePartTag.ANY:
                 # If an ordinal symbol is present and the part is not tagged, we can
                 # tag it as numeric.
-                span.parts[0].tag = NamePartTag.NUMERIC
+                span.parts[0].tag = NamePartTag.NUM
     for part in name.parts:
         if part.form.isnumeric() and part.tag == NamePartTag.ANY:
             # If a name part is numeric, we can tag it as numeric.
-            part.tag = NamePartTag.NUMERIC
+            part.tag = NamePartTag.NUM
     return name
 
 
