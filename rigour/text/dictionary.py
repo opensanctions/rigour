@@ -235,13 +235,14 @@ class AhoCorReplacer(AhoCorScanner, Replacer):
 
     def __init__(self, mapping: Dict[str, str], ignore_case: bool = True) -> None:
         self.mapping = mapping
-        self.replacements = []
+        self._replacements = []
+        """Indexed replacement for each pattern."""
         forms = []
         for k, v in mapping.items():
             # Skip empty keys
             if not k:
                 continue
-            self.replacements.append(v)
+            self._replacements.append(v)
             forms.append(k)
         super().__init__(forms, ignore_case=ignore_case)
 
@@ -250,7 +251,7 @@ class AhoCorReplacer(AhoCorScanner, Replacer):
         if text is None:
             return None
         for pattern_index, start, end in self._match(text):
-            replacement = self.replacements[pattern_index]
+            replacement = self._replacements[pattern_index]
             text = text[:start] + replacement + text[end:]
 
         return text

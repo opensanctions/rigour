@@ -71,13 +71,14 @@ class AhoCorTagger(AhoCorScanner, Tagger):
     """
 
     def __init__(self, mapping: Dict[str, List[Symbol]]) -> None:
-        self.symbols = []
+        self._symbols = []
+        """Indexed list of symbols for each pattern."""
         forms = []
         for k, v in mapping.items():
             # Skip empty key
             if not k:
                 continue
-            self.symbols.append(v)
+            self._symbols.append(v)
             forms.append(k)
         self.automaton = ahocorasick_rs.AhoCorasick(forms)
 
@@ -91,7 +92,7 @@ class AhoCorTagger(AhoCorScanner, Tagger):
         matches = word_boundary_matches(text, matches)
         for pattern_index, start, end in matches:
             match_string = text[start:end]
-            for symbol in self.symbols[pattern_index]:
+            for symbol in self._symbols[pattern_index]:
                 results.append((match_string, symbol))
 
         return results
