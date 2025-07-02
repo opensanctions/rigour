@@ -1,8 +1,8 @@
 import re
-from typing import Callable, Dict, Generator, List, Optional, Set, Tuple
+from typing import Callable, Dict, List, Optional, Set, Tuple
 
 from normality.constants import WS
-from ahocorasick_rs import AhoCorasick, MatchKind
+from ahocorasick_rs import AhoCorasick
 from abc import ABC, abstractmethod
 
 Normalizer = Callable[[Optional[str]], Optional[str]]
@@ -19,8 +19,13 @@ def noop_normalizer(text: Optional[str]) -> Optional[str]:
     return text
 
 
-class BaseScanner(ABC):
+class Scanner(ABC):
     """Abstract base class for scanners."""
+
+    @abstractmethod
+    def __init__(self, forms: List[str], ignore_case: bool = True) -> None:
+        """Initialize the scanner with a list of forms."""
+        pass
 
     @abstractmethod
     def extract(self, text: str) -> List[str]:
@@ -33,8 +38,15 @@ class BaseScanner(ABC):
         pass
 
 
-class BaseReplacer(BaseScanner):
+class Replacer(Scanner):
     """Abstract base class for replacers."""
+
+    mapping: Dict[str, str]
+
+    @abstractmethod
+    def __init__(self, mapping: Dict[str, str], ignore_case: bool = True) -> None:
+        """Initialize the replacer with a mapping of forms to their replacements."""
+        pass
 
     @abstractmethod
     def __call__(self, text: Optional[str]) -> Optional[str]:
@@ -42,7 +54,7 @@ class BaseReplacer(BaseScanner):
         pass
 
 
-class Scanner(BaseScanner):
+class REScanner(Scanner):
     """Core class for scanning text for forms. It uses a regex pattern to match the list of
     given forms in the text, trying to match the longest form first."""
 
@@ -95,7 +107,7 @@ class Scanner(BaseScanner):
         return self.pattern.sub(replacement, text)
 
 
-class Replacer(Scanner, BaseReplacer):
+class REReplacer(REScanner, Replacer):
     """A class to manage a dictionary of words and their aliases. This is used to perform replacement
     on those aliases or the word itself in a text.
     """
@@ -156,13 +168,13 @@ def non_overlapping(matches: List[Tuple[int, int, int]]) -> List[Tuple[int, int,
     return non_overlapping_matches
 
 
-class AhoCorScanner(BaseScanner):
+class AhoCorScanner(Scanner):
     def __init__(self, forms: List[str], ignore_case: bool = True) -> None:
         self.ignore_case = ignore_case
-        forms = []
+        case_forms = []
         for form in forms:
-            forms.append(form.lower() if ignore_case else form)
-        self.automaton = AhoCorasick(forms)
+            case_forms.append(form.lower() if ignore_case else form)
+        self.automaton = AhoCorasick(case_forms)
 
     def _match(self, text: str) -> List[Tuple[int, int, int]]:
         """Find all the non-overlapping matches, preferring earlier patterns over later ones."""
@@ -215,7 +227,7 @@ class AhoCorScanner(BaseScanner):
         return "".join(segments)
 
 
-class AhoCorReplacer(AhoCorScanner, BaseReplacer):
+class AhoCorReplacer(AhoCorScanner, Replacer):
     """A class to manage a dictionary of words and their aliases using Aho-Corasick algorithm.
     This is used to perform replacement on those aliases or the word itself in a text.
     """

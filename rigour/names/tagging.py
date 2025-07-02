@@ -1,10 +1,16 @@
+from abc import abstractmethod
 import logging
 from functools import cache
 from collections import defaultdict
 from typing import Dict, List, Optional, Tuple, Type, cast
-import re
 
-from rigour.text.dictionary import Scanner, Normalizer, REGEX_TOKENS
+from rigour.text.dictionary import (
+    AhoCorScanner,
+    REScanner,
+    Scanner,
+    Normalizer,
+    word_boundary_matches,
+)
 from rigour.names import Symbol, Name
 from rigour.names import load_person_names_mapping
 from rigour.names.tag import NameTypeTag, NamePartTag, GIVEN_NAME_TAGS
@@ -15,6 +21,19 @@ log = logging.getLogger(__name__)
 
 
 class Tagger(Scanner):
+    """An abstract base class for taggers that can be used to tag names with symbols."""
+
+    @abstractmethod
+    def __init__(self, mapping: Dict[str, List[Symbol]]) -> None:
+        pass
+
+    @abstractmethod
+    def __call__(self, text: Optional[str]) -> List[Tuple[str, Symbol]]:
+        """Apply the tagger on a piece of pre-normalized text."""
+        pass
+
+
+class RETagger(REScanner, Tagger):
     """A class to manage a dictionary of words and their aliases. This is used to perform
     replacement on those aliases or the word itself in a text.
     """
@@ -45,7 +64,7 @@ class Tagger(Scanner):
         return symbols
 
 
-class AhoCorTagger(Tagger):
+class AhoCorTagger(AhoCorScanner, Tagger):
     """A class to manage a dictionary of words and their aliases. This is used to perform
     replacement on those aliases or the word itself in a text.
     """
@@ -67,17 +86,9 @@ class AhoCorTagger(Tagger):
             return []
         results: List[Tuple[str, Symbol]] = []
 
-        # Find boundaries of tokens in the text
-        boundaries = set()
-        for word_match in REGEX_TOKENS.finditer(text):
-            boundaries.add(word_match.start())
-            boundaries.add(word_match.end())
-
         matches = self.automaton.find_matches_as_indexes(text, overlapping=True)
+        matches = word_boundary_matches(text, matches)
         for pattern_index, start, end in matches:
-            # Skip any matches that aren't along token boundaries
-            if start not in boundaries or end not in boundaries:
-                continue
             match_string = text[start:end]
             for symbol in self.symbols[pattern_index]:
                 results.append((match_string, symbol))
@@ -103,7 +114,7 @@ def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
 
 @cache
 def _get_org_tagger(
-    normalizer: Normalizer, tagger_name: str = Tagger.__name__
+    normalizer: Normalizer, tagger_name: str = RETagger.__name__
 ) -> Tagger:
     """Get the organization name tagger."""
     from rigour.data.names.data import ORG_SYMBOLS
@@ -179,7 +190,7 @@ def _infer_part_tags(name: Name) -> Name:
 
 
 def tag_org_name(
-    name: Name, normalizer: Normalizer, tagger_class: Type[Tagger] = Tagger
+    name: Name, normalizer: Normalizer, tagger_class: Type[Tagger] = RETagger
 ) -> Name:
     """Tag the name with the organization type and symbol tags."""
     tagger = _get_org_tagger(normalizer, tagger_class.__name__)
@@ -190,7 +201,7 @@ def tag_org_name(
 
 @cache
 def _get_person_tagger(
-    normalizer: Normalizer, tagger_name: str = Tagger.__name__
+    normalizer: Normalizer, tagger_name: str = RETagger.__name__
 ) -> Tagger:
     """Get the person name tagger."""
     from rigour.data.names.data import PERSON_SYMBOLS
@@ -224,7 +235,7 @@ def tag_person_name(
     name: Name,
     normalizer: Normalizer,
     any_initials: bool = False,
-    tagger_class: Type[Tagger] = Tagger,
+    tagger_class: Type[Tagger] = RETagger,
 ) -> Name:
     """Tag a person's name with the person name part and other symbol tags."""
     # tag given name abbreviations. this is meant to handle a case where the person's

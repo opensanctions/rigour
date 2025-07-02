@@ -6,10 +6,10 @@ from rigour.addresses import (
     remove_address_keywords,
     shorten_address_keywords,
 )
-from rigour.text.dictionary import Replacer, AhoCorReplacer
+from rigour.text.dictionary import REReplacer, AhoCorReplacer
 
 
-@pytest.mark.parametrize("clazz", [Replacer, AhoCorReplacer])
+@pytest.mark.parametrize("clazz", [REReplacer, AhoCorReplacer])
 def test_normalize_address(clazz):
     address = "Bahnhofstr. 10, 86150 Augsburg, Germany"
     assert normalize_address(address) == "bahnhofstr 10 86150 augsburg germany"
@@ -22,7 +22,7 @@ def test_normalize_address(clazz):
 
     address = "160 Broad Street, Birmingham B15 1DT"
     normalized = normalize_address(address)
-    assert shorten_address_keywords(normalized) == "160 broad st birmingham b15 1dt"
+    assert shorten_address_keywords(normalized, replacer_class=clazz) == "160 broad st birmingham b15 1dt"
     removed = collapse_spaces(remove_address_keywords(normalized, replacer_class=clazz))
     assert removed == "160 broad birmingham b15 1dt"
 
