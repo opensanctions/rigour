@@ -75,7 +75,7 @@ def pick_name(names: List[str]) -> Optional[str]:
     return None
 
 
-def pick_case(names: List[str]) -> Optional[str]:
+def pick_case(names: List[str]) -> str:
     """Pick the best mix of lower- and uppercase characters from a set of names
     that are identical except for case.
 
@@ -86,14 +86,19 @@ def pick_case(names: List[str]) -> Optional[str]:
         Optional[str]: The best name for display.
     """
     if len(names) == 0:
-        return None
+        raise ValueError("Cannot pick a name from an empty list.")
     if len(names) == 1:
         return names[0]
     reference = names[0].title()
     difference: Dict[str, int] = {n: 0 for n in names}
     for i, char in enumerate(reference):
         for name in names:
-            if name[i] != char:
+            if len(name) <= i:
+                raise ValueError("Name length mismatch: %r vs %r", name, reference)
+            nchar = name[i]
+            if nchar != char:
+                if nchar.lower() != char.lower():
+                    raise ValueError("Names mismatch: %r vs %r", name, reference)
                 difference[name] += 1
     return min(difference.items(), key=lambda x: x[1])[0]
 
@@ -111,7 +116,7 @@ def reduce_names(names: List[str]) -> List[str]:
     """
     if len(names) < 2:
         return [n for n in names if is_name(n)]
-    lower = defaultdict(list)
+    lower: Dict[str, List[str]] = defaultdict(list)
     for name in names:
         # Filter names that are not valid (e.g. empty or do not contain any letters)
         if not is_name(name):
@@ -120,8 +125,11 @@ def reduce_names(names: List[str]) -> List[str]:
         lower[name.lower()].append(name)
     reduced: List[str] = []
     for group in lower.values():
-        picked = pick_case(group)
-        if picked is None:
-            continue
-        reduced.append(picked)
+        try:
+            picked = pick_case(group)
+            reduced.append(picked)
+        except (ValueError, IndexError, KeyError) as e:
+            log.warning("Failed to pick case for group %r: %s", group, e)
+            # If we cannot pick a case, add all
+            reduced.extend(group)
     return reduced

@@ -1,3 +1,4 @@
+import pytest
 from rigour.names.pick import pick_name, levenshtein_pick, pick_case, reduce_names
 
 PUTIN = [
@@ -38,9 +39,9 @@ MITCH = [
 
 def test_pick_nothing():
     name = pick_name([])
-    assert name is None
+    assert name is None, "Expected None for empty list"
     name = pick_name([""])
-    assert name is None
+    assert name is None, "Expected None for empty string"
 
 
 def test_pick_mitch():
@@ -110,8 +111,18 @@ def test_pick_case():
         "VLADIMIR PUTIN",
     ]
     assert pick_case(cases) == "Vladimir Putin"
-    assert pick_case([]) is None
+    with pytest.raises(ValueError):
+        pick_case([])
     assert pick_case(["VLADIMIR PUTIN"]) == "VLADIMIR PUTIN"
+
+    with pytest.raises(ValueError):
+        pick_case(["Vladimir Putin", "Vladimir PUTIN", "VLADIMIR PUTIN", ""])
+
+    with pytest.raises(ValueError):
+        pick_case(["Vladimir Putin", "Vladimir Putan"])
+
+    with pytest.raises(ValueError):
+        pick_case(["Vladimir Putina", "Vladimir PUTIN", "VLADIMIR PUTIN"])
 
 
 def test_reduce_names():
