@@ -53,6 +53,7 @@ class FormatSpec(TypedDict):
     title: str
     names: List[str]
     description: str
+    strong: bool
 
 
 def get_identifier_format(name: str) -> Type[IdentifierFormat]:
