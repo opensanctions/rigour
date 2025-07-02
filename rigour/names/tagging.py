@@ -1,4 +1,5 @@
 from abc import abstractmethod
+from enum import Enum
 import logging
 from functools import cache
 from collections import defaultdict
@@ -96,6 +97,11 @@ class AhoCorTagger(AhoCorScanner, Tagger):
         return results
 
 
+class TaggerType(Enum):
+    RE = RETagger
+    AHO_COR = AhoCorTagger
+
+
 def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
     """Get the common symbols for names."""
     from rigour.data.names.data import ORDINALS
@@ -113,14 +119,10 @@ def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
 
 
 @cache
-def _get_org_tagger(
-    normalizer: Normalizer, tagger_name: str = RETagger.__name__
-) -> Tagger:
+def _get_org_tagger(normalizer: Normalizer, tagger_type: TaggerType) -> Tagger:
     """Get the organization name tagger."""
     from rigour.data.names.data import ORG_SYMBOLS
     from rigour.data.names.org_types import ORG_TYPES
-
-    tagger_class = cast(Type[Tagger], globals()[tagger_name])
 
     log.info("Loading org type/symbol tagger...")
 
@@ -162,7 +164,7 @@ def _get_org_tagger(
                     mapping[nalias].append(class_sym)
 
     log.info("Loaded organization tagger (%s terms).", len(mapping))
-    return tagger_class(mapping)
+    return cast(Tagger, tagger_type.value(mapping))
 
 
 def _infer_part_tags(name: Name) -> Name:
@@ -190,23 +192,19 @@ def _infer_part_tags(name: Name) -> Name:
 
 
 def tag_org_name(
-    name: Name, normalizer: Normalizer, tagger_class: Type[Tagger] = RETagger
+    name: Name, normalizer: Normalizer, tagger_type: TaggerType = TaggerType.RE
 ) -> Name:
     """Tag the name with the organization type and symbol tags."""
-    tagger = _get_org_tagger(normalizer, tagger_class.__name__)
+    tagger = _get_org_tagger(normalizer, tagger_type)
     for phrase, symbol in tagger(name.norm_form):
         name.apply_phrase(phrase, symbol)
     return _infer_part_tags(name)
 
 
 @cache
-def _get_person_tagger(
-    normalizer: Normalizer, tagger_name: str = RETagger.__name__
-) -> Tagger:
+def _get_person_tagger(normalizer: Normalizer, tagger_type: TaggerType) -> Tagger:
     """Get the person name tagger."""
     from rigour.data.names.data import PERSON_SYMBOLS
-
-    tagger_class = cast(Type[Tagger], globals()[tagger_name])
 
     mapping = _common_symbols(normalizer)
     for key, values in PERSON_SYMBOLS.items():
@@ -228,14 +226,14 @@ def _get_person_tagger(
             mapping[name].append(sym)
 
     log.info("Loaded person tagger (%s terms).", len(mapping))
-    return tagger_class(mapping)
+    return cast(Tagger, tagger_type.value(mapping))
 
 
 def tag_person_name(
     name: Name,
     normalizer: Normalizer,
     any_initials: bool = False,
-    tagger_class: Type[Tagger] = RETagger,
+    tagger_type: TaggerType = TaggerType.RE,
 ) -> Name:
     """Tag a person's name with the person name part and other symbol tags."""
     # tag given name abbreviations. this is meant to handle a case where the person's
@@ -250,7 +248,7 @@ def tag_person_name(
             name.apply_part(part, sym)
 
     # tag the name with person symbols
-    tagger = _get_person_tagger(normalizer, tagger_class.__name__)
+    tagger = _get_person_tagger(normalizer, tagger_type)
     for phrase, symbol in tagger(name.norm_form):
         name.apply_phrase(phrase, symbol)
 

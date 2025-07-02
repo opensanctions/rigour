@@ -7,7 +7,7 @@ from normality.constants import WS
 from normality.transliteration import ascii_text
 from normality.util import Categories
 
-from rigour.text.dictionary import REReplacer, Replacer, AhoCorReplacer
+from rigour.text.dictionary import Replacer, ReplacerType
 
 CHARS_ALLOWED = "&№" + string.ascii_letters + string.digits
 TOKEN_SEP_CATEGORIES: Categories = {
@@ -89,7 +89,7 @@ def normalize_address(
 
 @cache
 def _address_replacer(
-    latinize: bool = False, replacer_name: str = REReplacer.__name__
+    latinize: bool = False, replacer_type: ReplacerType = ReplacerType.RE
 ) -> Replacer:
     """Create a function that replaces common address tokens with their normalized forms.
 
@@ -102,8 +102,6 @@ def _address_replacer(
     """
     from rigour.data.addresses.data import FORMS
     from rigour.data.names.data import ORDINALS
-
-    replacer_class = cast(Type[Replacer], globals()[replacer_name])
 
     ordinals = [(str(k), v) for k, v in ORDINALS.items()]
     forms = list(FORMS.items()) + ordinals
@@ -129,14 +127,14 @@ def _address_replacer(
                         mapping[value_norm],
                     )  # pragma: no cover
                 mapping[value_norm] = repl_norm
-    return replacer_class(mapping, ignore_case=True)
+    return cast(Replacer, replacer_type.value(mapping, ignore_case=True))
 
 
 def remove_address_keywords(
     address: str,
     latinize: bool = False,
     replacement: str = WS,
-    replacer_class: Type[Replacer] = REReplacer,
+    replacer_type: ReplacerType = ReplacerType.RE,
 ) -> Optional[str]:
     """Remove common address keywords (such as "street", "road", "south", etc.) from the
     given address string. The address string is assumed to have already been normalized
@@ -151,14 +149,12 @@ def remove_address_keywords(
     Returns:
         The address, without any stopwords.
     """
-    replacer = _address_replacer(
-        latinize=latinize, replacer_name=replacer_class.__name__
-    )
+    replacer = _address_replacer(latinize, replacer_type)
     return replacer.remove(address, replacement=replacement)
 
 
 def shorten_address_keywords(
-    address: str, latinize: bool = False, replacer_class: Type[Replacer] = REReplacer
+    address: str, latinize: bool = False, replacer_type: ReplacerType = ReplacerType.RE
 ) -> Optional[str]:
     """Shorten common address keywords (such as "street", "road", "south", etc.) in the
     given address string. The address string is assumed to have already been normalized
@@ -171,7 +167,5 @@ def shorten_address_keywords(
     Returns:
         The address, with keywords shortened.
     """
-    replacer = _address_replacer(
-        latinize=latinize, replacer_name=replacer_class.__name__
-    )
+    replacer = _address_replacer(latinize, replacer_type)
     return replacer(address)

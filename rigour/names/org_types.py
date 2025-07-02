@@ -22,22 +22,15 @@ The database is originally based on three different sources:
 
 """
 
-from enum import Enum
 import sys
 import logging
 from functools import cache
 from normality import collapse_spaces
-from typing import Dict, List, Optional, Set, Tuple, Type, cast
+from typing import Dict, List, Optional, Set, Tuple, cast
 
-# Import to access via globals()
-from rigour.text.dictionary import Normalizer, Replacer, REReplacer, AhoCorReplacer
+from rigour.text.dictionary import Normalizer, Replacer, ReplacerType
 
 log = logging.getLogger(__name__)
-
-
-class ReplacerType(Enum):
-    RE = REReplacer
-    AHO_COR = AhoCorReplacer
 
 
 def normalize_display(text: Optional[str]) -> Optional[str]:

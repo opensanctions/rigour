@@ -1,3 +1,4 @@
+from enum import Enum
 import re
 from typing import Callable, Dict, List, Optional, Set, Tuple
 
@@ -253,3 +254,8 @@ class AhoCorReplacer(AhoCorScanner, Replacer):
             text = text[:start] + replacement + text[end:]
 
         return text
+
+
+class ReplacerType(Enum):
+    RE = REReplacer
+    AHO_COR = AhoCorReplacer

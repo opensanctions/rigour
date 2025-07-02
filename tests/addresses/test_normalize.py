@@ -6,11 +6,11 @@ from rigour.addresses import (
     remove_address_keywords,
     shorten_address_keywords,
 )
-from rigour.text.dictionary import REReplacer, AhoCorReplacer
+from rigour.text.dictionary import ReplacerType
 
 
-@pytest.mark.parametrize("clazz", [REReplacer, AhoCorReplacer])
-def test_normalize_address(clazz):
+@pytest.mark.parametrize("replacer_type", [ReplacerType.RE, ReplacerType.AHO_COR])
+def test_normalize_address(replacer_type):
     address = "Bahnhofstr. 10, 86150 Augsburg, Germany"
     assert normalize_address(address) == "bahnhofstr 10 86150 augsburg germany"
 
@@ -22,14 +22,15 @@ def test_normalize_address(clazz):
 
     address = "160 Broad Street, Birmingham B15 1DT"
     normalized = normalize_address(address)
-    assert shorten_address_keywords(normalized, replacer_class=clazz) == "160 broad st birmingham b15 1dt"
-    removed = collapse_spaces(remove_address_keywords(normalized, replacer_class=clazz))
+    shortened = shorten_address_keywords(normalized, replacer_type=replacer_type)
+    assert shortened == "160 broad st birmingham b15 1dt"
+    removed = collapse_spaces(remove_address_keywords(normalized, replacer_type=replacer_type))
     assert removed == "160 broad birmingham b15 1dt"
 
     address = "Marlborough House, Pall Mall, London SW1Y 5HX"
     normalized = normalize_address(address)
     assert normalized == "marlborough house pall mall london sw1y 5hx"
-    removed = collapse_spaces(remove_address_keywords(normalized, replacer_class=clazz))
+    removed = collapse_spaces(remove_address_keywords(normalized, replacer_type=replacer_type))
     assert removed == "marlborough pall mall london sw1y 5hx"
 
     assert normalize_address("hey") is None
