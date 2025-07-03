@@ -1,32 +1,39 @@
 UNITS = {
+    # Fractions
+    "percent": "%",
+    "pct": "%",
+    "pct.": "%",
+    "percentage": "%",
+    "per cent": "%",
+    "per-cent": "%",
     # Length
-    "centimeters": "cm", # en-US
+    "centimeters": "cm",  # en-US
     "centimetres": "cm",
-    "centimeter": "cm", # en-US
+    "centimeter": "cm",  # en-US
     "centimetre": "cm",
-    "meters": "m", # en-US
-    "metres": "m", 
-    "meter": "m", # en-US
-    "metre": "m", 
-    "kilometers": "km", # en-US
-    "kilometres": "km", 
-    "kilometer": "km", # en-US
-    "kilometre": "km", 
+    "meters": "m",  # en-US
+    "metres": "m",
+    "meter": "m",  # en-US
+    "metre": "m",
+    "kilometers": "km",  # en-US
+    "kilometres": "km",
+    "kilometer": "km",  # en-US
+    "kilometre": "km",
     "inches": "in",
     "inch": "in",
-    "″": "in", # double prime symbol (unicode: U+2033) — the correct unicode symbol for inches (in practice people may use double quotes etc)
+    "″": "in",  # double prime symbol (unicode: U+2033) — the correct unicode symbol for inches (in practice people may use double quotes etc)
     "feet": "ft",
     "foot": "ft",
-    "′": "ft", # prime symbol (unicode: U+2032) — the correct unicode symbol for feet (in practice people may use single quote etc)
+    "′": "ft",  # prime symbol (unicode: U+2032) — the correct unicode symbol for feet (in practice people may use single quote etc)
     # Weight/mass
     "grams": "g",
-    "grammes": "g", # en-GB
+    "grammes": "g",  # en-GB
     "lbs.": "lbs",
     "pound": "lbs",
     "pounds": "lbs",
     "kg": "kg",
     "kilograms": "kg",
-    "kilogrammes": "kg", # en GB
+    "kilogrammes": "kg",  # en GB
     "kilos": "kg",
     "ton": "t",
     "tons": "t",
@@ -38,7 +45,7 @@ UNITS = {
     "metric tonnes": "t",
     # Area
     "m2": "m²",
-    "square meters": "m²", # en-US
+    "square meters": "m²",  # en-US
     "square metres": "m²",
     "sqm": "m²",
     "hectares": "ha",
@@ -53,16 +60,16 @@ UNITS = {
     "milliseconds": "ms",
     "hertz": "Hz",
     # Currency
-    # (i) Currency — whole units 
+    # (i) Currency — whole units
     "eur": "€",
     "euros": "€",
     "euro": "€",
     "dollars": "$",
     "dollar": "$",
-    "British pounds": "£", # Note: 'pounds' can also be a unit of weight
-    "British pound": "£", 
-    "pounds sterling": "£", 
-    "pound sterling": "£", 
+    "British pounds": "£",  # Note: 'pounds' can also be a unit of weight
+    "British pound": "£",
+    "pounds sterling": "£",
+    "pound sterling": "£",
     "rub": "₽",
     "rubles": "₽",
     "ruble": "₽",
