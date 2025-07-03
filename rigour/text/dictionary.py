@@ -248,13 +248,18 @@ class AhoCorReplacer(AhoCorScanner, Replacer):
 
     def __call__(self, text: Optional[str]) -> Optional[str]:
         """Apply the replacer on a piece of pre-normalized text."""
-        if text is None:
-            return None
-        for pattern_index, start, end in self._match(text):
-            replacement = self._replacements[pattern_index]
-            text = text[:start] + replacement + text[end:]
 
-        return text
+        # Case-insensitive replacement is not supported yet because the same string
+        # can have different lengths depending on case. Getting match indices in
+        # lowercase doesn't allow us to directly replace the original text.
+        #
+        # One option is to use Aho Corsaick to find which forms match the lowercase text,
+        # then use regex based on only those forms on the original text.
+        #
+        # Another possible implementation is to use aho corasick to find the matching
+        # tokens in the lowercase text, and align those with the matching tokens
+        # in the original text.
+        raise NotImplementedError()
 
 
 class ReplacerType(Enum):

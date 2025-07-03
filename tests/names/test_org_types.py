@@ -8,7 +8,8 @@ from rigour.names.org_types import _normalize_compare, ReplacerType
 # from rigour.names.org_types import normalize_display
 
 
-@pytest.mark.parametrize("tagger_type", [ReplacerType.RE, ReplacerType.AHO_COR])
+# Aho Corasick replacement not supported yet.
+@pytest.mark.parametrize("tagger_type", [ReplacerType.RE])
 def test_display_form(tagger_type):
     assert replace_display("Siemens Aktiengesellschaft", replacer_type=tagger_type) == "Siemens AG"
     assert replace_display("Siemens AG", replacer_type=tagger_type) == "Siemens AG"
@@ -24,7 +25,8 @@ def test_display_form(tagger_type):
     assert replace_display("GMBH", replacer_type=tagger_type) == "GMBH"
 
 
-@pytest.mark.parametrize("tagger_type", [ReplacerType.RE, ReplacerType.AHO_COR])
+# Aho Corasick replacement not supported yet.
+@pytest.mark.parametrize("tagger_type", [ReplacerType.RE])
 def test_compare_form(tagger_type):
     assert replace_compare("siemens aktiengesellschaft", replacer_type=tagger_type) == "siemens ag"
     assert replace_compare("siemens ag", replacer_type=tagger_type) == "siemens ag"
