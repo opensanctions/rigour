@@ -50,6 +50,13 @@ def test_extract_org_types(tagger_type):
     assert extract_org_types("siemens g.m.b.h", generic=True, replacer_type=tagger_type) == [("g.m.b.h", "llc")]
     assert extract_org_types("siemens", replacer_type=tagger_type) == []
 
+    assert extract_org_types("aryav securities pvt.ltd.", replacer_type=ReplacerType.RE) == [("ltd.", "ltd")]
+    assert extract_org_types("aryav securities pvt.ltd.", replacer_type=ReplacerType.AHO_COR) == [("ltd", "ltd")]
+    assert extract_org_types("finet, poslovne storitve, d.o.o.", replacer_type=tagger_type) == [("d.o.o.", "doo")]
+
+    # mr. s.p. dhanraj
+    assert extract_org_types("mr. s.p. dhanraj", replacer_type=tagger_type) == [("s.p.", "")]
+
 
 @pytest.mark.parametrize("tagger_type", [ReplacerType.RE, ReplacerType.AHO_COR])
 def test_remove_org_types(tagger_type):
