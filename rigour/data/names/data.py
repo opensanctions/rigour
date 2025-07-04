@@ -2751,6 +2751,8 @@ ORDINALS: Dict[int, Tuple[str, ...]] = {
         "41ª.",
         "41º",
         "41ú",
+        "Einundvierzigste",
+        "Einundvierzigster",
         "Forty-first",
         "Fortyfirst",
         "Fourty-first",
@@ -2758,8 +2760,6 @@ ORDINALS: Dict[int, Tuple[str, ...]] = {
         "No. 41",
         "No.41",
         "No41",
-        "Einundvierzigste",
-        "Einundvierzigster",
     ),
     44: (
         "44",
