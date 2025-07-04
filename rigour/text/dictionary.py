@@ -35,7 +35,7 @@ class Scanner(ABC):
         pass
 
 
-class REScanner:
+class REScanner(Scanner):
     """Core class for scanning text for forms. It uses a regex pattern to match the list of
     given forms in the text, trying to match the longest form first."""
 
