@@ -2758,8 +2758,8 @@ ORDINALS: Dict[int, Tuple[str, ...]] = {
         "No. 41",
         "No.41",
         "No41",
-        "Vierundvierzigste",
-        "Vierundvierzigster",
+        "Einundvierzigste",
+        "Einundvierzigster",
     ),
     44: (
         "44",
