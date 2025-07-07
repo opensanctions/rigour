@@ -20,7 +20,7 @@ This library is built to provide foundational functionality for a broader ecosys
 
 * [FollowTheMoney](https://followthemoney.tech) - principal user of `rigour`
 * OpenSanctions: [open source projects](https://www.opensanctions.org/docs/opensource/)
-* [Aleph project](https://github.com/alephdata)
+* [OpenAleph project](https://github.com/openaleph)
 
 ## Naming
 
