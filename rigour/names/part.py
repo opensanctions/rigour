@@ -5,7 +5,7 @@ from rigour.text.scripts import is_modern_alphabet
 from rigour.text.phonetics import metaphone
 from rigour.names.tag import NamePartTag
 from rigour.names.symbol import Symbol
-from rigour.names.tag import FAMILY_NAME_TAGS, GIVEN_NAME_TAGS, NAME_TAGS_ORDER
+from rigour.names.tag import NAME_TAGS_ORDER
 
 
 class NamePart(object):
@@ -51,13 +51,7 @@ class NamePart(object):
 
     def can_match(self, other: "NamePart") -> bool:
         """Check if this part can match another part. This is based on the tags of the parts."""
-        if NamePartTag.ANY in (self.tag, other.tag):
-            return True
-        if self.tag in GIVEN_NAME_TAGS and other.tag not in GIVEN_NAME_TAGS:
-            return False
-        if self.tag in FAMILY_NAME_TAGS and other.tag not in FAMILY_NAME_TAGS:
-            return False
-        return True
+        return self.tag.can_match(other.tag)
 
     def __eq__(self, other: Any) -> bool:
         try:

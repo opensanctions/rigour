@@ -46,6 +46,10 @@ def test_name_part_tags():
     assert not steven.can_match(stevens)
     assert not stevens.can_match(steven)
 
+    anyst = NamePart("steven", 0, NamePartTag.ANY)
+    assert anyst.can_match(steven)
+    assert anyst.can_match(stevens)
+
     sorted = NamePart.tag_sort([stevens, steven, john])
     assert sorted == [steven, john, stevens]
 

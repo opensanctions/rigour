@@ -31,6 +31,18 @@ class NamePartTag(Enum):
     NUM = "NUM"
     LEGAL = "LEGAL"  # Legal form of an organisation
 
+    def can_match(self, other: "NamePartTag") -> bool:
+        """Check if this tag can match the other tag."""
+        if self == NamePartTag.ANY or other == NamePartTag.ANY:
+            return True
+        if self == other:
+            return True
+        if self in GIVEN_NAME_TAGS and other not in GIVEN_NAME_TAGS:
+            return False
+        if self in FAMILY_NAME_TAGS and other not in FAMILY_NAME_TAGS:
+            return False
+        return True
+
 
 GIVEN_NAME_TAGS = {
     NamePartTag.GIVEN,

@@ -51,6 +51,10 @@ def test_name_tag_text():
     name.tag_text("Hans", NamePartTag.PATRONYMIC)
     assert name.parts[0].tag == NamePartTag.GIVEN
 
+    # Contradictory tags should not result in ANY:
+    name.tag_text("Hans", NamePartTag.FAMILY)
+    assert name.parts[0].tag == NamePartTag.ANY
+
     name = Name("Butros Butros Ghali")
     name.tag_text("Butros", NamePartTag.GIVEN, max_matches=1)
     assert name.parts[1].tag == NamePartTag.ANY

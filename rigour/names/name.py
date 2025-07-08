@@ -55,15 +55,17 @@ class Name(object):
         matches = 0
         matching: List[NamePart] = []
         for part in self.parts:
-            if part.tag not in (tag, NamePartTag.ANY):
-                matching = []
-                continue
             next_token = tokens[len(matching)]
             if part.form == next_token:
                 matching.append(part)
             if len(matching) == len(tokens):
                 for part in matching:
-                    part.tag = tag
+                    if part.tag == NamePartTag.ANY:
+                        part.tag = tag
+                    elif not part.tag.can_match(tag):
+                        # if the part is already tagged, we check compatibility and
+                        # possibly revert to the basic type
+                        part.tag = NamePartTag.ANY
                 matches += 1
                 if matches >= max_matches:
                     return
