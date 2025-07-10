@@ -66,11 +66,12 @@ def prenormalize_name(name: Optional[str]) -> str:
     return name.lower()
 
 
-def normalize_name(name: Optional[str], sep=WS) -> Optional[str]:
+def normalize_name(name: Optional[str], sep: str = WS) -> Optional[str]:
     """Normalize a name for tokenization and matching."""
     if name is None:
         return None
     name = prenormalize_name(name)
-    if len(name) == 0:
+    joined = sep.join(tokenize_name(name))
+    if len(joined) == 0:
         return None
-    return sep.join(tokenize_name(name))
+    return joined
