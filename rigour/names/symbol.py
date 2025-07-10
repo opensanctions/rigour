@@ -12,8 +12,8 @@ class Symbol:
         SYMBOL = "SYMBOL"
         INITIAL = "INITIAL"
         NAME = "NAME"
-        ORDINAL = "ORD"
-        PHONETIC = "PHON"
+        ORDINAL = "ORDINAL"
+        PHONETIC = "PHONETIC"
 
     __slots__ = ["category", "id"]
 

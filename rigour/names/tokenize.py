@@ -64,3 +64,13 @@ def prenormalize_name(name: Optional[str]) -> str:
         return ""
     name = unicodedata.normalize("NFC", name)
     return name.lower()
+
+
+def normalize_name(name: Optional[str], sep=WS) -> Optional[str]:
+    """Normalize a name for tokenization and matching."""
+    if name is None:
+        return None
+    name = prenormalize_name(name)
+    if len(name) == 0:
+        return None
+    return sep.join(tokenize_name(name))
