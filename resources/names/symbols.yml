@@ -657,6 +657,7 @@ org_symbols:
     - respublik
   institute:
     - institute
+    - insitute
     - institut
     - inštitút
     - школа
@@ -685,6 +686,27 @@ org_symbols:
     - institutului
     - 研究所
     - 学院
+  academy:
+    - academy
+    - academie
+    - akademie
+    - akademija
+    - akademiia
+    - akademiya
+    - akademi
+    - akadēmija
+    - akadēmijas
+    - akadēmijā
+    - akadēmijai
+    - akadēmijām
+    - akademii
+    - akademiia
+    - akademiya
+    - akademiia
+    - академия
+    - академии
+    - академиии
+    - академиию
   institution:
     - учреждение
     - institution
@@ -777,6 +799,7 @@ org_symbols:
   scientific:
     - scientific
     - science
+    - sciences
     - science and technology
     - научный
     - научная
@@ -1464,6 +1487,36 @@ org_symbols:
     - military
     - militare
     #  - militsii
+  tactical:
+    - tactical
+    - tactics
+    - taktik
+    - taktische
+    - taktički
+    - тактический
+    - тактическая
+    - тактические
+    - тактических
+    - тактического
+    - тактической
+    - тактична
+    - тактичні
+    - тактичного
+    - тактичной
+  army:
+    - army
+    - armee
+    - armée
+    - armeen
+    - armée de terre
+    - армия
+    - армія
+    - армейский
+    - армейская
+    - армейские
+    - армейских
+    - армейского
+    - армейской
   manufacturing:
     - manufacturing
     - manufakturynh

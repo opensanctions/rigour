@@ -177,13 +177,144 @@ ORG_NAME_PREFIXES:
 STOPWORDS:
   # Conjunctions/joining words
   - "de"
+  - "le"
   - "of"
+  - "the"
+  - "in"
   - "and"
   - for
-  - для # for
+  - "or"
+  - "et"
+  - "a"
+  - "an"
+  - "as"
+  - "with"
+  - "on"
+  - "at"
+  - "to"
+  - "by"
+  - "from"
+  - "into"
   - "&"
-  - "(sic)"
-  - "[sic]"
+  - "al"
+  - "por"
+  - "per"
+  - "al"
+  # Russian stopwords
+  - для # for
+  - и
+  - в # in
+  - на # on
+  - с # with
+  - от # from
+  - к # to
+  - по # by, for
+  - из # out of, from
+  - а # and, but
+  - но # but
+  - о # about
+  - за # for, behind
+  - при # at, in the presence of
+  - как # as, like
+  - что # that, what
+  - это # this, it
+  - все # all, everything
+  # Ukrainian stopwords
+  - для # for
+  - і
+  - в # in
+  - на # on
+  - з # with
+  - від # from
+  - до # to
+  - по # by, for
+  - з # out of, from
+  - а # and, but
+  - але # but
+  - про # about
+  - за # for, behind
+  - при # at, in the presence of
+  - як # as, like
+  - що # that, what
+  - це # this, it
+  # Arabic stopwords
+  - "في" # in
+  - "من" # from
+  - "إلى" # to
+  - "عن" # about
+  - "مع" # with
+  - "على" # on
+  - "و" # and
+  - "أو" # or
+  - "في" # in
+  - "ال" # the (definite article)
+  - "هذا" # this
+  - "ذلك" # that
+  - "كل" # all, every
+  - "أي" # any
+  # Spanish stopwords
+  - "de" # of, from
+  - "la" # the (feminine)
+  - "el" # the (masculine)
+  - "y" # and
+  - "en" # in, on
+  - "a" # to, at
+  # - "con" # with
+  - "por" # for, by
+  - "para" # for, to
+  - "un" # a, an (masculine)
+  - "una"
+  - "unos"
+  - "unas"
+  - "y"
+  # French stopwords
+  - "de" # of, from
+  - "la" # the (feminine)
+  - "le" # the (masculine)
+  - "et" # and
+  - "en" # in, on
+  - "à" # to, at
+  - "avec" # with
+  - "pour" # for, to
+  - "par" # by, through
+  - "un" # a, an (masculine)
+  - "une" # a, an (feminine)
+  # Chinese stopwords
+  - "的" # of, 's (possessive)
+  - "在" # at, in, on
+  - "和" # and
+  # - "与" # and, with
+  - "为" # for, as
+  - "是" # is, are
+  - "有" # have, has
+  - "这" # this
+  - "那" # that
+  - "一个" # a, an
+  - "一些" # some
+  # Japanese stopwords
+  - "の" # of, 's (possessive)
+  - "で" # at, in, on
+  - "と" # and, with
+  - "に" # to, at
+  - "は" # topic marker
+  # German stopwords
+  - "der" # the (masculine)
+  - "die" # the (feminine)
+  - "das" # the (neuter)
+  - "und" # and
+  - "in" # in
+  - "zu" # to
+  - "von" # from, of
+  - "mit" # with
+  - "für" # for
+  - "auf" # on, upon
+  - "an" # at, on
+  - "bei" # at, near
+  - "als" # as, when
+  - "es" # it
+  # - "(sic)"
+  # - "[sic]"
+STOPPHRASES:
   # Terms used to indicate aliases/alternative names including old names
   - "also known as"
   - "a.k.a"
