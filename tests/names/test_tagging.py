@@ -136,6 +136,13 @@ def test_tag_org_name_type_cast():
     assert tagged_name is not None
     assert tagged_name.tag == NameTypeTag.ORG
 
+    name = Name("The Bow and Arrow", tag=NameTypeTag.ENT)
+    tagged_name = tag_org_name(name, _org_normalizer)
+    assert tagged_name is not None
+    assert tagged_name.parts[0].tag == NamePartTag.STOP
+    assert tagged_name.parts[1].tag == NamePartTag.ANY
+    assert tagged_name.parts[2].tag == NamePartTag.STOP
+
 
 def test_tag_org_name_ordinals():
     vars = ["5. Batallion", "5 Batallion", "Fifth Batallion"]

@@ -25,7 +25,10 @@ build-addresses:
 build-names:
 	python genscripts/generate_names.py
 
-build: build-iso639 build-territories build-addresses build-names
+build-text:
+	python genscripts/generate_text.py
+
+build: build-iso639 build-territories build-addresses build-names build-text
 
 docs:
 	mkdocs build -c -d site

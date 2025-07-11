@@ -71,7 +71,7 @@ class Tagger:
 
 def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
     """Get the common symbols for names."""
-    from rigour.data.names.data import ORDINALS
+    from rigour.data.text.ordinals import ORDINALS
 
     mapping: Dict[str, List[Symbol]] = defaultdict(list)
     for key, values in ORDINALS.items():

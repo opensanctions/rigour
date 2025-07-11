@@ -50,7 +50,8 @@ GIVEN_NAME_TAGS = {
     NamePartTag.PATRONYMIC,
     NamePartTag.MATRONYMIC,
     NamePartTag.HONORIFIC,
-    # NamePartTag.NICK,
+    NamePartTag.STOP,
+    NamePartTag.NICK,
 }
 FAMILY_NAME_TAGS = {
     NamePartTag.PATRONYMIC,
@@ -60,6 +61,7 @@ FAMILY_NAME_TAGS = {
     NamePartTag.TRIBAL,
     NamePartTag.HONORIFIC,
     NamePartTag.NUM,
+    NamePartTag.STOP,
 }
 
 # All models are lies, but some are useful.
@@ -76,4 +78,5 @@ NAME_TAGS_ORDER = (
     NamePartTag.NUM,
     NamePartTag.SUFFIX,
     NamePartTag.LEGAL,
+    NamePartTag.STOP,
 )

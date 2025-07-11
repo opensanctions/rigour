@@ -1,32 +1,29 @@
-from genscripts.util import RESOURCES_PATH
+import yaml
+from typing import Dict
+from genscripts.util import RESOURCES_PATH, CODE_PATH, write_python
 
 
-TEMPLATE = """
-from typing import List
+ORDINALS_TEMPLATE = """
+from typing import Dict, Tuple
 """
 
 
-def generate_scripts_ranges() -> None:
-    """Generate the scripts ranges file."""
-    scripts_path = RESOURCES_PATH / "text" / "scripts.txt"
+def generate_ordinals() -> None:
+    ordinals_path = RESOURCES_PATH / "text" / "ordinals.yml"
+    with open(ordinals_path, "r", encoding="utf-8") as ufh:
+        ordinals_mapping: Dict[str, Dict[str, str]] = yaml.safe_load(ufh.read())
 
-    with open(scripts_path, "r", encoding="utf-8") as fh:
-        while line := fh.readline():
-            line = line.split("#")[0].strip()
-            if not line:
-                continue
-            parts = line.split(";")
-            range = parts[0].strip()
-            if ".." in range:
-                range = range.split("..")
-                start = int(range[0], 16)
-                end = int(range[1], 16)
-            else:
-                start = int(range, 16)
-                end = start
-            script = parts[1].strip()
-            print(script, start, end)
+    mapping = {}
+    for number, forms in ordinals_mapping["ordinals"].items():
+        assert number is not None
+        items = tuple(sorted(set([str(v) for v in forms if len(str(v)) > 0])))
+        mapping[number] = items
+
+    content = ORDINALS_TEMPLATE
+    content += f"ORDINALS: Dict[int, Tuple[str, ...]] = {mapping!r}\n\n"
+    out_path = CODE_PATH / "text" / "ordinals.py"
+    write_python(out_path, content)
 
 
 if __name__ == "__main__":
-    generate_scripts_ranges()
+    generate_ordinals()

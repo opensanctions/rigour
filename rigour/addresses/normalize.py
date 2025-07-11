@@ -99,7 +99,7 @@ def _address_replacer(latinize: bool = False) -> Replacer:
         A function that takes a string and returns its normalized form.
     """
     from rigour.data.addresses.data import FORMS
-    from rigour.data.names.data import ORDINALS
+    from rigour.data.text.ordinals import ORDINALS
 
     ordinals = [(str(k), v) for k, v in ORDINALS.items()]
     forms = list(FORMS.items()) + ordinals
