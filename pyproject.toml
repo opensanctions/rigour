@@ -54,6 +54,8 @@ dev = [
     "types-setuptools",
     "types-PyYAML",
     "coverage>=4.1",
+    "ruamel.yaml==0.18.10",
+    "mystace==0.1.0",
 ]
 docs = [
     "pillow",
