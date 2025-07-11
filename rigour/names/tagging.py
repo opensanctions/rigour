@@ -7,6 +7,7 @@ from typing import Dict, List, Optional, Tuple
 from rigour.text.dictionary import Normalizer
 from rigour.names import Symbol, Name
 from rigour.names import load_person_names_mapping
+from rigour.names.check import is_stopword
 from rigour.names.tag import NameTypeTag, NamePartTag, GIVEN_NAME_TAGS
 
 import ahocorasick_rs
@@ -151,12 +152,13 @@ def _infer_part_tags(name: Name) -> Name:
                 # tag it as numeric.
                 span.parts[0].tag = NamePartTag.NUM
     for part in name.parts:
-        if part.form.isnumeric() and part.tag == NamePartTag.ANY:
-            # If a name part is numeric, we can tag it as numeric.
-            part.tag = NamePartTag.NUM
-        # if part.tag == NamePartTag.ANY and is_stopword(part.form):
-        #     # If a name part is a stop word, we can tag it as a stop word.
-        #     part.tag = NamePartTag.STOP
+        if part.tag == NamePartTag.ANY:
+            if part.form.isnumeric():
+                # If a name part is numeric, we can tag it as numeric.
+                part.tag = NamePartTag.NUM
+            elif is_stopword(part.form):
+                # If a name part is a stop word, we can tag it as a stop word.
+                part.tag = NamePartTag.STOP
     return name
 
 
