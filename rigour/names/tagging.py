@@ -1,44 +1,71 @@
+import re
 import logging
 from functools import cache
 from collections import defaultdict
 from typing import Dict, List, Optional, Tuple
-from rigour.text.dictionary import Scanner, Normalizer
+
+from rigour.text.dictionary import Normalizer
 from rigour.names import Symbol, Name
 from rigour.names import load_person_names_mapping
 from rigour.names.tag import NameTypeTag, NamePartTag, GIVEN_NAME_TAGS
 
+import ahocorasick_rs
+
 log = logging.getLogger(__name__)
 
+REGEX_TOKENS = re.compile(r"(?<!\w)([\w\.-]+)(?!\w)")
 
-class Tagger(Scanner):
+
+def word_boundary_matches(
+    text: str, matches: List[Tuple[int, int, int]]
+) -> List[Tuple[int, int, int]]:
+    """Keep only matches starting and ending on some token boundary in the text"""
+    # Find boundaries of tokens in the text
+    boundaries = set()
+    for word_match in REGEX_TOKENS.finditer(text):
+        boundaries.add(word_match.start())
+        boundaries.add(word_match.end())
+
+    token_matches: List[Tuple[int, int, int]] = []
+    for pattern_index, start, end in matches:
+        # Skip any matches that aren't along token boundaries
+        if start not in boundaries or end not in boundaries:
+            continue
+        token_matches.append((pattern_index, start, end))
+    return token_matches
+
+
+class Tagger:
     """A class to manage a dictionary of words and their aliases. This is used to perform
     replacement on those aliases or the word itself in a text.
     """
 
-    def __init__(
-        self,
-        mapping: Dict[str, List[Symbol]],
-    ) -> None:
-        forms = list(mapping.keys())
-        super().__init__(forms, ignore_case=False)
-        self.mapping = mapping
+    def __init__(self, mapping: Dict[str, List[Symbol]]) -> None:
+        self._symbols = []
+        """Indexed list of symbols for each pattern."""
+        forms = []
+        for k, v in mapping.items():
+            # Skip empty key
+            if not k:
+                continue
+            self._symbols.append(v)
+            forms.append(k)
+        self.automaton = ahocorasick_rs.AhoCorasick(forms)
 
     def __call__(self, text: Optional[str]) -> List[Tuple[str, Symbol]]:
         """Apply the tagger on a piece of pre-normalized text."""
         if text is None:
             return []
-        symbols: List[Tuple[str, Symbol]] = []
-        for match in self.pattern.finditer(text):
-            value = match.group(1)
-            for symbol in self.mapping.get(value, []):
-                symbols.append((value, symbol))
+        results: List[Tuple[str, Symbol]] = []
 
-        for token in text.split(" "):
-            if token in self.mapping:
-                for symbol in self.mapping[token]:
-                    if (token, symbol) not in symbols:
-                        symbols.append((token, symbol))
-        return symbols
+        matches = self.automaton.find_matches_as_indexes(text, overlapping=True)
+        matches = word_boundary_matches(text, matches)
+        for pattern_index, start, end in sorted(matches, key=lambda x: x[0]):
+            match_string = text[start:end]
+            for symbol in self._symbols[pattern_index]:
+                results.append((match_string, symbol))
+
+        return results
 
 
 def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
@@ -127,6 +154,9 @@ def _infer_part_tags(name: Name) -> Name:
         if part.form.isnumeric() and part.tag == NamePartTag.ANY:
             # If a name part is numeric, we can tag it as numeric.
             part.tag = NamePartTag.NUM
+        # if part.tag == NamePartTag.ANY and is_stopword(part.form):
+        #     # If a name part is a stop word, we can tag it as a stop word.
+        #     part.tag = NamePartTag.STOP
     return name
 
 

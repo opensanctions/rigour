@@ -6,7 +6,16 @@ from rigour.names.tagging import tag_person_name, tag_org_name
 from rigour.names.tokenize import prenormalize_name, tokenize_name
 
 # For testing purposes, we only load these names by hacking the normalizer.
-LOAD_ONLY = ["john", "doe", "Dr", "Doktor", "jean", "claude", "jean-claude"]
+LOAD_COMPOUND = ["jae", "ho", "jae-ho", "jeong", "jeong-jae"]
+LOAD_ONLY = [
+    "john",
+    "doe",
+    "Dr",
+    "Doktor",
+    "jean",
+    "claude",
+    "jean-claude",
+] + LOAD_COMPOUND
 
 
 def _per_normalizer(name: Optional[str]) -> Optional[str]:
@@ -50,6 +59,28 @@ def test_tag_person_name():
     tagged_name = tag_person_name(name, _per_normalizer, any_initials=True)
     assert tagged_name is not None
     assert jsym in tagged_name.symbols
+
+
+def test_tag_person_name_overlapping():
+    """
+    Just documenting for now that jae-ho is not tagged by RE but jeong-jae is
+
+    Same sort of thing for
+    - বর য ন (3894860) in বর য ন ব রক
+    - "da silva" in "adaias rodrigues da silva"
+    - "james anthony" in "jonathan james anthony naden"
+    """
+    # It's important that these are distinct name instances
+    #  - tag_person_name modifies the instance.
+    name_ahocor = Name("jeong jae ho")
+    name_ahocor = tag_person_name(name_ahocor, _per_normalizer)
+    jae_ho = Symbol(Symbol.Category.NAME, 17151901)
+    jeong = Symbol(Symbol.Category.NAME, 37489860)
+    jeong_jae = Symbol(Symbol.Category.NAME, 69509157)
+    ho = Symbol(Symbol.Category.NAME, 104377081)
+    jae = Symbol(Symbol.Category.NAME, 16255943)
+    all = {jae_ho, jeong, jeong_jae, ho, jae}
+    assert all - name_ahocor.symbols == set()
 
 
 def test_tag_person_multiple():
