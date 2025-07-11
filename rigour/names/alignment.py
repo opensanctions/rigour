@@ -58,7 +58,7 @@ def align_person_name_order(
         Tuple[List[NamePart], List[NamePart]]: A tuple containing the sorted name parts of both names.
     """
     if not len(left):
-        return [left, NamePart.tag_sort(right)]
+        return (left, NamePart.tag_sort(right))
 
     left_sorted: List[NamePart] = []
     right_sorted: List[NamePart] = []
@@ -102,8 +102,8 @@ def align_person_name_order(
                 right_unused.remove(rp)
 
     if not len(left_sorted):
-        return [NamePart.tag_sort(left), NamePart.tag_sort(right)]
+        return (NamePart.tag_sort(left), NamePart.tag_sort(right))
 
     left_sorted.extend(left_unused)
     right_sorted.extend(right_unused)
-    return [left_sorted, right_sorted]
+    return (left_sorted, right_sorted)
