@@ -25,8 +25,7 @@ from rigour.names.tagging import tag_person_name, tag_org_name
 from rigour.names.org_types import replace_org_types_display
 from rigour.names.org_types import replace_org_types_compare
 from rigour.names.org_types import extract_org_types, remove_org_types
-from rigour.names.alignment import align_person_name_order, align_name_strict
-from rigour.names.alignment import align_name_slop, align_tag_sort
+from rigour.names.alignment import align_person_name_order
 
 __all__ = [
     "pick_name",
@@ -50,9 +49,6 @@ __all__ = [
     "replace_org_types_display",
     "replace_org_types_compare",
     "align_person_name_order",
-    "align_name_strict",
-    "align_tag_sort",
-    "align_name_slop",
     "extract_org_types",
     "remove_org_types",
     "tag_person_name",

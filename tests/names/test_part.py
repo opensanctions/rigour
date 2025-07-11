@@ -50,9 +50,56 @@ def test_name_part_tags():
     assert anyst.can_match(steven)
     assert anyst.can_match(stevens)
 
+
+def test_name_part_sort():
+    john = NamePart("john", 0)
+    steven = NamePart("steven", 0, NamePartTag.GIVEN)
+    stevens = NamePart("stevens", 0, NamePartTag.FAMILY)
     sorted = NamePart.tag_sort([stevens, steven, john])
     assert sorted == [steven, john, stevens]
 
     smith = NamePart("smith", 0)
     assert NamePart.tag_sort([smith, john]) == [smith, john]
     assert NamePart.tag_sort([john, smith]) == [john, smith]
+
+
+def name_part_sort_company():
+    parts = [
+        NamePart("llc", 0, NamePartTag.LEGAL),
+        NamePart("orion", 1, NamePartTag.ANY),
+    ]
+    sorted_parts = NamePart.tag_sort(parts)
+    assert len(sorted_parts) == 2
+    assert sorted_parts[0].form == "orion"
+    assert sorted_parts[1].form == "llc"
+    parts = [
+        NamePart("orion", 0, NamePartTag.ANY),
+        NamePart("llc", 1, NamePartTag.LEGAL),
+    ]
+    sorted_parts = NamePart.tag_sort(parts)
+    assert len(sorted_parts) == 2
+    assert sorted_parts[0].form == "orion"
+    assert sorted_parts[1].form == "llc"
+
+
+def test_name_part_sort_stable():
+    parts = [
+        NamePart("a", 0, NamePartTag.ANY),
+        NamePart("c", 1, NamePartTag.ANY),
+        NamePart("x", 1, NamePartTag.ANY),
+    ]
+    sorted_parts = NamePart.tag_sort(parts)
+    assert len(sorted_parts) == 3
+    assert sorted_parts[0].form == "a"
+    assert sorted_parts[1].form == "c"
+    assert sorted_parts[2].form == "x"
+    parts = [
+        NamePart("x", 0, NamePartTag.ANY),
+        NamePart("c", 1, NamePartTag.ANY),
+        NamePart("a", 1, NamePartTag.ANY),
+    ]
+    sorted_parts = NamePart.tag_sort(parts)
+    assert len(sorted_parts) == 3
+    assert sorted_parts[0].form == "x"
+    assert sorted_parts[1].form == "c"
+    assert sorted_parts[2].form == "a"
