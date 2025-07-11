@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 import re
 from normality.constants import WS
 from typing import Callable, Dict, List, Optional
@@ -16,26 +15,7 @@ def noop_normalizer(text: Optional[str]) -> Optional[str]:
     return text
 
 
-class Scanner(ABC):
-    """Abstract base class for scanners."""
-
-    @abstractmethod
-    def __init__(self, forms: List[str], ignore_case: bool = True) -> None:
-        """Initialize the scanner with a list of forms."""
-        pass
-
-    @abstractmethod
-    def extract(self, text: str) -> List[str]:
-        """Extract forms from the text."""
-        pass
-
-    @abstractmethod
-    def remove(self, text: str, replacement: str = WS) -> str:
-        """Remove forms from the text."""
-        pass
-
-
-class REScanner(Scanner):
+class Scanner:
     """Core class for scanning text for forms. It uses a regex pattern to match the list of
     given forms in the text, trying to match the longest form first."""
 
@@ -88,7 +68,7 @@ class REScanner(Scanner):
         return self.pattern.sub(replacement, text)
 
 
-class Replacer(REScanner):
+class Replacer(Scanner):
     """A class to manage a dictionary of words and their aliases. This is used to perform replacement
     on those aliases or the word itself in a text.
     """

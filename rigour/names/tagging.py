@@ -1,18 +1,10 @@
-from abc import abstractmethod
-from enum import Enum
+import re
 import logging
 from functools import cache
 from collections import defaultdict
-import re
-from typing import Dict, List, Optional, Tuple, cast
+from typing import Dict, List, Optional, Tuple
 
-from normality.constants import WS
-
-from rigour.text.dictionary import (
-    REScanner,
-    Scanner,
-    Normalizer,
-)
+from rigour.text.dictionary import Normalizer
 from rigour.names import Symbol, Name
 from rigour.names import load_person_names_mapping
 from rigour.names.tag import NameTypeTag, NamePartTag, GIVEN_NAME_TAGS
@@ -22,50 +14,6 @@ import ahocorasick_rs
 log = logging.getLogger(__name__)
 
 REGEX_TOKENS = re.compile(r"(?<!\w)([\w\.-]+)(?!\w)")
-
-
-class Tagger(Scanner):
-    """An abstract base class for taggers that can be used to tag names with symbols."""
-
-    @abstractmethod
-    def __init__(self, mapping: Dict[str, List[Symbol]]) -> None:
-        pass
-
-    @abstractmethod
-    def __call__(self, text: Optional[str]) -> List[Tuple[str, Symbol]]:
-        """Apply the tagger on a piece of pre-normalized text."""
-        pass
-
-
-class RETagger(REScanner, Tagger):
-    """A class to manage a dictionary of words and their aliases. This is used to perform
-    replacement on those aliases or the word itself in a text.
-    """
-
-    def __init__(
-        self,
-        mapping: Dict[str, List[Symbol]],
-    ) -> None:
-        forms = list(mapping.keys())
-        super().__init__(forms, ignore_case=False)
-        self.mapping = mapping
-
-    def __call__(self, text: Optional[str]) -> List[Tuple[str, Symbol]]:
-        """Apply the tagger on a piece of pre-normalized text."""
-        if text is None:
-            return []
-        symbols: List[Tuple[str, Symbol]] = []
-        for match in self.pattern.finditer(text):
-            value = match.group(1)
-            for symbol in self.mapping.get(value, []):
-                symbols.append((value, symbol))
-
-        for token in text.split(" "):
-            if token in self.mapping:
-                for symbol in self.mapping[token]:
-                    if (token, symbol) not in symbols:
-                        symbols.append((token, symbol))
-        return symbols
 
 
 def word_boundary_matches(
@@ -87,7 +35,7 @@ def word_boundary_matches(
     return token_matches
 
 
-class AhoCorTagger(Tagger):
+class Tagger:
     """A class to manage a dictionary of words and their aliases. This is used to perform
     replacement on those aliases or the word itself in a text.
     """
@@ -119,19 +67,6 @@ class AhoCorTagger(Tagger):
 
         return results
 
-    def extract(self, text: str) -> List[str]:
-        """Extract forms from the text."""
-        raise NotImplementedError()
-
-    def remove(self, text: str, replacement: str = WS) -> str:
-        """Remove forms from the text."""
-        raise NotImplementedError()
-
-
-class TaggerType(Enum):
-    RE = RETagger
-    AHO_COR = AhoCorTagger
-
 
 def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
     """Get the common symbols for names."""
@@ -150,7 +85,7 @@ def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
 
 
 @cache
-def _get_org_tagger(normalizer: Normalizer, tagger_type: TaggerType) -> Tagger:
+def _get_org_tagger(normalizer: Normalizer) -> Tagger:
     """Get the organization name tagger."""
     from rigour.data.names.data import ORG_SYMBOLS
     from rigour.data.names.org_types import ORG_TYPES
@@ -195,7 +130,7 @@ def _get_org_tagger(normalizer: Normalizer, tagger_type: TaggerType) -> Tagger:
                     mapping[nalias].append(class_sym)
 
     log.info("Loaded organization tagger (%s terms).", len(mapping))
-    return cast(Tagger, tagger_type.value(mapping))
+    return Tagger(mapping)
 
 
 def _infer_part_tags(name: Name) -> Name:
@@ -219,21 +154,22 @@ def _infer_part_tags(name: Name) -> Name:
         if part.form.isnumeric() and part.tag == NamePartTag.ANY:
             # If a name part is numeric, we can tag it as numeric.
             part.tag = NamePartTag.NUM
+        # if part.tag == NamePartTag.ANY and is_stopword(part.form):
+        #     # If a name part is a stop word, we can tag it as a stop word.
+        #     part.tag = NamePartTag.STOP
     return name
 
 
-def tag_org_name(
-    name: Name, normalizer: Normalizer, tagger_type: TaggerType = TaggerType.RE
-) -> Name:
+def tag_org_name(name: Name, normalizer: Normalizer) -> Name:
     """Tag the name with the organization type and symbol tags."""
-    tagger = _get_org_tagger(normalizer, tagger_type)
+    tagger = _get_org_tagger(normalizer)
     for phrase, symbol in tagger(name.norm_form):
         name.apply_phrase(phrase, symbol)
     return _infer_part_tags(name)
 
 
 @cache
-def _get_person_tagger(normalizer: Normalizer, tagger_type: TaggerType) -> Tagger:
+def _get_person_tagger(normalizer: Normalizer) -> Tagger:
     """Get the person name tagger."""
     from rigour.data.names.data import PERSON_SYMBOLS
 
@@ -257,14 +193,11 @@ def _get_person_tagger(normalizer: Normalizer, tagger_type: TaggerType) -> Tagge
             mapping[name].append(sym)
 
     log.info("Loaded person tagger (%s terms).", len(mapping))
-    return cast(Tagger, tagger_type.value(mapping))
+    return Tagger(mapping)
 
 
 def tag_person_name(
-    name: Name,
-    normalizer: Normalizer,
-    any_initials: bool = False,
-    tagger_type: TaggerType = TaggerType.RE,
+    name: Name, normalizer: Normalizer, any_initials: bool = False
 ) -> Name:
     """Tag a person's name with the person name part and other symbol tags."""
     # tag given name abbreviations. this is meant to handle a case where the person's
@@ -279,7 +212,7 @@ def tag_person_name(
             name.apply_part(part, sym)
 
     # tag the name with person symbols
-    tagger = _get_person_tagger(normalizer, tagger_type)
+    tagger = _get_person_tagger(normalizer)
     for phrase, symbol in tagger(name.norm_form):
         name.apply_phrase(phrase, symbol)
 

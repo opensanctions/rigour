@@ -1,9 +1,9 @@
-from rigour.text.dictionary import REScanner, noop_normalizer
+from rigour.text.dictionary import Scanner, noop_normalizer
 
 
 def test_scanner():
     forms = ["hello", "world"]
-    scanner = REScanner(forms)
+    scanner = Scanner(forms)
 
     # Test extraction
     text = "hello world"
@@ -14,7 +14,7 @@ def test_scanner():
     removed = scanner.remove(text)
     assert len(removed.strip()) == 0
 
-    scanner = REScanner(["Ban", "Banana", "Long Banana"], ignore_case=False)
+    scanner = Scanner(["Ban", "Banana", "Long Banana"], ignore_case=False)
     found = scanner.extract("I am a Banana!")
     assert found == ["Banana"]
 
@@ -22,7 +22,7 @@ def test_scanner():
     assert found == []
 
     # Escapes
-    scanner = REScanner(["C.I.A.", "Space Invaders"])
+    scanner = Scanner(["C.I.A.", "Space Invaders"])
     found = scanner.extract("The Space Invaders are run by the C.I.A.")
     assert "C.I.A." in found
     assert "Space Invaders" in found
