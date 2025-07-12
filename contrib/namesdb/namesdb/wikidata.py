@@ -56,7 +56,7 @@ def clean_wikidata_name(name: Optional[str]) -> List[str]:
         part = clean_form(part)
         if part is None:
             continue
-        if "," in part or "(" in part or "/" in part or "=" in part:
+        if "," in part or "(" in part or "/" in part or "=" in part or ":" in part:
             # print("Skipping: ", part)
             continue
         names.append(part)

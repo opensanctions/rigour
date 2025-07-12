@@ -10,4 +10,4 @@ get:
 	gsutil cp gs://internal-data.opensanctions.org/namesdb/names.db data/names.db 
 
 dump:
-	ndb dump ../../rigour/names/persons.txt
+	ndb dump ../../rigour/data/names/persons.txt
