@@ -1,0 +1,22 @@
+# There are fullwidth unicode symbols for each of the digits zero to nine.
+# These are sometimes used in China and Japan where characters are wider.
+0:
+  -"０"
+1:
+  -"１"
+2:
+  -"２"
+3:
+  -"３"
+4:
+  -"４"
+5:
+  -"５"
+6:
+  -"６"
+7:
+  - "７"
+8:
+  - "８"
+9:
+  - "９"
