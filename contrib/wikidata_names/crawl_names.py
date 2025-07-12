@@ -13,7 +13,7 @@ from nomenklatura.cache import Cache
 from nomenklatura.dataset import Dataset
 from nomenklatura.wikidata import WikidataClient
 from rigour.names import is_name
-from fingerprints import clean_brackets
+from rigour.text.cleaning import remove_bracketed_text
 from rigour.text.cleaning import remove_emoji
 from rigour.text.scripts import is_modern_alphabet
 
@@ -23,7 +23,7 @@ dataset = Dataset.make({"name": "synonames", "title": "Synonames"})
 cache = Cache.make_default(dataset)
 # cache.preload(f"{WikidataClient.WD_API}%")
 session = requests.Session()
-client = WikidataClient(cache, session=session, cache_days=60)
+client = WikidataClient(cache, session=session, cache_days=90)
 out_path = Path(__file__).parent / "out"
 out_path.mkdir(exist_ok=True, parents=True)
 
@@ -59,7 +59,7 @@ def clean_name(name: Optional[str]) -> List[str]:
         return []
     names: List[str] = []
     name = unicodedata.normalize("NFC", name)
-    name = clean_brackets(name)
+    name = remove_bracketed_text(name)
     name = remove_emoji(name)
     for part in name.split("/"):
         part = part.strip().lower()
@@ -155,8 +155,7 @@ def build_canonicalisations():
             if len(aliases) < 2:
                 continue
             forms = ", ".join(sorted(aliases))
-            out = f"{forms} => {qid}"
-            fh.write(out + "\n")
+            fh.write(f"{forms} => {qid}\n")
 
 
 if __name__ == "__main__":
