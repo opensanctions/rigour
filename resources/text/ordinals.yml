@@ -26,6 +26,9 @@ ordinals:
     - "1o"
     - "1ú"
     - "1º."
+    - "⒈"  # Unicode symbol for number plus full stop
+    - "１"  # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑴"  # Unicode symbol for parenthesized number"
     - "No1"
     - "No 1"
     - "No.1"
@@ -54,6 +57,9 @@ ordinals:
     - "2o"
     - "2ú"
     - "2º."
+    - "⒉"  # Unicode symbol for number plus full stop
+    - "２"  # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑵"  # Unicode symbol for parenthesized number"  
     - "No2"
     - "No 2"
     - "No.2"
@@ -82,6 +88,9 @@ ordinals:
     - "3o"
     - "3ú"
     - "3º."
+    - "⒊"  # Unicode symbol for number plus full stop
+    - "３"  # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑶"  # Unicode symbol for parenthesized number
     - "No3"
     - "No 3"
     - "No.3"
@@ -110,6 +119,9 @@ ordinals:
     - "4o"
     - "4ú"
     - "4º."
+    - "⒋"  # Unicode symbol for number plus full stop
+    - "４"  # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑷"  # Unicode symbol for parenthesized number
     - "No4"
     - "No 4"
     - "No.4"
@@ -140,6 +152,9 @@ ordinals:
     - "5o"
     - "5ú"
     - "5º."
+    - "⒌"  # Unicode symbol for number plus full stop
+    - "５"  # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑸"  # Unicode symbol for parenthesized number
     - "No5"
     - "No 5"
     - "No.5"
@@ -168,6 +183,9 @@ ordinals:
     - "6o"
     - "6ú"
     - "6º."
+    -  "⒍"  # Unicode symbol for number plus full stop
+    -  "６"  # Unicode symbol for fullwidth digit (used in China and Japan)
+    -  "⑹"  # Unicode symbol for parenthesized number
     - "No6"
     - "No 6"
     - "No.6"
@@ -196,6 +214,9 @@ ordinals:
     - "7o"
     - "7ú"
     - "7º."
+    -  "⒎"  # Unicode symbol for number plus full stop
+    -  "７"  # Unicode symbol for fullwidth digit (used in China and Japan)
+    -  "⑺"  # Unicode symbol for parenthesized number
     - "No7"
     - "No 7"
     - "No.7"
@@ -224,6 +245,9 @@ ordinals:
     - "8o"
     - "8ú"
     - "8º."
+    -  "⒏"  # Unicode symbol for number plus full stop
+    -  "８"  # Unicode symbol for fullwidth digit (used in China and Japan)
+    -  "⑻"  # Unicode symbol for parenthesized number
     - "No8"
     - "No 8"
     - "No.8"
@@ -253,6 +277,9 @@ ordinals:
     - "9ú"
     - "9º."
     - "IXth"
+    - "⒐"  # Unicode symbol for number plus full stop
+    - "９"  # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑼"  # Unicode symbol for parenthesized number
     - "No9"
     - "No 9"
     - "No.9"
@@ -281,6 +308,8 @@ ordinals:
     - "10o"
     - "10ú"
     - "10º."
+    - "⒑"  # Unicode symbol for number plus full stop
+    - "⑽"  # Unicode symbol for parenthesized number
     - "No10"
     - "No 10"
     - "No.10"
@@ -308,6 +337,8 @@ ordinals:
     - "11o"
     - "11ú"
     - "11º."
+    - "⒒"  # Unicode symbol for number plus full stop
+    - "⑾"  # Unicode symbol for parenthesized number
     - "No11"
     - "No 11"
     - "No.11"
@@ -335,6 +366,8 @@ ordinals:
     - "12o"
     - "12ú"
     - "12º."
+    - "⒓"  # Unicode symbol for number plus full stop
+    - "⑿"  # Unicode symbol for parenthesized number
     - "No12"
     - "No 12"
     - "No.12"
@@ -362,6 +395,8 @@ ordinals:
     - "13o"
     - "13ú"
     - "13º."
+    - "⒔"  # Unicode symbol for number plus full stop
+    - "⒀"  # Unicode symbol for parenthesized number
     - "No13"
     - "No 13"
     - "No.13"
@@ -389,6 +424,8 @@ ordinals:
     - "14o"
     - "14ú"
     - "14º."
+    - "⒕"  # Unicode symbol for number plus full stop
+    - "⒁"  # Unicode symbol for parenthesized number
     - "No14"
     - "No 14"
     - "No.14"
@@ -417,6 +454,8 @@ ordinals:
     - "15o"
     - "15ú"
     - "15º."
+    - "⒖"  # Unicode symbol for number plus full stop
+    - "⒂" # Unicode symbol for parenthesized number
     - "No15"
     - "No 15"
     - "No.15"
@@ -444,6 +483,8 @@ ordinals:
     - "16o"
     - "16ú"
     - "16º."
+    - "⒗"  # Unicode symbol for number plus full stop
+    - "⒃"  # Unicode symbol for parenthesized number
     - "No16"
     - "No 16"
     - "No.16"
@@ -471,6 +512,8 @@ ordinals:
     - "17o"
     - "17ú"
     - "17º."
+    - "⒘" # Unicode symbol for number plus full stop
+    - "⒄" # Unicode symbol for parenthesized number
     - "No17"
     - "No 17"
     - "No.17"
@@ -498,6 +541,8 @@ ordinals:
     - "18o"
     - "18ú"
     - "18º."
+    - "⒙"  # Unicode symbol for number plus full stop
+    - "⒅"  # Unicode symbol for parenthesized number
     - "No18"
     - "No 18"
     - "No.18"
@@ -525,6 +570,8 @@ ordinals:
     - "19o"
     - "19ú"
     - "19º."
+    - "⒚"  # Unicode symbol for number plus full stop
+    - "⒆" # Unicode symbol for parenthesized number
     - "No19"
     - "No 19"
     - "No.19"
@@ -553,6 +600,8 @@ ordinals:
     - "20o"
     - "20ú"
     - "20º."
+    - "⒛"  # Unicode symbol for number plus full stop
+    - "⒇"  # Unicode symbol for parenthesized number
     - "No20"
     - "No 20"
     - "No.20"
