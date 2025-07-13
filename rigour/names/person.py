@@ -23,7 +23,7 @@ def load_person_names() -> Generator[Tuple[str, List[str]], None, None]:
 
 
 def load_person_names_mapping(
-    normalizer: Normalizer = noop_normalizer,
+    normalizer: Normalizer = noop_normalizer, min_mappings: int = 1
 ) -> Dict[str, Set[str]]:
     """Load the person QID to name mappings from disk. This is a collection
     of aliases (in various alphabets) of person name parts mapped to a
@@ -43,7 +43,7 @@ def load_person_names_mapping(
             if norm_alias is None:
                 continue
             forms.add(norm_alias)
-        if len(forms) < 2:
+        if len(forms) < min_mappings:
             continue
         for form in forms:
             if form not in names:
