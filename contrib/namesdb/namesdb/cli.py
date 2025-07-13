@@ -1,6 +1,6 @@
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, Set
+from typing import Dict, List, Set
 import click
 from rich.table import Table
 from rich.console import Console
@@ -8,6 +8,7 @@ from normality import latinize_text
 
 from namesdb.db import engine, store_mapping, skip_mapping
 from namesdb.db import get_groups, get_forms, all_mappings
+from namesdb.cleanup import block_groups, block_phrases
 
 
 @click.group()
@@ -25,10 +26,11 @@ def map_forms(group: str, form: str) -> None:
 
 
 @cli.command("skip")
-@click.argument("id", type=int)
-def skip_form(id: int) -> None:
+@click.argument("ids", type=int, nargs=-1)
+def skip_form(ids: List[int]) -> None:
     with engine.begin() as conn:
-        skip_mapping(conn, id)
+        for id in ids:
+            skip_mapping(conn, id)
 
 
 @cli.command("lookup")
@@ -65,6 +67,8 @@ def load_file(path: Path) -> None:
 @cli.command("dump")
 @click.argument("path", type=click.Path(dir_okay=False, writable=True))
 def dump_file(path: Path) -> None:
+    block_groups()
+    block_phrases()
     with engine.begin() as conn:
         mappings = dict(all_mappings(conn))
         # print("Deduplicating name QIDs...")
