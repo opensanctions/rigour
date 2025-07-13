@@ -191,6 +191,14 @@ org_symbols:
     - 企業
     - ファーム
     - 企业
+  committee:
+    - committee
+    - committees
+    - комитет
+    - комитеты
+    - комітет
+    - комітети
+    - комитету
   concern:
     - kontsern
     - concern
@@ -207,6 +215,23 @@ org_symbols:
     - consortum
     - konsortsium
     - consortile
+  construction:
+    - construction
+    - строительство
+    - строительный
+  consulting:
+    - consulting
+    - консалтинг
+    - konsulting
+    - consultancy
+    - constultants
+    - консалтинговая
+    - consult
+    - konsult
+    - consulenza
+    - conseils
+    - beratung
+    - コンサルティング
   coop:
     - co-op
     - coop
@@ -284,7 +309,7 @@ org_symbols:
     - defensa
     - оборонный
     - оборон
-    dept:
+  dept:
     - department
     - dept.
     - département
@@ -296,6 +321,22 @@ org_symbols:
     - afdeling
     - afdelingen
     - отдел
+  design:
+    - design
+    - designer
+    - designers
+    - designing
+    - diseño
+    - diseñador
+    - dizayn
+    - progettazione
+    - デザイン
+    - проектирование
+    - проектировщик
+    - проектировщики
+    - проектировщица
+    - проектировщицы
+    - проектировщиц
   dev:
     - development
     - dev
@@ -477,6 +518,29 @@ org_symbols:
     - صندوق
   #
   # *** G ***
+  general:
+    - general
+    - генеральный
+    - генеральная
+    - генеральные
+    - генерального
+    - генеральной
+    - генеральных
+  global:
+    - global
+    - weltweit
+    - mondial
+    - mondiale
+    - globální
+    - globalny
+    - küresel
+    - глобальный
+    - глобальная
+    - глобальные
+    - глобального
+    - глобальной
+    - глобальных
+    - глобально
    grp:
     - group
     - группа
@@ -833,6 +897,25 @@ org_symbols:
     - 核的 # zh
   #
   # *** O ***
+  operations:
+    - operations
+    - operation
+    - operating
+    - операциях
+    - операции
+    - operaciones
+    - operações
+    - opérations
+    - operativos
+    - operativa
+    - operazioni
+    - operasional
+    - operativní
+    - operationeel
+    - operasyonel
+    - operacyjne
+    - オペレーション
+    - 运营
   org:
     - organization
     - organisation
@@ -876,6 +959,23 @@ org_symbols:
     - pharmacy
     - фармацевтический
     - apotheke
+  production:
+    - production
+    - productions
+    - proizvodstvennoe
+    - производственное
+  professional:
+    - professional
+    - professionel
+    - professionalnyi
+    - профессионального
+    - профессионольного
+    - профессиональоного
+    - профессонального
+    - профессиональная
+    - профессиональное
+    - профессионально
+    - профессиональных
   property:
     - property
     - properties
@@ -917,7 +1017,32 @@ org_symbols:
     - جمهورية
     - respublika
     - respublik
-    #
+  research:
+    - research
+    - исследование
+    - исследовательский
+    - изучение
+    - forschung
+  #
+    revolutionary:
+    - revolutionary
+    - revolutsioonilise
+    - revolutsionny
+    - rewolucji
+    - révolution
+    - revolucio
+    - revolution
+    - revolučných
+    - revolučních
+    - revoliucijos
+    - revolucionarne
+    - revolucionāro
+    - rivoluzionarie
+    - revolutionaire
+    - революционный
+    - революционная
+    - революционные
+    - революционных
   # *** S ***
   scientific:
     - scientific
@@ -937,6 +1062,11 @@ org_symbols:
     - servicios
     - службы
     - служба
+  shipping:
+    - shipping
+    - shipping company
+    - shipping line
+    - shipping lines
   special:
     - Specjalnych
     - specială
@@ -1021,128 +1151,27 @@ org_symbols:
     - takticheskoe raketnoe vooruzhenie
     - тактическое ракетное вооружение
     - тактичне ракетне озброєння
+  transport:
+    - transport
+    - transportation
+    - транспорт
+    - транспортный
+    - транспортная
+    - транспортные
+    - транспортировке
+    - транспортировок
+    - транспортировке
+
+
     ##########################
 
 
-  research:
-    - research
-    - исследование
-    - исследовательский
-    - изучение
-    - forschung
-  shipping:
-    - shipping
-    - shipping company
-    - shipping line
-    - shipping lines
-  production:
-    - production
-    - productions
-    - proizvodstvennoe
-    - производственное
-  construction:
-    - construction
-    - строительство
-    - строительный
-  consulting:
-    - consulting
-    - консалтинг
-    - konsulting
-    - consultancy
-    - constultants
-    - консалтинговая
-    - consult
-    - konsult
-    - consulenza
-    - conseils
-    - beratung
-    - コンサルティング
-  design:
-    - design
-    - designer
-    - designers
-    - designing
-    - diseño
-    - diseñador
-    - dizayn
-    - progettazione
-    - デザイン
-    - проектирование
-    - проектировщик
-    - проектировщики
-    - проектировщица
-    - проектировщицы
-    - проектировщиц
-  revolutionary:
-    - revolutionary
-    - revolutsioonilise
-    - revolutsionny
-    - rewolucji
-    - révolution
-    - revolucio
-    - revolution
-    - revolučných
-    - revolučních
-    - revoliucijos
-    - revolucionarne
-    - revolucionāro
-    - rivoluzionarie
-    - revolutionaire
-    - революционный
-    - революционная
-    - революционные
-    - революционных
-  committee:
-    - committee
-    - committees
-    - комитет
-    - комитеты
-    - комітет
-    - комітети
-    - комитету
-  professional:
-    - professional
-    - professionel
-    - professionalnyi
-    - профессионального
-    - профессионольного
-    - профессиональоного
-    - профессонального
-    - профессиональная
-    - профессиональное
-    - профессионально
-    - профессиональных
-  operations:
-    - operations
-    - operation
-    - operating
-    - операциях
-    - операции
-    - operaciones
-    - operações
-    - opérations
-    - operativos
-    - operativa
-    - operazioni
-    - operasional
-    - operativní
-    - operationeel
-    - operasyonel
-    - operacyjne
-    - オペレーション
-    - 运营
+  
   kombinat:
     - kombinat
     - комбинат
     - Kombinatas
-  general:
-    - general
-    - генеральный
-    - генеральная
-    - генеральные
-    - генерального
-    - генеральной
-    - генеральных
+
   mechanical:
     - mechanical
     - механический
@@ -1157,16 +1186,6 @@ org_symbols:
     - МЕХАНИЧЕСКИЙ
     - Mekhanicheskiy
     - Mecánica
-  transport:
-    - transport
-    - transportation
-    - транспорт
-    - транспортный
-    - транспортная
-    - транспортные
-    - транспортировке
-    - транспортировок
-    - транспортировке
 
   comms:
     - communications
@@ -1239,21 +1258,7 @@ org_symbols:
     - химических
     - химического
     - химической
-  global:
-    - global
-    - weltweit
-    - mondial
-    - mondiale
-    - globální
-    - globalny
-    - küresel
-    - глобальный
-    - глобальная
-    - глобальные
-    - глобального
-    - глобальной
-    - глобальных
-    - глобально
+
   system:
     - system
     - systems
