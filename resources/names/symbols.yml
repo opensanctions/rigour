@@ -101,6 +101,11 @@ org_symbols:
    associates:
     - associates
     - ассоциированные
+   association:
+    - association
+    - associations
+    - ассоциация
+    - ассоциации
    aviation:
     - aviation
     - aviación
@@ -109,12 +114,52 @@ org_symbols:
     - авиационный
  #
  # *** B ***
+   bank:
+    - bank
+    - banking
+    - investment bank
+    - investment banking
+    - commercial bank
+    - trade bank
+    - merchant bank
+    - clearing bank
+    - savings and loan
+    - savings bank
+    - savings and loan association
+    - handelsbank
+    - Kreditanstalt
+    - handelsbanken
+    - банка
+    - банк
+    - инвестиционный банк
+    - коммерческий банк
+    - муниципально-коммерческий банк
+    - банківська
+    - банківська установа
+    - τράπεζα
+    - banque
+    - banco
+    - bankası
+    - banki
+    - 銀行
  branch:
     - branch
     - branch of
     - филиал
     - filiale
     - zweigstelle
+  bureau:
+    - bureau
+    - бюро
+    - бюро
+    - бюрo
+    - bürö
+    - bürö
+    - büro
+    - büron
+    - büron
+    - büronü
+    - büronü
  business:
     - business
     - businesses
@@ -129,6 +174,12 @@ org_symbols:
     - 商
   #
   # *** C ***
+  capital:
+    - capital
+    - κεφάλαιο
+    - κεφαλαιακή
+    - капитал
+    - kapital
   center:
     - центр
     - tsentr
@@ -154,6 +205,15 @@ org_symbols:
     - центральные
     - центрального
     - центральной
+  chemical:
+    - chemical
+    - chemicals
+    - химический
+    - химическая
+    - химические
+    - химических
+    - химического
+    - химической
   co:
     - company
     - сompany
@@ -191,6 +251,32 @@ org_symbols:
     - 企業
     - ファーム
     - 企业
+   commercial:
+    - commercial
+    - коммерческий
+    - коммерческая
+    - коммерческое
+    - коммерческой
+    - коммерческих
+    - коммерческого
+    - комерческий
+    - comercial
+    - commerciale
+    - commerciaux
+    - commercieel
+    - commerciale
+    - comerciale
+    - commerciële
+    - kommercial
+    - commerical
+    - comercială
+    - εμπορική
+    - 商業
+    - commerciell
+    - קומרציאלי
+    - 상업적
+    - kommersiel
+    - 商业的
   committee:
     - committee
     - committees
@@ -199,6 +285,15 @@ org_symbols:
     - комітет
     - комітети
     - комитету
+  comms:
+    - communications
+    - communication
+    - kommunikation
+    - comms
+    - коммюникации
+    - коммуникация
+    - коммуникации
+    - коммуникаций
   concern:
     - kontsern
     - concern
@@ -347,7 +442,63 @@ org_symbols:
     - развития
     - развитию
     - ανάπτυξης
+  distrib:
+    - distributors
+    - distributor
+    - distribution
   # *** E ***
+  electronic:
+    - electronic
+    - electronics
+    - electronical
+    - elektronisch
+    - elektronische
+    - électronique
+    - elettronico
+    - elettronica
+    - electrónico
+    - electrónica
+    - elektronisk
+    - електронний
+    - електронна
+    - електронски
+    - электронный
+    - электронная
+    - электронные
+    - электронных
+    - электроника
+    - электроники
+    - 电子
+    - 電子
+    - 電子の
+    - 전자
+    - 전자의
+  energy:
+    - energy
+    - energies
+    - energie
+    - energia
+    - energía
+    - énergie
+    - énergies
+    - energias
+    - energieën
+    - energi
+    - energier
+    - energií
+    - energije
+    - energija
+    - энергия
+    - энергии
+    - енергія
+    - енергії
+    - енергија
+    - енергије
+    - 能源
+    - 能量
+    - 能源
+    - エネルギー
+    - 에너지
   eng:
     - engineering
     - инженерия
@@ -400,6 +551,12 @@ org_symbols:
     - обрудовании
     - оборудованиe
     - оборудованию
+  export:
+    - export
+    - exports
+    - eksportu
+    - экспорт
+    - экспорты
  #
  # *** F ***
   factory:
@@ -541,6 +698,54 @@ org_symbols:
     - глобальной
     - глобальных
     - глобально
+    gov:
+    - gov
+    - govmnt
+    - government
+    - government of
+    - government of the
+    - governmental
+    - regierung
+    - regierung von
+    - regierung der
+    - staat
+    - staatlich
+    - staatliche
+    - staatliches
+    - 政府
+    - 辖
+    - state
+    - state of
+    - правительство
+    - gouvernement
+    - gouvernement de
+    - gouvernementale
+    - государственное
+    - государственная
+    - государственный
+    - государственне
+    - государственноый
+    - госудаственным
+    - гомударственной
+    - государсвенным
+    - государствнный
+    - госудаpственное
+    - государсовенный
+    - госудрарственное
+    - государственном
+    - государственно
+    - государственного
+    - государственной
+    - государственным
+    - государственные
+    - государственных
+    - правительсто
+    - госпредприятие # soe
+    - казенное
+    - gobierno
+    - gobierno de
+    - κυβερνηση
+    - κυβερνητική
    grp:
     - group
     - группа
@@ -596,6 +801,18 @@ org_symbols:
     - больницам
   #
   # *** I ***
+  import:
+    - import
+    - imports
+    - импорт
+    - импорты
+    - импорта
+    - импортный
+    - импортная
+    - импортные
+    - импортных
+    - импортного
+    - импортной
    industry:
     - industry
     - industries
@@ -775,6 +992,25 @@ org_symbols:
     - islamo
     - islâmico
   #
+  # *** K ***
+  kombinat:
+    - kombinat
+    - комбинат
+    - Kombinatas
+  #
+  # *** L ***  
+    logistics:
+    - logistic
+    - logistics
+    - логистика
+    - логистики
+    - логистическая
+    - логистической
+    - логистических
+    - логистическому
+    - логистическому
+    - логистической
+  #
   # *** M ***
   maritime:
     - maritime
@@ -784,6 +1020,31 @@ org_symbols:
     - морские
     - морских
     - морского
+   mechanical:
+    - mechanical
+    - механический
+    - механическая
+    - механические
+    - механического
+    - механической
+    - механических
+    - механика
+    - mechanický
+    - mécanique
+    - МЕХАНИЧЕСКИЙ
+    - Mekhanicheskiy
+    - Mecánica
+  medical:
+    - medical
+    - медичний
+    - медична
+    - медичні
+    - медичних
+    - медицинский
+    - медицинская
+    - медицинские
+    - медицинского
+    - медицинской
   mgmt:
     - management
     - мanagement
@@ -805,8 +1066,31 @@ org_symbols:
     - 管理
     - 辖
     - 机场
+  ministry:
+    - ministry
+    - мinistry
+    - ministère
+    - ministeru
+    - ministero
+    - ministerio
+    - ministerul
+    - ministerium
+    - ministerie
+    - ministrerio
+    - ministerstvo
+    - ministerului
+    - ministerij
   #
   # *** N ***
+  named:
+    - im
+    - имени
+    - им
+    - imeni
+    - named after
+    - named for
+    - named in honor of
+    - named in memory of
   natl:
     - national
     - национальный
@@ -897,6 +1181,17 @@ org_symbols:
     - 核的 # zh
   #
   # *** O ***
+  offshore:
+    - offshore
+    - ofshor
+    - оффшор
+    - оффшорный
+    - оффшорная
+    - оффшорные
+    - оффшорной
+    - оффшорного
+    - offshores
+    - オフショア
   operations:
     - operations
     - operation
@@ -1023,8 +1318,7 @@ org_symbols:
     - исследовательский
     - изучение
     - forschung
-  #
-    revolutionary:
+  revolutionary:
     - revolutionary
     - revolutsioonilise
     - revolutsionny
@@ -1067,6 +1361,33 @@ org_symbols:
     - shipping company
     - shipping line
     - shipping lines
+  socalled: # EU slang
+    - SO-CALLED
+    - Self-proclaimed
+    - the so-called
+    - Așa-numita
+    - Den såkaldte
+    - Takozvana
+    - Sogenannte
+    - L-hekk imsejħa
+    - soi-disant
+    - Soi-disant
+    - Javni pokret
+    - mar a ghairtear de
+    - Tā sauktā
+    - Samhällsrörelsen
+    - népi mozgalom
+    - Tzv.
+    - Т.нар.
+  solution:
+    - solution
+    - solutions
+    - λύση
+    - λύσεις
+    - λύσεων
+    - решение
+    - решения
+    - решению
   special:
     - Specjalnych
     - specială
@@ -1078,7 +1399,19 @@ org_symbols:
     - supply
     - supplies
     - supplier
-    #
+  system:
+    - system
+    - systems
+    - systeme
+    - система
+    - системы
+    - sistema
+    - sistemas
+    - système
+    - systèmes
+    - システム
+    - システムズ
+  #
   # *** T ***
   tech:
     - technology
@@ -1151,326 +1484,6 @@ org_symbols:
     - takticheskoe raketnoe vooruzhenie
     - тактическое ракетное вооружение
     - тактичне ракетне озброєння
-  transport:
-    - transport
-    - transportation
-    - транспорт
-    - транспортный
-    - транспортная
-    - транспортные
-    - транспортировке
-    - транспортировок
-    - транспортировке
-
-
-    ##########################
-
-
-  
-  kombinat:
-    - kombinat
-    - комбинат
-    - Kombinatas
-
-  mechanical:
-    - mechanical
-    - механический
-    - механическая
-    - механические
-    - механического
-    - механической
-    - механических
-    - механика
-    - mechanický
-    - mécanique
-    - МЕХАНИЧЕСКИЙ
-    - Mekhanicheskiy
-    - Mecánica
-
-  comms:
-    - communications
-    - communication
-    - kommunikation
-    - comms
-    - коммюникации
-    - коммуникация
-    - коммуникации
-    - коммуникаций
-
-  electronic:
-    - electronic
-    - electronics
-    - electronical
-    - elektronisch
-    - elektronische
-    - électronique
-    - elettronico
-    - elettronica
-    - electrónico
-    - electrónica
-    - elektronisk
-    - електронний
-    - електронна
-    - електронски
-    - электронный
-    - электронная
-    - электронные
-    - электронных
-    - электроника
-    - электроники
-    - 电子
-    - 電子
-    - 電子の
-    - 전자
-    - 전자의
-  energy:
-    - energy
-    - energies
-    - energie
-    - energia
-    - energía
-    - énergie
-    - énergies
-    - energias
-    - energieën
-    - energi
-    - energier
-    - energií
-    - energije
-    - energija
-    - энергия
-    - энергии
-    - енергія
-    - енергії
-    - енергија
-    - енергије
-    - 能源
-    - 能量
-    - 能源
-    - エネルギー
-    - 에너지
-  chemical:
-    - chemical
-    - chemicals
-    - химический
-    - химическая
-    - химические
-    - химических
-    - химического
-    - химической
-
-  system:
-    - system
-    - systems
-    - systeme
-    - система
-    - системы
-    - sistema
-    - sistemas
-    - système
-    - systèmes
-    - システム
-    - システムズ
-  association:
-    - association
-    - associations
-    - ассоциация
-    - ассоциации
-  bureau:
-    - bureau
-    - бюро
-    - бюро
-    - бюрo
-    - bürö
-    - bürö
-    - büro
-    - büron
-    - büron
-    - büronü
-    - büronü
-  logistics:
-    - logistic
-    - logistics
-    - логистика
-    - логистики
-    - логистическая
-    - логистической
-    - логистических
-    - логистическому
-    - логистическому
-    - логистической
-  bank:
-    - bank
-    - banking
-    - investment bank
-    - investment banking
-    - commercial bank
-    - trade bank
-    - merchant bank
-    - clearing bank
-    - savings and loan
-    - savings bank
-    - savings and loan association
-    - handelsbank
-    - Kreditanstalt
-    - handelsbanken
-    - банка
-    - банк
-    - инвестиционный банк
-    - коммерческий банк
-    - муниципально-коммерческий банк
-    - банківська
-    - банківська установа
-    - τράπεζα
-    - banque
-    - banco
-    - bankası
-    - banki
-    - 銀行
-  commercial:
-    - commercial
-    - коммерческий
-    - коммерческая
-    - коммерческое
-    - коммерческой
-    - коммерческих
-    - коммерческого
-    - комерческий
-    - comercial
-    - commerciale
-    - commerciaux
-    - commercieel
-    - commerciale
-    - comerciale
-    - commerciële
-    - kommercial
-    - commerical
-    - comercială
-    - εμπορική
-    - 商業
-    - commerciell
-    - קומרציאלי
-    - 상업적
-    - kommersiel
-    - 商业的
-  offshore:
-    - offshore
-    - ofshor
-    - оффшор
-    - оффшорный
-    - оффшорная
-    - оффшорные
-    - оффшорной
-    - оффшорного
-    - offshores
-    - オフショア
-  gov:
-    - gov
-    - govmnt
-    - government
-    - government of
-    - government of the
-    - governmental
-    - regierung
-    - regierung von
-    - regierung der
-    - staat
-    - staatlich
-    - staatliche
-    - staatliches
-    - 政府
-    - 辖
-    - state
-    - state of
-    - правительство
-    - gouvernement
-    - gouvernement de
-    - gouvernementale
-    - государственное
-    - государственная
-    - государственный
-    - государственне
-    - государственноый
-    - госудаственным
-    - гомударственной
-    - государсвенным
-    - государствнный
-    - госудаpственное
-    - государсовенный
-    - госудрарственное
-    - государственном
-    - государственно
-    - государственного
-    - государственной
-    - государственным
-    - государственные
-    - государственных
-    - правительсто
-    - госпредприятие # soe
-    - казенное
-    - gobierno
-    - gobierno de
-    - κυβερνηση
-    - κυβερνητική
-  named:
-    - im
-    - имени
-    - им
-    - imeni
-    - named after
-    - named for
-    - named in honor of
-    - named in memory of
-  socalled: # EU slang
-    - SO-CALLED
-    - Self-proclaimed
-    - the so-called
-    - Așa-numita
-    - Den såkaldte
-    - Takozvana
-    - Sogenannte
-    - L-hekk imsejħa
-    - soi-disant
-    - Soi-disant
-    - Javni pokret
-    - mar a ghairtear de
-    - Tā sauktā
-    - Samhällsrörelsen
-    - népi mozgalom
-    - Tzv.
-    - Т.нар.
-  ministry:
-    - ministry
-    - мinistry
-    - ministère
-    - ministeru
-    - ministero
-    - ministerio
-    - ministerul
-    - ministerium
-    - ministerie
-    - ministrerio
-    - ministerstvo
-    - ministerului
-    - ministerij
-  export:
-    - export
-    - exports
-    - eksportu
-    - экспорт
-    - экспорты
-  import:
-    - import
-    - imports
-    - импорт
-    - импорты
-    - импорта
-    - импортный
-    - импортная
-    - импортные
-    - импортных
-    - импортного
-    - импортной
   trade:
     - trade
     - trading
@@ -1508,25 +1521,16 @@ org_symbols:
     - 商业
     - 商行
     - 贸易公司
-  solution:
-    - solution
-    - solutions
-    - λύση
-    - λύσεις
-    - λύσεων
-    - решение
-    - решения
-    - решению
-  distrib:
-    - distributors
-    - distributor
-    - distribution
-  capital:
-    - capital
-    - κεφάλαιο
-    - κεφαλαιακή
-    - капитал
-    - kapital
+  transport:
+    - transport
+    - transportation
+    - транспорт
+    - транспортный
+    - транспортная
+    - транспортные
+    - транспортировке
+    - транспортировок
+    - транспортировке
   trust:
     - trust
     - trusts
@@ -1540,6 +1544,8 @@ org_symbols:
     - фондовий
     - фондова
     - фондові
+  #
+  # *** U ***
   union:
     - union
     - союз
@@ -1571,6 +1577,12 @@ org_symbols:
     - univ.
     - univ. of
     - univ. of the
+
+    ##########################
+
+
+
+
   military:
     - военный
     - military
@@ -1614,17 +1626,7 @@ org_symbols:
     - production
     - производственный
     - производственная
-  medical:
-    - medical
-    - медичний
-    - медична
-    - медичні
-    - медичних
-    - медицинский
-    - медицинская
-    - медицинские
-    - медицинского
-    - медицинской
+
 
 
 person_symbols:
