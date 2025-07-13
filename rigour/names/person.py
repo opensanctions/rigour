@@ -37,12 +37,17 @@ def load_person_names_mapping(
     """
     names: Dict[str, Set[str]] = {}
     for qid, aliases in load_person_names():
+        forms: Set[str] = set()
         for alias in aliases:
             norm_alias = normalizer(alias)
             if norm_alias is None:
                 continue
-            if norm_alias not in names:
-                names[norm_alias] = set([qid])
+            forms.add(norm_alias)
+        if len(forms) < 2:
+            continue
+        for form in forms:
+            if form not in names:
+                names[form] = set([qid])
             else:
-                names[norm_alias].add(qid)
+                names[form].add(qid)
     return names
