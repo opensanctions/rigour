@@ -1323,7 +1323,9 @@ org_symbols:
   realty:
     - realty
     - realtor
-    - real estate
+    - real estate   # en
+    - inmobiliaria  # es
+    - imobiliária   # pt
     - недвижимость
     - недвижимостью
     - недвижимостями
@@ -1387,9 +1389,10 @@ org_symbols:
     - научной
     - научно-исследовательский
   service:
-    - service
-    - services
-    - servicios
+    - service   # en, fr
+    - services   # en, fr
+    - servicio   # es
+    - servicios   # es
     - службы
     - служба
   shipping:
@@ -1432,9 +1435,10 @@ org_symbols:
     - Specijalni
     - Специальный
   supply:
-    - supply
-    - supplies
-    - supplier
+    - supply   # en
+    - supplies   # en
+    - supplier   # en
+    - suppliers   # en
   system:
     - system
     - systems
