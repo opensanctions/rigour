@@ -826,7 +826,15 @@ org_symbols:
     - импортных
     - импортного
     - импортной
-   industry:
+  in liquidation:
+    - in liqu.   # de (abbreviation)
+    - in liquidation   # de, en
+    - in liquidazione   # it
+    - en liquidacion   # es
+    - en liquidation   # fr
+    - 清算中    # zh
+    - "/in liquidation/"   # used by certain Bulgarian companies
+  industry:
     - industry
     - industries
     - indastris
