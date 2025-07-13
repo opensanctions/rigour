@@ -3,8 +3,7 @@ org_symbols:
   # partially derived from OpenSanctions name data. The idea is to provide mappings between different
   # spellings, languages and other variations of the same term. This can be used as a matching
   # mechanism that circumvents the need for fuzzy matching or other complex algorithms.
-  # Symbols for organisations are mainly listed in alphabetical order but some older items are
-  # yet to be reordered.
+  # Symbols for organisations are listed in alphabetical order.
  #
  # *** A ***
   academy:
@@ -98,6 +97,20 @@ org_symbols:
     - 공항
     - 비행장
     - 항공항
+  army:
+    - army
+    - armee
+    - armée
+    - armeen
+    - armée de terre
+    - армия
+    - армія
+    - армейский
+    - армейская
+    - армейские
+    - армейских
+    - армейского
+    - армейской
    associates:
     - associates
     - ассоциированные
@@ -999,7 +1012,7 @@ org_symbols:
     - Kombinatas
   #
   # *** L ***  
-    logistics:
+  logistics:
     - logistic
     - logistics
     - логистика
@@ -1012,6 +1025,14 @@ org_symbols:
     - логистической
   #
   # *** M ***
+  manufacturing:
+    - manufacturing
+    - manufakturynh
+    - manufacturies
+    - производство
+    - production
+    - производственный
+    - производственная
   maritime:
     - maritime
     - maritim
@@ -1020,7 +1041,7 @@ org_symbols:
     - морские
     - морских
     - морского
-   mechanical:
+  mechanical:
     - mechanical
     - механический
     - механическая
@@ -1045,6 +1066,11 @@ org_symbols:
     - медицинские
     - медицинского
     - медицинской
+  military:
+    - военный
+    - military
+    - militare
+    #  - militsii
   mgmt:
     - management
     - мanagement
@@ -1413,6 +1439,22 @@ org_symbols:
     - システムズ
   #
   # *** T ***
+  tactical:
+    - tactical
+    - tactics
+    - taktik
+    - taktische
+    - taktički
+    - тактический
+    - тактическая
+    - тактические
+    - тактических
+    - тактического
+    - тактической
+    - тактична
+    - тактичні
+    - тактичного
+    - тактичной
   tech:
     - technology
     - технология
@@ -1577,58 +1619,6 @@ org_symbols:
     - univ.
     - univ. of
     - univ. of the
-
-    ##########################
-
-
-
-
-  military:
-    - военный
-    - military
-    - militare
-    #  - militsii
-  tactical:
-    - tactical
-    - tactics
-    - taktik
-    - taktische
-    - taktički
-    - тактический
-    - тактическая
-    - тактические
-    - тактических
-    - тактического
-    - тактической
-    - тактична
-    - тактичні
-    - тактичного
-    - тактичной
-  army:
-    - army
-    - armee
-    - armée
-    - armeen
-    - armée de terre
-    - армия
-    - армія
-    - армейский
-    - армейская
-    - армейские
-    - армейских
-    - армейского
-    - армейской
-  manufacturing:
-    - manufacturing
-    - manufakturynh
-    - manufacturies
-    - производство
-    - production
-    - производственный
-    - производственная
-
-
-
 person_symbols:
   jr:
     - "Jr"
@@ -1682,27 +1672,27 @@ person_symbols:
     - "ibn"
     - "ibn al"
     - "ibn ul"
-    - ould
-    - בן
-    - בר
-    - بن
-    - بنت
-    - ابن
-    - ابن ال
-    - ابن ال
+    - "ould
+    - "בן
+    - "בר"
+    - "بن"
+    - "بنت"
+    - "ابن"
+    - "ابن ال"
+    - "ابن ال"
   bint:
-    - bint
-    - ult
-    - mint
-    - bat
-    - בת
-    - بنت
+    - "bint"
+    - "ult"
+    - "mint"
+    - "bat"
+    - "בת"
+    - "بنت"
   abu:
     - "Abu"
     - "Abu al"
     - "Abul"
     - "Abdul"
-    - أبو
+    - "أبو"
   umm:
     - "Umm"
     - "Umm al"
@@ -1721,8 +1711,8 @@ person_symbols:
     - "Roberto"
     - "Rob"
   dick:
-    - Dick
-    - Richard
+    - "Dick"
+    - "Richard"
   will:
-    - will
-    - william
+    - "Will"
+    - "William"
