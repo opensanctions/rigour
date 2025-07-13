@@ -3,361 +3,32 @@ org_symbols:
   # partially derived from OpenSanctions name data. The idea is to provide mappings between different
   # spellings, languages and other variations of the same term. This can be used as a matching
   # mechanism that circumvents the need for fuzzy matching or other complex algorithms.
-  co:
-    - company
-    - сompany
-    - corporation
-    - компания
-    - kompani
-    - kompania
-    - komaniya
-    - kompaniy
-    - kampaniia
-    - kompaniia
-    - kompaniya
-    - kompānija
-    - kampaniya
-    - kompanii
-    - къмпани
-    - компани
-    - компания
-    - коспания
-    - компаний
-    - компана
-    - co
-    - компанія
-    - شركة
-    - compañía
-    - compania
-    - companie
-    - companhia
-    - întreprinderea
-    - firma
-    - firm
-    - Εταιρεία
-    - Etaireia
-    - 公司
-    - 企業
-    - ファーム
-    - 企业
-  org:
-    - organization
-    - organisation
-    - organisations
-    - org
-    - организація
-    - orhanizatsiia
-    - orhanizatsiya
-    - organisasjon
-    - organisasjonen
-    - organisatie
-    - organzation
-    - orhanizatsiino
-    - organizatsiya
-    - organizacion
-    - organizacja
-    - organizácie
-    - organizácia
-    - organizaciju
-    - organizace
-    - organizacije
-    - organizacija
-    - organizaci
-    - organizatia
-    - органищация
-    - организациями
-    - организация
-    - организации
-    - organizatsii
-    - organizația
-    - organización
-    - organisaatio
-    - Οργανισμός
-    - Organismos
-    - ファーム
-    - 団体
-    - 協会
-  corp:
-    - corporation
-    - corporaton
-    - corporate
-    - сorporation
-    - corp
-    - корпорация
-    - корпорація
-    - مؤسسة
-    - corporación
-    - koroporatsiya
-    - korporatsiyi
-    - corporația
-    - corporaciia
-    - korporatsiia
-    - korporatsiya
-    - korporacija
-    - corporations
-    - corporacion
-    - корпорации
-    - корпарация
-    - корпорації
-    - корпораций
-    - società
-    - Εταιρικός Όμιλος
-    - 協力的な
-    - 生活協同組合
-    - 合作社
-  coop:
-    - co-op
-    - coop
-    - co-operation
-    - cooperation
-    - co-operative
-    - cooperative
-    - co-operative society
-    - coop society
-    - co-op society
-    - koperasi
-    - cooperative society
-    - coopératif
-    - kooperatif
-    - kooperativa
-    - kooperattiva
-    - coopération
-    - cooperativă
-    - coopérative
-    - kooperatsia
-    - cooperatieve
-    - cooperatives
-    - cooperativo
-    - cooperativa
-    - corporativo
-    - corporativos
-    - sociedad cooperativa
-    - spółdzielni
-    - кооперация
-    - Συνεταιρισμός
-    - Synetairismos
-  center:
-    - центр
-    - tsentr
-    - cntr
-    - center
-    - centre
-    - centras
-    - Centro
-    - Centrum
-    - centr
-    - centro
-    - tsentrov
-    - центров
-    - مركز
-  holding:
-    - holding
-    - holdings
-    - проведение
-    - холдинг
-    - холдинг
-    - хлдинг
-    - xoлдиhг
-    - kholdyng
-    - القابضة
-    - Συμμετοχών
-    - Symmetochon
-    - Συμμετοχές
-    - Symmetoches
-    - 集体
-    - 保持
-    - 保有資産
-  business:
-    - business
-    - businesses
-    - бизнес
-    - бізнес
-    - أعمال
-    - деловой
-    - деловая
-    - Επιχείρηση
-    - Μπίζνες
-    - 商业
-    - 商
-  branch:
-    - branch
-    - branch of
-    - филиал
-    - filiale
-    - zweigstelle
-  concern:
-    - kontsern
-    - concern
-    - konzern
-    - концерн
-    - مجموعة
-    - consorcio
-    - consórcio
-    - group of companies
-  consortium:
-    - consortium
-    - consorcio
-    - consórcio
-    - consortum
-    - konsortsium
-    - consortile
-  service:
-    - service
-    - services
-    - servicios
-    - службы
-    - служба
-  defence:
-    - defence
-    - defense
-    - défense
-    - defensie
-    - defensiv
-    - defesa
-    - difesa
-    - försvar
-    - Verteidigung
-    - verdediging
-    - protecția
-    - försvar
-    - defensa
-    - оборонный
-    - оборон
-  dept:
-    - department
-    - dept.
-    - département
-    - departament
-    - departamento
-    - departamentul
-    - dipartimento
-    - Abteilung
-    - afdeling
-    - afdelingen
-    - отдел
-  special:
-    - Specjalnych
-    - specială
-    - special
-    - Speciaal
-    - Specijalni
-    - Специальный
-  tech:
-    - technology
-    - технология
-    - технологии
-    - техника
-    - тэхники
-    - тэхніка
-    - технікал
-    - технологія
-    - технології
-    - тэхналогіі
-    - тэхналогій
-    - технологій
-    - технологий
-    - технолоджі
-    - технолоджи
-    - технологиями
-    - технологічне
-    - technalohiy
-    - tekhnolohiia
-    - technológiai
-    - tehnologiei
-    - tehnologică
-    - technologickou
-    - technological
-    - technologique
-    - tehnološko
-    - tecnologies
-    - tecnologia
-    - technológií
-    - tehnologie
-    - tehnologiju
-    - tekhnology
-    - tekhnologi
-    - teknologiya
-    - tehnološki
-    - teknoloġija
-    - tehnologia
-    - technologická
-    - technik
-    - teknologii
-    - tekhnolohiyi
-    - tekhnologii
-    - technologií
-    - tecnología
-    - tehnologii
-    - tekhnologiya
-    - tekhnologiy
-    - technológiák
-    - technologie
-    - technologia
-    - technologies
-    - technologijų
-    - technologii
-    - tecnologias
-    - tekhnolohii
-    - 技术
-    - 工艺学
-    - τεχνολογία
-    - τεχνολογίες
-    - τεχνολογίας
-  insurance:
-    - insurance
-    - insurans
-    - insurance company
-    - versicherung
-    - versicherungen
-    - versicherungsgesellschaft
-    - verzekeringsmaatschappij
-    - verzekeringsmaatschappijen
-    - страхового
-    - страховая
-  property:
-    - property
-    - properties
-    - собственность
-    - собственностью
-    - собственностью
-    - собственностью
-    - собственностью
-    - собственностью
-    - собственностью
-    - собственности
-  realty:
-    - realty
-    - realtor
-    - real estate
-    - недвижимость
-    - недвижимостью
-    - недвижимостями
-    - недвижимостях
-    - недвижимостью
-  supply:
-    - supply
-    - supplies
-    - supplier
-  equipment:
-    - equipment
-    - equipement
-    - оборудование
-    - обрудование
-    - обрудования
-    - обрудованиями
-    - обрудованиях
-    - обрудованиям
-    - обрудованиями
-    - обрудовании
-    - оборудованиe
-    - оборудованию
-  aviation:
-    - aviation
-    - aviación
-    - luftfahrt
-    - авиация
-    - авиационный
-  airline:
+  # Symbols for organisations are mainly listed in alphabetical order but some older items are
+  # yet to be reordered.
+ #
+ # *** A ***
+  academy:
+    - academy
+    - academie
+    - akademie
+    - akademija
+    - akademiia
+    - akademiya
+    - akademi
+    - akadēmija
+    - akadēmijas
+    - akadēmijā
+    - akadēmijai
+    - akadēmijām
+    - akademii
+    - akademiia
+    - akademiya
+    - akademiia
+    - академия
+    - академии
+    - академиии
+    - академиию
+   airline:
     - airline
     - airlines
     - авиакомпания
@@ -427,57 +98,269 @@ org_symbols:
     - 공항
     - 비행장
     - 항공항
-  flight:
-    - flight
-    - flights
-    - полет
-    - полеты
-    - полетах
-    - полетам
-    - полетами
-    - полете
-    - полетов
-    - рейс
-    - рейсы
-    - рейсов
-  maritime:
-    - maritime
-    - maritim
-    - морская
-    - морской
-    - морские
-    - морских
-    - морского
-  naval:
-    - naval
-    - navy
-  nuclear:
-    - niwclear # cy
-    - nuclear # en, es, pt
-    - nucleair # nl
-    - nucleare # it
-    - nucleares # pt (plural)
-    - nucléaire # fr singular
-    - nucléaires # fr plural
-    - nuklear # de
-    - nükleer # tr
-    - nyuklia # sw
-    - nuklearny # pl (masculine)
-    - nuklearna # pl (f)
-    - nuklearne # pl (neuter)
-    - πυρηνικός # el (masculine)
-    - πυρηνική # el (feminine)
-    - πυρηνικό # el (neuter)
-    - ядерный # ru (masculine)
-    - ядерная # ru (feminine)
-    - ядерное # ru (neuter)
-    - ядерные # ru (plural)
-    - ядерний # uk (masculine)
-    - ядерна # uk (feminine)
-    - ядерне # uk (neuter)
-    - ядерні # uk (plural)
-    - 核能 # zh
-    - 核的 # zh
+   associates:
+    - associates
+    - ассоциированные
+   aviation:
+    - aviation
+    - aviación
+    - luftfahrt
+    - авиация
+    - авиационный
+ #
+ # *** B ***
+ branch:
+    - branch
+    - branch of
+    - филиал
+    - filiale
+    - zweigstelle
+ business:
+    - business
+    - businesses
+    - бизнес
+    - бізнес
+    - أعمال
+    - деловой
+    - деловая
+    - Επιχείρηση
+    - Μπίζνες
+    - 商业
+    - 商
+  #
+  # *** C ***
+  center:
+    - центр
+    - tsentr
+    - cntr
+    - center
+    - centre
+    - centras
+    - Centro
+    - Centrum
+    - centr
+    - centro
+    - tsentrov
+    - центров
+    - مركز
+  central:
+    - central
+    - centrala
+    - centrale
+    - centralele
+    - centrali
+    - центральный
+    - центральная
+    - центральные
+    - центрального
+    - центральной
+  co:
+    - company
+    - сompany
+    - corporation
+    - компания
+    - kompani
+    - kompania
+    - komaniya
+    - kompaniy
+    - kampaniia
+    - kompaniia
+    - kompaniya
+    - kompānija
+    - kampaniya
+    - kompanii
+    - къмпани
+    - компани
+    - компания
+    - коспания
+    - компаний
+    - компана
+    - co
+    - компанія
+    - شركة
+    - compañía
+    - compania
+    - companie
+    - companhia
+    - întreprinderea
+    - firma
+    - firm
+    - Εταιρεία
+    - Etaireia
+    - 公司
+    - 企業
+    - ファーム
+    - 企业
+  concern:
+    - kontsern
+    - concern
+    - konzern
+    - концерн
+    - مجموعة
+    - consorcio
+    - consórcio
+    - group of companies
+  consortium:
+    - consortium
+    - consorcio
+    - consórcio
+    - consortum
+    - konsortsium
+    - consortile
+  coop:
+    - co-op
+    - coop
+    - co-operation
+    - cooperation
+    - co-operative
+    - cooperative
+    - co-operative society
+    - coop society
+    - co-op society
+    - koperasi
+    - cooperative society
+    - coopératif
+    - kooperatif
+    - kooperativa
+    - kooperattiva
+    - coopération
+    - cooperativă
+    - coopérative
+    - kooperatsia
+    - cooperatieve
+    - cooperatives
+    - cooperativo
+    - cooperativa
+    - corporativo
+    - corporativos
+    - sociedad cooperativa
+    - spółdzielni
+    - кооперация
+    - Συνεταιρισμός
+    - Synetairismos
+  corp:
+    - corporation
+    - corporaton
+    - corporate
+    - сorporation
+    - corp
+    - корпорация
+    - корпорація
+    - مؤسسة
+    - corporación
+    - koroporatsiya
+    - korporatsiyi
+    - corporația
+    - corporaciia
+    - korporatsiia
+    - korporatsiya
+    - korporacija
+    - corporations
+    - corporacion
+    - корпорации
+    - корпарация
+    - корпорації
+    - корпораций
+    - società
+    - Εταιρικός Όμιλος
+    - 協力的な
+    - 生活協同組合
+    - 合作社
+  #
+  # *** D ***
+    defence:
+    - defence
+    - defense
+    - défense
+    - defensie
+    - defensiv
+    - defesa
+    - difesa
+    - försvar
+    - Verteidigung
+    - verdediging
+    - protecția
+    - försvar
+    - defensa
+    - оборонный
+    - оборон
+    dept:
+    - department
+    - dept.
+    - département
+    - departament
+    - departamento
+    - departamentul
+    - dipartimento
+    - Abteilung
+    - afdeling
+    - afdelingen
+    - отдел
+  dev:
+    - development
+    - dev
+    - devt
+    - devt.
+    - ανάπτυξη
+    - развитие
+    - развития
+    - развитию
+    - ανάπτυξης
+  # *** E ***
+  eng:
+    - engineering
+    - инженерия
+    - инжиниринг
+    - иинжиниринг
+    - иинженерно
+    - инжинириум
+    - engineering
+    - ingenierie
+    - ingegneri
+    - ingeniérie
+    - ingeniería
+    - inženýrství
+    - inženiring
+    - inzhiniring
+    - 工学
+    - エンジニアリング
+   enterprise:
+    - enterprise
+    - enterprises
+    - entreprise
+    - enterprises
+    - enterpraizes
+    - entreprises
+    - interprise
+    - предприятие
+    - пpедпpиятие
+    - предприиятие
+    - предприятия
+    - предпрятие
+    - предприятий
+    - predpriyatie
+    - empresa
+    - impresa
+    - предприемство
+    - підприємство
+    - 기업
+    - प्रतिष्ठान
+    - yritys
+  equipment:
+    - equipment
+    - equipement
+    - оборудование
+    - обрудование
+    - обрудования
+    - обрудованиями
+    - обрудованиях
+    - обрудованиям
+    - обрудованиями
+    - обрудовании
+    - оборудованиe
+    - оборудованию
+ #
+ # *** F ***
   factory:
     - factory
     - factories
@@ -498,77 +381,27 @@ org_symbols:
     - 厂家
     - 厂子
     - plant
-  fund:
-    - fund
-    - fond
-    - fondo
-    - fonds
-    - fundo
-    - fondovy
+  fdn:
+    - foundation
+    - foudation
     - фонд
-    - صندوق
-  intl:
-    - intl
-    - int'l
-    - international
-    - internațional
-    - internantional
-    - internatsionale
-    - internationales
-    - internasional
-    - интернациональный
-    - интернациональная
-    - интернациональные
-    - internationale
-    - internacional
-    - internacionais
-    - internacionales
-    - інтернейшнл
-    - internazionale
-    - internazionali
-    - 国際的
-    - 国際
-    - 国际的
-    - 国际
-  grp:
-    - group
-    - группа
-    - групп
-    - groupement
-    - groupe
-    - Grupa
-    - grupė
-    - Grupul
-    - Grúpa
-    - grup
-    - Όμιλος
-    - Ομάδα
-    - Skupina
-    - Grupa
-    - 团体
-    - 团
-    - 集体
-  mgmt:
-    - management
-    - мanagement
-    - менеджмент
-    - упрвлению
-    - менеджмента
-    - менеджменту
-    - إدارة
-    - управление
-    - управления
-    - ўпраўлення
-    - упарвлению
-    - упарвления
-    - управлениe
-    - управлению
-    - gestión
-    - Διαχείριση
-    - Epicheirisi
-    - 管理
-    - 辖
-    - 机场
+    - fundacja
+    - fundacion
+    - fondation
+    - fundație
+    - fundacija
+    - Foundation
+    - Fondacion
+    - Fondacioni
+    - Fundación
+    - fundația
+    - Stiftung
+    - Stichting
+    - Ίδρυμα
+    - fdn
+    - 財団
+    - 基金
+    - 設立
   fed:
     - federal
     - федеральное
@@ -608,135 +441,98 @@ org_symbols:
     - federalny
     - federalna
     - federāla
-  natl:
-    - national
-    - национальный
-    - национальная
-    - национальные
-    - национального
-    - национальной
-    - национальных
-    - национальнoе
-    - национальнaя
-    - национальнoй
-    - национальнoго
-    - национальнoе
-    - национальнoй
-    - nationalnyy
-    - nacionalnyy
-    - nacionalna
-    - nazionale
-    - nacional
-    - nationell
-    - nasjonale
-    - ulusal
-    - narodowy
-    - národní
-    - landelijk
-    - valstybinis
-    - 国立
-    - 国家的
-  republic:
-    - republic
-    - republics
-    - республика
-    - республиканский
-    - республиканская
-    - республиканские
-    - республиканского
-    - республиканской
-    - république
-    - republik
-    - repubblica
-    - republika
-    - república
-    - 共和国
-    - cumhuriyet
-    - جمهورية
-    - respublika
-    - respublik
-  institute:
-    - institute
-    - insitute
-    - institut
-    - inštitút
-    - школа
-    - институт
-    - інститут
-    - Ινστιτούτο
-    - institutu
-    - instituta
-    - instituto
-    - instituti
-    - inštitut
-    - instituição
-    - ynstytut
-    - institiut
-    - institūts
-    - instytutu
-    - instituut
-    - instytut
-    - istituto
-    - institutas
-    - institutul
-    - instituutti
-    - industite
-    - instituutin
-    - inštituta
-    - institutului
-    - 研究所
-    - 学院
-  academy:
-    - academy
-    - academie
-    - akademie
-    - akademija
-    - akademiia
-    - akademiya
-    - akademi
-    - akadēmija
-    - akadēmijas
-    - akadēmijā
-    - akadēmijai
-    - akadēmijām
-    - akademii
-    - akademiia
-    - akademiya
-    - akademiia
-    - академия
-    - академии
-    - академиии
-    - академиию
-  institution:
-    - учреждение
-    - institution
-    - institucija
-    - instituția
-    - учраждение
-    - учреджение
-    - учреждениение
-  fdn:
-    - foundation
-    - foudation
+  financial:
+    - financial
+    - finance
+    - finances
+    - финансирование
+    - финансирования
+    - финансовый
+    - финансовая
+    - финансовые
+    - финансовых
+    - финансового
+    - финансовой
+  flight:
+    - flight
+    - flights
+    - полет
+    - полеты
+    - полетах
+    - полетам
+    - полетами
+    - полете
+    - полетов
+    - рейс
+    - рейсы
+    - рейсов
+  fund:
+    - fund
+    - fond
+    - fondo
+    - fonds
+    - fundo
+    - fondovy
     - фонд
-    - fundacja
-    - fundacion
-    - fondation
-    - fundație
-    - fundacija
-    - Foundation
-    - Fondacion
-    - Fondacioni
-    - Fundación
-    - fundația
-    - Stiftung
-    - Stichting
-    - Ίδρυμα
-    - fdn
-    - 財団
-    - 基金
-    - 設立
-  industry:
+    - صندوق
+  #
+  # *** G ***
+   grp:
+    - group
+    - группа
+    - групп
+    - groupement
+    - groupe
+    - Grupa
+    - grupė
+    - Grupul
+    - Grúpa
+    - grup
+    - Όμιλος
+    - Ομάδα
+    - Skupina
+    - Grupa
+    - 团体
+    - 团
+    - 集体
+  #
+  # *** H ***
+  health:
+    - health
+    - healthcare
+  holding:
+    - holding
+    - holdings
+    - проведение
+    - холдинг
+    - холдинг
+    - хлдинг
+    - xoлдиhг
+    - kholdyng
+    - القابضة
+    - Συμμετοχών
+    - Symmetochon
+    - Συμμετοχές
+    - Symmetoches
+    - 集体
+    - 保持
+    - 保有資産
+  hospital:
+    - hospital
+    - hospitals
+    - госпиталь
+    - госпиталя
+    - госпиталях
+    - госпиталям
+    - госпиталями
+    - госпитале
+    - больница
+    - больницы
+    - больницах
+    - больницам
+  #
+  # *** I ***
+   industry:
     - industry
     - industries
     - indastris
@@ -779,52 +575,93 @@ org_symbols:
     - indústria
     - endustriyel
     - 業界
-  eng:
-    - engineering
-    - инженерия
-    - инжиниринг
-    - иинжиниринг
-    - иинженерно
-    - инжинириум
-    - engineering
-    - ingenierie
-    - ingegneri
-    - ingeniérie
-    - ingeniería
-    - inženýrství
-    - inženiring
-    - inzhiniring
-    - 工学
-    - エンジニアリング
-  scientific:
-    - scientific
-    - science
-    - sciences
-    - science and technology
-    - научный
-    - научная
-    - научные
-    - научных
-    - научного
-    - научной
-    - научно-исследовательский
-  health:
-    - health
-    - healthcare
-  pharmacy:
-    - pharmacy
-    - фармацевтический
-    - apotheke
-  associates:
-    - associates
-    - ассоциированные
-  network:
-    - network
-    - networks
-    - netzwerk
-    - сетевой
-    - сетевые
-    - сетевое
+  information:
+    - information
+    - info
+    - information
+    - informatics
+    - informatyka
+    - informatica
+    - informatyki
+    - информация
+    - информациями
+    - информацией
+    - информационное
+    - информационные
+    - информационных
+  insurance:
+    - insurance
+    - insurans
+    - insurance company
+    - versicherung
+    - versicherungen
+    - versicherungsgesellschaft
+    - verzekeringsmaatschappij
+    - verzekeringsmaatschappijen
+    - страхового
+    - страховая
+  institute:
+    - institute
+    - insitute
+    - institut
+    - inštitút
+    - школа
+    - институт
+    - інститут
+    - Ινστιτούτο
+    - institutu
+    - instituta
+    - instituto
+    - instituti
+    - inštitut
+    - instituição
+    - ynstytut
+    - institiut
+    - institūts
+    - instytutu
+    - instituut
+    - instytut
+    - istituto
+    - institutas
+    - institutul
+    - instituutti
+    - industite
+    - instituutin
+    - inštituta
+    - institutului
+    - 研究所
+    - 学院
+  institution:
+    - учреждение
+    - institution
+    - institucija
+    - instituția
+    - учраждение
+    - учреджение
+    - учреждениение
+  intl:
+    - intl
+    - int'l
+    - international
+    - internațional
+    - internantional
+    - internatsionale
+    - internationales
+    - internasional
+    - интернациональный
+    - интернациональная
+    - интернациональные
+    - internationale
+    - internacional
+    - internacionais
+    - internacionales
+    - інтернейшнл
+    - internazionale
+    - internazionali
+    - 国際的
+    - 国際
+    - 国际的
+    - 国际
   investment:
     - investment
     - investmet
@@ -856,38 +693,6 @@ org_symbols:
     - investicija
     - invesment
     - invesmenti
-  dev:
-    - development
-    - dev
-    - devt
-    - devt.
-    - ανάπτυξη
-    - развитие
-    - развития
-    - развитию
-    - ανάπτυξης
-  enterprise:
-    - enterprise
-    - enterprises
-    - entreprise
-    - enterprises
-    - enterpraizes
-    - entreprises
-    - interprise
-    - предприятие
-    - пpедпpиятие
-    - предприиятие
-    - предприятия
-    - предпрятие
-    - предприятий
-    - predpriyatie
-    - empresa
-    - impresa
-    - предприемство
-    - підприємство
-    - 기업
-    - प्रतिष्ठान
-    - yritys
   islamic:
     - islamic
     - исламский
@@ -905,6 +710,320 @@ org_symbols:
     - islam
     - islamo
     - islâmico
+  #
+  # *** M ***
+  maritime:
+    - maritime
+    - maritim
+    - морская
+    - морской
+    - морские
+    - морских
+    - морского
+  mgmt:
+    - management
+    - мanagement
+    - менеджмент
+    - упрвлению
+    - менеджмента
+    - менеджменту
+    - إدارة
+    - управление
+    - управления
+    - ўпраўлення
+    - упарвлению
+    - упарвления
+    - управлениe
+    - управлению
+    - gestión
+    - Διαχείριση
+    - Epicheirisi
+    - 管理
+    - 辖
+    - 机场
+  #
+  # *** N ***
+  natl:
+    - national
+    - национальный
+    - национальная
+    - национальные
+    - национального
+    - национальной
+    - национальных
+    - национальнoе
+    - национальнaя
+    - национальнoй
+    - национальнoго
+    - национальнoе
+    - национальнoй
+    - nationalnyy
+    - nacionalnyy
+    - nacionalna
+    - nazionale
+    - nacional
+    - nationell
+    - nasjonale
+    - ulusal
+    - narodowy
+    - národní
+    - landelijk
+    - valstybinis
+    - 国立
+    - 国家的
+  naval:
+    - naval
+    - navy
+  network:
+    - network
+    - networks
+    - netzwerk
+    - сетевой
+    - сетевые
+    - сетевое
+  npp:
+    - research and production association
+    - npp
+    - НПП
+    - research and production enterprise
+    - research and production corporation
+    - research & production corporation
+    - research & production
+    - research and production
+    - research and production company
+    - research & production association
+    - Naukovo-vyrobnyche pidpryiemstvo
+    - NAUCHNO-PROIZVODSTVENNOE PREDPRIYATIE
+    - ENGINEERING AND CONSTRUCTION
+    - Kutató- és Termelővállalat
+    - Întreprinderea de cercetare și producție
+    - Corporația de cercetare și producție
+    - Scientific and Production Enterprise
+    - Scientific and Production
+    - Научно-производственное предприятие
+    - Научно-производственное
+    - Науково-виробниче підприємство
+    - Науково-виробниче
+  nuclear:
+    - niwclear # cy
+    - nuclear # en, es, pt
+    - nucleair # nl
+    - nucleare # it
+    - nucleares # pt (plural)
+    - nucléaire # fr singular
+    - nucléaires # fr plural
+    - nuklear # de
+    - nükleer # tr
+    - nyuklia # sw
+    - nuklearny # pl (masculine)
+    - nuklearna # pl (f)
+    - nuklearne # pl (neuter)
+    - πυρηνικός # el (masculine)
+    - πυρηνική # el (feminine)
+    - πυρηνικό # el (neuter)
+    - ядерный # ru (masculine)
+    - ядерная # ru (feminine)
+    - ядерное # ru (neuter)
+    - ядерные # ru (plural)
+    - ядерний # uk (masculine)
+    - ядерна # uk (feminine)
+    - ядерне # uk (neuter)
+    - ядерні # uk (plural)
+    - 核能 # zh
+    - 核的 # zh
+  #
+  # *** O ***
+  org:
+    - organization
+    - organisation
+    - organisations
+    - org
+    - организація
+    - orhanizatsiia
+    - orhanizatsiya
+    - organisasjon
+    - organisasjonen
+    - organisatie
+    - organzation
+    - orhanizatsiino
+    - organizatsiya
+    - organizacion
+    - organizacja
+    - organizácie
+    - organizácia
+    - organizaciju
+    - organizace
+    - organizacije
+    - organizacija
+    - organizaci
+    - organizatia
+    - органищация
+    - организациями
+    - организация
+    - организации
+    - organizatsii
+    - organizația
+    - organización
+    - organisaatio
+    - Οργανισμός
+    - Organismos
+    - ファーム
+    - 団体
+    - 協会
+  #
+  # *** P ***
+  pharmacy:
+    - pharmacy
+    - фармацевтический
+    - apotheke
+  property:
+    - property
+    - properties
+    - собственность
+    - собственностью
+    - собственностью
+    - собственностью
+    - собственностью
+    - собственностью
+    - собственностью
+    - собственности
+    #
+  # *** R ***
+  realty:
+    - realty
+    - realtor
+    - real estate
+    - недвижимость
+    - недвижимостью
+    - недвижимостями
+    - недвижимостях
+    - недвижимостью
+  republic:
+    - republic
+    - republics
+    - республика
+    - республиканский
+    - республиканская
+    - республиканские
+    - республиканского
+    - республиканской
+    - république
+    - republik
+    - repubblica
+    - republika
+    - república
+    - 共和国
+    - cumhuriyet
+    - جمهورية
+    - respublika
+    - respublik
+    #
+  # *** S ***
+  scientific:
+    - scientific
+    - science
+    - sciences
+    - science and technology
+    - научный
+    - научная
+    - научные
+    - научных
+    - научного
+    - научной
+    - научно-исследовательский
+  service:
+    - service
+    - services
+    - servicios
+    - службы
+    - служба
+  special:
+    - Specjalnych
+    - specială
+    - special
+    - Speciaal
+    - Specijalni
+    - Специальный
+  supply:
+    - supply
+    - supplies
+    - supplier
+    #
+  # *** T ***
+  tech:
+    - technology
+    - технология
+    - технологии
+    - техника
+    - тэхники
+    - тэхніка
+    - технікал
+    - технологія
+    - технології
+    - тэхналогіі
+    - тэхналогій
+    - технологій
+    - технологий
+    - технолоджі
+    - технолоджи
+    - технологиями
+    - технологічне
+    - technalohiy
+    - tekhnolohiia
+    - technológiai
+    - tehnologiei
+    - tehnologică
+    - technologickou
+    - technological
+    - technologique
+    - tehnološko
+    - tecnologies
+    - tecnologia
+    - technológií
+    - tehnologie
+    - tehnologiju
+    - tekhnology
+    - tekhnologi
+    - teknologiya
+    - tehnološki
+    - teknoloġija
+    - tehnologia
+    - technologická
+    - technik
+    - teknologii
+    - tekhnolohiyi
+    - tekhnologii
+    - technologií
+    - tecnología
+    - tehnologii
+    - tekhnologiya
+    - tekhnologiy
+    - technológiák
+    - technologie
+    - technologia
+    - technologies
+    - technologijų
+    - technologii
+    - tecnologias
+    - tekhnolohii
+    - 技术
+    - 工艺学
+    - τεχνολογία
+    - τεχνολογίες
+    - τεχνολογίας
+  tpb:
+    - corporația de rachete balistice tactice
+    - društvo za taktičke projektile
+    - tactical missile company
+    - tactical missiles company
+    - tactical missile corporation
+    - tactical missiles corporation
+    - takticheskoe raketnoe vooruzhenie
+    - тактическое ракетное вооружение
+    - тактичне ракетне озброєння
+    ##########################
+
+
   research:
     - research
     - исследование
@@ -1016,17 +1135,6 @@ org_symbols:
     - kombinat
     - комбинат
     - Kombinatas
-  central:
-    - central
-    - centrala
-    - centrale
-    - centralele
-    - centrali
-    - центральный
-    - центральная
-    - центральные
-    - центрального
-    - центральной
   general:
     - general
     - генеральный
@@ -1059,18 +1167,7 @@ org_symbols:
     - транспортировке
     - транспортировок
     - транспортировке
-  financial:
-    - financial
-    - finance
-    - finances
-    - финансирование
-    - финансирования
-    - финансовый
-    - финансовая
-    - финансовые
-    - финансовых
-    - финансового
-    - финансовой
+
   comms:
     - communications
     - communication
@@ -1080,20 +1177,7 @@ org_symbols:
     - коммуникация
     - коммуникации
     - коммуникаций
-  information:
-    - information
-    - info
-    - information
-    - informatics
-    - informatyka
-    - informatica
-    - informatyki
-    - информация
-    - информациями
-    - информацией
-    - информационное
-    - информационные
-    - информационных
+
   electronic:
     - electronic
     - electronics
@@ -1536,52 +1620,8 @@ org_symbols:
     - медицинские
     - медицинского
     - медицинской
-  hospital:
-    - hospital
-    - hospitals
-    - госпиталь
-    - госпиталя
-    - госпиталях
-    - госпиталям
-    - госпиталями
-    - госпитале
-    - больница
-    - больницы
-    - больницах
-    - больницам
-  tpb:
-    - corporația de rachete balistice tactice
-    - društvo za taktičke projektile
-    - tactical missile company
-    - tactical missiles company
-    - tactical missile corporation
-    - tactical missiles corporation
-    - takticheskoe raketnoe vooruzhenie
-    - тактическое ракетное вооружение
-    - тактичне ракетне озброєння
-  npp:
-    - research and production association
-    - npp
-    - НПП
-    - research and production enterprise
-    - research and production corporation
-    - research & production corporation
-    - research & production
-    - research and production
-    - research and production company
-    - research & production association
-    - Naukovo-vyrobnyche pidpryiemstvo
-    - NAUCHNO-PROIZVODSTVENNOE PREDPRIYATIE
-    - ENGINEERING AND CONSTRUCTION
-    - Kutató- és Termelővállalat
-    - Întreprinderea de cercetare și producție
-    - Corporația de cercetare și producție
-    - Scientific and Production Enterprise
-    - Scientific and Production
-    - Научно-производственное предприятие
-    - Научно-производственное
-    - Науково-виробниче підприємство
-    - Науково-виробниче
+
+
 person_symbols:
   jr:
     - "Jr"
