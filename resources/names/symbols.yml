@@ -933,6 +933,16 @@ org_symbols:
     - учраждение
     - учреджение
     - учреждениение
+  intel:
+    - intel  # en (abbreviation)
+    - intelligence  # en
+    - inteligencia  # es
+    - inteligência  # pt
+    - intelijen  # id
+    - inteligjenca # sq
+    - inteligjencës  # sq
+    - wywiadu # pl
+    - разведывательное # ru
   intl:
     - intl
     - int'l
