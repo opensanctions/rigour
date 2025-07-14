@@ -5,9 +5,9 @@ from functools import lru_cache
 from typing import List, Optional, Set, Tuple
 # from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 
+from followthemoney import Dataset
 from nomenklatura import settings
 from nomenklatura.cache import Cache
-from nomenklatura.dataset import Dataset
 from nomenklatura.wikidata import WikidataClient
 
 from namesdb.db import store_mapping, engine, metadata
