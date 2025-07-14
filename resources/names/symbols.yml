@@ -155,7 +155,7 @@ org_symbols:
     - bankası
     - banki
     - 銀行
- branch:
+  branch:
     - branch
     - branch of
     - филиал
@@ -200,8 +200,8 @@ org_symbols:
     - center
     - centre
     - centras
-    - Centro
-    - Centrum
+    - centro
+    - centrum
     - centr
     - centro
     - tsentrov
@@ -601,13 +601,13 @@ org_symbols:
     - fondation
     - fundație
     - fundacija
-    - Foundation
-    - Fondacion
-    - Fondacioni
-    - Fundación
+    - foundation
+    - fondacion
+    - fondacioni
+    - fundación
     - fundația
-    - Stiftung
-    - Stichting
+    - stiftung
+    - stichting
     - Ίδρυμα
     - fdn
     - 財団
@@ -765,15 +765,15 @@ org_symbols:
     - групп
     - groupement
     - groupe
-    - Grupa
+    - grupa
     - grupė
-    - Grupul
-    - Grúpa
+    - grupul
+    - grúpa
     - grup
     - Όμιλος
     - Ομάδα
-    - Skupina
-    - Grupa
+    - skupina
+    - grupa
     - 团体
     - 团
     - 集体
@@ -795,7 +795,7 @@ org_symbols:
     - Συμμετοχών
     - Symmetochon
     - Συμμετοχές
-    - Symmetoches
+    - symmetoches
     - 集体
     - 保持
     - 保有資産
@@ -895,6 +895,7 @@ org_symbols:
     - insurance
     - insurans
     - insurance company
+    - insurer
     - versicherung
     - versicherungen
     - versicherungsgesellschaft
@@ -976,6 +977,7 @@ org_symbols:
     - 国际
   investment:
     - investment
+    - investments   # en (plural)
     - investmet
     - invest
     - investments
