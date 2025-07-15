@@ -5,6 +5,22 @@ ordinals:
   # Covers certain variants e.g. IIIIth as well as IVth for 4th.
   # Ordinals of the form 1a, 2a etc have been left out as these could be flat/apartment numbers etc.
   # Rare English variants such as 3d have also been omitted for the same reason.
+  # Zero is included even though it is not always considered to be an ordinal. It is occassional used for street numbers.
+  0:
+    - "Zeroth"   # en
+    - "Zero"   # en
+    - "Nil "   # en
+    - "Nought"  # en
+    - "Nullter"   # de
+    - "Null"   # de
+    - "0th"
+    - "０"   # Unicode symbol for fullwidth digit (used in China and Japan)
+     - "No0"
+    - "No 0"
+    - "No.0"
+    - "No. 0"
+    - "№0"
+    - "№ 0"
   1:
     - "First"
     - "One"
