@@ -14,7 +14,6 @@ ordinals:
     - "Nullter"   # de
     - "Null"   # de
     - "0th"
-    - "0.0"
     - "０"   # Unicode symbol for fullwidth digit (used in China and Japan)
     - "0.0"
     - "(0)"
@@ -1161,7 +1160,7 @@ ordinals:
     - "thirtysix"
     - "thirtysixth"
     - "thirty six"
-    - "thirty-sixth"
+    - "thirty sixth"
     - "36th"
     - "36e"
     - "36ú"
@@ -1351,7 +1350,8 @@ ordinals:
   41:
     - "Forty-first"
     - "Fourty-first"   # misspelling
-    - "Forty one"
+    - "Forty-one"
+    - "Fourty-one"   # misspelling
     - "Fortyfirst"
     - "Fortyone"
     - "Forty first"
@@ -1660,7 +1660,7 @@ ordinals:
     - "forty-nine"
     - "fortyninth"
     - "fortynine"
-    - "forty-ninth"
+    - "forty ninth"
     - "forty nine"
     - "49th"
     - "49e"
@@ -3474,8 +3474,8 @@ ordinals:
     - "ninety-ninth"
     - "ninetynine"
     - "ninetyninth"
-    - "ninety-nine"
-    - "ninety-ninth"
+    - "ninety nine"
+    - "ninety ninth"
     - "99th"
     - "99e"
     - "99ú"
