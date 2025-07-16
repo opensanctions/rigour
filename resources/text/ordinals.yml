@@ -5,7 +5,7 @@ ordinals:
   # Covers certain variants e.g. IIIIth as well as IVth for 4th.
   # Ordinals of the form 1a, 2a etc have been left out as these could be flat/apartment numbers etc.
   # Rare English variants such as 3d have also been omitted for the same reason.
-  # Zero is included even though it is not always considered to be an ordinal. It is occassional used for street numbers.
+  # Zero is included even though it is not always considered to be an ordinal. It is occassionally used for street numbers.
   0:
     - "Zeroth"   # en
     - "Zero"   # en
