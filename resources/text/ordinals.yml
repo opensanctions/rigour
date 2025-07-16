@@ -2267,7 +2267,11 @@ ordinals:
     - "第陆拾肆"
   65:
     - "65"
+    - "sixty-fifth"
     - "sixty-five"
+    - "sixtyfifth"
+    - "sixtyfive"
+    - "sixty fifth"
     - "sixty five"
     - "65th"
     - "65e"
@@ -2301,7 +2305,11 @@ ordinals:
     - "第陆拾伍"
   66:
     - "66"
+    - "sixty-sixth"
     - "sixty-six"
+    - "sixtysixth"
+    - "sixtysix"
+    - "sixty sixth"
     - "sixty six"
     - "66th"
     - "66e"
