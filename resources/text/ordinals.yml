@@ -3344,7 +3344,11 @@ ordinals:
     - "第玖拾肆"
   95:
     - "95"
+    - "ninety-fifth"
     - "ninety-five"
+    - "ninetyfifth"
+    - "ninetyfive"
+    - "ninety fifth"
     - "ninety five"
     - "95th"
     - "95e"
@@ -3378,7 +3382,11 @@ ordinals:
     - "第玖拾伍"
   96:
     - "96"
+    - "ninety-sixth"
     - "ninety-six"
+    - "ninetysixth"
+    - "ninetysix"
+    - "ninety sixth"
     - "ninety six"
     - "96th"
     - "96e"
