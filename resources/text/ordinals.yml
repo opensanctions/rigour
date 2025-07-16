@@ -2187,7 +2187,11 @@ ordinals:
     - "第陆拾贰"
   63:
     - "63"
+    - "sixty-third"
     - "sixty-three"
+    - "sixtythird"
+    - "sixtythree"
+    - "sixty third"
     - "sixty three"
     - "63rd"
     - "63e"
@@ -2223,7 +2227,11 @@ ordinals:
     - "第陆拾叁"
   64:
     - "64"
+    - "sixty-fourth"
     - "sixty-four"
+    - "sixtyfourth"
+    - "sixtyfour"
+    - "sixty fourth"
     - "sixty four"
     - "64th"
     - "64e"
