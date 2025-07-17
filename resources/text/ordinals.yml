@@ -23,6 +23,8 @@ ordinals:
     - "No. 0"
     - "№0"
     - "№ 0"
+    - "零"
+    - "〇"   # Ideograph number zero (Han Script)
   1:
     - "First"
     - "One"
