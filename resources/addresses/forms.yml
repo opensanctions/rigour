@@ -55,6 +55,9 @@ forms:
     - district
     - bezirk
     - distrikt
+  bch:
+    - beach
+    - пляж
   ed:
     - edificio
     - edifice
