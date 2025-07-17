@@ -26,6 +26,7 @@ FORMS: Dict[str, List[str]] = {
         "bezirk",
         "distrikt",
     ],
+    "bch": ["beach", "пляж"],
     "ed": ["edificio", "edifice"],
     "blk": ["block", "блок"],
     "nat": ["national"],

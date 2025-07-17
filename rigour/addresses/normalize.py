@@ -114,7 +114,7 @@ def _address_replacer(latinize: bool = False) -> Replacer:
         for value in values:
             value_norm = normalize_address(value, latinize=latinize, min_length=1)
             if value_norm is None:
-                log.warning("Value is normalized to null [%r]: %r", repl, value)
+                # log.warning("Value is normalized to null [%r]: %r", repl, value)
                 continue
             if value_norm != repl_norm:
                 if value_norm in mapping and mapping[value_norm] != repl_norm:
