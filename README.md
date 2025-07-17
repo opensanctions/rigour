@@ -15,7 +15,7 @@ pip install -U rigour
 
 ## Usage & documentation 
 
-See: https://opensanctions.github.io/rigour/
+See: https://rigour.followthemoney.tech/
 
 ## Acknowledgements
 

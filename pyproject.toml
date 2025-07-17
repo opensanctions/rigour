@@ -34,7 +34,7 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://opensanctions.github.io/rigour/"
+Documentation = "https://rigour.followthemoney.tech/"
 Repository = "https://github.com/opensanctions/rigour.git"
 Issues = "https://github.com/opensanctions/rigour/issues"
 
