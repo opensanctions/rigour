@@ -3133,7 +3133,11 @@ ordinals:
     - "第捌拾捌"
   89:
     - "89"
+    - "eighty-ninth"
     - "eighty-nine"
+    - "eightyninth"
+    - "eightynine"
+    - "eighty ninth"
     - "eighty nine"
     - "89th"
     - "89e"
@@ -3169,6 +3173,7 @@ ordinals:
     - "第捌拾玖"
   90:
     - "90"
+    - "ninetieth"
     - "ninety"
     - "90th"
     - "90e"
@@ -3202,7 +3207,11 @@ ordinals:
     - "第玖拾"
   91:
     - "91"
+    - "ninety-first"
     - "ninety-one"
+    - "ninetyfirst"
+    - "ninetyone"
+    - "ninety first"
     - "ninety one"
     - "91st"
     - "91e"
