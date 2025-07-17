@@ -307,6 +307,7 @@ org_symbols:
     - insurance
     - insurans
     - insurance company
+    - insurer
     - versicherung
     - versicherungen
     - versicherungsgesellschaft
@@ -314,6 +315,16 @@ org_symbols:
     - verzekeringsmaatschappijen
     - страхового
     - страховая
+  intel:
+    - intel  # en (abbreviation)
+    - intelligence  # en
+    - inteligencia  # es
+    - inteligência  # pt
+    - intelijen  # id
+    - inteligjenca # sq
+    - inteligjencës  # sq
+    - wywiadu # pl
+    - разведывательное # ru
   property:
     - property
     - properties
@@ -1582,6 +1593,14 @@ org_symbols:
     - Научно-производственное
     - Науково-виробниче підприємство
     - Науково-виробниче
+in liquidation:
+    - in liqu.   # de (abbreviation)
+    - in liquidation   # de, en
+    - in liquidazione   # it
+    - en liquidacion   # es
+    - en liquidation   # fr
+    - 清算中    # zh
+    - "/in liquidation/"   # used by certain Bulgarian companies
 person_symbols:
   jr:
     - "Jr"
