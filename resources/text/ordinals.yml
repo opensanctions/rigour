@@ -5,6 +5,26 @@ ordinals:
   # Covers certain variants e.g. IIIIth as well as IVth for 4th.
   # Ordinals of the form 1a, 2a etc have been left out as these could be flat/apartment numbers etc.
   # Rare English variants such as 3d have also been omitted for the same reason.
+  # Zero is included even though it is not always considered to be an ordinal. It is occassionally used for street numbers.
+  0:
+    - "Zeroth"   # en
+    - "Zero"   # en
+    - "Nil "   # en
+    - "Nought"  # en
+    - "Nullter"   # de
+    - "Null"   # de
+    - "0th"
+    - "０"   # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "0.0"
+    - "(0)"
+    - "No0"
+    - "No 0"
+    - "No.0"
+    - "No. 0"
+    - "№0"
+    - "№ 0"
+    - "零"
+    - "〇"   # Ideograph number zero (Han Script)
   1:
     - "First"
     - "One"
@@ -26,9 +46,11 @@ ordinals:
     - "1o"
     - "1ú"
     - "1º."
-    - "⒈" # Unicode symbol for number plus full stop
-    - "１" # Unicode symbol for fullwidth digit (used in China and Japan)
-    - "⑴" # Unicode symbol for parenthesized number"
+    - "⒈"   # Unicode symbol for number plus full stop
+    - "１"   # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑴"   # Unicode symbol for parenthesized number"
+    - "1.0"
+    - "(1)"
     - "No1"
     - "No 1"
     - "No.1"
@@ -36,7 +58,7 @@ ordinals:
     - "№1"
     - "№ 1"
     - "Ist"
-    - "I." # see if this backfires
+    - "I."   # see if this backfires
   2:
     - "Second"
     - "Two"
@@ -57,9 +79,11 @@ ordinals:
     - "2o"
     - "2ú"
     - "2º."
-    - "⒉" # Unicode symbol for number plus full stop
-    - "２" # Unicode symbol for fullwidth digit (used in China and Japan)
-    - "⑵" # Unicode symbol for parenthesized number"
+    - "⒉"   # Unicode symbol for number plus full stop
+    - "２"   # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑵"   # Unicode symbol for parenthesized number"
+    - "2.0"
+    - "(2)"
     - "No2"
     - "No 2"
     - "No.2"
@@ -67,7 +91,7 @@ ordinals:
     - "№2"
     - "№ 2"
     - "IInd"
-    - "II" # see if this backfires
+    - "II"   # see if this backfires
   3:
     - "Third"
     - "Three"
@@ -88,9 +112,11 @@ ordinals:
     - "3o"
     - "3ú"
     - "3º."
-    - "⒊" # Unicode symbol for number plus full stop
-    - "３" # Unicode symbol for fullwidth digit (used in China and Japan)
-    - "⑶" # Unicode symbol for parenthesized number
+    - "⒊"   # Unicode symbol for number plus full stop
+    - "３"   # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑶"   # Unicode symbol for parenthesized number
+    - "3.0"
+    - "(3)"
     - "No3"
     - "No 3"
     - "No.3"
@@ -98,7 +124,7 @@ ordinals:
     - "№3"
     - "№ 3"
     - "IIIrd"
-    - "III" # see if this backfires
+    - "III"   # see if this backfires
   4:
     - "Fourth"
     - "Four"
@@ -119,9 +145,11 @@ ordinals:
     - "4o"
     - "4ú"
     - "4º."
-    - "⒋" # Unicode symbol for number plus full stop
-    - "４" # Unicode symbol for fullwidth digit (used in China and Japan)
-    - "⑷" # Unicode symbol for parenthesized number
+    - "⒋"   # Unicode symbol for number plus full stop
+    - "４"   # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑷"   # Unicode symbol for parenthesized number
+    - "4.0"
+    - "(4)"
     - "No4"
     - "No 4"
     - "No.4"
@@ -152,9 +180,11 @@ ordinals:
     - "5o"
     - "5ú"
     - "5º."
-    - "⒌" # Unicode symbol for number plus full stop
-    - "５" # Unicode symbol for fullwidth digit (used in China and Japan)
-    - "⑸" # Unicode symbol for parenthesized number
+    - "⒌"   # Unicode symbol for number plus full stop
+    - "５"   # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑸"   # Unicode symbol for parenthesized number
+    - "5.0"
+    - "(5)"
     - "No5"
     - "No 5"
     - "No.5"
@@ -162,7 +192,7 @@ ordinals:
     - "№5"
     - "№ 5"
     - "Vth"
-    - "V." # see if this backfires
+    - "V."   # see if this backfires
   6:
     - "Sixth"
     - "Six"
@@ -183,9 +213,11 @@ ordinals:
     - "6o"
     - "6ú"
     - "6º."
-    - "⒍" # Unicode symbol for number plus full stop
-    - "６" # Unicode symbol for fullwidth digit (used in China and Japan)
-    - "⑹" # Unicode symbol for parenthesized number
+    - "⒍"   # Unicode symbol for number plus full stop
+    - "６"   # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑹"   # Unicode symbol for parenthesized number
+    - "6.0"
+    - "(6)"
     - "No6"
     - "No 6"
     - "No.6"
@@ -214,9 +246,11 @@ ordinals:
     - "7o"
     - "7ú"
     - "7º."
-    - "⒎" # Unicode symbol for number plus full stop
-    - "７" # Unicode symbol for fullwidth digit (used in China and Japan)
-    - "⑺" # Unicode symbol for parenthesized number
+    - "⒎"   # Unicode symbol for number plus full stop
+    - "７"   # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑺"   # Unicode symbol for parenthesized number
+    - "7.0"
+    - "(7)"
     - "No7"
     - "No 7"
     - "No.7"
@@ -245,9 +279,11 @@ ordinals:
     - "8o"
     - "8ú"
     - "8º."
-    - "⒏" # Unicode symbol for number plus full stop
-    - "８" # Unicode symbol for fullwidth digit (used in China and Japan)
-    - "⑻" # Unicode symbol for parenthesized number
+    - "⒏"   # Unicode symbol for number plus full stop
+    - "８"   # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑻"   # Unicode symbol for parenthesized number
+    - "8.0"
+    - "(8)"
     - "No8"
     - "No 8"
     - "No.8"
@@ -277,9 +313,11 @@ ordinals:
     - "9ú"
     - "9º."
     - "IXth"
-    - "⒐" # Unicode symbol for number plus full stop
-    - "９" # Unicode symbol for fullwidth digit (used in China and Japan)
-    - "⑼" # Unicode symbol for parenthesized number
+    - "⒐"   # Unicode symbol for number plus full stop
+    - "９"   # Unicode symbol for fullwidth digit (used in China and Japan)
+    - "⑼"   # Unicode symbol for parenthesized number
+    - "9.0"
+    - "(9)"
     - "No9"
     - "No 9"
     - "No.9"
@@ -308,8 +346,10 @@ ordinals:
     - "10o"
     - "10ú"
     - "10º."
-    - "⒑" # Unicode symbol for number plus full stop
-    - "⑽" # Unicode symbol for parenthesized number
+    - "⒑"   # Unicode symbol for number plus full stop
+    - "⑽"   # Unicode symbol for parenthesized number
+    - "10.0"
+    - "(10)"
     - "No10"
     - "No 10"
     - "No.10"
@@ -337,8 +377,11 @@ ordinals:
     - "11o"
     - "11ú"
     - "11º."
-    - "⒒" # Unicode symbol for number plus full stop
-    - "⑾" # Unicode symbol for parenthesized number
+    - "１１"   # fullwidth characters sometimes used in China and Japan
+    - "⒒"   # Unicode symbol for number plus full stop
+    - "⑾"   # Unicode symbol for parenthesized number
+    - "11.0"
+    - "(11)"
     - "No11"
     - "No 11"
     - "No.11"
@@ -366,8 +409,11 @@ ordinals:
     - "12o"
     - "12ú"
     - "12º."
-    - "⒓" # Unicode symbol for number plus full stop
-    - "⑿" # Unicode symbol for parenthesized number
+    - "１２"   # fullwidth characters sometimes used in China and Japan
+    - "⒓"   # Unicode symbol for number plus full stop
+    - "⑿"   # Unicode symbol for parenthesized number
+    - "12.0"
+    - "(12)"
     - "No12"
     - "No 12"
     - "No.12"
@@ -395,8 +441,11 @@ ordinals:
     - "13o"
     - "13ú"
     - "13º."
-    - "⒔" # Unicode symbol for number plus full stop
-    - "⒀" # Unicode symbol for parenthesized number
+    - "１３"   # fullwidth characters sometimes used in China and Japan
+    - "⒔"   # Unicode symbol for number plus full stop
+    - "⒀"   # Unicode symbol for parenthesized number
+    - "13.0"
+    - "(13)"
     - "No13"
     - "No 13"
     - "No.13"
@@ -424,8 +473,11 @@ ordinals:
     - "14o"
     - "14ú"
     - "14º."
-    - "⒕" # Unicode symbol for number plus full stop
-    - "⒁" # Unicode symbol for parenthesized number
+    - "１４"   # fullwidth characters sometimes used in China and Japan
+    - "⒕"   # Unicode symbol for number plus full stop
+    - "⒁"   # Unicode symbol for parenthesized number
+    - "14.0"
+    - "(14)"
     - "No14"
     - "No 14"
     - "No.14"
@@ -454,8 +506,11 @@ ordinals:
     - "15o"
     - "15ú"
     - "15º."
-    - "⒖" # Unicode symbol for number plus full stop
-    - "⒂" # Unicode symbol for parenthesized number
+    - "１５"   # fullwidth characters sometimes used in China and Japan
+    - "⒖"   # Unicode symbol for number plus full stop
+    - "⒂"   # Unicode symbol for parenthesized number
+    - "15.0"
+    - "(15)"
     - "No15"
     - "No 15"
     - "No.15"
@@ -483,8 +538,11 @@ ordinals:
     - "16o"
     - "16ú"
     - "16º."
-    - "⒗" # Unicode symbol for number plus full stop
-    - "⒃" # Unicode symbol for parenthesized number
+    - "１６"   # fullwidth characters sometimes used in China and Japan
+    - "⒗"   # Unicode symbol for number plus full stop
+    - "⒃"   # Unicode symbol for parenthesized number
+    - "16.0"
+    - "(16)"
     - "No16"
     - "No 16"
     - "No.16"
@@ -512,8 +570,11 @@ ordinals:
     - "17o"
     - "17ú"
     - "17º."
-    - "⒘" # Unicode symbol for number plus full stop
-    - "⒄" # Unicode symbol for parenthesized number
+    - "１７"   # fullwidth characters sometimes used in China and Japan
+    - "⒘"   # Unicode symbol for number plus full stop
+    - "⒄"   # Unicode symbol for parenthesized number
+    - "17.0"
+    - "(17)"
     - "No17"
     - "No 17"
     - "No.17"
@@ -541,8 +602,11 @@ ordinals:
     - "18o"
     - "18ú"
     - "18º."
-    - "⒙" # Unicode symbol for number plus full stop
-    - "⒅" # Unicode symbol for parenthesized number
+    - "⒙"   # Unicode symbol for number plus full stop
+    - "⒅"   # Unicode symbol for parenthesized number
+    - "１８"   # fullwidth characters sometimes used in China and Japan
+    - "18.0"
+    - "(18)"
     - "No18"
     - "No 18"
     - "No.18"
@@ -570,8 +634,11 @@ ordinals:
     - "19o"
     - "19ú"
     - "19º."
-    - "⒚" # Unicode symbol for number plus full stop
-    - "⒆" # Unicode symbol for parenthesized number
+    - "１９"   # fullwidth characters sometimes used in China and Japan
+    - "⒚"   # Unicode symbol for number plus full stop
+    - "⒆"   # Unicode symbol for parenthesized number
+    - "19.0"
+    - "(19)" 
     - "No19"
     - "No 19"
     - "No.19"
@@ -600,8 +667,11 @@ ordinals:
     - "20o"
     - "20ú"
     - "20º."
-    - "⒛" # Unicode symbol for number plus full stop
-    - "⒇" # Unicode symbol for parenthesized number
+    - "２０"   # fullwidth characters sometimes used in China and Japan
+    - "⒛"   # Unicode symbol for number plus full stop
+    - "⒇"   # Unicode symbol for parenthesized number
+    - "20.0"
+    - "(20)"
     - "No20"
     - "No 20"
     - "No.20"
@@ -633,6 +703,9 @@ ordinals:
     - "21o"
     - "21ú"
     - "21º."
+    - "２１"   # fullwidth characters sometimes used in China and Japan
+    - "21.0"
+    - "(21)"
     - "No21"
     - "No 21"
     - "No.21"
@@ -664,6 +737,9 @@ ordinals:
     - "22o"
     - "22ú"
     - "22º."
+    - "２２"   # fullwidth characters sometimes used in China and Japan
+    - "22.0"
+    - "(22)"
     - "No22"
     - "No 22"
     - "No.22"
@@ -695,6 +771,9 @@ ordinals:
     - "23o"
     - "23ú"
     - "23º."
+    - "２３"   # fullwidth characters sometimes used in China and Japan
+    - "23.0"
+    - "(23)"
     - "No23"
     - "No 23"
     - "No.23"
@@ -726,6 +805,9 @@ ordinals:
     - "24o"
     - "24ú"
     - "24º."
+    - "２４"   # fullwidth characters sometimes used in China and Japan
+    - "24.0"
+    - "(24)"
     - "No24"
     - "No 24"
     - "No.24"
@@ -756,6 +838,9 @@ ordinals:
     - "25o"
     - "25ú"
     - "25º."
+    - "２５"   # fullwidth characters sometimes used in China and Japan
+    - "25.0"
+    - "(25)"
     - "No25"
     - "No 25"
     - "No.25"
@@ -785,6 +870,9 @@ ordinals:
     - "26o"
     - "26ú"
     - "26º."
+    - "２６"   # fullwidth characters sometimes used in China and Japan
+    - "26.0"
+    - "(26)"
     - "No26"
     - "No 26"
     - "No.26"
@@ -814,6 +902,9 @@ ordinals:
     - "27o"
     - "27u"
     - "27º."
+    - "２７"   # fullwidth characters sometimes used in China and Japan
+    - "27.0"
+    - "(27)"
     - "No27"
     - "No 27"
     - "No.27"
@@ -843,6 +934,9 @@ ordinals:
     - "28o"
     - "28ú"
     - "28º."
+    - "２８"   # fullwidth characters sometimes used in China and Japan
+    - "28.0"
+    - "(28)"
     - "No28"
     - "No 28"
     - "No.28"
@@ -872,6 +966,9 @@ ordinals:
     - "29o"
     - "29ú"
     - "29º."
+    - "２９"   # fullwidth characters sometimes used in China and Japan
+    - "29.0"
+    - "(29)"
     - "No29"
     - "No 29"
     - "No.29"
@@ -899,6 +996,9 @@ ordinals:
     - "30º"
     - "30o"
     - "30ú"
+    - "３０"   # fullwidth characters sometimes used in China and Japan
+    - "30.0"
+    - "(30)"
     - "No30"
     - "No 30"
     - "No.30"
@@ -930,6 +1030,9 @@ ordinals:
     - "31º"
     - "31o"
     - "31ú"
+    - "３１"   # fullwidth characters sometimes used in China and Japan
+    - "31.0"
+    - "(31)"
     - "No31"
     - "No 31"
     - "No.31"
@@ -957,6 +1060,9 @@ ordinals:
     - "32º"
     - "32o"
     - "32ú"
+    - "３２"   # fullwidth characters sometimes used in China and Japan
+    - "32.0"
+    - "(32)"
     - "No32"
     - "No 32"
     - "No.32"
@@ -984,6 +1090,9 @@ ordinals:
     - "33º"
     - "33o"
     - "33ú"
+    - "３３"   # fullwidth characters sometimes used in China and Japan
+    - "33.0"
+    - "(33)"
     - "No33"
     - "No 33"
     - "No.33"
@@ -1011,6 +1120,9 @@ ordinals:
     - "34º"
     - "34o"
     - "34ú"
+    - "３４"   # fullwidth characters sometimes used in China and Japan
+    - "34.0"
+    - "(34)"
     - "No34"
     - "No 34"
     - "No.34"
@@ -1036,6 +1148,9 @@ ordinals:
     - "35º"
     - "35o"
     - "35ú"
+    - "３５"   # fullwidth characters sometimes used in China and Japan
+    - "35.0"
+    - "(35)"
     - "No35"
     - "No 35"
     - "No.35"
@@ -1047,7 +1162,7 @@ ordinals:
     - "thirtysix"
     - "thirtysixth"
     - "thirty six"
-    - "thirty-sixth"
+    - "thirty sixth"
     - "36th"
     - "36e"
     - "36ú"
@@ -1063,7 +1178,7 @@ ordinals:
     - "36-я"
     - "36-e"
     - "36:e"
-    - "３６" #  Full width characters sometimes used in China and Japan
+    - "３６"   #  fullwidth characters sometimes used in China and Japan
     - "36.0"
     - "(36)"
     - "Number 36"
@@ -1103,7 +1218,7 @@ ordinals:
     - "37-я"
     - "37-e"
     - "37:e"
-    - "３７" #  Full width characters sometimes used in China and Japan
+    - "３７"   #  fullwidth characters sometimes used in China and Japan
     - "37.0"
     - "(37)"
     - "Number 37"
@@ -1143,7 +1258,7 @@ ordinals:
     - "38-я"
     - "38-e"
     - "38:e"
-    - "３８" #  Full width characters sometimes used in China and Japan
+    - "３８"   #  fullwidth characters sometimes used in China and Japan
     - "38.0"
     - "(38)"
     - "Number 38"
@@ -1183,7 +1298,7 @@ ordinals:
     - "39-я"
     - "39-e"
     - "39:e"
-    - "３９" #  Full width characters sometimes used in China and Japan
+    - "３９"   #  fullwidth characters sometimes used in China and Japan
     - "39.0"
     - "(39)"
     - "Number 39"
@@ -1205,7 +1320,7 @@ ordinals:
   40:
     - "Fortieth"
     - "Forty"
-    - "Fourty" # common misspelling
+    - "Fourty"   # common misspelling
     - "Vierzigste"
     - "Vierzigster"
     - "40th"
@@ -1222,6 +1337,9 @@ ordinals:
     - "40º"
     - "40o"
     - "40ú"
+    - "４０"   # fullwidth characters sometimes used in China and Japan
+    - "40.0"
+    - "(40)"
     - "No40"
     - "No 40"
     - "No.40"
@@ -1233,8 +1351,9 @@ ordinals:
     - "XLth"
   41:
     - "Forty-first"
-    - "Fourty-first" # misspelling
-    - "Forty one"
+    - "Fourty-first"   # misspelling
+    - "Forty-one"
+    - "Fourty-one"   # misspelling
     - "Fortyfirst"
     - "Fortyone"
     - "Forty first"
@@ -1255,6 +1374,9 @@ ordinals:
     - "41º"
     - "41o"
     - "41ú"
+    - "４１"   # fullwidth characters sometimes used in China and Japan
+    - "41.0"
+    - "(41)" 
     - "No41"
     - "No 41"
     - "No.41"
@@ -1282,7 +1404,7 @@ ordinals:
     - "42-я"
     - "42-e"
     - "42:e"
-    - "４２" #  Full width characters sometimes used in China and Japan
+    - "４２"   #  fullwidth characters sometimes used in China and Japan
     - "42.0"
     - "(42)"
     - "Number 42"
@@ -1322,7 +1444,7 @@ ordinals:
     - "43-я"
     - "43-e"
     - "43:e"
-    - "４３" #  Full width characters sometimes used in China and Japan
+    - "４３"   #  fullwidth characters sometimes used in China and Japan
     - "43.0"
     - "(43)"
     - "Number 43"
@@ -1341,17 +1463,17 @@ ordinals:
     - "第肆拾叁"
   44:
     - "Forty-fourth"
-    - "Fourty-fourth" # misspelling
+    - "Fourty-fourth"   # misspelling
     - "Forty-four"
-    - "Fourty-four" # misspelling
+    - "Fourty-four"   # misspelling
     - "Fortyfourth"
-    - "Fourtyfourth" # misspelling
+    - "Fourtyfourth"   # misspelling
     - "Fortyfour"
-    - "Fourtyfour" # misspelling
+    - "Fourtyfour"   # misspelling
     - "Forty fourth"
-    - "Fourty fourth" # misspelling
+    - "Fourty fourth"   # misspelling
     - "Forty four"
-    - "Fourty four" # misspelling
+    - "Fourty four"   # misspelling
     - "Vierundvierzigste"
     - "Vierundvierzigster"
     - "44th"
@@ -1369,6 +1491,9 @@ ordinals:
     - "44º"
     - "44o"
     - "44ú"
+    - "４４"   # fullwidth characters sometimes used in China and Japan
+    - "44.0"
+    - "(44)"
     - "No44"
     - "No 44"
     - "No.44"
@@ -1396,7 +1521,7 @@ ordinals:
     - "45-я"
     - "45-e"
     - "45:e"
-    - "４５" #  Full width characters sometimes used in China and Japan
+    - "４５"   #  fullwidth characters sometimes used in China and Japan
     - "45.0"
     - "(45)"
     - "Number 45"
@@ -1434,7 +1559,7 @@ ordinals:
     - "46-я"
     - "46-e"
     - "46:e"
-    - "４６" #  Full width characters sometimes used in China and Japan
+    - "４６"   #  fullwidth characters sometimes used in China and Japan
     - "46.0"
     - "(46)"
     - "Number 46"
@@ -1474,7 +1599,7 @@ ordinals:
     - "47-я"
     - "47-e"
     - "47:e"
-    - "４７" #  Full width characters sometimes used in China and Japan
+    - "４７"   #  fullwidth characters sometimes used in China and Japan
     - "47.0"
     - "(47)"
     - "Number 47"
@@ -1514,7 +1639,7 @@ ordinals:
     - "48-я"
     - "48-e"
     - "48:e"
-    - "４８" #  Full width characters sometimes used in China and Japan
+    - "４８"   #  fullwidth characters sometimes used in China and Japan
     - "48.0"
     - "(48)"
     - "Number 48"
@@ -1537,7 +1662,7 @@ ordinals:
     - "forty-nine"
     - "fortyninth"
     - "fortynine"
-    - "forty-ninth"
+    - "forty ninth"
     - "forty nine"
     - "49th"
     - "49e"
@@ -1554,7 +1679,7 @@ ordinals:
     - "49-я"
     - "49-e"
     - "49:e"
-    - "４９" #  Full width characters sometimes used in China and Japan
+    - "４９"   #  fullwidth characters sometimes used in China and Japan
     - "49.0"
     - "(49)"
     - "Number 49"
@@ -1575,7 +1700,7 @@ ordinals:
     - "第肆拾玖"
   50:
     - "Fiftieth"
-    - "Fiftyth" # misspelling
+    - "Fiftyth"   # misspelling
     - "Fifty"
     - "Fünfzigste"
     - "Fünfzigster"
@@ -1593,6 +1718,9 @@ ordinals:
     - "50º"
     - "50o"
     - "50ú"
+    - "５０"   # fullwidth characters sometimes used in China and Japan
+    - "50.0"
+    - "(50.0)"
     - "No50"
     - "No 50"
     - "No.50"
@@ -1622,7 +1750,7 @@ ordinals:
     - "51-я"
     - "51-e"
     - "51:a"
-    - "５１" #  Full width characters sometimes used in China and Japan
+    - "５１"   #  fullwidth characters sometimes used in China and Japan
     - "51.0"
     - "(51)"
     - "Number 51"
@@ -1660,7 +1788,7 @@ ordinals:
     - "52-я"
     - "52-e"
     - "52:e"
-    - "５２" #  Full width characters sometimes used in China and Japan
+    - "５２"   #  fullwidth characters sometimes used in China and Japan
     - "52.0"
     - "(52)"
     - "Number 52"
@@ -1698,7 +1826,7 @@ ordinals:
     - "53-я"
     - "53-e"
     - "53:e"
-    - "５３" #  Full width characters sometimes used in China and Japan
+    - "５３"   #  fullwidth characters sometimes used in China and Japan
     - "53.0"
     - "(53)"
     - "Number 53"
@@ -1738,7 +1866,7 @@ ordinals:
     - "54-я"
     - "54-e"
     - "54:e"
-    - "５４" #  Full width characters sometimes used in China and Japan
+    - "５４"   #  fullwidth characters sometimes used in China and Japan
     - "54.0"
     - "(54)"
     - "Number 54"
@@ -1776,7 +1904,7 @@ ordinals:
     - "55-я"
     - "55-e"
     - "55:e"
-    - "５５" #  Full width characters sometimes used in China and Japan
+    - "５５"   #  fullwidth characters sometimes used in China and Japan
     - "55.0"
     - "(55)"
     - "Number 55"
@@ -1814,7 +1942,7 @@ ordinals:
     - "56-я"
     - "56-e"
     - "56:e"
-    - "５６" #  Full width characters sometimes used in China and Japan
+    - "５６"   #  fullwidth characters sometimes used in China and Japan
     - "56.0"
     - "(56)"
     - "Number 56"
@@ -1832,7 +1960,11 @@ ordinals:
   57:
     - "57"
     - "fifty-seven"
+    - "fifty-seventh"
+    - "fiftyseven"
+    - "fiftyseventh"
     - "fifty seven"
+    - "fifty seventh"
     - "57th"
     - "57e"
     - "57ú"
@@ -1848,7 +1980,7 @@ ordinals:
     - "57-я"
     - "57-e"
     - "57:e"
-    - "５７" #  Full width characters sometimes used in China and Japan
+    - "５７"   #  fullwidth characters sometimes used in China and Japan
     - "57.0"
     - "(57)"
     - "Number 57"
@@ -1867,7 +1999,11 @@ ordinals:
     - "第伍拾柒"
   58:
     - "58"
+    - "fifty-eighth"
     - "fifty-eight"
+    - "fiftyeighth"
+    - "fiftyeight"
+    - "fifty eighth"
     - "fifty eight"
     - "58th"
     - "58e"
@@ -1884,7 +2020,7 @@ ordinals:
     - "58-я"
     - "58-e"
     - "58:e"
-    - "５８" #  Full width characters sometimes used in China and Japan
+    - "５８"   #  fullwidth characters sometimes used in China and Japan
     - "58.0"
     - "(58)"
     - "Number 58"
@@ -1904,7 +2040,11 @@ ordinals:
   59:
     - "59"
     - "fifty-nine"
+    - "fifty-ninth"
+    - "fiftynine"
+    - "fiftyninth"
     - "fifty nine"
+    - "fifty ninth"
     - "59th"
     - "59e"
     - "59ú"
@@ -1920,7 +2060,7 @@ ordinals:
     - "59-я"
     - "59-e"
     - "59:e"
-    - "５９" #  Full width characters sometimes used in China and Japan
+    - "５９"   #  fullwidth characters sometimes used in China and Japan
     - "59.0"
     - "(59)"
     - "Number 59"
@@ -1938,6 +2078,7 @@ ordinals:
   60:
     - "60"
     - "sixty"
+    - "sixtieth"
     - "60th"
     - "60e"
     - "60ú"
@@ -1953,7 +2094,7 @@ ordinals:
     - "60-я"
     - "60-e"
     - "60:e"
-    - "６０" #  Full width characters sometimes used in China and Japan
+    - "６０"   #  fullwidth characters sometimes used in China and Japan
     - "60.0"
     - "(60)"
     - "Number 60"
@@ -1971,7 +2112,11 @@ ordinals:
   61:
     - "61"
     - "sixty-one"
+    - "sixty-first"
+    - "sixtyone"
+    - "sixtyfirst"
     - "sixty one"
+    - "sixty first"
     - "61st"
     - "61e"
     - "61ú"
@@ -1987,7 +2132,7 @@ ordinals:
     - "61-я"
     - "61-e"
     - "61:a"
-    - "６１" #  Full width characters sometimes used in China and Japan
+    - "６１"   #  fullwidth characters sometimes used in China and Japan
     - "61.0"
     - "(61)"
     - "Number 61"
@@ -2004,7 +2149,11 @@ ordinals:
     - "第陆拾壹"
   62:
     - "62"
+    - "sixty-second"
     - "sixty-two"
+    - "sixtysecond"
+    - "sixtytwo"
+    - "sixty second"
     - "sixty two"
     - "62nd"
     - "62e"
@@ -2021,7 +2170,7 @@ ordinals:
     - "62-я"
     - "62-e"
     - "62:e"
-    - "６２" #  Full width characters sometimes used in China and Japan
+    - "６２"   #  fullwidth characters sometimes used in China and Japan
     - "62.0"
     - "(62)"
     - "Number 62"
@@ -2040,7 +2189,11 @@ ordinals:
     - "第陆拾贰"
   63:
     - "63"
+    - "sixty-third"
     - "sixty-three"
+    - "sixtythird"
+    - "sixtythree"
+    - "sixty third"
     - "sixty three"
     - "63rd"
     - "63e"
@@ -2057,7 +2210,7 @@ ordinals:
     - "63-я"
     - "63-e"
     - "63:e"
-    - "６３" #  Full width characters sometimes used in China and Japan
+    - "６３"   #  fullwidth characters sometimes used in China and Japan
     - "63.0"
     - "(63)"
     - "Number 63"
@@ -2076,7 +2229,11 @@ ordinals:
     - "第陆拾叁"
   64:
     - "64"
+    - "sixty-fourth"
     - "sixty-four"
+    - "sixtyfourth"
+    - "sixtyfour"
+    - "sixty fourth"
     - "sixty four"
     - "64th"
     - "64e"
@@ -2093,7 +2250,7 @@ ordinals:
     - "64-я"
     - "64-e"
     - "64:e"
-    - "６４" #  Full width characters sometimes used in China and Japan
+    - "６４"   #  fullwidth characters sometimes used in China and Japan
     - "64.0"
     - "(64)"
     - "Number 64"
@@ -2112,7 +2269,11 @@ ordinals:
     - "第陆拾肆"
   65:
     - "65"
+    - "sixty-fifth"
     - "sixty-five"
+    - "sixtyfifth"
+    - "sixtyfive"
+    - "sixty fifth"
     - "sixty five"
     - "65th"
     - "65e"
@@ -2129,7 +2290,7 @@ ordinals:
     - "65-я"
     - "65-e"
     - "65:e"
-    - "６５" #  Full width characters sometimes used in China and Japan
+    - "６５"   #  fullwidth characters sometimes used in China and Japan
     - "65.0"
     - "(65)"
     - "Number 65"
@@ -2146,7 +2307,11 @@ ordinals:
     - "第陆拾伍"
   66:
     - "66"
+    - "sixty-sixth"
     - "sixty-six"
+    - "sixtysixth"
+    - "sixtysix"
+    - "sixty sixth"
     - "sixty six"
     - "66th"
     - "66e"
@@ -2163,7 +2328,7 @@ ordinals:
     - "66-я"
     - "66-e"
     - "66:e"
-    - "６６" #  Full width characters sometimes used in China and Japan
+    - "６６"   #  fullwidth characters sometimes used in China and Japan
     - "66.0"
     - "(66)"
     - "Number 66"
@@ -2183,6 +2348,10 @@ ordinals:
   67:
     - "67"
     - "sixty-seven"
+    - "sixty-seventh"
+    - "sixtyseventh"
+    - "sixtyseven"
+    - "sixty seventh"
     - "sixty seven"
     - "67th"
     - "67e"
@@ -2199,7 +2368,7 @@ ordinals:
     - "67-я"
     - "67-e"
     - "67:e"
-    - "６７" #  Full width characters sometimes used in China and Japan
+    - "６７"   #  fullwidth characters sometimes used in China and Japan
     - "67.0"
     - "(67)"
     - "Number 67"
@@ -2218,7 +2387,11 @@ ordinals:
     - "第陆拾柒"
   68:
     - "68"
+    - "sixty-eighth"
     - "sixty-eight"
+    - "sixtyeighth"
+    - "sixtyeight"
+    - "sixty eighth"
     - "sixty eight"
     - "68th"
     - "68e"
@@ -2235,7 +2408,7 @@ ordinals:
     - "68-я"
     - "68-e"
     - "68:e"
-    - "６８" #  Full width characters sometimes used in China and Japan
+    - "６８"   #  fullwidth characters sometimes used in China and Japan
     - "68.0"
     - "(68)"
     - "Number 68"
@@ -2254,8 +2427,12 @@ ordinals:
     - "第陆拾捌"
   69:
     - "69"
+    - "sixty-ninth"
     - "sixty-nine"
+    - "sixtyninth"
+    - "sixtynine"
     - "sixty nine"
+    - "sixty ninth"
     - "69th"
     - "69e"
     - "69ú"
@@ -2271,7 +2448,7 @@ ordinals:
     - "69-я"
     - "69-e"
     - "69:e"
-    - "６９" #  Full width characters sometimes used in China and Japan
+    - "６９"   #  fullwidth characters sometimes used in China and Japan
     - "69.0"
     - "(69)"
     - "Number 69"
@@ -2290,6 +2467,7 @@ ordinals:
     - "第陆拾玖"
   70:
     - "70"
+    - "seventieth"
     - "seventy"
     - "70th"
     - "70e"
@@ -2306,7 +2484,7 @@ ordinals:
     - "70-я"
     - "70-e"
     - "70:e"
-    - "７０" #  Full width characters sometimes used in China and Japan
+    - "７０"   #  fullwidth characters sometimes used in China and Japan
     - "70.0"
     - "(70)"
     - "Number 70"
@@ -2323,7 +2501,11 @@ ordinals:
     - "第柒拾"
   71:
     - "71"
+    - "seventy-first"
     - "seventy-one"
+    - "seventyfirst"
+    - "seventyone"
+    - "seventy first"
     - "seventy one"
     - "71st"
     - "71e"
@@ -2340,7 +2522,7 @@ ordinals:
     - "71-я"
     - "71-e"
     - "71:a"
-    - "７１" #  Full width characters sometimes used in China and Japan
+    - "７１"   #  fullwidth characters sometimes used in China and Japan
     - "71.0"
     - "(71)"
     - "Number 71"
@@ -2359,7 +2541,11 @@ ordinals:
     - "第柒拾壹"
   72:
     - "72"
+    - "seventy-second"
     - "seventy-two"
+    - "seventysecond"
+    - "seventytwo"
+    - "seventy second"
     - "seventy two"
     - "72nd"
     - "72e"
@@ -2376,7 +2562,7 @@ ordinals:
     - "72-я"
     - "72-e"
     - "72:e"
-    - "７２" #  Full width characters sometimes used in China and Japan
+    - "７２"   #  fullwidth characters sometimes used in China and Japan
     - "72.0"
     - "(72)"
     - "Number 72"
@@ -2395,7 +2581,11 @@ ordinals:
     - "第柒拾贰"
   73:
     - "73"
+    - "seventy-third"
     - "seventy-three"
+    - "seventythird"
+    - "seventythree"
+    - "seventy third"
     - "seventy three"
     - "73rd"
     - "73e"
@@ -2412,7 +2602,7 @@ ordinals:
     - "73-я"
     - "73-e"
     - "73:e"
-    - "７３" #  Full width characters sometimes used in China and Japan
+    - "７３"   #  fullwidth characters sometimes used in China and Japan
     - "73.0"
     - "(73)"
     - "Number 73"
@@ -2431,7 +2621,11 @@ ordinals:
     - "第柒拾叁"
   74:
     - "74"
+    - "seventy-fourth"
     - "seventy-four"
+    - "seventyfourth"
+    - "seventyfour"
+    - "seventy fourth"
     - "seventy four"
     - "74th"
     - "74e"
@@ -2448,7 +2642,7 @@ ordinals:
     - "74-я"
     - "74-e"
     - "74:e"
-    - "７４" #  Full width characters sometimes used in China and Japan
+    - "７４"   #  fullwidth characters sometimes used in China and Japan
     - "74.0"
     - "(74)"
     - "Number 74"
@@ -2467,7 +2661,11 @@ ordinals:
     - "第柒拾肆"
   75:
     - "75"
+    - "seventy-fifth"
     - "seventy-five"
+    - "seventyfifth"
+    - "seventyfive"
+    - "seventy fifth"
     - "seventy five"
     - "75th"
     - "75e"
@@ -2484,7 +2682,7 @@ ordinals:
     - "75-я"
     - "75-e"
     - "75:e"
-    - "７５" #  Full width characters sometimes used in China and Japan
+    - "７５"   #  fullwidth characters sometimes used in China and Japan
     - "75.0"
     - "(75)"
     - "Number 75"
@@ -2503,7 +2701,11 @@ ordinals:
     - "第柒拾伍"
   76:
     - "76"
+    - "seventy-sixth"
     - "seventy-six"
+    - "seventysixth"
+    - "seventysix"
+    - "seventy sixth"
     - "seventy six"
     - "76th"
     - "76e"
@@ -2520,7 +2722,7 @@ ordinals:
     - "76-я"
     - "76-e"
     - "76:e"
-    - "７６" #  Full width characters sometimes used in China and Japan
+    - "７６"   #  fullwidth characters sometimes used in China and Japan
     - "76.0"
     - "(76)"
     - "Number 76"
@@ -2539,7 +2741,11 @@ ordinals:
     - "第柒拾陆"
   77:
     - "77"
+    - "seventy-seventh"
     - "seventy-seven"
+    - "seventyseventh"
+    - "seventyseven"
+    - "seventy seventh"
     - "seventy seven"
     - "77th"
     - "77e"
@@ -2556,7 +2762,7 @@ ordinals:
     - "77-я"
     - "77-e"
     - "77:e"
-    - "７７" #  Full width characters sometimes used in China and Japan
+    - "７７"   #  fullwidth characters sometimes used in China and Japan
     - "77.0"
     - "(77)"
     - "Number 77"
@@ -2575,7 +2781,11 @@ ordinals:
     - "第柒拾柒"
   78:
     - "78"
+    - "seventy-eighth"
     - "seventy-eight"
+    - "seventyeighth"
+    - "seventyeight"
+    - "seventy eighth"
     - "seventy eight"
     - "78th"
     - "78e"
@@ -2592,7 +2802,7 @@ ordinals:
     - "78-я"
     - "78-e"
     - "78:e"
-    - "７８" #  Full width characters sometimes used in China and Japan
+    - "７８"   #  fullwidth characters sometimes used in China and Japan
     - "78.0"
     - "(78)"
     - "Number 78"
@@ -2611,7 +2821,11 @@ ordinals:
     - "第柒拾捌"
   79:
     - "79"
+    - "seventy-ninth"
     - "seventy-nine"
+    - "seventyninth"
+    - "seventynine"
+    - "seventy ninth"
     - "seventy nine"
     - "79th"
     - "79e"
@@ -2628,7 +2842,7 @@ ordinals:
     - "79-я"
     - "79-e"
     - "79:e"
-    - "７９" #  Full width characters sometimes used in China and Japan
+    - "７９"   #  fullwidth characters sometimes used in China and Japan
     - "79.0"
     - "(79)"
     - "Number 79"
@@ -2647,6 +2861,7 @@ ordinals:
     - "第柒拾玖"
   80:
     - "80"
+    - "eightieth"
     - "eighty"
     - "80th"
     - "80e"
@@ -2663,7 +2878,7 @@ ordinals:
     - "80-я"
     - "80-e"
     - "80:e"
-    - "８０" #  Full width characters sometimes used in China and Japan
+    - "８０"   #  fullwidth characters sometimes used in China and Japan
     - "80.0"
     - "(80)"
     - "Number 80"
@@ -2682,7 +2897,11 @@ ordinals:
     - "第捌拾"
   81:
     - "81"
+    - "eighty-first"
     - "eighty-one"
+    - "eightyfirst"
+    - "eightyone"
+    - "eighty first"
     - "eighty one"
     - "81st"
     - "81e"
@@ -2699,7 +2918,7 @@ ordinals:
     - "81-я"
     - "81-e"
     - "81:a"
-    - "８１" #  Full width characters sometimes used in China and Japan
+    - "８１"   #  fullwidth characters sometimes used in China and Japan
     - "81.0"
     - "(81)"
     - "Number 81"
@@ -2718,7 +2937,11 @@ ordinals:
     - "第捌拾壹"
   82:
     - "82"
+    - "eighty-second"
     - "eighty-two"
+    - "eightysecond"
+    - "eightytwo"
+    - "eighty second"
     - "eighty two"
     - "82nd"
     - "82e"
@@ -2735,7 +2958,7 @@ ordinals:
     - "82-я"
     - "82-e"
     - "82:e"
-    - "８２" #  Full width characters sometimes used in China and Japan
+    - "８２"   #  fullwidth characters sometimes used in China and Japan
     - "82.0"
     - "(82)"
     - "Number 82"
@@ -2754,7 +2977,11 @@ ordinals:
     - "第捌拾贰"
   83:
     - "83"
+    - "eighty-third"
     - "eighty-three"
+    - "eightythird"
+    - "eightythree"
+    - "eighty third"
     - "eighty three"
     - "83rd"
     - "83e"
@@ -2771,7 +2998,7 @@ ordinals:
     - "83-я"
     - "83-e"
     - "83:e"
-    - "８３" #  Full width characters sometimes used in China and Japan
+    - "８３"   #  fullwidth characters sometimes used in China and Japan
     - "83.0"
     - "(83)"
     - "Number 83"
@@ -2790,7 +3017,11 @@ ordinals:
     - "第捌拾叁"
   84:
     - "84"
+    - "eighty-fourth"
     - "eighty-four"
+    - "eightyfourth"
+    - "eightyfour"
+    - "eighty fourth"
     - "eighty four"
     - "84th"
     - "84e"
@@ -2807,7 +3038,7 @@ ordinals:
     - "84-я"
     - "84-e"
     - "84:e"
-    - "８４" #  Full width characters sometimes used in China and Japan
+    - "８４"   #  fullwidth characters sometimes used in China and Japan
     - "84.0"
     - "(84)"
     - "Number 84"
@@ -2826,7 +3057,11 @@ ordinals:
     - "第捌拾肆"
   85:
     - "85"
+    - "eighty-fifth"
     - "eighty-five"
+    - "eightyfifth"
+    - "eightyfive"
+    - "eighty fifth"
     - "eighty five"
     - "85th"
     - "85e"
@@ -2843,7 +3078,7 @@ ordinals:
     - "85-я"
     - "85-e"
     - "85:e"
-    - "８５" #  Full width characters sometimes used in China and Japan
+    - "８５"   #  fullwidth characters sometimes used in China and Japan
     - "85.0"
     - "(85)"
     - "Number 85"
@@ -2862,7 +3097,11 @@ ordinals:
     - "第捌拾伍"
   86:
     - "86"
+    - "eighty-sixth"
     - "eighty-six"
+    - "eightysixth"
+    - "eightysix"
+    - "eighty sixth"
     - "eighty six"
     - "86th"
     - "86e"
@@ -2879,7 +3118,7 @@ ordinals:
     - "86-я"
     - "86-e"
     - "86:e"
-    - "８６" #  Full width characters sometimes used in China and Japan
+    - "８６"   #  fullwidth characters sometimes used in China and Japan
     - "86.0"
     - "(86)"
     - "Number 86"
@@ -2898,7 +3137,11 @@ ordinals:
     - "第捌拾陆"
   87:
     - "87"
+    - "eighty-seventh"
     - "eighty-seven"
+    - "eightyseventh"
+    - "eightyseven"
+    - "eighty seventh"
     - "eighty seven"
     - "87th"
     - "87e"
@@ -2915,7 +3158,7 @@ ordinals:
     - "87-я"
     - "87-e"
     - "87:e"
-    - "８７" #  Full width characters sometimes used in China and Japan
+    - "８７"   #  fullwidth characters sometimes used in China and Japan
     - "87.0"
     - "(87)"
     - "Number 87"
@@ -2934,7 +3177,11 @@ ordinals:
     - "第捌拾柒"
   88:
     - "88"
+    - "eighty-eighth"
     - "eighty-eight"
+    - "eightyeighth"
+    - "eightyeight"
+    - "eighty eighth"
     - "eighty eight"
     - "88th"
     - "88e"
@@ -2951,7 +3198,7 @@ ordinals:
     - "88-я"
     - "88-e"
     - "88:e"
-    - "８８" #  Full width characters sometimes used in China and Japan
+    - "８８"   #  fullwidth characters sometimes used in China and Japan
     - "88.0"
     - "(88)"
     - "Number 88"
@@ -2970,7 +3217,11 @@ ordinals:
     - "第捌拾捌"
   89:
     - "89"
+    - "eighty-ninth"
     - "eighty-nine"
+    - "eightyninth"
+    - "eightynine"
+    - "eighty ninth"
     - "eighty nine"
     - "89th"
     - "89e"
@@ -2987,7 +3238,7 @@ ordinals:
     - "89-я"
     - "89-e"
     - "89:e"
-    - "８９" #  Full width characters sometimes used in China and Japan
+    - "８９"   #  fullwidth characters sometimes used in China and Japan
     - "89.0"
     - "(89)"
     - "Number 89"
@@ -3006,6 +3257,7 @@ ordinals:
     - "第捌拾玖"
   90:
     - "90"
+    - "ninetieth"
     - "ninety"
     - "90th"
     - "90e"
@@ -3022,7 +3274,7 @@ ordinals:
     - "90-я"
     - "90-e"
     - "90:e"
-    - "９０" #  Full width characters sometimes used in China and Japan
+    - "９０"   #  fullwidth characters sometimes used in China and Japan
     - "90.0"
     - "(90)"
     - "Number 90"
@@ -3039,7 +3291,11 @@ ordinals:
     - "第玖拾"
   91:
     - "91"
+    - "ninety-first"
     - "ninety-one"
+    - "ninetyfirst"
+    - "ninetyone"
+    - "ninety first"
     - "ninety one"
     - "91st"
     - "91e"
@@ -3056,7 +3312,7 @@ ordinals:
     - "91-я"
     - "91-e"
     - "91:a"
-    - "９１" #  Full width characters sometimes used in China and Japan
+    - "９１"   #  fullwidth characters sometimes used in China and Japan
     - "91.0"
     - "(91)"
     - "Number 91"
@@ -3073,7 +3329,11 @@ ordinals:
     - "第玖拾壹"
   92:
     - "92"
+    - "ninety-second"
     - "ninety-two"
+    - "ninetysecond"
+    - "ninetytwo"
+    - "ninety second"
     - "ninety two"
     - "92nd"
     - "92e"
@@ -3090,7 +3350,7 @@ ordinals:
     - "92-я"
     - "92-e"
     - "92:e"
-    - "９２" #  Full width characters sometimes used in China and Japan
+    - "９２"   #  fullwidth characters sometimes used in China and Japan
     - "92.0"
     - "(92)"
     - "Number 92"
@@ -3109,7 +3369,11 @@ ordinals:
     - "第玖拾贰"
   93:
     - "93"
+    - "ninety-third"
     - "ninety-three"
+    - "ninetythird"
+    - "ninetythree"
+    - "ninety third"
     - "ninety three"
     - "93rd"
     - "93e"
@@ -3126,7 +3390,7 @@ ordinals:
     - "93-я"
     - "93-e"
     - "93:e"
-    - "９３" #  Full width characters sometimes used in China and Japan
+    - "９３"   #  fullwidth characters sometimes used in China and Japan
     - "93.0"
     - "(93)"
     - "Number 93"
@@ -3145,7 +3409,11 @@ ordinals:
     - "第玖拾叁"
   94:
     - "94"
+    - "ninety-fourth"
     - "ninety-four"
+    - "ninetyfourth"
+    - "ninetyfour"
+    - "ninety fourth"
     - "ninety four"
     - "94th"
     - "94e"
@@ -3162,7 +3430,7 @@ ordinals:
     - "94-я"
     - "94-e"
     - "94:e"
-    - "９４" #  Full width characters sometimes used in China and Japan
+    - "９４"   #  fullwidth characters sometimes used in China and Japan
     - "94.0"
     - "(94)"
     - "Number 94"
@@ -3181,7 +3449,11 @@ ordinals:
     - "第玖拾肆"
   95:
     - "95"
+    - "ninety-fifth"
     - "ninety-five"
+    - "ninetyfifth"
+    - "ninetyfive"
+    - "ninety fifth"
     - "ninety five"
     - "95th"
     - "95e"
@@ -3198,7 +3470,7 @@ ordinals:
     - "95-я"
     - "95-e"
     - "95:e"
-    - "９５" #  Full width characters sometimes used in China and Japan
+    - "９５"   #  fullwidth characters sometimes used in China and Japan
     - "95.0"
     - "(95)"
     - "Number 95"
@@ -3215,7 +3487,11 @@ ordinals:
     - "第玖拾伍"
   96:
     - "96"
+    - "ninety-sixth"
     - "ninety-six"
+    - "ninetysixth"
+    - "ninetysix"
+    - "ninety sixth"
     - "ninety six"
     - "96th"
     - "96e"
@@ -3232,7 +3508,7 @@ ordinals:
     - "96-я"
     - "96-e"
     - "96:e"
-    - "９６" #  Full width characters sometimes used in China and Japan
+    - "９６"   #  fullwidth characters sometimes used in China and Japan
     - "96.0"
     - "(96)"
     - "Number 96"
@@ -3251,7 +3527,11 @@ ordinals:
     - "第玖拾陆"
   97:
     - "97"
+    - "ninety-seventh"
     - "ninety-seven"
+    - "ninetyseventh"
+    - "ninetyseven"
+    - "ninety seventh"
     - "ninety seven"
     - "97th"
     - "97e"
@@ -3268,7 +3548,7 @@ ordinals:
     - "97-я"
     - "97-e"
     - "97:e"
-    - "９７" #  Full width characters sometimes used in China and Japan
+    - "９７"   #  fullwidth characters sometimes used in China and Japan
     - "97.0"
     - "(97)"
     - "Number 97"
@@ -3287,8 +3567,12 @@ ordinals:
     - "第玖拾柒"
   98:
     - "98"
+    - "ninety-eighth"
     - "ninety-eight"
+    - "ninetyeight"
+    - "ninetyeighth"
     - "ninety eight"
+    - "ninety eighth"
     - "98th"
     - "98e"
     - "98ú"
@@ -3304,7 +3588,7 @@ ordinals:
     - "98-я"
     - "98-e"
     - "98:e"
-    - "９８" #  Full width characters sometimes used in China and Japan
+    - "９８"   #  fullwidth characters sometimes used in China and Japan
     - "98.0"
     - "(98)"
     - "Number 98"
@@ -3324,7 +3608,11 @@ ordinals:
   99:
     - "99"
     - "ninety-nine"
+    - "ninety-ninth"
+    - "ninetynine"
+    - "ninetyninth"
     - "ninety nine"
+    - "ninety ninth"
     - "99th"
     - "99e"
     - "99ú"
@@ -3340,7 +3628,7 @@ ordinals:
     - "99-я"
     - "99-e"
     - "99:e"
-    - "９９" #  Full width characters sometimes used in China and Japan
+    - "９９"   #  fullwidth characters sometimes used in China and Japan
     - "99.0"
     - "(99)"
     - "Number 99"
@@ -3361,7 +3649,7 @@ ordinals:
     - "100"
     - "one hundred"
     - "hundredth"
-    - "Hundred"
+    - "hundred"
     - "100th"
     - "100e"
     - "100ú"
@@ -3377,7 +3665,7 @@ ordinals:
     - "100-я"
     - "100-e"
     - "100:e"
-    - "１００" #  Full width characters sometimes used in China and Japan
+    - "１００"   #  fullwidth characters sometimes used in China and Japan
     - "100.0"
     - "(100)"
     - "Number 100"
