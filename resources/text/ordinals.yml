@@ -1227,6 +1227,8 @@ ordinals:
     - "32-e"
     - "32:a"
     - "32."
+    - "32do" # es (masculine, informal)
+    - "32da" # es (feminine, informal)
     - "32.ª"
     - "32.º"
     - "32ª"
@@ -1261,6 +1263,8 @@ ordinals:
     - "33-e"
     - "33:e"
     - "33."
+    - "33ro" # es (masculine, informal)
+    - "33ra" # es (feminine, informal)
     - "33.ª"
     - "33.º"
     - "33ª"
@@ -1295,6 +1299,8 @@ ordinals:
     - "34-e"
     - "34:e"
     - "34."
+    - "34to" # es (masculine, informal)
+    - "34ta" # es (feminine, informal)
     - "34.ª"
     - "34.º"
     - "34ª"
