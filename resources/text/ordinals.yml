@@ -1333,6 +1333,8 @@ ordinals:
     - "35-e"
     - "35:e"
     - "35."
+    - "35to" # es (masculine, informal)
+    - "35ta" # es (feminine, informal)
     - "35.ª"
     - "35.º"
     - "35ª"
@@ -1371,6 +1373,8 @@ ordinals:
     - "36º."
     - "36ª."
     - "36."
+    - "36to" # es (masculine, informal)
+    - "36ta" # es (feminine, informal)
     - "36-й"
     - "36-я"
     - "36-e"
