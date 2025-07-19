@@ -1046,7 +1046,7 @@ ordinals:
     - "27e"
     - "27º"
     - "27o"
-    - "27u"
+    - "27ú"
     - "27º."
     - "２７" # fullwidth characters sometimes used in China and Japan
     - "(27)"
@@ -1539,7 +1539,7 @@ ordinals:
   40:
     - "Fortieth"
     - "Forty"
-    - "Fourty" # common misspelling
+    - "Fourty" # en common misspelling
     - "Vierzigste"
     - "Vierzigster"
     - "cuadragésimo" # es (masculine)
@@ -1979,7 +1979,7 @@ ordinals:
     - "第肆拾玖"
   50:
     - "Fiftieth"
-    - "Fiftyth" # misspelling
+    - "Fiftyth" # en misspelling
     - "Fifty"
     - "Fünfzigste"
     - "Fünfzigster"
@@ -2003,7 +2003,8 @@ ordinals:
     - "50o"
     - "50ú"
     - "５０" # fullwidth characters sometimes used in China and Japan
-    - "(50.0)"
+    - "(50)"
+    - "Number 50"
     - "No50"
     - "No 50"
     - "No.50"
