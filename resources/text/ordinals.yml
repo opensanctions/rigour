@@ -2856,6 +2856,11 @@ ordinals:
     - "seventythree"
     - "seventy third"
     - "seventy three"
+    - "septuagésimo tercero" # es (masculine)
+    - "septuagésima tercera" # es (feminine)
+    - "septuagesimotercero" # es (masculine, accepted alternative)
+    - "septuagesimatercera" # es (feminine, accepted alternative)
+    - "setenta y tres" # es (number)
     - "73rd"
     - "73e"
     - "73ú"
@@ -2895,6 +2900,11 @@ ordinals:
     - "seventyfour"
     - "seventy fourth"
     - "seventy four"
+    - "septuagésimo cuarto" # es (masculine)
+    - "septuagésima cuarta" # es (feminine)
+    - "septuagesimocuarto" # es (masculine, accepted alternative)
+    - "septuagesimacuarta" # es (feminine, accepted alternative)
+    - "setenta y cuatro" # es (number)
     - "74th"
     - "74e"
     - "74ú"
@@ -2934,6 +2944,11 @@ ordinals:
     - "seventyfive"
     - "seventy fifth"
     - "seventy five"
+    - "septuagésimo quinto" # es (masculine)
+    - "septuagésima quinta" # es (feminine)
+    - "septuagesimoquinto" # es (masculine, accepted alternative)
+    - "septuagesimaquinta" # es (feminine, accepted alternative)
+    - "setenta y cinco" # es (number)
     - "75th"
     - "75e"
     - "75ú"
@@ -2973,6 +2988,11 @@ ordinals:
     - "seventysix"
     - "seventy sixth"
     - "seventy six"
+    - "septuagésimo sexto" # es (masculine)
+    - "septuagésima sexta" # es (feminine)
+    - "septuagesimosexto" # es (masculine, accepted alternative)
+    - "septuagesimasexta" # es (feminine, accepted alternative)
+    - "setenta y seis" # es (number)
     - "76th"
     - "76e"
     - "76ú"
@@ -3012,6 +3032,11 @@ ordinals:
     - "seventyseven"
     - "seventy seventh"
     - "seventy seven"
+    - "septuagésimo séptimo" # es (masculine)
+    - "septuagésima séptima" # es (feminine)
+    - "septuagesimoseptimo" # es (masculine, accepted alternative)
+    - "septuagesimaseptima" # es (feminine, accepted alternative)
+    - "setenta y siete" # es (number)
     - "77th"
     - "77e"
     - "77ú"
@@ -3051,6 +3076,11 @@ ordinals:
     - "seventyeight"
     - "seventy eighth"
     - "seventy eight"
+    - "septuagésimo octavo" # es (masculine)
+    - "septuagésima octava" # es (feminine)
+    - "septuagesimooctavo" # es (masculine, accepted alternative)
+    - "septuagesimaoctava" # es (feminine, accepted alternative)
+    - "setenta y ocho" # es (number)
     - "78th"
     - "78e"
     - "78ú"
@@ -3090,6 +3120,11 @@ ordinals:
     - "seventynine"
     - "seventy ninth"
     - "seventy nine"
+    - "septuagésimo noveno" # es (masculine)
+    - "septuagésima novena" # es (feminine)
+    - "septuagesimonoveno" # es (masculine, accepted alternative)
+    - "septuagesimanovena" # es (feminine, accepted alternative)
+    - "setenta y nueve" # es (number)
     - "79th"
     - "79e"
     - "79ú"
@@ -3125,6 +3160,9 @@ ordinals:
     - "80"
     - "eightieth"
     - "eighty"
+    - "octogésimo" # es (masculine)
+    - "octogésima" # es (feminine)
+    - "ochenta" # es (number)
     - "80th"
     - "80e"
     - "80ú"
@@ -3164,6 +3202,13 @@ ordinals:
     - "eightyone"
     - "eighty first"
     - "eighty one"
+    - "octogésimo primero" # es (masculine)
+    - "octogésima primera" # es (feminine)
+    - "octogesimoprimero" # es (masculine, accepted alternative)
+    - "octogesimaprimera" # es (feminine, accepted alternative)
+    - "ochenta y uno" # es (number)
+    - "ochenta y una" # es (number, feminine)
+    - "ochenta y un" # es (number, masculine, shortened form)
     - "81st"
     - "81e"
     - "81ú"
@@ -3203,6 +3248,11 @@ ordinals:
     - "eightytwo"
     - "eighty second"
     - "eighty two"
+    - "octogésimo segundo" # es (masculine)
+    - "octogésima segunda" # es (feminine)
+    - "octogesimosegundo" # es (masculine, accepted alternative)
+    - "octogesimasegunda" # es (feminine, accepted alternative)
+    - "ochenta y dos" # es (number)
     - "82nd"
     - "82e"
     - "82ú"
@@ -3242,6 +3292,11 @@ ordinals:
     - "eightythree"
     - "eighty third"
     - "eighty three"
+    - "octogésimo tercero" # es (masculine)
+    - "octogésima tercera" # es (feminine)
+    - "octogesimotercero" # es (masculine, accepted alternative)
+    - "octogesimatercera" # es (feminine, accepted alternative)
+    - "ochenta y tres" # es (number)
     - "83rd"
     - "83e"
     - "83ú"
@@ -3281,6 +3336,11 @@ ordinals:
     - "eightyfour"
     - "eighty fourth"
     - "eighty four"
+    - "octogésimo cuarto" # es (masculine)
+    - "octogésima cuarta" # es (feminine)
+    - "octogesimocuarto" # es (masculine, accepted alternative)
+    - "octogesimacuarta" # es (feminine, accepted alternative)
+    - "ochenta y cuatro" # es (number)
     - "84th"
     - "84e"
     - "84ú"
@@ -3320,6 +3380,11 @@ ordinals:
     - "eightyfive"
     - "eighty fifth"
     - "eighty five"
+    - "octogésimo quinto" # es (masculine)
+    - "octogésima quinta" # es (feminine)
+    - "octogesimoquinto" # es (masculine, accepted alternative)
+    - "octogesimaquinta" # es (feminine, accepted alternative)
+    - "ochenta y cinco" # es (number)
     - "85th"
     - "85e"
     - "85ú"
@@ -3359,6 +3424,11 @@ ordinals:
     - "eightysix"
     - "eighty sixth"
     - "eighty six"
+    - "octogésimo sexto" # es (masculine)
+    - "octogésima sexta" # es (feminine)
+    - "octogesimosexto" # es (masculine, accepted alternative)
+    - "octogesimasexta" # es (feminine, accepted alternative)
+    - "ochenta y seis" # es (number)
     - "86th"
     - "86e"
     - "86ú"
@@ -3398,6 +3468,11 @@ ordinals:
     - "eightyseven"
     - "eighty seventh"
     - "eighty seven"
+    - "octogésimo séptimo" # es (masculine)
+    - "octogésima séptima" # es (feminine)
+    - "octogesimoseptimo" # es (masculine, accepted alternative)
+    - "octogesimaseptima" # es (feminine, accepted alternative)
+    - "ochenta y siete" # es (number)
     - "87th"
     - "87e"
     - "87ú"
@@ -3437,6 +3512,11 @@ ordinals:
     - "eightyeight"
     - "eighty eighth"
     - "eighty eight"
+    - "octogésimo octavo" # es (masculine)
+    - "octogésima octava" # es (feminine)
+    - "octogesimooctavo" # es (masculine, accepted alternative)
+    - "octogesimaoctava" # es (feminine, accepted alternative)
+    - "ochenta y ocho" # es (number)
     - "88th"
     - "88e"
     - "88ú"
@@ -3476,6 +3556,11 @@ ordinals:
     - "eightynine"
     - "eighty ninth"
     - "eighty nine"
+    - "octogésimo noveno" # es (masculine)
+    - "octogésima novena" # es (feminine)
+    - "octogesimonoveno" # es (masculine, accepted alternative)
+    - "octogesimanovena" # es (feminine, accepted alternative)
+    - "ochenta y nueve" # es (number)
     - "89th"
     - "89e"
     - "89ú"
@@ -3511,6 +3596,9 @@ ordinals:
     - "90"
     - "ninetieth"
     - "ninety"
+    - "nonagésimo" # es (masculine)
+    - "nonagésima" # es (feminine)
+    - "noventa" # es (number)
     - "90th"
     - "90e"
     - "90ú"
@@ -3548,6 +3636,13 @@ ordinals:
     - "ninetyone"
     - "ninety first"
     - "ninety one"
+    - "nonagésimo primero" # es (masculine)
+    - "nonagésima primera" # es (feminine)
+    - "nonagesimoprimero" # es (masculine, accepted alternative)
+    - "nonagesimaprimera" # es (feminine, accepted alternative)
+    - "noventa y uno" # es (number)
+    - "noventa y una" # es (number, feminine)
+    - "noventa y un" # es (number, masculine, shortened form)
     - "91st"
     - "91e"
     - "91ú"
@@ -3585,6 +3680,11 @@ ordinals:
     - "ninetytwo"
     - "ninety second"
     - "ninety two"
+    - "nonagésimo segundo" # es (masculine)
+    - "nonagésima segunda" # es (feminine)
+    - "nonagesimosegundo" # es (masculine, accepted alternative)
+    - "nonagesimasegunda" # es (feminine, accepted alternative)
+    - "noventa y dos" # es (number)
     - "92nd"
     - "92e"
     - "92ú"
@@ -3624,6 +3724,11 @@ ordinals:
     - "ninetythree"
     - "ninety third"
     - "ninety three"
+    - "nonagésimo tercero" # es (masculine)
+    - "nonagésima tercera" # es (feminine)
+    - "nonagesimotercero" # es (masculine, accepted alternative)
+    - "nonagesimatercera" # es (feminine, accepted alternative)
+    - "noventa y tres" # es (number)
     - "93rd"
     - "93e"
     - "93ú"
@@ -3663,6 +3768,11 @@ ordinals:
     - "ninetyfour"
     - "ninety fourth"
     - "ninety four"
+    - "nonagésimo cuarto" # es (masculine)
+    - "nonagésima cuarta" # es (feminine)
+    - "nonagesimocuarto" # es (masculine, accepted alternative)
+    - "nonagesimacuarta" # es (feminine, accepted alternative)
+    - "noventa y cuatro" # es (number)
     - "94th"
     - "94e"
     - "94ú"
@@ -3702,6 +3812,11 @@ ordinals:
     - "ninetyfive"
     - "ninety fifth"
     - "ninety five"
+    - "nonagésimo quinto" # es (masculine)
+    - "nonagésima quinta" # es (feminine)
+    - "nonagesimoquinto" # es (masculine, accepted alternative)
+    - "nonagesimaquinta" # es (feminine, accepted alternative)
+    - "noventa y cinco" # es (number)
     - "95th"
     - "95e"
     - "95ú"
@@ -3739,6 +3854,11 @@ ordinals:
     - "ninetysix"
     - "ninety sixth"
     - "ninety six"
+    - "nonagésimo sexto" # es (masculine)
+    - "nonagésima sexta" # es (feminine)
+    - "nonagesimosexto" # es (masculine, accepted alternative)
+    - "nonagesimasexta" # es (feminine, accepted alternative)
+    - "noventa y seis" # es (number)
     - "96th"
     - "96e"
     - "96ú"
@@ -3778,6 +3898,11 @@ ordinals:
     - "ninetyseven"
     - "ninety seventh"
     - "ninety seven"
+    - "nonagésimo séptimo" # es (masculine)
+    - "nonagésima séptima" # es (feminine)
+    - "nonagesimoseptimo" # es (masculine, accepted alternative)
+    - "nonagesimaseptima" # es (feminine, accepted alternative)
+    - "noventa y siete" # es (number)
     - "97th"
     - "97e"
     - "97ú"
@@ -3817,6 +3942,11 @@ ordinals:
     - "ninetyeighth"
     - "ninety eight"
     - "ninety eighth"
+    - "nonagésimo octavo" # es (masculine)
+    - "nonagésima octava" # es (feminine)
+    - "nonagesimooctavo" # es (masculine, accepted alternative)
+    - "nonagesimaoctava" # es (feminine, accepted alternative)
+    - "noventa y ocho" # es (number)
     - "98th"
     - "98e"
     - "98ú"
@@ -3856,6 +3986,11 @@ ordinals:
     - "ninetyninth"
     - "ninety nine"
     - "ninety ninth"
+    - "nonagésimo noveno" # es (masculine)
+    - "nonagésima novena" # es (feminine)
+    - "nonagesimonoveno" # es (masculine, accepted alternative)
+    - "nonagesimanovena" # es (feminine, accepted alternative)
+    - "noventa y nueve" # es (number)
     - "99th"
     - "99e"
     - "99ú"
@@ -3891,6 +4026,10 @@ ordinals:
     - "one hundred"
     - "hundredth"
     - "hundred"
+    - "centésimo" # es (masculine)
+    - "centésima" # es (feminine)
+    - "ciento" # es (number)
+    - "cien" # es (number, short form)
     - "100th"
     - "100e"
     - "100ú"
