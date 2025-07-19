@@ -47,6 +47,7 @@ ordinals:
     - "1ª."
     - "1er" # es (masculine, informal)
     - "1.er" # es (masculine, more formal)
+    - "1.ᵉʳ" # es (masculine, formal)
     - "1.ra" # es (feminine, informal)
     - "1ere"
     - "1º"
@@ -119,6 +120,7 @@ ordinals:
     - "3."
     - "3er" # es (masculine, more formal)
     - "3.er" # es (masculine, informal)
+    - "3.ᵉʳ" # es (masculine, formal)
     - "3.ra" # es (feminine, informal)
     - "3.ª"
     - "3.º"
