@@ -492,7 +492,8 @@ ordinals:
     - "13-e"
     - "13:e"
     - "13."
-    - "13ro" # es (masculine, informal)
+    - "13er" # es (masculine, informal)
+    - "13.er" # es (masculine, formal)
     - "13ra" # es (feminine, informal)
     - "13.ª"
     - "13.º"
