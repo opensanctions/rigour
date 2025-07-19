@@ -1419,6 +1419,8 @@ ordinals:
     - "37º."
     - "37ª."
     - "37."
+    - "37mo" # es (masculine, informal)
+    - "37ma" # es (feminine, informal)
     - "37-й"
     - "37-я"
     - "37-e"
@@ -1463,6 +1465,8 @@ ordinals:
     - "38º."
     - "38ª."
     - "38."
+    - "38vo" # es (masculine, informal)
+    - "38va" # es (feminine, informal)
     - "38-й"
     - "38-я"
     - "38-e"
@@ -1507,6 +1511,8 @@ ordinals:
     - "39º."
     - "39ª."
     - "39."
+    - "39no" # es (masculine, informal)
+    - "39na" # es (feminine, informal)
     - "39-й"
     - "39-я"
     - "39-e"
@@ -1544,6 +1550,8 @@ ordinals:
     - "40-e"
     - "40:e"
     - "40."
+    - "40mo" # es (masculine, informal)
+    - "40ma" # es (feminine, informal)
     - "40.ª"
     - "40.º"
     - "40ª"
