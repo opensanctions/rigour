@@ -13,6 +13,7 @@ ordinals:
     - "Nought" # en
     - "Nullter" # de
     - "Null" # de
+    - "cero" # es
     - "0th"
     - "０" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "(0)"
@@ -66,6 +67,10 @@ ordinals:
     - "№ 1"
     - "Ist"
     - "I." # see if this backfires
+    - 一 # zh (number, simple)
+    - 第一 # zh (simple)
+    - 壹 # zh (number, financial)
+    - 第壹 # zh (financial)
   2:
     - "Second"
     - "Two"
@@ -103,6 +108,10 @@ ordinals:
     - "№ 2"
     - "IInd"
     - "II" # see if this backfires
+    - 二 # zh (number, simple)
+    - 第二 # zh (simple)
+    - 贰 # zh (number, financial)
+    - 第贰 # zh (financial)
   3:
     - "Third"
     - "Three"
@@ -143,6 +152,10 @@ ordinals:
     - "№ 3"
     - "IIIrd"
     - "III" # see if this backfires
+    - 三 # zh (number, simple)
+    - 第三 # zh (simple)
+    - 叁 # zh (number, financial)
+    - 第叁 # zh (financial)
   4:
     - "Fourth"
     - "Four"
@@ -181,6 +194,10 @@ ordinals:
     - "IIIIth"
     - "IIII"
     - "IV"
+    - 四 # zh (number, simple)
+    - 第四 # zh (simple)
+    - 肆 # zh (number, financial)
+    - 第肆 # zh (financial)
   5:
     - "Fifth"
     - "Five"
@@ -218,6 +235,10 @@ ordinals:
     - "№ 5"
     - "Vth"
     - "V." # see if this backfires
+    - 五 # zh (number, simple)
+    - 第五 # zh (simple)
+    - 伍 # zh (number, financial)
+    - 第伍 # zh (financial)
   6:
     - "Sixth"
     - "Six"
