@@ -1595,6 +1595,8 @@ ordinals:
     - "41-e"
     - "41:e"
     - "41."
+    - "41ro" # es (masculine, informal)
+    - "41ra" # es (feminine, informal)
     - "41.ª"
     - "41.º"
     - "41ª"
@@ -1633,6 +1635,8 @@ ordinals:
     - "42º."
     - "42ª."
     - "42."
+    - "42do" # es (masculine, informal)
+    - "42da" # es (feminine, informal)
     - "42-й"
     - "42-я"
     - "42-e"
@@ -1677,6 +1681,8 @@ ordinals:
     - "43º."
     - "43ª."
     - "43."
+    - "43ro" # es (masculine, informal)
+    - "43ra" # es (feminine, informal)
     - "43-й"
     - "43-я"
     - "43-e"
@@ -1724,6 +1730,8 @@ ordinals:
     - "44-e"
     - "44:e"
     - "44."
+    - "44to" # es (masculine, informal)
+    - "44ta" # es (feminine, informal)
     - "44.ª"
     - "44.º"
     - "44ª"
@@ -1762,6 +1770,8 @@ ordinals:
     - "45º."
     - "45ª."
     - "45."
+    - "45to" # es (masculine, informal)
+    - "45ta" # es (feminine, informal)
     - "45-й"
     - "45-я"
     - "45-e"
@@ -1804,6 +1814,8 @@ ordinals:
     - "46º."
     - "46ª."
     - "46."
+    - "46to" # es (masculine, informal)
+    - "46ta" # es (feminine, informal)
     - "46-й"
     - "46-я"
     - "46-e"
@@ -1848,6 +1860,8 @@ ordinals:
     - "47º."
     - "47ª."
     - "47."
+    - "47mo" # es (masculine, informal)
+    - "47ma" # es (feminine, informal)
     - "47-й"
     - "47-я"
     - "47-e"
@@ -1892,6 +1906,8 @@ ordinals:
     - "48º."
     - "48ª."
     - "48."
+    - "48vo" # es (masculine, informal)
+    - "48va" # es (feminine, informal)
     - "48-й"
     - "48-я"
     - "48-e"
@@ -1936,6 +1952,8 @@ ordinals:
     - "49º."
     - "49ª."
     - "49."
+    - "49no" # es (masculine, informal)
+    - "49na" # es (feminine, informal)
     - "49-й"
     - "49-я"
     - "49-e"
@@ -1973,6 +1991,8 @@ ordinals:
     - "50-e"
     - "50:e"
     - "50."
+    - "50mo" # es (masculine, informal)
+    - "50ma" # es (feminine, informal)
     - "50.ª"
     - "50.º"
     - "50ª"
@@ -2015,6 +2035,8 @@ ordinals:
     - "51º."
     - "51ª."
     - "51."
+    - "51ro" # es (masculine, informal)
+    - "51ra" # es (feminine, informal)
     - "51-й"
     - "51-я"
     - "51-e"
@@ -2057,6 +2079,8 @@ ordinals:
     - "52º."
     - "52ª."
     - "52."
+    - "52do" # es (masculine, informal)
+    - "52da" # es (feminine, informal)
     - "52-й"
     - "52-я"
     - "52-e"
@@ -2099,6 +2123,8 @@ ordinals:
     - "53º."
     - "53ª."
     - "53."
+    - "53ro" # es (masculine, informal)
+    - "53ra" # es (feminine, informal)
     - "53-й"
     - "53-я"
     - "53-e"
@@ -2143,6 +2169,8 @@ ordinals:
     - "54º."
     - "54ª."
     - "54."
+    - "54to" # es (masculine, informal)
+    - "54ta" # es (feminine, informal)
     - "54-й"
     - "54-я"
     - "54-e"
@@ -2185,6 +2213,8 @@ ordinals:
     - "55º."
     - "55ª."
     - "55."
+    - "55to" # es (masculine, informal)
+    - "55ta" # es (feminine, informal)
     - "55-й"
     - "55-я"
     - "55-e"
@@ -2227,6 +2257,8 @@ ordinals:
     - "56º."
     - "56ª."
     - "56."
+    - "56to" # es (masculine, informal)
+    - "56ta" # es (feminine, informal)
     - "56-й"
     - "56-я"
     - "56-e"
@@ -2269,6 +2301,8 @@ ordinals:
     - "57º."
     - "57ª."
     - "57."
+    - "57mo" # es (masculine, informal)
+    - "57ma" # es (feminine, informal)
     - "57-й"
     - "57-я"
     - "57-e"
@@ -2313,6 +2347,8 @@ ordinals:
     - "58º."
     - "58ª."
     - "58."
+    - "58vo" # es (masculine, informal)
+    - "58va" # es (feminine, informal)
     - "58-й"
     - "58-я"
     - "58-e"
@@ -2357,6 +2393,8 @@ ordinals:
     - "59º."
     - "59ª."
     - "59."
+    - "59no" # es (masculine, informal)
+    - "59na" # es (feminine, informal)
     - "59-й"
     - "59-я"
     - "59-e"
@@ -2393,6 +2431,8 @@ ordinals:
     - "60º."
     - "60ª."
     - "60."
+    - "60mo" # es (masculine, informal)
+    - "60ma" # es (feminine, informal)
     - "60-й"
     - "60-я"
     - "60-e"
@@ -2437,6 +2477,8 @@ ordinals:
     - "61º."
     - "61ª."
     - "61."
+    - "61ro" # es (masculine, informal)
+    - "61ra" # es (feminine, informal)
     - "61-й"
     - "61-я"
     - "61-e"
@@ -2479,6 +2521,8 @@ ordinals:
     - "62º."
     - "62ª."
     - "62."
+    - "62do" # es (masculine, informal)
+    - "62da" # es (feminine, informal)
     - "62-й"
     - "62-я"
     - "62-e"
@@ -2523,6 +2567,8 @@ ordinals:
     - "63º."
     - "63ª."
     - "63."
+    - "63ro" # es (masculine, informal)
+    - "63ra" # es (feminine, informal)
     - "63-й"
     - "63-я"
     - "63-e"
@@ -2567,6 +2613,8 @@ ordinals:
     - "64º."
     - "64ª."
     - "64."
+    - "64to" # es (masculine, informal)
+    - "64ta" # es (feminine, informal)
     - "64-й"
     - "64-я"
     - "64-e"
@@ -2611,6 +2659,8 @@ ordinals:
     - "65º."
     - "65ª."
     - "65."
+    - "65to" # es (masculine, informal)
+    - "65ta" # es (feminine, informal)
     - "65-й"
     - "65-я"
     - "65-e"
@@ -2653,6 +2703,8 @@ ordinals:
     - "66º."
     - "66ª."
     - "66."
+    - "66to" # es (masculine, informal)
+    - "66ta" # es (feminine, informal)
     - "66-й"
     - "66-я"
     - "66-e"
@@ -2697,6 +2749,8 @@ ordinals:
     - "67º."
     - "67ª."
     - "67."
+    - "67mo" # es (masculine, informal)
+    - "67ma" # es (feminine, informal)
     - "67-й"
     - "67-я"
     - "67-e"
@@ -2741,6 +2795,8 @@ ordinals:
     - "68º."
     - "68ª."
     - "68."
+    - "68vo" # es (masculine, informal)
+    - "68va" # es (feminine, informal)
     - "68-й"
     - "68-я"
     - "68-e"
@@ -2785,6 +2841,8 @@ ordinals:
     - "69º."
     - "69ª."
     - "69."
+    - "69no" # es (masculine, informal)
+    - "69na" # es (feminine, informal)
     - "69-й"
     - "69-я"
     - "69-e"
@@ -2823,6 +2881,8 @@ ordinals:
     - "70º."
     - "70ª."
     - "70."
+    - "70mo" # es (masculine, informal)
+    - "70ma" # es (feminine, informal)
     - "70-й"
     - "70-я"
     - "70-e"
@@ -2867,6 +2927,8 @@ ordinals:
     - "71º."
     - "71ª."
     - "71."
+    - "71ro" # es (masculine, informal)
+    - "71ra" # es (feminine, informal)
     - "71-й"
     - "71-я"
     - "71-e"
@@ -2911,6 +2973,8 @@ ordinals:
     - "72º."
     - "72ª."
     - "72."
+    - "72do" # es (masculine, informal)
+    - "72da" # es (feminine, informal)
     - "72-й"
     - "72-я"
     - "72-e"
@@ -2955,6 +3019,8 @@ ordinals:
     - "73º."
     - "73ª."
     - "73."
+    - "73ro" # es (masculine, informal)
+    - "73ra" # es (feminine, informal)
     - "73-й"
     - "73-я"
     - "73-e"
@@ -2999,6 +3065,8 @@ ordinals:
     - "74º."
     - "74ª."
     - "74."
+    - "74to" # es (masculine, informal)
+    - "74ta" # es (feminine, informal)
     - "74-й"
     - "74-я"
     - "74-e"
@@ -3043,6 +3111,8 @@ ordinals:
     - "75º."
     - "75ª."
     - "75."
+    - "75to" # es (masculine, informal)
+    - "75ta" # es (feminine, informal)
     - "75-й"
     - "75-я"
     - "75-e"
@@ -3087,6 +3157,8 @@ ordinals:
     - "76º."
     - "76ª."
     - "76."
+    - "76to" # es (masculine, informal)
+    - "76ta" # es (feminine, informal)
     - "76-й"
     - "76-я"
     - "76-e"
@@ -3131,6 +3203,8 @@ ordinals:
     - "77º."
     - "77ª."
     - "77."
+    - "77mo" # es (masculine, informal)
+    - "77ma" # es (feminine, informal)
     - "77-й"
     - "77-я"
     - "77-e"
@@ -3175,6 +3249,8 @@ ordinals:
     - "78º."
     - "78ª."
     - "78."
+    - "78vo" # es (masculine, informal)
+    - "78va" # es (feminine, informal)
     - "78-й"
     - "78-я"
     - "78-e"
@@ -3219,6 +3295,8 @@ ordinals:
     - "79º."
     - "79ª."
     - "79."
+    - "79no" # es (masculine, informal)
+    - "79na" # es (feminine, informal)
     - "79-й"
     - "79-я"
     - "79-e"
@@ -3257,6 +3335,8 @@ ordinals:
     - "80º."
     - "80ª."
     - "80."
+    - "80mo" # es (masculine, informal)
+    - "80ma" # es (feminine, informal)
     - "80-й"
     - "80-я"
     - "80-e"
@@ -3303,6 +3383,8 @@ ordinals:
     - "81º."
     - "81ª."
     - "81."
+    - "81ro" # es (masculine, informal)
+    - "81ra" # es (feminine, informal)
     - "81-й"
     - "81-я"
     - "81-e"
@@ -3347,6 +3429,8 @@ ordinals:
     - "82º."
     - "82ª."
     - "82."
+    - "82do" # es (masculine, informal)
+    - "82da" # es (feminine, informal)
     - "82-й"
     - "82-я"
     - "82-e"
@@ -3391,6 +3475,8 @@ ordinals:
     - "83º."
     - "83ª."
     - "83."
+    - "83ro" # es (masculine, informal)
+    - "83ra" # es (feminine, informal)
     - "83-й"
     - "83-я"
     - "83-e"
@@ -3435,6 +3521,8 @@ ordinals:
     - "84º."
     - "84ª."
     - "84."
+    - "84to" # es (masculine, informal)
+    - "84ta" # es (feminine, informal)
     - "84-й"
     - "84-я"
     - "84-e"
@@ -3479,6 +3567,8 @@ ordinals:
     - "85º."
     - "85ª."
     - "85."
+    - "85to" # es (masculine, informal)
+    - "85ta" # es (feminine, informal)
     - "85-й"
     - "85-я"
     - "85-e"
@@ -3523,6 +3613,8 @@ ordinals:
     - "86º."
     - "86ª."
     - "86."
+    - "86to" # es (masculine, informal)
+    - "86ta" # es (feminine, informal)
     - "86-й"
     - "86-я"
     - "86-e"
@@ -3567,6 +3659,8 @@ ordinals:
     - "87º."
     - "87ª."
     - "87."
+    - "87mo" # es (masculine, informal)
+    - "87ma" # es (feminine, informal)
     - "87-й"
     - "87-я"
     - "87-e"
@@ -3611,6 +3705,8 @@ ordinals:
     - "88º."
     - "88ª."
     - "88."
+    - "88vo" # es (masculine, informal)
+    - "88va" # es (feminine, informal)
     - "88-й"
     - "88-я"
     - "88-e"
@@ -3655,6 +3751,8 @@ ordinals:
     - "89º."
     - "89ª."
     - "89."
+    - "89no" # es (masculine, informal)
+    - "89na" # es (feminine, informal)
     - "89-й"
     - "89-я"
     - "89-e"
@@ -3693,6 +3791,8 @@ ordinals:
     - "90º."
     - "90ª."
     - "90."
+    - "90mo" # es (masculine, informal)
+    - "90ma" # es (feminine, informal)
     - "90-й"
     - "90-я"
     - "90-e"
@@ -3737,6 +3837,8 @@ ordinals:
     - "91º."
     - "91ª."
     - "91."
+    - "91ro" # es (masculine, informal)
+    - "91ra" # es (feminine, informal)
     - "91-й"
     - "91-я"
     - "91-e"
@@ -3779,6 +3881,8 @@ ordinals:
     - "92º."
     - "92ª."
     - "92."
+    - "92do" # es (masculine, informal)
+    - "92da" # es (feminine, informal)
     - "92-й"
     - "92-я"
     - "92-e"
@@ -3823,6 +3927,8 @@ ordinals:
     - "93º."
     - "93ª."
     - "93."
+    - "93ro" # es (masculine, informal)
+    - "93ra" # es (feminine, informal)
     - "93-й"
     - "93-я"
     - "93-e"
@@ -3867,6 +3973,8 @@ ordinals:
     - "94º."
     - "94ª."
     - "94."
+    - "94to" # es (masculine, informal)
+    - "94ta" # es (feminine, informal)
     - "94-й"
     - "94-я"
     - "94-e"
@@ -3911,6 +4019,8 @@ ordinals:
     - "95º."
     - "95ª."
     - "95."
+    - "95to" # es (masculine, informal)
+    - "95ta" # es (feminine, informal)
     - "95-й"
     - "95-я"
     - "95-e"
@@ -3953,6 +4063,8 @@ ordinals:
     - "96º."
     - "96ª."
     - "96."
+    - "96to" # es (masculine, informal)
+    - "96ta" # es (feminine, informal)
     - "96-й"
     - "96-я"
     - "96-e"
@@ -3997,6 +4109,8 @@ ordinals:
     - "97º."
     - "97ª."
     - "97."
+    - "97mo" # es (masculine, informal)
+    - "97ma" # es (feminine, informal)
     - "97-й"
     - "97-я"
     - "97-e"
@@ -4041,6 +4155,8 @@ ordinals:
     - "98º."
     - "98ª."
     - "98."
+    - "98vo" # es (masculine, informal)
+    - "98va" # es (feminine, informal)
     - "98-й"
     - "98-я"
     - "98-e"
@@ -4085,6 +4201,8 @@ ordinals:
     - "99º."
     - "99ª."
     - "99."
+    - "99no" # es (masculine, informal)
+    - "99na" # es (feminine, informal)
     - "99-й"
     - "99-я"
     - "99-e"
@@ -4124,6 +4242,8 @@ ordinals:
     - "100º."
     - "100ª."
     - "100."
+    - "100mo" # es (masculine, informal)
+    - "100ma" # es (feminine, informal)
     - "100-й"
     - "100-я"
     - "100-e"
