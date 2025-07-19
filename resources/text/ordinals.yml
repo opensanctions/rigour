@@ -29,6 +29,12 @@ ordinals:
     - "One"
     - "Erste"
     - "Erster"
+    - "primer" # es (masculine)
+    - "primero" # es (masculine)
+    - "primera" # es (feminine)
+    - "uno" # es (number)
+    - "una" # es (number, feminine)
+    # - "un" # es (number) [can be other things]
     - "1st"
     - "1-й"
     - "1-я"
@@ -62,6 +68,9 @@ ordinals:
     - "Two"
     - "Zweite"
     - "Zweiter"
+    - "segundo" # es (masculine)
+    - "segunda" # es (feminine)
+    - "dos" # es (number)
     - "2nd"
     - "2-й"
     - "2-я"
@@ -94,6 +103,10 @@ ordinals:
     - "Three"
     - "Dritte"
     - "Dritter"
+    - "tercer" # es (masculine)
+    - "tercero" # es (masculine)
+    - "tercera" # es (feminine)
+# - "tres" # es (number) [can be other things]
     - "3rd"
     - "3-й"
     - "3-я"
@@ -126,6 +139,8 @@ ordinals:
     - "Four"
     - "Vierte"
     - "Vierter"
+    - "cuarto" # es (masculine)
+    - "cuarta" # es (feminine)
     - "4th"
     - "4-й"
     - "4-я"
@@ -160,6 +175,9 @@ ordinals:
     - "Five"
     - "Fünfte"
     - "Fünfter"
+    - "quinto" # es (masculine)
+    - "quinta" # es (feminine)
+    - "cinco" # es (number)
     - "5th"
     - "5-й"
     - "5-я"
@@ -192,6 +210,9 @@ ordinals:
     - "Six"
     - "Sechste"
     - "Sechster"
+    - "sexto" # es (masculine)
+    - "sexta" # es (feminine)
+    - "seis" # es (number)
     - "6th"
     - "6-й"
     - "6-я"
@@ -224,6 +245,9 @@ ordinals:
     - "Seven"
     - "Siebte"
     - "Siebter"
+    - "séptimo" # es (masculine)
+    - "séptima" # es (feminine)
+    - "siete" # es (number)
     - "7th"
     - "7-й"
     - "7-я"
@@ -256,6 +280,9 @@ ordinals:
     - "Eight"
     - "Achte"
     - "Achter"
+    - "octavo" # es (masculine)
+    - "octava" # es (feminine)
+    - "ocho" # es (number)
     - "8th"
     - "8-й"
     - "8-я"
@@ -288,6 +315,9 @@ ordinals:
     - "Nine"
     - "Neunte"
     - "Neunter"
+    - "noveno" # es (masculine)
+    - "novena" # es (feminine)
+    - "nueve" # es (number)
     - "9th"
     - "9-й"
     - "9-я"
@@ -321,6 +351,9 @@ ordinals:
     - "Ten"
     - "Zehnte"
     - "Zehnter"
+    - "décimo" # es (masculine)
+    - "décima" # es (feminine)
+    - "diez" # es (number)
     - "10th"
     - "10-й"
     - "10-я"
@@ -351,6 +384,11 @@ ordinals:
     - "Eleven"
     - "Elfte"
     - "Elfter"
+    - "undécimo" # es (masculine)
+    - "undécima" # es (feminine)
+    - "decimoprimero" # es (masculine, accepted alternative)
+    - "decimoprimera" # es (feminine, accepted alternative)
+    # - "once" # es (number) [can be other things e.g. en word "once"]
     - "11th"
     - "11-й"
     - "11-я"
@@ -382,6 +420,11 @@ ordinals:
     - "Twelve"
     - "Zwölfte"
     - "Zwölfter"
+    - "duodécimo" # es (masculine)
+    - "duodécima" # es (feminine)
+    - "decimosegundo" # es (masculine, accepted alternative)
+    - "decimosegunda" # es (feminine, accepted alternative)
+    - "doce" # es (number)
     - "12th"
     - "12-й"
     - "12-я"
@@ -413,6 +456,9 @@ ordinals:
     - "Thirteen"
     - "Dreizehnte"
     - "Dreizehnter"
+    - "decimotercero" # es (masculine)
+    - "decimotercera" # es (feminine)
+    - "trece" # es (number)
     - "13th"
     - "13-й"
     - "13-я"
@@ -444,6 +490,9 @@ ordinals:
     - "Fourteen"
     - "Vierzehnte"
     - "Vierzehnter"
+    - "decimocuarto" # es (masculine)
+    - "decimocuarta" # es (feminine)
+    - "catorce" # es (number)
     - "14th"
     - "14-й"
     - "14-я"
@@ -476,6 +525,9 @@ ordinals:
     - "Fifteen"
     - "Fünfzehnte"
     - "Fünfzehnter"
+    - "decimoquinto" # es (masculine)
+    - "decimoquinta" # es (feminine)
+    - "quince" # es (number)
     - "15th"
     - "15-й"
     - "15-я"
@@ -507,6 +559,10 @@ ordinals:
     - "Sixteen"
     - "Sechzehnte"
     - "Sechzehnter"
+    - "decimosexto" # es (masculine)
+    - "decimosexta" # es (feminine)
+    - "dieciséis" # es (number)
+    - "diez y seis" # es (number, old non-standard)
     - "16th"
     - "16-й"
     - "16-я"
@@ -538,6 +594,10 @@ ordinals:
     - "Seventeen"
     - "Siebzehnte"
     - "Siebzehnter"
+    - "decimoséptimo" # es (masculine)
+    - "decimoséptima" # es (feminine)
+    - "diecisiete" # es (number)
+    - "diez y siete" # es (number, old non-standard)
     - "17th"
     - "17-й"
     - "17-я"
@@ -569,6 +629,10 @@ ordinals:
     - "Eighteen"
     - "Achtzehnte"
     - "Achtzehnter"
+    - "decimoctavo" # es (masculine)
+    - "decimoctava" # es (feminine)
+    - "dieciocho" # es (number)
+    - "diez y ocho" # es (number, old non-standard)
     - "18th"
     - "18-й"
     - "18-я"
@@ -600,6 +664,10 @@ ordinals:
     - "Nineteen"
     - "Neunzehnte"
     - "Neunzehnter"
+    - "decimonoveno" # es (masculine)
+    - "decimonovena" # es (feminine)
+    - "diecinueve" # es (number)
+    - "diez y nueve" # es (number, old non-standard)
     - "19th"
     - "19-й"
     - "19-я"
@@ -632,6 +700,9 @@ ordinals:
     - "Twenty"
     - "Zwanzigste"
     - "Zwanzigster"
+    - "vigésimo" # es (masculine)
+    - "vigésima" # es (feminine)
+    - "veinte" # es (number)
     - "20th"
     - "20-й"
     - "20-я"
@@ -667,6 +738,14 @@ ordinals:
     - "Twenty first"
     - "Einundzwanzigste"
     - "Einundzwanzigster"
+    - "vigésimo primero" # es (masculine)
+    - "vigésima primera" # es (feminine)
+    - "vigesimoprimero" # es (masculine, accepted alternative)
+    - "vigesimaprimera" # es (feminine, accepted alternative)
+    - "veintiuno" # es (number)
+    - "veintiún" # es (number, masculine, shortened form)
+    - "veintiuna " # es (number, feminine)
+    - "veinte y uno" # es (number, old non-standard)
     - "21st"
     - "21-й"
     - "21-я"
@@ -700,6 +779,12 @@ ordinals:
     - "Twenty second"
     - "Zweiundzwanzigste"
     - "Zweiundzwanzigster"
+    - "vigésimo segundo" # es (masculine)
+    - "vigésima segunda" # es (feminine)
+    - "vigesimosegundo" # es (masculine, accepted alternative)
+    - "vigesimasegunda" # es (feminine, accepted alternative)
+    - "veintidós" # es (number)
+    - "veinte y dos" # es (number, old non-standard)
     - "22nd"
     - "22-й"
     - "22-я"
@@ -733,6 +818,12 @@ ordinals:
     - "Twenty three"
     - "Dreiundzwanzigste"
     - "Dreiundzwanzigster"
+    - "vigésimo tercero" # es (masculine)
+    - "vigésima tercera" # es (feminine)
+    - "vigesimotercero" # es (masculine, accepted alternative)
+    - "vigesimatercera" # es (feminine, accepted alternative)
+    - "veintitrés" # es (number)
+    - "veinte y tres" # es (number, old non-standard)
     - "23rd"
     - "23-й"
     - "23-я"
@@ -766,6 +857,12 @@ ordinals:
     - "Twenty four"
     - "Vierundzwanzigste"
     - "Vierundzwanzigster"
+    - "vigésimo cuarto" # es (masculine)
+    - "vigésima cuarta" # es (feminine)
+    - "vigesimocuarto" # es (masculine, accepted alternative)
+    - "vigesimacuarta" # es (feminine, accepted alternative)
+    - "veinticuatro" # es (number)
+    - "veinte y cuatro" # es (number, old non-standard)
     - "24th"
     - "24-й"
     - "24-я"
@@ -798,6 +895,12 @@ ordinals:
     - "Twentyfifth"
     - "Twenty five"
     - "Twenty fifth"
+    - "vigésimo quinto" # es (masculine)
+    - "vigésima quinta" # es (feminine)
+    - "vigesimoquinto" # es (masculine, accepted alternative)
+    - "vigesimaquinta" # es (feminine, accepted alternative)
+    - "veinticinco" # es (number)
+    - "veinte y cinco" # es (number, old non-standard)
     - "25th"
     - "25-й"
     - "25-я"
@@ -829,6 +932,12 @@ ordinals:
     - "Twentysix"
     - "Twenty sixth"
     - "Twenty six"
+    - "vigésimo sexto" # es (masculine)
+    - "vigésima sexta" # es (feminine)
+    - "vigesimosexto" # es (masculine, accepted alternative)
+    - "vigesimasexta" # es (feminine, accepted alternative)
+    - "veintiséis" # es (number)
+    - "veinte y seis" # es (number, old non-standard)
     - "26th"
     - "26-й"
     - "26-я"
@@ -860,6 +969,12 @@ ordinals:
     - "Twentyseventh"
     - "Twenty seven"
     - "Twenty seventh"
+    - "vigésimo séptimo" # es (masculine)
+    - "vigésima séptima" # es (feminine)
+    - "vigesimoseptimo" # es (masculine, accepted alternative)
+    - "vigesimaseptima" # es (feminine, accepted alternative)
+    - "veintisiete" # es (number)
+    - "veinte y siete" # es (number, old non-standard)
     - "27th"
     - "27-й"
     - "27-я"
@@ -891,6 +1006,12 @@ ordinals:
     - "Twentyeighth"
     - "Twenty eight"
     - "Twenty eighth"
+    - "vigésimo octavo" # es (masculine)
+    - "vigésima octava" # es (feminine)
+    - "vigesimooctavo" # es (masculine, accepted alternative)
+    - "vigesimaoctava" # es (feminine, accepted alternative)
+    - "veintiocho" # es (number)
+    - "veinte y ocho" # es (number, old non-standard)
     - "28th"
     - "28-й"
     - "28-я"
@@ -922,6 +1043,12 @@ ordinals:
     - "Twentynine"
     - "Twenty ninth"
     - "Twenty nine"
+    - "vigésimo noveno" # es (masculine)
+    - "vigésima novena" # es (feminine)
+    - "vigesimonoveno" # es (masculine, accepted alternative)
+    - "vigesimanovena" # es (feminine, accepted alternative)
+    - "veintinueve" # es (number)
+    - "veinte y nueve" # es (number, old non-standard)
     - "29th"
     - "29-й"
     - "29-я"
@@ -952,6 +1079,9 @@ ordinals:
     - "Thirty"
     - "Dreißigste"
     - "Dreißigster"
+    - "trigésimo" # es (masculine)
+    - "trigésima" # es (feminine)
+    - "treinta" # es (number)
     - "30th"
     - "30-й"
     - "30-я"
@@ -985,6 +1115,13 @@ ordinals:
     - "Thirty first"
     - "Einunddreißigste"
     - "Einunddreißigster"
+    - "trigésimo primero" # es (masculine)
+    - "trigésima primera" # es (feminine)
+    - "trigesimoprimero" # es (masculine, accepted alternative)
+    - "trigesimaprimera" # es (feminine, accepted alternative)
+    - "treinta y uno" # es (number)
+    - "treinta y una" # es (number, feminine)
+    - "treinta y un" # es (number, masculine, shortened form)
     - "31st"
     - "31-й"
     - "31-я"
@@ -1014,6 +1151,11 @@ ordinals:
     - "Thirty second"
     - "Zweiunddreißigste"
     - "Zweiunddreißigster"
+    - "trigésimo segundo" # es (masculine)
+    - "trigésima segunda" # es (feminine)
+    - "trigesimosegundo" # es (masculine, accepted alternative)
+    - "trigesimasegunda" # es (feminine, accepted alternative)
+    - "treinta y dos" # es (number)
     - "32nd"
     - "32-й"
     - "32-я"
@@ -1043,6 +1185,11 @@ ordinals:
     - "Thirty third"
     - "Dreiunddreißigste"
     - "Dreiunddreißigster"
+    - "trigésimo tercero" # es (masculine)
+    - "trigésima tercera" # es (feminine)
+    - "trigesimotercero" # es (masculine, accepted alternative)
+    - "trigesimatercera" # es (feminine, accepted alternative)
+    - "treinta y tres" # es (number)
     - "33rd"
     - "33-й"
     - "33-я"
@@ -1072,6 +1219,11 @@ ordinals:
     - "Thirty four"
     - "Vierunddreißigste"
     - "Vierunddreißigster"
+    - "trigésimo cuarto" # es (masculine)
+    - "trigésima cuarta" # es (feminine)
+    - "trigesimocuarto" # es (masculine, accepted alternative)
+    - "trigesimacuarta" # es (feminine, accepted alternative)
+    - "treinta y cuatro" # es (number)
     - "34th"
     - "34-й"
     - "34-я"
@@ -1099,6 +1251,11 @@ ordinals:
     - "Thirtyfifth"
     - "Thirty five"
     - "Thirty fifth"
+    - "trigésimo quinto" # es (masculine)
+    - "trigésima quinta" # es (feminine)
+    - "trigesimoquinto" # es (masculine, accepted alternative)
+    - "trigesimaquinta" # es (feminine, accepted alternative)
+    - "treinta y cinco" # es (number)
     - "35th"
     - "35-й"
     - "35-я"
@@ -1127,6 +1284,11 @@ ordinals:
     - "thirtysixth"
     - "thirty six"
     - "thirty sixth"
+    - "trigésimo sexto" # es (masculine)
+    - "trigésima sexta" # es (feminine)
+    - "trigesimosexto" # es (masculine, accepted alternative)
+    - "trigesimasexta" # es (feminine, accepted alternative)
+    - "treinta y seis" # es (number)
     - "36th"
     - "36e"
     - "36ú"
@@ -1166,7 +1328,12 @@ ordinals:
     - "thirtyseventh"
     - "thirty seven"
     - "thirty seventh"
-    - "37th"
+    - "trigésimo séptimo" # es (masculine)
+    - "trigésima séptima" # es (feminine)
+    - "trigesimoseptimo" # es (masculine, accepted alternative)
+    - "trigesimaseptima" # es (feminine, accepted alternative)
+    - "treinta y siete" # es (number)
+        - "37th"
     - "37e"
     - "37ú"
     - "37º"
@@ -1205,6 +1372,11 @@ ordinals:
     - "thirtyeighth"
     - "thirty eight"
     - "thirty eighth"
+    - "trigésimo octavo" # es (masculine)
+    - "trigésima octava" # es (feminine)
+    - "trigesimooctavo" # es (masculine, accepted alternative)
+    - "trigesimaoctava" # es (feminine, accepted alternative)
+    - "treinta y ocho" # es (number)
     - "38th"
     - "38e"
     - "38ú"
@@ -1244,6 +1416,11 @@ ordinals:
     - "thirtyninth"
     - "thirty nine"
     - "thirty ninth"
+    - "trigésimo noveno" # es (masculine)
+    - "trigésima novena" # es (feminine)
+    - "trigesimonoveno" # es (masculine, accepted alternative)
+    - "trigesimanovena" # es (feminine, accepted alternative)
+    - "treinta y nueve" # es (number)
     - "39th"
     - "39e"
     - "39ú"
@@ -1283,6 +1460,9 @@ ordinals:
     - "Fourty" # common misspelling
     - "Vierzigste"
     - "Vierzigster"
+    - "cuadragésimo" # es (masculine)
+    - "cuadragésima" # es (feminine)
+    - "cuarenta" # es (number)
     - "40th"
     - "40-й"
     - "40-я"
