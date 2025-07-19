@@ -195,8 +195,8 @@ ordinals:
     - "5-e"
     - "5:e"
     - "5."
-    - "5to"# es (masculine, informal)
-    - "5ta"# es (feminine, informal)
+    - "5to" # es (masculine, informal)
+    - "5ta" # es (feminine, informal)
     - "5.ª"
     - "5.º"
     - "5ª"
@@ -232,8 +232,8 @@ ordinals:
     - "6-e"
     - "6:e"
     - "6."
-    - "6to"# es (masculine, informal)
-    - "6ta"# es (feminine, informal)
+    - "6to" # es (masculine, informal)
+    - "6ta" # es (feminine, informal)
     - "6.ª"
     - "6.º"
     - "6ª"
@@ -269,8 +269,8 @@ ordinals:
     - "7-e"
     - "7:e"
     - "7."
-    - "7mo"# es (masculine, informal)
-    - "7ma"# es (feminine, informal)
+    - "7mo" # es (masculine, informal)
+    - "7ma" # es (feminine, informal)
     - "7.ª"
     - "7.º"
     - "7ª"
@@ -306,8 +306,8 @@ ordinals:
     - "8-e"
     - "8:e"
     - "8."
-    - "8vo"# es (masculine, informal)
-    - "8va"# es (feminine, informal)
+    - "8vo" # es (masculine, informal)
+    - "8va" # es (feminine, informal)
     - "8.ª"
     - "8.º"
     - "8ª"
@@ -343,8 +343,8 @@ ordinals:
     - "9-e"
     - "9:e"
     - "9."
-    - "9no"# es (masculine, informal)
-    - "9na"# es (feminine, informal)
+    - "9no" # es (masculine, informal)
+    - "9na" # es (feminine, informal)
     - "9.ª"
     - "9.º"
     - "9ª"
@@ -381,8 +381,8 @@ ordinals:
     - "10-e"
     - "10:e"
     - "10."
-    - "10mo"# es (masculine, informal)
-    - "10ma"# es (feminine, informal)
+    - "10mo" # es (masculine, informal)
+    - "10ma" # es (feminine, informal)
     - "10.ª"
     - "10.º"
     - "10ª"
@@ -418,6 +418,8 @@ ordinals:
     - "11-e"
     - "11:e"
     - "11."
+    - "11mo" # es (masculine, informal)
+    - "11ma" # es (feminine, informal)
     - "11.ª"
     - "11.º"
     - "11ª"
@@ -454,6 +456,8 @@ ordinals:
     - "12-e"
     - "12:e"
     - "12."
+    - "12mo" # es (masculine, informal)
+    - "12ma" # es (feminine, informal)
     - "12.ª"
     - "12.º"
     - "12ª"
@@ -488,6 +492,8 @@ ordinals:
     - "13-e"
     - "13:e"
     - "13."
+    - "13ro" # es (masculine, informal)
+    - "13ra" # es (feminine, informal)
     - "13.ª"
     - "13.º"
     - "13ª"
@@ -522,6 +528,8 @@ ordinals:
     - "14-e"
     - "14:e"
     - "14."
+    - "14to" # es (masculine, informal)
+    - "14ta" # es (feminine, informal)
     - "14.ª"
     - "14.º"
     - "14ª"
@@ -557,6 +565,8 @@ ordinals:
     - "15-e"
     - "15:e"
     - "15."
+    - "15to" # es (masculine, informal)
+    - "15ta" # es (feminine, informal)
     - "15.ª"
     - "15.º"
     - "15ª"
@@ -592,6 +602,8 @@ ordinals:
     - "16-e"
     - "16:e"
     - "16."
+    - "16to" # es (masculine, informal)
+    - "16ta" # es (feminine, informal)
     - "16.ª"
     - "16.º"
     - "16ª"
@@ -627,6 +639,8 @@ ordinals:
     - "17-e"
     - "17:e"
     - "17."
+    - "17mo" # es (masculine, informal)
+    - "17ma" # es (feminine, informal)
     - "17.ª"
     - "17.º"
     - "17ª"
@@ -662,6 +676,8 @@ ordinals:
     - "18-e"
     - "18:e"
     - "18."
+    - "18vo" # es (masculine, informal)
+    - "18va" # es (feminine, informal)
     - "18.ª"
     - "18.º"
     - "18ª"
@@ -697,6 +713,8 @@ ordinals:
     - "19-e"
     - "19:e"
     - "19."
+    - "19no" # es (masculine, informal)
+    - "19na" # es (feminine, informal)
     - "19.ª"
     - "19.º"
     - "19ª"
@@ -732,6 +750,8 @@ ordinals:
     - "20-e"
     - "20:e"
     - "20."
+    - "20mo" # es (masculine, informal)
+    - "20ma" # es (feminine, informal)
     - "20.ª"
     - "20.º"
     - "20ª"
@@ -775,6 +795,8 @@ ordinals:
     - "21-e"
     - "21:a"
     - "21."
+    - "21ro" # es (masculine, informal)
+    - "21ra" # es (feminine, informal)
     - "21.ª"
     - "21.º"
     - "21ª"
@@ -814,6 +836,8 @@ ordinals:
     - "22-e"
     - "22:a"
     - "22."
+    - "22do" # es (masculine, informal)
+    - "22da" # es (feminine, informal)
     - "22.ª"
     - "22.º"
     - "22ª"
@@ -853,6 +877,8 @@ ordinals:
     - "23-e"
     - "23:e"
     - "23."
+    - "23ro" # es (masculine, informal)
+    - "23ra" # es (feminine, informal)
     - "23.ª"
     - "23.º"
     - "23ª"
@@ -892,6 +918,8 @@ ordinals:
     - "24-e"
     - "24:e"
     - "24."
+    - "24to" # es (masculine, informal)
+    - "24ta" # es (feminine, informal)
     - "24.ª"
     - "24.º"
     - "24ª"
@@ -930,6 +958,8 @@ ordinals:
     - "25-e"
     - "25:e"
     - "25."
+    - "25to" # es (masculine, informal)
+    - "25ta" # es (feminine, informal)
     - "25.ª"
     - "25.º"
     - "25ª"
@@ -967,6 +997,8 @@ ordinals:
     - "26-e"
     - "26:e"
     - "26."
+    - "26to" # es (masculine, informal)
+    - "26ta" # es (feminine, informal)
     - "26.ª"
     - "26.º"
     - "26ª"
@@ -1004,6 +1036,8 @@ ordinals:
     - "27-e"
     - "27:e"
     - "27."
+    - "27mo" # es (masculine, informal)
+    - "27ma" # es (feminine, informal)
     - "27.ª"
     - "27.º"
     - "27ª"
@@ -1041,6 +1075,8 @@ ordinals:
     - "28-e"
     - "28:e"
     - "28."
+    - "28vo" # es (masculine, informal)
+    - "28va" # es (feminine, informal)
     - "28.ª"
     - "28.º"
     - "28ª"
@@ -1078,6 +1114,8 @@ ordinals:
     - "29-e"
     - "29:e"
     - "29."
+    - "29no" # es (masculine, informal)
+    - "29na" # es (feminine, informal)
     - "29.ª"
     - "29.º"
     - "29ª"
@@ -1111,6 +1149,8 @@ ordinals:
     - "30-e"
     - "30:e"
     - "30."
+    - "30mo" # es (masculine, informal)
+    - "30ma" # es (feminine, informal)
     - "30.ª"
     - "30.º"
     - "30ª"
@@ -1151,6 +1191,8 @@ ordinals:
     - "31-e"
     - "31:a"
     - "31."
+    - "31ro" # es (masculine, informal)
+    - "31ra" # es (feminine, informal)
     - "31.ª"
     - "31.º"
     - "31ª"
