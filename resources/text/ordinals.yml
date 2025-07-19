@@ -1499,6 +1499,13 @@ ordinals:
     - "Forty one"
     - "Einundvierzigste"
     - "Einundvierzigster"
+    - "cuadragésimo primero" # es (masculine)
+    - "cuadragésima primera" # es (feminine)
+    - "cuadragesimoprimero" # es (masculine, accepted alternative)
+    - "cuadragesimaprimera" # es (feminine, accepted alternative)
+    - "cuarenta y uno" # es (number)
+    - "cuarenta y una" # es (number, feminine)
+    - "cuarenta y un" # es (number, masculine, shortened form)
     - "41st"
     - "41-й"
     - "41-я"
@@ -1527,6 +1534,11 @@ ordinals:
     - "fortytwo"
     - "forty second"
     - "forty two"
+    - "cuadragésimo segundo" # es (masculine)
+    - "cuadragésima segunda" # es (feminine)
+    - "cuadragesimosegundo" # es (masculine, accepted alternative)
+    - "cuadragesimasegunda" # es (feminine, accepted alternative)
+    - "cuarenta y dos" # es (number)
     - "42nd"
     - "42e"
     - "42ú"
@@ -1566,6 +1578,11 @@ ordinals:
     - "fortythree"
     - "forty third"
     - "forty three"
+    - "cuadragésimo tercero" # es (masculine)
+    - "cuadragésima tercera" # es (feminine)
+    - "cuadragesimotercero" # es (masculine, accepted alternative)
+    - "cuadragesimatercera" # es (feminine, accepted alternative)
+    - "cuarenta y tres" # es (number)
     - "43rd"
     - "43e"
     - "43ú"
@@ -1612,6 +1629,11 @@ ordinals:
     - "Fourty four" # misspelling
     - "Vierundvierzigste"
     - "Vierundvierzigster"
+    - "cuadragésimo cuarto" # es (masculine)
+    - "cuadragésima cuarta" # es (feminine)
+    - "cuadragesimocuarto" # es (masculine, accepted alternative)
+    - "cuadragesimacuarta" # es (feminine, accepted alternative)
+    - "cuarenta y cuatro" # es (number)
     - "44th"
     - "44"
     - "44-й"
@@ -1641,6 +1663,11 @@ ordinals:
     - "fortyfive"
     - "forty fifth"
     - "forty five"
+    - "cuadragésimo quinto" # es (masculine)
+    - "cuadragésima quinta" # es (feminine)
+    - "cuadragesimoquinto" # es (masculine, accepted alternative)
+    - "cuadragesimaquinta" # es (feminine, accepted alternative)
+    - "cuarenta y cinco" # es (number)
     - "45th"
     - "45e"
     - "45ú"
@@ -1678,6 +1705,11 @@ ordinals:
     - "fortysix"
     - "forty sixth"
     - "forty six"
+    - "cuadragésimo sexto" # es (masculine)
+    - "cuadragésima sexta" # es (feminine)
+    - "cuadragesimosexto" # es (masculine, accepted alternative)
+    - "cuadragesimasexta" # es (feminine, accepted alternative)
+    - "cuarenta y seis" # es (number)
     - "46th"
     - "46e"
     - "46ú"
@@ -1717,6 +1749,11 @@ ordinals:
     - "fortyseven"
     - "forty seventh"
     - "forty seven"
+    - "cuadragésimo séptimo" # es (masculine)
+    - "cuadragésima séptima" # es (feminine)
+    - "cuadragesimoseptimo" # es (masculine, accepted alternative)
+    - "cuadragesimaseptima" # es (feminine, accepted alternative)
+    - "cuarenta y siete" # es (number)
     - "47th"
     - "47e"
     - "47ú"
@@ -1756,6 +1793,11 @@ ordinals:
     - "fortyeight"
     - "forty eight"
     - "forty eighth"
+    - "cuadragésimo octavo" # es (masculine)
+    - "cuadragésima octava" # es (feminine)
+    - "cuadragesimooctavo" # es (masculine, accepted alternative)
+    - "cuadragesimaoctava" # es (feminine, accepted alternative)
+    - "cuarenta y ocho" # es (number)
     - "48th"
     - "48e"
     - "48ú"
@@ -1795,6 +1837,11 @@ ordinals:
     - "fortynine"
     - "forty ninth"
     - "forty nine"
+    - "cuadragésimo noveno" # es (masculine)
+    - "cuadragésima novena" # es (feminine)
+    - "cuadragesimonoveno" # es (masculine, accepted alternative)
+    - "cuadragesimanovena" # es (feminine, accepted alternative)
+    - "cuarenta y nueve" # es (number)
     - "49th"
     - "49e"
     - "49ú"
@@ -1834,6 +1881,9 @@ ordinals:
     - "Fifty"
     - "Fünfzigste"
     - "Fünfzigster"
+    - "quincuagésimo" # es (masculine)
+    - "quincuagésima" # es (feminine)
+    - "cincuenta" # es (number)
     - "50th"
     - "50-й"
     - "50-я"
@@ -1864,6 +1914,13 @@ ordinals:
     - "fiftyone"
     - "fifty first"
     - "fifty one"
+    - "quincuagésimo primero" # es (masculine)
+    - "quincuagésima primera" # es (feminine)
+    - "quincuagesimoprimero" # es (masculine, accepted alternative)
+    - "quincuagesimaprimera" # es (feminine, accepted alternative)
+    - "cincuenta y uno" # es (number)
+    - "cincuenta y una" # es (number, feminine)
+    - "cincuenta y un" # es (number, masculine, shortened form)
     - "51st"
     - "51e"
     - "51ú"
@@ -1901,6 +1958,11 @@ ordinals:
     - "fiftytwo"
     - "fifty second"
     - "fifty two"
+    - "quincuagésimo segundo" # es (masculine)
+    - "quincuagésima segunda" # es (feminine)
+    - "quincuagesimosegundo" # es (masculine, accepted alternative)
+    - "quincuagesimasegunda" # es (feminine, accepted alternative)
+    - "cincuenta y dos" # es (number)
     - "52nd"
     - "52e"
     - "52ú"
@@ -1938,6 +2000,11 @@ ordinals:
     - "fiftythree"
     - "fifty third"
     - "fifty three"
+    - "quincuagésimo tercero" # es (masculine)
+    - "quincuagésima tercera" # es (feminine)
+    - "quincuagesimotercero" # es (masculine, accepted alternative)
+    - "quincuagesimatercera" # es (feminine, accepted alternative)
+    - "cincuenta y tres" # es (number)
     - "53rd"
     - "53e"
     - "53ú"
@@ -1977,6 +2044,11 @@ ordinals:
     - "fiftyfour"
     - "fifty fourth"
     - "fifty four"
+    - "quincuagésimo cuarto" # es (masculine)
+    - "quincuagésima cuarta" # es (feminine)
+    - "quincuagesimocuarto" # es (masculine, accepted alternative)
+    - "quincuagesimacuarta" # es (feminine, accepted alternative)
+    - "cincuenta y cuatro" # es (number)
     - "54th"
     - "54e"
     - "54ú"
@@ -2014,6 +2086,11 @@ ordinals:
     - "fiftyfive"
     - "fifty fifth"
     - "fifty five"
+    - "quincuagésimo quinto" # es (masculine)
+    - "quincuagésima quinta" # es (feminine)
+    - "quincuagesimoquinto" # es (masculine, accepted alternative)
+    - "quincuagesimaquinta" # es (feminine, accepted alternative)
+    - "cincuenta y cinco" # es (number)
     - "55th"
     - "55e"
     - "55ú"
@@ -2051,6 +2128,11 @@ ordinals:
     - "fiftysix"
     - "fifty sixth"
     - "fifty six"
+    - "quincuagésimo sexto" # es (masculine)
+    - "quincuagésima sexta" # es (feminine)
+    - "quincuagesimosexto" # es (masculine, accepted alternative)
+    - "quincuagesimasexta" # es (feminine, accepted alternative)
+    - "cincuenta y seis" # es (number)
     - "56th"
     - "56e"
     - "56ú"
@@ -2088,6 +2170,11 @@ ordinals:
     - "fiftyseventh"
     - "fifty seven"
     - "fifty seventh"
+    - "quincuagésimo séptimo" # es (masculine)
+    - "quincuagésima séptima" # es (feminine)
+    - "quincuagesimoseptimo" # es (masculine, accepted alternative)
+    - "quincuagesimaseptima" # es (feminine, accepted alternative)
+    - "cincuenta y siete" # es (number)
     - "57th"
     - "57e"
     - "57ú"
@@ -2127,6 +2214,11 @@ ordinals:
     - "fiftyeight"
     - "fifty eighth"
     - "fifty eight"
+    - "quincuagésimo octavo" # es (masculine)
+    - "quincuagésima octava" # es (feminine)
+    - "quincuagesimooctavo" # es (masculine, accepted alternative)
+    - "quincuagesimaoctava" # es (feminine, accepted alternative)
+    - "cincuenta y ocho" # es (number)
     - "58th"
     - "58e"
     - "58ú"
@@ -2166,6 +2258,11 @@ ordinals:
     - "fiftyninth"
     - "fifty nine"
     - "fifty ninth"
+    - "quincuagésimo noveno" # es (masculine)
+    - "quincuagésima novena" # es (feminine)
+    - "quincuagesimonoveno" # es (masculine, accepted alternative)
+    - "quincuagesimanovena" # es (feminine, accepted alternative)
+    - "cincuenta y nueve" # es (number)
     - "59th"
     - "59e"
     - "59ú"
@@ -2199,6 +2296,9 @@ ordinals:
     - "60"
     - "sixty"
     - "sixtieth"
+    - "sexagésimo" # es (masculine)
+    - "sexagésima" # es (feminine)
+    - "sesenta" # es (number)
     - "60th"
     - "60e"
     - "60ú"
@@ -2236,6 +2336,13 @@ ordinals:
     - "sixtyfirst"
     - "sixty one"
     - "sixty first"
+    - "sexagésimo primero" # es (masculine)
+    - "sexagésima primera" # es (feminine)
+    - "sexagesimoprimero" # es (masculine, accepted alternative)
+    - "sexagesimaprimera" # es (feminine, accepted alternative)
+    - "sesenta y uno" # es (number)
+    - "sesenta y una" # es (number, feminine)
+    - "sesenta y un" # es (number, masculine, shortened form)
     - "61st"
     - "61e"
     - "61ú"
@@ -2273,6 +2380,11 @@ ordinals:
     - "sixtytwo"
     - "sixty second"
     - "sixty two"
+    - "sexagésimo segundo" # es (masculine)
+    - "sexagésima segunda" # es (feminine)
+    - "sexagesimosegundo" # es (masculine, accepted alternative)
+    - "sexagesimasegunda" # es (feminine, accepted alternative)
+    - "sesenta y dos" # es (number)
     - "62nd"
     - "62e"
     - "62ú"
@@ -2312,6 +2424,11 @@ ordinals:
     - "sixtythree"
     - "sixty third"
     - "sixty three"
+    - "sexagésimo tercero" # es (masculine)
+    - "sexagésima tercera" # es (feminine)
+    - "sexagesimotercero" # es (masculine, accepted alternative)
+    - "sexagesimatercera" # es (feminine, accepted alternative)
+    - "sesenta y tres" # es (number)
     - "63rd"
     - "63e"
     - "63ú"
@@ -2351,6 +2468,11 @@ ordinals:
     - "sixtyfour"
     - "sixty fourth"
     - "sixty four"
+    - "sexagésimo cuarto" # es (masculine)
+    - "sexagésima cuarta" # es (feminine)
+    - "sexagesimocuarto" # es (masculine, accepted alternative)
+    - "sexagesimacuarta" # es (feminine, accepted alternative)
+    - "sesenta y cuatro" # es (number)
     - "64th"
     - "64e"
     - "64ú"
@@ -2390,6 +2512,11 @@ ordinals:
     - "sixtyfive"
     - "sixty fifth"
     - "sixty five"
+    - "sexagésimo quinto" # es (masculine)
+    - "sexagésima quinta" # es (feminine)
+    - "sexagesimoquinto" # es (masculine, accepted alternative)
+    - "sexagesimaquinta" # es (feminine, accepted alternative)
+    - "sesenta y cinco" # es (number)
     - "65th"
     - "65e"
     - "65ú"
@@ -2427,6 +2554,11 @@ ordinals:
     - "sixtysix"
     - "sixty sixth"
     - "sixty six"
+    - "sexagésimo sexto" # es (masculine)
+    - "sexagésima sexta" # es (feminine)
+    - "sexagesimosexto" # es (masculine, accepted alternative)
+    - "sexagesimasexta" # es (feminine, accepted alternative)
+    - "sesenta y seis" # es (number)
     - "66th"
     - "66e"
     - "66ú"
@@ -2466,6 +2598,11 @@ ordinals:
     - "sixtyseven"
     - "sixty seventh"
     - "sixty seven"
+    - "sexagésimo séptimo" # es (masculine)
+    - "sexagésima séptima" # es (feminine)
+    - "sexagesimoseptimo" # es (masculine, accepted alternative)
+    - "sexagesimaseptima" # es (feminine, accepted alternative)
+    - "sesenta y siete" # es (number)
     - "67th"
     - "67e"
     - "67ú"
@@ -2505,6 +2642,11 @@ ordinals:
     - "sixtyeight"
     - "sixty eighth"
     - "sixty eight"
+    - "sexagésimo octavo" # es (masculine)
+    - "sexagésima octava" # es (feminine)
+    - "sexagesimooctavo" # es (masculine, accepted alternative)
+    - "sexagesimaoctava" # es (feminine, accepted alternative)
+    - "sesenta y ocho" # es (number)
     - "68th"
     - "68e"
     - "68ú"
@@ -2544,6 +2686,11 @@ ordinals:
     - "sixtynine"
     - "sixty nine"
     - "sixty ninth"
+    - "sexagésimo noveno" # es (masculine)
+    - "sexagésima novena" # es (feminine)
+    - "sexagesimonoveno" # es (masculine, accepted alternative)
+    - "sexagesimanovena" # es (feminine, accepted alternative)
+    - "sesenta y nueve" # es (number)
     - "69th"
     - "69e"
     - "69ú"
@@ -2579,6 +2726,9 @@ ordinals:
     - "70"
     - "seventieth"
     - "seventy"
+    - "septuagésimo" # es (masculine)
+    - "septuagésima" # es (feminine)
+    - "setenta" # es (number)
     - "70th"
     - "70e"
     - "70ú"
@@ -2616,6 +2766,13 @@ ordinals:
     - "seventyone"
     - "seventy first"
     - "seventy one"
+    - "septuagésimo primero" # es (masculine)
+    - "septuagésima primera" # es (feminine)
+    - "septuagesimoprimero" # es (masculine, accepted alternative)
+    - "septuagesimaprimera" # es (feminine, accepted alternative)
+    - "setenta y una" # es (number, feminine)
+    - "setenta y uno" # es (number)
+    - "setenta y un" # es (number, masculine, shortened form)
     - "71st"
     - "71e"
     - "71ú"
@@ -2655,6 +2812,11 @@ ordinals:
     - "seventytwo"
     - "seventy second"
     - "seventy two"
+    - "septuagésimo segundo" # es (masculine)
+    - "septuagésima segunda" # es (feminine)
+    - "septuagesimosegundo" # es (masculine, accepted alternative)
+    - "septuagesimasegunda" # es (feminine, accepted alternative)
+    - "setenta y dos" # es (number)
     - "72nd"
     - "72e"
     - "72ú"
