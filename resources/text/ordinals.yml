@@ -29,8 +29,8 @@ ordinals:
     - "One"
     - "Erste"
     - "Erster"
+    - "primero" # es (when no noun follows)
     - "primer" # es (masculine)
-    - "primero" # es (masculine)
     - "primera" # es (feminine)
     - "uno" # es (number)
     - "una" # es (number, feminine)
@@ -103,8 +103,8 @@ ordinals:
     - "Three"
     - "Dritte"
     - "Dritter"
+    - "tercero" # es (when no noun follows)
     - "tercer" # es (masculine)
-    - "tercero" # es (masculine)
     - "tercera" # es (feminine)
 # - "tres" # es (number) [can be other things]
     - "3rd"
