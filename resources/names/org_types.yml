@@ -1061,7 +1061,9 @@ types:
       - Лімітед
       - בע"מ
       - 有限公司
+      - 有限
       - المحدودة
+      - المساهمة المحدودة
   - display: Ltd Sti
     generic: LLC
     aliases:
