@@ -1,3 +1,4 @@
+from functools import lru_cache
 import unicodedata
 from typing import List, Optional
 from normality.constants import WS
@@ -66,6 +67,7 @@ def prenormalize_name(name: Optional[str]) -> str:
     return name.lower()
 
 
+@lru_cache(maxsize=128)
 def normalize_name(name: Optional[str], sep: str = WS) -> Optional[str]:
     """Normalize a name for tokenization and matching."""
     if name is None:
