@@ -293,6 +293,9 @@ STOPWORDS:
   - "那" # that
   - "一个" # a, an
   - "一些" # some
+  # Italian stopwords
+  - "da" # from
+  - "di" # of
   # Japanese stopwords
   - "の" # of, 's (possessive)
   - "で" # at, in, on
