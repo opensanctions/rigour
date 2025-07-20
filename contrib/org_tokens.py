@@ -39,20 +39,20 @@ def parse_names(file_path):
                 continue
             if row["prop_type"] != "name":
                 continue
-            dataset = row["dataset"]
-            if dataset not in (
-                "eu_fsf",
-                # "ext_ru_egrul",
-                # "ua_nsdc_sanctions",
-                "us_ofac_sdn",
-                "us_ofac_cons",
-                "ch_seco_sanctions",
-                "gb_hmt_sanctions",
-                "gb_fcdo_sanctions",
-                "us_sam_exclusions",
-                "be_fod_sanctions",
-            ):
-                continue
+            # dataset = row["dataset"]
+            # if dataset not in (
+            #     "eu_fsf",
+            #     # "ext_ru_egrul",
+            #     # "ua_nsdc_sanctions",
+            #     "us_ofac_sdn",
+            #     "us_ofac_cons",
+            #     "ch_seco_sanctions",
+            #     "gb_hmt_sanctions",
+            #     "gb_fcdo_sanctions",
+            #     "us_sam_exclusions",
+            #     "be_fod_sanctions",
+            # ):
+            #     continue
             count += 1
             if count % 10000 == 0:
                 print(count)
@@ -74,7 +74,7 @@ def parse_names(file_path):
                 tokens[token] += 1
 
     print("Tokens:")
-    for token, count in tokens.most_common(1000):
+    for token, count in tokens.most_common(2000):
         print(f"{token}: {count}")
 
     # print("Similar to existing symbols:")
