@@ -114,7 +114,9 @@ ordinals:
     - "二" # zh (number, simple)
     - "第二" # zh (simple)
     - "贰" # zh (number, financial)
+    - "貳" # zh (number, financial, traditional)
     - "第贰" # zh (financial)
+    - "第貳" # zh (financial, traditional)
   3:
     - "Third"
     - "Three"
@@ -539,7 +541,9 @@ ordinals:
     - "十二" # zh (number, simple)
     - "第十二" # zh (simple)
     - "拾贰" # zh (number, financial)
+    - "拾貳" # zh (number, financial, traditional)
     - "第拾贰" # zh (financial)
+    - "第拾貳" # zh (financial, traditional)
   13:
     - "Thirteenth"
     - "Thirteen"
@@ -874,7 +878,9 @@ ordinals:
     - "二十" # zh (number, simple)
     - "第二十" # zh (simple)
     - "贰拾" # zh (number, financial)
+    - "貳拾" # zh (number, financial, traditional)
     - "第贰拾" # zh (financial)
+    - "第貳拾" # zh (financial, traditional)
   21:
     - "Twenty-first"
     - "Twenty-one"
@@ -922,7 +928,9 @@ ordinals:
     - "二十一" # zh (number, simple)
     - "第二十一" # zh (simple)
     - "贰拾壹" # zh (number, financial)
+    - "貳拾壹" # zh (number, financial, traditional)
     - "第贰拾壹" # zh (financial)
+    - "第貳拾壹" # zh (financial, traditional)
   22:
     - "Twenty-second"
     - "Twenty-two"
@@ -968,7 +976,9 @@ ordinals:
     - "二十二" # zh (number, simple)
     - "第二十二" # zh (simple)
     - "贰拾贰" # zh (number, financial)
+    - "貳拾貳" # zh (number, financial, traditional)
     - "第贰拾贰" # zh (financial)
+    - "第貳拾貳" # zh (financial, traditional)
   23:
     - "Twenty-third"
     - "Twenty-three"
