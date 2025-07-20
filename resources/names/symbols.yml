@@ -646,6 +646,7 @@ org_symbols:
     - Όμιλος
     - Ομάδα
     - Skupina
+    - hrupa
     - Grupa
     - 团体
     - 团
@@ -709,6 +710,7 @@ org_symbols:
     - federální
     - federálny
     - federalny
+    - federatsiyi
     - federalna
     - federāla
   natl:
@@ -753,6 +755,7 @@ org_symbols:
     - республике
     - république
     - respublikos
+    - respubliky
     - republik
     - repubblica
     - republika
