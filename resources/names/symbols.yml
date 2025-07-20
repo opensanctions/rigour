@@ -101,6 +101,7 @@ org_symbols:
     - корпорації
     - корпораций
     - societatea
+    - sociedade
     - società
     - Εταιρικός Όμιλος
     - 協力的な
@@ -185,6 +186,9 @@ org_symbols:
     - Μπίζνες
     - 商业
     - 商
+  nominee:
+    - nominees
+    - nominee
   branch:
     - branch
     - branch of
@@ -549,11 +553,16 @@ org_symbols:
   oil:
     - oil
     - petroleum
+    - petrochemical
+    - нефтепереработка
     - neft
     - нефть
+    - татнефть
+    - нефтяная
     - нефтяной
   steel:
     - steel
+    - metal
     - steelworks
     - metallurgical
     - metallurgy
@@ -573,6 +582,7 @@ org_symbols:
     - растение
     - usine
     - zavod
+    - závod
     - завод
     - fabriek
     - fabrik
@@ -586,6 +596,7 @@ org_symbols:
     - plant
   fund:
     - fund
+    - funds
     - fond
     - fondo
     - fonds
@@ -627,6 +638,8 @@ org_symbols:
     - groupe
     - Grupa
     - grupė
+    - grupo
+    - gruppo
     - Grupul
     - Grúpa
     - grup
@@ -1026,11 +1039,13 @@ org_symbols:
     - islamique
     - islamske
     - islamiya
+    - islamiyah
     - islamskiej
     - islámských
     - islamských
     - islamiske
     - islam
+    - islami
     - islamo
     - islâmico
   research:
@@ -1064,6 +1079,11 @@ org_symbols:
   construction:
     - construction
     - строительство
+    - construtora
+    - construcoes
+    - construções
+    - construcao
+    - construção
     - строительный
     - строительное
     - строительная
@@ -1120,6 +1140,7 @@ org_symbols:
     - committee
     - committees
     - комитет
+    - комитета
     - комитеты
     - комітет
     - комітети
@@ -1208,6 +1229,7 @@ org_symbols:
     - financial
     - finance
     - finances
+    - finans
     - финансирование
     - финансирования
     - финансовый
@@ -1320,6 +1342,7 @@ org_symbols:
   security:
     - security
     - seguridad
+    - securities
     - sécurité
     - güvenlik
     - безопасности
@@ -1659,16 +1682,57 @@ org_symbols:
     - решение
     - решения
     - решению
+  project:
+    - project
+    - projects
+    - projetos
+    - проект
+    - проекты
+    - проекта
+    - проектов
+    - проекту
+    - проектно
+    - проектный
+    - проекты
+    - projekat
+    - projekt
+    - projektas
+    - projektas
+    - projekti
+    - projektių
+    - projekto
+    - projektų
+    - projektoje
+    - projektųje
+    - projektoje
+  product:
+    - product
+    - products
+    - продукция
+    - продукціі
+    - продукцією
+    - produkt
   distrib:
     - distributors
     - distributor
     - distribution
+    - дистрибьютор
+    - дистрибуция
+    - дистрибутора
+    - дистрибуции
   capital:
     - capital
     - κεφάλαιο
     - κεφαλαιακή
     - капитал
     - kapital
+  credit:
+    - credit
+    - kredit
+    - credits
+  asset:
+    - asset
+    - assets
   budget:
     - budget
     - budgetary
@@ -1794,6 +1858,7 @@ org_symbols:
     - производственная
   medical:
     - medical
+    - medicine
     - медичний
     - медична
     - медичні

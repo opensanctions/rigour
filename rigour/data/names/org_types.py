@@ -533,6 +533,11 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
+        "display": "სს",
+        "generic": "JSC",
+        "aliases": ["სააქციო საზოგადოება", "დახურული სააქციო საზოგადოება"],
+    },
+    {
         "display": "PJSC",
         "generic": "JSC",
         "aliases": [
@@ -1044,12 +1049,18 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "private company with limited liability",
             "private limited company",
             "private limited liability company",
+        ],
+    },
+    {
+        "generic": "LLC",
+        "aliases": [
             "компания с ограниченной ответственностью",
             "лтд",
             "лимитед",
             "Лімітед",
             'בע"מ',
             "有限公司",
+            "المحدودة",
         ],
     },
     {
@@ -1067,6 +1078,11 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "limited şirket",
             "limited şirketi",
         ],
+    },
+    {
+        "display": "შპს",
+        "generic": "LLC",
+        "aliases": ["შპს", "შეზღუდული პასუხისმგებლობის საზოგადოება"],
     },
     {
         "display": "МЧЖ",

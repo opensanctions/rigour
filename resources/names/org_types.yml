@@ -502,6 +502,11 @@ types:
       - Joint Stock Co.
       - JS Co.
       - JSC Company
+  - display: სს
+    generic: JSC
+    aliases:
+      - სააქციო საზოგადოება
+      - დახურული სააქციო საზოგადოება
   - display: PJSC
     generic: JSC
     aliases:
@@ -1048,12 +1053,15 @@ types:
       - private company with limited liability
       - private limited company
       - private limited liability company
+  - generic: LLC
+    aliases:
       - компания с ограниченной ответственностью
       - лтд
       - лимитед
       - Лімітед
       - בע"מ
       - 有限公司
+      - المحدودة
   - display: Ltd Sti
     generic: LLC
     aliases:
@@ -1067,6 +1075,11 @@ types:
       - limited sti
       - limited şirket
       - limited şirketi
+  - display: შპს
+    generic: LLC
+    aliases:
+      - შპს
+      - შეზღუდული პასუხისმგებლობის საზოგადოება
   - display: МЧЖ
     generic: LLC
     aliases:

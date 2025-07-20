@@ -219,6 +219,7 @@ STOPWORDS:
   - что # that, what
   - это # this, it
   - все # all, everything
+  - без
   # Ukrainian stopwords
   - для # for
   - і
@@ -326,6 +327,7 @@ STOPPHRASES:
   - "formerly known as"
   - "f/k/a"
   - "F/K/A"
+  - "former"
   - "formerly"
   - "presently known as"
   - "previously known as"
