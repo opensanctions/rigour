@@ -164,6 +164,7 @@ org_symbols:
     - хлдинг
     - xoлдиhг
     - kholdyng
+    - kholding
     - القابضة
     - Συμμετοχών
     - Symmetochon
@@ -245,6 +246,7 @@ org_symbols:
     - Specjalnych
     - specială
     - special
+    - speciale
     - Speciaal
     - Specijalni
     - Специальный
@@ -326,13 +328,13 @@ org_symbols:
     - страхового
     - страховая
   intel:
-    - intel  # en (abbreviation)
-    - intelligence  # en
-    - inteligencia  # es
-    - inteligência  # pt
-    - intelijen  # id
+    - intel # en (abbreviation)
+    - intelligence # en
+    - inteligencia # es
+    - inteligência # pt
+    - intelijen # id
     - inteligjenca # sq
-    - inteligjencës  # sq
+    - inteligjencës # sq
     - wywiadu # pl
     - разведывательное # ru
   property:
@@ -737,6 +739,7 @@ org_symbols:
     - республик
     - республике
     - république
+    - respublikos
     - republik
     - repubblica
     - republika
@@ -886,6 +889,8 @@ org_symbols:
     - inženýrství
     - inženiring
     - inzhiniring
+    - engineers
+    - инженерный
     - 工学
     - エンジニアリング
   scientific:
@@ -1020,6 +1025,7 @@ org_symbols:
     - islamitische
     - islamique
     - islamske
+    - islamiya
     - islamskiej
     - islámských
     - islamských
@@ -1388,6 +1394,7 @@ org_symbols:
     - Kreditanstalt
     - handelsbanken
     - банка
+    - banka
     - банк
     - инвестиционный банк
     - коммерческий банк
@@ -1863,13 +1870,13 @@ org_symbols:
     - Науково-виробниче підприємство
     - Науково-виробниче
 in liquidation:
-    - in liqu.   # de (abbreviation)
-    - in liquidation   # de, en
-    - in liquidazione   # it
-    - en liquidacion   # es
-    - en liquidation   # fr
-    - 清算中    # zh
-    - "/in liquidation/"   # used by certain Bulgarian companies
+  - in liqu. # de (abbreviation)
+  - in liquidation # de, en
+  - in liquidazione # it
+  - en liquidacion # es
+  - en liquidation # fr
+  - 清算中 # zh
+  - "/in liquidation/" # used by certain Bulgarian companies
 person_symbols:
   jr:
     - "Jr"
