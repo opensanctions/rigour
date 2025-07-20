@@ -257,7 +257,8 @@ STOPWORDS:
   - "de" # of, from
   - "la" # the (feminine)
   - "el" # the (masculine)
-  - "los" # the (plural)
+  - "las" # the (feminine plural)
+  - "los" # the (masculine plural)
   - "y" # and
   - "en" # in, on
   - "a" # to, at
