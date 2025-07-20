@@ -270,6 +270,7 @@ STOPWORDS:
   - "y"
   # French stopwords
   - "de" # of, from
+  - "du" # of the, any, some
   - "la" # the (feminine)
   - "le" # the (masculine)
   - "et" # and
