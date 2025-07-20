@@ -138,6 +138,21 @@ org_symbols:
     - кооперация
     - Συνεταιρισμός
     - Synetairismos
+  partner:
+    - partner
+    - partners
+    - партнер
+    - партнеры
+    - партнёр
+    - партнери
+    - спільник
+    - спільники
+    - الشركاء
+    - 合伙人
+    - 合夥人
+    - 伙伴
+    - 共同経営者
+    - 組合員
   center:
     - центр
     - tsentr
@@ -281,6 +296,7 @@ org_symbols:
     - technologickou
     - technological
     - technologique
+    - tekhnichnyi
     - tehnološko
     - tecnologies
     - tecnologia
@@ -361,6 +377,11 @@ org_symbols:
     - недвижимостями
     - недвижимостях
     - недвижимостью
+  house:
+    - housing
+    - house
+    - maison
+    - haus
   supply:
     - supply
     - supplies
@@ -1292,6 +1313,17 @@ org_symbols:
     - 電子の
     - 전자
     - 전자의
+  electric:
+    - electric
+    - electrical
+    - electrically
+    - electricity
+    - электрический
+    - электрическая
+    - электрические
+    - электрических
+    - электрического
+    - электрической
   energy:
     - energy
     - energies
@@ -1318,6 +1350,9 @@ org_symbols:
     - 能源
     - エネルギー
     - 에너지
+  power:
+    - power
+    - powers
   chemical:
     - chemical
     - chemicals
@@ -1374,6 +1409,7 @@ org_symbols:
     - sistemas
     - système
     - systèmes
+    - sistemy
     - システム
     - システムズ
   association:
