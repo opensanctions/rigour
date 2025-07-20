@@ -38,6 +38,7 @@ def generate_data_file() -> None:
         section = section.strip().upper()
         mapping = {}
         group_type = "str"
+        # print(section, value)
         for group, items in value.items():
             if group is None:
                 continue

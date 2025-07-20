@@ -1869,14 +1869,14 @@ org_symbols:
     - Научно-производственное
     - Науково-виробниче підприємство
     - Науково-виробниче
-in liquidation:
-  - in liqu. # de (abbreviation)
-  - in liquidation # de, en
-  - in liquidazione # it
-  - en liquidacion # es
-  - en liquidation # fr
-  - 清算中 # zh
-  - "/in liquidation/" # used by certain Bulgarian companies
+  liquidation:
+    - in liqu. # de (abbreviation)
+    - in liquidation # de, en
+    - in liquidazione # it
+    - en liquidacion # es
+    - en liquidation # fr
+    - 清算中 # zh
+    - "/in liquidation/" # used by certain Bulgarian companies
 person_symbols:
   jr:
     - "Jr"

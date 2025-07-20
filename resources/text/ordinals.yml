@@ -125,7 +125,7 @@ ordinals:
     - "tercero" # es (when no noun follows)
     - "tercer" # es (masculine)
     - "tercera" # es (feminine)
-# - "tres" # es (number) [can be other things]
+    # - "tres" # es (number) [can be other things]
     - "3rd"
     - "3-й"
     - "3-я"
@@ -2216,7 +2216,7 @@ ordinals:
     - "五十" # zh (number, simple)
     - "第五十" # zh (simple)
     - "伍拾" # zh (number, financial)
-  - "第伍拾" # zh (financial)
+    - "第伍拾" # zh (financial)
   51:
     - "51"
     - "fifty-first"

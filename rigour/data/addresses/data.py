@@ -5,7 +5,7 @@ FORMS: Dict[str, List[str]] = {
     "apt": ["apartment", "appartement", "flat"],
     "av": ["avenue", "ave", "avenida", "авеню"],
     "rd": ["road"],
-    "no": ["number", "nr", "№"],
+    "no": ["number", "nr", "№", "numero", "numéro", "número", "номер"],
     "d": ["dom", "дом", "house", "hse"],
     "condo": ["condominium"],
     "twr": ["tower", "towers"],
