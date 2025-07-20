@@ -17,6 +17,7 @@ ordinals:
     - "0th"
     - "０" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "(0)"
+    - "Number 0"
     - "No0"
     - "No 0"
     - "No.0"
@@ -59,6 +60,7 @@ ordinals:
     - "１" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑴" # Unicode symbol for parenthesized number"
     - "(1)"
+    - "Number 1"
     - "No1"
     - "No 1"
     - "No.1"
@@ -100,6 +102,7 @@ ordinals:
     - "２" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑵" # Unicode symbol for parenthesized number"
     - "(2)"
+    - "Number 2"
     - "No2"
     - "No 2"
     - "No.2"
@@ -144,6 +147,7 @@ ordinals:
     - "３" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑶" # Unicode symbol for parenthesized number
     - "(3)"
+    - "Number 3"
     - "No3"
     - "No 3"
     - "No.3"
@@ -184,6 +188,7 @@ ordinals:
     - "４" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑷" # Unicode symbol for parenthesized number
     - "(4)"
+    - "Number 4"
     - "No4"
     - "No 4"
     - "No.4"
@@ -227,6 +232,7 @@ ordinals:
     - "５" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑸" # Unicode symbol for parenthesized number
     - "(5)"
+    - "Number 5"
     - "No5"
     - "No 5"
     - "No.5"
@@ -268,6 +274,7 @@ ordinals:
     - "６" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑹" # Unicode symbol for parenthesized number
     - "(6)"
+    - "Number 6"
     - "No6"
     - "No 6"
     - "No.6"
@@ -276,6 +283,10 @@ ordinals:
     - "№ 6"
     - "VIth"
     - "VI"
+    - "六" # zh (number, simple)
+    - "第六" # zh (simple)
+    - "陆" # zh (number, financial)
+    - "第陆" # zh (financial)
   7:
     - "Seventh"
     - "Seven"
@@ -305,6 +316,7 @@ ordinals:
     - "７" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑺" # Unicode symbol for parenthesized number
     - "(7)"
+    - "Number 7"
     - "No7"
     - "No 7"
     - "No.7"
@@ -313,6 +325,10 @@ ordinals:
     - "№ 7"
     - "VIIth"
     - "VII"
+    - "七" # zh (number, simple)
+    - "第七" # zh (simple)
+    - "柒" # zh (number, financial)
+    - "第柒" # zh (financial)
   8:
     - "Eighth"
     - "Eight"
@@ -342,6 +358,7 @@ ordinals:
     - "８" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑻" # Unicode symbol for parenthesized number
     - "(8)"
+    - "Number 8"
     - "No8"
     - "No 8"
     - "No.8"
@@ -350,6 +367,10 @@ ordinals:
     - "№ 8"
     - "VIIIth"
     - "VIII"
+    - "八" # zh (number, simple)
+    - "第八" # zh (simple)
+    - "捌" # zh (number, financial)
+    - "第捌" # zh (financial)
   9:
     - "Ninth"
     - "Nine"
@@ -380,6 +401,7 @@ ordinals:
     - "９" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑼" # Unicode symbol for parenthesized number
     - "(9)"
+    - "Number 9"
     - "No9"
     - "No 9"
     - "No.9"
@@ -388,6 +410,10 @@ ordinals:
     - "№ 9"
     - "VIIIIth"
     - "IX"
+    - "九" # zh (number, simple)
+    - "第九" # zh (simple)
+    - "玖" # zh (number, financial)
+    - "第玖" # zh (financial)
   10:
     - "Tenth"
     - "Ten"
@@ -416,6 +442,7 @@ ordinals:
     - "⒑" # Unicode symbol for number plus full stop
     - "⑽" # Unicode symbol for parenthesized number
     - "(10)"
+    - "Number 10"
     - "No10"
     - "No 10"
     - "No.10"
@@ -423,6 +450,10 @@ ordinals:
     - "№10"
     - "№ 10"
     - "Xth"
+    - "十" # zh (number, simple)
+    - "第十" # zh (simple)
+    - "拾" # zh (number, financial)
+    - "第拾" # zh (financial)
   11:
     - "Eleventh"
     - "Eleven"
@@ -454,6 +485,7 @@ ordinals:
     - "⒒" # Unicode symbol for number plus full stop
     - "⑾" # Unicode symbol for parenthesized number
     - "(11)"
+    - "Number 11"
     - "No11"
     - "No 11"
     - "No.11"
@@ -461,6 +493,10 @@ ordinals:
     - "№11"
     - "№ 11"
     - "XIth"
+    - "十一" # zh (number, simple)
+    - "第十一" # zh (simple)
+    - "拾壹" # zh (number, financial)
+    - "第拾壹" # zh (financial)
   12:
     - "Twelfth"
     - "Twelve"
@@ -492,6 +528,7 @@ ordinals:
     - "⒓" # Unicode symbol for number plus full stop
     - "⑿" # Unicode symbol for parenthesized number
     - "(12)"
+    - "Number 12"
     - "No12"
     - "No 12"
     - "No.12"
@@ -499,6 +536,10 @@ ordinals:
     - "№12"
     - "№ 12"
     - "XIIth"
+    - "十二" # zh (number, simple)
+    - "第十二" # zh (simple)
+    - "拾贰" # zh (number, financial)
+    - "第拾贰" # zh (financial)
   13:
     - "Thirteenth"
     - "Thirteen"
@@ -529,6 +570,7 @@ ordinals:
     - "⒔" # Unicode symbol for number plus full stop
     - "⒀" # Unicode symbol for parenthesized number
     - "(13)"
+    - "Number 13"
     - "No13"
     - "No 13"
     - "No.13"
@@ -536,6 +578,10 @@ ordinals:
     - "№13"
     - "№ 13"
     - "XIIIth"
+    - "十三" # zh (number, simple)
+    - "第十三" # zh (simple)
+    - "拾叁" # zh (number, financial)
+    - "第拾叁" # zh (financial)
   14:
     - "Fourteenth"
     - "Fourteen"
@@ -565,6 +611,7 @@ ordinals:
     - "⒕" # Unicode symbol for number plus full stop
     - "⒁" # Unicode symbol for parenthesized number
     - "(14)"
+    - "Number 14"
     - "No14"
     - "No 14"
     - "No.14"
@@ -573,6 +620,10 @@ ordinals:
     - "№ 14"
     - "XIVth"
     - "XIIIIth"
+    - "十四" # zh (number, simple)
+    - "第十四" # zh (simple)
+    - "拾肆" # zh (number, financial)
+    - "第拾肆" # zh (financial)
   15:
     - "Fifteenth"
     - "Fifteen"
@@ -602,6 +653,7 @@ ordinals:
     - "⒖" # Unicode symbol for number plus full stop
     - "⒂" # Unicode symbol for parenthesized number
     - "(15)"
+    - "Number 15"
     - "No15"
     - "No 15"
     - "No.15"
@@ -609,6 +661,10 @@ ordinals:
     - "№15"
     - "№ 15"
     - "XVth"
+    - "十五" # zh (number, simple)
+    - "第十五" # zh (simple)
+    - "拾伍" # zh (number, financial)
+    - "第拾伍" # zh (financial)
   16:
     - "Sixteenth"
     - "Sixteen"
@@ -639,6 +695,7 @@ ordinals:
     - "⒗" # Unicode symbol for number plus full stop
     - "⒃" # Unicode symbol for parenthesized number
     - "(16)"
+    - "Number 16"
     - "No16"
     - "No 16"
     - "No.16"
@@ -646,6 +703,10 @@ ordinals:
     - "№16"
     - "№ 16"
     - "XVIth"
+    - "十六" # zh (number, simple)
+    - "第十六" # zh (simple)
+    - "拾陆" # zh (number, financial)
+    - "第拾陆" # zh (financial)
   17:
     - "Seventeenth"
     - "Seventeen"
@@ -676,6 +737,7 @@ ordinals:
     - "⒘" # Unicode symbol for number plus full stop
     - "⒄" # Unicode symbol for parenthesized number
     - "(17)"
+    - "Number 17"
     - "No17"
     - "No 17"
     - "No.17"
@@ -683,6 +745,10 @@ ordinals:
     - "№17"
     - "№ 17"
     - "XVIIth"
+    - "十七" # zh (number, simple)
+    - "第十七" # zh (simple)
+    - "拾柒" # zh (number, financial)
+    - "第拾柒" # zh (financial)
   18:
     - "Eighteenth"
     - "Eighteen"
@@ -713,6 +779,7 @@ ordinals:
     - "⒅" # Unicode symbol for parenthesized number
     - "１８" # fullwidth characters sometimes used in China and Japan
     - "(18)"
+    - "Number 18"
     - "No18"
     - "No 18"
     - "No.18"
@@ -720,6 +787,10 @@ ordinals:
     - "№18"
     - "№ 18"
     - "XVIIIth"
+    - "十八" # zh (number, simple)
+    - "第十八" # zh (simple)
+    - "拾捌" # zh (number, financial)
+    - "第拾捌" # zh (financial)
   19:
     - "Nineteenth"
     - "Nineteen"
@@ -750,6 +821,7 @@ ordinals:
     - "⒚" # Unicode symbol for number plus full stop
     - "⒆" # Unicode symbol for parenthesized number
     - "(19)"
+    - "Number 19"
     - "No19"
     - "No 19"
     - "No.19"
@@ -758,6 +830,10 @@ ordinals:
     - "№ 19"
     - "XIXth"
     - "XVIIIIth"
+    - "十九" # zh (number, simple)
+    - "第十九" # zh (simple)
+    - "拾玖" # zh (number, financial)
+    - "第拾玖" # zh (financial)
   20:
     - "Twentieth"
     - "Twenty"
@@ -787,6 +863,7 @@ ordinals:
     - "⒛" # Unicode symbol for number plus full stop
     - "⒇" # Unicode symbol for parenthesized number
     - "(20)"
+    - "Number 20"
     - "No20"
     - "No 20"
     - "No.20"
@@ -794,6 +871,10 @@ ordinals:
     - "№20"
     - "№ 20"
     - "XXth"
+    - "二十" # zh (number, simple)
+    - "第二十" # zh (simple)
+    - "贰拾" # zh (number, financial)
+    - "第贰拾" # zh (financial)
   21:
     - "Twenty-first"
     - "Twenty-one"
@@ -830,6 +911,7 @@ ordinals:
     - "21º."
     - "２１" # fullwidth characters sometimes used in China and Japan
     - "(21)"
+    - "Number 21"
     - "No21"
     - "No 21"
     - "No.21"
@@ -837,6 +919,10 @@ ordinals:
     - "№21"
     - "№ 21"
     - "XXIst"
+    - "二十一" # zh (number, simple)
+    - "第二十一" # zh (simple)
+    - "贰拾壹" # zh (number, financial)
+    - "第贰拾壹" # zh (financial)
   22:
     - "Twenty-second"
     - "Twenty-two"
@@ -871,6 +957,7 @@ ordinals:
     - "22º."
     - "２２" # fullwidth characters sometimes used in China and Japan
     - "(22)"
+    - "Number 22"
     - "No22"
     - "No 22"
     - "No.22"
@@ -878,6 +965,10 @@ ordinals:
     - "№22"
     - "№ 22"
     - "XXIInd"
+    - "二十二" # zh (number, simple)
+    - "第二十二" # zh (simple)
+    - "贰拾贰" # zh (number, financial)
+    - "第贰拾贰" # zh (financial)
   23:
     - "Twenty-third"
     - "Twenty-three"
@@ -912,6 +1003,7 @@ ordinals:
     - "23º."
     - "２３" # fullwidth characters sometimes used in China and Japan
     - "(23)"
+    - "Number 23"
     - "No23"
     - "No 23"
     - "No.23"
@@ -919,6 +1011,10 @@ ordinals:
     - "№23"
     - "№ 23"
     - "XXIIIrd"
+    - "二十三" # zh (number, simple)
+    - "第二十三" # zh (simple)
+    - "贰拾叁" # zh (number, financial)
+    - "第贰拾叁" # zh (financial)
   24:
     - "Twenty-fourth"
     - "Twenty-four"
@@ -953,6 +1049,7 @@ ordinals:
     - "24º."
     - "２４" # fullwidth characters sometimes used in China and Japan
     - "(24)"
+    - "Number 24"
     - "No24"
     - "No 24"
     - "No.24"
@@ -961,6 +1058,10 @@ ordinals:
     - "№ 24"
     - "XXIVth"
     - "XXIIIIth"
+    - "二十四" # zh (number, simple)
+    - "第二十四" # zh (simple)
+    - "贰拾肆" # zh (number, financial)
+    - "第贰拾肆" # zh (financial)
   25:
     - "Twenty-fifth"
     - "Twenty-five"
@@ -993,6 +1094,7 @@ ordinals:
     - "25º."
     - "２５" # fullwidth characters sometimes used in China and Japan
     - "(25)"
+    - "Number 25"
     - "No25"
     - "No 25"
     - "No.25"
@@ -1000,6 +1102,10 @@ ordinals:
     - "№25"
     - "№ 25"
     - "XXVth"
+    - "二十五" # zh (number, simple)
+    - "第二十五" # zh (simple)
+    - "贰拾伍" # zh (number, financial)
+    - "第贰拾伍" # zh (financial)
   26:
     - "Twenty-sixth"
     - "Twenty-six"
@@ -1032,6 +1138,7 @@ ordinals:
     - "26º."
     - "２６" # fullwidth characters sometimes used in China and Japan
     - "(26)"
+    - "Number 26"
     - "No26"
     - "No 26"
     - "No.26"
@@ -1039,6 +1146,10 @@ ordinals:
     - "№26"
     - "№ 26"
     - "XXVIth"
+    - " 二十六" # zh (number, simple)
+    - " 第二十六" # zh (simple)
+    - " 贰拾陆" # zh (number, financial)
+    - " 第贰拾陆" # zh (financial)
   27:
     - "Twenty-seventh"
     - "Twenty-seven"
@@ -1071,6 +1182,7 @@ ordinals:
     - "27º."
     - "２７" # fullwidth characters sometimes used in China and Japan
     - "(27)"
+    - "Number 27"
     - "No27"
     - "No 27"
     - "No.27"
@@ -1078,6 +1190,10 @@ ordinals:
     - "№27"
     - "№ 27"
     - "XXVIIth"
+    - " 二十七" # zh (number, simple)
+    - " 第二十七" # zh (simple)
+    - " 贰拾柒" # zh (number, financial)
+    - " 第贰拾柒" # zh (financial)
   28:
     - "Twenty-eight"
     - "Twenty-eighth"
@@ -1110,6 +1226,7 @@ ordinals:
     - "28º."
     - "２８" # fullwidth characters sometimes used in China and Japan
     - "(28)"
+    - "Number 28"
     - "No28"
     - "No 28"
     - "No.28"
@@ -1117,6 +1234,10 @@ ordinals:
     - "№28"
     - "№ 28"
     - "XXVIIIth"
+    - " 二十八" # zh (number, simple)
+    - " 第二十八" # zh (simple)
+    - " 贰拾捌" # zh (number, financial)
+    - " 第贰拾捌" # zh (financial)
   29:
     - "Twenty-ninth"
     - "Twenty-nine"
@@ -1149,6 +1270,7 @@ ordinals:
     - "29º."
     - "２９" # fullwidth characters sometimes used in China and Japan
     - "(29)"
+    - "Number 29"
     - "No29"
     - "No 29"
     - "No.29"
@@ -1157,6 +1279,10 @@ ordinals:
     - "№ 29"
     - "XXIXth"
     - "XXVIIIIth"
+    - " 二十九" # zh (number, simple)
+    - " 第二十九" # zh (simple)
+    - " 贰拾玖" # zh (number, financial)
+    - " 第贰拾玖" # zh (financial)
   30:
     - "Thirtieth"
     - "Thirty"
@@ -1183,6 +1309,7 @@ ordinals:
     - "30ú"
     - "３０" # fullwidth characters sometimes used in China and Japan
     - "(30)"
+    - "Number 39"
     - "No30"
     - "No 30"
     - "No.30"
@@ -1191,6 +1318,10 @@ ordinals:
     - "№ 30"
     - "30º."
     - "XXXth"
+    - " 三十" # zh (number, simple)
+    - " 第三十" # zh (simple)
+    - " 叁拾" # zh (number, financial)
+    - " 第叁拾" # zh (financial)
   31:
     - "Thirty-first"
     - "Thirty-one"
@@ -1225,10 +1356,15 @@ ordinals:
     - "31ú"
     - "３１" # fullwidth characters sometimes used in China and Japan
     - "(31)"
+    - "Number 31"
     - "No31"
     - "No 31"
     - "No.31"
     - "No. 31"
+    - " 三十一" # zh (number, simple)
+    - " 第三十一" # zh (simple)
+    - " 叁拾壹" # zh (number, financial)
+    - " 第叁拾壹" # zh (financial)
   32:
     - "Thirty-second"
     - "Thirty-two"
@@ -1261,10 +1397,15 @@ ordinals:
     - "32ú"
     - "３２" # fullwidth characters sometimes used in China and Japan
     - "(32)"
+    - "Number 32"
     - "No32"
     - "No 32"
     - "No.32"
     - "No. 32"
+    - " 三十二" # zh (number, simple)
+    - " 第三十二" # zh (simple)
+    - " 叁拾贰" # zh (number, financial)
+    - " 第叁拾贰" # zh (financial)
   33:
     - "Thirty-third"
     - "Thirty-three"
@@ -1297,10 +1438,15 @@ ordinals:
     - "33ú"
     - "３３" # fullwidth characters sometimes used in China and Japan
     - "(33)"
+    - "Number 33"
     - "No33"
     - "No 33"
     - "No.33"
     - "No. 33"
+    - " 三十三" # zh (number, simple)
+    - " 第三十三" # zh (simple)
+    - " 叁拾叁" # zh (number, financial)
+    - " 第叁拾叁" # zh (financial)
   34:
     - "Thirty-fourth"
     - "Thirty-four"
@@ -1333,10 +1479,15 @@ ordinals:
     - "34ú"
     - "３４" # fullwidth characters sometimes used in China and Japan
     - "(34)"
+    - "Number 34"
     - "No34"
     - "No 34"
     - "No.34"
     - "No. 34"
+    - " 三十四" # zh (number, simple)
+    - " 第三十四" # zh (simple)
+    - " 叁拾肆" # zh (number, financial)
+    - " 第叁拾肆" # zh (financial)
   35:
     - "Thirty-fifth"
     - "Thirty-five"
@@ -1367,10 +1518,15 @@ ordinals:
     - "35ú"
     - "３５" # fullwidth characters sometimes used in China and Japan
     - "(35)"
+    - "Number 35"
     - "No35"
     - "No 35"
     - "No.35"
     - "No. 35"
+    - " 三十五" # zh (number, simple)
+    - " 第三十五" # zh (simple)
+    - " 叁拾伍" # zh (number, financial)
+    - " 第叁拾伍" # zh (financial)
   36:
     - "36"
     - "thirty-six"
@@ -1584,6 +1740,7 @@ ordinals:
     - "40ú"
     - "４０" # fullwidth characters sometimes used in China and Japan
     - "(40)"
+    - "Number 40"
     - "No40"
     - "No 40"
     - "No.40"
@@ -1593,6 +1750,10 @@ ordinals:
     - "XXXXth"
     - "XXXX"
     - "XLth"
+    - " 四十" # zh (number, simple)
+    - " 第四十" # zh (simple)
+    - " 肆拾" # zh (number, financial)
+    - " 第肆拾" # zh (financial)
   41:
     - "Forty-first"
     - "Fourty-first" # misspelling
@@ -1629,10 +1790,15 @@ ordinals:
     - "41ú"
     - "４１" # fullwidth characters sometimes used in China and Japan
     - "(41)"
+    - "Number 41"
     - "No41"
     - "No 41"
     - "No.41"
     - "No. 41"
+    - " 四十一" # zh (number, simple)
+    - " 第四十一" # zh (simple)
+    - " 肆拾壹" # zh (number, financial)
+    - " 第肆拾壹" # zh (financial)
   42:
     - "42"
     - "forty-second"
@@ -1764,10 +1930,15 @@ ordinals:
     - "44ú"
     - "４４" # fullwidth characters sometimes used in China and Japan
     - "(44)"
+    - "Number 44"
     - "No44"
     - "No 44"
     - "No.44"
     - "No. 44"
+    - " 四十四" # zh (number, simple)
+    - " 第四十四" # zh (simple)
+    - " 肆拾肆" # zh (number, financial)
+    - " 第肆拾肆" # zh (financial)
   45:
     - "45"
     - "forty-fifth"
@@ -2032,6 +2203,10 @@ ordinals:
     - "No. 50"
     - "№50"
     - "№ 50"
+    - " 五十" # zh (number, simple)
+    - " 第五十" # zh (simple)
+    - " 伍拾" # zh (number, financial)
+  - " 第伍拾" # zh (financial)
   51:
     - "51"
     - "fifty-first"
