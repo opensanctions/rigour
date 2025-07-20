@@ -1,38 +1,36 @@
-from functools import lru_cache
 import sys
 import csv
 from collections import Counter
-from normality.cleaning import compose_nfc
+from typing import Callable
 
-from rigour.names import tokenize_name
-from rigour.names.org_types import remove_org_types, normalize_display
+from rigour.names import normalize_name
+from rigour.names.org_types import remove_org_types
+from rigour.text.dictionary import Scanner
 from rigour.data.names import data
 
 
-@lru_cache(maxsize=20000)
-def normalize(name: str) -> str:
-    """Normalize the name by removing special characters and converting to lowercase."""
-    # Remove special characters and convert to lowercase
-    name = compose_nfc(name).lower()
-    name = " ".join(tokenize_name(name.lower()))
-    return name
-
-
-def ignore_list():
-    """Return a set of ignored tokens."""
-    ignored = set()
-    for sw in data.STOPWORDS:
-        ignored.add(normalize(sw))
+def org_name_processor() -> Callable[[str], str]:
+    forms = set()
     for key, values in data.ORG_SYMBOLS.items():
-        ignored.add(normalize(key))
+        forms.add(normalize_name(key))
         for value in values:
-            ignored.add(normalize(value))
-    return ignored
+            forms.add(normalize_name(value))
+    for stopword in data.STOPWORDS:
+        forms.add(normalize_name(stopword))
+    for phrase in data.STOPPHRASES:
+        forms.add(normalize_name(phrase))
+    flist = [f for f in forms if f is not None]
+    scanner = Scanner(flist, ignore_case=True)
+
+    def processor(text: str) -> str:
+        return scanner.remove(text)
+
+    return processor
 
 
 def parse_names(file_path):
     tokens = Counter()
-    ignored = ignore_list()
+    processor = org_name_processor()
     with open(file_path, "r", encoding="utf-8") as fh:
         reader = csv.DictReader(fh)
         count = 0
@@ -44,8 +42,8 @@ def parse_names(file_path):
             dataset = row["dataset"]
             if dataset not in (
                 "eu_fsf",
-                "ext_ru_egrul",
-                "ua_nsdc_sanctions",
+                # "ext_ru_egrul",
+                # "ua_nsdc_sanctions",
                 "us_ofac_sdn",
                 "us_ofac_cons",
                 "ch_seco_sanctions",
@@ -60,12 +58,13 @@ def parse_names(file_path):
                 print(count)
             # if count > 500000:
             #     break
-            value = normalize_display(row["value"])
+            value = normalize_name(row["value"])
             if value is None:
                 continue
-            value = remove_org_types(value)
-            for token in tokenize_name(value.lower()):
-                if len(token) < 2 or token in ignored:
+            value = remove_org_types(value, normalizer=normalize_name)
+            value = processor(value)
+            for token in value.split(" "):
+                if len(token) < 2:
                     continue
                 try:
                     int(token)

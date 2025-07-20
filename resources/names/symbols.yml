@@ -100,6 +100,7 @@ org_symbols:
     - корпарация
     - корпорації
     - корпораций
+    - societatea
     - società
     - Εταιρικός Όμιλος
     - 協力的な
@@ -150,6 +151,10 @@ org_symbols:
     - tsentrov
     - центров
     - مركز
+  culture:
+    - culture
+    - kultura
+    - культуры
   holding:
     - holding
     - holdings
@@ -207,6 +212,7 @@ org_symbols:
     - servicios
     - службы
     - служба
+    - обслуживания
   defence:
     - defence
     - defense
@@ -244,6 +250,7 @@ org_symbols:
     - Специальный
   tech:
     - technology
+    - technical
     - технология
     - технологии
     - техника
@@ -303,6 +310,9 @@ org_symbols:
     - τεχνολογία
     - τεχνολογίες
     - τεχνολογίας
+    - технологический
+    - технологическая
+    - технического
   insurance:
     - insurance
     - insurans
@@ -362,12 +372,28 @@ org_symbols:
     - обрудовании
     - оборудованиe
     - оборудованию
+  innovation:
+    - innovation
+    - innovations
+    - innovatsiya
+    - инновационное
+    - инновационная
   aviation:
     - aviation
     - aviación
+    - aerospace
     - luftfahrt
     - авиация
     - авиационный
+    - авиационная
+    - авиационные
+  aircraft:
+    - aircraft
+    - airplane
+    - flugzeug
+    - самолет
+    - аэроплан
+    - самолеты
   airline:
     - airline
     - airlines
@@ -459,9 +485,38 @@ org_symbols:
     - морские
     - морских
     - морского
+    - marine
   naval:
     - naval
     - navy
+  railway:
+    - railway
+    - railways
+    - railway company
+    - железной
+    - железнодорожной
+    - железнодорожный
+  auto:
+    - auto
+    - automobile
+    - automotive
+    - car
+    - vehicle
+    - vehicular
+    - автомобиль
+    - automobiles
+    - automóviles
+    - automobily
+    - automobilii
+    - automobilyi
+    - automobilya
+    - automobiliai
+    - automobilis
+    - automobilov
+    - automobilu
+    - automobilei
+    - automobilele
+    - automobilelor
   nuclear:
     - niwclear # cy
     - nuclear # en, es, pt
@@ -489,6 +544,24 @@ org_symbols:
     - ядерні # uk (plural)
     - 核能 # zh
     - 核的 # zh
+  oil:
+    - oil
+    - petroleum
+    - neft
+    - нефть
+    - нефтяной
+  steel:
+    - steel
+    - steelworks
+    - metallurgical
+    - metallurgy
+    - металлургический
+    - сталь
+  mining:
+    - mining
+    - mines
+    - bergbau
+    - горнодобывающая
   factory:
     - factory
     - factories
@@ -545,6 +618,9 @@ org_symbols:
     - group
     - группа
     - групп
+    - группы
+    - груп
+    - グループ
     - groupement
     - groupe
     - Grupa
@@ -614,6 +690,7 @@ org_symbols:
     - федеральної
     - federalnyy
     - federatsyy
+    - федерации
     - federální
     - federálny
     - federalny
@@ -656,6 +733,9 @@ org_symbols:
     - республиканские
     - республиканского
     - республиканской
+    - республики
+    - республик
+    - республике
     - république
     - republik
     - repubblica
@@ -760,6 +840,7 @@ org_symbols:
     - индустрии
     - индустриальный
     - индустральный
+    - промышленности
     - industrijo
     - industria
     - industriia
@@ -819,13 +900,28 @@ org_symbols:
     - научного
     - научной
     - научно-исследовательский
+    - научное
   health:
     - health
     - healthcare
+    - здравоохранения
   pharmacy:
     - pharmacy
     - фармацевтический
     - apotheke
+  machine:
+    - machine
+    - machines
+    - machining
+    - machinery
+    - машиностроение
+    - машиностроительный
+    - машиностроительная
+    - машиностроительные
+    - машиностроительных
+    - машиностроительного
+    - машиностроительной
+    - машиностроения
   associates:
     - associates
     - ассоциированные
@@ -867,6 +963,12 @@ org_symbols:
     - investicija
     - invesment
     - invesmenti
+  leasing:
+    - leasing
+    - lease
+    - лизинг
+    - лизинговая
+    - лизинговые
   dev:
     - development
     - dev
@@ -899,6 +1001,14 @@ org_symbols:
     - 기업
     - प्रतिष्ठान
     - yritys
+  education:
+    - education
+    - educational
+    - образования
+    - лаборатория
+    - образовательное
+    - образовательная
+    - общеобразовательное
   islamic:
     - islamic
     - исламский
@@ -909,6 +1019,7 @@ org_symbols:
     - исламской
     - islamitische
     - islamique
+    - islamske
     - islamskiej
     - islámských
     - islamských
@@ -927,20 +1038,35 @@ org_symbols:
     - shipping company
     - shipping line
     - shipping lines
+  shipbuilding:
+    - shipbuilding
+    - shipyard
+    - shipyards
+    - судостроение
+    - судостроительный
+    - судостроительная
+    - судостроительные
+    - судостроительных
+    - судостроительного
+    - судостроительной
   production:
     - production
     - productions
     - proizvodstvennoe
     - производственное
+    - производственно
   construction:
     - construction
     - строительство
     - строительный
+    - строительное
+    - строительная
   consulting:
     - consulting
     - консалтинг
     - konsulting
     - consultancy
+    - consultants
     - constultants
     - консалтинговая
     - consult
@@ -1027,6 +1153,7 @@ org_symbols:
     - kombinat
     - комбинат
     - Kombinatas
+    - комбинированного
   central:
     - central
     - centrala
@@ -1038,6 +1165,7 @@ org_symbols:
     - центральные
     - центрального
     - центральной
+    - централизованная
   general:
     - general
     - генеральный
@@ -1091,6 +1219,8 @@ org_symbols:
     - коммуникация
     - коммуникации
     - коммуникаций
+    - связи
+    - связь
   information:
     - information
     - info
@@ -1166,6 +1296,27 @@ org_symbols:
     - химических
     - химического
     - химической
+  museum:
+    - museum
+    - museums
+    - музей
+    - музея
+    - музеях
+    - музеям
+    - музеями
+    - museu
+    - museos
+    - musée
+    - musei
+    - muzej
+    - muzeum
+    - muzeji
+  security:
+    - security
+    - seguridad
+    - sécurité
+    - güvenlik
+    - безопасности
   global:
     - global
     - weltweit
@@ -1286,6 +1437,62 @@ org_symbols:
     - оффшорного
     - offshores
     - オフショア
+  municipal:
+    - municipal
+    - municipality
+    - муниципальный
+    - муниципальная
+    - муниципальные
+    - муниципального
+    - муниципальной
+    - муниципальных
+    - муніципальний
+    - муніципальна
+    - муніципальні
+    - муніципального
+    - муніципальної
+    - муніципальних
+    - munisipalitas
+    - munisipaliteti
+    - munisipalitetet
+    - муниципальное
+  city:
+    - city
+    - cities
+    - city of
+    - city of the
+    - city council
+    - city government
+    - municipalité
+    - municipale
+    - municipals
+    - municipale
+    - municipale de
+    - municipale du
+    - municipale des
+    - муниципалитет
+    - муниципалитеты
+    - муниципалитета
+    - муниципалитетам
+    - городская
+    - городского
+    - городские
+    - городских
+  office:
+    - office
+    - offices
+    - оффис
+    - офис
+    - офисы
+    - офиса
+    - офиса
+    - офіс
+    - офіси
+    - oficina
+    - oficinas
+    - bureau
+    - bureaux
+    - бюро
   gov:
     - gov
     - govmnt
@@ -1337,6 +1544,7 @@ org_symbols:
   named:
     - im
     - имени
+    - імені
     - им
     - imeni
     - named after
@@ -1422,6 +1630,11 @@ org_symbols:
     - SANAYI VE TICARET
     - tes.tek.dis
     - tes.tek.dış
+    - Diş Ticaret
+    - Dis Ticaret
+    - Foreign Trade
+    - Зовнішньоторговельна
+    - Zovnishnotorhovelna
     - Tesisler Teknoloji Dış
     - Tesisler Teknoloji Dış Ticaret
     - Εμπορική
@@ -1449,6 +1662,16 @@ org_symbols:
     - κεφαλαιακή
     - капитал
     - kapital
+  budget:
+    - budget
+    - budgetary
+    - бюджет
+    - бюджетный
+    - бюджетная
+    - бюджетные
+    - бюджетное
+    - бюджетного
+    - бюджетной
   trust:
     - trust
     - trusts
@@ -1475,6 +1698,32 @@ org_symbols:
     - związek
     - savez
     - szakszervezet
+    - обєднання
+    - об'єднання
+  united:
+    - united
+    - unita
+    - uniti
+    - unidas
+    - unifié
+    - unificato
+    - unificata
+    - unificati
+    - unificadas
+    - объединенный
+    - объединенная
+    - объединенные
+    - объединенных
+    - об'єднаний
+    - об'єднана
+    - об'єднані
+  exchange:
+    - exchange
+    - exchanges
+    - биржа
+    - биржи
+    - биржевой
+    - биржевое
   university:
     - university
     - университет
@@ -1560,6 +1809,26 @@ org_symbols:
     - больницы
     - больницах
     - больницам
+  social:
+    - social
+    - социальный
+    - социальная
+    - социальные
+    - социального
+    - социальной
+    - социальных
+    - socialnyy
+    - socjalny
+    - socjalna
+    - socjalne
+    - socjalnych
+    - sosyal
+  media:
+    - media
+    - medios
+    - médias
+    - медиа
+    - медіа
   tpb:
     - corporația de rachete balistice tactice
     - društvo za taktičke projektile

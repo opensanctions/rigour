@@ -1045,6 +1045,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "private limited company",
             "private limited liability company",
             "компания с ограниченной ответственностью",
+            "лтд",
             "лимитед",
             "Лімітед",
             'בע"מ',
