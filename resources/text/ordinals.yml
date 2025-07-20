@@ -1146,10 +1146,10 @@ ordinals:
     - "№26"
     - "№ 26"
     - "XXVIth"
-    - " 二十六" # zh (number, simple)
-    - " 第二十六" # zh (simple)
-    - " 贰拾陆" # zh (number, financial)
-    - " 第贰拾陆" # zh (financial)
+    - "二十六" # zh (number, simple)
+    - "第二十六" # zh (simple)
+    - "贰拾陆" # zh (number, financial)
+    - "第贰拾陆" # zh (financial)
   27:
     - "Twenty-seventh"
     - "Twenty-seven"
@@ -1190,10 +1190,10 @@ ordinals:
     - "№27"
     - "№ 27"
     - "XXVIIth"
-    - " 二十七" # zh (number, simple)
-    - " 第二十七" # zh (simple)
-    - " 贰拾柒" # zh (number, financial)
-    - " 第贰拾柒" # zh (financial)
+    - "二十七" # zh (number, simple)
+    - "第二十七" # zh (simple)
+    - "贰拾柒" # zh (number, financial)
+    - "第贰拾柒" # zh (financial)
   28:
     - "Twenty-eight"
     - "Twenty-eighth"
@@ -1234,10 +1234,10 @@ ordinals:
     - "№28"
     - "№ 28"
     - "XXVIIIth"
-    - " 二十八" # zh (number, simple)
-    - " 第二十八" # zh (simple)
-    - " 贰拾捌" # zh (number, financial)
-    - " 第贰拾捌" # zh (financial)
+    - "二十八" # zh (number, simple)
+    - "第二十八" # zh (simple)
+    - "贰拾捌" # zh (number, financial)
+    - "第贰拾捌" # zh (financial)
   29:
     - "Twenty-ninth"
     - "Twenty-nine"
@@ -1279,10 +1279,10 @@ ordinals:
     - "№ 29"
     - "XXIXth"
     - "XXVIIIIth"
-    - " 二十九" # zh (number, simple)
-    - " 第二十九" # zh (simple)
-    - " 贰拾玖" # zh (number, financial)
-    - " 第贰拾玖" # zh (financial)
+    - "二十九" # zh (number, simple)
+    - "第二十九" # zh (simple)
+    - "贰拾玖" # zh (number, financial)
+    - "第贰拾玖" # zh (financial)
   30:
     - "Thirtieth"
     - "Thirty"
@@ -1318,10 +1318,10 @@ ordinals:
     - "№ 30"
     - "30º."
     - "XXXth"
-    - " 三十" # zh (number, simple)
-    - " 第三十" # zh (simple)
-    - " 叁拾" # zh (number, financial)
-    - " 第叁拾" # zh (financial)
+    - "三十" # zh (number, simple)
+    - "第三十" # zh (simple)
+    - "叁拾" # zh (number, financial)
+    - "第叁拾" # zh (financial)
   31:
     - "Thirty-first"
     - "Thirty-one"
@@ -1361,10 +1361,10 @@ ordinals:
     - "No 31"
     - "No.31"
     - "No. 31"
-    - " 三十一" # zh (number, simple)
-    - " 第三十一" # zh (simple)
-    - " 叁拾壹" # zh (number, financial)
-    - " 第叁拾壹" # zh (financial)
+    - "三十一" # zh (number, simple)
+    - "第三十一" # zh (simple)
+    - "叁拾壹" # zh (number, financial)
+    - "第叁拾壹" # zh (financial)
   32:
     - "Thirty-second"
     - "Thirty-two"
@@ -1402,10 +1402,10 @@ ordinals:
     - "No 32"
     - "No.32"
     - "No. 32"
-    - " 三十二" # zh (number, simple)
-    - " 第三十二" # zh (simple)
-    - " 叁拾贰" # zh (number, financial)
-    - " 第叁拾贰" # zh (financial)
+    - "三十二" # zh (number, simple)
+    - "第三十二" # zh (simple)
+    - "叁拾贰" # zh (number, financial)
+    - "第叁拾贰" # zh (financial)
   33:
     - "Thirty-third"
     - "Thirty-three"
@@ -1443,10 +1443,10 @@ ordinals:
     - "No 33"
     - "No.33"
     - "No. 33"
-    - " 三十三" # zh (number, simple)
-    - " 第三十三" # zh (simple)
-    - " 叁拾叁" # zh (number, financial)
-    - " 第叁拾叁" # zh (financial)
+    - "三十三" # zh (number, simple)
+    - "第三十三" # zh (simple)
+    - "叁拾叁" # zh (number, financial)
+    - "第叁拾叁" # zh (financial)
   34:
     - "Thirty-fourth"
     - "Thirty-four"
@@ -1484,10 +1484,10 @@ ordinals:
     - "No 34"
     - "No.34"
     - "No. 34"
-    - " 三十四" # zh (number, simple)
-    - " 第三十四" # zh (simple)
-    - " 叁拾肆" # zh (number, financial)
-    - " 第叁拾肆" # zh (financial)
+    - "三十四" # zh (number, simple)
+    - "第三十四" # zh (simple)
+    - "叁拾肆" # zh (number, financial)
+    - "第叁拾肆" # zh (financial)
   35:
     - "Thirty-fifth"
     - "Thirty-five"
@@ -1523,10 +1523,10 @@ ordinals:
     - "No 35"
     - "No.35"
     - "No. 35"
-    - " 三十五" # zh (number, simple)
-    - " 第三十五" # zh (simple)
-    - " 叁拾伍" # zh (number, financial)
-    - " 第叁拾伍" # zh (financial)
+    - "三十五" # zh (number, simple)
+    - "第三十五" # zh (simple)
+    - "叁拾伍" # zh (number, financial)
+    - "第叁拾伍" # zh (financial)
   36:
     - "36"
     - "thirty-six"
@@ -1750,10 +1750,10 @@ ordinals:
     - "XXXXth"
     - "XXXX"
     - "XLth"
-    - " 四十" # zh (number, simple)
-    - " 第四十" # zh (simple)
-    - " 肆拾" # zh (number, financial)
-    - " 第肆拾" # zh (financial)
+    - "四十" # zh (number, simple)
+    - "第四十" # zh (simple)
+    - "肆拾" # zh (number, financial)
+    - "第肆拾" # zh (financial)
   41:
     - "Forty-first"
     - "Fourty-first" # misspelling
@@ -1795,10 +1795,10 @@ ordinals:
     - "No 41"
     - "No.41"
     - "No. 41"
-    - " 四十一" # zh (number, simple)
-    - " 第四十一" # zh (simple)
-    - " 肆拾壹" # zh (number, financial)
-    - " 第肆拾壹" # zh (financial)
+    - "四十一" # zh (number, simple)
+    - "第四十一" # zh (simple)
+    - "肆拾壹" # zh (number, financial)
+    - "第肆拾壹" # zh (financial)
   42:
     - "42"
     - "forty-second"
@@ -1935,10 +1935,10 @@ ordinals:
     - "No 44"
     - "No.44"
     - "No. 44"
-    - " 四十四" # zh (number, simple)
-    - " 第四十四" # zh (simple)
-    - " 肆拾肆" # zh (number, financial)
-    - " 第肆拾肆" # zh (financial)
+    - "四十四" # zh (number, simple)
+    - "第四十四" # zh (simple)
+    - "肆拾肆" # zh (number, financial)
+    - "第肆拾肆" # zh (financial)
   45:
     - "45"
     - "forty-fifth"
@@ -2203,10 +2203,10 @@ ordinals:
     - "No. 50"
     - "№50"
     - "№ 50"
-    - " 五十" # zh (number, simple)
-    - " 第五十" # zh (simple)
-    - " 伍拾" # zh (number, financial)
-  - " 第伍拾" # zh (financial)
+    - "五十" # zh (number, simple)
+    - "第五十" # zh (simple)
+    - "伍拾" # zh (number, financial)
+  - "第伍拾" # zh (financial)
   51:
     - "51"
     - "fifty-first"
