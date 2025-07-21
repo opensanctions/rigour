@@ -235,6 +235,7 @@ org_symbols:
     - service
     - services
     - servicios
+    - servicos
     - службы
     - служба
     - сервис
@@ -874,6 +875,29 @@ org_symbols:
     - 財団
     - 基金
     - 設立
+  private:
+    - private
+    - privat
+    - privato
+    - privati
+    - privatiy
+    - приватный
+    - приватная
+    - приватное
+    - приватные
+  public:
+    - public
+    - publiczny
+    - publiczna
+    - publiczne
+    - общественный
+    - общественная
+    - общественные
+    - общественных
+    - общественного
+    - общественной
+    - 公共的
+    - 公共的な
   industry:
     - industry
     - industries
@@ -1444,6 +1468,17 @@ org_symbols:
     - büron
     - büronü
     - büronü
+  venture:
+    - venture
+    - ventures
+    - венчурный
+    - венчурная
+    - венчурные
+    - венчурных
+    - венчурного
+    - венчурной
+    - венчурное
+    - empreendimentos
   logistics:
     - logistic
     - logistics
@@ -1455,6 +1490,29 @@ org_symbols:
     - логистическому
     - логистическому
     - логистической
+  marketing:
+    - marketing
+    - маркетинг
+    - маркетинговый
+    - маркетинговая
+    - маркетинговые
+    - маркетинговых
+    - marketingu
+    - markedsføring
+    - marketingová
+    - marketingové
+    - marketingových
+    - marketingo
+    - marketinga
+  commerce:
+    - commerce
+    - commercial
+    - коммерция
+    - коммерческая
+    - коммерческие
+    - коммерческих
+    - коммерческого
+    - коммерческой
   bank:
     - bank
     - banking
@@ -1697,6 +1755,8 @@ org_symbols:
     - торговый
     - торгово
     - торговая
+    - торговые
+    - торговых
     - trэid
     - торговы
     - comercio

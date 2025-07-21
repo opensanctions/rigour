@@ -55,6 +55,7 @@ ORDINALS: Dict[int, Tuple[str, ...]] = {
         "No1",
         "Number 1",
         "One",
+        "Premier",
         "primer",
         "primera",
         "primero",
