@@ -4,6 +4,8 @@ from typing import List, Optional
 from normality.constants import WS
 from normality.util import Categories
 
+from rigour.util import MEMO_TINY
+
 # PREFIXES = ["el", "al", "il"]
 TOKEN_SEP_CATEGORIES: Categories = {
     "Cc": WS,
@@ -67,7 +69,7 @@ def prenormalize_name(name: Optional[str]) -> str:
     return name.lower()
 
 
-@lru_cache(maxsize=128)
+@lru_cache(maxsize=MEMO_TINY)
 def normalize_name(name: Optional[str], sep: str = WS) -> Optional[str]:
     """Normalize a name for tokenization and matching."""
     if name is None:

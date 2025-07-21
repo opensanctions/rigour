@@ -2,6 +2,8 @@ from datetime import datetime, date, timezone
 from functools import lru_cache
 from typing import Optional, Union
 
+from rigour.util import MEMO_SMALL
+
 
 def utc_now() -> datetime:
     """Return the current datetime in UTC."""
@@ -18,7 +20,7 @@ def utc_date() -> date:
     return utc_now().date()
 
 
-@lru_cache(maxsize=1000)
+@lru_cache(maxsize=MEMO_SMALL)
 def iso_datetime(value: Optional[str]) -> Optional[datetime]:
     """Parse datetime from standardized date string. This expects an ISO 8601 formatted
     string, e.g. '2023-10-01T12:00:00'. Any additional characters after the seconds will

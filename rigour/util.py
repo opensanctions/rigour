@@ -1,6 +1,7 @@
 from typing import List
 
 
+MEMO_TINY = 128
 MEMO_SMALL = 2000
 MEMO_MEDIUM = 20000
 MEMO_LARGE = 2**17
