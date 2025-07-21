@@ -1341,7 +1341,7 @@ ORDINALS: Dict[int, Tuple[str, ...]] = {
         "No. 30",
         "No.30",
         "No30",
-        "Number 39",
+        "Number 30",
         "Thirtieth",
         "Thirty",
         "XXXth",
