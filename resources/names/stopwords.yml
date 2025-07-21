@@ -271,7 +271,10 @@ STOPWORDS:
   - "unas"
   - "y"
   # Portugese stopwords
+  - "do" # of
   - "em" # in
+  # Dutch stopwords
+  - "voor" # for
   # French stopwords
   - "de" # of, from
   - "du" # of the, any, some
