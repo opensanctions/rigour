@@ -257,6 +257,8 @@ STOPWORDS:
   - "de" # of, from
   - "la" # the (feminine)
   - "el" # the (masculine)
+  - "las" # the (feminine plural)
+  - "los" # the (masculine plural)
   - "y" # and
   - "en" # in, on
   - "a" # to, at
@@ -268,8 +270,11 @@ STOPWORDS:
   - "unos"
   - "unas"
   - "y"
+  # Portugese stopwords
+  - "em" # in
   # French stopwords
   - "de" # of, from
+  - "du" # of the, any, some
   - "la" # the (feminine)
   - "le" # the (masculine)
   - "et" # and
@@ -292,6 +297,9 @@ STOPWORDS:
   - "那" # that
   - "一个" # a, an
   - "一些" # some
+  # Italian stopwords
+  - "da" # from
+  - "di" # of
   # Japanese stopwords
   - "の" # of, 's (possessive)
   - "で" # at, in, on
