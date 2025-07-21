@@ -138,6 +138,11 @@ org_symbols:
     - кооперация
     - Συνεταιρισμός
     - Synetairismos
+  assoc:
+    - association
+    - associations
+    - ассоциация
+    - объединение
   partner:
     - partner
     - partners
@@ -232,6 +237,7 @@ org_symbols:
     - servicios
     - службы
     - служба
+    - сервис
     - обслуживания
   defence:
     - defence
@@ -663,6 +669,7 @@ org_symbols:
     - gruppo
     - Grupul
     - Grúpa
+    - Csoport
     - grup
     - Όμιλος
     - Ομάδα
@@ -1233,8 +1240,10 @@ org_symbols:
     - механического
     - механической
     - механических
+    - Механический
     - механика
     - mechanický
+    - mecanique
     - mécanique
     - МЕХАНИЧЕСКИЙ
     - Mekhanicheskiy
@@ -1399,6 +1408,12 @@ org_symbols:
     - глобальной
     - глобальных
     - глобально
+  world:
+    - world
+    - welt
+    - worldwide
+    - мир
+    - 世界
   system:
     - system
     - systems
@@ -1772,6 +1787,8 @@ org_symbols:
     - credit
     - kredit
     - credits
+    - КРЕДИТНАЯ
+    - кредитная
   asset:
     - asset
     - assets

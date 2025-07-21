@@ -1104,6 +1104,11 @@ types:
     aliases:
       - nin'i kumiai
       - 任意組合
+      - NON-BANK CREDIT ORGANIZATION
+      - Небанковская кредитная организация
+      - небанковская кредитная организация
+      - Расчетная небанковская кредитная организация
+      - Settlement non-banking credit organization
   - display: нп
     generic: NGO
     aliases:
@@ -1580,6 +1585,23 @@ types:
   # - generic: San. ve
   #   aliases:
   #     - san.ve
+
+  - generic: MIL
+    aliases:
+      - militärische organisation
+      - militärische Organisation
+      - militärische Vereinigung
+      - militärische Vereinigung
+      - militarna organizacija
+      - militarna organizacija
+      - militarne organizacije
+      - militarne organizacije
+      - pmc
+      - Приватна військова компанія
+      - ЧВК
+      - Частная военная компания
+      - ChVK
+      - Private Military Company
 
   - generic: LP
     aliases:
