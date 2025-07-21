@@ -21,6 +21,7 @@ cache = Cache(engine, metadata, dataset, create=True)
 # cache = Cache.make_default(dataset)
 # cache.preload(f"{WikidataClient.WD_API}%")
 session = requests.Session()
+session.headers.update({"User-Agent": "opensanctions/namesdb"})
 client = WikidataClient(cache, session=session, cache_days=90)
 
 
@@ -89,6 +90,7 @@ def process_item(qid: str) -> Optional[Tuple[str, Set[str]]]:
         return (qid, unique)
     except requests.RequestException as e:
         log.error(f"Error fetching item {qid}: {e}")
+        # print("X", e.response.text)
         # time.sleep(1)
         return None
 
