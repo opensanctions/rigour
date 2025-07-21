@@ -1640,6 +1640,7 @@ org_symbols:
     - Т.нар.
   ministry:
     - ministry
+    - ministries
     - мinistry
     - ministère
     - ministeru
@@ -1652,6 +1653,8 @@ org_symbols:
     - ministerstvo
     - ministerului
     - ministerij
+    - министерства
+    - министерство
   export:
     - export
     - exports
