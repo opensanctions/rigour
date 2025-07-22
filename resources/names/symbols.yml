@@ -1629,6 +1629,7 @@ org_symbols:
     - городского
     - городские
     - городских
+    - города
   office:
     - office
     - offices
@@ -1692,6 +1693,22 @@ org_symbols:
     - gobierno de
     - κυβερνηση
     - κυβερνητική
+  region:
+    - области
+    - област
+    - областное
+    - областная
+    - областные
+    - района
+    - район
+    - районов
+    - region
+    - regions
+    - regional
+    - regionalny
+    - regionala
+    - regionali
+    - regionales
   named:
     - im
     - имени
@@ -1737,6 +1754,7 @@ org_symbols:
     - ministerij
     - министерства
     - министерство
+    - министерства
   export:
     - export
     - exports
