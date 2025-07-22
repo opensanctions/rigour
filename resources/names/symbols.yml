@@ -379,6 +379,11 @@ org_symbols:
     - realty
     - realtor
     - real estate
+    - immobilier
+    - immobilien
+    - imobiliare
+    - imobiliária
+    - inmobiliaria
     - недвижимость
     - недвижимостью
     - недвижимостями
@@ -1275,6 +1280,10 @@ org_symbols:
   transport:
     - transport
     - transportation
+    - transporte
+    - trasporto
+    - transpor
+    - vervoer
     - транспорт
     - транспортный
     - транспортная
