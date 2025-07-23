@@ -270,6 +270,7 @@ STOPWORDS:
   - "unos"
   - "unas"
   - "y"
+  - "és" # is
   # Portugese stopwords
   - "em" # in
   # French stopwords
