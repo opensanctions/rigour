@@ -1553,6 +1553,7 @@ org_symbols:
     - банківська установа
     - τράπεζα
     - banque
+    - banca
     - banco
     - bankası
     - banki
@@ -1862,6 +1863,7 @@ org_symbols:
     - продукціі
     - продукцією
     - produkt
+    - produtos
   distrib:
     - distributors
     - distributor
