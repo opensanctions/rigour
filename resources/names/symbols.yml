@@ -234,8 +234,14 @@ org_symbols:
   service:
     - service
     - services
+    - servicio
     - servicios
+    - servico
     - servicos
+    - serviço
+    - serviços
+    - servizio
+    - servizi
     - службы
     - служба
     - сервис
