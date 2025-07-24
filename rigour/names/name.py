@@ -1,4 +1,4 @@
-from typing import Optional, List, Dict, Any, Set
+from typing import Optional, List, Any, Set
 
 from rigour.names.part import NamePart, Span
 from rigour.names.symbol import Symbol
@@ -123,15 +123,6 @@ class Name(object):
                 return True
 
         return other.norm_form in self.norm_form
-
-    def symbol_map(self) -> Dict[Symbol, List[Span]]:
-        """Return a mapping of symbols to their string representations."""
-        symbol_map: Dict[Symbol, List[Span]] = {}
-        for span in self.spans:
-            if span.symbol not in symbol_map:
-                symbol_map[span.symbol] = []
-            symbol_map[span.symbol].append(span)
-        return symbol_map
 
     def __eq__(self, other: Any) -> bool:
         try:
