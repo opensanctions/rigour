@@ -13,7 +13,7 @@ class NamePart(object):
     and match names. It generates and caches representations of the name in various processing
     forms."""
 
-    __slots__ = ["form", "index", "tag", "is_modern_alphabet", "_ascii"]
+    __slots__ = ["form", "index", "tag", "is_modern_alphabet", "_ascii", "_hash"]
 
     def __init__(
         self,
@@ -26,6 +26,7 @@ class NamePart(object):
         self.tag = tag
         self.is_modern_alphabet = is_modern_alphabet(form)
         self._ascii: Optional[str] = None
+        self._hash = hash((self.index, self.form))
 
     @property
     def ascii(self) -> Optional[str]:
@@ -38,9 +39,10 @@ class NamePart(object):
     def comparable(self) -> str:
         if not self.is_modern_alphabet:
             return self.form
-        if self.ascii is None:
+        ascii = self.ascii
+        if ascii is None:
             return self.form
-        return self.ascii
+        return ascii
 
     @property
     def metaphone(self) -> Optional[str]:
@@ -55,12 +57,12 @@ class NamePart(object):
 
     def __eq__(self, other: Any) -> bool:
         try:
-            return other.form == self.form and other.index == self.index  # type: ignore
+            return other._hash == self._hash  # type: ignore
         except AttributeError:
             return False
 
     def __hash__(self) -> int:
-        return hash((self.index, self.form))
+        return self._hash
 
     def __len__(self) -> int:
         return len(self.form)
