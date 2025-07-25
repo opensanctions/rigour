@@ -35,11 +35,15 @@ log = logging.getLogger(__name__)
 
 def normalize_display(text: Optional[str]) -> Optional[str]:
     """Normalize the display name for the organization type."""
+    if text is None:
+        return None
     return collapse_spaces(text)
 
 
 def _normalize_compare(text: Optional[str]) -> Optional[str]:
     """Stub normalizer for more heavy string cleanup."""
+    if text is None:
+        return None
     norm = collapse_spaces(text)
     if norm is None:
         return None

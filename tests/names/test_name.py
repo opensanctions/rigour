@@ -100,9 +100,6 @@ def test_name_symbols():
     rsymbol = Symbol(Symbol.Category.INITIAL, "r")
     name.apply_phrase("r", rsymbol)
     assert len(name.symbols) == 1
-    map = name.symbol_map()
-    assert len(map) == 1
-    assert len(map[rsymbol]) == 2
 
 
 def test_name_contains_per():

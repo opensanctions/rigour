@@ -1,45 +1,57 @@
 import unicodedata
 from functools import lru_cache
-from typing import Tuple, Optional
+from typing import Optional
 
-from rigour.text.script_data import BLOCK_TAGS, ALPHABET, HISTORIC, FUNKY, LATIN
+from rigour.data.text.scripts import RANGES, LATIN_CHARS, LATINIZABLE_CHARS
 from rigour.util import MEMO_MEDIUM
 
+# There are no non-Latin characters below this codepoint:
+LATIN_BLOCK = 740
+# Hangul is surprisingly good in terms of transliteration, so we allow it:
+LATINIZE_SCRIPTS = {"Hangul", "Cyrillic", "Greek", "Armenian", "Latin"}
 
-@lru_cache(maxsize=MEMO_MEDIUM)
-def char_tags(char: str) -> Tuple[int, ...]:
-    """Get the tags applicable to a particular character."""
-    codepoint = ord(char)
-    for start, end, tags in BLOCK_TAGS:
+
+def get_script(codepoint: int) -> Optional[str]:
+    """Get the script of a character."""
+    for (start, end), script in RANGES.items():
         if start <= codepoint <= end:
-            return tags
-    return ()
+            return script
+    return None
 
 
 @lru_cache(maxsize=MEMO_MEDIUM)
-def is_alpha(char: str) -> bool:
-    """Check if a character is alphabetic. This improves on the function implemented on
-    `str` by including characters for the whole unicode range."""
-    category = unicodedata.category(char)[0]
-    return category == "L"
-
-
-@lru_cache(maxsize=MEMO_MEDIUM)
-def is_alphanum(char: str) -> bool:
-    """Check if a character is alpha-numeric."""
-    category = unicodedata.category(char)[0]
-    return category in ("L", "N")
-
-
-@lru_cache(maxsize=MEMO_MEDIUM)
-def is_modern_alphabet_char(char: str) -> Optional[bool]:
-    tags = char_tags(char)
-    if not len(tags):
+def can_latinize_cp(cp: int) -> Optional[bool]:
+    """Check if a codepoint should be latinized."""
+    cat = unicodedata.category(chr(cp))
+    if not cat.startswith("L") and not cat.startswith("N"):
         return None
-    if ALPHABET not in tags:
-        return False
-    if HISTORIC in tags or FUNKY in tags:
-        return False
+    script = get_script(cp)
+    if script is None:
+        return None
+    if script in LATINIZE_SCRIPTS:
+        return True
+    return False
+
+
+def can_latinize(word: str) -> bool:
+    """Check if a word should be latinized using automated transliteration. This limits
+    the scope of transliteration to specific scripts which are well-suited for automated
+    romanisation.
+
+    Args:
+        word (str): The word to check.
+
+    Returns:
+        bool: True if the word should be latinized, False otherwise.
+    """
+    for char in word:
+        cp = ord(char)
+        if cp in LATINIZABLE_CHARS:
+            continue
+        if cp < LATIN_BLOCK:
+            continue
+        if can_latinize_cp(cp) is False:
+            return False
     return True
 
 
@@ -49,18 +61,14 @@ def is_modern_alphabet(word: str) -> bool:
     are safely transliterated to latin. Basically: Cyrillic, Greek, Armenian,
     and Latin."""
     for char in word:
-        is_char = is_modern_alphabet_char(char)
-        if is_char is False:
-            return False
-    return True
-
-
-@lru_cache(maxsize=MEMO_MEDIUM)
-def is_latin_char(char: str) -> Optional[bool]:
-    tags = char_tags(char)
-    if not len(tags):
-        return None
-    if LATIN not in tags:
+        cp = ord(char)
+        if cp in LATINIZABLE_CHARS:
+            continue
+        if cp < LATIN_BLOCK:
+            continue
+        cat = unicodedata.category(chr(cp))
+        if not cat.startswith("L") and not cat.startswith("N"):
+            continue
         return False
     return True
 
@@ -68,7 +76,14 @@ def is_latin_char(char: str) -> Optional[bool]:
 def is_latin(word: str) -> bool:
     """Check if a word is written in the latin alphabet."""
     for char in word:
-        is_char = is_latin_char(char)
-        if is_char is False:
+        cp = ord(char)
+        if cp in LATIN_CHARS:
+            continue
+        if cp < LATIN_BLOCK:
+            continue
+        if cp in LATINIZABLE_CHARS:
+            return False
+        cat = unicodedata.category(char)
+        if cat.startswith("L") or cat.startswith("N"):
             return False
     return True

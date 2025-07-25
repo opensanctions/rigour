@@ -8,7 +8,7 @@ def test_name_part():
     assert john.comparable == "john"
     assert john.form == "john"
     assert john.metaphone == "JN"
-    assert john.is_modern_alphabet is True
+    assert john.latinize is True
     assert len(john) == 4
     assert hash(john) == hash((0, "john"))
     assert john == NamePart("john", 0)
@@ -25,7 +25,7 @@ def test_name_part():
     osama = NamePart("أسامة", 0)
     assert osama.ascii == "asamt"
     assert osama.comparable == "أسامة"
-    assert osama.is_modern_alphabet is False
+    assert osama.latinize is False
     assert osama.metaphone is None
 
 
@@ -35,7 +35,7 @@ def test_name_part_empty():
     assert empty.ascii is None
     assert empty.comparable == ""
     assert empty.metaphone is None
-    assert empty.is_modern_alphabet is True
+    assert empty.latinize is True
 
 
 def test_name_part_tags():
