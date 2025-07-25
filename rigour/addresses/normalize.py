@@ -76,7 +76,7 @@ def normalize_address(
     parts: List[str] = []
     for token in tokens:
         token_str: Optional[str] = "".join(token)
-        if latinize:
+        if latinize and token_str is not None:
             token_str = ascii_text(token_str)
         if token_str is None:
             continue

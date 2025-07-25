@@ -205,7 +205,7 @@ def tag_person_name(
     # tag given name abbreviations. this is meant to handle a case where the person's
     # first or middle name is an abbreviation, e.g. "J. Smith" or "John Q. Smith"
     for part in name.parts:
-        if not part.is_modern_alphabet:
+        if not part.latinize:
             continue
         sym = Symbol(Symbol.Category.INITIAL, part.comparable[0])
         if any_initials and len(part.form) == 1:

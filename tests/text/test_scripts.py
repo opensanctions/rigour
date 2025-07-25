@@ -1,5 +1,5 @@
-from rigour.text.scripts import is_latin, is_alpha, is_alphanum
-from rigour.text.scripts import is_modern_alphabet
+from rigour.text.scripts import is_latin
+from rigour.text.scripts import should_latinize, is_modern_alphabet
 
 
 def test_is_latin():
@@ -16,13 +16,9 @@ def test_is_modern_alphabet():
     assert is_modern_alphabet("😋")  # skips irrelevant blocks
 
 
-def test_is_alpha():
-    assert is_alpha("a")
-    assert not is_alpha("1")
-    assert not is_alpha("😋")
-
-
-def test_is_alphanum():
-    assert is_alphanum("a")
-    assert is_alphanum("1")
-    assert not is_alphanum("😋")
+def test_should_latinize():
+    assert should_latinize("banana")
+    assert should_latinize("банан")
+    assert not should_latinize("中國哲學書電子化計劃")
+    assert not should_latinize("ᚠ")
+    assert should_latinize("😋")  # skips irrelevant blocks

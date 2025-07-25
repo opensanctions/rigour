@@ -1,7 +1,7 @@
 from typing import Any, List, Optional
 
 from normality import ascii_text
-from rigour.text.scripts import is_modern_alphabet
+from rigour.text.scripts import should_latinize
 from rigour.text.phonetics import metaphone
 from rigour.names.tag import NamePartTag
 from rigour.names.symbol import Symbol
@@ -13,7 +13,7 @@ class NamePart(object):
     and match names. It generates and caches representations of the name in various processing
     forms."""
 
-    __slots__ = ["form", "index", "tag", "is_modern_alphabet", "_ascii", "_hash"]
+    __slots__ = ["form", "index", "tag", "latinize", "_ascii", "_hash"]
 
     def __init__(
         self,
@@ -24,7 +24,7 @@ class NamePart(object):
         self.form = form
         self.index = index
         self.tag = tag
-        self.is_modern_alphabet = is_modern_alphabet(form)
+        self.latinize = should_latinize(form)
         self._ascii: Optional[str] = None
         self._hash = hash((self.index, self.form))
 
@@ -37,7 +37,7 @@ class NamePart(object):
 
     @property
     def comparable(self) -> str:
-        if not self.is_modern_alphabet:
+        if not self.should_latininze:
             return self.form
         ascii = self.ascii
         if ascii is None:
@@ -46,7 +46,7 @@ class NamePart(object):
 
     @property
     def metaphone(self) -> Optional[str]:
-        if self.is_modern_alphabet and self.ascii is not None:
+        if self.should_latininze and self.ascii is not None:
             # doesn't handle non-ascii characters
             return metaphone(self.ascii)
         return None

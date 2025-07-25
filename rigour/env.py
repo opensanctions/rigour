@@ -1,6 +1,6 @@
 from os import environ as env
 from zoneinfo import ZoneInfo
-from normality import stringify
+from normality import stringify, DEFAULT_ENCODING
 
 
 def env_str(name: str, default: str) -> str:
@@ -25,7 +25,7 @@ def env_float(name: str, default: float) -> float:
         return default
 
 
-ENCODING = env_str("RR_ENCODING", "utf-8")
+ENCODING = env_str("RR_ENCODING", DEFAULT_ENCODING)
 
 # Main language
 PREFERRED_LANG = env_str("RR_PREFERRED_LANG", "eng")
