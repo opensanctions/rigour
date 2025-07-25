@@ -23,6 +23,7 @@ extra:
       link: https://www.opensanctions.org
 
 plugins:
+  - search
   - autorefs
   # - social
   - mkdocstrings:
