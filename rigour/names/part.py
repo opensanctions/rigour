@@ -1,7 +1,7 @@
 from typing import Any, List, Optional
 
 from normality import ascii_text
-from rigour.text.scripts import should_latinize
+from rigour.text.scripts import can_latinize
 from rigour.text.phonetics import metaphone
 from rigour.names.tag import NamePartTag
 from rigour.names.symbol import Symbol
@@ -24,7 +24,7 @@ class NamePart(object):
         self.form = form
         self.index = index
         self.tag = tag
-        self.latinize = should_latinize(form)
+        self.latinize = can_latinize(form)
         self._ascii: Optional[str] = None
         self._hash = hash((self.index, self.form))
 
@@ -37,7 +37,7 @@ class NamePart(object):
 
     @property
     def comparable(self) -> str:
-        if not self.should_latininze:
+        if not self.latinize:
             return self.form
         ascii = self.ascii
         if ascii is None:
@@ -46,9 +46,10 @@ class NamePart(object):
 
     @property
     def metaphone(self) -> Optional[str]:
-        if self.should_latininze and self.ascii is not None:
-            # doesn't handle non-ascii characters
-            return metaphone(self.ascii)
+        if self.latinize:
+            ascii_form = self.ascii
+            if ascii_form is not None and len(ascii_form) > 2:
+                return metaphone(ascii_form)
         return None
 
     def can_match(self, other: "NamePart") -> bool:

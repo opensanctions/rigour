@@ -18,14 +18,19 @@ def test_normalize_address():
 
     address = "160 Broad Street, Birmingham B15 1DT"
     normalized = normalize_address(address)
+    assert normalized is not None
     assert shorten_address_keywords(normalized) == "160 broad st birmingham b15 1dt"
-    removed = collapse_spaces(remove_address_keywords(normalized))
+    removed = remove_address_keywords(normalized)
+    assert removed is not None
+    removed = collapse_spaces(removed)
     assert removed == "160 broad birmingham b15 1dt"
 
     address = "Marlborough House, Pall Mall, London SW1Y 5HX"
     normalized = normalize_address(address)
     assert normalized == "marlborough house pall mall london sw1y 5hx"
-    removed = collapse_spaces(remove_address_keywords(normalized))
+    removed = remove_address_keywords(normalized)
+    assert removed is not None
+    removed = collapse_spaces(removed)
     assert removed == "marlborough pall mall london sw1y 5hx"
 
     assert normalize_address("hey") is None

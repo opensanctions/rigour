@@ -8,7 +8,7 @@ from rigour.util import MEMO_MEDIUM
 # There are no non-Latin characters below this codepoint:
 LATIN_BLOCK = 740
 # Hangul is surprisingly good in terms of transliteration, so we allow it:
-LATINIZE_EXTRA = {"Hangul"}
+LATINIZE_SCRIPTS = {"Hangul", "Cyrillic", "Greek", "Armenian", "Latin"}
 
 
 def get_script(codepoint: int) -> Optional[str]:
@@ -20,24 +20,20 @@ def get_script(codepoint: int) -> Optional[str]:
 
 
 @lru_cache(maxsize=MEMO_MEDIUM)
-def should_latinize_cp(cp: int) -> Optional[bool]:
+def can_latinize_cp(cp: int) -> Optional[bool]:
     """Check if a codepoint should be latinized."""
-    if cp in LATINIZABLE_CHARS:
-        return True
-    if cp < LATIN_BLOCK:
-        return None
     cat = unicodedata.category(chr(cp))
     if not cat.startswith("L") and not cat.startswith("N"):
         return None
     script = get_script(cp)
     if script is None:
         return None
-    if script in LATINIZE_EXTRA:
+    if script in LATINIZE_SCRIPTS:
         return True
     return False
 
 
-def should_latinize(word: str) -> bool:
+def can_latinize(word: str) -> bool:
     """Check if a word should be latinized using automated transliteration. This limits
     the scope of transliteration to specific scripts which are well-suited for automated
     romanisation.
@@ -54,7 +50,7 @@ def should_latinize(word: str) -> bool:
             continue
         if cp < LATIN_BLOCK:
             continue
-        if should_latinize_cp(cp) is False:
+        if can_latinize_cp(cp) is False:
             return False
     return True
 
@@ -64,7 +60,17 @@ def is_modern_alphabet(word: str) -> bool:
     used in a narrow sense here: it includes only alphabets that have vowels and
     are safely transliterated to latin. Basically: Cyrillic, Greek, Armenian,
     and Latin."""
-    return should_latinize(word)
+    for char in word:
+        cp = ord(char)
+        if cp in LATINIZABLE_CHARS:
+            continue
+        if cp < LATIN_BLOCK:
+            continue
+        cat = unicodedata.category(chr(cp))
+        if not cat.startswith("L") and not cat.startswith("N"):
+            continue
+        return False
+    return True
 
 
 def is_latin(word: str) -> bool:
