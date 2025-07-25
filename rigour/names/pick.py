@@ -5,7 +5,7 @@ from typing import Dict, Optional, List
 from normality import ascii_text
 from rigour.names.check import is_name
 from rigour.text.distance import levenshtein
-from rigour.text.scripts import is_latin_char, is_modern_alphabet_char
+from rigour.data.text.scripts import LATIN_CHARS, LATINIZABLE_CHARS
 
 log = logging.getLogger(__name__)
 
@@ -14,9 +14,10 @@ def latin_share(text: str) -> float:
     """Determine the percentage of a string that's latin."""
     latin = 0.0
     for char in text:
-        if is_latin_char(char):
+        cp = ord(char)
+        if cp in LATIN_CHARS:
             latin += 1.0
-        elif is_modern_alphabet_char(char):
+        elif cp in LATINIZABLE_CHARS:
             latin += 0.1
     return latin / max(1, len(text))
 
