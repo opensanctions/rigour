@@ -201,43 +201,43 @@ STOPWORDS:
   - "per"
   - "al"
   # Russian stopwords
-  - для # for
-  - и
-  - в # in
-  - на # on
-  - с # with
-  - от # from
-  - к # to
-  - по # by, for
-  - из # out of, from
-  - а # and, but
-  - но # but
-  - о # about
-  - за # for, behind
-  - при # at, in the presence of
-  - как # as, like
-  - что # that, what
-  - это # this, it
-  - все # all, everything
-  - без
+  - "для" # for
+  - "и"
+  - "в" # in
+  - "на" # on
+  - "с" # with
+  - "от" # from
+  - "к" # to
+  - "по" # by, for
+  - "из" # out of, from
+  - "а" # and, but
+  - "но" # but
+  - "о" # about
+  - "за" # for, behind
+  - "при" # at, in the presence of
+  - "как" # as, like
+  - "что" # that, what
+  - "это" # this, it
+  - "все" # all, everything
+  - "без"
   # Ukrainian stopwords
-  - для # for
-  - і
-  - в # in
-  - на # on
-  - з # with
-  - від # from
-  - до # to
-  - по # by, for
-  - з # out of, from
-  - а # and, but
-  - але # but
-  - про # about
-  - за # for, behind
-  - при # at, in the presence of
-  - як # as, like
-  - що # that, what
-  - це # this, it
+  - "для" # for
+  - "і"
+  - "в" # in
+  - "на" # on
+  - "з" # with
+  - "від" # from
+  - "до" # to
+  - "по" # by, for
+  - "з" # out of, from
+  - "а" # and, but
+  - "але" # but
+  - "про" # about
+  - "за" # for, behind
+  - "при" # at, in the presence of
+  - "як" # as, like
+  - "що" # that, what
+  - "це" # this, it
   # Arabic / transliterated Arabic stopwords
   - "في" # in
   - "من" # from
@@ -272,6 +272,8 @@ STOPWORDS:
   - "unas"
   - "y"
   - "del" # of the
+  # Estonian
+  - "ja" # and
   # Catalan stopwords
   - "és" # is
   # Portugese stopwords
