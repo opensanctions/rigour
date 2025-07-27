@@ -9,10 +9,9 @@ EMOJI_PATTERN = re.compile(
     "\U0001f3fb-\U0001f3ff"  # skin tones
     "\Ufe0e\Ufe0f" # variation selectors (these allow emoji and non-emoji forms of the same symbol to be selected)
     # Symbols, shapes, and pictographs 
-    "\U0001f9c0-\U0001f9ff"  # additional symbols
     "\U00002700-\U000027bf"  # dingbats
     "\U0001f1e0-\U0001f1ff"  # flags (iOS)
-    "\U0001f300-\U0001f5ff"  # symbols and pictographs
+    "\U0001f300-\U0001f5ff"  # symbols and pictographs (range also includes skin tones which is also covered above)
     "\U0002600-\U00026ff" # miscellaneous symbols block (including warning signs and symbols re weather, games, astrology and religion/culture)
     "\U0001f680-\U0001f6ff"  # transport and map symbols
     "\U0002b00-\U0002bff" # miscellaneous symbols and arrows
