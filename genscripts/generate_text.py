@@ -5,7 +5,11 @@ from typing import Dict, Set, Tuple
 from genscripts.util import RESOURCES_PATH, CODE_PATH, write_python
 
 IGNORE_SCRIPTS = {"Common", "Inherited"}
-LATINIZABLE = ("Cyrillic", "Greek", "Armenian", "Latin")
+LATINIZABLE = (
+    "Cyrillic",
+    "Greek",
+    "Latin",
+)  # Wider set is defined in rigour.text.scripts via a fallback
 
 ORDINALS_TEMPLATE = """
 from typing import Dict, Tuple

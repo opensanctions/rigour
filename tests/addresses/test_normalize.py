@@ -1,4 +1,4 @@
-from normality import collapse_spaces
+from normality import squash_spaces
 from rigour.addresses import (
     normalize_address,
     remove_address_keywords,
@@ -22,7 +22,7 @@ def test_normalize_address():
     assert shorten_address_keywords(normalized) == "160 broad st birmingham b15 1dt"
     removed = remove_address_keywords(normalized)
     assert removed is not None
-    removed = collapse_spaces(removed)
+    removed = squash_spaces(removed)
     assert removed == "160 broad birmingham b15 1dt"
 
     address = "Marlborough House, Pall Mall, London SW1Y 5HX"
@@ -30,7 +30,7 @@ def test_normalize_address():
     assert normalized == "marlborough house pall mall london sw1y 5hx"
     removed = remove_address_keywords(normalized)
     assert removed is not None
-    removed = collapse_spaces(removed)
+    removed = squash_spaces(removed)
     assert removed == "marlborough pall mall london sw1y 5hx"
 
     assert normalize_address("hey") is None

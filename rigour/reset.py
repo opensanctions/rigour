@@ -1,5 +1,5 @@
 import gc
-from normality.transliteration import latinize_text
+from normality.transliteration import latinize_text, _ascii_text
 
 from rigour.text.distance import levenshtein, dam_levenshtein, jaro_winkler
 from rigour.text.phonetics import soundex, metaphone
@@ -14,6 +14,7 @@ def reset_caches() -> None:
     """Reset LRU caches in the rigour module. This is meant to be used
     in long-lived processes to prevent memory expansion."""
     latinize_text.cache_clear()
+    _ascii_text.cache_clear()
     levenshtein.cache_clear()
     normalize_name.cache_clear()
     dam_levenshtein.cache_clear()

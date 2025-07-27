@@ -17,7 +17,7 @@ class StrictFormat(IdentifierFormat):
     @classmethod
     def normalize(cls, value: str) -> Optional[str]:
         ascii = ascii_text(value)
-        if ascii is None or len(ascii) < 2:
+        if len(ascii) < 2:
             return None
         chars = [c for c in ascii if c.isalnum()]
         return "".join(chars).upper()

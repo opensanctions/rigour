@@ -25,7 +25,7 @@ The database is originally based on three different sources:
 import sys
 import logging
 from functools import cache
-from normality import collapse_spaces
+from normality import squash_spaces
 from typing import Dict, List, Optional, Set, Tuple
 
 from rigour.text.dictionary import Normalizer, Replacer
@@ -37,15 +37,18 @@ def normalize_display(text: Optional[str]) -> Optional[str]:
     """Normalize the display name for the organization type."""
     if text is None:
         return None
-    return collapse_spaces(text)
+    text = squash_spaces(text)
+    if len(text) == 0:
+        return None
+    return text
 
 
 def _normalize_compare(text: Optional[str]) -> Optional[str]:
     """Stub normalizer for more heavy string cleanup."""
     if text is None:
         return None
-    norm = collapse_spaces(text)
-    if norm is None:
+    norm = squash_spaces(text)
+    if len(norm) == 0:
         return None
     return norm.lower()
 

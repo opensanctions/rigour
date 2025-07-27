@@ -31,7 +31,7 @@ class NamePart(object):
     @property
     def ascii(self) -> Optional[str]:
         if self._ascii is None:
-            out = ascii_text(self.form) or ""
+            out = ascii_text(self.form)
             self._ascii = "".join(o for o in out if o.isalnum())
         return self._ascii if len(self._ascii) > 0 else None
 

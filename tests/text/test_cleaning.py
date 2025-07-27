@@ -1,4 +1,4 @@
-from normality import collapse_spaces
+from normality import squash_spaces
 from rigour.text.cleaning import remove_emoji, remove_bracketed_text
 
 
@@ -14,13 +14,13 @@ def test_remove_emoji():
 def test_remove_bracketed_text():
     assert remove_bracketed_text("abc") == "abc"
     assert (
-        collapse_spaces(remove_bracketed_text("Sean Connery (Actor)")) == "Sean Connery"
+        squash_spaces(remove_bracketed_text("Sean Connery (Actor)")) == "Sean Connery"
     )
     assert (
         remove_bracketed_text("Deutsche Bank Shanghai Ltd")
         == "Deutsche Bank Shanghai Ltd"
     )
     assert (
-        collapse_spaces(remove_bracketed_text("Deutsche Bank (Shanghai) Ltd"))
+        squash_spaces(remove_bracketed_text("Deutsche Bank (Shanghai) Ltd"))
         == "Deutsche Bank Ltd"
     )

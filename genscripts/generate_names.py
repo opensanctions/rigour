@@ -1,7 +1,7 @@
 from collections import Counter
 import yaml
 from typing import Dict, List
-from normality import collapse_spaces
+from normality import squash_spaces
 
 from rigour.data.types import OrgTypeSpec
 from genscripts.util import write_python, RESOURCES_PATH, CODE_PATH
@@ -69,16 +69,21 @@ def generate_org_type_file() -> None:
                 "generic": None,
                 "aliases": [],
             }
-            display = collapse_spaces(spec.get("display", ""))
-            if display is not None and len(display) > 0:
-                out["display"] = display
-            generic = collapse_spaces(spec.get("generic"))
-            if generic is not None and len(generic) > 0:
-                out["generic"] = generic
-            compare = collapse_spaces(spec.get("compare"))
+            display = spec.get("display", "")
+            if display is not None:
+                display = squash_spaces(display)
+                if len(display) > 0:
+                    out["display"] = display
+            generic = spec.get("generic")
+            if generic is not None:
+                generic = squash_spaces(generic)
+                if len(generic) > 0:
+                    out["generic"] = generic
+            compare = spec.get("compare")
             if compare is not None:
+                compare = squash_spaces(compare)
                 out["compare"] = compare
-            aliases_ = [collapse_spaces(a) for a in spec.get("aliases", [])]
+            aliases_ = [squash_spaces(a) for a in spec.get("aliases", [])]
             aliases = [a for a in aliases_ if a is not None and len(a) > 0]
             if not len(aliases):
                 print("No aliases for:", display)

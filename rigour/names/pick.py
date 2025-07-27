@@ -54,7 +54,7 @@ def pick_name(names: List[str]) -> Optional[str]:
             continue
         # even totally non-Latin names have a base weight of 1:
         latin_shr = latin_share(name)
-        if latin_shr > 0.9:
+        if latin_shr > 0.85:
             latin_names.append(name)
         weight = 1 + latin_shr
         weights[form] += weight
@@ -62,7 +62,7 @@ def pick_name(names: List[str]) -> Optional[str]:
         forms[form].append(name.title())
 
         norm = ascii_text(form)
-        if norm is not None and len(norm):
+        if len(norm) > 2:
             weights[norm] += weight
             forms[norm].append(name)
 
