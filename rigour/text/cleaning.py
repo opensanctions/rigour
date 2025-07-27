@@ -63,7 +63,7 @@ BRACKETED = re.compile(r"(\([^\(\)]*\)|\[[^\[\]]*\]|\（[^\(\）]*）)", re.UNIC
 
 # https://stackoverflow.com/a/49146722/330558
 def remove_emoji(string: str) -> str:
-    """Remove unicode ranges used by emoticons, symbolks, flags and other visual codepoints from
+    """Remove unicode ranges used by emoticons, symbols, flags and other visual codepoints from
     a piece of text. Primary use case is to remove shit emojis from the names of political office
     holders coming from Wikidata.
 
