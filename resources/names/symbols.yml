@@ -1142,6 +1142,15 @@ org_symbols:
     - судноплавного
     - судноплавной
     - судноплавства
+  agriculture:
+    - agriculture
+    - agricultural
+    - agricola
+    - agricole
+    - agricoltura
+    - agricultura
+    - agrikultura
+    - агрикультура
   shipbuilding:
     - shipbuilding
     - shipyard
