@@ -7,7 +7,7 @@ EMOJI_PATTERN = re.compile(
     # Emojis
     "\U0001f600-\U0001f64f"  # emoticons
     "\U0001f3fb-\U0001f3ff"  # skin tones
-    "\U000fe0e\U000fe0f" # variation selectors (these allow emoji and non-emoji forms of the same symbol to be selected)
+    "\U000fe0e-\U000fe0f" # variation selectors (these allow emoji and non-emoji forms of the same symbol to be selected)
     # Symbols, shapes, and pictographs 
     "\U00002700-\U000027bf"  # dingbats
     "\U0001f1e0-\U0001f1ff"  # flags (iOS)
