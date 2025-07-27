@@ -282,6 +282,10 @@ org_symbols:
     - Speciaal
     - Specijalni
     - Специальный
+  spv:
+    - spv
+    - special purpose vehicle
+    - vehículo de propósito especial 
   tech:
     - technology
     - technical
