@@ -182,7 +182,7 @@ STOPWORDS:
   - "the"
   - "in"
   - "and"
-  - for
+  - "for"
   - "or"
   - "et"
   - "a"
@@ -201,44 +201,44 @@ STOPWORDS:
   - "per"
   - "al"
   # Russian stopwords
-  - для # for
-  - и
-  - в # in
-  - на # on
-  - с # with
-  - от # from
-  - к # to
-  - по # by, for
-  - из # out of, from
-  - а # and, but
-  - но # but
-  - о # about
-  - за # for, behind
-  - при # at, in the presence of
-  - как # as, like
-  - что # that, what
-  - это # this, it
-  - все # all, everything
-  - без
+  - "для" # for
+  - "и"
+  - "в" # in
+  - "на" # on
+  - "с" # with
+  - "от" # from
+  - "к" # to
+  - "по" # by, for
+  - "из" # out of, from
+  - "а" # and, but
+  - "но" # but
+  - "о" # about
+  - "за" # for, behind
+  - "при" # at, in the presence of
+  - "как" # as, like
+  - "что" # that, what
+  - "это" # this, it
+  - "все" # all, everything
+  - "без"
   # Ukrainian stopwords
-  - для # for
-  - і
-  - в # in
-  - на # on
-  - з # with
-  - від # from
-  - до # to
-  - по # by, for
-  - з # out of, from
-  - а # and, but
-  - але # but
-  - про # about
-  - за # for, behind
-  - при # at, in the presence of
-  - як # as, like
-  - що # that, what
-  - це # this, it
-  # Arabic stopwords
+  - "для" # for
+  - "і"
+  - "в" # in
+  - "на" # on
+  - "з" # with
+  - "від" # from
+  - "до" # to
+  - "по" # by, for
+  - "з" # out of, from
+  - "а" # and, but
+  - "але" # but
+  - "про" # about
+  - "за" # for, behind
+  - "при" # at, in the presence of
+  - "як" # as, like
+  - "що" # that, what
+  - "це" # this, it
+  # Arabic / transliterated Arabic stopwords
   - "في" # in
   - "من" # from
   - "إلى" # to
@@ -249,6 +249,7 @@ STOPWORDS:
   - "أو" # or
   - "في" # in
   - "ال" # the (definite article)
+  - "ul" # the (definite article)
   - "هذا" # this
   - "ذلك" # that
   - "كل" # all, every
@@ -270,6 +271,10 @@ STOPWORDS:
   - "unos"
   - "unas"
   - "y"
+  - "del" # of the
+  # Estonian
+  - "ja" # and
+  # Catalan stopwords
   - "és" # is
   # Portugese stopwords
   - "do" # of
@@ -289,6 +294,14 @@ STOPWORDS:
   - "par" # by, through
   - "un" # a, an (masculine)
   - "une" # a, an (feminine)
+  - "des" # of the
+  - "de l'" # of the (before a vowel or h)
+  # Slovene stopwords
+  - "za" # for 
+  # Turkish
+  - "ve" # and
+  # Swahili stopwords
+  - "wa" # of
   # Chinese stopwords
   - "的" # of, 's (possessive)
   - "在" # at, in, on
@@ -304,6 +317,9 @@ STOPWORDS:
   # Italian stopwords
   - "da" # from
   - "di" # of
+  - "degli" # of the
+  - "della" # from the
+  - "delle" # from the
   # Japanese stopwords
   - "の" # of, 's (possessive)
   - "で" # at, in, on
