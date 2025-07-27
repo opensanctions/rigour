@@ -7,7 +7,7 @@ EMOJI_PATTERN = re.compile(
     # Emojis
     "\U0001f600-\U0001f64f"  # emoticons
     "\U0001f3fb-\U0001f3ff"  # skin tones
-    "\Ufe0e\Ufe0f" # variation selectors (these allow emoji and non-emoji forms of the same symbol to be selected)
+    "\U000fe0e\U000fe0f" # variation selectors (these allow emoji and non-emoji forms of the same symbol to be selected)
     # Symbols, shapes, and pictographs 
     "\U00002700-\U000027bf"  # dingbats
     "\U0001f1e0-\U0001f1ff"  # flags (iOS)
@@ -38,6 +38,8 @@ EMOJI_PATTERN = re.compile(
     "\U0001f000-\U0001f02f" # Mahjong tiles
     "\U0001f030-\U0001f09f" # domino tiles
     "\U0001f0a0-\U0001f0ff" # playing cards
+    # Unicode specials block
+    "\U000fff0-\U000ffff" # character for encoding errors (�) etc 
     # Ancient/obsolete scripts 
     "\U00016a0-\U00016ff" # Runic
     "\U0001680-\U000169f" # Ogham
