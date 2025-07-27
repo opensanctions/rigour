@@ -41,17 +41,13 @@ EMOJI_PATTERN = re.compile(
     # Unicode specials block
     "\U000fff0-\U000ffff" # character for encoding errors (�) etc 
     # Ancient/obsolete scripts 
+    "\U00010000-\U000103df # Ancient languages including Gothic and Old Persian
     "\U00016a0-\U00016ff" # Runic
     "\U0001680-\U000169f" # Ogham
-    "\U00010330-\U0001034f" # Gothic
     "\U00010900-\U0001091f" # Phoenician
-    "\U00010380-\U0001039f" # Ugaritic (an extinct Semitic language)
-    "\U000103a0-\U000103df" # Old Persian
-    "\U00010000-\U000100ff" # Linear B (used for an form of the Greek language)
     "\U00012000-\U000123ff" # Cuneiform
     "\U00012400-\U0001247f" # Cuneiform numbers and punctuation
-    "\U00013000-\U0001342f" # Egyptian hieroglyphs
-    "\U00013430-\U0001345f" # Egyptian hieroglyph format controls (for grouping hieroglyphs)
+    "\U00013000-\U0001345f" # Egyptian hieroglyphs (main block and format controls)
     "\U00014400-\U0001467f" # Anatolian hieroglyphs
     # Constructed languages/scripts 
     "\U00010450-\U0001047f" # Shavian (constructed script created in the 1950s and 1960s to write English)
