@@ -50,7 +50,7 @@ EMOJI_PATTERN = re.compile(
     "\U00010000-\U000100ff" # Linear B (used for an form of the Greek language)
     "\U00012000-\U000123ff" # Cuneiform
     "\U00013000-\U0001342f" # Egyptian hieroglyphs
-    "\U00013430-\U0001345f" # Egyptian Hieroglyph Format Controls (for grouping hieroglyphs)
+    "\U00013430-\U0001345f" # Egyptian hieroglyph format controls (for grouping hieroglyphs)
     "\U00014400-\U0001467f" # Anatolian hieroglyphs
     # Constructed languages/scripts 
     "\U00010450-\U0001047f" # Shavian (constructed script created in the 1950s and 1960s to write English)
