@@ -38,15 +38,16 @@ EMOJI_PATTERN = re.compile(
     "\U0001f000-\U0001f02f" # Mahjong tiles
     "\U0001f030-\U0001f09f" # domino tiles
     "\U0001f0a0-\U0001f0ff" # playing cards
+    # Shorthand
+    "\U0001BC00-\U0001BC9f" # Duployan shorthand
     # Unicode specials block
-    "\U000fff0-\U000ffff" # character for encoding errors (�) etc 
+    "\ufff0-\uffff" # character for encoding errors (�) etc 
     # Ancient/obsolete scripts 
-    "\U00010000-\U000103df # Ancient languages including Gothic and Old Persian
+    "\U00010000-\U000103df" # Ancient languages including Gothic and Old Persian
     "\U00016a0-\U00016ff" # Runic
     "\U0001680-\U000169f" # Ogham
     "\U00010900-\U0001091f" # Phoenician
-    "\U00012000-\U000123ff" # Cuneiform
-    "\U00012400-\U0001247f" # Cuneiform numbers and punctuation
+    "\U00012000-\U0001247f" # Cuneiform (letters, numbers and punctuation)
     "\U00013000-\U0001345f" # Egyptian hieroglyphs (main block and format controls)
     "\U00014400-\U0001467f" # Anatolian hieroglyphs
     # Constructed languages/scripts 
