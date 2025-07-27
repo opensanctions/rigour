@@ -295,9 +295,9 @@ STOPWORDS:
   - "un" # a, an (masculine)
   - "une" # a, an (feminine)
   - "des" # of the
-  - "de l'" # of the (before a vowel or h)
+  # - "de l'" # of the (before a vowel or h)
   # Slovene stopwords
-  - "za" # for 
+  - "za" # for
   # Turkish
   - "ve" # and
   # Swahili stopwords
