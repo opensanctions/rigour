@@ -49,6 +49,7 @@ EMOJI_PATTERN = re.compile(
     "\U000103a0-\U000103df" # Old Persian
     "\U00010000-\U000100ff" # Linear B (used for an form of the Greek language)
     "\U00012000-\U000123ff" # Cuneiform
+    "\U00012400-\U0001247f" # Cuneiform numbers and punctuation
     "\U00013000-\U0001342f" # Egyptian hieroglyphs
     "\U00013430-\U0001345f" # Egyptian hieroglyph format controls (for grouping hieroglyphs)
     "\U00014400-\U0001467f" # Anatolian hieroglyphs
