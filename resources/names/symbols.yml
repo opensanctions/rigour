@@ -1121,6 +1121,13 @@ org_symbols:
     - исследовательский
     - изучение
     - forschung
+  resources:
+    - resources
+    - resource
+    - ressource
+    - ressources
+    - recurso 
+    - recursos 
   shipping:
     - shipping
     - shipping company
