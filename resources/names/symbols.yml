@@ -1427,6 +1427,11 @@ org_symbols:
   power:
     - power
     - powers
+  base:
+      - base
+      - bases
+      - baza
+      - база
   chemical:
     - chemical
     - chemicals
