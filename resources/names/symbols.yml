@@ -402,6 +402,16 @@ org_symbols:
     - house
     - maison
     - haus
+    - huis
+    - hus
+    - casa
+    - dom
+    - дом
+  royal:
+    - royal
+    - royale
+    - königlich
+    - kunglig 
   supply:
     - supply
     - supplies
@@ -1451,15 +1461,6 @@ org_symbols:
     - химических
     - химического
     - химической
-  house:
-    - house
-    - Haus
-    - huis
-    - hus
-    - casa
-    - dom
-    - maison
-    - дом
   museum:
     - museum
     - museums
