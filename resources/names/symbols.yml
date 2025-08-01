@@ -1257,6 +1257,11 @@ org_symbols:
     - проектировщица
     - проектировщицы
     - проектировщиц
+  hotel:
+    - hotel
+    - hôtel
+    - albergo
+    - отель
   revolutionary:
     - revolutionary
     - revolutsioonilise
