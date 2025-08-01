@@ -1138,6 +1138,19 @@ org_symbols:
     - islami
     - islamo
     - islâmico
+  reinsurance:
+    - reinsurance
+    - re-assurance
+    - re # reasonably common abbreviation in entity names e.g. Swiss Re
+    - reinsurer
+    - reinsurance company
+    - réassurance
+    - reaseguro
+    - riassicurazione
+    - resseguro 
+    - rückversicherung
+    - перестрахование
+    - 재보험
   research:
     - research
     - исследование
