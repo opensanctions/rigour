@@ -1,4 +1,3 @@
-import unicodedata
 from functools import lru_cache
 from typing import Optional
 
@@ -22,8 +21,8 @@ def get_script(codepoint: int) -> Optional[str]:
 @lru_cache(maxsize=MEMO_MEDIUM)
 def can_latinize_cp(cp: int) -> Optional[bool]:
     """Check if a codepoint should be latinized."""
-    cat = unicodedata.category(chr(cp))
-    if not cat.startswith("L") and not cat.startswith("N"):
+    char = chr(cp)
+    if not char.isalnum():
         return None
     script = get_script(cp)
     if script is None:
@@ -66,8 +65,7 @@ def is_modern_alphabet(word: str) -> bool:
             continue
         if cp < LATIN_BLOCK:
             continue
-        cat = unicodedata.category(chr(cp))
-        if not cat.startswith("L") and not cat.startswith("N"):
+        if not char.isalnum():
             continue
         return False
     return True
@@ -81,9 +79,6 @@ def is_latin(word: str) -> bool:
             continue
         if cp < LATIN_BLOCK:
             continue
-        if cp in LATINIZABLE_CHARS:
-            return False
-        cat = unicodedata.category(char)
-        if cat.startswith("L") or cat.startswith("N"):
+        if char.isalnum():
             return False
     return True
