@@ -609,6 +609,22 @@ ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {
         "Специальный",
     ),
     "SPV": ("special purpose vehicle", "spv", "vehículo de propósito especial"),
+    "SKB": (
+        "OKB",
+        "Osoblyve konstruktorske biuro",
+        "skb",
+        "special design bureau",
+        "ОСОБОЕ КОНСТРУКТОРСКОЕ БЮРО",
+        "Особое Конструкторское Бюро",
+    ),
+    "INSTRMAK": (
+        "INSTRUMENT ENGINEERING",
+        "Priborostroeniya",
+        "fabrication d’instruments",
+        "instrument-making",
+        "ПРИБОРОСТРОИТЕЛЬНЫЙ",
+        "приборостроительный",
+    ),
     "TECH": (
         "technalohiy",
         "technical",

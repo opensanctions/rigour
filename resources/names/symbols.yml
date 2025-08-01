@@ -285,7 +285,21 @@ org_symbols:
   spv:
     - spv
     - special purpose vehicle
-    - vehículo de propósito especial 
+    - vehículo de propósito especial
+  skb:
+    - skb
+    - special design bureau
+    - Особое Конструкторское Бюро
+    - ОСОБОЕ КОНСТРУКТОРСКОЕ БЮРО
+    - Osoblyve konstruktorske biuro
+    - OKB
+  instrmak:
+    - Priborostroeniya
+    - instrument-making
+    - INSTRUMENT ENGINEERING
+    - fabrication d’instruments
+    - приборостроительный
+    - ПРИБОРОСТРОИТЕЛЬНЫЙ
   tech:
     - technology
     - technical
@@ -415,7 +429,7 @@ org_symbols:
     - royal
     - royale
     - königlich
-    - kunglig 
+    - kunglig
   supply:
     - supply
     - supplies
@@ -1067,7 +1081,7 @@ org_symbols:
     - invesmenti
   casino:
     - casino
-    - cazinou 
+    - cazinou
     - kasino
     - kasíno
     - kasiino
@@ -1151,7 +1165,7 @@ org_symbols:
     - réassurance
     - reaseguro
     - riassicurazione
-    - resseguro 
+    - resseguro
     - rückversicherung
     - перестрахование
     - 재보험
@@ -1166,8 +1180,8 @@ org_symbols:
     - resource
     - ressource
     - ressources
-    - recurso 
-    - recursos 
+    - recurso
+    - recursos
   shipping:
     - shipping
     - shipping company
@@ -1476,10 +1490,10 @@ org_symbols:
     - power
     - powers
   base:
-      - base
-      - bases
-      - baza
-      - база
+    - base
+    - bases
+    - baza
+    - база
   chemical:
     - chemical
     - chemicals
