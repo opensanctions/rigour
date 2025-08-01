@@ -297,6 +297,8 @@ org_symbols:
     - тэхналогій
     - технологій
     - технологий
+    - технический
+    - технической
     - технолоджі
     - технолоджи
     - технологиями
@@ -400,6 +402,16 @@ org_symbols:
     - house
     - maison
     - haus
+    - huis
+    - hus
+    - casa
+    - dom
+    - дом
+  royal:
+    - royal
+    - royale
+    - königlich
+    - kunglig 
   supply:
     - supply
     - supplies
@@ -1038,6 +1050,7 @@ org_symbols:
     - investeringen
     - investimentos
     - inversión
+    - inversiones
     - investissement
     - investitorii
     - 투자
@@ -1121,6 +1134,13 @@ org_symbols:
     - исследовательский
     - изучение
     - forschung
+  resources:
+    - resources
+    - resource
+    - ressource
+    - ressources
+    - recurso 
+    - recursos 
   shipping:
     - shipping
     - shipping company
@@ -1178,6 +1198,7 @@ org_symbols:
     - construção
     - строительный
     - строительное
+    - строительства
     - строительная
   consulting:
     - consulting
@@ -1427,6 +1448,11 @@ org_symbols:
   power:
     - power
     - powers
+  base:
+      - base
+      - bases
+      - baza
+      - база
   chemical:
     - chemical
     - chemicals
@@ -1988,6 +2014,7 @@ org_symbols:
     - universtiy
     - universitet
     - universität
+    - universytet
     - univ
     - uni
     - univ.
@@ -2081,6 +2108,17 @@ org_symbols:
     - médias
     - медиа
     - медіа
+  school:
+    - school
+    - école
+    - escola
+    - escuela
+    - Schule
+    - scuola
+    - skola
+    - szkoła
+    - šola
+    - школа
   tpb:
     - corporația de rachete balistice tactice
     - društvo za taktičke projektile
