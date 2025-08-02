@@ -7,6 +7,7 @@ org_symbols:
     - company
     - сompany
     - corporation
+    - compagnie
     - компания
     - kompani
     - kompania
@@ -18,12 +19,14 @@ org_symbols:
     - kompānija
     - kampaniya
     - kompanii
+    - vállalat
     - къмпани
     - компани
     - компания
     - коспания
     - компаний
     - компана
+    - компані
     - co
     - компанія
     - شركة
@@ -36,10 +39,13 @@ org_symbols:
     - firm
     - Εταιρεία
     - Etaireia
+    - společnost
+    - şirket
     - 公司
     - 企業
     - ファーム
     - 企业
+    - कंपनी 
   org:
     - organization
     - organisation
@@ -83,6 +89,7 @@ org_symbols:
     - corporate
     - сorporation
     - corp
+    - korp
     - корпорация
     - корпорація
     - مؤسسة
@@ -135,6 +142,7 @@ org_symbols:
     - corporativos
     - sociedad cooperativa
     - spółdzielni
+    - spoldzielczy
     - кооперация
     - Συνεταιρισμός
     - Synetairismos
@@ -240,11 +248,13 @@ org_symbols:
     - servicos
     - serviço
     - serviços
+    - servis
     - servizio
     - servizi
     - службы
     - служба
     - сервис
+    - сервіс
     - обслуживания
   defence:
     - defence
@@ -448,6 +458,21 @@ org_symbols:
     - авиационный
     - авиационная
     - авиационные
+  agency:
+    - agency
+    - agence
+    - agentur
+    - agencia
+    - agencja
+    - agência
+    - agentschap
+    - agenzia
+    - ajans
+    - агентства
+    - агентстве
+    - агентство
+    - एजेंसी
+    - وكالة
   aircraft:
     - aircraft
     - airplane
@@ -525,6 +550,21 @@ org_symbols:
     - 공항
     - 비행장
     - 항공항
+  brigade:
+    - brigade
+    - brigada
+    - briqada
+    - brigáda
+    - brigaad
+    - brigata
+    - brygada
+    - brigadă
+    - brigedi
+    - brigad
+    - брига́да
+    - لواء
+    - 旅
+    - ब्रिगेड
   flight:
     - flight
     - flights
@@ -649,6 +689,14 @@ org_symbols:
     - 厂家
     - 厂子
     - plant
+  investment fund:
+   - investment fund
+   - fondo de inversión
+   - investmentfonds
+   - fondo di investimento
+   - fundo de investimento
+   - fi
+   - mutual fund
   fund:
     - fund
     - funds
@@ -969,6 +1017,8 @@ org_symbols:
     - industriais
     - indústria
     - endustriyel
+    - endüstri
+    - sanayi
     - 業界
   eng:
     - engineering
@@ -1098,6 +1148,8 @@ org_symbols:
     - enterprises
     - enterpraizes
     - entreprises
+    - empreendimento
+    - empreendimentos
     - interprise
     - предприятие
     - пpедпpиятие
@@ -1157,6 +1209,7 @@ org_symbols:
     - 재보험
   research:
     - research
+    - recherche
     - исследование
     - исследовательский
     - изучение
@@ -1335,6 +1388,7 @@ org_symbols:
     - централизованная
   general:
     - general
+    - generale
     - генеральный
     - генеральная
     - генеральные
@@ -1361,6 +1415,7 @@ org_symbols:
     - transport
     - transportation
     - transporte
+    - transportes
     - trasporto
     - transpor
     - vervoer
@@ -1370,7 +1425,7 @@ org_symbols:
     - транспортные
     - транспортировке
     - транспортировок
-    - транспортировке
+    - транспортного
   financial:
     - financial
     - finance
@@ -1461,6 +1516,7 @@ org_symbols:
     - energií
     - energije
     - energija
+    - enerji
     - энергия
     - энергии
     - енергія
@@ -1472,6 +1528,34 @@ org_symbols:
     - 能源
     - エネルギー
     - 에너지
+  police:
+    - police
+    - police force
+    - constabulary
+    - póilíní
+    - policia
+    - policía
+    - policie
+    - policija
+    - policja
+    - poliisi
+    - polis
+    - polisi
+    - polisie
+    - politi
+    - politie
+    - poliție
+    - politsei
+    - polizei
+    - αστυνομία
+    - полі́ція
+    - полиция
+    - 경찰
+    - पुलिस
+    - شرطة
+    - পুলিশ
+    - ตำรวจ
+    - 警察
   power:
     - power
     - powers
@@ -1607,6 +1691,7 @@ org_symbols:
     - коммерческих
     - коммерческого
     - коммерческой
+    - комерційний
   bank:
     - bank
     - banking
@@ -1637,6 +1722,9 @@ org_symbols:
     - bankası
     - banki
     - 銀行
+    - बैंक
+    - 은행
+    - مصرف
   commercial:
     - commercial
     - коммерческий
@@ -1893,6 +1981,7 @@ org_symbols:
     - Diş Ticaret
     - Dis Ticaret
     - Foreign Trade
+    - tejarat
     - Зовнішньоторговельна
     - Zovnishnotorhovelna
     - Tesisler Teknoloji Dış
@@ -1981,6 +2070,7 @@ org_symbols:
     - trusts
     - фонд
     - траст
+    - трест
     - трастовий
     - трастова
     - трастові
@@ -2116,6 +2206,26 @@ org_symbols:
     - больницы
     - больницах
     - больницам
+  party:
+    - party
+    - páirtí
+    - partai
+    - partei
+    - parti
+    - partia
+    - partid
+    - partido
+    - partij
+    - partija
+    - strana
+    - stranka
+    - па́ртия
+    - κόμμα
+    - حزب
+    - दल
+    - দল
+    - 政黨
+    - 党
   social:
     - social
     - социальный
