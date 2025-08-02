@@ -530,6 +530,21 @@ org_symbols:
     - 공항
     - 비행장
     - 항공항
+  brigade:
+    - brigade
+    - brigada
+    - briqada
+    - brigáda
+    - brigaad
+    - brigata
+    - brygada
+    - brigadă
+    - brigedi
+    - brigad
+    - брига́да
+    - لواء
+    - 旅
+    - ब्रिगेड
   flight:
     - flight
     - flights
