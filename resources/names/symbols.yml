@@ -2175,6 +2175,26 @@ org_symbols:
     - больницы
     - больницах
     - больницам
+  party:
+    - party
+    - páirtí
+    - partai
+    - partei
+    - parti
+    - partia
+    - partid
+    - partido
+    - partij
+    - partija
+    - strana
+    - stranka
+    - па́ртия
+    - κόμμα
+    - حزب
+    - दल
+    - দল
+    - 政黨
+    - 党
   social:
     - social
     - социальный
