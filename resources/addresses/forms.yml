@@ -191,6 +191,7 @@ forms:
     - c o
     - c/o
     - care of
+    - ℅ # unicode U+2105
   pza:
     - piazza
   ctr:
