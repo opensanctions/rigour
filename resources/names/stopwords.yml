@@ -275,6 +275,7 @@ STOPWORDS:
   # Portugese stopwords
   - "do" # of
   - "em" # in
+  - "ou" # or
   # Dutch stopwords
   - "voor" # for
   # French stopwords
