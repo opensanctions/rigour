@@ -1415,6 +1415,7 @@ org_symbols:
     - transport
     - transportation
     - transporte
+    - transportes
     - trasporto
     - transpor
     - vervoer
@@ -1424,7 +1425,7 @@ org_symbols:
     - транспортные
     - транспортировке
     - транспортировок
-    - транспортировке
+    - транспортного
   financial:
     - financial
     - finance
