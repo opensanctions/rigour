@@ -301,6 +301,8 @@ STOPWORDS:
   - "ve" # and
   # Swahili stopwords
   - "wa" # of
+  # Swedish stopwords
+  - "för" # for
   # Chinese stopwords
   - "的" # of, 's (possessive)
   - "在" # at, in, on
