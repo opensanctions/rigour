@@ -216,6 +216,7 @@ STOPWORDS:
   - "это" # this, it
   - "все" # all, everything
   - "без" # without
+  - "ИХ" # their
   # Ukrainian stopwords
   - "для" # for
   - "і" # and
