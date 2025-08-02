@@ -1303,6 +1303,23 @@ org_symbols:
     - 호텔
     - ホテル
     - 酒店
+  wine:
+    - wine
+    - şarap 
+    - viini
+    - vin
+    - vinho
+    - vino
+    - wein
+    - wijn
+    - wino
+    - κρασί
+    - вино
+    - 와인
+    - ワイン
+    - 葡萄酒
+    - خمر
+    - نبيذ
   revolutionary:
     - revolutionary
     - revolutsioonilise
