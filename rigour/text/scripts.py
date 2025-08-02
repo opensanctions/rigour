@@ -7,7 +7,7 @@ from rigour.util import MEMO_MEDIUM
 # There are no non-Latin characters below this codepoint:
 LATIN_BLOCK = 740
 # Hangul is surprisingly good in terms of transliteration, so we allow it:
-LATINIZE_SCRIPTS = {"Hangul", "Cyrillic", "Greek", "Armenian", "Latin"}
+LATINIZE_SCRIPTS = {"Hangul", "Cyrillic", "Greek", "Armenian", "Latin", "Georgian"}
 
 
 def get_script(codepoint: int) -> Optional[str]:
