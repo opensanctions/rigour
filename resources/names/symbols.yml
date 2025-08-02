@@ -1976,6 +1976,31 @@ org_symbols:
     - бюджетное
     - бюджетного
     - бюджетной
+  stock exchange:
+    - stock exchange
+    - stock market
+    - securities exchange
+    - bourse
+    - börse
+    - bolsa de valores
+    - borsa valori
+    - bursă de valori
+    - bursa efek
+    - effectenbeurs
+    - beurs
+    - aandelebeurs
+    - aktiemarknad
+    - giełda papierów wartościowych
+    - giełda
+    - pörssi
+    - χρηματιστήριο
+    - Фондовый рынок
+    - Фондовая биржа 
+    - शेयर बाज़ार
+    - 证券交易所
+    - 証券取引所
+    - سوق الأوراق المالية
+    - 증권거래소
   trust:
     - trust
     - trusts
