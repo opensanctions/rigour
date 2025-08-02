@@ -272,7 +272,7 @@ STOPWORDS:
   - "unas"
   - "y"
   - "del" # of the
-  # Estonian
+  # Estonian stopwords
   - "ja" # and
   # Catalan stopwords
   - "és" # is
@@ -341,6 +341,9 @@ STOPWORDS:
   - "bei" # at, near
   - "als" # as, when
   - "es" # it
+  # Greek stopwords
+  - "του" # of
+  - "και" # and
   # - "(sic)"
   # - "[sic]"
 STOPPHRASES:
