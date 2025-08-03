@@ -814,6 +814,7 @@ org_symbols:
     - Epicheirisi
     - 管理
     - 辖
+    - 
   fed:
     - federal
     - федеральное
@@ -964,6 +965,15 @@ org_symbols:
     - advisor
     - advisers
     - advisors
+  club:
+    - club
+    - clube
+    - circolo
+    - klub
+    - kulüp
+    - клуб
+    - 俱乐部
+    - クラブ
   institution:
     - учреждение
     - institution
