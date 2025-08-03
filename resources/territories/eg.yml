@@ -11,10 +11,10 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary:
-  Egypt, officially the Arab Republic of Egypt, is a transcontinental country
-  spanning the northeast corner of Africa and the Sinai Peninsula in the southwest
-  corner of Asia. It is bordered by the Mediterranean Sea to the north, the Gaza Strip
-  of Palestine and Israel to the northeast, the Red Sea to the east, Sudan to the
-  south, and Libya to the west.
+summary: >-
+  Egypt, officially the Arab Republic of Egypt, is a transcontinental country spanning
+  the northeast corner of Africa and the Sinai Peninsula in the southwest corner of
+  Asia. It is bordered by the Mediterranean Sea to the north, the Gaza Strip of Palestine
+  and Israel to the northeast, the Red Sea to the east, Sudan to the south, and Libya
+  to the west.
 wikipedia_url: https://en.wikipedia.org/wiki/Egypt

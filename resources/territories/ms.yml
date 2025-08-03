@@ -9,8 +9,7 @@ is_ftm: true
 is_jurisdiction: true
 see:
   - gb
-summary:
-  Montserrat is a British Overseas Territory in the Caribbean. It is part of
-  the Leeward Islands, the northern portion of the Lesser Antilles chain of the West
-  Indies.
+summary: >-
+  Montserrat is a British Overseas Territory in the Caribbean. It is part of the Leeward
+  Islands, the northern portion of the Lesser Antilles chain of the West Indies.
 wikipedia_url: https://en.wikipedia.org/wiki/Montserrat

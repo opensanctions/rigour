@@ -12,8 +12,8 @@ is_ftm: true
 is_jurisdiction: true
 see:
   - eu
-summary:
-  The Netherlands, informally Holland, is a country located in northwestern
-  Europe with overseas territories in the Caribbean. It is the largest of four constituent
+summary: >-
+  The Netherlands, informally Holland, is a country located in northwestern Europe
+  with overseas territories in the Caribbean. It is the largest of four constituent
   countries of the Kingdom of the Netherlands.
 wikipedia_url: https://en.wikipedia.org/wiki/Netherlands

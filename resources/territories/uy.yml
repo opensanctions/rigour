@@ -7,9 +7,9 @@ qid: Q77
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary:
-  Uruguay, officially the Oriental Republic of Uruguay or the Eastern Republic
-  of Uruguay, is a country in South America. It shares borders with Argentina to its
+summary: >-
+  Uruguay, officially the Oriental Republic of Uruguay or the Eastern Republic of
+  Uruguay, is a country in South America. It shares borders with Argentina to its
   west and southwest and Brazil to its north and northeast, while bordering the Río
   de la Plata to the south and the Atlantic Ocean to the southeast.
 wikipedia_url: https://en.wikipedia.org/wiki/Uruguay

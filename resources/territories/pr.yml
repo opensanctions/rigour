@@ -10,9 +10,9 @@ is_country: false
 is_ftm: true
 is_jurisdiction: true
 parent: us
-summary:
-  Puerto Rico, officially the Commonwealth of Puerto Rico, is a Caribbean island
-  and unincorporated territory of the United States with official Commonwealth status.
+summary: >-
+  Puerto Rico, officially the Commonwealth of Puerto Rico, is a Caribbean island and
+  unincorporated territory of the United States with official Commonwealth status.
   It is located in the northeast Caribbean Sea, approximately 1,000 miles southeast
   of Miami, Florida, between the Dominican Republic and the U.S. Virgin Islands.
 wikipedia_url: https://en.wikipedia.org/wiki/Puerto_Rico

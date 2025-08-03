@@ -11,8 +11,8 @@ is_ftm: true
 is_jurisdiction: true
 see:
   - eu
-summary:
-  Malta, officially the Republic of Malta, is an island country in Southern
-  Europe, located in the Mediterranean Sea. It consists of an archipelago between
-  Italy and Libya.
+summary: >-
+  Malta, officially the Republic of Malta, is an island country in Southern Europe,
+  located in the Mediterranean Sea. It consists of an archipelago between Italy and
+  Libya.
 wikipedia_url: https://en.wikipedia.org/wiki/Malta

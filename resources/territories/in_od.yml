@@ -5,6 +5,6 @@ is_historical: false
 is_jurisdiction: true
 name: Odisha
 other_codes:
-- in-od
+  - in-od
 parent: in
 qid: Q22048

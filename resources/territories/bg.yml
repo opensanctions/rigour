@@ -11,7 +11,6 @@ is_ftm: true
 is_jurisdiction: true
 see:
   - eu
-summary:
-  Bulgaria, officially the Republic of Bulgaria, is a country in Southeast
-  Europe.
+summary: >-
+  Bulgaria, officially the Republic of Bulgaria, is a country in Southeast Europe.
 wikipedia_url: https://en.wikipedia.org/wiki/Bulgaria

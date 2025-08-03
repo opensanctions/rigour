@@ -9,8 +9,8 @@ is_jurisdiction: true
 parent: gb
 see:
   - gb
-summary:
-  Wales is a country that is part of the United Kingdom. It is bordered by
-  England to the east, the Irish Sea to the north and west, the Celtic Sea to the
-  southwest and the Bristol Channel to the south.
+summary: >-
+  Wales is a country that is part of the United Kingdom. It is bordered by England
+  to the east, the Irish Sea to the north and west, the Celtic Sea to the southwest
+  and the Bristol Channel to the south.
 wikipedia_url: https://en.wikipedia.org/wiki/Wales

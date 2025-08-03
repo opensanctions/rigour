@@ -9,9 +9,9 @@ is_ftm: true
 is_jurisdiction: true
 see:
   - eu
-summary:
-  Sweden, formally the Kingdom of Sweden, is a Nordic country located on the
-  Scandinavian Peninsula in Northern Europe. It borders Norway to the west and north,
-  Finland to the east, and is connected to Denmark in the southwest by a bridge–tunnel
-  across the Öresund.
+summary: >-
+  Sweden, formally the Kingdom of Sweden, is a Nordic country located on the Scandinavian
+  Peninsula in Northern Europe. It borders Norway to the west and north, Finland to
+  the east, and is connected to Denmark in the southwest by a bridge–tunnel across
+  the Öresund.
 wikipedia_url: https://en.wikipedia.org/wiki/Sweden
