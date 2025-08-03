@@ -14,8 +14,8 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary:
-  Nigeria, officially the Federal Republic of Nigeria, is a country in West
-  Africa. It is situated between the Sahel to the north and the Gulf of Guinea to
-  the south in the Atlantic Ocean.
+summary: >-
+  Nigeria, officially the Federal Republic of Nigeria, is a country in West Africa.
+  It is situated between the Sahel to the north and the Gulf of Guinea to the south
+  in the Atlantic Ocean.
 wikipedia_url: https://en.wikipedia.org/wiki/Nigeria

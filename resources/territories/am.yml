@@ -7,10 +7,9 @@ qid: Q399
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary:
-  Armenia, officially the Republic of Armenia, is a landlocked country in the
-  Armenian Highlands of West Asia, with geopolitical ties to Europe. It is a part
-  of the Caucasus region and is bordered by Turkey to the west, Georgia to the north
-  and Azerbaijan to the east, and Iran and the Azerbaijani exclave of Nakhchivan to
-  the south.
+summary: >-
+  Armenia, officially the Republic of Armenia, is a landlocked country in the Armenian
+  Highlands of West Asia, with geopolitical ties to Europe. It is a part of the Caucasus
+  region and is bordered by Turkey to the west, Georgia to the north and Azerbaijan
+  to the east, and Iran and the Azerbaijani exclave of Nakhchivan to the south.
 wikipedia_url: https://en.wikipedia.org/wiki/Armenia

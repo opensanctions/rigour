@@ -9,6 +9,6 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary:
-  The United States is one of the key sanctions-making jurisdictions in the
-  World, including multiple lists published by the Treasury, State and other departments.
+summary: >-
+  The United States is one of the key sanctions-making jurisdictions in the World,
+  including multiple lists published by the Treasury, State and other departments.

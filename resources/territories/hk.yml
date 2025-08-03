@@ -12,7 +12,7 @@ is_country: false
 is_ftm: true
 is_jurisdiction: true
 parent: cn
-summary:
-  Hong Kong, officially the Hong Kong Special Administrative Region of the
-  People's Republic of China, is a city and a special administrative region in China.
+summary: >-
+  Hong Kong, officially the Hong Kong Special Administrative Region of the People's
+  Republic of China, is a city and a special administrative region in China.
 wikipedia_url: https://en.wikipedia.org/wiki/Hong_Kong_SAR_China

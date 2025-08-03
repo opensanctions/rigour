@@ -9,9 +9,9 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary:
-  Mexico, officially the United Mexican States, is a country in the southern
-  portion of North America. It is bordered to the north by the United States; to the
-  south and west by the Pacific Ocean; to the southeast by Guatemala, Belize, and
-  the Caribbean Sea; and to the east by the Gulf of Mexico.
+summary: >-
+  Mexico, officially the United Mexican States, is a country in the southern portion
+  of North America. It is bordered to the north by the United States; to the south
+  and west by the Pacific Ocean; to the southeast by Guatemala, Belize, and the Caribbean
+  Sea; and to the east by the Gulf of Mexico.
 wikipedia_url: https://en.wikipedia.org/wiki/Mexico

@@ -9,9 +9,9 @@ is_ftm: true
 is_jurisdiction: true
 see:
   - eu
-summary:
-  Finland, officially the Republic of Finland, is a Nordic country in Northern
-  Europe. It borders Sweden to the northwest, Norway to the north, and Russia to the
-  east, with the Gulf of Bothnia to the west and the Gulf of Finland to the south,
-  opposite Estonia.
+summary: >-
+  Finland, officially the Republic of Finland, is a Nordic country in Northern Europe.
+  It borders Sweden to the northwest, Norway to the north, and Russia to the east,
+  with the Gulf of Bothnia to the west and the Gulf of Finland to the south, opposite
+  Estonia.
 wikipedia_url: https://en.wikipedia.org/wiki/Finland

@@ -9,8 +9,8 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
-summary:
-  Paraguay, officially the Republic of Paraguay, is a landlocked country in
-  South America. It is bordered by Argentina to the south and southwest, Brazil to
-  the east and northeast, and Bolivia to the northwest.
+summary: >-
+  Paraguay, officially the Republic of Paraguay, is a landlocked country in South
+  America. It is bordered by Argentina to the south and southwest, Brazil to the east
+  and northeast, and Bolivia to the northwest.
 wikipedia_url: https://en.wikipedia.org/wiki/Paraguay
