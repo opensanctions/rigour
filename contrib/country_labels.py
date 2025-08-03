@@ -1,6 +1,6 @@
 # pip install ruamel.yaml
 from typing import Optional
-from normality import slugify_text, latinize_text, normalize
+from normality import slugify_text, latinize_text, normalize, squash_spaces
 from rigour.text.scripts import is_latin, can_latinize
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedSeq
@@ -19,6 +19,13 @@ yaml.indent(mapping=2, sequence=2, offset=2)
 def global_norm(text: str) -> Optional[str]:
     """Normalize text for global use."""
     return normalize(text, lowercase=True)
+
+
+def loc_norm(text: str) -> str:
+    """Normalize text for local use."""
+    if not text:
+        return ""
+    return squash_spaces(text.lower())
 
 
 # def load_country_labels():
@@ -52,20 +59,20 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
         #     labels.add(version)
 
         # Process the territory data as needed
-        used_names = set()
+        used_names = set([loc_norm(cc)])
         name = terr.get("name")
         if name in labels:
             labels.remove(name)
         if name is not None:
-            used_names.add(name.lower())
+            used_names.add(loc_norm(name))
         full_name = terr.get("full_name")
         if full_name in labels:
             labels.remove(full_name)
         if full_name is not None:
-            used_names.add(full_name.lower())
+            used_names.add(loc_norm(full_name))
         iso3 = terr.get("alpha3")
         if iso3 is not None:
-            used_names.add(iso3.lower())
+            used_names.add(loc_norm(iso3))
         if "names_strong" in terr:
             strong = terr["names_strong"]
             for name in strong:
@@ -76,7 +83,7 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
             terr["names_strong"] = CommentedSeq()
             terr["names_strong"].append(name)
         for name in terr["names_strong"]:
-            if name.lower() in used_names:
+            if loc_norm(name) in used_names:
                 terr["names_strong"].remove(name)
         for i, name in enumerate(terr["names_strong"]):
             if is_latin(name):
@@ -86,7 +93,7 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
                 terr["names_weak"].yaml_add_eol_comment(latin, i)
 
         for sname in terr["names_strong"]:
-            used_names.add(sname.lower())
+            used_names.add(loc_norm(sname))
 
         if "names_weak" in terr:
             weak = terr["names_weak"]
@@ -99,7 +106,7 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
         for label in labels:
             terr["names_weak"].append(label)
         for name in terr["names_weak"]:
-            if name.lower() in used_names:
+            if loc_norm(name) in used_names:
                 terr["names_weak"].remove(name)
         for i, name in enumerate(terr["names_weak"]):
             if is_latin(name):
