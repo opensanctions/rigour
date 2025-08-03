@@ -2084,6 +2084,22 @@ org_symbols:
     - продукцією
     - produkt
     - produtos
+  alliance:
+    - alliance
+    - aliança
+    - allians
+    - allianz # also a brand name
+    - alianza
+    - alleanza
+    - alliantie
+    - alianţă
+    - ittifak
+    - sojusz
+    - альянс
+    - تحالف
+    - गठबंधन
+    - 同盟
+    - 동맹
   distrib:
     - distributors
     - distributor
