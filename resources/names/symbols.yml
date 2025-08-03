@@ -482,10 +482,34 @@ org_symbols:
   aircraft:
     - aircraft
     - airplane
+    - airplanes
+    - aeroplane
+    - aeroplanes
+    - plane
+    - planes
     - flugzeug
+    - flugzeuge
     - самолет
     - аэроплан
     - самолеты
+    - aeroplanë
+    - aeroplani
+    - aereo
+    - aerei
+    - avion
+    - aviones
+    - avions
+    - avión
+    - avião
+    - aviões
+    - ndege
+    - 비행기
+    - 비행기들
+    - طائرة
+    - طائرات
+    - हवाई जहाज़
+    - 飞机
+    - 飛行機
   airline:
     - airline
     - airlines
@@ -556,35 +580,6 @@ org_symbols:
     - 공항
     - 비행장
     - 항공항
-  airplane:
-    - airplane
-    - aeroplane
-    - airplanes
-    - aeroplanes
-    - plane
-    - planes
-    - aeroplanë
-    - aeroplani
-    - aereo
-    - aerei
-    - avion
-    - aviones
-    - avions
-    - avión
-    - avião
-    - aviões
-    - Flugzeug
-    - Flugzeuge
-    - ndege
-    - самолет
-    - самолеты
-    - 비행기
-    - 비행기들
-    - طائرة
-    - طائرات
-    - हवाई जहाज़
-    - 飞机
-    - 飛行機
   brigade:
     - brigade
     - brigada
