@@ -16,14 +16,18 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Serbia
 names_strong:
   - Serbia
+  - Republika Srbija
+  - Republika Serbija
+  - Сербия # Serbiâ
+  - Република Србија # Republika Srbija
+  - Република Србија # Republika Srbiâ
 names_weak:
   - ସର୍ବିଆ
   - Serbiya
   - Serbien
-  - Sɛlɛbî
-  - Сербия  # Serbiâ
-  - Serbia nutome
-  - ਸਰਬੀਆ
+  - Sɛlɛbî        # Serbiâ
+  - Serbia nutome # Republika Srbiǰa
+  - ਸਰਬੀਆ         # Republika Srbiǰa
   - ເຊີເບຍ
   - Servië
   - セルビア
@@ -49,16 +53,16 @@ names_weak:
   - סערביע
   - Särbije
   - صربستون
-  - Серби # Serbi
+  - Серби         # Serbi
   - ⵙⵉⵔⴱⵢⴰ
-  - სერბეთი # serbeti
+  - სერბეთი       # serbeti
   - Srbsko
-  - Србија # Srbiǰa
+  - Србија        # Srbiǰa
   - ಸೆರ್ಬಿಯಾ
   - সার্বিয়া
   - Serbiska
   - صربيا
-  - Сербія # Serbíâ
+  - Сербія        # Serbíâ
   - Serbian
   - सर्बिया
   - Serbi
@@ -67,7 +71,7 @@ names_weak:
   - Sèrbia
   - i -Serbia
   - سربیا
-  - 세르비아 # seleubia
+  - 세르비아          # seleubia
   - સર્બિયા
   - සර්බියාව
   - סרביה

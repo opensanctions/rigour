@@ -1,5 +1,5 @@
 name: Ireland
-full_name: Ireland
+full_name: Republic of Ireland
 region: Europe
 subregion: Northern Europe
 alpha3: irl
@@ -20,6 +20,8 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Republic_of_Ireland
 names_strong:
   - Ireland
+  - Republic of Ireland
+  - Éire
 names_weak:
   - İrlandiya
   - Ayrlaand
@@ -45,7 +47,6 @@ names_weak:
   - Ірландія  # Írlandíâ
   - Roscommon
   - Aelandi
-  - Éire
   - אירלאַנד
   - ไอร์แลนด์
   - Irlandiya
@@ -109,7 +110,6 @@ names_weak:
   - Irlanda
   - Ayaláandi
   - IRELD
-  - Republic of Ireland
   - Clare
   - Irelandɛ
   - Irishwoman

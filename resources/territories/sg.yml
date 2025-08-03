@@ -1,5 +1,5 @@
 name: Singapore
-full_name: Singapore
+full_name: Republic of Singapore
 region: Asia
 subregion: South-eastern Asia
 alpha3: sgp
@@ -16,6 +16,9 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Singapore
 names_strong:
   - Singapore
+  - Singapura
+  - Singapour
+  - Singapoor
 names_weak:
   - སིང་ག་པོར
   - Singapowa
@@ -23,7 +26,6 @@ names_weak:
   - सिंगापूर
   - Sïngäpûru
   - i -Singapore
-  - Singapour
   - Singapor
   - סינגאַפּור
   - Singapo
@@ -65,11 +67,9 @@ names_weak:
   - SGP
   - Singapure
   - சிங்கப்பூர்
-  - Republic of Singapore
   - 싱가포르 # sing-gapoleu
   - 新加坡
   - Singapoa
-  - Singapura
   - シンガポール
   - snɣafura
   - Singapūras

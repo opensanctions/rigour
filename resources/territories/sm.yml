@@ -1,5 +1,5 @@
 name: San Marino
-full_name: San Marino
+full_name: Republic of San Marino
 region: Europe
 subregion: Southern Europe
 alpha3: smr
@@ -15,6 +15,7 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/San_Marino
 names_strong:
   - San Marino
+  - Most Serene Republic of San Marino
 names_weak:
   - سین میرِنو
   - San Marinu
@@ -34,7 +35,6 @@ names_weak:
   - سان مارينو
   - სანმარინო  # sanmarino
   - 聖馬利諾
-  - Republic of San Marino
   - See Maree
   - Сан -Марына # San -Maryna
   - Santu Marine

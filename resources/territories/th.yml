@@ -1,5 +1,5 @@
 name: Thailand
-full_name: Thailand
+full_name: Kingdom of Thailand
 region: Asia
 subregion: South-eastern Asia
 alpha3: tha
@@ -11,6 +11,8 @@ is_ftm: true
 is_jurisdiction: true
 names_strong:
   - Thailand
+  - ประเทศไทย
+  - Prathet Thai
 names_weak:
   - Thaiföld
   - ថៃ
@@ -118,7 +120,6 @@ names_weak:
   - Emetab Thailand
   - Тајланд # Taǰland
   - Hutailandi
-  - Kingdom of Thailand
   - Thailandia
   - थाइल्याण्ड
   - ไทย

@@ -1,5 +1,5 @@
 name: Qatar
-full_name: Qatar
+full_name: State of Qatar
 region: Asia
 subregion: Western Asia
 alpha3: qat
@@ -14,7 +14,9 @@ summary: >-
   of its territory surrounded by the Persian Gulf.
 wikipedia_url: https://en.wikipedia.org/wiki/Qatar
 names_strong:
-  - Qatar
+  - قطر
+  - Qatari
+  - دولة قطر # Dawlat Qaṭar
 names_weak:
   - QAT
   - قَطِر
@@ -28,9 +30,7 @@ names_weak:
   - क़तार
   - কাতার
   - கத்தார்
-  - قطر
   - Қатар  # Kˌatar
-  - Qatari
   - 卡達
   - Ukatari
   - Kàtâr
@@ -64,7 +64,6 @@ names_weak:
   - Katari
   - ກາຕາ
   - Ggatar
-  - State of Qatar
   - कतार
   - კატარი # kʼatʼari
   - Kata

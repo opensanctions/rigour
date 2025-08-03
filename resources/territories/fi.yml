@@ -1,5 +1,5 @@
 name: Finland
-full_name: Finland
+full_name: Republic of Finland
 region: Europe
 subregion: Northern Europe
 alpha3: fin
@@ -17,6 +17,14 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Finland
 names_strong:
   - Finland
+  - Republic of Finland
+  - Suomi
+  - Suomen tasavalta
+  - Finnland
+  - Finlandia
+  - Finlande
+  - Финляндия # Finlândiâ
+  - Финска # Finska
 names_weak:
   - ফিনল্যান্ড
   - fillanda
@@ -25,8 +33,8 @@ names_weak:
   - Finnország
   - i -Finland
   - Finlândia
-  - fɛnlánd
-  - Finnish
+  - fɛnlánd # Finlândiâ
+  - Finnish # Finska
   - فىنلاندىيە
   - Fɨnlàn
   - Finland nutome
@@ -42,7 +50,6 @@ names_weak:
   - ᏫᏂᎦᏙᎯ
   - Huufini
   - ಫಿನ್ಲ್ಯಾಂಡ್
-  - Finlande
   - فن لینڈ
   - 芬兰
   - Finlân
@@ -50,7 +57,7 @@ names_weak:
   - fínlan
   - فنلاند
   - フィンランド
-  - Финландия  # Finlandiâ
+  - Финландия # Finlandiâ
   - फिन्ल्याण्ड
   - Orílẹ́ède Filandi
   - Finlandë
@@ -58,7 +65,7 @@ names_weak:
   - Finilandi
   - An Fhionnlann
   - פֿינלאַנד
-  - 핀란드 # pinlandeu
+  - 핀란드     # pinlandeu
   - फिनलैंड
   - ຝຽກລັງ
   - Finəlán
@@ -77,20 +84,16 @@ names_weak:
   - Somija
   - Filandɛ
   - فنلینډ
-  - ფინეთი # pineti
+  - ფინეთი  # pineti
   - Y Ffindir
-  - Suomi
   - فِنلینٛڑ
   - Phần Lan
   - Sǝr Finland
   - Suomija
   - Фінляндыя # Fínlândyâ
-  - Финляндия # Finlândiâ
   - Suomâ
   - Suopma
   - فنلند
-  - Finlandia
-  - Финска    # Finska
   - פינלנד
   - Ufíini
   - Fëlânde
@@ -100,14 +103,12 @@ names_weak:
   - Orílɛ́ède Filandi
   - Finsko
   - Fiŋlɛŋ
-  - Финланд   # Finland
+  - Финланд # Finland
   - ཕིན་ལེནཌ
   - Finlandie
-  - Finnland
   - Fenland
   - Finlanda
   - ⴼⵉⵍⵍⴰⵏⴷⴰ
-  - Republic of Finland
   - ហ្វាំងឡង់
   - Grand Duchy of Finland
   - Finilani
@@ -116,7 +117,7 @@ names_weak:
   - Finska
   - Ֆինլանդիա # Finlandia
   - ဖင်လန်
-  - Финлянди  # Finlândi
+  - Финлянди # Finlândi
   - Bufini
   - FIN
   - Ufini

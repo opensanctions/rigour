@@ -17,10 +17,13 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Georgia_(country)
 names_strong:
   - Georgia
+  - Sakartvelo
+  - საქართველო
+  - Gruzia
 names_weak:
   - Xeorxia
   - Geoorgie
-  - Zeorzia
+  - Zeorzia  # sakartvelo
   - Georgian
   - Gürcüstan
   - జార్జియా
@@ -31,7 +34,7 @@ names_weak:
   - Kartvelujo
   - ཇོར་ཇི་ཡ།
   - Gyogiya
-  - Гуьржийчоь  # Guʹržijčoʹ
+  - Гуьржийчоь # Guʹržijčoʹ
   - گىروزىيە
   - Gruzja
   - Jɔɔjiya
@@ -64,7 +67,6 @@ names_weak:
   - Georgiab
   - जॉर्जिया
   - Gruzie
-  - საქართველო # sakartvelo
   - Gjeorgjie
   - Վրաստան # Vrastan
   - Jeorrjije

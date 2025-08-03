@@ -1,5 +1,5 @@
 name: South Africa
-full_name: South Africa
+full_name: Republic of South Africa
 region: Africa
 subregion: Southern Africa
 alpha3: zaf
@@ -18,6 +18,13 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/South_Africa
 names_strong:
   - South Africa
+  - Republic of South Africa
+  - Suid -Afrika
+  - Afrika du Sud
+  - Afrika Selatan
+  - Afrika Kudu
+  - Afrika ya Kudu
+  - Afrika ya Kɔtɔ
 names_weak:
   - Afrika Anaafo
   - Afríka yí sí
@@ -61,7 +68,6 @@ names_weak:
   - ZAF
   - Africa dal Sid
   - דרום אפריקה
-  - Republic of South Africa
   - afilí mbátɛ́
   - Koonfur Afrika
   - Південно -Африканська Республіка # Pívdenno -Afrikansʹka Respublíka
@@ -82,7 +88,6 @@ names_weak:
   - Afrika ya Southi
   - སཱའུཐ་ ཨཕ་རི་ཀ
   - Suid Afrikab
-  - Suid -Afrika
   - Afrika Kuthini
   - Tafrikt Tunẓul
   - Pussideinanafrika
@@ -140,7 +145,6 @@ names_weak:
   - Afirka Ta Kudu
   - Güney Afrika
   - Južná Afrika
-  - Afrika Selatan
   - Sud Afriche
   - Afrika di Sul
   - Afrika t’Isfel

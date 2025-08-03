@@ -1,5 +1,5 @@
 name: India
-full_name: India
+full_name: Republic of India
 region: Asia
 subregion: Southern Asia
 alpha3: ind
@@ -14,6 +14,13 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/India
 names_strong:
   - India
+  - Republic of India
+  - Bharat
+  - Hindustan
+  - Bhārat Gaṇarājya
+  - Hindustān
+  - भारत गणराज्य
+  - भारत
 names_weak:
   - Республика Индия  # Respublika Indiâ
   - Na h -Innseachan
@@ -29,7 +36,6 @@ names_weak:
   - Ubuhindi
   - རྒྱ་གར
   - Инди # Indi
-  - भारत
   - Ándɛ
   - Indië
   - Endìa
@@ -101,7 +107,6 @@ names_weak:
   - Índɛ
   - indí
   - Lhend
-  - Republic of India
   - ინდოეთი   # indoeti
   - Ҳиндистон # Ҳindiston
   - Indu laboo

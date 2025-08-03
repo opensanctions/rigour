@@ -9,4 +9,11 @@ is_jurisdiction: true
 parent: ae
 names_strong:
   - Abu Dhabi
-names_weak: []
+names_weak:
+  - ABU DHABI
+  - أبوظبي
+  - أبوظبي (إمارة)
+  - Abu Dhabi (Emirate)
+  - Emirato de Abu Dhabi
+  - Emirate of Abu Dhabi
+  - Абу Даби  # Abu Dabi

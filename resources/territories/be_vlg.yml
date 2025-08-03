@@ -7,4 +7,9 @@ is_jurisdiction: true
 parent: be
 names_strong:
   - Flanders
-names_weak: []
+names_weak:
+  - Flandre
+  - Vlaanderen
+  - Vlaanderen (Vlaams Gewest)
+  - Flandes
+  - Flandern

@@ -7,4 +7,6 @@ is_jurisdiction: true
 parent: ca
 names_strong:
   - Nunavut
-names_weak: []
+names_weak:
+  - NUNAVUT, CANADA
+  - Keewatin

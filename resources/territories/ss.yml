@@ -1,5 +1,5 @@
 name: South Sudan
-full_name: South Sudan
+full_name: Republic of South Sudan
 region: Africa
 subregion: Eastern Africa
 alpha3: ssd
@@ -12,6 +12,9 @@ summary: >-
   of democratic stability has been engulfed in civil war.
 names_strong:
   - South Sudan
+  - Republic of South Sudan
+  - Southern Sudan
+  - South Sudanese Republic
 names_weak:
   - Pietų Sudanas
   - ស៊ូដង់ខាងត្បូង
@@ -91,7 +94,6 @@ names_weak:
   - Sudán del Sur
   - South Sudanese
   - 남수단          # namsudan
-  - Republic of South Sudan
   - Sudäan -Mbongo
   - Suid -Soedan
   - Південний Судан # Pívdennij Sudan
@@ -113,3 +115,4 @@ names_weak:
   - Sudan Selatan
   - ⵙⵙⵓⴷⴰⵏ ⵏ ⵉⴼⴼⵓⵙ
   - ദക്ഷിണ സുഡാൻ
+  - Juba

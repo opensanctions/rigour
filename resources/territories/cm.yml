@@ -1,5 +1,5 @@
 name: Cameroon
-full_name: Cameroon
+full_name: Republic of Cameroon
 region: Africa
 subregion: Middle Africa
 alpha3: cmr
@@ -17,6 +17,9 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Cameroon
 names_strong:
   - Cameroon
+  - Cameroun
+  - Camerún
+  - Kamerun
 names_weak:
   - Կամերուն  # Kamerun
   - kamɛrún
@@ -60,7 +63,6 @@ names_weak:
   - Kamerun nutome
   - კამერუნი # kʼameruni
   - CMR
-  - Camerún
   - کیمرون
   - ཀ་མེ་རུན།
   - Kamerune
@@ -69,7 +71,6 @@ names_weak:
   - கேமரூன்
   - កាមេរូន
   - کیٚمِروٗن
-  - Kamerun
   - Cameroonian
   - كامېرون
   - कोमेरान
@@ -79,7 +80,6 @@ names_weak:
   - Kamerún
   - ཀེ་མ་རུན
   - Orílɛ́ède Kamerúúnì
-  - Cameroun
   - کامرون
   - Kɛmɛrun
   - Kamarõis
@@ -104,7 +104,6 @@ names_weak:
   - Camarún
   - ꕪꔈꖩꘋ
   - କାମେରୁନ୍
-  - Republic of Cameroon
   - ຄາເມຣູນ
   - Kameroen
   - Kamɛrune

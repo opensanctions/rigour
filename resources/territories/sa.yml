@@ -1,5 +1,5 @@
 name: Saudi Arabia
-full_name: Saudi Arabia
+full_name: Kingdom of Saudi Arabia
 region: Asia
 subregion: Western Asia
 alpha3: sau
@@ -17,6 +17,7 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Saudi_Arabia
 names_strong:
   - Saudi Arabia
+  - المملكة العربية السعودية # Al-Mamlakah Al-‘Arabīyah As-Su‘ūdīyah
 names_weak:
   - Aràibia nan Sabhd
   - सौदी अरब
@@ -40,7 +41,6 @@ names_weak:
   - Abari Saudi
   - ဆော်ဒီအာရေးဗီးယား
   - عربستان سعودی
-  - المملكة العربية السعودية
   - السعوديه
   - Arab Saudi
   - Emetab Saudi Arabia
@@ -57,7 +57,6 @@ names_weak:
   - སཱཝ་དི་ ཨ་རེ་བྷི་ཡ
   - සෞදි අරාබිය
   - Arabia Saoudat
-  - Kingdom of Saudi Arabia
   - সৌদি আরব
   - alapísawutíit
   - Səudiyyə Ərəbistanı

@@ -1,5 +1,5 @@
 name: Soviet Union
-full_name: Soviet Union
+full_name: Union of Soviet Socialist Republics
 region: Supranational
 qid: Q15180
 other_codes:
@@ -43,13 +43,13 @@ summary: >-
   of birth of a number of designated persons.
 names_strong:
   - Soviet Union
+  - USSR
+  - УССР # USSR
 names_weak:
   - Сою́з ССР        # Soû́z SSR
   - Сове́тский Сою́з # Sovétskij Soû́z
-  - UdSSR
+  - UdSSR            # USSR
   - Soviet
   - Сою́з Сове́тских Социалисти́ческих Респу́блик # Soû́z Sovétskih Socialistíčeskih Respúblik
   - Russia (USSR)
   - SU
-  - Union of Soviet Socialist Republics
-  - USSR

@@ -1,5 +1,5 @@
 name: Slovenia
-full_name: Slovenia
+full_name: Republic of Slovenia
 region: Europe
 subregion: Central Europe
 alpha3: svn
@@ -16,6 +16,12 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Slovenia
 names_strong:
   - Slovenia
+  - Slovenija
+  - Republika Slovenija
+  - Republic of Slovenia
+  - Republika Slovenije
+  - Republika Slovénie
+  - Republika Slovénia
 names_weak:
   - سىلوۋېنىيە
   - Slloveni
@@ -50,7 +56,6 @@ names_weak:
   - Slovenien
   - ஸ்லோவேனியா
   - 斯洛維尼亞
-  - Republic of Slovenia
   - Słowjenska
   - Slovėnija
   - Eslovénia
@@ -74,7 +79,6 @@ names_weak:
   - ས་ལཽ་ཝེ་ནི་ཡ།
   - Thlovenia
   - ስሎቬኒያ
-  - Slovenija
   - Slovenian
   - Σλοβενία # Slobenía
   - Sulovénia

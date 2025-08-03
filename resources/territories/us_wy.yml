@@ -7,4 +7,13 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - Wyoming
-names_weak: []
+names_weak:
+  - Wyo.
+  - Wyoming (USA)
+  - Wyoming, USA
+  - Wyoming, United States of America
+  - Uaioming
+  - Uayoming
+  - Uayoming (Estados Unidos)
+  - Uayoming (Estados Unidos da América)
+  - Уайоминг  # Uajoming

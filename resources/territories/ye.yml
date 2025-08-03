@@ -1,5 +1,5 @@
 name: Yemen
-full_name: Yemen
+full_name: Republic of Yemen
 region: Asia
 subregion: Western Asia
 alpha3: yem
@@ -18,6 +18,12 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Yemen
 names_strong:
   - Yemen
+  - Republic of Yemen
+  - اليمن
+  - Al-Yaman
+  - Al-Yaman al-Mu'azzam
+  - Al-Yaman al-Mu'azzam al-Jumhuriyah
+  - Al-Yaman al-Mu'azzam al-Jumhuri
 names_weak:
   - येमेन
   - Yemenite
@@ -37,7 +43,6 @@ names_weak:
   - Ємен # Êmen
   - Orílẹ́ède yemeni
   - Jemena
-  - Republic of Yemen
   - ಯೆಮನ್
   - Iemen
   - 也门
@@ -49,7 +54,6 @@ names_weak:
   - យេមែន
   - Yaman
   - یمن
-  - اليمن
   - Lyamen
   - Емен # Emen
   - ཡེ་མེན།

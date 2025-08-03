@@ -8,4 +8,6 @@ parent: ch
 qid: Q11943
 names_strong:
   - Zürich
-names_weak: []
+  - Zurich
+names_weak:
+  - Zurich, Switzerland

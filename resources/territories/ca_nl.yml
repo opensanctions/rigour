@@ -7,4 +7,6 @@ is_jurisdiction: true
 parent: ca
 names_strong:
   - Newfoundland and Labrador
-names_weak: []
+names_weak:
+  - Newfoundland
+  - Labrador

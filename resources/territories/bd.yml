@@ -1,5 +1,5 @@
 name: Bangladesh
-full_name: Bangladesh
+full_name: People's Republic of Bangladesh
 region: Asia
 subregion: Southern Asia
 alpha3: bgd
@@ -31,6 +31,7 @@ names_weak:
   - バングラデシュ
   - Bangladeshis
   - Bangiladeshi
+  - East Pakistan
   - Бангладэш  # Bangladéš
   - Bangaladɛ́s
   - Bangladeş
@@ -42,7 +43,6 @@ names_weak:
   - Bangladeshi
   - 방글라데시 # bang-geulladesi
   - Bangaradeshi
-  - People's Republic of Bangladesh
   - Bangladesj
   - བངྒ་ལ་དེཤ
   - Bangladexi
@@ -116,3 +116,4 @@ names_weak:
   - Bhangiladeshi
   - Pengilātesi
   - Bangladex
+  - Bangladexi

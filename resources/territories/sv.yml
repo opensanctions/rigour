@@ -1,5 +1,5 @@
 name: El Salvador
-full_name: El Salvador
+full_name: Republic of El Salvador
 region: Americas
 subregion: Central America
 alpha3: slv
@@ -14,6 +14,10 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/El_Salvador
 names_strong:
   - El Salvador
+  - Republic of El Salvador
+  - República de El Salvador
+  - El Salvadori
+  - El Salvadore
 names_weak:
   - Salvadoor
   - Salvadora
@@ -25,7 +29,6 @@ names_weak:
   - Savadɔrɛ
   - i -El Salvador
   - Эль -Сальвадор  # Élʹ -Salʹvador
-  - Republic of El Salvador
   - Emetab El Salvador
   - ऍल साल्वाडोर
   - El Salvadōrs
@@ -91,7 +94,6 @@ names_weak:
   - Ελ Σαλβαδόρ # El Salbadór
   - เอลซัลวาดอร์
   - El Salwador
-  - El Salvadori
   - Salvadoras
   - Elsavado
   - salfatɔ́ɔl

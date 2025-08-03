@@ -1,5 +1,5 @@
 name: Slovakia
-full_name: Slovakia
+full_name: Slovak Republic
 region: Europe
 subregion: Eastern Europe
 alpha3: svk
@@ -18,9 +18,10 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Slovakia
 names_strong:
   - Slovakia
+  - Slovak Republic
+  - Slovensko
 names_weak:
   - Silovakiya
-  - Slovak Republic
   - Sulovakiya
   - Eslovaquia
   - Słowacja
@@ -99,7 +100,6 @@ names_weak:
   - Slovaška
   - 슬로바키아 # seullobakia
   - Sirovaakiya
-  - Slovensko
   - i -Slovakia
   - Словаки # Slovaki
   - Emetab Slovakia

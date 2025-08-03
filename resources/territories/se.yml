@@ -1,5 +1,5 @@
 name: Sweden
-full_name: Sweden
+full_name: Kingdom of Sweden
 region: Europe
 subregion: Northern Europe
 alpha3: swe
@@ -17,6 +17,11 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Sweden
 names_strong:
   - Sweden
+  - Sverige
+  - Sverige rike
+  - Kingdom of Sweden
+  - Konungariket Sverige
+  - Kungariket Sverige
 names_weak:
   - Šwēdija
   - 스웨덴  # seuweden
@@ -43,7 +48,6 @@ names_weak:
   - Швеция # Šveciâ
   - Huuswidi
   - Швеци  # Šveci
-  - Sverige
   - स्वीडन
   - Swedɛ̀n
   - ስዊድን
@@ -61,7 +65,6 @@ names_weak:
   - سویډن
   - Suedia
   - Orílẹ́ède Swidini
-  - Kingdom of Sweden
   - સ્વીડન
   - sswid
   - Svezie

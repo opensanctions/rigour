@@ -1,5 +1,5 @@
 name: Czechoslovakia
-full_name: Czechoslovakia
+full_name: Czechoslovak Socialist Republic
 region: Europe
 subregion: Central Europe
 qid: Q33946
@@ -22,10 +22,9 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Czechoslovakia
 names_strong:
   - Czechoslovakia
+  - Československo
 names_weak:
   - Czecho-Slovakia
   - Česko-Slovensko
-  - Československo
-  - Czechoslovak Socialist Republic
   - Czechoslovak Republic
   - Czechoslovakian

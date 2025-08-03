@@ -1,5 +1,5 @@
 name: Abkhazia (Occupied Georgia)
-full_name: Abkhazia (Occupied Georgia)
+full_name: Autonomous Republic of Abkhazia (Occupied Georgia)
 region: Asia
 subregion: Western Asia
 qid: Q31354462
@@ -17,14 +17,17 @@ summary: >-
   It is located within the Republic of Georgia, and its strive for independence has
   met with Russian attempts to destabilise Georgian sovereignty.
 names_strong:
-  - Abkhazia (Occupied Georgia)
-names_weak:
   - Abkhazia
+  - Autonomous Republic of Abkhazia
+  - Abkhazian Autonomous Republic
+  - Abkhazian Autonomous Republic of Georgia
+  - Abkhazian Republic
+  - Republic of Abkhazia
+  - Abkhazian Republic of Georgia
+names_weak:
   - აფხაზეთი  # apkhazeti
   - Respublika Abkhaziya
-  - Autonomous Republic of Abkhazia
   - GEAB
-  - Republic of Abkhazia
   - Abkhazian
   - АБХАЗИЯ            # ABHAZIÂ
   - Республика Абхазия # Respublika Abhaziâ

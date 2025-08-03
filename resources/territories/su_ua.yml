@@ -12,4 +12,7 @@ successors:
   - ua
 names_strong:
   - Ukrainian SSR
-names_weak: []
+names_weak:
+  - Soviet Ukraine
+  - Украинская ССР                                   # Ukrainskaâ SSR
+  - Украинская Советская Социалистическая Республика # Ukrainskaâ Sovetskaâ Socialističeskaâ Respublika

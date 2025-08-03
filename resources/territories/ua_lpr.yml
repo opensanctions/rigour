@@ -18,9 +18,10 @@ summary: >-
   by Russia. The LPR was infiltrated by Russian-backed paramilitaries in 2014, and
   it initially operated as a breakaway state until it was annexed by Russia in 2022.
 names_strong:
-  - Luhansk (Occupied Ukraine)
-names_weak:
+  - Luhansk
   - Luhansk People's Republic
+  - Lugansk People's Republic
+  - LPR
+names_weak:
   - Луга́нская                       # Lugánskaâ
   - Луга́нская Наро́дная Респу́блика # Lugánskaâ Naródnaâ Respúblika
-  - Luhansk

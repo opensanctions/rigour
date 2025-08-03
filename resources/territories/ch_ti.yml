@@ -8,4 +8,10 @@ parent: ch
 qid: Q12724
 names_strong:
   - Ticino
-names_weak: []
+  - Tessin
+  - Tessin
+  - Ticino (Switzerland)
+  - Ticino (Svizzera)
+  - Ticino (Schweiz)
+names_weak:
+  - Lugano

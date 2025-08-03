@@ -1,5 +1,5 @@
 name: East Germany
-full_name: East Germany
+full_name: German Democratic Republic
 region: Europe
 subregion: Central Europe
 qid: Q16957
@@ -17,12 +17,11 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/East_Germany
 names_strong:
   - East Germany
+  - DDR
 names_weak:
   - Германская Демократическая Республика  # Germanskaâ Demokratičeskaâ Respublika
   - DDDE
   - Germany, Democratic Republic (GDR)
-  - DDR
-  - German Democratic Republic
   - GDR
   - FORMER GERMAN DEMOCRATIC REPUBLIC
   - Deutsche Demokratische Republik

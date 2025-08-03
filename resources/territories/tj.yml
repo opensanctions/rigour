@@ -1,5 +1,5 @@
 name: Tajikistan
-full_name: Tajikistan
+full_name: Republic of Tajikistan
 region: Asia
 subregion: Central Asia
 alpha3: tjk
@@ -14,16 +14,24 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Tajikistan
 names_strong:
   - Tajikistan
+  - Republic of Tajikistan
+  - Tojikiston
+  - Tājikistān
+  - Таджикистан # Tadžikistan
+  - تاجیکستان # Tājikistan
+  - Тәжікстан # Təžíkstan
+  - Таджыкистан # Tadžikistan
+  - Таджикистан # Tadžikistan
 names_weak:
   - Таџикистан  # Tad̂ikistan
   - Таджыкістан # Tadžykístan
   - ทาจิกิสถาน
   - طاجيكستان
-  - tadjikistaŋ
+  - tadjikistaŋ # Tadžikistan
   - Tazikistan
-  - טג׳יקיסטן
-  - Tasikitani
-  - Tadšikistan
+  - טג׳יקיסטן   # Təžíkstan
+  - Tasikitani  # Tadžykistan
+  - Tadšikistan # Tadžikistan
   - Taazikiistäan
   - Tajikisitaani
   - Taġikistan
@@ -43,7 +51,6 @@ names_weak:
   - TJK
   - ტაჯიკეთი    # tʼajikʼeti
   - Tadschikistahn
-  - تاجیکستان
   - Tajikistaan
   - Tajikistan nutome
   - Ujikistani
@@ -72,7 +79,6 @@ names_weak:
   - Taidigeastàn
   - Tajikithtani
   - Tádzsikisztán
-  - Тәжікстан   # Təžíkstan
   - Tažikistan
   - Tadzikisətáŋ
   - Tadikistani
@@ -97,20 +103,17 @@ names_weak:
   - Τατζικιστάν # Tatzikistán
   - 塔吉克
   - Tajikisitaŋ
-  - Republic of Tajikistan
   - ତାଜିକିସ୍ଥାନ୍
   - ටජිකිස්තානය
   - តាជីគីស្តង់
   - Tajikistaŋ
   - Տաջիկստան   # Taǰikstan
   - Tajiquistão
-  - Tojikiston
   - Taxiquistán
   - Tádžikistán
   - Tayikistán
   - تاجکِستان
-  - Таджикистан # Tadžikistan
-  - Тажикистан # Tažikistan
+  - Тажикистан  # Tažikistan
   - 塔吉克斯坦
   - Tazikisita
-  - Тожикистон # Tožikiston
+  - Тожикистон  # Tožikiston

@@ -1,5 +1,5 @@
 name: Somalia
-full_name: Somalia
+full_name: Federal Republic of Somalia
 region: Africa
 subregion: Eastern Africa
 alpha3: som
@@ -16,6 +16,7 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Somalia
 names_strong:
   - Somalia
+  - جمهورية الصومال الفيدرالية
 names_weak:
   - Somaliab
   - Somàlia
@@ -104,6 +105,5 @@ names_weak:
   - Emetab Somalia
   - Սոմալի # Somali
   - i -Somalia
-  - Federal Republic of Somalia
   - Somali Democratic Republic
   - Сомалия # Somaliâ

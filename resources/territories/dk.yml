@@ -1,5 +1,5 @@
 name: Denmark
-full_name: Denmark
+full_name: Kingdom of Denmark
 region: Europe
 subregion: Northern Europe
 alpha3: dnk
@@ -19,6 +19,9 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Denmark
 names_strong:
   - Denmark
+  - Danmark
+  - Danemark
+  - Denemarken
 names_weak:
   - Danəmárəg
   - Denmakhi
@@ -31,7 +34,6 @@ names_weak:
   - डेनमार्क
   - Дані́ѧ  # Daní́ѧ
   - Dɛnɨmà
-  - Danemark
   - Dania
   - i -Denmark
   - دانمارک
@@ -46,9 +48,7 @@ names_weak:
   - დანია # dania
   - Denimaki
   - Hudenmaki
-  - Denemarken
   - Udenimaka
-  - Danmark
   - Dánmárku
   - Danimarka
   - ڈینٛمارٕک
@@ -67,7 +67,6 @@ names_weak:
   - الدانمرك
   - دنمارک
   - ଡେନମାର୍କ
-  - Kingdom of Denmark
   - Denmarki
   - Kenemaka
   - Dánsko

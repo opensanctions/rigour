@@ -9,4 +9,10 @@ is_jurisdiction: true
 parent: ca
 names_strong:
   - Prince Edward Island
-names_weak: []
+names_weak:
+  - Prince Edward Island, Canada
+  - Prince Edward Island, Canada (PE)
+  - Prince Edward Island, CA
+  - Prince Edward Island (CA)
+  - PE, Canada
+  - PEI, Canada

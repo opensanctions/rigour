@@ -1,7 +1,6 @@
 # pip install ruamel.yaml
-from normality import slugify_text, latinize_text, squash_spaces
-from normality.cleaning import remove_unsafe_chars
-from rigour.names.pick import pick_case
+from typing import Optional
+from normality import slugify_text, latinize_text, normalize
 from rigour.text.scripts import is_latin, can_latinize
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedSeq
@@ -17,11 +16,17 @@ yaml.default_flow_style = False
 yaml.indent(mapping=2, sequence=2, offset=2)
 
 
+def global_norm(text: str) -> Optional[str]:
+    """Normalize text for global use."""
+    return normalize(text, lowercase=True)
+
+
 # def load_country_labels():
 #     with open(PATH, "r", encoding="utf-8") as f:
 #         data = yaml.load(f)
 #     return data
 
+global_names = {}
 
 # cc_labels = load_country_labels()
 for terr_file in sorted(TERR_DIR.glob("*.yml")):
@@ -83,6 +88,10 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
         for name in terr["names_weak"]:
             if name in strong_names:
                 terr["names_weak"].remove(name)
+            elif name == terr.get("name", ""):
+                terr["names_weak"].remove(name)
+            elif name == terr.get("full_name", ""):
+                terr["names_weak"].remove(name)
         for i, name in enumerate(terr["names_weak"]):
             if is_latin(name):
                 continue
@@ -90,5 +99,26 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
                 latin = latinize_text(name)
                 terr["names_weak"].yaml_add_eol_comment(latin, i)
 
+        all_labels = set()
+        all_labels.add(terr.get("name"))
+        all_labels.add(terr.get("full_name"))
+        all_labels.update([str(n) for n in terr["names_strong"]])
+        all_labels.update([str(n) for n in terr["names_weak"]])
+        for gname in all_labels:
+            if gname is None:
+                continue
+            normed = global_norm(gname)
+            if normed is None:
+                continue
+            if normed not in global_names:
+                global_names[normed] = set()
+            global_names[normed].add(cc)
+
     with open(terr_file, "w", encoding="utf-8") as f:
         yaml.dump(terr, f)
+
+for normed, codes in global_names.items():
+    if len(codes) < 2:
+        continue
+    codes = sorted(codes)
+    print(f"{normed} => {', '.join(codes)}")

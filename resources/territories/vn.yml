@@ -1,5 +1,5 @@
 name: Vietnam
-full_name: Viet Nam
+full_name: Socialist Republic of Vietnam
 region: Asia
 subregion: South-eastern Asia
 alpha3: vnm
@@ -21,6 +21,10 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Vietnam
 names_strong:
   - Vietnam
+  - Việt Nam
+  - Cộng hòa xã hội chủ nghĩa Việt Nam
+  - Việt Nam Dân chủ Cộng hòa
+  - Viet nam
 names_weak:
   - ꗲꕇꖮꔃꕞ
   - Viyetiname
@@ -37,7 +41,6 @@ names_weak:
   - ویٹِنام
   - Vietnamese
   - Виетнам  # Vietnam
-  - Socialist Republic of Vietnam
   - Viyetinaamu
   - Vjetnama
   - فيتنام
@@ -48,7 +51,6 @@ names_weak:
   - વિયેતનામ
   - Viɛtnam
   - Fietnam
-  - Việt Nam
   - 베트남 # beteunam
   - Viet-Nam, Democratic Republic of
   - Uvietinamu
@@ -77,7 +79,6 @@ names_weak:
   - Viëtnam
   - Вʼєтнам # Vʼêtnam
   - Vjetnamo
-  - Cộng hòa xã hội chủ nghĩa Việt Nam
   - Vijetnam
   - ベトナム
   - Vìɛ̀dnâm

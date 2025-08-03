@@ -1,5 +1,5 @@
 name: Estonia
-full_name: Estonia
+full_name: Republic of Estonia
 region: Europe
 subregion: Northern Europe
 alpha3: est
@@ -17,6 +17,11 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Estonia
 names_strong:
   - Estonia
+  - Eesti
+  - Eesti Vabariik
+  - Estland
+  - Estonie
+  - Estonian
 names_weak:
   - ଏସ୍ତୋନିଆ
   - এস্তোনিয়া
@@ -24,7 +29,6 @@ names_weak:
   - اسٹونیا
   - استونیا
   - एस्टोनिया
-  - Estland
   - ਇਸਟੋਨੀਆ
   - எஸ்டோனியா
   - إستونيا
@@ -38,8 +42,6 @@ names_weak:
   - Эстония # Éstoniâ
   - Äßland
   - Eestland
-  - Estonie
-  - Estonian
   - Isṭunya
   - استونی
   - Esetoní
@@ -65,7 +67,6 @@ names_weak:
   - 爱沙尼亚
   - Ɛsitóninya
   - ኤስቶኒያ
-  - Eesti
   - Észtország
   - ཨིསྟོ་ནི་ཡ།
   - Εσθονία # Esthonía
@@ -90,7 +91,6 @@ names_weak:
   - An Eastóin
   - ꗡꔻꕿꕇꕰ
   - Estonija
-  - Republic of Estonia
   - အက်စတိုးနီးယား
   - Estonïi
   - Estònia

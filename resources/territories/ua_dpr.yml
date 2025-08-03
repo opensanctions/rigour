@@ -18,9 +18,9 @@ summary: >-
   infiltrated by Russian-backed paramilitaries in 2014, and it initially operated
   as a breakaway state until it was annexed by Russia in 2022.
 names_strong:
-  - Donetsk (Occupied Ukraine)
-names_weak:
-  - Донецька  # Donecʹka
-  - Donetsk People's Republic
-  - Донецкая Народная Республика # Doneckaâ Narodnaâ Respublika
   - Donetsk
+  - Donetsk People's Republic
+  - DPR
+names_weak:
+  - Донецька                     # Donecʹka
+  - Донецкая Народная Республика # Doneckaâ Narodnaâ Respublika

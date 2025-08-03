@@ -26,6 +26,8 @@ class Territory(object):
         self._successors: List[str] = data.get("successors", [])
         self._parent: Optional[str] = data.get("parent")
         self._see: List[str] = data.get("see", [])
+        self.names_strong: List[str] = data.get("names_strong", [])
+        self.names_weak: List[str] = data.get("names_weak", [])
 
     @property
     def parent(self) -> Optional["Territory"]:

@@ -17,13 +17,19 @@ summary: >-
   of Russian persons and companies involved in the aggression.
 names_strong:
   - Ukraine
+  - Ukrainian
+  - Ukrayina
+  - Ukraïna
+  - Украïна # Ukraína
+  - Украйна # Ukrajna
+  - Ukraïne
 names_weak:
   - អ៊ុយក្រែន
   - Ukraina
   - ꖳꖴꔓꘋ
   - אוקראינה
-  - Yukreini
-  - ཡུ་ཀརེན
+  - Yukreini # Ukraïna
+  - ཡུ་ཀརེན # Ukrajna
   - Ikrɛni
   - Ukren
   - Ukrainians
@@ -35,7 +41,7 @@ names_weak:
   - de Ukra’iine
   - Ukərɛ́n
   - أوكرانيا
-  - Донецька область  # Donecʹka oblastʹ
+  - Донецька область # Donecʹka oblastʹ
   - Ukranya
   - Yukileini
   - ୟୁକ୍ରାଇନ୍
@@ -46,7 +52,6 @@ names_weak:
   - Ukureini
   - 우크라이나  # ukeulaina
   - Украйн # Ukrajn
-  - Ukrainian
   - Ukɛrɛni
   - Ուկրաինա # Owkraina
   - Ucraina
@@ -84,7 +89,6 @@ names_weak:
   - ukilɛ́ɛn
   - Ucrania
   - Úkraína
-  - Украйна # Ukrajna
   - אוקראַינע
   - Emetab Ukrainie
   - Ukrainian State

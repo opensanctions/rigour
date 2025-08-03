@@ -9,4 +9,9 @@ is_jurisdiction: true
 parent: ca
 names_strong:
   - Quebec
-names_weak: []
+names_weak:
+  - QUEBEC, CANADA
+  - Québec, Canada
+  - Québec (Canada)
+  - Québec, Canada (QC)
+  - Québec, CA

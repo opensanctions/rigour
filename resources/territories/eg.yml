@@ -1,5 +1,5 @@
 name: Egypt
-full_name: Egypt
+full_name: Arab Republic of Egypt
 region: Africa
 subregion: Northern Africa
 alpha3: egy
@@ -20,11 +20,19 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Egypt
 names_strong:
   - Egypt
+  - Arab Republic of Egypt
+  - جمهورية مصر العربية
+  - جمهورية مصر
+  - Misr
+  - Misr al-‘Arabiyya
+  - Misr al-‘Arabīyah
+  - Misr al-‘Arabia
+  - Misr al-‘Arabīya
+  - Misr al-‘Arabiyah
 names_weak:
   - Orílẹ́ède Égípítì
   - Ejypta
   - Ehíbətɛn
-  - Arab Republic of Egypt
   - египетска  # egipetska
   - Misili
   - Египат # Egipat
@@ -133,7 +141,6 @@ names_weak:
   - Egitto
   - EGY
   - Egypti
-  - Misr
   - Ägypten
   - ഈജിപ്ത്
   - 埃及

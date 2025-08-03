@@ -10,4 +10,13 @@ is_jurisdiction: true
 is_historical: false
 names_strong:
   - Brčko District
-names_weak: []
+  - Brčko
+names_weak:
+  - Brčko Distrikt
+  - Brčko Distrikt (Bosnia and Herzegovina)
+  - Brčko Distrikt (BiH)
+  - Brčko Distrikt (FBiH)
+  - Brčko Distrikt (Federation of Bosnia and Herzegovina)
+  - Бродски округ       # Brodski okrug
+  - Бродски округ (БиХ) # Brodski okrug (BiH)
+  - Бродски округ (ФБиХ) # Brodski okrug (FBiH)

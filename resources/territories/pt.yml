@@ -1,5 +1,5 @@
 name: Portugal
-full_name: Portugal
+full_name: Portuguese Republic
 region: Europe
 subregion: Southern Europe
 alpha3: prt
@@ -22,6 +22,7 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Portugal
 names_strong:
   - Portugal
+  - República Portuguesa
 names_weak:
   - Portugalija
   - போர்ச்சுக்கல்
@@ -127,7 +128,6 @@ names_weak:
   - Portugän
   - Portekiz
   - ポルトガル
-  - Portuguese Republic
   - Portugaliya
   - Португал   # Portugal
   - fɔrətugɛ́s

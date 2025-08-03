@@ -1,5 +1,5 @@
 name: Belgium
-full_name: Belgium
+full_name: Kingdom of Belgium
 region: Europe
 subregion: Western Europe
 alpha3: bel
@@ -16,6 +16,8 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Belgium
 names_strong:
   - Belgium
+  - Belgique
+  - Belgien
 names_weak:
   - Orílẹ́ède Bégíọ́mù
   - Beleziki
@@ -79,7 +81,6 @@ names_weak:
   - ꗩꕀꗚꘋ
   - Ububiligi
   - Gwlad Belg
-  - Kingdom of Belgium
   - Belgiummi
   - ቤልጄም
   - Bɛɛdzwùm
@@ -90,7 +91,6 @@ names_weak:
   - เบลเยียม
   - Belzik
   - Huubelgiji
-  - Belgique
   - Белгија # Belgiǰa
   - Belgjikë
   - بەلژیک
@@ -102,7 +102,6 @@ names_weak:
   - Белги # Belgi
   - Belsch
   - Pelesiume
-  - Belgien
   - ແບລຊິກ
   - Belġju
   - Bhelgium

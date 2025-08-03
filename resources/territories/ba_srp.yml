@@ -12,4 +12,7 @@ other_qids:
   - Q16761250
 names_strong:
   - Republika Srpska
-names_weak: []
+names_weak:
+  - Република Српска       # Republika Srpska
+  - Република Српска (БиХ) # Republika Srpska (BiH)
+  - Republika Srpska (BiH)

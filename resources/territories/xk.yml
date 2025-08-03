@@ -1,5 +1,5 @@
 name: Kosovo
-full_name: Kosovo
+full_name: Republic of Kosovo
 region: Europe
 subregion: Southern Europe
 qid: Q1246
@@ -16,6 +16,10 @@ summary: >-
   recognized by most Western governments.
 names_strong:
   - Kosovo
+  - Republic of Kosovo
+  - Kosova
+  - Kosova e pavarur
+  - Republika e Kosovës
 names_weak:
   - Kosowo
   - Republika Kosovo
@@ -24,8 +28,6 @@ names_weak:
   - Република Косово  # Republika Kosovo
   - Kosovan
   - Kosovës
-  - Republika e Kosovës
   - Kosovar
   - Kosovon
   - Republic of Kosova
-  - Republic of Kosovo

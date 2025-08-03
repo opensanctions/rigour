@@ -1,5 +1,5 @@
 name: Poland
-full_name: Poland
+full_name: Republic of Poland
 region: Europe
 subregion: Central Europe
 alpha3: pol
@@ -19,6 +19,11 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Poland
 names_strong:
   - Poland
+  - Republic of Poland
+  - Polska
+  - Polonia
+  - Polsko
+  - Pologne
 names_weak:
   - ፖላንድ
   - ਪੋਲੈਂਡ
@@ -27,7 +32,6 @@ names_weak:
   - POL
   - ⴱⵓⵍⵓⵏⵢⴰ
   - Mpoloni
-  - Republic of Poland
   - Lenkija
   - Ba Lan
   - A’ Phòlainn
@@ -43,7 +47,6 @@ names_weak:
   - Pollando
   - Poland nutome
   - Poloni
-  - Polsko
   - Polani
   - ပိုလန်
   - Polşa
@@ -66,7 +69,6 @@ names_weak:
   - Gwlad Pwyl
   - Польща # Polʹŝa
   - لهستون
-  - Pologne
   - Լեհաստան # Lehastan
   - Pulunya
   - Pologna
@@ -87,7 +89,6 @@ names_weak:
   - لهستان
   - ಪೋಲ್ಯಾಂಡ್
   - ᏉᎳᏂ
-  - Polska
   - Pulonia
   - போலந்து
   - Polish
@@ -100,7 +101,6 @@ names_weak:
   - Polònia
   - ប៉ូឡូញ
   - An Pholainn
-  - Polonia
   - Booland
   - פּוילן
   - Pólandi

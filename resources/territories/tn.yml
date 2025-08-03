@@ -1,5 +1,5 @@
 name: Tunisia
-full_name: Tunisia
+full_name: Republic of Tunisia
 region: Africa
 subregion: Northern Africa
 alpha3: tun
@@ -17,6 +17,9 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Tunisia
 names_strong:
   - Tunisia
+  - Tunis
+  - Tunisian Republic
+  - Republic of Tunisia
 names_weak:
   - Utunisia
   - Tunezja
@@ -82,11 +85,9 @@ names_weak:
   - Tunisko
   - 突尼西亞
   - Tuinisea
-  - Tunis
   - Emetab Tunisia
   - Tuneesia
   - Tuneesie
-  - Republic of Tunisia
   - Tunisie
   - An Túinéis
   - Tùnisìà

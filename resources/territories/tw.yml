@@ -17,6 +17,10 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Taiwan
 names_strong:
   - Taiwan
+  - Republic of China
+  - 中華民國 # Zhōnghuá Mínguó
+  - 中華民國臺灣 # Zhōnghuá Mínguó Táiwān
+  - 中華民國臺灣省 # Zhōnghuá Mínguó Táiwān Shěng
 names_weak:
   - i -Taiwan
   - Taiwan, Province of China
@@ -41,7 +45,6 @@ names_weak:
   - ታይዋን
   - Taiwāns
   - 台灣
-  - Republic of China
   - तैवान
   - Hutaiwani
   - Tâiwâni

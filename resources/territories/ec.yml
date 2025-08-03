@@ -1,5 +1,5 @@
 name: Ecuador
-full_name: Ecuador
+full_name: Republic of Ecuador
 region: Americas
 subregion: South America
 alpha3: ecu
@@ -15,6 +15,7 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Ecuador
 names_strong:
   - Ecuador
+  - República del Ecuador
 names_weak:
   - ئېكۋادور
   - Ecuadoran
@@ -27,7 +28,6 @@ names_weak:
   - เอกวาดอร์
   - Ekwateer
   - ECU
-  - Republic of Ecuador
   - Ekwatór
   - Ikwaṭur
   - Ekvadoro

@@ -1,5 +1,5 @@
 name: Türkiye
-full_name: Türkiye
+full_name: Republic of Türkiye
 region: Asia
 subregion: Western Asia
 alpha3: tur
@@ -13,6 +13,11 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Turkey
 names_strong:
   - Türkiye
+  - Turkey
+  - Republic of Türkiye
+  - Republic of Turkey
+  - Türkiye Cumhuriyeti
+  - Türkiye, Republic of
 names_weak:
   - Turquie
   - تُرکی
@@ -81,15 +86,14 @@ names_weak:
   - Turcja
   - თურქეთი # turketi
   - તુર્કી
-  - Турцыя # Turcyâ
-  - Turkey
+  - Турцыя    # Turcyâ
   - Туреччина # Tureččina
   - تركيا
   - Tuluki
   - Turiki
   - Twrci
   - THE TURKISH REPUBLIC
-  - Թուրքիա # Tʻurkʻia
+  - Թուրքիա   # Tʻurkʻia
   - Turkish
   - Турк    # Turk
   - Турција # Turciǰa
@@ -124,7 +128,6 @@ names_weak:
   - TÃ¼rkiye
   - ਤੁਰਕੀ
   - Turki
-  - Republic of Turkey
   - ទួរគី
   - Turcija
   - ⵜⵓⵔⴽⵢⴰ

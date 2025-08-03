@@ -1,5 +1,5 @@
 name: Germany
-full_name: Germany
+full_name: Federal Republic of Germany
 region: Europe
 subregion: Central Europe
 alpha3: deu
@@ -22,6 +22,8 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Germany
 names_strong:
   - Germany
+  - Deutschland
+  - Bundesrepublik Deutschland
 names_weak:
   - Wujelumani
   - Iyášiča Makȟóčhe
@@ -34,7 +36,6 @@ names_weak:
   - જર્મની
   - Germanujo
   - Алманија  # Almaniǰa
-  - Federal Republic of Germany
   - Jaman
   - DEU
   - Niemcy
@@ -53,7 +54,6 @@ names_weak:
   - Vācija
   - München
   - Германія # Germaníâ
-  - Deutschland
   - Németország
   - Duitsland
   - Ujerumani
@@ -61,7 +61,6 @@ names_weak:
   - djɛrman
   - ജർമനി
   - Němska
-  - Bundesrepublik Deutschland
   - Germaniýa
   - Njemačka
   - Alemani

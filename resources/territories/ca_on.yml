@@ -7,4 +7,6 @@ is_jurisdiction: true
 parent: ca
 names_strong:
   - Ontario
-names_weak: []
+names_weak:
+  - ONTARIO, CANADA
+  - Ontarie

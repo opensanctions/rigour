@@ -1,5 +1,5 @@
 name: Haiti
-full_name: Haiti
+full_name: Republic of Haiti
 region: Americas
 subregion: Caribbean
 alpha3: hti
@@ -18,11 +18,13 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Haiti
 names_strong:
   - Haiti
+  - Hayti
+  - République d'Haïti
+  - Repiblik Ayiti
 names_weak:
   - ཧེ་ཊི
   - ⵀⴰⵢⵜⵉ
   - เฮติ
-  - Republic of Haiti
   - Sǝr Haiti
   - ହାଇତି
   - Хаити  # Haiti
@@ -77,7 +79,6 @@ names_weak:
   - ഹെയ്തി
   - Uhaiti
   - Hǎetì
-  - Hayti
   - Haiti nutome
   - Ayiti
   - ᎮᎢᏘ

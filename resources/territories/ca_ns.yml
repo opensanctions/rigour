@@ -7,4 +7,5 @@ is_jurisdiction: true
 parent: ca
 names_strong:
   - Nova Scotia
-names_weak: []
+names_weak:
+  - NOVA SCOTIA, CANADA

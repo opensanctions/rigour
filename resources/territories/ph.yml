@@ -1,5 +1,5 @@
 name: Philippines
-full_name: Philippines
+full_name: Republic of the Philippines
 region: Asia
 subregion: South-eastern Asia
 alpha3: phl
@@ -15,6 +15,10 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Philippines
 names_strong:
   - Philippines
+  - Republic of the Philippines
+  - Republika ng Pilipinas
+  - Filipinas
+  - Republika Filipina
 names_weak:
   - Filipini nutome
   - Phillipines
@@ -89,7 +93,6 @@ names_weak:
   - ఫిలిప్పీన్స్
   - ᎠᏂᏈᎵᎩᏃ
   - פֿיליפּינען
-  - Filipinas
   - Filipin
   - Филиппины # Filippiny
   - Filippiinnat
@@ -98,7 +101,6 @@ names_weak:
   - الفلبين
   - filipíin
   - Filipines
-  - Republika ng Pilipinas
   - Филлипин  # Fillipin
   - filipǝ́n
   - Filippiinit
@@ -109,7 +111,6 @@ names_weak:
   - Filippyne
   - Filippine
   - i -Philippines
-  - Republic of the Philippines
   - फिलीपिन्स
   - Philippine
   - Filipine

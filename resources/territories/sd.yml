@@ -1,5 +1,5 @@
 name: Sudan
-full_name: Sudan
+full_name: Republic of the Sudan
 region: Africa
 subregion: Northern Africa
 alpha3: sdn
@@ -17,6 +17,11 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Sudan
 names_strong:
   - Sudan
+  - جمهورية السودان
+  - جمهورية السودان الفيدرالية
+  - Republic of the Sudan
+  - جمهورية السودان الديمقراطية
+  - جمهورية السودان الاتحادية
 names_weak:
   - সুদান
   - An tSúdáin
@@ -105,5 +110,4 @@ names_weak:
   - Σουδάν # Soudán
   - Husudani
   - Avannarleqsudan
-  - Republic of the Sudan
   - ሱዳን

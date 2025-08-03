@@ -1,5 +1,5 @@
 name: Israel
-full_name: Israel
+full_name: State of Israel
 region: Asia
 subregion: Western Asia
 alpha3: isr
@@ -18,6 +18,9 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Israel
 names_strong:
   - Israel
+  - State of Israel
+  - Yisra'el
+  - Yisraeli
 names_weak:
   - ئیسرائیل
   - ꕑꕇꔻꕞꔤꕞ
@@ -64,7 +67,6 @@ names_weak:
   - Israel nutome
   - ísilayɛ́l
   - اسرائیل
-  - State of Israel
   - Ísrael
   - Israely
   - इस्त्राइल

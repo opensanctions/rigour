@@ -1,5 +1,5 @@
 name: Chile
-full_name: Chile
+full_name: Republic of Chile
 region: Americas
 subregion: South America
 alpha3: chl
@@ -14,6 +14,7 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Chile
 names_strong:
   - Chile
+  - República de Chile
 names_weak:
   - Tšiili
   - Kili
@@ -51,7 +52,6 @@ names_weak:
   - Cayile
   - syili
   - Silí
-  - Republic of Chile
   - ཅི་ལི
   - Shili
   - Чили # Čili
