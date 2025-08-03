@@ -922,6 +922,11 @@ org_symbols:
     - академии
     - академиии
     - академиию
+  adviser:
+    - adviser
+    - advisor
+    - advisers
+    - advisors
   institution:
     - учреждение
     - institution
