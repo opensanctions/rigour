@@ -794,6 +794,9 @@ org_symbols:
   mgmt:
     - management
     - мanagement
+    - gestion
+    - gestión
+    - gerenciamento
     - менеджмент
     - упрвлению
     - менеджмента
@@ -811,7 +814,6 @@ org_symbols:
     - Epicheirisi
     - 管理
     - 辖
-    - 机场
   fed:
     - federal
     - федеральное
