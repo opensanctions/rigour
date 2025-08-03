@@ -1,5 +1,5 @@
 name: Kyrgyzstan
-full_name: Kyrgyzstan
+full_name: Kyrgyz Republic
 region: Asia
 subregion: Central Asia
 alpha3: kgz
@@ -12,14 +12,19 @@ summary: >-
   lying in the Tian Shan and Pamir mountain ranges.
 wikipedia_url: https://en.wikipedia.org/wiki/Kyrgyzstan
 names_strong:
-  - Kyrgyzstan
+  - Кыргыз Республикасы
+  - Кыргыз Республикасы # Kyrgyz Respublikasy
+  - Кыргызстан # Kyrgyzstan
+  - Qırğız Respublikası
+  - Qırğız Respublikasy
+  - Кыргыз Республикасы # Kyrgyz Respublikasy
 names_weak:
-  - Quirguicistán
-  - ཁིར་གིཛ་སྟཱན།
-  - Κιργιστάν  # Kirgistán
+  - Quirguicistán # Kyrgyz Respublikasy
+  - ཁིར་གིཛ་སྟཱན། # Kyrgyz Respublikasy
+  - Κιργιστάν     # Kirgistán
   - Emetab Kyrgyzstan
   - किर्गिस्थान
-  - Киргизи # Kirgizi
+  - Киргизи       # Kirgizi
   - Kirigistan
   - ኪርጊስታን
   - Киргизька Республіка # Kirgizʹka Respublíka
@@ -47,14 +52,13 @@ names_weak:
   - คีร์กีซสถาน
   - قرغزستان
   - Kirigizistani
-  - кирги́зїа # kirgízí̈a
+  - кирги́зїа     # kirgízí̈a
   - Kìdzisɨ̀tân
   - Kirigizithtani
   - 吉爾吉斯
   - Kirigizitùaan
   - Kirghizstan
-  - Қирғизистон # Kˌirġiziston
-  - Кыргызстан # Kyrgyzstan
+  - Қирғизистон   # Kˌirġiziston
   - Kiordistan
   - Kyrgyzstán
   - Kırgızistan
@@ -63,7 +67,7 @@ names_weak:
   - قرغیزستان
   - Kirgistan
   - Kirgiisischtan
-  - Киргистан  # Kirgistan
+  - Киргистан     # Kirgistan
   - Kirigizisitaani
   - An Chirgeastáin
   - Quirguistão
@@ -116,14 +120,12 @@ names_weak:
   - قرغيزستان
   - قىرغىزىستان
   - Kyrgzstan
-  - KGZ
   - Kīkisitani
   - ཀིར་གིས་སཏཱན
   - Kirguistán
   - Қырғызстан # Kˌyrġyzstan
   - කිර්ගිස්තානය
   - Kyrgyz SSR (now Kyrgyzstan)
-  - Kyrgyz Republic
   - Kirghiz
   - kilikisistáŋ
   - Kyrgyzstanni

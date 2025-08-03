@@ -10,8 +10,7 @@ is_country: false
 is_ftm: true
 is_jurisdiction: true
 parent: au
-names_strong:
-  - Heard and McDonald Islands
+names_strong: []
 names_weak:
   - ହାର୍ଡ ଦ୍ବୀପପୁଞ୍ଜ ଏବଂ ମ୍ୟାକଡୋନାଲ୍ ଦ୍ବୀପପୁଞ୍ଜ
   - Heardov ostrov a McDonaldove ostrovy
@@ -88,7 +87,6 @@ names_weak:
   - האי הרד ואיי מקדונלד
   - ᎲᏗ ᎤᎦᏚᏛᎢ ᎠᎴ ᎺᎩᏓᎾᎵᏗ ᏚᎦᏚᏛᎢ
   - हर्ड आणि मॅक्डोनाल्ड बेटे
-  - HMD
   - Hērda un Makdonalda salas
   - Νήσοι Χερντ και Μακντόναλντ      # Nḗsoi Chernt kai Makntónalnt
   - የኧርድ እና የማክዶናልድ ደሴቶች

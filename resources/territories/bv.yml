@@ -8,8 +8,7 @@ is_country: false
 is_ftm: true
 is_jurisdiction: true
 parent: dk
-names_strong:
-  - Bouvet Island
+names_strong: []
 names_weak:
   - Буве аралы  # Buve araly
   - Insula Bouvet
@@ -46,7 +45,6 @@ names_weak:
   - Bouvetön
   - Bouvetowa kupa
   - Bouvet -eiland
-  - BVT
   - Islla Bouvet
   - Bouvet uhartea
   - Буветын Арлууд # Buvetyn Arluud

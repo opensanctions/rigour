@@ -7,8 +7,7 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ca
-names_strong:
-  - Prince Edward Island
+names_strong: []
 names_weak:
   - Prince Edward Island, Canada
   - Prince Edward Island, Canada (PE)

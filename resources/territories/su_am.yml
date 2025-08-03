@@ -10,7 +10,6 @@ is_historical: true
 parent: suhh
 successors:
   - am
-names_strong:
-  - Armenian SSR
+names_strong: []
 names_weak:
   - Soviet Armenia

@@ -12,8 +12,7 @@ is_country: false
 is_ftm: true
 is_jurisdiction: true
 parent: nl
-names_strong:
-  - Bonaire, Sint Eustatius and Saba
+names_strong: []
 names_weak:
   - オランダ領カリブ
   - Karibysk Nederlân
@@ -86,7 +85,6 @@ names_weak:
   - Կարիբյան Նիդեռլանդներ # Karibyan Nideṙlandner
   - Karayip Hollanda
   - कैरिबियन नीदरलैंड
-  - BES
   - Holland Karib -térség
   - Nizozemski Karibi
   - كارىب دېڭىزى گوللاندىيە

@@ -5,6 +5,5 @@ is_ftm: false
 is_jurisdiction: true
 parent: us
 qid: Q1415
-names_strong:
-  - Indiana
+names_strong: []
 names_weak: []

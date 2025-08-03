@@ -1,5 +1,5 @@
 name: Iraq
-full_name: Iraq
+full_name: Republic of Iraq
 region: Asia
 subregion: Western Asia
 alpha3: irq
@@ -14,7 +14,12 @@ summary: >-
   federal parliamentary republic that consists of 19 governorates.
 wikipedia_url: https://en.wikipedia.org/wiki/Iraq
 names_strong:
-  - Iraq
+  - جمهورية العراق
+  - Al-Jumhūrīyah al-‘Irāqīyah
+  - Al-Irāq
+  - Irak
+  - Irāk
+  - Iraki
 names_weak:
   - ഇറാഖ്
   - ཨི་རག།
@@ -56,9 +61,7 @@ names_weak:
   - Èlâkɨ̀
   - Iroq
   - អ៊ីរ៉ាក់
-  - Irak
   - Iraak
-  - Iraki
   - ایٖراق
   - Irág
   - ඉරාකය
@@ -74,7 +77,6 @@ names_weak:
   - Ӏиракъ # Ӏirakʺ
   - Ioràc
   - ଇରାକ୍
-  - IRQ
   - ཨི་རཱཀ
   - Emetab Iraq
   - Orílɛ́ède Iraki
@@ -88,7 +90,6 @@ names_weak:
   - Ciraaq
   - ئىراق
   - Irāka
-  - Republic of Iraq
   - Irák
   - עיראק
   - ኢራቅ

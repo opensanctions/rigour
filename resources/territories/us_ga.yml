@@ -1,4 +1,4 @@
-name: Georgia
+name: Georgia (USA)
 full_name: Georgia (United States of America)
 qid: Q1428
 is_country: false
@@ -6,5 +6,7 @@ is_ftm: false
 is_jurisdiction: true
 parent: us
 names_strong:
-  - Georgia
-names_weak: []
+  - Georgia (U.S. state)
+  - Georgia, USA
+names_weak:
+  - Atlanta, GA

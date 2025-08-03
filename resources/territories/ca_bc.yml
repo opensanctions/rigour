@@ -5,10 +5,8 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ca
-names_strong:
-  - British Columbia
+names_strong: []
 names_weak:
-  - BRITISH COLUMBIA
   - British Columbia (Province)
   - British Columbia, Canada
   - British Columbia, CA

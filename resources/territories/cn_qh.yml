@@ -6,6 +6,5 @@ is_jurisdiction: true
 name: Qinghai
 parent: cn
 qid: Q45833
-names_strong:
-  - Qinghai
+names_strong: []
 names_weak: []

@@ -14,10 +14,9 @@ summary: >-
   to the east, and Iran and the Azerbaijani exclave of Nakhchivan to the south.
 wikipedia_url: https://en.wikipedia.org/wiki/Armenia
 names_strong:
-  - Armenia
   - Հայաստան # Hayastan
 names_weak:
-  - Armènia
+  - Armènia  # Hayastan
   - Armenië  # Hayastan
   - Orílẹ́ède Améníà
   - Armenii
@@ -30,12 +29,12 @@ names_weak:
   - Ermenistan
   - ఆర్మేనియా
   - ཨར་མི་ནི་ཡ
-  - Арменія # Armeníâ
+  - Арменія  # Armeníâ
   - Armenujo
   - Ermənistan
   - Armenia nutome
   - Orílɛ́ède Améníà
-  - 아르메니아 # aleumenia
+  - 아르메니아    # aleumenia
   - ארמניה
   - Amɛni
   - Arumeniya
@@ -46,7 +45,7 @@ names_weak:
   - Armenien
   - Arrmeenije
   - Armenija
-  - Αρμενία # Armenía
+  - Αρμενία  # Armenía
   - አርሜኒያ
   - ⴰⵔⵎⵉⵏⵢⴰ
   - Armenie
@@ -75,7 +74,6 @@ names_weak:
   - Armênia
   - Armeniab
   - Armeni
-  - ARM
   - Armenian
   - Arəménia
   - อาร์เมเนีย
@@ -87,13 +85,13 @@ names_weak:
   - i -Armenia
   - Amenia
   - Arimeni
-  - Армен # Armen
+  - Армен    # Armen
   - Armaniston
   - Armeenie
   - Améniya
   - Arimeniya
   - Emetab Armenia
-  - Армения # Armeniâ
+  - Армения  # Armeniâ
   - Republic of Armenia
   - Вірменія   # Vírmeníâ
   - Эрмалойчоь # Érmalojčoʹ

@@ -8,7 +8,6 @@ is_jurisdiction: true
 summary: >-
   The global region is used in OpenSanctions to denote datasets and entities which
   can not be scoped to any more specific single national or supranational region.
-names_strong:
-  - Global
+names_strong: []
 names_weak:
   - Worldwide

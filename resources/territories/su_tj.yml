@@ -10,6 +10,5 @@ is_historical: true
 parent: suhh
 successors:
   - tj
-names_strong:
-  - Tajik SSR
+names_strong: []
 names_weak: []

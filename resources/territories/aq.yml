@@ -9,8 +9,7 @@ is_ftm: true
 is_jurisdiction: true
 other_codes:
   - nq
-names_strong:
-  - Antarctica
+names_strong: []
 names_weak:
   - Antarktika
   - အန္တာတိက
@@ -29,7 +28,6 @@ names_weak:
   - אנטארקטיקה
   - Rothera
   - అంటార్కటికా
-  - ATA
   - Antárktis
   - ਅੰਟਾਰਕਟਿਕਾ
   - Անտարկտիդա # Antarktida

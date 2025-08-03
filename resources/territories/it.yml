@@ -1,5 +1,5 @@
 name: Italy
-full_name: Italy
+full_name: Republic of Italy
 region: Europe
 subregion: Southern Europe
 alpha3: ita
@@ -17,7 +17,10 @@ summary: >-
   consists of a peninsula delimited by the Alps and surrounded by several islands.
 wikipedia_url: https://en.wikipedia.org/wiki/Italy
 names_strong:
-  - Italy
+  - Repubblica Italiana
+  - Italia
+  - Italian Republic
+  - Itàlia
 names_weak:
   - อิตาลี
   - Ìtalìà
@@ -66,7 +69,6 @@ names_weak:
   - Італія # Ítalíâ
   - Ítalía
   - Italia nutome
-  - Italian Republic
   - Emetab Italy
   - Yr Eidal
   - အီတလီ
@@ -76,7 +78,6 @@ names_weak:
   - Olaszország
   - איטליה
   - Taliansko
-  - Italia
   - ئیتاڵی
   - ITLAY
   - ཨི་ཀྲར་ལི་
@@ -101,7 +102,6 @@ names_weak:
   - ئیتالیا
   - İtaliya
   - ཨི་ཊ་ལི
-  - Itàlia
   - Sardinia
   - ઇટાલી
   - Orílẹ́ède Italiyi
@@ -111,7 +111,6 @@ names_weak:
   - An Iodáil
   - Sicilian
   - ᏲᎶ
-  - ITA
   - Италия # Italiâ
   - Itália
   - اٹلی

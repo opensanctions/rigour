@@ -7,8 +7,7 @@ parent: io
 is_country: false
 is_ftm: true
 is_jurisdiction: false
-names_strong:
-  - Diego Garcia
+names_strong: []
 names_weak:
   - Dieqo-Qarsia
   - डिएगो गार्सिया

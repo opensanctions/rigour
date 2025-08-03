@@ -6,6 +6,5 @@ is_jurisdiction: true
 name: Schwyz
 parent: ch
 qid: Q12433
-names_strong:
-  - Schwyz
+names_strong: []
 names_weak: []

@@ -16,7 +16,13 @@ summary: >-
   south.
 wikipedia_url: https://en.wikipedia.org/wiki/Japan
 names_strong:
-  - Japan
+  - Nippon-koku
+  - Nihon-koku
+  - Nippon
+  - Nihon
+  - 日本国 # Nippon-koku
+  - 日本 # Nihon
+  - 日本国 # Nihon-koku
 names_weak:
   - Fukuoka
   - جاپان
@@ -40,7 +46,6 @@ names_weak:
   - Chiba
   - Kitakyushu
   - जपान
-  - 日本
   - Kyoto
   - Japānija
   - Hujapani
@@ -169,7 +174,6 @@ names_weak:
   - Gyapaani
   - Zapɔn
   - जापान
-  - JPN
   - Yokohama
   - Hiroshima
   - יאַפּאַן

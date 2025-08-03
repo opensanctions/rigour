@@ -5,7 +5,6 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ae
-names_strong:
-  - Fujairah
+names_strong: []
 names_weak:
   - FUJAIRAH MEDIA FREE ZONE

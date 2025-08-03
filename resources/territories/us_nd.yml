@@ -5,6 +5,5 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
-names_strong:
-  - North Dakota
+names_strong: []
 names_weak: []

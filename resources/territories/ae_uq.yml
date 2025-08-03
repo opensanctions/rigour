@@ -7,8 +7,7 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ae
-names_strong:
-  - Umm Al Quwain
+names_strong: []
 names_weak:
   - Umm al-Quwain
   - أم القيوين

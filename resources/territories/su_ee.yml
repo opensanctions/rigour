@@ -10,6 +10,5 @@ is_historical: true
 parent: suhh
 successors:
   - ee
-names_strong:
-  - Estonian SSR
+names_strong: []
 names_weak: []

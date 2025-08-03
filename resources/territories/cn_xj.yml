@@ -10,5 +10,8 @@ is_country: false
 is_ftm: false
 is_jurisdiction: false
 names_strong:
-  - Xinjiang
+  - 新疆维吾尔自治区
+  - Sinkiang Uighur Autonomous Region
+  - Sinkiang Uyghur Autonomous Region
+  - Xinjiang Uygur Autonomous Region
 names_weak: []

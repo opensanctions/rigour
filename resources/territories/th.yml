@@ -10,7 +10,6 @@ is_country: true
 is_ftm: true
 is_jurisdiction: true
 names_strong:
-  - Thailand
   - ประเทศไทย
   - Prathet Thai
 names_weak:
@@ -32,7 +31,6 @@ names_weak:
   - 泰國
   - Tāilandan
   - థాయిలాండ్
-  - THA
   - An Téalainn
   - Tayilandi
   - Gwlad Thai

@@ -16,13 +16,12 @@ summary: >-
   Azerbaijan to the southeast.
 wikipedia_url: https://en.wikipedia.org/wiki/Georgia_(country)
 names_strong:
-  - Georgia
   - Sakartvelo
   - საქართველო
   - Gruzia
 names_weak:
   - Xeorxia
-  - Geoorgie
+  - Geoorgie # sakartvelo
   - Zeorzia  # sakartvelo
   - Georgian
   - Gürcüstan
@@ -45,14 +44,13 @@ names_weak:
   - A’ Chairtbheil
   - Orílẹ́ède Gọgia
   - jurjya
-  - GEO
   - Grusiyän
   - ਜਾਰਜੀਆ
   - Socialist Soviet Republic Of Georgia
-  - Грузија # Gruziǰa
+  - Грузија  # Gruziǰa
   - Gruzínsko
   - Gjeorgji
-  - 조지아 # jojia
+  - 조지아      # jojia
   - 格魯吉亞
   - Gyɔgyea
   - Georgiya
@@ -68,7 +66,7 @@ names_weak:
   - जॉर्जिया
   - Gruzie
   - Gjeorgjie
-  - Վրաստան # Vrastan
+  - Վրաստան  # Vrastan
   - Jeorrjije
   - Jojiya
   - 喬治亞共和國
@@ -78,12 +76,12 @@ names_weak:
   - Seōsia
   - Georgia nutome
   - Gruusia
-  - Грузия # Gruziâ
+  - Грузия   # Gruziâ
   - Gyogya
   - Tbilisian
   - ဂျော်ဂျီယာ
   - گورجستان
-  - Грузія # Gruzíâ
+  - Грузія   # Gruzíâ
   - Georgie
   - Emetab Georgia
   - جارجیا
@@ -95,7 +93,7 @@ names_weak:
   - Gruziya
   - גרוזיע
   - جارجِیا
-  - Γεωργία # Geōrgía
+  - Γεωργία  # Geōrgía
   - ጆርጂያ
   - Jyurjya
   - Democratic Republic of Georgia
@@ -112,7 +110,7 @@ names_weak:
   - Ġeorġja
   - Geòrgia
   - i -Georgia
-  - Гүрж # Gürž
+  - Гүрж     # Gürž
   - Georgía
   - Horə́yia
   - Ujojia

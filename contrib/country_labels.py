@@ -52,12 +52,20 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
         #     labels.add(version)
 
         # Process the territory data as needed
+        used_names = set()
         name = terr.get("name")
         if name in labels:
             labels.remove(name)
+        if name is not None:
+            used_names.add(name.lower())
         full_name = terr.get("full_name")
         if full_name in labels:
             labels.remove(full_name)
+        if full_name is not None:
+            used_names.add(full_name.lower())
+        iso3 = terr.get("alpha3")
+        if iso3 is not None:
+            used_names.add(iso3.lower())
         if "names_strong" in terr:
             strong = terr["names_strong"]
             for name in strong:
@@ -67,6 +75,9 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
         else:
             terr["names_strong"] = CommentedSeq()
             terr["names_strong"].append(name)
+        for name in terr["names_strong"]:
+            if name.lower() in used_names:
+                terr["names_strong"].remove(name)
         for i, name in enumerate(terr["names_strong"]):
             if is_latin(name):
                 continue
@@ -74,7 +85,9 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
                 latin = latinize_text(name)
                 terr["names_weak"].yaml_add_eol_comment(latin, i)
 
-        strong_names = list(terr["names_strong"])
+        for sname in terr["names_strong"]:
+            used_names.add(sname.lower())
+
         if "names_weak" in terr:
             weak = terr["names_weak"]
             for name in weak:
@@ -86,11 +99,7 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
         for label in labels:
             terr["names_weak"].append(label)
         for name in terr["names_weak"]:
-            if name in strong_names:
-                terr["names_weak"].remove(name)
-            elif name == terr.get("name", ""):
-                terr["names_weak"].remove(name)
-            elif name == terr.get("full_name", ""):
+            if name.lower() in used_names:
                 terr["names_weak"].remove(name)
         for i, name in enumerate(terr["names_weak"]):
             if is_latin(name):
