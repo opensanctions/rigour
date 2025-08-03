@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Neuchâtel
 parent: ch
 qid: Q12738
+names_strong:
+  - Neuchâtel
+names_weak: []

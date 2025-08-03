@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Kamchatka Krai
 parent: ru
 qid: Q7948
+names_strong:
+  - Kamchatka Krai
+names_weak: []

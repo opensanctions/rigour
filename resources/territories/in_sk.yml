@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Sikkim
 parent: in
 qid: Q1505
+names_strong:
+  - Sikkim
+names_weak: []

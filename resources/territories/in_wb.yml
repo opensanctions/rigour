@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: West Bengal
 parent: in
 qid: Q1356
+names_strong:
+  - West Bengal
+names_weak: []

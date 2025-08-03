@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Khakassia
 parent: ru
 qid: Q6543
+names_strong:
+  - Khakassia
+names_weak: []

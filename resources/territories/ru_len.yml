@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Leningrad Oblast
 parent: ru
 qid: Q2191
+names_strong:
+  - Leningrad Oblast
+names_weak: []

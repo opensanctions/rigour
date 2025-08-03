@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Tambov Oblast
 parent: ru
 qid: Q3550
+names_strong:
+  - Tambov Oblast
+names_weak: []

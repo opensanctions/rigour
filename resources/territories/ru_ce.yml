@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Chechnya
 parent: ru
 qid: Q5187
+names_strong:
+  - Chechnya
+names_weak: []

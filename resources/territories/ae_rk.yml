@@ -7,3 +7,6 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ae
+names_strong:
+  - Ras Al Khaimah
+names_weak: []

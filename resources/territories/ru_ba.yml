@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Bashkortostan
 parent: ru
 qid: Q5710
+names_strong:
+  - Bashkortostan
+names_weak: []

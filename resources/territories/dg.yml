@@ -7,3 +7,18 @@ parent: io
 is_country: false
 is_ftm: true
 is_jurisdiction: false
+names_strong:
+  - Diego Garcia
+names_weak:
+  - Dieqo-Qarsia
+  - डिएगो गार्सिया
+  - Диего-Гарсия  # Diego-Garsiâ
+  - דייגו גרסיה
+  - Диего Гарсия # Diego Garsiâ
+  - Atol Diego García
+  - 디에고가르시아섬     # diegogaleusiaseom
+  - Дієго-Гарсія # Díêgo-Garsíâ
+  - Դիեգո-Գարսիա # Diego-Garsia
+  - Ντιέγκο Γκαρσία # Ntiénko Nkarsía
+  - Дыега Гарсія # Dyega Garsíâ
+  - ディエゴガルシア島

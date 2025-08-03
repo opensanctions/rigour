@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Manipur
 parent: in
 qid: Q1193
+names_strong:
+  - Manipur
+names_weak: []

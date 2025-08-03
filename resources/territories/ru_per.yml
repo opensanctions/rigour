@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Perm Krai
 parent: ru
 qid: Q5400
+names_strong:
+  - Perm Krai
+names_weak: []

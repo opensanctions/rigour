@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Dagestan
 parent: ru
 qid: Q5118
+names_strong:
+  - Dagestan
+names_weak: []

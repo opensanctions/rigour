@@ -7,3 +7,7 @@ is_jurisdiction: false
 see:
   - in
   - pk
+names_strong:
+  - Kashmir
+names_weak:
+  - Pakistan Occupied Kashmir

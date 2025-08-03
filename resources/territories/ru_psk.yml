@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Pskov Oblast
 parent: ru
 qid: Q2218
+names_strong:
+  - Pskov Oblast
+names_weak: []

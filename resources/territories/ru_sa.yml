@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Sakha
 parent: ru
 qid: Q6605
+names_strong:
+  - Sakha
+names_weak: []

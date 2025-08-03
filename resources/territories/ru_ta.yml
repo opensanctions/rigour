@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Tatarstan
 parent: ru
 qid: Q5481
+names_strong:
+  - Tatarstan
+names_weak: []

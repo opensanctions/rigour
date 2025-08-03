@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Tamil Nadu
 parent: in
 qid: Q1445
+names_strong:
+  - Tamil Nadu
+names_weak: []

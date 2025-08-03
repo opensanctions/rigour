@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Bern
 parent: ch
 qid: Q11911
+names_strong:
+  - Bern
+names_weak: []

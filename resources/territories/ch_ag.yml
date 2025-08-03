@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Aargau
 parent: ch
 qid: Q11972
+names_strong:
+  - Aargau
+names_weak: []

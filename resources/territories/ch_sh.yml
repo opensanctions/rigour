@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Schaffhausen
 parent: ch
 qid: Q12697
+names_strong:
+  - Schaffhausen
+names_weak: []

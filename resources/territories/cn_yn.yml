@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Yunnan
 parent: cn
 qid: Q43194
+names_strong:
+  - Yunnan
+names_weak: []

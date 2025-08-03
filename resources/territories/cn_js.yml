@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Jiangsu
 parent: cn
 qid: Q16963
+names_strong:
+  - Jiangsu
+names_weak: []

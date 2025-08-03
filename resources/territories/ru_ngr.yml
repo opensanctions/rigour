@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Novgorod Oblast
 parent: ru
 qid: Q2240
+names_strong:
+  - Novgorod Oblast
+names_weak: []

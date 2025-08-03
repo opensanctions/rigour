@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Haryana
 parent: in
 qid: Q1174
+names_strong:
+  - Haryana
+names_weak: []

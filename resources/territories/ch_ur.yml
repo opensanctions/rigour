@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Uri
 parent: ch
 qid: Q12404
+names_strong:
+  - Uri
+names_weak: []

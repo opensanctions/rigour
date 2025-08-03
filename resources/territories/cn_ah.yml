@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Anhui
 parent: cn
 qid: Q40956
+names_strong:
+  - Anhui
+names_weak: []

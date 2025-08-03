@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Basel-Stadt
 parent: ch
 qid: Q12172
+names_strong:
+  - Basel-Stadt
+names_weak: []

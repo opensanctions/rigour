@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Jharkhand
 parent: in
 qid: Q1184
+names_strong:
+  - Jharkhand
+names_weak: []

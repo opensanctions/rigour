@@ -7,3 +7,10 @@ parent: pf
 is_country: false
 is_ftm: true
 is_jurisdiction: false
+names_strong:
+  - Clipperton Island
+names_weak:
+  - Клиппертон  # Klipperton
+  - Clipperton-Insel
+  - 克利珀顿岛
+  - Clipperton

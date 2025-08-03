@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Karachay-Cherkessia
 parent: ru
 qid: Q5328
+names_strong:
+  - Karachay-Cherkessia
+names_weak: []

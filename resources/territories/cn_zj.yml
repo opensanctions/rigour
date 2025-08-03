@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Zhejiang
 parent: cn
 qid: Q16967
+names_strong:
+  - Zhejiang
+names_weak: []

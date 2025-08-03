@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Obwalden
 parent: ch
 qid: Q12573
+names_strong:
+  - Obwalden
+names_weak: []

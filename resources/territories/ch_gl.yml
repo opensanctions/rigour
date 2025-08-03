@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Glarus
 parent: ch
 qid: Q11922
+names_strong:
+  - Glarus
+names_weak: []

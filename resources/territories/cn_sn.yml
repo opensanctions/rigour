@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Shaanxi
 parent: cn
 qid: Q47974
+names_strong:
+  - Shaanxi
+names_weak: []

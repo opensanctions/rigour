@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Maharashtra
 parent: in
 qid: Q1191
+names_strong:
+  - Maharashtra
+names_weak: []

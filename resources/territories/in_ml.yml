@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Meghalaya
 parent: in
 qid: Q1195
+names_strong:
+  - Meghalaya
+names_weak: []

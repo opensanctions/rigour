@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Jura
 parent: ch
 qid: Q12755
+names_strong:
+  - Jura
+names_weak: []

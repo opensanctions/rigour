@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Hubei
 parent: cn
 qid: Q46862
+names_strong:
+  - Hubei
+names_weak: []

@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Primorsky Krai
 parent: ru
 qid: Q4341
+names_strong:
+  - Primorsky Krai
+names_weak: []

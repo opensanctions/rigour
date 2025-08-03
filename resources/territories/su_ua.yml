@@ -10,3 +10,6 @@ is_historical: true
 parent: suhh
 successors:
   - ua
+names_strong:
+  - Ukrainian SSR
+names_weak: []

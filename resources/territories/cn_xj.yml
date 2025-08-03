@@ -9,3 +9,6 @@ other_qids:
 is_country: false
 is_ftm: false
 is_jurisdiction: false
+names_strong:
+  - Xinjiang
+names_weak: []

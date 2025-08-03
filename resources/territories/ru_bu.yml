@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Buryatia
 parent: ru
 qid: Q6809
+names_strong:
+  - Buryatia
+names_weak: []

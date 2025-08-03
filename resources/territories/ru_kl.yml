@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Kalmykia
 parent: ru
 qid: Q3953
+names_strong:
+  - Kalmykia
+names_weak: []

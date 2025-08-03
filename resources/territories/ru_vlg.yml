@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Vologda Oblast
 parent: ru
 qid: Q2015
+names_strong:
+  - Vologda Oblast
+names_weak: []

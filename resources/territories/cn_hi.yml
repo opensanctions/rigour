@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Hainan
 parent: cn
 qid: Q42200
+names_strong:
+  - Hainan
+names_weak: []

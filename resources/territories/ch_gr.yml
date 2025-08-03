@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Grisons
 parent: ch
 qid: Q11925
+names_strong:
+  - Grisons
+names_weak: []

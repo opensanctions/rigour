@@ -14,3 +14,10 @@ is_country: false
 is_ftm: false
 is_jurisdiction: false
 is_historical: true
+names_strong:
+  - Netherlands Antilles
+names_weak:
+  - De Nederlandske Antiller
+  - NETHERLAND ANTILLES
+  - DUTCH ANTILLES
+  - Antilles yr Iseldiroedd

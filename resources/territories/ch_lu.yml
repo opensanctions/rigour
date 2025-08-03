@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Lucerne
 parent: ch
 qid: Q12121
+names_strong:
+  - Lucerne
+names_weak: []

@@ -8,3 +8,6 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 is_historical: false
+names_strong:
+  - Brčko District
+names_weak: []

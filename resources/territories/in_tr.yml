@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Tripura
 parent: in
 qid: Q1363
+names_strong:
+  - Tripura
+names_weak: []

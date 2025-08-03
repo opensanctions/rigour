@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Tuva
 parent: ru
 qid: Q960
+names_strong:
+  - Tuva
+names_weak: []

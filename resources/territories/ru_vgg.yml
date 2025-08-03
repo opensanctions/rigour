@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Volgograd Oblast
 parent: ru
 qid: Q3819
+names_strong:
+  - Volgograd Oblast
+names_weak: []

@@ -11,3 +11,6 @@ parent: suhh
 successors:
   - md
   - md-pmr
+names_strong:
+  - Moldavian SSR
+names_weak: []

@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Sichuan
 parent: cn
 qid: Q19770
+names_strong:
+  - Sichuan
+names_weak: []

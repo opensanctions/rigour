@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Heilongjiang
 parent: cn
 qid: Q19206
+names_strong:
+  - Heilongjiang
+names_weak: []

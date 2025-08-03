@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Basel-Landschaft
 parent: ch
 qid: Q12146
+names_strong:
+  - Basel-Landschaft
+names_weak: []

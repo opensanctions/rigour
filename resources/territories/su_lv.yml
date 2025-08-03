@@ -10,3 +10,6 @@ is_historical: true
 parent: suhh
 successors:
   - lv
+names_strong:
+  - Latvian SSR
+names_weak: []

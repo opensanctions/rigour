@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Appenzell Ausserrhoden
 parent: ch
 qid: Q12079
+names_strong:
+  - Appenzell Ausserrhoden
+names_weak: []

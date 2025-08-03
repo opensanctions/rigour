@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Chuvashia
 parent: ru
 qid: Q5466
+names_strong:
+  - Chuvashia
+names_weak: []

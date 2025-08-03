@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Madhya Pradesh
 parent: in
 qid: Q1188
+names_strong:
+  - Madhya Pradesh
+names_weak: []

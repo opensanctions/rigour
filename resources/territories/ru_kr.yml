@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Karelia
 parent: ru
 qid: Q1914
+names_strong:
+  - Karelia
+names_weak: []

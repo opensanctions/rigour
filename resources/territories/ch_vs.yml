@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Valais
 parent: ch
 qid: Q834
+names_strong:
+  - Valais
+names_weak: []

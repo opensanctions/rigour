@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Mordovia
 parent: ru
 qid: Q5340
+names_strong:
+  - Mordovia
+names_weak: []

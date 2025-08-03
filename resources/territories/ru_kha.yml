@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Khabarovsk Krai
 parent: ru
 qid: Q7788
+names_strong:
+  - Khabarovsk Krai
+names_weak: []

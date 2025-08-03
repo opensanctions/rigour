@@ -8,3 +8,6 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 is_historical: false
+names_strong:
+  - Federation of Bosnia and Herzegovina
+names_weak: []

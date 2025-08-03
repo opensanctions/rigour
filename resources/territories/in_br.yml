@@ -6,3 +6,6 @@ is_jurisdiction: true
 name: Bihar
 parent: in
 qid: Q1165
+names_strong:
+  - Bihar
+names_weak: []
