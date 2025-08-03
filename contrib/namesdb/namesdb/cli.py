@@ -6,7 +6,7 @@ from rich.table import Table
 from rich.console import Console
 from normality import latinize_text
 
-from namesdb.db import engine, store_mapping, skip_mapping
+from namesdb.db import engine, regex_groups, store_mapping, skip_mapping
 from namesdb.db import get_groups, get_forms, all_mappings
 from namesdb.cleanup import block_groups, block_phrases
 
@@ -47,6 +47,25 @@ def lookup_form(form: str) -> None:
             for mapping_id, form, skip in sorted(get_forms(conn, group)):
                 status = "skip" if skip else ""
                 table.add_row(group, str(mapping_id), form, latinize_text(form), status)
+        Console().print(table)
+
+
+@cli.command("grep")
+@click.option("--mark-skip", "-k", is_flag=True, help="Mark all matches as skipped.")
+@click.argument("pattern", type=str)
+def grep_forms(pattern: str, mark_skip: bool = False) -> None:
+    with engine.begin() as conn:
+        table = Table()
+        table.add_column("Group", style="magenta")
+        table.add_column("ID", style="blue")
+        table.add_column("Form", style="green")
+        table.add_column("Latinized", style="yellow")
+        table.add_column("Skip", style="red")
+        for group, mapping_id, form, skip in regex_groups(conn, pattern):
+            status = "skip" if skip else ""
+            table.add_row(group, str(mapping_id), form, latinize_text(form), status)
+            if mark_skip and not skip:
+                skip_mapping(conn, mapping_id)
         Console().print(table)
 
 
