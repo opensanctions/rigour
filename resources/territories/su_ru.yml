@@ -12,5 +12,8 @@ is_historical: true
 parent: suhh
 successors:
   - ru
-names_strong: []
+names_strong:
+  - RSFSR
+  - РСФСР # RSFSR
+  - Российская СФСР # Rossiyskaya SFSR
 names_weak: []

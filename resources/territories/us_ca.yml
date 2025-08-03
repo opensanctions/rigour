@@ -5,5 +5,15 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
-names_strong: []
-names_weak: []
+names_strong:
+  - CALIFORNIA, U.S.A.
+names_weak:
+  - California, USA
+  - California (USA)
+  - Californië
+  - Kalifornien
+  - Kaliforniya
+  - Kalifornië
+  - Kalifornija
+  - Kalifornië (SŠA) # Kalifornija (SŠA)
+  - Kalifornien (SŠA) # Kaliforniya (SŠA)

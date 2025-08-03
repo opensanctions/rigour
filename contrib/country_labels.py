@@ -18,7 +18,8 @@ yaml.indent(mapping=2, sequence=2, offset=2)
 
 def global_norm(text: str) -> Optional[str]:
     """Normalize text for global use."""
-    return normalize(text, lowercase=True)
+    # return normalize(text, lowercase=True)
+    return squash_spaces(text.lower())
 
 
 def loc_norm(text: str) -> str:

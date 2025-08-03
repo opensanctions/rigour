@@ -13,9 +13,10 @@ is_historical: true
 parent: suhh
 successors:
   - by
-names_strong: []
+names_strong:
+  - BSSR
+  - Белорусская ССР # Belorusskaâ SSR
+  - Белорусская Советская Социалистическая Республика # Belorusskaâ Sovetskaâ Socialističeskaâ Respublika
+  - БССР # BSSR
 names_weak:
   - Belarusian SSR
-  - Белорусская ССР                                   # Belorusskaâ SSR
-  - Белорусская Советская Социалистическая Республика # Belorusskaâ Sovetskaâ Socialističeskaâ Respublika
-  - БССР                                              # BSSR

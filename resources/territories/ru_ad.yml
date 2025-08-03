@@ -6,5 +6,9 @@ is_jurisdiction: true
 name: Adygea
 parent: ru
 qid: Q3734
-names_strong: []
+names_strong:
+  - Адыгея
+  - Адыгея (Россия) # Adygeja (Rossija)
+  - Республика Адыгея # Respublika Adygeja
+  - Республика Адыгея (Россия) # Respublika Adygeja (Rossija)
 names_weak: []

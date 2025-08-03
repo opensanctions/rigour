@@ -6,5 +6,7 @@ is_jurisdiction: true
 name: Vladimir Oblast
 parent: ru
 qid: Q2702
-names_strong: []
+names_strong:
+  - Владимирская область # Vladimirskaja oblastʹ
+  - Владимирская область (Россия) # Vladimirskaja oblastʹ (Rossija)
 names_weak: []

@@ -5,7 +5,8 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
-names_strong: []
+names_strong:
+  - ALASKA, U.S.A.
 names_weak:
   - Alaska (USA)
   - Alaska, USA

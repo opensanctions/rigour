@@ -6,5 +6,7 @@ is_jurisdiction: true
 name: Tomsk Oblast
 parent: ru
 qid: Q5884
-names_strong: []
+names_strong:
+  - Томская область # Tomskaja oblastʹ
+  - Томская область (Россия) # Tomskaja oblastʹ (Rossija)
 names_weak: []

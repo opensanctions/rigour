@@ -6,5 +6,8 @@ is_jurisdiction: true
 name: Buryatia
 parent: ru
 qid: Q6809
-names_strong: []
+names_strong:
+  - Бурятия # Buriâtiâ
+  - Республика Бурятия # Respublika Buriâtiâ
+  - Республика Бурятия (Россия) # Respublika Buriâtiâ (Rossija)
 names_weak: []

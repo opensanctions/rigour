@@ -5,5 +5,10 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
-names_strong: []
-names_weak: []
+names_strong:
+  - HAWAII, U.S.A.
+  - Ha'waii
+names_weak:
+  - Honolulu
+  - Hawaii (USA)
+  - Hawaii, USA

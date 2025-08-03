@@ -7,5 +7,12 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
-names_strong: []
-names_weak: []
+names_strong:
+  - NEW YORK, U.S.A.
+  - New York, Usa
+  - NYC
+names_weak:
+  - New Yorker
+  - New York City
+  - Нью-Йорк       # Nʹû-Jork
+  - Нью-Йорк (США) # Nʹû-Jork (SŠA)

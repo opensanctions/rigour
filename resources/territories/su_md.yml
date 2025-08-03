@@ -11,5 +11,7 @@ parent: suhh
 successors:
   - md
   - md-pmr
-names_strong: []
+names_strong:
+  - MSSR
+  - Молдавская ССР # Moldavskaya SSR
 names_weak: []

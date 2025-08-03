@@ -5,5 +5,12 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
-names_strong: []
-names_weak: []
+names_strong:
+  - TENNESSEE, U.S.A.
+names_weak:
+  - Tennessee (USA)
+  - Tennessee, USA
+  - Tenesí
+  - Tenesí (Estados Unidos)
+  - Теннесси       # Tennessi
+  - Теннесси (США) # Tennessi (SŠA)

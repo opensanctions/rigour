@@ -6,5 +6,8 @@ is_jurisdiction: true
 name: Tatarstan
 parent: ru
 qid: Q5481
-names_strong: []
+names_strong:
+  - Татарстан # Tatarstan
+  - Республика Татарстан # Respublika Tatarstan
+  - Республика Татарстан (Россия) # Respublika Tatarstan (Rossija)
 names_weak: []

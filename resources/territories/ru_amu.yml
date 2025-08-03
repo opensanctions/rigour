@@ -6,5 +6,8 @@ is_jurisdiction: true
 name: Amur Oblast
 parent: ru
 qid: Q6886
-names_strong: []
+names_strong:
+  - Амурская область # Amurskaja oblastʹ
+  - Амурская область (Россия) # Amurskaja oblastʹ (Rossija)
+  - Амурская область (Российская Федерация) # Amurskaja oblastʹ (Rossijskaja Federacija)
 names_weak: []

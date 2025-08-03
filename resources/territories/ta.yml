@@ -9,5 +9,8 @@ other_codes:
 is_country: false
 is_ftm: true
 is_jurisdiction: false
-names_strong: []
-names_weak: []
+names_strong:
+  - Tristan
+names_weak:
+  - Тристан-да-Кунья              # Tristan-da-Kunʹâ
+  - Тристан-да-Кунья (Сент-Елена) # Tristan-da-Kunʹâ (Sent-Elena)

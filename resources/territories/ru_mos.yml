@@ -6,5 +6,7 @@ is_jurisdiction: true
 name: Moscow Oblast
 parent: ru
 qid: Q1697
-names_strong: []
+names_strong:
+  - Московская область # Moskovskaja oblastʹ
+  - Московская область (Россия) # Moskovskaja oblastʹ (Rossija)
 names_weak: []

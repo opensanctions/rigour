@@ -6,5 +6,8 @@ is_jurisdiction: true
 name: Mari El
 parent: ru
 qid: Q5446
-names_strong: []
+names_strong:
+  - Марий Эл # Mari El
+  - Республика Марий Эл # Respublika Mari El
+  - Республика Марий Эл (Россия) # Respublika Mari El (Rossija)
 names_weak: []

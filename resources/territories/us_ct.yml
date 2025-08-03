@@ -5,5 +5,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
-names_strong: []
-names_weak: []
+names_strong:
+  - CONNECTICUT, U.S.A.
+  - Connecticut, USA
+names_weak:
+  - Коннектикут       # Konnektikut
+  - Коннектикут (США) # Konnektikut (SŠA)
+  - Конактікут        # Konaktíkut
+  - Конактікут (США)  # Konaktíkut (SŠA)

@@ -6,5 +6,7 @@ is_jurisdiction: true
 name: Ulyanovsk Oblast
 parent: ru
 qid: Q5634
-names_strong: []
+names_strong:
+  - Ульяновская область # Uljanovskaja oblastʹ
+  - Ульяновская область (Россия) # Uljanovskaja oblastʹ (Rossija)
 names_weak: []

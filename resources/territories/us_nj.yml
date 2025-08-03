@@ -5,5 +5,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
-names_strong: []
-names_weak: []
+names_strong:
+  - NEW JERSEY, U.S.A.
+names_weak:
+  - New Jersey, USA
+  - New Jersey (USA)
+  - New Jersey (United States)
+  - Нью-Джерси       # Nʹû-Džersi
+  - Нью-Джерси (США) # Nʹû-Džersi (SŠA)

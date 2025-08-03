@@ -44,11 +44,13 @@ summary: >-
 names_strong:
   - USSR
   - УССР # USSR
+  - Советский Союз # Sovétskij Soûz
+  - Союз Советских Социалистических Республик # Soûz Sovétskih Socialistíčeskih Respúblik
 names_weak:
-  - Сою́з ССР        # Soû́z SSR
+  - Сою́з ССР # Soû́z SSR
   - Сове́тский Сою́з # Sovétskij Soû́z
-  - UdSSR            # USSR
-  - Soviet
+  - UdSSR     # Sovetskij Soûz
+  - Soviet    # Soûz Sovetskih Socialističeskih Respublik
   - Сою́з Сове́тских Социалисти́ческих Респу́блик # Soû́z Sovétskih Socialistíčeskih Respúblik
   - Russia (USSR)
   - SU
