@@ -679,6 +679,9 @@ org_symbols:
     - oil
     - petroleum
     - petrochemical
+    - aceite
+    - huile
+    - olje
     - нефтепереработка
     - neft
     - нефть
@@ -686,6 +689,7 @@ org_symbols:
     - нефтяная
     - нефтяной
     - زيت
+    - 石油
   steel:
     - steel
     - metal
