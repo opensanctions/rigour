@@ -19,6 +19,11 @@ EMOJI_PATTERN = re.compile(
     "\U0001f700-\U0001f77f" # alchemical symbols
     "\U0001f780-\U0001f7ff" # geometric shapes extended
     "\U0001f900-\U0001f9ff" # supplemental symbols and pictographs
+    # Musical symbols
+    "\U0001d100-\U0001d1ff" # musical symbols
+    "\U0001d200-\U0001d24f" # Ancient Greek musical notation
+    "\U0001d000-\U0001d0ff" # Byzantine musical symbols
+    "\U0001cf00-\U0001cfcf" # Znamenny musical notation
     # Mathematical, computing and technical symbols 
     "\U0002190-\U00021ff" # arrows
     "\U0002300-\U00023ff" # miscellaneous technical
@@ -30,11 +35,7 @@ EMOJI_PATTERN = re.compile(
     "\U0002200-\U00022ff" # mathematical operators and symbols
     "\U0002a00-\U0002aff" # supplemental mathematical operators
     "\U0001FB00-\U0001FBFF" # symbols for legacy computing
-    # Games, music, and esoteric symbols 
-    "\U0004dc0-\U0004dff" # Yijing hexagram symbols
-    "\U0001d100-\U0001d1ff" # musical symbols
-    "\U0001d300-\U0001d35f" # Tai Xuan Jing symbols
-    "\U0001d360-\U0001d37f" # counting rod numerals (used in ancient China, Japan, Korea, and Vietnam)
+    # Symbols used for games
     "\U0001f000-\U0001f02f" # Mahjong tiles
     "\U0001f030-\U0001f09f" # domino tiles
     "\U0001f0a0-\U0001f0ff" # playing cards
