@@ -86,6 +86,21 @@ def get_groups(conn: Connection, form: str) -> List[str]:
     return groups
 
 
+def regex_groups(conn: Connection, pattern: str) -> Set[Tuple[str, int, str, bool]]:
+    stmt = select(mapping_table)
+    stmt = stmt.filter(mapping_table.c.form.regexp_match(pattern))
+    forms: Set[Tuple[str, int, str, bool]] = set()
+    for row in conn.execute(stmt):
+        data = (
+            row._mapping["group"],
+            row._mapping["id"],
+            row._mapping["form"],
+            row._mapping["skip"],
+        )
+        forms.add(data)
+    return forms
+
+
 def get_forms(conn: Connection, group: str) -> Set[Tuple[int, str, bool]]:
     stmt = select(mapping_table)
     stmt = stmt.filter(mapping_table.c.group == group)
