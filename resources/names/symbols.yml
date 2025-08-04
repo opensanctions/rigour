@@ -423,13 +423,17 @@ org_symbols:
     - дом
   jail: # may want to combine with prison below
     - jail
+    - jailhouse
     - gaol
+    - gaolhouse
     - maison d'arrêt
     - cárcel
     - untersuchungshaftanstalt
     - tutkintavankila
-    - СИЗО
+    - 看守所
   prison: # may want to combine with jail above
+    - prison
+    - penitentiary
     - centre de détention
     - maison centrale
     - prisión
@@ -437,6 +441,8 @@ org_symbols:
     - vankila
     - gefängnis
     - тюрьма
+    - سجن
+    - 监狱
   royal:
     - royal
     - royale
