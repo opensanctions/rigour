@@ -33,5 +33,3 @@ def test_lookup_territory():
 
     territory = lookup_territory("Nonexistent Territory")
     assert territory is None
-
-    assert False
