@@ -430,6 +430,7 @@ org_symbols:
     - cárcel
     - untersuchungshaftanstalt
     - tutkintavankila
+    - СИЗО
     - 看守所
   prison: # may want to combine with jail above
     - prison
@@ -441,6 +442,7 @@ org_symbols:
     - vankila
     - gefängnis
     - тюрьма
+    - исправительная колония
     - سجن
     - 监狱
   royal:
