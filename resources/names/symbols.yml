@@ -427,12 +427,15 @@ org_symbols:
     - maison d'arrêt
     - cárcel
     - untersuchungshaftanstalt
+    - tutkintavankila
     - СИЗО
   prison: # may want to combine with jail above
     - centre de détention
     - maison centrale
     - prisión
-    - Gefängnis
+    - príosún
+    - vankila
+    - gefängnis
     - тюрьма
   royal:
     - royal
