@@ -421,6 +421,19 @@ org_symbols:
     - casa
     - dom
     - дом
+  jail: # may want to combine with prison below
+    - jail
+    - gaol
+    - maison d'arrêt
+    - cárcel
+    - untersuchungshaftanstalt
+    - СИЗО
+  prison: # may want to combine with jail above
+    - centre de détention
+    - maison centrale
+    - prisión
+    - Gefängnis
+    - тюрьма
   royal:
     - royal
     - royale
