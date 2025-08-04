@@ -1,5 +1,6 @@
 import logging
-from functools import cache
+from functools import cache, lru_cache
+from rapidfuzz.distance import Levenshtein
 from typing import Dict, Optional
 
 from rigour.territories.territory import Territory
@@ -82,7 +83,27 @@ def _get_territory_names() -> Dict[str, Territory]:
     return mapping
 
 
-def lookup_territory(text: str) -> Optional[Territory]:
+@lru_cache(maxsize=2**16)
+def _fuzzy_search(name: str) -> Optional[Territory]:
+    best_territory: Optional[Territory] = None
+    cutoff = int(len(name) * 0.3)
+    best_distance: Optional[int] = cutoff + 1
+    for cand, territory in _get_territory_names().items():
+        if len(cand) <= 4:
+            continue
+        distance = Levenshtein.distance(name, cand, score_cutoff=cutoff)
+        if distance < best_distance:
+            best_distance = distance
+            best_territory = territory
+    if best_distance is None:
+        return None
+    log.debug(
+        "Guessing country: %s -> %s (distance %d)", name, best_territory, best_distance
+    )
+    return best_territory
+
+
+def lookup_territory(text: str, fuzzy: bool = False) -> Optional[Territory]:
     """Lookup a territory by various codes and names.
 
     Args:
@@ -96,4 +117,9 @@ def lookup_territory(text: str) -> Optional[Territory]:
         return territory
     normalized_name = normalize_territory_name(text)
     names = _get_territory_names()
-    return names.get(normalized_name)
+    if normalized_name in names:
+        return names[normalized_name]
+    if fuzzy:
+        return _fuzzy_search(normalized_name)
+    log.debug("No territory found for %r", text)
+    return None
