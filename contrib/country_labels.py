@@ -4,7 +4,7 @@ from normality import slugify_text, latinize_text, normalize, squash_spaces
 from rigour.text.scripts import is_latin, can_latinize
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedSeq
-from ruamel.yaml.scalarstring import FoldedScalarString
+from ruamel.yaml.scalarstring import FoldedScalarString, DoubleQuotedScalarString
 from pathlib import Path
 
 
@@ -43,6 +43,8 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
         terr = yaml.load(f)
         if "summary" in terr:
             terr["summary"] = FoldedScalarString(terr.get("summary"))
+        if "parent" in terr and terr["parent"] == "no":
+            terr["parent"] = DoubleQuotedScalarString(terr.get("parent"))
 
         # lower = {}
         # for name in cc_labels.get(cc, []):

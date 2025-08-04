@@ -4,7 +4,7 @@ region: Europe
 subregion: Northern Europe
 alpha3: sjm
 qid: Q25231
-parent: no
+parent: "no"
 other_codes:
   - no-21
   - no-22

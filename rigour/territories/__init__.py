@@ -11,24 +11,21 @@ to retrieve territories by their codes or QIDs.
 """
 
 from functools import cache
-from typing import Dict, List, Optional
+from typing import List, Optional
 from rigour.territories.territory import Territory
+from rigour.territories.territory import get_index as _get_index
+from rigour.territories.lookup import lookup_by_identifier, lookup_territory
 from rigour.territories.util import clean_code
 
 
-@cache
-def _get_index() -> Dict[str, Territory]:
-    from rigour.data.territories.data import TERRITORIES
-
-    index: Dict[str, Territory] = {}
-    for code, data in TERRITORIES.items():
-        index[code] = Territory(index, code, data)
-    for territory in list(index.values()):
-        for other in territory.other_codes:
-            index[other] = territory
-        if territory.alpha3:
-            index[territory.alpha3] = territory
-    return index
+__all__ = [
+    "get_territory",
+    "get_territories",
+    "get_territory_by_qid",
+    "get_ftm_countries",
+    "lookup_by_identifier",
+    "lookup_territory",
+]
 
 
 def get_territory(code: str) -> Optional[Territory]:
