@@ -4,7 +4,7 @@ from normality.transliteration import latinize_text, _ascii_text
 from rigour.text.distance import levenshtein, dam_levenshtein, jaro_winkler
 from rigour.text.phonetics import soundex, metaphone
 from rigour.territories.territory import get_index
-from rigour.territories.lookup import _fuzzy_search
+from rigour.territories.lookup import lookup_territory
 from rigour.territories.lookup import _get_identifier_map, _get_territory_names
 from rigour.text.scripts import can_latinize_cp
 from rigour.names import normalize_name
@@ -34,5 +34,5 @@ def reset_caches() -> None:
     get_index.cache_clear()
     _get_identifier_map.cache_clear()
     _get_territory_names.cache_clear()
-    _fuzzy_search.cache_clear()
+    lookup_territory.cache_clear()
     gc.collect()
