@@ -245,6 +245,7 @@ org_symbols:
     - службы
     - служба
     - сервис
+    - услуг
     - обслуживания
   defence:
     - defence
@@ -434,6 +435,41 @@ org_symbols:
     - supply
     - supplies
     - supplier
+  tv:
+    - tv
+    - television
+    - telly
+    - télévision
+    - télé
+    - televisión
+    - tele
+    - televisioon
+    - тв
+    - televize
+    - televisio
+    - televisão
+    - televisi
+    - televisione
+    - televisjon
+    - telewizja
+    - televisheni
+    - televízia
+    - televizija
+    - televizyon
+    - televizor
+    - Fernsehen
+    - телеба́чення
+    - телевидение
+    - टेलीविज़न
+    - تلفاز
+    - تِلْفِزْيُون
+    - 텔레비전
+    - 텔레비죤
+    - 電視
+    - 电视
+    - テレビ
+    - টেলিভিশন
+    - দূরদর্শন
   equipment:
     - equipment
     - equipement
@@ -1271,6 +1307,33 @@ org_symbols:
     - проектировщица
     - проектировщицы
     - проектировщиц
+  hotel:
+    - hotel
+    - hotell
+    - hôtel
+    - albergo
+    - otel
+    - отель
+    - 호텔
+    - ホテル
+    - 酒店
+  wine:
+    - wine
+    - şarap 
+    - viini
+    - vin
+    - vinho
+    - vino
+    - wein
+    - wijn
+    - wino
+    - κρασί
+    - вино
+    - 와인
+    - ワイン
+    - 葡萄酒
+    - خمر
+    - نبيذ
   revolutionary:
     - revolutionary
     - revolutsioonilise
@@ -1290,6 +1353,26 @@ org_symbols:
     - революционная
     - революционные
     - революционных
+  theater:
+    - theater
+    - theatre
+    - divadlo
+    - teater
+    - teatteri
+    - théâtre
+    - teatro
+    - teatr
+    - tiyatro
+    - θέατρο
+    - театр
+    - театър
+    - थिएटर
+    - नाट्यशाला
+    - रंगमंच
+    - 극장
+    - مسرح
+    - 剧院
+    - 劇場
   committee:
     - committee
     - committees
@@ -1961,6 +2044,7 @@ org_symbols:
     - distributors
     - distributor
     - distribution
+    - distribuidora
     - дистрибьютор
     - дистрибуция
     - дистрибутора
