@@ -47,7 +47,7 @@ def lookup_by_identifier(identifier: str) -> Optional[Territory]:
 
 @cache
 def _get_territory_names() -> Dict[str, Territory]:
-    """Get a mapping of strong names to Territory objects."""
+    """Get a mapping of names to Territory objects."""
     index = _get_index()
     mapping: Dict[str, Territory] = {}
     for territory in index.values():
@@ -87,7 +87,7 @@ def _get_territory_names() -> Dict[str, Territory]:
 def _fuzzy_search(name: str) -> Optional[Territory]:
     best_territory: Optional[Territory] = None
     cutoff = int(len(name) * 0.3)
-    best_distance: Optional[int] = cutoff + 1
+    best_distance = cutoff + 1
     for cand, territory in _get_territory_names().items():
         if len(cand) <= 4:
             continue
@@ -95,10 +95,13 @@ def _fuzzy_search(name: str) -> Optional[Territory]:
         if distance < best_distance:
             best_distance = distance
             best_territory = territory
-    if best_distance is None:
+    if best_territory is None:
         return None
     log.debug(
-        "Guessing country: %s -> %s (distance %d)", name, best_territory, best_distance
+        "Guessing country: %r -> %s (distance %d)",
+        name,
+        best_territory.code,
+        best_distance,
     )
     return best_territory
 
