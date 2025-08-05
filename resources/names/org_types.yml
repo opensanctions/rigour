@@ -481,8 +481,8 @@ types:
     aliases:
       - andelslag
       - andelslag med begrænset ansvar
-  - display: PA
-    generic: PC
+  - compare: PA
+    generic: NGO
     aliases:
       - professional association
   - display: PLLC
