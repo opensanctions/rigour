@@ -47,7 +47,7 @@ class Tagger:
         forms = []
         for k, v in mapping.items():
             # Skip empty key
-            if not k:
+            if k is None or k == "":
                 continue
             self._symbols.append(v)
             forms.append(k)
@@ -75,7 +75,7 @@ def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
 
     mapping: Dict[str, List[Symbol]] = defaultdict(list)
     for key, values in ORDINALS.items():
-        sym = Symbol(Symbol.Category.ORDINAL, key)
+        sym = Symbol(Symbol.Category.NUMERIC, key)
         for value in values:
             nvalue = normalizer(value)
             if nvalue is None:
@@ -106,12 +106,14 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
             if sym not in mapping.get(nvalue, []):
                 mapping[nvalue].append(sym)
 
+    symbols: Dict[str, Symbol] = {}
     for org_type in ORG_TYPES:
-        class_sym: Optional[Symbol] = None
         generic = org_type.get("generic")
         if generic is None:
             continue
-        class_sym = Symbol(Symbol.Category.ORG_CLASS, generic)
+        if generic not in symbols:
+            symbols[generic] = Symbol(Symbol.Category.ORG_CLASS, generic)
+        class_sym = symbols[generic]
         display = org_type.get("display")
         if display is not None:
             display_norm = normalizer(display)
@@ -138,7 +140,7 @@ def _infer_part_tags(name: Name) -> Name:
     """Infer the tags of the name parts based on the name type."""
     for span in name.spans:
         if span.symbol.category == Symbol.Category.ORG_CLASS:
-            if name.tag == NameTypeTag.ENT:
+            if name.tag == NameTypeTag.ENT and len(span) > 2:
                 # If an untyped entity name contains an organization type, we can tag
                 # it as an organization.
                 name.tag = NameTypeTag.ORG
@@ -146,9 +148,9 @@ def _infer_part_tags(name: Name) -> Name:
             for part in span.parts:
                 if part.tag == NamePartTag.ANY:
                     part.tag = NamePartTag.LEGAL
-        if span.symbol.category == Symbol.Category.ORDINAL:
+        if span.symbol.category == Symbol.Category.NUMERIC:
             if len(span.parts) == 1 and span.parts[0].tag == NamePartTag.ANY:
-                # If an ordinal symbol is present and the part is not tagged, we can
+                # If a numeric symbol is present and the part is not tagged, we can
                 # tag it as numeric.
                 span.parts[0].tag = NamePartTag.NUM
     for part in name.parts:

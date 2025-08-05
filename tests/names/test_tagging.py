@@ -152,6 +152,6 @@ def test_tag_org_name_ordinals():
         assert tagged_name.parts[0].tag == NamePartTag.NUM
         assert len(tagged_name.symbols) > 0
         assert any(
-            symbol.category == Symbol.Category.ORDINAL and symbol.id == 5
+            symbol.category == Symbol.Category.NUMERIC and symbol.id == 5
             for symbol in tagged_name.symbols
         )

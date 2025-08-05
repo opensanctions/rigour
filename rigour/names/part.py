@@ -91,6 +91,10 @@ class Span:
         """Return the comparison-suited string representation of the span."""
         return " ".join([part.comparable for part in self.parts])
 
+    def __len__(self) -> int:
+        """Return the number of parts in the span."""
+        return sum(len(part) for part in self.parts)
+
     def __hash__(self) -> int:
         return hash((self.parts, self.symbol))
 

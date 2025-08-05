@@ -255,6 +255,7 @@ org_symbols:
     - служба
     - сервис
     - сервіс
+    - услуг
     - обслуживания
   defence:
     - defence
@@ -295,7 +296,21 @@ org_symbols:
   spv:
     - spv
     - special purpose vehicle
-    - vehículo de propósito especial 
+    - vehículo de propósito especial
+  skb:
+    - skb
+    - special design bureau
+    - Особое Конструкторское Бюро
+    - ОСОБОЕ КОНСТРУКТОРСКОЕ БЮРО
+    - Osoblyve konstruktorske biuro
+    - OKB
+  instrmak:
+    - Priborostroeniya
+    - instrument-making
+    - INSTRUMENT ENGINEERING
+    - fabrication d’instruments
+    - приборостроительный
+    - ПРИБОРОСТРОИТЕЛЬНЫЙ
   tech:
     - technology
     - technical
@@ -449,11 +464,46 @@ org_symbols:
     - royal
     - royale
     - königlich
-    - kunglig 
+    - kunglig
   supply:
     - supply
     - supplies
     - supplier
+  tv:
+    - tv
+    - television
+    - telly
+    - télévision
+    - télé
+    - televisión
+    - tele
+    - televisioon
+    - тв
+    - televize
+    - televisio
+    - televisão
+    - televisi
+    - televisione
+    - televisjon
+    - telewizja
+    - televisheni
+    - televízia
+    - televizija
+    - televizyon
+    - televizor
+    - Fernsehen
+    - телеба́чення
+    - телевидение
+    - टेलीविज़न
+    - تلفاز
+    - تِلْفِزْيُون
+    - 텔레비전
+    - 텔레비죤
+    - 電視
+    - 电视
+    - テレビ
+    - টেলিভিশন
+    - দূরদর্শন
   equipment:
     - equipment
     - equipement
@@ -1193,7 +1243,7 @@ org_symbols:
     - invesmenti
   casino:
     - casino
-    - cazinou 
+    - cazinou
     - kasino
     - kasíno
     - kasiino
@@ -1279,7 +1329,7 @@ org_symbols:
     - réassurance
     - reaseguro
     - riassicurazione
-    - resseguro 
+    - resseguro
     - rückversicherung
     - перестрахование
     - 재보험
@@ -1295,8 +1345,8 @@ org_symbols:
     - resource
     - ressource
     - ressources
-    - recurso 
-    - recursos 
+    - recurso
+    - recursos
   shipping:
     - shipping
     - shipping company
@@ -1386,6 +1436,33 @@ org_symbols:
     - проектировщица
     - проектировщицы
     - проектировщиц
+  hotel:
+    - hotel
+    - hotell
+    - hôtel
+    - albergo
+    - otel
+    - отель
+    - 호텔
+    - ホテル
+    - 酒店
+  wine:
+    - wine
+    - şarap 
+    - viini
+    - vin
+    - vinho
+    - vino
+    - wein
+    - wijn
+    - wino
+    - κρασί
+    - вино
+    - 와인
+    - ワイン
+    - 葡萄酒
+    - خمر
+    - نبيذ
   revolutionary:
     - revolutionary
     - revolutsioonilise
@@ -1405,6 +1482,26 @@ org_symbols:
     - революционная
     - революционные
     - революционных
+  theater:
+    - theater
+    - theatre
+    - divadlo
+    - teater
+    - teatteri
+    - théâtre
+    - teatro
+    - teatr
+    - tiyatro
+    - θέατρο
+    - театр
+    - театър
+    - थिएटर
+    - नाट्यशाला
+    - रंगमंच
+    - 극장
+    - مسرح
+    - 剧院
+    - 劇場
   committee:
     - committee
     - committees
@@ -1636,10 +1733,10 @@ org_symbols:
     - power
     - powers
   base:
-      - base
-      - bases
-      - baza
-      - база
+    - base
+    - bases
+    - baza
+    - база
   chemical:
     - chemical
     - chemicals
@@ -2128,6 +2225,7 @@ org_symbols:
     - distributors
     - distributor
     - distribution
+    - distribuidora
     - дистрибьютор
     - дистрибуция
     - дистрибутора
@@ -2157,6 +2255,31 @@ org_symbols:
     - бюджетное
     - бюджетного
     - бюджетной
+  stock exchange:
+    - stock exchange
+    - stock market
+    - securities exchange
+    - bourse
+    - börse
+    - bolsa de valores
+    - borsa valori
+    - bursă de valori
+    - bursa efek
+    - effectenbeurs
+    - beurs
+    - aandelebeurs
+    - aktiemarknad
+    - giełda papierów wartościowych
+    - giełda
+    - pörssi
+    - χρηματιστήριο
+    - Фондовый рынок
+    - Фондовая биржа 
+    - शेयर बाज़ार
+    - 证券交易所
+    - 証券取引所
+    - سوق الأوراق المالية
+    - 증권거래소
   trust:
     - trust
     - trusts

@@ -4,16 +4,18 @@ from typing import Any
 
 class Symbol:
     """A symbol is a semantic interpretation applied to one or more parts of a name. Symbols can
-    represent various categories such as organization classes, initials, names, ordinals, or phonetic
+    represent various categories such as organization classes, initials, names, numeric, or phonetic
     transcriptions. Each symbol has a category and an identifier."""
 
     class Category(Enum):
-        ORG_CLASS = "ORGCLASS"
+        # ORG_TYPE = "ORGTYPE"
+        ORG_CLASS = "ORGCLS"
         SYMBOL = "SYMBOL"
         INITIAL = "INITIAL"
         NAME = "NAME"
-        ORDINAL = "ORDINAL"
-        PHONETIC = "PHONETIC"
+        NUMERIC = "NUM"
+        LOCATION = "LOC"
+        PHONETIC = "PHON"
 
     __slots__ = ["category", "id"]
 
