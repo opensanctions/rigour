@@ -481,6 +481,14 @@ types:
     aliases:
       - andelslag
       - andelslag med begrænset ansvar
+  - display: PA
+    generic: PC
+    aliases:
+      - professional association
+  - display: PLLC
+    generic: LLC
+    aliases:
+      - professional limited liability company
   - display: ано
     generic: NGO
     aliases:
