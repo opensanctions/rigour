@@ -507,6 +507,12 @@ ORG_TYPES: List[OrgTypeSpec] = [
         "generic": "COOP",
         "aliases": ["andelslag", "andelslag med begrænset ansvar"],
     },
+    {"compare": "PA", "generic": "NGO", "aliases": ["professional association"]},
+    {
+        "display": "PLLC",
+        "generic": "LLC",
+        "aliases": ["professional limited liability company"],
+    },
     {
         "display": "ано",
         "generic": "NGO",
