@@ -2,7 +2,11 @@ import re
 from typing import Tuple
 from functools import cache
 
-from rigour.data.names.data import PERSON_NAME_PREFIXES, ORG_NAME_PREFIXES
+from rigour.data.names.data import (
+    PERSON_NAME_PREFIXES,
+    ORG_NAME_PREFIXES,
+    OBJ_NAME_PREFIXES,
+)
 
 
 @cache
@@ -23,3 +27,8 @@ def remove_person_prefixes(name: str) -> str:
 def remove_org_prefixes(name: str) -> str:
     """Remove prefixes like Mr., Mrs., etc."""
     return re_prefixes(ORG_NAME_PREFIXES).sub("", name)
+
+
+def remove_obj_prefixes(name: str) -> str:
+    """Remove prefixes like The, MV, etc."""
+    return re_prefixes(OBJ_NAME_PREFIXES).sub("", name)

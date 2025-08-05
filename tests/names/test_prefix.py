@@ -1,4 +1,8 @@
-from rigour.names.prefix import remove_person_prefixes, remove_org_prefixes
+from rigour.names.prefix import (
+    remove_person_prefixes,
+    remove_org_prefixes,
+    remove_obj_prefixes,
+)
 
 
 def test_remove_person_prefixes():
@@ -10,3 +14,4 @@ def test_remove_person_prefixes():
 
 def test_remove_org_prefixes():
     assert remove_org_prefixes("The Charitable Trust") == "Charitable Trust"
+    assert remove_obj_prefixes("M/V Oceanic") == "Oceanic"

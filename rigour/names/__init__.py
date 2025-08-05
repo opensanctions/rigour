@@ -21,6 +21,7 @@ from rigour.names.check import is_name, is_stopword
 from rigour.names.tokenize import tokenize_name, prenormalize_name, normalize_name
 from rigour.names.person import load_person_names, load_person_names_mapping
 from rigour.names.prefix import remove_person_prefixes, remove_org_prefixes
+from rigour.names.prefix import remove_obj_prefixes
 from rigour.names.tagging import tag_person_name, tag_org_name
 from rigour.names.org_types import replace_org_types_display
 from rigour.names.org_types import replace_org_types_compare
@@ -44,6 +45,7 @@ __all__ = [
     "NameTypeTag",
     "remove_person_prefixes",
     "remove_org_prefixes",
+    "remove_obj_prefixes",
     "load_person_names",
     "load_person_names_mapping",
     "replace_org_types_display",

@@ -6,7 +6,8 @@ Investigating financial crime requires contextual data about multiple aspects of
 
 For name matching, we produce four classes of data assets:
 
-* **Stopwords** ([YAML](https://github.com/opensanctions/rigour/blob/main/resources/names/stopwords.yml)) are name parts, including prefixes (like `Mr`, `Mrs.`, `President`), that can be fully removed from a name prior to name comparison. In addition stopwords include words that appear with high frequency in normal language that are considered to be of very limited use in disambiguating entities. Examples of stopwords include the English words "the", "of" and "from" and their equivalents in other languages.
+* **Stopwords** ([YAML](https://github.com/opensanctions/rigour/blob/main/resources/names/stopwords.yml)) are name parts that can be fully removed from a name prior to name comparison. Stopwords include words that appear with high frequency in normal language that are considered to be of very limited use in disambiguating entities. Examples of stopwords include the English words "the", "of" and "from" and their equivalents in other languages.
+    - The stopwords data includes prefixes (like `Mr`, `Mrs.`, `President`) that can be removed from the beginning of person, organisation or other names.
 * **Organisation type labels** ([YAML](https://github.com/opensanctions/rigour/blob/main/resources/names/org_types.yml)) are extensively mapped from real-world data, to allow three different normalisation forms: 
     - *Display normalisation* is intended for user-facing re-writes of organisation types. It offers a cosmetic simplification for name cleaning. Example: `Aktiengesellschaft` becomes `AG`, `ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ` becomes `ООО`. 
     - *Compare normalisation* is designed to facilitate string-based comparison of company types, e.g. `Sp. z o.o.` becomes `spzoo`, `G.m.beschr. Haftung` becomes `gmbh`. 

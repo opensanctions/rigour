@@ -25,7 +25,7 @@ def generate_data_file() -> None:
         stopword_lists: Dict[str, List[str]] = yaml.safe_load(ufh.read())
 
     for key, value in stopword_lists.items():
-        values = tuple(sorted([str(v) for v in value if len(str(v)) > 0]))
+        values = tuple(sorted(set([str(v) for v in value if len(str(v)) > 0])))
         if isinstance(key, str):
             key = key.strip().upper()
         content += f"{key.upper()}: Tuple[str, ...] = {values!r}\n\n"
