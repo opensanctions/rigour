@@ -67,7 +67,7 @@ FORMS: Dict[str, List[str]] = {
     "ft": ["fort"],
     "hts": ["hgts", "heights"],
     "mt": ["mount", "montaña", "mountain"],
-    "co": ["c o", "c/o", "care of"],
+    "co": ["c o", "c/o", "care of", "℅"],
     "pza": ["piazza"],
     "ctr": ["center", "centre", "central"],
     "pk": ["park"],
