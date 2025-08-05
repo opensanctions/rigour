@@ -5,11 +5,13 @@ from functools import cache
 from collections import defaultdict
 from typing import Dict, List, Optional, Set, Tuple
 
+from rigour.data import read_jsonl
 from rigour.text.dictionary import Normalizer
 from rigour.names import Symbol, Name
 from rigour.names import load_person_names
 from rigour.names.check import is_stopword
 from rigour.names.tag import NameTypeTag, NamePartTag, GIVEN_NAME_TAGS
+from rigour.territories.territory import TERRITORIES_FILE
 
 import ahocorasick_rs
 
@@ -93,7 +95,6 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
     """Get the organization name tagger."""
     from rigour.data.names.data import ORG_SYMBOLS
     from rigour.data.names.org_types import ORG_TYPES
-    from rigour.territories.territory import get_index
 
     log.info("Loading org type/symbol tagger...")
 
@@ -110,16 +111,17 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
             if sym not in mapping.get(nvalue, []):
                 mapping[nvalue].append(sym)
 
-    for territory in get_index().values():
-        sym = Symbol(Symbol.Category.LOCATION, territory.code)
-        names = list(territory.names_strong)
-        names.append(territory.name)
-        names.append(territory.full_name)
+    for data in read_jsonl(TERRITORIES_FILE):
+        sym = Symbol(Symbol.Category.LOCATION, sys.intern(data["code"]))
+        names: List[str] = data.get("names_strong", [])
+        names.append(data["name"])
+        names.append(data["full_name"])
         for name in names:
             nname = normalizer(name)
             if nname is None or not len(nname):
                 continue
-            mapping[nname].append(sym)
+            if sym not in mapping.get(nname, []):
+                mapping[nname].append(sym)
 
     symbols: Dict[str, Symbol] = {}
     for org_type in ORG_TYPES:
@@ -127,7 +129,7 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
         if generic is None:
             continue
         if generic not in symbols:
-            symbols[generic] = Symbol(Symbol.Category.ORG_CLASS, generic)
+            symbols[generic] = Symbol(Symbol.Category.ORG_CLASS, sys.intern(generic))
         class_sym = symbols[generic]
         display = org_type.get("display")
         if display is not None:

@@ -6,7 +6,7 @@ from typing import Any, Dict, Set
 from rigour.ids.wikidata import is_qid
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes
-from genscripts.util import write_python, RESOURCES_PATH, CODE_PATH
+from genscripts.util import write_jsonl, RESOURCES_PATH, CODE_PATH
 
 log = logging.getLogger(__name__)
 
@@ -33,6 +33,7 @@ def update_data() -> None:
         seen_codes.add(code)
         with open(source_file, "r", encoding="utf-8") as ufh:
             data = yaml.safe_load(ufh.read())
+            data["code"] = code
             raw_territories[code] = data
             data["other_codes"] = clean_codes(data.get("other_codes", []))
             for other in data["other_codes"]:
@@ -72,9 +73,8 @@ def update_data() -> None:
             msg = "Country is not a jurisdiction: %r" % terr.code
             raise RuntimeError(msg)
 
-    content = TEMPLATE % raw_territories
-    out_path = CODE_PATH / "territories" / "data.py"
-    write_python(out_path, content)
+    out_path = CODE_PATH / "territories" / "data.jsonl"
+    write_jsonl(out_path, raw_territories.values())
 
 
 if __name__ == "__main__":

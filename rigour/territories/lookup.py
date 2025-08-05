@@ -1,10 +1,11 @@
 import logging
 from functools import cache, lru_cache
 from rapidfuzz.distance import Levenshtein
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
+from rigour.data import read_jsonl
 from rigour.territories.territory import Territory
-from rigour.territories.territory import get_index as _get_index
+from rigour.territories.territory import TERRITORIES_FILE, get_index as _get_index
 from rigour.territories.util import clean_code, normalize_territory_name
 
 log = logging.getLogger(__name__)
@@ -50,8 +51,14 @@ def _get_territory_names() -> Dict[str, Territory]:
     """Get a mapping of names to Territory objects."""
     index = _get_index()
     mapping: Dict[str, Territory] = {}
-    for territory in index.values():
-        names = list(territory.names_strong)
+    weaks: Dict[Territory, List[str]] = {}
+    for data in read_jsonl(TERRITORIES_FILE):
+        code = data["code"]
+        territory = index.get(code)
+        if territory is None:
+            raise RuntimeError(f"Missing territory for code: {code}")
+        names: List[str] = data.get("names_strong", [])
+        weaks[territory] = data.get("names_weak", [])
         names.append(territory.name)
         names.append(territory.full_name)
         for name in names:
@@ -66,8 +73,8 @@ def _get_territory_names() -> Dict[str, Territory]:
             mapping[nname] = territory
 
     weak_mapping: Dict[str, Territory] = {}
-    for territory in index.values():
-        for name in territory.names_weak:
+    for territory, names_weak in weaks.items():
+        for name in names_weak:
             nname = normalize_territory_name(name)
             if nname in mapping:
                 continue
