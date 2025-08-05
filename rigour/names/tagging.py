@@ -93,6 +93,7 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
     """Get the organization name tagger."""
     from rigour.data.names.data import ORG_SYMBOLS
     from rigour.data.names.org_types import ORG_TYPES
+    from rigour.territories.territory import get_index
 
     log.info("Loading org type/symbol tagger...")
 
@@ -108,6 +109,17 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
                 continue
             if sym not in mapping.get(nvalue, []):
                 mapping[nvalue].append(sym)
+
+    for territory in get_index().values():
+        sym = Symbol(Symbol.Category.LOCATION, territory.code)
+        names = list(territory.names_strong)
+        names.append(territory.name)
+        names.append(territory.full_name)
+        for name in names:
+            nname = normalizer(name)
+            if nname is None or not len(nname):
+                continue
+            mapping[nname].append(sym)
 
     symbols: Dict[str, Symbol] = {}
     for org_type in ORG_TYPES:

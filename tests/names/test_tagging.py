@@ -132,6 +132,17 @@ def test_tag_org_name():
             assert part.tag == NamePartTag.LEGAL
 
 
+def test_tag_org_name_location():
+    """Test tagging an organization name with a location."""
+    name = Name("Doe Industries (New York) Inc.")
+    tagged_name = tag_org_name(name, _org_normalizer)
+
+    assert tagged_name is not None
+    assert len(tagged_name.symbols) > 0
+    loc = Symbol(Symbol.Category.LOCATION, "us-ny")
+    assert loc in tagged_name.symbols
+
+
 def test_tag_org_name_sorting():
     # Legal tagged name parts go last in the sort order.
     name = Name("OOO ORION", tag=NameTypeTag.ORG)
