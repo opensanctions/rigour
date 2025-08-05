@@ -175,16 +175,13 @@ ORG_NAME_PREFIXES:
   - Le
   - La
 STOPWORDS:
-  # Conjunctions/joining words
-  - "de"
-  - "le"
+  # English stopwords
   - "of"
   - "the"
   - "in"
   - "and"
   - "for"
   - "or"
-  - "et"
   - "a"
   - "an"
   - "as"
@@ -196,13 +193,12 @@ STOPWORDS:
   - "from"
   - "into"
   - "&"
+  # Uncategorised stopwords
   - "al"
-  - "por"
   - "per"
-  - "al"
   # Russian stopwords
   - "для" # for
-  - "и"
+  - "и" # and
   - "в" # in
   - "на" # on
   - "с" # with
@@ -219,10 +215,11 @@ STOPWORDS:
   - "что" # that, what
   - "это" # this, it
   - "все" # all, everything
-  - "без"
+  - "без" # without
+  - "ИХ" # their
   # Ukrainian stopwords
   - "для" # for
-  - "і"
+  - "і" # and
   - "в" # in
   - "на" # on
   - "з" # with
@@ -267,18 +264,19 @@ STOPWORDS:
   - "por" # for, by
   - "para" # for, to
   - "un" # a, an (masculine)
-  - "una"
-  - "unos"
-  - "unas"
-  - "y"
+  - "una" # a, an (feminine)
+  - "unos" # some (masculine)
+  - "unas" # some (feminine)
+  - "y" # and
   - "del" # of the
-  # Estonian
+  # Estonian stopwords
   - "ja" # and
   # Catalan stopwords
   - "és" # is
   # Portugese stopwords
   - "do" # of
   - "em" # in
+  - "ou" # or
   # Dutch stopwords
   - "voor" # for
   # French stopwords
@@ -296,12 +294,18 @@ STOPWORDS:
   - "une" # a, an (feminine)
   - "des" # of the
   # - "de l'" # of the (before a vowel or h)
+  # Hebrew stopwords
+  - "אל" # to
+  # Romanian stopwords
+  - "și" # and
   # Slovene stopwords
   - "za" # for
   # Turkish
   - "ve" # and
   # Swahili stopwords
   - "wa" # of
+  # Swedish stopwords
+  - "för" # for
   # Chinese stopwords
   - "的" # of, 's (possessive)
   - "在" # at, in, on
@@ -341,6 +345,10 @@ STOPWORDS:
   - "bei" # at, near
   - "als" # as, when
   - "es" # it
+  # Greek stopwords
+  - "του" # of
+  - "και" # and
+  # Commented out
   # - "(sic)"
   # - "[sic]"
 STOPPHRASES:
