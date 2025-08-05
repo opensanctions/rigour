@@ -5,3 +5,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - DELAWARE, U.S.A.
+  - Delaware, Usa
+names_weak:
+  - Delaware (USA)
+  - Delauear
+  - Delauear (Estados Unidos)
+  - Делауэр  # Delauér

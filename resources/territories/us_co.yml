@@ -5,3 +5,12 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - COLORADO, U.S.A.
+names_weak:
+  - Colorado, USA
+  - Colorado (USA)
+  - Колорадо       # Kolorado
+  - Колорадо (США) # Kolorado (SŠA)
+  - Kolorado # Kolorado
+  - Kolorado (SŠA) # Kolorado (SŠA)

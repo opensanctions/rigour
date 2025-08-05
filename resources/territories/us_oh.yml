@@ -5,3 +5,9 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - OHIO, U.S.A.
+  - Ohio (USA)
+names_weak:
+  - Огайо       # Ogajo
+  - Огайо (США) # Ogajo (SŠA)

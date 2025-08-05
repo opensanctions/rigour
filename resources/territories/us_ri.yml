@@ -5,3 +5,9 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - RHODE ISLAND, U.S.A.
+  - Rhode Island (USA)
+names_weak:
+  - Род-Айленд       # Rod-Ajlend
+  - Род-Айленд (США) # Rod-Ajlend (SŠA)

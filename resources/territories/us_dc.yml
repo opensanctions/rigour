@@ -7,3 +7,13 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - Washington, D.C.
+  - Washington, DC
+  - District of Columbia, USA
+  - Washington, D.C., USA
+names_weak:
+  - Вашингтон, округ Колумбия       # Vašington, okrug Kolumbiâ
+  - Вашингтон, округ Колумбия (США) # Vašington, okrug Kolumbiâ (SŠA)
+  - Вашингтон, округ Колумбія       # Vašington, okrug Kolumbíâ
+  - Вашингтон, округ Колумбія (США) # Vašington, okrug Kolumbíâ (SŠA)

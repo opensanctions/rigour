@@ -6,3 +6,7 @@ is_jurisdiction: true
 name: Yaroslavl Oblast
 parent: ru
 qid: Q2448
+names_strong:
+  - Ярославская область # Jaroslavskaja oblastʹ
+  - Ярославская область (Россия) # Jaroslavskaja oblastʹ (Rossija)
+names_weak: []

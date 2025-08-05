@@ -6,3 +6,9 @@ is_jurisdiction: true
 name: Altai Republic
 parent: ru
 qid: Q5971
+names_strong:
+  - Республика Алтай # Respublika Altaj
+  - Республика Алтай (Россия) # Respublika Altaj (Rossija)
+  - Алтайская Республика # Altaiskaja Respublika
+  - Алтайская Республика (Россия) # Altaiskaja Respublika (Rossija)
+names_weak: []

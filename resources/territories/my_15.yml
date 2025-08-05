@@ -5,3 +5,7 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: my
+names_strong:
+  - Labua
+  - Labuan, Malaysia
+names_weak: []

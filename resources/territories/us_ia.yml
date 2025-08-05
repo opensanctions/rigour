@@ -5,3 +5,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - IOWA, U.S.A.
+names_weak:
+  - Iowa, USA
+  - Iowa (USA)
+  - Iowa (United States)
+  - Айова       # Ajova
+  - Айова (США) # Ajova (SŠA)

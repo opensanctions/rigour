@@ -40,7 +40,7 @@ def load_person_names_mapping(
         forms: Set[str] = set()
         for alias in aliases:
             norm_alias = normalizer(alias)
-            if norm_alias is None:
+            if norm_alias is None or not len(norm_alias):
                 continue
             forms.add(norm_alias)
         if len(forms) < min_mappings:

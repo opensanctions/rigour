@@ -5,3 +5,17 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ca
+names_strong: []
+names_weak:
+  - British Columbia (Province)
+  - British Columbia, Canada
+  - British Columbia, CA
+  - British Columbia (Kanada)
+  - British Columbia (Kanada) Province
+  - British Columbia (Kanada) Provinz
+  - Британская Колумбия  # Britanskaâ Kolumbiâ
+  - Britisk Kolumbija
+  - Britisk Kolumbija (Kanada)
+  - Britisk Kolumbija (Kanada) Province
+  - BRITISH COLUMBIA, CANADA
+  - Victoria, British Columbia

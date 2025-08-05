@@ -6,3 +6,10 @@ is_jurisdiction: true
 name: Omsk Oblast
 parent: ru
 qid: Q5835
+names_strong:
+  - Omskaya Oblast
+  - Omskaya oblast'
+  - Omskaya oblast
+  - Omskaya oblastʹ
+  - Омская область
+names_weak: []

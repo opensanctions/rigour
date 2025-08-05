@@ -5,3 +5,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - FLORIDA, U.S.A.
+names_weak:
+  - FLO
+  - Florida, USA
+  - Florida (USA)
+  - Флорида       # Florida
+  - Флорида (США) # Florida (SŠA)

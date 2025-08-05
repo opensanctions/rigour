@@ -6,3 +6,7 @@ is_jurisdiction: true
 name: Zabaykalsky Krai
 parent: ru
 qid: Q6838
+names_strong:
+  - Забайкальский край # Zabajkalʹskii kraj
+  - Забайкальский край (Россия) # Zabajkalʹskii kraj (Rossija)
+names_weak: []

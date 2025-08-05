@@ -9,3 +9,9 @@ other_qids:
   - Q5103726
   - Q6940348
   - Q14708404
+names_strong:
+  - OKLAHOMA, U.S.A.
+  - Oklahoma (USA)
+names_weak:
+  - Оклахома       # Oklahoma
+  - Оклахома (США) # Oklahoma (SŠA)

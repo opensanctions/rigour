@@ -7,3 +7,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ae
+names_strong: []
+names_weak:
+  - أبوظبي
+  - أبوظبي (إمارة)
+  - Abu Dhabi (Emirate)
+  - Emirato de Abu Dhabi
+  - Emirate of Abu Dhabi
+  - Абу Даби  # Abu Dabi

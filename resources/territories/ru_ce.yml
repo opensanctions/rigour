@@ -6,3 +6,14 @@ is_jurisdiction: true
 name: Chechnya
 parent: ru
 qid: Q5187
+names_strong:
+  - Chechen Republic
+  - Chechnya, Russia
+  - Чеченская Республика
+  - Чечня
+names_weak:
+  - Chechen
+  - Chechnya, Russian Federation
+  - Chechnya, RU   # Čečenskaâ Respublika
+  - Чечня (Россия) # Čečnâ (Rossiâ)
+  - Чеченская Республика (Россия) # Čečenskaâ Respublika (Rossiâ)

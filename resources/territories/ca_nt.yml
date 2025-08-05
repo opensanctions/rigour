@@ -5,3 +5,13 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ca
+names_strong: []
+names_weak:
+  - Northwest Territories, Canada
+  - Northwest Territories, Canada (NT)
+  - Northwest Territories, CA
+  - Northwest Territories (CA)
+  - NT, Canada
+  - NT, CA
+  - Northwest Territories (NT)
+  - Territoires du Nord-Ouest

@@ -6,3 +6,8 @@ is_jurisdiction: true
 name: Astrakhan Oblast
 parent: ru
 qid: Q3941
+names_strong:
+  - Астраханская область # Astrakhanskaja oblastʹ
+  - Астраханская область (Россия) # Astrakhanskaja oblastʹ (Rossija)
+  - Астраханская область (Российская Федерация) # Astrakhanskaja oblastʹ (Rossijskaja Federacija)
+names_weak: []

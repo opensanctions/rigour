@@ -10,3 +10,8 @@ is_historical: false
 qid: Q11196
 other_qids:
   - Q16761250
+names_strong: []
+names_weak:
+  - Република Српска       # Republika Srpska
+  - Република Српска (БиХ) # Republika Srpska (BiH)
+  - Republika Srpska (BiH)

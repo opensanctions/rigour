@@ -1,5 +1,5 @@
 name: Kosovo
-full_name: Kosovo
+full_name: Republic of Kosovo
 region: Europe
 subregion: Southern Europe
 qid: Q1246
@@ -14,3 +14,18 @@ summary: >-
   Kosovo, officially the Republic of Kosovo, is a partially recognized country in
   Southeast Europe. It declared its independence from Serbia in 2008, and has been
   recognized by most Western governments.
+names_strong:
+  - Kosova
+  - Kosova e pavarur
+  - Republika e Kosovës
+names_weak:
+  - Kosowo
+  - Republika Kosovo
+  - კოსოვო            # kʼosovo
+  - Республика Косово # Respublika Kosovo
+  - Република Косово  # Republika Kosovo
+  - Kosovan
+  - Kosovës
+  - Kosovar
+  - Kosovon
+  - Republic of Kosova

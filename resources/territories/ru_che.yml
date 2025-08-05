@@ -6,3 +6,7 @@ is_jurisdiction: true
 name: Chelyabinsk Oblast
 parent: ru
 qid: Q5714
+names_strong:
+  - Челябинская область # Čeljabinskaja oblastʹ
+  - Челябинская область (Россия) # Čeljabinskaja oblastʹ (Rossija)
+names_weak: []

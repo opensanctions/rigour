@@ -5,3 +5,14 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - WASHINGTON, U.S.A.
+names_weak:
+  - WASHINGTON STATE
+  - WASHINGTON, USA
+  - Washington (USA)
+  - Washington, United States of America
+  - Uashington
+  - Uashington (Estados Unidos)
+  - Уошингтон  # Uošington
+  - WASH., U.S.A.

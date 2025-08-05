@@ -1,5 +1,6 @@
+import sys
 from typing import Dict, Any, List, Optional, Set
-from functools import total_ordering
+from functools import cache, total_ordering
 
 
 @total_ordering
@@ -26,6 +27,8 @@ class Territory(object):
         self._successors: List[str] = data.get("successors", [])
         self._parent: Optional[str] = data.get("parent")
         self._see: List[str] = data.get("see", [])
+        self.names_strong: List[str] = data.get("names_strong", [])
+        self.names_weak: List[str] = data.get("names_weak", [])
 
     @property
     def parent(self) -> Optional["Territory"]:
@@ -95,3 +98,20 @@ class Territory(object):
 
     def __repr__(self) -> str:
         return f"<Territory({self.code!r})>"
+
+
+@cache
+def get_index() -> Dict[str, Territory]:
+    from rigour.data.territories.data import TERRITORIES
+
+    index: Dict[str, Territory] = {}
+    for code, data in TERRITORIES.items():
+        index[code] = Territory(index, code, data)
+    for territory in list(index.values()):
+        for other in territory.other_codes:
+            index[other] = territory
+        if territory.alpha3:
+            index[territory.alpha3] = territory
+
+    del sys.modules["rigour.data.territories.data"]
+    return index

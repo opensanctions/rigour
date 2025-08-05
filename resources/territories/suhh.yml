@@ -1,5 +1,5 @@
 name: Soviet Union
-full_name: Soviet Union
+full_name: Union of Soviet Socialist Republics
 region: Supranational
 qid: Q15180
 other_codes:
@@ -41,3 +41,16 @@ summary: >-
   The Soviet Union, officially the Union of Soviet Socialist Republics (USSR), was
   disbanded in 1991. It exists in our database because it is still the stated country
   of birth of a number of designated persons.
+names_strong:
+  - USSR
+  - УССР # USSR
+  - Советский Союз # Sovétskij Soûz
+  - Союз Советских Социалистических Республик # Soûz Sovétskih Socialistíčeskih Respúblik
+names_weak:
+  - Сою́з ССР # Soû́z SSR
+  - Сове́тский Сою́з # Sovétskij Soû́z
+  - UdSSR     # Sovetskij Soûz
+  - Soviet    # Soûz Sovetskih Socialističeskih Respublik
+  - Сою́з Сове́тских Социалисти́ческих Респу́блик # Soû́z Sovétskih Socialistíčeskih Respúblik
+  - Russia (USSR)
+  - SU

@@ -6,3 +6,8 @@ is_jurisdiction: true
 name: Mordovia
 parent: ru
 qid: Q5340
+names_strong:
+  - Мордовия # Mordoviâ
+  - Республика Мордовия # Respublika Mordoviâ
+  - Республика Мордовия (Россия) # Respublika Mordoviâ (Rossija)
+names_weak: []

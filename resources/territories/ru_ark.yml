@@ -6,3 +6,8 @@ is_jurisdiction: true
 name: Arkhangelsk Oblast
 parent: ru
 qid: Q1875
+names_strong:
+  - Архангельская область # Arhangelskaja oblastʹ
+  - Архангельская область (Россия) # Arhangelskaja oblastʹ (Rossija)
+  - Архангельская область (Российская Федерация) # Arhangelskaja oblastʹ (Rossijskaja Federacija)
+names_weak: []

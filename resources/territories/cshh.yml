@@ -1,5 +1,5 @@
 name: Czechoslovakia
-full_name: Czechoslovakia
+full_name: Czechoslovak Socialist Republic
 region: Europe
 subregion: Central Europe
 qid: Q33946
@@ -20,3 +20,10 @@ summary: >-
   Czechoslovakia was a landlocked state in Central Europe. On 31 December 1992, Czechoslovakia
   split into the two sovereign states of the Czech Republic and Slovakia.
 wikipedia_url: https://en.wikipedia.org/wiki/Czechoslovakia
+names_strong:
+  - Československo
+names_weak:
+  - Czecho-Slovakia
+  - Česko-Slovensko
+  - Czechoslovak Republic
+  - Czechoslovakian

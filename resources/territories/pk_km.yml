@@ -7,3 +7,10 @@ is_jurisdiction: false
 see:
   - in
   - pk
+names_strong:
+  - Jammu and Kashmir
+  - Azad Jammu and Kashmir
+  - Gilgit-Baltistan
+  - Pakistan-administered Kashmir
+names_weak:
+  - Pakistan Occupied Kashmir

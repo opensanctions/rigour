@@ -9,3 +9,14 @@ parent: sh
 is_country: false
 is_ftm: true
 is_jurisdiction: false
+names_strong:
+  - Ascension
+names_weak:
+  - île de l'Ascension
+  - 阿森松岛
+  - Острів Вознесіння # Ostrív Voznesínnâ
+  - Остров Вознесения # Ostrov Vozneseniâ
+  - ამაღლების კუნძული # amaghlebis kʼundzuli
+  - Isla Ascensión
+  - 어센션섬              # eosensyeonseom
+  - アセンション島

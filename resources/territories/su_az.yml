@@ -10,3 +10,6 @@ is_historical: true
 parent: suhh
 successors:
   - az
+names_strong:
+  - Азербайджанская ССР # Azerbaydzhanskaya SSR
+names_weak: []

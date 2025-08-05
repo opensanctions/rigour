@@ -5,3 +5,9 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - PENNSYLVANIA, U.S.A.
+  - Pennsylvania (USA)
+names_weak:
+  - Пенсильвания       # Pensilʹvaniâ
+  - Пенсильвания (США) # Pensilʹvaniâ (SŠA)

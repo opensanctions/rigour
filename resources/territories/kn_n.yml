@@ -5,3 +5,9 @@ is_ftm: false
 is_jurisdiction: true
 parent: kn
 qid: Q207794
+names_strong:
+  - Nevis Island
+  - Isla de Nevis
+  - Isla de Nivis
+names_weak:
+  - Nevis

@@ -1,3 +1,4 @@
+import sys
 import string
 import logging
 import unicodedata
@@ -125,6 +126,9 @@ def _address_replacer(latinize: bool = False) -> Replacer:
                         mapping[value_norm],
                     )  # pragma: no cover
                 mapping[value_norm] = repl_norm
+
+    del sys.modules["rigour.data.addresses.data"]
+    del sys.modules["rigour.data.text.ordinals"]
     return Replacer(mapping, ignore_case=True)
 
 

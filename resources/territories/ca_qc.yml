@@ -7,3 +7,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ca
+names_strong:
+  - Québec
+names_weak:
+  - QUEBEC, CANADA
+  - Québec, Canada
+  - Québec (Canada)
+  - Québec, Canada (QC)
+  - Québec, CA

@@ -5,3 +5,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - SOUTH DAKOTA, U.S.A.
+  - South Dakota (USA)
+names_weak:
+  - Южная Дакота       # Ûžnaâ Dakota
+  - Южная Дакота (США) # Ûžnaâ Dakota (SŠA)
+  - S.Dakota
+  - S. Dakota

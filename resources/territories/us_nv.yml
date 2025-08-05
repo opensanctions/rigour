@@ -5,3 +5,12 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - NEVADA, U.S.A.
+names_weak:
+  - NEV
+  - NEVADA, USA
+  - NEVADA (USA)
+  - NEVADA (United States)
+  - Невада       # Nevada
+  - Невада (США) # Nevada (SŠA)

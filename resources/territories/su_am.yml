@@ -10,3 +10,7 @@ is_historical: true
 parent: suhh
 successors:
   - am
+names_strong:
+  - Армянская ССР # Armyanskaya SSR
+names_weak:
+  - Soviet Armenia  # Armânskaâ SSR

@@ -10,3 +10,7 @@ is_historical: true
 parent: suhh
 successors:
   - lv
+names_strong:
+  - Latvijas TSR
+  - Латвийская ССР # Latviyskaya SSR
+names_weak: []

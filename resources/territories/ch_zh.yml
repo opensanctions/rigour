@@ -6,3 +6,7 @@ is_jurisdiction: true
 name: Zürich
 parent: ch
 qid: Q11943
+names_strong:
+  - Zurich
+names_weak:
+  - Zurich, Switzerland

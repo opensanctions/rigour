@@ -5,3 +5,10 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - MAINE, U.S.A.
+names_weak:
+  - Maine, USA
+  - Maine (USA)
+  - Мэн       # Mén
+  - Мэн (США) # Mén (SŠA)

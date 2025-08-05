@@ -5,3 +5,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
+names_strong:
+  - WISCONSIN, U.S.A.
+names_weak:
+  - WIS
+  - WISCONSIN (USA)
+  - WISCONSIN, USA
+  - Uisconsin
+  - Уисконсин  # Uiskonsin

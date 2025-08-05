@@ -7,3 +7,17 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ae
+names_strong:
+  - Emirate of Dubai
+  - Dubai, UAE
+names_weak:
+  - دبي
+  - دبی
+  - Dubai (Emirate)
+  - Emirato de Dubai
+  - Dubayy
+  - Дубай # Dubaj
+  - Дубаи # Dubai
+  - دُبَيّ # Dubaï
+  - Emirate Of Dubai, U.A.E
+  - Дубай, ОАЕ # Dubaj, OAE

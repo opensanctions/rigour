@@ -6,3 +6,9 @@ is_jurisdiction: true
 name: Dagestan
 parent: ru
 qid: Q5118
+names_strong:
+  - DAGHESTAN, RUSSIA
+  - Дагестан # Dagestan
+  - Дагестанская Республика # Dagestanskaya Respublika
+names_weak:
+  - Дагестан (Россия) # Dagestan (Rossiâ)

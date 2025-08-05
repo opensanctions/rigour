@@ -6,3 +6,10 @@ is_jurisdiction: true
 name: Tyumen Oblast
 parent: ru
 qid: Q5824
+names_strong:
+  - Тюменская область # Tjumenskaja oblastʹ
+  - Тюменская область (Россия) # Tjumenskaja oblastʹ (Rossija)
+names_weak:
+  - Tyumen  # Tûmenskaâ oblastʹ
+  - Tyumen Region # Tûmenskaâ oblastʹ (Rossiâ)
+  - Тюмень # Tûmenʹ

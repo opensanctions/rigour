@@ -8,3 +8,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 is_historical: false
+names_strong:
+  - FBiH
+names_weak:
+  - Федерација Босне и Херцеговине       # Federaciǰa Bosne i Hercegovine
+  - Федерација Босне и Херцеговине (БиХ) # Federaciǰa Bosne i Hercegovine (BiH)
+  - Federation of Bosnia and Herzegovina (BiH)
+  - Federation of Bosnia and Herzegovina (FBiH)
+  - Федерација Босне и Херцеговине (ФБиХ) # Federaciǰa Bosne i Hercegovine (FBiH)

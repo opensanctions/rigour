@@ -6,3 +6,8 @@ is_jurisdiction: true
 name: Moscow
 parent: ru
 qid: Q649
+names_strong:
+  - MOSCOW, RUSSIA
+  - Moskva
+  - Москва # Moskva
+names_weak: []

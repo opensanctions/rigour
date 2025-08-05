@@ -5,3 +5,17 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ca
+names_strong: []
+names_weak:
+  - Alberta (Province)
+  - Alberta, Canada
+  - Alberta, CA
+  - ALBERTA, CANADA
+  - Alberta (Kanada)
+  - Alberta (Kanada) Province
+  - Alberta (Kanada) Provinz
+  - Альберта  # Alʹberta
+  - Alburta
+  - Alburta (Kanada)
+  - Alburta (Kanada) Province
+  - Edmonton, Alberta

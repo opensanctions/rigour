@@ -5,3 +5,13 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ca
+names_strong: []
+names_weak:
+  - MANITOBA, CANADA
+  - Manitoba, Canada
+  - Manitoba, Canada (MB)
+  - Manitoba, CA
+  - Manitoba (CA)
+  - MB, Canada
+  - MB, CA
+  - Manitoba (MB)
