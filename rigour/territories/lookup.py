@@ -90,7 +90,6 @@ def _get_territory_names() -> Dict[str, Territory]:
     return mapping
 
 
-@lru_cache(maxsize=2**16)
 def _fuzzy_search(name: str) -> Optional[Territory]:
     best_territory: Optional[Territory] = None
     cutoff = int(len(name) * 0.3)
@@ -113,6 +112,7 @@ def _fuzzy_search(name: str) -> Optional[Territory]:
     return best_territory
 
 
+@lru_cache(maxsize=2**16)
 def lookup_territory(text: str, fuzzy: bool = False) -> Optional[Territory]:
     """Lookup a territory by various codes and names.
 
