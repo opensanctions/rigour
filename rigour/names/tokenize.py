@@ -66,7 +66,7 @@ def prenormalize_name(name: Optional[str]) -> str:
     """Prepare a name for tokenization and matching."""
     if name is None:
         return ""
-    name = unicodedata.normalize("NFC", name)
+    # name = unicodedata.normalize("NFC", name)
     return name.lower()
 
 
