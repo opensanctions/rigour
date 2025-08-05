@@ -1,3 +1,4 @@
+import sys
 from typing import Dict, Any, List, Optional, Set
 from functools import cache, total_ordering
 
@@ -105,7 +106,7 @@ class Territory(object):
 def get_index() -> Dict[str, Territory]:
     index: Dict[str, Territory] = {}
     for data in read_jsonl(TERRITORIES_FILE):
-        code = data["code"]
+        code = sys.intern(data["code"])
         index[code] = Territory(index, code, data)
     for territory in list(index.values()):
         for other in territory.other_codes:
