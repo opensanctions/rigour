@@ -81,6 +81,8 @@ def _display_replacer(normalizer: Normalizer = normalize_display) -> Replacer:
             mapping[alias_norm] = display_norm
     for alias in clashes:
         mapping.pop(alias, None)
+
+    del sys.modules["rigour.data.names.org_types"]
     return Replacer(mapping, ignore_case=True)
 
 
@@ -146,6 +148,8 @@ def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
         display_norm = normalizer(display_form)
         if display_norm is not None and display_norm not in mapping:
             mapping[display_norm] = compare_norm
+
+    del sys.modules["rigour.data.names.org_types"]
     return Replacer(mapping, ignore_case=True)
 
 
@@ -176,6 +180,8 @@ def _generic_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
         display_norm = normalizer(org_type.get("display"))
         if display_norm is not None and display_norm not in mapping:
             mapping[display_norm] = generic_norm
+
+    del sys.modules["rigour.data.names.org_types"]
     return Replacer(mapping, ignore_case=True)
 
 

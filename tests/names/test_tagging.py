@@ -6,15 +6,30 @@ from rigour.names.tagging import tag_person_name, tag_org_name
 from rigour.names.tokenize import prenormalize_name, tokenize_name
 
 # For testing purposes, we only load these names by hacking the normalizer.
-LOAD_COMPOUND = ["jae", "ho", "jae-ho", "jeong", "jeong-jae"]
+LOAD_COMPOUND = [
+    "jae",
+    "再",
+    "ho",
+    "하오",
+    "jae-ho",
+    "재호",
+    "jeong",
+    "郑",
+    "jeong-jae",
+    "정재",
+]
 LOAD_ONLY = [
     "john",
+    "джон",
     "doe",
     "Dr",
     "Doktor",
     "jean",
+    "жан",
     "claude",
+    "клод",
     "jean-claude",
+    "жан-клод",
 ] + LOAD_COMPOUND
 
 

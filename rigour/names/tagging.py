@@ -1,12 +1,13 @@
 import re
+import sys
 import logging
 from functools import cache
 from collections import defaultdict
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 from rigour.text.dictionary import Normalizer
 from rigour.names import Symbol, Name
-from rigour.names import load_person_names_mapping
+from rigour.names import load_person_names
 from rigour.names.check import is_stopword
 from rigour.names.tag import NameTypeTag, NamePartTag, GIVEN_NAME_TAGS
 
@@ -82,6 +83,8 @@ def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
                 continue
             if sym not in mapping.get(nvalue, []):
                 mapping[nvalue].append(sym)
+
+    del sys.modules["rigour.data.text.ordinals"]
     return mapping
 
 
@@ -132,6 +135,8 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
                 if class_sym not in mapping.get(nalias, []):
                     mapping[nalias].append(class_sym)
 
+    del sys.modules["rigour.data.names.data"]
+    del sys.modules["rigour.data.names.org_types"]
     log.info("Loaded organization tagger (%s terms).", len(mapping))
     return Tagger(mapping)
 
@@ -190,12 +195,20 @@ def _get_person_tagger(normalizer: Normalizer) -> Tagger:
             if sym not in mapping.get(nvalue, []):
                 mapping[nvalue].append(sym)
 
-    name_mapping = load_person_names_mapping(normalizer=normalizer)
-    for name, qids in name_mapping.items():
-        for qid in qids:
-            sym = Symbol(Symbol.Category.NAME, int(qid[1:]))
-            mapping[name].append(sym)
+    for qid, aliases in load_person_names():
+        sym = Symbol(Symbol.Category.NAME, int(qid[1:]))
+        forms: Set[str] = set()
+        for alias in aliases:
+            norm_alias = normalizer(alias)
+            if norm_alias is None or not len(norm_alias):
+                continue
+            forms.add(norm_alias)
+        if len(forms) < 2:
+            continue
+        for form in forms:
+            mapping[form].append(sym)
 
+    del sys.modules["rigour.data.names.data"]
     log.info("Loaded person tagger (%s terms).", len(mapping))
     return Tagger(mapping)
 
