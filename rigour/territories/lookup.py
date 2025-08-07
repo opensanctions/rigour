@@ -118,6 +118,7 @@ def lookup_territory(text: str, fuzzy: bool = False) -> Optional[Territory]:
 
     Args:
         text: The text to lookup, which can be a code, name, or other identifier.
+        fuzzy: If true, try a fuzzy search if the direct lookup didn't succeed.
 
     Returns:
         An instance of Territory if found, otherwise None.
