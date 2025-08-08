@@ -261,11 +261,20 @@ forms:
     - suite
   fl:
     - floor
+    - flr
     - story
     - storey
+    - level
+    - lvl
+    - andar
+    - aukštas
+    - étage
     - etazh
+    - piso
+    - verdieping
     - поверх
     - этаж
+    - 階
   dept:
     - department
   "&":
