@@ -17,6 +17,8 @@ forms:
     - number
     - nr
     - №
+    - număr
+    - nummer
     - numero
     - numéro
     - número
@@ -28,6 +30,9 @@ forms:
     - hse
   condo:
     - condominium
+    - condominio
+    - condomínio
+    - kondominium
   twr:
     - tower
     - towers
@@ -57,11 +62,15 @@ forms:
     - neighborhood
     - nachbarschaft
     - neighbourhood
-    - район
     - райончик
     - district
     - bezirk
     - distrikt
+    - barrio
+    - quarter
+    - quartier
+    - quartiere
+    - kvartal
   bch:
     - beach
     - пляж
@@ -77,6 +86,7 @@ forms:
     - federal
   alley:
     - alley
+    - allée
     - аллея
     - проезд
     - проїзд
@@ -90,18 +100,21 @@ forms:
     - крыло
   blvd:
     - boulevard
+    - bulevar
     - бульвар
   st:
     - strasse
-    - strase
+    - straße
+    - strase # to capture misspellings of strasse
     - street
+    - straat
     - strada
+    - stradă
     - str
     - rue
     - стр
   pr:
-    - Pr-kt
-    - Prospekt
+    - pr-kt
     - prospekt
     - prospect
     - просп
@@ -112,7 +125,7 @@ forms:
     - вул
     - ул
   kv:
-    - kvartal
+   # - kvartal (refers to quarter/block and not flat)
     - квартал
     - kvartira
     - квартира
@@ -128,6 +141,7 @@ forms:
     - drive
   ln:
     - lane
+    - laan
     - переулок
     - pereulok
     - per
@@ -151,7 +165,7 @@ forms:
     - turnpike
   vl:
     - villa
-    - village
+    # - village (a village is a small settlement whereas a villa is a large house)
   rte:
     - route
   br:
@@ -159,12 +173,13 @@ forms:
   unt:
     - unit
   loft:
+    - studio
     - studios
   pl:
     - platz
     - plaza
     - place
-    - plot
+    - plot # note: does not mean exactly the same as place
   cty:
     - county
     - counties
@@ -190,6 +205,9 @@ forms:
     - mount
     - montaña
     - mountain
+    - montagna
+    - montagne
+    - montanha
   "co":
     - c o
     - c/o
@@ -203,6 +221,9 @@ forms:
     - central
   pk:
     - park
+    - parc
+    - parco
+    - parque
   gd:
     - garden
     - gardens
@@ -262,6 +283,7 @@ forms:
     - southwester
   ste:
     - suite
+    - suit # for typos of "suite"
   fl:
     - floor
     - story
@@ -278,13 +300,15 @@ forms:
     - et
   of:
     - office
+    - oficina
     - KOM./OFFICE
-    - officier
+    - ufficio
     - офис
     - ofis
     - офіс
   b:
     - bureau
+    - bureaux
     - büro
   hq:
     - headquarters
@@ -296,17 +320,16 @@ forms:
     - cabinet
     - Kabinet
   pom:
-    - Pomeshch
-    - Pomeshchenie
-    - Pomeshtenie
+    - pomeshch
+    - pomeshchenie
+    - pomeshtenie
     - pomeshcheniye
-    - Floor/Pomeshch.
+    - floor/pomeshch.
     - Помещ
     - Пом
   nab:
     - naberezhnaya
     - naberezhnye
-    - NABEREZHNAYA
     - nab.
     - набережная
     - набережн
@@ -315,7 +338,6 @@ forms:
   muni:
     - municipal
     - municipality
-    - MUNICIPAL
     - Munitsipal'nyi
   hwy:
     - highway
@@ -329,9 +351,9 @@ forms:
   pobox:
     - po box
     - p o box
-    - P.O. Box
-    - Post Office Box
-    - Post Box
+    - p.o. box
+    - post office box
+    - post box
   zip:
     - zipcode
     - zip code
