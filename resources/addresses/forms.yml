@@ -275,6 +275,31 @@ forms:
     - поверх
     - этаж
     - 階
+  street_level:
+    - grnd
+    - ground
+    - grnd floor
+    - ground floor
+    - street level
+    - begane grond
+    - erdgeschoss
+    - pianterreno
+    - planta baja
+    - rez-de-chaussée
+    - rdc
+    - Первый этаж
+  basement:
+    - basement
+    - cellar
+    - kelder
+    - keller
+    - seminterrato
+    - sous-sol
+    - souterrain
+    - sótano
+    - subsol
+    - подвал
+    - подвальное
   dept:
     - department
   "&":
