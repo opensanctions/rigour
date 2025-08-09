@@ -1,7 +1,9 @@
 forms:
   apt:
     - apartment
+    - apartamento
     - appartement
+    - appartamento
     - flat
   av:
     - avenue
