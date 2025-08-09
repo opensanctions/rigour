@@ -376,6 +376,12 @@ forms:
     - post office box
     - post box
     - postbox
+    - apartado postal
+    - boîte postale
+    - caixa postal
+    - postbus
+    - postfach
+    - почтовый ящик
   zip:
     - zipcode
     - zip code
