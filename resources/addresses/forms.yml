@@ -15,7 +15,7 @@ forms:
     - road
   "no":
     - number
-    - nr
+    - nr # unfortunately, Nr in addresses can also mean "near"
     - №
     - număr
     - nummer
@@ -284,19 +284,19 @@ forms:
   ne:
     - northeast
     - north east
-    - northeaster
+    - northeastern
   nw:
     - northwest
     - north west
-    - northwester
+    - northwestern
   se:
     - southeast
     - south east
-    - southeaster
+    - southeastern
   sw:
     - southwest
     - south west
-    - southwester
+    - southwestern
   ste:
     - suite
     - suit # for typos of "suite"
