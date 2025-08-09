@@ -372,8 +372,10 @@ forms:
     - po box
     - p o box
     - p.o. box
+    - p.o.box
     - post office box
     - post box
+    - postbox
   zip:
     - zipcode
     - zip code
