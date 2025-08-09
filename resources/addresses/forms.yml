@@ -278,8 +278,9 @@ forms:
   street_level:
     - grnd
     - ground
-    - grnd floor
     - ground floor
+    - grnd floor
+    - g floor
     - street level
     - begane grond
     - erdgeschoss
