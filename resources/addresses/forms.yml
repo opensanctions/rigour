@@ -59,6 +59,11 @@ forms:
     - строение
   zone:
     - zone
+    - sone
+    - zona
+    - zone
+    - zóna
+    - ζώνη
     - зона
   area:
     - area
