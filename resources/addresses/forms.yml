@@ -360,6 +360,10 @@ forms:
     - shosse
     - шоссе
     - шосе
+  jct:
+    - junction
+    - jctn
+    - junctn
   lvl:
     - level
   ny:
