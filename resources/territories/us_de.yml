@@ -8,8 +8,12 @@ parent: us
 names_strong:
   - DELAWARE, U.S.A.
   - Delaware, Usa
+  - Delaware, US
 names_weak:
   - Delaware (USA)
   - Delauear
   - Delauear (Estados Unidos)
-  - Делауэр  # Delauér
+  - Делауэр       # Delauér
+  - Делауэр (США) # Delauér (SŠA)
+  - Delaware (États-Unis)
+  - Delaware (Estados Unidos)

@@ -8,6 +8,9 @@ parent: us
 names_strong:
   - KENTUCKY, U.S.A.
   - Kentucky, USA
+  - Kentucky, US
 names_weak:
   - Кентукки       # Kentukki
   - Кентукки (США) # Kentukki (SŠA)
+  - Kentucky (États-Unis)
+  - Kentucky (Estados Unidos)

@@ -7,4 +7,8 @@ name: Samara Oblast
 parent: ru
 qid: Q1727
 names_strong: []
-names_weak: []
+names_weak:
+  - Samara
+  - Самара  # Samara
+  - Samara, Russia
+  - Самара (Россия) # Samara (Rossiâ)

@@ -7,9 +7,12 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - IOWA, U.S.A.
+  - Iowa, US
 names_weak:
   - Iowa, USA
   - Iowa (USA)
   - Iowa (United States)
   - Айова       # Ajova
   - Айова (США) # Ajova (SŠA)
+  - Iowa (États-Unis)
+  - Iowa (Estados Unidos)

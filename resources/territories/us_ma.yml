@@ -8,4 +8,12 @@ parent: us
 names_strong:
   - MASSACHUSETTS, U.S.A.
   - Massachusetts, United States
-names_weak: []
+  - Massachusetts, US
+names_weak:
+  - Massachusetts (USA)
+  - Massachusetts, USA
+  - Massachusetts, United States of America
+  - Массачусетс       # Massačusets
+  - Массачусетс (США) # Massačusets (SŠA)
+  - Massachusetts (États-Unis)
+  - Massachusetts (Estados Unidos)

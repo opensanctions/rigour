@@ -7,4 +7,12 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - MICHIGAN, U.S.A.
-names_weak: []
+  - Michigan, US
+names_weak:
+  - Michigan (USA)
+  - Michigan, USA
+  - Michigan, United States of America
+  - Мичиган       # Mičigan
+  - Мичиган (США) # Mičigan (SŠA)
+  - Michigan (États-Unis)
+  - Michigan (Estados Unidos)

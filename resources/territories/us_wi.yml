@@ -7,9 +7,13 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - WISCONSIN, U.S.A.
+  - Wisconsin, US
 names_weak:
   - WIS
   - WISCONSIN (USA)
   - WISCONSIN, USA
   - Uisconsin
-  - Уисконсин  # Uiskonsin
+  - Уисконсин       # Uiskonsin
+  - Уисконсин (США) # Uiskonsin (SŠA)
+  - Wisconsin (États-Unis)
+  - Wisconsin (Estados Unidos)

@@ -7,4 +7,12 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - IDAHO, U.S.A.
-names_weak: []
+  - Idaho, US
+names_weak:
+  - Idaho (USA)
+  - Idaho, USA
+  - Idaho, United States of America
+  - Айдахо       # Ajdaho
+  - Айдахо (США) # Ajdaho (SŠA)
+  - Idaho (États-Unis)
+  - Idaho (Estados Unidos)

@@ -7,4 +7,8 @@ name: Krasnodar Krai
 parent: ru
 qid: Q3680
 names_strong: []
-names_weak: []
+names_weak:
+  - Krasnodar
+  - Краснодар  # Krasnodar
+  - Krasnodar, Russia
+  - Краснодар (Россия) # Krasnodar (Rossiâ)

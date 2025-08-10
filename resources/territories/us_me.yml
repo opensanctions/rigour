@@ -7,8 +7,11 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - MAINE, U.S.A.
+  - Maine, US
 names_weak:
   - Maine, USA
   - Maine (USA)
   - Мэн       # Mén
   - Мэн (США) # Mén (SŠA)
+  - Maine (États-Unis)
+  - Maine (Estados Unidos)

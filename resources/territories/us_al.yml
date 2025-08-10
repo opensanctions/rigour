@@ -5,7 +5,8 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: us
-names_strong: []
+names_strong:
+  - Alabama, US
 names_weak:
   - Ala.
   - Alabama (USA)
@@ -15,3 +16,5 @@ names_weak:
   - Alabam (Estados Unidos)
   - Алабама       # Alabama
   - Алабама (США) # Alabama (SŠA)
+  - Alabama (États-Unis)
+  - Alabama (Estados Unidos)

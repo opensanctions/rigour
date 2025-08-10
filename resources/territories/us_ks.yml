@@ -7,8 +7,11 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - KANSAS, U.S.A.
+  - Kansas, US
 names_weak:
   - Kansas, USA
   - Kansas (USA)
   - Канзас       # Kanzas
   - Канзас (США) # Kanzas (SŠA)
+  - Kansas (États-Unis)
+  - Kansas (Estados Unidos)

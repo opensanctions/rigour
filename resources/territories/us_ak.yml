@@ -7,6 +7,7 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - ALASKA, U.S.A.
+  - Alaska, US
 names_weak:
   - Alaska (USA)
   - Alaska, USA
@@ -15,3 +16,5 @@ names_weak:
   - Alasca (Estados Unidos)
   - Аляска       # Alâska
   - Аляска (США) # Alâska (SŠA)
+  - Alaska (États-Unis)
+  - Alaska (Estados Unidos)

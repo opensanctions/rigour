@@ -7,4 +7,12 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - MARYLAND, U.S.A.
-names_weak: []
+  - Maryland, US
+names_weak:
+  - Maryland (USA)
+  - Maryland, USA
+  - Maryland, United States of America
+  - Мэриленд       # Mérilend
+  - Мэриленд (США) # Mérilend (SŠA)
+  - Maryland (États-Unis)
+  - Maryland (Estados Unidos)

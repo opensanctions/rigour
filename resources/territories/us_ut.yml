@@ -7,9 +7,13 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - UTAH, U.S.A.
+  - Utah, US
 names_weak:
   - UTAH (USA)
   - UTAH, USA
   - Uta
   - Uta (Estados Unidos)
-  - Ута  # Uta
+  - Ута       # Uta
+  - Ута (США) # Uta (SŠA)
+  - Utah (États-Unis)
+  - Utah (Estados Unidos)

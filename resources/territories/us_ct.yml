@@ -8,8 +8,11 @@ parent: us
 names_strong:
   - CONNECTICUT, U.S.A.
   - Connecticut, USA
+  - Connecticut, US
 names_weak:
   - Коннектикут       # Konnektikut
   - Коннектикут (США) # Konnektikut (SŠA)
   - Конактікут        # Konaktíkut
   - Конактікут (США)  # Konaktíkut (SŠA)
+  - Connecticut (États-Unis)
+  - Connecticut (Estados Unidos)

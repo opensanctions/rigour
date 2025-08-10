@@ -7,4 +7,13 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - VIRGINIA, U.S.A.
-names_weak: []
+  - Virginia, US
+names_weak:
+  - Virginia (USA)
+  - Virginia, USA
+  - Virginia, United States of America
+  - Виргиния       # Virginiâ
+  - Виргиния (США) # Virginiâ (SŠA)
+  - Virginie
+  - Virginie (États-Unis)
+  - Virginia (Estados Unidos)

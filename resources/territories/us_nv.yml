@@ -7,6 +7,7 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - NEVADA, U.S.A.
+  - Nevada, US
 names_weak:
   - NEV
   - NEVADA, USA
@@ -14,3 +15,5 @@ names_weak:
   - NEVADA (United States)
   - Невада       # Nevada
   - Невада (США) # Nevada (SŠA)
+  - Nevada (États-Unis)
+  - Nevada (Estados Unidos)

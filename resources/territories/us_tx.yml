@@ -7,6 +7,7 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - TEXAS, U.S.A.
+  - Texas, US
 names_weak:
   - Tex.
   - Texas (USA)
@@ -16,3 +17,4 @@ names_weak:
   - Tejas (Estados Unidos)
   - Техас                  # Tehas
   - Техас (Съединени щати) # Tehas (Sʺedineni ŝati)
+  - Texas (États-Unis)
