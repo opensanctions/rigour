@@ -1,6 +1,13 @@
 types:
-  # The local abbreviation or term (e.g., "LLC").
-  # Must be a single string.
+  # This data file captures organisation type descriptors that are used as part of legal entity names and
+  # maps them to a variety of cleaner or generic forms. The aliases can include common abbreviations,
+  # translations, and variations in spelling or formatting.
+  # The `generic` field provides a globally standardized tag for the organisation type. The vocabulary of
+  # this field is tightly constrained, and providing a `generic` is optional.
+  # The `display` field is used for human-readable representations of the organisation type, which can be
+  # placed as a replacement for user interfaces or reports.
+  # The `compare` field is used for matching and comparison purposes, allowing for variations in naming
+  # or formatting to be standardized, while not abstracting as radically as the `generic` field.
   - display: PLC
     generic: JSC
     aliases:
@@ -201,13 +208,22 @@ types:
     aliases:
       - No liability
   - display: ІП
+    compare: IP
     generic: SP
     aliases:
       - Індывідуальны прадпрымальнік
   - display: ПУП
+    compare: PUP
     generic: SP
     aliases:
       - Прыватнае унітарнае прадпрыемства
+  - display: ИП
+    compare: IP
+    generic: SP
+    aliases:
+      - индивидуальный предприниматель
+      - ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ
+      - Индивидуальный предприниматель
   - display: d.d.
     compare: dd
     generic: JSC
@@ -1015,6 +1031,7 @@ types:
     aliases:
       - kommandiittiyhtiö
   - display: ТОВ
+    compare: OOO
     generic: LLC
     aliases:
       - товариство з обмеженою відповідальністю
@@ -1025,6 +1042,22 @@ types:
     aliases:
       - tovarystvo z obmezhenoyu vidpovidalnistyu
       - Tovarystvo z obmezhenoiu vidpovidalnistiu
+  - display: СПД
+    compare: SPD
+    generic: SP
+    aliases:
+      - субъект предпринимательской деятельности
+      - СУБЪЕКТ ПРЕДПРИНИМАТЕЛЬСКОЙ ДЕЯТЕЛЬНОСТИ
+      - суб'єкт підприємницької діяльності
+      - СУБ'ЄКТ ПІДПРИЄМНИЦЬКОЇ ДІЯЛЬНОСТІ
+  - display: ФОП
+    compare: FOP
+    generic: SP
+    aliases:
+      - физическое лицо-предприниматель
+      - ФИЗИЧЕСКОЕ ЛИЦО-ПРЕДПРИНИМАТЕЛЬ
+      - фізична особа-підприємець
+      - ФІЗИЧНА ОСОБА-ПІДПРИЄМЕЦЬ
   - generic: LLC
     aliases:
       - tavaristva z abmezhavanaj adkaznastsiu
@@ -2013,6 +2046,7 @@ types:
       - Государственное предприятие
 
   - display: ГУП # государственное унитарное предприятие
+    compare: GUP
     generic: SOE
     aliases:
       - ГУП
@@ -2179,14 +2213,14 @@ types:
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ # FEDERAL STATE PRESCHOOL EDUCATIONAL INSTITUTION
 
   - display: ФГУП
-    compare: ""
+    compare: FGUP
     generic: SOE
     aliases:
       - ФГУП
       - ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ # FEDERAL STATE UNITARY ENTERPRISE
 
   - display: ФГБУ # федеральное государственное бюджетное учреждение
-    compare: ""
+    compare: FGBU
     generic: SOE
     aliases:
       - ФГБУ
@@ -2378,12 +2412,14 @@ types:
       - НЕГОСУДАРСТВЕНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДОПОЛНИТЕЛЬНОГО ПРОФЕССИОНАЛЬНОГО ОБРАЗОВАНИЯ (ПОВЫШЕНИЯ КВАЛИФИКАЦИИ) СПЕЦИАЛИСТОВ # NON-STATE EDUCATIONAL INSTITUTION OF FURTHER PROFESSIONAL EDUCATION (QUALIFICATION IMPROVEMENT) FOR SPECIALISTS
 
   - display: САК
+    compare: AO
     generic: JSC
     aliases:
       - СТРАХОВАЯ АКЦИОНЕРНАЯ КОМПАНИЯ # INSURANCE JOINT-STOCK COMPANY
       - СТРАХОВАЯ АКЦИОНЕР.КОМПАНИЯ
 
   - display: ЗАО # закрытое акционерное общество
+    compare: AO
     generic: JSC
     aliases:
       - закрите акціонерне товариство
@@ -2412,6 +2448,7 @@ types:
       - Закрите акціонерне товариство
 
   - display: ОАО # открытое акционерное общество
+    compare: AO
     generic: JSC
     aliases:
       - OAO # Open Joint-Stock Company
@@ -2464,6 +2501,7 @@ types:
       - cuideachta comhstoic oscailte
 
   - display: АО # акционерное общество
+    compare: AO
     generic: JSC
     aliases:
       - АКЦИОНЕРНОЕ ОБЩЕСТВО # JOINT-STOCK COMPANY
@@ -2484,6 +2522,7 @@ types:
       - Publichne aktsionerne tovarystvo
 
   - display: ПАО # публичное акционерное общество
+    compare: AO
     generic: JSC
     aliases:
       - ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО # PUBLIC JOINT-STOCK COMPANY
@@ -2491,11 +2530,13 @@ types:
       - приватне акціонерне товариство
       - публичное акционерное общество
   - display: ПАТ # публічне акціонерне товариство
+    compare: AO
     generic: JSC
     aliases:
       - Публічне акціонерне товариство
 
   - display: НАО # некоммерческое акционерное общество
+    compare: AO
     generic: JSC
     aliases:
       - НЕПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО # NON-PUBLIC JOINT-STOCK COMPANY
@@ -2511,6 +2552,7 @@ types:
       - СЛЕДСТВЕННОЕ УПРАВЛЕНИЕ СЛЕДСТВЕННОГО КОМИТЕТА РОССИЙСКОЙ ФЕДЕРАЦИИ
 
   - display: МУП # муниципальное унитарное предприятие
+    compare: MUP
     generic: SOE
     aliases:
       - МУНИЦИПАЛЬНОЕ УНИТАРНОЕ ПРЕДПРИЯТИЕ # MUNICIPAL UNITARY ENTERPRISE
@@ -2602,6 +2644,7 @@ types:
       - obshchestvo s ogranichennoi otvetstvennostiu
 
   - display: ООО # общество с ограниченной ответственностью
+    compare: OOO
     generic: LLC
     aliases:
       - ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ # LIMITED LIABILITY COMPANY
