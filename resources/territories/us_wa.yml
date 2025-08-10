@@ -7,6 +7,7 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - WASHINGTON, U.S.A.
+  - Washington, US
 names_weak:
   - WASHINGTON STATE
   - WASHINGTON, USA
@@ -16,3 +17,5 @@ names_weak:
   - Uashington (Estados Unidos)
   - Уошингтон  # Uošington
   - WASH., U.S.A.
+  - Уошингтон (США) # Uošington (SŠA)
+  - Washington (États-Unis)

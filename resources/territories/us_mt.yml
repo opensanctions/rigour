@@ -8,6 +8,9 @@ parent: us
 names_strong:
   - MONTANA, U.S.A.
   - Montana, USA
+  - Montana, US
 names_weak:
   - Монтана       # Montana
   - Монтана (США) # Montana (SŠA)
+  - Montana (États-Unis)
+  - Montana (Estados Unidos)

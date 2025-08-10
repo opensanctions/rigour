@@ -8,7 +8,10 @@ parent: us
 names_strong:
   - ARKANSAS, U.S.A.
   - Arkansas, USA
+  - Arkansas, US
 names_weak:
   - Арканзас       # Arkanzas
   - Арканзас (США) # Arkanzas (SŠA)
   - Арканзас, США  # Arkanzas, SŠA
+  - Arkansas (États-Unis)
+  - Arkansas (Estados Unidos)

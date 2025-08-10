@@ -7,9 +7,13 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - MISSOURI, U.S.A.
+  - Missouri, US
 names_weak:
   - Missouri, USA
   - Missouri (USA)
   - Missouri (United States)
   - Миссури       # Missuri
   - Миссури (США) # Missuri (SŠA)
+  - Missouri (États-Unis)
+  - Misuri
+  - Misuri (Estados Unidos)

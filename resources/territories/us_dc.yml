@@ -12,8 +12,13 @@ names_strong:
   - Washington, DC
   - District of Columbia, USA
   - Washington, D.C., USA
+  - District of Columbia, US
 names_weak:
   - Вашингтон, округ Колумбия       # Vašington, okrug Kolumbiâ
   - Вашингтон, округ Колумбия (США) # Vašington, okrug Kolumbiâ (SŠA)
   - Вашингтон, округ Колумбія       # Vašington, okrug Kolumbíâ
   - Вашингтон, округ Колумбія (США) # Vašington, okrug Kolumbíâ (SŠA)
+  - District de Columbia
+  - District de Columbia (États-Unis)
+  - Distrito de Columbia
+  - Distrito de Columbia (Estados Unidos)

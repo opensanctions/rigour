@@ -7,9 +7,12 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - ILLINOIS, U.S.A.
+  - Illinois, US
 names_weak:
   - Illinois, USA
   - Illinois (USA)
   - Illinois (United States)
   - Иллинойс       # Illinojs
   - Иллинойс (США) # Illinojs (SŠA)
+  - Illinois (États-Unis)
+  - Illinois (Estados Unidos)

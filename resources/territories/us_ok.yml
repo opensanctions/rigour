@@ -12,6 +12,9 @@ other_qids:
 names_strong:
   - OKLAHOMA, U.S.A.
   - Oklahoma (USA)
+  - Oklahoma, US
 names_weak:
   - Оклахома       # Oklahoma
   - Оклахома (США) # Oklahoma (SŠA)
+  - Oklahoma (États-Unis)
+  - Oklahoma (Estados Unidos)

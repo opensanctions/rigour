@@ -7,9 +7,14 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - NEW JERSEY, U.S.A.
+  - NJ, US
+  - New Jersey, US
 names_weak:
   - New Jersey, USA
   - New Jersey (USA)
   - New Jersey (United States)
   - Нью-Джерси       # Nʹû-Džersi
   - Нью-Джерси (США) # Nʹû-Džersi (SŠA)
+  - New Jersey (États-Unis)
+  - Nueva Jersey
+  - Nueva Jersey (Estados Unidos)

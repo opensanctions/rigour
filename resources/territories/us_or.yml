@@ -7,8 +7,10 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - OREGON, U.S.A.
+  - Oregon, US
 names_weak:
   - Oregón
   - Oregón (Estados Unidos)
   - Ореґон       # Oreg̀on
   - Ореґон (США) # Oreg̀on (SŠA)
+  - Oregon (États-Unis)

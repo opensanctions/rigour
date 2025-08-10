@@ -8,6 +8,9 @@ parent: us
 names_strong:
   - VERMONT, U.S.A.
   - Vermont (USA)
+  - Vermont, US
 names_weak:
   - Вермонт       # Vermont
   - Вермонт (США) # Vermont (SŠA)
+  - Vermont (États-Unis)
+  - Vermont (Estados Unidos)

@@ -7,4 +7,8 @@ name: Perm Krai
 parent: ru
 qid: Q5400
 names_strong: []
-names_weak: []
+names_weak:
+  - Perm
+  - Пермь  # Permʹ
+  - Perm, Russia
+  - Пермь (Россия) # Permʹ (Rossiâ)

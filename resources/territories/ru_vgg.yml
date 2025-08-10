@@ -7,4 +7,9 @@ name: Volgograd Oblast
 parent: ru
 qid: Q3819
 names_strong: []
-names_weak: []
+names_weak:
+  - Volgograd
+  - Волгоград  # Volgograd
+  - Stalingrad
+  - Volgograd, Russia
+  - Волгоград (Россия) # Volgograd (Rossiâ)

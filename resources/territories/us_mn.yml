@@ -7,4 +7,12 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - MINNESOTA, U.S.A.
-names_weak: []
+  - Minnesota, US
+names_weak:
+  - Minnesota (USA)
+  - Minnesota, USA
+  - Minnesota, United States of America
+  - Миннесота       # Minnesota
+  - Миннесота (США) # Minnesota (SŠA)
+  - Minnesota (États-Unis)
+  - Minnesota (Estados Unidos)

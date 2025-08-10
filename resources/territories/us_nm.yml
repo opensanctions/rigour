@@ -7,9 +7,14 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - NEW MEXICO, U.S.A.
+  - New Mexico, US
 names_weak:
   - New Mexico, USA
   - New Mexico (USA)
   - New Mexico (United States)
   - Нью-Мексико       # Nʹû-Meksiko
   - Нью-Мексико (США) # Nʹû-Meksiko (SŠA)
+  - Nouveau-Mexique
+  - Nouveau-Mexique (États-Unis)
+  - Nuevo México
+  - Nuevo México (Estados Unidos)

@@ -8,7 +8,10 @@ parent: us
 names_strong:
   - NEBRASKA, U.S.A.
   - Nebraska, USA
+  - Nebraska, US
 names_weak:
   - Небраска       # Nebraska
   - Небраска (США) # Nebraska (SŠA)
   - Небраска, США  # Nebraska, SŠA
+  - Nebraska (États-Unis)
+  - Nebraska (Estados Unidos)

@@ -151,6 +151,8 @@ org_symbols:
     - associations
     - ассоциация
     - объединение
+    - асоціація
+    - об'єднання
   partner:
     - partner
     - partners
@@ -184,6 +186,11 @@ org_symbols:
     - culture
     - kultura
     - культуры
+    - культура
+    - культури
+    - культурний
+    - культурна
+    - культурне
   holding:
     - holding
     - holdings
@@ -202,6 +209,15 @@ org_symbols:
     - 集体
     - 保持
     - 保有資産
+    - кооперація
+    - кооператив
+    - кооперативне
+    - кооперативна
+    - кооперативи
+    - кооперативу
+    - кооперативів
+    - споживче товариство
+    - споживча кооперація
   business:
     - business
     - businesses
@@ -217,6 +233,11 @@ org_symbols:
   nominee:
     - nominees
     - nominee
+    - номинальный
+    - номинальная
+    - номінальний
+    - номінальна
+    - довірена особа
   branch:
     - branch
     - branch of
@@ -239,6 +260,8 @@ org_symbols:
     - consortum
     - konsortsium
     - consortile
+    - консорциум
+    - консорціум
   service:
     - service
     - services
@@ -293,10 +316,18 @@ org_symbols:
     - Speciaal
     - Specijalni
     - Специальный
+    - специальная
+    - специальное
+    - спеціальний
+    - спеціальна
+    - спеціальне
   spv:
     - spv
     - special purpose vehicle
     - vehículo de propósito especial
+    - специальное проектное предприятие
+    - компания специального назначения
+    - спеціальна проектна компанія
   skb:
     - skb
     - special design bureau
@@ -311,6 +342,10 @@ org_symbols:
     - fabrication d’instruments
     - приборостроительный
     - ПРИБОРОСТРОИТЕЛЬНЫЙ
+    - приладобудівний
+    - приладобудування
+    - приладобудівна
+    - приладобудівне
   tech:
     - technology
     - technical
@@ -465,10 +500,23 @@ org_symbols:
     - royale
     - königlich
     - kunglig
+    - королевский
+    - королевская
+    - королевское
+    - королівський
+    - королівська
+    - королівське
   supply:
     - supply
     - supplies
     - supplier
+    - поставка
+    - поставки
+    - поставщик
+    - снабжение
+    - постачання
+    - постачальник
+    - забезпечення
   tv:
     - tv
     - television
@@ -1038,6 +1086,14 @@ org_symbols:
     - advisor
     - advisers
     - advisors
+    - советник
+    - советники
+    - консультант
+    - консультанты
+    - радник
+    - радники
+    - консультант
+    - консультанти
   club:
     - club
     - clube
@@ -1181,10 +1237,21 @@ org_symbols:
     - health
     - healthcare
     - здравоохранения
+    - здравоохранение
+    - охорона здоров'я
+    - здоров'я
   pharmacy:
     - pharmacy
     - фармацевтический
     - apotheke
+    - фармацевтическая
+    - фармацевтические
+    - фармация
+    - аптека
+    - фармацевтичний
+    - фармацевтична
+    - фармацевтичні
+    - фармація
   machine:
     - machine
     - machines
@@ -1346,6 +1413,11 @@ org_symbols:
     - ressources
     - recurso
     - recursos
+    - ресурсы
+    - ресурс
+    - ресурсов
+    - ресурси
+    - ресурсів
   shipping:
     - shipping
     - shipping company
@@ -1731,6 +1803,14 @@ org_symbols:
   power:
     - power
     - powers
+    - энергия
+    - энергетика
+    - энергетический
+    - энергетическая
+    - енергія
+    - енергетика
+    - енергетичний
+    - енергетична
   base:
     - base
     - bases
@@ -2241,9 +2321,21 @@ org_symbols:
     - credits
     - КРЕДИТНАЯ
     - кредитная
+    - кредитный
+    - кредитное
+    - кредит
+    - кредиты
+    - кредитний
+    - кредитна
+    - кредитне
   asset:
     - asset
     - assets
+    - активы
+    - актив
+    - активов
+    - активи
+    - активів
   budget:
     - budget
     - budgetary
@@ -2254,6 +2346,12 @@ org_symbols:
     - бюджетное
     - бюджетного
     - бюджетной
+    - бюджетний
+    - бюджетна
+    - бюджетні
+    - бюджетного
+    - бюджетної
+    - бюджетних
   stockexch:
     - stock exchange
     - stock market

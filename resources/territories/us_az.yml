@@ -7,4 +7,12 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - ARIZONA, U.S.A.
-names_weak: []
+  - Arizona, US
+names_weak:
+  - Arizona (USA)
+  - Arizona, USA
+  - Arizona, United States of America
+  - Аризона       # Arizona
+  - Аризона (США) # Arizona (SŠA)
+  - Arizona (États-Unis)
+  - Arizona (Estados Unidos)

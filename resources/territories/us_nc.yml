@@ -7,4 +7,15 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - NORTH CAROLINA, U.S.A.
-names_weak: []
+  - North Carolina, US
+  - NC, US
+names_weak:
+  - North Carolina (USA)
+  - North Carolina, USA
+  - North Carolina, United States of America
+  - Северная Каролина       # Severnaâ Karolina
+  - Северная Каролина (США) # Severnaâ Karolina (SŠA)
+  - Caroline du Nord
+  - Caroline du Nord (États-Unis)
+  - Carolina del Norte
+  - Carolina del Norte (Estados Unidos)

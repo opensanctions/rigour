@@ -7,6 +7,8 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - CALIFORNIA, U.S.A.
+  - California Republic
+  - California, US
 names_weak:
   - California, USA
   - California (USA)
@@ -17,3 +19,8 @@ names_weak:
   - Kalifornija
   - Kalifornië (SŠA) # Kalifornija (SŠA)
   - Kalifornien (SŠA) # Kaliforniya (SŠA)
+  - Калифорния        # Kaliforniâ
+  - Калифорния (США)  # Kaliforniâ (SŠA)
+  - Californie
+  - Californie (États-Unis)
+  - California (Estados Unidos)

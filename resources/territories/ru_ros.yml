@@ -7,4 +7,9 @@ name: Rostov Oblast
 parent: ru
 qid: Q3573
 names_strong: []
-names_weak: []
+names_weak:
+  - Rostov-on-Don
+  - Ростов-на-Дону  # Rostov-na-Donu
+  - Rostov na Donu
+  - Rostov-on-Don, Russia
+  - Ростов-на-Дону (Россия) # Rostov-na-Donu (Rossiâ)
