@@ -10,9 +10,16 @@ parent: us
 names_strong:
   - NEW YORK, U.S.A.
   - New York, Usa
+  - New York, NY, US
+  - New York, NY
+  - New York, N.Y.
+  - NY, US
+  - NY, NY, US
   - NYC
 names_weak:
   - New Yorker
   - New York City
+  - New York City, NY
   - Нью-Йорк       # Nʹû-Jork
   - Нью-Йорк (США) # Nʹû-Jork (SŠA)
+  - Nueva York
