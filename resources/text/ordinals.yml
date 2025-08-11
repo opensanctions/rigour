@@ -17,6 +17,7 @@ ordinals:
     - "0th"
     - "０" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "(0)"
+    - "#0"
     - "Number 0"
     - "No0"
     - "No 0"
@@ -61,6 +62,7 @@ ordinals:
     - "１" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑴" # Unicode symbol for parenthesized number"
     - "(1)"
+    - "#1"
     - "Number 1"
     - "No1"
     - "No 1"
@@ -103,6 +105,7 @@ ordinals:
     - "２" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑵" # Unicode symbol for parenthesized number"
     - "(2)"
+    - "#2"
     - "Number 2"
     - "No2"
     - "No 2"
@@ -150,6 +153,7 @@ ordinals:
     - "３" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑶" # Unicode symbol for parenthesized number
     - "(3)"
+    - "#3"
     - "Number 3"
     - "No3"
     - "No 3"
@@ -191,6 +195,7 @@ ordinals:
     - "４" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑷" # Unicode symbol for parenthesized number
     - "(4)"
+    - "#4"
     - "Number 4"
     - "No4"
     - "No 4"
@@ -235,6 +240,7 @@ ordinals:
     - "５" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑸" # Unicode symbol for parenthesized number
     - "(5)"
+    - "#5"
     - "Number 5"
     - "No5"
     - "No 5"
@@ -277,6 +283,7 @@ ordinals:
     - "６" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑹" # Unicode symbol for parenthesized number
     - "(6)"
+    - "#6"
     - "Number 6"
     - "No6"
     - "No 6"
@@ -319,6 +326,7 @@ ordinals:
     - "７" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑺" # Unicode symbol for parenthesized number
     - "(7)"
+    - "#7"
     - "Number 7"
     - "No7"
     - "No 7"
@@ -361,6 +369,7 @@ ordinals:
     - "８" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑻" # Unicode symbol for parenthesized number
     - "(8)"
+    - "#8"
     - "Number 8"
     - "No8"
     - "No 8"
@@ -404,6 +413,7 @@ ordinals:
     - "９" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "⑼" # Unicode symbol for parenthesized number
     - "(9)"
+    - "#9"
     - "Number 9"
     - "No9"
     - "No 9"
@@ -445,6 +455,7 @@ ordinals:
     - "⒑" # Unicode symbol for number plus full stop
     - "⑽" # Unicode symbol for parenthesized number
     - "(10)"
+    - "#10"
     - "Number 10"
     - "No10"
     - "No 10"
@@ -488,6 +499,7 @@ ordinals:
     - "⒒" # Unicode symbol for number plus full stop
     - "⑾" # Unicode symbol for parenthesized number
     - "(11)"
+    - "#11"
     - "Number 11"
     - "No11"
     - "No 11"
@@ -531,6 +543,7 @@ ordinals:
     - "⒓" # Unicode symbol for number plus full stop
     - "⑿" # Unicode symbol for parenthesized number
     - "(12)"
+    - "#12"
     - "Number 12"
     - "No12"
     - "No 12"
@@ -575,6 +588,7 @@ ordinals:
     - "⒔" # Unicode symbol for number plus full stop
     - "⒀" # Unicode symbol for parenthesized number
     - "(13)"
+    - "#13"
     - "Number 13"
     - "No13"
     - "No 13"
@@ -616,6 +630,7 @@ ordinals:
     - "⒕" # Unicode symbol for number plus full stop
     - "⒁" # Unicode symbol for parenthesized number
     - "(14)"
+    - "#14"
     - "Number 14"
     - "No14"
     - "No 14"
@@ -658,6 +673,7 @@ ordinals:
     - "⒖" # Unicode symbol for number plus full stop
     - "⒂" # Unicode symbol for parenthesized number
     - "(15)"
+    - "#15"
     - "Number 15"
     - "No15"
     - "No 15"
@@ -700,6 +716,7 @@ ordinals:
     - "⒗" # Unicode symbol for number plus full stop
     - "⒃" # Unicode symbol for parenthesized number
     - "(16)"
+    - "#16"
     - "Number 16"
     - "No16"
     - "No 16"
@@ -742,6 +759,7 @@ ordinals:
     - "⒘" # Unicode symbol for number plus full stop
     - "⒄" # Unicode symbol for parenthesized number
     - "(17)"
+    - "#17"
     - "Number 17"
     - "No17"
     - "No 17"
@@ -784,6 +802,7 @@ ordinals:
     - "⒅" # Unicode symbol for parenthesized number
     - "１８" # fullwidth characters sometimes used in China and Japan
     - "(18)"
+    - "#18"
     - "Number 18"
     - "No18"
     - "No 18"
@@ -826,6 +845,7 @@ ordinals:
     - "⒚" # Unicode symbol for number plus full stop
     - "⒆" # Unicode symbol for parenthesized number
     - "(19)"
+    - "#19"
     - "Number 19"
     - "No19"
     - "No 19"
@@ -868,6 +888,7 @@ ordinals:
     - "⒛" # Unicode symbol for number plus full stop
     - "⒇" # Unicode symbol for parenthesized number
     - "(20)"
+    - "#20"
     - "Number 20"
     - "No20"
     - "No 20"
@@ -918,6 +939,7 @@ ordinals:
     - "21º."
     - "２１" # fullwidth characters sometimes used in China and Japan
     - "(21)"
+    - "#21"
     - "Number 21"
     - "No21"
     - "No 21"
@@ -966,6 +988,7 @@ ordinals:
     - "22º."
     - "２２" # fullwidth characters sometimes used in China and Japan
     - "(22)"
+    - "#22"
     - "Number 22"
     - "No22"
     - "No 22"
@@ -1014,6 +1037,7 @@ ordinals:
     - "23º."
     - "２３" # fullwidth characters sometimes used in China and Japan
     - "(23)"
+    - "#23"
     - "Number 23"
     - "No23"
     - "No 23"
@@ -1060,6 +1084,7 @@ ordinals:
     - "24º."
     - "２４" # fullwidth characters sometimes used in China and Japan
     - "(24)"
+    - "#24"
     - "Number 24"
     - "No24"
     - "No 24"
@@ -1105,6 +1130,7 @@ ordinals:
     - "25º."
     - "２５" # fullwidth characters sometimes used in China and Japan
     - "(25)"
+    - "#25"
     - "Number 25"
     - "No25"
     - "No 25"
@@ -1149,6 +1175,7 @@ ordinals:
     - "26º."
     - "２６" # fullwidth characters sometimes used in China and Japan
     - "(26)"
+    - "#26"
     - "Number 26"
     - "No26"
     - "No 26"
@@ -1193,6 +1220,7 @@ ordinals:
     - "27º."
     - "２７" # fullwidth characters sometimes used in China and Japan
     - "(27)"
+    - "#27"
     - "Number 27"
     - "No27"
     - "No 27"
@@ -1237,6 +1265,7 @@ ordinals:
     - "28º."
     - "２８" # fullwidth characters sometimes used in China and Japan
     - "(28)"
+    - "#28"
     - "Number 28"
     - "No28"
     - "No 28"
@@ -1281,6 +1310,7 @@ ordinals:
     - "29º."
     - "２９" # fullwidth characters sometimes used in China and Japan
     - "(29)"
+    - "#29"
     - "Number 29"
     - "No29"
     - "No 29"
@@ -1320,6 +1350,7 @@ ordinals:
     - "30ú"
     - "３０" # fullwidth characters sometimes used in China and Japan
     - "(30)"
+    - "#30"
     - "Number 30"
     - "No30"
     - "No 30"
