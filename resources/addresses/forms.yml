@@ -12,6 +12,7 @@ forms:
     - road
   "no":
     - number
+    - num
     - nr
     - №
     - numero
