@@ -1700,6 +1700,7 @@ ordinals:
     - "38:e"
     - "３８" #  fullwidth characters sometimes used in China and Japan
     - "(38)"
+    - "#38"
     - "Number 38"
     - "No. 38"
     - "No.38"
@@ -1746,6 +1747,7 @@ ordinals:
     - "39:e"
     - "３９" #  fullwidth characters sometimes used in China and Japan
     - "(39)"
+    - "#39"
     - "Number 39"
     - "No. 39"
     - "No.39"
@@ -1789,6 +1791,7 @@ ordinals:
     - "40ú"
     - "４０" # fullwidth characters sometimes used in China and Japan
     - "(40)"
+    - "#40"
     - "Number 40"
     - "No40"
     - "No 40"
@@ -1839,6 +1842,7 @@ ordinals:
     - "41ú"
     - "４１" # fullwidth characters sometimes used in China and Japan
     - "(41)"
+    - "#41"
     - "Number 41"
     - "No41"
     - "No 41"
@@ -1880,6 +1884,7 @@ ordinals:
     - "42:e"
     - "４２" #  fullwidth characters sometimes used in China and Japan
     - "(42)"
+    - "#42"
     - "Number 42"
     - "No. 42"
     - "No.42"
@@ -1926,6 +1931,7 @@ ordinals:
     - "43:e"
     - "４３" #  fullwidth characters sometimes used in China and Japan
     - "(43)"
+    - "#43"
     - "Number 43"
     - "No. 43"
     - "No.43"
@@ -1979,6 +1985,7 @@ ordinals:
     - "44ú"
     - "４４" # fullwidth characters sometimes used in China and Japan
     - "(44)"
+    - "#44"
     - "Number 44"
     - "No44"
     - "No 44"
@@ -2020,6 +2027,7 @@ ordinals:
     - "45:e"
     - "４５" #  fullwidth characters sometimes used in China and Japan
     - "(45)"
+    - "#45"
     - "Number 45"
     - "No. 45"
     - "No.45"
@@ -2064,6 +2072,7 @@ ordinals:
     - "46:e"
     - "４６" #  fullwidth characters sometimes used in China and Japan
     - "(46)"
+    - "#46"
     - "Number 46"
     - "No. 46"
     - "No.46"
@@ -2110,6 +2119,7 @@ ordinals:
     - "47:e"
     - "４７" #  fullwidth characters sometimes used in China and Japan
     - "(47)"
+    - "#47"
     - "Number 47"
     - "No. 47"
     - "No.47"
@@ -2156,6 +2166,7 @@ ordinals:
     - "48:e"
     - "４８" #  fullwidth characters sometimes used in China and Japan
     - "(48)"
+    - "#48"
     - "Number 48"
     - "No. 48"
     - "No.48"
@@ -2202,6 +2213,7 @@ ordinals:
     - "49:e"
     - "４９" #  fullwidth characters sometimes used in China and Japan
     - "(49)"
+    - "#49"
     - "Number 49"
     - "No. 49"
     - "No.49"
@@ -2245,6 +2257,7 @@ ordinals:
     - "50ú"
     - "５０" # fullwidth characters sometimes used in China and Japan
     - "(50)"
+    - "#50"
     - "Number 50"
     - "No50"
     - "No 50"
@@ -2290,6 +2303,7 @@ ordinals:
     - "51:a"
     - "５１" #  fullwidth characters sometimes used in China and Japan
     - "(51)"
+    - "#51"
     - "Number 51"
     - "No. 51"
     - "No.51"
@@ -2334,6 +2348,7 @@ ordinals:
     - "52:e"
     - "５２" #  fullwidth characters sometimes used in China and Japan
     - "(52)"
+    - "#52"
     - "Number 52"
     - "No. 52"
     - "No.52"
@@ -2378,6 +2393,7 @@ ordinals:
     - "53:e"
     - "５３" #  fullwidth characters sometimes used in China and Japan
     - "(53)"
+    - "#53"
     - "Number 53"
     - "No. 53"
     - "No.53"
@@ -2424,6 +2440,7 @@ ordinals:
     - "54:e"
     - "５４" #  fullwidth characters sometimes used in China and Japan
     - "(54)"
+    - "#54"
     - "Number 54"
     - "No. 54"
     - "No.54"
@@ -2468,6 +2485,7 @@ ordinals:
     - "55:e"
     - "５５" #  fullwidth characters sometimes used in China and Japan
     - "(55)"
+    - "#55"
     - "Number 55"
     - "No. 55"
     - "No.55"
@@ -2512,6 +2530,7 @@ ordinals:
     - "56:e"
     - "５６" #  fullwidth characters sometimes used in China and Japan
     - "(56)"
+    - "#56"
     - "Number 56"
     - "No. 56"
     - "No.56"
@@ -2556,6 +2575,7 @@ ordinals:
     - "57:e"
     - "５７" #  fullwidth characters sometimes used in China and Japan
     - "(57)"
+    - "#57"
     - "Number 57"
     - "No. 57"
     - "No.57"
@@ -2602,6 +2622,7 @@ ordinals:
     - "58:e"
     - "５８" #  fullwidth characters sometimes used in China and Japan
     - "(58)"
+    - "#58"
     - "Number 58"
     - "No. 58"
     - "No.58"
@@ -2648,6 +2669,7 @@ ordinals:
     - "59:e"
     - "５９" #  fullwidth characters sometimes used in China and Japan
     - "(59)"
+    - "#59"
     - "Number 59"
     - "No. 59"
     - "No.59"
@@ -2686,6 +2708,7 @@ ordinals:
     - "60:e"
     - "６０" #  fullwidth characters sometimes used in China and Japan
     - "(60)"
+    - "#60"
     - "Number 60"
     - "No. 60"
     - "No.60"
@@ -2732,6 +2755,7 @@ ordinals:
     - "61:a"
     - "６１" #  fullwidth characters sometimes used in China and Japan
     - "(61)"
+    - "#61"
     - "Number 61"
     - "No. 61"
     - "No.61"
@@ -2776,6 +2800,7 @@ ordinals:
     - "62:e"
     - "６２" #  fullwidth characters sometimes used in China and Japan
     - "(62)"
+    - "#62"
     - "Number 62"
     - "No. 62"
     - "No.62"
@@ -2822,6 +2847,7 @@ ordinals:
     - "63:e"
     - "６３" #  fullwidth characters sometimes used in China and Japan
     - "(63)"
+    - "#63"
     - "Number 63"
     - "No. 63"
     - "No.63"
@@ -2868,6 +2894,7 @@ ordinals:
     - "64:e"
     - "６４" #  fullwidth characters sometimes used in China and Japan
     - "(64)"
+    - "#64"
     - "Number 64"
     - "No. 64"
     - "No.64"
@@ -2914,6 +2941,7 @@ ordinals:
     - "65:e"
     - "６５" #  fullwidth characters sometimes used in China and Japan
     - "(65)"
+    - "#65"
     - "Number 65"
     - "No. 65"
     - "No.65"
@@ -2958,6 +2986,7 @@ ordinals:
     - "66:e"
     - "６６" #  fullwidth characters sometimes used in China and Japan
     - "(66)"
+    - "#66"
     - "Number 66"
     - "No. 66"
     - "No.66"
@@ -3004,6 +3033,7 @@ ordinals:
     - "67:e"
     - "６７" #  fullwidth characters sometimes used in China and Japan
     - "(67)"
+    - "#67"
     - "Number 67"
     - "No. 67"
     - "No.67"
@@ -3050,6 +3080,7 @@ ordinals:
     - "68:e"
     - "６８" #  fullwidth characters sometimes used in China and Japan
     - "(68)"
+    - "#68"
     - "Number 68"
     - "No. 68"
     - "No.68"
@@ -3096,6 +3127,7 @@ ordinals:
     - "69:e"
     - "６９" #  fullwidth characters sometimes used in China and Japan
     - "(69)"
+    - "#69"
     - "Number 69"
     - "No. 69"
     - "No.69"
@@ -3136,6 +3168,7 @@ ordinals:
     - "70:e"
     - "７０" #  fullwidth characters sometimes used in China and Japan
     - "(70)"
+    - "#70"
     - "Number 70"
     - "No. 70"
     - "No.70"
@@ -3182,6 +3215,7 @@ ordinals:
     - "71:a"
     - "７１" #  fullwidth characters sometimes used in China and Japan
     - "(71)"
+    - "#71"
     - "Number 71"
     - "No. 71"
     - "No.71"
@@ -3228,6 +3262,7 @@ ordinals:
     - "72:e"
     - "７２" #  fullwidth characters sometimes used in China and Japan
     - "(72)"
+    - "#72"
     - "Number 72"
     - "No. 72"
     - "No.72"
@@ -3274,6 +3309,7 @@ ordinals:
     - "73:e"
     - "７３" #  fullwidth characters sometimes used in China and Japan
     - "(73)"
+    - "#73"
     - "Number 73"
     - "No. 73"
     - "No.73"
@@ -3320,6 +3356,7 @@ ordinals:
     - "74:e"
     - "７４" #  fullwidth characters sometimes used in China and Japan
     - "(74)"
+    - "#74"
     - "Number 74"
     - "No. 74"
     - "No.74"
@@ -3366,6 +3403,7 @@ ordinals:
     - "75:e"
     - "７５" #  fullwidth characters sometimes used in China and Japan
     - "(75)"
+    - "#75"
     - "Number 75"
     - "No. 75"
     - "No.75"
@@ -3412,6 +3450,7 @@ ordinals:
     - "76:e"
     - "７６" #  fullwidth characters sometimes used in China and Japan
     - "(76)"
+    - "#76"
     - "Number 76"
     - "No. 76"
     - "No.76"
@@ -3458,6 +3497,7 @@ ordinals:
     - "77:e"
     - "７７" #  fullwidth characters sometimes used in China and Japan
     - "(77)"
+    - "#77"
     - "Number 77"
     - "No. 77"
     - "No.77"
@@ -3504,6 +3544,7 @@ ordinals:
     - "78:e"
     - "７８" #  fullwidth characters sometimes used in China and Japan
     - "(78)"
+    - "#78"
     - "Number 78"
     - "No. 78"
     - "No.78"
@@ -3550,6 +3591,7 @@ ordinals:
     - "79:e"
     - "７９" #  fullwidth characters sometimes used in China and Japan
     - "(79)"
+    - "#79"
     - "Number 79"
     - "No. 79"
     - "No.79"
@@ -3590,6 +3632,7 @@ ordinals:
     - "80:e"
     - "８０" #  fullwidth characters sometimes used in China and Japan
     - "(80)"
+    - "80"
     - "Number 80"
     - "No. 80"
     - "No.80"
@@ -3638,6 +3681,7 @@ ordinals:
     - "81:a"
     - "８１" #  fullwidth characters sometimes used in China and Japan
     - "(81)"
+    - "#81"
     - "Number 81"
     - "No. 81"
     - "No.81"
@@ -3684,6 +3728,7 @@ ordinals:
     - "82:e"
     - "８２" #  fullwidth characters sometimes used in China and Japan
     - "(82)"
+    - "#82"
     - "Number 82"
     - "No. 82"
     - "No.82"
@@ -3730,6 +3775,7 @@ ordinals:
     - "83:e"
     - "８３" #  fullwidth characters sometimes used in China and Japan
     - "(83)"
+    - "#83"
     - "Number 83"
     - "No. 83"
     - "No.83"
@@ -3776,6 +3822,7 @@ ordinals:
     - "84:e"
     - "８４" #  fullwidth characters sometimes used in China and Japan
     - "(84)"
+    - "#84"
     - "Number 84"
     - "No. 84"
     - "No.84"
@@ -3822,6 +3869,7 @@ ordinals:
     - "85:e"
     - "８５" #  fullwidth characters sometimes used in China and Japan
     - "(85)"
+    - "#85"
     - "Number 85"
     - "No. 85"
     - "No.85"
@@ -3868,6 +3916,7 @@ ordinals:
     - "86:e"
     - "８６" #  fullwidth characters sometimes used in China and Japan
     - "(86)"
+    - "#86"
     - "Number 86"
     - "No. 86"
     - "No.86"
@@ -3905,7 +3954,7 @@ ordinals:
     - "87o"
     - "87º."
     - "87ª."
-    - "87."
+    - "87."\
     - "87mo" # es (masculine, informal)
     - "87ma" # es (feminine, informal)
     - "87-й"
@@ -3914,6 +3963,7 @@ ordinals:
     - "87:e"
     - "８７" #  fullwidth characters sometimes used in China and Japan
     - "(87)"
+    - "#87"
     - "Number 87"
     - "No. 87"
     - "No.87"
@@ -3960,6 +4010,7 @@ ordinals:
     - "88:e"
     - "８８" #  fullwidth characters sometimes used in China and Japan
     - "(88)"
+    - "#88"
     - "Number 88"
     - "No. 88"
     - "No.88"
@@ -4006,6 +4057,7 @@ ordinals:
     - "89:e"
     - "８９" #  fullwidth characters sometimes used in China and Japan
     - "(89)"
+    - "#89"
     - "Number 89"
     - "No. 89"
     - "No.89"
@@ -4046,6 +4098,7 @@ ordinals:
     - "90:e"
     - "９０" #  fullwidth characters sometimes used in China and Japan
     - "(90)"
+    - "#90"
     - "Number 90"
     - "No. 90"
     - "No.90"
@@ -4092,6 +4145,7 @@ ordinals:
     - "91:a"
     - "９１" #  fullwidth characters sometimes used in China and Japan
     - "(91)"
+    - "#91"
     - "Number 91"
     - "No. 91"
     - "No.91"
@@ -4136,6 +4190,7 @@ ordinals:
     - "92:e"
     - "９２" #  fullwidth characters sometimes used in China and Japan
     - "(92)"
+    - "#92"
     - "Number 92"
     - "No. 92"
     - "No.92"
@@ -4182,6 +4237,7 @@ ordinals:
     - "93:e"
     - "９３" #  fullwidth characters sometimes used in China and Japan
     - "(93)"
+    - "#93"
     - "Number 93"
     - "No. 93"
     - "No.93"
@@ -4228,6 +4284,7 @@ ordinals:
     - "94:e"
     - "９４" #  fullwidth characters sometimes used in China and Japan
     - "(94)"
+    - "#94"
     - "Number 94"
     - "No. 94"
     - "No.94"
@@ -4274,6 +4331,7 @@ ordinals:
     - "95:e"
     - "９５" #  fullwidth characters sometimes used in China and Japan
     - "(95)"
+    - "#95"
     - "Number 95"
     - "No. 95"
     - "No.95"
@@ -4318,6 +4376,7 @@ ordinals:
     - "96:e"
     - "９６" #  fullwidth characters sometimes used in China and Japan
     - "(96)"
+    - "#96"
     - "Number 96"
     - "No. 96"
     - "No.96"
@@ -4364,6 +4423,7 @@ ordinals:
     - "97:e"
     - "９７" #  fullwidth characters sometimes used in China and Japan
     - "(97)"
+    - "#97"
     - "Number 97"
     - "No. 97"
     - "No.97"
@@ -4410,6 +4470,7 @@ ordinals:
     - "98:e"
     - "９８" #  fullwidth characters sometimes used in China and Japan
     - "(98)"
+    - "#98"
     - "Number 98"
     - "No. 98"
     - "No.98"
@@ -4456,6 +4517,7 @@ ordinals:
     - "99:e"
     - "９９" #  fullwidth characters sometimes used in China and Japan
     - "(99)"
+    - "#99"
     - "Number 99"
     - "No. 99"
     - "No.99"
@@ -4497,6 +4559,7 @@ ordinals:
     - "100:e"
     - "１００" #  fullwidth characters sometimes used in China and Japan
     - "(100)"
+    - "#100"
     - "Number 100"
     - "No. 100"
     - "No.100"
