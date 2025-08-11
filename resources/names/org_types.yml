@@ -616,6 +616,12 @@ types:
     generic: LLC
     aliases:
       - compañía anónima
+  - display: CIC
+    generic: NGO
+    aliases:
+      - cic
+      - c.i.c.
+      - community interest company
   - display: Co Ltd
     compare: CoLtd
     generic: LLC
