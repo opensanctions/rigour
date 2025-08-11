@@ -1482,7 +1482,7 @@ ordinals:
     - "33ú"
     - "３３" # fullwidth characters sometimes used in China and Japan
     - "(33)"
-    - "33"
+    - "#33"
     - "Number 33"
     - "No33"
     - "No 33"
@@ -1653,6 +1653,7 @@ ordinals:
     - "37:e"
     - "３７" #  fullwidth characters sometimes used in China and Japan
     - "(37)"
+    - "#37"
     - "Number 37"
     - "No. 37"
     - "No.37"
