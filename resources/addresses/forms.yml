@@ -240,7 +240,7 @@ forms:
     - 방갈로
     - バンガロー
     - 平房
-factory:
+  factory:
     - factory
     - factories
     - fabbrica
@@ -270,6 +270,30 @@ factory:
     - 工厂
     - 工場
     - कारखाना
+  warehouse:
+    - warehouse
+    - almacén
+    - armazém
+    - depot
+    - godown
+    - lager
+    - 창고 
+    - depósito
+    - entrepôt
+    - gudang
+    - ladu
+    - lagerhaus
+    - magazyn
+    - pakhuis
+    - raktár 
+    - sandėlis
+    - store room
+    - storeroom
+    - varasto
+    - Склад
+    - مخزن 
+    - 仓库 
+    - गोदाम
   ind:
     - industrial
   cmrc:
