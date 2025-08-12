@@ -226,6 +226,20 @@ forms:
     - станц.
     - вокзал
     - 车站
+  bnglw:
+    - bungalow
+    - bungalo
+    - bangalô
+    - bungaló
+    - bungalas
+    - bunglow # English typo
+    - μπαγκάλοου
+    - бунгало
+    - बंगला
+    - بُنْغَلُو
+    - 방갈로
+    - バンガロー
+    - 平房
   ind:
     - industrial
   cmrc:
