@@ -240,6 +240,36 @@ forms:
     - 방갈로
     - バンガロー
     - 平房
+factory:
+    - factory
+    - factories
+    - fabbrica
+    - fabbriche
+    - fábrica
+    - fabriek
+    - fabrik
+    - fabrika
+    - fabrikas
+    - fabrique
+    - fabryka
+    - gamykla
+    - gyár
+    - plant
+    - tehas
+    - tehdas
+    - usine
+    - vabrik
+    - zavod
+    - závod
+    - завод
+    - фабрика
+    - مَصْنَع
+    - 공장
+    - 厂
+    - 厂子
+    - 工厂
+    - 工場
+    - कारखाना
   ind:
     - industrial
   cmrc:
