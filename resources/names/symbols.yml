@@ -5,7 +5,7 @@ org_symbols:
   # mechanism that circumvents the need for fuzzy matching or other complex algorithms.
   co:
     - company
-    - сompany
+    - сompany # Homoglyph, first letter is Cyrillic
     - corporation
     - compagnie
     - компания
@@ -34,18 +34,22 @@ org_symbols:
     - compania
     - companie
     - companhia
+    - bendrovė
     - întreprinderea
+    - ettevõte
     - firma
     - firm
     - Εταιρεία
     - Etaireia
     - společnost
     - şirket
+    - yhtiö
     - 公司
     - 企業
     - ファーム
     - 企业
     - कंपनी
+    - 회사
   org:
     - organization
     - organisation
