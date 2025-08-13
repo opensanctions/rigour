@@ -1,19 +1,24 @@
 forms:
   apt:
     - apartment
+    - apartamento
     - appartement
+    - appartamento
     - flat
   av:
     - avenue
     - ave
     - avenida
+    - avinguda
     - авеню
   rd:
     - road
   "no":
     - number
-    - nr
+    - nr # unfortunately, Nr in addresses can also mean "near"
     - №
+    - număr
+    - nummer
     - numero
     - numéro
     - número
@@ -25,9 +30,16 @@ forms:
     - hse
   condo:
     - condominium
+    - condominio
+    - condomínio
+    - kondominium
   twr:
     - tower
     - towers
+    - toren
+    - torre
+    - torres
+    - torre
   c:
     - calle
   bat:
@@ -47,6 +59,11 @@ forms:
     - строение
   zone:
     - zone
+    - sone
+    - zona
+    - zone
+    - zóna
+    - ζώνη
     - зона
   area:
     - area
@@ -54,11 +71,15 @@ forms:
     - neighborhood
     - nachbarschaft
     - neighbourhood
-    - район
     - райончик
     - district
     - bezirk
     - distrikt
+    - barrio
+    - quarter
+    - quartier
+    - quartiere
+    - kvartal
   bch:
     - beach
     - пляж
@@ -74,6 +95,7 @@ forms:
     - federal
   alley:
     - alley
+    - allée
     - аллея
     - проезд
     - проїзд
@@ -87,18 +109,21 @@ forms:
     - крыло
   blvd:
     - boulevard
+    - bulevar
     - бульвар
   st:
     - strasse
-    - strase
+    - straße
+    - strase # to capture misspellings of strasse
     - street
+    - straat
     - strada
+    - stradă
     - str
     - rue
     - стр
   pr:
-    - Pr-kt
-    - Prospekt
+    - pr-kt
     - prospekt
     - prospect
     - просп
@@ -109,7 +134,7 @@ forms:
     - вул
     - ул
   kv:
-    - kvartal
+   # - kvartal (refers to quarter/block and not flat)
     - квартал
     - kvartira
     - квартира
@@ -125,6 +150,7 @@ forms:
     - drive
   ln:
     - lane
+    - laan
     - переулок
     - pereulok
     - per
@@ -148,7 +174,7 @@ forms:
     - turnpike
   vl:
     - villa
-    - village
+    # - village (a village is a small settlement whereas a villa is a large house)
   rte:
     - route
   br:
@@ -156,12 +182,19 @@ forms:
   unt:
     - unit
   loft:
+    - attic
+    - ática
+    - ático
+    - dachboden
+    - grenier
+    - studio
     - studios
+    - penthouse
   pl:
     - platz
     - plaza
     - place
-    - plot
+    - plot # note: does not mean exactly the same as place
   cty:
     - county
     - counties
@@ -187,6 +220,15 @@ forms:
     - mount
     - montaña
     - mountain
+    - montagna
+    - montagne
+    - montanha
+  hl:
+    - hill
+    - hills
+    - heuvel
+    - heuvels
+    - hügel
   "co":
     - c o
     - c/o
@@ -200,6 +242,9 @@ forms:
     - central
   pk:
     - park
+    - parc
+    - parco
+    - parque
   gd:
     - garden
     - gardens
@@ -230,6 +275,13 @@ forms:
     - industrial
   cmrc:
     - commercial
+    - коммерция
+    - коммерческая
+    - коммерческие
+    - коммерческих
+    - коммерческого
+    - коммерческой
+    - комерційний
   res:
     - residential
   w:
@@ -244,21 +296,22 @@ forms:
   ne:
     - northeast
     - north east
-    - northeaster
+    - northeastern
   nw:
     - northwest
     - north west
-    - northwester
+    - northwestern
   se:
     - southeast
     - south east
-    - southeaster
+    - southeastern
   sw:
     - southwest
     - south west
-    - southwester
+    - southwestern
   ste:
     - suite
+    - suit # for typos of "suite"
   fl:
     - floor
     - flr
@@ -310,13 +363,15 @@ forms:
     - et
   of:
     - office
+    - oficina
     - KOM./OFFICE
-    - officier
+    - ufficio
     - офис
     - ofis
     - офіс
   b:
     - bureau
+    - bureaux
     - büro
   hq:
     - headquarters
@@ -328,17 +383,16 @@ forms:
     - cabinet
     - Kabinet
   pom:
-    - Pomeshch
-    - Pomeshchenie
-    - Pomeshtenie
+    - pomeshch
+    - pomeshchenie
+    - pomeshtenie
     - pomeshcheniye
-    - Floor/Pomeshch.
+    - floor/pomeshch.
     - Помещ
     - Пом
   nab:
     - naberezhnaya
     - naberezhnye
-    - NABEREZHNAYA
     - nab.
     - набережная
     - набережн
@@ -347,21 +401,32 @@ forms:
   muni:
     - municipal
     - municipality
-    - MUNICIPAL
-    - Munitsipal'nyi
+    - munitsipal'nyi
   hwy:
     - highway
     - shosse
     - шоссе
     - шосе
+  jct:
+    - junction
+    - jctn
+    - junctn
   ny:
     - new york
   pobox:
     - po box
     - p o box
-    - P.O. Box
-    - Post Office Box
-    - Post Box
+    - p.o. box
+    - p.o.box
+    - post office box
+    - post box
+    - postbox
+    - apartado postal
+    - boîte postale
+    - caixa postal
+    - postbus
+    - postfach
+    - почтовый ящик
   zip:
     - zipcode
     - zip code
