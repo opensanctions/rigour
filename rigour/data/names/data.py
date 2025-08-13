@@ -315,6 +315,7 @@ STOPPHRASES: Tuple[str, ...] = (
 ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {
     "CO": (
         "Etaireia",
+        "bendrovė",
         "co",
         "compagnie",
         "companhia",
@@ -323,6 +324,7 @@ ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {
         "company",
         "compañía",
         "corporation",
+        "ettevõte",
         "firm",
         "firma",
         "kampaniia",
@@ -337,6 +339,7 @@ ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {
         "kompānija",
         "společnost",
         "vállalat",
+        "yhtiö",
         "întreprinderea",
         "şirket",
         "Εταιρεία",
@@ -355,6 +358,7 @@ ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {
         "企业",
         "企業",
         "公司",
+        "회사",
     ),
     "ORG": (
         "Organismos",

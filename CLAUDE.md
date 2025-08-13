@@ -8,7 +8,7 @@ This library contains data validation and cleaning routines that are meant to be
 
 ## Languages
 
-* Our resources should target always supporting the following languages: English, French, Spanish, Russian, Ukrainian, Arabic, Simplified Chinese, Korean, Japanese, Portuguese (Brazilian and normal), Turkish, Polish, German, Swedish, Norwegian, Danish, Lithuanian, Estonian, Finnish, Hungarian, Dutch
+* Our resources should target always supporting the following languages: English, French, Spanish, Russian, Ukrainian, Arabic, Simplified Chinese, Korean, Japanese, Portuguese (Brazilian and European), Turkish, Polish, German, Swedish, Norwegian, Danish, Lithuanian, Estonian, Finnish, Hungarian, Dutch
 
 ## Python 
 
