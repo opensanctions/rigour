@@ -1,5 +1,6 @@
 ordinals:
   # Ordinal numbers
+  # *** Current coverage ***
   # Languages covered at least in part: de, en, es, fr, ga, it, nl, pt, ru, sv
   # Also covers Roman Numerals e.g. VIIIth (for 8th).
   # Covers certain variants e.g. IIIIth as well as IVth for 4th.
@@ -11,6 +12,8 @@ ordinals:
   # Our resources should target always supporting the following languages: English, French, Spanish, Russian, Ukrainian, Arabic, 
   # Simplified Chinese, Korean, Japanese, Portuguese (Brazilian and normal), Polish, German, Swedish, Norwegian, Danish, Lithuanian,
   # Estonian, Finnish, Hungarian, Dutch.
+  # We aim to support Roman numerals that are widely used in many of the above languages.
+  # We also ultimately aim to support Devanagari numerals that are used in Hindi, Nepali and certain other languages.
   0:
     - "Zeroth" # en
     - "Zero" # en
