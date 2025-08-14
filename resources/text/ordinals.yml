@@ -6,6 +6,11 @@ ordinals:
   # Ordinals of the form 1a, 2a etc have been left out as these could be flat/apartment numbers etc.
   # Rare English variants such as 3d have also been omitted for the same reason.
   # Zero is included even though it is not always considered to be an ordinal. It is occassionally used for street numbers.
+  # *** Aims/scope ***
+  # The initial aim is to cover whole numbers from 0 to 100 and powers of ten from one thousand to one million.
+  # Our resources should target always supporting the following languages: English, French, Spanish, Russian, Ukrainian, Arabic, 
+  # Simplified Chinese, Korean, Japanese, Portuguese (Brazilian and normal), Polish, German, Swedish, Norwegian, Danish, Lithuanian,
+  # Estonian, Finnish, Hungarian, Dutch.
   0:
     - "Zeroth" # en
     - "Zero" # en
