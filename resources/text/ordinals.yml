@@ -14,6 +14,7 @@ ordinals:
     - "Nullter" # de
     - "Null" # de
     - "cero" # es
+    - "ноль" # ru (number)
     - "0th"
     - "０" # Unicode symbol for fullwidth digit (used in China and Japan)
     - "(0)"
@@ -39,6 +40,7 @@ ordinals:
     - "uno" # es (number)
     - "una" # es (number, feminine)
     # - "un" # es (number) [can be other things]
+    - "один" # ru (number)
     - "1st"
     - "1-й"
     - "1-я"
@@ -84,6 +86,7 @@ ordinals:
     - "segundo" # es (masculine)
     - "segunda" # es (feminine)
     - "dos" # es (number)
+    - "два" # ru (number)
     - "2nd"
     - "2-й"
     - "2-я"
@@ -130,6 +133,7 @@ ordinals:
     - "tercer" # es (masculine)
     - "tercera" # es (feminine)
     # - "tres" # es (number) [can be other things]
+    - "три" # ru (number)
     - "3rd"
     - "3-й"
     - "3-я"
@@ -174,6 +178,7 @@ ordinals:
     - "Vierter"
     - "cuarto" # es (masculine)
     - "cuarta" # es (feminine)
+    - "четыре" # ru (number)
     - "4th"
     - "4-й"
     - "4-я"
@@ -219,6 +224,7 @@ ordinals:
     - "quinto" # es (masculine)
     - "quinta" # es (feminine)
     - "cinco" # es (number)
+    - "пять" # ru (number)
     - "5th"
     - "5-й"
     - "5-я"
@@ -262,6 +268,7 @@ ordinals:
     - "sexto" # es (masculine)
     - "sexta" # es (feminine)
     - "seis" # es (number)
+    - "шесть" # ru (number)
     - "6th"
     - "6-й"
     - "6-я"
@@ -305,6 +312,7 @@ ordinals:
     - "séptimo" # es (masculine)
     - "séptima" # es (feminine)
     - "siete" # es (number)
+    - "семь" # ru (number)
     - "7th"
     - "7-й"
     - "7-я"
@@ -348,6 +356,7 @@ ordinals:
     - "octavo" # es (masculine)
     - "octava" # es (feminine)
     - "ocho" # es (number)
+    - "восемь" # ru (number)
     - "8th"
     - "8-й"
     - "8-я"
@@ -391,6 +400,7 @@ ordinals:
     - "noveno" # es (masculine)
     - "novena" # es (feminine)
     - "nueve" # es (number)
+    - "девять" # ru (number)
     - "9th"
     - "9-й"
     - "9-я"
@@ -435,6 +445,7 @@ ordinals:
     - "décimo" # es (masculine)
     - "décima" # es (feminine)
     - "diez" # es (number)
+    - "десять" # ru (number)
     - "10th"
     - "10-й"
     - "10-я"
@@ -477,6 +488,7 @@ ordinals:
     - "undécima" # es (feminine)
     - "decimoprimero" # es (masculine, accepted alternative)
     - "decimoprimera" # es (feminine, accepted alternative)
+    - "одиннадцать" # ru (number)
     # - "once" # es (number) [can be other things e.g. en word "once"]
     - "11th"
     - "11-й"
@@ -521,6 +533,7 @@ ordinals:
     - "duodécima" # es (feminine)
     - "decimosegundo" # es (masculine, accepted alternative)
     - "decimosegunda" # es (feminine, accepted alternative)
+    - "двенадцать" # ru (number)
     - "doce" # es (number)
     - "12th"
     - "12-й"
@@ -566,6 +579,7 @@ ordinals:
     - "decimotercero" # es (masculine)
     - "decimotercera" # es (feminine)
     - "trece" # es (number)
+    - "тринадцать" # ru (number)
     - "13th"
     - "13-й"
     - "13-я"
@@ -609,6 +623,7 @@ ordinals:
     - "decimocuarto" # es (masculine)
     - "decimocuarta" # es (feminine)
     - "catorce" # es (number)
+    - "четырнадцать" # ru (number)
     - "14th"
     - "14-й"
     - "14-я"
@@ -652,6 +667,7 @@ ordinals:
     - "decimoquinto" # es (masculine)
     - "decimoquinta" # es (feminine)
     - "quince" # es (number)
+    - "пятнадцать" # ru (number)
     - "15th"
     - "15-й"
     - "15-я"
@@ -695,6 +711,7 @@ ordinals:
     - "decimosexta" # es (feminine)
     - "dieciséis" # es (number)
     - "diez y seis" # es (number, old non-standard)
+    - "шестнадцать" # ru (number)
     - "16th"
     - "16-й"
     - "16-я"
@@ -738,6 +755,7 @@ ordinals:
     - "decimoséptima" # es (feminine)
     - "diecisiete" # es (number)
     - "diez y siete" # es (number, old non-standard)
+    - "семнадцать" # ru (number)
     - "17th"
     - "17-й"
     - "17-я"
@@ -781,6 +799,7 @@ ordinals:
     - "decimoctava" # es (feminine)
     - "dieciocho" # es (number)
     - "diez y ocho" # es (number, old non-standard)
+    - "восемнадцать" # ru (number)
     - "18th"
     - "18-й"
     - "18-я"
@@ -824,6 +843,7 @@ ordinals:
     - "decimonovena" # es (feminine)
     - "diecinueve" # es (number)
     - "diez y nueve" # es (number, old non-standard)
+    - "девятнадцать" # ru (number)
     - "19th"
     - "19-й"
     - "19-я"
@@ -867,6 +887,7 @@ ordinals:
     - "vigésimo" # es (masculine)
     - "vigésima" # es (feminine)
     - "veinte" # es (number)
+    - "двадцать" # ru (number)
     - "20th"
     - "20-й"
     - "20-я"
