@@ -2335,6 +2335,7 @@ ordinals:
     - "cincuenta y uno" # es (number)
     - "cincuenta y una" # es (number, feminine)
     - "cincuenta y un" # es (number, masculine, shortened form)
+    - "пятьдесят один" # ru (number)
     - "51st"
     - "51e"
     - "51ú"
@@ -2380,6 +2381,7 @@ ordinals:
     - "quincuagesimosegundo" # es (masculine, accepted alternative)
     - "quincuagesimasegunda" # es (feminine, accepted alternative)
     - "cincuenta y dos" # es (number)
+    - "пятьдесят два" # ru (number)
     - "52nd"
     - "52e"
     - "52ú"
@@ -2425,6 +2427,7 @@ ordinals:
     - "quincuagesimotercero" # es (masculine, accepted alternative)
     - "quincuagesimatercera" # es (feminine, accepted alternative)
     - "cincuenta y tres" # es (number)
+    - "пятьдесят три" # ru (number)
     - "53rd"
     - "53e"
     - "53ú"
@@ -2472,6 +2475,7 @@ ordinals:
     - "quincuagesimocuarto" # es (masculine, accepted alternative)
     - "quincuagesimacuarta" # es (feminine, accepted alternative)
     - "cincuenta y cuatro" # es (number)
+    - "пятьдесят четыре" # ru (number)
     - "54th"
     - "54e"
     - "54ú"
@@ -2517,6 +2521,7 @@ ordinals:
     - "quincuagesimoquinto" # es (masculine, accepted alternative)
     - "quincuagesimaquinta" # es (feminine, accepted alternative)
     - "cincuenta y cinco" # es (number)
+    - "пятьдесят пять" # ru (number)
     - "55th"
     - "55e"
     - "55ú"
@@ -2562,6 +2567,7 @@ ordinals:
     - "quincuagesimosexto" # es (masculine, accepted alternative)
     - "quincuagesimasexta" # es (feminine, accepted alternative)
     - "cincuenta y seis" # es (number)
+    - "пятьдесят шесть" # ru (number)
     - "56th"
     - "56e"
     - "56ú"
@@ -2607,6 +2613,7 @@ ordinals:
     - "quincuagesimoseptimo" # es (masculine, accepted alternative)
     - "quincuagesimaseptima" # es (feminine, accepted alternative)
     - "cincuenta y siete" # es (number)
+    - "пятьдесят семь" # ru (number)
     - "57th"
     - "57e"
     - "57ú"
@@ -2654,6 +2661,7 @@ ordinals:
     - "quincuagesimooctavo" # es (masculine, accepted alternative)
     - "quincuagesimaoctava" # es (feminine, accepted alternative)
     - "cincuenta y ocho" # es (number)
+    - "пятьдесят восемь" # ru (number)
     - "58th"
     - "58e"
     - "58ú"
@@ -2701,6 +2709,7 @@ ordinals:
     - "quincuagesimonoveno" # es (masculine, accepted alternative)
     - "quincuagesimanovena" # es (feminine, accepted alternative)
     - "cincuenta y nueve" # es (number)
+    - "пятьдесят девять" # ru (number)
     - "59th"
     - "59e"
     - "59ú"
@@ -2740,6 +2749,7 @@ ordinals:
     - "sexagésimo" # es (masculine)
     - "sexagésima" # es (feminine)
     - "sesenta" # es (number)
+    - "шестьдесят" # ru (number)
     - "60th"
     - "60e"
     - "60ú"
@@ -2787,6 +2797,7 @@ ordinals:
     - "sesenta y uno" # es (number)
     - "sesenta y una" # es (number, feminine)
     - "sesenta y un" # es (number, masculine, shortened form)
+    - "шестьдесят один" # ru (number)
     - "61st"
     - "61e"
     - "61ú"
@@ -2832,6 +2843,7 @@ ordinals:
     - "sexagesimosegundo" # es (masculine, accepted alternative)
     - "sexagesimasegunda" # es (feminine, accepted alternative)
     - "sesenta y dos" # es (number)
+    - "шестьдесят два" # ru (number)
     - "62nd"
     - "62e"
     - "62ú"
@@ -2879,6 +2891,7 @@ ordinals:
     - "sexagesimotercero" # es (masculine, accepted alternative)
     - "sexagesimatercera" # es (feminine, accepted alternative)
     - "sesenta y tres" # es (number)
+    - "шестьдесят три" # ru (number)
     - "63rd"
     - "63e"
     - "63ú"
@@ -2926,6 +2939,7 @@ ordinals:
     - "sexagesimocuarto" # es (masculine, accepted alternative)
     - "sexagesimacuarta" # es (feminine, accepted alternative)
     - "sesenta y cuatro" # es (number)
+    - "шестьдесят четыре" # ru (number)
     - "64th"
     - "64e"
     - "64ú"
@@ -2973,6 +2987,7 @@ ordinals:
     - "sexagesimoquinto" # es (masculine, accepted alternative)
     - "sexagesimaquinta" # es (feminine, accepted alternative)
     - "sesenta y cinco" # es (number)
+    - "шестьдесят пять" # ru (number)
     - "65th"
     - "65e"
     - "65ú"
@@ -3018,6 +3033,7 @@ ordinals:
     - "sexagesimosexto" # es (masculine, accepted alternative)
     - "sexagesimasexta" # es (feminine, accepted alternative)
     - "sesenta y seis" # es (number)
+    - "шестьдесят шесть" # ru (number)
     - "66th"
     - "66e"
     - "66ú"
@@ -3065,6 +3081,7 @@ ordinals:
     - "sexagesimoseptimo" # es (masculine, accepted alternative)
     - "sexagesimaseptima" # es (feminine, accepted alternative)
     - "sesenta y siete" # es (number)
+    - "шестьдесят семь" # ru (number)
     - "67th"
     - "67e"
     - "67ú"
@@ -3112,6 +3129,7 @@ ordinals:
     - "sexagesimooctavo" # es (masculine, accepted alternative)
     - "sexagesimaoctava" # es (feminine, accepted alternative)
     - "sesenta y ocho" # es (number)
+    - "шестьдесят восемь" # ru (number)
     - "68th"
     - "68e"
     - "68ú"
@@ -3159,6 +3177,7 @@ ordinals:
     - "sexagesimonoveno" # es (masculine, accepted alternative)
     - "sexagesimanovena" # es (feminine, accepted alternative)
     - "sesenta y nueve" # es (number)
+    - "шестьдесят девять" # ru (number)
     - "69th"
     - "69e"
     - "69ú"
@@ -3200,6 +3219,7 @@ ordinals:
     - "septuagésimo" # es (masculine)
     - "septuagésima" # es (feminine)
     - "setenta" # es (number)
+    - "семьдесят" # ru (number)
     - "70th"
     - "70e"
     - "70ú"
@@ -3247,6 +3267,7 @@ ordinals:
     - "setenta y una" # es (number, feminine)
     - "setenta y uno" # es (number)
     - "setenta y un" # es (number, masculine, shortened form)
+    - "семьдесят один" # ru (number)
     - "71st"
     - "71e"
     - "71ú"
@@ -3294,6 +3315,7 @@ ordinals:
     - "septuagesimosegundo" # es (masculine, accepted alternative)
     - "septuagesimasegunda" # es (feminine, accepted alternative)
     - "setenta y dos" # es (number)
+    - "семьдесят два" # ru (number)
     - "72nd"
     - "72e"
     - "72ú"
@@ -3341,6 +3363,7 @@ ordinals:
     - "septuagesimotercero" # es (masculine, accepted alternative)
     - "septuagesimatercera" # es (feminine, accepted alternative)
     - "setenta y tres" # es (number)
+    - "семьдесят три" # ru (number)
     - "73rd"
     - "73e"
     - "73ú"
@@ -3388,6 +3411,7 @@ ordinals:
     - "septuagesimocuarto" # es (masculine, accepted alternative)
     - "septuagesimacuarta" # es (feminine, accepted alternative)
     - "setenta y cuatro" # es (number)
+    - "семьдесят четыре" # ru (number)
     - "74th"
     - "74e"
     - "74ú"
@@ -3435,6 +3459,7 @@ ordinals:
     - "septuagesimoquinto" # es (masculine, accepted alternative)
     - "septuagesimaquinta" # es (feminine, accepted alternative)
     - "setenta y cinco" # es (number)
+    - "семьдесят пять" # ru (number)
     - "75th"
     - "75e"
     - "75ú"
@@ -3482,6 +3507,7 @@ ordinals:
     - "septuagesimosexto" # es (masculine, accepted alternative)
     - "septuagesimasexta" # es (feminine, accepted alternative)
     - "setenta y seis" # es (number)
+    - "семьдесят шесть" # ru (number)
     - "76th"
     - "76e"
     - "76ú"
@@ -3529,6 +3555,7 @@ ordinals:
     - "septuagesimoseptimo" # es (masculine, accepted alternative)
     - "septuagesimaseptima" # es (feminine, accepted alternative)
     - "setenta y siete" # es (number)
+    - "семьдесят семь" # ru (number)
     - "77th"
     - "77e"
     - "77ú"
@@ -3576,6 +3603,7 @@ ordinals:
     - "septuagesimooctavo" # es (masculine, accepted alternative)
     - "septuagesimaoctava" # es (feminine, accepted alternative)
     - "setenta y ocho" # es (number)
+    - "семьдесят восемь" # ru (number)
     - "78th"
     - "78e"
     - "78ú"
@@ -3623,6 +3651,7 @@ ordinals:
     - "septuagesimonoveno" # es (masculine, accepted alternative)
     - "septuagesimanovena" # es (feminine, accepted alternative)
     - "setenta y nueve" # es (number)
+    - "семьдесят девять" # ru (number)
     - "79th"
     - "79e"
     - "79ú"
@@ -3664,6 +3693,7 @@ ordinals:
     - "octogésimo" # es (masculine)
     - "octogésima" # es (feminine)
     - "ochenta" # es (number)
+    - "восемьдесят" # ru (number)
     - "80th"
     - "80e"
     - "80ú"
@@ -3713,6 +3743,7 @@ ordinals:
     - "ochenta y uno" # es (number)
     - "ochenta y una" # es (number, feminine)
     - "ochenta y un" # es (number, masculine, shortened form)
+    - "восемьдесят один" # ru (number)
     - "81st"
     - "81e"
     - "81ú"
@@ -3760,6 +3791,7 @@ ordinals:
     - "octogesimosegundo" # es (masculine, accepted alternative)
     - "octogesimasegunda" # es (feminine, accepted alternative)
     - "ochenta y dos" # es (number)
+    - "восемьдесят два" # ru (number)
     - "82nd"
     - "82e"
     - "82ú"
