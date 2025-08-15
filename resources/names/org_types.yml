@@ -1576,6 +1576,57 @@ types:
       - Egyéni Vállalkozó
       - Egyéni Cég
 
+  - display: Szöv.
+    generic: COOP
+    aliases:
+      - Szövetkezet
+      - szövetkezet
+
+  - display: Egyes.
+    generic: NGO
+    aliases:
+      - egyesület
+      - Egyes.
+
+  - display: Alap.
+    generic: NGO
+    aliases:
+      - alapítvány
+  - display: Kht.
+    generic: NGO
+    aliases:
+      - közhasznú társaság
+
+  - display: EGE
+    generic: COOP
+    aliases:
+      - európai gazdasági egyesülés
+
+  - display: Kjsz.
+    generic: SOE
+    aliases:
+      - közjogi szervezet
+
+  - display: Kft. fióktelep
+    generic: LLC
+    aliases:
+      - külföldi székhelyű vállalkozás fióktelepe
+
+  - display: Et.
+    generic: GP
+    aliases:
+      - egyszerű társaság
+
+  - display: Kv.
+    generic: JV
+    aliases:
+      - közös vállalat
+
+  - display: Ets.
+    generic: COOP
+    aliases:
+      - erdészeti társulás
+
   - display: Ltda
     generic: LLC
     aliases:
