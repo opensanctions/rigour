@@ -1,11 +1,19 @@
 ordinals:
   # Ordinal numbers
+  # *** Current coverage ***
   # Languages covered at least in part: de, en, es, fr, ga, it, nl, pt, ru, sv
   # Also covers Roman Numerals e.g. VIIIth (for 8th).
   # Covers certain variants e.g. IIIIth as well as IVth for 4th.
   # Ordinals of the form 1a, 2a etc have been left out as these could be flat/apartment numbers etc.
   # Rare English variants such as 3d have also been omitted for the same reason.
   # Zero is included even though it is not always considered to be an ordinal. It is occassionally used for street numbers.
+  # *** Aims/scope ***
+  # The initial aim is to cover whole numbers from 0 to 100 and powers of ten from one thousand to one million.
+  # Our resources should target always supporting the following languages: English, French, Spanish, Russian, Ukrainian, Arabic, 
+  # Simplified Chinese, Korean, Japanese, Portuguese (Brazilian and normal), Polish, German, Swedish, Norwegian, Danish, Lithuanian,
+  # Estonian, Finnish, Hungarian, Dutch.
+  # We aim to support Roman numerals that are widely used in many of the above languages.
+  # We also ultimately aim to support Devanagari numerals that are used in Hindi, Nepali and certain other languages.
   0:
     - "Zeroth" # en
     - "Zero" # en
