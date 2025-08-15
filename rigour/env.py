@@ -1,11 +1,17 @@
 from os import environ as env
+from typing import Optional
 from zoneinfo import ZoneInfo
 from normality import stringify, DEFAULT_ENCODING
 
 
+def env_opt(name: str) -> Optional[str]:
+    """Get an optional environment variable."""
+    return stringify(env.get(name))
+
+
 def env_str(name: str, default: str) -> str:
     """Ensure the env returns a string even on Windows (#100)."""
-    value = stringify(env.get(name))
+    value = env_opt(name)
     return default if value is None else value
 
 
