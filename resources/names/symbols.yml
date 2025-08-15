@@ -801,6 +801,25 @@ org_symbols:
     - ядерні # uk (plural)
     - 核能 # zh
     - 核的 # zh
+  uranium:
+    - uranium # en, fr
+    - uraan # et, af, nl
+    - uraani # fi
+    - uran # cs, de, sv, pl
+    - urán # hu, sk
+    - urani # sq, ca, vi
+    - urāns # lv
+    - uranas # lt
+    - uranio # es, it
+    - urânio # pt
+    - uranyum # tr
+    - ουράνιο # el
+    - Уран # ru, uk, bg
+    - اليورانيوم # ar
+    - यूरेनियम # hi
+    - 우라늄 # ko
+    - ウラン # ja
+    - 铀 # zh
   oil:
     - oil
     - petroleum
