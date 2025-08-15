@@ -1411,6 +1411,7 @@ ordinals:
     - "treinta y uno" # es (number)
     - "treinta y una" # es (number, feminine)
     - "treinta y un" # es (number, masculine, shortened form)
+    - "тридцать один" # ru (number)
     - "31st"
     - "31-й"
     - "31-я"
