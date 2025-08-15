@@ -3839,6 +3839,7 @@ ordinals:
     - "octogesimotercero" # es (masculine, accepted alternative)
     - "octogesimatercera" # es (feminine, accepted alternative)
     - "ochenta y tres" # es (number)
+    - "восемьдесят три" # ru (number)
     - "83rd"
     - "83e"
     - "83ú"
@@ -3886,6 +3887,7 @@ ordinals:
     - "octogesimocuarto" # es (masculine, accepted alternative)
     - "octogesimacuarta" # es (feminine, accepted alternative)
     - "ochenta y cuatro" # es (number)
+    - "восемьдесят четыре" # ru (number)
     - "84th"
     - "84e"
     - "84ú"
@@ -3933,6 +3935,7 @@ ordinals:
     - "octogesimoquinto" # es (masculine, accepted alternative)
     - "octogesimaquinta" # es (feminine, accepted alternative)
     - "ochenta y cinco" # es (number)
+    - "восемьдесят пять" # ru (number)
     - "85th"
     - "85e"
     - "85ú"
@@ -3980,6 +3983,7 @@ ordinals:
     - "octogesimosexto" # es (masculine, accepted alternative)
     - "octogesimasexta" # es (feminine, accepted alternative)
     - "ochenta y seis" # es (number)
+    - "восемьдесят шесть" # ru (number)
     - "86th"
     - "86e"
     - "86ú"
@@ -4027,6 +4031,7 @@ ordinals:
     - "octogesimoseptimo" # es (masculine, accepted alternative)
     - "octogesimaseptima" # es (feminine, accepted alternative)
     - "ochenta y siete" # es (number)
+    - "восемьдесят семь" # ru (number)
     - "87th"
     - "87e"
     - "87ú"
@@ -4074,6 +4079,7 @@ ordinals:
     - "octogesimooctavo" # es (masculine, accepted alternative)
     - "octogesimaoctava" # es (feminine, accepted alternative)
     - "ochenta y ocho" # es (number)
+    - "восемьдесят восемь" # ru (number)
     - "88th"
     - "88e"
     - "88ú"
@@ -4121,6 +4127,7 @@ ordinals:
     - "octogesimonoveno" # es (masculine, accepted alternative)
     - "octogesimanovena" # es (feminine, accepted alternative)
     - "ochenta y nueve" # es (number)
+    - "восемьдесят девять" # ru (number)
     - "89th"
     - "89e"
     - "89ú"
@@ -4162,6 +4169,7 @@ ordinals:
     - "nonagésimo" # es (masculine)
     - "nonagésima" # es (feminine)
     - "noventa" # es (number)
+    - "девяносто" # ru (number)
     - "90th"
     - "90e"
     - "90ú"
@@ -4209,6 +4217,7 @@ ordinals:
     - "noventa y uno" # es (number)
     - "noventa y una" # es (number, feminine)
     - "noventa y un" # es (number, masculine, shortened form)
+    - "девяносто один" # ru (number)
     - "91st"
     - "91e"
     - "91ú"
@@ -4254,6 +4263,7 @@ ordinals:
     - "nonagesimosegundo" # es (masculine, accepted alternative)
     - "nonagesimasegunda" # es (feminine, accepted alternative)
     - "noventa y dos" # es (number)
+    - "девяносто два" # ru (number)
     - "92nd"
     - "92e"
     - "92ú"
@@ -4301,6 +4311,7 @@ ordinals:
     - "nonagesimotercero" # es (masculine, accepted alternative)
     - "nonagesimatercera" # es (feminine, accepted alternative)
     - "noventa y tres" # es (number)
+    - "девяносто три" # ru (number)
     - "93rd"
     - "93e"
     - "93ú"
@@ -4348,6 +4359,7 @@ ordinals:
     - "nonagesimocuarto" # es (masculine, accepted alternative)
     - "nonagesimacuarta" # es (feminine, accepted alternative)
     - "noventa y cuatro" # es (number)
+    - "девяносто четыре" # ru (number)
     - "94th"
     - "94e"
     - "94ú"
@@ -4395,6 +4407,7 @@ ordinals:
     - "nonagesimoquinto" # es (masculine, accepted alternative)
     - "nonagesimaquinta" # es (feminine, accepted alternative)
     - "noventa y cinco" # es (number)
+    - "девяносто пять" # ru (number)
     - "95th"
     - "95e"
     - "95ú"
@@ -4440,6 +4453,7 @@ ordinals:
     - "nonagesimosexto" # es (masculine, accepted alternative)
     - "nonagesimasexta" # es (feminine, accepted alternative)
     - "noventa y seis" # es (number)
+    - "девяносто шесть" # ru (number)
     - "96th"
     - "96e"
     - "96ú"
@@ -4487,6 +4501,7 @@ ordinals:
     - "nonagesimoseptimo" # es (masculine, accepted alternative)
     - "nonagesimaseptima" # es (feminine, accepted alternative)
     - "noventa y siete" # es (number)
+    - "девяносто семь" # ru (number)
     - "97th"
     - "97e"
     - "97ú"
@@ -4534,6 +4549,7 @@ ordinals:
     - "nonagesimooctavo" # es (masculine, accepted alternative)
     - "nonagesimaoctava" # es (feminine, accepted alternative)
     - "noventa y ocho" # es (number)
+    - "девяносто восемь" # ru (number)
     - "98th"
     - "98e"
     - "98ú"
@@ -4581,6 +4597,7 @@ ordinals:
     - "nonagesimonoveno" # es (masculine, accepted alternative)
     - "nonagesimanovena" # es (feminine, accepted alternative)
     - "noventa y nueve" # es (number)
+    - "девяносто девять" # ru (number)
     - "99th"
     - "99e"
     - "99ú"
@@ -4623,6 +4640,7 @@ ordinals:
     - "centésima" # es (feminine)
     - "ciento" # es (number)
     - "cien" # es (number, short form)
+    - "сто" # ru (number)
     - "100th"
     - "100e"
     - "100ú"
