@@ -941,6 +941,7 @@ ordinals:
     - "veintiún" # es (number, masculine, shortened form)
     - "veintiuna " # es (number, feminine)
     - "veinte y uno" # es (number, old non-standard)
+    - "двадцать один" # ru (number)
     - "21st"
     - "21-й"
     - "21-я"
@@ -990,6 +991,7 @@ ordinals:
     - "vigesimasegunda" # es (feminine, accepted alternative)
     - "veintidós" # es (number)
     - "veinte y dos" # es (number, old non-standard)
+    - "двадцать два" # ru (number)
     - "22nd"
     - "22-й"
     - "22-я"
@@ -1039,6 +1041,7 @@ ordinals:
     - "vigesimatercera" # es (feminine, accepted alternative)
     - "veintitrés" # es (number)
     - "veinte y tres" # es (number, old non-standard)
+    - "двадцать три" # ru (number)
     - "23rd"
     - "23-й"
     - "23-я"
@@ -1086,6 +1089,7 @@ ordinals:
     - "vigesimacuarta" # es (feminine, accepted alternative)
     - "veinticuatro" # es (number)
     - "veinte y cuatro" # es (number, old non-standard)
+    - "двадцать четыре" # ru (number)
     - "24th"
     - "24-й"
     - "24-я"
@@ -1132,6 +1136,7 @@ ordinals:
     - "vigesimaquinta" # es (feminine, accepted alternative)
     - "veinticinco" # es (number)
     - "veinte y cinco" # es (number, old non-standard)
+    - "двадцать пять" # ru (number)
     - "25th"
     - "25-й"
     - "25-я"
@@ -1177,6 +1182,7 @@ ordinals:
     - "vigesimasexta" # es (feminine, accepted alternative)
     - "veintiséis" # es (number)
     - "veinte y seis" # es (number, old non-standard)
+    - "двадцать шесть" # ru (number)
     - "26th"
     - "26-й"
     - "26-я"
@@ -1222,6 +1228,7 @@ ordinals:
     - "vigesimaseptima" # es (feminine, accepted alternative)
     - "veintisiete" # es (number)
     - "veinte y siete" # es (number, old non-standard)
+    - "двадцать семь" # ru (number)
     - "27th"
     - "27-й"
     - "27-я"
@@ -1267,6 +1274,7 @@ ordinals:
     - "vigesimaoctava" # es (feminine, accepted alternative)
     - "veintiocho" # es (number)
     - "veinte y ocho" # es (number, old non-standard)
+    - "двадцать восемь" # ru (number) 
     - "28th"
     - "28-й"
     - "28-я"
@@ -1312,6 +1320,7 @@ ordinals:
     - "vigesimanovena" # es (feminine, accepted alternative)
     - "veintinueve" # es (number)
     - "veinte y nueve" # es (number, old non-standard)
+    - "двадцать девять" # ru (number)
     - "29th"
     - "29-й"
     - "29-я"
@@ -1353,6 +1362,7 @@ ordinals:
     - "trigésimo" # es (masculine)
     - "trigésima" # es (feminine)
     - "treinta" # es (number)
+    - "тридцать" # ru (number)
     - "30th"
     - "30-й"
     - "30-я"
