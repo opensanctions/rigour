@@ -1454,6 +1454,7 @@ ordinals:
     - "trigesimosegundo" # es (masculine, accepted alternative)
     - "trigesimasegunda" # es (feminine, accepted alternative)
     - "treinta y dos" # es (number)
+    - "тридцать два" # ru (number)
     - "32nd"
     - "32-й"
     - "32-я"
@@ -1496,6 +1497,7 @@ ordinals:
     - "trigesimotercero" # es (masculine, accepted alternative)
     - "trigesimatercera" # es (feminine, accepted alternative)
     - "treinta y tres" # es (number)
+    - "тридцать три" # ru (number)
     - "33rd"
     - "33-й"
     - "33-я"
@@ -1538,6 +1540,7 @@ ordinals:
     - "trigesimocuarto" # es (masculine, accepted alternative)
     - "trigesimacuarta" # es (feminine, accepted alternative)
     - "treinta y cuatro" # es (number)
+    - "тридцать четыре" # ru (number)
     - "34th"
     - "34-й"
     - "34-я"
@@ -1578,6 +1581,7 @@ ordinals:
     - "trigesimoquinto" # es (masculine, accepted alternative)
     - "trigesimaquinta" # es (feminine, accepted alternative)
     - "treinta y cinco" # es (number)
+    - "тридцать пять" # ru (number)
     - "35th"
     - "35-й"
     - "35-я"
@@ -1619,6 +1623,7 @@ ordinals:
     - "trigesimosexto" # es (masculine, accepted alternative)
     - "trigesimasexta" # es (feminine, accepted alternative)
     - "treinta y seis" # es (number)
+    - "тридцать шесть" # ru (number)
     - "36th"
     - "36e"
     - "36ú"
@@ -1666,6 +1671,7 @@ ordinals:
     - "trigesimoseptimo" # es (masculine, accepted alternative)
     - "trigesimaseptima" # es (feminine, accepted alternative)
     - "treinta y siete" # es (number)
+    - "тридцать семь" # ru (number)
     - "37th"
     - "37e"
     - "37ú"
@@ -1713,6 +1719,7 @@ ordinals:
     - "trigesimooctavo" # es (masculine, accepted alternative)
     - "trigesimaoctava" # es (feminine, accepted alternative)
     - "treinta y ocho" # es (number)
+    - "тридцать восемь" # ru (number)
     - "38th"
     - "38e"
     - "38ú"
@@ -1760,6 +1767,7 @@ ordinals:
     - "trigesimonoveno" # es (masculine, accepted alternative)
     - "trigesimanovena" # es (feminine, accepted alternative)
     - "treinta y nueve" # es (number)
+    - "тридцать девять" # ru (number)
     - "39th"
     - "39e"
     - "39ú"
@@ -1805,6 +1813,7 @@ ordinals:
     - "cuadragésimo" # es (masculine)
     - "cuadragésima" # es (feminine)
     - "cuarenta" # es (number)
+    - "сорок" # ru (number)
     - "40th"
     - "40-й"
     - "40-я"
@@ -1856,6 +1865,7 @@ ordinals:
     - "cuarenta y uno" # es (number)
     - "cuarenta y una" # es (number, feminine)
     - "cuarenta y un" # es (number, masculine, shortened form)
+    - "сорок один" # ru (number)
     - "41st"
     - "41-й"
     - "41-я"
@@ -1897,6 +1907,7 @@ ordinals:
     - "cuadragesimosegundo" # es (masculine, accepted alternative)
     - "cuadragesimasegunda" # es (feminine, accepted alternative)
     - "cuarenta y dos" # es (number)
+    - "сорок два" # ru (number)
     - "42nd"
     - "42e"
     - "42ú"
@@ -1944,6 +1955,7 @@ ordinals:
     - "cuadragesimotercero" # es (masculine, accepted alternative)
     - "cuadragesimatercera" # es (feminine, accepted alternative)
     - "cuarenta y tres" # es (number)
+    - "сорок три" # ru (number)
     - "43rd"
     - "43e"
     - "43ú"
@@ -1998,6 +2010,7 @@ ordinals:
     - "cuadragesimocuarto" # es (masculine, accepted alternative)
     - "cuadragesimacuarta" # es (feminine, accepted alternative)
     - "cuarenta y cuatro" # es (number)
+    - "сорок четыре" # ru (number)
     - "44th"
     - "44"
     - "44-й"
@@ -2040,6 +2053,7 @@ ordinals:
     - "cuadragesimoquinto" # es (masculine, accepted alternative)
     - "cuadragesimaquinta" # es (feminine, accepted alternative)
     - "cuarenta y cinco" # es (number)
+    - "сорок пять" # ru (number)
     - "45th"
     - "45e"
     - "45ú"
@@ -2085,6 +2099,7 @@ ordinals:
     - "cuadragesimosexto" # es (masculine, accepted alternative)
     - "cuadragesimasexta" # es (feminine, accepted alternative)
     - "cuarenta y seis" # es (number)
+    - "сорок шесть" # ru (number)
     - "46th"
     - "46e"
     - "46ú"
@@ -2132,6 +2147,7 @@ ordinals:
     - "cuadragesimoseptimo" # es (masculine, accepted alternative)
     - "cuadragesimaseptima" # es (feminine, accepted alternative)
     - "cuarenta y siete" # es (number)
+    - "сорок семь" # ru (number)
     - "47th"
     - "47e"
     - "47ú"
@@ -2179,6 +2195,7 @@ ordinals:
     - "cuadragesimooctavo" # es (masculine, accepted alternative)
     - "cuadragesimaoctava" # es (feminine, accepted alternative)
     - "cuarenta y ocho" # es (number)
+    - "сорок восемь" # ru (number)
     - "48th"
     - "48e"
     - "48ú"
@@ -2226,6 +2243,7 @@ ordinals:
     - "cuadragesimonoveno" # es (masculine, accepted alternative)
     - "cuadragesimanovena" # es (feminine, accepted alternative)
     - "cuarenta y nueve" # es (number)
+    - "сорок девять" # ru (number)
     - "49th"
     - "49e"
     - "49ú"
@@ -2271,6 +2289,7 @@ ordinals:
     - "quincuagésimo" # es (masculine)
     - "quincuagésima" # es (feminine)
     - "cincuenta" # es (number)
+    - "пятьдесят" # ru (number)
     - "50th"
     - "50-й"
     - "50-я"
