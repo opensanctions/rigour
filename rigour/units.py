@@ -26,8 +26,8 @@ UNITS = {
     "نسبة مئوية": "%", # ar
     "パーセント": "%", # ja
     "百分之": "%", # zh
-    "프로": "%", # kr
-    "퍼센트": "%", # kr
+    "프로": "%", # ko
+    "퍼센트": "%", # ko
     # Length
     "centimeters": "cm",  # en-US
     "centimetres": "cm",
@@ -47,7 +47,7 @@ UNITS = {
     "метры": "m", # ru (plural)
     "метрів": "m", # uk (plural)
     "متر": "m", # ar
-    "미터": "m", # kr
+    "미터": "m", # ko
     "kilometers": "km",  # en-US
     "kilometres": "km",
     "kilometer": "km",  # en-US
