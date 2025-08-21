@@ -51,13 +51,34 @@ class Name(object):
         return " ".join([part.form for part in self.parts])
 
     def tag_text(self, text: str, tag: NamePartTag, max_matches: int = 1) -> None:
+        """Tags name parts from a text with a known tag type.
+        
+        For example, if the name is "John Smith", and we know that "John" is the given name,
+        this method will tag that name part with NamePartTag.GIVEN.
+
+        The tagger can skip tokens in the name. For example, if the name is
+        "Karl-Theodor Maria Nikolaus zu Guttenberg", and `text` is "Karl-Theodor
+        Nikolaus", both "Karl-Theodor" and "Nikolaus" will be tagged, while
+        "Maria" will not be tagged.
+
+        If `text` is not matched in full, the tagger will not tag any name parts. For example,
+        if the name is "John Smith", and `text` is "John Ted", "John" will not be tagged.
+
+        The tagger will tag up to `max_matches` occurrences of `text` in the name.
+        For example, if the name is "John John Smith", and `text` is "John", both
+        "John"s will be tagged if `max_matches` is >= 2.
+        """
         tokens = tokenize_name(prenormalize_name(text))
+        if len(tokens) == 0:
+            return
+
         matches = 0
         matching: List[NamePart] = []
         for part in self.parts:
             next_token = tokens[len(matching)]
             if part.form == next_token:
                 matching.append(part)
+            # Only tag if we have matched the entire text
             if len(matching) == len(tokens):
                 for part in matching:
                     if part.tag == NamePartTag.ANY:
@@ -69,6 +90,8 @@ class Name(object):
                 matches += 1
                 if matches >= max_matches:
                     return
+                # Reset the list of matching parts, i.e. start over matching from the
+                # beginning of the tokenized text if we haven't reached `max_matches`.
                 matching = []
 
     def apply_phrase(self, phrase: str, symbol: Symbol) -> None:
