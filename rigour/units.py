@@ -125,6 +125,7 @@ UNITS = {
     "pound sterling": "£",
     "livres sterling": "£", # fr
     "pfund sterling": "£", # de
+    "￡": "£", # This maps the fullwidth pound sign (U+FFE1) to the pound sign (U+00A3)
     "rub": "₽",
     "rubles": "₽",
     "ruble": "₽",
