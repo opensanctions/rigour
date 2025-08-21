@@ -844,51 +844,51 @@ org_symbols:
     - металлургический
     - сталь
   diamond:
-    - diamond # en
-    - diamonds # en
-    - brylant # pl
-    - brylanty # pl
-    - deimantai # lt
-    - deimantas # lt
-    - diamant # da, de, fr, nl, no, sv
-    - diamantar # no
-    - diamante # es, pt
-    - diamanten # de, nl
-    - diamanter # da, no, sv
-    - diamantes # es, pt
-    - diamants # fr
-    - diament # pl
-    - diamenty # pl
-    - elmas # tr
-    - elmaslar # tr
-    - gyémánt # hu
-    - gyémántok # hu
-    - teemandid # et
-    - teemant # et
-    - timantteja # fi
-    - timantti # fi
-    - pırlanta # tr
-    - pırlantalar # tr
-    - алмаз # ru, uk
-    - алмазы # ru
-    - алмази # uk
-    - бриллиант # ru
-    - бриллианты # ru
-    - діамант # uk
-    - діаманти # uk
-    - الماس # ar
-    - ألماس # ar
-    - डायमंड # hi
-    - हीरे # hi
-    - हीरा # hi
-    - 다이아 # ko
-    - 다이아몬드 # ko
-    - ダイヤ # ja
-    - ダイヤモンド # ja
-    - 金刚石 # zh
-    - 金剛石 # zh
-    - 钻石 # zh
-    - 鑽石 # zh
+    - diamond # en
+    - diamonds # en
+    - brylant # pl
+    - brylanty # pl
+    - deimantai # lt
+    - deimantas # lt
+    - diamant # da, de, fr, nl, no, sv
+    - diamantar # no
+    - diamante # es, pt
+    - diamanten # de, nl
+    - diamanter # da, no, sv
+    - diamantes # es, pt
+    - diamants # fr
+    - diament # pl
+    - diamenty # pl
+    - elmas # tr
+    - elmaslar # tr
+    - gyémánt # hu
+    - gyémántok # hu
+    - teemandid # et
+    - teemant # et
+    - timantteja # fi
+    - timantti # fi
+    - pırlanta # tr
+    - pırlantalar # tr
+    - алмаз # ru, uk
+    - алмазы # ru
+    - алмази # uk
+    - бриллиант # ru
+    - бриллианты # ru
+    - діамант # uk
+    - діаманти # uk
+    - الماس # ar
+    - ألماس # ar
+    - डायमंड # hi
+    - हीरे # hi
+    - हीरा # hi
+    - 다이아 # ko
+    - 다이아몬드 # ko
+    - ダイヤ # ja
+    - ダイヤモンド # ja
+    - 金刚石 # zh
+    - 金剛石 # zh
+    - 钻石 # zh
+    - 鑽石 # zh
   mining:
     - mining
     - mines
