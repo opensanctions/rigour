@@ -16,7 +16,8 @@ summary: >-
   territory is disputed by Spain, while the United Nations regards it as a Non-Self-Governing
   Territory.
 wikipedia_url: https://en.wikipedia.org/wiki/Gibraltar
-names_strong: []
+names_strong:
+  - Territory of Gibraltar
 names_weak:
   - Diblalta
   - Jibraltar
@@ -108,3 +109,4 @@ names_weak:
   - جبلالطارق
   - Gjibraltar
   - Giburaata
+  - Gibraltar (GB)

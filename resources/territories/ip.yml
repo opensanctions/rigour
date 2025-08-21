@@ -7,10 +7,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: false
 summary: >-
-  Cyberspace is a virtual environment where digital communication and data exchange occur.
-  It encompasses the internet, online communities, and digital interactions, transcending
-  physical boundaries and enabling global connectivity.
+  Cyberspace is a virtual environment where digital communication and data exchange
+  occur. It encompasses the internet, online communities, and digital interactions,
+  transcending physical boundaries and enabling global connectivity.
 wikipedia_url: https://en.wikipedia.org/wiki/Cyberspace
 names_strong:
   - Internet
   - Online
+names_weak: []
