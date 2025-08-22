@@ -9,6 +9,8 @@ theme:
     primary: custom
     accent: custom
   custom_dir: docs/overrides
+  features:
+    - navigation.sections
 extra_css: [stylesheets/extra.css]
 
 extra:
@@ -46,13 +48,21 @@ markdown_extensions:
 
 nav:
   - Overview: index.md
-  - Names: names.md
-  - Identifiers: ids.md
-  - Territories: territories.md
-  - Addresses: addresses.md
-  - Languages: langs.md
-  - MIME types: mime.md
-  - URLs: urls.md
-  - Text: text.md
-  - Other: misc.md
   - Data assets: data.md
+  - Data types:
+      - Names: names.md
+      - Identifiers: ids.md
+      - Territories: territories.md
+      - Addresses: addresses.md
+      - Languages: langs.md
+      - MIME types: mime.md
+      - URLs: urls.md
+      - Text: text.md
+      - Other: misc.md
+
+  - Toolchain:
+      - followthemoney: https://followthemoney.tech/
+      # - rigour: https://rigour.followthemoney.tech/
+      - yente: https://yente.followthemoney.tech/
+      - OpenAleph: https://openaleph.org/docs/
+      - OpenSanctions: https://www.opensanctions.org/docs/
