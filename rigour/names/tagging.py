@@ -165,15 +165,15 @@ def _infer_part_tags(name: Name) -> Name:
                 name.tag = NameTypeTag.ORG
             # If a name part is an organization class or type, we can tag it as legal.
             for part in span.parts:
-                if part.tag == NamePartTag.ANY:
+                if part.tag == NamePartTag.UNSET:
                     part.tag = NamePartTag.LEGAL
         if span.symbol.category == Symbol.Category.NUMERIC:
-            if len(span.parts) == 1 and span.parts[0].tag == NamePartTag.ANY:
+            if len(span.parts) == 1 and span.parts[0].tag == NamePartTag.UNSET:
                 # If a numeric symbol is present and the part is not tagged, we can
                 # tag it as numeric.
                 span.parts[0].tag = NamePartTag.NUM
     for part in name.parts:
-        if part.tag == NamePartTag.ANY:
+        if part.tag == NamePartTag.UNSET:
             if part.form.isnumeric():
                 # If a name part is numeric, we can tag it as numeric.
                 part.tag = NamePartTag.NUM

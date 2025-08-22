@@ -166,7 +166,7 @@ def test_tag_org_name_type_cast():
     tagged_name = tag_org_name(name, _org_normalizer)
     assert tagged_name is not None
     assert tagged_name.parts[0].tag == NamePartTag.STOP
-    assert tagged_name.parts[1].tag == NamePartTag.ANY
+    assert tagged_name.parts[1].tag == NamePartTag.UNSET
     assert tagged_name.parts[2].tag == NamePartTag.STOP
 
 

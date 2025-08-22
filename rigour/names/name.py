@@ -52,7 +52,7 @@ class Name(object):
 
     def tag_text(self, text: str, tag: NamePartTag, max_matches: int = 1) -> None:
         """Tags name parts from a text with a known tag type.
-        
+
         For example, if the name is "John Smith", and we know that "John" is the given name,
         this method will tag that name part with NamePartTag.GIVEN.
 
@@ -81,12 +81,12 @@ class Name(object):
             # Only tag if we have matched the entire text
             if len(matching) == len(tokens):
                 for part in matching:
-                    if part.tag == NamePartTag.ANY:
+                    if part.tag == NamePartTag.UNSET:
                         part.tag = tag
                     elif not part.tag.can_match(tag):
                         # if the part is already tagged, we check compatibility and
-                        # possibly revert to the basic type
-                        part.tag = NamePartTag.ANY
+                        # otherwise mark it as an outcast from polite society
+                        part.tag = NamePartTag.AMBIGUOUS
                 matches += 1
                 if matches >= max_matches:
                     return

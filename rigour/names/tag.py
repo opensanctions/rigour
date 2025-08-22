@@ -14,7 +14,8 @@ class NameTypeTag(Enum):
 class NamePartTag(Enum):
     """Within a name, identify name part types."""
 
-    ANY = "ANY"
+    UNSET = "UNSET"
+    AMBIGUOUS = "AMBIGUOUS"
 
     TITLE = "TITLE"
     GIVEN = "GIVEN"
@@ -33,7 +34,7 @@ class NamePartTag(Enum):
 
     def can_match(self, other: "NamePartTag") -> bool:
         """Check if this tag can match the other tag."""
-        if self == NamePartTag.ANY or other == NamePartTag.ANY:
+        if self in WILDCARDS or other in WILDCARDS:
             return True
         if self == other:
             return True
@@ -43,6 +44,12 @@ class NamePartTag(Enum):
             return False
         return True
 
+
+WILDCARDS = {
+    NamePartTag.UNSET,
+    NamePartTag.AMBIGUOUS,
+    NamePartTag.STOP,
+}
 
 GIVEN_NAME_TAGS = {
     NamePartTag.GIVEN,
@@ -72,7 +79,7 @@ NAME_TAGS_ORDER = (
     NamePartTag.NICK,
     NamePartTag.PATRONYMIC,
     NamePartTag.MATRONYMIC,
-    NamePartTag.ANY,
+    NamePartTag.UNSET,
     NamePartTag.FAMILY,
     NamePartTag.TRIBAL,
     NamePartTag.NUM,
