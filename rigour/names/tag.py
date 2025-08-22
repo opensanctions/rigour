@@ -14,8 +14,8 @@ class NameTypeTag(Enum):
 class NamePartTag(Enum):
     """Within a name, identify name part types."""
 
-    ANY = "ANY"
-    UNSURE = "UNSURE"
+    UNSET = "UNSET"
+    AMBIGUOUS = "AMBIGUOUS"
 
     TITLE = "TITLE"
     GIVEN = "GIVEN"
@@ -46,8 +46,8 @@ class NamePartTag(Enum):
 
 
 WILDCARDS = {
-    NamePartTag.ANY,
-    NamePartTag.UNSURE,
+    NamePartTag.UNSET,
+    NamePartTag.AMBIGUOUS,
     NamePartTag.STOP,
 }
 
@@ -79,7 +79,7 @@ NAME_TAGS_ORDER = (
     NamePartTag.NICK,
     NamePartTag.PATRONYMIC,
     NamePartTag.MATRONYMIC,
-    NamePartTag.ANY,
+    NamePartTag.UNSET,
     NamePartTag.FAMILY,
     NamePartTag.TRIBAL,
     NamePartTag.NUM,

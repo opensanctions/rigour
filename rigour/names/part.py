@@ -19,7 +19,7 @@ class NamePart(object):
         self,
         form: str,
         index: Optional[int] = None,
-        tag: NamePartTag = NamePartTag.ANY,
+        tag: NamePartTag = NamePartTag.UNSET,
     ) -> None:
         self.form = form
         self.index = index

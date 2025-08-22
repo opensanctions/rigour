@@ -13,7 +13,7 @@ def test_name_part():
     assert hash(john) == hash((0, "john"))
     assert john == NamePart("john", 0)
     assert john != NamePart("john", 1)
-    assert repr(john) == "<NamePart('john', 0, 'ANY')>"
+    assert repr(john) == "<NamePart('john', 0, 'UNSET')>"
 
     petro = NamePart("Петро́", 0)
     assert petro.ascii == "Petro"
@@ -46,7 +46,7 @@ def test_name_part_tags():
     assert not steven.can_match(stevens)
     assert not stevens.can_match(steven)
 
-    anyst = NamePart("steven", 0, NamePartTag.ANY)
+    anyst = NamePart("steven", 0, NamePartTag.UNSET)
     assert anyst.can_match(steven)
     assert anyst.can_match(stevens)
 
@@ -66,14 +66,14 @@ def test_name_part_sort():
 def name_part_sort_company():
     parts = [
         NamePart("llc", 0, NamePartTag.LEGAL),
-        NamePart("orion", 1, NamePartTag.ANY),
+        NamePart("orion", 1, NamePartTag.UNSET),
     ]
     sorted_parts = NamePart.tag_sort(parts)
     assert len(sorted_parts) == 2
     assert sorted_parts[0].form == "orion"
     assert sorted_parts[1].form == "llc"
     parts = [
-        NamePart("orion", 0, NamePartTag.ANY),
+        NamePart("orion", 0, NamePartTag.UNSET),
         NamePart("llc", 1, NamePartTag.LEGAL),
     ]
     sorted_parts = NamePart.tag_sort(parts)
@@ -84,9 +84,9 @@ def name_part_sort_company():
 
 def test_name_part_sort_stable():
     parts = [
-        NamePart("a", 0, NamePartTag.ANY),
-        NamePart("c", 1, NamePartTag.ANY),
-        NamePart("x", 1, NamePartTag.ANY),
+        NamePart("a", 0, NamePartTag.UNSET),
+        NamePart("c", 1, NamePartTag.UNSET),
+        NamePart("x", 1, NamePartTag.UNSET),
     ]
     sorted_parts = NamePart.tag_sort(parts)
     assert len(sorted_parts) == 3
@@ -94,9 +94,9 @@ def test_name_part_sort_stable():
     assert sorted_parts[1].form == "c"
     assert sorted_parts[2].form == "x"
     parts = [
-        NamePart("x", 0, NamePartTag.ANY),
-        NamePart("c", 1, NamePartTag.ANY),
-        NamePart("a", 1, NamePartTag.ANY),
+        NamePart("x", 0, NamePartTag.UNSET),
+        NamePart("c", 1, NamePartTag.UNSET),
+        NamePart("a", 1, NamePartTag.UNSET),
     ]
     sorted_parts = NamePart.tag_sort(parts)
     assert len(sorted_parts) == 3

@@ -157,8 +157,8 @@ def test_align_tagged_person_name_parts():
     assert query_sorted[0].form == result_sorted[0].form
 
     query = [
-        NamePart("smith", 0, NamePartTag.ANY),
-        NamePart("john", 1, NamePartTag.ANY),
+        NamePart("smith", 0, NamePartTag.UNSET),
+        NamePart("john", 1, NamePartTag.UNSET),
     ]
     query_sorted, result_sorted = align_person_name_order(query, result)
     assert query_sorted[1].form == result_sorted[1].form
@@ -166,7 +166,7 @@ def test_align_tagged_person_name_parts():
 
     query = [
         NamePart("henry", 1, NamePartTag.GIVEN),
-        NamePart("smith", 0, NamePartTag.ANY),
+        NamePart("smith", 0, NamePartTag.UNSET),
         NamePart("john", 1, NamePartTag.GIVEN),
     ]
     query_sorted, result_sorted = align_person_name_order(query, result)

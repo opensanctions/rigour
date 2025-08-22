@@ -81,12 +81,12 @@ class Name(object):
             # Only tag if we have matched the entire text
             if len(matching) == len(tokens):
                 for part in matching:
-                    if part.tag == NamePartTag.ANY:
+                    if part.tag == NamePartTag.UNSET:
                         part.tag = tag
                     elif not part.tag.can_match(tag):
                         # if the part is already tagged, we check compatibility and
                         # otherwise mark it as an outcast from polite society
-                        part.tag = NamePartTag.UNSURE
+                        part.tag = NamePartTag.AMBIGUOUS
                 matches += 1
                 if matches >= max_matches:
                     return
