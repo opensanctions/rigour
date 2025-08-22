@@ -2,6 +2,7 @@ from itertools import product
 from typing import List, Optional, Tuple
 
 from rigour.names.part import NamePart
+from rigour.names.tag import NamePartTag
 from rigour.text.distance import dam_levenshtein
 
 
@@ -25,7 +26,7 @@ def _pack_short_parts(
     for op in options:
         if op in packed:
             continue
-        if not part.can_match(op):
+        if not NamePartTag.can_match(part.tag, op.tag):
             continue
         base_str = "".join([p.comparable for p in packed])
         if len(base_str) >= len(part.form):
@@ -70,7 +71,7 @@ def align_person_name_order(
         best_left_parts: Optional[List[NamePart]] = None
         best_right_parts: Optional[List[NamePart]] = None
         for qp, rp in product(left_unused, right_unused):
-            if not qp.can_match(rp):
+            if not NamePartTag.can_match(qp.tag, rp.tag):
                 continue
             if qp.comparable == rp.comparable:
                 best_score = 1.0

@@ -15,6 +15,7 @@ class NamePartTag(Enum):
     """Within a name, identify name part types."""
 
     ANY = "ANY"
+    UNSURE = "UNSURE"
 
     TITLE = "TITLE"
     GIVEN = "GIVEN"
@@ -33,7 +34,8 @@ class NamePartTag(Enum):
 
     def can_match(self, other: "NamePartTag") -> bool:
         """Check if this tag can match the other tag."""
-        if self == NamePartTag.ANY or other == NamePartTag.ANY:
+        wildcard = {self.ANY, self.UNSURE, self.STOP}
+        if self in wildcard or other in wildcard:
             return True
         if self == other:
             return True
