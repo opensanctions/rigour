@@ -34,8 +34,7 @@ class NamePartTag(Enum):
 
     def can_match(self, other: "NamePartTag") -> bool:
         """Check if this tag can match the other tag."""
-        wildcard = {self.ANY, self.UNSURE, self.STOP}
-        if self in wildcard or other in wildcard:
+        if self in WILDCARDS or other in WILDCARDS:
             return True
         if self == other:
             return True
@@ -45,6 +44,12 @@ class NamePartTag(Enum):
             return False
         return True
 
+
+WILDCARDS = {
+    NamePartTag.ANY,
+    NamePartTag.UNSURE,
+    NamePartTag.STOP,
+}
 
 GIVEN_NAME_TAGS = {
     NamePartTag.GIVEN,
