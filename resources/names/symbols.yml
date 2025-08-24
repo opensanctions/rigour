@@ -915,6 +915,45 @@ org_symbols:
     - 厂家
     - 厂子
     - plant
+  lab:
+    - laboratory # en (singular)
+    - laboratories # en (plural)
+    - lab # en (short form singular)
+    - labs # en (short form plural)
+    # - labor # de,et (singular) — means work in US English
+    - laboratoire # fr (singular)
+    - laboratoires # fr (plural)
+    - laboratoria # nl, pl, (plural)
+    - laboratorien # de (plural, technical)
+    - laboratorier # da, no, sv (plural)
+    - laboratorija # lt (singular)
+    - laboratorijos # lt (plural)
+    - laboratorio # es, fi (singular)
+    - laboratório # pt (singular)
+    - laboratorios # es (plural)
+    - laboratórios # pt (plural)
+    - laboratoriot # fi (plural)
+    - laboratorium # da, nl, no, pl, sv (singular)
+    - laboratórium # hu (singular)
+    - laboratóriumok # hu (plural)
+    - laboratuvar # tr (singular)
+    - laboratuvarlar # tr (plural)
+    - labore # de (plural, non-technical)
+    - laborid # et (plural)
+    - лаборатории # ru (plural)
+    - лаборатория # ru (singular)
+    - лабораторії # uk (plural)
+    - лабораторія # uk (singular)
+    - المختبر # ar (singular)
+    - المختبرات # ar (plural)
+    - معمل # ar (singular)
+    - معامل # ar (plural)
+    - प्रयोगशाला # hi (singular)
+    - प्रयोगशालाएं # hi (plural)
+    - 실험실 # ko
+    - 实验室 # zh
+    - 実験室 # ja (experiment room)
+    - 研究室 # ja (research room)
   invfund:
     - investment fund
     - fondo de inversión
