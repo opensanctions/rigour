@@ -775,14 +775,23 @@ org_symbols:
     - automobilele
     - automobilelor
   nuclear:
-    - niwclear # cy
     - nuclear # en, es, pt
+    - branduolinis # lt (masculine)
+    - branduolinė # lt (feminine)
+    - jądrowy # pl
+    - kjernefysisk # no
+    - niwclear # cy
     - nucleair # nl
     - nucleare # it
     - nucleares # pt (plural)
     - nucléaire # fr singular
     - nucléaires # fr plural
+    - nukleaarinen # fi
+    - nukleaarne # et
     - nuklear # de
+    - nukleare # da
+    - nukleáris # hu
+    - nukleär # sv
     - nükleer # tr
     - nyuklia # sw
     - nuklearny # pl (masculine)
@@ -799,8 +808,11 @@ org_symbols:
     - ядерна # uk (feminine)
     - ядерне # uk (neuter)
     - ядерні # uk (plural)
+    - نووي # ar
+    - नाभिकीय # hi
+    - 핵 # ko
+    - 核 # ja, zh
     - 核能 # zh
-    - 核的 # zh
   uranium:
     - uranium # en, fr
     - uraan # et, af, nl
