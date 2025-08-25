@@ -17,6 +17,9 @@ pip install -U rigour
 
 See: https://rigour.followthemoney.tech/
 
+## Target languages and number systems
+Our resources will always aim to support the following languages: English, French, Spanish, Russian, Ukrainian, Arabic, Simplified Chinese, Korean, Japanese, Portuguese (Brazilian and European), Turkish, Polish, German, Swedish, Norwegian, Danish, Lithuanian, Estonian, Finnish, Hungarian and Dutch. We aim to support the main number systems used in each of the above languages as well as Roman numerals. For English, we aim to support both US and UK spellings.
+
 ## Acknowledgements
 
 The address formatting database contained in `rigour/data/addresses/formats.yml` is derived from `worldwide.yml` in the [OpenCageData address-formatting repository](https://github.com/OpenCageData/address-formatting). It is used to format addresses according to customs in the country that is been encoded.
