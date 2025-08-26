@@ -136,7 +136,7 @@ forms:
     - вул
     - ул
   kv:
-   # - kvartal (refers to quarter/block and not flat)
+    # - kvartal (refers to quarter/block and not flat)
     - квартал
     - kvartira
     - квартира
@@ -287,60 +287,60 @@ forms:
     - 방갈로
     - バンガロー
     - 平房
-  factory:
-    - factory
-    - factories
-    - fabbrica
-    - fabbriche
-    - fábrica
-    - fabriek
-    - fabrik
-    - fabrika
-    - fabrikas
-    - fabrique
-    - fabryka
-    - gamykla
-    - gyár
-    - plant
-    - tehas
-    - tehdas
-    - usine
-    - vabrik
-    - zavod
-    - závod
-    - завод
-    - фабрика
-    - مَصْنَع
-    - 공장
-    - 厂
-    - 厂子
-    - 工厂
-    - 工場
-    - कारखाना
-  warehouse:
-    - warehouse
-    - almacén
-    - armazém
-    - depot
-    - godown
-    - lager
-    - 창고 
-    - depósito
-    - entrepôt
-    - gudang
-    - ladu
-    - lagerhaus
-    - magazyn
-    - pakhuis
-    - raktár 
-    - sandėlis
-    - store room
-    - storeroom
-    - varasto
-    - Склад
-    - مخزن 
-    - 仓库 
-    - गोदाम
+  # factory:
+  #   - factory
+  #   - factories
+  #   - fabbrica
+  #   - fabbriche
+  #   - fábrica
+  #   - fabriek
+  #   - fabrik
+  #   - fabrika
+  #   - fabrikas
+  #   - fabrique
+  #   - fabryka
+  #   - gamykla
+  #   - gyár
+  #   - plant
+  #   - tehas
+  #   - tehdas
+  #   - usine
+  #   - vabrik
+  #   - zavod
+  #   - závod
+  #   - завод
+  #   - фабрика
+  #   - مَصْنَع
+  #   - 공장
+  #   - 厂
+  #   - 厂子
+  #   - 工厂
+  #   - 工場
+  #   - कारखाना
+  # warehouse:
+  #   - warehouse
+  #   - almacén
+  #   - armazém
+  #   - depot
+  #   - godown
+  #   - lager
+  #   - 창고
+  #   - depósito
+  #   - entrepôt
+  #   - gudang
+  #   - ladu
+  #   - lagerhaus
+  #   - magazyn
+  #   - pakhuis
+  #   - raktár
+  #   - sandėlis
+  #   - store room
+  #   - storeroom
+  #   - varasto
+  #   - Склад
+  #   - مخزن
+  #   - 仓库
+  #   - गोदाम
   ind:
     - industrial
   cmrc:
