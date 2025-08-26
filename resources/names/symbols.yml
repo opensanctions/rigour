@@ -889,6 +889,40 @@ org_symbols:
     - 金剛石 # zh
     - 钻石 # zh
     - 鑽石 # zh
+  jewelry:	
+    - jewelry # en-US	
+    - jewellery # en-GB	
+    - bijoux # fr	
+    - biżuteria # pl	
+    - ehted # et	
+    - ékszerek # hu	
+    - gioielli # it	
+    - jóias # pt	
+    - joyas # es	
+    - joyería # es (jewelry shop/craft of making jewelry)	
+    - juwelen # nl	
+    - korut # fi	
+    - mücevher # tr	
+    - papuošalai # lt	
+    - schmuck # de	
+    - sieraden # nl	
+    - smycke # sv	
+    - smykker # da, no	
+    - šperky # cs, sk	
+    - takı # tr	
+    - κοσμήματα # el	
+    - украшения # ru	
+    - ювелирные изделия # ru	
+    - прикраси # uk	
+    - ювелірні вироби # uk	
+    - مجوهرات # ar	
+    - आभूषण # hi	
+    - 보석류 # ko	
+    - 주얼리 # ko	
+    - 宝飾品 # ja	
+    - ジュエリー # ja	
+    - 首饰 # zh	
+    - 珠宝 # zh	
   mining:
     - mining
     - mines
