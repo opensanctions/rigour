@@ -85,5 +85,5 @@ NAME_TAGS_ORDER = (
     NamePartTag.NUM,
     NamePartTag.SUFFIX,
     NamePartTag.LEGAL,
-    NamePartTag.STOP,
+    *WILDCARDS,
 )
