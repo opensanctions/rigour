@@ -74,16 +74,21 @@ FAMILY_NAME_TAGS = {
 # All models are lies, but some are useful.
 NAME_TAGS_ORDER = (
     NamePartTag.HONORIFIC,
+    NamePartTag.TITLE,
     NamePartTag.GIVEN,
     NamePartTag.MIDDLE,
     NamePartTag.NICK,
     NamePartTag.PATRONYMIC,
     NamePartTag.MATRONYMIC,
     NamePartTag.UNSET,
+    NamePartTag.AMBIGUOUS,
     NamePartTag.FAMILY,
     NamePartTag.TRIBAL,
     NamePartTag.NUM,
     NamePartTag.SUFFIX,
     NamePartTag.LEGAL,
-    *WILDCARDS,
+    NamePartTag.STOP,
 )
+
+UNORDERED = set(list(NamePartTag)) - set(NAME_TAGS_ORDER)
+assert len(UNORDERED) == 0, UNORDERED
