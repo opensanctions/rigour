@@ -30,6 +30,36 @@ def test_name_object():
     assert len(putin.parts) == 2
 
 
+def test_consolidate_names():
+    """Test the consolidate_names classmethod that removes short names contained in longer names."""
+    # Create test names
+    john_smith = Name("John Smith", tag=NameTypeTag.PER)
+    john_k_smith = Name("John K Smith", tag=NameTypeTag.PER)
+    john_r_smith = Name("John R Smith", tag=NameTypeTag.PER)
+    
+    # Test that shorter names are removed when longer names contain them
+    names = [john_smith, john_k_smith, john_r_smith]
+    consolidated = Name.consolidate_names(names)
+    
+    # Should only keep the longer names since "John Smith" is contained in both longer names
+    assert len(consolidated) == 2
+    assert john_k_smith in consolidated
+    assert john_r_smith in consolidated
+    assert john_smith not in consolidated
+    
+    # Test with organization names
+    acme_corp = Name("Acme Corporation", tag=NameTypeTag.ORG)
+    acme_corp_inc = Name("Acme Corporation Inc", tag=NameTypeTag.ORG)
+    
+    org_names = [acme_corp, acme_corp_inc]
+    consolidated_orgs = Name.consolidate_names(org_names)
+    
+    # Should only keep the longer name
+    assert len(consolidated_orgs) == 1
+    assert acme_corp_inc in consolidated_orgs
+    assert acme_corp not in consolidated_orgs
+
+
 def test_cjk_name():
     name = Name("维克托·亚历山德罗维奇·卢卡申科", lang="zho")
     assert name.form == "维克托·亚历山德罗维奇·卢卡申科"

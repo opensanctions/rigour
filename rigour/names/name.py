@@ -1,4 +1,5 @@
-from typing import Optional, List, Any, Set
+from typing import Optional, List, Any, Set, Iterable
+import itertools
 
 from rigour.names.part import NamePart, Span
 from rigour.names.symbol import Symbol
@@ -161,3 +162,24 @@ class Name(object):
 
     def __repr__(self) -> str:
         return "<Name(%r, %r, %r)>" % (self.original, self.form, self.tag.value)
+
+    @classmethod
+    def consolidate_names(cls, names: Iterable["Name"]) -> Set["Name"]:
+        """Remove short names that are contained in longer names.
+        
+        This is useful when building a matcher to prevent a scenario where a short
+        version of a name ("John Smith") is matched to a query ("John K Smith"), where a longer 
+        version would have disqualified the match ("John K Smith" != "John R Smith").
+        """
+        # We call these super_names because they are (non-strict) supersets of names.
+        super_names = set(names)
+        
+        for name, other in itertools.product(names, names):
+            # Check if name is still in super_names, otherwise two equal names
+            # will remove each other with none being left.
+            if name in super_names and name.contains(other):
+                # Use discard instead of remove here because other may already have been kicked out
+                # by another name of which it was a subset.
+                super_names.discard(other)
+        
+        return super_names
