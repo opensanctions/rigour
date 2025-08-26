@@ -10,16 +10,16 @@ class LangStr(str):
 
     __slots__ = ("lang",)
 
-    def __new__(cls, content: str, lang: Optional[str] = None):
+    def __new__(cls, content: str, lang: Optional[str] = None) -> "LangStr":
         instance = str.__new__(cls, content)
         return instance
 
-    def __init__(self, content: str, lang: Optional[str] = None):
+    def __init__(self, content: str, lang: Optional[str] = None) -> None:
         if lang is not None and lang not in ISO3_ALL:
             raise ValueError(f"Invalid ISO 639-3 language code: {lang}")
         self.lang = lang
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         if self.lang is not None:
             return f'"{super().__str__()}"@{self.lang}'
         return super().__repr__()
