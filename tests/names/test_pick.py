@@ -1,5 +1,12 @@
 import pytest
-from rigour.names.pick import pick_name, levenshtein_pick, pick_case, reduce_names
+from rigour.langs import LangStr, PREFERRED_LANG
+from rigour.names.pick import (
+    pick_name,
+    pick_lang_name,
+    levenshtein_pick,
+    pick_case,
+    reduce_names,
+)
 
 PUTIN = [
     "Vladimir Vladimirovich Putin",
@@ -34,6 +41,21 @@ MITCH = [
     "ミッチ・マコーネル",
     "米奇·麥康諾",
     "미치 매코널",
+]
+
+TAGGED = [
+    LangStr("Mitch McConnell", lang=PREFERRED_LANG),
+    LangStr("Mitch McConne", lang=None),
+    LangStr("Mitch McConne", lang=None),
+    LangStr("Mitch McConne", lang=None),
+    LangStr("Mitch McConne", lang=None),
+    LangStr("Mitch McConne", lang=None),
+    LangStr("Mitch McConne", lang=None),
+    LangStr("Митч Макконнелл", lang="rus"),
+    LangStr("میتچ ماکونل", lang="ara"),
+    LangStr("ミッチ・マコーネル", lang="jpn"),
+    LangStr("米奇·麥康諾", lang="zho"),
+    LangStr("미치 매코널", lang="kor"),
 ]
 
 
@@ -102,6 +124,10 @@ def test_levenshtein_pick():
     assert levenshtein_pick(names, {})[0] == "Vladimir Vladimirovich PUTIN"
     weights = {"Vladimir Vladimirovich Putin": 3.0}
     assert levenshtein_pick(names, weights)[0] == "Vladimir Vladimirovich Putin"
+
+
+def test_pick_lang_name():
+    assert pick_lang_name(TAGGED) == "Mitch McConnell"
 
 
 def test_pick_case():

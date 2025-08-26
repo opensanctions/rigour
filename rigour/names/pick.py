@@ -3,6 +3,8 @@ from itertools import combinations
 from collections import defaultdict
 from typing import Dict, Optional, List
 from normality import ascii_text
+
+from rigour.langs import LangStr, PREFERRED_LANG, PREFERRED_LANGS
 from rigour.names.check import is_name
 from rigour.text.distance import levenshtein
 from rigour.data.text.scripts import LATIN_CHARS, LATINIZABLE_CHARS
@@ -74,6 +76,30 @@ def pick_name(names: List[str]) -> Optional[str]:
             if surface in names:
                 return surface
     return None
+
+
+def pick_lang_name(names: List[LangStr]) -> Optional[str]:
+    """Pick the best name from a list of LangStr objects, prioritizing the preferred language.
+
+    Args:
+        names (List[LangStr]): A list of LangStr objects with language information.
+
+    Returns:
+        Optional[str]: The best name for display.
+    """
+    if len(names) == 0:
+        return None
+    preferred = [str(n) for n in names if n.lang == PREFERRED_LANG]
+    if len(preferred) > 0:
+        picked = pick_name(preferred)
+        if picked is not None:
+            return picked
+    preferred = [str(n) for n in names if n.lang in PREFERRED_LANGS]
+    if len(preferred) > 0:
+        picked = pick_name(preferred)
+        if picked is not None:
+            return picked
+    return pick_name([str(n) for n in names])
 
 
 def pick_case(names: List[str]) -> str:

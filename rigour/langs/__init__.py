@@ -21,6 +21,7 @@ from banal import ensure_list
 
 from rigour.data.langs.iso639 import ISO3_ALL, ISO2_MAP, ISO3_MAP
 from rigour.langs.synonyms import expand_synonyms, LANG_REWRITE
+from rigour.langs.text import LangStr
 from rigour.langs.util import normalize_code
 from rigour.env import PREFERRED_LANG as PREFERRED_LANG_
 
@@ -29,7 +30,7 @@ from rigour.env import PREFERRED_LANG as PREFERRED_LANG_
 # languages using a latin script.
 # https://en.wikipedia.org/wiki/List_of_languages_by_number_of_native_speakers
 PREFERRED_LANG = PREFERRED_LANG_  # env: RR_PREFERRED_LANG/eng
-PREFFERED_LANGS = [
+PREFERRED_LANGS = [
     "eng",
     "spa",
     "fra",
@@ -51,6 +52,15 @@ PREFFERED_LANGS = [
     "fas",
     "urd",
     "zho",
+]
+
+__all__ = [
+    "LangStr",
+    "PREFERRED_LANG",
+    "PREFFERED_LANGS",
+    "iso_639_alpha2",
+    "iso_639_alpha3",
+    "list_to_alpha3",
 ]
 
 
