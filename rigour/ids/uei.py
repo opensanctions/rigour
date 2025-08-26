@@ -19,7 +19,9 @@ class UEI(IdentifierFormat):
     @classmethod
     def is_valid(cls, text: str) -> bool:
         """Determine if the given string is a valid NPI."""
-        if UEI_RE.match(text) is None:
+        text = text.strip()
+        match = UEI_RE.search(text)
+        if match is None or match.group(1) != text:
             return False
 
         if text.startswith("0"):
