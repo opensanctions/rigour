@@ -6,4 +6,3 @@ def test_text_hash():
     assert text_hash("HelloWorld") == text_hash("Hello, World!")
     assert text_hash("Rigour\n\t!!!!!!!") == text_hash("rigour")
     assert text_hash("") == text_hash(". ")
-    assert False
