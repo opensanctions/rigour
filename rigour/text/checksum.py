@@ -16,7 +16,7 @@ def text_hash(text: str) -> str:
         str: The SHA-1 hash of the processed text.
     """
     substantial: List[str] = []
-    text = normalize("NFKC", remove_unsafe_chars(text.lower()))
+    text = normalize("NFKD", remove_unsafe_chars(text.lower()))
     for char in text:
         if char.isalnum():
             substantial.append(char)
