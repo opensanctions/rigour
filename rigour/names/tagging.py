@@ -81,9 +81,8 @@ def _common_symbols(normalizer: Normalizer) -> Dict[str, Set[Symbol]]:
         sym = Symbol(Symbol.Category.NUMERIC, key)
         for value in values:
             nvalue = normalizer(value)
-            if nvalue is None:
-                continue
-            mapping[nvalue].add(sym)
+            if nvalue is not None:
+                mapping[nvalue].add(sym)
 
     del sys.modules["rigour.data.text.ordinals"]
     return mapping
@@ -116,9 +115,8 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
         names.append(data["full_name"])
         for name in names:
             nname = normalizer(name)
-            if nname is None or not len(nname):
-                continue
-            mapping[nname].add(sym)
+            if nname is not None and len(nname):
+                mapping[nname].add(sym)
 
     symbols: Dict[str, Symbol] = {}
     for org_type in ORG_TYPES:
@@ -141,9 +139,8 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
         if compare is None:
             for alias in org_type.get("aliases", []):
                 nalias = normalizer(alias)
-                if nalias is None:
-                    continue
-                mapping[nalias].add(class_sym)
+                if nalias is not None:
+                    mapping[nalias].add(class_sym)
 
     del sys.modules["rigour.data.names.data"]
     del sys.modules["rigour.data.names.org_types"]
@@ -209,9 +206,8 @@ def _get_person_tagger(normalizer: Normalizer) -> Tagger:
         forms: Set[str] = set()
         for alias in aliases:
             norm_alias = normalizer(alias)
-            if norm_alias is None or not len(norm_alias):
-                continue
-            forms.add(norm_alias)
+            if norm_alias is not None and len(norm_alias):
+                forms.add(norm_alias)
         if len(forms) < 2:
             continue
         for form in forms:
