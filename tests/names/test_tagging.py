@@ -123,13 +123,17 @@ def test_tag_org_name():
     assert len(tagged_name.symbols) > 0
     indus = Symbol(Symbol.Category.SYMBOL, "INDUSTRY")
     assert indus in tagged_name.symbols
-    for span in tagged_name.spans:
-        if span.symbol.category == Symbol.Category.SYMBOL:
-            continue
-        assert span.symbol.category == Symbol.Category.ORG_CLASS
-        assert span.symbol.id == "LLC"
-        for part in span.parts:
-            assert part.tag == NamePartTag.LEGAL
+
+    assert len(tagged_name.spans) == 2
+    # First span is "Doe Industries"
+    assert tagged_name.spans[0].symbol.category == Symbol.Category.SYMBOL
+
+    # Second span is "Inc." which maps to LLC
+    llc_span = tagged_name.spans[1]
+    assert llc_span.symbol.category == Symbol.Category.ORG_CLASS
+    assert llc_span.symbol.id == "LLC"
+    for part in llc_span.parts:
+        assert part.tag == NamePartTag.LEGAL
 
 
 def test_tag_org_name_location():

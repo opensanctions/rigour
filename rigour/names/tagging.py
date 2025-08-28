@@ -44,7 +44,7 @@ class Tagger:
     replacement on those aliases or the word itself in a text.
     """
 
-    def __init__(self, mapping: Dict[str, List[Symbol]]) -> None:
+    def __init__(self, mapping: Dict[str, Set[Symbol]]) -> None:
         self._symbols = []
         """Indexed list of symbols for each pattern."""
         forms = []
@@ -72,11 +72,11 @@ class Tagger:
         return results
 
 
-def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
+def _common_symbols(normalizer: Normalizer) -> Dict[str, Set[Symbol]]:
     """Get the common symbols for names."""
     from rigour.data.text.ordinals import ORDINALS
 
-    mapping: Dict[str, List[Symbol]] = defaultdict(list)
+    mapping: Dict[str, Set[Symbol]] = defaultdict(set)
     for key, values in ORDINALS.items():
         sym = Symbol(Symbol.Category.NUMERIC, key)
         for value in values:
@@ -84,7 +84,7 @@ def _common_symbols(normalizer: Normalizer) -> Dict[str, List[Symbol]]:
             if nvalue is None:
                 continue
             if sym not in mapping.get(nvalue, []):
-                mapping[nvalue].append(sym)
+                mapping[nvalue].add(sym)
 
     del sys.modules["rigour.data.text.ordinals"]
     return mapping
@@ -103,13 +103,13 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
         sym = Symbol(Symbol.Category.SYMBOL, key.upper())
         nkey = normalizer(key)
         if nkey is not None:
-            mapping[nkey].append(sym)
+            mapping[nkey].add(sym)
         for value in values:
             nvalue = normalizer(value)
             if nvalue is None:
                 continue
             if sym not in mapping.get(nvalue, []):
-                mapping[nvalue].append(sym)
+                mapping[nvalue].add(sym)
 
     for data in read_jsonl(TERRITORIES_FILE):
         sym = Symbol(Symbol.Category.LOCATION, sys.intern(data["code"]))
@@ -121,7 +121,7 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
             if nname is None or not len(nname):
                 continue
             if sym not in mapping.get(nname, []):
-                mapping[nname].append(sym)
+                mapping[nname].add(sym)
 
     symbols: Dict[str, Symbol] = {}
     for org_type in ORG_TYPES:
@@ -135,19 +135,19 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
         if display is not None:
             display_norm = normalizer(display)
             if display_norm is not None:
-                mapping[display_norm].append(class_sym)
+                mapping[display_norm].add(class_sym)
         compare = org_type.get("compare", display)
         if compare is not None:
             compare_norm = normalizer(compare)
             if compare_norm is not None:
-                mapping[compare_norm].append(class_sym)
+                mapping[compare_norm].add(class_sym)
         if compare is None:
             for alias in org_type.get("aliases", []):
                 nalias = normalizer(alias)
                 if nalias is None:
                     continue
                 if class_sym not in mapping.get(nalias, []):
-                    mapping[nalias].append(class_sym)
+                    mapping[nalias].add(class_sym)
 
     del sys.modules["rigour.data.names.data"]
     del sys.modules["rigour.data.names.org_types"]
@@ -201,13 +201,13 @@ def _get_person_tagger(normalizer: Normalizer) -> Tagger:
         sym = Symbol(Symbol.Category.SYMBOL, key.upper())
         nkey = normalizer(key)
         if nkey is not None:
-            mapping[nkey].append(Symbol(Symbol.Category.SYMBOL, key))
+            mapping[nkey].add(Symbol(Symbol.Category.SYMBOL, key))
         for value in values:
             nvalue = normalizer(value)
             if nvalue is None:
                 continue
             if sym not in mapping.get(nvalue, []):
-                mapping[nvalue].append(sym)
+                mapping[nvalue].add(sym)
 
     for qid, aliases in load_person_names():
         sym = Symbol(Symbol.Category.NAME, int(qid[1:]))
@@ -220,7 +220,7 @@ def _get_person_tagger(normalizer: Normalizer) -> Tagger:
         if len(forms) < 2:
             continue
         for form in forms:
-            mapping[form].append(sym)
+            mapping[form].add(sym)
 
     del sys.modules["rigour.data.names.data"]
     log.info("Loaded person tagger (%s terms).", len(mapping))
