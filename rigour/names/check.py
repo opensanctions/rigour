@@ -1,4 +1,5 @@
 from functools import cache
+from typing import Sequence, Set
 import unicodedata
 
 from rigour.text.dictionary import Normalizer
@@ -15,28 +16,68 @@ def is_name(name: str) -> bool:
     return False
 
 
+def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
+    """Load a list of words and normalize them using the provided normalizer."""
+    wordlist = set()
+    for word in words:
+        norm = normalizer(word)
+        if norm is not None and len(norm) > 0:
+            wordlist.add(norm)
+    return wordlist
+
+
 @cache
-def _load_stopwords(normalizer: Normalizer) -> set[str]:
+def _load_stopwords(normalizer: Normalizer) -> Set[str]:
     """Load the stopwords from the data file and normalize them using the provided normalizer."""
     from rigour.data.names.data import STOPWORDS
 
-    stopwords = set()
-    for word in STOPWORDS:
-        norm = normalizer(word)
-        if norm is not None and len(norm) > 0:
-            stopwords.add(norm)
-    return stopwords
+    return _load_wordlist(STOPWORDS, normalizer)
 
 
-def is_stopword(form: str, normalizer: Normalizer = normalize_name) -> bool:
+def is_stopword(
+    form: str, *, normalizer: Normalizer = normalize_name, normalize: bool = False
+) -> bool:
     """Check if the given form is a stopword. The stopword list is normalized first.
 
     Args:
         form (str): The token to check, must already be normalized.
         normalizer (Normalizer): The normalizer to use for checking stopwords.
+        normalize (bool): Whether to normalize the form before checking.
 
     Returns:
         bool: True if the form is a stopword, False otherwise.
     """
+    norm_form = normalizer(form) if normalize else form
+    if norm_form is None:
+        return False
     stopwords = _load_stopwords(normalizer)
-    return form in stopwords
+    return norm_form in stopwords
+
+
+@cache
+def _load_nullwords(normalizer: Normalizer) -> set[str]:
+    """Load the nullwords from the data file and normalize them using the provided normalizer."""
+    from rigour.data.names.data import NULLWORDS
+
+    return _load_wordlist(NULLWORDS, normalizer)
+
+
+def is_nullword(
+    form: str, *, normalizer: Normalizer = normalize_name, normalize: bool = False
+) -> bool:
+    """Check if the given form is a nullword. Nullwords are words that imply a missing value, such
+    as "none", "not available", "n/a", etc. The nullword list is normalized first.
+
+    Args:
+        form (str): The token to check, must already be normalized.
+        normalizer (Normalizer): The normalizer to use for checking nullwords.
+        normalize (bool): Whether to normalize the form before checking.
+
+    Returns:
+        bool: True if the form is a nullword, False otherwise.
+    """
+    norm_form = normalizer(form) if normalize else form
+    if norm_form is None:
+        return False
+    nullwords = _load_nullwords(normalizer)
+    return norm_form in nullwords

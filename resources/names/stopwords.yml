@@ -389,6 +389,12 @@ NULLWORDS:
   - unknown
   - unk
   - Other
+  - nil
+  - void
+  - blank
+  - missing
+  - n.a.
+  - xxx
   - not applicable
   - not specified other
   - not specified
@@ -399,6 +405,31 @@ NULLWORDS:
   - not given
   - keine angabe
   - no data
+  - No disponible
+  - Sin datos
+  - Desconocido
+  - No especificado
+  - Sin especificar
+  - No aplica
+  - Vacío
+  - Nulo
+  - Non disponible
+  - Pas de données
+  - Inconnu
+  - Non spécifié
+  - Non renseigné
+  - Sans objet
+  - Nicht verfügbar
+  - Keine Daten
+  - Nicht angegeben
+  - Entfällt
+  - Niet beschikbaar
+  - Н/Д
+  - Нет данных
+  - Неизвестно
+  - Не указано
+  - Пусто
+  - Отсутствует
 NULLPLACES:
   - stateless
   - overseas
