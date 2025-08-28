@@ -374,3 +374,52 @@ STOPPHRASES:
   - "presently known as"
   - "previously known as"
   - "trading as"
+NULLWORDS:
+  - Not applicable
+  - N/A
+  - None
+  - "Null"
+  - /
+  - "00"
+  - UNKNOWN
+  - "NULL"
+  - undetermined
+  - Other
+  - n a
+  - unknown
+  - unk
+  - Other
+  - not applicable
+  - not specified other
+  - not specified
+  - non specified
+  - "Not Known"
+  - "Not Disclosed"
+  - empty
+  - not given
+  - keine angabe
+  - no data
+NULLPLACES:
+  - stateless
+  - overseas
+  - ABC islands
+  - antilles
+  - Lesser Antilles
+  - Antillean
+  - asia
+  - british overseas territories
+  - overseas territories
+  - abroad
+  - channel islands
+  - channel island
+  - west indies
+  - West Indian
+  - indies
+  - THE WEST INDIES
+  - THE CHENNAL ISLES
+  - CHANNEL ISLANDS
+  - VIRGIN ISLANDS
+  - Africa
+  - African
+  - central america
+  - southern america
