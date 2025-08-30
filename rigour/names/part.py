@@ -48,7 +48,11 @@ class NamePart(object):
     def metaphone(self) -> Optional[str]:
         if self.latinize:
             ascii_form = self.ascii
-            if ascii_form is not None and len(ascii_form) > 2:
+            if (
+                ascii_form is not None
+                and len(ascii_form) > 2
+                and not ascii_form.isnumeric()
+            ):
                 return metaphone(ascii_form)
         return None
 

@@ -28,6 +28,12 @@ def test_name_part():
     assert osama.latinize is False
     assert osama.metaphone is None
 
+    numeric = NamePart("1234", 0)
+    assert numeric.ascii == "1234"
+    assert numeric.comparable == "1234"
+    assert numeric.metaphone is None
+    assert numeric.latinize is True
+
 
 def test_name_part_empty():
     # Should never exist
