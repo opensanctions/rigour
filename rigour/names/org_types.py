@@ -24,7 +24,7 @@ The database is originally based on three different sources:
 
 import sys
 import logging
-from functools import cache
+from functools import cache, lru_cache
 from normality import squash_spaces
 from typing import Dict, List, Optional, Set, Tuple
 
@@ -185,6 +185,7 @@ def _generic_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
     return Replacer(mapping, ignore_case=True)
 
 
+@lru_cache(maxsize=1024)
 def replace_org_types_compare(
     name: str, normalizer: Normalizer = _normalize_compare, generic: bool = False
 ) -> str:
