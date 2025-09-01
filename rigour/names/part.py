@@ -47,13 +47,9 @@ class NamePart(object):
     @property
     def metaphone(self) -> Optional[str]:
         if self.latinize:
-            ascii_form = self.ascii
-            if (
-                ascii_form is not None
-                and len(ascii_form) > 2
-                and not ascii_form.isnumeric()
-            ):
-                return metaphone(ascii_form)
+            text = self.ascii
+            if text is not None and len(text) > 2 and not text.isnumeric():
+                return metaphone(text)
         return None
 
     def can_match(self, other: "NamePart") -> bool:
