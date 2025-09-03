@@ -430,6 +430,7 @@ NULLWORDS:
   - Не указано
   - Пусто
   - Отсутствует
+  - Undefined
 NULLPLACES:
   - stateless
   - overseas
@@ -443,6 +444,7 @@ NULLPLACES:
   - abroad
   - channel islands
   - channel island
+  - Channel Isles
   - west indies
   - West Indian
   - indies
@@ -454,3 +456,4 @@ NULLPLACES:
   - African
   - central america
   - southern america
+  - ДЛЯ ЛИЦ БЕЗ ГРАЖДАНСТВА

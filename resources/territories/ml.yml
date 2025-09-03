@@ -11,15 +11,16 @@ summary: >-
   Mali, officially the Republic of Mali, is a landlocked country in West Africa. Mali
   is the eighth-largest country in Africa, with an area of over 1,241,238 square kilometres.
 wikipedia_url: https://en.wikipedia.org/wiki/Mali
-names_strong: []
+names_strong:
+  - РЕСПУБЛИКА МАЛИ
 names_weak:
-  - مالی
+  - مالی  # RESPUBLIKA MALI
   - Mailí
   - Sǝr Mali
   - మాలి
   - Màili
   - Orílɛ́ède Mali
-  - Մալի  # Mali
+  - Մալի # Mali
   - Māli
   - Malè
   - マリ共和国

@@ -72,6 +72,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "Trade Free Zone Company",
             "Special Economic Zone LLC",
             "Free Zone L.L.C.",
+            "L.L.C-FZ",
             "F.Z. Co.",
             "Free Zone Company",
             "Free Zone Limited Liability Company",
@@ -192,6 +193,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "S. DE R.L. DE C.V.",
             "S DE RL DE CV",
             "Sociedad de Responsabilidad Limitada de Capital Variable",
+            "S. de R.L. de C.V.",
         ],
     },
     {

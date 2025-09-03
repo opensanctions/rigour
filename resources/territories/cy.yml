@@ -17,10 +17,12 @@ summary: >-
   Mediterranean Sea. It lies between the continental mainlands of Europe and Asia,
   but is culturally and geopolitically Southeast European.
 wikipedia_url: https://en.wikipedia.org/wiki/Cyprus
-names_strong: []
+names_strong:
+  - РЕСПУБЛИКА КИПР
+  - Республика Кипр
 names_weak:
-  - Kıbrıs Cumhuriyeti
-  - CYPRS
+  - Kıbrıs Cumhuriyeti  # RESPUBLIKA KIPR
+  - CYPRS # Respublika Kipr
   - Emetab Cyprus
   - Λευκωσία # Leukōsía
   - Кипар # Kipar

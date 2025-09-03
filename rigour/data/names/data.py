@@ -342,6 +342,7 @@ NULLWORDS: Tuple[str, ...] = (
     "Sin datos",
     "Sin especificar",
     "UNKNOWN",
+    "Undefined",
     "Vacío",
     "blank",
     "empty",
@@ -375,6 +376,7 @@ NULLPLACES: Tuple[str, ...] = (
     "African",
     "Antillean",
     "CHANNEL ISLANDS",
+    "Channel Isles",
     "Lesser Antilles",
     "THE CHENNAL ISLES",
     "THE WEST INDIES",
@@ -393,6 +395,7 @@ NULLPLACES: Tuple[str, ...] = (
     "southern america",
     "stateless",
     "west indies",
+    "ДЛЯ ЛИЦ БЕЗ ГРАЖДАНСТВА",
 )
 
 ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {

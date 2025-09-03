@@ -12,9 +12,10 @@ summary: >-
   Oceania in the South Pacific Ocean. It lies about 1,100 nautical miles north-northeast
   of New Zealand.
 wikipedia_url: https://en.wikipedia.org/wiki/Fiji
-names_strong: []
+names_strong:
+  - Республика Фиджи
 names_weak:
-  - Sǝr Fiji
+  - Sǝr Fiji  # Respublika Fidži
   - فىجى
   - Fijib
   - ফিজি
@@ -31,7 +32,7 @@ names_weak:
   - فیجی
   - ⴼⵉⴷⵊⵉ
   - Fidzí
-  - Фіджі  # Fídží
+  - Фіджі # Fídží
   - Emetab Fiji
   - Fizi
   - Fiĝoj

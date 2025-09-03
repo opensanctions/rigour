@@ -17,11 +17,13 @@ summary: >-
   with overseas territories in the Caribbean. It is the largest of four constituent
   countries of the Kingdom of the Netherlands.
 wikipedia_url: https://en.wikipedia.org/wiki/Netherlands
-names_strong: []
-names_weak:
-  - Нидерланддар  # Niderlanddar
+names_strong:
   - Nederlands
-  - BREDA
+  - Holland
+  - КОРОЛЕВСТВО НИДЕРЛАНДЫ
+names_weak:
+  - Нидерланддар # Niderlanddar
+  - BREDA        # KOROLEVSTVO NIDERLANDY
   - هالېنډ
   - Hoorandi
   - Nīderlande
@@ -37,7 +39,7 @@ names_weak:
   - Netherlands nutome
   - Nizozemsko
   - Belanda
-  - Нидерландаш # Niderlandaš
+  - Нидерландаш  # Niderlandaš
   - Nyderlandai
   - הולנד
   - The Netherlands
@@ -53,7 +55,7 @@ names_weak:
   - Na Tìrean Ìsle
   - Oland
   - NETH
-  - Ολλανδία # Ollandía
+  - Ολλανδία     # Ollandía
   - Orílẹ́ède Nedalandi
   - نیٖدَرلینٛڑ
   - Ǹlɛndi
@@ -74,10 +76,9 @@ names_weak:
   - Nederland
   - Holandija
   - Alankomaat
-  - Holland
   - Paesi Bassi
   - Netherlands (Kingdom of the)
-  - Холандија # Holandiǰa
+  - Холандија    # Holandiǰa
   - de Nederläng
   - Uholandhi
   - 荷蘭

@@ -1,5 +1,5 @@
 name: Zaire
-full_name: Zaire
+full_name: Republic of Zaire
 region: Africa
 subregion: Middle Africa
 qid: Q6500954
@@ -17,8 +17,9 @@ summary: >-
   of the Congo from 1965 to 1997. Zaire was located in Central Africa and was, by
   area, the third-largest country in Africa (after Sudan and Algeria).
 wikipedia_url: https://en.wikipedia.org/wiki/Zaire
-names_strong: []
+names_strong:
+  - Республика Заир
 names_weak:
-  - Zair
+  - Zair  # Respublika Zair
   - Zairean
   - République du Zaïre

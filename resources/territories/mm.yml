@@ -19,10 +19,11 @@ summary: >-
   and Thailand to its east and southeast, and the Andaman Sea and the Bay of Bengal
   to its south and southwest.
 wikipedia_url: https://en.wikipedia.org/wiki/Myanmar
-names_strong: []
+names_strong:
+  - Республика Союза Мьянма
 names_weak:
-  - မြန်မာ
-  - Мьянма (Бирма)  # Mʹânma (Birma)
+  - မြန်မာ         # Respublika Soûza Mʹânma
+  - Мьянма (Бирма) # Mʹânma (Birma)
   - Mianmar
   - মায়ানমার (বার্মা)
   - මියන්මාරය (බුරුමය)

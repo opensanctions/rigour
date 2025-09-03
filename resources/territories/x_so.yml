@@ -18,10 +18,12 @@ names_strong:
   - Tskhinvali Region
   - Tskhinvali Region of Georgia
   - Tskhinvali Region of South Ossetia
+  - Республика Южная Осетия
+  - Южная Осетия
 names_weak:
   - Respublikæ Xussar Iryston
   - the State of Alania
   - Republic of South Ossetia
   - Paddzaxad Allonston
-  - South Ossetian
-  - ცხინვალის რეგიონი  # tskhinvalis regioni
+  - South Ossetian    # Respublika Ûžnaâ Osetiâ
+  - ცხინვალის რეგიონი # tskhinvalis regioni
