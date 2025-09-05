@@ -268,7 +268,7 @@ FORMS: Dict[str, List[str]] = {
     "lit": ["letter", "liter", "litera", "літер", "лит", "литера", "літера", "литер"],
     "rn": ["region", "регіон", "обл", "область", "oblast"],
     "ru": ["russia", "russian federation", "russian", "россия", "российская федерация"],
-    "moscow": ["moscow", "москвa", "москви", "москва", "moskau"],
+    "moscow": ["moscow", "москвa", "москви", "москва", "moskau", "Г.МОСКВА"],
     "us": [
         "united states",
         "united states of america",
