@@ -2747,11 +2747,28 @@ org_symbols:
     - socjalnych
     - sosyal
   media:
-    - media
-    - medios
-    - médias
-    - медиа
-    - медіа
+    - media # en, it, nl
+    - medios # es
+    - médias # pt, fr
+    - médios # pt (alternative)
+    - medien # de
+    - massmedia # sv
+    - massmedier # no, da
+    - tiedotusvälineet # fi
+    - meedia # et
+    - žiniasklaida # lt
+    - média # hu
+    - środki masowego przekazu # pl
+    - mediji # lt (alternative)
+    - medya # tr
+    - медиа # ru
+    - медіа # uk
+    - ЗМІ # uk (abbreviation)
+    - СМИ # ru (abbreviation)
+    - وسائل الإعلام # ar
+    - 媒体 # zh
+    - メディア # ja
+    - 미디어 # ko
   school:
     - school
     - école
@@ -2837,11 +2854,46 @@ org_symbols:
     - Întreprinderea de cercetare și producție
     - Corporația de cercetare și producție
     - Scientific and Production Enterprise
+    - Scientific Production Enterprise
+    - spe
     - Scientific and Production
     - Научно-производственное предприятие
     - Научно-производственное
     - Науково-виробниче підприємство
     - Науково-виробниче
+  cartel:
+    - cartel # en, es, pt
+    - cartels # en (plural)
+    - dto
+    - Drug Trafficking Organization
+    - kartell # de
+    - cartello # it
+    - cartel # fr
+    - cartéis # pt (plural)
+    - cárteles # es (plural)
+    - cartelli # it (plural)
+    - картель # ru
+    - картели # ru (plural)
+    - картель # uk
+    - картелі # uk (plural)
+    - كارتل # ar
+    - 卡特尔 # zh
+    - カルテル # ja
+    - 카르텔 # ko
+    - kartel # nl, tr
+    - kartele # nl (plural)
+    - karteller # tr (plural)
+    - karteli # fi
+    - kartellit # fi (plural)
+    - kartell # no, da, sv
+    - kartel # lt
+    - karteliai # lt (plural)
+    - kartell # et
+    - kartellid # et (plural)
+    - kartell # hu
+    - kartellek # hu (plural)
+    - kartel # pl
+    - kartele # pl (plural)
   liquidation:
     - in liqu. # de (abbreviation)
     - in liquidation # de, en
