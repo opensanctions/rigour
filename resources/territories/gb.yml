@@ -198,6 +198,10 @@ names_weak:
   - County of Berks
   - United Kindgom
   - Hertfordshire
+  - Nottingham
+  - Bristol
+  - Manchester
+  - Leicester
   - city of london
   - እንግሊዝ
   - County of Nottingham
@@ -274,6 +278,7 @@ names_weak:
   - Somersetshire
   - Shropshire
   - Yorkshire
+  - Northampton
   - Northamptonshire
   - Wiltshire
   - Albion
@@ -361,6 +366,7 @@ names_weak:
   - Staf
   - Вялікабрытанія                                             # Vâlíkabrytaníâ
   - Cardiff
+  - Engl
   - Britsh
   - Mddx
   - Emetab Kibagenge nebo Uingereza
