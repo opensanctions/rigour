@@ -57,7 +57,7 @@ PREFERRED_LANGS = [
 __all__ = [
     "LangStr",
     "PREFERRED_LANG",
-    "PREFFERED_LANGS",
+    "PREFERRED_LANGS",
     "iso_639_alpha2",
     "iso_639_alpha3",
     "list_to_alpha3",
