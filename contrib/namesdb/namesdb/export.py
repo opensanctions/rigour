@@ -24,6 +24,7 @@ def can_translit_match(forms: Iterable[str]) -> bool:
 
 
 def dump_file_export(path: Path):
+    log.info("Exporting namesdb mappings to %r", path.as_posix())
     block_groups()
     block_phrases()
     with engine.begin() as conn:
@@ -52,10 +53,10 @@ def dump_file_export(path: Path):
                 if len(forms) < 2:
                     continue
                 if can_translit_match(forms):
-                    log.info("Skipping mapping for: %r", forms)
+                    # log.info("Skipping mapping for: %r", forms)
                     continue
                 written += 1
                 fstr = ", ".join(sorted(forms))
                 fh.write(f"{fstr} => {group}\n")
 
-        log.info("Wrote %d mappings to %r", written, path)
+        log.info("Wrote %d mappings to %r", written, path.as_posix())
