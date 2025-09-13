@@ -4,6 +4,8 @@ region: Europe
 subregion: Southern Europe
 alpha3: grc
 qid: Q41
+other_codes:
+  - el
 other_qids:
   - Q209065
   - Q56692361
