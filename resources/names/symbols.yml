@@ -2947,6 +2947,7 @@ person_symbols:
     - "Certified Senior Advisor"
     - "Certified Senior Associate"
 
+person_name_parts:
   # MENA name parts:
   bin:
     - "ben"
@@ -2999,3 +3000,28 @@ person_symbols:
   will:
     - will
     - william
+  khuylo:
+    - putin
+    - poetin
+    - poutine
+    - putinas
+    - putins
+    - putyin
+    - pútín
+    - путин
+    - путін
+    - пуцін
+    - путин
+    - putyín
+    - პუტინი
+    - Պուտին
+    - پوتن
+    - פוטין
+    - بوتين
+    - プーチン
+    - 普京
+    - 普丁
+    - 푸틴
+    - ปูติน
+    - पुतिन
+    - πούτιν

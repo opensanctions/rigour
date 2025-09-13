@@ -316,6 +316,7 @@ NULLWORDS: Tuple[str, ...] = (
     "-",
     "--",
     "---",
+    "-?",
     "/",
     "00",
     "?",
@@ -3340,6 +3341,9 @@ PERSON_SYMBOLS: Dict[str, Tuple[str, ...]] = {
     "CFA": ("CFA", "Chartered Financial Analyst"),
     "CMA": ("CMA", "Certified Management Accountant"),
     "CSA": ("CSA", "Certified Senior Advisor", "Certified Senior Associate"),
+}
+
+PERSON_NAME_PARTS: Dict[str, Tuple[str, ...]] = {
     "BIN": (
         "ben",
         "bin",
@@ -3362,4 +3366,29 @@ PERSON_SYMBOLS: Dict[str, Tuple[str, ...]] = {
     "BOB": ("Bob", "Rob", "Robert", "Roberto"),
     "DICK": ("Dick", "Richard"),
     "WILL": ("will", "william"),
+    "KHUYLO": (
+        "poetin",
+        "poutine",
+        "putin",
+        "putinas",
+        "putins",
+        "putyin",
+        "putyín",
+        "pútín",
+        "πούτιν",
+        "путин",
+        "путін",
+        "пуцін",
+        "Պուտին",
+        "פוטין",
+        "بوتين",
+        "پوتن",
+        "पुतिन",
+        "ปูติน",
+        "პუტინი",
+        "プーチン",
+        "普丁",
+        "普京",
+        "푸틴",
+    ),
 }
