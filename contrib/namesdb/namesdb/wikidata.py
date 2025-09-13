@@ -14,7 +14,7 @@ from namesdb.db import store_mapping, engine, metadata
 from namesdb.blocks import GROUPS as BLOCKED_GROUPS
 from namesdb.util import clean_form
 
-log = logging.getLogger(__name__)
+log = logging.getLogger("namesdb.wikidata")
 settings.DB_STMT_TIMEOUT = 10000 * 100000
 dataset = Dataset.make({"name": "synonames", "title": "Synonames"})
 cache = Cache(engine, metadata, dataset, create=True)
@@ -31,7 +31,10 @@ CLASSES = {
     "Q4116295": "family",  # surname
     "Q120707496": "family",  # second family name
     "Q121493728": "family",  # first family name
+    "Q66475447": "family",  # family name affix
+    "Q12717622": "parentonymic",  # parentonymic name
     "Q110874": "patronymic",  # patronymic name
+    "Q1076664": "matronymic",  # matronymic name
     "Q130444148": "patronymic",  # masculine patronymic name
     "Q130444179": "patronymic",  # feminine patronymic name
     "Q130443889": "matronymic",  # feminine matronymic name
@@ -97,11 +100,13 @@ def process_item(qid: str) -> Optional[Tuple[str, Set[str]]]:
 
 def crawl_mappings():
     # with ThreadPoolExecutor(max_workers=6) as executor:
-    for cls, cls_name in CLASSES.items():
-        print("Crawling: ", cls, cls_name)
+    classes = list(CLASSES.items())
+    random.shuffle(classes)
+    for cls, cls_name in classes:
+        log.info("Crawling: %s (%s)", cls, cls_name)
         query = SPARQL % cls
         response = client.query(query)
-        print("Results: ", len(response.results))
+        log.info("Results: %d", len(response.results))
         # futures: Future[Optional[Tuple[str, Set[str]]]] = []
         random.shuffle(response.results)
         # for result in response.results:
@@ -125,7 +130,7 @@ def crawl_mappings():
                 log.info(f"Storing mapping: {qid} -> {form}")
                 store_mapping(cache.conn, form, qid)
             if idx > 0 and idx % 1000 == 0:
-                print("Crawled: ", idx)
+                log.info("Crawled: %d", idx)
                 # client.cache.flush()
                 cache.flush()
 

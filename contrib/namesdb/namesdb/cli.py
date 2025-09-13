@@ -1,20 +1,20 @@
-from collections import defaultdict
-from pathlib import Path
-from typing import Dict, List, Set
 import click
+import logging
+from pathlib import Path
+from typing import List
+from namesdb.export import dump_file_export
 from rich.table import Table
 from rich.console import Console
 from normality import latinize_text
 
 from namesdb.db import engine, regex_groups, store_mapping, skip_mapping
-from namesdb.db import get_groups, get_forms, all_mappings
-from namesdb.cleanup import block_groups, block_phrases
+from namesdb.db import get_groups, get_forms
 
 
 @click.group()
 def cli():
     """NamesDB CLI for managing name mappings."""
-    pass
+    logging.basicConfig(level=logging.INFO)
 
 
 @cli.command("map")
@@ -86,32 +86,7 @@ def load_file(path: Path) -> None:
 @cli.command("dump")
 @click.argument("path", type=click.Path(dir_okay=False, writable=True))
 def dump_file(path: Path) -> None:
-    block_groups()
-    block_phrases()
-    with engine.begin() as conn:
-        mappings = dict(all_mappings(conn))
-        # print("Deduplicating name QIDs...")
-        by_names: Dict[str, Set[str]] = defaultdict(set)
-        for group, aliases in mappings.items():
-            for alias in aliases:
-                by_names[alias].add(group)
-        for ngroup, naliases in sorted(mappings.items()):
-            other_groups = set()
-            for alias in naliases:
-                other_groups.update(by_names[alias])
-            other_groups.discard(ngroup)
-            for ogroup in other_groups:
-                oaliases = mappings.get(ogroup, set())
-                if naliases.issubset(oaliases):
-                    # print("Removing: ", nqid, "->", oqid, ": ", naliases)
-                    mappings.pop(ngroup, None)
-
-        with open(path, "w") as fh:
-            for group, forms in sorted(mappings.items()):
-                if len(forms) < 2:
-                    continue
-                fstr = ", ".join(sorted(forms))
-                fh.write(f"{fstr} => {group}\n")
+    dump_file_export(Path(path))
 
 
 if __name__ == "__main__":
