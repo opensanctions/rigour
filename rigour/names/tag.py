@@ -50,7 +50,12 @@ WILDCARDS = {
     NamePartTag.AMBIGUOUS,
     NamePartTag.STOP,
 }
-
+INTITIAL_TAGS = {
+    NamePartTag.GIVEN,
+    NamePartTag.MIDDLE,
+    NamePartTag.PATRONYMIC,
+    NamePartTag.MATRONYMIC,
+}
 GIVEN_NAME_TAGS = {
     NamePartTag.GIVEN,
     NamePartTag.MIDDLE,

@@ -10,7 +10,7 @@ from rigour.text.dictionary import Normalizer
 from rigour.names import Symbol, Name
 from rigour.names import load_person_names
 from rigour.names.check import is_stopword
-from rigour.names.tag import NameTypeTag, NamePartTag, GIVEN_NAME_TAGS
+from rigour.names.tag import NameTypeTag, NamePartTag, INTITIAL_TAGS
 from rigour.territories.territory import TERRITORIES_FILE
 
 import ahocorasick_rs
@@ -187,19 +187,22 @@ def tag_org_name(name: Name, normalizer: Normalizer) -> Name:
 @cache
 def _get_person_tagger(normalizer: Normalizer) -> Tagger:
     """Get the person name tagger."""
-    from rigour.data.names.data import PERSON_SYMBOLS
+    from rigour.data.names.data import PERSON_SYMBOLS, PERSON_NAME_PARTS
 
     mapping = _common_symbols(normalizer)
     for key, values in PERSON_SYMBOLS.items():
         sym = Symbol(Symbol.Category.SYMBOL, key.upper())
-        nkey = normalizer(key)
-        if nkey is not None:
-            mapping[nkey].add(Symbol(Symbol.Category.SYMBOL, key))
         for value in values:
             nvalue = normalizer(value)
-            if nvalue is None:
-                continue
-            mapping[nvalue].add(sym)
+            if nvalue is not None:
+                mapping[nvalue].add(sym)
+
+    for key, values in PERSON_NAME_PARTS.items():
+        sym = Symbol(Symbol.Category.NAME, key.upper())
+        for value in values:
+            nvalue = normalizer(value)
+            if nvalue is not None:
+                mapping[nvalue].add(sym)
 
     for qid, aliases in load_person_names():
         sym = Symbol(Symbol.Category.NAME, int(qid[1:]))
@@ -230,7 +233,7 @@ def tag_person_name(
         sym = Symbol(Symbol.Category.INITIAL, part.comparable[0])
         if any_initials and len(part.form) == 1:
             name.apply_part(part, sym)
-        elif part.tag in GIVEN_NAME_TAGS:
+        elif part.tag in INTITIAL_TAGS:
             name.apply_part(part, sym)
 
     # tag the name with person symbols
