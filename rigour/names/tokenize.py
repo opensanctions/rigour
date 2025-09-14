@@ -67,7 +67,7 @@ def prenormalize_name(name: Optional[str]) -> str:
     if name is None:
         return ""
     # name = unicodedata.normalize("NFC", name)
-    return name.lower()
+    return name.casefold()
 
 
 @lru_cache(maxsize=MEMO_TINY)

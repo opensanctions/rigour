@@ -19,7 +19,7 @@ def clean_codes(codes: List[str]) -> List[str]:
 
 def normalize_territory_name(name: str) -> str:
     """Normalize a territory name for lookup."""
-    name = unicodedata.normalize("NFKD", name).lower()
+    name = unicodedata.normalize("NFKD", name).casefold()
     can_latinize = True
     filtered: List[str] = []
     for char in name:

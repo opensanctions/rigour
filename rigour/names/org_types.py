@@ -50,7 +50,7 @@ def _normalize_compare(text: Optional[str]) -> Optional[str]:
     norm = squash_spaces(text)
     if len(norm) == 0:
         return None
-    return norm.lower()
+    return norm.casefold()
 
 
 @cache

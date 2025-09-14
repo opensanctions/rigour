@@ -51,7 +51,7 @@ def pick_name(names: List[str]) -> Optional[str]:
     forms: Dict[str, List[str]] = defaultdict(list)
     latin_names: List[str] = []
     for name in sorted(names):
-        form = name.strip().lower()
+        form = name.strip().casefold()
         if len(form) == 0:
             continue
         # even totally non-Latin names have a base weight of 1:
@@ -124,7 +124,7 @@ def pick_case(names: List[str]) -> str:
                 raise ValueError("Name length mismatch: %r vs %r" % (name, reference))
             nchar = name[i]
             if nchar != char:
-                if nchar.lower() != char.lower():
+                if nchar.casefold() != char.casefold():
                     raise ValueError("Names mismatch: %r vs %r" % (name, reference))
                 difference[name] += 1
     return min(difference.items(), key=lambda x: x[1])[0]
@@ -149,7 +149,7 @@ def reduce_names(names: List[str]) -> List[str]:
         if not is_name(name):
             log.warning("Invalid name found: %r", name)
             continue
-        lower[name.lower()].append(name)
+        lower[name.casefold()].append(name)
     reduced: List[str] = []
     for group in lower.values():
         try:
