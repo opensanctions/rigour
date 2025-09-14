@@ -1,8 +1,8 @@
 import sys
 import yaml
 import unicodedata
-from typing import Dict, Set, Tuple
-from genscripts.util import RESOURCES_PATH, CODE_PATH, write_python
+from typing import Dict, List, Set, Tuple
+from genscripts.util import RESOURCES_PATH, CODE_PATH, norm_string, write_python
 
 IGNORE_SCRIPTS = {"Common", "Inherited"}
 LATINIZABLE = (
@@ -23,12 +23,13 @@ from typing import Set, Dict, Tuple
 def generate_ordinals() -> None:
     ordinals_path = RESOURCES_PATH / "text" / "ordinals.yml"
     with open(ordinals_path, "r", encoding="utf-8") as ufh:
-        ordinals_mapping: Dict[str, Dict[str, str]] = yaml.safe_load(ufh.read())
+        ordinals_mapping: Dict[str, Dict[str, List[str]]] = yaml.safe_load(ufh.read())
 
     mapping = {}
     for number, forms in ordinals_mapping["ordinals"].items():
         assert number is not None
-        items = tuple(sorted(set([str(v) for v in forms if len(str(v)) > 0])))
+        forms = set(norm_string(v) for v in forms)
+        items = tuple(sorted(set([v for v in forms if len(v) > 0])))
         mapping[number] = items
 
     content = ORDINALS_TEMPLATE

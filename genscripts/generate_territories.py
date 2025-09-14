@@ -6,7 +6,7 @@ from typing import Any, Dict, Set
 from rigour.ids.wikidata import is_qid
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes
-from genscripts.util import write_jsonl, RESOURCES_PATH, CODE_PATH
+from genscripts.util import write_jsonl, norm_string, RESOURCES_PATH, CODE_PATH
 
 log = logging.getLogger(__name__)
 
@@ -33,7 +33,20 @@ def update_data() -> None:
         seen_codes.add(code)
         with open(source_file, "r", encoding="utf-8") as ufh:
             data = yaml.safe_load(ufh.read())
-            data["code"] = code
+            data["code"] = norm_string(code)
+            data["name"] = norm_string(data["name"])
+            if "full_name" in data:
+                data["full_name"] = norm_string(data["full_name"])
+            if "region" in data:
+                data["region"] = norm_string(data["region"])
+            if "subregion" in data:
+                data["subregion"] = norm_string(data["subregion"])
+            if "names_strong" in data:
+                names = set(norm_string(name) for name in data["names_strong"])
+                data["names_strong"] = sorted(names)
+            if "names_weak" in data:
+                names = set(norm_string(name) for name in data["names_weak"])
+                data["names_weak"] = sorted(names)
             raw_territories[code] = data
             data["other_codes"] = clean_codes(data.get("other_codes", []))
             for other in data["other_codes"]:
@@ -44,6 +57,7 @@ def update_data() -> None:
             data["see"] = clean_codes(data.get("see", []))
             if len(data["see"]) == 0:
                 data.pop("see")
+
             territories[code] = Territory(territories, code, data)
 
     for terr in territories.values():

@@ -4,7 +4,7 @@ from typing import Dict, List
 from normality import squash_spaces
 
 from rigour.data.types import OrgTypeSpec
-from genscripts.util import write_python, RESOURCES_PATH, CODE_PATH
+from genscripts.util import norm_string, write_python, RESOURCES_PATH, CODE_PATH
 
 
 DATA_TEMPLATE = """
@@ -25,7 +25,8 @@ def generate_data_file() -> None:
         stopword_lists: Dict[str, List[str]] = yaml.safe_load(ufh.read())
 
     for key, value in stopword_lists.items():
-        values = tuple(sorted(set([str(v) for v in value if len(str(v)) > 0])))
+        raw_values = [norm_string(v) for v in value]
+        values = tuple(sorted(set(v for v in raw_values if len(v) > 0)))
         if isinstance(key, str):
             key = key.strip().upper()
         content += f"{key.upper()}: Tuple[str, ...] = {values!r}\n\n"
@@ -44,10 +45,11 @@ def generate_data_file() -> None:
                 continue
             group_type = "int" if isinstance(group, int) else "str"
             if group_type == "str":
-                group = group.strip().upper()
+                group = norm_string(group).upper()
                 if len(group) == 0:
                     continue
-            items = tuple(sorted(set([str(v) for v in items if len(str(v)) > 0])))
+            values = set(norm_string(v) for v in items)
+            items = tuple(sorted(v for v in values if len(v) > 0))
             mapping[group] = items
         content += f"{section}: Dict[{group_type}, Tuple[str, ...]] = {mapping!r}\n\n"
 
@@ -71,19 +73,20 @@ def generate_org_type_file() -> None:
             }
             display = spec.get("display", "")
             if display is not None:
-                display = squash_spaces(display)
+                display = squash_spaces(norm_string(display))
                 if len(display) > 0:
                     out["display"] = display
             generic = spec.get("generic")
             if generic is not None:
-                generic = squash_spaces(generic)
+                generic = squash_spaces(norm_string(generic))
                 if len(generic) > 0:
                     out["generic"] = generic
             compare = spec.get("compare")
             if compare is not None:
-                compare = squash_spaces(compare)
+                compare = squash_spaces(norm_string(compare))
                 out["compare"] = compare
-            aliases_ = [squash_spaces(a) for a in spec.get("aliases", [])]
+            aliases_ = spec.get("aliases", [])
+            aliases_ = [squash_spaces(norm_string(a)) for a in aliases_]
             aliases = [a for a in aliases_ if a is not None and len(a) > 0]
             if not len(aliases):
                 print("No aliases for:", display)

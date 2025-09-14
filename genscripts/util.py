@@ -1,8 +1,10 @@
 import black
 import orjson
 import logging
+import unicodedata
 from pathlib import Path
 from typing import Any, Iterable
+from normality.cleaning import remove_unsafe_chars
 
 
 REPO_ROOT = Path(__file__).parent.parent
@@ -10,6 +12,14 @@ RESOURCES_PATH = REPO_ROOT / "resources"
 CODE_PATH = REPO_ROOT / "rigour" / "data"
 
 logging.basicConfig(level=logging.INFO)
+
+
+def norm_string(data: Any) -> str:
+    """Normalize a string to avoid duplication and provide standardized forms."""
+    text = str(data)
+    text = unicodedata.normalize("NFC", text)
+    text = remove_unsafe_chars(text)
+    return text.strip()
 
 
 def write_python(file_path: Path, content: str) -> None:
