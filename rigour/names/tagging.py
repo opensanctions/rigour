@@ -187,7 +187,7 @@ def tag_org_name(name: Name, normalizer: Normalizer) -> Name:
 @cache
 def _get_person_tagger(normalizer: Normalizer) -> Tagger:
     """Get the person name tagger."""
-    from rigour.data.names.data import PERSON_SYMBOLS, PERSON_NAME_PARTS
+    from rigour.data.names.data import PERSON_SYMBOLS, PERSON_NAME_PARTS, PERSON_NICK
 
     mapping = _common_symbols(normalizer)
     for key, values in PERSON_SYMBOLS.items():
@@ -199,6 +199,13 @@ def _get_person_tagger(normalizer: Normalizer) -> Tagger:
 
     for key, values in PERSON_NAME_PARTS.items():
         sym = Symbol(Symbol.Category.NAME, key.upper())
+        for value in values:
+            nvalue = normalizer(value)
+            if nvalue is not None:
+                mapping[nvalue].add(sym)
+
+    for key, values in PERSON_NICK.items():
+        sym = Symbol(Symbol.Category.NICK, key.upper())
         for value in values:
             nvalue = normalizer(value)
             if nvalue is not None:

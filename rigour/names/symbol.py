@@ -13,6 +13,7 @@ class Symbol:
         SYMBOL = "SYMBOL"
         INITIAL = "INITIAL"
         NAME = "NAME"
+        NICK = "NICK"
         NUMERIC = "NUM"
         LOCATION = "LOC"
         PHONETIC = "PHON"
