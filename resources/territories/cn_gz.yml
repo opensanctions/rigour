@@ -6,5 +6,7 @@ is_jurisdiction: true
 name: Guizhou
 parent: cn
 qid: Q47097
-names_strong: []
+names_strong:
+  - 贵州 # Guìzhōu
+  - 贵阳 # Guìyáng
 names_weak: []

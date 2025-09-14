@@ -13,10 +13,12 @@ summary: >-
   the Scandinavian Peninsula. The remote Arctic island of Jan Mayen and the archipelago
   of Svalbard also form part of Norway.
 wikipedia_url: https://en.wikipedia.org/wiki/Norway
-names_strong: []
+names_strong:
+  - Norge
+  - Норвегия # Norvegiâ
 names_weak:
   - नर्वे
-  - Norweigan
+  - Norweigan  # Norvegiâ
   - Norvège
   - ន័រវែស
   - Norvégia
@@ -30,7 +32,7 @@ names_weak:
   - นอร์เวย์
   - નૉર્વે
   - Nolwe
-  - Норвешка  # Norveška
+  - Норвешка # Norveška
   - Nnurwij
   - Noorweey
   - Νορβηγία # Norbēgía
@@ -60,10 +62,8 @@ names_weak:
   - Норвеги  # Norvegi
   - Nowe
   - နော်ဝေ
-  - Норвегия # Norvegiâ
   - ନରୱେ
   - Norwe
-  - Norge
   - நார்வே
   - Noruega
   - Norja

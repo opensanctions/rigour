@@ -2947,59 +2947,153 @@ person_symbols:
     - "Certified Senior Advisor"
     - "Certified Senior Associate"
 
-person_name_parts:
   # MENA name parts:
   bin:
     - "ben"
     - "bin"
-    - "bint"
     - "ibn"
     - "ibn al"
     - "ibn ul"
-    - ould
-    - בן
-    - בר
-    - بن
-    - بنت
-    - ابن
-    - ابن ال
-    - ابن ال
+    - בן # Hebrew "ben" (son)
+    - בר # Aramaic "bar" (son)
+    - بن # Arabic "bin/ben" (son)
+    - ابن # Arabic "ibn" (son)
+    - ابن ال # Arabic "ibn al" (son of the)
   bint:
-    - bint
-    - ult
-    - mint
-    - bat
-    - בת
-    - بنت
+    - "bint"
+    - "bint al"
+    - "ult" # North African variant of bint
+    - "mint" # Mauritanian variant of bint
+    - "bat" # Hebrew daughter
+    - בת # Hebrew "bat" (daughter)
+    - بنت # Arabic "bint" (daughter)
+    - بنت ال # Arabic "bint al" (daughter of the)
+  ould:
+    - "ould"
+    - "wuld"
+    - "wald"
+    - ولد # Arabic/Mauritanian "wald/ould" (son)
   abu:
     - "Abu"
     - "Abu al"
-    - "Abul"
-    - "Abdul"
     - أبو
+  abul:
+    - "Abul"
+    - "Abu al"
+    - "Abu-l"
+    - أبو ال
+  abdul:
+    - "Abdul"
+    - "Abd al"
+    - "Abd-al"
+    - عبد ال
   umm:
     - "Umm"
     - "Umm al"
     - "Ummul"
-  ben:
-    - "Ben"
-    - "Benedict"
-    - "Benjamin"
 
+  # German:
+  von:
+    - von
+    - von und zu
+    - von der
+
+  van:
+    - van
+    - van und zu
+    - van der
+    - van de
+
+  saint:
+    - "san"
+    - "santa"
+    - "santo"
+    - "são"
+    - "saint"
+    - "st"
+    - "st."
+    - "ste"
+
+  haji:
+    - "haji"
+    - "hajji"
+    - "hajj"
+    - "el haj"
+    - "al hajj"
+    - "حاج" # Arabic "hajj"
+    - "حاجي" # Arabic "haji"
+
+  sheikh:
+    - "sheikh"
+    - "shaikh"
+    - "shaykh"
+    - "شيخ" # Arabic "sheikh"
+    - "شيخة" # Arabic "sheikha"
+
+person_nick:
   # We could get these en masse from Wikidata, but I want to keep the nickname
   # thing at bay until we have collected some more data about how this works into
   # matching.
   bob:
     - "Bob"
     - "Robert"
-    - "Roberto"
+  rob:
     - "Rob"
+    - "Robert"
   dick:
     - Dick
     - Richard
   will:
     - will
     - william
+  bill:
+    - "Bill"
+    - "William"
+  tim:
+    - "Tim"
+    - "Timothy"
+  ted:
+    - "Ted"
+    - "Theodore"
+  sam:
+    - "Sam"
+    - "Samuel"
+  sama:
+    - "Sam"
+    - "Samantha"
+  alex:
+    - "Alex"
+    - "Alexander"
+  alexa:
+    - "Alex"
+    - "Alexandra"
+  ray:
+    - "Ray"
+    - "Raymond"
+  ken:
+    - "Ken"
+    - "Kenneth"
+  ben:
+    - "Ben"
+    - "Benjamin"
+  greg:
+    - "Greg"
+    - "Gregory"
+  larry:
+    - "Larry"
+    - "Lawrence"
+  ron:
+    - "Ron"
+    - "Ronald"
+  ed:
+    - "Ed"
+    - "Edward"
+  tony:
+    - "Tony"
+    - "Anthony"
+
+person_name_parts:
+  # Big guy gets a special kind of love
   khuylo:
     - putin
     - poetin

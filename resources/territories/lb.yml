@@ -1,5 +1,5 @@
 name: Lebanon
-full_name: Lebanon
+full_name: Republic of Lebanon
 region: Asia
 subregion: Western Asia
 alpha3: lbn
@@ -12,21 +12,23 @@ summary: >-
   a country in West Asia. It is bordered by Syria to the north and east, by Israel
   to the south, and by the Mediterranean Sea to the west.
 wikipedia_url: https://en.wikipedia.org/wiki/Lebanon
-names_strong: []
+names_strong:
+  - لبنان # Lubnān
 names_weak:
   - Lubnan
   - Lebhanɔ
   - Líbanu
   - Libanus
   - Li -băng
+  - بيروت # Bayrūt
   - ꔒꕑꗟꘋ
   - لٮ۪بنان
-  - Ливан  # Livan
+  - Ливан # Livan
   - לבנון
   - លីបង់
   - లెబనాన్
   - ලෙබනනය
-  - 레바논 # lebanon
+  - 레바논   # lebanon
   - Lebhanoni
   - ເລບານອນ
   - Libùaan
@@ -69,7 +71,6 @@ names_weak:
   - ሊባኖስ
   - Libá
   - લેબનોન
-  - لبنان
   - லெபனான்
   - Emetab Lebanon
   - Libanas

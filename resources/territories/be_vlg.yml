@@ -5,10 +5,11 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: be
-names_strong: []
+names_strong:
+  - Vlaanderen
+  - Vlaams Gewest
 names_weak:
   - Flandre
-  - Vlaanderen
   - Vlaanderen (Vlaams Gewest)
   - Flandes
   - Flandern

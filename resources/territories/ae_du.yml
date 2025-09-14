@@ -10,14 +10,14 @@ parent: ae
 names_strong:
   - Emirate of Dubai
   - Dubai, UAE
+  - Дубай # Dubaj
+  - Дубаи # Dubai
 names_weak:
   - دبي
   - دبی
-  - Dubai (Emirate)
-  - Emirato de Dubai
+  - Dubai (Emirate)  # Dubaj
+  - Emirato de Dubai # Dubai
   - Dubayy
-  - Дубай # Dubaj
-  - Дубаи # Dubai
   - دُبَيّ # Dubaï
   - Emirate Of Dubai, U.A.E
   - Дубай, ОАЕ # Dubaj, OAE

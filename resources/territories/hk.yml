@@ -16,7 +16,12 @@ summary: >-
   Hong Kong, officially the Hong Kong Special Administrative Region of the People's
   Republic of China, is a city and a special administrative region in China.
 wikipedia_url: https://en.wikipedia.org/wiki/Hong_Kong_SAR_China
-names_strong: []
+names_strong:
+  - HK SAR
+  - Hong Kong
+  - Hongkong
+  - 香港 # Xiānggǎng
+  - 香港特别行政区 # Xiānggǎng Tèbié Xíngzhèngqū
 names_weak:
   - हाँगकाँग एसएआर चीन
   - Hong Kong AEB Txina
@@ -62,7 +67,6 @@ names_weak:
   - ჰონკონგი # honkʼongi
   - Región Administrativa Especial de Hong Kong de la República Popular China
   - Sjálfstjórnarsvæðið Hong Kong
-  - Hong Kong
   - တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ ဟောင်ကောင်
   - Хонконг, САР на Китай                     # Honkong, SAR na Kitaj
   - БНХАУ -ын Тусгай захиргааны бүс Хонг Конг # BNHAU -yn Tusgaj zahirgaany büs Hong Kong
@@ -108,7 +112,6 @@ names_weak:
   - SRA Hongkong (Chiny)
   - Гонконг, О.А.Р. Китаю                     # Gonkong, O.A.R. Kitaû
   - RVAK i Hong Kongut
-  - Hongkong
   - Хонг Конг С. А. Р. Кина                   # Hong Kong S. A. R. Kina
   - Kwun Tong
   - හොංකොං චීන විශේෂ පරිපාලන කලාපය

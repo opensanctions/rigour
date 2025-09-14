@@ -21,10 +21,11 @@ names_strong:
   - Nederlands
   - Holland
   - КОРОЛЕВСТВО НИДЕРЛАНДЫ
+  - Koninkrijk der Nederlanden
 names_weak:
   - Нидерланддар # Niderlanddar
-  - BREDA        # KOROLEVSTVO NIDERLANDY
-  - هالېنډ       # KOROLEVSTVO NIDERLANDY
+  - BREDA # KOROLEVSTVO NIDERLANDY
+  - هالېنډ # KOROLEVSTVO NIDERLANDY
   - Hoorandi
   - Nīderlande
   - ନେଦରଲ୍ୟାଣ୍ଡ
@@ -39,7 +40,7 @@ names_weak:
   - Netherlands nutome
   - Nizozemsko
   - Belanda
-  - Нидерландаш  # Niderlandaš
+  - Нидерландаш # Niderlandaš
   - Nyderlandai
   - הולנד
   - The Netherlands
@@ -55,7 +56,7 @@ names_weak:
   - Na Tìrean Ìsle
   - Oland
   - NETH
-  - Ολλανδία     # Ollandía
+  - Ολλανδία # Ollandía
   - Orílẹ́ède Nedalandi
   - نیٖدَرلینٛڑ
   - Ǹlɛndi
@@ -78,7 +79,7 @@ names_weak:
   - Alankomaat
   - Paesi Bassi
   - Netherlands (Kingdom of the)
-  - Холандија    # Holandiǰa
+  - Холандија # Holandiǰa
   - de Nederläng
   - Uholandhi
   - 荷蘭

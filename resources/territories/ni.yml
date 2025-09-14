@@ -1,5 +1,5 @@
 name: Nicaragua
-full_name: Nicaragua
+full_name: Republic of Nicaragua
 region: Americas
 subregion: Central America
 alpha3: nic
@@ -13,11 +13,13 @@ summary: >-
   to the south, and the Pacific Ocean to the west. Managua is the country's capital
   and largest city.
 wikipedia_url: https://en.wikipedia.org/wiki/Nicaragua
-names_strong: []
+names_strong:
+  - República de Nicaragua
+  - República de Nicaraguá
+  - Никарагуа
 names_weak:
   - Hunikaragwa
   - 尼加拉瓜
-  - Republic of Nicaragua
   - Nikaraguwa
   - Нікарагуа  # Níkaragua
   - نيكاراغوا
@@ -61,7 +63,6 @@ names_weak:
   - Nicearagua
   - nikalaká
   - Nikaragvo
-  - Никарагуа  # Nikaragua
   - Nikaragva
   - นิการากัว
   - નિકારાગુઆ

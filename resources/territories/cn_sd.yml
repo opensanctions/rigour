@@ -6,5 +6,7 @@ is_jurisdiction: true
 name: Shandong
 parent: cn
 qid: Q43407
-names_strong: []
+names_strong:
+  - 山东 # Shāndōng
+  - 济南 # Jǐnán
 names_weak: []

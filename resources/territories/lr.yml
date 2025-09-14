@@ -12,18 +12,18 @@ summary: >-
   It is bordered by Sierra Leone to its northwest, Guinea to its north, Ivory Coast
   to its east, and the Atlantic Ocean to its south and southwest.
 wikipedia_url: https://en.wikipedia.org/wiki/Liberia
-names_strong: []
+names_strong:
+  - Ліберыя # Líberyâ
+  - Ліберія # Líberíâ
 names_weak:
-  - لایبریا
-  - Liberie
+  - لایبریا  # Líberyâ
+  - Liberie # Líberíâ
   - ላይቤሪያ
   - ਲਾਈਬੀਰੀਆ
   - Libèir
   - ལཱའི་བེ་རི་ཡ
   - لیبریا
   - لیبەریا
-  - Ліберыя # Líberyâ
-  - Ліберія # Líberíâ
   - ꕞꔤꔫꕩ
   - లైబీరియా
   - ไลบีเรีย
@@ -47,7 +47,7 @@ names_weak:
   - Libɛrî
   - لایبیرِیا
   - लायबेरिया
-  - 라이베리아   # laibelia
+  - 라이베리아 # laibelia
   - Liberia nutome
   - An Libéir
   - Uliberia
@@ -71,7 +71,7 @@ names_weak:
   - Laybeeriya
   - ລິເບີເຣຍ
   - i -Liberia
-  - Либери  # Liberi
+  - Либери # Liberi
   - লাইবেরিয়া
   - ⵍⵉⴱⵉⵔⵢⴰ
   - Liberiya

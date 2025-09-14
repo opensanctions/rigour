@@ -14,17 +14,18 @@ summary: >-
   is a small landlocked country in Western Europe. It borders Belgium to the west
   and north, Germany to the east, and France to the south.'
 wikipedia_url: https://en.wikipedia.org/wiki/Luxembourg
-names_strong: []
+names_strong:
+  - Luxemburg
+  - Луксембург # Luksemburg
 names_weak:
   - Likisambulu
-  - ལག་ཛམ་བོརྒ
+  - ལག་ཛམ་བོརྒ  # Luksemburg
   - لگژمبرگ
   - Luxembogu
   - Luzɨmbùʔ
   - لىيۇكسېمبۇرگ
   - ਲਕਜ਼ਮਬਰਗ
   - Lucembursko
-  - Луксембург  # Luksemburg
   - Lukisembaaga
   - Likisanburu
   - Lüksemburq
@@ -105,7 +106,6 @@ names_weak:
   - ლუქსემბურგი  # luksemburgi
   - लग्ज़मबर्ग
   - Luxemburgska
-  - Luxemburg
   - ລຸກຊຳບົວ
   - ルクセンブルグ
   - లక్సంబర్గ్

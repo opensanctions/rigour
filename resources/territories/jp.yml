@@ -23,6 +23,7 @@ names_strong:
   - 日本国 # Nippon-koku
   - 日本 # Nihon
   - 日本国 # Nihon-koku
+  - Жапония # Žaponiâ
 names_weak:
   - Fukuoka
   - جاپان
@@ -31,10 +32,9 @@ names_weak:
   - Yamaguchi
   - Shimane
   - Wakayama
-  - japɔ́ŋ
+  - japɔ́ŋ  # Žaponiâ
   - Gyapan
   - Zapon
-  - Жапония  # Žaponiâ
   - Sakai
   - Ubuyapani
   - Japu

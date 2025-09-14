@@ -1,5 +1,5 @@
 name: Oman
-full_name: Oman
+full_name: Sultanate of Oman
 region: Asia
 subregion: Western Asia
 alpha3: omn
@@ -15,11 +15,14 @@ summary: >-
   spans the mouth of the Persian Gulf. It shares land borders with Saudi Arabia, United
   Arab Emirates, and Yemen, while sharing maritime borders with Iran and Pakistan.
 wikipedia_url: https://en.wikipedia.org/wiki/Oman
-names_strong: []
+names_strong:
+  - عمان # ʿUmān
+  - سلطنة عمان # Sulṭanat ʿUmān
+  - Оман # Oman
 names_weak:
   - Huomani
   - عومان
-  - Omani
+  - Omani  # Oman
   - Ómani
   - Omaan
   - Omaani
@@ -54,7 +57,6 @@ names_weak:
   - Orílɛ́ède Ɔɔma
   - ᎣᎺᏂ
   - Omã
-  - عمان
   - オマーン
   - Cumaan
   - ஓமன்
@@ -64,7 +66,6 @@ names_weak:
   - ಓಮನ್
   - ওমান
   - omáŋ
-  - Sultanate of Oman
   - اومان
   - Omane
   - Orílẹ́ède Ọọma
@@ -76,7 +77,6 @@ names_weak:
   - ओमान
   - ʻOmani
   - عُمان
-  - Оман  # Oman
   - ఒమన్
   - ਓਮਾਨ
   - ໂອມານ

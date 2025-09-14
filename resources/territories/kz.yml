@@ -1,5 +1,5 @@
 name: Kazakhstan
-full_name: Kazakhstan
+full_name: Republic of Kazakhstan
 region: Asia
 subregion: Central Asia
 alpha3: kaz
@@ -11,21 +11,26 @@ summary: >-
   Kazakhstan is a landlocked country mostly in Central Asia, with a small part in
   Eastern Europe.
 wikipedia_url: https://en.wikipedia.org/wiki/Kazakhstan
-names_strong: []
+names_strong:
+  - Қазақстан # Qazaqstan
+  - Казакстан # Kazakstan
+  - Қазақстан Республикасы # Qazaqstan Respúblıkası
+  - Qazaqstan Respublikasy
+  - Qazaqstan
+  - Республика Казахстан
 names_weak:
-  - Kazakistãu
-  - Kazakstán
-  - An Chasacstáin
-  - Қозоғистон  # Kˌozoġiston
+  - Kazakistãu  # Kˌazakˌstan
+  - Kazakstán # Kazakstan
+  - An Chasacstáin # Kˌazakˌstan Respublikasy
+  - Қозоғистон # Kˌozoġiston
   - قزاخستان
-  - കസാഖിസ്ഥാൻ
+  - കസാഖിസ്ഥാൻ # Respublika Kazahstan
   - Kasakstaan
   - ꕪꕤꔻꕚꘋ
   - Kazakhstanni
   - Kazakisitá
-  - Казахстан # Kazahstan
   - کازاخستان
-  - 카자흐스탄 # kajaheuseutan
+  - 카자흐스탄      # kajaheuseutan
   - Orílɛ́ède Kashashatani
   - Qozogʻiston
   - كازاخستان
@@ -40,7 +45,7 @@ names_weak:
   - ካዛኪስታን
   - Kasachschtan
   - Kazachstán
-  - ყაზახეთი # qʼazakheti
+  - ყაზახეთი   # qʼazakheti
   - Kasakisitani
   - Kazakisitäan
   - قزاقستان
@@ -51,7 +56,7 @@ names_weak:
   - Kazakasitáani
   - ཀ་ཛགས་སཏཱན
   - Każakstan
-  - Ղազախստան # Ġazaxstan
+  - Ղազախստան  # Ġazaxstan
   - កាហ្សាក់ស្តង់់
   - කසකස්තානය
   - कज़ाखस्तान
@@ -69,9 +74,8 @@ names_weak:
   - Kazajistán
   - Kazakətáŋ
   - Kazakusita
-  - Казакстан # Kazakstan
   - Ukazakistani
-  - Καζακστάν # Kazakstán
+  - Καζακστάν  # Kazakstán
   - Kassakstahn
   - 哈萨克斯坦
   - Kazakistaŋ
@@ -82,7 +86,6 @@ names_weak:
   - Kazakstaŋ
   - ⴽⴰⵣⴰⵅⵙⵜⴰⵏ
   - ಕಝಾಕಿಸ್ಥಾನ್
-  - Қазақстан # Kˌazakˌstan
   - ཁ་ཛཱག་སྟཱན།
   - Casaquistão
   - Kazakistani
@@ -106,7 +109,6 @@ names_weak:
   - Kazakistan
   - kazakstáŋ
   - Kaazakstan
-  - Republic of Kazakhstan
   - Casachstàn
   - কাজাখস্তান
   - Kàzàkstâŋ

@@ -6,5 +6,7 @@ is_jurisdiction: true
 name: Sichuan
 parent: cn
 qid: Q19770
-names_strong: []
+names_strong:
+  - 四川 # Sìchuān
+  - 成都 # Chéngdū
 names_weak: []

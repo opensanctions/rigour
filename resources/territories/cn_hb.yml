@@ -6,5 +6,7 @@ is_jurisdiction: true
 name: Hubei
 parent: cn
 qid: Q46862
-names_strong: []
+names_strong:
+  - 湖北 # Húběi
+  - 武汉 # Wǔhàn
 names_weak: []

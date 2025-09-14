@@ -19,10 +19,13 @@ summary: >-
   it initially operated as a breakaway state until it was annexed by Russia in 2022.
 names_strong:
   - Luhansk
+  - Lugansk
   - Luhansk People's Republic
   - Lugansk People's Republic
-  - LPR
-names_weak:
-  - Луга́нская                       # Lugánskaâ
+  - Луга́нская # Lugánskaâ
+  - Луганск # Lugansk
   - Луга́нская Наро́дная Респу́блика # Lugánskaâ Naródnaâ Respúblika
-  - Луганская Народная Республика    # Luganskaâ Narodnaâ Respublika
+  - Луганская Народная Республика # Luganskaâ Narodnaâ Respublika
+names_weak:
+  - ЛНР  # LNR
+  - LPR

@@ -6,5 +6,7 @@ is_jurisdiction: true
 name: Hunan
 parent: cn
 qid: Q45761
-names_strong: []
+names_strong:
+  - 湖南 # Húnán
+  - 长沙 # Chángshā
 names_weak: []

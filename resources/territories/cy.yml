@@ -20,10 +20,11 @@ wikipedia_url: https://en.wikipedia.org/wiki/Cyprus
 names_strong:
   - РЕСПУБЛИКА КИПР
   - Республика Кипр
+  - Кипр
 names_weak:
   - Kıbrıs Cumhuriyeti # RESPUBLIKA KIPR
   - CYPRS # Respublika Kipr
-  - Emetab Cyprus
+  - Emetab Cyprus # Kipr
   - Λευκωσία # Leukōsía
   - Кипар # Kipar
   - Kýpur
@@ -40,7 +41,6 @@ names_weak:
   - 키프로스  # kipeuloseu
   - Sípɛlɛ
   - साइप्रस
-  - Кипр  # Kipr
   - Kuprosi
   - Saipurasi
   - Sîpri

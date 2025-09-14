@@ -14,10 +14,12 @@ summary: >-
   Europe. It is bordered by Russia to the east and northeast, Ukraine to the south,
   Poland to the west, and Lithuania and Latvia to the northwest.
 wikipedia_url: https://en.wikipedia.org/wiki/Belarus
-names_strong: []
+names_strong:
+  - Беларусь # Bielaruś
+  - Республика Беларусь # Respublika Belarusʹ
 names_weak:
-  - бѣ́лаѧ рꙋ́сь  # bѣ́laѧ rꙋ́sʹ
-  - בעלאַרוס
+  - бѣ́лаѧ рꙋ́сь # bѣ́laѧ rꙋ́sʹ
+  - בעלאַרוס # Respublika Belarusʹ
   - Bilarusya
   - روسیهٔ سفید
   - Hvideruslandi
@@ -25,6 +27,7 @@ names_weak:
   - Белорусия # Belorusiâ
   - Belarus (Republic of)
   - Fehéroroszország
+  - BIÉLORUSSIE
   - Belarus nutome
   - 白俄羅斯
   - بيلاروس
@@ -48,7 +51,6 @@ names_weak:
   - Byelorisi
   - Vitryssland
   - Emetab Belarus
-  - Республика Беларусь # Respublika Belarusʹ
   - Bhelarusi
   - เบลารุส
   - Baltarusija
@@ -95,7 +97,6 @@ names_weak:
   - Weissrussland
   - A’ Bhealaruis
   - Valgevene
-  - Беларусь # Belarusʹ
   - بیلاروٗس
   - Bjelorussja
   - ベラルーシ

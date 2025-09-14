@@ -6,5 +6,7 @@ is_jurisdiction: true
 name: Heilongjiang
 parent: cn
 qid: Q19206
-names_strong: []
+names_strong:
+  - 黑龙江 # Hēilóngjiāng
+  - 哈尔滨 # Hā'ěrbīn
 names_weak: []

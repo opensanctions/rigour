@@ -6,5 +6,6 @@ is_jurisdiction: true
 name: Henan
 parent: cn
 qid: Q43684
-names_strong: []
+names_strong:
+  - 河南 # Hénán
 names_weak: []

@@ -6,5 +6,6 @@ is_jurisdiction: true
 name: Gansu
 parent: cn
 qid: Q42392
-names_strong: []
+names_strong:
+  - 甘肃 # Gānsù
 names_weak: []

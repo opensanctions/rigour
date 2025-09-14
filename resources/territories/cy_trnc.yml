@@ -16,9 +16,9 @@ summary: >-
   only by Turkey and its territory is considered by the international community to
   be part of the Republic of Cyprus.
 wikipedia_url: https://en.wikipedia.org/wiki/Northern_Cyprus
-names_strong: []
+names_strong:
+  - KKTC
 names_weak:
   - Kuzey Kıbrıs
-  - KKTC
   - Kuzey Kıbrıs Türk Cumhuriyeti
   - Turkish Republic of Northern Cyprus

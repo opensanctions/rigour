@@ -6,5 +6,6 @@ is_jurisdiction: true
 name: Guangdong
 parent: cn
 qid: Q15175
-names_strong: []
+names_strong:
+  - 广东 # Guǎngdōng
 names_weak: []

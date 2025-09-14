@@ -8,10 +8,10 @@ parent: us
 names_strong:
   - FLORIDA, U.S.A.
   - Florida, US
-names_weak:
-  - FLO
   - Florida, USA
   - Florida (USA)
+names_weak:
+  - FLO
   - Флорида       # Florida
   - Флорида (США) # Florida (SŠA)
   - Floride

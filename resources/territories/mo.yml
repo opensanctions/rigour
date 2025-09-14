@@ -15,7 +15,10 @@ summary: >-
   of the People's Republic of China (MSAR), is a city and special administrative region
   of China in the western Pearl River Delta by the South China Sea.
 wikipedia_url: https://en.wikipedia.org/wiki/Macau
-names_strong: []
+names_strong:
+  - Macao
+  - Macau
+  - 澳門 # Àomén
 names_weak:
   - Nossa Senhora de Fátima
   - ມາເກົ້າ ເຂດປົກຄອງພິເສດ ຈີນ
@@ -70,7 +73,6 @@ names_weak:
   - Макау Кытай ААА # Makau Kytaj AAA
   - Makao (S. A. R. Kina)
   - Macau SAS Sjina
-  - Macao
   - Çin Makao ÖYB
   - БНХАУ -ын Тусгай захиргааны бүс Макао # BNHAU -yn Tusgaj zahirgaany büs Makao
   - మాకావ్ ఎస్ఏఆర్ చైనా
@@ -104,7 +106,6 @@ names_weak:
   - Jūng'wàh Yàhnmàhn Guhng'wòhgwok Oumún Dahkbiht Hàhngjingkēui
   - САР Макао (Кина)    # SAR Makao (Kina)
   - Макао, САР на Китай # Makao, SAR na Kitaj
-  - Macau
   - ማካዎ
   - Regiun d’administraziun speziala Macao, China
   - Sonderverwaltungsregion Macau
@@ -131,7 +132,6 @@ names_weak:
   - மகாவ் எஸ்ஏஆர் சீனா
   - R.A.S. Macao a Chinei
   - Макао С. А. Р. Кина # Makao S. A. R. Kina
-  - 澳門
   - Macau RAE de China
   - Macàthu SAR na Sìne
   - RAE de Macao (China)

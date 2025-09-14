@@ -1,5 +1,5 @@
 name: Sri Lanka
-full_name: Sri Lanka
+full_name: Democratic Socialist Republic of Sri Lanka
 region: Asia
 subregion: Southern Asia
 alpha3: lka
@@ -13,11 +13,14 @@ summary: >-
   in South Asia. It lies in the Indian Ocean, southwest of the Bay of Bengal, separated
   from the Indian peninsula by the Gulf of Mannar and the Palk Strait.
 wikipedia_url: https://en.wikipedia.org/wiki/Sri_Lanka
-names_strong: []
+names_strong:
+  - CEYLON (SRI LANKA)
+  - Ceylon
 names_weak:
   - Siriláanka
   - Шри -Ланка  # Šri -Lanka
   - Šrilanka
+  - CEJLON
   - סרי לנקה
   - ཤྲཱི་ལངྐ་།
   - סרי־לאַנקאַ
@@ -60,7 +63,6 @@ names_weak:
   - သီရိလင်္ကာ
   - 斯里蘭卡
   - შრი-ლანკა # shri-lankʼa
-  - Democratic Socialist Republic of Sri Lanka
   - ಶ್ರೀಲಂಕಾ
   - Emetab Sri Lanka
   - ᏍᎵ ᎳᏂᎧ

@@ -6,5 +6,7 @@ is_jurisdiction: true
 name: Qinghai
 parent: cn
 qid: Q45833
-names_strong: []
+names_strong:
+  - 青海 # Qīnghǎi
+  - 西宁 # Xīníng
 names_weak: []

@@ -15,7 +15,9 @@ summary: >-
   natural islands and an additional 33 artificial islands, centered on Bahrain Island
   which makes up around 83 per cent of the country's landmass.
 wikipedia_url: https://en.wikipedia.org/wiki/Bahrain
-names_strong: []
+names_strong:
+  - البحرين # Al-Bahrayn
+  - مملكة البحرين # Mamlakat Al-Bahrayn
 names_weak:
   - barǝ́n
   - Baren
@@ -30,7 +32,6 @@ names_weak:
   - Бахрейн # Bahrejn
   - Bhahareni
   - Государство Бахрейн # Gosudarstvo Bahrejn
-  - البحرين
   - बहरैन
   - ಬಹರೈನ್
   - bahraiŋ

@@ -15,22 +15,26 @@ summary: >-
   Caucasus region and is bounded by the Caspian Sea to the east, Russia to the north,
   Georgia to the northwest, Armenia and Turkey to the west, and Iran to the south.
 wikipedia_url: https://en.wikipedia.org/wiki/Azerbaijan
-names_strong: []
+names_strong:
+  - Azərbaycan
+  - Azerbaycan
+  - Азербайджан # Azerbajdžan
 names_weak:
   - Азербејџан  # Azerbeǰd̂an
   - Aserbaysan
-  - Azerubayijani
+  - Azerubayijani # Azerbajdžan
   - Αζερμπαϊτζάν # Azermpaïtzán
   - Azerbaïdjan ( Rép. )
   - Azerbaijan Republic
+  - Азербайджанська Республіка # Azerbajdžansʹka Respublíka
   - Azabajáani
   - Azarbaijan
   - અઝરબૈજાન
   - Huazabajani
   - अज़रबैजान
-  - Озарбайжон # Ozarbajžon
+  - Озарбайжон   # Ozarbajžon
   - Azerbeidjan
-  - Азербайжан # Azerbajžan
+  - Азербайжан   # Azerbajžan
   - ئازەربایجان
   - อาเซอร์ไบจาน
   - Азербайджанська Республіка # Azerbajdžansʹka Respublíka
@@ -41,7 +45,6 @@ names_weak:
   - Azerbaidjan
   - Республика Азербайджан # Respublika Azerbajdžan
   - Azerbajdžan
-  - Azərbaycan
   - آزَرباجان
   - អាហ៊្សែរបែហ្សង់
   - Azɛrbayjaŋ
@@ -107,7 +110,6 @@ names_weak:
   - Azerbiǧan
   - Ajerbayjaan
   - Azrabijan
-  - Азербайджан # Azerbajdžan
   - আজারবাইজান
   - Azerbeidzjan
   - ᎠᏏᎵᏆᏌᏂ
@@ -143,4 +145,3 @@ names_weak:
   - Ozarbayjon
   - Azebaegyan
   - azerbaijaŋ
-  - Azerbaycan
