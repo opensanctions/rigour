@@ -3055,6 +3055,9 @@ person_nick:
   ted:
     - "Ted"
     - "Theodore"
+  drew:
+    - Drew
+    - Andrew
   sam:
     - "Sam"
     - "Samuel"
@@ -3076,6 +3079,9 @@ person_nick:
   ben:
     - "Ben"
     - "Benjamin"
+  bend:
+    - "Ben"
+    - "Benedict"
   greg:
     - "Greg"
     - "Gregory"
@@ -3119,3 +3125,37 @@ person_name_parts:
     - ปูติน
     - पुतिन
     - πούτιν
+
+  ghaddafi:
+    - "GADDAFI"
+    - "Ghaddafi"
+    - ELKADDAFI
+    - QADDAFI
+    - Kaddafi
+    - el Gadafi
+    - al-Kaddafi
+    - القذافي
+    - Каддафі
+    - Каддафи
+    - ал-Қазофӣ
+    - əl-Qəzzafi
+    - Gheddafi
+    - al-Qadhafi
+    - GHATHAFI
+    - Kadaffi
+    - Khadafy
+    - Qadhdhafi
+
+  alqaeda:
+    - al-qaeda
+    - qaeda
+    - Al-Qa'ida
+    - Qa'ida
+    - Al Qaida
+    - Al-Kaida
+    - القاعدة
+    - QA'IDA OF JIHAD ORGANIZATION
+    - AL-QA'IDA ORGANIZATION
+    - Al-Qaida Organization
+    - Al Qaida/Islamic Army
+    - Al Qa’ida/Islamic Army
