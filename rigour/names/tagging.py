@@ -10,6 +10,7 @@ from rigour.text.dictionary import Normalizer
 from rigour.names import Symbol, Name
 from rigour.names import load_person_names
 from rigour.names.check import is_stopword
+from rigour.names.part import NamePart
 from rigour.names.tag import NameTypeTag, NamePartTag, INTITIAL_TAGS
 from rigour.territories.territory import TERRITORIES_FILE
 
@@ -150,6 +151,7 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
 
 def _infer_part_tags(name: Name) -> Name:
     """Infer the tags of the name parts based on the name type."""
+    numerics: Set[NamePart] = set()
     for span in name.spans:
         if span.symbol.category == Symbol.Category.ORG_CLASS:
             if name.tag == NameTypeTag.ENT and len(span) > 2:
@@ -161,15 +163,25 @@ def _infer_part_tags(name: Name) -> Name:
                 if part.tag == NamePartTag.UNSET:
                     part.tag = NamePartTag.LEGAL
         if span.symbol.category == Symbol.Category.NUMERIC:
-            if len(span.parts) == 1 and span.parts[0].tag == NamePartTag.UNSET:
-                # If a numeric symbol is present and the part is not tagged, we can
-                # tag it as numeric.
-                span.parts[0].tag = NamePartTag.NUM
+            for part in span.parts:
+                numerics.add(part)
+        #     if len(span.parts) == 1 and span.parts[0].tag == NamePartTag.UNSET:
+        #         # If a numeric symbol is present and the part is not tagged, we can
+        #         # tag it as numeric.
+        #         span.parts[0].tag = NamePartTag.NUM
     for part in name.parts:
         if part.tag == NamePartTag.UNSET:
-            if part.form.isnumeric():
+            if part.comparable.isnumeric():
                 # If a name part is numeric, we can tag it as numeric.
                 part.tag = NamePartTag.NUM
+                # And apply a symbol, if missing:
+                if part not in numerics:
+                    try:
+                        num = int(part.comparable)
+                        name.apply_part(part, Symbol(Symbol.Category.NUMERIC, num))
+                    except ValueError:
+                        log.warning("Failed to tag number: %s", part.comparable)
+                    numerics.add(part)
             elif is_stopword(part.form):
                 # If a name part is a stop word, we can tag it as a stop word.
                 part.tag = NamePartTag.STOP
