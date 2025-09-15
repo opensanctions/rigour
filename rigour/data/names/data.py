@@ -3405,7 +3405,7 @@ PERSON_NAME_PARTS: Dict[str, Tuple[str, ...]] = {
         "普京",
         "푸틴",
     ),
-    "GHADDAFI": (
+    "QDFI": (
         "ELKADDAFI",
         "GADDAFI",
         "GHATHAFI",
