@@ -1,6 +1,12 @@
+import string
+import logging
 from sqlalchemy import select, update, func
 from namesdb.db import engine, mapping_table
 from namesdb.blocks import GROUPS, CONTAINS
+
+from rigour.text.scripts import is_latin
+
+log = logging.getLogger(__name__)
 
 
 def block_groups():
@@ -19,6 +25,26 @@ def block_phrases():
             stmt = stmt.where(mapping_table.c.form.ilike(f"%{phrase}%"))
             stmt = stmt.values(skip=True)
             conn.execute(stmt)
+
+
+def block_forms():
+    with engine.begin() as conn:
+        q = select(mapping_table.c.id, mapping_table.c.form)
+        q = q.where(mapping_table.c.skip.is_(False))
+        result = conn.execute(q)
+        for row in result:
+            form = row._mapping["form"]
+
+            # Remove single-character forms
+            alnums = [c for c in form if c.isalnum()]
+            if len(alnums) < 2:
+                latins = [c for c in alnums if is_latin(c) or c in string.digits]
+                if len(latins) == len(alnums):
+                    log.info("Blocking form: %r", form)
+                    # stmt = update(mapping_table)
+                    # stmt = stmt.where(mapping_table.c.id == row._mapping["id"])
+                    # stmt = stmt.values(skip=True)
+                    # conn.execute(stmt)
 
 
 def bad_candidates():

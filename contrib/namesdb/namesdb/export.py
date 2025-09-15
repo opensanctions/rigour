@@ -7,7 +7,7 @@ from normality import ascii_text
 from normality.cleaning import remove_unsafe_chars
 from rigour.text.scripts import can_latinize
 
-from namesdb.cleanup import block_groups, block_phrases
+from namesdb.cleanup import block_forms, block_groups, block_phrases
 from namesdb.db import all_mappings, engine
 
 log = logging.getLogger(__name__)
@@ -36,6 +36,7 @@ def dump_file_export(path: Path):
     log.info("Exporting namesdb mappings to %r", path.as_posix())
     block_groups()
     block_phrases()
+    block_forms()
     with engine.begin() as conn:
         raw_mappings = dict(all_mappings(conn))
         log.info("Loaded %d name mappings", len(raw_mappings))
@@ -62,6 +63,7 @@ def dump_file_export(path: Path):
                     mappings.pop(ngroup, None)
 
         written = 0
+        forms_written = 0
         with open(path, "w") as fh:
             for group, forms in sorted(mappings.items()):
                 if len(forms) < 2:
@@ -70,7 +72,13 @@ def dump_file_export(path: Path):
                     # log.info("Skipping mapping for: %r", forms)
                     continue
                 written += 1
+                forms_written += len(forms)
                 fstr = ", ".join(sorted(forms))
                 fh.write(f"{fstr} => {group}\n")
 
-        log.info("Wrote %d mappings to %r", written, path.as_posix())
+        log.info(
+            "Wrote %d mappings (%d forms) to %r",
+            written,
+            forms_written,
+            path.as_posix(),
+        )

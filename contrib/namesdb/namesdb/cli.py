@@ -10,6 +10,8 @@ from normality import latinize_text
 from namesdb.db import engine, regex_groups, store_mapping, skip_mapping
 from namesdb.db import get_groups, get_forms
 
+log = logging.getLogger(__name__)
+
 
 @click.group()
 def cli():
@@ -31,6 +33,18 @@ def skip_form(ids: List[int]) -> None:
     with engine.begin() as conn:
         for id in ids:
             skip_mapping(conn, id)
+
+
+@cli.command("skipgroup")
+@click.argument("groups", type=str, nargs=-1)
+def skip_group(groups: List[str]) -> None:
+    with engine.begin() as conn:
+        for group in groups:
+            for mapping_id, form, skip in sorted(get_forms(conn, group)):
+                if skip:
+                    continue
+                log.info("Skip %r (%d) for group '%s'", form, mapping_id, group)
+                skip_mapping(conn, mapping_id)
 
 
 @cli.command("lookup")
