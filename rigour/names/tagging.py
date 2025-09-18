@@ -6,6 +6,7 @@ from collections import defaultdict
 from typing import Dict, List, Optional, Set, Tuple
 
 from rigour.data import read_jsonl
+from rigour.text.numbers import string_number
 from rigour.text.dictionary import Normalizer
 from rigour.names import Symbol, Name
 from rigour.names import load_person_names
@@ -176,11 +177,9 @@ def _infer_part_tags(name: Name) -> Name:
                 part.tag = NamePartTag.NUM
                 # And apply a symbol, if missing:
                 if part not in numerics:
-                    try:
-                        num = int(part.comparable)
-                        name.apply_part(part, Symbol(Symbol.Category.NUMERIC, num))
-                    except ValueError:
-                        log.warning("Failed to tag number: %s", part.comparable)
+                    num = string_number(part.comparable)
+                    if num is not None and num.is_integer():
+                        name.apply_part(part, Symbol(Symbol.Category.NUMERIC, int(num)))
                     numerics.add(part)
             elif is_stopword(part.form):
                 # If a name part is a stop word, we can tag it as a stop word.
