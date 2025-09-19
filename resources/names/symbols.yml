@@ -3055,6 +3055,9 @@ person_nick:
   ted:
     - "Ted"
     - "Theodore"
+  doug:
+    - "Doug"
+    - "Douglas"
   drew:
     - Drew
     - Andrew
@@ -3075,6 +3078,9 @@ person_nick:
     - "Raymond"
   ken:
     - "Ken"
+    - "Kenneth"
+  kenny:
+    - "Kenny"
     - "Kenneth"
   ben:
     - "Ben"
@@ -3097,6 +3103,9 @@ person_nick:
   tony:
     - "Tony"
     - "Anthony"
+  josh:
+    - "Josh"
+    - "Joshua"
 
 person_name_parts:
   # Big guy gets a special kind of love

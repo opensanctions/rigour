@@ -116,17 +116,35 @@ def pick_case(names: List[str]) -> str:
         raise ValueError("Cannot pick a name from an empty list.")
     if len(names) == 1:
         return names[0]
-    reference = names[0].title()
+    # Pick the shortest, meaning the name least likely to be damaged by case
+    # folding / NFKC.
+    reference = min(names, key=len).title()
+    # if reference in names:
+    #     return reference
+    print("XXXX", reference)
+    offsets: Dict[str, int] = {n: 0 for n in names}
     difference: Dict[str, int] = {n: 0 for n in names}
-    for i, char in enumerate(reference):
+    for char in reference:
+        if not char.isalpha():
+            continue
+        fchar = char.casefold()
+        if char != fchar:
+            continue
         for name in names:
+            i = offsets[name]
             if len(name) <= i:
-                raise ValueError("Name length mismatch: %r vs %r" % (name, reference))
+                continue
+                # raise ValueError("Name length mismatch: %r vs %r" % (name, reference))
             nchar = name[i]
+            fnchar = nchar.casefold()
             if nchar != char:
-                if nchar.casefold() != char.casefold():
-                    raise ValueError("Names mismatch: %r vs %r" % (name, reference))
+                # if fchar != fnchar:
+                #     raise ValueError(
+                #         "Names mismatch: %r vs %r (char: %r vs %r)"
+                #         % (name, reference, fnchar, fchar)
+                #     )
                 difference[name] += 1
+            offsets[name] += len(fnchar)
     return min(difference.items(), key=lambda x: x[1])[0]
 
 

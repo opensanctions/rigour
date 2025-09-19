@@ -3363,6 +3363,7 @@ PERSON_NICK: Dict[str, Tuple[str, ...]] = {
     "BILL": ("Bill", "William"),
     "TIM": ("Tim", "Timothy"),
     "TED": ("Ted", "Theodore"),
+    "DOUG": ("Doug", "Douglas"),
     "DREW": ("Andrew", "Drew"),
     "SAM": ("Sam", "Samuel"),
     "SAMA": ("Sam", "Samantha"),
@@ -3370,6 +3371,7 @@ PERSON_NICK: Dict[str, Tuple[str, ...]] = {
     "ALEXA": ("Alex", "Alexandra"),
     "RAY": ("Ray", "Raymond"),
     "KEN": ("Ken", "Kenneth"),
+    "KENNY": ("Kenneth", "Kenny"),
     "BEN": ("Ben", "Benjamin"),
     "BEND": ("Ben", "Benedict"),
     "GREG": ("Greg", "Gregory"),
@@ -3377,6 +3379,7 @@ PERSON_NICK: Dict[str, Tuple[str, ...]] = {
     "RON": ("Ron", "Ronald"),
     "ED": ("Ed", "Edward"),
     "TONY": ("Anthony", "Tony"),
+    "JOSH": ("Josh", "Joshua"),
 }
 
 PERSON_NAME_PARTS: Dict[str, Tuple[str, ...]] = {
