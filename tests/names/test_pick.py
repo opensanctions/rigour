@@ -141,14 +141,53 @@ def test_pick_case():
         pick_case([])
     assert pick_case(["VLADIMIR PUTIN"]) == "VLADIMIR PUTIN"
 
-    with pytest.raises(ValueError):
-        pick_case(["Vladimir Putin", "Vladimir PUTIN", "VLADIMIR PUTIN", ""])
 
-    with pytest.raises(ValueError):
-        pick_case(["Vladimir Putin", "Vladimir Putan"])
+def test_pick_case_stoesslein():
+    names = [
+        "Stefan Stösslein",
+        "Stefan Stößlein",
+        "Stefan Stößlein",
+        "STEFAN STÖSSLEIN",
+    ]
+    name = pick_case(names)
+    assert name is not None
+    assert "Stößlein" in name, name
 
-    with pytest.raises(ValueError):
-        pick_case(["Vladimir Putina", "Vladimir PUTIN", "VLADIMIR PUTIN"])
+    names = ["Max Strauß", "Max Strauss"]
+    name = pick_case(names)
+    assert name is not None
+    assert "Strauß" in name, name
+
+
+def test_pick_case_turkish():
+    names = ["SEHER DEMİR", "Seher Demi̇r"]
+    name = pick_case(names)
+    assert name is not None
+    assert "Demi̇r" in name, name
+
+    names = ["Süleyman ŞAHİN", "Süleyman Şahi̇n"]
+    name = pick_case(names)
+    assert name is not None
+    assert "Şahi̇n" in name, name
+
+
+def test_pick_case_armenian():
+    names = ["Գեւորգ Սամվելի Գորգիսյան", "Գևորգ Սամվելի Գորգիսյան"]
+    name = pick_case(names)
+    assert name is not None
+    assert "Գևորգ" in name, name
+
+
+def test_pick_case_greek():
+    # ok so:
+    # 'ΚΟΣΜΟΣ'.casefold() -> 'κοσμοσ'
+    # but:
+    # 'Κόσμος'.upper() -> 'ΚΌΣΜΟΣ'
+    # that's how you get to 150% debt-to-GDP ratio
+    names = ["Κόσμος", "κόσμος", "κόσμος", "ΚΟΣΜΟΣ"]
+    name = pick_case(names)
+    assert name is not None
+    assert "Κόσμος" in name, name
 
 
 def test_reduce_names():
@@ -171,6 +210,13 @@ def test_reduce_names():
     names = ["."]
     reduced = reduce_names(names)
     assert len(reduced) == 0, reduced
+
+    names = ["Κόσμος", "κόσμος", "κόσμος", "ΚΟΣΜΟΣ"]
+    reduced = reduce_names(names)
+    assert len(reduced) == 2
+    names = ["Κοσμοσ", "κοσμοσ", "κοσμοσ", "ΚΟΣΜΟΣ"]
+    reduced = reduce_names(names)
+    assert len(reduced) == 1
 
     reduced = reduce_names([])
     assert len(reduced) == 0, reduced

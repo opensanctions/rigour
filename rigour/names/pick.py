@@ -1,4 +1,5 @@
 import logging
+import re
 from itertools import combinations
 from collections import defaultdict
 from typing import Dict, Optional, List
@@ -10,6 +11,9 @@ from rigour.text.distance import levenshtein
 from rigour.data.text.scripts import LATIN_CHARS, LATINIZABLE_CHARS
 
 log = logging.getLogger(__name__)
+
+# Precompiled regex for word boundaries in title case detection
+WORD_BOUNDARY_RE = re.compile(r"[\s\-\'\.]+")
 
 
 def latin_share(text: str) -> float:
@@ -104,48 +108,44 @@ def pick_lang_name(names: List[LangStr]) -> Optional[str]:
 
 def pick_case(names: List[str]) -> str:
     """Pick the best mix of lower- and uppercase characters from a set of names
-    that are identical except for case.
+    that are identical except for case. If the names are not identical, undefined
+    things happen (not recommended).
 
     Args:
         names (List[str]): A list of identical names in different cases.
 
     Returns:
-        Optional[str]: The best name for display.
+        str: The best name for display.
     """
     if len(names) == 0:
         raise ValueError("Cannot pick a name from an empty list.")
     if len(names) == 1:
         return names[0]
-    # Pick the shortest, meaning the name least likely to be damaged by case
-    # folding / NFKC.
-    reference = min(names, key=len).title()
-    # if reference in names:
-    #     return reference
-    print("XXXX", reference)
-    offsets: Dict[str, int] = {n: 0 for n in names}
-    difference: Dict[str, int] = {n: 0 for n in names}
-    for char in reference:
-        if not char.isalpha():
+
+    basic = sorted(names, key=len)[0].title()
+    if basic in names:
+        return basic
+
+    scores: Dict[str, float] = {}
+    for name in names:
+        if len(name) != len(basic):
             continue
-        fchar = char.casefold()
-        if char != fchar:
-            continue
-        for name in names:
-            i = offsets[name]
-            if len(name) <= i:
+        new_word = True
+        errors = 0
+        for char in name:
+            if not char.isalpha():
+                new_word = True
                 continue
-                # raise ValueError("Name length mismatch: %r vs %r" % (name, reference))
-            nchar = name[i]
-            fnchar = nchar.casefold()
-            if nchar != char:
-                # if fchar != fnchar:
-                #     raise ValueError(
-                #         "Names mismatch: %r vs %r (char: %r vs %r)"
-                #         % (name, reference, fnchar, fchar)
-                #     )
-                difference[name] += 1
-            offsets[name] += len(fnchar)
-    return min(difference.items(), key=lambda x: x[1])[0]
+            if new_word:
+                if not char.isupper():
+                    errors += 2
+                new_word = False
+                continue
+            if char.isupper():
+                errors += 1
+        scores[name] = errors / len(name)
+
+    return min(scores.items(), key=lambda i: (i[1], len(i[0])))[0]
 
 
 def reduce_names(names: List[str]) -> List[str]:
