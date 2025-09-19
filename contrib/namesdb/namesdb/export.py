@@ -26,7 +26,7 @@ def can_translit_match(forms: Iterable[str]) -> bool:
 
 
 def normalize_form(text: str) -> str:
-    text = text.strip()
+    text = text.strip().strip('"')
     text = unicodedata.normalize("NFC", text)
     text = remove_unsafe_chars(text)
     return text

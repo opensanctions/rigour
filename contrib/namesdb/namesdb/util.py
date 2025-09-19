@@ -1,5 +1,6 @@
-from typing import Optional
 import unicodedata
+from typing import Optional
+from normality.cleaning import remove_unsafe_chars
 
 from rigour.names import is_name
 from rigour.text.cleaning import remove_bracketed_text, remove_emoji
@@ -11,6 +12,7 @@ def clean_form(form: str) -> Optional[str]:
     form = remove_bracketed_text(form)
     form = remove_emoji(form)
     form = unicodedata.normalize("NFC", form.strip().lower())
+    form = remove_unsafe_chars(form)
     if not is_name(form):
         return None
     if len(form) > 40:

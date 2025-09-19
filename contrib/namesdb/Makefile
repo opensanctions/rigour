@@ -3,13 +3,12 @@
 # TODO: upload with timestamp
 
 put:
-	sqlite3 data/names.db 'DELETE FROM cache WHERE timestamp < datetime("now", "-90 days");'
-	sqlite3 data/names.db 'VACUUM;'
-	gsutil cp data/names.db gs://internal-data.opensanctions.org/namesdb/names.db
-	gsutil cp gs://internal-data.opensanctions.org/namesdb/names.db gs://internal-data.opensanctions.org/namesdb/names.$(shell date +%Y-%m-%d).db
+	sqlite3 data/names.db '.dump' | gzip > data/names.sql.gz
+	gsutil cp data/names.sql.gz gs://internal-data.opensanctions.org/namesdb/names.sql.gz
+	gsutil cp gs://internal-data.opensanctions.org/namesdb/names.sql.gz gs://internal-data.opensanctions.org/namesdb/names.$(shell date +%Y-%m-%d).sql.gz
 
 get:
-	gsutil cp gs://internal-data.opensanctions.org/namesdb/names.db data/names.db 
+	gsutil cp gs://internal-data.opensanctions.org/namesdb/names.sql.gz data/names.sql.gz 
 
 wikidata:
 	python namesdb/wikidata.py
