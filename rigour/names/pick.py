@@ -1,5 +1,4 @@
 import logging
-import re
 from itertools import combinations
 from collections import defaultdict
 from typing import Dict, Optional, List
@@ -11,9 +10,6 @@ from rigour.text.distance import levenshtein
 from rigour.data.text.scripts import LATIN_CHARS, LATINIZABLE_CHARS
 
 log = logging.getLogger(__name__)
-
-# Precompiled regex for word boundaries in title case detection
-WORD_BOUNDARY_RE = re.compile(r"[\s\-\'\.]+")
 
 
 def latin_share(text: str) -> float:
