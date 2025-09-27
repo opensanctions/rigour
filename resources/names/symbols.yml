@@ -6,6 +6,7 @@ org_symbols:
   co:
     - company
     - сompany # Homoglyph, first letter is Cyrillic
+    - cомpany
     - corporation
     - compagnie
     - компания
@@ -35,6 +36,18 @@ org_symbols:
     - compania
     - companie
     - companhia
+    - kampani
+    - kompanija
+    - kongsi
+    - kaisha
+    - gongsi
+    - shirkat
+    - חברה
+    - società
+    - société
+    - sociedad
+    - gesellschaft
+    - vennootschap
     - bendrovė
     - întreprinderea
     - ettevõte
@@ -108,6 +121,13 @@ org_symbols:
     - korporacija
     - corporations
     - corporacion
+    - Corporación
+    - Corporatie
+    - Corporação
+    - Korporation
+    - Corporatn
+    - Corprtn
+    - Corpo
     - корпорации
     - корпарация
     - корпорації
@@ -243,12 +263,6 @@ org_symbols:
     - номінальний
     - номінальна
     - довірена особа
-  branch:
-    - branch
-    - branch of
-    - филиал
-    - filiale
-    - zweigstelle
   concern:
     - kontsern
     - concern
@@ -2903,6 +2917,23 @@ org_symbols:
     - en liquidation # fr
     - 清算中 # zh
     - "/in liquidation/" # used by certain Bulgarian companies
+  repoff:
+    - Representative Office
+    - Rep. Office
+    - Representative Off.
+    - Rep Off
+    - Repr. Office
+  branch:
+    - branch
+    - branch of
+    - филиал
+    - filiale
+    - zweigstelle
+    - Branch Office
+    - Br. Office
+    - Branch Off.
+    - Br Off
+    - Subsidiary Branch
 person_symbols:
   jr:
     - "Jr"

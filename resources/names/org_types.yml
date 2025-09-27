@@ -30,6 +30,19 @@ types:
       - Pubic Limited Company
       - Public Limitied Company
       - Public Limitted Company
+      - Pub Ltd Co
+      - Pub. Lt. Co.
+      - Public Lt. Co.
+      - Public Lt Company
+      - Pub Limited
+      - Publicly Ltd Company
+      - Public Ltd Corporation
+      - Public Lmtd Company
+      - Publi Limited Company
+      - Publc Limited Company
+      - P.L.C.
+      - P L C
+      - PLCs
   - generic: JSC
     aliases:
       - ሃላፊነቱ የተወሰነ የግል ማህበር
@@ -259,6 +272,21 @@ types:
     aliases:
       - društvo s ograničenom odgovornošću
       - družba z omejeno odgovornostjo
+      - d o o
+      - D.O.O.
+      - drustvo s ogranicenom odgovornoscu
+      - društvo ograničene odgovornosti
+      - drustv ogranic odgovor
+  - display: s.r.o.
+    compare: sro
+    generic: LLC
+    aliases:
+      - S.R.O.
+      - společnost s ručením omezeným
+      - spol. s r.o.
+      - spol s ruc omez
+      - spol s r.o.
+      - s r o
   - display: k.d.
     compare: kd
     generic: LP
@@ -373,6 +401,14 @@ types:
       - mit besch haftung
       - mit beschr haftung
       - mit beschränkter haftung
+      - G.m.b.H.
+      - G m b H
+      - GmbHs
+      - Ges. m. b. H.
+      - Ges.m.b.H.
+      - Gesellsch. m. b. H.
+      - G.M.B.H.
+      - Gesellschaft m.b.H.
       - гмбх
       - г.м.б.х.
   - display: gGmbH
@@ -414,6 +450,12 @@ types:
       - AG & Co KG
       - AG und Co KG
       - AG & Co. KGaA
+      - A.G.
+      - A G
+      - AGs
+      - Aktien-Gesellschaft
+      - Aktienges.
+      - AG Société Anonyme
 
   - display: KG
     generic: LP
@@ -447,6 +489,8 @@ types:
       - sp. z o.o. sp.k
       - sp. z oo
       - sp. zoo
+      - Sp. z ogr. odp.
+      - Spólka z ogr odpow
       - spolka z ograniczona odpowiedzialnoscia
       - spółka z ograniczoną odpowiedzialnością
       - spółka z o.o.
@@ -467,6 +511,11 @@ types:
     aliases:
       - abp
       - aktiebolag
+      - Aktiebolag
+      - Aktie Bolag
+      - Aktie-bolag
+      - Aktiebol.
+      - A-bolag
       - publikt aktiebolag
   - display: abv
     aliases:
@@ -528,6 +577,12 @@ types:
       - Joint Stock Co.
       - JS Co.
       - JSC Company
+      - J.S.C.
+      - J S C
+      - Jnt Stock Co
+      - Joint Stock Corp
+      - J Stock Company
+      - Jt Stock Co
   - display: სს
     generic: JSC
     aliases:
@@ -567,9 +622,12 @@ types:
       - Societatea publică pe acțiuni
       - offene aktiengesellschaft
       - open joint stock company
-      - open jsc
+      - O J S C
+      - Open Joint Stock Company
+      - Open Jnt Stock Co
+      - O Joint Stock Co
+      - Open JSC
       - veřejná akciová společnost
-      - Aktiebolaget
   - display: AT
     generic: JSC
     aliases:
@@ -591,6 +649,8 @@ types:
       - akciju sabiedrība
       - akciová společnost
       - akciová spoločnosť
+      - akc. společnost
+      - a. společnost
       - aktieselskab
       - aktieselskabet
       - aktsiaselts
@@ -625,6 +685,12 @@ types:
     aliases:
       - B.V.
       - besloten vennootschap
+      - B V
+      - Besloten Vennootschap
+      - Besl. Vennootschap
+      - B. Vennootschap
+      - Besloten Vennotschap
+      - Beslotn Vennootschap
   - display: bvba
     generic: LLC
     aliases:
@@ -929,6 +995,15 @@ types:
       - incorporation
       - incorporée
       - Inc.
+      - Incorporated
+      - Incorp
+      - Incorp.
+      - Incorported
+      - Incorporatd
+      - Incorporado
+      - Incorporée
+      - Incs
+      - I N C
   - display: IS
     generic: SOE
     aliases:
@@ -1007,6 +1082,8 @@ types:
       - Korlátolt Felelősségű Társaság
       - korlátolt felelősségü társaság, organizační složka
       - korlátolt felelősségű társaság
+      - K f t
+      - Korlatolt Felelossegu Tarsasag
   - generic: JSC
     aliases:
       - 株式会社
@@ -1080,28 +1157,58 @@ types:
     aliases:
       - Limited Liability Company
       - limited liability company
+      - LIMITED LIABILITY CO
+      - LIMITED LIABILITY COMP
       - LIMITED LIABILITY COMPANY
+      - LIMITED LIABILITY CO.
+      - LIMITED LIABILITY CORP
+      - LIMITED LIABILITY CORPORATION
+      - LIMITED LIABILITY CORP.
       - FOREIGN LIMITED LIABILITY COMPANY
+      - LTD LIABILITY COMPANY
+      - LTD LIABILITY COMP
+      - LTD LIABILITY CO
       - L.L.C
       - L.L.C.
+      - L L C
+      - LLCs
+      - Ltd Liability Co
+      - Limited Liability Corp
+      - Lmtd Liability Company
+      - Lt Liability Company
+      - Limited Liab Co
+      - Ltd Liab Company
+      - Limitd Liability Co
+      - Limted Liability Co
+      - private limited liability company
   - display: Ltd
     generic: LLC
     aliases:
-      - Limited
-      - Ltd
       - lda.
       - limitada
+      - Limitada
+      - Limitd
+      - Limite
       - limited
+      - Limited
       - limited by guarantee
       - limited by shares
+      - Limited Co
       - limited company
-      - limitée
+      - Limitée
+      - Limted
+      - Lmtd
+      - Lt
+      - Lt.
+      - Ltd
+      - Ltd Co.
       - ltd.
+      - Ltd. Co
       - ltd. co.
       - ltda
+      - Ltds
       - private company with limited liability
       - private limited company
-      - private limited liability company
   - generic: LLC
     aliases:
       - компания с ограниченной ответственностью
@@ -1170,6 +1277,11 @@ types:
       - N.V.
       - N.V
       - naamloze vennootschap
+      - N V
+      - Naamloze Vennootschap
+      - Naamlze Vennootschap
+      - N. Vennootschap
+      - Naaml. Vennootschap
   - display: OAJ
     generic: JSC
     aliases:
@@ -1345,6 +1457,11 @@ types:
       - sociedade anônima
       - sociedá anónima
       - societat anònima
+      - Sociedad Anónima
+      - Société Anonyme
+      - Sociedade Anônima
+      - Societa Anonima
+      - Societate Anonima
       - societate pe acțiuni
       - societatea pe actiuni
       - societatea pe acţiuni
@@ -1383,12 +1500,23 @@ types:
     aliases:
       - S.A.R.L.
       - société à responsabilité limitée
+      - S A R L
+      - Société à Responsabilité Limitée
+      - Soc. à Resp. Limitée
+      - Soc à Responsab Limitée
+      - S. à R. L.
       - شّركة ذات مسؤوليّات محدودة ش.م.م
   - display: SAS
     generic: LLC
     aliases:
       - sociedades por acciones simplificada
       - société par actions simplifiée
+      - S.A.S.
+      - S A S
+      - Société par Actions Simplifiée
+      - Soc. par Actions Simplifiée
+      - Société Actions Simplifiée
+      - S. par A. S.
   - display: scc
     generic: LLC
     aliases:
@@ -1467,6 +1595,9 @@ types:
     generic: FIN
     aliases:
       - société d'investissement à capital variable
+      - S I C A V
+      - Société d'Investissement à Capital Variable
+      - Soc Invest Capital Variable
   - display: SLL
     generic: LLC
     aliases:
@@ -1523,6 +1654,12 @@ types:
       - intreprinderea cu responsabilitate limitata
       - s.r.l
       - s.r.l.
+      - S R L
+      - Società a Responsabilità Limitata
+      - Sociedad de Responsabilidad Limitada
+      - Societate cu Raspundere Limitata
+      - Soc. Resp. Limitada
+      - Soc a Resp Limitata
       - sicietatea de raspundere limitata
       - sociedad de responsabilidad limitada
       - societata cu raspundere limitata
