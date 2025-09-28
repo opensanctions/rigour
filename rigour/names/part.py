@@ -3,6 +3,7 @@ from typing import Any, List, Optional
 from normality import ascii_text
 from rigour.text.scripts import can_latinize
 from rigour.text.phonetics import metaphone
+from rigour.text.numbers import string_number
 from rigour.names.tag import NamePartTag
 from rigour.names.symbol import Symbol
 from rigour.names.tag import NAME_TAGS_ORDER
@@ -13,7 +14,7 @@ class NamePart(object):
     and match names. It generates and caches representations of the name in various processing
     forms."""
 
-    __slots__ = ["form", "index", "tag", "latinize", "_ascii", "_hash"]
+    __slots__ = ["form", "index", "tag", "latinize", "numeric", "_ascii", "_hash"]
 
     def __init__(
         self,
@@ -25,6 +26,7 @@ class NamePart(object):
         self.index = index
         self.tag = tag
         self.latinize = can_latinize(form)
+        self.numeric = form.isnumeric()
         self._ascii: Optional[str] = None
         self._hash = hash((self.index, self.form))
 
@@ -36,7 +38,17 @@ class NamePart(object):
         return self._ascii if len(self._ascii) > 0 else None
 
     @property
+    def integer_value(self) -> Optional[int]:
+        if self.numeric:
+            numeric = string_number(self.form)
+            if numeric is not None and numeric.is_integer():
+                return int(numeric)
+        return None
+
+    @property
     def comparable(self) -> str:
+        if self.numeric:
+            return str(self.integer_value)
         if not self.latinize:
             return self.form
         ascii = self.ascii

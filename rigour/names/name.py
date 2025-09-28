@@ -16,7 +16,7 @@ class Name(object):
     would be `NamePartTag.FAMILY`. The form for both parts would be the text of the part itself.
     """
 
-    __slots__ = ["original", "form", "tag", "lang", "_parts", "spans"]
+    __slots__ = ["original", "form", "tag", "lang", "parts", "spans"]
 
     def __init__(
         self,
@@ -30,16 +30,11 @@ class Name(object):
         self.form = form or prenormalize_name(original)
         self.tag = tag
         self.lang = lang
-        self._parts = parts
-        self.spans: List[Span] = []
-
-    @property
-    def parts(self) -> List[NamePart]:
-        if self._parts is None:
-            self._parts = []
+        self.parts: List[NamePart] = parts or []
+        if parts is None:
             for i, form in enumerate(tokenize_name(self.form)):
-                self._parts.append(NamePart(form, i))
-        return self._parts
+                self.parts.append(NamePart(form, i))
+        self.spans: List[Span] = []
 
     @property
     def comparable(self) -> str:
@@ -166,14 +161,14 @@ class Name(object):
     @classmethod
     def consolidate_names(cls, names: Iterable["Name"]) -> Set["Name"]:
         """Remove short names that are contained in longer names.
-        
+
         This is useful when building a matcher to prevent a scenario where a short
-        version of a name ("John Smith") is matched to a query ("John K Smith"), where a longer 
+        version of a name ("John Smith") is matched to a query ("John K Smith"), where a longer
         version would have disqualified the match ("John K Smith" != "John R Smith").
         """
         # We call these super_names because they are (non-strict) supersets of names.
         super_names = set(names)
-        
+
         for name, other in itertools.product(names, names):
             # Check if name is still in super_names, otherwise two equal names
             # will remove each other with none being left.
@@ -181,5 +176,5 @@ class Name(object):
                 # Use discard instead of remove here because other may already have been kicked out
                 # by another name of which it was a subset.
                 super_names.discard(other)
-        
+
         return super_names
