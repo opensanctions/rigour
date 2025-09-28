@@ -556,11 +556,7 @@ types:
     generic: LLC
     aliases:
       - professional limited liability company
-  - display: ано
-    generic: NGO
-    aliases:
-      - автономная некоммерческая организация
-      - ано
+
   - display: anpo
     generic: NGO
     aliases:
@@ -1311,10 +1307,84 @@ types:
     aliases:
       - oilaviy korxona
       - оилавий корхона
+
+  - compare: NGO
+    generic: NGO
+    aliases:
+      - non-governmental organization
+      - non governmental organization
+      - non-government organisation
+      - non governmental organisation
+      - non-profit organization
+      - non profit organization
+      - non-profit organisation
+      - non profit organisation
+      - ngo
+      - N.G.O.
+      - N G O
+      - n.g.o.
+      - n.g.o
+      - n.g.o.
+      - n.g.o
+      - n.g.o.
+      - n.g.o
+      - ngo
+      - ن.م.م
+      - منظمة غير حكومية
+
+  - display: NPO
+    generic: NGO
+    compare: NGO
+    aliases:
+      - non-profit organization
+      - NON-PROFIT ORGANIZATION
+      - NON PROFIT ORGANIZATION
+      - NONPROFIT ORGANIZATION
+      - NPO
+      - N.P.O.
+      - NON-PROFIT
+      - NONPROFIT
+
+  - generic: NGO
+    compare: NGO
+    aliases:
+      - niegovorni organizaciji
+      - nevladine organizacije
+      - nevladina organizacija
+      - CHARITY
+      - CHARITABLE ORGANIZATION
+      - CHARITABLE ORGANISATION
+      - CHARITABLE FUND
+      - CHARITY FUND
+      - Nichtregierungsorganisation # German
+      - Organizația societății civile # Romanian
+      - Organizația societatii civile # Romanian (without diacritics)
+      - Organizația neguvernamentală # Romanian
+      - Organizația neguvernamentala # Romanian (without diacritics)
+      - Niet-gouvernementele organisatie
+      - Organizacja pozarządowa
+      - Organizacja pozarzadowa # without diacritics
+      - Nevládní organizace
+      - Nevladni organizace # without diacritics
+      - Mimovládna organizácia # Slovak
+      - Mimovladna organizacia # without diacritics
+
+  - display: CSO
+    generic: NGO
+    aliases:
+      - civil society organization
+      - civil society organisation
+      - Civil Society Organization # CSO
+      - Civil Society Organisation # CSO
+
   - display: ONG
     generic: NGO
     aliases:
-      - organização não governamental
+      - Organisation non gouvernementale # French
+      - Organización no gubernamental # Spanish
+      - Organização não governamental # Portuguese
+      - Organizzazione non governativa # Italian
+
   - display: ood
     generic: LLC
     aliases:
@@ -1323,6 +1393,7 @@ types:
       - druzhestvo s ogranichena otgovornost
       - дружество с ограничена отговорност
       - оод
+
   - display: OPG
     generic: SP
     aliases:
@@ -2593,6 +2664,14 @@ types:
     generic: NGO
     aliases:
       - ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ # NGO
+      - ОБЩЕСТВЕННОЕ ОБЪЕДИНЕНИЕ
+      - OBSHCHESTVENNOYE OBYEDINENIYE
+      - OBŠČESTVENNOE OB'EDINENIE
+      - OBSCHESTVENNOE OBYEDINENIE
+      - ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ
+      - OBSHCHESTVENNAYA ORGANIZATSIYA
+      - OBSCHESTVENNAYA ORGANIZATSIYA
+      - OBŠČESTVENNAJA ORGANIZACIJA
 
   - display: НОУ ДПО # негосударственное образовательное учреждение дополнительного профессионального образования
     generic: NGO
@@ -2750,8 +2829,16 @@ types:
   - display: АНО # автономная некоммерческая организация
     generic: NGO
     aliases:
-      - АНО
       - АВТОНОМНАЯ НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ # AUTONOMOUS NON-COMMERCIAL ORGANIZATION
+      - AVTONOMNAYA NEKOMMERCHESKAYA ORGANIZATSIYA
+      - AVTONOMNAJA NEKOMMERČESKAJA ORGANIZACIJA
+      - автономная некоммерческая организация
+
+  - display: НКО # некоммерческая организация
+    generic: NGO
+    aliases:
+      - NEKOMMERCHESKAYA ORGANIZATSIYA FOND
+      - НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ ФОНД
 
   - display: КФХ # крестьянское (фермерское) хозяйство
     aliases:
@@ -2814,15 +2901,145 @@ types:
       - ОНОСС
       - ОРГАНИЗАЦИЯ НАУЧНОГО ОБСЛУЖИВАНИЯ И СОЦИАЛЬНОЙ СФЕРЫ
 
-  - compare: ""
+  - display: НКО
+    generic: NGO
     aliases:
-      - ОБЛАСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ
+      - NEKOMMERCHESKAYA ORGANIZATSIYA FOND
+      - НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ ФОНД
+
+  - display: НО
+    generic: NGO
+    aliases:
+      - НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ
+      - NEKOMMERCHESKAYA ORGANIZATSIYA
+      - NEKOMMERCHESKAYA ORGANIZACIYA # alternative transliteration with 'c'
+      - NEKOMMERCESKAYA ORGANIZATSIYA # variant with single 'ch'
+      - NEKOMMERCESKAJA ORGANIZACIJA # scholarly/ISO 9 transliteration
+
+  - display: ОБО # областная общественная организация
+    generic: NGO
+    aliases:
+      - ОБЛАСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ # REGIONAL PUBLIC ORGANIZATION
+
+  - display: БФ
+    generic: NGO
+    aliases:
+      - БЛАГОТВОРИТЕЛЬНЫЙ ФОНД # CHARITABLE FOUNDATION
+      - BLAGOTVORITELNYY FOND
+      - BLAGOTVORITELNY FOND
+      - BLAGOTVORITEL'NYJ FOND
+      - БЛАГОДІЙНИЙ ФОНД
+      - BLAHODIYNYY FOND
+      - BLAHODІJNYJ FOND
+      - БЛАГОТВОРИТЕЛЬНЫЙ ФОНД # CHARITABLE FOUNDATION
+      - БЛАГОТВОРИТЕЛЬНЫЙ ФОНД
+      - BLAGOTVORITELNYY FOND
+      - BLAGOTVORITELNY FOND
+
+  - display: БО
+    generic: NGO
+    aliases:
+      - БЛАГОТВОРИТЕЛЬНАЯ ОРГАНИЗАЦИЯ # CHARITABLE ORGANIZATION
+      - БЛАГОДІЙНА ОРГАНІЗАЦІЯ
+      - BLAHODIYNA ORHANIZATSIYA
+      - БЛАГОТВОРИТЕЛЬНАЯ ОРГАНИЗАЦИЯ
+      - BLAGOTVORITELNAYA ORGANIZATSIYA
+      - BLAGOTVORITEL'NAJA ORGANIZACIJA
+      - БЛАГОДІЙНА ОРГАНІЗАЦІЯ
+      - BLAHODIYNA ORHANIZATSIYA
+      - BLAHODІJNA ORHANІZACІJA
+
+  - display: ГО
+    generic: NGO
+    aliases:
+      - ГРОМАДСЬКА ОРГАНІЗАЦІЯ
+      - HROMADSKA ORHANIZATSIYA
+      - HROMADS'KA ORHANIZATSIYA
+      - HROMADS'KA ORHANIZACIJA
+      - ГРОМАДСЬКЕ ОБ'ЄДНАННЯ
+      - HROMADSKE OBYEDNANNYA
+      - HROMADS'KE OB'JEDNANNJA
+
+  - display: ВО
+    generic: NGO
+    aliases:
+      - ВОЛОНТЕРСЬКА ОРГАНІЗАЦІЯ
+      - VOLONTERSKA ORHANIZATSIYA
+      - VOLONTERS'KA ORHANIZACIJA
+
+  - display: НДА
+    generic: NGO
+    aliases:
+      - НЕДЗЯРЖАЎНАЯ АРГАНІЗАЦЫЯ
+      - NEDZIARZHAUNAYA ARHANIZATSYYA
+      - NEDZ'ARŽAŬNAJA ARHANIZACYJA
+      - NEDZJARZHAUNAJA ARHANIZACYJA
+
+  - display: ДА
+    generic: NGO
+    aliases:
+      - ДАБРАЧЫННАЯ АРГАНІЗАЦЫЯ
+      - DABRACHYNNAYA ARHANIZATSYYA
+      - DABRAČYNNAJA ARHANIZACYJA
+
+  - display: ДФ
+    generic: NGO
+    aliases:
+      - ДАБРАЧЫННЫ ФОНД
+      - DABRACHYNNY FOND
+      - DABRAČYNNY FOND
+
+  - display: ОФ
+    generic: NGO
+    aliases:
+      - ОБЩЕСТВЕННЫЙ ФОНД
+      - OBSHCHESTVENNYY FOND
+      - OBŠČESTVENNYJ FOND
+      - OBSCESTVENNYJ FOND
+
+  - display: ГА
+    generic: NGO
+    aliases:
+      - ГРАМАДСКАЕ АБ'ЯДНАННЕ
+      - HRAMADSKAYE ABYADNANNE
+      - HRAMADSKAE AB'JADNANNE
+      - ГРАМАДСКАЯ АРГАНІЗАЦЫЯ
+      - HRAMADSKAYA ARHANIZATSYYA
+      - HRAMADSKAJA ARHANIZACYJA
+
+  - display: НДО # негосударственная (некоммерческая) организация
+    generic: NGO
+    aliases:
+      - НУО
+      - НЕГОСУДАРСТВЕННАЯ (НЕКОММЕРЧЕСКАЯ) ОРГАНИЗАЦИЯ # NON-GOVERNMENTAL (NON-PROFIT) ORGANIZATION
+      - НЕГОСУДАРСТВЕННАЯ (НЕКОММЕРЧЕСКАЯ) ОРГАНИЗАЦИЯ
+      - НЕГОСУДАРСТВЕННАЯ НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ
+      - НЕГОСУДАРСТВЕННАЯ ОРГАНИЗАЦИЯ
+      - NEDERZHAVNA ORHANIZATSIYA
+      - НЕКОМЕРЦІЙНА ОРГАНІЗАЦІЯ
+      - NEKOMERTSIYNA ORHANIZATSIYA
+      - NEKOMERCІJNA ORHANІZACІJA # ISO 9
+      - НЕДЕРЖАВНА ОРГАНІЗАЦІЯ
+      - NEDERZHAVNA ORHANIZATSIYA
+      - NEDERŽAVNA ORHANIZACIJA
+      - НЕДЕРЖАВНА ОРГАНІЗАЦІЯ
+      - NEDERZHAVNA ORHANIZATSIYA
+      - НЕУРЯДОВА ОРГАНІЗАЦІЯ
+      - NEURYADOVA ORHANIZATSIYA
+      - NEURJADOVA ORHANIZACIJA
 
   - generic: FIN
     aliases:
       - Интервальный комбинированный паевой инвестиционный фонд
       - Закрытый комбинированный паевой инвестиционный фонд
       - Биржевой паевой инвестиционный фонд рыночных финансовых инструментов
+      - Открытый паевой инвестиционный фонд
+      - Интервальный паевой инвестиционный фонд
+      - Закрытый паевой инвестиционный фонд
+      - Биржевой паевой инвестиционный фонд
+      - Zakrytyy kombinirovannyy paevoy investitsionnyy fond
+      - Birzhevoy paevoy investitsionnyy fond rynochnykh finansovykh instrumentov
+      - Otkrytyy paevoy investitsionnyy fond
 
   - display: OOO # latin
     generic: LLC

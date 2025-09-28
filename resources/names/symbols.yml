@@ -98,6 +98,8 @@ org_symbols:
     - organisaatio
     - Οργανισμός
     - Organismos
+    - ОБЩЕСТВО
+    - OBSHCHESTVO
     - ファーム
     - 団体
     - 協会
@@ -178,6 +180,109 @@ org_symbols:
     - объединение
     - асоціація
     - об'єднання
+    - ASSOTSIATSIYA # transliteration of ассоциация
+    - ASSOCIACIYA # alternative transliteration
+    - ASSOTSIACIJA # ISO 9 transliteration
+    - OBYEDINENIYE # transliteration of объединение
+    - OBYEDINENIE # variant transliteration
+    - OB'YEDNANNYA # transliteration of об'єднання
+    - OBYEDNANNYA # without apostrophe
+    - ASOTSIATSIIA # Ukrainian transliteration
+    - Associazione
+    - Association
+    - Assoc.
+    - Asociación
+    - Asociacion
+    - Associação
+    - Associacao
+    - Associazione
+    - Stowarzyszenie
+    - Związek
+    - Zwiazek # without diacritic
+  ngo:
+    - ngo
+    - n.g.o.
+    - НКО
+    - non-governmental organization
+    - non governmental organization
+    - non-governmental organisation
+    - non governmental organisation
+    - non-profit organization
+    - non profit organization
+    - non-profit organisation
+    - non profit organisation
+    - ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ # NGO
+    - ОБЩЕСТВЕННОЕ ОБЪЕДИНЕНИЕ
+    - OBSHCHESTVENNOYE OBYEDINENIYE
+    - OBŠČESTVENNOE OB'EDINENIE
+    - OBSCHESTVENNOE OBYEDINENIE
+    - ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ
+    - OBSHCHESTVENNAYA ORGANIZATSIYA
+    - OBSCHESTVENNAYA ORGANIZATSIYA
+    - OBŠČESTVENNAJA ORGANIZACIJA
+    - НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ # NON-COMMERCIAL ORGANIZATION
+    - NEKOMMERCHESKAYA ORGANIZATSIYA FOND
+    - NEKOMMERCHESKAYA ORGANIZATSIYA
+    - НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ ФОНД
+    - НЕКОММЕРЧЕСКАЯ ОРГАНИЗАЦИЯ
+    - NEKOMMERCHESKAYA ORGANIZACIYA # alternative transliteration with 'c'
+    - NEKOMMERCESKAYA ORGANIZATSIYA # variant with single 'ch'
+    - NEKOMMERCESKAJA ORGANIZACIJA # scholarly/ISO 9 transliteration
+    - БФ
+    - БЛАГОТВОРИТЕЛЬНЫЙ ФОНД # CHARITABLE FOUNDATION
+    - BLAGOTVORITELNYY FOND
+    - BLAGOTVORITELNY FOND
+    - BLAGOTVORITELNAYA ORGANIZATSIYA
+    - BLAGOTVORITEL'NYJ FOND
+    - БЛАГОДІЙНИЙ ФОНД
+    - BLAHODIYNYY FOND
+    - BLAHODІJNYJ FOND
+    - БЛАГОТВОРИТЕЛЬНЫЙ ФОНД # CHARITABLE FOUNDATION
+    - БЛАГОТВОРИТЕЛЬНЫЙ ФОНД
+    - BLAGOTVORITELNYY FOND
+    - BLAGOTVORITELNY FOND
+    - БЛАГОТВОРИТЕЛЬНАЯ ОРГАНИЗАЦИЯ # CHARITABLE ORGANIZATION
+    - БО
+    - БЛАГОДІЙНА ОРГАНІЗАЦІЯ
+    - BLAHODIYNA ORHANIZATSIYA
+    - БЛАГОТВОРИТЕЛЬНАЯ ОРГАНИЗАЦИЯ
+    - BLAGOTVORITELNAYA ORGANIZATSIYA
+    - BLAGOTVORITEL'NAJA ORGANIZACIJA
+    - БЛАГОДІЙНА ОРГАНІЗАЦІЯ
+    - BLAHODIYNA ORHANIZATSIYA
+    - BLAHODІJNA ORHANІZACІJA
+    - НЕДЗЯРЖАЎНАЯ АРГАНІЗАЦЫЯ
+    - NEDZIARZHAUNAYA ARHANIZATSYYA
+    - NEDZ'ARŽAŬNAJA ARHANIZACYJA
+    - NEDZJARZHAUNAJA ARHANIZACYJA
+    - niegovorni organizaciji
+    - nevladine organizacije
+    - nevladina organizacija
+    - CHARITY
+    - CHARITABLE ORGANIZATION
+    - CHARITABLE ORGANISATION
+    - CHARITABLE FUND
+    - CHARITY FUND
+    - Nichtregierungsorganisation # German
+    - ONG # Organisation non gouvernementale # French
+    - Organisation non gouvernementale # French
+    - Organización no gubernamental # Spanish
+    - Organização não governamental # Portuguese
+    - Organizzazione non governativa # Italian
+    - CSO # Civil Society Organization
+    - Civil Society Organization # CSO
+    - Civil Society Organisation # CSO
+    - Organizația societății civile # Romanian
+    - Organizația societatii civile # Romanian (without diacritics)
+    - Organizația neguvernamentală # Romanian
+    - Organizația neguvernamentala # Romanian (without diacritics)
+    - Niet-gouvernementele organisatie
+    - Organizacja pozarządowa
+    - Organizacja pozarzadowa # without diacritics
+    - Nevládní organizace
+    - Nevladni organizace # without diacritics
+    - Mimovládna organizácia # Slovak
+    - Mimovladna organizacia # without diacritics
   partner:
     - partner
     - partners
@@ -1021,6 +1126,19 @@ org_symbols:
     - investmentfonds
     - fondo di investimento
     - fundo de investimento
+    - инвестиционный фонд
+    - инвестиционный фондов
+    - инвестиционных фондов
+    - инвестиционных фонд
+    - investitsionnyy fond
+    - investycyjny fundusz
+    - investicinis fondas
+    - investicijų fondas
+    - investicinis fondas
+    - investicijų fondas
+    - investicijų fondų
+    - investicinių fondų
+    - investicinių fondas
     - fi
     - mutual fund
   fund:

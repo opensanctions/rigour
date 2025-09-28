@@ -59,6 +59,13 @@ forms:
     - зд
     - здание
     - строение
+    - edificio
+    - edifice
+    - édifice
+    - edificio
+    - Gebäude
+    - buildings
+    - gebouw
   zone:
     - zone
     - sone
@@ -67,12 +74,14 @@ forms:
     - zóna
     - ζώνη
     - зона
-  area:
+  kv:
     - area
     - район
     - neighborhood
     - nachbarschaft
     - neighbourhood
+    - quartier
+    - vecindario
     - райончик
     - district
     - bezirk
@@ -82,12 +91,14 @@ forms:
     - quartier
     - quartiere
     - kvartal
+    # - kvartal (refers to quarter/block and not flat)
+    - квартал
+    - kvartira
+    - квартира
+    - кв
   bch:
     - beach
     - пляж
-  ed:
-    - edificio
-    - edifice
   blk:
     - block
     - блок
@@ -135,12 +146,6 @@ forms:
     - улица
     - вул
     - ул
-  kv:
-    # - kvartal (refers to quarter/block and not flat)
-    - квартал
-    - kvartira
-    - квартира
-    - кв
   k:
     - корпус
     - korpus
