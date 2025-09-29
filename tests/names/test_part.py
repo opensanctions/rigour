@@ -9,6 +9,7 @@ def test_name_part():
     assert john.form == "john"
     assert john.metaphone == "JN"
     assert john.latinize is True
+    assert john.numeric is False
     assert len(john) == 4
     assert hash(john) == hash((0, "john"))
     assert john == NamePart("john", 0)
@@ -31,8 +32,10 @@ def test_name_part():
     numeric = NamePart("1234", 0)
     assert numeric.ascii == "1234"
     assert numeric.comparable == "1234"
+    assert numeric.integer_value == 1234
     assert numeric.metaphone is None
     assert numeric.latinize is True
+    assert numeric.numeric is True
 
 
 def test_name_part_empty():
@@ -42,6 +45,7 @@ def test_name_part_empty():
     assert empty.comparable == ""
     assert empty.metaphone is None
     assert empty.latinize is True
+    assert empty.numeric is False
 
 
 def test_name_part_tags():
@@ -55,6 +59,15 @@ def test_name_part_tags():
     anyst = NamePart("steven", 0, NamePartTag.UNSET)
     assert anyst.can_match(steven)
     assert anyst.can_match(stevens)
+
+
+def test_name_part_numeric():
+    name = NamePart("Ⅻ", 1)
+    assert name.numeric is True
+    assert name.ascii == "12"
+    assert name.comparable == "12"
+    assert name.integer_value == 12
+    assert name.metaphone is None
 
 
 def test_name_part_sort():

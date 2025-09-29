@@ -5,6 +5,7 @@ from rigour.territories.util import clean_codes
 
 def test_world_real():
     gb = get_territory("gb")
+    assert gb is not None
     assert gb.name == "United Kingdom"
     assert gb.parent is None
     assert get_territory_by_qid("Q145") == gb
@@ -24,12 +25,14 @@ def test_world_real():
     assert srk == cq
 
     su = get_territory("su")
+    assert su is not None
     assert get_territory("ru") in su.successors
     assert get_territory("ru") in su.see
 
 
 def test_territory_class_functions():
     fr = get_territory("fr")
+    assert fr is not None
     assert repr(fr) == "<Territory('fr')>"
 
     assert fr == get_territory("fr")
@@ -42,20 +45,25 @@ def test_territory_class_functions():
 
     assert fr != "fr"
     assert fr > get_territory("de")
+    assert fr < "fr"
 
     dubai = get_territory("ae-du")
+    assert dubai is not None
     assert dubai.region == "Asia"
     assert dubai.subregion == "Western Asia"
 
 
 def test_territory_ftm():
     ae = get_territory("ae")
+    assert ae is not None
     assert ae.ftm_country == "ae"
 
     dubai = get_territory("ae-du")
+    assert dubai is not None
     assert dubai.ftm_country == "ae"
 
     crimea = get_territory("ua-cri")
+    assert crimea is not None
     assert crimea.ftm_country == "ua-cri"
 
     # antilles = get_territory("anhh")

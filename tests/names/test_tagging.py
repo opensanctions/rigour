@@ -75,6 +75,13 @@ def test_tag_person_name():
     assert tagged_name is not None
     assert jsym in tagged_name.symbols
 
+    # test an arabic name
+    name = Name("أسامة")
+    tagged_name = tag_person_name(name, _per_normalizer)
+    assert tagged_name is not None
+    assert tagged_name.comparable == "أسامة"
+    assert len(tagged_name.symbols) == 0.0  # no loaded fixtures
+
 
 def test_tag_person_name_overlapping():
     """

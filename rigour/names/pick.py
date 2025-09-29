@@ -166,11 +166,6 @@ def reduce_names(names: List[str]) -> List[str]:
         lower[name.casefold()].append(name)
     reduced: List[str] = []
     for group in lower.values():
-        try:
-            picked = pick_case(group)
-            reduced.append(picked)
-        except (ValueError, IndexError, KeyError) as e:
-            log.warning("Failed to pick case: %s", e)
-            # If we cannot pick a case, add all
-            reduced.extend(group)
+        picked = pick_case(group)
+        reduced.append(picked)
     return reduced

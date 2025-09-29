@@ -4,7 +4,14 @@ import unicodedata
 
 def string_number(text: str) -> float | None:
     """Convert Unicode numeric strings to their numeric values. This handles cases in
-    which numbers are given in non-latin scripts."""
+    which numbers are given in non-latin scripts.
+
+    Args:
+        text: The text to convert (must be a valid number string).
+
+    Returns:
+        The numeric value as a float, or None if conversion failed.
+    """
     # if not text.isnumeric():
     #     return None
 

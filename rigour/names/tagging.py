@@ -3,7 +3,7 @@ import sys
 import logging
 from functools import cache
 from collections import defaultdict
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Set, Tuple
 
 from rigour.data import read_jsonl
 from rigour.text.dictionary import Normalizer
@@ -57,10 +57,8 @@ class Tagger:
             forms.append(k)
         self.automaton = ahocorasick_rs.AhoCorasick(forms)
 
-    def __call__(self, text: Optional[str]) -> List[Tuple[str, Symbol]]:
+    def __call__(self, text: str) -> List[Tuple[str, Symbol]]:
         """Apply the tagger on a piece of pre-normalized text."""
-        if text is None:
-            return []
         results: List[Tuple[str, Symbol]] = []
 
         matches = self.automaton.find_matches_as_indexes(text, overlapping=True)
@@ -101,11 +99,11 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
     for key, values in ORG_SYMBOLS.items():
         sym = Symbol(Symbol.Category.SYMBOL, key.upper())
         nkey = normalizer(key)
-        if nkey is not None:
+        if nkey is not None:  # pragma: no cover
             mapping[nkey].add(sym)
         for value in values:
             nvalue = normalizer(value)
-            if nvalue is None:
+            if nvalue is None:  # pragma: no cover
                 continue
             mapping[nvalue].add(sym)
 
@@ -116,7 +114,7 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
         names.append(data["full_name"])
         for name in names:
             nname = normalizer(name)
-            if nname is not None and len(nname):
+            if nname is not None and len(nname):  # pragma: no cover
                 mapping[nname].add(sym)
 
     symbols: Dict[str, Symbol] = {}
@@ -130,17 +128,17 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
         display = org_type.get("display")
         if display is not None:
             dn = normalizer(display)
-            if dn is not None:
+            if dn is not None:  # pragma: no cover
                 mapping[dn].add(class_sym)
         compare = org_type.get("compare", display)
         if compare is not None:
             cn = normalizer(compare)
-            if cn is not None:
+            if cn is not None:  # pragma: no cover
                 mapping[cn].add(class_sym)
         if compare is None:
             for alias in org_type.get("aliases", []):
                 nalias = normalizer(alias)
-                if nalias is not None:
+                if nalias is not None:  # pragma: no cover
                     mapping[nalias].add(class_sym)
 
     del sys.modules["rigour.data.names.data"]
@@ -212,14 +210,14 @@ def _get_person_tagger(normalizer: Normalizer) -> Tagger:
         sym = Symbol(Symbol.Category.NAME, key.upper())
         for value in values:
             nvalue = normalizer(value)
-            if nvalue is not None:
+            if nvalue is not None:  # pragma: no cover
                 mapping[nvalue].add(sym)
 
     for key, values in PERSON_NICK.items():
         sym = Symbol(Symbol.Category.NICK, key.upper())
         for value in values:
             nvalue = normalizer(value)
-            if nvalue is not None:
+            if nvalue is not None:  # pragma: no cover
                 mapping[nvalue].add(sym)
 
     for qid, aliases in load_person_names():

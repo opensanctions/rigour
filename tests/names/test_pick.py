@@ -127,7 +127,33 @@ def test_levenshtein_pick():
 
 
 def test_pick_lang_name():
+    assert pick_lang_name([]) is None
     assert pick_lang_name(TAGGED) == "Mitch McConnell"
+
+    other_langs = [
+        LangStr("Митч Макконнелл", lang="rus"),
+        LangStr("میتچ ماکونل", lang="ara"),
+        LangStr("ミッチ・マコーネル", lang="jpn"),
+        LangStr("ミッチ・マコーネル", lang="jpn"),
+        LangStr("ミッチ・マコーネル", lang="jpn"),
+        LangStr("ミッチ・マコーネル", lang="jpn"),
+        LangStr("米奇·麥康諾", lang="zho"),
+        LangStr("미치 매코널", lang="kor"),
+    ]
+    assert pick_lang_name(other_langs) == "Митч Макконнелл"
+
+    other_langs = [LangStr(" ", lang="rus")]
+    assert pick_lang_name(other_langs) is None
+
+    no_langs = [
+        LangStr("Mitch McConne", lang=None),
+        LangStr("Mitch McConne", lang=None),
+        LangStr("Mitch McConne", lang=None),
+    ]
+    assert pick_lang_name(no_langs) == "Mitch McConne"
+
+    no_langs = [LangStr(" ", lang=None)]
+    assert pick_lang_name(no_langs) is None
 
 
 def test_pick_case():
@@ -140,6 +166,22 @@ def test_pick_case():
     with pytest.raises(ValueError):
         pick_case([])
     assert pick_case(["VLADIMIR PUTIN"]) == "VLADIMIR PUTIN"
+
+    cases = [
+        "Vladimir PuTin",
+        "VlaDimir PuTin",
+        "Vladimir PUTIN",
+        "VLADIMIR PUTIN",
+    ]
+    assert pick_case(cases) == "Vladimir PuTin"
+
+    cases = [
+        "Vladimir PuTin",
+        "VlaDimir PuTin",
+        "vladimir PUTINO",
+        "VLADIMIR pUTIN",
+    ]
+    assert pick_case(cases) == "Vladimir PuTin"
 
 
 def test_pick_case_stoesslein():

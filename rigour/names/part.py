@@ -24,15 +24,27 @@ class NamePart(object):
     ) -> None:
         self.form = form
         self.index = index
+
         self.tag = tag
+        """Part tag, see NamePartTag."""
+
         self.latinize = can_latinize(form)
+        """Whether this part can be latinized."""
+
         self.numeric = form.isnumeric()
+        """Whether this part is numeric."""
+
         self._ascii: Optional[str] = None
         self._hash = hash((self.index, self.form))
 
     @property
     def ascii(self) -> Optional[str]:
         if self._ascii is None:
+            if self.numeric:
+                value = self.integer_value
+                if value is not None:
+                    self._ascii = str(value)
+                    return self._ascii
             out = ascii_text(self.form)
             self._ascii = "".join(o for o in out if o.isalnum())
         return self._ascii if len(self._ascii) > 0 else None
@@ -58,9 +70,9 @@ class NamePart(object):
 
     @property
     def metaphone(self) -> Optional[str]:
-        if self.latinize:
+        if self.latinize and not self.numeric:
             text = self.ascii
-            if text is not None and len(text) > 2 and not text.isnumeric():
+            if text is not None and len(text) > 2:
                 return metaphone(text)
         return None
 

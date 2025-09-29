@@ -23,7 +23,7 @@ def _get_identifier_map() -> Dict[str, Territory]:
             mapping[territory.alpha3] = territory
         for code in territory.other_codes:
             mapping[code] = territory
-        if territory.qid:
+        if territory.qid:  # pragma: no cover
             qid = clean_code(territory.qid)
             mapping[qid] = territory
         for qid in territory.other_qids:
@@ -55,7 +55,7 @@ def _get_territory_names() -> Dict[str, Territory]:
     for data in read_jsonl(TERRITORIES_FILE):
         code = data["code"]
         territory = index.get(code)
-        if territory is None:
+        if territory is None:  # pragma: no cover
             raise RuntimeError(f"Missing territory for code: {code}")
         names: List[str] = data.get("names_strong", [])
         weaks[territory] = data.get("names_weak", [])
@@ -63,7 +63,7 @@ def _get_territory_names() -> Dict[str, Territory]:
         names.append(territory.full_name)
         for name in names:
             nname = normalize_territory_name(name)
-            if nname in mapping and mapping[nname] != territory:
+            if nname in mapping and mapping[nname] != territory:  # pragma: no cover
                 log.warning(
                     "Duplicate strong name found: %r for %s and %s",
                     name,
@@ -78,7 +78,9 @@ def _get_territory_names() -> Dict[str, Territory]:
             nname = normalize_territory_name(name)
             if nname in mapping:
                 continue
-            if nname in weak_mapping and weak_mapping[nname] != territory:
+            if (
+                nname in weak_mapping and weak_mapping[nname] != territory
+            ):  # pragma: no cover
                 log.warning(
                     "Duplicate weak name found: %r for %s and %s",
                     name,

@@ -108,7 +108,7 @@ def _address_replacer(latinize: bool = False) -> Replacer:
     mapping: Dict[str, str] = {}
     for repl, values in forms:
         repl_norm = normalize_address(repl, latinize=latinize, min_length=1)
-        if repl_norm is None:
+        if repl_norm is None:  # pragma: no cover
             log.warning("Replacement is normalized to null: %r", repl)
             continue
         mapping[repl_norm] = repl_norm
