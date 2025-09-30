@@ -60,7 +60,6 @@ class Tagger:
     def __call__(self, text: str) -> List[Tuple[str, Symbol]]:
         """Apply the tagger on a piece of pre-normalized text."""
         results: List[Tuple[str, Symbol]] = []
-
         matches = self.automaton.find_matches_as_indexes(text, overlapping=True)
         matches = word_boundary_matches(text, matches)
         for pattern_index, start, end in sorted(matches, key=lambda x: x[0]):
@@ -174,7 +173,7 @@ def _infer_part_tags(name: Name) -> Name:
                 part.tag = NamePartTag.NUM
                 # And apply a symbol, if missing:
                 if part not in numerics:
-                    value = part.integer_value
+                    value = part.integer
                     if value is not None:
                         sym = Symbol(Symbol.Category.NUMERIC, value)
                         name.apply_part(part, sym)

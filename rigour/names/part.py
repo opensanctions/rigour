@@ -41,7 +41,7 @@ class NamePart(object):
     def ascii(self) -> Optional[str]:
         if self._ascii is None:
             if self.numeric:
-                value = self.integer_value
+                value = self.integer
                 if value is not None:
                     self._ascii = str(value)
                     return self._ascii
@@ -50,7 +50,7 @@ class NamePart(object):
         return self._ascii if len(self._ascii) > 0 else None
 
     @property
-    def integer_value(self) -> Optional[int]:
+    def integer(self) -> Optional[int]:
         if self.numeric:
             numeric = string_number(self.form)
             if numeric is not None and numeric.is_integer():
@@ -60,7 +60,7 @@ class NamePart(object):
     @property
     def comparable(self) -> str:
         if self.numeric:
-            return str(self.integer_value)
+            return str(self.integer)
         if not self.latinize:
             return self.form
         ascii = self.ascii
@@ -114,6 +114,13 @@ class Span:
     def comparable(self) -> str:
         """Return the comparison-suited string representation of the span."""
         return " ".join([part.comparable for part in self.parts])
+
+    # @property
+    # def numeric(self) -> bool:
+    #     """Return whether all parts in the span are numeric."""
+    #     if len(self.parts) != 1:
+    #         return False
+    #     return self.parts[0].numeric
 
     def __len__(self) -> int:
         """Return the number of parts in the span."""

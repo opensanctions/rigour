@@ -11,7 +11,9 @@ def test_world_real():
     assert get_territory_by_qid("Q145") == gb
     assert gb.qid == "Q145"
     assert get_territory_by_qid("Q2914461") == get_territory("ge-ab")
-    assert get_territory("ge-ab").qid != "Q2914461"
+    abk = get_territory("ge-ab")
+    assert abk is not None
+    assert abk.qid != "Q2914461"
     nir = get_territory("gb-nir")
     assert nir is not None
     assert nir.parent == gb

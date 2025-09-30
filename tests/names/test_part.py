@@ -32,7 +32,7 @@ def test_name_part():
     numeric = NamePart("1234", 0)
     assert numeric.ascii == "1234"
     assert numeric.comparable == "1234"
-    assert numeric.integer_value == 1234
+    assert numeric.integer == 1234
     assert numeric.metaphone is None
     assert numeric.latinize is True
     assert numeric.numeric is True
@@ -66,7 +66,7 @@ def test_name_part_numeric():
     assert name.numeric is True
     assert name.ascii == "12"
     assert name.comparable == "12"
-    assert name.integer_value == 12
+    assert name.integer == 12
     assert name.metaphone is None
 
 

@@ -12,9 +12,6 @@ def string_number(text: str) -> float | None:
     Returns:
         The numeric value as a float, or None if conversion failed.
     """
-    # if not text.isnumeric():
-    #     return None
-
     # Try standard int conversion first (for ASCII digits)
     try:
         return float(text)
