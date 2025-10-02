@@ -1207,8 +1207,12 @@ types:
       - Ltds
       - private company with limited liability
       - private limited company
-      # Official Welsh version of LTD
+  - display: Cyf
+    generic: LLC
+    compare: Ltd
+    aliases:
       - Cyfyngedig
+      - Cyf.
       - Cyf
   - generic: LLC
     compare: Ltd
