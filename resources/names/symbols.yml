@@ -8,6 +8,7 @@ org_symbols:
     - сompany # Homoglyph, first letter is Cyrillic
     - cомpany
     - corporation
+    - corp
     - compagnie
     - компания
     - kompani
@@ -29,6 +30,7 @@ org_symbols:
     - компана
     - компані
     - co
+    - coy # Australian government equivelent of company
     - comp
     - компанія
     - شركة
@@ -283,6 +285,8 @@ org_symbols:
     - Nevladni organizace # without diacritics
     - Mimovládna organizácia # Slovak
     - Mimovladna organizacia # without diacritics
+  incorporated:
+    - inc
   partner:
     - partner
     - partners

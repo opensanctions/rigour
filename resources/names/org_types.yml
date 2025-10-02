@@ -1205,6 +1205,9 @@ types:
       - Ltds
       - private company with limited liability
       - private limited company
+      # Official Welsh version of LTD
+      - Cyfyngedig
+      - Cyf
   - generic: LLC
     aliases:
       - компания с ограниченной ответственностью
@@ -1475,9 +1478,11 @@ types:
     aliases:
       - proprietary limited
       - proprietary limited company
+      - proprietary Ltd
       - pty ltd
       - Pty. Ltd.
       - Pty. Ltd
+      - Pty Ltd.
       - Pty Limited
   - display: qk
     aliases:
