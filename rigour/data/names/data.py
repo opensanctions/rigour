@@ -417,7 +417,9 @@ ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {
         "companie",
         "company",
         "compañía",
+        "corp",
         "corporation",
+        "coy",
         "cомpany",
         "ettevõte",
         "firm",
@@ -2626,6 +2628,7 @@ ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {
     "LOGISTICS": (
         "logistic",
         "logistics",
+        "ЛОГИСТИКС",
         "логистика",
         "логистики",
         "логистическая",

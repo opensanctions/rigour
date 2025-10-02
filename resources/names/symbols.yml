@@ -285,8 +285,6 @@ org_symbols:
     - Nevladni organizace # without diacritics
     - Mimovládna organizácia # Slovak
     - Mimovladna organizacia # without diacritics
-  incorporated:
-    - inc
   partner:
     - partner
     - partners
@@ -2218,6 +2216,7 @@ org_symbols:
     - логистическому
     - логистическому
     - логистической
+    - ЛОГИСТИКС
   marketing:
     - marketing
     - маркетинг

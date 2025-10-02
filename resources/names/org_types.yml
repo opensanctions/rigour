@@ -1189,6 +1189,8 @@ types:
       - Limited
       - limited by guarantee
       - limited by shares
+      - ЧАСТНАЯ КОМПАНИЯ С ОТВЕТСТВЕННОСТЬЮ, ОГРАНИЧЕННОЙ АКЦИЯМИ
+      - ЧАСТНАЯ КОМПАНИЯ С ОТВЕТСТВЕННОСТЬЮ
       - Limited Co
       - limited company
       - Limitée
@@ -1209,17 +1211,20 @@ types:
       - Cyfyngedig
       - Cyf
   - generic: LLC
+    compare: Ltd
     aliases:
       - компания с ограниченной ответственностью
       - лтд
       - лимитед
       - Лімітед
+      - ЛИМИТЕД
       - בע"מ
       - 有限公司
       - 有限
       - المحدودة
       - المساهمة المحدودة
   - display: Ltd Sti
+    compare: Ltd
     generic: LLC
     aliases:
       - Ltd. Sti.
@@ -1335,8 +1340,7 @@ types:
       - ن.م.م
       - منظمة غير حكومية
 
-  - display: NPO
-    generic: NGO
+  - generic: NGO
     compare: NGO
     aliases:
       - non-profit organization
@@ -1372,7 +1376,7 @@ types:
       - Mimovládna organizácia # Slovak
       - Mimovladna organizacia # without diacritics
 
-  - display: CSO
+  - compare: CSO
     generic: NGO
     aliases:
       - civil society organization
@@ -1401,6 +1405,7 @@ types:
     generic: SP
     aliases:
       - obiteljsko poljoprivredno gospodarstvo
+
   - display: ops
     generic: NGO
     aliases:
@@ -1474,6 +1479,7 @@ types:
     aliases:
       - perseroan terbatas terbuka
   - display: Pty Ltd
+    compare: Ltd
     generic: LLC
     aliases:
       - proprietary limited

@@ -1204,6 +1204,8 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "Limited",
             "limited by guarantee",
             "limited by shares",
+            "ЧАСТНАЯ КОМПАНИЯ С ОТВЕТСТВЕННОСТЬЮ, ОГРАНИЧЕННОЙ АКЦИЯМИ",
+            "ЧАСТНАЯ КОМПАНИЯ С ОТВЕТСТВЕННОСТЬЮ",
             "Limited Co",
             "limited company",
             "Limitée",
@@ -1220,15 +1222,19 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "Ltds",
             "private company with limited liability",
             "private limited company",
+            "Cyfyngedig",
+            "Cyf",
         ],
     },
     {
+        "compare": "Ltd",
         "generic": "LLC",
         "aliases": [
             "компания с ограниченной ответственностью",
             "лтд",
             "лимитед",
             "Лімітед",
+            "ЛИМИТЕД",
             'בע"מ',
             "有限公司",
             "有限",
@@ -1238,6 +1244,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
     },
     {
         "display": "Ltd Sti",
+        "compare": "Ltd",
         "generic": "LLC",
         "aliases": [
             "Ltd. Sti.",
@@ -1345,7 +1352,6 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
-        "display": "NPO",
         "compare": "NGO",
         "generic": "NGO",
         "aliases": [
@@ -1386,7 +1392,7 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
-        "display": "CSO",
+        "compare": "CSO",
         "generic": "NGO",
         "aliases": [
             "civil society organization",
@@ -1465,13 +1471,16 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {"display": "pt tbk", "aliases": ["perseroan terbatas terbuka"]},
     {
         "display": "Pty Ltd",
+        "compare": "Ltd",
         "generic": "LLC",
         "aliases": [
             "proprietary limited",
             "proprietary limited company",
+            "proprietary Ltd",
             "pty ltd",
             "Pty. Ltd.",
             "Pty. Ltd",
+            "Pty Ltd.",
             "Pty Limited",
         ],
     },
