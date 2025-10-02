@@ -142,7 +142,7 @@ def pick_case(names: List[str]) -> str:
         scores[name] = errors / len(name)
 
     if len(scores) == 0:
-        raise ValueError("Names could not be scored: %s" % names)
+        raise ValueError("Names could not be scored: %r" % names)
 
     return min(scores.items(), key=lambda i: (i[1], len(i[0])))[0]
 
