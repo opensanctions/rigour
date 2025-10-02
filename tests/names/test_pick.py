@@ -212,6 +212,12 @@ def test_pick_case_turkish():
     assert name is not None
     assert "Şahi̇n" in name, name
 
+    # None of the names are lowercase, which makes them all different from the base:
+    names = ["Ahmet ÇİÇEK", "AHMET ÇİÇEK"]
+    name = pick_case(names)
+    assert name is not None
+    assert "Ahmet" in name, name
+
 
 def test_pick_case_armenian():
     names = ["Գեւորգ Սամվելի Գորգիսյան", "Գևորգ Սամվելի Գորգիսյան"]

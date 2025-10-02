@@ -124,10 +124,9 @@ def pick_case(names: List[str]) -> str:
 
     scores: Dict[str, float] = {}
     for name in names:
-        if len(name) != len(basic):
-            continue
         new_word = True
-        errors = 0
+        # Bias for shorter names (`ẞ` over `ss`).
+        errors = len(name)
         for char in name:
             if not char.isalpha():
                 new_word = True
