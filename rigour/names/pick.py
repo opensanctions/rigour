@@ -141,6 +141,9 @@ def pick_case(names: List[str]) -> str:
                 errors += 1
         scores[name] = errors / len(name)
 
+    if len(scores) == 0:
+        raise ValueError("Names could not be scored: %s" % names)
+
     return min(scores.items(), key=lambda i: (i[1], len(i[0])))[0]
 
 
@@ -166,6 +169,10 @@ def reduce_names(names: List[str]) -> List[str]:
         lower[name.casefold()].append(name)
     reduced: List[str] = []
     for group in lower.values():
-        picked = pick_case(group)
-        reduced.append(picked)
+        try:
+            picked = pick_case(group)
+            reduced.append(picked)
+        except ValueError:
+            log.exception("Could not pick name from group: %r", group)
+            reduced.extend(group)
     return reduced
