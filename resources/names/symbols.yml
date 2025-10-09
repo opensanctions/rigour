@@ -3198,6 +3198,9 @@ person_nick:
   dick:
     - Dick
     - Richard
+  rick:
+    - Rick
+    - Richard
   will:
     - will
     - william
@@ -3262,6 +3265,44 @@ person_nick:
   josh:
     - "Josh"
     - "Joshua"
+  andy:
+    - "Andy"
+    - "Andrew"
+  chris:
+    - "Chris"
+    - "Christopher"
+  chuck:
+    - "Chuck"
+    - "Charles"
+  dan:
+    - "Daniel"
+  dave:
+    - "David"
+  jack:
+    - "Jack"
+    - "John"
+  jim:
+    - "jim"
+    - "James"
+  jon:
+    - "Jon"
+    - "Jonathan"
+  maggie:
+    - "Maggie"
+    - "Margaret"
+  mike:
+    - "Mike"
+    - "Michael"
+  pete:
+    - "Pete"
+    - "Peter"
+  steve:
+    - "Steve"
+    - "Stephen"
+    - "Steven"
+  tom:
+    - "Tom"
+    - "Thomas"
 
 person_name_parts:
   # Big guy gets a special kind of love
