@@ -1222,9 +1222,13 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "Ltds",
             "private company with limited liability",
             "private limited company",
-            "Cyfyngedig",
-            "Cyf",
         ],
+    },
+    {
+        "display": "Cyf",
+        "compare": "Ltd",
+        "generic": "LLC",
+        "aliases": ["Cyfyngedig", "Cyf.", "Cyf"],
     },
     {
         "compare": "Ltd",

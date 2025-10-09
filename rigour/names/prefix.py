@@ -13,7 +13,7 @@ from rigour.data.names.data import (
 def re_prefixes(prefixes: Tuple[str, ...]) -> re.Pattern[str]:
     """Compile a regex pattern to match common name prefixes."""
     # e.g. Mr., Mrs., Dr., etc. for people, The for organizations, etc.
-    person_name_prefixes = "|".join(prefixes)
+    person_name_prefixes = "|".join((re.escape(p) for p in prefixes))
     prefix_pattern = r"^\W*((%s)\.?\s+)*"
     prefix_pattern_ = prefix_pattern % person_name_prefixes
     return re.compile(prefix_pattern_, re.I | re.U)
