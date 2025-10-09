@@ -30,7 +30,7 @@ dependencies = [
     "fingerprints >= 1.0.1, < 2.0.0",
     "python-stdnum >= 2.0, < 3.0.0",
     "jinja2 >= 3.1.0, < 4.0.0",
-    "ahocorasick-rs >= 0.22.0, < 0.23.0",
+    "ahocorasick-rs >= 0.22.0, < 1.1.0",
 ]
 
 [project.urls]
