@@ -3,15 +3,16 @@ repo_url: https://github.com/opensanctions/rigour
 
 theme:
   name: material
-  logo: https://assets.opensanctions.org/images/ura/logo_white.png
-  favicon: https://assets.opensanctions.org/images/favicon-32x32.png
+  logo: https://assets.opensanctions.org/images/nura/logo-icon-white.svg
+  favicon: https://assets.opensanctions.org/images/nura/favicon-32.png
   palette:
     primary: custom
     accent: custom
   custom_dir: docs/overrides
   features:
     - navigation.sections
-extra_css: [stylesheets/extra.css]
+extra_css:
+  - stylesheets/extra.css
 
 extra:
   social:
