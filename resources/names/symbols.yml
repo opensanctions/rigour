@@ -3214,6 +3214,8 @@ person_nick:
   ted:
     - "Edward"
     - "Ted"
+  ted2:
+    - "Ted"
     - "Theodore"
   doug:
     - "Doug"
@@ -3276,14 +3278,16 @@ person_nick:
     - "Chuck"
     - "Charles"
   dan:
+    - "Dan"
     - "Daniel"
   dave:
+    - "Dave"
     - "David"
   jack:
     - "Jack"
     - "John"
   jim:
-    - "jim"
+    - "Jim"
     - "James"
   jon:
     - "Jon"

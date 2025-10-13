@@ -1271,7 +1271,13 @@ ORG_TYPES: List[OrgTypeSpec] = [
     {
         "display": "МЧЖ",
         "generic": "LLC",
-        "aliases": ["mas'uliyati cheklangan jamiyat", "масъулияти чекланган жамият"],
+        "aliases": [
+            "mas'uliyati cheklangan jamiyat",
+            "масъулияти чекланган жамият",
+            "Масъулияти чекланган жамият",
+            "Mas'uliyati cheklangan jamiyat",
+            "MChJ",
+        ],
     },
     {"display": "MMC", "generic": "LLC", "aliases": ["məhdud məsuliyyətli cəmiyyət"]},
     {"display": "mtü", "generic": "NGO", "aliases": ["mittetulundusühing"]},
