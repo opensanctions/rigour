@@ -3217,6 +3217,9 @@ person_nick:
   ted2:
     - "Ted"
     - "Theodore"
+  theo:
+    - "Theo"
+    - "Theodore"
   doug:
     - "Doug"
     - "Douglas"
@@ -3274,6 +3277,9 @@ person_nick:
   chris:
     - "Chris"
     - "Christopher"
+  chris2:
+    - "Chris"
+    - "Christoph"
   chuck:
     - "Chuck"
     - "Charles"
