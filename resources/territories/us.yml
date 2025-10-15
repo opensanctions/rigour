@@ -1,4 +1,4 @@
-name: United States of America
+name: United States
 full_name: United States of America
 region: Americas
 subregion: Northern America
@@ -13,10 +13,8 @@ summary: >-
   The United States is one of the key sanctions-making jurisdictions in the World,
   including multiple lists published by the Treasury, State and other departments.
 names_strong:
-  - United States
   - U.S.A.
   - U.S.
-  - US
 names_weak:
   - A.B.Ş.
   - ABD

@@ -1,5 +1,5 @@
-name: Palestinian territories
-full_name: Palestinian territories
+name: Palestine
+full_name: State of Palestine
 region: Asia
 subregion: Western Asia
 alpha3: pse
@@ -16,12 +16,12 @@ summary: >-
   has referred to the West Bank, including East Jerusalem, as "the Occupied Palestinian
   Territory", and this term was used as the legal definition by the ICJ in its advisory
   opinion of July 2004.
-wikipedia_url: https://en.wikipedia.org/wiki/Palestinian_Territories
+wikipedia_url: https://en.wikipedia.org/wiki/Palestine
 names_strong:
   - Palestinian territories, Occupied
-  - State of Palestine
   - Palestinian Territory
   - Palestinian Authority
+  - Palestinian territories
   - Palestinian Autonomous Territories
   - Palestinian Autonomous Areas
   - Palestinian Autonomous Region
@@ -58,7 +58,6 @@ names_weak:
   - Gaza Strip
   - Nchingu wa Magalibi wa Mpanda wa kuGaza wa kuPales
   - Teritoris palestinês
-  - PALESTINE
   - Palestijnse gebieden
   - Parestiina na Gaza
   - De palæstinensiske områder
