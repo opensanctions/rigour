@@ -20,7 +20,6 @@ names_strong:
   - Nihon-koku
   - Nippon
   - Nihon
-  - 日本国 # Nippon-koku
   - 日本 # Nihon
   - 日本国 # Nihon-koku
   - Жапония # Žaponiâ
@@ -31,7 +30,7 @@ names_weak:
   - Dzàkpân
   - Yamaguchi
   - Shimane
-  - Wakayama
+  - Wakayama # Žaponiâ
   - japɔ́ŋ  # Žaponiâ
   - Gyapan
   - Zapon
@@ -63,7 +62,7 @@ names_weak:
   - Kanagawa
   - Iāpana
   - ජපානය
-  - Япония # Âponiâ
+  - Япония  # Âponiâ
   - Japoni
   - Japaŋ
   - Mie
@@ -83,7 +82,7 @@ names_weak:
   - Sapporo
   - ᏣᏩᏂᏏ
   - Fukushima
-  - Япони # Âponi
+  - Япони   # Âponi
   - Ehime
   - Osaka
   - Ujapani
@@ -91,7 +90,7 @@ names_weak:
   - ꔛꗨꗢ
   - Kyōto
   - جاپون
-  - Японія # Âponíâ
+  - Японія  # Âponíâ
   - Japana
   - Japon
   - Sapoŋ
@@ -102,7 +101,7 @@ names_weak:
   - An tSeapáin
   - Japão
   - ཇ་པཱན
-  - 일본 # ilbon
+  - 일본      # ilbon
   - ဂျပန်
   - Јапонија # J̌aponiǰa
   - Sagamihara
@@ -122,7 +121,7 @@ names_weak:
   - Japanska
   - Jaapan
   - Nara
-  - Јапан # J̌apan
+  - Јапан   # J̌apan
   - Japãu
   - Toyama
   - Kumamoto
@@ -192,7 +191,7 @@ names_weak:
   - Nagasaki
   - Shiga
   - Nagoya
-  - Япон # Âpon
+  - Япон    # Âpon
   - Japán
   - Okinawa
   - Xapón

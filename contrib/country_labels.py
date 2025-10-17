@@ -86,17 +86,16 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
             terr["names_strong"] = CommentedSeq()
             terr["names_strong"].append(name)
         for name in terr["names_strong"]:
-            if loc_norm(name) in used_names:
+            name_norm = loc_norm(name)
+            if name_norm in used_names:
                 terr["names_strong"].remove(name)
+            used_names.add(name_norm)
         for i, name in enumerate(terr["names_strong"]):
             if is_latin(name):
                 continue
             if can_latinize(name):
                 latin = latinize_text(name)
                 terr["names_weak"].yaml_add_eol_comment(latin, i)
-
-        for sname in terr["names_strong"]:
-            used_names.add(loc_norm(sname))
 
         if "names_weak" in terr:
             weak = terr["names_weak"]

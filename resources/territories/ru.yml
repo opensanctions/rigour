@@ -21,7 +21,6 @@ wikipedia_url: https://en.wikipedia.org/wiki/Russia
 names_strong:
   - Rossiya
   - РФ
-  - Российская Федерация # Rossíjskaya Federacíâ
   - Российская Федерация
   - Российская Федераци
   - Российская Федерациѐ
@@ -29,8 +28,8 @@ names_weak:
   - Русија # Rusiǰa
   - ᏲᏂᎢ    # RF
   - روس    # Rossijskaâ Federaciâ
-  - Rusija # Rossijskaâ Federaciâ
-  - Lasa   # Rossijskaâ Federaci
+  - Rusija # Rossijskaâ Federaci
+  - Lasa   # Rossijskaâ Federaciè
   - Ir -Russja # Rossijskaâ Federaciè
   - Rosia
   - Rasiab
@@ -39,7 +38,7 @@ names_weak:
   - Federația Rusă
   - Krievijas Federācija
   - Ruska
-  - Росія  # Rosíâ
+  - Росія      # Rosíâ
   - Russian Republic
   - Rɔhyea
   - Rússland

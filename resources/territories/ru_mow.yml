@@ -13,13 +13,11 @@ names_strong:
 names_weak:
   - Москва (Россия)  # Moskva (Rossiâ)
   - Moskva (Russia)
-  - Moskva (Rusia)
+  - Moskva (Rusia) # Moskva
   - Москва (Росія) # Moskva (Rosíâ)
   - Moskau
   - Moscú
   - Moskow
-  - モスクワ
-  - 모스크바 # moseukeuba
   - 莫斯科
   - Mosca
   - Moscou
@@ -27,4 +25,4 @@ names_weak:
   - Moskwa
   - モスクワ
   - 莫斯科 (俄罗斯)
-  - 모스크바 # moseukeuba
+  - 모스크바           # moseukeuba
