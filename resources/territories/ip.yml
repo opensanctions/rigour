@@ -4,7 +4,7 @@ region: Supranational
 alpha3: cyb
 qid: Q204606
 is_country: false
-is_ftm: false
+is_ftm: true
 is_jurisdiction: false
 summary: >-
   Cyberspace is a virtual environment where digital communication and data exchange
