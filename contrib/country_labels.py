@@ -1,6 +1,6 @@
 # pip install ruamel.yaml
 from typing import Optional
-from normality import slugify_text, latinize_text, normalize, squash_spaces
+from normality import slugify_text, latinize_text, squash_spaces
 from rigour.text.scripts import is_latin, can_latinize
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedSeq
@@ -19,7 +19,7 @@ yaml.indent(mapping=2, sequence=2, offset=2)
 def global_norm(text: str) -> Optional[str]:
     """Normalize text for global use."""
     # return normalize(text, lowercase=True)
-    return squash_spaces(text.lower())
+    return squash_spaces(text.casefold())
 
 
 def loc_norm(text: str) -> str:
@@ -109,8 +109,11 @@ for terr_file in sorted(TERR_DIR.glob("*.yml")):
         for label in labels:
             terr["names_weak"].append(label)
         for name in terr["names_weak"]:
-            if loc_norm(name) in used_names:
+            norm_name = loc_norm(name)
+            if norm_name in used_names:
+                print("Remove", name)
                 terr["names_weak"].remove(name)
+            used_names.add(norm_name)
         for i, name in enumerate(terr["names_weak"]):
             if is_latin(name):
                 continue

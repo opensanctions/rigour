@@ -4,7 +4,7 @@ from normality import latinize_text, squash_spaces
 
 from rigour.text.scripts import can_latinize_cp
 
-SKIP_CHARACTERS = ".()ʻ'’"
+SKIP_CHARACTERS = ".()[],;:_-/ʻ'’"
 
 
 def clean_code(code: str) -> str:
