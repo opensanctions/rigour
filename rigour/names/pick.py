@@ -25,7 +25,7 @@ def latin_share(text: str) -> float:
             latin += 0.3
             continue
         elif not char.isalpha():
-            skipped += 1.0
+            skipped += 1
     return latin / max(1, len(text) - skipped)
 
 
