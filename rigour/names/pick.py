@@ -15,13 +15,18 @@ log = logging.getLogger(__name__)
 def latin_share(text: str) -> float:
     """Determine the percentage of a string that's latin."""
     latin = 0.0
+    skipped = 0
     for char in text:
         cp = ord(char)
         if cp in LATIN_CHARS:
             latin += 1.0
+            continue
         elif cp in LATINIZABLE_CHARS:
-            latin += 0.1
-    return latin / max(1, len(text))
+            latin += 0.3
+            continue
+        elif not char.isalpha():
+            skipped += 1.0
+    return latin / max(1, len(text) - skipped)
 
 
 def levenshtein_pick(names: List[str], weights: Dict[str, float]) -> List[str]:
