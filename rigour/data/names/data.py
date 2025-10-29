@@ -3474,6 +3474,20 @@ ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {
         "zweigstelle",
         "филиал",
     ),
+    "ALQAEDA": (
+        "AL-QA'IDA ORGANIZATION",
+        "Al Qaida",
+        "Al Qaida/Islamic Army",
+        "Al Qa’ida/Islamic Army",
+        "Al-Kaida",
+        "Al-Qa'ida",
+        "Al-Qaida Organization",
+        "QA'IDA OF JIHAD ORGANIZATION",
+        "Qa'ida",
+        "al-qaeda",
+        "qaeda",
+        "القاعدة",
+    ),
 }
 
 PERSON_SYMBOLS: Dict[str, Tuple[str, ...]] = {
@@ -3593,19 +3607,5 @@ PERSON_NAME_PARTS: Dict[str, Tuple[str, ...]] = {
         "Каддафі",
         "ал-Қазофӣ",
         "القذافي",
-    ),
-    "ALQAEDA": (
-        "AL-QA'IDA ORGANIZATION",
-        "Al Qaida",
-        "Al Qaida/Islamic Army",
-        "Al Qa’ida/Islamic Army",
-        "Al-Kaida",
-        "Al-Qa'ida",
-        "Al-Qaida Organization",
-        "QA'IDA OF JIHAD ORGANIZATION",
-        "Qa'ida",
-        "al-qaeda",
-        "qaeda",
-        "القاعدة",
     ),
 }

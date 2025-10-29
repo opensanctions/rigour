@@ -12,7 +12,7 @@ ordinals:
     - "Nil " # en
     - "Nought" # en
     - "Nullter" # de
-    - "Null" # de
+    # - "Null" # de
     - "cero" # es
     - "ноль" # ru (number)
     - "0th"
@@ -37,7 +37,7 @@ ordinals:
     - "primero" # es (when no noun follows)
     - "primer" # es (masculine)
     - "primera" # es (feminine)
-    - "uno" # es (number)
+    # - "uno" # es (number)
     - "una" # es (number, feminine)
     # - "un" # es (number) [can be other things]
     - "один" # ru (number)
@@ -72,7 +72,7 @@ ordinals:
     - "No. 1"
     - "№1"
     - "№ 1"
-    - "Ist"
+    # - "Ist"
     - "I." # see if this backfires
     - "一" # zh (number, simple)
     - "第一" # zh (simple)
@@ -85,7 +85,7 @@ ordinals:
     - "Zweiter"
     - "segundo" # es (masculine)
     - "segunda" # es (feminine)
-    - "dos" # es (number)
+    # - "dos" # es (number)
     - "два" # ru (number)
     - "2nd"
     - "2-й"
@@ -1274,7 +1274,7 @@ ordinals:
     - "vigesimaoctava" # es (feminine, accepted alternative)
     - "veintiocho" # es (number)
     - "veinte y ocho" # es (number, old non-standard)
-    - "двадцать восемь" # ru (number) 
+    - "двадцать восемь" # ru (number)
     - "28th"
     - "28-й"
     - "28-я"

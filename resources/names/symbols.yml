@@ -3058,6 +3058,19 @@ org_symbols:
     - Branch Off.
     - Br Off
     - Subsidiary Branch
+  alqaeda:
+    - al-qaeda
+    - qaeda
+    - Al-Qa'ida
+    - Qa'ida
+    - Al Qaida
+    - Al-Kaida
+    - القاعدة
+    - QA'IDA OF JIHAD ORGANIZATION
+    - AL-QA'IDA ORGANIZATION
+    - Al-Qaida Organization
+    - Al Qaida/Islamic Army
+    - Al Qa’ida/Islamic Army
 person_symbols:
   jr:
     - "Jr"
@@ -3362,17 +3375,3 @@ person_name_parts:
     - Kadaffi
     - Khadafy
     - Qadhdhafi
-
-  alqaeda:
-    - al-qaeda
-    - qaeda
-    - Al-Qa'ida
-    - Qa'ida
-    - Al Qaida
-    - Al-Kaida
-    - القاعدة
-    - QA'IDA OF JIHAD ORGANIZATION
-    - AL-QA'IDA ORGANIZATION
-    - Al-Qaida Organization
-    - Al Qaida/Islamic Army
-    - Al Qa’ida/Islamic Army
