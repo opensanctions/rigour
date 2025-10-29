@@ -12,8 +12,9 @@ from stdnum.exceptions import ValidationError
 class ISIN(IdentifierFormat):
     """An ISIN number for a security."""
 
+    NAME = "isin"
     TITLE = "ISIN"
-    STRONG: bool = True
+    STRONG = True
 
     @classmethod
     def is_valid(cls, value: str) -> bool:
@@ -30,8 +31,9 @@ class ISIN(IdentifierFormat):
 class IBAN(IdentifierFormat):
     """An IBAN number for a bank account."""
 
+    NAME = "iban"
     TITLE = "IBAN"
-    STRONG: bool = True
+    STRONG = True
 
     @classmethod
     def is_valid(cls, value: str) -> bool:
@@ -52,8 +54,9 @@ class IBAN(IdentifierFormat):
 class FIGI(IdentifierFormat):
     """A FIGI number for a security, as managed by OpenFIGI."""
 
+    NAME = "figi"
     TITLE = "FIGI"
-    STRONG: bool = True
+    STRONG = True
 
     impl = figi
 
@@ -72,8 +75,9 @@ class FIGI(IdentifierFormat):
 class BIC(IdentifierFormat):
     """BIC (ISO 9362 Business identifier codes)."""
 
+    NAME = "bic"
     TITLE = "BIC"
-    STRONG: bool = True
+    STRONG = True
 
     @classmethod
     def is_valid(cls, value: str) -> bool:
@@ -98,8 +102,9 @@ class BIC(IdentifierFormat):
 class INN(IdentifierFormat):
     """Russian tax identification number."""
 
+    NAME = "inn"
     TITLE = "INN"
-    STRONG: bool = True
+    STRONG = True
 
     @classmethod
     def is_valid(cls, value: str) -> bool:
@@ -116,8 +121,9 @@ class INN(IdentifierFormat):
 class LEI(IdentifierFormat):
     """Legal Entity Identifier (ISO 17442)"""
 
+    NAME = "lei"
     TITLE = "LEI"
-    STRONG: bool = True
+    STRONG = True
 
     @classmethod
     def is_valid(cls, value: str) -> bool:
@@ -134,8 +140,9 @@ class LEI(IdentifierFormat):
 class SSN(IdentifierFormat):
     """US Social Security Number"""
 
+    NAME = "ssn"
     TITLE = "SSN"
-    STRONG: bool = False
+    STRONG = False
 
     @classmethod
     def is_valid(cls, value: str) -> bool:
@@ -156,6 +163,7 @@ class SSN(IdentifierFormat):
 class CPF(IdentifierFormat):
     """Cadastro de Pessoas Físicas, Brazilian national identifier"""
 
+    NAME = "cpf"
     TITLE = "CPF"
 
     @classmethod
@@ -177,8 +185,9 @@ class CPF(IdentifierFormat):
 class CNPJ(IdentifierFormat):
     """Cadastro Nacional de Pessoas Jurídicas, Brazilian national companies identifier"""
 
+    NAME = "cnpj"
     TITLE = "CNPJ"
-    STRONG: bool = True
+    STRONG = True
 
     @classmethod
     def is_valid(cls, value: str) -> bool:
@@ -199,8 +208,9 @@ class CNPJ(IdentifierFormat):
 class USCC(IdentifierFormat):
     """Unified Social Credit Identifier, a Chinese national identifier"""
 
+    NAME = "uscc"
     TITLE = "USCC"
-    STRONG: bool = True
+    STRONG = True
 
     @classmethod
     def is_valid(cls, value: str) -> bool:

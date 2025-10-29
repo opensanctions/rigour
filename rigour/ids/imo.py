@@ -9,8 +9,9 @@ IMO_RE = re.compile(r"\b(IMO)?(\d{7})\b")
 class IMO(IdentifierFormat):
     """An IMO number for a ship or shipping company"""
 
+    NAME = "imo"
     TITLE = "IMO"
-    STRONG: bool = True
+    STRONG = True
 
     @classmethod
     def is_valid(cls, text: str) -> bool:

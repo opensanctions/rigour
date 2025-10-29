@@ -10,8 +10,9 @@ class UEI(IdentifierFormat):
 
     # https://www.gsa.gov/about-us/organization/federal-acquisition-service/integrated-award-environment-iae/iae-systems-information-kit/uei-technical-specifications-and-api-information
 
-    TITLE: str = "NPI"
-    STRONG: bool = False
+    NAME = "uei"
+    TITLE = "NPI"
+    STRONG = False
     """Marked false because the SAM database is massively duplicated, and entities in 
     SAM conflate companies and their owners. This makes UEIs more like cluster IDs than
     unique entity identifiers."""

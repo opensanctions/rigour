@@ -1,5 +1,3 @@
-import pytest
-
 from rigour.ids import get_identifier_format, get_identifier_formats
 from rigour.ids import get_identifier_format_names, get_strong_format_names
 from rigour.ids.common import IdentifierFormat
@@ -7,10 +5,11 @@ from rigour.ids.strict import StrictFormat
 
 
 def test_get_identifier_format():
-    assert issubclass(get_identifier_format("wikidata"), IdentifierFormat)
-    assert issubclass(get_identifier_format("qid"), IdentifierFormat)
+    wd = get_identifier_format("wikidata")
+    assert wd is not None
+    assert issubclass(wd, IdentifierFormat)
     assert get_identifier_format("wikidata") == get_identifier_format("qid")
-    assert pytest.raises(KeyError, get_identifier_format, "foo")
+    assert get_identifier_format("foo") is None
     assert get_identifier_format("generic") == IdentifierFormat
     assert get_identifier_format("null") == IdentifierFormat
     assert get_identifier_format("strict") == StrictFormat
@@ -18,10 +17,10 @@ def test_get_identifier_format():
 
 def test_get_identifier_format_names():
     assert "wikidata" in get_identifier_format_names()
-    assert "qid" in get_identifier_format_names()
+    assert "qid" not in get_identifier_format_names()
     assert "foo" not in get_identifier_format_names()
     assert "generic" in get_identifier_format_names()
-    assert "null" in get_identifier_format_names()
+    # assert "null" in get_identifier_format_names()
     assert "strict" in get_identifier_format_names()
 
 
@@ -30,7 +29,7 @@ def test_get_identifier_formats():
     assert len(formats) > 5
     for fmt in formats:
         assert len(fmt["description"]) > 5, fmt
-        assert len(fmt["names"]) > 0, fmt
+        assert len(fmt["name"]) > 1, fmt
         assert len(fmt["title"]) > 1, fmt
 
 

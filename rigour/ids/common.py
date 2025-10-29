@@ -4,6 +4,7 @@ from typing import Optional
 class IdentifierFormat(object):
     """Base class for identifier types."""
 
+    NAME: str = "generic"
     TITLE: str = "Generic identifier"
     STRONG: bool = False
 

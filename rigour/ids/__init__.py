@@ -9,7 +9,7 @@ need to introduce a proper, structured identification scheme for identifiers, wi
 """
 
 from functools import cache
-from typing import Dict, List, Type
+from typing import List, Optional, Tuple, Type
 from typing_extensions import TypedDict
 
 from rigour.ids.wikidata import WikidataQID
@@ -22,57 +22,67 @@ from rigour.ids.imo import IMO
 from rigour.ids.strict import StrictFormat
 from rigour.ids.common import IdentifierFormat
 
-FORMATS: Dict[str, Type[IdentifierFormat]] = {
-    "wikidata": WikidataQID,
-    "qid": WikidataQID,
-    "ogrn": OGRN,
-    "imo": IMO,
-    "isin": ISIN,
-    "iban": IBAN,
-    "figi": FIGI,
-    "openfigi": FIGI,
-    "bic": BIC,
-    "swift": BIC,
-    "inn": INN,
-    "npi": NPI,
-    "lei": LEI,
-    "uei": UEI,
-    "ssn": SSN,
-    "cpf": CPF,
-    "cnpj": CNPJ,
-    "uscc": USCC,
-    "generic": IdentifierFormat,
-    "null": IdentifierFormat,
-    "strict": StrictFormat,
+FormatType = Type[IdentifierFormat]
+
+_FORMATS: Tuple[FormatType, ...] = (
+    WikidataQID,
+    OGRN,
+    IMO,
+    ISIN,
+    IBAN,
+    FIGI,
+    BIC,
+    INN,
+    NPI,
+    LEI,
+    UEI,
+    SSN,
+    CPF,
+    CNPJ,
+    USCC,
+    IdentifierFormat,
+    StrictFormat,
+)
+
+FORMAT_ALIASES = {
+    "qid": WikidataQID.NAME,
+    "swift": BIC.NAME,
+    "openfigi": FIGI.NAME,
+    "null": IdentifierFormat.NAME,
 }
 
 
 class FormatSpec(TypedDict):
     """An identifier format specification."""
 
+    name: str
     title: str
-    names: List[str]
     description: str
     strong: bool
 
 
-def get_identifier_format(name: str) -> Type[IdentifierFormat]:
+@cache
+def get_identifier_format(name: str) -> Optional[FormatType]:
     """Get the identifier type class for the given format name."""
-    return FORMATS[name]
+    name = FORMAT_ALIASES.get(name, name)
+    for fmt in _FORMATS:
+        if fmt.NAME == name:
+            return fmt
+    return None
 
 
 def get_identifier_format_names() -> List[str]:
     """Get a list of all identifier type names."""
-    return list(FORMATS.keys())
+    return [fmt.NAME for fmt in _FORMATS]
 
 
 def get_identifier_formats() -> List[FormatSpec]:
     """Get a list of all identifier formats."""
     formats: List[FormatSpec] = []
-    for type_ in set(FORMATS.values()):
-        names = [name for name, cls in FORMATS.items() if cls == type_]
+    for type_ in _FORMATS:
+        name = type_.NAME
         fmt: FormatSpec = {
-            "names": names,
+            "name": name,
             "title": type_.TITLE,
             "description": type_.__doc__ or "",
             "strong": type_.STRONG,
@@ -84,7 +94,7 @@ def get_identifier_formats() -> List[FormatSpec]:
 @cache
 def get_strong_format_names() -> List[str]:
     """Get a list of all strong identifier type names."""
-    return [name for name, cls in FORMATS.items() if cls.STRONG]
+    return [fmt.NAME for fmt in _FORMATS if fmt.STRONG]
 
 
 __all__ = [

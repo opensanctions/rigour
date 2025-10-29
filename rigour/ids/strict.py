@@ -7,7 +7,9 @@ from rigour.ids.common import IdentifierFormat
 class StrictFormat(IdentifierFormat):
     """A generic identifier type that applies harsh normalization."""
 
-    TITLE: str = "Strict identifier"
+    NAME = "strict"
+    TITLE = "Strict identifier"
+    STRONG = False
 
     @classmethod
     def is_valid(cls, value: str) -> bool:

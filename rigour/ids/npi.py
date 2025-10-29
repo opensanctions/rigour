@@ -11,8 +11,9 @@ INVALID = ("0000000000", "000000000000000", "808400000000000")
 class NPI(IdentifierFormat):
     """National Provider Identifier."""
 
-    TITLE: str = "NPI"
-    STRONG: bool = True
+    NAME = "npi"
+    TITLE = "NPI"
+    STRONG = True
 
     # cf. https://www.johndcook.com/blog/2024/06/26/npi-number/
 
