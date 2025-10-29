@@ -1028,16 +1028,12 @@ types:
     generic: JSC
     aliases:
       - joint stock commercial bank
-      - aktsionernyi komertsiinyi bank
   - display: АКБ
     compare: JSCB
     generic: JSC
     aliases:
       - Акціонерний комерційний банк
       - акционерный коммерческий банк
-  - display: АКБ
-    generic: JSC
-    aliases:
       - АКЦИОНЕРНЫЙ КОММЕРЧЕСКИЙ БАНК
       - акционерный коммерческий банк
       - Aktsionerny Kommercheskiy Bank

@@ -1055,21 +1055,14 @@ ORG_TYPES: List[OrgTypeSpec] = [
         "generic": "SOE",
         "aliases": ["javno preduzeće", "јавно предузеће", "ЈП", "Ј.П.", "Ј. П."],
     },
-    {
-        "display": "JSCB",
-        "generic": "JSC",
-        "aliases": ["joint stock commercial bank", "aktsionernyi komertsiinyi bank"],
-    },
+    {"display": "JSCB", "generic": "JSC", "aliases": ["joint stock commercial bank"]},
     {
         "display": "АКБ",
         "compare": "JSCB",
         "generic": "JSC",
-        "aliases": ["Акціонерний комерційний банк", "акционерный коммерческий банк"],
-    },
-    {
-        "display": "АКБ",
-        "generic": "JSC",
         "aliases": [
+            "Акціонерний комерційний банк",
+            "акционерный коммерческий банк",
             "АКЦИОНЕРНЫЙ КОММЕРЧЕСКИЙ БАНК",
             "акционерный коммерческий банк",
             "Aktsionerny Kommercheskiy Bank",
