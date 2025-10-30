@@ -25,10 +25,10 @@ def remove_person_prefixes(name: str) -> str:
 
 
 def remove_org_prefixes(name: str) -> str:
-    """Remove prefixes like Mr., Mrs., etc."""
+    """Remove prefixes like "The", etc."""
     return re_prefixes(ORG_NAME_PREFIXES).sub("", name)
 
 
 def remove_obj_prefixes(name: str) -> str:
-    """Remove prefixes like The, MV, etc."""
+    """Remove prefixes like "The", "MV", etc."""
     return re_prefixes(OBJ_NAME_PREFIXES).sub("", name)
