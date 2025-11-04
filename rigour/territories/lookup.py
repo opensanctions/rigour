@@ -7,6 +7,7 @@ from rigour.data import read_jsonl
 from rigour.territories.territory import Territory
 from rigour.territories.territory import TERRITORIES_FILE, get_index as _get_index
 from rigour.territories.util import clean_code, normalize_territory_name
+from rigour.util import resource_lock
 
 log = logging.getLogger(__name__)
 
@@ -96,7 +97,9 @@ def _fuzzy_search(name: str) -> Optional[Territory]:
     best_territory: Optional[Territory] = None
     cutoff = int(len(name) * 0.3)
     best_distance = cutoff + 1
-    for cand, territory in _get_territory_names().items():
+    with resource_lock:
+        names = _get_territory_names()
+    for cand, territory in names.items():
         if len(cand) <= 4:
             continue
         distance = Levenshtein.distance(name, cand, score_cutoff=cutoff)
@@ -129,7 +132,8 @@ def lookup_territory(text: str, fuzzy: bool = False) -> Optional[Territory]:
     if territory is not None:
         return territory
     normalized_name = normalize_territory_name(text)
-    names = _get_territory_names()
+    with resource_lock:
+        names = _get_territory_names()
     if normalized_name in names:
         return names[normalized_name]
     if fuzzy:

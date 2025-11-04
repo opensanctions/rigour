@@ -29,6 +29,7 @@ from normality import squash_spaces
 from typing import Dict, List, Optional, Set, Tuple
 
 from rigour.text.dictionary import Normalizer, Replacer
+from rigour.util import resource_lock, unload_module
 
 log = logging.getLogger(__name__)
 
@@ -82,7 +83,7 @@ def _display_replacer(normalizer: Normalizer = normalize_display) -> Replacer:
     for alias in clashes:
         mapping.pop(alias, None)
 
-    del sys.modules["rigour.data.names.org_types"]
+    unload_module("rigour.data.names.org_types")
     return Replacer(mapping, ignore_case=True)
 
 
@@ -104,8 +105,9 @@ def replace_org_types_display(
         Optional[str]: The text with organization types replaced.
     """
     is_uppercase = name.isupper()
-    replacer = _display_replacer(normalizer=normalizer)
-    out_text = replacer(name)
+    with resource_lock:
+        replacer = _display_replacer(normalizer=normalizer)
+        out_text = replacer(name)
     if out_text is None:
         return name
     if is_uppercase:
@@ -149,7 +151,7 @@ def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
         if display_norm is not None and display_norm not in mapping:
             mapping[display_norm] = compare_norm
 
-    del sys.modules["rigour.data.names.org_types"]
+    unload_module("rigour.data.names.org_types")
     return Replacer(mapping, ignore_case=True)
 
 
@@ -181,7 +183,7 @@ def _generic_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
         if display_norm is not None and display_norm not in mapping:
             mapping[display_norm] = generic_norm
 
-    del sys.modules["rigour.data.names.org_types"]
+    unload_module("rigour.data.names.org_types")
     return Replacer(mapping, ignore_case=True)
 
 
@@ -204,8 +206,9 @@ def replace_org_types_compare(
     Returns:
         Optional[str]: The text with organization types replaced.
     """
-    _func = _generic_replacer if generic else _compare_replacer
-    replacer = _func(normalizer=normalizer)
+    with resource_lock:
+        _func = _generic_replacer if generic else _compare_replacer
+        replacer = _func(normalizer=normalizer)
     return replacer(name) or name
 
 
@@ -227,8 +230,9 @@ def extract_org_types(
     Returns:
         Tuple[str, str]: Tuple of the org type as matched, and the compare form of it.
     """
-    _func = _generic_replacer if generic else _compare_replacer
-    replacer = _func(normalizer=normalizer)
+    with resource_lock:
+        _func = _generic_replacer if generic else _compare_replacer
+        replacer = _func(normalizer=normalizer)
     matches: List[Tuple[str, str]] = []
     for matched in replacer.extract(name):
         matches.append((matched, replacer.mapping.get(matched, matched)))
@@ -249,5 +253,6 @@ def remove_org_types(
     Returns:
         str: The text with organization types replaced/removed.
     """
-    replacer = _compare_replacer(normalizer=normalizer)
+    with resource_lock:
+        replacer = _compare_replacer(normalizer=normalizer)
     return replacer.remove(name, replacement=replacement)

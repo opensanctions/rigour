@@ -13,6 +13,7 @@ from rigour.names.check import is_stopword
 from rigour.names.part import NamePart
 from rigour.names.tag import NameTypeTag, NamePartTag, INTITIAL_TAGS
 from rigour.territories.territory import TERRITORIES_FILE
+from rigour.util import resource_lock, unload_module
 
 import ahocorasick_rs
 
@@ -82,7 +83,7 @@ def _common_symbols(normalizer: Normalizer) -> Dict[str, Set[Symbol]]:
             if nvalue is not None:
                 mapping[nvalue].add(sym)
 
-    del sys.modules["rigour.data.text.ordinals"]
+    unload_module("rigour.data.text.ordinals")
     return mapping
 
 
@@ -140,8 +141,8 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
                 if nalias is not None:  # pragma: no cover
                     mapping[nalias].add(class_sym)
 
-    del sys.modules["rigour.data.names.data"]
-    del sys.modules["rigour.data.names.org_types"]
+    unload_module("rigour.data.names.data")
+    unload_module("rigour.data.names.org_types")
     log.info("Loaded organization tagger (%s terms).", len(mapping))
     return Tagger(mapping)
 
@@ -186,7 +187,8 @@ def _infer_part_tags(name: Name) -> Name:
 
 def tag_org_name(name: Name, normalizer: Normalizer) -> Name:
     """Tag the name with the organization type and symbol tags."""
-    tagger = _get_org_tagger(normalizer)
+    with resource_lock:
+        tagger = _get_org_tagger(normalizer)
     for phrase, symbol in tagger(name.norm_form):
         name.apply_phrase(phrase, symbol)
     return _infer_part_tags(name)
@@ -231,7 +233,7 @@ def _get_person_tagger(normalizer: Normalizer) -> Tagger:
         for form in forms:
             mapping[form].add(sym)
 
-    del sys.modules["rigour.data.names.data"]
+    unload_module("rigour.data.names.data")
     log.info("Loaded person tagger (%s terms).", len(mapping))
     return Tagger(mapping)
 
@@ -252,7 +254,8 @@ def tag_person_name(
             name.apply_part(part, sym)
 
     # tag the name with person symbols
-    tagger = _get_person_tagger(normalizer)
+    with resource_lock:
+        tagger = _get_person_tagger(normalizer)
     for phrase, symbol in tagger(name.norm_form):
         name.apply_phrase(phrase, symbol)
 

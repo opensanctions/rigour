@@ -3491,7 +3491,7 @@ ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {
 }
 
 PERSON_SYMBOLS: Dict[str, Tuple[str, ...]] = {
-    "JR": ("Jr", "Junior"),
+    "JR": ("Jr", "Junior", "mladší"),
     "SR": ("Senior", "Snr", "Sr"),
     "ESQ": ("Esq", "Esquire"),
     "DR": ("Doctor", "Doktor", "Doktorin", "Dr"),

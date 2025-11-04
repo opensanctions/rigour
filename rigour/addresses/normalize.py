@@ -1,4 +1,3 @@
-import sys
 import string
 import logging
 import unicodedata
@@ -9,6 +8,7 @@ from normality.transliteration import ascii_text
 from normality.util import Categories
 
 from rigour.text.dictionary import Replacer
+from rigour.util import resource_lock, unload_module
 
 CHARS_ALLOWED = "&№" + string.ascii_letters + string.digits
 TOKEN_SEP_CATEGORIES: Categories = {
@@ -127,8 +127,8 @@ def _address_replacer(latinize: bool = False) -> Replacer:
                     )  # pragma: no cover
                 mapping[value_norm] = repl_norm
 
-    del sys.modules["rigour.data.addresses.data"]
-    del sys.modules["rigour.data.text.ordinals"]
+    unload_module("rigour.data.addresses.data")
+    unload_module("rigour.data.text.ordinals")
     return Replacer(mapping, ignore_case=True)
 
 
@@ -148,7 +148,8 @@ def remove_address_keywords(
     Returns:
         The address, without any stopwords.
     """
-    replacer = _address_replacer(latinize=latinize)
+    with resource_lock:
+        replacer = _address_replacer(latinize=latinize)
     return replacer.remove(address, replacement=replacement)
 
 
