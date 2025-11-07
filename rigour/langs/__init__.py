@@ -107,3 +107,30 @@ def list_to_alpha3(languages: Iterable[str], synonyms: bool = True) -> Set[str]:
         if synonyms:
             codes.update(expand_synonyms(code))
     return codes
+
+
+def is_lang_better(candidate: str, baseline: str) -> bool:
+    """Decide if the candidate language code is 'better' than the baseline
+    language code, according to the preferred languages list.
+
+     >>> is_lang_better('eng', 'deu')
+     True
+     >>> is_lang_better('fra', 'eng')
+     False
+
+    Args:
+        candidate (str): The candidate language code.
+        baseline (str): The baseline language code.
+
+    Returns:
+        bool: True if the candidate is better than the baseline.
+    """
+    try:
+        candidate_index = PREFERRED_LANGS.index(candidate)
+    except ValueError:
+        candidate_index = len(PREFERRED_LANGS) + 1
+    try:
+        baseline_index = PREFERRED_LANGS.index(baseline)
+    except ValueError:
+        baseline_index = len(PREFERRED_LANGS) + 1
+    return candidate_index < baseline_index

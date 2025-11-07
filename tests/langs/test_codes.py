@@ -1,5 +1,5 @@
 from rigour.langs import iso_639_alpha3, iso_639_alpha2
-from rigour.langs import list_to_alpha3
+from rigour.langs import list_to_alpha3, is_lang_better
 from rigour.langs import PREFERRED_LANG, PREFERRED_LANGS
 
 
@@ -37,3 +37,12 @@ def test_list():
     assert "eng" in list_to_alpha3(["en"])
     assert not len(list_to_alpha3(["xy"]))
     assert not len(list_to_alpha3([""]))
+
+
+def test_is_better():
+    assert is_lang_better("eng", "deu")
+    assert not is_lang_better("eng", "eng")
+    assert not is_lang_better("fra", "eng")
+    assert is_lang_better("eng", "xyz")
+    assert not is_lang_better("xyz", "eng")
+    assert not is_lang_better("xyz", "abc")
