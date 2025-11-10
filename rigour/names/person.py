@@ -17,9 +17,9 @@ def load_person_names() -> Generator[Tuple[str, List[str]], None, None]:
     with open(NAMES_DATA_PATH, "r", encoding="utf-8") as fh:
         for line in fh:
             line = line.strip()
-            names_, qid = line.split(" => ")
+            names_, gid = line.split(" => ")
             names = names_.split(", ")
-            yield qid, names
+            yield gid, names
 
 
 def load_person_names_mapping(
@@ -36,7 +36,7 @@ def load_person_names_mapping(
         Dict[str, Set[str]]: A dictionary mapping normalized names to sets of QIDs.
     """
     names: Dict[str, Set[str]] = {}
-    for qid, aliases in load_person_names():
+    for gid, aliases in load_person_names():
         forms: Set[str] = set()
         for alias in aliases:
             norm_alias = normalizer(alias)
@@ -47,7 +47,7 @@ def load_person_names_mapping(
             continue
         for form in forms:
             if form not in names:
-                names[form] = set([qid])
+                names[form] = set([gid])
             else:
-                names[form].add(qid)
+                names[form].add(gid)
     return names

@@ -221,8 +221,8 @@ def _get_person_tagger(normalizer: Normalizer) -> Tagger:
             if nvalue is not None:  # pragma: no cover
                 mapping[nvalue].add(sym)
 
-    for qid, aliases in load_person_names():
-        sym = Symbol(Symbol.Category.NAME, int(qid[1:]))
+    for gid, aliases in load_person_names():
+        sym = Symbol(Symbol.Category.NAME, int(gid[1:]))
         forms: Set[str] = set()
         for alias in aliases:
             norm_alias = normalizer(alias)
