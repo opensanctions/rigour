@@ -7,7 +7,7 @@ from rich.table import Table
 from rich.console import Console
 from normality import latinize_text
 
-from namesdb.db import engine, regex_groups, store_mapping, skip_mapping
+from namesdb.db import engine, make_group_id, regex_groups, store_mapping, skip_mapping
 from namesdb.db import get_groups, get_forms
 
 log = logging.getLogger(__name__)
@@ -33,6 +33,16 @@ def skip_form(ids: List[int]) -> None:
     with engine.begin() as conn:
         for id in ids:
             skip_mapping(conn, id)
+
+
+@cli.command("new")
+@click.argument("forms", type=str, nargs=-1)
+def new_group(forms: List[str]) -> None:
+    with engine.begin() as conn:
+        group_id = make_group_id(conn)
+        log.info("Generated new group ID: %s", group_id)
+        for form in forms:
+            store_mapping(conn, form, group_id)
 
 
 @cli.command("skipgroup")

@@ -1,3 +1,4 @@
+from itertools import count
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Generator, List, Optional, Set, Tuple
@@ -12,6 +13,7 @@ from sqlalchemy import (
     Unicode,
     UniqueConstraint,
     create_engine,
+    or_,
     select,
     update,
 )
@@ -125,3 +127,21 @@ def all_mappings(conn: Connection) -> Generator[Tuple[str, Set[str]], None, None
         forms.add(row._mapping["form"])
     if group is not None and len(forms):
         yield (group, forms)
+
+
+def make_group_id(conn: Connection) -> str:
+    """Generate a fake group ID for testing purposes."""
+    for i in count(1):
+        wiki_id = f"Q{i}"
+        group_id = f"X{i}"
+        stmt = select(mapping_table)
+        stmt = stmt.filter(
+            or_(
+                mapping_table.c.group == group_id,
+                mapping_table.c.group == wiki_id,
+            )
+        )
+        result = conn.execute(stmt).first()
+        if result is None:
+            return group_id
+    raise RuntimeError("Unable to generate unique group ID")
