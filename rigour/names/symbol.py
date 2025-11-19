@@ -11,6 +11,7 @@ class Symbol:
         # ORG_TYPE = "ORGTYPE"
         ORG_CLASS = "ORGCLS"
         SYMBOL = "SYMBOL"
+        DOMAIN = "DOMAIN"
         INITIAL = "INITIAL"
         NAME = "NAME"
         NICK = "NICK"

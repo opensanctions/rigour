@@ -90,7 +90,7 @@ def _common_symbols(normalizer: Normalizer) -> Dict[str, Set[Symbol]]:
 @cache
 def _get_org_tagger(normalizer: Normalizer) -> Tagger:
     """Get the organization name tagger."""
-    from rigour.data.names.data import ORG_SYMBOLS
+    from rigour.data.names.data import ORG_SYMBOLS, ORG_DOMAINS
     from rigour.data.names.org_types import ORG_TYPES
 
     log.info("Loading org type/symbol tagger...")
@@ -98,14 +98,17 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
     mapping = _common_symbols(normalizer)
     for key, values in ORG_SYMBOLS.items():
         sym = Symbol(Symbol.Category.SYMBOL, key.upper())
-        nkey = normalizer(key)
-        if nkey is not None:  # pragma: no cover
-            mapping[nkey].add(sym)
         for value in values:
             nvalue = normalizer(value)
-            if nvalue is None:  # pragma: no cover
-                continue
-            mapping[nvalue].add(sym)
+            if nvalue is not None:
+                mapping[nvalue].add(sym)
+
+    for key, values in ORG_DOMAINS.items():
+        sym = Symbol(Symbol.Category.DOMAIN, key.upper())
+        for value in values:
+            nvalue = normalizer(value)
+            if nvalue is not None:
+                mapping[nvalue].add(sym)
 
     for data in read_jsonl(TERRITORIES_FILE):
         sym = Symbol(Symbol.Category.LOCATION, sys.intern(data["code"]))

@@ -314,15 +314,6 @@ org_symbols:
     - tsentrov
     - центров
     - مركز
-  culture:
-    - culture
-    - kultura
-    - культуры
-    - культура
-    - культури
-    - культурний
-    - культурна
-    - культурне
   holding:
     - holding
     - holdings
@@ -406,22 +397,6 @@ org_symbols:
     - сервіс
     - услуг
     - обслуживания
-  defence:
-    - defence
-    - defense
-    - défense
-    - defensie
-    - defensiv
-    - defesa
-    - difesa
-    - försvar
-    - Verteidigung
-    - verdediging
-    - protecția
-    - försvar
-    - defensa
-    - оборонный
-    - оборон
   dept:
     - department
     - dept.
@@ -454,6 +429,1028 @@ org_symbols:
     - специальное проектное предприятие
     - компания специального назначения
     - спеціальна проектна компанія
+  agency:
+    - agency
+    - agence
+    - agentur
+    - agencia
+    - agencja
+    - agência
+    - agentschap
+    - agenzia
+    - ajans
+    - агентства
+    - агентстве
+    - агентство
+    - एजेंसी
+    - وكالة
+  fund:
+    - fund
+    - funds
+    - fond
+    - fondo
+    - fonds
+    - fundo
+    - fondovy
+    - фонд
+    - صندوق
+  intl:
+    - intl
+    - int'l
+    - international
+    - internațional
+    - internantional
+    - internatsionale
+    - internationales
+    - internasional
+    - интернациональный
+    - интернациональная
+    - интернациональные
+    - internationale
+    - internacional
+    - internacionais
+    - internacionales
+    - інтернейшнл
+    - internazionale
+    - internazionali
+    - 国際的
+    - 国際
+    - 国际的
+    - 国际
+  grp:
+    - group
+    - группа
+    - групп
+    - группы
+    - груп
+    - グループ
+    - groupement
+    - groupe
+    - Grupa
+    - grupė
+    - grupo
+    - grupp
+    - gruppo
+    - Grupul
+    - Grúpa
+    - Csoport
+    - Gruppo di società
+    - Group of Companies
+    - Όμιλος Εταιρειών
+    - группа компаний
+    - Groupe d'entreprise
+    - grupo de empresas
+    - Group Company
+    - grup
+    - Όμιλος
+    - Ομάδα
+    - Skupina
+    - hrupa
+    - Grupa
+    - 团体
+    - 团
+    - 集体
+  mgmt:
+    - management
+    - мanagement
+    - gestion
+    - gestión
+    - gerenciamento
+    - менеджмент
+    - упрвлению
+    - менеджмента
+    - менеджменту
+    - إدارة
+    - управление
+    - управления
+    - ўпраўлення
+    - упарвлению
+    - упарвления
+    - управлениe
+    - управлению
+    - gestión
+    - Διαχείριση
+    - Epicheirisi
+    - 管理
+    - 辖
+  fed:
+    - federal
+    - федеральное
+    - федеральноая
+    - федеpальное
+    - федералное
+    - федеоальная
+    - федерельная
+    - федералльная
+    - фдеральная
+    - федеральной
+    - федерпальное
+    - федеарльная
+    - федералная
+    - федеральне
+    - феднральная
+    - федеральные
+    - фeдеральное
+    - федеральными
+    - федеральных
+    - федеральному
+    - федеральна
+    - федральное
+    - федеральний
+    - федерального
+    - федеральный
+    - федеральная
+    - глсударственное
+    - федеральным
+    - федеральних
+    - федеральном
+    - федеральної
+    - federalnyy
+    - federatsyy
+    - федерации
+    - federální
+    - federálny
+    - federalny
+    - federatsiyi
+    - federalna
+    - federāla
+  natl:
+    - national
+    - национальный
+    - национальная
+    - национальные
+    - национального
+    - национальной
+    - национальных
+    - национальнoе
+    - национальнaя
+    - национальнoй
+    - национальнoго
+    - национальнoе
+    - национальнoй
+    - nationalnyy
+    - nacionalnyy
+    - nacionalna
+    - nazionale
+    - nacional
+    - nationell
+    - nasjonale
+    - ulusal
+    - narodowy
+    - národní
+    - landelijk
+    - valstybinis
+    - 国立
+    - 国家的
+  repu:
+    - republic
+    - republics
+    - республика
+    - республиканский
+    - республиканская
+    - республиканские
+    - республиканского
+    - республиканской
+    - республики
+    - республик
+    - республике
+    - république
+    - respublikos
+    - respubliky
+    - republik
+    - repubblica
+    - republika
+    - república
+    - 共和国
+    - cumhuriyet
+    - جمهورية
+    - respublika
+    - respublik
+  institute:
+    - institute
+    - insitute
+    - institut
+    - inštitút
+    - школа
+    - институт
+    - інститут
+    - Ινστιτούτο
+    - institutu
+    - instituta
+    - instituto
+    - instituti
+    - inštitut
+    - instituição
+    - ynstytut
+    - institiut
+    - institūts
+    - instytutu
+    - instituut
+    - instytut
+    - istituto
+    - institutas
+    - institutul
+    - instituutti
+    - industite
+    - instituutin
+    - inštituta
+    - institutului
+    - 研究所
+    - 学院
+  club:
+    - club
+    - clube
+    - circolo
+    - klub
+    - kulüp
+    - клуб
+    - 俱乐部
+    - クラブ
+  institution:
+    - учреждение
+    - institution
+    - institucija
+    - instituția
+    - учраждение
+    - учреджение
+    - учреждениение
+  fdn:
+    - foundation
+    - foudation
+    - фонд
+    - fundacja
+    - fundacion
+    - fondation
+    - fundație
+    - fundacija
+    - Foundation
+    - Fondacion
+    - Fondacioni
+    - Fundación
+    - fundația
+    - Stiftung
+    - Stichting
+    - Ίδρυμα
+    - fdn
+    - 財団
+    - 基金
+    - 設立
+  private:
+    - private
+    - privat
+    - privato
+    - privati
+    - privatiy
+    - приватный
+    - приватная
+    - приватное
+    - приватные
+  public:
+    - public
+    - publiczny
+    - publiczna
+    - publiczne
+    - общественный
+    - общественная
+    - общественные
+    - общественных
+    - общественного
+    - общественной
+    - 公共的
+    - 公共的な
+  industry:
+    - industry
+    - industries
+    - indastris
+    - industrial
+    - industriyi
+    - industriilor
+    - industrialnyi
+    - indastri
+    - индустрия
+    - индустрии
+    - индустриальный
+    - индустральный
+    - промышленности
+    - industrijo
+    - industria
+    - industriia
+    - industriala
+    - industriji
+    - industrji
+    - industrije
+    - industriya
+    - industriei
+    - industriju
+    - industriales
+    - indastrial
+    - industriel
+    - industriale
+    - industrială
+    - industrialny
+    - industrie
+    - industra
+    - industrier
+    - indústrias
+    - industriële
+    - industriële
+    - industriell
+    - industrija
+    - industrias
+    - industrialna
+    - industriais
+    - indústria
+    - endustriyel
+    - endüstri
+    - sanayi
+    - 業界
+  associates:
+    - associates
+    - ассоциированные
+  network:
+    - network
+    - networks
+    - netzwerk
+    - сетевой
+    - сетевые
+    - сетевое
+  dev:
+    - development
+    - dev
+    - devt
+    - devt.
+    - ανάπτυξη
+    - развитие
+    - развития
+    - развитию
+    - ανάπτυξης
+  enterprise:
+    - enterprise
+    - enterprises
+    - entreprise
+    - enterprises
+    - enterpraizes
+    - entreprises
+    - empreendimento
+    - empreendimentos
+    - interprise
+    - предприятие
+    - пpедпpиятие
+    - предприиятие
+    - предприятия
+    - предпрятие
+    - предприятий
+    - predpriyatie
+    - empresa
+    - impresa
+    - предприемство
+    - підприємство
+    - 기업
+    - प्रतिष्ठान
+    - yritys
+  committee:
+    - committee
+    - committees
+    - комитет
+    - комитета
+    - комитеты
+    - комітет
+    - комітети
+    - комитету
+  kombinat:
+    - kombinat
+    - комбинат
+    - Kombinatas
+    - комбинированного
+  central:
+    - central
+    - centrala
+    - centrale
+    - centralele
+    - centrali
+    - центральный
+    - центральная
+    - центральные
+    - центрального
+    - центральной
+    - централизованная
+  general:
+    - general
+    - generale
+    - генеральный
+    - генеральная
+    - генеральные
+    - генерального
+    - генеральной
+    - генеральных
+  base:
+    - base
+    - bases
+    - baza
+    - база
+  global:
+    - global
+    - weltweit
+    - mondial
+    - mondiale
+    - globální
+    - globalny
+    - küresel
+    - глобальный
+    - глобальная
+    - глобальные
+    - глобального
+    - глобальной
+    - глобальных
+    - глобально
+  world:
+    - world
+    - welt
+    - worldwide
+    - mundo
+    - monde
+    - мир
+    - 世界
+  system:
+    - system
+    - systems
+    - systeme
+    - система
+    - системы
+    - sistema
+    - sistemas
+    - système
+    - systèmes
+    - sistemy
+    - システム
+    - システムズ
+  association:
+    - association
+    - associations
+    - associação
+    - asociaciones
+    - ассоциация
+    - ассоциации
+  venture:
+    - venture
+    - ventures
+    - венчурный
+    - венчурная
+    - венчурные
+    - венчурных
+    - венчурного
+    - венчурной
+    - венчурное
+    - empreendimentos
+  commerce:
+    - commerce
+    - commercial
+    - коммерция
+    - коммерческая
+    - коммерческие
+    - коммерческих
+    - коммерческого
+    - коммерческой
+    - комерційний
+  commercial:
+    - commercial
+    - коммерческий
+    - коммерческая
+    - коммерческое
+    - коммерческой
+    - коммерческих
+    - коммерческого
+    - комерческий
+    - comercial
+    - commerciale
+    - commerciaux
+    - commercieel
+    - commerciale
+    - comerciale
+    - commerciële
+    - kommercial
+    - commerical
+    - comercială
+    - εμπορική
+    - 商業
+    - commerciell
+    - קומרציאלי
+    - 상업적
+    - kommersiel
+    - 商业的
+  municipal:
+    - municipal
+    - municipality
+    - муниципальный
+    - муниципальная
+    - муниципальные
+    - муниципального
+    - муниципальной
+    - муниципальных
+    - муніципальний
+    - муніципальна
+    - муніципальні
+    - муніципального
+    - муніципальної
+    - муніципальних
+    - munisipalitas
+    - munisipaliteti
+    - munisipalitetet
+    - муниципальное
+  city:
+    - city
+    - cities
+    - city of
+    - city of the
+    - city council
+    - city government
+    - municipalité
+    - municipale
+    - municipals
+    - municipale
+    - municipale de
+    - municipale du
+    - municipale des
+    - муниципалитет
+    - муниципалитеты
+    - муниципалитета
+    - муниципалитетам
+    - городская
+    - городского
+    - городские
+    - городских
+    - города
+  office:
+    - office
+    - offices
+    - оффис
+    - офис
+    - офисы
+    - офиса
+    - офиса
+    - офіс
+    - офіси
+    - oficina
+    - oficinas
+    - bureau
+    - bureaux
+  bureau:
+    - bureau
+    - бюро
+    - бюро
+    - бюрo
+    - bürö
+    - bürö
+    - büro
+    - büron
+    - büron
+    - büronü
+    - büronü
+  gov:
+    - gov
+    - govmnt
+    - government
+    - government of
+    - government of the
+    - governmental
+    - regierung
+    - regierung von
+    - regierung der
+    - staat
+    - staatlich
+    - staatliche
+    - staatliches
+    - 政府
+    - 辖
+    - state
+    - state of
+    - правительство
+    - gouvernement
+    - gouvernement de
+    - gouvernementale
+    - государственное
+    - государственная
+    - государственный
+    - государственне
+    - государственноый
+    - госудаственным
+    - гомударственной
+    - государсвенным
+    - государствнный
+    - госудаpственное
+    - государсовенный
+    - госудрарственное
+    - государственном
+    - государственно
+    - государственного
+    - государственной
+    - государственным
+    - государственные
+    - государственных
+    - правительсто
+    - госпредприятие # soe
+    - казенное
+    - gobierno
+    - gobierno de
+    - κυβερνηση
+    - κυβερνητική
+  region:
+    - области
+    - област
+    - областное
+    - областная
+    - областные
+    - района
+    - район
+    - районов
+    - region
+    - regions
+    - regional
+    - regionalny
+    - regionala
+    - regionali
+    - regionales
+  named:
+    - im
+    - имени
+    - імені
+    - им
+    - imeni
+    - named after
+    - named for
+    - named in honor of
+    - named in memory of
+  socalled: # EU slang
+    - SO-CALLED
+    - Self-proclaimed
+    - the so-called
+    - Așa-numita
+    - Den såkaldte
+    - Takozvana
+    - Sogenannte
+    - L-hekk imsejħa
+    - soi-disant
+    - Soi-disant
+    - Javni pokret
+    - mar a ghairtear de
+    - Tā sauktā
+    - Samhällsrörelsen
+    - népi mozgalom
+    - Tzv.
+    - Т.нар.
+  ministry:
+    - ministry
+    - ministries
+    - мinistry
+    - ministère
+    - ministeru
+    - ministero
+    - ministerio
+    - ministerul
+    - ministerium
+    - ministerie
+    - ministrerio
+    - ministerstvo
+    - ministerului
+    - ministerij
+    - министерства
+    - министерство
+    - министерства
+  export:
+    - export
+    - exports
+    - eksportu
+    - eksporty
+    - экспорт
+    - экспорты
+    - експорту
+    - експорти
+    - экспорта
+    - експорту
+    - экспорти
+    - экспорте
+    - экспорты
+    - экспортив
+    - экспортиве
+    - экспортиву
+    - экспортивы
+    - экспортивом
+  import:
+    - import
+    - imports
+    - импорт
+    - импорты
+    - импорта
+    - импортный
+    - импортная
+    - импортные
+    - импортных
+    - импортного
+    - импортной
+  trade:
+    - trade
+    - trading
+    - торговля
+    - торгівля
+    - торговьй
+    - торговый
+    - торгово
+    - торговая
+    - торговые
+    - торговых
+    - trэid
+    - торговы
+    - comercio
+    - comercio
+    - commercio
+    - comércio
+    - impex
+    - imp. exp.
+    - usaha dagang
+    - sanayi ve ticaret
+    - ticaret
+    - san.tic
+    - san. tic.
+    - san.ve
+    - San. ve Tic.
+    - sanayi ve ticaret
+    - sanayi ticaret
+    - SANAYI VE TICARET
+    - tes.tek.dis
+    - tes.tek.dış
+    - Diş Ticaret
+    - Dis Ticaret
+    - Foreign Trade
+    - tejarat
+    - Зовнішньоторговельна
+    - Zovnishnotorhovelna
+    - Tesisler Teknoloji Dış
+    - Tesisler Teknoloji Dış Ticaret
+    - Εμπορική
+    - 贸易
+    - 行业
+    - 商业
+    - 商行
+    - 贸易公司
+  solution:
+    - solution
+    - solutions
+    - λύση
+    - λύσεις
+    - λύσεων
+    - решение
+    - решения
+    - решению
+    - решении
+    - решениеи
+    - soluzioni
+    - solutii
+    - soluções
+    - soluciones
+    - solusi
+  project:
+    - project
+    - projects
+    - projetos
+    - проект
+    - проекты
+    - проекта
+    - проектов
+    - проекту
+    - проектно
+    - проектный
+    - проекты
+    - projekat
+    - projekt
+    - projektas
+    - projektas
+    - projekti
+    - projektių
+    - projekto
+    - projektų
+    - projektoje
+    - projektųje
+    - projektoje
+  product:
+    - product
+    - products
+    - продукция
+    - продукціі
+    - продукцією
+    - produkt
+    - produtos
+    - prodotto
+    - prodotti
+    - προϊόν
+    - προϊόντα
+    - ürün
+    - ürünler
+  alliance:
+    - alliance
+    - aliança
+    - allians
+    - allianz # also a brand name
+    - alianza
+    - alleanza
+    - alliantie
+    - alianţă
+    - ittifak
+    - sojusz
+    - альянс
+    - تحالف
+    - गठबंधन
+    - 同盟
+    - 동맹
+  capital:
+    - capital
+    - κεφάλαιο
+    - κεφαλαιακή
+    - капитал
+    - kapital
+    - capitale
+    - капитала
+    - capitalul
+    - capitals
+  credit:
+    - credit
+    - kredit
+    - credits
+    - КРЕДИТНАЯ
+    - кредитная
+    - кредитный
+    - кредитное
+    - кредит
+    - кредиты
+    - кредитний
+    - кредитна
+    - кредитне
+  asset:
+    - asset
+    - assets
+    - активы
+    - актив
+    - активов
+    - активи
+    - активів
+  trust:
+    - trust
+    - trusts
+    - фонд
+    - траст
+    - трест
+    - трастовий
+    - трастова
+    - трастові
+    - трастової
+    - трастового
+    - фондовий
+    - фондова
+    - фондові
+  union:
+    - union
+    - союз
+    - союза
+    - unión
+    - União
+    - ユニオン
+    - 組合
+    - 联盟
+    - zveza
+    - związek
+    - savez
+    - szakszervezet
+    - обєднання
+    - об'єднання
+  authority:
+    - authority
+    - autoridad
+    - autoridade
+    - autorità
+    - autoritat
+    - autorität
+    - autoritate
+    - autoritāte
+    - autorité
+    - autoriteet
+    - autoriteit
+    - autoritet
+    - autoritetas
+    - autorytet
+    - avtoritet
+    - avtoriteta
+    - awtoridad
+    - awtorità
+    - behörde
+    - hatóság
+    - otoritas
+    - otorite
+    - údarás
+    - viranomainen
+    - авторитет
+    - аўтарытэт
+    - ავტორიტეტი
+    - רשות
+    - السلطة
+    - अधिकार
+    - 权威
+    - 権限
+  party:
+    - party
+    - páirtí
+    - partai
+    - partei
+    - parti
+    - partia
+    - partid
+    - partido
+    - partij
+    - partija
+    - strana
+    - stranka
+    - па́ртия
+    - κόμμα
+    - حزب
+    - दल
+    - দল
+    - 政黨
+    - 党
+  liquidation:
+    - in liqu. # de (abbreviation)
+    - in liquidation # de, en
+    - in liquidazione # it
+    - en liquidacion # es
+    - en liquidation # fr
+    - 清算中 # zh
+    - "/in liquidation/" # used by certain Bulgarian companies
+  repoff:
+    - Representative Office
+    - Rep. Office
+    - Representative Off.
+    - Rep Off
+    - Repr. Office
+  branch:
+    - branch
+    - branch of
+    - филиал
+    - filiale
+    - zweigstelle
+    - Branch Office
+    - Br. Office
+    - Branch Off.
+    - Br Off
+    - Subsidiary Branch
+    - Sub. Branch
+
+# Domains are a sibling category to symbols: common term groups with translations, abbreviations, and variations.
+# While symbols describe extremely common and non-meaningful words (like "company" or "group"), domains are
+# meaningful as to the entity's identity, and will be weighted more heavily in matches.
+org_domains:
+  house:
+    - housing
+    - house
+    - maison
+    - haus
+    - huis
+    - hus
+    - casa
+    - dom
+    - дом
+  supply:
+    - supply
+    - supplies
+    - supplier
+    - поставка
+    - поставки
+    - поставщик
+    - снабжение
+    - постачання
+    - постачальник
+    - забезпечення
+  culture:
+    - culture
+    - kultura
+    - культуры
+    - культура
+    - культури
+    - культурний
+    - культурна
+    - культурне
+  defence:
+    - defence
+    - defense
+    - défense
+    - defensie
+    - defensiv
+    - defesa
+    - difesa
+    - försvar
+    - Verteidigung
+    - verdediging
+    - protecția
+    - försvar
+    - defensa
+    - оборонный
+    - оборон
   skb:
     - skb
     - special design bureau
@@ -587,16 +1584,6 @@ org_symbols:
     - недвижимостями
     - недвижимостях
     - недвижимостью
-  house:
-    - housing
-    - house
-    - maison
-    - haus
-    - huis
-    - hus
-    - casa
-    - dom
-    - дом
   jail: # may want to combine with prison below
     - jail
     - jailhouse
@@ -632,17 +1619,6 @@ org_symbols:
     - королівський
     - королівська
     - королівське
-  supply:
-    - supply
-    - supplies
-    - supplier
-    - поставка
-    - поставки
-    - поставщик
-    - снабжение
-    - постачання
-    - постачальник
-    - забезпечення
   tv:
     - tv
     - television
@@ -700,9 +1676,65 @@ org_symbols:
   innovation:
     - innovation
     - innovations
+    - innovative
+    - innovativo
+    - innovativa
+    - innovazione
+    - innovazioni
+    - innováció
+    - innovație
+    - innovatsioon
+    - innovasjon
+    - innovasjonar
+    - innovasiyon
+    - innovações
+    - innovaçőes
+    - innovații
+    - innovațiii
+    - innovațiilor
+    - innovației
     - innovatsiya
     - инновационное
     - инновационная
+  university:
+    - university
+    - университет
+    - університет
+    - унивирситет
+    - университнт
+    - университи
+    - университета
+    - universidad
+    - université
+    - universtiy
+    - universitet
+    - universität
+    - universytet
+    - univ
+    - uni
+    - univ.
+    - univ. of
+    - univ. of the
+  military:
+    - военный
+    - military
+    - militare
+    #  - militsii
+  army:
+    - army
+    - armee
+    - armée
+    - armeen
+    - armée de terre
+    - армия
+    - армія
+    - армейский
+    - армейская
+    - армейские
+    - армейских
+    - армейского
+    - армейской
+    - ejército
   aviation:
     - aviation
     - aviación
@@ -712,21 +1744,6 @@ org_symbols:
     - авиационный
     - авиационная
     - авиационные
-  agency:
-    - agency
-    - agence
-    - agentur
-    - agencia
-    - agencja
-    - agência
-    - agentschap
-    - agenzia
-    - ajans
-    - агентства
-    - агентстве
-    - агентство
-    - एजेंसी
-    - وكالة
   aircraft:
     - aircraft
     - airplane
@@ -1143,219 +2160,6 @@ org_symbols:
     - investicinių fondas
     - fi
     - mutual fund
-  fund:
-    - fund
-    - funds
-    - fond
-    - fondo
-    - fonds
-    - fundo
-    - fondovy
-    - фонд
-    - صندوق
-  intl:
-    - intl
-    - int'l
-    - international
-    - internațional
-    - internantional
-    - internatsionale
-    - internationales
-    - internasional
-    - интернациональный
-    - интернациональная
-    - интернациональные
-    - internationale
-    - internacional
-    - internacionais
-    - internacionales
-    - інтернейшнл
-    - internazionale
-    - internazionali
-    - 国際的
-    - 国際
-    - 国际的
-    - 国际
-  grp:
-    - group
-    - группа
-    - групп
-    - группы
-    - груп
-    - グループ
-    - groupement
-    - groupe
-    - Grupa
-    - grupė
-    - grupo
-    - grupp
-    - gruppo
-    - Grupul
-    - Grúpa
-    - Csoport
-    - Gruppo di società
-    - Group of Companies
-    - Όμιλος Εταιρειών
-    - группа компаний
-    - Groupe d'entreprise
-    - grupo de empresas
-    - Group Company
-    - grup
-    - Όμιλος
-    - Ομάδα
-    - Skupina
-    - hrupa
-    - Grupa
-    - 团体
-    - 团
-    - 集体
-  mgmt:
-    - management
-    - мanagement
-    - gestion
-    - gestión
-    - gerenciamento
-    - менеджмент
-    - упрвлению
-    - менеджмента
-    - менеджменту
-    - إدارة
-    - управление
-    - управления
-    - ўпраўлення
-    - упарвлению
-    - упарвления
-    - управлениe
-    - управлению
-    - gestión
-    - Διαχείριση
-    - Epicheirisi
-    - 管理
-    - 辖
-  fed:
-    - federal
-    - федеральное
-    - федеральноая
-    - федеpальное
-    - федералное
-    - федеоальная
-    - федерельная
-    - федералльная
-    - фдеральная
-    - федеральной
-    - федерпальное
-    - федеарльная
-    - федералная
-    - федеральне
-    - феднральная
-    - федеральные
-    - фeдеральное
-    - федеральными
-    - федеральных
-    - федеральному
-    - федеральна
-    - федральное
-    - федеральний
-    - федерального
-    - федеральный
-    - федеральная
-    - глсударственное
-    - федеральным
-    - федеральних
-    - федеральном
-    - федеральної
-    - federalnyy
-    - federatsyy
-    - федерации
-    - federální
-    - federálny
-    - federalny
-    - federatsiyi
-    - federalna
-    - federāla
-  natl:
-    - national
-    - национальный
-    - национальная
-    - национальные
-    - национального
-    - национальной
-    - национальных
-    - национальнoе
-    - национальнaя
-    - национальнoй
-    - национальнoго
-    - национальнoе
-    - национальнoй
-    - nationalnyy
-    - nacionalnyy
-    - nacionalna
-    - nazionale
-    - nacional
-    - nationell
-    - nasjonale
-    - ulusal
-    - narodowy
-    - národní
-    - landelijk
-    - valstybinis
-    - 国立
-    - 国家的
-  republic:
-    - republic
-    - republics
-    - республика
-    - республиканский
-    - республиканская
-    - республиканские
-    - республиканского
-    - республиканской
-    - республики
-    - республик
-    - республике
-    - république
-    - respublikos
-    - respubliky
-    - republik
-    - repubblica
-    - republika
-    - república
-    - 共和国
-    - cumhuriyet
-    - جمهورية
-    - respublika
-    - respublik
-  institute:
-    - institute
-    - insitute
-    - institut
-    - inštitút
-    - школа
-    - институт
-    - інститут
-    - Ινστιτούτο
-    - institutu
-    - instituta
-    - instituto
-    - instituti
-    - inštitut
-    - instituição
-    - ynstytut
-    - institiut
-    - institūts
-    - instytutu
-    - instituut
-    - instytut
-    - istituto
-    - institutas
-    - institutul
-    - instituutti
-    - industite
-    - instituutin
-    - inštituta
-    - institutului
-    - 研究所
-    - 学院
   academy:
     - academy
     - academie
@@ -1390,113 +2194,6 @@ org_symbols:
     - радники
     - консультант
     - консультанти
-  club:
-    - club
-    - clube
-    - circolo
-    - klub
-    - kulüp
-    - клуб
-    - 俱乐部
-    - クラブ
-  institution:
-    - учреждение
-    - institution
-    - institucija
-    - instituția
-    - учраждение
-    - учреджение
-    - учреждениение
-  fdn:
-    - foundation
-    - foudation
-    - фонд
-    - fundacja
-    - fundacion
-    - fondation
-    - fundație
-    - fundacija
-    - Foundation
-    - Fondacion
-    - Fondacioni
-    - Fundación
-    - fundația
-    - Stiftung
-    - Stichting
-    - Ίδρυμα
-    - fdn
-    - 財団
-    - 基金
-    - 設立
-  private:
-    - private
-    - privat
-    - privato
-    - privati
-    - privatiy
-    - приватный
-    - приватная
-    - приватное
-    - приватные
-  public:
-    - public
-    - publiczny
-    - publiczna
-    - publiczne
-    - общественный
-    - общественная
-    - общественные
-    - общественных
-    - общественного
-    - общественной
-    - 公共的
-    - 公共的な
-  industry:
-    - industry
-    - industries
-    - indastris
-    - industrial
-    - industriyi
-    - industriilor
-    - industrialnyi
-    - indastri
-    - индустрия
-    - индустрии
-    - индустриальный
-    - индустральный
-    - промышленности
-    - industrijo
-    - industria
-    - industriia
-    - industriala
-    - industriji
-    - industrji
-    - industrije
-    - industriya
-    - industriei
-    - industriju
-    - industriales
-    - indastrial
-    - industriel
-    - industriale
-    - industrială
-    - industrialny
-    - industrie
-    - industra
-    - industrier
-    - indústrias
-    - industriële
-    - industriële
-    - industriell
-    - industrija
-    - industrias
-    - industrialna
-    - industriais
-    - indústria
-    - endustriyel
-    - endüstri
-    - sanayi
-    - 業界
   eng:
     - engineering
     - инженерия
@@ -1561,16 +2258,6 @@ org_symbols:
     - машиностроительного
     - машиностроительной
     - машиностроения
-  associates:
-    - associates
-    - ассоциированные
-  network:
-    - network
-    - networks
-    - netzwerk
-    - сетевой
-    - сетевые
-    - сетевое
   investment:
     - investment
     - investmet
@@ -1619,40 +2306,6 @@ org_symbols:
     - лизинг
     - лизинговая
     - лизинговые
-  dev:
-    - development
-    - dev
-    - devt
-    - devt.
-    - ανάπτυξη
-    - развитие
-    - развития
-    - развитию
-    - ανάπτυξης
-  enterprise:
-    - enterprise
-    - enterprises
-    - entreprise
-    - enterprises
-    - enterpraizes
-    - entreprises
-    - empreendimento
-    - empreendimentos
-    - interprise
-    - предприятие
-    - пpедпpиятие
-    - предприиятие
-    - предприятия
-    - предпрятие
-    - предприятий
-    - predpriyatie
-    - empresa
-    - impresa
-    - предприемство
-    - підприємство
-    - 기업
-    - प्रतिष्ठान
-    - yritys
   education:
     - education
     - educational
@@ -1871,15 +2524,6 @@ org_symbols:
     - مسرح
     - 剧院
     - 劇場
-  committee:
-    - committee
-    - committees
-    - комитет
-    - комитета
-    - комитеты
-    - комітет
-    - комітети
-    - комитету
   professional:
     - professional
     - professionel
@@ -1911,32 +2555,6 @@ org_symbols:
     - operacyjne
     - オペレーション
     - 运营
-  kombinat:
-    - kombinat
-    - комбинат
-    - Kombinatas
-    - комбинированного
-  central:
-    - central
-    - centrala
-    - centrale
-    - centralele
-    - centrali
-    - центральный
-    - центральная
-    - центральные
-    - центрального
-    - центральной
-    - централизованная
-  general:
-    - general
-    - generale
-    - генеральный
-    - генеральная
-    - генеральные
-    - генерального
-    - генеральной
-    - генеральных
   mechanical:
     - mechanical
     - механический
@@ -2109,11 +2727,6 @@ org_symbols:
     - енергетика
     - енергетичний
     - енергетична
-  base:
-    - base
-    - bases
-    - baza
-    - база
   chemical:
     - chemical
     - chemicals
@@ -2145,68 +2758,6 @@ org_symbols:
     - sécurité
     - güvenlik
     - безопасности
-  global:
-    - global
-    - weltweit
-    - mondial
-    - mondiale
-    - globální
-    - globalny
-    - küresel
-    - глобальный
-    - глобальная
-    - глобальные
-    - глобального
-    - глобальной
-    - глобальных
-    - глобально
-  world:
-    - world
-    - welt
-    - worldwide
-    - мир
-    - 世界
-  system:
-    - system
-    - systems
-    - systeme
-    - система
-    - системы
-    - sistema
-    - sistemas
-    - système
-    - systèmes
-    - sistemy
-    - システム
-    - システムズ
-  association:
-    - association
-    - associations
-    - ассоциация
-    - ассоциации
-  bureau:
-    - bureau
-    - бюро
-    - бюро
-    - бюрo
-    - bürö
-    - bürö
-    - büro
-    - büron
-    - büron
-    - büronü
-    - büronü
-  venture:
-    - venture
-    - ventures
-    - венчурный
-    - венчурная
-    - венчурные
-    - венчурных
-    - венчурного
-    - венчурной
-    - венчурное
-    - empreendimentos
   logistics:
     - logistic
     - logistics
@@ -2233,16 +2784,6 @@ org_symbols:
     - marketingových
     - marketingo
     - marketinga
-  commerce:
-    - commerce
-    - commercial
-    - коммерция
-    - коммерческая
-    - коммерческие
-    - коммерческих
-    - коммерческого
-    - коммерческой
-    - комерційний
   bank:
     - bank
     - banking
@@ -2276,32 +2817,6 @@ org_symbols:
     - बैंक
     - 은행
     - مصرف
-  commercial:
-    - commercial
-    - коммерческий
-    - коммерческая
-    - коммерческое
-    - коммерческой
-    - коммерческих
-    - коммерческого
-    - комерческий
-    - comercial
-    - commerciale
-    - commerciaux
-    - commercieel
-    - commerciale
-    - comerciale
-    - commerciële
-    - kommercial
-    - commerical
-    - comercială
-    - εμπορική
-    - 商業
-    - commerciell
-    - קומרציאלי
-    - 상업적
-    - kommersiel
-    - 商业的
   offshore:
     - offshore
     - ofshor
@@ -2313,292 +2828,6 @@ org_symbols:
     - оффшорного
     - offshores
     - オフショア
-  municipal:
-    - municipal
-    - municipality
-    - муниципальный
-    - муниципальная
-    - муниципальные
-    - муниципального
-    - муниципальной
-    - муниципальных
-    - муніципальний
-    - муніципальна
-    - муніципальні
-    - муніципального
-    - муніципальної
-    - муніципальних
-    - munisipalitas
-    - munisipaliteti
-    - munisipalitetet
-    - муниципальное
-  city:
-    - city
-    - cities
-    - city of
-    - city of the
-    - city council
-    - city government
-    - municipalité
-    - municipale
-    - municipals
-    - municipale
-    - municipale de
-    - municipale du
-    - municipale des
-    - муниципалитет
-    - муниципалитеты
-    - муниципалитета
-    - муниципалитетам
-    - городская
-    - городского
-    - городские
-    - городских
-    - города
-  office:
-    - office
-    - offices
-    - оффис
-    - офис
-    - офисы
-    - офиса
-    - офиса
-    - офіс
-    - офіси
-    - oficina
-    - oficinas
-    - bureau
-    - bureaux
-    - бюро
-  gov:
-    - gov
-    - govmnt
-    - government
-    - government of
-    - government of the
-    - governmental
-    - regierung
-    - regierung von
-    - regierung der
-    - staat
-    - staatlich
-    - staatliche
-    - staatliches
-    - 政府
-    - 辖
-    - state
-    - state of
-    - правительство
-    - gouvernement
-    - gouvernement de
-    - gouvernementale
-    - государственное
-    - государственная
-    - государственный
-    - государственне
-    - государственноый
-    - госудаственным
-    - гомударственной
-    - государсвенным
-    - государствнный
-    - госудаpственное
-    - государсовенный
-    - госудрарственное
-    - государственном
-    - государственно
-    - государственного
-    - государственной
-    - государственным
-    - государственные
-    - государственных
-    - правительсто
-    - госпредприятие # soe
-    - казенное
-    - gobierno
-    - gobierno de
-    - κυβερνηση
-    - κυβερνητική
-  region:
-    - области
-    - област
-    - областное
-    - областная
-    - областные
-    - района
-    - район
-    - районов
-    - region
-    - regions
-    - regional
-    - regionalny
-    - regionala
-    - regionali
-    - regionales
-  named:
-    - im
-    - имени
-    - імені
-    - им
-    - imeni
-    - named after
-    - named for
-    - named in honor of
-    - named in memory of
-  socalled: # EU slang
-    - SO-CALLED
-    - Self-proclaimed
-    - the so-called
-    - Așa-numita
-    - Den såkaldte
-    - Takozvana
-    - Sogenannte
-    - L-hekk imsejħa
-    - soi-disant
-    - Soi-disant
-    - Javni pokret
-    - mar a ghairtear de
-    - Tā sauktā
-    - Samhällsrörelsen
-    - népi mozgalom
-    - Tzv.
-    - Т.нар.
-  ministry:
-    - ministry
-    - ministries
-    - мinistry
-    - ministère
-    - ministeru
-    - ministero
-    - ministerio
-    - ministerul
-    - ministerium
-    - ministerie
-    - ministrerio
-    - ministerstvo
-    - ministerului
-    - ministerij
-    - министерства
-    - министерство
-    - министерства
-  export:
-    - export
-    - exports
-    - eksportu
-    - экспорт
-    - экспорты
-  import:
-    - import
-    - imports
-    - импорт
-    - импорты
-    - импорта
-    - импортный
-    - импортная
-    - импортные
-    - импортных
-    - импортного
-    - импортной
-  trade:
-    - trade
-    - trading
-    - торговля
-    - торгівля
-    - торговьй
-    - торговый
-    - торгово
-    - торговая
-    - торговые
-    - торговых
-    - trэid
-    - торговы
-    - comercio
-    - comercio
-    - commercio
-    - comércio
-    - impex
-    - imp. exp.
-    - usaha dagang
-    - sanayi ve ticaret
-    - ticaret
-    - san.tic
-    - san. tic.
-    - san.ve
-    - San. ve Tic.
-    - sanayi ve ticaret
-    - sanayi ticaret
-    - SANAYI VE TICARET
-    - tes.tek.dis
-    - tes.tek.dış
-    - Diş Ticaret
-    - Dis Ticaret
-    - Foreign Trade
-    - tejarat
-    - Зовнішньоторговельна
-    - Zovnishnotorhovelna
-    - Tesisler Teknoloji Dış
-    - Tesisler Teknoloji Dış Ticaret
-    - Εμπορική
-    - 贸易
-    - 行业
-    - 商业
-    - 商行
-    - 贸易公司
-  solution:
-    - solution
-    - solutions
-    - λύση
-    - λύσεις
-    - λύσεων
-    - решение
-    - решения
-    - решению
-  project:
-    - project
-    - projects
-    - projetos
-    - проект
-    - проекты
-    - проекта
-    - проектов
-    - проекту
-    - проектно
-    - проектный
-    - проекты
-    - projekat
-    - projekt
-    - projektas
-    - projektas
-    - projekti
-    - projektių
-    - projekto
-    - projektų
-    - projektoje
-    - projektųje
-    - projektoje
-  product:
-    - product
-    - products
-    - продукция
-    - продукціі
-    - продукцією
-    - produkt
-    - produtos
-  alliance:
-    - alliance
-    - aliança
-    - allians
-    - allianz # also a brand name
-    - alianza
-    - alleanza
-    - alliantie
-    - alianţă
-    - ittifak
-    - sojusz
-    - альянс
-    - تحالف
-    - गठबंधन
-    - 同盟
-    - 동맹
   distrib:
     - distributors
     - distributor
@@ -2608,33 +2837,6 @@ org_symbols:
     - дистрибуция
     - дистрибутора
     - дистрибуции
-  capital:
-    - capital
-    - κεφάλαιο
-    - κεφαλαιακή
-    - капитал
-    - kapital
-  credit:
-    - credit
-    - kredit
-    - credits
-    - КРЕДИТНАЯ
-    - кредитная
-    - кредитный
-    - кредитное
-    - кредит
-    - кредиты
-    - кредитний
-    - кредитна
-    - кредитне
-  asset:
-    - asset
-    - assets
-    - активы
-    - актив
-    - активов
-    - активи
-    - активів
   budget:
     - budget
     - budgetary
@@ -2676,35 +2878,6 @@ org_symbols:
     - 証券取引所
     - سوق الأوراق المالية
     - 증권거래소
-  trust:
-    - trust
-    - trusts
-    - фонд
-    - траст
-    - трест
-    - трастовий
-    - трастова
-    - трастові
-    - трастової
-    - трастового
-    - фондовий
-    - фондова
-    - фондові
-  union:
-    - union
-    - союз
-    - союза
-    - unión
-    - União
-    - ユニオン
-    - 組合
-    - 联盟
-    - zveza
-    - związek
-    - savez
-    - szakszervezet
-    - обєднання
-    - об'єднання
   united:
     - united
     - unita
@@ -2729,30 +2902,6 @@ org_symbols:
     - биржи
     - биржевой
     - биржевое
-  university:
-    - university
-    - университет
-    - університет
-    - унивирситет
-    - университнт
-    - университи
-    - университета
-    - universidad
-    - université
-    - universtiy
-    - universitet
-    - universität
-    - universytet
-    - univ
-    - uni
-    - univ.
-    - univ. of
-    - univ. of the
-  military:
-    - военный
-    - military
-    - militare
-    #  - militsii
   tactical:
     - tactical
     - tactics
@@ -2769,54 +2918,6 @@ org_symbols:
     - тактичні
     - тактичного
     - тактичной
-  army:
-    - army
-    - armee
-    - armée
-    - armeen
-    - armée de terre
-    - армия
-    - армія
-    - армейский
-    - армейская
-    - армейские
-    - армейских
-    - армейского
-    - армейской
-    - ejército
-  authority:
-    - authority
-    - autoridad
-    - autoridade
-    - autorità
-    - autoritat
-    - autorität
-    - autoritate
-    - autoritāte
-    - autorité
-    - autoriteet
-    - autoriteit
-    - autoritet
-    - autoritetas
-    - autorytet
-    - avtoritet
-    - avtoriteta
-    - awtoridad
-    - awtorità
-    - behörde
-    - hatóság
-    - otoritas
-    - otorite
-    - údarás
-    - viranomainen
-    - авторитет
-    - аўтарытэт
-    - ავტორიტეტი
-    - רשות
-    - السلطة
-    - अधिकार
-    - 权威
-    - 権限
   manufacturing:
     - manufacturing
     - manufakturynh
@@ -2851,26 +2952,39 @@ org_symbols:
     - больницы
     - больницах
     - больницам
-  party:
-    - party
-    - páirtí
-    - partai
-    - partei
-    - parti
-    - partia
-    - partid
-    - partido
-    - partij
-    - partija
-    - strana
-    - stranka
-    - па́ртия
-    - κόμμα
-    - حزب
-    - दल
-    - দল
-    - 政黨
-    - 党
+  cartel:
+    - cartel # en, es, pt
+    - cartels # en (plural)
+    - dto
+    - Drug Trafficking Organization
+    - kartell # de
+    - cartello # it
+    - cartel # fr
+    - cartéis # pt (plural)
+    - cárteles # es (plural)
+    - cartelli # it (plural)
+    - картель # ru
+    - картели # ru (plural)
+    - картель # uk
+    - картелі # uk (plural)
+    - كارتل # ar
+    - 卡特尔 # zh
+    - カルテル # ja
+    - 카르텔 # ko
+    - kartel # nl, tr
+    - kartele # nl (plural)
+    - karteller # tr (plural)
+    - karteli # fi
+    - kartellit # fi (plural)
+    - kartell # no, da, sv
+    - kartel # lt
+    - karteliai # lt (plural)
+    - kartell # et
+    - kartellid # et (plural)
+    - kartell # hu
+    - kartellek # hu (plural)
+    - kartel # pl
+    - kartele # pl (plural)
   social:
     - social
     - социальный
@@ -3000,64 +3114,6 @@ org_symbols:
     - Научно-производственное
     - Науково-виробниче підприємство
     - Науково-виробниче
-  cartel:
-    - cartel # en, es, pt
-    - cartels # en (plural)
-    - dto
-    - Drug Trafficking Organization
-    - kartell # de
-    - cartello # it
-    - cartel # fr
-    - cartéis # pt (plural)
-    - cárteles # es (plural)
-    - cartelli # it (plural)
-    - картель # ru
-    - картели # ru (plural)
-    - картель # uk
-    - картелі # uk (plural)
-    - كارتل # ar
-    - 卡特尔 # zh
-    - カルテル # ja
-    - 카르텔 # ko
-    - kartel # nl, tr
-    - kartele # nl (plural)
-    - karteller # tr (plural)
-    - karteli # fi
-    - kartellit # fi (plural)
-    - kartell # no, da, sv
-    - kartel # lt
-    - karteliai # lt (plural)
-    - kartell # et
-    - kartellid # et (plural)
-    - kartell # hu
-    - kartellek # hu (plural)
-    - kartel # pl
-    - kartele # pl (plural)
-  liquidation:
-    - in liqu. # de (abbreviation)
-    - in liquidation # de, en
-    - in liquidazione # it
-    - en liquidacion # es
-    - en liquidation # fr
-    - 清算中 # zh
-    - "/in liquidation/" # used by certain Bulgarian companies
-  repoff:
-    - Representative Office
-    - Rep. Office
-    - Representative Off.
-    - Rep Off
-    - Repr. Office
-  branch:
-    - branch
-    - branch of
-    - филиал
-    - filiale
-    - zweigstelle
-    - Branch Office
-    - Br. Office
-    - Branch Off.
-    - Br Off
-    - Subsidiary Branch
   alqaeda:
     - al-qaeda
     - qaeda
