@@ -990,6 +990,7 @@ types:
       - Incorporated
       - incorporation
       - incorporée
+      - Inc
       - Inc.
       - Incorporated
       - Incorp
@@ -999,6 +1000,7 @@ types:
       - Incorporado
       - Incorporée
       - Incs
+      - in # This might bite us, but it's observed in data.
       - I N C
   - display: IS
     generic: SOE
