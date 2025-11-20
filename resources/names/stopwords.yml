@@ -381,6 +381,10 @@ NULLWORDS:
   - N/A
   - None
   - "Null"
+  - unlabeled
+  - notnevada
+  - null null null
+  - null null
   - /
   - "-"
   - "--"
@@ -441,6 +445,7 @@ NULLWORDS:
   - Пусто
   - Отсутствует
   - Undefined
+  - vacant
 NULLPLACES:
   - stateless
   - overseas
@@ -467,3 +472,35 @@ NULLPLACES:
   - central america
   - southern america
   - ДЛЯ ЛИЦ БЕЗ ГРАЖДАНСТВА
+
+# These are names that often occur as full names of people and may need to be moved to an `alias` or `weakAlias` field during data cleaning.
+GENERIC_PERSON_NAMES:
+  - abu anas
+  - abu omar
+  - abu musab
+  - abu abdullah
+  - أبو عبد الله
+  - abu bakr
+  - abu aisha
+  - أبو عائشة
+  - abu muhammad
+  - abu ismail
+  - abu khattab
+  - abu hajar
+  - abu ali
+  - abu hamza
+  - abdul samad
+  - abdul rahman
+  - abdul rehman
+  - abdul haq
+  - abu jihad
+  - ivan ivanov
+  - hassan
+  - muhammad
+  - mohammed
+  - mohammad
+  - abu ubaidah
+  - abdul aziz
+  - abu akram
+  - abdullah
+  - bilal

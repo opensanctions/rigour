@@ -81,3 +81,33 @@ def is_nullword(
         return False
     nullwords = _load_nullwords(normalizer)
     return norm_form in nullwords
+
+
+@cache
+def _load_generic_person_names(normalizer: Normalizer) -> Set[str]:
+    """Load the generic person names from the data file and normalize them using the provided normalizer."""
+    from rigour.data.names.data import GENERIC_PERSON_NAMES
+
+    return _load_wordlist(GENERIC_PERSON_NAMES, normalizer)
+
+
+def is_generic_person_name(
+    form: str, *, normalizer: Normalizer = normalize_name, normalize: bool = False
+) -> bool:
+    """Check if the given form is a generic person name. Generic person names are t, when used
+    on their own as a full name, not meaningful identifiers of an individual. Examples would include the word
+    "Muhammed", "Abu Bakr", etc. The generic person name list is normalized first.
+
+    Args:
+        form (str): The string to check, must already be normalized.
+        normalizer (Normalizer): The normalizer to use for checking generic person names.
+        normalize (bool): Whether to normalize the form before checking.
+
+    Returns:
+        bool: True if the form is a generic person name, False otherwise.
+    """
+    norm_form = normalizer(form) if normalize else form
+    if norm_form is None:
+        return False
+    generic_names = _load_generic_person_names(normalizer)
+    return norm_form in generic_names
