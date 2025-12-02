@@ -3114,6 +3114,21 @@ org_domains:
     - Научно-производственное
     - Науково-виробниче підприємство
     - Науково-виробниче
+  snco:
+    - Settlement Non-banking Credit Institution
+    - Settlement non-banking credit organization
+    - SNCO
+    - некредитная организация по расчетам
+    - некредитна організація з розрахунків
+    - некредитна організація по розрахунках
+  nbco:
+    - Non-bank credit organization
+    - Non-banking credit organization
+    - Non-bank credit institution
+    - Non-banking credit institution
+    - NBCO
+    - некредитная организация
+    - некредитна організація
   alqaeda:
     - al-qaeda
     - qaeda
