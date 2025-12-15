@@ -33,8 +33,17 @@ GROUPS = [
     "Q9008316",
 ]
 
+STARTS = [
+    "імя ",
+]
+
+SUFFIXES = [
+    " nombre",
+]
+
 CONTAINS = [
     "nom de famille",
+    "prénom",
     "frauenname",
     "vorname",
     "family name",

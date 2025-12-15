@@ -2,7 +2,7 @@ import string
 import logging
 from sqlalchemy import select, update, func
 from namesdb.db import engine, mapping_table
-from namesdb.blocks import GROUPS, CONTAINS
+from namesdb.blocks import GROUPS, CONTAINS, STARTS, SUFFIXES
 
 from rigour.text.scripts import is_latin
 
@@ -23,6 +23,16 @@ def block_phrases():
         for phrase in CONTAINS:
             stmt = update(mapping_table)
             stmt = stmt.where(mapping_table.c.form.ilike(f"%{phrase}%"))
+            stmt = stmt.values(skip=True)
+            conn.execute(stmt)
+        for phrase in STARTS:
+            stmt = update(mapping_table)
+            stmt = stmt.where(mapping_table.c.form.ilike(f"{phrase}%"))
+            stmt = stmt.values(skip=True)
+            conn.execute(stmt)
+        for phrase in SUFFIXES:
+            stmt = update(mapping_table)
+            stmt = stmt.where(mapping_table.c.form.ilike(f"%{phrase}"))
             stmt = stmt.values(skip=True)
             conn.execute(stmt)
 
