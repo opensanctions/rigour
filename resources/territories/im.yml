@@ -7,6 +7,8 @@ qid: Q9676
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+claims:
+  - gb
 see:
   - gb
 summary: >-

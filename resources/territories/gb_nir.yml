@@ -8,6 +8,8 @@ is_country: false
 is_ftm: true
 is_jurisdiction: true
 parent: gb
+claims:
+  - ie
 see:
   - gb
 summary: >-

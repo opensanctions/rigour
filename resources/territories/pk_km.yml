@@ -4,6 +4,9 @@ qid: Q43100
 is_country: false
 is_ftm: true
 is_jurisdiction: false
+claims:
+  - in
+  - pk
 see:
   - in
   - pk

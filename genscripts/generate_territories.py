@@ -54,6 +54,9 @@ def update_data() -> None:
                     log.warning("Duplicate code: %s", other)
             if len(data["other_codes"]) == 0:
                 data.pop("other_codes")
+            data["claims"] = clean_codes(data.get("claims", []))
+            if len(data["claims"]) == 0:
+                data.pop("claims")
             data["see"] = clean_codes(data.get("see", []))
             if len(data["see"]) == 0:
                 data.pop("see")
@@ -76,6 +79,11 @@ def update_data() -> None:
         for successor in terr._successors:
             if successor not in territories:
                 msg = "Invalid successor: %s (country: %r)" % (successor, terr.code)
+                raise RuntimeError(msg)
+
+        for claim in terr._claims:
+            if claim not in territories:
+                msg = "Invalid claim: %s (country: %r)" % (claim, terr.code)
                 raise RuntimeError(msg)
 
         for see in terr._see:

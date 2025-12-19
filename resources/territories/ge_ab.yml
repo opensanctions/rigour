@@ -10,6 +10,8 @@ is_country: false
 is_ftm: true
 is_jurisdiction: true
 parent: ge
+claims:
+  - ru
 see:
   - ge
 summary: >-

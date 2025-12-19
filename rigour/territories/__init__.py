@@ -15,6 +15,7 @@ from typing import List, Optional
 from rigour.territories.territory import Territory
 from rigour.territories.territory import get_index as _get_index
 from rigour.territories.lookup import lookup_by_identifier, lookup_territory
+from rigour.territories.match import territories_intersect
 from rigour.territories.util import clean_code
 
 
@@ -25,6 +26,7 @@ __all__ = [
     "get_ftm_countries",
     "lookup_by_identifier",
     "lookup_territory",
+    "territories_intersect",
 ]
 
 

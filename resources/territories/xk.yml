@@ -8,6 +8,8 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+claims:
+  - rs
 see:
   - rs
 summary: >-
@@ -21,13 +23,13 @@ names_strong:
 names_weak:
   - Kosowo
   - Republika Kosovo
-  - კოსოვო            # kʼosovo
+  - კოსოვო # kʼosovo
   - Республика Косово # Respublika Kosovo
-  - Република Косово  # Republika Kosovo
+  - Република Косово # Republika Kosovo
   - Kosovan
   - Kosovës
   - Kosovar
   - Kosovon
   - Republic of Kosova
   - Kósóvó
-  - Косово            # Kosovo
+  - Косово # Kosovo

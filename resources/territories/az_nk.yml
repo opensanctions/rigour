@@ -7,6 +7,8 @@ is_country: false
 is_ftm: true
 is_jurisdiction: true
 parent: am
+claims:
+  - az
 see:
   - am
   - az
@@ -21,11 +23,11 @@ names_strong:
   - Nagornij Karabah
   - Nagorno-Karabakh
 names_weak:
-  - Нагорный Карабах  # Nagornyj Karabah
-  - Yuxarı Qarabağ    # Leṙnayin Ġarabaġ
-  - Bergkarabach      # Leṙnayin Ġarabaġ
+  - Нагорный Карабах # Nagornyj Karabah
+  - Yuxarı Qarabağ   # Leṙnayin Ġarabaġ
+  - Bergkarabach # Leṙnayin Ġarabaġ
   - Gorski Karabah
   - Dağlıq Qarabağ
   - AZ--NK
-  - Արցախ             # Arcʻax
+  - Արցախ        # Arcʻax
   - Haut-Karabagh

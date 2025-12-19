@@ -30,6 +30,7 @@ class Territory(object):
         self.other_codes: List[str] = data.get("other_codes", [])
         self._successors: List[str] = data.get("successors", [])
         self._parent: Optional[str] = data.get("parent")
+        self._claims: List[str] = data.get("claims", [])
         self._see: List[str] = data.get("see", [])
 
     @property
@@ -61,6 +62,11 @@ class Territory(object):
     def successors(self) -> List["Territory"]:
         """Return a list of successor countries."""
         return [self.index[s] for s in self._successors]
+
+    @property
+    def claims(self) -> List["Territory"]:
+        """Return a list of contested claims on this territory."""
+        return [self.index[s] for s in self._claims]
 
     @property
     def see(self) -> List["Territory"]:

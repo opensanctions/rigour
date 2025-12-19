@@ -10,6 +10,8 @@ other_qids:
 is_country: false
 is_ftm: true
 parent: ua
+claims:
+  - ru
 see:
   - ua
   - ru

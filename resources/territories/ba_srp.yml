@@ -3,6 +3,8 @@ full_name: Republika Srpska
 region: Europe
 subregion: Southern Europe
 parent: ba
+claims:
+  - rs
 is_country: false
 is_ftm: false
 is_jurisdiction: true
