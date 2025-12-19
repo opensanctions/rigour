@@ -1030,6 +1030,9 @@ types:
     generic: JSC
     aliases:
       - joint stock commercial bank
+      - Public Joint-Stock Commercial Bank
+      - Joint-Stock Bank
+      - PJSCB
   - display: АКБ
     compare: JSCB
     generic: JSC

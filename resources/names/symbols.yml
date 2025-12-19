@@ -300,6 +300,13 @@ org_symbols:
     - 伙伴
     - 共同経営者
     - 組合員
+  bros:
+    - brothers
+    - bros
+    - fratelli
+    - hermanos
+    - frères
+    - irmãos
   center:
     - центр
     - tsentr
@@ -3127,6 +3134,7 @@ org_domains:
     - Non-bank credit institution
     - Non-banking credit institution
     - NBCO
+    - NCO
     - некредитная организация
     - некредитна організація
   alqaeda:

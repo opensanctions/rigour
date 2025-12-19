@@ -1057,7 +1057,16 @@ ORG_TYPES: List[OrgTypeSpec] = [
         "generic": "SOE",
         "aliases": ["javno preduzeće", "јавно предузеће", "ЈП", "Ј.П.", "Ј. П."],
     },
-    {"display": "JSCB", "generic": "JSC", "aliases": ["joint stock commercial bank"]},
+    {
+        "display": "JSCB",
+        "generic": "JSC",
+        "aliases": [
+            "joint stock commercial bank",
+            "Public Joint-Stock Commercial Bank",
+            "Joint-Stock Bank",
+            "PJSCB",
+        ],
+    },
     {
         "display": "АКБ",
         "compare": "JSCB",
