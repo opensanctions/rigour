@@ -151,7 +151,7 @@ def pick_case(names: List[str]) -> str:
     return min(scores.items(), key=lambda i: (i[1], len(i[0])))[0]
 
 
-def reduce_names(names: List[str]) -> List[str]:
+def reduce_names(names: List[str], require_names: bool = False) -> List[str]:
     """Select a reduced set of names from a list of names. This is used to
     prepare the set of names linked to a person, organization, or other entity
     for publication.
@@ -163,11 +163,13 @@ def reduce_names(names: List[str]) -> List[str]:
         List[str]: The reduced list of names.
     """
     if len(names) < 2:
-        return [n for n in names if is_name(n)]
+        if require_names:
+            return [n for n in names if is_name(n)]
+        return names
     lower: Dict[str, List[str]] = defaultdict(list)
     for name in names:
         # Filter names that are not valid (e.g. empty or do not contain any letters)
-        if not is_name(name):
+        if require_names and not is_name(name):
             log.warning("Invalid name found: %r", name)
             continue
         lower[name.casefold()].append(name)

@@ -257,6 +257,14 @@ def test_reduce_names():
 
     names = ["."]
     reduced = reduce_names(names)
+    assert len(reduced) == 1, reduced
+
+    names = ["764"]
+    reduced = reduce_names(names)
+    assert len(reduced) == 1, reduced
+
+    names = ["764"]
+    reduced = reduce_names(names, require_names=True)
     assert len(reduced) == 0, reduced
 
     names = ["Κόσμος", "κόσμος", "κόσμος", "ΚΟΣΜΟΣ"]
@@ -271,4 +279,8 @@ def test_reduce_names():
 
     names = [".", "6161", " / "]
     reduced = reduce_names(names)
+    assert len(reduced) == 3, reduced
+
+    names = [".", "6161", " / "]
+    reduced = reduce_names(names, require_names=True)
     assert len(reduced) == 0, reduced
