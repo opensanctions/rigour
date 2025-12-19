@@ -69,6 +69,9 @@ docs = [
 only-include = ["rigour", "LICENSE", "README.md"]
 exclude = ['genscripts']
 
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
+
 [tool.hatch.build.targets.wheel]
 exclude = ["genscripts"]
 
