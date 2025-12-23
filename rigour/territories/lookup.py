@@ -7,7 +7,7 @@ from rigour.data import read_jsonl
 from rigour.territories.territory import Territory
 from rigour.territories.territory import TERRITORIES_FILE, get_index as _get_index
 from rigour.territories.util import clean_code, normalize_territory_name
-from rigour.util import resource_lock
+from rigour.util import MEMO_MEDIUM, resource_lock
 
 log = logging.getLogger(__name__)
 
@@ -117,7 +117,7 @@ def _fuzzy_search(name: str) -> Optional[Territory]:
     return best_territory
 
 
-@lru_cache(maxsize=2**16)
+@lru_cache(maxsize=MEMO_MEDIUM)
 def lookup_territory(text: str, fuzzy: bool = False) -> Optional[Territory]:
     """Lookup a territory by various codes and names.
 

@@ -401,6 +401,7 @@ NULLPLACES: Tuple[str, ...] = (
     "central america",
     "channel island",
     "channel islands",
+    "channels islands",
     "indies",
     "overseas",
     "overseas territories",
