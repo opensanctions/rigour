@@ -473,6 +473,9 @@ NULLPLACES:
   - central america
   - southern america
   - ДЛЯ ЛИЦ БЕЗ ГРАЖДАНСТВА
+  - Gulf
+  - Central America
+  - South America
 
 # These are names that often occur as full names of people and may need to be moved to an `alias` or `weakAlias` field during data cleaning.
 GENERIC_PERSON_NAMES:

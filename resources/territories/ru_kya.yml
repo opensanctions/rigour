@@ -6,5 +6,9 @@ is_jurisdiction: true
 name: Krasnoyarsk Krai
 parent: ru
 qid: Q6563
-names_strong: []
+names_strong:
+  - Krasnodarskiy Kray, Russia
+  - Krasnoyarsk Region, Russia
+  - Красноярский край, Россия
+  - Красноярский край
 names_weak: []
