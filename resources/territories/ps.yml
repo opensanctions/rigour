@@ -24,12 +24,14 @@ names_strong:
   - Palestinian Territory
   - Palestinian Authority
   - Palestinian territories
+  - Palestina
   - Palestinian Autonomous Territories
   - Palestinian Autonomous Areas
   - Palestinian Autonomous Region
   - Государство Палестина
-  - Gaza
+  - Gaza Strip
   - West Bank
+  - Gaza
 names_weak:
   - GZ
   - XGZ
@@ -37,9 +39,9 @@ names_weak:
   - Палестинан латтанаш # Palestinan lattanaš
   - Palestinia nutome
   - Palestinske teritorije
-  - Palestinian
+  - Palestinian # Gosudarstvo Palestina
   - Palesitayini ni Gaza # Gosudarstvo Palestina
-  - Palesitini # Gosudarstvo Palestina
+  - Palesitini           # Gosudarstvo Palestina
   - Palestinski awtonomny teritorij
   - Wilayah Palestina
   - Palistina
@@ -58,7 +60,6 @@ names_weak:
   - Palestinska territorierna
   - Palestynske gebieten
   - Fələstin Əraziləri
-  - Gaza Strip
   - Nchingu wa Magalibi wa Mpanda wa kuGaza wa kuPales
   - Teritoris palestinês
   - Palestijnse gebieden
@@ -192,4 +193,3 @@ names_weak:
   - पॅलेस्टिनियन प्रदेश
   - Judea and Samaria Region
   - Judea and Samaria
-  - Palestina
