@@ -42,9 +42,7 @@ def word_boundary_matches(
 
 
 class Tagger:
-    """A class to manage a dictionary of words and their aliases. This is used to perform
-    replacement on those aliases or the word itself in a text.
-    """
+    """A class to manage a dictionary of words and the symbols they match."""
 
     def __init__(self, mapping: Dict[str, Set[Symbol]]) -> None:
         self._symbols: List[Tuple[Symbol, ...]] = []
