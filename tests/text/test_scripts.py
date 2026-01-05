@@ -1,5 +1,29 @@
-from rigour.text.scripts import is_latin
+from rigour.text.scripts import is_latin, get_script
 from rigour.text.scripts import can_latinize, is_modern_alphabet
+
+
+def test_get_script() -> None:
+    # Test basic Latin
+    assert get_script(ord("A")) == "Latin"
+    assert get_script(ord("z")) == "Latin"
+    # Test Cyrillic
+    assert get_script(ord("Б")) == "Cyrillic"
+    # Test Greek
+    assert get_script(ord("α")) == "Greek"
+    # Test Han (Chinese)
+    assert get_script(ord("日")) == "Han"
+    # Test Hangul (Korean)
+    assert get_script(ord("가")) == "Hangul"
+    # Test Hiragana (Japanese)
+    assert get_script(ord("あ")) == "Hiragana"
+    # Test Armenian
+    assert get_script(ord("Ա")) == "Armenian"
+    # Test Arabic
+    assert get_script(ord("ع")) == "Arabic"
+    # Test codepoint that's not in any range
+    assert get_script(0) is None
+    # Test codepoint between ranges (control character)
+    assert get_script(1) is None
 
 
 def test_is_latin():
