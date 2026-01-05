@@ -1,21 +1,19 @@
 import bisect
 from functools import lru_cache
-from typing import List, Optional, Tuple
+from typing import Optional
 
-from rigour.data.text.scripts import RANGES, LATIN_CHARS, LATINIZABLE_CHARS
+from rigour.data.text.scripts import (
+    LATIN_CHARS,
+    LATINIZABLE_CHARS,
+    SORTED_RANGES,
+    RANGE_STARTS,
+)
 from rigour.util import MEMO_MEDIUM
 
 # There are no non-Latin characters below this codepoint:
 LATIN_BLOCK = 740
 # Hangul is surprisingly good in terms of transliteration, so we allow it:
 LATINIZE_SCRIPTS = {"Hangul", "Cyrillic", "Greek", "Armenian", "Latin", "Georgian"}
-
-# Pre-compute sorted ranges for binary search - sorted by start value
-_SORTED_RANGES: List[Tuple[int, int, str]] = sorted(
-    [(start, end, script) for (start, end), script in RANGES.items()],
-    key=lambda x: x[0],
-)
-_RANGE_STARTS: List[int] = [r[0] for r in _SORTED_RANGES]
 
 
 def get_script(codepoint: int) -> Optional[str]:
@@ -28,11 +26,11 @@ def get_script(codepoint: int) -> Optional[str]:
         The script name if found, otherwise None.
     """
     # Binary search to find the rightmost range whose start is <= codepoint
-    idx = bisect.bisect_right(_RANGE_STARTS, codepoint)
+    idx = bisect.bisect_right(RANGE_STARTS, codepoint)
     if idx == 0:
         return None
     # Check if codepoint falls within the range
-    start, end, script = _SORTED_RANGES[idx - 1]
+    start, end, script = SORTED_RANGES[idx - 1]
     if start <= codepoint <= end:
         return script
     return None
