@@ -7,6 +7,8 @@ qid: Q218
 other_qids:
   - Q842794
   - Q191071
+other_codes:
+  - rom
 is_country: true
 is_ftm: true
 is_jurisdiction: true
