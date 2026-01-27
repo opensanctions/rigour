@@ -64,7 +64,7 @@ def levenshtein_similarity(
     max_percent: float = env.LEVENSHTEIN_MAX_PERCENT,
     max_length: int = env.MAX_NAME_LENGTH,
 ) -> float:
-    """Compute the Damerau Levenshtein similarity of two strings. The similiarity is
+    """Compute the Levenshtein similarity of two strings. The similiarity is
     the percentage distance measured against the length of the longest string.
 
     Args:
@@ -79,6 +79,7 @@ def levenshtein_similarity(
     left_len = len(left)
     right_len = len(right)
     if left_len == 0 or right_len == 0:
+        # Do not produce matches for empty strings
         return 0.0
 
     # Skip results with an overall distance of more than N characters:

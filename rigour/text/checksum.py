@@ -1,5 +1,4 @@
 from hashlib import sha1
-from typing import List
 from unicodedata import normalize
 from normality.cleaning import remove_unsafe_chars
 
@@ -15,10 +14,7 @@ def text_hash(text: str) -> str:
     Returns:
         str: The SHA-1 hash of the processed text.
     """
-    substantial: List[str] = []
     text = normalize("NFKD", remove_unsafe_chars(text.lower()))
-    for char in text:
-        if char.isalnum():
-            substantial.append(char)
+    substantial = [c for c in text if c.isalnum()]
     text = "".join(substantial)
     return sha1(text.encode(ENCODING)).hexdigest()

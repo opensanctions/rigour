@@ -1,4 +1,3 @@
-from typing import Optional
 import unicodedata
 
 
@@ -19,7 +18,7 @@ def string_number(text: str) -> float | None:
         pass
 
     # Handle Unicode numeric characters
-    result: Optional[float] = None
+    result: float | None = None
     for char in text:
         try:
             value = unicodedata.numeric(char)
