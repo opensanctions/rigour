@@ -8,15 +8,22 @@ def test_world_real():
     assert gb is not None
     assert gb.name == "United Kingdom"
     assert gb.parent is None
+    assert gb.in_sentence == "the United Kingdom"
+    assert gb.region == "Europe"
+    assert gb.subregion == "Northern Europe"
+    assert "parent" not in gb.to_dict()
     assert get_territory_by_qid("Q145") == gb
     assert gb.qid == "Q145"
+    assert "Q145" in gb.to_dict()["qids"]
     assert get_territory_by_qid("Q2914461") == get_territory("ge-ab")
     abk = get_territory("ge-ab")
     assert abk is not None
+    assert abk.in_sentence == abk.name
     assert abk.qid != "Q2914461"
     nir = get_territory("gb-nir")
     assert nir is not None
     assert nir.parent == gb
+    assert nir.to_dict()["parent"] == "gb"
     assert get_territory("gb-nirvana") is None
     assert get_territory_by_qid("Q232323312") is None
 
@@ -25,11 +32,26 @@ def test_world_real():
     assert cq is not None
     assert srk is not None
     assert srk == cq
+    assert "gg-srk" in cq.to_dict()["codes"]
 
     su = get_territory("su")
     assert su is not None
     assert get_territory("ru") in su.successors
     assert get_territory("ru") in su.see
+
+    nir = get_territory("gb-nir")
+    assert nir is not None
+    assert nir.in_sentence == "Northern Ireland"
+    assert nir.region == "Europe"
+    assert nir.subregion == "Northern Europe"
+
+    moscow = get_territory("ru-mos")
+    assert moscow is not None
+    assert moscow._region is None
+    assert moscow.region == "Europe"
+    assert moscow.subregion == "Eastern Europe"
+    assert moscow.is_ftm is False
+    assert moscow.ftm_country == "ru"
 
 
 def test_territory_class_functions():

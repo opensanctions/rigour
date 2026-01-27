@@ -25,6 +25,7 @@ class Territory(object):
         self.is_historical: bool = data.get("is_historical", False)
         self._region: Optional[str] = data.get("region", None)
         self._subregion: Optional[str] = data.get("subregion", None)
+        self._in_sentence: Optional[str] = data.get("in_sentence", None)
         self.qid: str = str(data.get("qid"))
         self.other_qids: List[str] = data.get("other_qids", [])
         self.other_codes: List[str] = data.get("other_codes", [])
@@ -43,7 +44,7 @@ class Territory(object):
     @property
     def region(self) -> Optional[str]:
         """Return the global region name."""
-        if self._region:
+        if self._region is not None:
             return self._region
         if self.parent:
             return self.parent.region
@@ -52,11 +53,18 @@ class Territory(object):
     @property
     def subregion(self) -> Optional[str]:
         """Return the subregion name."""
-        if self._subregion:
+        if self._subregion is not None:
             return self._subregion
         if self.parent:
             return self.parent.subregion
         return None
+
+    @property
+    def in_sentence(self) -> str:
+        """Return the name to use in a sentence."""
+        if self._in_sentence:
+            return self._in_sentence
+        return self.name
 
     @property
     def successors(self) -> List["Territory"]:
@@ -81,6 +89,15 @@ class Territory(object):
         return qids
 
     @property
+    def codes(self) -> Set[str]:
+        """Return all the codes linked to a territory."""
+        codes = set(self.other_codes)
+        codes.add(self.code)
+        if self.alpha3:
+            codes.add(self.alpha3)
+        return codes
+
+    @property
     def ftm_country(self) -> Optional[str]:
         """Return the FTM country code for this territory."""
         if self.is_ftm:
@@ -88,6 +105,38 @@ class Territory(object):
         if self.parent is not None:
             return self.parent.ftm_country
         return None
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Return a dictionary (JSON-ready) representation of the territory."""
+        data = {
+            "code": self.code,
+            "name": self.name,
+            "full_name": self.full_name,
+            "alpha3": self.alpha3,
+            "is_country": self.is_country,
+            "is_ftm": self.is_ftm,
+            "ftm_country": self.ftm_country,
+            "is_jurisdiction": self.is_jurisdiction,
+            "is_historical": self.is_historical,
+            "qid": self.qid,
+            "qids": list(self.qids),
+            "codes": list(self.codes),
+        }
+        if self.parent is not None:
+            data["parent"] = self.parent.code
+        if self._region is not None:
+            data["region"] = self._region
+        if self._subregion is not None:
+            data["subregion"] = self._subregion
+        if self._in_sentence is not None:
+            data["in_sentence"] = self._in_sentence
+        if self.successors:
+            data["successors"] = [s.code for s in self.successors]
+        if self.claims:
+            data["claims"] = [c.code for c in self.claims]
+        if self.see:
+            data["see"] = [s.code for s in self.see]
+        return data
 
     def __eq__(self, other: Any) -> bool:
         try:

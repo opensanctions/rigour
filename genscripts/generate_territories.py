@@ -41,13 +41,14 @@ def update_data() -> None:
                 data["region"] = norm_string(data["region"])
             if "subregion" in data:
                 data["subregion"] = norm_string(data["subregion"])
+            if "in_sentence" in data:
+                data["in_sentence"] = norm_string(data["in_sentence"])
             if "names_strong" in data:
                 names = set(norm_string(name) for name in data["names_strong"])
                 data["names_strong"] = sorted(names)
             if "names_weak" in data:
                 names = set(norm_string(name) for name in data["names_weak"])
                 data["names_weak"] = sorted(names)
-            raw_territories[code] = data
             data["other_codes"] = clean_codes(data.get("other_codes", []))
             for other in data["other_codes"]:
                 if other in territories:
@@ -60,7 +61,7 @@ def update_data() -> None:
             data["see"] = clean_codes(data.get("see", []))
             if len(data["see"]) == 0:
                 data.pop("see")
-
+            raw_territories[code] = data
             territories[code] = Territory(territories, code, data)
 
     for terr in territories.values():
