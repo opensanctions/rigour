@@ -2,6 +2,7 @@ name: Czechoslovakia
 full_name: Czechoslovak Socialist Republic
 region: Europe
 subregion: Central Europe
+alpha3: csk
 qid: Q33946
 other_qids:
   - Q853348

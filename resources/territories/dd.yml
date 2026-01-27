@@ -2,6 +2,7 @@ name: East Germany
 full_name: German Democratic Republic
 region: Europe
 subregion: Central Europe
+alpha3: ddr
 qid: Q16957
 is_country: true
 is_ftm: true
@@ -15,8 +16,7 @@ summary: >-
   Europe that existed from its creation on 7 October 1949 until its dissolution on
   3 October 1990.
 wikipedia_url: https://en.wikipedia.org/wiki/East_Germany
-names_strong:
-  - DDR
+names_strong: []
 names_weak:
   - Германская Демократическая Республика  # Germanskaâ Demokratičeskaâ Respublika
   - DDDE

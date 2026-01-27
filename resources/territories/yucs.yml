@@ -2,6 +2,7 @@ name: Yugoslavia
 full_name: Socialist Federal Republic of Yugoslavia
 region: Europe
 subregion: Eastern Europe
+alpha3: yug
 qid: Q83286
 other_qids:
   - Q36704
@@ -42,7 +43,6 @@ names_weak:
   - Democratic Federal Yugoslavia
   - Federal Socialist Republic of Yugoslavia
   - Federal People's Republic of Yugoslavia
-  - YUG
   - Júgóslavía
   - Yougoslavie
   - Югославия  # Ûgoslaviâ
