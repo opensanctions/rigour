@@ -3,7 +3,7 @@ PERSON_NAME_PREFIXES:
   # Regular titles
   - "Mr"
   - "Mister"
-  - "Master"
+  # "Master" is also a male given name and so not currently included here
   - "Mrs"
   - "Misses"
   - "Missis"
@@ -61,7 +61,7 @@ PERSON_NAME_PREFIXES:
   - "Commodore"
   - "Captain"
   - "Capt."
-  - "Major"
+  # "Major" is also a male given name and so not currently included here
   # - "Maj."
   - "Rear-Admiral"
   - "Rear Admiral"
@@ -83,17 +83,17 @@ PERSON_NAME_PREFIXES:
   # Royal titles
   - "Emperor"
   - "Empress"
-  - "King"
+  # "King" is also a male given name and so not currently included here
   - "Queen"
-  - "Sheik"
-  - "Sheikh"
-  - "Shaikh"
-  - "Sultan"
-  - "Sultana"
-  - "Emir"
-  - "Emira"
-  - "Prince"
-  - "Princess"
+  # "Sheik" is also a male given name and so not currently included here
+  # "Sheikh" is also a male given name and so not currently included here
+  # "Shaikh" is also a male given name and so not currently included here
+  # "Sultan" is also a male given name and so not currently included here
+  # "Sultana" is also a female given name and so not currently included here
+  # "Emir" is also a male given name and so not currently included here
+  # "Emira" is also a female given name and so not currently included here
+  # "Prince" is also a male given name and so not currently included here
+  # "Princess" is also a female given name and so not currently included here
   - "The Prince"
   - "The Princess"
   - "The Princess Royal"
@@ -113,7 +113,7 @@ PERSON_NAME_PREFIXES:
   - "Lady"
   - "Laird"
   - "Dame"
-  - "Baron"
+  # "Baron" is also a male given name and so not currently included here
   - "Baroness"
   - "Baronet"
   - "Baronetess"
