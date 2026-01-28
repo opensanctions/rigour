@@ -16,7 +16,7 @@ from typing import Dict, Tuple
 """
 
 SCRIPTS_TEMPLATE = """
-from typing import Set, Dict, Tuple
+from typing import List, Set, Dict, Tuple
 """
 
 
@@ -92,6 +92,18 @@ def generate_script_data() -> None:
 
     content = SCRIPTS_TEMPLATE
     content += "RANGES: Dict[Tuple[int, int], str] = {}\n\n".format(ranges)
+
+    # Pre-compute sorted ranges for binary search - sorted by start value
+    sorted_ranges = sorted(
+        [(start, end, script) for (start, end), script in ranges.items()],
+        key=lambda x: x[0],
+    )
+    range_starts = [r[0] for r in sorted_ranges]
+
+    content += "SORTED_RANGES: List[Tuple[int, int, str]] = {!r}\n\n".format(
+        sorted_ranges
+    )
+    content += "RANGE_STARTS: List[int] = {!r}\n\n".format(range_starts)
     content += "LATIN_CHARS: Set[int] = {}  # fmt: skip \n\n".format(latin_chars)
     content += "LATINIZABLE_CHARS: Set[int] = {}  # fmt: skip \n\n".format(
         latinizable_chars
