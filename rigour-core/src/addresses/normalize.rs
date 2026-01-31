@@ -3,7 +3,74 @@
 /// This module provides functions to normalize addresses for comparison purposes.
 /// The normalization is destructive (makes addresses ugly) but enables better matching.
 
-use crate::common::{ascii_text, get_category_action, is_address_allowed_char, CategoryAction, WS};
+use crate::common::{ascii_text, CategoryAction, WS};
+
+/// Check if a character is allowed in normalized addresses without modification.
+/// Matches CHARS_ALLOWED from rigour/addresses/normalize.py
+fn is_address_allowed_char(ch: char) -> bool {
+    ch == '&' || ch == '№' || ch.is_ascii_alphanumeric()
+}
+
+/// Get the action to take for a character in address normalization.
+///
+/// This mapping is specific to address processing and differs from name tokenization.
+/// Based on rigour/addresses/normalize.py TOKEN_SEP_CATEGORIES.
+fn get_category_action(ch: char) -> CategoryAction {
+    use unicode_general_category::{get_general_category, GeneralCategory};
+
+    match get_general_category(ch) {
+        // Letters → keep (all types)
+        GeneralCategory::UppercaseLetter => CategoryAction::Keep,
+        GeneralCategory::LowercaseLetter => CategoryAction::Keep,
+        GeneralCategory::TitlecaseLetter => CategoryAction::Keep,
+        GeneralCategory::OtherLetter => CategoryAction::Keep,
+
+        // Numbers
+        GeneralCategory::DecimalNumber => CategoryAction::Keep,
+        GeneralCategory::LetterNumber => CategoryAction::Keep,
+        GeneralCategory::OtherNumber => CategoryAction::Skip,
+
+        // Modifier letter → skip
+        GeneralCategory::ModifierLetter => CategoryAction::Skip,
+
+        // Marks
+        GeneralCategory::NonspacingMark => CategoryAction::Skip,
+        GeneralCategory::SpacingMark => CategoryAction::Whitespace,
+        GeneralCategory::EnclosingMark => CategoryAction::Skip,
+
+        // Punctuation → whitespace (all types)
+        GeneralCategory::ConnectorPunctuation => CategoryAction::Whitespace,
+        GeneralCategory::DashPunctuation => CategoryAction::Whitespace,
+        GeneralCategory::OpenPunctuation => CategoryAction::Whitespace,
+        GeneralCategory::ClosePunctuation => CategoryAction::Whitespace,
+        GeneralCategory::InitialPunctuation => CategoryAction::Whitespace,
+        GeneralCategory::FinalPunctuation => CategoryAction::Whitespace,
+        GeneralCategory::OtherPunctuation => CategoryAction::Whitespace,
+
+        // Symbols
+        GeneralCategory::MathSymbol => CategoryAction::Whitespace,
+        GeneralCategory::CurrencySymbol => CategoryAction::Skip,
+        GeneralCategory::ModifierSymbol => CategoryAction::Skip,
+        GeneralCategory::OtherSymbol => CategoryAction::Whitespace,
+
+        // Separators → whitespace
+        GeneralCategory::SpaceSeparator => CategoryAction::Whitespace,
+        GeneralCategory::LineSeparator => CategoryAction::Whitespace,
+        GeneralCategory::ParagraphSeparator => CategoryAction::Whitespace,
+
+        // Control/format
+        GeneralCategory::Control => CategoryAction::Whitespace,
+        GeneralCategory::Format => CategoryAction::Skip,
+
+        // Special categories → skip
+        GeneralCategory::Surrogate => CategoryAction::Skip,
+        GeneralCategory::PrivateUse => CategoryAction::Skip,
+        GeneralCategory::Unassigned => CategoryAction::Skip,
+
+        // Catch any future Unicode categories: keep (matches Python's .get(cat, char) default)
+        _ => CategoryAction::Keep,
+    }
+}
 
 /// Normalize an address string for comparison.
 ///
@@ -154,5 +221,36 @@ mod tests {
         let result = normalize_address("Café 123", true, 4);
         // TODO: This should transliterate 'é' to 'e' when we implement proper latinization
         assert!(result.is_some());
+    }
+
+    #[test]
+    fn test_category_actions() {
+        // Whitespace
+        assert_eq!(get_category_action(' '), CategoryAction::Whitespace);
+        assert_eq!(get_category_action('\t'), CategoryAction::Whitespace);
+
+        // ASCII alphanumeric should be kept
+        assert_eq!(get_category_action('a'), CategoryAction::Keep);
+        assert_eq!(get_category_action('Z'), CategoryAction::Keep);
+        assert_eq!(get_category_action('5'), CategoryAction::Keep);
+
+        // Punctuation -> whitespace
+        assert_eq!(get_category_action('.'), CategoryAction::Whitespace);
+        assert_eq!(get_category_action(','), CategoryAction::Whitespace);
+    }
+
+    #[test]
+    fn test_address_allowed_chars() {
+        // Allowed chars
+        assert!(is_address_allowed_char('a'));
+        assert!(is_address_allowed_char('Z'));
+        assert!(is_address_allowed_char('5'));
+        assert!(is_address_allowed_char('&'));
+        assert!(is_address_allowed_char('№'));
+
+        // Not allowed
+        assert!(!is_address_allowed_char(' '));
+        assert!(!is_address_allowed_char('.'));
+        assert!(!is_address_allowed_char('!'));
     }
 }

@@ -3,21 +3,9 @@
 /// This module provides functions to split person and entity names into parts,
 /// and normalize them for comparison and matching.
 
-const SKIP_CHARACTERS: &[char] = &['.', '\u{2019}', '\''];  // period, right single quote, apostrophe
+use crate::common::CategoryAction;
 
-/// Unicode category action for name tokenization.
-///
-/// Different from address normalization - names have specific rules
-/// about which categories become whitespace vs. being removed.
-#[derive(Debug, Clone, Copy, PartialEq)]
-enum CategoryAction {
-    /// Keep the character as-is
-    Keep,
-    /// Replace with whitespace (token separator)
-    Whitespace,
-    /// Remove the character entirely
-    Remove,
-}
+const SKIP_CHARACTERS: &[char] = &['.', '\u{2019}', '\''];  // period, right single quote, apostrophe
 
 /// Get the action for a Unicode category in name tokenization.
 ///
@@ -43,16 +31,16 @@ fn get_name_category_action(ch: char) -> CategoryAction {
         GeneralCategory::DecimalNumber => CategoryAction::Keep,
         GeneralCategory::LetterNumber => CategoryAction::Keep,
 
-        // Modifier letter → remove
-        GeneralCategory::ModifierLetter => CategoryAction::Remove,
+        // Modifier letter → skip
+        GeneralCategory::ModifierLetter => CategoryAction::Skip,
 
         // Marks
-        GeneralCategory::NonspacingMark => CategoryAction::Remove,
+        GeneralCategory::NonspacingMark => CategoryAction::Skip,
         GeneralCategory::SpacingMark => CategoryAction::Whitespace,
-        GeneralCategory::EnclosingMark => CategoryAction::Remove,
+        GeneralCategory::EnclosingMark => CategoryAction::Skip,
 
-        // Other number → remove
-        GeneralCategory::OtherNumber => CategoryAction::Remove,
+        // Other number → skip
+        GeneralCategory::OtherNumber => CategoryAction::Skip,
 
         // Punctuation → whitespace (all types)
         GeneralCategory::ConnectorPunctuation => CategoryAction::Whitespace,
@@ -65,8 +53,8 @@ fn get_name_category_action(ch: char) -> CategoryAction {
 
         // Symbols
         GeneralCategory::MathSymbol => CategoryAction::Whitespace,
-        GeneralCategory::CurrencySymbol => CategoryAction::Remove,
-        GeneralCategory::ModifierSymbol => CategoryAction::Remove,
+        GeneralCategory::CurrencySymbol => CategoryAction::Skip,
+        GeneralCategory::ModifierSymbol => CategoryAction::Skip,
         GeneralCategory::OtherSymbol => CategoryAction::Whitespace,
 
         // Separators → whitespace
@@ -74,14 +62,14 @@ fn get_name_category_action(ch: char) -> CategoryAction {
         GeneralCategory::LineSeparator => CategoryAction::Whitespace,
         GeneralCategory::ParagraphSeparator => CategoryAction::Whitespace,
 
-        // Control/format → remove or whitespace
+        // Control/format
         GeneralCategory::Control => CategoryAction::Whitespace,
-        GeneralCategory::Format => CategoryAction::Remove,
+        GeneralCategory::Format => CategoryAction::Skip,
 
-        // Special categories → remove
-        GeneralCategory::Surrogate => CategoryAction::Remove,
-        GeneralCategory::PrivateUse => CategoryAction::Remove,
-        GeneralCategory::Unassigned => CategoryAction::Remove,
+        // Special categories → skip
+        GeneralCategory::Surrogate => CategoryAction::Skip,
+        GeneralCategory::PrivateUse => CategoryAction::Skip,
+        GeneralCategory::Unassigned => CategoryAction::Skip,
 
         // Catch any future Unicode categories: keep (matches Python's .get(cat, char) default)
         _ => CategoryAction::Keep,
@@ -126,7 +114,7 @@ pub fn tokenize_name(text: &str, token_min_length: usize) -> Vec<String> {
         let action = get_name_category_action(ch);
 
         match action {
-            CategoryAction::Remove => {
+            CategoryAction::Skip => {
                 // Skip this character
                 continue;
             }
