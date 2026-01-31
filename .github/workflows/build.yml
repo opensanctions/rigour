@@ -59,6 +59,12 @@ jobs:
             target: universal2
     steps:
       - uses: actions/checkout@v6
+      - name: Install ICU (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install icu4c pkg-config
+          echo "PKG_CONFIG_PATH=$(brew --prefix icu4c)/lib/pkgconfig:$PKG_CONFIG_PATH" >> $GITHUB_ENV
+          echo "ICU_ROOT=$(brew --prefix icu4c)" >> $GITHUB_ENV
       - name: Set up Python 3.13
         uses: actions/setup-python@v6
         with:
@@ -70,6 +76,9 @@ jobs:
           args: --release --strip --out dist
           sccache: 'true'
           manylinux: auto
+          before-script-linux: |
+            # Install ICU and pkg-config in manylinux container
+            dnf install -y libicu-devel pkgconf-pkg-config
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
