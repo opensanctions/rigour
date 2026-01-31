@@ -383,14 +383,21 @@ types:
   - display: GmbH
     generic: LLC
     aliases:
+      - GmbH
+      - mbH
+      - -GmbH
       - Gesellschaft mit beschränkter Haftung
+      - GMBH
+      - gmbh
+      - Gesellschaft mbH
+      - GmbH.
+      - m.b.H.
       - g.m.b.h
       - gmb.h
       - Gesellschaft mit besch Haftung
       - Gesellschaft mit besch. Haftung
       - Gesellschaft mit beschr Haftung
       - Gesellschaft mit beschr. Haftung
-      - Gesellschaft mit beschränkter Haftung
       - Gesellschaft mit beschraenkter Haftung
       - Gesellschaft mit beschraenker Haftung
       - Gesellschaft mit beschränkter Haftng
@@ -406,6 +413,7 @@ types:
       - GmbHs
       - Ges. m. b. H.
       - Ges.m.b.H.
+      - GesmbH
       - Gesellsch. m. b. H.
       - G.M.B.H.
       - Gesellschaft m.b.H.
@@ -416,21 +424,33 @@ types:
     aliases:
       - gGmbH
       - gemeinnützige GmbH
+      - Gemeinnützige GmbH
+      - gemeinnützige Gesellschaft mit beschränkter Haftung
   - display: UG
     generic: LLC
     aliases:
+      - UG
       - UG (haftungsbeschränkt)
+      - -UG (haftungsbeschränkt)
+      - Unternehmergesellschaft (haftungsbeschränkt)
+      - Unternehmergesellschaft
+      - UG haftungsbeschränkt
       - UG (haftungsbeschr.)
       - UG (h.b.)
-      - Unternehmergesellschaft haftungsbeschränkt
       - Unternehmerges. (haftungsbeschränkt)
-      - Unternehmergesellschaft
       - Unternehmerges.
       - Unternehmerg.
   - display: GmbH & Co. KG
     compare: GmbHCoKG
-    generic: LLC
+    generic: LP
     aliases:
+      - GmbH & Co. KG
+      - GmbH & Co KG
+      - GmbH u. Co. KG
+      - GmbH und Co. KG
+      - -GmbH & Co. KG
+      - Gesellschaft mit beschränkter Haftung & Co. KG
+      - Gesellschaft mbH & Co. KG
       - gmbh & co.
       - gmbh & co. kg
       - gmbh and сo. kg
@@ -439,41 +459,317 @@ types:
   - display: AG
     generic: JSC
     aliases:
+      - AG
       - Aktiengesellschaft
+      - A.G.
+      - -AG
+      - Aktienges.
       - Aktiengeselschaft
       - Aktien Gesellschaft
       - Aktien ges
       - Aktienges
       - AktG
       - Akt Ges
-      - AG & Co. KG
-      - AG & Co KG
-      - AG und Co KG
-      - AG & Co. KGaA
-      - A.G.
       - A G
       - AGs
       - Aktien-Gesellschaft
-      - Aktienges.
       - AG Société Anonyme
 
   - display: KG
     generic: LP
     aliases:
+      - KG
       - Kommanditgesellschaft
+      - K.G.
+      - K. G.
+      - -KG
       - Kommandit-Gesellschaft
 
   - display: e.K.
     compare: eK
-    generic: GP
+    generic: SP
     aliases:
+      - e.K.
       - e. K.
+      - eK
+      - e.K
+      - e. K
       - eingetragener Kaufmann
+      - Eingetragener Kaufmann
+      - eingetr. Kaufmann
+      - e.Kfm.
+      - e. Kfm.
+      - e.Kfm
+      - e. Kfm
+      - eKfm
+      - Kfm.
+      - e.Kfr.
+      - e. Kfr.
+      - e.Kfr
+      - e. Kfr
+      - eKfr
+      - Kfr.
+      - eingetragene Kauffrau
+      - Eingetragene Kauffrau
 
   - display: KGaA
     generic: LP
     aliases:
+      - KGaA
       - Kommanditgesellschaft auf Aktien
+      - K.G.a.A.
+
+  - display: OHG
+    generic: GP
+    aliases:
+      - OHG
+      - oHG
+      - Offene Handelsgesellschaft
+      - O.H.G.
+      - -OHG
+      - -oHG
+      - Offene Handels-Gesellschaft
+
+  - display: gUG
+    generic: LLC
+    aliases:
+      - gUG
+      - gUG (haftungsbeschränkt)
+      - gemeinnützige UG
+      - gemeinnützige UG (haftungsbeschränkt)
+      - gemeinnützige Unternehmergesellschaft
+      - gemeinnützige Unternehmergesellschaft (haftungsbeschränkt)
+
+  - display: UG & Co. KG
+    compare: UGCoKG
+    generic: LP
+    aliases:
+      - UG (haftungsbeschränkt) & Co. KG
+      - UG & Co KG
+      - UG (haftungsbeschränkt) & Co KG
+      - Unternehmergesellschaft & Co. KG
+      - Unternehmergesellschaft (haftungsbeschränkt) & Co. KG
+
+  - display: AG & Co. KG
+    compare: AGCoKG
+    generic: LP
+    aliases:
+      - AG & Co KG
+      - AG und Co KG
+      - AG und Co. KG
+      - Aktiengesellschaft & Co. KG
+
+  - display: SE & Co. KG
+    compare: SECoKG
+    generic: LP
+    aliases:
+      - SE & Co. KG
+      - SE & Co KG
+      - Europäische Gesellschaft & Co. KG
+      - Societas Europaea & Co. KG
+
+  - display: Stiftung & Co. KG
+    compare: StiftungCoKG
+    generic: LP
+    aliases:
+      - Stiftung & Co KG
+      - Stiftung und Co. KG
+
+  - display: GmbH & Co. OHG
+    compare: GmbHCoOHG
+    generic: GP
+    aliases:
+      - GmbH & Co OHG
+      - GmbH & Co. oHG
+      - GmbH & Co oHG
+      - Gesellschaft mit beschränkter Haftung & Co. OHG
+
+  - display: UG & Co. OHG
+    compare: UGCoOHG
+    generic: GP
+    aliases:
+      - UG (haftungsbeschränkt) & Co. OHG
+      - UG & Co OHG
+
+  - display: eG & Co. KG
+    compare: eGCoKG
+    generic: LP
+    aliases:
+      - eG & Co KG
+      - eingetragene Genossenschaft & Co. KG
+      - Genossenschaft & Co. KG
+
+  - display: SE & Co. KGaA
+    compare: SECoKGaA
+    generic: LP
+    aliases:
+      - SE & Co. KGaA
+      - SE & Co KGaA
+      - Europäische Gesellschaft & Co. KGaA
+      - Societas Europaea & Co. KGaA
+
+  - display: GmbH & Co. KGaA
+    compare: GmbHCoKGaA
+    generic: LP
+    aliases:
+      - GmbH & Co KGaA
+      - Gesellschaft mit beschränkter Haftung & Co. KGaA
+
+  - display: Ltd. & Co. KG
+    compare: LtdCoKG
+    generic: LP
+    aliases:
+      - Ltd & Co. KG
+      - Ltd. & Co KG
+      - Ltd & Co KG
+      - Limited & Co. KG
+      - Limited & Co KG
+
+  - display: mbH & Co. KG
+    compare: GmbHCoKG
+    generic: LP
+    aliases:
+      - mbH & Co. KG
+      - mbH & Co KG
+      - mbH u. Co. KG
+      - m.b.H. & Co. KG
+
+  - display: B.V. & Co. KG
+    compare: BVCoKG
+    generic: LP
+    aliases:
+      - B.V. & Co. KG
+      - BV & Co. KG
+      - B.V. & Co KG
+      - BV & Co KG
+
+  - display: AG & Co. KGaA
+    compare: AGCoKGaA
+    generic: LP
+    aliases:
+      - AG & Co. KGaA
+      - AG & Co KGaA
+      - Aktiengesellschaft & Co. KGaA
+
+  - display: Stiftung & Co. KGaA
+    compare: StiftungCoKGaA
+    generic: LP
+    aliases:
+      - Stiftung & Co. KGaA
+      - Stiftung & Co KGaA
+
+  - display: gAG
+    generic: JSC
+    aliases:
+      - gAG
+      - gemeinnützige AG
+      - gemeinnützige Aktiengesellschaft
+
+  - display: eGbR
+    compare: eGbR
+    generic: GP
+    aliases:
+      - eGbR
+      - e.GbR
+      - eingetragene GbR
+      - eingetragene Gesellschaft bürgerlichen Rechts
+      - eingetragene Gesellschaft des bürgerlichen Rechts
+
+
+  - display: PartG
+    generic: GP
+    aliases:
+      - PartG
+      - Part.G.
+      - Partnerschaftsgesellschaft
+      - Partnerschaft
+
+  - display: PartG mbB
+    compare: PartGmbB
+    generic: LLP
+    aliases:
+      - PartG mbB
+      - PartGmbB
+      - mbB
+      - Partnerschaft mbB
+      - Partnerschaftsgesellschaft mbB
+      - Part.G. mbB
+      - PartG m.b.B.
+      - Part. mbB
+      - PartmbB
+      - Partnerschaftsgesellschaft mit beschränkter Berufshaftung
+      - Partnerschaft mit beschränkter Berufshaftung
+
+  - display: eG
+    generic: COOP
+    aliases:
+      - eG
+      - e.G.
+      - e. G.
+      - eingetragene Genossenschaft
+      - Eingetragene Genossenschaft
+      - Genossenschaft
+      - eGen
+
+  - display: Stiftung
+    generic: NGO
+    aliases:
+      - Stiftung
+      - rechtsfähige Stiftung
+      - gemeinnützige Stiftung
+      - Stiftung des öffentlichen Rechts
+      - Stiftung des bürgerlichen Rechts
+      - rechtsf. Stiftung
+
+  - display: EWIV
+    aliases:
+      - EWIV
+      - E.W.I.V.
+      - Europäische wirtschaftliche Interessenvereinigung
+      - EEIG
+      - European Economic Interest Grouping
+
+  - display: SCE
+    generic: COOP
+    aliases:
+      - SCE
+      - S.C.E.
+      - Societas Cooperativa Europaea
+      - Europäische Genossenschaft
+
+  - display: VVaG
+    generic: COOP
+    aliases:
+      - VVaG
+      - V.V.a.G.
+      - Versicherungsverein auf Gegenseitigkeit
+      - Versicherungsverein a.G.
+
+  - display: AöR
+    generic: SOE
+    aliases:
+      - AöR
+      - A.ö.R.
+      - Anstalt des öffentlichen Rechts
+      - Anstalt öffentlichen Rechts
+
+  - display: KdöR
+    generic: SOE
+    aliases:
+      - KdöR
+      - K.d.ö.R.
+      - KöR
+      - Körperschaft des öffentlichen Rechts
+      - Körperschaft öffentlichen Rechts
+
+  - display: KU
+    generic: SOE
+    aliases:
+      - KU
+      - K.U.
+      - Kommunalunternehmen
+      - gKU
+      - gemeinnütziges Kommunalunternehmen
 
   - display: Sp. z o.o.
     compare: Spzoo
@@ -889,9 +1185,17 @@ types:
     compare: eV
     generic: NGO
     aliases:
-      - eingetragener verein
+      - e.V.
+      - e. V.
+      - eV
+      - e.V
+      - e. V
+      - e V
       - eingetragener Verein
-      - eingetragene vereinigung
+      - Eingetragener Verein
+      - eingetr. Verein
+      - Verein
+      - eingetragene Vereinigung
   - display: f:ma
     aliases:
       - enskild näringsidkare
@@ -902,8 +1206,13 @@ types:
     aliases:
       - forening med begrænset ansvar
   - display: GbR
-    generic: SP
+    generic: GP
     aliases:
+      - GbR
+      - Gesellschaft bürgerlichen Rechts
+      - Gesellschaft des bürgerlichen Rechts
+      - BGB-Gesellschaft
+      - Ges. bürgerlichen Rechts
       - gesbr
       - gesellschaft des bürgerlichen rechts
       - gesellschaft bürgerlichen rechts
@@ -1657,7 +1966,12 @@ types:
   - display: SE
     generic: JSC
     aliases:
+      - SE
+      - S.E.
+      - Societas Europaea
       - societas europaea
+      - Europäische Aktiengesellschaft
+      - Europäische Gesellschaft
   - display: sem
     generic: COOP
     aliases:
