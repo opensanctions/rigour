@@ -135,6 +135,8 @@ forms:
     - str
     - rue
     - стр
+    # Whole other meaning
+    - saint
   pr:
     - pr-kt
     - prospekt
