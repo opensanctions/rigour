@@ -47,6 +47,7 @@ jobs:
   build-wheels:
     name: Build wheels on ${{ matrix.platform.name }}
     runs-on: ${{ matrix.platform.os }}
+    needs: test
     strategy:
       matrix:
         platform:
@@ -62,7 +63,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --strip --out dist
+          args: --release --strip --out dist --find-interpreter
           sccache: 'true'
           manylinux: auto
       - name: Upload wheels
