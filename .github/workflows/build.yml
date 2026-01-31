@@ -59,11 +59,15 @@ jobs:
             target: universal2
     steps:
       - uses: actions/checkout@v6
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --strip --out dist --find-interpreter
+          args: --release --strip --out dist
           sccache: 'true'
           manylinux: auto
       - name: Upload wheels
