@@ -1,9 +1,14 @@
 from functools import cache
 from typing import Sequence, Set
 import unicodedata
+import warnings
 
 from rigour.text.dictionary import Normalizer
 from rigour.names.tokenize import normalize_name
+
+# Re-export stopword and nullword functions from rigour.text.stopwords for backwards compatibility
+from rigour.text.stopwords import is_stopword as _is_stopword
+from rigour.text.stopwords import is_nullword as _is_nullword
 
 
 def is_name(name: str) -> bool:
@@ -16,28 +21,13 @@ def is_name(name: str) -> bool:
     return False
 
 
-def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
-    """Load a list of words and normalize them using the provided normalizer."""
-    wordlist = set()
-    for word in words:
-        norm = normalizer(word)
-        if norm is not None and len(norm) > 0:
-            wordlist.add(norm)
-    return wordlist
-
-
-@cache
-def _load_stopwords(normalizer: Normalizer) -> Set[str]:
-    """Load the stopwords from the data file and normalize them using the provided normalizer."""
-    from rigour.data.names.data import STOPWORDS
-
-    return _load_wordlist(STOPWORDS, normalizer)
-
-
 def is_stopword(
     form: str, *, normalizer: Normalizer = normalize_name, normalize: bool = False
 ) -> bool:
     """Check if the given form is a stopword. The stopword list is normalized first.
+
+    .. deprecated::
+        Use :func:`rigour.text.is_stopword` instead. This function will be removed in a future version.
 
     Args:
         form (str): The token to check, must already be normalized.
@@ -47,19 +37,12 @@ def is_stopword(
     Returns:
         bool: True if the form is a stopword, False otherwise.
     """
-    norm_form = normalizer(form) if normalize else form
-    if norm_form is None:
-        return False
-    stopwords = _load_stopwords(normalizer)
-    return norm_form in stopwords
-
-
-@cache
-def _load_nullwords(normalizer: Normalizer) -> set[str]:
-    """Load the nullwords from the data file and normalize them using the provided normalizer."""
-    from rigour.data.names.data import NULLWORDS
-
-    return _load_wordlist(NULLWORDS, normalizer)
+    warnings.warn(
+        "rigour.names.is_stopword is deprecated, use rigour.text.is_stopword instead",
+        DeprecationWarning,
+        stacklevel=2,
+    )
+    return _is_stopword(form, normalizer=normalizer, normalize=normalize)
 
 
 def is_nullword(
@@ -67,6 +50,9 @@ def is_nullword(
 ) -> bool:
     """Check if the given form is a nullword. Nullwords are words that imply a missing value, such
     as "none", "not available", "n/a", etc. The nullword list is normalized first.
+
+    .. deprecated::
+        Use :func:`rigour.text.is_nullword` instead. This function will be removed in a future version.
 
     Args:
         form (str): The token to check, must already be normalized.
@@ -76,11 +62,22 @@ def is_nullword(
     Returns:
         bool: True if the form is a nullword, False otherwise.
     """
-    norm_form = normalizer(form) if normalize else form
-    if norm_form is None:
-        return False
-    nullwords = _load_nullwords(normalizer)
-    return norm_form in nullwords
+    warnings.warn(
+        "rigour.names.is_nullword is deprecated, use rigour.text.is_nullword instead",
+        DeprecationWarning,
+        stacklevel=2,
+    )
+    return _is_nullword(form, normalizer=normalizer, normalize=normalize)
+
+
+def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
+    """Load a list of words and normalize them using the provided normalizer."""
+    wordlist = set()
+    for word in words:
+        norm = normalizer(word)
+        if norm is not None and len(norm) > 0:
+            wordlist.add(norm)
+    return wordlist
 
 
 @cache

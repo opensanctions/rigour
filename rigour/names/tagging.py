@@ -7,11 +7,12 @@ from typing import Dict, List, Set, Tuple
 
 from rigour.data import read_jsonl
 from rigour.text.dictionary import Normalizer
+from rigour.text.stopwords import is_stopword
 from rigour.names import Symbol, Name
 from rigour.names import load_person_names
-from rigour.names.check import is_stopword
 from rigour.names.part import NamePart
 from rigour.names.tag import NameTypeTag, NamePartTag, INTITIAL_TAGS
+from rigour.names.tokenize import normalize_name
 from rigour.territories.territory import TERRITORIES_FILE
 from rigour.util import resource_lock, unload_module
 
@@ -180,7 +181,7 @@ def _infer_part_tags(name: Name) -> Name:
                         sym = Symbol(Symbol.Category.NUMERIC, value)
                         name.apply_part(part, sym)
                     numerics.add(part)
-            elif is_stopword(part.form):
+            elif is_stopword(part.form, normalizer=normalize_name):
                 # If a name part is a stop word, we can tag it as a stop word.
                 part.tag = NamePartTag.STOP
     return name

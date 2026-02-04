@@ -22,9 +22,9 @@ def generate_data_file() -> None:
 
     stopwords_path = RESOURCES_PATH / "names" / "stopwords.yml"
     with open(stopwords_path, "r", encoding="utf-8") as ufh:
-        stopword_lists: Dict[str, List[str]] = yaml.safe_load(ufh.read())
+        name_data: Dict[str, List[str]] = yaml.safe_load(ufh.read())
 
-    for key, value in stopword_lists.items():
+    for key, value in name_data.items():
         raw_values = [norm_string(v) for v in value]
         values = tuple(sorted(set(v for v in raw_values if len(v) > 0)))
         if isinstance(key, str):

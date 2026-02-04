@@ -1,0 +1,277 @@
+STOPWORDS:
+  # English stopwords
+  - "of"
+  - "the"
+  - "in"
+  - "and"
+  - "for"
+  - "or"
+  - "a"
+  - "an"
+  - "as"
+  - "with"
+  - "on"
+  - "at"
+  - "to"
+  - "by"
+  - "from"
+  - "into"
+  - "&"
+  # Uncategorised stopwords
+  - "al"
+  - "per"
+  # Russian stopwords
+  - "для" # for
+  - "и" # and
+  - "в" # in
+  - "на" # on
+  - "с" # with
+  - "от" # from
+  - "к" # to
+  - "по" # by, for
+  - "из" # out of, from
+  - "а" # and, but
+  - "но" # but
+  - "о" # about
+  - "за" # for, behind
+  - "при" # at, in the presence of
+  - "как" # as, like
+  - "что" # that, what
+  - "это" # this, it
+  - "все" # all, everything
+  - "без" # without
+  - "ИХ" # their
+  # Ukrainian stopwords
+  - "для" # for
+  - "і" # and
+  - "в" # in
+  - "на" # on
+  - "з" # with
+  - "від" # from
+  - "до" # to
+  - "по" # by, for
+  - "з" # out of, from
+  - "а" # and, but
+  - "але" # but
+  - "про" # about
+  - "за" # for, behind
+  - "при" # at, in the presence of
+  - "як" # as, like
+  - "що" # that, what
+  - "це" # this, it
+  # Arabic / transliterated Arabic stopwords
+  - "في" # in
+  - "من" # from
+  - "إلى" # to
+  - "عن" # about
+  - "مع" # with
+  - "على" # on
+  - "و" # and
+  - "أو" # or
+  - "في" # in
+  - "ال" # the (definite article)
+  - "ul" # the (definite article)
+  - "هذا" # this
+  - "ذلك" # that
+  - "كل" # all, every
+  - "أي" # any
+  # Spanish stopwords
+  - "de" # of, from
+  - "la" # the (feminine)
+  - "el" # the (masculine)
+  - "las" # the (feminine plural)
+  - "los" # the (masculine plural)
+  - "y" # and
+  - "en" # in, on
+  - "a" # to, at
+  # - "con" # with
+  - "por" # for, by
+  - "para" # for, to
+  - "un" # a, an (masculine)
+  - "una" # a, an (feminine)
+  - "unos" # some (masculine)
+  - "unas" # some (feminine)
+  - "y" # and
+  - "del" # of the
+  # Estonian stopwords
+  - "ja" # and
+  # Catalan stopwords
+  - "és" # is
+  # Portugese stopwords
+  - "do" # of
+  - "em" # in
+  - "ou" # or
+  # Dutch stopwords
+  - "voor" # for
+  # French stopwords
+  - "de" # of, from
+  - "du" # of the, any, some
+  - "la" # the (feminine)
+  - "le" # the (masculine)
+  - "et" # and
+  - "en" # in, on
+  - "à" # to, at
+  - "avec" # with
+  - "pour" # for, to
+  - "par" # by, through
+  - "un" # a, an (masculine)
+  - "une" # a, an (feminine)
+  - "des" # of the
+  # - "de l'" # of the (before a vowel or h)
+  # Hebrew stopwords
+  - "אל" # to
+  # Romanian stopwords
+  - "și" # and
+  # Slovene stopwords
+  - "za" # for
+  # Turkish
+  - "ve" # and
+  # Swahili stopwords
+  - "wa" # of
+  # Swedish stopwords
+  - "för" # for
+  # Chinese stopwords
+  - "的" # of, 's (possessive)
+  - "在" # at, in, on
+  - "和" # and
+  # - "与" # and, with
+  - "为" # for, as
+  - "是" # is, are
+  - "有" # have, has
+  - "这" # this
+  - "那" # that
+  - "一个" # a, an
+  - "一些" # some
+  # Italian stopwords
+  - "da" # from
+  - "di" # of
+  - "degli" # of the
+  - "della" # from the
+  - "delle" # from the
+  # Japanese stopwords
+  - "の" # of, 's (possessive)
+  - "で" # at, in, on
+  - "と" # and, with
+  - "に" # to, at
+  - "は" # topic marker
+  # German stopwords
+  - "der" # the (masculine)
+  - "die" # the (feminine)
+  - "das" # the (neuter)
+  - "und" # and
+  - "in" # in
+  - "zu" # to
+  - "von" # from, of
+  - "mit" # with
+  - "für" # for
+  - "auf" # on, upon
+  - "an" # at, on
+  - "bei" # at, near
+  - "als" # as, when
+  - "es" # it
+  # Greek stopwords
+  - "του" # of
+  - "και" # and
+  # Commented out
+  # - "(sic)"
+  # - "[sic]"
+NULLWORDS:
+  - Not applicable
+  - N/A
+  - None
+  - "Null"
+  - unlabeled
+  - notnevada
+  - null null null
+  - null null
+  - /
+  - "-"
+  - "--"
+  - "---"
+  - "?"
+  - "-"
+  - "-?"
+  - "???"
+  - "????"
+  - "00"
+  - UNKNOWN
+  - "NULL"
+  - undetermined
+  - Other
+  - n a
+  - unknown
+  - unk
+  - Other
+  - nil
+  - void
+  - blank
+  - missing
+  - n.a.
+  - xxx
+  - not applicable
+  - not specified other
+  - not specified
+  - non specified
+  - "Not Known"
+  - "Not Disclosed"
+  - empty
+  - not given
+  - keine angabe
+  - no data
+  - No disponible
+  - Sin datos
+  - Desconocido
+  - No especificado
+  - Sin especificar
+  - No aplica
+  - Vacío
+  - Nulo
+  - Non disponible
+  - Pas de données
+  - Inconnu
+  - Non spécifié
+  - Non renseigné
+  - Sans objet
+  - Nicht verfügbar
+  - Keine Daten
+  - Nicht angegeben
+  - Entfällt
+  - Niet beschikbaar
+  - Н/Д
+  - Нет данных
+  - Неизвестно
+  - Не указано
+  - Пусто
+  - Отсутствует
+  - Undefined
+  - vacant
+NULLPLACES:
+  - stateless
+  - overseas
+  - ABC islands
+  - antilles
+  - Lesser Antilles
+  - Antillean
+  - asia
+  - british overseas territories
+  - overseas territories
+  - abroad
+  - channel islands
+  - channels islands
+  - channel island
+  - Channel Isles
+  - west indies
+  - West Indian
+  - indies
+  - THE WEST INDIES
+  - THE CHENNAL ISLES
+  - CHANNEL ISLANDS
+  - VIRGIN ISLANDS
+  - Africa
+  - African
+  - central america
+  - southern america
+  - ДЛЯ ЛИЦ БЕЗ ГРАЖДАНСТВА
+  - Gulf
+  - Central America
+  - South America
