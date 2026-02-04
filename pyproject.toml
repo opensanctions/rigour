@@ -1,6 +1,6 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["maturin>=1.5,<2.0"]
+build-backend = "maturin"
 
 [project]
 name = "rigour"
@@ -65,18 +65,22 @@ docs = [
 
 [project.entry-points."babel.extractors"]
 
-[tool.hatch.build.targets.sdist]
-only-include = ["rigour", "LICENSE", "README.md"]
-exclude = ['genscripts']
+[tool.maturin]
+python-source = "."
+module-name = "rigour._core"
+features = ["pyo3/extension-module"]
+strip = true
+manifest-path = "rigour-core/Cargo.toml"
+
+# Include Python source and Rust crate
+include = ["rigour/**/*.py", "rigour/data/**/*", "rigour-core/**/*"]
+exclude = ["genscripts/**/*"]
 
 # [tool.pytest.ini_options]
 # asyncio_default_fixture_loop_scope = "function"
 
-[tool.hatch.build.targets.wheel]
-exclude = ["genscripts"]
-
 [tool.distutils.bdist_wheel]
-universal = true
+universal = false
 
 [tool.coverage.run]
 branch = true

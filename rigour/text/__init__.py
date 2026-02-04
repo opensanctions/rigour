@@ -5,6 +5,7 @@ from rigour.text.distance import jaro_winkler
 from rigour.text.checksum import text_hash
 from rigour.text.phonetics import metaphone, soundex
 from rigour.text.cleaning import remove_bracketed_text, remove_emoji
+from rigour.text.transliterate import ascii_text
 
 __all__ = [
     "dam_levenshtein",
@@ -17,4 +18,5 @@ __all__ = [
     "remove_bracketed_text",
     "remove_emoji",
     "text_hash",
+    "ascii_text",
 ]

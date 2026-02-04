@@ -7,7 +7,6 @@ from rigour.territories.territory import get_index
 from rigour.territories.lookup import lookup_territory
 from rigour.territories.lookup import _get_identifier_map, _get_territory_names
 from rigour.text.scripts import can_latinize_cp
-from rigour.names import normalize_name
 from rigour.addresses.format import _load_formats, _load_template
 from rigour.addresses.normalize import _address_replacer
 from rigour.names.org_types import _compare_replacer, _display_replacer
@@ -21,7 +20,7 @@ def reset_caches() -> None:
     latinize_text.cache_clear()
     _ascii_text.cache_clear()
     levenshtein.cache_clear()
-    normalize_name.cache_clear()
+    # normalize_name is now implemented in Rust without caching
     dam_levenshtein.cache_clear()
     jaro_winkler.cache_clear()
     soundex.cache_clear()

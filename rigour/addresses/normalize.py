@@ -1,42 +1,13 @@
-import string
 import logging
-import unicodedata
 from functools import cache
 from typing import Dict, List, Optional
 from normality.constants import WS
-from normality.transliteration import ascii_text
-from normality.util import Categories
 
 from rigour.text.dictionary import Replacer
 from rigour.util import resource_lock, unload_module
 
-CHARS_ALLOWED = "&№" + string.ascii_letters + string.digits
-TOKEN_SEP_CATEGORIES: Categories = {
-    "Cc": WS,
-    "Cf": None,
-    # "Cs": None,
-    "Co": None,
-    "Cn": None,
-    "Lm": None,
-    "Mn": None,
-    "Mc": WS,
-    "Me": None,
-    "No": None,
-    "Zs": WS,
-    "Zl": WS,
-    "Zp": WS,
-    "Pc": WS,
-    "Pd": WS,
-    "Ps": WS,
-    "Pe": WS,
-    "Pi": WS,
-    "Pf": WS,
-    "Po": WS,
-    "Sm": WS,
-    "Sc": None,
-    "Sk": None,
-    "So": WS,
-}
+# Import Rust implementation
+from rigour._core import normalize_address as _normalize_address_core
 
 log = logging.getLogger(__name__)
 
@@ -47,45 +18,17 @@ def normalize_address(
     """Normalize the given address string for comparison, in a way that is destructive to
     the ability for displaying it (makes it ugly).
 
+    This function is implemented in Rust for performance.
+
     Args:
         address: The address to be normalized.
         latinize: Whether to convert non-Latin characters to their Latin equivalents.
         min_length: Minimum length of the normalized address.
 
     Returns:
-        The normalized address.
+        The normalized address, or None if below minimum length.
     """
-    tokens: List[List[str]] = []
-    token: List[str] = []
-    for char in address.lower():
-        if char in CHARS_ALLOWED:
-            chr: Optional[str] = char
-        else:
-            cat = unicodedata.category(char)
-            chr = TOKEN_SEP_CATEGORIES.get(cat, char)
-        if chr is None:
-            continue
-        if chr == WS:
-            if len(token):
-                tokens.append(token)
-            token = []
-            continue
-        token.append(chr)
-    if len(token):
-        tokens.append(token)
-
-    parts: List[str] = []
-    for token in tokens:
-        token_str = "".join(token)
-        if latinize:
-            token_str = ascii_text(token_str)
-        if len(token_str) == 0:
-            continue
-        parts.append(token_str)
-    norm_address = WS.join(parts)
-    if len(norm_address) < min_length:
-        return None
-    return norm_address
+    return _normalize_address_core(address, latinize, min_length)
 
 
 @cache
