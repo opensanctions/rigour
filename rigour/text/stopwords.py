@@ -1,15 +1,18 @@
 from functools import cache
-from typing import Sequence, Set
+from typing import Optional, Sequence, Set
 
 from normality import category_replace, squash_spaces
 from normality.constants import SLUG_CATEGORIES
 from rigour.text.dictionary import Normalizer
 
 
-def normalize_text(text: str) -> str:
+def normalize_text(text: Optional[str]) -> Optional[str]:
+    if text is None:
+        return None
     text = text.casefold()
     replaced = category_replace(text, SLUG_CATEGORIES)
-    return squash_spaces(replaced)
+    replaced = squash_spaces(replaced)
+    return replaced if len(replaced) > 0 else None
 
 
 def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
