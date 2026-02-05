@@ -173,8 +173,9 @@ forms:
   ter:
     - terr
     - terrace
-  pkwy:
+  pky:
     - parkway
+    - pkwy
   expy:
     - expressway
   fwy:
@@ -488,8 +489,6 @@ forms:
     - junction
     - jctn
     - junctn
-  ny:
-    - new york
   pobox:
     - po box
     - p o box
@@ -527,42 +526,7 @@ forms:
     - обл
     - область
     - oblast
-  ru:
-    - russia
-    - russian federation
-    - russian
-    - россия
-    - российская федерация
-  moscow:
-    - moscow
-    - москвa
-    - москви
-    - москва
-    - moskau
-    - Г.МОСКВА
-  us:
-    - united states
-    - united states of america
-    - u.s. of a
-    - u.s.
-    - usa
-    - america
   ir:
-    - iran
-    - islamic republic of iran
-    - исламистская республика иран
     - irn
   ae:
-    - united arab emirates
     - uae
-    - арабские эмираты
-  hk:
-    - hong kong
-    - хонг конг
-  gb:
-    - united kingdom
-    - great britain
-    - united kingdom of great britain and northern ireland
-    - великобритания
-    - великобританія
-    - великобританії

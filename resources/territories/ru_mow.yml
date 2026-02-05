@@ -19,9 +19,9 @@ names_weak:
   - Moskva (Russia)
   - Moskva (Rusia) # Moskva
   - Москва (Росія) # Moskva (Rosíâ)
-  - Moscú
+  - Moscú          # moskvi
   - Moskow         # G.MOSKVA
-  - 莫斯科
+  - 莫斯科            # G.MOSKVA
   - Mosca
   - Moscou
   - Moscova
