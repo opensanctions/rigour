@@ -7,9 +7,10 @@ is_jurisdiction: true
 parent: us
 names_strong:
   - Wyoming, US
+  - Wyoming, WY
+  - Wy, Usa
 names_weak:
   - Wyo.
-  - Wy, Usa
   - Wyoming (USA)
   - Wyoming, USA
   - Wyoming, United States of America

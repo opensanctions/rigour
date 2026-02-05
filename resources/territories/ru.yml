@@ -24,6 +24,8 @@ names_strong:
   - Российская Федерация
   - Российская Федераци
   - Российская Федерациѐ
+  - russian
+  - россия
 names_weak:
   - Русија # Rusiǰa
   - ᏲᏂᎢ    # RF
@@ -31,14 +33,14 @@ names_weak:
   - Rusija # Rossijskaâ Federaci
   - Lasa   # Rossijskaâ Federaciè
   - Ir -Russja # Rossijskaâ Federaciè
-  - Rosia
-  - Rasiab
+  - Rosia      # rossiâ
+  - Rasiab # rossiâ
   - רוסיה
   - Rashiya
   - Federația Rusă
   - Krievijas Federācija
   - Ruska
-  - Росія      # Rosíâ
+  - Росія  # Rosíâ
   - Russian Republic
   - Rɔhyea
   - Rússland
@@ -97,7 +99,6 @@ names_weak:
   - Larisi
   - Russia Federation
   - Rrus
-  - Russian
   - రష్యా
   - روسیه
   - Арассыыйа # Arassyyja
@@ -120,7 +121,6 @@ names_weak:
   - รัสเซีย
   - Rrasha
   - Emetab Russia
-  - Россия # Rossiâ
   - רוסלאַנד
   - ৰুচ
   - Risí
