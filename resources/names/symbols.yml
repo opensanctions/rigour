@@ -3371,8 +3371,8 @@ person_nick:
     - "Andy"
     - "Andrew"
   beccy:
-   - "Beccy"
-   - "Rebecca"
+    - "Beccy"
+    - "Rebecca"
   chris:
     - "Chris"
     - "Christopher"
@@ -3392,17 +3392,17 @@ person_nick:
     - "Dave"
     - "David"
   debbie:
-   - "Debbie"
-   - "Deborah"
+    - "Debbie"
+    - "Deborah"
   ellie:
-   - "Ellie"
-   - "Eleanor"
+    - "Ellie"
+    - "Eleanor"
   fred:
-   - "Fred"
-   - "Frederick"
+    - "Fred"
+    - "Frederick"
   jess:
-   - "Jess"
-   - "Jessica"
+    - "Jess"
+    - "Jessica"
   jack:
     - "Jack"
     - "John"
@@ -3413,8 +3413,8 @@ person_nick:
     - "Jon"
     - "Jonathan"
   liz:
-   - "Liz"
-   - "Elizabeth"
+    - "Liz"
+    - "Elizabeth"
   maggie:
     - "Maggie"
     - "Margaret"
@@ -3423,16 +3423,16 @@ person_nick:
     - "Mathew"
     - "Matthew"
   max:
-   - "Maximilian"
+    - "Maximilian"
   mike:
     - "Mike"
     - "Michael"
   nick:
     - "Nick"
-    - "Nicholas" 
+    - "Nicholas"
   paddy:
-   - "Paddy"
-   - "Patrick"
+    - "Paddy"
+    - "Patrick"
   pete:
     - "Pete"
     - "Peter"
@@ -3450,8 +3450,8 @@ person_nick:
     - "Tom"
     - "Thomas"
   wes:
-   - "Wes"
-   - "Wesley"
+    - "Wes"
+    - "Wesley"
 
 person_name_parts:
   # Big guy gets a special kind of love
