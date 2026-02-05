@@ -48,7 +48,7 @@ def lookup_by_identifier(identifier: str) -> Optional[Territory]:
 
 
 @cache
-def _get_territory_names() -> Dict[str, Territory]:
+def _get_territory_names(weak_names: bool = True) -> Dict[str, Territory]:
     """Get a mapping of names to Territory objects."""
     index = _get_index()
     mapping: Dict[str, Territory] = {}
@@ -72,6 +72,9 @@ def _get_territory_names() -> Dict[str, Territory]:
                     territory.name,
                 )
             mapping[nname] = territory
+
+    if not weak_names:
+        return mapping
 
     weak_mapping: Dict[str, Territory] = {}
     for territory, names_weak in weaks.items():

@@ -45,3 +45,17 @@ def test_normalize_address():
         normalize_address("Д.127, АМУРСКАЯ, АМУРСКАЯ, 675000", latinize=True)
         == "d 127 amurskaa amurskaa 675000"
     )
+
+
+def test_shorten_address_keywords():
+    cases = [
+        ("New York Street, New York, NY 10001", "ny st ny 10001"),
+        ("Islamic Republic of Iran", "ir"),
+        ("Iran", "ir"),
+        ("United Arab Emirates", "ae"),
+    ]
+    for address, expected in cases:
+        normalized = normalize_address(address)
+        assert normalized is not None
+        shortened = shorten_address_keywords(normalized)
+        assert shortened == expected
