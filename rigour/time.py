@@ -1,6 +1,7 @@
+import warnings
 from datetime import datetime, date, timezone
 from functools import lru_cache
-from typing import Optional, Union
+from typing import Optional
 
 from rigour.util import MEMO_SMALL
 
@@ -34,14 +35,33 @@ def iso_datetime(value: Optional[str]) -> Optional[datetime]:
     return dt.replace(tzinfo=timezone.utc)
 
 
-def datetime_iso(dt: Optional[Union[str, datetime]]) -> Optional[str]:
+def datetime_iso(dt: datetime) -> Optional[str]:
     """Convert a datetime object or string to an ISO 8601 formatted string. If the input
     is None, it returns None. If the input is a string, it is returned as is. Otherwise,
-    the datetime object is converted to a string in the format 'YYYY-MM-DDTHH:MM:SS'."""
+    the datetime object is converted to a string in the format 'YYYY-MM-DDTHH:MM:SS'
+    (with timezone suffix if present).
+
+    The function expects datetime objects to have UTC timezone. If a datetime with a
+    different timezone is provided, a warning is emitted."""
     if dt is None:
         return dt
     try:
+        # Check if the datetime has timezone info and if it's UTC
+        if dt.tzinfo != timezone.utc:  # type: ignore
+            warnings.warn(
+                f"datetime_iso expects UTC timezone, but got {dt.tzinfo}. "  # type: ignore
+                "Consider using utc_now() or converting to UTC first.",
+                UserWarning,
+                stacklevel=2,
+            )
+
         return dt.isoformat(sep="T", timespec="seconds")  # type: ignore
     except AttributeError:
+        if isinstance(dt, str):
+            warnings.warn(
+                "datetime_iso received a string, supports only datetime objects.",
+                UserWarning,
+                stacklevel=2,
+            )
         outvalue = str(dt)
         return outvalue.replace(" ", "T")
