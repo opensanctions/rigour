@@ -773,16 +773,6 @@ ORG_TYPES: List[OrgTypeSpec] = [
         ],
     },
     {
-        "display": "EWIV",
-        "aliases": [
-            "EWIV",
-            "E.W.I.V.",
-            "Europäische wirtschaftliche Interessenvereinigung",
-            "EEIG",
-            "European Economic Interest Grouping",
-        ],
-    },
-    {
         "display": "SCE",
         "generic": "COOP",
         "aliases": [
@@ -1220,6 +1210,9 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "european economic interest grouping",
             "evropeysko obedinenie po ikonomicheski interesi",
             "европейско обединение по икономически интереси",
+            "EWIV",
+            "E.W.I.V.",
+            "Europäische wirtschaftliche Interessenvereinigung",
             "еоии",
         ],
     },
