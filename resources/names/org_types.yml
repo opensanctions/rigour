@@ -675,7 +675,6 @@ types:
       - eingetragene Gesellschaft bürgerlichen Rechts
       - eingetragene Gesellschaft des bürgerlichen Rechts
 
-
   - display: PartG
     generic: GP
     aliases:
@@ -720,14 +719,6 @@ types:
       - Stiftung des öffentlichen Rechts
       - Stiftung des bürgerlichen Rechts
       - rechtsf. Stiftung
-
-  - display: EWIV
-    aliases:
-      - EWIV
-      - E.W.I.V.
-      - Europäische wirtschaftliche Interessenvereinigung
-      - EEIG
-      - European Economic Interest Grouping
 
   - display: SCE
     generic: COOP
@@ -1135,6 +1126,9 @@ types:
       - european economic interest grouping
       - evropeysko obedinenie po ikonomicheski interesi
       - европейско обединение по икономически интереси
+      - EWIV
+      - E.W.I.V.
+      - Europäische wirtschaftliche Interessenvereinigung
       - еоии
   - display: e.G.
     compare: eG
