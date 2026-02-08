@@ -1,7 +1,7 @@
 import logging
 from functools import cache, lru_cache
 from rapidfuzz.distance import Levenshtein
-from typing import Dict, List, Optional
+from typing import Dict, Generator, List, Optional, Tuple
 
 from rigour.data import read_jsonl
 from rigour.territories.territory import Territory
@@ -47,22 +47,31 @@ def lookup_by_identifier(identifier: str) -> Optional[Territory]:
     return mapping.get(identifier)
 
 
-@cache
-def _get_territory_names(weak_names: bool = True) -> Dict[str, Territory]:
-    """Get a mapping of names to Territory objects."""
+def _load_territory_names() -> Generator[
+    Tuple[Territory, List[str], List[str]], None, None
+]:
+    """Load the mapping of normalized territory names to Territory objects."""
     index = _get_index()
-    mapping: Dict[str, Territory] = {}
-    weaks: Dict[Territory, List[str]] = {}
     for data in read_jsonl(TERRITORIES_FILE):
         code = data["code"]
         territory = index.get(code)
         if territory is None:  # pragma: no cover
             raise RuntimeError(f"Missing territory for code: {code}")
-        names: List[str] = data.get("names_strong", [])
-        weaks[territory] = data.get("names_weak", [])
-        names.append(territory.name)
-        names.append(territory.full_name)
-        for name in names:
+        strongs: List[str] = data.get("names_strong", [])
+        strongs.append(territory.name)
+        strongs.append(territory.full_name)
+        weaks: List[str] = data.get("names_weak", [])
+        yield territory, strongs, weaks
+
+
+@cache
+def _get_territory_names() -> Dict[str, Territory]:
+    """Get a mapping of names to Territory objects."""
+    mapping: Dict[str, Territory] = {}
+    weaks: Dict[Territory, List[str]] = {}
+    for territory, strongs, weaks_ in _load_territory_names():
+        weaks[territory] = weaks_
+        for name in strongs:
             nname = normalize_territory_name(name)
             if nname in mapping and mapping[nname] != territory:  # pragma: no cover
                 log.warning(
@@ -72,9 +81,6 @@ def _get_territory_names(weak_names: bool = True) -> Dict[str, Territory]:
                     territory.name,
                 )
             mapping[nname] = territory
-
-    if not weak_names:
-        return mapping
 
     weak_mapping: Dict[str, Territory] = {}
     for territory, names_weak in weaks.items():

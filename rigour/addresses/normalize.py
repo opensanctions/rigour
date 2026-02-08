@@ -8,7 +8,7 @@ from normality.transliteration import ascii_text
 from normality.util import Categories
 
 from rigour.text.dictionary import Replacer
-from rigour.territories.lookup import _get_territory_names
+from rigour.territories.lookup import _load_territory_names
 from rigour.util import resource_lock, unload_module
 
 CHARS_ALLOWED = "&№" + string.ascii_letters + string.digits
@@ -122,25 +122,27 @@ def _address_replacer(latinize: bool = False) -> Replacer:
                 if value_norm in mapping and mapping[value_norm] != repl_norm:
                     log.warning(
                         "Duplicate mapping for %s (%s and %s)",
-                        value_norm,
+                        value,
                         repl_norm,
                         mapping[value_norm],
                     )  # pragma: no cover
                 mapping[value_norm] = repl_norm
 
-    for name, territory in _get_territory_names(weak_names=False).items():
-        name_norm = normalize_address(name, latinize=latinize, min_length=2)
-        if name_norm is None:
-            continue
-        target = territory.code.split("-")[-1]
-        if name_norm in mapping and mapping[name_norm] != target:
-            log.warning(
-                "Duplicate mapping for %s (%s and %s)",
-                name_norm,
-                target,
-                mapping[name_norm],
-            )  # pragma: no cover
-        mapping[name_norm] = target
+    # ignore weak names for now, as they cause too many false positives
+    for territory, names, _ in _load_territory_names():
+        for name in names:
+            name_norm = normalize_address(name, latinize=latinize, min_length=3)
+            if name_norm is None:
+                continue
+            target = territory.code.split("-")[-1]
+            if name_norm in mapping and mapping[name_norm] != target:
+                log.warning(
+                    "Duplicate mapping for %s (%s and %s)",
+                    name,
+                    target,
+                    mapping[name_norm],
+                )  # pragma: no cover
+            mapping[name_norm] = target
 
     unload_module("rigour.data.addresses.data")
     unload_module("rigour.data.text.ordinals")
