@@ -3,6 +3,9 @@ from typing import Optional
 from zoneinfo import ZoneInfo
 from normality import stringify, DEFAULT_ENCODING
 
+TRUE_VALUES = {"true", "1", "yes", "y", "t", "on", "enable", "enabled"}
+FALSE_VALUES = {"false", "0", "no", "n", "f", "off", "disable", "disabled"}
+
 
 def env_opt(name: str) -> Optional[str]:
     """Get an optional environment variable."""
@@ -13,6 +16,19 @@ def env_str(name: str, default: str) -> str:
     """Ensure the env returns a string even on Windows (#100)."""
     value = env_opt(name)
     return default if value is None else value
+
+
+def env_bool(name: str, default: bool) -> bool:
+    """Ensure the env returns a boolean."""
+    value = env_opt(name)
+    if value is None:
+        return default
+    value = value.lower().strip()
+    if value in TRUE_VALUES:
+        return True
+    if value in FALSE_VALUES:
+        return False
+    return default
 
 
 def env_int(name: str, default: int) -> int:

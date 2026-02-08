@@ -1,5 +1,5 @@
 import os
-from rigour.env import env_str, env_float, env_int, env_opt
+from rigour.env import env_bool, env_str, env_float, env_int, env_opt
 
 
 def test_env_str():
@@ -11,6 +11,17 @@ def test_env_opt():
     assert env_opt("TZ_NAME_XXXX") is None
     os.environ["TZ_NAME_XXXX"] = "UTC"
     assert env_opt("TZ_NAME_XXXX") == "UTC"
+
+
+def test_env_bool():
+    assert env_bool("TZ_NAME_XXXX", True) is not None
+    assert env_bool("TZ_NAME_XXXX", True) is True
+    os.environ["TZ_NAME_XXXX"] = "true"
+    assert env_bool("TZ_NAME_XXXX", False) is True
+    os.environ["TZ_NAME_XXXX"] = "false"
+    assert env_bool("TZ_NAME_XXXX", True) is False
+    os.environ["TZ_NAME_XXXX"] = "banana"
+    assert env_bool("TZ_NAME_XXXX", True) is True
 
 
 def test_env_int():
