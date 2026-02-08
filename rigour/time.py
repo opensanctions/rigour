@@ -47,15 +47,15 @@ def datetime_iso(dt: datetime) -> Optional[str]:
         return dt
     try:
         # Check if the datetime has timezone info and if it's UTC
-        if dt.tzinfo != timezone.utc:  # type: ignore
+        if dt.tzinfo != timezone.utc:
             warnings.warn(
-                f"datetime_iso expects UTC timezone, but got {dt.tzinfo}. "  # type: ignore
+                f"datetime_iso expects UTC timezone, but got {dt.tzinfo}. "
                 "Consider using utc_now() or converting to UTC first.",
                 UserWarning,
                 stacklevel=2,
             )
 
-        return dt.isoformat(sep="T", timespec="seconds")  # type: ignore
+        return dt.isoformat(sep="T", timespec="seconds")
     except AttributeError:
         if isinstance(dt, str):
             warnings.warn(
