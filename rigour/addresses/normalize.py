@@ -136,7 +136,7 @@ def _address_replacer(latinize: bool = False) -> Replacer:
             name_norm = normalize_address(name, latinize=False, min_length=1)
             if name_norm is None:
                 continue
-            target = territory.code.replace("-", " ")
+            target = territory.code.split("-")[-1]
             if name_norm in mapping and mapping[name_norm] != target:
                 log.warning(
                     "Duplicate mapping for %s (%r, %s and %s)",
