@@ -178,8 +178,9 @@ OBJ_NAME_PREFIXES:
   - The
   - MV
   - M/V
-# Terms used to indicate aliases/alternative names including old names
-NAME_SPLITTERS:
+# Terms used to indicate the need for splitting a name, e.g. when multiple names are in a single string.
+NAME_SPLIT_PHRASES:
+  # aliases/alternative names including old names
   - "also known as"
   - "a.k.a"
   - "a.k.a."

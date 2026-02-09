@@ -143,7 +143,7 @@ ORG_NAME_PREFIXES: Tuple[str, ...] = ("La", "Le", "The")
 
 OBJ_NAME_PREFIXES: Tuple[str, ...] = ("M/V", "MV", "The")
 
-NAME_SPLITTERS: Tuple[str, ...] = (
+NAME_SPLIT_PHRASES: Tuple[str, ...] = (
     "A.K.A",
     "A/K/A",
     "F/K/A",
