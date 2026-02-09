@@ -1,5 +1,8 @@
 import csv
 import logging
+from typing import Dict, Set
+
+import yaml
 
 from rigour.langs.util import normalize_code
 from genscripts.util import write_python, CODE_PATH, RESOURCES_PATH
@@ -16,8 +19,8 @@ ISO2_MAP: Dict[str, str] = %r  # noqa
 
 
 def update_data() -> None:
-    iso3_ids = set()
-    iso2_map = {}
+    iso3_ids: Set[str] = set()
+    iso2_map: Dict[str, str] = {}
     iso3_map = {}
 
     source_path = RESOURCES_PATH / "langs" / "iso-639-3.tab"
@@ -45,21 +48,16 @@ def update_data() -> None:
             if ref_name is not None and len(ref_name) > 3:
                 iso3_map[ref_name] = iso3
 
-    # Hack in some outdated/extra aliases:
-    iso3_map.update(
-        {
-            "mo": "ron",
-            "mol": "ron",
-            "scc": "srp",
-            "scr": "hrv",
-            "jw": "jav",
-            "jv": "jav",
-            "jaw": "jav",
-            "iw": "heb",
-            "in": "ind",
-            "ji": "yid",
-        }
-    )
+    names_path = RESOURCES_PATH / "langs" / "names.yaml"
+    with open(names_path, "r", encoding="utf-8") as nfh:
+        mapping = yaml.safe_load(nfh)
+        for code, values in mapping["langs"].items():
+            iso3 = normalize_code(code)
+            if iso3 not in iso3_ids:
+                log.warning("Code %r from names.yaml not found in iso-639-3.tab", code)
+                continue
+            for value in values:
+                iso3_map[value.lower()] = iso3
 
     output_path = CODE_PATH / "langs" / "iso639.py"
     content = TEMPLATE % (list(sorted(iso3_ids)), iso3_map, iso2_map)

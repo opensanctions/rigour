@@ -1,0 +1,243 @@
+langs:
+  afr:
+    - Afrikaans
+    - Afrikaans
+  ara:
+    - Arabic
+    - العربية
+    - arb
+    - arz
+    - apc
+    - acm
+  aze:
+    - Azerbaijani
+    - Azərbaycan
+    - Azeri
+    - aze_cyrl
+  bel:
+    - Belarusian
+    - Belarussian
+  ben:
+    - Bengali
+    - বাংলা
+  bos:
+    - Bosnian
+    - Bosanski
+  bul:
+    - Bulgarian
+    - Български
+  cat:
+    - Catalan
+    - Català
+  ces:
+    - Czech
+    - Čeština
+    - cze
+  dan:
+    - Danish
+    - Dansk
+  deu:
+    - German
+    - Deutsch
+    - ger
+  ell:
+    - Greek
+    - Ελληνικά
+    - gre
+  eng:
+    - English
+    - Englisch
+    - Anglais
+  fas:
+    - Persian
+    - Iranian
+    - فارسی
+    - Farsi
+    - per
+  fin:
+    - Finnish
+    - Suomi
+  fil:
+    - Filipino
+    - Pilipino
+  fra:
+    - French
+    - Französisch
+    - Français
+    - fre
+  guj:
+    - Gujarati
+    - ગુજરાતી
+  heb:
+    - Hebrew
+    - עברית
+    - iw
+  hin:
+    - Hindi
+    - हिंदी
+  hrv:
+    - Croatian
+    - Hrvatski
+    - cro
+    - scr
+  hun:
+    - Hungarian
+    - Magyar
+  hye:
+    - Armenian
+    - Հայերեն
+    - arm
+  ind:
+    - Indonesian
+    - Bahasa Indonesia
+    - in
+  isl:
+    - Icelandic
+    - Íslenska
+    - ice
+  ita:
+    - Italian
+    - Italiano
+  jav:
+    - Javanese
+    - Jawa
+    - jw
+    - jv
+    - jaw
+  jpn:
+    - Japanese
+    - 日本語
+  kat:
+    - Georgian
+    - ქართული
+    - geo
+  kaz:
+    - Kazakh
+    - Қазақша
+    - Qazaq
+  khm:
+    - Khmer
+    - ខ្មែរ
+  kir:
+    - Kirghiz; Kyrgyz
+    - Kirghiz
+    - Kyrgyz
+  kor:
+    - Korean
+    - 한국어
+  lao:
+    - Lao
+    - ລາວ
+  mal:
+    - Malayalam
+    - മലയാളം
+  mar:
+    - Marathi
+    - मराठी
+  mkd:
+    - Macedonian
+    - Македонски
+    - mac
+  msa:
+    - Malay
+    - Bahasa Melayu
+    - may
+  mya:
+    - Burmese
+    - မြန်မာ
+    - bur
+  nld:
+    - Dutch
+    - Nederlands
+    - dut
+  nor:
+    - Norwegian
+    - Norsk
+    - nno
+    - non
+  npi:
+    - Nepali
+    - Nepalese
+    - नेपाली
+  pan:
+    - Punjabi
+    - ਪੰਜਾਬੀ
+  pol:
+    - Polish
+    - Polski
+  por:
+    - Portuguese
+    - Português
+  ron:
+    - Romanian
+    - Română
+    - rom
+    - rum
+    - Moldavian
+    - Moldovan
+    - mo
+    - mol
+    - Romanian; Moldavian; Moldovan
+  rus:
+    - Russian
+    - Русский
+  sin:
+    - Sinhala
+    - සිංහල
+  slk:
+    - Slovak
+    - Slovenčina
+    - slo
+  spa:
+    - Spanish
+    - Español
+  sqi:
+    - Albanian
+    - Shqip
+    - alb
+  srp:
+    - Serbian
+    - Српски
+    - scc
+  swa:
+    - Kiswahili
+    - Swahili
+  swe:
+    - Swedish
+    - Svenska
+  tam:
+    - Tamil
+    - தமிழ்
+  tel:
+    - Telugu
+    - తెలుగు
+  tha:
+    - Thai
+    - ภาษาไทย
+  tur:
+    - Turkish
+    - Türkçe
+  ukr:
+    - Ukrainian
+    - Українська
+  urd:
+    - Urdu
+    - اردو
+  vie:
+    - Vietnamese
+    - Tiếng Việt
+  yid:
+    - Yiddish
+    - ji
+  yor:
+    - Yoruba
+    - Yorùbá
+  zho:
+    - Chinese
+    - 中文
+    - chi
+    - chi_sim
+    - chi_tra
+  zul:
+    - Zulu
+    - isiZulu
