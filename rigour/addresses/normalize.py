@@ -131,14 +131,17 @@ def _address_replacer(latinize: bool = False) -> Replacer:
     # ignore weak names for now, as they cause too many false positives
     for territory, names, _ in _load_territory_names():
         for name in names:
-            name_norm = normalize_address(name, latinize=latinize, min_length=3)
+            # FIXME: never latinize territory names, this leads to too much ambiguity
+            # (e.g. "Shanxi" and "Shaanxi" in China)
+            name_norm = normalize_address(name, latinize=False, min_length=1)
             if name_norm is None:
                 continue
-            target = territory.code.split("-")[-1]
+            target = territory.code.replace("-", " ")
             if name_norm in mapping and mapping[name_norm] != target:
                 log.warning(
-                    "Duplicate mapping for %s (%s and %s)",
+                    "Duplicate mapping for %s (%r, %s and %s)",
                     name,
+                    name_norm,
                     target,
                     mapping[name_norm],
                 )  # pragma: no cover
