@@ -16204,6 +16204,7 @@ ISO3_MAP: Dict[str, str] = {
     "български": "bul",
     "català": "cat",
     "čeština": "ces",
+    "crnogorski": "cnr",
     "dansk": "dan",
     "deutsch": "deu",
     "greek": "ell",

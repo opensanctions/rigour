@@ -1422,26 +1422,35 @@ org_domains:
     - casa
     - dom
     - дом
+    - ev # Turkish
+    - konut # Turkish
+    - 房屋 # Chinese (simplified)
+    - 住宅 # Chinese (simplified & traditional)
   supply:
     - supply
     - supplies
     - supplier
-    - поставка
-    - поставки
     - поставщик
-    - снабжение
-    - постачання
     - постачальник
-    - забезпечення
+    - tedarik # Turkish
+    - tedarikçi # Turkish
+    - suministro # Spanish
+    - suministros # Spanish
+    - proveedor # Spanish
+    - 供应 # Chinese (simplified)
+    - 供給 # Chinese (traditional)
+    - 供应商 # Chinese (simplified)
   culture:
     - culture
     - kultura
-    - культуры
     - культура
-    - культури
     - культурний
     - культурна
     - культурне
+    - kültür # Turkish
+    - cultura # Spanish
+    - cultural # Spanish
+    - 文化 # Chinese (simplified & traditional)
   defence:
     - defence
     - defense
@@ -1458,6 +1467,11 @@ org_domains:
     - defensa
     - оборонный
     - оборон
+    - savunma # Turkish
+    - defensa # Spanish (already present)
+    - 防務 # Chinese (traditional)
+    - 防务 # Chinese (simplified)
+    - 国防 # Chinese (simplified & traditional)
   skb:
     - skb
     - special design bureau
@@ -1544,6 +1558,11 @@ org_domains:
     - технологический
     - технологическая
     - технического
+    - teknoloji # Turkish
+    - teknik # Turkish
+    - tecnológica # Spanish - adjective
+    - 科技 # Chinese (simplified & traditional)
+    - 技術 # Chinese (traditional)
   insurance:
     - insurance
     - insurans
@@ -1556,6 +1575,14 @@ org_domains:
     - verzekeringsmaatschappijen
     - страхового
     - страховая
+    - sigorta # Turkish
+    - sigortacılık # Turkish
+    - seguro # Spanish
+    - seguros # Spanish
+    - aseguradora # Spanish
+    - 保险 # Chinese (simplified)
+    - 保險 # Chinese (traditional)
+    - 保险公司 # Chinese (simplified)
   intel:
     - intel # en (abbreviation)
     - intelligence # en
@@ -1566,6 +1593,10 @@ org_domains:
     - inteligjencës # sq
     - wywiadu # pl
     - разведывательное # ru
+    - istihbarat # Turkish
+    - istihbaratı # Turkish
+    - 情报 # Chinese (simplified)
+    - 情報 # Chinese (traditional)
   property:
     - property
     - properties
@@ -1577,6 +1608,17 @@ org_domains:
     - собственностью
     - собственностью
     - собственности
+    - mülk # Turkish
+    - gayrimenkul # Turkish
+    - propiedad # Spanish
+    - propiedades # Spanish
+    - inmueble # Spanish
+    - 物业 # Chinese (simplified)
+    - 物業 # Chinese (traditional)
+    - 房地产 # Chinese (simplified)
+    - 房地產 # Chinese (traditional)
+    # - 财产 # Chinese (simplified) - too generic, means "property/assets" broadly
+    # - 財產 # Chinese (traditional) - too generic
   realty:
     - realty
     - realtor
@@ -1591,6 +1633,14 @@ org_domains:
     - недвижимостями
     - недвижимостях
     - недвижимостью
+    - emlak # Turkish
+    - emlakçı # Turkish
+    - bienes raíces # Spanish
+    - inmobiliario # Spanish
+    - 房地产 # Chinese (simplified)
+    - 房地產 # Chinese (traditional)
+    - 不动产 # Chinese (simplified)
+    - 不動產 # Chinese (traditional)
   jail: # may want to combine with prison below
     - jail
     - jailhouse
@@ -1680,6 +1730,16 @@ org_domains:
     - обрудовании
     - оборудованиe
     - оборудованию
+    - ekipman # Turkish
+    - teçhizat # Turkish
+    - 设备 # Chinese (simplified)
+    - 設備 # Chinese (traditional)
+    - 装备 # Chinese (simplified) - military connotation, less common in civilian entity names
+    - 裝備 # Chinese (traditional) - military connotation
+  hardware:
+    - hardware
+    - hardwares
+    - donanım # Turkish - more often means "hardware" in IT contex
   innovation:
     - innovation
     - innovations
@@ -1703,6 +1763,12 @@ org_domains:
     - innovatsiya
     - инновационное
     - инновационная
+    - inovasyon # Turkish
+    - yenilik # Turkish
+    - innovación # Spanish
+    - innovaciones # Spanish
+    - 创新 # Chinese (simplified)
+    - 創新 # Chinese (traditional)
   university:
     - university
     - университет
@@ -1722,11 +1788,23 @@ org_domains:
     - univ.
     - univ. of
     - univ. of the
+    - üniversite # Turkish
+    - üniversitesi # Turkish
+    - 大学 # Chinese (simplified)
+    - 大學 # Chinese (traditional)
   military:
     - военный
     - military
     - militare
-    #  - militsii
+    - militsii
+    - askeri # Turkish
+    - askeriye # Turkish
+    - militar # Spanish - adjective
+    - militares # Spanish - adjective plural
+    - 军事 # Chinese (simplified)
+    - 軍事 # Chinese (traditional)
+    - 军队 # Chinese (simplified)
+    - 軍隊 # Chinese (traditional)
   army:
     - army
     - armee
@@ -1742,6 +1820,12 @@ org_domains:
     - армейского
     - армейской
     - ejército
+    - ordu # Turkish
+    - kara kuvvetleri # Turkish - full phrase "land forces", too specific
+    - 陆军 # Chinese (simplified)
+    - 陸軍 # Chinese (traditional)
+    - 军队 # Chinese (simplified)
+    - 軍隊 # Chinese (traditional)
   aviation:
     - aviation
     - aviación
@@ -1751,6 +1835,11 @@ org_domains:
     - авиационный
     - авиационная
     - авиационные
+    - havacılık # Turkish
+    - havacılığı # Turkish
+    - 航空 # Chinese (simplified & traditional)
+    - 航空业 # Chinese (simplified) - means "aviation industry", too generic
+    - 航空業 # Chinese (traditional) - means "aviation industry", too generic
   aircraft:
     - aircraft
     - airplane
@@ -1999,6 +2088,10 @@ org_domains:
     - нефтяной
     - زيت
     - 石油
+    - petrol # Turkish
+    - petrokimya # Turkish
+    - petróleo # Spanish
+    - petrolero # Spanish
   steel:
     - steel
     - metal
@@ -2007,6 +2100,16 @@ org_domains:
     - metallurgy
     - металлургический
     - сталь
+    - çelik # Turkish
+    - metalurji # Turkish
+    - acero # Spanish
+    - metalúrgico # Spanish - adjective
+    - metalúrgica # Spanish - adjective
+    - siderúrgico # Spanish - adjective
+    - 钢铁 # Chinese (simplified)
+    - 鋼鐵 # Chinese (traditional)
+    - 金属 # Chinese (simplified & traditional)
+    - 冶金 # Chinese (simplified & traditional)
   diamond:
     - diamond # en
     - diamonds # en
@@ -2092,6 +2195,15 @@ org_domains:
     - mines
     - bergbau
     - горнодобывающая
+    - madencilik # Turkish
+    - maden # Turkish
+    - minería # Spanish
+    # - minero # Spanish - adjective or means "miner" (person)
+    - minera # Spanish
+    # - 采矿 # Chinese (simplified) - verb "to mine"
+    # - 採礦 # Chinese (traditional) - verb "to mine"
+    - 矿业 # Chinese (simplified)
+    - 礦業 # Chinese (traditional)
   factory:
     - factory
     - factories
@@ -2118,7 +2230,7 @@ org_domains:
     - laboratories # en (plural)
     - lab # en (short form singular)
     - labs # en (short form plural)
-    # - labor # de,et (singular) — means work in US English
+    - labor # de,et (singular)
     - laboratoire # fr (singular)
     - laboratoires # fr (plural)
     - laboratoria # nl, pl, (plural)
@@ -2441,6 +2553,30 @@ org_domains:
     - строительное
     - строительства
     - строительная
+    - inşaat # Turkish
+    - construcción # Spanish
+    - constructora # Spanish
+    - 建设 # Chinese (simplified)
+    - 建設 # Chinese (traditional)
+    - 建筑 # Chinese (simplified)
+    - 建築 # Chinese (traditional)
+  building:
+    - building
+    - buildings
+    - edificio
+    - edificios
+    - bâtiment
+    - bâtiments
+    - gebäude
+    - gebaude
+    - zgrada
+    - zgrade
+    - здание
+    - здания
+    - 건물
+    - 建筑物 # Chinese (simplified)
+    - 建築物 # Chinese (traditional)
+    - yapı # Turkish
   consulting:
     - consulting
     - консалтинг
@@ -2455,6 +2591,15 @@ org_domains:
     - conseils
     - beratung
     - コンサルティング
+    - danışmanlık # Turkish
+    - danışman # Turkish
+    - consultoría # Spanish
+    - consultora # Spanish
+    - asesoría # Spanish
+    - 咨询 # Chinese (simplified)
+    - 諮詢 # Chinese (traditional)
+    - 顾问 # Chinese (simplified)
+    - 顧問 # Chinese (traditional)
   design:
     - design
     - designer
@@ -2471,6 +2616,12 @@ org_domains:
     - проектировщица
     - проектировщицы
     - проектировщиц
+    - tasarım # Turkish
+    - tasarımcı # Turkish
+    - 设计 # Chinese (simplified)
+    - 設計 # Chinese (traditional)
+    - 设计师 # Chinese (simplified)
+    - 設計師 # Chinese (traditional)
   hotel:
     - hotel
     - hotell
@@ -2481,6 +2632,16 @@ org_domains:
     - 호텔
     - ホテル
     - 酒店
+  restaurant:
+    - restaurant
+    - restoran
+    - restaurante
+    - restauranteza
+    - restauracja
+    - restaurace
+    - restauracja
+    - 饭店 # Chinese (simplified)
+    - 飯店 # Chinese (traditional)
   wine:
     - wine
     - şarap
@@ -2599,6 +2760,13 @@ org_domains:
     - транспортировке
     - транспортировок
     - транспортного
+    - ulaşım # Turkish
+    - taşımacılık # Turkish
+    - nakliye # Turkish
+    - 运输 # Chinese (simplified)
+    - 運輸 # Chinese (traditional)
+    - 交通 # Chinese (simplified & traditional)
+    - 运输公司 # Chinese (simplified)
   financial:
     - financial
     - finance
@@ -2612,6 +2780,17 @@ org_domains:
     - финансовых
     - финансового
     - финансовой
+    - finansal # Turkish
+    - finans # Turkish
+    - mali # Turkish
+    - financiero # Spanish
+    - financiera # Spanish
+    - finanzas # Spanish
+    - 金融 # Chinese (simplified & traditional)
+    - 财务 # Chinese (simplified)
+    - 財務 # Chinese (traditional)
+    - 财政 # Chinese (simplified)
+    - 財政 # Chinese (traditional)
   comms:
     - communications
     - communication
@@ -2623,6 +2802,15 @@ org_domains:
     - коммуникаций
     - связи
     - связь
+    - iletişim # Turkish
+    - haberleşme # Turkish
+    - comunicación # Spanish
+    - comunicaciones # Spanish
+    - 通信 # Chinese (simplified & traditional)
+    - 通讯 # Chinese (simplified)
+    - 通訊 # Chinese (traditional)
+    - 传播 # Chinese (simplified)
+    - 傳播 # Chinese (traditional)
   information:
     - information
     - info
@@ -2637,6 +2825,14 @@ org_domains:
     - информационное
     - информационные
     - информационных
+    - bilgi # Turkish
+    - enformasyon # Turkish
+    - información # Spanish
+    - informática # Spanish
+    - 信息 # Chinese (simplified)
+    - 資訊 # Chinese (traditional)
+    - 情报 # Chinese (simplified)
+    - 情報 # Chinese (traditional)
   electronic:
     - electronic
     - electronics
@@ -2663,6 +2859,8 @@ org_domains:
     - 電子の
     - 전자
     - 전자의
+    - elektronik # Turkish
+    - elektronikçi # Turkish
   electric:
     - electric
     - electrical
@@ -2674,6 +2872,15 @@ org_domains:
     - электрических
     - электрического
     - электрической
+    - elektrik # Turkish
+    - elektrikli # Turkish
+    - eléctrico # Spanish
+    - eléctrica # Spanish
+    - electricidad # Spanish
+    - 电气 # Chinese (simplified)
+    - 電氣 # Chinese (traditional)
+    - 电力 # Chinese (simplified)
+    - 電力 # Chinese (traditional)
   energy:
     - energy
     - energies
@@ -2740,6 +2947,14 @@ org_domains:
     - енергетика
     - енергетичний
     - енергетична
+    - güç # Turkish
+    - enerji # Turkish
+    - potencia # Spanish
+    - poder # Spanish
+    - 电力 # Chinese (simplified)
+    - 電力 # Chinese (traditional)
+    - 动力 # Chinese (simplified)
+    - 動力 # Chinese (traditional)
   chemical:
     - chemical
     - chemicals
@@ -2749,6 +2964,14 @@ org_domains:
     - химических
     - химического
     - химической
+    - kimya # Turkish
+    - kimyasal # Turkish
+    - kimyevi # Turkish
+    - químico # Spanish
+    - química # Spanish
+    - 化学 # Chinese (simplified)
+    - 化學 # Chinese (traditional)
+    - 化工 # Chinese (simplified & traditional)
   museum:
     - museum
     - museums
@@ -2764,6 +2987,11 @@ org_domains:
     - muzej
     - muzeum
     - muzeji
+    - müze # Turkish
+    - müzesi # Turkish
+    - museo # Spanish
+    - 博物馆 # Chinese (simplified)
+    - 博物館 # Chinese (traditional)
   security:
     - security
     - seguridad
@@ -2771,6 +2999,11 @@ org_domains:
     - sécurité
     - güvenlik
     - безопасности
+    - emniyet # Turkish
+    - securidad # Spanish (alternative)
+    - 安全 # Chinese (simplified & traditional)
+    - 保安 # Chinese (simplified & traditional)
+    - 安保 # Chinese (simplified & traditional)
   logistics:
     - logistic
     - logistics
@@ -2783,6 +3016,11 @@ org_domains:
     - логистическому
     - логистической
     - ЛОГИСТИКС
+    - lojistik # Turkish
+    - logística # Spanish
+    - 物流 # Chinese (simplified & traditional)
+    - 后勤 # Chinese (simplified)
+    - 後勤 # Chinese (traditional)
   marketing:
     - marketing
     - маркетинг
@@ -2797,6 +3035,13 @@ org_domains:
     - marketingových
     - marketingo
     - marketinga
+    - pazarlama # Turkish
+    - mercadeo # Spanish
+    - mercadotecnia # Spanish
+    - 营销 # Chinese (simplified)
+    - 營銷 # Chinese (traditional)
+    - 市场营销 # Chinese (simplified)
+    - 市場營銷 # Chinese (traditional)
   bank:
     - bank
     - banking
@@ -2830,6 +3075,8 @@ org_domains:
     - बैंक
     - 은행
     - مصرف
+    - bankacılık # Turkish
+    - 银行 # Chinese (simplified)
   offshore:
     - offshore
     - ofshor
@@ -2952,6 +3199,16 @@ org_domains:
     - медицинские
     - медицинского
     - медицинской
+    - tıbbi # Turkish
+    - tıp # Turkish
+    - sağlık # Turkish
+    - médico # Spanish
+    - médica # Spanish
+    - medicina # Spanish
+    - 医疗 # Chinese (simplified)
+    - 醫療 # Chinese (traditional)
+    - 医学 # Chinese (simplified)
+    - 醫學 # Chinese (traditional)
   hospital:
     - hospital
     - hospitals
@@ -2965,6 +3222,10 @@ org_domains:
     - больницы
     - больницах
     - больницам
+    - hastane # Turkish
+    - hastanesi # Turkish
+    - 医院 # Chinese (simplified)
+    - 醫院 # Chinese (traditional)
   cartel:
     - cartel # en, es, pt
     - cartels # en (plural)
@@ -3035,6 +3296,9 @@ org_domains:
     - 媒体 # zh
     - メディア # ja
     - 미디어 # ko
+    - 媒體 # Chinese (traditional)
+    - 传媒 # Chinese (simplified)
+    - 傳媒 # Chinese (traditional)
   school:
     - school
     - école
@@ -3046,6 +3310,10 @@ org_domains:
     - szkoła
     - šola
     - школа
+    - okul # Turkish
+    - colegio # Spanish
+    - 学校 # Chinese (simplified)
+    - 學校 # Chinese (traditional)
   crypto:
     - crypto # en, fr, nl (short form)
     - cryptocurrency # en (long form)
