@@ -1889,9 +1889,13 @@ org_domains:
     - морских
     - морского
     - marine
+    - denizcilik
   naval:
     - naval
     - navy
+    - военно-морской
+    - военно-морская
+    - военно-морские
   railway:
     - railway
     - railways
@@ -1920,6 +1924,8 @@ org_domains:
     - automobilei
     - automobilele
     - automobilelor
+    - automobilů
+    - automobilův
   nuclear:
     - nuclear # en, es, pt
     - branduolinis # lt (masculine)
