@@ -1,7 +1,13 @@
+import bisect
 from functools import lru_cache
 from typing import Optional
 
-from rigour.data.text.scripts import RANGES, LATIN_CHARS, LATINIZABLE_CHARS
+from rigour.data.text.scripts import (
+    LATIN_CHARS,
+    LATINIZABLE_CHARS,
+    SORTED_RANGES,
+    RANGE_STARTS,
+)
 from rigour.util import MEMO_MEDIUM
 
 # There are no non-Latin characters below this codepoint:
@@ -11,10 +17,22 @@ LATINIZE_SCRIPTS = {"Hangul", "Cyrillic", "Greek", "Armenian", "Latin", "Georgia
 
 
 def get_script(codepoint: int) -> Optional[str]:
-    """Get the script of a character."""
-    for (start, end), script in RANGES.items():
-        if start <= codepoint <= end:
-            return script
+    """Get the script of a character using binary search.
+
+    Args:
+        codepoint: The Unicode codepoint to look up.
+
+    Returns:
+        The script name if found, otherwise None.
+    """
+    # Binary search to find the rightmost range whose start is <= codepoint
+    idx = bisect.bisect_right(RANGE_STARTS, codepoint)
+    if idx == 0:
+        return None
+    # Check if codepoint falls within the range
+    start, end, script = SORTED_RANGES[idx - 1]
+    if start <= codepoint <= end:
+        return script
     return None
 
 
