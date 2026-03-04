@@ -8,6 +8,11 @@ from rigour.util import MEMO_MEDIUM
 LATIN_BLOCK = 740
 # Hangul is surprisingly good in terms of transliteration, so we allow it:
 LATINIZE_SCRIPTS = {"Hangul", "Cyrillic", "Greek", "Armenian", "Latin", "Georgian"}
+# Scripts that are denser than Latin (fewer code points per unit of meaning/sound)
+# Includes Hangul along with logographic scripts because it is also denser by virtue
+# of encoding syllables rather than individual sounds.
+# https://en.wikipedia.org/wiki/List_of_writing_systems#Logographic_systems
+DENSE_SCRIPTS = {"Han", "Hiragana", "Katakana", "Hangul"}
 
 
 def get_script(codepoint: int) -> Optional[str]:
@@ -82,3 +87,26 @@ def is_latin(word: str) -> bool:
         if char.isalnum():
             return False
     return True
+
+
+def is_dense_script(word: str) -> bool:
+    """Check if a word contains characters from a script that is notably denser
+    than Latin: one that encodes more meaning/sound per unicode code point
+    
+    This can be a rough proxy for languages scripts which don't use spaces to
+    separate names, although it includes Hangul which uses spaces to separate other
+    words.
+
+    Args:
+        word (str): The word to check.
+
+    Returns:
+        bool: True if the word contains any character from a dense script.
+    """
+    for char in word:
+        if not char.isalnum():
+            continue
+        script = get_script(ord(char))
+        if script in DENSE_SCRIPTS:
+            return True
+    return False
