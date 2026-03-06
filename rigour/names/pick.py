@@ -148,7 +148,8 @@ def pick_case(names: List[str]) -> str:
     if len(scores) == 0:
         raise ValueError("Names could not be scored: %r" % names)
 
-    return min(scores.items(), key=lambda i: (i[1], len(i[0])))[0]
+    # Sort by score, then by length (shortest wins), then lexicographically
+    return min(scores.items(), key=lambda i: (i[1], len(i[0]), i[0]))[0]
 
 
 def reduce_names(names: List[str], require_names: bool = False) -> List[str]:
