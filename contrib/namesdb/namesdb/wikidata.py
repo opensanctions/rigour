@@ -1,4 +1,5 @@
 import random
+import time
 import logging
 import requests
 from functools import lru_cache
@@ -22,7 +23,7 @@ cache = Cache(engine, metadata, dataset, create=True)
 # cache.preload(f"{WikidataClient.WD_API}%")
 session = requests.Session()
 session.headers.update({"User-Agent": "opensanctions/namesdb"})
-client = WikidataClient(cache, session=session, cache_days=90)
+client = WikidataClient(cache, session=session, cache_days=200)
 
 
 # Crawl wikidata for names
@@ -93,8 +94,11 @@ def process_item(qid: str) -> Optional[Tuple[str, Set[str]]]:
         return (qid, unique)
     except requests.RequestException as e:
         log.error(f"Error fetching item {qid}: {e}")
-        # print("X", e.response.text)
-        # time.sleep(1)
+        if e.response is not None and e.response.status_code == 429:
+            retry_after = e.response.headers.get("Retry-After")
+            if retry_after is not None:
+                log.info(f"Rate limited. Retrying after {retry_after} seconds.")
+                time.sleep(int(retry_after) + 1)
         return None
 
 
