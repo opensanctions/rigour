@@ -238,6 +238,18 @@ def test_pick_case_greek():
     assert "Κόσμος" in name, name
 
 
+def test_pick_ordering():
+    names = [
+        "OCEAN SHIP MANAGEMENT AND OPERATION LLC",
+        "OCEAN SHIP MANAGEMENT and OPERATION LLC",
+    ]
+    onames = [
+        "OCEAN SHIP MANAGEMENT and OPERATION LLC",
+        "OCEAN SHIP MANAGEMENT AND OPERATION LLC",
+    ]
+    assert pick_name(names) == pick_name(onames)
+
+
 def test_reduce_names():
     names = [
         "Vladimir Vladimirovich Putin",
