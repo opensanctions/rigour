@@ -46,7 +46,7 @@ TOKEN_SEP_CATEGORIES: Categories = {
 }
 
 
-class _TokenizerLookup(dict):
+class _TokenizerLookup(dict[int, Optional[int]]):
     """Lazy str.translate() table for tokenize_name().
 
     Caches codepoint → replacement on first encounter, up to a limit of entries.
