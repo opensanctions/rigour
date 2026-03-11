@@ -22,7 +22,7 @@ names_weak:
   - Κιργιστάν     # Kirgistán
   - Emetab Kyrgyzstan # Kyrgyz Respublikasy
   - किर्गिस्थान
-  - Киргизи       # Kirgizi
+  - Киргизи   # Kirgizi
   - Kirigistan
   - ኪርጊስታን
   - Киргизька Республіка # Kirgizʹka Respublíka
@@ -50,13 +50,13 @@ names_weak:
   - คีร์กีซสถาน
   - قرغزستان
   - Kirigizistani
-  - кирги́зїа     # kirgízí̈a
+  - кирги́зїа # kirgízí̈a
   - Kìdzisɨ̀tân
   - Kirigizithtani
   - 吉爾吉斯
   - Kirigizitùaan
   - Kirghizstan
-  - Қирғизистон   # Kˌirġiziston
+  - Қирғизистон # Kˌirġiziston
   - Kiordistan
   - Kyrgyzstán
   - Kırgızistan
@@ -65,7 +65,7 @@ names_weak:
   - قرغیزستان
   - Kirgistan
   - Kirgiisischtan
-  - Киргистан     # Kirgistan
+  - Киргистан # Kirgistan
   - Kirigizisitaani
   - An Chirgeastáin
   - Quirguistão
@@ -136,3 +136,4 @@ names_weak:
   - Kirgizsko
 langs:
   - kir
+  - rus
