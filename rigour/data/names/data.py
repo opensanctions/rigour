@@ -804,6 +804,7 @@ ORG_SYMBOLS: Dict[str, Tuple[str, ...]] = {
         "国家的",
         "国立",
     ),
+    "ALLRUSSIAN": ("all-russian", "national", "ВСЕРОССИЙСКИЙ"),
     "REPU": (
         "cumhuriyet",
         "repubblica",

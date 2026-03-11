@@ -609,6 +609,10 @@ org_symbols:
     - valstybinis
     - 国立
     - 国家的
+  allrussian:
+    - ВСЕРОССИЙСКИЙ
+    - all-russian
+    - national
   repu:
     - republic
     - republics
