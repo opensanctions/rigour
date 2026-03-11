@@ -33,6 +33,7 @@ class Territory(object):
         self._parent: Optional[str] = data.get("parent")
         self._claims: List[str] = data.get("claims", [])
         self._see: List[str] = data.get("see", [])
+        self._langs: List[str] = data.get("langs", [])
 
     @property
     def parent(self) -> Optional["Territory"]:
@@ -106,6 +107,15 @@ class Territory(object):
             return self.parent.ftm_country
         return None
 
+    @property
+    def langs(self) -> List[str]:
+        """Return the languages for this territory."""
+        if len(self._langs) > 0:
+            return self._langs
+        if self.parent is not None:
+            return self.parent.langs
+        return []
+
     def to_dict(self) -> Dict[str, Any]:
         """Return a dictionary (JSON-ready) representation of the territory."""
         data = {
@@ -136,6 +146,8 @@ class Territory(object):
             data["claims"] = [c.code for c in self.claims]
         if self.see:
             data["see"] = [s.code for s in self.see]
+        if self.langs:
+            data["langs"] = self.langs
         return data
 
     def __eq__(self, other: Any) -> bool:

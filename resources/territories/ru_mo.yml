@@ -11,3 +11,7 @@ names_strong:
   - Республика Мордовия # Respublika Mordoviâ
   - Республика Мордовия (Россия) # Respublika Mordoviâ (Rossija)
 names_weak: []
+langs:
+  - mdf
+  - myv
+  - rus

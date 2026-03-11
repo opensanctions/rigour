@@ -17,3 +17,5 @@ names_strong:
   - РСФСР # RSFSR
   - Российская СФСР # Rossiyskaya SFSR
 names_weak: []
+langs:
+  - rus

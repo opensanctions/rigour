@@ -12,3 +12,6 @@ names_strong:
   - Алтайская Республика # Altaiskaja Respublika
   - Алтайская Республика (Россия) # Altaiskaja Respublika (Rossija)
 names_weak: []
+langs:
+  - alt
+  - rus

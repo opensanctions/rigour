@@ -12,3 +12,6 @@ names_strong:
   - Республика Башкортостан # Respublika Baškortostan
   - Республика Башкортостан (Россия) # Respublika Baškortostan (Rossija)
 names_weak: []
+langs:
+  - bak
+  - rus

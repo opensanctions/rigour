@@ -8,3 +8,6 @@ parent: in
 qid: Q1193
 names_strong: []
 names_weak: []
+langs:
+  - mni
+  - eng

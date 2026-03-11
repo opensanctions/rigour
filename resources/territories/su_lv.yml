@@ -14,3 +14,5 @@ names_strong:
   - Latvijas TSR
   - Латвийская ССР # Latviyskaya SSR
 names_weak: []
+langs:
+  - lav

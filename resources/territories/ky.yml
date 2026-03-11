@@ -9,11 +9,8 @@ is_country: true
 is_ftm: true
 is_jurisdiction: true
 summary: >-
-  The Cayman Islands is a self-governing British Overseas Territory, and the
-
-  largest by population. Tax Justice Network ranks it #2 amongst Corporate Tax 
-
-  Havens.
+  The Cayman Islands is a self-governing British Overseas Territory, and the largest
+  by population. Tax Justice Network ranks it #2 amongst Corporate Tax Havens.
 names_strong:
   - Cayman
 names_weak:
@@ -172,3 +169,5 @@ names_weak:
   - Little Cayman
   - Kaimaninseln
   - Cayman Islands (GB)
+langs:
+  - eng

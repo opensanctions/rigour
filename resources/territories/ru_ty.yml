@@ -11,3 +11,6 @@ names_strong:
   - Республика Тыва
   - Республика Тыва (Россия) # Respublika Tyva (Rossija)
 names_weak: []
+langs:
+  - tyv
+  - rus

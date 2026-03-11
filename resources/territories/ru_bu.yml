@@ -11,3 +11,6 @@ names_strong:
   - Республика Бурятия # Respublika Buriâtiâ
   - Республика Бурятия (Россия) # Respublika Buriâtiâ (Rossija)
 names_weak: []
+langs:
+  - bua
+  - rus

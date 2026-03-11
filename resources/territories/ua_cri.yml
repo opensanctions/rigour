@@ -33,3 +33,7 @@ names_weak:
   - crimea (occupied)
   - Автономная Республика Крым # Avtonomnaâ Respublika Krym
   - Крым # Krym
+langs:
+  - crh
+  - rus
+  - ukr

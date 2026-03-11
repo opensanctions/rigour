@@ -17,3 +17,6 @@ names_strong:
   - 新疆 # Xīnjiāng
   - 乌鲁木齐 # Wūlǔmùqí
 names_weak: []
+langs:
+  - uig
+  - zho

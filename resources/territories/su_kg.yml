@@ -16,3 +16,6 @@ names_strong:
   - KSSR
   - Киргизская ССР # Kirgizskaya SSR
 names_weak: []
+langs:
+  - kir
+  - rus

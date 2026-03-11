@@ -28,3 +28,5 @@ names_strong:
 names_weak:
   - DPR
   - ДНР # DNR
+langs:
+  - rus

@@ -82,3 +82,6 @@ names_weak:
   - 괌    # gwam
   - Гуам # Guam
   - Ngwame
+langs:
+  - eng
+  - cha
