@@ -10,6 +10,7 @@ from ruamel.yaml.comments import CommentedSeq
 from ruamel.yaml.scalarstring import FoldedScalarString, DoubleQuotedScalarString
 
 from rigour.ids.wikidata import is_qid
+from rigour.langs import iso_639_alpha3
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes
 from genscripts.util import write_jsonl, norm_string, RESOURCES_PATH, CODE_PATH
@@ -181,6 +182,21 @@ def update_data() -> None:
             data["see"] = clean_codes(data.get("see", []))
             if len(data["see"]) == 0:
                 data.pop("see")
+
+            if "langs" in data:
+                langs = set()
+                for lang in data["langs"]:
+                    lang_code = iso_639_alpha3(lang)
+                    if lang_code is None or lang_code != lang:
+                        log.warning(
+                            "Invalid language code [%r]: %s (%s)",
+                            source_file.as_posix(),
+                            lang,
+                            lang_code,
+                        )
+                        continue
+                    langs.add(lang_code)
+                data["langs"] = sorted(langs)
             raw_territories[code] = data
             territories[code] = Territory(territories, code, data)
 

@@ -20,3 +20,6 @@ names_strong:
   - БССР # BSSR
 names_weak:
   - Belarusian SSR
+langs:
+  - bel
+  - rus

@@ -15,3 +15,6 @@ names_strong:
   - MSSR
   - Молдавская ССР # Moldavskaya SSR
 names_weak: []
+langs:
+  - ron
+  - rus

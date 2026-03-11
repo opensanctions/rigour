@@ -19,3 +19,7 @@ names_weak:
   - Бродски округ       # Brodski okrug
   - Бродски округ (БиХ) # Brodski okrug (BiH)
   - Бродски округ (ФБиХ) # Brodski okrug (FBiH)
+langs:
+  - bos
+  - hrv
+  - srp

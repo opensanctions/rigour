@@ -8,3 +8,6 @@ parent: in
 qid: Q1164
 names_strong: []
 names_weak: []
+langs:
+  - asm
+  - ben

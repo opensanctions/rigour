@@ -11,3 +11,6 @@ names_strong:
   - Ямало-Ненецкий автономный округ # Jamalo-Neneckij avtonomnyj okrug
   - Ямало-Ненецкий автономный округ (Россия) # Jamalo-Neneckij avtonomnyj okrug (Rossija)
 names_weak: []
+langs:
+  - yrk
+  - rus

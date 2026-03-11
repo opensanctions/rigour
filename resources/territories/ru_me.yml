@@ -11,3 +11,6 @@ names_strong:
   - Республика Марий Эл # Respublika Mari El
   - Республика Марий Эл (Россия) # Respublika Mari El (Rossija)
 names_weak: []
+langs:
+  - mhr
+  - rus

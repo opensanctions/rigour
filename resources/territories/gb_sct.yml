@@ -72,3 +72,7 @@ names_weak:
   - East Lothian
   - Inverness-shire
   - Berwickshire
+langs:
+  - sco
+  - eng
+  - gla

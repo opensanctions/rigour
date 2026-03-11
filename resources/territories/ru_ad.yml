@@ -12,3 +12,6 @@ names_strong:
   - Республика Адыгея # Respublika Adygeja
   - Республика Адыгея (Россия) # Respublika Adygeja (Rossija)
 names_weak: []
+langs:
+  - ady
+  - rus

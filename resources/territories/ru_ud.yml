@@ -10,3 +10,6 @@ names_strong:
   - Удмуртская Республика # Udmurtskaja Respublika
   - Удмуртская Республика (Россия) # Udmurtskaja Respublika (Rossija)
 names_weak: []
+langs:
+  - udm
+  - rus

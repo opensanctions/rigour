@@ -27,3 +27,7 @@ names_weak:
   - Somalilander
   - British Somaliland
   - SOSOM
+langs:
+  - som
+  - ara
+  - eng

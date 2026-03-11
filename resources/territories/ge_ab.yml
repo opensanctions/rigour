@@ -34,3 +34,6 @@ names_weak:
   - АБХАЗИЯ            # ABHAZIÂ
   - Республика Абхазия # Respublika Abhaziâ
   - Abkhaziya
+langs:
+  - abk
+  - rus

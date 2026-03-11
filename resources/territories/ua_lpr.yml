@@ -31,3 +31,5 @@ names_strong:
 names_weak:
   - ЛНР  # LNR
   - LPR
+langs:
+  - rus
