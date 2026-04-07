@@ -1530,6 +1530,8 @@ ORG_TYPES: List[OrgTypeSpec] = [
             "L.L.C.",
             "L L C",
             "LLCs",
+            "LL",
+            "LC",
             "Ltd Liability Co",
             "Limited Liability Corp",
             "Lmtd Liability Company",
