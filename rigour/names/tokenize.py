@@ -18,6 +18,16 @@ SKIP_CHARACTERS = (
     "\u00b4"  # U+00B4 ACUTE ACCENT
 )
 
+# Lm (Letter, modifier) characters that carry meaning in names and should be
+# kept as part of tokens rather than deleted. Most Lm characters are phonetic
+# notation (superscript markers like ʰ, ʲ) which are noise in name data, but
+# these specific ones appear in real CJK names.
+KEEP_CHARACTERS = (
+    "\u30fc"  # U+30FC KATAKANA-HIRAGANA PROLONGED SOUND MARK (ー)
+    "\uff70"  # U+FF70 HALFWIDTH KATAKANA-HIRAGANA PROLONGED SOUND MARK (ｰ)
+    "\u3005"  # U+3005 IDEOGRAPHIC ITERATION MARK (々)
+)
+
 TOKEN_SEP_CATEGORIES: Categories = {
     "Cc": WS,
     "Cf": None,
@@ -26,7 +36,10 @@ TOKEN_SEP_CATEGORIES: Categories = {
     "Cn": None,
     "Lm": None,
     "Mn": None,
-    "Mc": WS,
+    # Mc (spacing combining marks) are kept — they are vowel signs in Brahmic/Indic
+    # scripts (Myanmar, Devanagari, Tamil, Thai, etc.) and essential parts of syllables.
+    # No Mc characters exist in Latin, Cyrillic, Greek, CJK, or Arabic ranges.
+    # "Mc": WS,
     "Me": None,
     "No": None,
     "Zs": WS,
@@ -54,10 +67,16 @@ class _TokenizerLookup(dict[int, Optional[int]]):
     """
 
     def __missing__(self, codepoint: int) -> Optional[int]:
-        cat = unicodedata.category(chr(codepoint))
+        char = chr(codepoint)
+        if char in KEEP_CHARACTERS:
+            val: Optional[int] = codepoint  # keep as-is
+            if len(self) < MEMO_MEDIUM:
+                self[codepoint] = val
+            return val
+        cat = unicodedata.category(char)
         replacement = TOKEN_SEP_CATEGORIES.get(cat)
         if replacement is None and cat not in TOKEN_SEP_CATEGORIES:
-            val: Optional[int] = codepoint  # keep as-is
+            val = codepoint  # keep as-is
         elif not replacement:
             val = None  # delete
         else:
