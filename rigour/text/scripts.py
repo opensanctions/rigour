@@ -64,6 +64,8 @@ def is_modern_alphabet(word: str) -> bool:
     used in a narrow sense here: it includes only alphabets that have vowels and
     are safely transliterated to latin. Basically: Cyrillic, Greek, Armenian,
     and Latin."""
+    if word.isascii():
+        return True
     for char in word:
         cp = ord(char)
         if cp in LATINIZABLE_CHARS:
@@ -78,6 +80,8 @@ def is_modern_alphabet(word: str) -> bool:
 
 def is_latin(word: str) -> bool:
     """Check if a word is written in the latin alphabet."""
+    if word.isascii():
+        return True
     for char in word:
         cp = ord(char)
         if cp in LATIN_CHARS:
@@ -92,7 +96,7 @@ def is_latin(word: str) -> bool:
 def is_dense_script(word: str) -> bool:
     """Check if a word contains characters from a script that is notably denser
     than Latin: one that encodes more meaning/sound per unicode code point
-    
+
     This can be a rough proxy for languages scripts which don't use spaces to
     separate names, although it includes Hangul which uses spaces to separate other
     words.
