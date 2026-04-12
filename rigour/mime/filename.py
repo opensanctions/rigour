@@ -1,6 +1,6 @@
 import os
+import sys
 from typing import Optional
-from banal import decode_path
 from mimetypes import guess_extension
 from normality import slugify, safe_filename
 
@@ -10,9 +10,10 @@ from rigour.mime.types import DEFAULT
 
 def normalize_extension(extension: Optional[str]) -> Optional[str]:
     """Normalise a file name extension."""
-    extension = decode_path(extension)
     if extension is None:
         return None
+    if isinstance(extension, bytes):
+        extension = extension.decode(sys.getfilesystemencoding())
     if extension.startswith("."):
         extension = extension[1:]
     if "." in extension:

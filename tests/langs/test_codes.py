@@ -31,8 +31,8 @@ def test_alpha2():
 
 
 def test_list():
-    assert "srp" in list_to_alpha3("bs")
-    assert "srp" not in list_to_alpha3("bs", synonyms=False)
+    assert "srp" in list_to_alpha3(["bs"])
+    assert "srp" not in list_to_alpha3(["bs"], synonyms=False)
     assert "deu" in list_to_alpha3(["bs", "de"])
     assert "eng" in list_to_alpha3(["en"])
     assert not len(list_to_alpha3(["xy"]))

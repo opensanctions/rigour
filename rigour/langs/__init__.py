@@ -17,7 +17,7 @@ See also: https://www.loc.gov/standards/iso639-2/php/code_list.php
 """
 
 from typing import Iterable, Optional, Set
-from banal import ensure_list
+
 
 from rigour.data.langs.iso639 import ISO3_ALL, ISO2_MAP, ISO3_MAP
 from rigour.langs.synonyms import NON_LANGS, expand_synonyms
@@ -96,8 +96,8 @@ def list_to_alpha3(languages: Iterable[str], synonyms: bool = True) -> Set[str]:
     """Parse all the language codes in a given list into ISO 639 Part 2 codes
     and optionally expand them with synonyms (i.e. other names for the same
     language)."""
-    codes = set([])
-    for language in ensure_list(languages):
+    codes: Set[str] = set()
+    for language in languages:
         code = iso_639_alpha3(language)
         if code is None:
             continue
