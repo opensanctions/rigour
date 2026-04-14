@@ -3,7 +3,7 @@ from typing import Optional, Sequence, Set
 
 from normality import category_replace, squash_spaces
 from normality.constants import SLUG_CATEGORIES
-from rigour.text.dictionary import Normalizer
+from rigour.text.dictionary import Normalizer, noop_normalizer
 
 
 def normalize_text(text: Optional[str]) -> Optional[str]:
@@ -78,7 +78,7 @@ def is_nullword(
     norm_form = normalizer(form) if normalize else form
     if norm_form is None:
         return False
-    nullwords = _load_nullwords(normalizer)
+    nullwords = _load_nullwords(normalizer) if normalize else _load_nullwords(noop_normalizer)
     return norm_form in nullwords
 
 
