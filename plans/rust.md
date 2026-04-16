@@ -166,6 +166,8 @@ toolchain + maturin).
 
 ## ICU4X for Transliteration
 
+*Updated with ICU4X spike results (April 2026). See `spikes/icu4x-spike/` for the code.*
+
 ### Why ICU4X Instead of ICU4C
 
 The previous attempt used `rust_icu_utrans` which wraps ICU4C via bindgen. Problems:
@@ -173,62 +175,123 @@ The previous attempt used `rust_icu_utrans` which wraps ICU4C via bindgen. Probl
 - Creates linking headaches for manylinux wheel distribution (must bundle or static-link ICU)
 - The Python→Rust→ICU4C double-hop didn't outperform Python→ICU4C (PyICU) directly
 
-**ICU4X** (`icu` crate) is the ICU team's pure-Rust rewrite. Advantages:
+**ICU4X** (`icu` crate v2.2.0) is the ICU team's pure-Rust rewrite. Advantages:
 - Compiles statically, no system dependency
 - Data baked into the binary (CLDR data via `compiled_data` feature)
-- Designed for exactly this use case (embedding in libraries)
+- Binary size with all transliteration data: **3.4 MB**
+- Init time for all transliterators: **<1ms**
 
-### Transliteration in ICU4X
+### Transliteration Architecture (Spike-Validated)
 
-ICU4X has experimental transliteration support via the `icu::transliterator` module.
-The API accepts ICU transliterator rule strings. The exact API needs verification during
-implementation — the snippet below is illustrative:
+ICU4X `compiled_data` does NOT include `Any-Latin` (the compound transliterator used by
+PyICU). It DOES include 10 script-specific transliterators. The architecture is a manual
+pipeline with script detection:
 
 ```rust
-use icu::transliterator::Transliterator;
-use std::sync::LazyLock;
+use icu::experimental::transliterate::Transliterator;
+use icu::normalizer::DecomposingNormalizerBorrowed;
+use icu::properties::{CodePointMapDataBorrowed, props::GeneralCategory};
 
-// Equivalent to normality's ASCII_SCRIPT:
-// "Any-Latin; NFKD; [:Nonspacing Mark:] Remove; Latin-ASCII"
-static ASCII_TRANS: LazyLock<Transliterator> = LazyLock::new(|| {
-    // API may be try_new_with_compiled_data() or similar — verify against
-    // the actual icu crate v2 docs during implementation.
-    Transliterator::try_new(
-        "Any-Latin; NFKD; [:Nonspacing Mark:] Remove; Latin-ASCII".parse().unwrap(),
-    ).expect("ICU4X ASCII transliterator")
-});
+// Step 1: Script-specific transliterators (built-in compiled_data)
+// Only the one matching the input script is applied.
+let cyrl: Transliterator = Transliterator::try_new(
+    &"und-Latn-t-und-cyrl".parse().unwrap()
+).unwrap();
 
-/// Transliterate to ASCII. The Python wrapper handles the is_ascii() fast-path;
-/// this function only receives non-ASCII input.
-pub fn ascii_text(s: &str) -> String {
-    let mut result = ASCII_TRANS.transliterate(s.to_string());
-    // Fallback for anything ICU4X couldn't handle:
-    result.retain(|c| c.is_ascii());
-    result
+// Step 2: NFKD + mark removal (direct normalizer API — 3.5M ops/sec)
+let nfkd = DecomposingNormalizerBorrowed::new_nfkd();
+let gc: CodePointMapDataBorrowed<GeneralCategory> = CodePointMapDataBorrowed::new();
+
+pub fn ascii_text(input: &str) -> String {
+    if input.is_ascii() { return input.to_string(); }
+
+    let mut s = input.to_string();
+
+    // 1. Apply script-specific transliterator (only if non-Latin detected)
+    let scripts = detect_scripts(input);
+    for script_key in &scripts {
+        if let Some(t) = SCRIPT_TRANS.get(script_key) {
+            s = t.transliterate(s);
+        }
+    }
+
+    // 2. NFKD decomposition + remove nonspacing marks (replaces Latin-ASCII)
+    let decomposed = nfkd.normalize_utf8(s.as_bytes());
+    s = decomposed.chars()
+        .filter(|c| gc.get(*c) != GeneralCategory::NonspacingMark)
+        .collect();
+
+    // 3. Custom ASCII fallback for non-decomposable chars (ø→o, ß→ss, ə→a, etc.)
+    s = ascii_fallback_table(&s);
+
+    s
 }
 ```
 
-### Data Provider Strategy
+Available built-in transliterators (BCP-47-T locale IDs):
 
-ICU4X uses data providers for CLDR/Unicode data. With the `compiled_data` Cargo feature,
-data for all supported operations is baked into the binary at compile time. This adds ~2-5MB
-to the binary size, which is acceptable for a server-side library.
+| Locale ID | Script | Spike-verified |
+|-----------|--------|----------------|
+| `und-Latn-t-und-cyrl` | Cyrillic | Yes — exact match |
+| `und-Latn-t-und-arab` | Arabic | Yes — exact match |
+| `und-Latn-t-und-hans` | Chinese (Simplified) | Yes — exact match |
+| `und-Latn-t-und-grek` | Greek | Yes — exact match |
+| `und-Latn-t-und-hang` | Hangul | Yes — exact match |
+| `und-Latn-t-und-geor` | Georgian | Yes — exact match |
+| `und-Latn-t-und-armn` | Armenian | Yes — minor variant |
+| `und-Latn-t-und-deva` | Devanagari | Yes (untested in corpus) |
+| `und-Latn-t-und-kana` | Katakana | Yes — exact match |
+| `und-Latn-t-und-hebr` | Hebrew | Yes (untested in corpus) |
 
-If binary size becomes a concern, `icu_datagen` can generate data for only the specific
-transliteration rules we need — but start with `compiled_data` for simplicity.
+### Threading: `Transliterator` is `!Send`/`!Sync`
 
-### Validation
+Cannot use `std::sync::LazyLock`. Options:
+- `thread_local!` with `RefCell` — simplest, works with PyO3 GIL guarantee
+- Per-call construction — too slow (~900µs init)
+- `unsafe impl Send` — risky, transliterator may hold Rc internally
 
-The ICU4X transliterator may produce slightly different output than PyICU/ICU4C for edge cases
-(different CLDR versions, different rule implementations). Strategy:
+Recommended: `thread_local!` since Python's GIL means one thread per interpreter.
 
-1. Build a test corpus from all existing test vectors in `tests/text/` and `tests/names/`
-2. Run both PyICU and ICU4X on the corpus, diff the results
-3. Accept differences that are "equally correct" (e.g. different Pinyin romanizations)
-4. File ICU4X bugs for differences that are clearly wrong
-5. Add `tests/text/test_transliteration_corpus.py` that pins expected outputs
+### Spike Output Quality: 40/45 exact matches
 
-**Goal: drop `pyicu` from rigour's dependencies once ICU4X transliteration is validated.**
+| Difference | PyICU | ICU4X | Verdict |
+|-----------|-------|-------|---------|
+| Norwegian ø | `Lo/kke` | `Lokke` | ICU4X better |
+| Azeri ə/Ə | `ahmad` | `?hm?d` | Fix: add to ASCII fallback table |
+| Armenian w/v | `Geworg` | `Gevorg` | Both valid romanizations |
+| Georgian apostrophe | curly `'` (U+2019) | ASCII `'` (U+0027) | ICU4X correct for ASCII |
+
+**Latinize: 5/5 exact matches** (Ukrainian, Russian, Greek, Chinese, Georgian).
+
+### Performance: Bottleneck Identified and Solved
+
+The `Latin-ASCII` built-in transliterator is 4,500 ops/sec — a bottleneck. Replace with
+direct `icu::normalizer` (3.5M ops/sec) + custom fallback table.
+
+| Step | ops/sec | Production approach |
+|------|---------|-------------------|
+| Script transliterator | 52,000 | Keep (built-in) |
+| NFKD + Mn removal | 3,500,000 | Use `DecomposingNormalizerBorrowed` directly |
+| ASCII fallback | ~millions | Custom lookup table |
+| Latin-ASCII (built-in) | 4,500 | **DO NOT USE** — replaced by above |
+
+### Cargo Dependencies
+
+```toml
+[dependencies]
+icu = { version = "2", features = ["unstable", "compiled_data"] }
+```
+
+Feature `unstable` gates `icu::experimental::transliterate`. Feature `compiled_data` bakes
+CLDR data into the binary.
+
+### Test Expectations to Update
+
+When switching from PyICU to ICU4X, these pinned test values will change:
+- Norwegian: `"Lars Lo/kke Rasmussen"` → `"Lars Lokke Rasmussen"` (improvement)
+- Georgian: curly apostrophe → ASCII apostrophe (correction)
+
+**Goal: drop `pyicu` from rigour's dependencies once ICU4X transliteration is in place.**
 
 ---
 
@@ -272,34 +335,29 @@ automaton. This adds ~50-100ms one-time startup cost but keeps wheel size manage
 **Goal**: De-risk Phase 1 by expanding test coverage (so we can detect regressions when
 swapping in Rust) and validating that ICU4X and maturin work for our use case.
 
-**Test corpus expansion**:
+**Test corpus expansion**: DONE (306 tests, mypy clean)
 
-- **Transliteration**: Add test vectors for all target languages — Arabic, Simplified Chinese,
-  Japanese, Korean, Cyrillic (Russian, Ukrainian), Greek, Georgian, Armenian, Turkish, Polish,
-  Hungarian, Portuguese, Swedish, Norwegian, Danish, Lithuanian, Estonian, Finnish, Dutch, German,
-  French, Spanish. Pin expected `ascii_text` and `latinize_text` outputs. These become the
-  regression suite for the ICU4X transition.
-- **`tokenize_name`**: Add edge cases for exotic punctuation (e.g. middle dot `·`, Armenian
-  comma, CJK fullwidth punctuation), combining marks, zero-width characters, rare Unicode
-  categories. Pin expected token lists.
-- **Script detection**: Add test cases for `can_latinize`, `is_latin`, `is_modern_alphabet`,
-  `is_dense_script` covering boundary codepoints — last Latin codepoint, first Cyrillic, Hangul
-  Jamo vs. syllables, CJK Unified Ideographs extensions, etc.
+- Transliteration: 33 test functions pinning `ascii_text`/`latinize_text` across all 21 target
+  languages, mixed scripts, org names. File: `tests/text/test_transliteration.py`
+- Tokenization: 13 new test functions for language-specific tokenization, punctuation edge
+  cases, Unicode categories, KEEP_CHARACTERS. File: `tests/names/test_tokenize.py`
+- Script detection: 11 new test functions covering previously untested languages and boundary
+  codepoints. File: `tests/text/test_scripts.py`
+- Bugs fixed: Japanese ー deletion (KEEP_CHARACTERS), Burmese Mc splitting (category fix)
 
-**ICU4X spike** (throwaway code):
+**ICU4X spike**: DONE — verdict: **CONDITIONAL GO**
 
-- `cargo new icu4x-spike` in a temporary directory
-- Add `icu = { version = "2", features = ["transliteration", "compiled_data"] }`
-- Run our exact transliterator rule strings:
-  - `"Any-Latin; NFKD; [:Nonspacing Mark:] Remove; Latin-ASCII"` (ascii_text)
-  - `"Any-Latin"` (latinize_text)
-- Feed the test corpus through both rules, compare output against PyICU
-- Measure: binary size impact of `compiled_data`, transliteration throughput (ops/sec),
-  startup time for `LazyLock` initialization
-- **Decision gate**: If ICU4X output is unacceptably different or the API can't handle our
-  rules, revisit the transliteration strategy before proceeding to Phase 1
+- Code: `spikes/icu4x-spike/`
+- `icu` crate v2.2.0, features `["unstable", "compiled_data"]`
+- `Any-Latin` compound transliterator NOT in compiled_data — use manual pipeline instead
+  (script detection → targeted built-in transliterator → NFKD normalizer → ASCII fallback)
+- 40/45 exact ASCII matches, 5/5 exact latinize matches
+- Binary: 3.4 MB, init: <1ms
+- `Transliterator` is `!Send`/`!Sync` — use `thread_local!`
+- Bottleneck: `Latin-ASCII` built-in (4.5K ops/sec) — replace with direct normalizer (3.5M ops/sec)
+- See "ICU4X for Transliteration" section above for full details
 
-**Maturin spike** (throwaway code):
+**Maturin spike**: TODO
 
 - Create a minimal `rust/Cargo.toml` + `rust/src/lib.rs` with a single PyO3 function
   (e.g. `fn hello() -> &str`)
@@ -309,9 +367,6 @@ swapping in Rust) and validating that ICU4X and maturin work for our use case.
 - Test the CI pipeline: maturin-action builds wheels for at least one platform
 - **Decision gate**: If maturin integration has unexpected friction with the existing
   hatchling setup, resolve before Phase 1
-
-**No code ships from Phase 0** — the test corpus is committed, the spikes are discarded
-after they answer their questions.
 
 ---
 
