@@ -3428,6 +3428,13 @@ org_domains:
     - Al-Qaida Organization
     - Al Qaida/Islamic Army
     - Al Qa’ida/Islamic Army
+  irgc:
+   - IRGC
+   - Islamic Revolutionary Guard Corps
+   - Islamic Revolutionary Guards Corps # variant with an extra "S"
+   - Iranian Islamic Revolutionary Guard Corps 
+   - Army of the Guardians of the Islamic Revolution
+   - Pasdaran
 person_symbols:
   jr:
     - "Jr"
