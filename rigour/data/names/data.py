@@ -3641,6 +3641,18 @@ ORG_DOMAINS: Dict[str, Tuple[str, ...]] = {
         "qaeda",
         "القاعدة",
     ),
+    "IRGC": (
+        "Army of the Guardians of the Islamic Revolution",
+        "Corps des gardiens de la révolution islamique",
+        "IRGC",
+        "Iranian Islamic Revolutionary Guard Corps",
+        "Islamic Revolutionary Guard Corps",
+        "Islamic Revolutionary Guards Corps",
+        "Pasdaran",
+        "Sepah-e Pasdaran-e Enqelab-e Eslami",
+        "سپاه پاسداران انقلاب اسلامی",
+        "پاسداران",
+    ),
 }
 
 PERSON_SYMBOLS: Dict[str, Tuple[str, ...]] = {
