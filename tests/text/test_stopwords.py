@@ -16,13 +16,15 @@ def test_is_stopword():
 
 
 def test_is_nullword():
-    assert is_nullword("none")
+    assert is_nullword("none", normalize=True)
     assert is_nullword("N/A", normalize=True)
     assert not is_nullword("John")
     assert not is_nullword("12345")
     assert not is_nullword("")
     assert not is_nullword(" ")
-    assert not is_nullword("---")
+    assert is_nullword("-")
+    assert is_nullword("---")
+    assert is_nullword("?")
     assert not is_nullword("(Mr Bean)")
     assert not is_nullword("( )")
 
