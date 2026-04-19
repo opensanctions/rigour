@@ -80,9 +80,9 @@ Rust function, one Python wrapper, no Python parallel of the steps.
 - **`category_replace` is in scope** as a normalization step — it's what
   most of rigour's existing normalizers use to collapse punctuation /
   symbols / controls. Instead of exposing the full category-map as a
-  parameter (as normality does), expose a closed `Cleanup` enum with a
-  small set of named, fixed variants. Default is "no cleanup" — the
-  parameter is `Optional[Cleanup]` on the Python side.
+  parameter (as normality does), expose a closed `Cleanup` enum with
+  three variants — `Noop`, `Strong`, `Slug`. Default is `Cleanup::Noop`
+  (no category replacement).
 - **Reference design**: `normality.normalize()`
   (`/Users/pudo/Code/normality/normality/__init__.py`) is the existing
   "kitchen sink" normalizer. Our rigour version is a leaner version of
@@ -124,18 +124,18 @@ No `tokenize` (separate concern, separate return type). No `lower` (casefold sup
 
 ### Cleanup variants
 
-Default is "no cleanup" (the parameter is optional, absent = identity
-on the category axis). Two variants for now; room to grow.
+Three variants, all represented explicitly on the enum. `Noop` is the
+default.
 
 | Variant | Source | Intent |
 |---------|--------|--------|
+| `Noop` | — | Skip category replacement entirely. The default. |
 | `Strong` | `normality.constants.UNICODE_CATEGORIES` | Aggressive text cleanup — punctuation/symbols/controls → WS, marks (except Mc) deleted. The "kitchen-sink" profile for matching keys. |
-| `Slug` | `normality.constants.SLUG_CATEGORIES` | URL-slug-style cleanup — similar to Strong but keeps Lm (modifier letters) and Mn (nonspacing marks). Reserved for the upcoming `slugify` port; not used by any current rigour caller yet. |
+| `Slug` | `normality.constants.SLUG_CATEGORIES` | URL-slug-style cleanup — similar to Strong but keeps Lm (modifier letters) and Mn (nonspacing marks). Used by stopwords today; also the intended input for the future `slugify` port. |
 
 Cleanup variants are **fixed** in Rust. Callers cannot pass a custom
-category map; the only options are `Cleanup::Strong`, `Cleanup::Slug`,
-or "no cleanup". Adding another variant is a trivial change when a new
-use case appears.
+category map; the only options are the three above. Adding another
+variant is a trivial change when a new use case appears.
 
 **Why no `Name` variant yet**: an earlier draft proposed a `Name`
 profile ported from `rigour.names.tokenize.TOKEN_SEP_CATEGORIES` +
@@ -179,8 +179,10 @@ bitflags! {
     }
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum Cleanup {
+    #[default]
+    Noop,    // skip category replacement
     Strong,  // ≈ normality.UNICODE_CATEGORIES
     Slug,    // ≈ normality.SLUG_CATEGORIES
 }
@@ -188,9 +190,9 @@ pub enum Cleanup {
 pub fn normalize(
     text: &str,
     flags: Normalize,
-    cleanup: Option<Cleanup>,
+    cleanup: Cleanup,
 ) -> Option<String> {
-    // Fixed pipeline order; see below. `cleanup: None` = skip the
+    // Fixed pipeline order; see below. `Cleanup::Noop` skips the
     // category-replace step entirely.
 }
 ```
@@ -204,7 +206,7 @@ pub fn normalize(
 3. CASEFOLD
 4. ASCII, else LATINIZE (ASCII is a superset — running ASCII subsumes
    LATINIZE if both are set)
-5. category_replace (if `cleanup` is `Some(_)`; skipped when `None`)
+5. category_replace (if `cleanup != Cleanup::Noop`)
 6. SQUASH_SPACES
 
 Empty result → `None`, matching the existing contract on every observed
@@ -222,7 +224,7 @@ __all__ = ["normalize", "Normalize", "Cleanup"]
 def normalize(
     text: Optional[str],
     flags: Normalize,
-    cleanup: Optional[Cleanup] = None,
+    cleanup: Cleanup = Cleanup.Noop,
 ) -> Optional[str]:
     if text is None:
         return None
@@ -230,7 +232,7 @@ def normalize(
 ```
 
 The `Normalize` flag value and `Cleanup` enum cross the FFI boundary as
-small ints, ~zero marshalling cost. `cleanup=None` (the default) skips
+small ints, ~zero marshalling cost. `Cleanup.Noop` (the default) skips
 category replacement entirely.
 
 ### Callers define their own compositions
@@ -347,7 +349,7 @@ than doing a deprecation dance.
 pub fn normalize(
     text: &str,
     flags: Normalize,
-    cleanup: Option<Cleanup>,
+    cleanup: Cleanup,
 ) -> Option<String> {
     let mut s = if flags.contains(Normalize::STRIP) {
         text.trim().to_string()
@@ -374,8 +376,8 @@ pub fn normalize(
         s = latinize_text(&s);           // existing text::transliterate
     }
 
-    if let Some(variant) = cleanup {
-        s = category_replace(&s, variant);
+    if cleanup != Cleanup::Noop {
+        s = category_replace(&s, cleanup);
     }
 
     if flags.contains(Normalize::SQUASH_SPACES) {
@@ -386,9 +388,10 @@ pub fn normalize(
 }
 
 fn category_replace(text: &str, cleanup: Cleanup) -> String {
-    // Fixed tables: one match arm per Cleanup variant.
-    // Each variant's table is a const array populated from the ported
-    // UNICODE_CATEGORIES (Strong) / SLUG_CATEGORIES (Slug) data.
+    // Fixed tables: one match arm per Cleanup variant (Noop handled by
+    // the caller via the early return). Each variant's table is a const
+    // array populated from the ported UNICODE_CATEGORIES (Strong) /
+    // SLUG_CATEGORIES (Slug) data.
 }
 ```
 
