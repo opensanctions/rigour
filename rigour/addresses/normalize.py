@@ -58,7 +58,7 @@ def normalize_address(
     """
     tokens: List[List[str]] = []
     token: List[str] = []
-    for char in address.lower():
+    for char in address.casefold():
         if char in CHARS_ALLOWED:
             chr: Optional[str] = char
         else:

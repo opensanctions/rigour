@@ -1,4 +1,4 @@
-from rigour.text.dictionary import Scanner, noop_normalizer
+from rigour.text.dictionary import Scanner
 
 
 def test_scanner():
@@ -26,13 +26,3 @@ def test_scanner():
     found = scanner.extract("The Space Invaders are run by the C.I.A.")
     assert "C.I.A." in found
     assert "Space Invaders" in found
-
-
-def test_noop_normalizer():
-    assert noop_normalizer(None) is None
-    assert noop_normalizer("") is None
-    assert noop_normalizer("  ") is None
-    assert noop_normalizer("  hello  ") == "hello"
-    assert noop_normalizer("hello") == "hello"
-    assert noop_normalizer("Hello") == "Hello"
-    assert noop_normalizer("  hello world  ") == "hello world"

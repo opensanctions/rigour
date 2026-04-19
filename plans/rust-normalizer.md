@@ -425,12 +425,27 @@ Retired functions (breaking change, same PR):
 - `rigour.text.stopwords.normalize_text`
 - `rigour.names.tokenize.normalize_name` — replaced by an inline
   composition in callers. `rigour.names.tokenize.tokenize_name` stays
-  (it's the token-producing function, separate concern). The Python
-  `prenormalize_name` stays as it's just `text.casefold()`, trivially
-  cheap.
+  (it's the token-producing function, separate concern).
+- `rigour.names.tokenize.prenormalize_name` — **removed** (April 2026).
+  Was literally `text.casefold()`; callers inlined.
 - `rigour.names.org_types.normalize_display`, `_normalize_compare`
-- `rigour.text.dictionary.noop_normalizer`
-- `Normalizer` type alias in `rigour.text.dictionary`
+- `rigour.text.dictionary.noop_normalizer` — **removed** (April 2026).
+  Was a strip-and-None-on-empty Normalizer. Callers that still pass a
+  `Normalizer` callback get a local `partial(normalize, flags=
+  Normalize.STRIP)` until the flag migration lands.
+- `Normalizer` type alias in `rigour.text.dictionary` — kept for now;
+  retires when the callback pattern is fully replaced by `flags=`.
+
+Standardised on `str.casefold()` in place of `str.lower()` wherever
+rigour did case-insensitive normalization:
+
+- `rigour.langs.util.normalize_code`
+- `rigour.addresses.normalize.normalize_address`
+
+`str.lower()` mishandles ß, Turkish dotted-I, and Greek sigma forms;
+`str.casefold()` is the correct operation for case-insensitive equality
+and matches what `Normalize::CASEFOLD` does internally via ICU4X
+`CaseMapper::fold_string`.
 
 Kept (domain-specific wrappers, not generic):
 

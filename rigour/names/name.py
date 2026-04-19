@@ -4,7 +4,7 @@ import itertools
 from rigour.names.part import NamePart, Span
 from rigour.names.symbol import Symbol
 from rigour.names.tag import NameTypeTag, NamePartTag
-from rigour.names.tokenize import tokenize_name, prenormalize_name
+from rigour.names.tokenize import tokenize_name
 from rigour.util import list_intersection
 
 
@@ -27,7 +27,7 @@ class Name(object):
         parts: Optional[List[NamePart]] = None,
     ):
         self.original = original
-        self.form = form or prenormalize_name(original)
+        self.form = form or original.casefold()
         self.tag = tag
         self.lang = lang
         self.parts: List[NamePart] = parts or []
@@ -64,7 +64,7 @@ class Name(object):
         For example, if the name is "John John Smith", and `text` is "John", both
         "John"s will be tagged if `max_matches` is >= 2.
         """
-        tokens = tokenize_name(prenormalize_name(text))
+        tokens = tokenize_name(text.casefold())
         if len(tokens) == 0:
             return
 
