@@ -90,7 +90,7 @@ def test_nfkd_decompose() -> None:
 
 
 def test_latinize() -> None:
-    out = normalize("Владимир", Normalize.LATINIZE)
+    out = normalize("Владимир", Normalize.LATIN)
     assert out is not None
     # No Cyrillic characters remain
     assert not any("\u0400" <= c <= "\u04FF" for c in out)

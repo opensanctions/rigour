@@ -11,7 +11,7 @@ Pipeline order, independent of bit order:
     1. STRIP                — trim leading/trailing whitespace
     2. NFKD / NFKC / NFC    — at most one is meaningful
     3. CASEFOLD             — Unicode full casefold (ß → ss)
-    4. ASCII or LATINIZE    — ASCII wins if both set
+    4. ASCII or LATIN       — ASCII wins if both set
     5. Cleanup              — category_replace, unless Cleanup.Noop
     6. SQUASH_SPACES        — collapse whitespace runs, trim ends
 
@@ -33,7 +33,7 @@ class Normalize(IntFlag):
     NFC = 1 << 3
     NFKC = 1 << 4
     NFKD = 1 << 5
-    LATINIZE = 1 << 6
+    LATIN = 1 << 6
     ASCII = 1 << 7
 
 

@@ -173,8 +173,8 @@ bitflags! {
         const NFKC          = 1 << 4;
         const NFKD          = 1 << 5;
 
-        // Script conversion (ASCII implies LATINIZE at a lower level)
-        const LATINIZE      = 1 << 6;
+        // Script conversion (ASCII implies LATIN at a lower level)
+        const LATIN      = 1 << 6;
         const ASCII         = 1 << 7;
     }
 }
@@ -204,8 +204,8 @@ pub fn normalize(
 2. NFC / NFKC / NFKD (first-set-wins, or apply in declaration order if
    multiple somehow set — shouldn't happen in practice)
 3. CASEFOLD
-4. ASCII, else LATINIZE (ASCII is a superset — running ASCII subsumes
-   LATINIZE if both are set)
+4. ASCII, else LATIN (ASCII is a superset — running ASCII subsumes
+   LATIN if both are set)
 5. category_replace (if `cleanup != Cleanup::Noop`)
 6. SQUASH_SPACES
 
@@ -372,7 +372,7 @@ pub fn normalize(
 
     if flags.contains(Normalize::ASCII) {
         s = ascii_text(&s);              // existing text::transliterate
-    } else if flags.contains(Normalize::LATINIZE) {
+    } else if flags.contains(Normalize::LATIN) {
         s = latinize_text(&s);           // existing text::transliterate
     }
 
@@ -397,7 +397,7 @@ fn category_replace(text: &str, cleanup: Cleanup) -> String {
 
 Dependencies already in the crate:
 - `icu::normalizer` — NFC/NFKC/NFKD
-- ICU4X `Transliterator` — ASCII/LATINIZE (via existing
+- ICU4X `Transliterator` — ASCII/LATIN (via existing
   `text::transliterate`)
 - In-crate `category_replace` using `unicode-general-category` to map
   each char to its category and a per-profile table to resolve the

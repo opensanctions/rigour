@@ -8,7 +8,7 @@
 //   1. STRIP               — trim leading/trailing whitespace
 //   2. NFKD / NFKC / NFC   — at most one is meaningful; later-declared wins
 //   3. CASEFOLD            — Unicode full casefold (ß → ss, not lowercase)
-//   4. ASCII or LATINIZE   — ASCII is a superset and wins if both are set
+//   4. ASCII or LATIN      — ASCII is a superset and wins if both are set
 //   5. category_replace    — runs when `cleanup != Cleanup::Noop`
 //   6. SQUASH_SPACES       — collapse runs of whitespace, trim ends
 //
@@ -31,7 +31,7 @@ bitflags! {
         const NFC           = 1 << 3;
         const NFKC          = 1 << 4;
         const NFKD          = 1 << 5;
-        const LATINIZE      = 1 << 6;
+        const LATIN         = 1 << 6;
         const ASCII         = 1 << 7;
     }
 }
@@ -177,7 +177,7 @@ pub fn normalize(text: &str, flags: Normalize, cleanup: Cleanup) -> Option<Strin
 
     if flags.contains(Normalize::ASCII) {
         s = ascii_text(&s);
-    } else if flags.contains(Normalize::LATINIZE) {
+    } else if flags.contains(Normalize::LATIN) {
         s = latinize_text(&s);
     }
 
@@ -344,7 +344,7 @@ mod tests {
 
     #[test]
     fn latinize_cyrillic() {
-        let out = normalize("Владимир", Normalize::LATINIZE, Cleanup::Noop).unwrap();
+        let out = normalize("Владимир", Normalize::LATIN, Cleanup::Noop).unwrap();
         assert!(out.chars().all(|c| !('\u{0400}'..='\u{04FF}').contains(&c)));
     }
 
