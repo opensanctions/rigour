@@ -98,11 +98,12 @@ fn transliterate_with(locale_id: &'static str, input: String) -> String {
     })
 }
 
-// Non-decomposable Latin diacritics that NFKD won't break apart. Keep this
-// table small and curated — expand only when tests surface a real need.
-// Ordered with longer replacements first to avoid accidental interactions
-// (though .replace() semantics make order mostly irrelevant here).
+// Non-decomposable Latin diacritics that NFKD won't break apart, plus a few
+// modifier letters and CJK punctuation that ICU4X transliterators emit in
+// Latin output. Keep this table small and curated — expand only when tests
+// surface a real need.
 const ASCII_FALLBACK: &[(char, &str)] = &[
+    // Ligatures and non-decomposable Latin letters
     ('æ', "ae"),
     ('Æ', "AE"),
     ('œ', "oe"),
@@ -127,6 +128,20 @@ const ASCII_FALLBACK: &[(char, &str)] = &[
     ('Ħ', "H"),
     ('ŋ', "ng"),
     ('Ŋ', "NG"),
+    // Modifier letters emitted by ICU4X transliterators (Armenian, Georgian,
+    // Arabic ayn/hamza) in their Latin output. Map to ASCII apostrophe so
+    // downstream name matching doesn't see them as distinct characters.
+    ('\u{02BB}', "'"), // ʻ Armenian modifier-letter turned comma
+    ('\u{02BC}', "'"), // ʼ Georgian modifier-letter apostrophe
+    ('\u{02BD}', "'"), // ʽ modifier-letter reversed comma
+    ('\u{02BE}', "'"), // ʾ hamza (modifier-letter right half ring)
+    ('\u{02BF}', "'"), // ʿ ayn (modifier-letter left half ring)
+    ('\u{02C8}', "'"), // ˈ primary-stress mark
+    ('\u{02CA}', "'"), // ˊ modifier-letter acute accent
+    ('\u{02CB}', "'"), // ˋ modifier-letter grave accent
+    // CJK / Japanese punctuation that survives per-script transliterators.
+    ('\u{30FB}', " "), // ・ katakana middle dot (acts as a word separator)
+    ('\u{3000}', " "), // ideographic space
 ];
 
 fn ascii_fallback(input: &str) -> String {
