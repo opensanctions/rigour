@@ -52,17 +52,17 @@ No `.pyi` stub, no Python-side accessor, no export from
 
 ## Step sequence
 
-| # | Work | PyO3 surface added | Testable delivery |
+| # | Work | PyO3 surface added | Status |
 |---|---|---|---|
-| 1 | Symbol port per `plans/rust-symbols.md`: `SymbolCategory` enum + `Symbol` pyclass + `Arc<str>` interner. `rigour/names/symbol.py` becomes a re-export. Breaking change: `Symbol.id: str` always (yente reindexes, test call sites update). | `Symbol`, `SymbolCategory` classes | All existing Symbol tests pass with updated `.id` expectations; ~50 MB saved per 3M-Symbol tagger run |
-| 2 | `text/stopwords.yml` → `rust/data/text/stopwords.json` | `stopwords()`, `nullwords()`, `nullplaces()` | `rigour/text/stopwords.py` reads from Rust; `rigour/data/text/stopwords.py` deleted |
-| 3 | `names/stopwords.yml` → `rust/data/names/stopwords.json` | `person_name_prefixes()`, `org_name_prefixes()`, `obj_name_prefixes()`, `name_split_phrases()`, `generic_person_names()` | `rigour/names/{prefix,split_phrases,check}.py` read from Rust; `rigour/data/names/data.py` reduces or disappears |
-| 4 | `text/ordinals.yml` → `rust/data/text/ordinals.json` | `ordinals()` for the addresses/normalize consumer | `rigour/addresses/normalize.py` reads from Rust; `rigour/data/text/ordinals.py` deleted |
-| 5 | `symbols.yml` → `rust/data/names/symbols.json` | **None** — Rust-only artifact | Pure `make rust-data` diff; nothing observable until step 8 consumes it |
-| 6 | Full territories → `rust/data/territories/data.jsonl` (moved from `rigour/data/territories/`). `generate_territories.py` now writes there. `rigour.territories.*` and `rigour.names.tagging._get_org_tagger` read through `rigour._core.territories_jsonl()`. The Rust tagger will parse the same JSONL via `territories::raw()` + serde when step 8 lands. | `territories_jsonl()` | Python consumers load territory records through the Rust crate; `rigour/data/territories/` is gone |
-| 7 | `rust/data/names/person_names.txt` (committed as plain UTF-8 from the namesdb pipeline). `rust/build.rs` zstd-compresses at build time into `OUT_DIR`; `names::person_names` decodes on first access via `include_bytes!`. Plain text stays in git for diffability; the wheel ships ~2.7 MB of compressed bytes instead of 8.5 MB. | **None** | `rust/data/names/person_names.txt` lands + `names::person_names::raw()` loader; nothing consumes it yet until step 8 |
-| 8 | Tagger port itself — `rust/src/names/tagger.rs`. Consumes steps 4/5/6/7 via `include_str!` / `include_bytes!`, plus the already-landed `org_types.json` for ORG_CLASS symbols. `Needles<Vec<Symbol>>` payload. Flag-keyed cache keyed on `(TaggerKind, Normalize, Cleanup)`. Python `rigour/names/tagging.py` becomes a thin wrapper. | `tag_org_name(name, normalize_flags, cleanup)`, `tag_person_name(name, normalize_flags, cleanup, infer_initials)` | Single-FFI tagger; `ahocorasick-rs` drops from `pyproject.toml`; nomenklatura's hot loop gets the throughput win |
-| 9 | Downstream adapters update: nomenklatura, yente, FTM switch from `normalizer=` to `normalize_flags=` on the tagger entry points. Driven by the corresponding PR in each repo. | n/a | Downstream tests pass against the new rigour |
+| 1 | Symbol port per `plans/rust-symbols.md`: `SymbolCategory` enum + `Symbol` pyclass + `Arc<str>` interner. | `Symbol`, `SymbolCategory` classes | **Done** |
+| 2 | `text/stopwords.yml` → `rust/data/text/stopwords.json` | `stopwords()`, `nullwords()`, `nullplaces()` | **Done** |
+| 3 | `names/stopwords.yml` → `rust/data/names/stopwords.json` | `person_name_prefixes_list()` / `org_name_prefixes_list()` / `obj_name_prefixes_list()` / `name_split_phrases_list()` / `generic_person_names_list()` | **Done** |
+| 4 | `text/ordinals.yml` → `rust/data/text/ordinals.json` | `ordinals()` | **Done** |
+| 5 | `symbols.yml` → `rust/data/names/symbols.json` | **None** — Rust-only | **Done** |
+| 6 | Full territories → `rust/data/territories/data.jsonl`. | `territories_jsonl()` | **Done** |
+| 7 | `rust/data/names/person_names.txt` (committed plain; `rust/build.rs` zstd-compresses at build time). | **None** | **Done** |
+| 8 | Tagger port itself — `rust/src/names/tagger.rs` + `rust/src/names/symbols.rs`. Consumes the step 5/6/7 data via `include_str!` / `include_bytes!`, plus `org_types.json`. `Needles<Vec<Symbol>>` payload with `find_overlapping` to mirror Python's `overlapping=True`. `TOKENIZE_SKIP_CHARS` pre-strip on aliases to match tokenizer dot/apostrophe deletion. Flag-keyed cache keyed on `(TaggerKind, Normalize, Cleanup)`. Python `rigour/names/tagging.py` is a thin wrapper that calls `_core.tag_org_matches` / `tag_person_matches` and applies each `(phrase, symbol)` via `name.apply_phrase`. Retires `rigour/data/names/data.py`, `rigour/data/names/org_types.py`, `rigour/data/types.py`. `ahocorasick-rs` drops from `pyproject.toml`. | `tag_org_matches(text, flags, cleanup)`, `tag_person_matches(text, flags, cleanup)` | **Done** |
+| 9 | Downstream adapters update: nomenklatura, yente, FTM switch from `normalizer=` to `normalize_flags=` on the tagger entry points. Driven by the corresponding PR in each repo. | n/a | Pending |
 
 ## What falls out at each step
 
@@ -239,6 +239,3 @@ walking the Vec linearly — for N ≤ 4 it's faster than a HashSet.
   `Name` and mutates it in place. The full object-graph port is
   `rust.md` Phase 2, which runs in parallel with this sequence and
   lands independently.
-- **`ahocorasick-rs` dep removal.** Happens as a consequence of step
-  8, not a separate PR — once nothing imports it, drop from
-  `pyproject.toml`.

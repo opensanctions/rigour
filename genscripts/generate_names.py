@@ -1,27 +1,26 @@
 from collections import Counter
 import yaml
-from typing import Dict, List
+from typing import Dict, List, Optional, TypedDict
+
 from normality import squash_spaces
 
-from rigour.data.types import OrgTypeSpec
 from genscripts.util import (
     norm_string,
-    write_python,
     write_json,
     RESOURCES_PATH,
-    CODE_PATH,
     RUST_DATA_PATH,
 )
 
 
-DATA_TEMPLATE = """
-from typing import Tuple, Dict
-"""
+class OrgTypeSpec(TypedDict, total=False):
+    """One org-type record. Inlined here since `rigour.data.types`
+    (the previous home of this TypedDict) was retired with the
+    Python tagger in plans/rust-tagger.md step 8."""
 
-ORG_TYPE_TEMPLATE = """
-from typing import List
-from rigour.data.types import OrgTypeSpec
-"""
+    display: Optional[str]
+    compare: Optional[str]
+    generic: Optional[str]
+    aliases: List[str]
 
 
 def _sorted_unique_norm(values: List[str]) -> List[str]:
@@ -53,56 +52,34 @@ def generate_name_stopwords_file() -> None:
     write_json(out_path, out_data)
 
 
-def generate_symbols_data_file() -> None:
-    """Emit two artifacts from the one YAML source:
-
-    * `rigour/data/names/data.py` — five UPPERCASE module constants
-      (`ORG_SYMBOLS`, `ORG_DOMAINS`, `PERSON_SYMBOLS`, `PERSON_NICK`,
-      `PERSON_NAME_PARTS`) consumed by the Python tagger today.
-      Retired in step 8 of `plans/rust-tagger.md` when the tagger
-      itself ports to Rust.
-    * `rust/data/names/symbols.json` — same data under five
-      lowercase top-level keys. Rust-only artifact; the future
-      tagger in `rust/src/names/tagger.rs` reads it via
-      `include_str!`. No Python-facing accessor (per
-      `rust-tagger.md`'s Rust-only classification for this file).
-
-    Both are built from the same in-memory structure so they can't
-    drift."""
+def generate_symbols_file() -> None:
+    """Emit `rust/data/names/symbols.json` with the five nested-dict
+    sections from `resources/names/symbols.yml` (`org_symbols`,
+    `org_domains`, `person_symbols`, `person_nick`,
+    `person_name_parts`). Consumed by the Rust tagger
+    (`rust/src/names/symbols.rs`); no Python-side accessor per
+    `plans/rust-tagger.md`'s Rust-only classification."""
     symbols_path = RESOURCES_PATH / "names" / "symbols.yml"
     with open(symbols_path, "r", encoding="utf-8") as ufh:
         symbols_mappings: Dict[str, Dict[str, str]] = yaml.safe_load(ufh.read())
 
-    content = DATA_TEMPLATE
     json_data: Dict[str, Dict[str, List[str]]] = {}
 
     for section, value in symbols_mappings.items():
-        section_upper = section.strip().upper()
-        mapping = {}
-        group_type = "str"
+        mapping: Dict[str, List[str]] = {}
         for group, items in value.items():
             if group is None:
                 continue
-            group_type = "int" if isinstance(group, int) else "str"
-            if group_type == "str":
+            group_type_is_int = isinstance(group, int)
+            if not group_type_is_int:
                 group = norm_string(group).upper()
                 if len(group) == 0:
                     continue
             values = set(norm_string(v) for v in items)
-            items = tuple(sorted(v for v in values if len(v) > 0))
-            mapping[group] = items
-        content += f"{section_upper}: Dict[{group_type}, Tuple[str, ...]] = {mapping!r}\n\n"
+            sorted_values = sorted(v for v in values if len(v) > 0)
+            mapping[str(group)] = sorted_values
 
-        # Mirror into the Rust-side JSON. Keys stay lowercase here —
-        # Python callers that want uppercase read from data.py. The
-        # Rust consumer handles its own casing policy when building
-        # the tagger.
-        json_data[section.strip().lower()] = {
-            str(k): list(v) for k, v in mapping.items()
-        }
-
-    out_path = CODE_PATH / "names" / "data.py"
-    write_python(out_path, content)
+        json_data[section.strip().lower()] = mapping
 
     rust_out = RUST_DATA_PATH / "names" / "symbols.json"
     rust_out.parent.mkdir(parents=True, exist_ok=True)
@@ -110,9 +87,14 @@ def generate_symbols_data_file() -> None:
 
 
 def generate_org_type_file() -> None:
-    content = ORG_TYPE_TEMPLATE
+    """Emit `rust/data/org_types.json` from `resources/names/org_types.yml`.
+
+    Consumed by `rust/src/names/org_types.rs` (the Replacer + Rust
+    tagger's ORG_CLASS symbol loop). No Python output — `rigour/data/
+    names/org_types.py` was retired with the Python tagger in step 8.
+    """
     types_path = RESOURCES_PATH / "names" / "org_types.yml"
-    generic_types = Counter()
+    generic_types: Counter = Counter()
     with open(types_path, "r", encoding="utf-8") as ofh:
         data: Dict[str, List[OrgTypeSpec]] = yaml.safe_load(ofh.read())
         clean_types: List[OrgTypeSpec] = []
@@ -153,21 +135,15 @@ def generate_org_type_file() -> None:
             else:
                 generic_types.update([out["generic"]])
             clean_types.append(out)
-        content += f"ORG_TYPES: List[OrgTypeSpec] = {clean_types!r}\n"
 
     print("Compare types:")
     for k, v in generic_types.most_common():
         print(f"  {k}: {v}")
 
-    out_path = CODE_PATH / "names" / "org_types.py"
-    write_python(out_path, content)
-
-    # Rust-side artifact — same in-memory list, JSON-encoded. Consumed
-    # by `rust/src/names/org_types.rs`.
     write_json(RUST_DATA_PATH / "org_types.json", clean_types)
 
 
 if __name__ == "__main__":
     generate_name_stopwords_file()
-    generate_symbols_data_file()
+    generate_symbols_file()
     generate_org_type_file()

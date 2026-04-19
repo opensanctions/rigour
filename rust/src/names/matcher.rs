@@ -95,6 +95,30 @@ impl<T> Needles<T> {
         Self { ac, payloads }
     }
 
+    /// Return **all** boundary-passing matches — overlapping candidates
+    /// included. Used by consumers that want to see every recognised
+    /// phrase independently, e.g. the tagger (which creates a Span
+    /// per match) rather than the replacer (which substitutes once).
+    /// Match order follows the AC automaton's walk (roughly by end
+    /// position); sort downstream if a specific order is needed.
+    pub fn find_overlapping<'a>(&'a self, text: &'a str) -> Vec<Match<'a, T>> {
+        let bytes = text.as_bytes();
+        let mut out: Vec<Match<'a, T>> = Vec::new();
+        for m in self.ac.find_overlapping_iter(text) {
+            let start = m.start();
+            let end = m.end();
+            if boundary_ok(bytes, start, end) {
+                out.push(Match {
+                    start,
+                    end,
+                    matched: &text[start..end],
+                    payload: &self.payloads[m.pattern().as_usize()],
+                });
+            }
+        }
+        out
+    }
+
     /// Return the non-overlapping, leftmost-longest, boundary-passing
     /// matches in `text`. Materialised as a Vec since we have to
     /// collect + sort internally anyway; for our call sizes (< 100

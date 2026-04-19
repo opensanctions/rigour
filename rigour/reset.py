@@ -10,7 +10,11 @@ from rigour.text.scripts import can_latinize_cp
 from rigour.names import normalize_name
 from rigour.addresses.format import _load_formats, _load_template
 from rigour.addresses.normalize import _address_replacer
-from rigour.names.tagging import _get_org_tagger, _get_person_tagger
+# Tagger caches live Rust-side now (per plans/rust-tagger.md step 8),
+# keyed on (TaggerKind, Normalize, Cleanup) in a process-lifetime
+# RwLock<HashMap>. There's no Python-side handle to reset; the
+# built automata stay until process exit. Same shape as the
+# org_types Replacer cache.
 
 
 def reset_caches() -> None:
@@ -28,8 +32,6 @@ def reset_caches() -> None:
     _load_formats.cache_clear()
     _load_template.cache_clear()
     _address_replacer.cache_clear()
-    _get_org_tagger.cache_clear()
-    _get_person_tagger.cache_clear()
     get_index.cache_clear()
     _get_identifier_map.cache_clear()
     _get_territory_names.cache_clear()

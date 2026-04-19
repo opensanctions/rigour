@@ -223,6 +223,35 @@ fn py_territories_jsonl() -> &'static str {
     territories::raw()
 }
 
+// Low-level tagger matchers. Python wrappers (`tag_org_name` /
+// `tag_person_name` in rigour/names/tagging.py) call these and
+// apply each (phrase, symbol) pair to the Name via apply_phrase,
+// then run `_infer_part_tags` locally. See plans/rust-tagger.md
+// step 8.
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "tag_org_matches")]
+fn py_tag_org_matches(
+    text: &str,
+    flags: u16,
+    cleanup: u8,
+) -> Vec<(String, names::symbol::Symbol)> {
+    let (flags, cleanup) = _decode_flags(flags, cleanup);
+    names::tagger::get_tagger(names::tagger::TaggerKind::Org, flags, cleanup).tag(text)
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "tag_person_matches")]
+fn py_tag_person_matches(
+    text: &str,
+    flags: u16,
+    cleanup: u8,
+) -> Vec<(String, names::symbol::Symbol)> {
+    let (flags, cleanup) = _decode_flags(flags, cleanup);
+    names::tagger::get_tagger(names::tagger::TaggerKind::Person, flags, cleanup).tag(text)
+}
+
 #[cfg(feature = "python")]
 #[pymodule]
 fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -249,6 +278,8 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_ordinals_dict, m)?)?;
     m.add_function(wrap_pyfunction!(py_person_names_text, m)?)?;
     m.add_function(wrap_pyfunction!(py_territories_jsonl, m)?)?;
+    m.add_function(wrap_pyfunction!(py_tag_org_matches, m)?)?;
+    m.add_function(wrap_pyfunction!(py_tag_person_matches, m)?)?;
     m.add_class::<names::symbol::Symbol>()?;
     m.add_class::<names::symbol::SymbolCategory>()?;
     Ok(())

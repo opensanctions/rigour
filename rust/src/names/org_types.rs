@@ -37,20 +37,20 @@ use crate::names::matcher::Needles;
 use crate::text::normalize::{Cleanup, Normalize, normalize};
 
 #[derive(Debug, Deserialize)]
-struct OrgTypeSpec {
+pub(crate) struct OrgTypeSpec {
     #[serde(default)]
-    display: Option<String>,
+    pub(crate) display: Option<String>,
     #[serde(default)]
-    compare: Option<String>,
+    pub(crate) compare: Option<String>,
     #[serde(default)]
-    generic: Option<String>,
+    pub(crate) generic: Option<String>,
     #[serde(default)]
-    aliases: Vec<String>,
+    pub(crate) aliases: Vec<String>,
 }
 
 const ORG_TYPES_JSON: &str = include_str!("../../data/org_types.json");
 
-static ORG_TYPE_SPECS: LazyLock<Vec<OrgTypeSpec>> =
+pub(crate) static ORG_TYPE_SPECS: LazyLock<Vec<OrgTypeSpec>> =
     LazyLock::new(|| serde_json::from_str(ORG_TYPES_JSON).expect("org_types.json parses"));
 
 /// Selects which mapping (alias → target) the Replacer is built from.
