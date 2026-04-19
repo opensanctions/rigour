@@ -1,11 +1,9 @@
 import math
 from typing import Optional
 from functools import lru_cache
+from rapidfuzz.distance import Levenshtein, DamerauLevenshtein, JaroWinkler
 
 from rigour import env
-from rigour._core import dam_levenshtein as _dam_levenshtein
-from rigour._core import jaro_winkler_similarity as _jaro_winkler_similarity
-from rigour._core import levenshtein as _levenshtein
 from rigour.util import MEMO_SMALL
 
 
@@ -27,7 +25,11 @@ def dam_levenshtein(
     """
     if left == right:
         return 0
-    return _dam_levenshtein(left[:max_length], right[:max_length], max_edits)
+    return DamerauLevenshtein.distance(
+        left[:max_length],
+        right[:max_length],
+        score_cutoff=max_edits,
+    )
 
 
 @lru_cache(maxsize=MEMO_SMALL)
@@ -48,7 +50,11 @@ def levenshtein(
     """
     if left == right:
         return 0
-    return _levenshtein(left[:max_length], right[:max_length], max_edits)
+    return Levenshtein.distance(
+        left[:max_length],
+        right[:max_length],
+        score_cutoff=max_edits,
+    )
 
 
 def levenshtein_similarity(
@@ -127,5 +133,5 @@ def jaro_winkler(left: str, right: str, max_length: int = env.MAX_NAME_LENGTH) -
     Returns:
         A float between 0.0 and 1.0.
     """
-    score = _jaro_winkler_similarity(left[:max_length], right[:max_length])
+    score = JaroWinkler.normalized_similarity(left[:max_length], right[:max_length])
     return score if score > 0.6 else 0.0

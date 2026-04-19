@@ -26,11 +26,5 @@ pyo3 = { version = "0.28", features = ["extension-module", "generate-import-lib"
 # hard-depends on pyo3 and is published as cdylib-only.
 rphonetic = "3"
 
-# String distance (levenshtein, damerau-levenshtein, jaro-winkler). Rust port
-# of the rapidfuzz C++ library by the same author, using bit-parallel Myers /
-# Mbleven algorithms. Last release Dec 2023 but the algorithms don't evolve
-# and the API surface we use is three functions.
-rapidfuzz = "0.5"
-
 # NOTE: no [profile.release] overrides. Defaults are fine; revisit if benchmarks
 # show measurable headroom from LTO / codegen-units=1.
