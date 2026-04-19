@@ -1,5 +1,4 @@
-pub mod phonetics;
-pub mod scripts;
+pub mod text;
 
 #[cfg(feature = "python")]
 use pyo3::prelude::*;
@@ -10,28 +9,28 @@ use pyo3::types::PySet;
 #[pyfunction]
 #[pyo3(name = "metaphone")]
 fn py_metaphone(token: &str) -> String {
-    phonetics::metaphone(token)
+    text::phonetics::metaphone(token)
 }
 
 #[cfg(feature = "python")]
 #[pyfunction]
 #[pyo3(name = "soundex")]
 fn py_soundex(token: &str) -> String {
-    phonetics::soundex(token)
+    text::phonetics::soundex(token)
 }
 
 #[cfg(feature = "python")]
 #[pyfunction]
 #[pyo3(name = "codepoint_script")]
 fn py_codepoint_script(cp: u32) -> Option<&'static str> {
-    scripts::codepoint_script(cp)
+    text::scripts::codepoint_script(cp)
 }
 
 #[cfg(feature = "python")]
 #[pyfunction]
 #[pyo3(name = "text_scripts")]
 fn py_text_scripts<'py>(py: Python<'py>, text: &str) -> PyResult<Bound<'py, PySet>> {
-    PySet::new(py, &scripts::text_scripts(text))
+    PySet::new(py, &text::scripts::text_scripts(text))
 }
 
 #[cfg(feature = "python")]
