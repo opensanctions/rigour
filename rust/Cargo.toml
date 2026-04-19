@@ -26,5 +26,11 @@ pyo3 = { version = "0.28", features = ["extension-module", "generate-import-lib"
 # hard-depends on pyo3 and is published as cdylib-only.
 rphonetic = "3"
 
+# Unicode properties (Script, GeneralCategory) for codepoint_script /
+# text_scripts. `compiled_data` bakes the trie tables into the binary. No
+# `unstable` feature needed at this phase — that's for experimental
+# transliteration, coming in a later PR.
+icu = { version = "2", features = ["compiled_data"] }
+
 # NOTE: no [profile.release] overrides. Defaults are fine; revisit if benchmarks
 # show measurable headroom from LTO / codegen-units=1.

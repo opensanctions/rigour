@@ -1,5 +1,44 @@
+from rigour.text.scripts import codepoint_script, text_scripts
 from rigour.text.scripts import is_latin
-from rigour.text.scripts import can_latinize, is_modern_alphabet, is_dense_script
+from rigour.text.scripts import can_latinize, can_latinize_cp
+from rigour.text.scripts import is_modern_alphabet, is_dense_script
+
+
+def test_codepoint_script_basic():
+    assert codepoint_script(ord("A")) == "Latin"
+    assert codepoint_script(ord("а")) == "Cyrillic"
+    assert codepoint_script(ord("中")) == "Han"
+    assert codepoint_script(ord("가")) == "Hangul"
+    assert codepoint_script(ord("Α")) == "Greek"
+    assert codepoint_script(ord("Ա")) == "Armenian"
+    assert codepoint_script(ord("ა")) == "Georgian"
+
+
+def test_codepoint_script_common_inherited():
+    # codepoint_script is a faithful Unicode lookup — Common and Inherited
+    # are returned as-is rather than filtered out.
+    assert codepoint_script(ord(" ")) == "Common"
+    assert codepoint_script(ord("0")) == "Common"
+    assert codepoint_script(0x0301) == "Inherited"  # combining acute
+    assert codepoint_script(0xD800) is None  # lone surrogate
+
+
+def test_text_scripts_mixed():
+    assert text_scripts("Hello, мир! 中文 123") == {"Latin", "Cyrillic", "Han"}
+    assert text_scripts("") == set()
+    assert text_scripts("123 !@#") == set()  # Common-only input → empty set
+    assert text_scripts("Hello") == {"Latin"}
+    assert text_scripts("你好") == {"Han"}
+
+
+def test_can_latinize_cp():
+    assert can_latinize_cp(ord("A")) is True
+    assert can_latinize_cp(ord("а")) is True  # Cyrillic
+    assert can_latinize_cp(ord("中")) is False
+    # Non-alphanumeric or no real script → None
+    assert can_latinize_cp(ord(" ")) is None
+    assert can_latinize_cp(ord("0")) is None  # digit — Common script
+    assert can_latinize_cp(ord("!")) is None
 
 
 def test_is_latin():
@@ -85,20 +124,28 @@ def test_scripts_turkish():
 
 
 def test_scripts_georgian():
-    """Georgian: can_latinize=True but is_modern_alphabet=False."""
+    """Georgian is both latinizable and a modern alphabet.
+
+    Behaviour change from the pre-Rust-port implementation: previously
+    is_modern_alphabet(georgian) returned False because the underlying
+    LATINIZABLE_CHARS set only held Latin+Cyrillic+Greek, contradicting the
+    docstring's intent to include Armenian and Georgian. The set-based
+    rewrite aligns code with docstring.
+    """
     geo = "ნინო ბურჯანაძე"
     assert not is_latin(geo)
     assert can_latinize(geo)
-    assert not is_modern_alphabet(geo)
+    assert is_modern_alphabet(geo)
     assert not is_dense_script(geo)
 
 
 def test_scripts_armenian():
-    """Armenian: can_latinize=True, but is_modern_alphabet=False (not in LATINIZABLE_CHARS)."""
+    """Armenian is both latinizable and a modern alphabet. See test_scripts_georgian
+    for the behaviour-change rationale."""
     arm = "Միթչել Մակքոնել"
     assert not is_latin(arm)
     assert can_latinize(arm)
-    assert not is_modern_alphabet(arm)
+    assert is_modern_alphabet(arm)
     assert not is_dense_script(arm)
 
 
