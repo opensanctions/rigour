@@ -1102,6 +1102,46 @@ def entity_names(type_tag, entity, prop=None, is_query=False) -> Set[Name]:
 
 ---
 
+### Phase 6 candidate: name picking (`rigour.names.pick`)
+
+**Not scheduled, but called out so it doesn't get lost.** The `pick_name` /
+`levenshtein_pick` / `reduce_names` / `pick_case` family in `rigour/names/pick.py`
+is a plausible next Rust port after `analyze_names` lands.
+
+**Why this is tempting**:
+- It's a hot path during OpenSanctions data export — run per entity to choose a
+  display name from a bag of aliases. At OpenSanctions-scale (millions of
+  entities) this dominates export runtime.
+- `levenshtein_pick` does all-pairs Levenshtein: O(n²) distance calls over a
+  names list, weighted by latin share. Each call currently crosses the Python
+  FFI even with rapidfuzz's C++ backend.
+- `latin_share` iterates every character in every name (now via
+  `codepoint_script` → `_core` FFI per char). That's a lot of boundary
+  crossings that would amortise cleanly inside a single Rust call.
+- The internal helpers (`levenshtein`, `codepoint_script`, `ascii_text`) are
+  all already Rust-backed or soon will be. Moving the loop in reduces the
+  boundary crossings from `O(n² + k * m)` (all-pairs distance + per-char script
+  lookups) to one.
+
+**Shape of the port**:
+- `pick_name(names: list[str]) -> Optional[str]` becomes a `#[pyfunction]`
+  that takes `Vec<String>` and returns `Option<String>`.
+- Internally reuses the pure-Rust `distance::levenshtein` and
+  `scripts::codepoint_script` modules that land in earlier phases.
+- `pick_lang_name` is a thin Python layer above it (language filtering is
+  in Python land) and stays Python.
+
+**What to measure before committing**: Profile a real OpenSanctions export to
+confirm `pick_name` is actually in the top-N time sinks. If it's not, this
+phase is premature optimisation. If it is — likely a 5–10× speedup on name
+selection, which is a meaningful fraction of export time.
+
+**Prerequisites**: Phase 2 (distance functions available via `_core`) and the
+script-detection Rust module landed in the Phase 1 follow-up. No new data
+embedding needed.
+
+---
+
 ## Normality Subsumption
 
 The dependency stack is: **normality → rigour → followthemoney → nomenklatura**.
