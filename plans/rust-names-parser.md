@@ -457,21 +457,14 @@ can land independently.
 
 ### Follow-up: rewire the tagger's alias pipeline onto `tokenize_name`
 
-Once `tokenize_name` is Rust-side (lands during Phase 5 as part of the
-primitives for `analyze_names`), retire the ad-hoc `TOKENIZE_SKIP_CHARS`
-pre-strip in `rust/src/names/tagger.rs`. The tagger normalises aliases to
-mirror what the runtime haystack has been through; today it hand-copies
-the Python tokenizer's skip-char list, which is a second source of truth
-that can drift. Replace `strip_tokenize_skip(alias)` with
-`tokenize_name(alias).join(" ")` so the tagger picks up any future
-tokenisation changes (new punctuation rules, CJK segmentation tweaks)
-automatically.
-
-Do a differential check before the switchover: run every alias from
-stopwords + symbols + org_types + territories + person_names through
-both pipelines and diff the outputs. A diff means either the new
-`tokenize_name` has a bug or it's an intentional semantic gain — either
-way, review the diff before landing.
+**Done.** The `rust/src/names/tagger.rs` alias builder now calls
+`tokenize_name` directly (single source of truth for category /
+skip-char handling) and drops the ad-hoc `TOKENIZE_SKIP_CHARS`
+pre-strip. As a consequence the `cleanup` argument was removed from
+the tagger's public API end-to-end — `tokenize_name` subsumes its
+role. Aligning the tagger with the runtime haystack pipeline also
+fixed a latent bug where `Cleanup::Strong` deleted CJK Lm and Mc
+chars that `tokenize_name` keeps (e.g. `ー` in `ウラジーミル`).
 
 ## Open questions
 

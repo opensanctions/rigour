@@ -31,6 +31,7 @@ use crate::names::org_types;
 use crate::names::person_names;
 use crate::names::symbol::{Symbol, SymbolCategory};
 use crate::names::symbols as name_symbols;
+use crate::names::tokenize::tokenize_name;
 use crate::territories;
 use crate::text::normalize::{Cleanup, Normalize, normalize};
 use crate::text::ordinals;
@@ -65,53 +66,45 @@ impl Tagger {
     }
 }
 
-// Characters that Python's `rigour.names.tokenize.tokenize_name`
-// DELETES rather than treating as token separators — dot and
-// various apostrophe / prime / accent codepoints. The tagger's
-// haystack (`Name.norm_form`) goes through tokenize_name on
-// construction and has these stripped; alias-side normalisation
-// needs to strip them too or "U.S.A." (alias) won't match "USA"
-// (haystack). `normalize(.., Cleanup::Strong)` replaces them with
-// whitespace which does NOT agree with tokenize_name.
-const TOKENIZE_SKIP_CHARS: &[char] = &[
-    '.',        // U+002E FULL STOP
-    '\u{0027}', // APOSTROPHE
-    '\u{2018}', // LEFT SINGLE QUOTATION MARK
-    '\u{2019}', // RIGHT SINGLE QUOTATION MARK
-    '\u{02BC}', // MODIFIER LETTER APOSTROPHE
-    '\u{02B9}', // MODIFIER LETTER PRIME
-    '\u{0060}', // GRAVE ACCENT
-    '\u{00B4}', // ACUTE ACCENT
-];
-
-fn strip_tokenize_skip(s: &str) -> String {
-    s.chars()
-        .filter(|c| !TOKENIZE_SKIP_CHARS.contains(c))
-        .collect()
-}
-
 /// Builder state — accumulate phrase → symbols entries as we walk
 /// every data source, dedup-friendly via Vec append.
 struct Builder {
     flags: Normalize,
-    cleanup: Cleanup,
     mapping: HashMap<String, Vec<Symbol>>,
 }
 
 impl Builder {
-    fn new(flags: Normalize, cleanup: Cleanup) -> Self {
+    fn new(flags: Normalize) -> Self {
         Self {
             flags,
-            cleanup,
             mapping: HashMap::new(),
         }
     }
 
     fn norm(&self, s: &str) -> Option<String> {
-        // Pre-strip tokenize-skip chars before normalise, matching
-        // what the Python haystack went through.
-        let stripped = strip_tokenize_skip(s);
-        normalize(&stripped, self.flags, self.cleanup)
+        // Mirror the Python haystack pipeline:
+        //
+        //   Name.norm_form = " ".join(part.form for part in parts)
+        //                  = " ".join(tokenize_name(casefold(original)))
+        //
+        // So aliases get normalised with the same shape:
+        //   1. caller's flags (for casefold and any Unicode-normalisation bits)
+        //      minus SQUASH_SPACES — the tokens-joined-by-ASCII-space shape
+        //      below makes squashing redundant.
+        //   2. tokenize_name() → tokens → join with ASCII space.
+        //
+        // No Cleanup is applied — tokenize_name subsumes its role
+        // (Unicode-category handling + skip-char deletion) and the
+        // runtime haystack never goes through `Cleanup::Strong` either.
+        // Applying it here would drop chars the haystack keeps (CJK
+        // Lm, Mc), breaking matches.
+        let pre_flags = self.flags - Normalize::SQUASH_SPACES;
+        let pre = normalize(s, pre_flags, Cleanup::Noop)?;
+        let tokens = tokenize_name(&pre, 1);
+        if tokens.is_empty() {
+            return None;
+        }
+        Some(tokens.join(" "))
     }
 
     fn add(&mut self, alias: &str, symbol: &Symbol) {
@@ -159,8 +152,8 @@ fn add_common_symbols(b: &mut Builder) {
     }
 }
 
-fn build_org_tagger(flags: Normalize, cleanup: Cleanup) -> Tagger {
-    let mut b = Builder::new(flags, cleanup);
+fn build_org_tagger(flags: Normalize) -> Tagger {
+    let mut b = Builder::new(flags);
     add_common_symbols(&mut b);
 
     let syms = name_symbols::data();
@@ -239,8 +232,8 @@ fn build_org_tagger(flags: Normalize, cleanup: Cleanup) -> Tagger {
     b.finish()
 }
 
-fn build_person_tagger(flags: Normalize, cleanup: Cleanup) -> Tagger {
-    let mut b = Builder::new(flags, cleanup);
+fn build_person_tagger(flags: Normalize) -> Tagger {
+    let mut b = Builder::new(flags);
     add_common_symbols(&mut b);
 
     let syms = name_symbols::data();
@@ -307,18 +300,18 @@ fn build_person_tagger(flags: Normalize, cleanup: Cleanup) -> Tagger {
     b.finish()
 }
 
-type TaggerCache = RwLock<HashMap<(TaggerKind, Normalize, Cleanup), Arc<Tagger>>>;
+type TaggerCache = RwLock<HashMap<(TaggerKind, Normalize), Arc<Tagger>>>;
 
 static TAGGER_CACHE: LazyLock<TaggerCache> = LazyLock::new(|| RwLock::new(HashMap::new()));
 
-pub fn get_tagger(kind: TaggerKind, flags: Normalize, cleanup: Cleanup) -> Arc<Tagger> {
-    let key = (kind, flags, cleanup);
+pub fn get_tagger(kind: TaggerKind, flags: Normalize) -> Arc<Tagger> {
+    let key = (kind, flags);
     if let Some(existing) = TAGGER_CACHE.read().unwrap().get(&key) {
         return existing.clone();
     }
     let built = Arc::new(match kind {
-        TaggerKind::Org => build_org_tagger(flags, cleanup),
-        TaggerKind::Person => build_person_tagger(flags, cleanup),
+        TaggerKind::Org => build_org_tagger(flags),
+        TaggerKind::Person => build_person_tagger(flags),
     });
     let mut writer = TAGGER_CACHE.write().unwrap();
     Arc::clone(writer.entry(key).or_insert(built))
@@ -328,15 +321,12 @@ pub fn get_tagger(kind: TaggerKind, flags: Normalize, cleanup: Cleanup) -> Arc<T
 mod tests {
     use super::*;
 
-    // Use the same default flags the Python tagger's `normalize_name`
-    // effectively produces (casefold + punct→ws + squash). Matches
-    // the default we'll pin on the Python wrapper.
+    // Matches the default pinned on the Python wrapper.
     const FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::SQUASH_SPACES);
-    const CLEANUP: Cleanup = Cleanup::Strong;
 
     #[test]
     fn org_tagger_matches_ordinals() {
-        let tagger = get_tagger(TaggerKind::Org, FLAGS, CLEANUP);
+        let tagger = get_tagger(TaggerKind::Org, FLAGS);
         let matches = tagger.tag("acme number one limited");
         assert!(
             matches
@@ -349,7 +339,7 @@ mod tests {
 
     #[test]
     fn org_tagger_matches_org_class() {
-        let tagger = get_tagger(TaggerKind::Org, FLAGS, CLEANUP);
+        let tagger = get_tagger(TaggerKind::Org, FLAGS);
         // "aktiengesellschaft" should map to ORG_CLASS (via generic=JSC).
         let matches = tagger.tag("siemens aktiengesellschaft");
         assert!(
@@ -363,7 +353,7 @@ mod tests {
 
     #[test]
     fn person_tagger_matches_corpus_name() {
-        let tagger = get_tagger(TaggerKind::Person, FLAGS, CLEANUP);
+        let tagger = get_tagger(TaggerKind::Person, FLAGS);
         // Any name from the corpus should produce at least one NAME
         // symbol. Pick "john" — extremely common, should resolve to
         // at least one Wikidata-keyed Symbol.
@@ -379,15 +369,15 @@ mod tests {
 
     #[test]
     fn cache_returns_same_arc() {
-        let a = get_tagger(TaggerKind::Org, FLAGS, CLEANUP);
-        let b = get_tagger(TaggerKind::Org, FLAGS, CLEANUP);
+        let a = get_tagger(TaggerKind::Org, FLAGS);
+        let b = get_tagger(TaggerKind::Org, FLAGS);
         assert!(Arc::ptr_eq(&a, &b));
     }
 
     #[test]
     fn cache_distinguishes_kind() {
-        let org = get_tagger(TaggerKind::Org, FLAGS, CLEANUP);
-        let person = get_tagger(TaggerKind::Person, FLAGS, CLEANUP);
+        let org = get_tagger(TaggerKind::Org, FLAGS);
+        let person = get_tagger(TaggerKind::Person, FLAGS);
         assert!(!Arc::ptr_eq(&org, &person));
     }
 }

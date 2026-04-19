@@ -82,6 +82,3 @@ primitive calls.
   Python-owned `Name` and mutates it in place. The full port is
   `plans/rust.md` Phase 2, which runs in parallel and lands
   independently.
-- **Tagger follow-up: retire `TOKENIZE_SKIP_CHARS` pre-strip once
-  `tokenize_name` is Rust-side.** Tracked in `plans/rust-names-parser.md`
-  under *Phasing and rollout → Follow-up*.

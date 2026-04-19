@@ -27,21 +27,20 @@ from rigour.names import Name, Symbol
 from rigour.names.part import NamePart
 from rigour.names.tag import INTITIAL_TAGS, NamePartTag, NameTypeTag
 from rigour.names.tokenize import normalize_name
-from rigour.text.normalize import Cleanup, Normalize
+from rigour.text.normalize import Normalize
 from rigour.text.stopwords import is_stopword
 
 __all__ = ["tag_org_name", "tag_person_name"]
 
 # Default flags for tagger reference-data normalisation. CASEFOLD
-# gives case-insensitive matching; SQUASH_SPACES + Cleanup.Strong
-# (which replaces punctuation with whitespace and deletes controls/
-# marks) approximates the Python `normalize_name` + `tokenize_name`
-# pipeline the pre-port tagger ran aliases through. Callers pass the
-# same flags through when normalising runtime input (typically
-# `name.norm_form` is already built by tokenize_name + casefold +
-# join — this is compatible).
+# gives case-insensitive matching; SQUASH_SPACES is implicit in the
+# tokens-joined-by-single-space shape the tagger produces but kept
+# here so callers normalising their own haystacks get the same
+# whitespace handling. The tagger internally runs tokenize_name over
+# its aliases (Unicode-category handling + skip-char deletion),
+# matching what Python's `Name` constructor does for the haystack
+# side, so no Cleanup is needed or accepted.
 _DEFAULT_FLAGS = Normalize.CASEFOLD | Normalize.SQUASH_SPACES
-_DEFAULT_CLEANUP = Cleanup.Strong
 
 
 def _infer_part_tags(name: Name) -> Name:
@@ -85,7 +84,6 @@ def _infer_part_tags(name: Name) -> Name:
 def tag_org_name(
     name: Name,
     normalize_flags: Normalize = _DEFAULT_FLAGS,
-    cleanup: Cleanup = _DEFAULT_CLEANUP,
 ) -> Name:
     """Tag an organisation Name with org-class + location + ordinal
     symbols.
@@ -93,21 +91,15 @@ def tag_org_name(
     Args:
         name: The `Name` to tag. Mutated in place (spans added,
             parts' tags promoted); also returned for chaining.
-        normalize_flags: `Normalize` flags the tagger's internal alias
-            set is normalised with. The caller is expected to have
-            normalised `name.norm_form` with the same flags before
-            calling. Default matches what the pre-port `normalize_name`
-            pipeline produced.
-        cleanup: Cleanup variant for the same normalisation. Default
-            `Cleanup.Strong` to approximate `tokenize_name`'s category
-            handling.
+        normalize_flags: `Normalize` flags used on the tagger's internal
+            alias set. Aliases are tokenized via `tokenize_name` (same
+            as the haystack) and then normalised with these flags.
+            Default is `CASEFOLD | SQUASH_SPACES`.
 
     Returns:
         The mutated `name`.
     """
-    matches = tag_org_matches(
-        name.norm_form, int(normalize_flags), int(cleanup)
-    )
+    matches = tag_org_matches(name.norm_form, int(normalize_flags))
     for phrase, symbol in matches:
         name.apply_phrase(phrase, symbol)
     return _infer_part_tags(name)
@@ -116,7 +108,6 @@ def tag_org_name(
 def tag_person_name(
     name: Name,
     normalize_flags: Normalize = _DEFAULT_FLAGS,
-    cleanup: Cleanup = _DEFAULT_CLEANUP,
     any_initials: bool = False,
 ) -> Name:
     """Tag a person Name with name-part + nick + ordinal + initial
@@ -126,7 +117,6 @@ def tag_person_name(
         name: The `Name` to tag. Mutated in place.
         normalize_flags: `Normalize` flags. Same role as in
             :func:`tag_org_name`.
-        cleanup: Cleanup variant. Same role.
         any_initials: If True, treat every single-character latin
             name part as an INITIAL symbol (used on the matching query
             side where "J Smith" arrives without a GIVEN/MIDDLE tag).
@@ -148,9 +138,7 @@ def tag_person_name(
         elif part.tag in INTITIAL_TAGS:
             name.apply_part(part, sym)
 
-    matches = tag_person_matches(
-        name.norm_form, int(normalize_flags), int(cleanup)
-    )
+    matches = tag_person_matches(name.norm_form, int(normalize_flags))
     for phrase, symbol in matches:
         name.apply_phrase(phrase, symbol)
 

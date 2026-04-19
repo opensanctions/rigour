@@ -215,24 +215,25 @@ fn py_territories_jsonl() -> &'static str {
 // apply each (phrase, symbol) pair to the Name via apply_phrase,
 // then run `_infer_part_tags` locally. See plans/rust-tagger.md
 // step 8.
+//
+// No `cleanup` argument: the tagger uses `tokenize_name` for
+// category handling (same pipeline as the Python haystack), so the
+// Cleanup vocabulary is irrelevant here. See the norm() comment in
+// names/tagger.rs for rationale.
 #[cfg(feature = "python")]
 #[pyfunction]
 #[pyo3(name = "tag_org_matches")]
-fn py_tag_org_matches(text: &str, flags: u16, cleanup: u8) -> Vec<(String, names::symbol::Symbol)> {
-    let (flags, cleanup) = _decode_flags(flags, cleanup);
-    names::tagger::get_tagger(names::tagger::TaggerKind::Org, flags, cleanup).tag(text)
+fn py_tag_org_matches(text: &str, flags: u16) -> Vec<(String, names::symbol::Symbol)> {
+    let flags = text::normalize::Normalize::from_bits_truncate(flags);
+    names::tagger::get_tagger(names::tagger::TaggerKind::Org, flags).tag(text)
 }
 
 #[cfg(feature = "python")]
 #[pyfunction]
 #[pyo3(name = "tag_person_matches")]
-fn py_tag_person_matches(
-    text: &str,
-    flags: u16,
-    cleanup: u8,
-) -> Vec<(String, names::symbol::Symbol)> {
-    let (flags, cleanup) = _decode_flags(flags, cleanup);
-    names::tagger::get_tagger(names::tagger::TaggerKind::Person, flags, cleanup).tag(text)
+fn py_tag_person_matches(text: &str, flags: u16) -> Vec<(String, names::symbol::Symbol)> {
+    let flags = text::normalize::Normalize::from_bits_truncate(flags);
+    names::tagger::get_tagger(names::tagger::TaggerKind::Person, flags).tag(text)
 }
 
 #[cfg(feature = "python")]
