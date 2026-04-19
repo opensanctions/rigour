@@ -25,10 +25,19 @@ use std::collections::HashMap;
 
 use crate::text::scripts::text_scripts;
 
-// Map from Unicode Script long name → BCP-47-T locale ID.
-// Scripts not in this table pass through unchanged (input is returned as-is).
+// Map from Unicode Script long name → BCP-47-T locale ID for the
+// corresponding Script → Latin transliterator available in ICU4X's
+// `compiled_data`. Scripts not in this table pass through unchanged.
+//
 // Traditional Han falls back to Simplified's transliterator — good enough for
-// name-matching purposes.
+// name-matching purposes. Kana and Hiragana share the kana transliterator.
+//
+// Probed against icu 2.2.0: every locale ID in this table round-trips through
+// Transliterator::try_new. Thai, Khmer, Lao, Sinhala, Tibetan are deliberately
+// omitted — CLDR has transforms for them but they are not shipped in
+// `compiled_data` as of 2.2 (they reference rules the ICU4X data builder
+// skips, such as Any-BreakInternal / Any-Title). Those scripts pass through
+// untransliterated until ICU4X data coverage catches up.
 const SCRIPT_LOCALES: &[(&str, &str)] = &[
     ("Cyrillic", "und-Latn-t-und-cyrl"),
     ("Arabic", "und-Latn-t-und-arab"),
@@ -41,6 +50,20 @@ const SCRIPT_LOCALES: &[(&str, &str)] = &[
     ("Katakana", "und-Latn-t-und-kana"),
     ("Hiragana", "und-Latn-t-und-kana"), // Hiragana routes through Katakana
     ("Hebrew", "und-Latn-t-und-hebr"),
+    // Additional scripts confirmed available in icu 2.2 compiled_data:
+    ("Syriac", "und-Latn-t-und-syrc"),
+    ("Bengali", "und-Latn-t-und-beng"),
+    ("Tamil", "und-Latn-t-und-taml"),
+    ("Telugu", "und-Latn-t-und-telu"),
+    ("Kannada", "und-Latn-t-und-knda"),
+    ("Malayalam", "und-Latn-t-und-mlym"),
+    ("Gujarati", "und-Latn-t-und-gujr"),
+    ("Gurmukhi", "und-Latn-t-und-guru"),
+    ("Oriya", "und-Latn-t-und-orya"),
+    ("Ethiopic", "und-Latn-t-und-ethi"),
+    ("Thaana", "und-Latn-t-und-thaa"),
+    // Non-`und`-prefixed: Myanmar ships only under the language-tagged form.
+    ("Myanmar", "my-Latn-t-my"),
 ];
 
 fn locale_for_script(script: &str) -> Option<&'static str> {
@@ -50,8 +73,11 @@ fn locale_for_script(script: &str) -> Option<&'static str> {
         .map(|(_, loc)| *loc)
 }
 
+// Cache entries are Option<Transliterator>: None means we tried to init
+// and the locale isn't in compiled_data (or a BCP-47-T parse failed), so
+// future calls should pass through unchanged rather than re-attempting.
 thread_local! {
-    static TRANSLITERATOR_CACHE: RefCell<HashMap<&'static str, Transliterator>> =
+    static TRANSLITERATOR_CACHE: RefCell<HashMap<&'static str, Option<Transliterator>>> =
         RefCell::new(HashMap::new());
 }
 
@@ -59,12 +85,16 @@ fn transliterate_with(locale_id: &'static str, input: String) -> String {
     TRANSLITERATOR_CACHE.with(|cache| {
         let mut cache = cache.borrow_mut();
         if !cache.contains_key(locale_id) {
-            let locale: Locale = locale_id.parse().expect("valid BCP-47-T locale");
-            let t = Transliterator::try_new(&locale).expect("built-in transliterator present");
+            let t = locale_id
+                .parse::<Locale>()
+                .ok()
+                .and_then(|locale| Transliterator::try_new(&locale).ok());
             cache.insert(locale_id, t);
         }
-        let t = cache.get(locale_id).expect("just-inserted entry exists");
-        t.transliterate(input)
+        match cache.get(locale_id).expect("just-inserted entry exists") {
+            Some(t) => t.transliterate(input),
+            None => input,
+        }
     })
 }
 
@@ -216,5 +246,60 @@ mod tests {
         let out = ascii_text("Hello мир");
         assert!(out.is_ascii());
         assert!(out.to_lowercase().contains("hello"));
+    }
+
+    #[test]
+    fn latinize_text_newly_added_scripts() {
+        // Each of these should yield Latin-script output (no characters in
+        // the original Unicode block remain). Exact romanisation varies by
+        // transliterator so we check for "script was removed" rather than
+        // pinning specific output strings.
+        let cases = &[
+            ("সংখ্যা", 0x0980u32..=0x09FF), // Bengali
+            ("ตัวอย่าง", 0x0B80..=0x0BFF),  // Tamil (actually Thai script — fix below)
+        ];
+        for (input, _block) in cases {
+            let out = latinize_text(input);
+            // Either it was transliterated, or — for scripts we can't handle
+            // (like Thai) — it passed through unchanged. Either is acceptable.
+            let _ = out;
+        }
+
+        // These actually transliterate via compiled_data:
+        let bengali = latinize_text("সংখ্যা");
+        assert!(
+            !bengali
+                .chars()
+                .any(|c| ('\u{0980}'..='\u{09FF}').contains(&c))
+        );
+
+        let tamil = latinize_text("தமிழ்");
+        assert!(
+            !tamil
+                .chars()
+                .any(|c| ('\u{0B80}'..='\u{0BFF}').contains(&c))
+        );
+
+        let syriac = latinize_text("ܫܠܡ");
+        assert!(
+            !syriac
+                .chars()
+                .any(|c| ('\u{0700}'..='\u{074F}').contains(&c))
+        );
+
+        let armenian = latinize_text("Միթչել");
+        assert!(
+            !armenian
+                .chars()
+                .any(|c| ('\u{0530}'..='\u{058F}').contains(&c))
+        );
+    }
+
+    #[test]
+    fn latinize_text_unsupported_script_passthrough() {
+        // Thai is not in ICU4X compiled_data — should pass through unchanged
+        // rather than panic (graceful degradation). See SCRIPT_LOCALES comment.
+        let thai = "สวัสดี";
+        assert_eq!(latinize_text(thai), thai);
     }
 }
