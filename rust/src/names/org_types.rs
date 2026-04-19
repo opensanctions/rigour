@@ -50,9 +50,8 @@ struct OrgTypeSpec {
 
 const ORG_TYPES_JSON: &str = include_str!("../../data/org_types.json");
 
-static ORG_TYPE_SPECS: LazyLock<Vec<OrgTypeSpec>> = LazyLock::new(|| {
-    serde_json::from_str(ORG_TYPES_JSON).expect("org_types.json parses")
-});
+static ORG_TYPE_SPECS: LazyLock<Vec<OrgTypeSpec>> =
+    LazyLock::new(|| serde_json::from_str(ORG_TYPES_JSON).expect("org_types.json parses"));
 
 /// Selects which mapping (alias → target) the Replacer is built from.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -206,8 +205,7 @@ fn build_generic(flags: Normalize, cleanup: Cleanup) -> Replacer {
 /// casefolded key ("ag", "gmbh").
 fn build_display(flags: Normalize, cleanup: Cleanup) -> Replacer {
     let norm = norm_fn(flags, cleanup);
-    let display_target_norm =
-        norm_fn(Normalize::STRIP | Normalize::SQUASH_SPACES, Cleanup::Noop);
+    let display_target_norm = norm_fn(Normalize::STRIP | Normalize::SQUASH_SPACES, Cleanup::Noop);
 
     let mut mapping: HashMap<String, String> = HashMap::new();
     let mut seen_targets: HashMap<String, String> = HashMap::new();
@@ -249,8 +247,7 @@ fn build_display(flags: Normalize, cleanup: Cleanup) -> Replacer {
 
 type ReplacerCache = RwLock<HashMap<(ReplacerKind, Normalize, Cleanup), Arc<Replacer>>>;
 
-static REPLACER_CACHE: LazyLock<ReplacerCache> =
-    LazyLock::new(|| RwLock::new(HashMap::new()));
+static REPLACER_CACHE: LazyLock<ReplacerCache> = LazyLock::new(|| RwLock::new(HashMap::new()));
 
 fn get_replacer(kind: ReplacerKind, flags: Normalize, cleanup: Cleanup) -> Arc<Replacer> {
     let key = (kind, flags, cleanup);
@@ -375,7 +372,12 @@ mod tests {
     #[test]
     fn compare_replaces_common_forms() {
         assert_eq!(
-            replace_compare("siemens aktiengesellschaft", COMPARE_FLAGS, Cleanup::Noop, false),
+            replace_compare(
+                "siemens aktiengesellschaft",
+                COMPARE_FLAGS,
+                Cleanup::Noop,
+                false
+            ),
             "siemens ag"
         );
     }

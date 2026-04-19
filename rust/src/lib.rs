@@ -80,7 +80,10 @@ fn py_ffi_noop(text: &str) -> String {
 // passes plain ints through here. Bit values must match the Python-
 // side IntFlag/IntEnum definitions in rigour/text/normalize.py.
 #[cfg(feature = "python")]
-fn _decode_flags(flags: u16, cleanup: u8) -> (text::normalize::Normalize, text::normalize::Cleanup) {
+fn _decode_flags(
+    flags: u16,
+    cleanup: u8,
+) -> (text::normalize::Normalize, text::normalize::Cleanup) {
     let flags = text::normalize::Normalize::from_bits_truncate(flags);
     let cleanup = match cleanup {
         1 => text::normalize::Cleanup::Strong,

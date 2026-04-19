@@ -173,7 +173,10 @@ fn is_ascii_word(b: u8) -> bool {
 }
 
 fn decode_is_word(utf8: &[u8]) -> bool {
-    match std::str::from_utf8(utf8).ok().and_then(|s| s.chars().next()) {
+    match std::str::from_utf8(utf8)
+        .ok()
+        .and_then(|s| s.chars().next())
+    {
         Some(c) => c.is_alphanumeric() || c == '_',
         None => false,
     }
@@ -184,11 +187,7 @@ mod tests {
     use super::*;
 
     fn build<'a>(entries: &[(&'a str, &'a str)]) -> Needles<String> {
-        Needles::build(
-            entries
-                .iter()
-                .map(|(k, v)| (k.to_string(), v.to_string())),
-        )
+        Needles::build(entries.iter().map(|(k, v)| (k.to_string(), v.to_string())))
     }
 
     fn match_spans(n: &Needles<String>, text: &str) -> Vec<(usize, usize, String)> {
@@ -219,10 +218,7 @@ mod tests {
         // Alias ends in '.', match at end-of-string — boundary check
         // passes because EOS-edge is treated as \W.
         let n = build(&[("inc.", "INC")]);
-        assert_eq!(
-            match_spans(&n, "apple inc."),
-            vec![(6, 10, "INC".into())]
-        );
+        assert_eq!(match_spans(&n, "apple inc."), vec![(6, 10, "INC".into())]);
     }
 
     #[test]
@@ -265,10 +261,7 @@ mod tests {
         // "public limited co.foo" — the long alias fails boundary
         // (followed by \w), but the short alias at the same start
         // position passes. Must surface the shorter one.
-        let n = build(&[
-            ("public limited co.", "PLC_DOT"),
-            ("public limited", "PL"),
-        ]);
+        let n = build(&[("public limited co.", "PLC_DOT"), ("public limited", "PL")]);
         assert_eq!(
             match_spans(&n, "public limited co.foo"),
             vec![(0, 14, "PL".into())]
@@ -278,10 +271,7 @@ mod tests {
     #[test]
     fn empty_needle_ignored() {
         let n = build(&[("", "EMPTY"), ("llc", "LLC")]);
-        assert_eq!(
-            match_spans(&n, "acme llc"),
-            vec![(5, 8, "LLC".into())]
-        );
+        assert_eq!(match_spans(&n, "acme llc"), vec![(5, 8, "LLC".into())]);
     }
 
     #[test]
@@ -289,10 +279,7 @@ mod tests {
         // Two entries with the same key — second payload wins,
         // matching Python dict.update semantics.
         let n = build(&[("llc", "FIRST"), ("llc", "SECOND")]);
-        assert_eq!(
-            match_spans(&n, "acme llc"),
-            vec![(5, 8, "SECOND".into())]
-        );
+        assert_eq!(match_spans(&n, "acme llc"), vec![(5, 8, "SECOND".into())]);
     }
 
     #[test]
