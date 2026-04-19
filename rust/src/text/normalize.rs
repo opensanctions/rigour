@@ -111,7 +111,15 @@ fn category_replace(text: &str, cleanup: Cleanup) -> String {
 
 fn squash_spaces(text: &str) -> String {
     // Collapse runs of Unicode-whitespace chars into single ASCII spaces;
-    // trim ends. Mirrors normality.squash_spaces() semantics.
+    // trim ends. Called inside the hot matching loop, which is why this
+    // is a hand-written single-pass loop rather than a `\s+` regex
+    // replace: no per-call LazyLock deref, no intermediate allocation,
+    // no regex automaton overhead. `char::is_whitespace` follows the
+    // Unicode `White_Space` property — covers ASCII space, tab, CR, LF,
+    // NBSP (U+00A0), narrow NBSP (U+202F), ideographic space (U+3000),
+    // line/paragraph separators (U+2028/U+2029). Does NOT match zero-
+    // width space (U+200B) — that's Cf, not White_Space, and must be
+    // removed by category_replace if unwanted.
     let mut out = String::with_capacity(text.len());
     let mut last_was_space = true; // suppresses leading whitespace
     for ch in text.chars() {
@@ -236,6 +244,87 @@ mod tests {
             normalize("  hi  ", Normalize::SQUASH_SPACES, Cleanup::Noop),
             Some("hi".to_string())
         );
+    }
+
+    // --- squash_spaces — Unicode whitespace coverage ---
+    //
+    // char::is_whitespace follows the Unicode White_Space property.
+    // These tests pin the coverage and surface any surprises.
+
+    fn squash(input: &str) -> Option<String> {
+        normalize(input, Normalize::SQUASH_SPACES, Cleanup::Noop)
+    }
+
+    #[test]
+    fn squash_ascii_whitespace() {
+        // U+0020 space, U+0009 tab, U+000A LF, U+000D CR, U+000B VT, U+000C FF
+        assert_eq!(squash("a\tb"), Some("a b".to_string()));
+        assert_eq!(squash("a\nb"), Some("a b".to_string()));
+        assert_eq!(squash("a\rb"), Some("a b".to_string()));
+        assert_eq!(squash("a\u{000B}b"), Some("a b".to_string()));
+        assert_eq!(squash("a\u{000C}b"), Some("a b".to_string()));
+        // Mixed run
+        assert_eq!(squash("a \t\r\n b"), Some("a b".to_string()));
+    }
+
+    #[test]
+    fn squash_non_breaking_space() {
+        // U+00A0 non-breaking space — would survive naive `trim()` on
+        // whitespace-stripping implementations that only look at ASCII.
+        assert_eq!(squash("a\u{00A0}b"), Some("a b".to_string()));
+        assert_eq!(squash("\u{00A0}hello\u{00A0}"), Some("hello".to_string()));
+    }
+
+    #[test]
+    fn squash_narrow_nbsp() {
+        // U+202F narrow no-break space — used in French typography and
+        // between digits in some locales.
+        assert_eq!(squash("a\u{202F}b"), Some("a b".to_string()));
+    }
+
+    #[test]
+    fn squash_ideographic_space() {
+        // U+3000 ideographic space — the CJK full-width space.
+        assert_eq!(squash("中\u{3000}文"), Some("中 文".to_string()));
+    }
+
+    #[test]
+    fn squash_line_paragraph_separators() {
+        // U+2028 line separator, U+2029 paragraph separator
+        assert_eq!(squash("a\u{2028}b"), Some("a b".to_string()));
+        assert_eq!(squash("a\u{2029}b"), Some("a b".to_string()));
+    }
+
+    #[test]
+    fn squash_mixed_unicode_whitespace() {
+        // Mix several kinds in one run; still collapses to one ASCII space.
+        let input = "foo\u{00A0}\t\u{2003}\u{3000}bar";
+        assert_eq!(squash(input), Some("foo bar".to_string()));
+    }
+
+    #[test]
+    fn squash_zero_width_space_is_not_whitespace() {
+        // U+200B is Cf (Format), NOT in the White_Space property.
+        // It survives squash_spaces and must be removed via category_replace
+        // if the caller wants it gone.
+        assert_eq!(squash("a\u{200B}b"), Some("a\u{200B}b".to_string()),);
+    }
+
+    #[test]
+    fn squash_only_whitespace_becomes_none() {
+        // Empty after squash → None
+        assert_eq!(squash("   "), None);
+        assert_eq!(squash("\t\n\r"), None);
+        assert_eq!(squash("\u{00A0}\u{3000}\u{2028}"), None);
+    }
+
+    #[test]
+    fn squash_normalises_output_to_ascii_space() {
+        // Any whitespace in the input becomes ASCII U+0020 in the output.
+        let out = squash("a\u{00A0}b\u{3000}c").unwrap();
+        assert_eq!(out, "a b c");
+        // Confirm the output whitespace is specifically U+0020
+        assert!(out.chars().filter(|c| c.is_whitespace()).all(|c| c == ' '));
     }
 
     #[test]

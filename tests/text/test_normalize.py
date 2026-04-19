@@ -37,6 +37,49 @@ def test_squash_spaces() -> None:
     assert normalize("  hi  ", Normalize.SQUASH_SPACES) == "hi"
 
 
+def test_squash_unicode_whitespace() -> None:
+    """Unicode White_Space property coverage.
+
+    char::is_whitespace in Rust follows the Unicode White_Space property;
+    these assertions pin which characters actually get collapsed. Called
+    through the FFI so any marshalling issue with non-ASCII whitespace
+    also surfaces here.
+    """
+    # Tabs, CR, LF, vertical tab, form feed — all collapse.
+    assert normalize("a\tb", Normalize.SQUASH_SPACES) == "a b"
+    assert normalize("a\n\r b", Normalize.SQUASH_SPACES) == "a b"
+    # Non-breaking space (U+00A0) — NOT stripped by str.strip() in many
+    # languages; explicit here.
+    assert normalize("\u00A0hi\u00A0", Normalize.SQUASH_SPACES) == "hi"
+    # Ideographic space (U+3000) — CJK full-width space.
+    assert normalize("中\u3000文", Normalize.SQUASH_SPACES) == "中 文"
+    # Narrow no-break space (U+202F) — French typography.
+    assert normalize("a\u202Fb", Normalize.SQUASH_SPACES) == "a b"
+    # Line/paragraph separators (U+2028, U+2029).
+    assert normalize("a\u2028b", Normalize.SQUASH_SPACES) == "a b"
+    assert normalize("a\u2029b", Normalize.SQUASH_SPACES) == "a b"
+    # Mixed run of different whitespace → single ASCII space.
+    assert (
+        normalize("foo\u00A0\t\u2003\u3000bar", Normalize.SQUASH_SPACES)
+        == "foo bar"
+    )
+    # All-whitespace input becomes None.
+    assert normalize("\u00A0\u3000\u2028", Normalize.SQUASH_SPACES) is None
+
+
+def test_squash_zero_width_space_survives() -> None:
+    """U+200B is category Cf (Format), not in the White_Space property.
+
+    squash_spaces leaves it alone. Callers that want it gone must use
+    Cleanup.Strong (which replaces Cf with delete).
+    """
+    assert normalize("a\u200Bb", Normalize.SQUASH_SPACES) == "a\u200Bb"
+    # Cleanup.Strong deletes Cf → zero-width space is removed.
+    assert (
+        normalize("a\u200Bb", Normalize.SQUASH_SPACES, Cleanup.Strong) == "ab"
+    )
+
+
 def test_nfc_recompose() -> None:
     # "e" + combining acute → "é"
     assert normalize("e\u0301", Normalize.NFC) == "é"
