@@ -46,7 +46,11 @@ pub enum Cleanup {
     Slug,
 }
 
-enum CharAction {
+/// Per-codepoint verdict used by the category-driven loops in this
+/// module (`category_replace`) and in `names::tokenize`. Shared here
+/// because both consumers classify a `GeneralCategory` into the same
+/// three-way action.
+pub enum CharAction {
     Keep,
     Delete,
     Whitespace,

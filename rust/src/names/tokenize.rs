@@ -25,6 +25,8 @@
 
 use icu::properties::{CodePointMapData, props::GeneralCategory};
 
+use crate::text::normalize::CharAction;
+
 // Characters deleted outright — punctuation inside abbreviations
 // ("U.S.A." → "USA") and apostrophe-like marks inside names
 // ("O'Brien" → "OBrien"). Mirrors `SKIP_CHARACTERS` in
@@ -48,12 +50,6 @@ const KEEP_CHARS: &[char] = &[
     '\u{FF70}', // HALFWIDTH KATAKANA-HIRAGANA PROLONGED SOUND MARK (ｰ)
     '\u{3005}', // IDEOGRAPHIC ITERATION MARK (々)
 ];
-
-enum CharAction {
-    Keep,
-    Delete,
-    Whitespace,
-}
 
 fn category_action(cat: GeneralCategory) -> CharAction {
     use GeneralCategory::*;
