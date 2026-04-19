@@ -4,18 +4,36 @@
 // one JSON record per line, fields `{code, name, full_name, alpha3,
 // qid, parent, is_country, is_jurisdiction, is_historical, langs,
 // names_strong, names_weak, ...}`. Authoritative emission is
-// `genscripts/generate_territories.py::update_data`. This module
-// exposes the raw JSONL text so Python (`rigour.territories.*`) and
-// the future Rust tagger consume it without needing filesystem
-// access at runtime.
+// `genscripts/generate_territories.py::update_data`.
+//
+// The JSONL ships as plain UTF-8 in git (~783 KiB, diff-friendly when
+// the generator regenerates) and gets zstd-compressed at crate-build
+// time by `build.rs` (~214 KiB). Decompression is lazy on first call
+// to `raw()`. The decompressed `String` lives in a `LazyLock` so
+// `&'static str` lifetimes still work for consumers — Python reads
+// through the `rigour._core.territories_jsonl()` PyO3 accessor, and
+// the Rust tagger parses the same text line-by-line via serde.
 
-const JSONL: &str = include_str!("../data/territories/data.jsonl");
+use std::sync::LazyLock;
 
-/// Return the full territories JSONL as `&'static str`. Python-side
-/// consumers parse line-by-line with orjson; the Rust tagger reads
-/// through serde into typed structs when step 8 lands.
+/// The compressed blob — produced by `build.rs` from
+/// `rust/data/territories/data.jsonl`. Empty if the source file was
+/// missing at build time (build.rs emits a warning).
+const COMPRESSED: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/territories.jsonl.zst"));
+
+static DECOMPRESSED: LazyLock<String> = LazyLock::new(|| {
+    if COMPRESSED.is_empty() {
+        return String::new();
+    }
+    let bytes = zstd::decode_all(COMPRESSED).expect("zstd decode territories.jsonl.zst");
+    String::from_utf8(bytes).expect("territories.jsonl is valid UTF-8")
+});
+
+/// Return the full territories JSONL as `&'static str`, lazily decoded
+/// on first call. Python-side consumers parse line-by-line with
+/// orjson; the Rust tagger reads through serde into typed structs.
 pub fn raw() -> &'static str {
-    JSONL
+    &DECOMPRESSED
 }
 
 #[cfg(test)]
