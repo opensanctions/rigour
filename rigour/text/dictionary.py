@@ -5,6 +5,16 @@ from typing import Callable, Dict, List, Optional
 Normalizer = Callable[[Optional[str]], Optional[str]]
 
 
+def noop_normalizer(text: Optional[str]) -> Optional[str]:
+    """A no-op normalizer that returns the text unchanged."""
+    if text is None:
+        return None
+    text = text.strip()
+    if len(text) == 0:
+        return None
+    return text
+
+
 class Scanner:
     """Core class for scanning text for forms. It uses a regex pattern to match the list of
     given forms in the text, trying to match the longest form first."""

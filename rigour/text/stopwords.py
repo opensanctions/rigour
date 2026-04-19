@@ -1,15 +1,9 @@
-from functools import cache, partial
+from functools import cache
 from typing import Optional, Sequence, Set
 
 from normality import category_replace, squash_spaces
 from normality.constants import SLUG_CATEGORIES
-from rigour.text.dictionary import Normalizer
-from rigour.text.normalize import Normalize, normalize
-
-# Minimal normalizer used when `is_nullword(..., normalize=False)`: just
-# strip whitespace and collapse empties to None, matching the behaviour
-# of the former `noop_normalizer`.
-_strip_normalizer: Normalizer = partial(normalize, flags=Normalize.STRIP)
+from rigour.text.dictionary import Normalizer, noop_normalizer
 
 
 def normalize_text(text: Optional[str]) -> Optional[str]:
@@ -84,7 +78,7 @@ def is_nullword(
     norm_form = normalizer(form) if normalize else form
     if norm_form is None:
         return False
-    nullwords = _load_nullwords(normalizer) if normalize else _load_nullwords(_strip_normalizer)
+    nullwords = _load_nullwords(normalizer) if normalize else _load_nullwords(noop_normalizer)
     return norm_form in nullwords
 
 

@@ -1,15 +1,9 @@
-from functools import partial
 from typing import Dict, Generator, List, Set, Tuple
 
 from rigour.data import DATA_PATH
-from rigour.text.dictionary import Normalizer
-from rigour.text.normalize import Normalize, normalize
+from rigour.text.dictionary import Normalizer, noop_normalizer
 
 NAMES_DATA_PATH = DATA_PATH / "names" / "persons.txt"
-
-# Default normalizer for load_person_names_mapping — strip whitespace,
-# None and empty → None. Matches the former `noop_normalizer` default.
-_strip_normalizer: Normalizer = partial(normalize, flags=Normalize.STRIP)
 
 
 def load_person_names() -> Generator[Tuple[str, List[str]], None, None]:
@@ -29,16 +23,14 @@ def load_person_names() -> Generator[Tuple[str, List[str]], None, None]:
 
 
 def load_person_names_mapping(
-    normalizer: Normalizer = _strip_normalizer, min_mappings: int = 1
+    normalizer: Normalizer = noop_normalizer, min_mappings: int = 1
 ) -> Dict[str, Set[str]]:
     """Load the person QID to name mappings from disk. This is a collection
     of aliases (in various alphabets) of person name parts mapped to a
     Wikidata QID representing that name part.
 
     Args:
-        normalizer (Normalizer, optional): A function to normalize names.
-            Defaults to a strip-only normalizer (whitespace trimmed,
-            empty/None → None).
+        normalizer (Normalizer, optional): A function to normalize names. Defaults to noop_normalizer.
 
     Returns:
         Dict[str, Set[str]]: A dictionary mapping normalized names to sets of QIDs.

@@ -16,6 +16,7 @@ from rigour.names.tagging import (
 from rigour.names.tokenize import tokenize_name
 from rigour.text.dictionary import Normalizer
 from rigour.names.tagging import RETagger, AhoCorTagger, Tagger
+from rigour.names import prenormalize_name
 
 log = logging.getLogger(__name__)
 InPath = click.Path(dir_okay=False, readable=True, path_type=Path, allow_dash=True)
@@ -35,7 +36,7 @@ def normalizer(text: Optional[str]) -> Optional[str]:
     """Normalize a name by removing extra spaces and converting to lowercase."""
     if text is None:
         return None
-    text = text.casefold()
+    text = prenormalize_name(text)
     if not text:
         return None
     return " ".join(tokenize_name(text))

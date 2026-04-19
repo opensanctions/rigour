@@ -3,7 +3,7 @@ from typing import Optional
 from rigour.names import Name, Symbol, NamePartTag, NameTypeTag
 from rigour.names.part import NamePart
 from rigour.names.tagging import tag_person_name, tag_org_name
-from rigour.names.tokenize import tokenize_name
+from rigour.names.tokenize import prenormalize_name, tokenize_name
 
 # For testing purposes, we only load these names by hacking the normalizer.
 LOAD_COMPOUND = [
@@ -36,16 +36,12 @@ LOAD_ONLY = [
 def _per_normalizer(name: Optional[str]) -> Optional[str]:
     if name not in LOAD_ONLY:
         return None
-    if name is None:
-        return ""
-    pre = name.casefold()
+    pre = prenormalize_name(name)
     return " ".join(tokenize_name(pre)) if pre else ""
 
 
 def _org_normalizer(name: Optional[str]) -> Optional[str]:
-    if name is None:
-        return ""
-    pre = name.casefold()
+    pre = prenormalize_name(name)
     return " ".join(tokenize_name(pre)) if pre else ""
 
 

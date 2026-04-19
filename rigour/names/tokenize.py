@@ -95,12 +95,21 @@ def tokenize_name(text: str, token_min_length: int = 1) -> List[str]:
     return [t for t in text.split() if len(t) >= token_min_length]
 
 
+def prenormalize_name(name: Optional[str]) -> str:
+    """Prepare a name for tokenization and matching."""
+    if name is None:
+        return ""
+    # name = unicodedata.normalize("NFC", name)
+    return name.casefold()
+
+
 @lru_cache(maxsize=MEMO_TINY)
 def normalize_name(name: Optional[str], sep: str = WS) -> Optional[str]:
     """Normalize a name for tokenization and matching."""
     if name is None:
         return None
-    joined = sep.join(tokenize_name(name.casefold()))
+    name = prenormalize_name(name)
+    joined = sep.join(tokenize_name(name))
     if len(joined) == 0:
         return None
     return joined

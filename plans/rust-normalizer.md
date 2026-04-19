@@ -420,32 +420,33 @@ New module:
 - `rigour/text/normalize.py` — re-exports `normalize`, `Normalize`, and
   `CategoryProfile`.
 
-Retired functions (breaking change, same PR):
+Retired functions (eventual breaking change, done in a scoped migration
+PR later):
 
 - `rigour.text.stopwords.normalize_text`
 - `rigour.names.tokenize.normalize_name` — replaced by an inline
   composition in callers. `rigour.names.tokenize.tokenize_name` stays
   (it's the token-producing function, separate concern).
-- `rigour.names.tokenize.prenormalize_name` — **removed** (April 2026).
-  Was literally `text.casefold()`; callers inlined.
+- `rigour.names.tokenize.prenormalize_name` — trivially `text.casefold()`.
+  Retires with the `normalize_name` migration.
 - `rigour.names.org_types.normalize_display`, `_normalize_compare`
-- `rigour.text.dictionary.noop_normalizer` — **removed** (April 2026).
-  Was a strip-and-None-on-empty Normalizer. Callers that still pass a
-  `Normalizer` callback get a local `partial(normalize, flags=
-  Normalize.STRIP)` until the flag migration lands.
+- `rigour.text.dictionary.noop_normalizer` — strip-and-None-on-empty
+  Normalizer. Retires when the `Normalizer` callback pattern is fully
+  replaced by `flags=`. **Do not route through the Rust `normalize()`
+  just to strip** — the FFI cost is larger than `str.strip()`.
 - `Normalizer` type alias in `rigour.text.dictionary` — kept for now;
   retires when the callback pattern is fully replaced by `flags=`.
 
-Standardised on `str.casefold()` in place of `str.lower()` wherever
-rigour did case-insensitive normalization:
+Already done (April 2026) — minor hygiene fixes that live outside the
+callback-migration story:
 
-- `rigour.langs.util.normalize_code`
-- `rigour.addresses.normalize.normalize_address`
-
-`str.lower()` mishandles ß, Turkish dotted-I, and Greek sigma forms;
-`str.casefold()` is the correct operation for case-insensitive equality
-and matches what `Normalize::CASEFOLD` does internally via ICU4X
-`CaseMapper::fold_string`.
+- **`str.casefold()` in place of `str.lower()`** in
+  `rigour.langs.util.normalize_code` and
+  `rigour.addresses.normalize.normalize_address`. `str.lower()`
+  mishandles ß, Turkish dotted-I, and Greek sigma forms; `str.casefold()`
+  is the correct operation for case-insensitive equality. Output
+  differs on non-ASCII inputs with these characters; ASCII-only inputs
+  are unchanged.
 
 Kept (domain-specific wrappers, not generic):
 
