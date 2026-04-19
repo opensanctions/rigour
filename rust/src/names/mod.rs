@@ -3,3 +3,4 @@
 
 pub mod matcher;
 pub mod org_types;
+pub mod symbol;

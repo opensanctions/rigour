@@ -188,7 +188,7 @@ def test_tag_org_name_ordinals():
         # assert tagged_name.parts[0].tag == NamePartTag.NUM
         assert len(tagged_name.symbols) > 0
         assert any(
-            symbol.category == Symbol.Category.NUMERIC and symbol.id == 5
+            symbol.category == Symbol.Category.NUMERIC and symbol.id == "5"
             for symbol in tagged_name.symbols
         )
 
@@ -199,7 +199,7 @@ def test_tag_org_name_large_num():
     assert tagged_name.parts[0].tag == NamePartTag.NUM
     assert len(tagged_name.symbols) > 0
     assert any(
-        symbol.category == Symbol.Category.NUMERIC and symbol.id == 123456789
+        symbol.category == Symbol.Category.NUMERIC and symbol.id == "123456789"
         for symbol in tagged_name.symbols
     )
     name = Name("Rungra-888", tag=NameTypeTag.ENT)
@@ -207,7 +207,7 @@ def test_tag_org_name_large_num():
     assert tagged_name.parts[1].tag == NamePartTag.NUM
     assert len(tagged_name.symbols) > 0
     assert any(
-        symbol.category == Symbol.Category.NUMERIC and symbol.id == 888
+        symbol.category == Symbol.Category.NUMERIC and symbol.id == "888"
         for symbol in tagged_name.symbols
     )
 
@@ -265,7 +265,7 @@ def test_tag_org_cyrillic_quoted_with_number():
     llc = Symbol(Symbol.Category.ORG_CLASS, "LLC")
     assert llc in tagged.symbols
     assert any(
-        s.category == Symbol.Category.NUMERIC and s.id == 2000
+        s.category == Symbol.Category.NUMERIC and s.id == "2000"
         for s in tagged.symbols
     )
 

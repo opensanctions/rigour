@@ -31,7 +31,7 @@ fn py_codepoint_script(cp: u32) -> Option<&'static str> {
 #[pyfunction]
 #[pyo3(name = "text_scripts")]
 fn py_text_scripts<'py>(py: Python<'py>, text: &str) -> PyResult<Bound<'py, PySet>> {
-    PySet::new(py, &text::scripts::text_scripts(text))
+    PySet::new(py, text::scripts::text_scripts(text))
 }
 
 #[cfg(feature = "python")]
@@ -145,5 +145,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_replace_org_types_display, m)?)?;
     m.add_function(wrap_pyfunction!(py_remove_org_types, m)?)?;
     m.add_function(wrap_pyfunction!(py_extract_org_types, m)?)?;
+    m.add_class::<names::symbol::Symbol>()?;
+    m.add_class::<names::symbol::SymbolCategory>()?;
     Ok(())
 }

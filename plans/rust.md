@@ -758,6 +758,29 @@ modify `part.tag` after the `Name` is constructed. But none of the eagerly-compu
 (`ascii`, `comparable`, `metaphone`, `latinize`, `numeric`, `integer`) depend on `tag` — they
 depend only on `form`. So mutating `tag` doesn't invalidate any cached value.
 
+**String fields store `Py<PyString>`, not `String`.** The struct sketch
+above uses `String` / `Option<String>` for readability, but the real
+implementation should hold `Py<PyString>` (or `Option<Py<PyString>>`)
+for every field that Python reads as a string: `form`, `ascii`,
+`comparable`, `metaphone`. Same for `Span.comparable` below and
+`Name.original` / `Name.form` / `Name.lang`.
+
+Why: `#[pyo3(get)]` on a `String` field allocates a fresh `PyString`
+on *every* attribute read (UTF-8 validation + heap alloc, ~150–300 ns
+per access). Caching the `PyString` at construction time means
+subsequent reads are an INCREF of an already-built object (~60–100 ns,
+comparable to native `__slots__`). At matching-loop scale — millions
+of `part.comparable` reads across a scoring pass — this is a
+significant difference. The Rust-side logic still operates on the
+underlying `&str` via `.to_str(py)` when needed, but we avoid
+re-allocating on the Python side.
+
+The construction site (`NamePart::new` / `Span::new` / `Name::new`)
+builds the `PyString` once from the computed `String` value and stores
+it. Short Rust-internal accessors (`fn form_str(&self, py: Python) ->
+&str`) unwrap when the pure-Rust pipeline needs to read the value
+without touching Python.
+
 **`Span` owns cloned parts** (not indices):
 
 ```rust
