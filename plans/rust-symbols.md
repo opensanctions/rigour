@@ -28,7 +28,7 @@ Porting `rigour/names/tagging.py` to Rust means the AC tagger produces
 | `org_types.yml` generic field | `str` (interned) |
 | Territory codes (LOCATION) | `str` |
 | Part initials | `str` (single char) |
-| Person-name corpus (`persons.txt`) | **mixed** — Wikidata Q-IDs parsed as `int`, XIDs and manual overrides as `str` |
+| Person-name corpus (`person_names.txt`) | **mixed** — Wikidata Q-IDs parsed as `int`, XIDs and manual overrides as `str` |
 
 The heterogeneity isn't incidental; it reflects that these ids come
 from different sources with different conventions. Attempts to split

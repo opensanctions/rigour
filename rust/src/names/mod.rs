@@ -3,6 +3,6 @@
 
 pub mod matcher;
 pub mod org_types;
-pub mod persons;
+pub mod person_names;
 pub mod stopwords;
 pub mod symbol;

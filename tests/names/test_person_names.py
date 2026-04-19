@@ -1,5 +1,5 @@
 from typing import Optional
-from rigour.names.person import load_person_names_mapping
+from rigour.names.person_names import load_person_names_mapping
 
 
 def test_load_person_names_mapping():

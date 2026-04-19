@@ -14,4 +14,4 @@ wikidata:
 	python namesdb/wikidata.py
 
 dump:
-	ndb dump ../../rust/data/names/persons.txt
+	ndb dump ../../rust/data/names/person_names.txt

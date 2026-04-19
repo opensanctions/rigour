@@ -154,7 +154,7 @@ rigour/
 │   │   ├── org_symbols.json
 │   │   ├── person_symbols.json
 │   │   ├── territory_names.jsonl  # stripped territory subset for the tagger
-│   │   └── names/persons.txt     # plain UTF-8; build.rs compresses at build time
+│   │   └── names/person_names.txt     # plain UTF-8; build.rs compresses at build time
 │   └── benches/
 │       └── names.rs               # Criterion benchmarks
 ├── rigour/                        # Python package (unchanged structure)
@@ -244,7 +244,7 @@ Phase):**
 |------------------------|---------|------------------|------------------|
 | `names/org_types.py` | `ORG_TYPES` | Phase 3 | `rigour/data/names/org_types.py` |
 | `names/tagging.py`, `names/pick.py` | Symbols, domains, nicks, scripts, name parts | Phase 4 | `rigour/data/names/data.py`, `rigour/data/text/scripts.py` |
-| `names/tagging.py` | Person name corpus (persons.txt) | Phase 4 | `rigour/data/names/persons.txt` |
+| `names/tagging.py` | Person name corpus (person_names.txt) | Phase 4 | `rigour/data/names/person_names.txt` |
 | `names/prefix.py`, `names/split_phrases.py` | Prefix lists, split phrases | Phase 3 | `rigour/data/names/data.py` |
 | `names/check.py` | `GENERIC_PERSON_NAMES` | Phase 4 | `rigour/data/names/data.py` |
 | `text/scripts.py` | Script ranges, Latin char sets | Phase 1 | `rigour/data/text/scripts.py` |
@@ -309,7 +309,7 @@ table. The plan uses three formats, each matched to what the dataset *does* at r
 
 #### Tier 1: Compressed pattern list, rebuild on first use (person name corpus)
 
-`persons.txt` feeds an Aho-Corasick automaton with ~150k patterns. An earlier draft of
+`person_names.txt` feeds an Aho-Corasick automaton with ~150k patterns. An earlier draft of
 this plan proposed precomputing the automaton in `genscripts/` and embedding the
 serialised DFA bytes. **That approach does not work**: the `aho-corasick` crate v1.x
 exposes neither serde support nor raw byte serialisation (verified against its v1
@@ -319,11 +319,11 @@ Implementing cross-platform serialisation ourselves would be fragile and tied to
 crate's private representation.
 
 Plan of record: commit the patterns as **plain UTF-8**
-(`rust/data/names/persons.txt`, ~8.5 MB) so git diffs stay inspectable
+(`rust/data/names/person_names.txt`, ~8.5 MB) so git diffs stay inspectable
 when the corpus regenerates. `rust/build.rs` zstd-compresses at
 crate-build time (level 19, ~2.7 MB) into `OUT_DIR`, and
-`rust/src/names/persons.rs` pulls the compressed bytes in via
-`include_bytes!(concat!(env!("OUT_DIR"), "/persons.txt.zst"))` and
+`rust/src/names/person_names.rs` pulls the compressed bytes in via
+`include_bytes!(concat!(env!("OUT_DIR"), "/person_names.txt.zst"))` and
 decodes lazily. The tagger builds the automaton inside a
 `LazyLock<AhoCorasick>` on first access, on top of the decoded text.
 This pays the construction cost once per process at first use. Rough expected cost is
@@ -379,7 +379,7 @@ source stays as the human-edited form; JSON is just the build artifact Rust cons
 
 | Resource | Upstream source | Format → | Loaded via |
 |----------|----------------|----------|-------------|
-| Person name corpus | namesdb (`contrib/namesdb` pipeline) → plain `rust/data/names/persons.txt` | plain UTF-8 in git; `build.rs` compresses to `$OUT_DIR/persons.txt.zst` at build time | `include_bytes!(concat!(env!("OUT_DIR"), "/persons.txt.zst"))` + zstd decode in `LazyLock<String>` (`names::persons`); `AhoCorasick::new` inside the tagger's own `LazyLock` on top |
+| Person name corpus | namesdb (`contrib/namesdb` pipeline) → plain `rust/data/names/person_names.txt` | plain UTF-8 in git; `build.rs` compresses to `$OUT_DIR/person_names.txt.zst` at build time | `include_bytes!(concat!(env!("OUT_DIR"), "/person_names.txt.zst"))` + zstd decode in `LazyLock<String>` (`names::person_names`); `AhoCorasick::new` inside the tagger's own `LazyLock` on top |
 | Unicode script ranges | Unicode data via genscripts | `scripts.rs` (sorted range slice) | Compiled-in `static` |
 | Latin/Latinizable chars | Unicode data via genscripts | `latin.rs` (sorted range slice) | Compiled-in `static` |
 | Ordinals | `resources/text/ordinals.yml` | `ordinals.rs` (sorted slice) | Compiled-in `static` |
@@ -416,7 +416,7 @@ static ORG_TYPE_REGEX: LazyLock<Regex> = LazyLock::new(|| {
 });
 
 static NAME_TAGGER: LazyLock<AhoCorasick> = LazyLock::new(|| {
-    let bytes = include_bytes!(concat!(env!("OUT_DIR"), "/persons.txt.zst"));
+    let bytes = include_bytes!(concat!(env!("OUT_DIR"), "/person_names.txt.zst"));
     AhoCorasick::new(parse_patterns(&zstd::decode_all(&bytes[..]).unwrap())).unwrap()
 });
 ```
@@ -518,7 +518,7 @@ than surfacing them mid-Phase-4.
 
 **Explicitly out of scope for MVP**:
 - Any ICU4X / transliteration — Phase 1
-- Any data embedding (persons.txt, scripts, stopwords) — Phase 1+
+- Any data embedding (person_names.txt, scripts, stopwords) — Phase 1+
 - Distance functions (rapidfuzz) — Phase 2
 - `#[pyclass]` types — Phase 2
 - Batch variants of metaphone/soundex — noted below as a follow-up
@@ -1368,7 +1368,7 @@ Python benchmarks (separate script, not in CI):
 - `rigour/text/distance.py` — delegate to `_core`
 - `rigour/names/tagging.py` — delegate to `_core` (Phase 4)
 - `rigour/names/org_types.py` — delegate to `_core` (Phase 3)
-- `genscripts/generate_names.py` — emit JSON (org_types, symbols) for Rust. The person-names corpus comes from `contrib/namesdb/Makefile::dump`, not from genscripts; it lands plain at `rust/data/names/persons.txt` and `rust/build.rs` compresses it at crate-build time.
+- `genscripts/generate_names.py` — emit JSON (org_types, symbols) for Rust. The person-names corpus comes from `contrib/namesdb/Makefile::dump`, not from genscripts; it lands plain at `rust/data/names/person_names.txt` and `rust/build.rs` compresses it at crate-build time.
 - `genscripts/generate_text.py` — emit sorted-slice `.rs` for scripts, stopwords, ordinals
 - `genscripts/generate_territories.py` — emit stripped `territory_names.jsonl` alongside existing full JSONL
 
@@ -1439,7 +1439,7 @@ artifact" for rationale.
 - **Build backend switch**: plain replacement of hatchling with maturin. rigour's
   current `pyproject.toml` uses hatchling at default settings only, so no migration
   friction.
-- **Wheel size**: not a concern. Current rigour wheel ships `persons.txt` at ~8.5MB
+- **Wheel size**: not a concern. Current rigour wheel ships `person_names.txt` at ~8.5MB
   uncompressed; zstd-compressing it to ~2–3MB and adding ICU4X's 3.4MB is net-neutral
   to net-smaller than today.
 - **`consolidate_names` return type**: no hashing spec needed. Semantics are

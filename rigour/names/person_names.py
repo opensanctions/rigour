@@ -1,6 +1,6 @@
 from typing import Dict, Generator, List, Set, Tuple
 
-from rigour._core import persons_text
+from rigour._core import person_names_text
 from rigour.text.dictionary import Normalizer, noop_normalizer
 
 
@@ -11,18 +11,18 @@ def load_person_names() -> Generator[Tuple[str, List[str]], None, None]:
     small tail of X-prefixed manual override IDs.
 
     The corpus lives in the Rust crate (plain
-    `rust/data/names/persons.txt` at build time, zstd-compressed into
-    the binary by `build.rs`, decoded on first access by
-    `rigour._core.persons_text()`). The Rust side goes through one
-    UTF-8 PyString allocation for the full ~8.5 MB on each call, so
-    callers should iterate this generator to completion rather than
+    `rust/data/names/person_names.txt` at build time, zstd-compressed
+    into the binary by `build.rs`, decoded on first access by
+    `rigour._core.person_names_text()`). The Rust side goes through
+    one UTF-8 PyString allocation for the full ~8.5 MB on each call,
+    so callers should iterate this generator to completion rather than
     restarting mid-stream.
 
     Returns:
         Generator[Tuple[str, List[str]], None, None]: a generator
         yielding tuples of group ID and list of name aliases.
     """
-    text = persons_text()
+    text = person_names_text()
     for line in text.splitlines():
         line = line.strip()
         if not line:

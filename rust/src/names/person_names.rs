@@ -1,6 +1,6 @@
 // Person-names corpus loader.
 //
-// The corpus ships as plain UTF-8 (`rust/data/names/persons.txt`,
+// The corpus ships as plain UTF-8 (`rust/data/names/person_names.txt`,
 // committed), gets compiled into the binary as zstd-compressed bytes
 // by `build.rs`, and is decompressed once per process on first
 // access. Format: one mapping per line in the shape
@@ -20,20 +20,20 @@
 use std::sync::LazyLock;
 
 /// The compressed corpus — produced by `build.rs` from
-/// `rust/data/names/persons.txt`. Empty if the source file was
+/// `rust/data/names/person_names.txt`. Empty if the source file was
 /// missing at build time (build.rs emits a warning in that case).
-const COMPRESSED: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/persons.txt.zst"));
+const COMPRESSED: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/person_names.txt.zst"));
 
 static DECOMPRESSED: LazyLock<String> = LazyLock::new(|| {
     if COMPRESSED.is_empty() {
         return String::new();
     }
-    let bytes = zstd::decode_all(COMPRESSED).expect("zstd decode persons.txt.zst");
-    String::from_utf8(bytes).expect("persons.txt is valid UTF-8")
+    let bytes = zstd::decode_all(COMPRESSED).expect("zstd decode person_names.txt.zst");
+    String::from_utf8(bytes).expect("person_names.txt is valid UTF-8")
 });
 
 /// Return the full decompressed corpus as `&str`, lazily decoded on
-/// first call. Empty string if `rust/data/names/persons.txt` was
+/// first call. Empty string if `rust/data/names/person_names.txt` was
 /// missing at build time.
 pub fn raw() -> &'static str {
     &DECOMPRESSED

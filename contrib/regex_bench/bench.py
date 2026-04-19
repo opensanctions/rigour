@@ -5,7 +5,7 @@ from typing import Dict, List, Optional, Tuple, Type
 import click
 
 from rigour.names.name import Name
-from rigour.names.person import load_person_names_mapping
+from rigour.names.person_names import load_person_names_mapping
 from rigour.names.symbol import Symbol
 from rigour.names.tagging import (
     TaggerType,
