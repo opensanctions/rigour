@@ -46,5 +46,11 @@ build-text:
 
 build: build-iso639 build-territories build-addresses build-names build-text
 
+# Regenerate Rust-consumed data artifacts (under rust/data and
+# rust/src/generated). Generators are dual-emit — running them produces the
+# Rust artifacts alongside the existing Python ones, which keeps the two
+# from drifting. CI calls this + git-diffs to catch stale checkins.
+rust-data: build-names
+
 docs:
 	mkdocs build -c -d site

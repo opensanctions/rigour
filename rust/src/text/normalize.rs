@@ -23,7 +23,9 @@ use icu::properties::{CodePointMapData, props::GeneralCategory};
 use crate::text::transliterate::{ascii_text, latinize_text};
 
 bitflags! {
-    #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+    // Hash lets `Normalize` be used as part of a HashMap key — see
+    // the per-flag Replacer cache in names::org_types.
+    #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
     pub struct Normalize: u16 {
         const STRIP         = 1 << 0;
         const SQUASH_SPACES = 1 << 1;
@@ -36,7 +38,7 @@ bitflags! {
     }
 }
 
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash)]
 pub enum Cleanup {
     #[default]
     Noop,

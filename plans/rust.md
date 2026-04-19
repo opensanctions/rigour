@@ -881,20 +881,34 @@ instead.
 
 **Rust implementation**:
 - Org type data embedded from `resources/names/org_types.yml`
-- `Replacer` using the `regex` crate with `\b...\b` Unicode word boundaries
+- Replacer layered on `names::matcher::Needles<String>` — an Aho-Corasick
+  automaton with Python-style `(?<!\w)X(?!\w)` boundaries applied as a
+  post-match filter. The same `Needles<T>` substrate backs the symbol
+  tagger in Phase 4.
 - `remove_person_prefixes`, `remove_org_prefixes`, `remove_obj_prefixes`
 
-**Regex engine choice**: Use the `regex` crate with Unicode `\b` word boundaries. This
-replaces the Python `(?<!\w)...(?!\w)` pattern. The `regex` crate does not support
-lookahead/lookbehind, but Unicode `\b` is semantically equivalent for our token types.
-CJK characters are `\w` in both Python and the `regex` crate, so the CJK limitation
-(boundaries don't fire between CJK characters) is preserved identically.
+**Matching engine choice**: We tried three approaches — landed on AC.
+1. The `regex` crate with `\b...\b` boundaries is wrong for the 177 org-
+   type aliases that end in punctuation (e.g. "Inc.") because `\b`
+   requires a \w/\W transition that EOS or adjacent-\W doesn't provide.
+2. `fancy-regex` with lookaround matches Python semantics exactly but
+   pays for a backtracking engine; ~1.2× slower than Python's `re`.
+3. Flattening to per-alias `\b`/`\B`-anchored alternations in plain
+   `regex` was 5–6× slower than fancy-regex — the mixed anchors defeat
+   the DFA's literal-alternation prefix optimisation.
+4. `aho-corasick` + overlapping iteration + greedy longest-valid
+   selection: 190× faster than Python on cold inputs. This is the right
+   tool for multi-needle literal search with a post-match predicate.
+See `rust/src/names/matcher.rs` for the algorithm and the pathological
+`"public limited co.foo"` case the overlapping+greedy approach handles
+that simple reject-and-retry loops cannot.
 
 **Functions exposed via PyO3**:
-- `replace_org_types_compare(text, normalizer_fn) -> str`
-- `replace_org_types_display(text) -> str`
-- `remove_org_types(text) -> str`
-- `extract_org_types(text) -> list[str]`
+- `replace_org_types_compare(text, flags, cleanup) -> str` — flags
+  replace the `normalizer=` callback per `plans/rust-normalizer.md`
+- `replace_org_types_display(text, flags, cleanup) -> str`
+- `remove_org_types(text, flags, cleanup) -> str`
+- `extract_org_types(text, flags, cleanup) -> list[str]`
 - `remove_person_prefixes(text) -> str`
 - `remove_org_prefixes(text) -> str`
 - `remove_obj_prefixes(text) -> str`
@@ -912,18 +926,24 @@ CJK characters are `\w` in both Python and the `regex` crate, so the CJK limitat
 **Goal**: Port the `Tagger` class and all data loading to Rust.
 
 **Rust implementation**:
-- `aho-corasick` crate (the same crate that the `ahocorasick-rs` Python package wraps)
+- Built on the shared `names::matcher::Needles<T>` substrate (the same
+  Aho-Corasick layer org_types uses in Phase 3). Here the payload is
+  `Symbol` — or a Symbol + context wrapper — instead of `String`. The
+  overlapping-iter + boundary-filter + greedy-select algorithm is
+  written once in `matcher.rs` and reused.
 - Tagger loads org symbols, domains, territory name aliases (stripped subset),
   ordinals, and the person name corpus from embedded data — see the "Sources and
   Embedding" table in the Data Embedding Strategy section for the per-dataset format
-- `word_boundary_matches` ported using `regex` crate for token boundary detection
 - `tag_org_name`, `tag_person_name`, `_infer_part_tags` all in Rust
 
-**The `Normalizer` callback goes away.** Currently `tag_org_name(name, normalizer)` and
-`tag_person_name(name, normalizer)` take a Python callable. The normalizer is always
-`normalize_name` in practice. Since `normalize_name` is now in Rust (Phase 1), the parameter
-is unnecessary — Rust calls it directly. The Python-facing API can keep the parameter for
-backwards compatibility but ignore it.
+**The `Normalizer` callback becomes flags.** Currently `tag_org_name(name, normalizer)` and
+`tag_person_name(name, normalizer)` take a Python callable. Per
+`plans/rust-normalizer.md` the parameter keeps its role (picking how the
+function normalises its internal reference data — the AC patterns and the
+org-symbols / person-names corpus at build time) but its type changes to
+`Normalize` flags plus optional `Cleanup`. The tagger caches one built
+automaton per `(Normalize, Cleanup)` combination, same shape as the
+org_types cache landed in Phase 3.
 
 **Person name corpus loading**: see "Tier 1: Compressed pattern list" in the Data
 Embedding Strategy section. First tagger access pays ~50–200ms for zstd decompression

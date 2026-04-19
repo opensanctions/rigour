@@ -43,5 +43,20 @@ bitflags = "2"
 # the "why Rust-side distance isn't exposed to Python" trail.
 rapidfuzz = "0.5"
 
+# Aho-Corasick automaton for the multi-needle string search used by
+# `names::matcher::Needles`, which backs org_types replacement, the
+# symbol tagger, and anything else that needs "find these N strings
+# in this text with Python-style `(?<!\w)...(?!\w)` boundaries."
+# We tried the `regex` crate (DFA over literal alternations) and
+# `fancy-regex` (adds lookaround). AC beats both — it's the right
+# tool for pure literal search, and boundary checking as a post-
+# filter is cheap.
+aho-corasick = "1"
+
+# Serde + serde_json for reading committed JSON data artifacts like
+# rust/data/org_types.json inside a LazyLock at first use.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
 # NOTE: no [profile.release] overrides. Defaults are fine; revisit if benchmarks
 # show measurable headroom from LTO / codegen-units=1.

@@ -294,11 +294,101 @@ def _name_tokens(text):
 ```
 
 The callback-taking functions (`tag_org_name`, `is_stopword`, etc.)
-stop accepting a `normalizer=` parameter and normalize their input
-themselves. If a caller wants pre-normalized input, they normalize
-before calling.
+**keep** their parameterisation — they still let the caller choose how
+the function's internal reference data (org-type aliases, stopword
+list, AC patterns) is normalised when the regex or automaton is built.
+What changes is the shape of that parameter: the old
+`normalizer: Callable[[Optional[str]], Optional[str]]` becomes
+`normalize_flags: Normalize` (plus optional `cleanup: Cleanup` when
+the normaliser needs a category-replace step). Semantics are preserved:
+the caller is expected to normalise its runtime input with the **same**
+flag set before calling, exactly as it does today via the passed-in
+callback. See the next subsection for the full shape of the pattern.
+
+### Reference-data normalisation: keep the override, as flags
+
+There are **two** places where `Normalize` flags get used, and they
+have different lifecycles. The earlier parts of this document cover the
+first; this subsection describes the second and is the bridge to
+understanding what happens to callback-taking functions like
+`replace_org_types_compare` and `is_stopword`.
+
+| Use | Who calls `normalize()` | What's normalised | When |
+|---|---|---|---|
+| **Input normalisation** | The caller, *before* handing text to a lookup/tagger function | A single runtime string | On every call |
+| **Reference-data normalisation** | The lookup/tagger function *itself*, during regex/automaton construction | The static alias list / stopword list / AC pattern set | Once per distinct flag set (cached) |
+
+Same `normalize()` implementation, same flag vocabulary — different
+lifecycle and different owner. The reference-data path is where the
+old `normalizer=` callback lives. Dropping it entirely (as an earlier
+draft of this plan suggested) would have thrown away the ability for
+callers to choose how aliases get built into the internal structures
+— which nomenklatura, yente, and FTM all currently rely on via
+`normalizer=prenormalize_name`. We keep that override, just express it
+as flags.
+
+**Functions in the reference-data bucket** (all keep a parameterised
+entry point after the port):
+
+- `rigour/names/org_types.py`: `replace_org_types_compare`,
+  `replace_org_types_display`, `remove_org_types`, `extract_org_types`
+- `rigour/names/tagging.py`: `tag_org_name`, `tag_person_name`
+- `rigour/text/stopwords.py`, `rigour/names/check.py`: `is_stopword`,
+  `is_nullword`, `is_nullplace`, `is_generic_person_name`
+- `rigour/names/person.py`: `load_person_names_mapping`
+
+**New API shape** (representative — the other functions follow the
+same pattern):
+
+```python
+# rigour/names/org_types.py
+def replace_org_types_compare(
+    name: str,
+    normalize_flags: Normalize = Normalize.CASEFOLD,
+    cleanup: Cleanup = Cleanup.Noop,
+    generic: bool = False,
+) -> str:
+    ...
+```
+
+The default flag value matches what nomenklatura, yente, and FTM pass
+in practice today (casefold only, via `prenormalize_name`) — **not**
+the old Python default `_normalize_compare` (squash + casefold). This
+is a deliberate default change: production callers already override,
+so aligning the default with production means the common path needs
+zero caller-side changes. The old default was convenient for REPL use
+and not much else.
+
+**Caching.** Each distinct `(normalize_flags, cleanup)` combination
+constructs a different Aho-Corasick automaton. The Rust side caches
+them in a flag-keyed map, conceptually:
+
+```rust
+static REPLACERS: LazyLock<RwLock<HashMap<(Normalize, Cleanup), Arc<Replacer>>>> = ...;
+```
+
+First call with a given flag combo pays the build cost (~77 ms for
+`replace_org_types_compare` measured via `benchmarks/bench_org_types.py`
+— includes Python startup, JSON parse, AC build); subsequent calls
+hit the cache. Empirically there are 1–2 distinct flag sets in use
+across the rigour/FTM/nomenklatura/yente stack, so the cache size is
+tiny and bounded by that in practice. This is the same lifecycle as
+today's `@cache`-decorated `_compare_replacer` — we're preserving it,
+not adding something new.
+
+This cache is **not** the Phase-5 LRU scaffolding we're removing
+elsewhere — that LRU caches match *results* keyed by input string. The
+per-flag cache here keys compiled *patterns* and has a different shape,
+size bound, and motivation.
 
 ### Mapping observed normalizers to compositions
+
+The table below shows how each callback-based normaliser maps to a
+`Normalize` flag composition. Two readings: (a) these are the **default
+flag sets** each reference-data function will use internally when the
+caller doesn't override, and (b) these are the flag sets the caller
+should use when normalising its runtime input to match the function's
+internal reference data.
 
 | Old function | New composition |
 |--------------|-----------------|
@@ -324,8 +414,12 @@ before calling.
 
 ### Call sites that currently take a `normalizer` callback
 
-These are the functions whose `normalizer: Normalizer` parameter goes
-away:
+These are the functions whose `normalizer: Normalizer` parameter swaps
+out — the parameter stays, its type changes from
+`Callable[[Optional[str]], Optional[str]]` to `Normalize` (plus
+optional `Cleanup` where the old callback included a category-replace
+step). See the "Reference-data normalisation" subsection above for the
+full design:
 
 - `rigour/names/tagging.py`: `_get_org_tagger`, `_get_person_tagger`,
   `tag_org_name`, `tag_person_name`
@@ -336,11 +430,17 @@ away:
   `replace_org_types_display`, `remove_org_types`, `extract_org_types`
 - `rigour/names/person.py`: `load_person_names_mapping`
 
-Each of these normalizes its input directly (using the composition it
-needs), rather than deferring to a caller-supplied callback. This is a
-breaking API change. Given rigour is pre-2.0 and the consumers are
-small (ourselves + nomenklatura + FTM), break cleanly in one PR rather
-than doing a deprecation dance.
+The signature shape changes (callable → flags), but the role of the
+parameter is unchanged: it configures how the function's internal
+reference data is normalised when the regex / automaton is built.
+Callers that were passing `normalizer=prenormalize_name` today should
+pass `normalize_flags=Normalize.CASEFOLD` post-port; callers relying on
+the Python default `_normalize_compare` should pass
+`normalize_flags=Normalize.CASEFOLD | Normalize.SQUASH_SPACES`. This is
+still a breaking API change (callable-shaped → int-shaped argument);
+given rigour is pre-2.0 and the consumers are small (ourselves +
+nomenklatura + FTM), break cleanly in one PR rather than doing a
+deprecation dance.
 
 ### Rust wiring
 
