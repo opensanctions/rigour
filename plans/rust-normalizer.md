@@ -80,13 +80,14 @@ Rust function, one Python wrapper, no Python parallel of the steps.
 - **`category_replace` is in scope** as a normalization step — it's what
   most of rigour's existing normalizers use to collapse punctuation /
   symbols / controls. Instead of exposing the full category-map as a
-  parameter (as normality does), expose a closed `CategoryProfile` enum
-  with three named, fixed profiles.
+  parameter (as normality does), expose a closed `Cleanup` enum with a
+  small set of named, fixed variants. Default is "no cleanup" — the
+  parameter is `Optional[Cleanup]` on the Python side.
 - **Reference design**: `normality.normalize()`
   (`/Users/pudo/Code/normality/normality/__init__.py`) is the existing
   "kitchen sink" normalizer. Our rigour version is a leaner version of
   that — no `stringify`/encoding concerns, no `replace_categories: Categories`
-  free parameter, just fixed profiles.
+  free parameter, just the fixed `Cleanup` variants.
 
 ### Catalog of observed normalizers
 
@@ -121,19 +122,34 @@ primitives below, three are domain-specific wrappers that stay as-is.
 
 No `tokenize` (separate concern, separate return type). No `lower` (casefold supersedes it in all rigour callers we looked at; lossless for ASCII and more correct for ß/Turkish I).
 
-### Category profiles
+### Cleanup variants
 
-Three closed profiles, ported from the `Categories` dicts we have today:
+Default is "no cleanup" (the parameter is optional, absent = identity
+on the category axis). Two variants for now; room to grow.
 
-| Profile | Source | Intent |
+| Variant | Source | Intent |
 |---------|--------|--------|
-| `Default` | `normality.constants.UNICODE_CATEGORIES` | Generic text cleanup — punctuation/symbols/controls → WS, marks (except Mc) deleted |
-| `Slug` | `normality.constants.SLUG_CATEGORIES` | URL-slug-style cleanup — similar to Default but keeps Lm (modifier letters), keeps Mn (nonspacing marks — they'll be NFKD-decomposed separately) |
-| `Name` | `rigour.names.tokenize.TOKEN_SEP_CATEGORIES` + `SKIP_CHARACTERS` + `KEEP_CHARACTERS` | Name-specific — keeps Mc (Brahmic/Indic vowel signs), deletes Lm (phonetic superscripts), pre-deletes dots/apostrophes/accents, preserves Katakana prolonged-sound mark and ideographic iteration mark |
+| `Strong` | `normality.constants.UNICODE_CATEGORIES` | Aggressive text cleanup — punctuation/symbols/controls → WS, marks (except Mc) deleted. The "kitchen-sink" profile for matching keys. |
+| `Slug` | `normality.constants.SLUG_CATEGORIES` | URL-slug-style cleanup — similar to Strong but keeps Lm (modifier letters) and Mn (nonspacing marks). Reserved for the upcoming `slugify` port; not used by any current rigour caller yet. |
 
-Profiles are **fixed** in Rust. Callers cannot pass a custom category
-map; the only options are the three variants above. If a new profile is
-ever needed, adding a fourth variant is a trivial change.
+Cleanup variants are **fixed** in Rust. Callers cannot pass a custom
+category map; the only options are `Cleanup::Strong`, `Cleanup::Slug`,
+or "no cleanup". Adding another variant is a trivial change when a new
+use case appears.
+
+**Why no `Name` variant yet**: an earlier draft proposed a `Name`
+profile ported from `rigour.names.tokenize.TOKEN_SEP_CATEGORIES` +
+`SKIP_CHARACTERS` + `KEEP_CHARACTERS`. Deferred until the tokenizer
+port happens — the category-map used by `tokenize_name` is tangled with
+tokenization semantics (separator vs. delete vs. keep for each
+category) and is better thought of as an internal detail of the
+tokenizer rather than a standalone normalizer mode. Revisit then.
+
+**Why `Slug` now**: it's cheap to land alongside `Strong` (same table
+shape, trivial port from `normality.constants.SLUG_CATEGORIES`), and
+the slugify port is on the roadmap. Shipping the variant now means the
+eventual slugify implementation is a pure consumer of the normalizer
+API, not a dependency change.
 
 ### Flag model
 
@@ -164,18 +180,18 @@ bitflags! {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum CategoryProfile {
-    Default,  // ≈ normality.UNICODE_CATEGORIES
-    Slug,     // ≈ normality.SLUG_CATEGORIES
-    Name,     // ≈ rigour.names.tokenize.TOKEN_SEP_CATEGORIES + SKIP_CHARACTERS
+pub enum Cleanup {
+    Strong,  // ≈ normality.UNICODE_CATEGORIES
+    Slug,    // ≈ normality.SLUG_CATEGORIES
 }
 
 pub fn normalize(
     text: &str,
     flags: Normalize,
-    categories: Option<CategoryProfile>,
+    cleanup: Option<Cleanup>,
 ) -> Option<String> {
-    // Fixed pipeline order; see below.
+    // Fixed pipeline order; see below. `cleanup: None` = skip the
+    // category-replace step entirely.
 }
 ```
 
@@ -188,7 +204,7 @@ pub fn normalize(
 3. CASEFOLD
 4. ASCII, else LATINIZE (ASCII is a superset — running ASCII subsumes
    LATINIZE if both are set)
-5. category_replace (if `categories` is `Some(profile)`)
+5. category_replace (if `cleanup` is `Some(_)`; skipped when `None`)
 6. SQUASH_SPACES
 
 Empty result → `None`, matching the existing contract on every observed
@@ -199,22 +215,23 @@ normalizer.
 ```python
 # rigour/text/normalize.py
 from rigour._core import normalize as _normalize
-from rigour._core import Normalize, CategoryProfile
+from rigour._core import Normalize, Cleanup
 
-__all__ = ["normalize", "Normalize", "CategoryProfile"]
+__all__ = ["normalize", "Normalize", "Cleanup"]
 
 def normalize(
     text: Optional[str],
     flags: Normalize,
-    categories: Optional[CategoryProfile] = None,
+    cleanup: Optional[Cleanup] = None,
 ) -> Optional[str]:
     if text is None:
         return None
-    return _normalize(text, flags, categories)
+    return _normalize(text, flags, cleanup)
 ```
 
-The `Normalize` flag value and `CategoryProfile` enum cross the FFI
-boundary as small ints, ~zero marshalling cost.
+The `Normalize` flag value and `Cleanup` enum cross the FFI boundary as
+small ints, ~zero marshalling cost. `cleanup=None` (the default) skips
+category replacement entirely.
 
 ### Callers define their own compositions
 
@@ -239,33 +256,39 @@ def _compare(text):
 
 ```python
 # rigour/text/stopwords.py — replacing normalize_text
-#   (was: casefold + category_replace(SLUG) + squash_spaces)
-from rigour.text.normalize import normalize, Normalize, CategoryProfile
+#   (was: casefold + category_replace(SLUG) + squash_spaces).
+#   The stopwords path is actually the only current rigour caller using
+#   the SLUG profile. If a future grep shows nothing else will use Slug,
+#   consider promoting this to Cleanup.Strong — the stopword corpus
+#   doesn't care about Lm/Mn. For now, preserve current behaviour.
+from rigour.text.normalize import normalize, Normalize, Cleanup
 
 def _stopword_key(text):
     return normalize(
         text,
         Normalize.CASEFOLD | Normalize.SQUASH_SPACES,
-        CategoryProfile.Slug,
+        Cleanup.Slug,
     )
 ```
 
 ```python
 # rigour/names/tagging.py — tag_org_name / tag_person_name
-#   the normalizer was the Python normalize_name (casefold + tokenize + join).
-#   Tokenize is handled separately; the generic piece of normalization is:
-from rigour.text.normalize import normalize, Normalize, CategoryProfile
+#   The old normalizer was normalize_name (casefold + tokenize + join).
+#   Tokenisation is a separate concern (rigour.names.tokenize.tokenize_name)
+#   and tokenize_name's internal category handling is not exposed as a
+#   Cleanup variant — that's tangled with tokenizer semantics and will be
+#   revisited when the tokenizer ports over.
+#
+#   Until then, the tagger calls tokenize_name directly on pre-normalized
+#   input, rather than round-tripping through the flag-based normalizer:
+from rigour.text.normalize import normalize, Normalize
 from rigour.names.tokenize import tokenize_name
 
-def _name_key(text):
-    # Equivalent to the old normalize_name: category-replace with the Name
-    # profile (same behaviour as tokenize_name's internal category handling),
-    # casefold, squash. Tokenisation is a separate call returning List[str].
-    return normalize(
-        text,
-        Normalize.CASEFOLD | Normalize.SQUASH_SPACES,
-        CategoryProfile.Name,
-    )
+def _name_tokens(text):
+    # Casefold via normalize, then tokenize. No Cleanup pass — the
+    # tokenizer already handles category-based separation internally.
+    folded = normalize(text, Normalize.CASEFOLD)
+    return tokenize_name(folded) if folded else []
 ```
 
 The callback-taking functions (`tag_org_name`, `is_stopword`, etc.)
@@ -277,13 +300,13 @@ before calling.
 
 | Old function | New composition |
 |--------------|-----------------|
-| `normalize_text` | `CASEFOLD \| SQUASH_SPACES` + `CategoryProfile.Slug` |
-| `normalize_name` | `CASEFOLD \| SQUASH_SPACES` + `CategoryProfile.Name`, followed by `tokenize_name()` if the caller wants tokens |
-| `normalize_display` | `STRIP \| SQUASH_SPACES` |
-| `_normalize_compare` | `STRIP \| CASEFOLD \| SQUASH_SPACES` |
-| `normalize_code` | `STRIP \| CASEFOLD` |
-| `noop_normalizer` | `STRIP` |
-| `prenormalize_name` | `CASEFOLD` |
+| `normalize_text` | `CASEFOLD \| SQUASH_SPACES` + `Cleanup.Slug` |
+| `normalize_name` | `CASEFOLD`, then `tokenize_name()` if tokens are wanted. No `Cleanup` pass — tokenizer handles category separation internally. Revisit when the tokenizer ports over. |
+| `normalize_display` | `STRIP \| SQUASH_SPACES` (no cleanup) |
+| `_normalize_compare` | `STRIP \| CASEFOLD \| SQUASH_SPACES` (no cleanup) |
+| `normalize_code` | `STRIP \| CASEFOLD` (no cleanup) |
+| `noop_normalizer` | `STRIP` (no cleanup) |
+| `prenormalize_name` | `CASEFOLD` (no cleanup) |
 
 **Not covered by the flag model** (intentionally):
 
@@ -324,7 +347,7 @@ than doing a deprecation dance.
 pub fn normalize(
     text: &str,
     flags: Normalize,
-    categories: Option<CategoryProfile>,
+    cleanup: Option<Cleanup>,
 ) -> Option<String> {
     let mut s = if flags.contains(Normalize::STRIP) {
         text.trim().to_string()
@@ -351,8 +374,8 @@ pub fn normalize(
         s = latinize_text(&s);           // existing text::transliterate
     }
 
-    if let Some(profile) = categories {
-        s = category_replace(&s, profile);
+    if let Some(variant) = cleanup {
+        s = category_replace(&s, variant);
     }
 
     if flags.contains(Normalize::SQUASH_SPACES) {
@@ -362,10 +385,10 @@ pub fn normalize(
     if s.is_empty() { None } else { Some(s) }
 }
 
-fn category_replace(text: &str, profile: CategoryProfile) -> String {
-    // Fixed tables: one match arm per CategoryProfile variant.
-    // Each variant's table is a const array or phf map populated from
-    // the ported UNICODE_CATEGORIES / SLUG_CATEGORIES / Name data.
+fn category_replace(text: &str, cleanup: Cleanup) -> String {
+    // Fixed tables: one match arm per Cleanup variant.
+    // Each variant's table is a const array populated from the ported
+    // UNICODE_CATEGORIES (Strong) / SLUG_CATEGORIES (Slug) data.
 }
 ```
 
@@ -428,21 +451,21 @@ Kept (domain-specific wrappers, not generic):
   continue to pass after flipping their call sites from `normalizer=`
   to inline normalization.
 
-### Category profile data — sourcing
+### Cleanup data — sourcing
 
-The three profiles copy their category → action tables from existing
-Python sources:
+Both variants copy their category → action tables from existing Python
+sources:
 
-- `Default` — verbatim from `normality.constants.UNICODE_CATEGORIES`
+- `Strong` — verbatim from `normality.constants.UNICODE_CATEGORIES`
 - `Slug` — verbatim from `normality.constants.SLUG_CATEGORIES`
-- `Name` — from `rigour.names.tokenize.TOKEN_SEP_CATEGORIES`, plus the
-  `SKIP_CHARACTERS` set (pre-deleted: `.`, ASCII/curly apostrophes,
-  modifier-letter apostrophe/prime, grave/acute accents) and
-  `KEEP_CHARACTERS` set (preserved: U+30FC katakana-hiragana prolonged
-  sound, U+FF70 halfwidth variant, U+3005 ideographic iteration mark)
 
 These are small tables (~25 entries each) — generate as const arrays
 in `rust/src/text/normalize.rs` at port time; no genscripts step needed.
+
+The `Name`-profile data (`TOKEN_SEP_CATEGORIES` + `SKIP_CHARACTERS` +
+`KEEP_CHARACTERS` from `rigour.names.tokenize`) stays internal to the
+tokenizer for now. If the tokenizer port later proves that a
+standalone `Cleanup::Name` variant would be useful, add it then.
 
 ## Open questions
 
@@ -450,17 +473,14 @@ in `rust/src/text/normalize.rs` at port time; no genscripts step needed.
    `str.casefold()` exactly, including ß → ss and Turkish edges? Verify
    before shipping. Fallback: Rust's `to_lowercase()` + known-case
    overrides for the ~5 divergent characters.
-2. **Name profile completeness**: the `SKIP_CHARACTERS` and
-   `KEEP_CHARACTERS` sets in `rigour/names/tokenize.py` are recent
-   accretions; verify they cover every edge case before baking them in
-   as a closed profile. If more will appear, consider whether the
-   profile needs a way to extend without a crate release.
-3. **Thread-safety**: `normalize()` internally uses `ascii_text` and
+2. **Thread-safety**: `normalize()` internally uses `ascii_text` and
    `latinize_text` which use thread-local ICU4X transliterator caches.
    `normalize()` is safe to call from any thread; each thread amortises
    its own lazy init.
-4. **Does `SLUG_CATEGORIES` have a real use case in rigour?** Currently
-   only the stopwords path. If we're comfortable unifying `Slug` with
-   `Default` at the rigour level (we're not normality; slug URLs aren't
-   our concern), we could drop `Slug` and ship just `Default` + `Name`.
-   Worth a grep through consumers before finalising.
+3. **Will stopwords stay on `Slug`, or promote to `Strong`?** Stopwords
+   is the only current rigour consumer of `Cleanup.Slug`. The slug
+   profile was designed for URL slugs (normality); its distinguishing
+   trait is preserving Lm/Mn, which stopword keys don't obviously
+   need. Keep on `Slug` for parity with current behaviour, revisit if
+   we can prove `Strong` produces identical stopword keys in practice.
+   Not blocking — trivial to flip once decided.
