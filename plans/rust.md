@@ -24,10 +24,12 @@ runs entirely in Rust, crossing the boundary only at coarse entry/exit points.
 
 1. Move the entire name analysis pipeline into Rust so it runs without crossing back to Python
 2. Drop the `pyicu` dependency by using ICU4X (pure Rust) for transliteration
-3. Fold in functionality currently spread across `normality`, `ahocorasick-rs`, `jellyfish`,
-   and `rapidfuzz` into one Rust crate — reducing the Python dependency count while reusing
-   the same underlying Rust crates (`jellyfish`, `rapidfuzz`, `aho-corasick`) for the
-   algorithms.
+3. Fold in functionality currently spread across `normality`, `ahocorasick-rs`, and
+   `jellyfish` into one Rust crate — reducing the Python dependency count by reusing
+   the underlying Rust crates (`jellyfish`, `aho-corasick`). Python `rapidfuzz` stays
+   as a Python dep for now because the Rust `rapidfuzz` crate 0.5.0 lacks the
+   `opcodes` API that nomenklatura depends on. See the "Known gap" block under
+   Phase 2 for the decision trail.
 4. Reduce memory footprint: Python `Name`/`NamePart` objects cost ~1-5KB each; Rust structs
    cost ~200-400 bytes. For a nomenklatura index with 200k names, this is 200-1000MB vs 40-80MB
 
@@ -87,14 +89,21 @@ requires = ["maturin>=1.13,<2.0"]
 build-backend = "maturin"
 
 [tool.maturin]
-features = ["pyo3/extension-module"]
+# "python" feature gates the PyO3 bindings — without it, cargo test / cargo build
+# work on pure-Rust logic alone. Pattern copied from the jellyfish Python package.
+features = ["pyo3/extension-module", "python"]
 module-name = "rigour._core"
 manifest-path = "rust/Cargo.toml"
+# python-source defaults to repo root; the rigour/ package lives there, so omit.
 ```
 
 The switch from hatchling is a clean replacement — rigour's current `pyproject.toml`
 doesn't use hatchling features beyond the default (no custom hooks, no version
 plugins), so `build-backend` becomes a single-line change.
+
+**Also required at `rigour/py.typed`**: an empty file. Without this marker, downstream
+`mypy --strict` (FTM, nomenklatura, yente) ignores our `.pyi` stubs and breaks. This
+is the single most commonly-forgotten piece of the typed-Python-package story.
 
 The Rust crate compiles to `rigour/_core.so` — a private module. Python code imports from it:
 
@@ -194,132 +203,25 @@ toolchain + maturin).
 
 ## ICU4X for Transliteration
 
-*Updated with ICU4X spike results (April 2026). See `spikes/icu4x-spike/` for the code.*
+**The full transliteration design, benchmarks, and alternatives live in
+[`rust-transliteration.md`](./rust-transliteration.md).** This section now only
+carries the summary other parts of the plan reference.
 
-### Why ICU4X Instead of ICU4C
-
-The previous attempt used `rust_icu_utrans` which wraps ICU4C via bindgen. Problems:
-- Requires ICU4C headers and libraries at build time
-- Creates linking headaches for manylinux wheel distribution (must bundle or static-link ICU)
-- The Python→Rust→ICU4C double-hop didn't outperform Python→ICU4C (PyICU) directly
-
-**ICU4X** (`icu` crate v2.2.0) is the ICU team's pure-Rust rewrite. Advantages:
-- Compiles statically, no system dependency
-- Data baked into the binary (CLDR data via `compiled_data` feature)
-- Binary size with all transliteration data: **3.4 MB**
-- Init time for all transliterators: **<1ms**
-
-### Transliteration Architecture (Spike-Validated)
-
-ICU4X `compiled_data` does NOT include `Any-Latin` (the compound transliterator used by
-PyICU). It DOES include 10 script-specific transliterators. The architecture is a manual
-pipeline with script detection:
-
-```rust
-use icu::experimental::transliterate::Transliterator;
-use icu::normalizer::DecomposingNormalizerBorrowed;
-use icu::properties::{CodePointMapDataBorrowed, props::GeneralCategory};
-
-// Step 1: Script-specific transliterators (built-in compiled_data)
-// Only the one matching the input script is applied.
-let cyrl: Transliterator = Transliterator::try_new(
-    &"und-Latn-t-und-cyrl".parse().unwrap()
-).unwrap();
-
-// Step 2: NFKD + mark removal (direct normalizer API — 3.5M ops/sec)
-let nfkd = DecomposingNormalizerBorrowed::new_nfkd();
-let gc: CodePointMapDataBorrowed<GeneralCategory> = CodePointMapDataBorrowed::new();
-
-pub fn ascii_text(input: &str) -> String {
-    if input.is_ascii() { return input.to_string(); }
-
-    let mut s = input.to_string();
-
-    // 1. Apply script-specific transliterator (only if non-Latin detected)
-    let scripts = detect_scripts(input);
-    for script_key in &scripts {
-        if let Some(t) = SCRIPT_TRANS.get(script_key) {
-            s = t.transliterate(s);
-        }
-    }
-
-    // 2. NFKD decomposition + remove nonspacing marks (replaces Latin-ASCII)
-    let decomposed = nfkd.normalize_utf8(s.as_bytes());
-    s = decomposed.chars()
-        .filter(|c| gc.get(*c) != GeneralCategory::NonspacingMark)
-        .collect();
-
-    // 3. Custom ASCII fallback for non-decomposable chars (ø→o, ß→ss, ə→a, etc.)
-    s = ascii_fallback_table(&s);
-
-    s
-}
-```
-
-Available built-in transliterators (BCP-47-T locale IDs):
-
-| Locale ID | Script | Spike-verified |
-|-----------|--------|----------------|
-| `und-Latn-t-und-cyrl` | Cyrillic | Yes — exact match |
-| `und-Latn-t-und-arab` | Arabic | Yes — exact match |
-| `und-Latn-t-und-hans` | Chinese (Simplified) | Yes — exact match |
-| `und-Latn-t-und-grek` | Greek | Yes — exact match |
-| `und-Latn-t-und-hang` | Hangul | Yes — exact match |
-| `und-Latn-t-und-geor` | Georgian | Yes — exact match |
-| `und-Latn-t-und-armn` | Armenian | Yes — minor variant |
-| `und-Latn-t-und-deva` | Devanagari | Yes (untested in corpus) |
-| `und-Latn-t-und-kana` | Katakana | Yes — exact match |
-| `und-Latn-t-und-hebr` | Hebrew | Yes (untested in corpus) |
-
-### Threading: `Transliterator` is `!Send`/`!Sync`
-
-Cannot use `std::sync::LazyLock`. Options:
-- `thread_local!` with `RefCell` — simplest, works with PyO3 GIL guarantee
-- Per-call construction — too slow (~900µs init)
-- `unsafe impl Send` — risky, transliterator may hold Rc internally
-
-Recommended: `thread_local!` since Python's GIL means one thread per interpreter.
-
-### Spike Output Quality: 40/45 exact matches
-
-| Difference | PyICU | ICU4X | Verdict |
-|-----------|-------|-------|---------|
-| Norwegian ø | `Lo/kke` | `Lokke` | ICU4X better |
-| Azeri ə/Ə | `ahmad` | `?hm?d` | Fix: add to ASCII fallback table |
-| Armenian w/v | `Geworg` | `Gevorg` | Both valid romanizations |
-| Georgian apostrophe | curly `'` (U+2019) | ASCII `'` (U+0027) | ICU4X correct for ASCII |
-
-**Latinize: 5/5 exact matches** (Ukrainian, Russian, Greek, Chinese, Georgian).
-
-### Performance: Bottleneck Identified and Solved
-
-The `Latin-ASCII` built-in transliterator is 4,500 ops/sec — a bottleneck. Replace with
-direct `icu::normalizer` (3.5M ops/sec) + custom fallback table.
-
-| Step | ops/sec | Production approach |
-|------|---------|-------------------|
-| Script transliterator | 52,000 | Keep (built-in) |
-| NFKD + Mn removal | 3,500,000 | Use `DecomposingNormalizerBorrowed` directly |
-| ASCII fallback | ~millions | Custom lookup table |
-| Latin-ASCII (built-in) | 4,500 | **DO NOT USE** — replaced by above |
-
-### Cargo Dependencies
-
-```toml
-[dependencies]
-icu = { version = "2", features = ["unstable", "compiled_data"] }
-```
-
-Feature `unstable` gates `icu::experimental::transliterate`. Feature `compiled_data` bakes
-CLDR data into the binary.
-
-### Test Expectations to Update
-
-When switching from PyICU to ICU4X, these pinned test values will change:
-- Norwegian: `"Lars Lo/kke Rasmussen"` → `"Lars Lokke Rasmussen"` (improvement)
-- Georgian: curly apostrophe → ASCII apostrophe (correction)
-
-**Goal: drop `pyicu` from rigour's dependencies once ICU4X transliteration is in place.**
+- ICU4X (`icu` crate v2.2) is the team's pure-Rust ICU rewrite. Compiles
+  statically, no system ICU dependency, ~3.4MB of CLDR data baked in.
+- Pipeline: script detection (via `text_scripts`) → per-script transliterator →
+  NFKD + nonspacing mark removal → curated ASCII fallback table. ICU4X doesn't
+  ship `Any-Latin` so we dispatch per-script manually.
+- 22 script locales supported. Thai, Khmer, Lao, Sinhala, Tibetan pass through
+  unchanged — not in `compiled_data` as of 2.2.
+- `Transliterator` is `!Send + !Sync`. Use `thread_local!` with a RefCell cache
+  (not `LazyLock`). Python's GIL makes this effectively a process-lifetime cache.
+- **Post-landing benchmarks** (April 2026): FFI is ~150ns, not the bottleneck.
+  Library is 1.3–5× slower than PyICU on most scripts; 11× slower on Chinese,
+  20× slower on three-script mixed inputs. Latin-diacritics is 10× *faster* via
+  the ASCII fast-path. LRU cache masks this in production.
+- `anyascii` evaluated as a faster alternative backend. Not chosen yet —
+  decision gate in the linked doc.
 
 ---
 
@@ -524,11 +426,12 @@ and cannot go in a `static`. Those use `thread_local!` with a `RefCell`. Under t
 this is effectively a process-lifetime singleton; each interpreter thread pays init
 once. See "Threading: `Transliterator` is `!Send`/`!Sync`" above.
 
-**Not carried over from Python**: the `@lru_cache(maxsize=N)` memoization on
-transliteration, phonetics, distance, and tokenizer lookups — see "Why LRU caches go
-away" below. That also makes `rigour/reset.py`'s `cache_clear()` machinery obsolete:
-`LazyLock` and `thread_local!` have no reset API, but neither do these singletons need
-invalidation (they're derived from embedded data that never changes at runtime).
+**Decided case-by-case**: the `@lru_cache(maxsize=N)` memoization on transliteration,
+phonetics, distance, and tokenizer lookups. See "LRU caches: case-by-case, not blanket
+removal" below — some stay, some go, depending on call cost vs repetition rate.
+`rigour/reset.py`'s `cache_clear()` machinery remains for whichever caches are kept on
+the Python side. Rust-side singletons (`LazyLock`, `thread_local!`) have no reset API
+but don't need one — they're derived from embedded data that never changes at runtime.
 
 ---
 
@@ -571,6 +474,55 @@ swapping in Rust) and validating that ICU4X and maturin work for our use case.
   existing tests still pass, `mypy --strict` still passes with a `.pyi` stub
 - Test the CI pipeline: maturin-action builds wheels for at least one platform
 - Verify Windows build too (one matrix entry) — first real test of the newly-in-scope target
+
+---
+
+### Phase 0.5: MVP — phonetics wrapper
+
+**Goal**: ship the smallest possible real Rust functionality end-to-end, to validate
+the entire tooling + CI chain before committing to the larger phases. Scope: two
+functions (`metaphone`, `soundex`) wrapping the `jellyfish` Rust crate, replacing
+the current `jellyfish` Python dependency for those specific calls.
+
+**Why phonetics and not something bigger**: phonetics is pure `&str → String` with
+no data, no state, no lifetimes, no `#[pyclass]`, no ICU4X. The MVP isn't buying
+performance — it's buying tooling. Benchmarks on this MVP will likely show it's
+marginally *slower* than the current PyO3-backed `jellyfish` package (same FFI
+overhead, no amortisation). That's expected and acceptable — Phase 1+ is where the
+speed case lands. Surfacing CI/maturin/mypy issues on two functions is much cheaper
+than surfacing them mid-Phase-4.
+
+**Files**:
+- `rust/Cargo.toml`, `rust/src/lib.rs`, `rust/src/phonetics.rs` (pure-Rust wrappers)
+- `pyproject.toml` — switch build-backend to maturin, drop `jellyfish` from deps
+- `rigour/_core.pyi` — type stubs for `metaphone` and `soundex`
+- `rigour/py.typed` — empty marker file (without it, downstream mypy ignores the stubs)
+- `rigour/text/phonetics.py` — `from rigour._core import metaphone, soundex`; delete the `@lru_cache` wrappers
+- `Makefile` with `develop` target invoking `maturin develop`
+- `.github/workflows/` — replace the existing wheel-build job with `maturin-action`,
+  per-interpreter wheels (`-i 3.10 3.11 3.12 3.13`), seven OS/arch targets, `sccache: "true"`
+
+**Validation**:
+- `pytest tests/text/test_phonetics.py` passes locally after `maturin develop`
+- CI builds wheels on all seven targets (manylinux x86_64/aarch64, musllinux
+  x86_64/aarch64, macOS x86_64/arm64, Windows x86_64)
+- A wheel install followed by `from rigour.text.phonetics import metaphone; metaphone("Robert")` works in a clean venv
+- Downstream `mypy --strict` in FTM and nomenklatura still passes against the MVP wheel
+- `cargo test --manifest-path rust/Cargo.toml` passes without the `python` feature
+  (pure-Rust logic is exercisable independently)
+
+**Explicitly out of scope for MVP**:
+- Any ICU4X / transliteration — Phase 1
+- Any data embedding (persons.txt, scripts, stopwords) — Phase 1+
+- Distance functions (rapidfuzz) — Phase 2
+- `#[pyclass]` types — Phase 2
+- Batch variants of metaphone/soundex — noted below as a follow-up
+
+**Follow-up not in MVP but worth noting**: the jellyfish Python package exposes
+only single-call functions. A `vec_metaphone(Vec<String>) -> Vec<String>` variant
+would amortise FFI across a batch call — genuinely useful for callers normalising
+thousands of tokens, and a real improvement over what the Python jellyfish package
+offers. Defer to Phase 5 (batch API alignment with `analyze_names`).
 
 ---
 
@@ -716,6 +668,54 @@ native code:
   currently used should still get a Phase 2 test sweep — same algorithms,
   independent implementations.
 
+#### ⚠️ Known gap: the Rust `rapidfuzz` crate has no `opcodes` / alignment API
+
+The Python `rapidfuzz` package exposes `Levenshtein.opcodes(s1, s2)` returning a
+list-like `Opcodes` structure of `(tag, src_start, src_end, dest_start, dest_end)`
+tuples (tags: `"equal"`, `"replace"`, `"insert"`, `"delete"`). Nomenklatura uses
+this: `nomenklatura._opcodes` is `@lru_cache(maxsize=512)` over it, driving
+alignment logic in the matching pipeline.
+
+**The Rust `rapidfuzz` crate 0.5.0 does not implement this.** Verified by grepping
+the downloaded crate source: no `opcodes`, no `editops`, no alignment recovery API
+at all — only distance/similarity scores. This was discovered (April 2026) when an
+initial attempt to port distance functions ahead of Phase 2 was reverted precisely
+because of this gap.
+
+**Implication**: if we swap `rapidfuzz.distance.Levenshtein.distance` etc. to
+Rust-backed wrappers but nomenklatura still needs `Levenshtein.opcodes`, we'd end
+up carrying Python `rapidfuzz` as a dep *anyway*, just for the opcodes call — at
+which point the benefit of Rust-side distance is marginal (distance calls are
+LRU-cached too; FFI savings are bounded by cache miss rate).
+
+**Phase 2 decision gate** — three options, pick one:
+- **(A) Keep Python `rapidfuzz` as a dep for everything**: distance stays Python,
+  no rigour Rust bindings for Levenshtein/DamerauLevenshtein/JaroWinkler.
+  Simplest; loses the 3–10× bit-parallel speedup vs. keeping Python rapidfuzz
+  which already has it via C++ — so actually no regression. This is the de-facto
+  state as of the phonetics MVP.
+- **(B) Rust-side distance + Python-side opcodes**: expose distance functions
+  through `rigour._core`, keep Python `rapidfuzz` as a dep only for opcodes.
+  No net dependency reduction. Mostly pointless.
+- **(C) Implement opcodes in Rust**: port Hyyrö's bit-parallel alignment recovery
+  (from `rapidfuzz-cpp`) to Rust, or implement Wagner-Fischer with traceback
+  ourselves. Hyyrö gives byte-for-byte parity with Python rapidfuzz. Wagner-Fischer
+  is simpler but tiebreaks differently on ambiguous alignments — could subtly
+  change nomenklatura's alignment output on certain inputs. Real implementation
+  effort (~300–500 LOC).
+
+**Plan of record**: **(A)** until Phase 2 actively decides otherwise. The
+rapidfuzz distance speedup was attractive in the abstract, but given Python
+`rapidfuzz`'s C++ backend already runs the same bit-parallel algorithms, there's
+no *speed* argument for Rust-side distance — only a *dependency reduction*
+argument, which is killed by the opcodes gap. If Phase 5's `analyze_names`
+pipeline ends up calling distance from inside the hot loop (where FFI avoidance
+does matter), revisit — at that point, option (C) becomes worth the effort, or
+we upstream the opcodes API to the Rust rapidfuzz crate.
+
+Do not attempt to split distance and opcodes across Python and Rust without
+re-reading this section.
+
 **Rust structs**:
 
 ```rust
@@ -757,6 +757,29 @@ pub struct NamePart {
 modify `part.tag` after the `Name` is constructed. But none of the eagerly-computed properties
 (`ascii`, `comparable`, `metaphone`, `latinize`, `numeric`, `integer`) depend on `tag` — they
 depend only on `form`. So mutating `tag` doesn't invalidate any cached value.
+
+**String fields store `Py<PyString>`, not `String`.** The struct sketch
+above uses `String` / `Option<String>` for readability, but the real
+implementation should hold `Py<PyString>` (or `Option<Py<PyString>>`)
+for every field that Python reads as a string: `form`, `ascii`,
+`comparable`, `metaphone`. Same for `Span.comparable` below and
+`Name.original` / `Name.form` / `Name.lang`.
+
+Why: `#[pyo3(get)]` on a `String` field allocates a fresh `PyString`
+on *every* attribute read (UTF-8 validation + heap alloc, ~150–300 ns
+per access). Caching the `PyString` at construction time means
+subsequent reads are an INCREF of an already-built object (~60–100 ns,
+comparable to native `__slots__`). At matching-loop scale — millions
+of `part.comparable` reads across a scoring pass — this is a
+significant difference. The Rust-side logic still operates on the
+underlying `&str` via `.to_str(py)` when needed, but we avoid
+re-allocating on the Python side.
+
+The construction site (`NamePart::new` / `Span::new` / `Name::new`)
+builds the `PyString` once from the computed `String` value and stores
+it. Short Rust-internal accessors (`fn form_str(&self, py: Python) ->
+&str`) unwrap when the pure-Rust pipeline needs to read the value
+without touching Python.
 
 **`Span` owns cloned parts** (not indices):
 
@@ -881,20 +904,34 @@ instead.
 
 **Rust implementation**:
 - Org type data embedded from `resources/names/org_types.yml`
-- `Replacer` using the `regex` crate with `\b...\b` Unicode word boundaries
+- Replacer layered on `names::matcher::Needles<String>` — an Aho-Corasick
+  automaton with Python-style `(?<!\w)X(?!\w)` boundaries applied as a
+  post-match filter. The same `Needles<T>` substrate backs the symbol
+  tagger in Phase 4.
 - `remove_person_prefixes`, `remove_org_prefixes`, `remove_obj_prefixes`
 
-**Regex engine choice**: Use the `regex` crate with Unicode `\b` word boundaries. This
-replaces the Python `(?<!\w)...(?!\w)` pattern. The `regex` crate does not support
-lookahead/lookbehind, but Unicode `\b` is semantically equivalent for our token types.
-CJK characters are `\w` in both Python and the `regex` crate, so the CJK limitation
-(boundaries don't fire between CJK characters) is preserved identically.
+**Matching engine choice**: We tried three approaches — landed on AC.
+1. The `regex` crate with `\b...\b` boundaries is wrong for the 177 org-
+   type aliases that end in punctuation (e.g. "Inc.") because `\b`
+   requires a \w/\W transition that EOS or adjacent-\W doesn't provide.
+2. `fancy-regex` with lookaround matches Python semantics exactly but
+   pays for a backtracking engine; ~1.2× slower than Python's `re`.
+3. Flattening to per-alias `\b`/`\B`-anchored alternations in plain
+   `regex` was 5–6× slower than fancy-regex — the mixed anchors defeat
+   the DFA's literal-alternation prefix optimisation.
+4. `aho-corasick` + overlapping iteration + greedy longest-valid
+   selection: 190× faster than Python on cold inputs. This is the right
+   tool for multi-needle literal search with a post-match predicate.
+See `rust/src/names/matcher.rs` for the algorithm and the pathological
+`"public limited co.foo"` case the overlapping+greedy approach handles
+that simple reject-and-retry loops cannot.
 
 **Functions exposed via PyO3**:
-- `replace_org_types_compare(text, normalizer_fn) -> str`
-- `replace_org_types_display(text) -> str`
-- `remove_org_types(text) -> str`
-- `extract_org_types(text) -> list[str]`
+- `replace_org_types_compare(text, flags, cleanup) -> str` — flags
+  replace the `normalizer=` callback per `plans/rust-normalizer.md`
+- `replace_org_types_display(text, flags, cleanup) -> str`
+- `remove_org_types(text, flags, cleanup) -> str`
+- `extract_org_types(text, flags, cleanup) -> list[str]`
 - `remove_person_prefixes(text) -> str`
 - `remove_org_prefixes(text) -> str`
 - `remove_obj_prefixes(text) -> str`
@@ -912,18 +949,24 @@ CJK characters are `\w` in both Python and the `regex` crate, so the CJK limitat
 **Goal**: Port the `Tagger` class and all data loading to Rust.
 
 **Rust implementation**:
-- `aho-corasick` crate (the same crate that the `ahocorasick-rs` Python package wraps)
+- Built on the shared `names::matcher::Needles<T>` substrate (the same
+  Aho-Corasick layer org_types uses in Phase 3). Here the payload is
+  `Symbol` — or a Symbol + context wrapper — instead of `String`. The
+  overlapping-iter + boundary-filter + greedy-select algorithm is
+  written once in `matcher.rs` and reused.
 - Tagger loads org symbols, domains, territory name aliases (stripped subset),
   ordinals, and the person name corpus from embedded data — see the "Sources and
   Embedding" table in the Data Embedding Strategy section for the per-dataset format
-- `word_boundary_matches` ported using `regex` crate for token boundary detection
 - `tag_org_name`, `tag_person_name`, `_infer_part_tags` all in Rust
 
-**The `Normalizer` callback goes away.** Currently `tag_org_name(name, normalizer)` and
-`tag_person_name(name, normalizer)` take a Python callable. The normalizer is always
-`normalize_name` in practice. Since `normalize_name` is now in Rust (Phase 1), the parameter
-is unnecessary — Rust calls it directly. The Python-facing API can keep the parameter for
-backwards compatibility but ignore it.
+**The `Normalizer` callback becomes flags.** Currently `tag_org_name(name, normalizer)` and
+`tag_person_name(name, normalizer)` take a Python callable. Per
+`plans/rust-normalizer.md` the parameter keeps its role (picking how the
+function normalises its internal reference data — the AC patterns and the
+org-symbols / person-names corpus at build time) but its type changes to
+`Normalize` flags plus optional `Cleanup`. The tagger caches one built
+automaton per `(Normalize, Cleanup)` combination, same shape as the
+org_types cache landed in Phase 3.
 
 **Person name corpus loading**: see "Tier 1: Compressed pattern list" in the Data
 Embedding Strategy section. First tagger access pays ~50–200ms for zstd decompression
@@ -995,6 +1038,46 @@ def entity_names(type_tag, entity, prop=None, is_query=False) -> Set[Name]:
 
 ---
 
+### Phase 6 candidate: name picking (`rigour.names.pick`)
+
+**Not scheduled, but called out so it doesn't get lost.** The `pick_name` /
+`levenshtein_pick` / `reduce_names` / `pick_case` family in `rigour/names/pick.py`
+is a plausible next Rust port after `analyze_names` lands.
+
+**Why this is tempting**:
+- It's a hot path during OpenSanctions data export — run per entity to choose a
+  display name from a bag of aliases. At OpenSanctions-scale (millions of
+  entities) this dominates export runtime.
+- `levenshtein_pick` does all-pairs Levenshtein: O(n²) distance calls over a
+  names list, weighted by latin share. Each call currently crosses the Python
+  FFI even with rapidfuzz's C++ backend.
+- `latin_share` iterates every character in every name (now via
+  `codepoint_script` → `_core` FFI per char). That's a lot of boundary
+  crossings that would amortise cleanly inside a single Rust call.
+- The internal helpers (`levenshtein`, `codepoint_script`, `ascii_text`) are
+  all already Rust-backed or soon will be. Moving the loop in reduces the
+  boundary crossings from `O(n² + k * m)` (all-pairs distance + per-char script
+  lookups) to one.
+
+**Shape of the port**:
+- `pick_name(names: list[str]) -> Optional[str]` becomes a `#[pyfunction]`
+  that takes `Vec<String>` and returns `Option<String>`.
+- Internally reuses the pure-Rust `distance::levenshtein` and
+  `scripts::codepoint_script` modules that land in earlier phases.
+- `pick_lang_name` is a thin Python layer above it (language filtering is
+  in Python land) and stays Python.
+
+**What to measure before committing**: Profile a real OpenSanctions export to
+confirm `pick_name` is actually in the top-N time sinks. If it's not, this
+phase is premature optimisation. If it is — likely a 5–10× speedup on name
+selection, which is a meaningful fraction of export time.
+
+**Prerequisites**: Phase 2 (distance functions available via `_core`) and the
+script-detection Rust module landed in the Phase 1 follow-up. No new data
+embedding needed.
+
+---
+
 ## Normality Subsumption
 
 The dependency stack is: **normality → rigour → followthemoney → nomenklatura**.
@@ -1035,8 +1118,16 @@ rust-version = "1.86"
 name = "rigour_core"
 crate-type = ["cdylib"]
 
+[features]
+# Gates the PyO3 bindings. `cargo test` / `cargo build` without this feature
+# compile pure-Rust logic only — lets Rust devs iterate without a Python runtime.
+# Enabled by default via [tool.maturin].features in pyproject.toml.
+python = []
+
 [dependencies]
-pyo3 = { version = "0.28", features = ["extension-module"] }
+# generate-import-lib: avoids needing a real Python install on the Windows CI
+# runner at link time — PyO3 generates a stub import library instead.
+pyo3 = { version = "0.28", features = ["extension-module", "generate-import-lib"] }
 
 # Transliteration (Phase 1) — "unstable" gates icu::experimental::transliterate,
 # "compiled_data" bakes CLDR data into the binary
@@ -1076,30 +1167,42 @@ zstd = "0.13"
 [dev-dependencies]
 criterion = { version = "0.8", features = ["html_reports"] }
 
-[profile.release]
-lto = true
-codegen-units = 1
-opt-level = 3
-strip = true
+# NO [profile.release] overrides. The jellyfish Python package ships with default
+# release profile and is fast. Start without LTO/codegen-units=1/strip — re-add
+# only if Phase 4+ benchmarks show >=10% headroom from them.
 ```
 
 ---
 
 ## Key Design Decisions & Rationale
 
-### Why LRU caches go away
+### LRU caches: case-by-case, not blanket removal
 
 The Python codebase uses LRU caches extensively (65k entries for transliteration, 131k for
 phonetics, 20k for tokenizer lookups, 2k for distance functions) to compensate for Python's
-per-call overhead. In Rust, even the full ICU4X transliteration path is microseconds — the
-cache lookup + hash computation would cost more than re-running the function.
+per-call overhead.
 
-The Python wrapper layer handles trivial fast-paths (e.g. `text.isascii()` before calling
-Rust `ascii_text`), but does no result caching. This also eliminates the `reset.py`
-cache-clearing machinery needed for long-lived processes.
+An earlier version of this plan said "LRU caches go away" categorically. That's too strong.
+The right rule: **keep the cache when the workload has high repetition and the underlying
+call is not dramatically faster than the cache lookup itself.** Remove it where the Rust
+function is cheap enough that cache misses cost more than just re-running.
 
-LRU caches never live in Rust. They remain only in Python for the thin cases where a
-Python-level check avoids crossing to Rust at all.
+- **Transliteration, tokenisation**: Rust is microseconds; cache hit rates are spread
+  over diverse inputs; cache lookup + hash dominates. **Drop the LRU cache.**
+- **Phonetics (metaphone, soundex)**: Rust is ~1µs, but FFI crossing costs ~500ns per
+  call. Matching workloads pound on the same name tokens ("John", "Smith", "Sergei") at
+  90%+ hit rates. Cache avoids the FFI on hits; miss cost (~100ns) is small relative to
+  the FFI it replaces. **Keep the `@lru_cache(maxsize=MEMO_LARGE)` wrapper.**
+- **Distance (levenshtein, jaro-winkler)**: original caches were tiny (2k). Workload-
+  dependent; re-evaluate during Phase 2 benchmarks.
+
+**The MVP of Phase 0.5 demonstrated this nuance concretely**: we tried dropping the
+phonetics caches, realised from the `reset.py` consumers that the repetition was
+load-bearing for matching, and restored them. Document the reasoning in the code so
+it doesn't get re-deleted.
+
+LRU caches never live in Rust — they're always Python-side fast-paths that avoid
+crossing to Rust at all. That's the consistent principle.
 
 ### Why eagerly compute derived properties
 
@@ -1145,17 +1248,10 @@ No file path resolution at runtime. No `importlib.resources`, no `__file__` hack
 binary is self-contained. The person names corpus (8.5MB) compresses to ~2-3MB with zstd.
 Total wheel size increase is acceptable for a server-side library.
 
-### Why ICU4X over ICU4C bindings
-
-ICU4C bindings (`rust_icu_*`) require system ICU at build time and create linking headaches
-for wheel distribution. ICU4X compiles statically with data baked in. The transliteration
-API is experimental but functional and actively maintained by the ICU team.
-
 ### Why jellyfish AND rapidfuzz (not just one)
 
 Both crates expose the core algorithms rigour uses, and it's tempting to collapse to
-one dependency. We don't, because the implementations have materially different
-performance:
+one dependency. The algorithmic reasoning (from the Phase 2 section above):
 
 - `jellyfish` implements Levenshtein, Damerau-Levenshtein, and Jaro-Winkler with
   straightforward O(N·M) dynamic programming (verified by reading
@@ -1164,21 +1260,17 @@ performance:
   strings that fit in 64 bits, Mbleven pruning for low-edit-distance short strings,
   block-wise with Ukkonen band for longer inputs. For our typical 5–50 character
   name inputs, Levenshtein fits in a single machine word and runs **3–10× faster**
-  than a DP matrix (more on batches).
+  than a DP matrix in isolation.
 
-Because the whole point of this port is speed, we take the faster implementation for
-distance functions. `jellyfish` stays for metaphone and soundex (rapidfuzz doesn't
-have those). Having two small Rust crates compiled into one `.so` is essentially
-free at the Python boundary — there's no performance cost to keeping both.
-
-The Rust `rapidfuzz` crate (0.5.0, December 2023) is a full algorithmic port of the
-C++ core by the same author, not a simplified port — same three-tier dispatch, same
-published complexity bounds. Dormant since late 2023 but the algorithms don't evolve;
-API surface we use is three functions.
-
-Distance output parity against the current Python `rapidfuzz` values should still be
-verified in Phase 2 (independent implementations of well-specified algorithms should
-agree, but worth confirming concretely).
+`jellyfish` stays as a Cargo dep for metaphone and soundex (rapidfuzz doesn't have
+those) and was landed in Phase 0.5 for those functions specifically. Distance
+functions on the Rust side are **not** yet landed — see the "Known gap" block under
+Phase 2. Summary: the Rust `rapidfuzz` crate 0.5.0 lacks the `opcodes` API that
+nomenklatura depends on, which means a Rust-side distance port would leave the
+Python `rapidfuzz` dep in place anyway for opcodes. Given Python rapidfuzz already
+uses the same bit-parallel algorithms (via C++ backend), there's no speed regression
+from keeping distance on the Python side until Phase 5 indicates otherwise. Don't
+re-port distance without re-reading that block.
 
 ### Why `\b` word boundaries over lookaround
 
@@ -1232,8 +1324,8 @@ Python benchmarks (separate script, not in CI):
 |-------|----------------------|------------------------------|
 | 1 | `pyicu` | `icu` crate (ICU4X) |
 | 1+ | `normality` | `rigour.text.*` (Rust + pure Python) |
-| 2 | `jellyfish` | `jellyfish` crate (metaphone, soundex) |
-| 2 | `rapidfuzz` | `rapidfuzz` crate (bit-parallel distance, 3–10× faster than jellyfish DP) |
+| 2 | `jellyfish` | `jellyfish` crate (metaphone, soundex) — **done in Phase 0.5 MVP** |
+| — | `rapidfuzz` | **NOT REMOVED**. Blocked by opcodes gap in Rust `rapidfuzz` 0.5.0. See "Known gap" under Phase 2. |
 | 4 | `ahocorasick-rs` | `aho-corasick` crate |
 | — | `fingerprints` | Review if still needed after org_types port |
 
@@ -1297,23 +1389,25 @@ artifact" for rationale.
    API (`try_new` vs `try_new_with_compiled_data`, data provider pattern) needs verification
    against the `icu` crate v2.2 docs during Phase 1 implementation.
 
-2. **`rapidfuzz` Rust crate maintenance status**: v0.5.0, last release December 2023.
-   Pinned dependency risk: if a bug appears, we can't just update. Acceptable because
-   (a) the three functions we use (Levenshtein, Damerau-Levenshtein, Jaro-Winkler)
-   are well-specified and bug-stable, (b) the crate source is the full algorithmic
-   port of the C++ rapidfuzz, not a toy version, and (c) the performance advantage
-   over alternatives is load-bearing. Fallback if the crate actually breaks: pin to a
-   git SHA and maintain a fork, or port the ~300 lines of Myers/Mbleven we actually
-   need. Neither is catastrophic.
+2. **Rust-side distance functions: gated by opcodes gap**. Phase 2 originally
+   planned to port Levenshtein / Damerau-Levenshtein / Jaro-Winkler to the Rust
+   `rapidfuzz` crate. Discovered (April 2026, during an aborted MVP-adjacent
+   attempt): Rust `rapidfuzz` 0.5.0 has no opcodes / alignment API, but
+   nomenklatura depends on `Levenshtein.opcodes` via Python rapidfuzz. See the
+   "Known gap" block under Phase 2 for full context, the three decision options,
+   and why the current plan of record is to keep Python `rapidfuzz` for all
+   distance work until Phase 5 forces the question. **Do not try to half-port
+   this without re-reading that block** — the aborted attempt already proved
+   the failure mode.
 
-3. **`jellyfish` Rust crate maintenance status**: Last release June 2023 (v1.0.0).
+3. **`rapidfuzz` Rust crate maintenance status**: v0.5.0, last release December 2023.
+   Moot until we actually depend on it (see #2). If we ever do, acceptable because
+   the three functions we'd use are well-specified and bug-stable and the API surface
+   is tiny. Fallback: pin a git SHA or port the ~300 lines ourselves.
+
+4. **`jellyfish` Rust crate maintenance status**: Last release June 2023 (v1.0.0).
    1.0 implies API stability; metaphone/soundex don't evolve. Tolerable risk. No
    action needed unless a CVE surfaces.
-
-4. **Distance-function output parity**: Phase 2 should pin current Python
-   `rapidfuzz`-computed distances on a corpus of a few hundred string pairs and verify
-   the Rust `rapidfuzz` crate produces identical results. Same algorithms, independent
-   implementations — should agree, but worth confirming concretely.
 
 5. **`lru_cache` on `entity_names`**: Once `analyze_names` runs in Rust (Phase 5), the cache
    may be unnecessary — re-running the pipeline may be cheaper than Python cache overhead.
@@ -1356,10 +1450,12 @@ artifact" for rationale.
 - **Versions of all Rust crates and build tools**: pinned to current latest stable
   as of April 2026. See "Rust Crate Dependencies" section for the full list. MSRV
   is 1.86.
-- **jellyfish vs rapidfuzz crate choice**: keep both. An earlier revision tried to
-  collapse to jellyfish alone, but benchmark research showed rapidfuzz's bit-parallel
-  distance algorithms (Myers/Hyyrö/Mbleven) run 3–10× faster than jellyfish's DP
-  implementation for our typical 5–50 char name inputs. Since the whole port's speed
-  case is load-bearing, we take both: jellyfish for metaphone/soundex (rapidfuzz
-  doesn't have those) and rapidfuzz for distance. See "Why jellyfish AND rapidfuzz"
-  in Key Design Decisions for full rationale.
+- **jellyfish for phonetics, Rust-side distance deferred**: jellyfish crate is in
+  use now (Phase 0.5) for metaphone and soundex. Distance functions were originally
+  scheduled for a similar early port, but an attempt (April 2026) was reverted when
+  it surfaced that the Rust `rapidfuzz` 0.5.0 crate has no opcodes API while
+  nomenklatura depends on `Levenshtein.opcodes`. Splitting distance (Rust) from
+  opcodes (Python) would keep the Python dep anyway for no net win — and Python
+  rapidfuzz's C++ backend already runs the same bit-parallel algorithms, so there's
+  no speed regression from leaving distance on the Python side. See the "Known gap"
+  block under Phase 2 for the decision log and options.

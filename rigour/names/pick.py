@@ -2,14 +2,16 @@ import logging
 from itertools import combinations
 from collections import defaultdict
 from typing import Dict, Optional, List
-from normality import ascii_text
 
 from rigour.langs import LangStr, PREFERRED_LANG, PREFERRED_LANGS
+from rigour.text.transliteration import ascii_text
 from rigour.names.check import is_name
 from rigour.text.distance import levenshtein
-from rigour.data.text.scripts import LATIN_CHARS, LATINIZABLE_CHARS
+from rigour.text.scripts import codepoint_script
 
 log = logging.getLogger(__name__)
+
+_LATIN_SHARE_PARTIAL = {"Cyrillic", "Greek"}
 
 
 def latin_share(text: str) -> float:
@@ -17,15 +19,14 @@ def latin_share(text: str) -> float:
     latin = 0.0
     skipped = 0
     for char in text:
-        cp = ord(char)
-        if cp in LATIN_CHARS:
-            latin += 1.0
-            continue
-        elif cp in LATINIZABLE_CHARS:
-            latin += 0.3
-            continue
-        elif not char.isalpha():
+        if not char.isalpha():
             skipped += 1
+            continue
+        script = codepoint_script(ord(char))
+        if script == "Latin":
+            latin += 1.0
+        elif script in _LATIN_SHARE_PARTIAL:
+            latin += 0.3
     return latin / max(1, len(text) - skipped)
 
 

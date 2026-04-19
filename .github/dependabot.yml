@@ -10,3 +10,8 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+  - package-ecosystem: cargo
+    open-pull-requests-limit: 99
+    directory: "/rust"
+    schedule:
+      interval: weekly

@@ -1,4 +1,4 @@
-from normality.transliteration import latinize_text
+from rigour.text.transliteration import latinize_text
 
 from rigour.reset import reset_caches
 

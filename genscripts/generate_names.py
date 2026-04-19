@@ -4,7 +4,14 @@ from typing import Dict, List
 from normality import squash_spaces
 
 from rigour.data.types import OrgTypeSpec
-from genscripts.util import norm_string, write_python, RESOURCES_PATH, CODE_PATH
+from genscripts.util import (
+    norm_string,
+    write_python,
+    write_json,
+    RESOURCES_PATH,
+    CODE_PATH,
+    RUST_DATA_PATH,
+)
 
 
 DATA_TEMPLATE = """
@@ -109,6 +116,10 @@ def generate_org_type_file() -> None:
 
     out_path = CODE_PATH / "names" / "org_types.py"
     write_python(out_path, content)
+
+    # Rust-side artifact — same in-memory list, JSON-encoded. Consumer lands
+    # in a follow-up PR (LazyLock<Replacer> in rust/src/names/org_types.rs).
+    write_json(RUST_DATA_PATH / "org_types.json", clean_types)
 
 
 if __name__ == "__main__":

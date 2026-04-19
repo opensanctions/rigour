@@ -1,0 +1,60 @@
+def metaphone(token: str) -> str: ...
+def soundex(token: str) -> str: ...
+def codepoint_script(cp: int) -> str | None: ...
+def text_scripts(text: str) -> set[str]: ...
+def latinize_text(text: str) -> str: ...
+def ascii_text(text: str) -> str: ...
+def _normalize(text: str, flags: int, cleanup: int) -> str | None: ...
+def _ffi_noop(text: str) -> str: ...
+def replace_org_types_compare(text: str, flags: int, cleanup: int, generic: bool) -> str: ...
+def replace_org_types_display(text: str, flags: int, cleanup: int) -> str: ...
+def remove_org_types(text: str, flags: int, cleanup: int, replacement: str) -> str: ...
+def extract_org_types(
+    text: str, flags: int, cleanup: int, generic: bool
+) -> list[tuple[str, str]]: ...
+
+
+class SymbolCategory:
+    """Sealed enum of symbol categories. See
+    [rigour.text.normalize][] for related flag-based design.
+    """
+
+    ORG_CLASS: "SymbolCategory"
+    SYMBOL: "SymbolCategory"
+    DOMAIN: "SymbolCategory"
+    INITIAL: "SymbolCategory"
+    NAME: "SymbolCategory"
+    NICK: "SymbolCategory"
+    NUMERIC: "SymbolCategory"
+    LOCATION: "SymbolCategory"
+    PHONETIC: "SymbolCategory"
+
+    @property
+    def value(self) -> str:
+        """Short serialisation key (e.g. ``"ORGCLS"``, ``"NUM"``)."""
+        ...
+
+
+class Symbol:
+    """A semantic interpretation applied to one or more parts of a name.
+
+    Rust-backed struct holding a category and an interned string id.
+    Equal Symbols share one underlying `Arc<str>` allocation.
+    """
+
+    # `Category` is re-exported from rigour/names/symbol.py as an
+    # alias for `SymbolCategory` — preserves the pre-port nested-
+    # class access pattern `Symbol.Category.ORG_CLASS`. Declared here
+    # so mypy knows about it.
+    Category: type[SymbolCategory]
+
+    category: SymbolCategory
+
+    def __init__(self, category: SymbolCategory, id: str | int) -> None:
+        """`id` is decimal-stringified if passed as int."""
+
+    @property
+    def id(self) -> str:
+        """The interned id string."""
+        ...
+

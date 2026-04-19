@@ -1,6 +1,7 @@
 import black
 import orjson
 import logging
+import zstandard
 import unicodedata
 from pathlib import Path
 from typing import Any, Iterable
@@ -10,6 +11,8 @@ from normality.cleaning import remove_unsafe_chars
 REPO_ROOT = Path(__file__).parent.parent
 RESOURCES_PATH = REPO_ROOT / "resources"
 CODE_PATH = REPO_ROOT / "rigour" / "data"
+RUST_DATA_PATH = REPO_ROOT / "rust" / "data"
+RUST_GENERATED_PATH = REPO_ROOT / "rust" / "src" / "generated"
 
 logging.basicConfig(level=logging.INFO)
 
@@ -37,3 +40,27 @@ def write_jsonl(file_path: Path, data: Iterable[Any]) -> None:
     with open(file_path, "wb") as fh:
         for item in data:
             fh.write(orjson.dumps(item, option=orjson.OPT_APPEND_NEWLINE))
+
+
+def write_json(file_path: Path, data: Any) -> None:
+    """Write a single JSON document to disk.
+
+    Used for Tier-3 Rust data artifacts (structured records that the Rust
+    crate deserialises via serde inside a LazyLock). Output is sorted and
+    2-space-indented so the file diffs cleanly in PRs when YAML sources
+    change.
+    """
+    opts = orjson.OPT_SORT_KEYS | orjson.OPT_APPEND_NEWLINE
+    with open(file_path, "wb") as fh:
+        fh.write(orjson.dumps(data, option=opts))
+
+
+def write_zstd(file_path: Path, data: bytes) -> None:
+    """Write a zstd-compressed blob.
+
+    Used for Tier-1 Rust data artifacts — currently the person-name
+    corpus (~8.5MB text → ~2-3MB compressed). The Rust side reads this
+    via `include_bytes!` + zstd decode inside a `LazyLock`.
+    """
+    cctx = zstandard.ZstdCompressor(level=19)
+    file_path.write_bytes(cctx.compress(data))
