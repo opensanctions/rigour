@@ -1,18 +1,11 @@
-"""Transliteration, script detection, and script-predicate tests.
+"""Transliteration tests (ascii_text, latinize_text).
 
-Exercises the Rust/ICU4X path via `rigour.text.transliteration` and
-`rigour.text.scripts`. Pinned expected values were originally generated
-against PyICU/normality; where ICU4X diverges the pins have been updated
-with a note explaining the change.
+Exercises the Rust/ICU4X path via `rigour.text.transliteration`. Pinned
+expected values were originally generated against PyICU/normality; where
+ICU4X diverges the pins have been updated with a note explaining the
+change. Script detection and predicates live in test_scripts.py.
 """
 
-from rigour.text.scripts import (
-    can_latinize,
-    is_dense_script,
-    is_latin,
-    is_modern_alphabet,
-    text_scripts,
-)
 from rigour.text.transliteration import ascii_text, latinize_text
 
 
@@ -336,76 +329,3 @@ def test_latinize_unsupported_script_passthrough() -> None:
     out = latinize_text("Hello สวัสดี")
     assert out.startswith("Hello ")
     assert "ส" in out
-
-
-# --- text_scripts: detection across combinations ---
-
-
-def test_text_scripts_two_non_latin() -> None:
-    """Two non-Latin scripts, no Latin, no whitespace — text_scripts still
-    splits them despite the missing separator."""
-    assert text_scripts("Москва北京") == {"Cyrillic", "Han"}
-
-
-def test_text_scripts_latin_plus_diacritics_only() -> None:
-    """Latin with diacritics should still resolve to just {Latin}."""
-    assert text_scripts("François Müller") == {"Latin"}
-
-
-def test_text_scripts_four_scripts() -> None:
-    """Four scripts in one string — an unrealistic but boundary-useful input."""
-    # Hebrew + Arabic + Hangul + Latin
-    assert text_scripts("שלום سلام 안녕 Hello") == {
-        "Hebrew",
-        "Arabic",
-        "Hangul",
-        "Latin",
-    }
-
-
-def test_text_scripts_ignores_numbers_and_punctuation() -> None:
-    """Common-script characters don't show up as 'Common' in the result."""
-    assert text_scripts("2024-12-31 09:42:07") == set()
-
-
-def test_text_scripts_transition_without_whitespace() -> None:
-    """Bilingual compound names where scripts collide mid-token."""
-    assert text_scripts("Tokyo東京") == {"Latin", "Han"}
-    assert text_scripts("Smith-Петров") == {"Latin", "Cyrillic"}
-
-
-# --- Predicates on mixed-script inputs ---
-
-
-def test_predicates_latin_plus_cyrillic() -> None:
-    mixed = "Hello мир"
-    assert not is_latin(mixed)
-    assert can_latinize(mixed)  # both scripts are in LATINIZE_SCRIPTS
-    assert is_modern_alphabet(mixed)  # both are modern alphabets
-    assert not is_dense_script(mixed)
-
-
-def test_predicates_latin_plus_han() -> None:
-    mixed = "Tokyo東京"
-    assert not is_latin(mixed)
-    assert not can_latinize(mixed)  # Han isn't in LATINIZE_SCRIPTS
-    assert not is_modern_alphabet(mixed)
-    assert is_dense_script(mixed)  # Han triggers dense
-
-
-def test_predicates_latin_plus_hangul() -> None:
-    """Hangul is both latinizable and dense — unusual overlap."""
-    mixed = "Kim 김민석"
-    assert not is_latin(mixed)
-    assert can_latinize(mixed)
-    assert is_dense_script(mixed)
-
-
-def test_predicates_pure_punctuation() -> None:
-    """No script-bearing chars — predicates fall out to vacuously True on
-    subset-style checks, False on intersection-style checks."""
-    punct = "2024-12-31 !@#$"
-    assert is_latin(punct)  # vacuously — text_scripts returns empty set
-    assert is_modern_alphabet(punct)
-    assert can_latinize(punct)
-    assert not is_dense_script(punct)
