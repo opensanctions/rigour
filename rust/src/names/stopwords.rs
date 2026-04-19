@@ -24,9 +24,8 @@ struct NameStopwords {
 
 const JSON: &str = include_str!("../../data/names/stopwords.json");
 
-static DATA: LazyLock<NameStopwords> = LazyLock::new(|| {
-    serde_json::from_str(JSON).expect("rust/data/names/stopwords.json parses")
-});
+static DATA: LazyLock<NameStopwords> =
+    LazyLock::new(|| serde_json::from_str(JSON).expect("rust/data/names/stopwords.json parses"));
 
 pub fn person_name_prefixes_list() -> Vec<String> {
     DATA.person_name_prefixes.clone()

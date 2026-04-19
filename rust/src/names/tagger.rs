@@ -74,18 +74,20 @@ impl Tagger {
 // (haystack). `normalize(.., Cleanup::Strong)` replaces them with
 // whitespace which does NOT agree with tokenize_name.
 const TOKENIZE_SKIP_CHARS: &[char] = &[
-    '.',         // U+002E FULL STOP
-    '\u{0027}',  // APOSTROPHE
-    '\u{2018}',  // LEFT SINGLE QUOTATION MARK
-    '\u{2019}',  // RIGHT SINGLE QUOTATION MARK
-    '\u{02BC}',  // MODIFIER LETTER APOSTROPHE
-    '\u{02B9}',  // MODIFIER LETTER PRIME
-    '\u{0060}',  // GRAVE ACCENT
-    '\u{00B4}',  // ACUTE ACCENT
+    '.',        // U+002E FULL STOP
+    '\u{0027}', // APOSTROPHE
+    '\u{2018}', // LEFT SINGLE QUOTATION MARK
+    '\u{2019}', // RIGHT SINGLE QUOTATION MARK
+    '\u{02BC}', // MODIFIER LETTER APOSTROPHE
+    '\u{02B9}', // MODIFIER LETTER PRIME
+    '\u{0060}', // GRAVE ACCENT
+    '\u{00B4}', // ACUTE ACCENT
 ];
 
 fn strip_tokenize_skip(s: &str) -> String {
-    s.chars().filter(|c| !TOKENIZE_SKIP_CHARS.contains(c)).collect()
+    s.chars()
+        .filter(|c| !TOKENIZE_SKIP_CHARS.contains(c))
+        .collect()
 }
 
 /// Builder state — accumulate phrase → symbols entries as we walk
@@ -307,8 +309,7 @@ fn build_person_tagger(flags: Normalize, cleanup: Cleanup) -> Tagger {
 
 type TaggerCache = RwLock<HashMap<(TaggerKind, Normalize, Cleanup), Arc<Tagger>>>;
 
-static TAGGER_CACHE: LazyLock<TaggerCache> =
-    LazyLock::new(|| RwLock::new(HashMap::new()));
+static TAGGER_CACHE: LazyLock<TaggerCache> = LazyLock::new(|| RwLock::new(HashMap::new()));
 
 pub fn get_tagger(kind: TaggerKind, flags: Normalize, cleanup: Cleanup) -> Arc<Tagger> {
     let key = (kind, flags, cleanup);
@@ -338,7 +339,9 @@ mod tests {
         let tagger = get_tagger(TaggerKind::Org, FLAGS, CLEANUP);
         let matches = tagger.tag("acme number one limited");
         assert!(
-            matches.iter().any(|(_, s)| s.category == SymbolCategory::NUMERIC),
+            matches
+                .iter()
+                .any(|(_, s)| s.category == SymbolCategory::NUMERIC),
             "expected a NUMERIC match, got {:?}",
             matches
         );

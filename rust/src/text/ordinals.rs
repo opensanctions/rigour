@@ -21,16 +21,13 @@ pub struct OrdinalSpec {
 
 const JSON: &str = include_str!("../../data/text/ordinals.json");
 
-static DATA: LazyLock<Vec<OrdinalSpec>> = LazyLock::new(|| {
-    serde_json::from_str(JSON).expect("rust/data/text/ordinals.json parses")
-});
+static DATA: LazyLock<Vec<OrdinalSpec>> =
+    LazyLock::new(|| serde_json::from_str(JSON).expect("rust/data/text/ordinals.json parses"));
 
 /// Ordinals as a `{number: [forms...]}` map — matches the Python
 /// consumer's `ORDINALS.items()` iteration pattern.
 pub fn ordinals_dict() -> HashMap<u32, Vec<String>> {
-    DATA.iter()
-        .map(|o| (o.number, o.forms.clone()))
-        .collect()
+    DATA.iter().map(|o| (o.number, o.forms.clone())).collect()
 }
 
 /// Pure-Rust accessor for the raw spec list. Used by the future

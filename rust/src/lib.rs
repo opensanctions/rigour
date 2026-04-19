@@ -231,11 +231,7 @@ fn py_territories_jsonl() -> &'static str {
 #[cfg(feature = "python")]
 #[pyfunction]
 #[pyo3(name = "tag_org_matches")]
-fn py_tag_org_matches(
-    text: &str,
-    flags: u16,
-    cleanup: u8,
-) -> Vec<(String, names::symbol::Symbol)> {
+fn py_tag_org_matches(text: &str, flags: u16, cleanup: u8) -> Vec<(String, names::symbol::Symbol)> {
     let (flags, cleanup) = _decode_flags(flags, cleanup);
     names::tagger::get_tagger(names::tagger::TaggerKind::Org, flags, cleanup).tag(text)
 }

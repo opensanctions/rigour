@@ -1,4 +1,4 @@
-.PHONY: docs build typecheck test develop develop-debug rust-test bench rust-data build-iso639 build-territories build-addresses build-names
+.PHONY: docs build typecheck test develop develop-debug rust-test rust-fmt rust-fmt-check bench rust-data build-iso639 build-territories build-addresses build-names
 
 check: build typecheck test
 
@@ -14,6 +14,15 @@ develop-debug:
 
 rust-test:
 	cargo test --manifest-path rust/Cargo.toml
+
+# Format Rust sources in place. CI runs `cargo fmt --check` so drift
+# fails the build; this target is the one-command local fix. Run it
+# before committing Rust changes.
+rust-fmt:
+	cargo fmt --manifest-path rust/Cargo.toml
+
+rust-fmt-check:
+	cargo fmt --manifest-path rust/Cargo.toml --check
 
 bench:
 	python benchmarks/bench_transliteration.py

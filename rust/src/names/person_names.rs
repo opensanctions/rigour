@@ -84,10 +84,7 @@ mod tests {
         // X-prefixed manual overrides. If anything else shows up the
         // format has drifted.
         assert!(q_count > 0, "no Q-prefixed entries");
-        assert_eq!(
-            other, 0,
-            "unexpected id prefix in corpus ({other} lines)"
-        );
+        assert_eq!(other, 0, "unexpected id prefix in corpus ({other} lines)");
         // Rough shape check: QIDs massively outnumber XIDs.
         assert!(q_count > 10 * x_count);
     }

@@ -17,9 +17,8 @@ struct TextStopwords {
 
 const JSON: &str = include_str!("../../data/text/stopwords.json");
 
-static DATA: LazyLock<TextStopwords> = LazyLock::new(|| {
-    serde_json::from_str(JSON).expect("rust/data/text/stopwords.json parses")
-});
+static DATA: LazyLock<TextStopwords> =
+    LazyLock::new(|| serde_json::from_str(JSON).expect("rust/data/text/stopwords.json parses"));
 
 pub fn stopwords_list() -> Vec<String> {
     DATA.stopwords.clone()
