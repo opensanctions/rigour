@@ -50,7 +50,7 @@ build: build-iso639 build-territories build-addresses build-names build-text
 # rust/src/generated). Generators are dual-emit — running them produces the
 # Rust artifacts alongside the existing Python ones, which keeps the two
 # from drifting. CI calls this + git-diffs to catch stale checkins.
-rust-data: build-names
+rust-data: build-names build-text
 
 docs:
 	mkdocs build -c -d site

@@ -3,6 +3,8 @@
 
 pub mod distance;
 pub mod normalize;
+pub mod ordinals;
 pub mod phonetics;
 pub mod scripts;
+pub mod stopwords;
 pub mod transliterate;

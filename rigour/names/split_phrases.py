@@ -2,7 +2,10 @@ import re
 from typing import Tuple
 from functools import cache
 
-from rigour.data.names.data import NAME_SPLIT_PHRASES
+from rigour._core import name_split_phrases_list
+
+
+NAME_SPLIT_PHRASES: Tuple[str, ...] = tuple(name_split_phrases_list())
 
 
 @cache

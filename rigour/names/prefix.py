@@ -2,11 +2,16 @@ import re
 from typing import Tuple
 from functools import cache
 
-from rigour.data.names.data import (
-    PERSON_NAME_PREFIXES,
-    ORG_NAME_PREFIXES,
-    OBJ_NAME_PREFIXES,
+from rigour._core import (
+    obj_name_prefixes_list,
+    org_name_prefixes_list,
+    person_name_prefixes_list,
 )
+
+
+PERSON_NAME_PREFIXES: Tuple[str, ...] = tuple(person_name_prefixes_list())
+ORG_NAME_PREFIXES: Tuple[str, ...] = tuple(org_name_prefixes_list())
+OBJ_NAME_PREFIXES: Tuple[str, ...] = tuple(obj_name_prefixes_list())
 
 
 @cache

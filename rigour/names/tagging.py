@@ -72,17 +72,18 @@ class Tagger:
 
 def _common_symbols(normalizer: Normalizer) -> Dict[str, Set[Symbol]]:
     """Get the common symbols for names."""
-    from rigour.data.text.ordinals import ORDINALS
+    from rigour._core import ordinals_dict
 
     mapping: Dict[str, Set[Symbol]] = defaultdict(set)
-    for key, values in ORDINALS.items():
+    for key, values in ordinals_dict().items():
         sym = Symbol(Symbol.Category.NUMERIC, key)
         for value in values:
             nvalue = normalizer(value)
             if nvalue is not None:
                 mapping[nvalue].add(sym)
 
-    unload_module("rigour.data.text.ordinals")
+    # ordinals data now lives in Rust (via rigour._core.ordinals_dict);
+    # no Python module to unload.
     return mapping
 
 

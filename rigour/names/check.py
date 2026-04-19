@@ -83,9 +83,9 @@ def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
 @cache
 def _load_generic_person_names(normalizer: Normalizer) -> Set[str]:
     """Load the generic person names from the data file and normalize them using the provided normalizer."""
-    from rigour.data.names.data import GENERIC_PERSON_NAMES
+    from rigour._core import generic_person_names_list
 
-    return _load_wordlist(GENERIC_PERSON_NAMES, normalizer)
+    return _load_wordlist(generic_person_names_list(), normalizer)
 
 
 def is_generic_person_name(

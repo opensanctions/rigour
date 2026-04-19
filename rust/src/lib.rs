@@ -130,6 +130,73 @@ fn py_extract_org_types(
     names::org_types::extract(text, flags, cleanup, generic)
 }
 
+// Resource accessors — plain `list[str]` / `dict` returners that
+// Python modules read once at import time. Naming convention:
+// `<name>_list` for flat-list accessors, `<name>_dict` for dict-shaped.
+// See `plans/rust-tagger.md` for the data-migration classification.
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "stopwords_list")]
+fn py_stopwords_list() -> Vec<String> {
+    text::stopwords::stopwords_list()
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "nullwords_list")]
+fn py_nullwords_list() -> Vec<String> {
+    text::stopwords::nullwords_list()
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "nullplaces_list")]
+fn py_nullplaces_list() -> Vec<String> {
+    text::stopwords::nullplaces_list()
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "person_name_prefixes_list")]
+fn py_person_name_prefixes_list() -> Vec<String> {
+    names::stopwords::person_name_prefixes_list()
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "org_name_prefixes_list")]
+fn py_org_name_prefixes_list() -> Vec<String> {
+    names::stopwords::org_name_prefixes_list()
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "obj_name_prefixes_list")]
+fn py_obj_name_prefixes_list() -> Vec<String> {
+    names::stopwords::obj_name_prefixes_list()
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "name_split_phrases_list")]
+fn py_name_split_phrases_list() -> Vec<String> {
+    names::stopwords::name_split_phrases_list()
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "generic_person_names_list")]
+fn py_generic_person_names_list() -> Vec<String> {
+    names::stopwords::generic_person_names_list()
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "ordinals_dict")]
+fn py_ordinals_dict() -> std::collections::HashMap<u32, Vec<String>> {
+    text::ordinals::ordinals_dict()
+}
+
 #[cfg(feature = "python")]
 #[pymodule]
 fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -145,6 +212,15 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_replace_org_types_display, m)?)?;
     m.add_function(wrap_pyfunction!(py_remove_org_types, m)?)?;
     m.add_function(wrap_pyfunction!(py_extract_org_types, m)?)?;
+    m.add_function(wrap_pyfunction!(py_stopwords_list, m)?)?;
+    m.add_function(wrap_pyfunction!(py_nullwords_list, m)?)?;
+    m.add_function(wrap_pyfunction!(py_nullplaces_list, m)?)?;
+    m.add_function(wrap_pyfunction!(py_person_name_prefixes_list, m)?)?;
+    m.add_function(wrap_pyfunction!(py_org_name_prefixes_list, m)?)?;
+    m.add_function(wrap_pyfunction!(py_obj_name_prefixes_list, m)?)?;
+    m.add_function(wrap_pyfunction!(py_name_split_phrases_list, m)?)?;
+    m.add_function(wrap_pyfunction!(py_generic_person_names_list, m)?)?;
+    m.add_function(wrap_pyfunction!(py_ordinals_dict, m)?)?;
     m.add_class::<names::symbol::Symbol>()?;
     m.add_class::<names::symbol::SymbolCategory>()?;
     Ok(())

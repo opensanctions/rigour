@@ -24,19 +24,44 @@ from rigour.data.types import OrgTypeSpec
 """
 
 
-def generate_data_file() -> None:
-    content = DATA_TEMPLATE
+def _sorted_unique_norm(values: List[str]) -> List[str]:
+    """Normalise, dedupe, and sort a flat string list — stable JSON out."""
+    return sorted({norm_string(v) for v in values if norm_string(v)})
 
+
+def generate_name_stopwords_file() -> None:
+    """Emit `rust/data/names/stopwords.json` — a five-field object of
+    sorted de-duplicated normalised string lists. Consumed by the
+    Rust-side `person_name_prefixes_list` / `org_name_prefixes_list` /
+    `obj_name_prefixes_list` / `name_split_phrases_list` /
+    `generic_person_names_list` accessors, which
+    `rigour/names/{prefix,split_phrases,check}.py` read at import
+    time."""
     stopwords_path = RESOURCES_PATH / "names" / "stopwords.yml"
     with open(stopwords_path, "r", encoding="utf-8") as ufh:
         name_data: Dict[str, List[str]] = yaml.safe_load(ufh.read())
 
+    out_data: Dict[str, List[str]] = {}
     for key, value in name_data.items():
-        raw_values = [norm_string(v) for v in value]
-        values = tuple(sorted(set(v for v in raw_values if len(v) > 0)))
-        if isinstance(key, str):
-            key = key.strip().upper()
-        content += f"{key.upper()}: Tuple[str, ...] = {values!r}\n\n"
+        # YAML section names arrive as SCREAMING_SNAKE_CASE; lower-case
+        # them for serde-friendly snake_case field names on the Rust
+        # side.
+        out_data[key.strip().lower()] = _sorted_unique_norm(value)
+
+    out_path = RUST_DATA_PATH / "names" / "stopwords.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    write_json(out_path, out_data)
+
+
+def generate_symbols_data_file() -> None:
+    """Emit `rigour/data/names/data.py` with the five nested-dict
+    sections from `resources/names/symbols.yml`
+    (`org_symbols`/`org_domains`/`person_symbols`/`person_nick`/
+    `person_name_parts`). These are consumed by the Python tagger
+    in `rigour/names/tagging.py` for now — they migrate to Rust-only
+    JSON in step 5 of `plans/rust-tagger.md`, after which this file
+    is retired in full."""
+    content = DATA_TEMPLATE
 
     symbols_path = RESOURCES_PATH / "names" / "symbols.yml"
     with open(symbols_path, "r", encoding="utf-8") as ufh:
@@ -46,7 +71,6 @@ def generate_data_file() -> None:
         section = section.strip().upper()
         mapping = {}
         group_type = "str"
-        # print(section, value)
         for group, items in value.items():
             if group is None:
                 continue
@@ -117,11 +141,12 @@ def generate_org_type_file() -> None:
     out_path = CODE_PATH / "names" / "org_types.py"
     write_python(out_path, content)
 
-    # Rust-side artifact — same in-memory list, JSON-encoded. Consumer lands
-    # in a follow-up PR (LazyLock<Replacer> in rust/src/names/org_types.rs).
+    # Rust-side artifact — same in-memory list, JSON-encoded. Consumed
+    # by `rust/src/names/org_types.rs`.
     write_json(RUST_DATA_PATH / "org_types.json", clean_types)
 
 
 if __name__ == "__main__":
-    generate_data_file()
+    generate_name_stopwords_file()
+    generate_symbols_data_file()
     generate_org_type_file()
