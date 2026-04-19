@@ -198,19 +198,6 @@ fn py_ordinals_dict() -> std::collections::HashMap<u32, Vec<String>> {
     text::ordinals::ordinals_dict()
 }
 
-// The full decompressed person-names corpus as one string. Each call
-// allocates a fresh `PyString` (the corpus is ~8.5 MB of text), so
-// Python consumers read it once and iterate locally. Will be retired
-// when the tagger ports to Rust (step 8 of plans/rust-tagger.md) —
-// at which point the Rust side parses `names::person_names::raw()`
-// directly without crossing the FFI.
-#[cfg(feature = "python")]
-#[pyfunction]
-#[pyo3(name = "person_names_text")]
-fn py_person_names_text() -> &'static str {
-    names::person_names::raw()
-}
-
 // The full territory database as raw JSONL. Python consumers in
 // `rigour.territories.*` parse line-by-line with orjson at import
 // time (and under `@cache`-decorated index builders), so one ~500 KB
@@ -272,7 +259,6 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_name_split_phrases_list, m)?)?;
     m.add_function(wrap_pyfunction!(py_generic_person_names_list, m)?)?;
     m.add_function(wrap_pyfunction!(py_ordinals_dict, m)?)?;
-    m.add_function(wrap_pyfunction!(py_person_names_text, m)?)?;
     m.add_function(wrap_pyfunction!(py_territories_jsonl, m)?)?;
     m.add_function(wrap_pyfunction!(py_tag_org_matches, m)?)?;
     m.add_function(wrap_pyfunction!(py_tag_person_matches, m)?)?;

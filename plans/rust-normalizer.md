@@ -335,7 +335,6 @@ entry point after the port):
 - `rigour/names/tagging.py`: `tag_org_name`, `tag_person_name`
 - `rigour/text/stopwords.py`, `rigour/names/check.py`: `is_stopword`,
   `is_nullword`, `is_nullplace`, `is_generic_person_name`
-- `rigour/names/person_names.py`: `load_person_names_mapping`
 
 **New API shape** (representative — the other functions follow the
 same pattern):
@@ -428,7 +427,6 @@ full design:
   `is_generic_person_name`
 - `rigour/names/org_types.py`: `replace_org_types_compare`,
   `replace_org_types_display`, `remove_org_types`, `extract_org_types`
-- `rigour/names/person_names.py`: `load_person_names_mapping`
 
 The signature shape changes (callable → flags), but the role of the
 parameter is unchanged: it configures how the function's internal

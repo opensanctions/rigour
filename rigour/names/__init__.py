@@ -19,7 +19,6 @@ from rigour.names.tag import NamePartTag, NameTypeTag
 from rigour.names.pick import pick_name, pick_case, reduce_names
 from rigour.names.check import is_name, is_stopword
 from rigour.names.tokenize import tokenize_name, prenormalize_name, normalize_name
-from rigour.names.person_names import load_person_names, load_person_names_mapping
 from rigour.names.prefix import remove_person_prefixes, remove_org_prefixes
 from rigour.names.prefix import remove_obj_prefixes
 from rigour.names.tagging import tag_person_name, tag_org_name
@@ -47,8 +46,6 @@ __all__ = [
     "remove_person_prefixes",
     "remove_org_prefixes",
     "remove_obj_prefixes",
-    "load_person_names",
-    "load_person_names_mapping",
     "replace_org_types_display",
     "replace_org_types_compare",
     "align_person_name_order",
