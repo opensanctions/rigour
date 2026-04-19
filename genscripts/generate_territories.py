@@ -29,7 +29,11 @@ TERRITORIES: Dict[str, Any] = %r
 
 
 def territory_files() -> Generator[Path, None, None]:
-    for filename in os.listdir(TERRITORIES_DIR):
+    # Sort the listdir result: os.listdir returns filenames in
+    # filesystem-dependent order (alphabetical on macOS APFS, inode
+    # order on Linux ext4), which leaks into rust/data/territories/
+    # data.jsonl and breaks CI's no-diff check.
+    for filename in sorted(os.listdir(TERRITORIES_DIR)):
         if filename.endswith(".yml"):
             yield Path(TERRITORIES_DIR / filename).resolve()
 
