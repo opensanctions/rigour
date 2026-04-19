@@ -1,12 +1,22 @@
-.PHONY: docs build typecheck test develop rust-test rust-data build-iso639 build-territories build-addresses build-names
+.PHONY: docs build typecheck test develop develop-debug rust-test bench rust-data build-iso639 build-territories build-addresses build-names
 
 check: build typecheck test
 
+# Release build by default: the ICU4X trie-heavy transliteration path is
+# ~100x slower in debug and benchmark numbers are meaningless there. Use
+# `make develop-debug` for fast Rust-iteration cycles where speed of the
+# compiled code doesn't matter.
 develop:
+	maturin develop --manifest-path rust/Cargo.toml --release
+
+develop-debug:
 	maturin develop --manifest-path rust/Cargo.toml
 
 rust-test:
 	cargo test --manifest-path rust/Cargo.toml
+
+bench:
+	python benchmarks/bench_transliteration.py
 
 typecheck:
 	mypy --strict rigour
