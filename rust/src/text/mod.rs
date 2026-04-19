@@ -3,3 +3,4 @@
 
 pub mod phonetics;
 pub mod scripts;
+pub mod transliterate;

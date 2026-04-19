@@ -4,10 +4,10 @@ import unicodedata
 from functools import cache
 from typing import Dict, List, Optional
 from normality.constants import WS
-from normality.transliteration import ascii_text
 from normality.util import Categories
 
 from rigour.text.dictionary import Replacer
+from rigour.text.transliteration import ascii_text
 from rigour.territories.lookup import _load_territory_names
 from rigour.util import resource_lock, unload_module
 

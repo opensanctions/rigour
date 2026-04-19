@@ -34,11 +34,27 @@ fn py_text_scripts<'py>(py: Python<'py>, text: &str) -> PyResult<Bound<'py, PySe
 }
 
 #[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "latinize_text")]
+fn py_latinize_text(text: &str) -> String {
+    text::transliterate::latinize_text(text)
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "ascii_text")]
+fn py_ascii_text(text: &str) -> String {
+    text::transliterate::ascii_text(text)
+}
+
+#[cfg(feature = "python")]
 #[pymodule]
 fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_metaphone, m)?)?;
     m.add_function(wrap_pyfunction!(py_soundex, m)?)?;
     m.add_function(wrap_pyfunction!(py_codepoint_script, m)?)?;
     m.add_function(wrap_pyfunction!(py_text_scripts, m)?)?;
+    m.add_function(wrap_pyfunction!(py_latinize_text, m)?)?;
+    m.add_function(wrap_pyfunction!(py_ascii_text, m)?)?;
     Ok(())
 }

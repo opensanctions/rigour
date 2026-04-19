@@ -2,9 +2,9 @@ import logging
 from itertools import combinations
 from collections import defaultdict
 from typing import Dict, Optional, List
-from normality import ascii_text
 
 from rigour.langs import LangStr, PREFERRED_LANG, PREFERRED_LANGS
+from rigour.text.transliteration import ascii_text
 from rigour.names.check import is_name
 from rigour.text.distance import levenshtein
 from rigour.text.scripts import codepoint_script
