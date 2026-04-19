@@ -47,6 +47,23 @@ fn py_ascii_text(text: &str) -> String {
     text::transliterate::ascii_text(text)
 }
 
+// Low-level normalize. The nice Python API (IntFlag for Normalize, IntEnum
+// for Cleanup) lives in rigour/text/normalize.py and passes plain ints
+// through this function. The flag bit values and cleanup tags must match
+// the Python-side IntFlag/IntEnum definitions.
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "_normalize")]
+fn py_normalize(text: &str, flags: u16, cleanup: u8) -> Option<String> {
+    let flags = text::normalize::Normalize::from_bits_truncate(flags);
+    let cleanup = match cleanup {
+        1 => text::normalize::Cleanup::Strong,
+        2 => text::normalize::Cleanup::Slug,
+        _ => text::normalize::Cleanup::Noop,
+    };
+    text::normalize::normalize(text, flags, cleanup)
+}
+
 // Minimal PyO3 function used by benchmarks/bench_transliteration.py to
 // measure pure FFI overhead (String in, String out) independent of any
 // transliteration work.
@@ -66,6 +83,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_text_scripts, m)?)?;
     m.add_function(wrap_pyfunction!(py_latinize_text, m)?)?;
     m.add_function(wrap_pyfunction!(py_ascii_text, m)?)?;
+    m.add_function(wrap_pyfunction!(py_normalize, m)?)?;
     m.add_function(wrap_pyfunction!(py_ffi_noop, m)?)?;
     Ok(())
 }

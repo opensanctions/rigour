@@ -32,5 +32,8 @@ rphonetic = "3"
 # bakes the CLDR tables into the binary.
 icu = { version = "2", features = ["compiled_data", "unstable"] }
 
+# Bitflags for the Normalize flag set (rigour/text/normalize.rs).
+bitflags = "2"
+
 # NOTE: no [profile.release] overrides. Defaults are fine; revisit if benchmarks
 # show measurable headroom from LTO / codegen-units=1.
