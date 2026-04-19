@@ -24,6 +24,7 @@ from typing import Callable, List, Tuple
 
 from normality import ascii_text as normality_ascii
 from normality import latinize_text as normality_latinize
+from rigour._core import _ffi_noop as rigour_ffi_noop  # baseline PyO3 cost
 from rigour.text.transliteration import ascii_text as rigour_ascii
 from rigour.text.transliteration import latinize_text as rigour_latinize
 
@@ -69,20 +70,37 @@ def fmt_ns(ns: float) -> str:
 
 
 def main() -> None:
+    # PyO3 FFI baseline: a no-op Rust function that takes a str and returns
+    # it unchanged. This is the floor cost we pay per call even if the
+    # underlying Rust work is zero.
+    print("== PyO3 FFI baseline (String-in, String-out, zero work) ==")
+    print(f"{'Input':<20} {'ffi_noop':>12}")
+    print("-" * 34)
+    for label, inp in CORPUS:
+        ffi_ns = bench(rigour_ffi_noop, inp)
+        print(f"{label:<20} {fmt_ns(ffi_ns):>12}")
+
     pairs: List[Tuple[str, Callable[[str], str], Callable[[str], str]]] = [
         ("ascii_text", normality_ascii, rigour_ascii),
         ("latinize_text", normality_latinize, rigour_latinize),
     ]
     for fn_label, n_fn, r_fn in pairs:
         print(f"\n== {fn_label} ==")
-        print(f"{'Input':<20} {'normality':>12} {'rigour':>12} {'ratio':>8}")
-        print("-" * 56)
+        print(
+            f"{'Input':<20} {'normality':>12} {'rigour':>12} {'ratio':>8} "
+            f"{'rigour-ffi':>12}"
+        )
+        print("-" * 70)
         for label, inp in CORPUS:
             n_ns = bench(n_fn, inp)
             r_ns = bench(r_fn, inp)
+            ffi_ns = bench(rigour_ffi_noop, inp)
             ratio = r_ns / n_ns if n_ns > 0 else float("inf")
+            # rigour minus the FFI floor = pure library work in Rust.
+            r_library = max(0.0, r_ns - ffi_ns)
             print(
-                f"{label:<20} {fmt_ns(n_ns):>12} {fmt_ns(r_ns):>12} {ratio:>7.2f}x"
+                f"{label:<20} {fmt_ns(n_ns):>12} {fmt_ns(r_ns):>12} "
+                f"{ratio:>7.2f}x {fmt_ns(r_library):>12}"
             )
 
 

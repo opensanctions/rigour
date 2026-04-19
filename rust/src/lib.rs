@@ -47,6 +47,16 @@ fn py_ascii_text(text: &str) -> String {
     text::transliterate::ascii_text(text)
 }
 
+// Minimal PyO3 function used by benchmarks/bench_transliteration.py to
+// measure pure FFI overhead (String in, String out) independent of any
+// transliteration work.
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "_ffi_noop")]
+fn py_ffi_noop(text: &str) -> String {
+    text.to_string()
+}
+
 #[cfg(feature = "python")]
 #[pymodule]
 fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -56,5 +66,6 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_text_scripts, m)?)?;
     m.add_function(wrap_pyfunction!(py_latinize_text, m)?)?;
     m.add_function(wrap_pyfunction!(py_ascii_text, m)?)?;
+    m.add_function(wrap_pyfunction!(py_ffi_noop, m)?)?;
     Ok(())
 }
