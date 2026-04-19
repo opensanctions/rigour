@@ -1,5 +1,5 @@
 ---
-description: Replace rigour's normalizer-callback pattern with a flag-based normalize() function; policy for Python/Rust function duplication
+description: Replace rigour's normalizer-callback pattern with a flag-based normalize() + named CategoryProfile; policy for Python/Rust function duplication
 date: 2026-04-19
 tags: [rigour, rust, normalization, api-design, names]
 ---
@@ -19,13 +19,14 @@ Two related concerns from the names-system work:
    callback. That's untenable across the Rust boundary — calling a Python
    callback from Rust for every token is exactly the kind of fine-grained
    FFI that tanked the `fafo-rust` experiment. Replace with a flag-based
-   `normalize(text, flags)` function.
+   `normalize(text, flags, categories)` function. **No preset
+   compositions** — each caller defines its own flag combination inline.
 
 ## Part 1 — duplication policy
 
 **When to duplicate instead of FFI**:
 
-- Function body is <~50ns of work.
+- Function body is <~50 ns of work.
 - Called in a tight loop where each call is per-token, not per-string.
 - No data dependencies that would force a data-synchronisation story.
 - Has a small, well-pinned test corpus.
@@ -62,24 +63,44 @@ them.
   `rigour/names/tokenize.py`".
 
 **Not covered by this policy**: functions that go through `rigour._core`
-and are single-sourced. The Normalizer work below is an example — one
+and are single-sourced. The normalizer work below is an example — one
 Rust function, one Python wrapper, no Python parallel of the steps.
 
 ## Part 2 — normalizer flag model
 
+### Design decisions
+
+- **No FORM_* presets.** Callers (org_types, stopwords, tagging, …)
+  define their own flag composition inline and name it locally if they
+  want. The module exposes `normalize()` + `Normalize` flags + a tiny
+  `CategoryProfile` enum, nothing else.
+- **No TOKENIZE flag.** Tokenisation is a separate concern with its own
+  return type (`List[str]`, not `Optional[str]`) and lives in
+  `rigour.names.tokenize`. It is not a normalization step.
+- **`category_replace` is in scope** as a normalization step — it's what
+  most of rigour's existing normalizers use to collapse punctuation /
+  symbols / controls. Instead of exposing the full category-map as a
+  parameter (as normality does), expose a closed `CategoryProfile` enum
+  with three named, fixed profiles.
+- **Reference design**: `normality.normalize()`
+  (`/Users/pudo/Code/normality/normality/__init__.py`) is the existing
+  "kitchen sink" normalizer. Our rigour version is a leaner version of
+  that — no `stringify`/encoding concerns, no `replace_categories: Categories`
+  free parameter, just fixed profiles.
+
 ### Catalog of observed normalizers
 
 Grepped rigour for `normalize_*` functions and callsites taking
-`normalizer: Normalizer`. Twelve functions, but they decompose to a
-small set of primitive operations.
+`normalizer: Normalizer`. Twelve functions; nine decompose into the
+primitives below, three are domain-specific wrappers that stay as-is.
 
 | Function | File | Steps |
 |----------|------|-------|
-| `normalize_text` | `rigour/text/stopwords.py` | casefold → category_replace(SLUG_CATEGORIES) → squash_spaces |
-| `normalize_name` | `rigour/names/tokenize.py` | prenormalize (casefold) → tokenize → join |
+| `normalize_text` | `rigour/text/stopwords.py` | casefold → category_replace(SLUG) → squash_spaces |
+| `normalize_name` | `rigour/names/tokenize.py` | casefold → tokenize → join  (tokenize is not part of the flag system; this becomes a `normalize(..., NAME) + tokenize_name()` composition on the Python side) |
 | `normalize_display` | `rigour/names/org_types.py` | squash_spaces |
 | `_normalize_compare` | `rigour/names/org_types.py` | squash_spaces → casefold |
-| `normalize_address` | `rigour/addresses/normalize.py` | lower → category_replace → optional ascii → squash |
+| `normalize_address` | `rigour/addresses/normalize.py` | lower → category_replace(custom) → optional ascii → squash |
 | `normalize_territory_name` | `rigour/territories/util.py` | NFKD → casefold → strip(SKIP_CHARACTERS) → category_replace → conditional latinize → NFKC → squash |
 | `normalize_code` | `rigour/langs/util.py` | lower → strip |
 | `normalize_unit` | `rigour/units.py` | lower → dict lookup |
@@ -88,18 +109,31 @@ small set of primitive operations.
 | `noop_normalizer` | `rigour/text/dictionary.py` | strip |
 | `prenormalize_name` | `rigour/names/tokenize.py` | casefold |
 
-### Observed primitive operations
+### Primitive operations
 
 1. **strip** — trim leading/trailing whitespace
 2. **casefold** — Unicode casefolding (NOT lowercase; differs for ß → ss)
-3. **lower** — ASCII-ish lowercase (rarely needed once casefold exists)
-4. **NFC / NFKC / NFKD** — Unicode normal forms
-5. **squash_spaces** — runs of whitespace → single space, trim
-6. **category_replace** — Unicode category → replacement string
-7. **tokenize_join** — split by Unicode category, rejoin with separator
-8. **latinize** — script → Latin, preserving diacritics
-9. **ascii** — full Latin → ASCII (implies latinize + NFKD + mark strip + fallback)
-10. **conditional_latinize** — latinize only if `can_latinize(text)` (territory-specific; might drop, see below)
+3. **NFC / NFKC / NFKD** — Unicode normal forms
+4. **category_replace** — Unicode category → WS / delete / keep, driven by one of three fixed profiles (see below)
+5. **latinize** — script → Latin, preserving diacritics
+6. **ascii** — full Latin → ASCII (implies latinize + NFKD + mark strip + fallback)
+7. **squash_spaces** — runs of whitespace → single space, trim
+
+No `tokenize` (separate concern, separate return type). No `lower` (casefold supersedes it in all rigour callers we looked at; lossless for ASCII and more correct for ß/Turkish I).
+
+### Category profiles
+
+Three closed profiles, ported from the `Categories` dicts we have today:
+
+| Profile | Source | Intent |
+|---------|--------|--------|
+| `Default` | `normality.constants.UNICODE_CATEGORIES` | Generic text cleanup — punctuation/symbols/controls → WS, marks (except Mc) deleted |
+| `Slug` | `normality.constants.SLUG_CATEGORIES` | URL-slug-style cleanup — similar to Default but keeps Lm (modifier letters), keeps Mn (nonspacing marks — they'll be NFKD-decomposed separately) |
+| `Name` | `rigour.names.tokenize.TOKEN_SEP_CATEGORIES` + `SKIP_CHARACTERS` + `KEEP_CHARACTERS` | Name-specific — keeps Mc (Brahmic/Indic vowel signs), deletes Lm (phonetic superscripts), pre-deletes dots/apostrophes/accents, preserves Katakana prolonged-sound mark and ideographic iteration mark |
+
+Profiles are **fixed** in Rust. Callers cannot pass a custom category
+map; the only options are the three variants above. If a new profile is
+ever needed, adding a fourth variant is a trivial change.
 
 ### Flag model
 
@@ -117,7 +151,8 @@ bitflags! {
         // Case
         const CASEFOLD      = 1 << 2;
 
-        // Unicode normalisation (mutually exclusive; leftmost set wins)
+        // Unicode normalisation (at most one meaningfully set; later
+        // forms win if multiple)
         const NFC           = 1 << 3;
         const NFKC          = 1 << 4;
         const NFKD          = 1 << 5;
@@ -125,86 +160,147 @@ bitflags! {
         // Script conversion (ASCII implies LATINIZE at a lower level)
         const LATINIZE      = 1 << 6;
         const ASCII         = 1 << 7;
-
-        // Token pass (splits by Unicode category, rejoins with space)
-        const TOKENIZE      = 1 << 8;
-
-        // Presets matching current rigour normalizers
-        const FORM_BASIC    = Self::STRIP.bits() | Self::SQUASH_SPACES.bits();
-        const FORM_COMPARE  = Self::FORM_BASIC.bits() | Self::CASEFOLD.bits();
-        const FORM_NAME     = Self::CASEFOLD.bits() | Self::TOKENIZE.bits();
-        const FORM_ASCII_COMPARE = Self::FORM_COMPARE.bits() | Self::ASCII.bits();
     }
 }
 
-pub fn normalize(text: &str, flags: Normalize) -> Option<String> {
-    // Apply in a fixed order. Short-circuits to None on empty output.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum CategoryProfile {
+    Default,  // ≈ normality.UNICODE_CATEGORIES
+    Slug,     // ≈ normality.SLUG_CATEGORIES
+    Name,     // ≈ rigour.names.tokenize.TOKEN_SEP_CATEGORIES + SKIP_CHARACTERS
+}
+
+pub fn normalize(
+    text: &str,
+    flags: Normalize,
+    categories: Option<CategoryProfile>,
+) -> Option<String> {
+    // Fixed pipeline order; see below.
 }
 ```
 
-**Fixed pipeline order** (independent of bit order):
+**Fixed pipeline order** (independent of bit order; matches
+`normality.normalize` ordering):
 
 1. STRIP (if set)
-2. NFC / NFKC / NFKD (first-set-wins; should be mutex in practice)
+2. NFC / NFKC / NFKD (first-set-wins, or apply in declaration order if
+   multiple somehow set — shouldn't happen in practice)
 3. CASEFOLD
-4. ASCII, else LATINIZE (ASCII is a superset)
-5. TOKENIZE (joins with " ", so it influences whitespace)
-6. SQUASH_SPACES (last; collapses whatever whitespace earlier steps introduced)
+4. ASCII, else LATINIZE (ASCII is a superset — running ASCII subsumes
+   LATINIZE if both are set)
+5. category_replace (if `categories` is `Some(profile)`)
+6. SQUASH_SPACES
 
-Empty result → `None`, matching the existing contract on every
-observed normalizer.
+Empty result → `None`, matching the existing contract on every observed
+normalizer.
 
 ### Python exposure
 
 ```python
 # rigour/text/normalize.py
-from rigour._core import normalize as _normalize, Normalize
+from rigour._core import normalize as _normalize
+from rigour._core import Normalize, CategoryProfile
 
-# Re-export the flag enum for Python callers.
-__all__ = ["normalize", "Normalize"]
+__all__ = ["normalize", "Normalize", "CategoryProfile"]
 
-def normalize(text: Optional[str], flags: int) -> Optional[str]:
+def normalize(
+    text: Optional[str],
+    flags: Normalize,
+    categories: Optional[CategoryProfile] = None,
+) -> Optional[str]:
     if text is None:
         return None
-    return _normalize(text, flags)
+    return _normalize(text, flags, categories)
 ```
 
-The `Normalize` enum crosses the FFI once, is cheap to pass thereafter
-(it's just a u16).
+The `Normalize` flag value and `CategoryProfile` enum cross the FFI
+boundary as small ints, ~zero marshalling cost.
 
-### Mapping observed normalizers to flags
+### Callers define their own compositions
 
-| Old function | New flag expression |
-|--------------|---------------------|
-| `normalize_text` | `FORM_COMPARE` + category_replace is **out of scope** (see below) |
-| `normalize_name` | `FORM_NAME` (= CASEFOLD \| TOKENIZE) |
-| `normalize_display` | `FORM_BASIC` (= STRIP \| SQUASH_SPACES) |
-| `_normalize_compare` | `FORM_COMPARE` |
-| `normalize_code` | `STRIP` — lower is mostly redundant given casefold, but `STRIP \| CASEFOLD` covers the ASCII case identically |
+Each caller expresses its normalizer inline. No FORM_* presets exposed
+from the module. Examples of what current call sites become:
+
+```python
+# rigour/names/org_types.py — replacing normalize_display
+#   (was: squash_spaces)
+from rigour.text.normalize import normalize, Normalize
+
+def _display(text):
+    return normalize(text, Normalize.STRIP | Normalize.SQUASH_SPACES)
+
+# replacing _normalize_compare (was: squash_spaces + casefold)
+def _compare(text):
+    return normalize(
+        text,
+        Normalize.STRIP | Normalize.CASEFOLD | Normalize.SQUASH_SPACES,
+    )
+```
+
+```python
+# rigour/text/stopwords.py — replacing normalize_text
+#   (was: casefold + category_replace(SLUG) + squash_spaces)
+from rigour.text.normalize import normalize, Normalize, CategoryProfile
+
+def _stopword_key(text):
+    return normalize(
+        text,
+        Normalize.CASEFOLD | Normalize.SQUASH_SPACES,
+        CategoryProfile.Slug,
+    )
+```
+
+```python
+# rigour/names/tagging.py — tag_org_name / tag_person_name
+#   the normalizer was the Python normalize_name (casefold + tokenize + join).
+#   Tokenize is handled separately; the generic piece of normalization is:
+from rigour.text.normalize import normalize, Normalize, CategoryProfile
+from rigour.names.tokenize import tokenize_name
+
+def _name_key(text):
+    # Equivalent to the old normalize_name: category-replace with the Name
+    # profile (same behaviour as tokenize_name's internal category handling),
+    # casefold, squash. Tokenisation is a separate call returning List[str].
+    return normalize(
+        text,
+        Normalize.CASEFOLD | Normalize.SQUASH_SPACES,
+        CategoryProfile.Name,
+    )
+```
+
+The callback-taking functions (`tag_org_name`, `is_stopword`, etc.)
+stop accepting a `normalizer=` parameter and normalize their input
+themselves. If a caller wants pre-normalized input, they normalize
+before calling.
+
+### Mapping observed normalizers to compositions
+
+| Old function | New composition |
+|--------------|-----------------|
+| `normalize_text` | `CASEFOLD \| SQUASH_SPACES` + `CategoryProfile.Slug` |
+| `normalize_name` | `CASEFOLD \| SQUASH_SPACES` + `CategoryProfile.Name`, followed by `tokenize_name()` if the caller wants tokens |
+| `normalize_display` | `STRIP \| SQUASH_SPACES` |
+| `_normalize_compare` | `STRIP \| CASEFOLD \| SQUASH_SPACES` |
+| `normalize_code` | `STRIP \| CASEFOLD` |
 | `noop_normalizer` | `STRIP` |
 | `prenormalize_name` | `CASEFOLD` |
 
 **Not covered by the flag model** (intentionally):
 
-- `normalize_text`'s `category_replace(SLUG_CATEGORIES)` — this is
-  slug-specific and doesn't belong in a general normalizer. If stopwords
-  really need it, either (a) subsume it into `TOKENIZE` (they're almost
-  equivalent) or (b) add a `CATEGORY_SLUG` flag if we find it's truly
-  distinct. Revisit during stopwords porting.
 - `normalize_address`, `normalize_territory_name` — both layer
-  domain-specific logic (custom character maps, conditional latinize gated
-  by script detection, kitchen-sink category_replace) on top of the
-  generic steps. These stay as their own functions; internally they'll
-  call `normalize(text, flags)` with the generic bits and handle their
-  own specifics.
+  domain-specific logic (custom character maps, conditional latinize
+  gated by script detection, address-specific category variants) on top
+  of the generic steps. These stay as their own functions; internally
+  they'll call `normalize(text, flags, categories)` with the generic
+  bits and handle their own specifics.
 - `normalize_unit`, `normalize_mimetype`, `normalize_extension` —
   domain-specific. Not part of the "normalizer callback" pattern; no
   change needed.
 
 ### Call sites that currently take a `normalizer` callback
 
-These are the functions whose `normalizer: Normalizer` parameter becomes
-`flags: Normalize` in the new API:
+These are the functions whose `normalizer: Normalizer` parameter goes
+away:
 
 - `rigour/names/tagging.py`: `_get_org_tagger`, `_get_person_tagger`,
   `tag_org_name`, `tag_person_name`
@@ -215,38 +311,28 @@ These are the functions whose `normalizer: Normalizer` parameter becomes
   `replace_org_types_display`, `remove_org_types`, `extract_org_types`
 - `rigour/names/person.py`: `load_person_names_mapping`
 
-For each, the signature becomes:
-
-```python
-def tag_org_name(name: Name, flags: Normalize = Normalize.FORM_NAME) -> Name: ...
-```
-
-Default flags match the current default normalizer in each case.
-
-**API compatibility note**: tag/check/replace functions currently accept a
-callable. Converting to flags is a breaking change. Options:
-
-- **Break cleanly**: remove the callback argument, add `flags=` with a
-  sensible default. Upgrade the downstream callers in nomenklatura/FTM in
-  a coordinated commit.
-- **Soft-deprecate**: add `flags=` as a new parameter, keep accepting
-  `normalizer=` for one release but warn. Remove in the next.
-
-Break cleanly. Rigour is pre-2.0; the API churn is acceptable and the
-deprecation window adds complexity for no real adopter benefit.
+Each of these normalizes its input directly (using the composition it
+needs), rather than deferring to a caller-supplied callback. This is a
+breaking API change. Given rigour is pre-2.0 and the consumers are
+small (ourselves + nomenklatura + FTM), break cleanly in one PR rather
+than doing a deprecation dance.
 
 ### Rust wiring
 
 ```rust
 // rust/src/text/normalize.rs (sketch)
-pub fn normalize(text: &str, flags: Normalize) -> Option<String> {
+pub fn normalize(
+    text: &str,
+    flags: Normalize,
+    categories: Option<CategoryProfile>,
+) -> Option<String> {
     let mut s = if flags.contains(Normalize::STRIP) {
         text.trim().to_string()
     } else {
         text.to_string()
     };
 
-    // Unicode normal form (at most one set)
+    // Unicode normal form (at most one is meaningful)
     if flags.contains(Normalize::NFKD) {
         s = nfkd(&s);
     } else if flags.contains(Normalize::NFKC) {
@@ -260,13 +346,13 @@ pub fn normalize(text: &str, flags: Normalize) -> Option<String> {
     }
 
     if flags.contains(Normalize::ASCII) {
-        s = ascii_text(&s);  // via _core::transliterate::ascii_text
+        s = ascii_text(&s);              // existing text::transliterate
     } else if flags.contains(Normalize::LATINIZE) {
-        s = latinize_text(&s);
+        s = latinize_text(&s);           // existing text::transliterate
     }
 
-    if flags.contains(Normalize::TOKENIZE) {
-        s = tokenize_join(&s, " ");
+    if let Some(profile) = categories {
+        s = category_replace(&s, profile);
     }
 
     if flags.contains(Normalize::SQUASH_SPACES) {
@@ -275,44 +361,52 @@ pub fn normalize(text: &str, flags: Normalize) -> Option<String> {
 
     if s.is_empty() { None } else { Some(s) }
 }
+
+fn category_replace(text: &str, profile: CategoryProfile) -> String {
+    // Fixed tables: one match arm per CategoryProfile variant.
+    // Each variant's table is a const array or phf map populated from
+    // the ported UNICODE_CATEGORIES / SLUG_CATEGORIES / Name data.
+}
 ```
 
 Dependencies already in the crate:
 - `icu::normalizer` — NFC/NFKC/NFKD
 - ICU4X `Transliterator` — ASCII/LATINIZE (via existing
   `text::transliterate`)
-- `unicode-general-category` + existing `tokenize_name` Rust parallel —
-  TOKENIZE
+- In-crate `category_replace` using `unicode-general-category` to map
+  each char to its category and a per-profile table to resolve the
+  action
 - In-crate `squash_spaces` (trivial; no new dep)
-- Rust's `char::to_lowercase` or `str::to_lowercase` approximates
-  CASEFOLD. Full Unicode casefold is a separate ICU4X API; if the
-  difference matters for ß and similar, use `icu::casemap::CaseMapper`.
+- CASEFOLD: check `icu::casemap::CaseMapper::fold()` first; fall back to
+  a hand-rolled table if `compiled_data` doesn't include it
 
-**CASEFOLD implementation decision needed**: check ICU4X 2.x —
-`icu::casemap::CaseMapper::fold()` is the right API if it's in
-`compiled_data`. If not, Rust's stdlib `str::to_lowercase()` is a
-partial substitute that disagrees on German ß and Turkish I/ı. Verify
-before committing; parity with Python's `str.casefold()` matters for
-stopword lookups.
+**CASEFOLD implementation decision needed**: verify that ICU4X's
+`CaseMapper::fold()` gives the same output as Python's `str.casefold()`
+for the cases that matter in rigour (ß → ss, Turkish I/ı dotless,
+Greek sigma forms). If `compiled_data` doesn't carry the casemap, use
+Rust's `str::to_lowercase()` + known overrides for the ~5 divergent
+characters.
 
 ### Python rigour surface
 
 New module:
 
-- `rigour/text/normalize.py` — re-exports `Normalize` flag + `normalize`
-  function from `_core`.
+- `rigour/text/normalize.py` — re-exports `normalize`, `Normalize`, and
+  `CategoryProfile`.
 
 Retired functions (breaking change, same PR):
 
 - `rigour.text.stopwords.normalize_text`
-- `rigour.names.tokenize.normalize_name` — replaced by
-  `normalize(text, Normalize.FORM_NAME)`. The Python tokeniser stays
-  (duplication policy!) but `normalize_name` itself disappears as a
-  public symbol.
+- `rigour.names.tokenize.normalize_name` — replaced by an inline
+  composition in callers. `rigour.names.tokenize.tokenize_name` stays
+  (it's the token-producing function, separate concern). The Python
+  `prenormalize_name` stays as it's just `text.casefold()`, trivially
+  cheap.
 - `rigour.names.org_types.normalize_display`, `_normalize_compare`
 - `rigour.text.dictionary.noop_normalizer`
+- `Normalizer` type alias in `rigour.text.dictionary`
 
-Kept (they're domain-specific wrappers, not generic):
+Kept (domain-specific wrappers, not generic):
 
 - `rigour.addresses.normalize.normalize_address`
 - `rigour.territories.util.normalize_territory_name`
@@ -323,15 +417,32 @@ Kept (they're domain-specific wrappers, not generic):
 ### Verification
 
 - Unit tests in `rust/src/text/normalize.rs` covering each flag in
-  isolation and the FORM_* presets against hand-picked inputs.
+  isolation, each `CategoryProfile`, and a few representative
+  compositions against hand-picked inputs.
 - Python tests in `tests/text/test_normalize.py` asserting that
-  `normalize(text, FORM_X)` matches the current output of the
-  corresponding legacy normalizer for a corpus of 50–100 representative
-  inputs.
+  `normalize(text, flags, categories)` matches the current output of
+  the corresponding legacy normalizer for a corpus of 50–100
+  representative inputs (one parity block per retired function).
 - All tagging/dictionary tests (`tests/names/test_tagging.py`,
   `tests/text/test_stopwords.py`, `tests/names/test_org_types.py`)
   continue to pass after flipping their call sites from `normalizer=`
-  to `flags=`.
+  to inline normalization.
+
+### Category profile data — sourcing
+
+The three profiles copy their category → action tables from existing
+Python sources:
+
+- `Default` — verbatim from `normality.constants.UNICODE_CATEGORIES`
+- `Slug` — verbatim from `normality.constants.SLUG_CATEGORIES`
+- `Name` — from `rigour.names.tokenize.TOKEN_SEP_CATEGORIES`, plus the
+  `SKIP_CHARACTERS` set (pre-deleted: `.`, ASCII/curly apostrophes,
+  modifier-letter apostrophe/prime, grave/acute accents) and
+  `KEEP_CHARACTERS` set (preserved: U+30FC katakana-hiragana prolonged
+  sound, U+FF70 halfwidth variant, U+3005 ideographic iteration mark)
+
+These are small tables (~25 entries each) — generate as const arrays
+in `rust/src/text/normalize.rs` at port time; no genscripts step needed.
 
 ## Open questions
 
@@ -339,15 +450,17 @@ Kept (they're domain-specific wrappers, not generic):
    `str.casefold()` exactly, including ß → ss and Turkish edges? Verify
    before shipping. Fallback: Rust's `to_lowercase()` + known-case
    overrides for the ~5 divergent characters.
-2. **Is `category_replace(SLUG_CATEGORIES)` genuinely needed** in the
-   flag set, or does `TOKENIZE` cover the same ground for our
-   stopwords/dictionary callers? Inspect `SLUG_CATEGORIES` vs our tokenize
-   classifier. Probably subsumed.
-3. **Flag naming**: `Normalize::TOKENIZE` implies space-join. If any
-   caller needs a different separator, expose `tokenize_with(sep)` as a
-   separate function rather than making the separator part of the flag
-   API. Keep flags simple.
-4. **Thread-safety**: `normalize()` internally uses `ascii_text` and
+2. **Name profile completeness**: the `SKIP_CHARACTERS` and
+   `KEEP_CHARACTERS` sets in `rigour/names/tokenize.py` are recent
+   accretions; verify they cover every edge case before baking them in
+   as a closed profile. If more will appear, consider whether the
+   profile needs a way to extend without a crate release.
+3. **Thread-safety**: `normalize()` internally uses `ascii_text` and
    `latinize_text` which use thread-local ICU4X transliterator caches.
    `normalize()` is safe to call from any thread; each thread amortises
    its own lazy init.
+4. **Does `SLUG_CATEGORIES` have a real use case in rigour?** Currently
+   only the stopwords path. If we're comfortable unifying `Slug` with
+   `Default` at the rigour level (we're not normality; slug URLs aren't
+   our concern), we could drop `Slug` and ship just `Default` + `Name`.
+   Worth a grep through consumers before finalising.
