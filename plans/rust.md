@@ -24,10 +24,12 @@ runs entirely in Rust, crossing the boundary only at coarse entry/exit points.
 
 1. Move the entire name analysis pipeline into Rust so it runs without crossing back to Python
 2. Drop the `pyicu` dependency by using ICU4X (pure Rust) for transliteration
-3. Fold in functionality currently spread across `normality`, `ahocorasick-rs`, `jellyfish`,
-   and `rapidfuzz` into one Rust crate — reducing the Python dependency count while reusing
-   the same underlying Rust crates (`jellyfish`, `rapidfuzz`, `aho-corasick`) for the
-   algorithms.
+3. Fold in functionality currently spread across `normality`, `ahocorasick-rs`, and
+   `jellyfish` into one Rust crate — reducing the Python dependency count by reusing
+   the underlying Rust crates (`jellyfish`, `aho-corasick`). Python `rapidfuzz` stays
+   as a Python dep for now because the Rust `rapidfuzz` crate 0.5.0 lacks the
+   `opcodes` API that nomenklatura depends on. See the "Known gap" block under
+   Phase 2 for the decision trail.
 4. Reduce memory footprint: Python `Name`/`NamePart` objects cost ~1-5KB each; Rust structs
    cost ~200-400 bytes. For a nomenklatura index with 200k names, this is 200-1000MB vs 40-80MB
 
@@ -773,6 +775,54 @@ native code:
   currently used should still get a Phase 2 test sweep — same algorithms,
   independent implementations.
 
+#### ⚠️ Known gap: the Rust `rapidfuzz` crate has no `opcodes` / alignment API
+
+The Python `rapidfuzz` package exposes `Levenshtein.opcodes(s1, s2)` returning a
+list-like `Opcodes` structure of `(tag, src_start, src_end, dest_start, dest_end)`
+tuples (tags: `"equal"`, `"replace"`, `"insert"`, `"delete"`). Nomenklatura uses
+this: `nomenklatura._opcodes` is `@lru_cache(maxsize=512)` over it, driving
+alignment logic in the matching pipeline.
+
+**The Rust `rapidfuzz` crate 0.5.0 does not implement this.** Verified by grepping
+the downloaded crate source: no `opcodes`, no `editops`, no alignment recovery API
+at all — only distance/similarity scores. This was discovered (April 2026) when an
+initial attempt to port distance functions ahead of Phase 2 was reverted precisely
+because of this gap.
+
+**Implication**: if we swap `rapidfuzz.distance.Levenshtein.distance` etc. to
+Rust-backed wrappers but nomenklatura still needs `Levenshtein.opcodes`, we'd end
+up carrying Python `rapidfuzz` as a dep *anyway*, just for the opcodes call — at
+which point the benefit of Rust-side distance is marginal (distance calls are
+LRU-cached too; FFI savings are bounded by cache miss rate).
+
+**Phase 2 decision gate** — three options, pick one:
+- **(A) Keep Python `rapidfuzz` as a dep for everything**: distance stays Python,
+  no rigour Rust bindings for Levenshtein/DamerauLevenshtein/JaroWinkler.
+  Simplest; loses the 3–10× bit-parallel speedup vs. keeping Python rapidfuzz
+  which already has it via C++ — so actually no regression. This is the de-facto
+  state as of the phonetics MVP.
+- **(B) Rust-side distance + Python-side opcodes**: expose distance functions
+  through `rigour._core`, keep Python `rapidfuzz` as a dep only for opcodes.
+  No net dependency reduction. Mostly pointless.
+- **(C) Implement opcodes in Rust**: port Hyyrö's bit-parallel alignment recovery
+  (from `rapidfuzz-cpp`) to Rust, or implement Wagner-Fischer with traceback
+  ourselves. Hyyrö gives byte-for-byte parity with Python rapidfuzz. Wagner-Fischer
+  is simpler but tiebreaks differently on ambiguous alignments — could subtly
+  change nomenklatura's alignment output on certain inputs. Real implementation
+  effort (~300–500 LOC).
+
+**Plan of record**: **(A)** until Phase 2 actively decides otherwise. The
+rapidfuzz distance speedup was attractive in the abstract, but given Python
+`rapidfuzz`'s C++ backend already runs the same bit-parallel algorithms, there's
+no *speed* argument for Rust-side distance — only a *dependency reduction*
+argument, which is killed by the opcodes gap. If Phase 5's `analyze_names`
+pipeline ends up calling distance from inside the hot loop (where FFI avoidance
+does matter), revisit — at that point, option (C) becomes worth the effort, or
+we upstream the opcodes API to the Rust rapidfuzz crate.
+
+Do not attempt to split distance and opcodes across Python and Rust without
+re-reading this section.
+
 **Rust structs**:
 
 ```rust
@@ -1231,8 +1281,7 @@ API is experimental but functional and actively maintained by the ICU team.
 ### Why jellyfish AND rapidfuzz (not just one)
 
 Both crates expose the core algorithms rigour uses, and it's tempting to collapse to
-one dependency. We don't, because the implementations have materially different
-performance:
+one dependency. The algorithmic reasoning (from the Phase 2 section above):
 
 - `jellyfish` implements Levenshtein, Damerau-Levenshtein, and Jaro-Winkler with
   straightforward O(N·M) dynamic programming (verified by reading
@@ -1241,21 +1290,17 @@ performance:
   strings that fit in 64 bits, Mbleven pruning for low-edit-distance short strings,
   block-wise with Ukkonen band for longer inputs. For our typical 5–50 character
   name inputs, Levenshtein fits in a single machine word and runs **3–10× faster**
-  than a DP matrix (more on batches).
+  than a DP matrix in isolation.
 
-Because the whole point of this port is speed, we take the faster implementation for
-distance functions. `jellyfish` stays for metaphone and soundex (rapidfuzz doesn't
-have those). Having two small Rust crates compiled into one `.so` is essentially
-free at the Python boundary — there's no performance cost to keeping both.
-
-The Rust `rapidfuzz` crate (0.5.0, December 2023) is a full algorithmic port of the
-C++ core by the same author, not a simplified port — same three-tier dispatch, same
-published complexity bounds. Dormant since late 2023 but the algorithms don't evolve;
-API surface we use is three functions.
-
-Distance output parity against the current Python `rapidfuzz` values should still be
-verified in Phase 2 (independent implementations of well-specified algorithms should
-agree, but worth confirming concretely).
+`jellyfish` stays as a Cargo dep for metaphone and soundex (rapidfuzz doesn't have
+those) and was landed in Phase 0.5 for those functions specifically. Distance
+functions on the Rust side are **not** yet landed — see the "Known gap" block under
+Phase 2. Summary: the Rust `rapidfuzz` crate 0.5.0 lacks the `opcodes` API that
+nomenklatura depends on, which means a Rust-side distance port would leave the
+Python `rapidfuzz` dep in place anyway for opcodes. Given Python rapidfuzz already
+uses the same bit-parallel algorithms (via C++ backend), there's no speed regression
+from keeping distance on the Python side until Phase 5 indicates otherwise. Don't
+re-port distance without re-reading that block.
 
 ### Why `\b` word boundaries over lookaround
 
@@ -1309,8 +1354,8 @@ Python benchmarks (separate script, not in CI):
 |-------|----------------------|------------------------------|
 | 1 | `pyicu` | `icu` crate (ICU4X) |
 | 1+ | `normality` | `rigour.text.*` (Rust + pure Python) |
-| 2 | `jellyfish` | `jellyfish` crate (metaphone, soundex) |
-| 2 | `rapidfuzz` | `rapidfuzz` crate (bit-parallel distance, 3–10× faster than jellyfish DP) |
+| 2 | `jellyfish` | `jellyfish` crate (metaphone, soundex) — **done in Phase 0.5 MVP** |
+| — | `rapidfuzz` | **NOT REMOVED**. Blocked by opcodes gap in Rust `rapidfuzz` 0.5.0. See "Known gap" under Phase 2. |
 | 4 | `ahocorasick-rs` | `aho-corasick` crate |
 | — | `fingerprints` | Review if still needed after org_types port |
 
@@ -1374,23 +1419,25 @@ artifact" for rationale.
    API (`try_new` vs `try_new_with_compiled_data`, data provider pattern) needs verification
    against the `icu` crate v2.2 docs during Phase 1 implementation.
 
-2. **`rapidfuzz` Rust crate maintenance status**: v0.5.0, last release December 2023.
-   Pinned dependency risk: if a bug appears, we can't just update. Acceptable because
-   (a) the three functions we use (Levenshtein, Damerau-Levenshtein, Jaro-Winkler)
-   are well-specified and bug-stable, (b) the crate source is the full algorithmic
-   port of the C++ rapidfuzz, not a toy version, and (c) the performance advantage
-   over alternatives is load-bearing. Fallback if the crate actually breaks: pin to a
-   git SHA and maintain a fork, or port the ~300 lines of Myers/Mbleven we actually
-   need. Neither is catastrophic.
+2. **Rust-side distance functions: gated by opcodes gap**. Phase 2 originally
+   planned to port Levenshtein / Damerau-Levenshtein / Jaro-Winkler to the Rust
+   `rapidfuzz` crate. Discovered (April 2026, during an aborted MVP-adjacent
+   attempt): Rust `rapidfuzz` 0.5.0 has no opcodes / alignment API, but
+   nomenklatura depends on `Levenshtein.opcodes` via Python rapidfuzz. See the
+   "Known gap" block under Phase 2 for full context, the three decision options,
+   and why the current plan of record is to keep Python `rapidfuzz` for all
+   distance work until Phase 5 forces the question. **Do not try to half-port
+   this without re-reading that block** — the aborted attempt already proved
+   the failure mode.
 
-3. **`jellyfish` Rust crate maintenance status**: Last release June 2023 (v1.0.0).
+3. **`rapidfuzz` Rust crate maintenance status**: v0.5.0, last release December 2023.
+   Moot until we actually depend on it (see #2). If we ever do, acceptable because
+   the three functions we'd use are well-specified and bug-stable and the API surface
+   is tiny. Fallback: pin a git SHA or port the ~300 lines ourselves.
+
+4. **`jellyfish` Rust crate maintenance status**: Last release June 2023 (v1.0.0).
    1.0 implies API stability; metaphone/soundex don't evolve. Tolerable risk. No
    action needed unless a CVE surfaces.
-
-4. **Distance-function output parity**: Phase 2 should pin current Python
-   `rapidfuzz`-computed distances on a corpus of a few hundred string pairs and verify
-   the Rust `rapidfuzz` crate produces identical results. Same algorithms, independent
-   implementations — should agree, but worth confirming concretely.
 
 5. **`lru_cache` on `entity_names`**: Once `analyze_names` runs in Rust (Phase 5), the cache
    may be unnecessary — re-running the pipeline may be cheaper than Python cache overhead.
@@ -1433,10 +1480,12 @@ artifact" for rationale.
 - **Versions of all Rust crates and build tools**: pinned to current latest stable
   as of April 2026. See "Rust Crate Dependencies" section for the full list. MSRV
   is 1.86.
-- **jellyfish vs rapidfuzz crate choice**: keep both. An earlier revision tried to
-  collapse to jellyfish alone, but benchmark research showed rapidfuzz's bit-parallel
-  distance algorithms (Myers/Hyyrö/Mbleven) run 3–10× faster than jellyfish's DP
-  implementation for our typical 5–50 char name inputs. Since the whole port's speed
-  case is load-bearing, we take both: jellyfish for metaphone/soundex (rapidfuzz
-  doesn't have those) and rapidfuzz for distance. See "Why jellyfish AND rapidfuzz"
-  in Key Design Decisions for full rationale.
+- **jellyfish for phonetics, Rust-side distance deferred**: jellyfish crate is in
+  use now (Phase 0.5) for metaphone and soundex. Distance functions were originally
+  scheduled for a similar early port, but an attempt (April 2026) was reverted when
+  it surfaced that the Rust `rapidfuzz` 0.5.0 crate has no opcodes API while
+  nomenklatura depends on `Levenshtein.opcodes`. Splitting distance (Rust) from
+  opcodes (Python) would keep the Python dep anyway for no net win — and Python
+  rapidfuzz's C++ backend already runs the same bit-parallel algorithms, so there's
+  no speed regression from leaving distance on the Python side. See the "Known gap"
+  block under Phase 2 for the decision log and options.
