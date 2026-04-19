@@ -197,6 +197,19 @@ fn py_ordinals_dict() -> std::collections::HashMap<u32, Vec<String>> {
     text::ordinals::ordinals_dict()
 }
 
+// The full decompressed person-names corpus as one string. Each call
+// allocates a fresh `PyString` (the corpus is ~8.5 MB of text), so
+// Python consumers read it once and iterate locally. Will be retired
+// when the tagger ports to Rust (step 8 of plans/rust-tagger.md) —
+// at which point the Rust side parses `names::persons::raw()`
+// directly without crossing the FFI.
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "persons_text")]
+fn py_persons_text() -> &'static str {
+    names::persons::raw()
+}
+
 #[cfg(feature = "python")]
 #[pymodule]
 fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -221,6 +234,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_name_split_phrases_list, m)?)?;
     m.add_function(wrap_pyfunction!(py_generic_person_names_list, m)?)?;
     m.add_function(wrap_pyfunction!(py_ordinals_dict, m)?)?;
+    m.add_function(wrap_pyfunction!(py_persons_text, m)?)?;
     m.add_class::<names::symbol::Symbol>()?;
     m.add_class::<names::symbol::SymbolCategory>()?;
     Ok(())

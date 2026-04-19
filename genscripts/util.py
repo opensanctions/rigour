@@ -1,7 +1,6 @@
 import black
 import orjson
 import logging
-import zstandard
 import unicodedata
 from pathlib import Path
 from typing import Any, Iterable
@@ -53,14 +52,3 @@ def write_json(file_path: Path, data: Any) -> None:
     opts = orjson.OPT_SORT_KEYS | orjson.OPT_APPEND_NEWLINE
     with open(file_path, "wb") as fh:
         fh.write(orjson.dumps(data, option=opts))
-
-
-def write_zstd(file_path: Path, data: bytes) -> None:
-    """Write a zstd-compressed blob.
-
-    Used for Tier-1 Rust data artifacts — currently the person-name
-    corpus (~8.5MB text → ~2-3MB compressed). The Rust side reads this
-    via `include_bytes!` + zstd decode inside a `LazyLock`.
-    """
-    cctx = zstandard.ZstdCompressor(level=19)
-    file_path.write_bytes(cctx.compress(data))

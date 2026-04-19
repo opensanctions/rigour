@@ -2,7 +2,7 @@ import click
 import logging
 from pathlib import Path
 from typing import List
-from namesdb.export import dump_file_export
+from namesdb.export import generate_export_lines
 from rich.table import Table
 from rich.console import Console
 from normality import latinize_text
@@ -110,7 +110,15 @@ def load_file(path: Path) -> None:
 @cli.command("dump")
 @click.argument("path", type=click.Path(dir_okay=False, writable=True))
 def dump_file(path: Path) -> None:
-    dump_file_export(Path(path))
+    log.info("Exporting namesdb mappings to %r", path)
+    mappings = 0
+    forms = 0
+    with open(path, "w") as fh:
+        for line in generate_export_lines():
+            mappings += 1
+            forms += line[1]
+            fh.write(line[0])
+    log.info("Wrote %d mappings (%d forms) to %r", mappings, forms, path)
 
 
 if __name__ == "__main__":

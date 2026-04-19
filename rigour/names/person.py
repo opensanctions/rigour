@@ -1,25 +1,35 @@
 from typing import Dict, Generator, List, Set, Tuple
 
-from rigour.data import DATA_PATH
+from rigour._core import persons_text
 from rigour.text.dictionary import Normalizer, noop_normalizer
-
-NAMES_DATA_PATH = DATA_PATH / "names" / "persons.txt"
 
 
 def load_person_names() -> Generator[Tuple[str, List[str]], None, None]:
-    """Load the person QID to name mappings from disk. This is a collection
-    of aliases (in various alphabets) of person name parts mapped to a
-    Wikidata QID representing that name part.
+    """Load the person QID to name mappings from the embedded corpus.
+    This is a collection of aliases (in various alphabets) of person
+    name parts mapped to a group ID — typically a Wikidata QID, with a
+    small tail of X-prefixed manual override IDs.
+
+    The corpus lives in the Rust crate (plain
+    `rust/data/names/persons.txt` at build time, zstd-compressed into
+    the binary by `build.rs`, decoded on first access by
+    `rigour._core.persons_text()`). The Rust side goes through one
+    UTF-8 PyString allocation for the full ~8.5 MB on each call, so
+    callers should iterate this generator to completion rather than
+    restarting mid-stream.
 
     Returns:
-        Generator[Tuple[str, List[str]], None, None]: A generator yielding tuples of QID and list of names.
+        Generator[Tuple[str, List[str]], None, None]: a generator
+        yielding tuples of group ID and list of name aliases.
     """
-    with open(NAMES_DATA_PATH, "r", encoding="utf-8") as fh:
-        for line in fh:
-            line = line.strip()
-            names_, gid = line.split(" => ")
-            names = names_.split(", ")
-            yield gid, names
+    text = persons_text()
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        names_, gid = line.split(" => ")
+        names = names_.split(", ")
+        yield gid, names
 
 
 def load_person_names_mapping(

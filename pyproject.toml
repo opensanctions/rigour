@@ -54,7 +54,6 @@ dev = [
     "types-setuptools",
     "types-PyYAML",
     "coverage>=4.1",
-    "zstandard",
 ]
 docs = [
     "pillow",

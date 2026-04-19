@@ -154,7 +154,7 @@ rigour/
 │   │   ├── org_symbols.json
 │   │   ├── person_symbols.json
 │   │   ├── territory_names.jsonl  # stripped territory subset for the tagger
-│   │   └── persons.txt.zst        # zstd-compressed AC pattern list
+│   │   └── names/persons.txt     # plain UTF-8; build.rs compresses at build time
 │   └── benches/
 │       └── names.rs               # Criterion benchmarks
 ├── rigour/                        # Python package (unchanged structure)
@@ -318,9 +318,14 @@ API — the `AhoCorasick` struct holds a `Arc<dyn AcAutomaton>` and has no
 Implementing cross-platform serialisation ourselves would be fragile and tied to the
 crate's private representation.
 
-Plan of record: ship the patterns as a zstd-compressed text blob
-(`rust/data/persons.txt.zst`, ~2–3MB compressed from 8.5MB), `include_bytes!` the
-blob, and build the automaton inside a `LazyLock<AhoCorasick>` on first tagger access.
+Plan of record: commit the patterns as **plain UTF-8**
+(`rust/data/names/persons.txt`, ~8.5 MB) so git diffs stay inspectable
+when the corpus regenerates. `rust/build.rs` zstd-compresses at
+crate-build time (level 19, ~2.7 MB) into `OUT_DIR`, and
+`rust/src/names/persons.rs` pulls the compressed bytes in via
+`include_bytes!(concat!(env!("OUT_DIR"), "/persons.txt.zst"))` and
+decodes lazily. The tagger builds the automaton inside a
+`LazyLock<AhoCorasick>` on first access, on top of the decoded text.
 This pays the construction cost once per process at first use. Rough expected cost is
 50–200ms; precise figure to be measured during Phase 4. For long-lived consumers
 (yente, zavod, nomenklatura indexing) this is negligible; for short-lived CLI
@@ -374,7 +379,7 @@ source stays as the human-edited form; JSON is just the build artifact Rust cons
 
 | Resource | Upstream source | Format → | Loaded via |
 |----------|----------------|----------|-------------|
-| Person name corpus | `resources/names/names/*.gz` | `persons.txt.zst` (zstd-compressed patterns) | `include_bytes!` + zstd decode + `AhoCorasick::new` in `LazyLock` |
+| Person name corpus | namesdb (`contrib/namesdb` pipeline) → plain `rust/data/names/persons.txt` | plain UTF-8 in git; `build.rs` compresses to `$OUT_DIR/persons.txt.zst` at build time | `include_bytes!(concat!(env!("OUT_DIR"), "/persons.txt.zst"))` + zstd decode in `LazyLock<String>` (`names::persons`); `AhoCorasick::new` inside the tagger's own `LazyLock` on top |
 | Unicode script ranges | Unicode data via genscripts | `scripts.rs` (sorted range slice) | Compiled-in `static` |
 | Latin/Latinizable chars | Unicode data via genscripts | `latin.rs` (sorted range slice) | Compiled-in `static` |
 | Ordinals | `resources/text/ordinals.yml` | `ordinals.rs` (sorted slice) | Compiled-in `static` |
@@ -411,7 +416,7 @@ static ORG_TYPE_REGEX: LazyLock<Regex> = LazyLock::new(|| {
 });
 
 static NAME_TAGGER: LazyLock<AhoCorasick> = LazyLock::new(|| {
-    let bytes = include_bytes!("../data/persons.txt.zst");
+    let bytes = include_bytes!(concat!(env!("OUT_DIR"), "/persons.txt.zst"));
     AhoCorasick::new(parse_patterns(&zstd::decode_all(&bytes[..]).unwrap())).unwrap()
 });
 ```
@@ -1363,7 +1368,7 @@ Python benchmarks (separate script, not in CI):
 - `rigour/text/distance.py` — delegate to `_core`
 - `rigour/names/tagging.py` — delegate to `_core` (Phase 4)
 - `rigour/names/org_types.py` — delegate to `_core` (Phase 3)
-- `genscripts/generate_names.py` — emit JSON (org_types, symbols) and zstd (persons.txt) for Rust
+- `genscripts/generate_names.py` — emit JSON (org_types, symbols) for Rust. The person-names corpus comes from `contrib/namesdb/Makefile::dump`, not from genscripts; it lands plain at `rust/data/names/persons.txt` and `rust/build.rs` compresses it at crate-build time.
 - `genscripts/generate_text.py` — emit sorted-slice `.rs` for scripts, stopwords, ordinals
 - `genscripts/generate_territories.py` — emit stripped `territory_names.jsonl` alongside existing full JSONL
 
