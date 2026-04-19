@@ -8,3 +8,4 @@ pub mod stopwords;
 pub mod symbol;
 pub mod symbols;
 pub mod tagger;
+pub mod tokenize;
