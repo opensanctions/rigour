@@ -2,18 +2,16 @@
 
 Two groups:
 
-1. Basic flag/cleanup behaviour — sanity checks that each step does what
-   it claims. Mirrors the Rust unit tests in rust/src/text/normalize.rs
-   via the FFI boundary.
-
-2. Parity against legacy normalizers — for each existing
-   `normalize_*` function in rigour, assert that an equivalent flag
-   composition produces the same output on a small corpus. This is the
-   evidence that the callback-pattern replacement is safe to roll out.
+1. Individual flag/cleanup behaviour — sanity checks that each step does
+   what it claims. Mirrors the Rust unit tests in
+   `rust/src/text/normalize.rs` via the FFI boundary.
+2. A small table-driven test for a realistic stopword-key pipeline
+   (`casefold | NFKD | squash_spaces` + `Cleanup.Slug`) with explicit
+   expected outputs per input.
 """
-from rigour.names.org_types import normalize_display, _normalize_compare
+import pytest
+
 from rigour.text.normalize import Cleanup, Normalize, normalize
-from rigour.text.stopwords import normalize_text
 
 
 # --- individual flags ---
@@ -153,62 +151,49 @@ def test_flags_are_int_flag() -> None:
     assert Normalize.STRIP not in combined
 
 
-# --- parity with legacy normalizers ---
+# --- stopword-key pipeline: casefold | NFKD | squash + Cleanup.Slug ---
+#
+# This is the flag composition callers use to build stopword-style
+# comparison keys: case-insensitive, diacritic-decomposing, with
+# punctuation / controls folded away under the Slug profile (which
+# keeps nonspacing marks). Each row pins one concrete (input,
+# expected) — mismatches surface the exact diverging input in pytest's
+# parametrize ID rather than through an opaque corpus loop.
 
-# A small corpus covering the quirks of each legacy function. Each entry
-# is an input string that probes a distinct normalization concern.
-_PARITY_CORPUS = [
-    "",
-    "   ",
-    "hello",
-    "  Hello World  ",
-    "Hello,\tWorld!",
-    "HELLO WORLD",
-    "Straße",
-    "naïve",
-    "Владимир",
-    "Kyriákos Mētsotákēs",
-    "FUAD ALIYEV",
-    "a\u0007b",               # control character
-    "café-bar",
+_STOPWORD_KEY_FLAGS = Normalize.CASEFOLD | Normalize.NFKD | Normalize.SQUASH_SPACES
+_STOPWORD_KEY_CLEANUP = Cleanup.Slug
+
+
+_STOPWORD_KEY_CASES = [
+    ("", None),
+    ("   ", None),
+    ("hello", "hello"),
+    ("  Hello World  ", "hello world"),
+    ("Hello,\tWorld!", "hello world"),
+    ("HELLO WORLD", "hello world"),
+    # ß → ss via casefold (not str.lower).
+    ("Straße", "strasse"),
+    # NFKD decomposes the diaeresis onto its base letter; Slug keeps
+    # nonspacing marks (Mn), so the combining mark survives. Expected
+    # value is decomposed: "nai\u0308ve", visually identical to input
+    # but one codepoint longer.
+    ("na\u00EFve", "nai\u0308ve"),
+    # Casefold on Cyrillic.
+    ("Владимир", "владимир"),
+    # Each diacritic-bearing letter decomposes: á → a + U+0301 (acute),
+    # ē → e + U+0304 (macron).
+    (
+        "Kyri\u00E1kos M\u0113tsot\u00E1k\u0113s",
+        "kyria\u0301kos me\u0304tsota\u0301ke\u0304s",
+    ),
+    ("FUAD ALIYEV", "fuad aliyev"),
+    # Control character (Cc) → deleted by Slug cleanup.
+    ("a\u0007b", "ab"),
+    # Hyphen (Pd) → whitespace under Slug → squashed. é also decomposes.
+    ("caf\u00E9-bar", "cafe\u0301 bar"),
 ]
 
 
-def test_parity_normalize_display() -> None:
-    # normalize_display: squash_spaces (keeps case, no cleanup)
-    flags = Normalize.STRIP | Normalize.SQUASH_SPACES
-    for inp in _PARITY_CORPUS:
-        legacy = normalize_display(inp)
-        rust = normalize(inp, flags, Cleanup.Noop)
-        assert legacy == rust, (
-            f"normalize_display divergence on {inp!r}: "
-            f"legacy={legacy!r}, rust={rust!r}"
-        )
-
-
-def test_parity_normalize_compare() -> None:
-    # _normalize_compare: squash_spaces → casefold
-    flags = Normalize.STRIP | Normalize.CASEFOLD | Normalize.SQUASH_SPACES
-    for inp in _PARITY_CORPUS:
-        legacy = _normalize_compare(inp)
-        rust = normalize(inp, flags, Cleanup.Noop)
-        assert legacy == rust, (
-            f"_normalize_compare divergence on {inp!r}: "
-            f"legacy={legacy!r}, rust={rust!r}"
-        )
-
-
-def test_parity_normalize_text_stopwords() -> None:
-    # normalize_text: casefold → category_replace(SLUG) → squash_spaces
-    # Note: normality.category_replace secretly applies NFKD before the
-    # lookup; our flag model makes that explicit. Callers migrating from
-    # `normalize_text` to the flag API must include NFKD to preserve
-    # byte-for-byte output on precomposed inputs like "naïve".
-    flags = Normalize.CASEFOLD | Normalize.NFKD | Normalize.SQUASH_SPACES
-    for inp in _PARITY_CORPUS:
-        legacy = normalize_text(inp)
-        rust = normalize(inp, flags, Cleanup.Slug)
-        assert legacy == rust, (
-            f"normalize_text divergence on {inp!r}: "
-            f"legacy={legacy!r}, rust={rust!r}"
-        )
+@pytest.mark.parametrize("inp,expected", _STOPWORD_KEY_CASES)
+def test_stopword_key_pipeline(inp: str, expected: str | None) -> None:
+    assert normalize(inp, _STOPWORD_KEY_FLAGS, _STOPWORD_KEY_CLEANUP) == expected

@@ -75,21 +75,56 @@ fn py_ffi_noop(text: &str) -> String {
     text.to_string()
 }
 
-// Low-level org-types replacer. The nice Python API (Normalize
-// IntFlag, Cleanup IntEnum) lives in rigour/names/org_types_rust.py
-// and passes plain ints through here. Bit values must match the
-// Python-side IntFlag/IntEnum definitions in rigour/text/normalize.py.
+// Low-level org-types replacers. The nice Python API (Normalize
+// IntFlag, Cleanup IntEnum) lives in rigour/names/org_types.py and
+// passes plain ints through here. Bit values must match the Python-
+// side IntFlag/IntEnum definitions in rigour/text/normalize.py.
 #[cfg(feature = "python")]
-#[pyfunction]
-#[pyo3(name = "replace_org_types_compare")]
-fn py_replace_org_types_compare(text: &str, flags: u16, cleanup: u8) -> String {
+fn _decode_flags(flags: u16, cleanup: u8) -> (text::normalize::Normalize, text::normalize::Cleanup) {
     let flags = text::normalize::Normalize::from_bits_truncate(flags);
     let cleanup = match cleanup {
         1 => text::normalize::Cleanup::Strong,
         2 => text::normalize::Cleanup::Slug,
         _ => text::normalize::Cleanup::Noop,
     };
-    names::org_types::replace_org_types_compare(text, flags, cleanup)
+    (flags, cleanup)
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "replace_org_types_compare")]
+fn py_replace_org_types_compare(text: &str, flags: u16, cleanup: u8, generic: bool) -> String {
+    let (flags, cleanup) = _decode_flags(flags, cleanup);
+    names::org_types::replace_compare(text, flags, cleanup, generic)
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "replace_org_types_display")]
+fn py_replace_org_types_display(text: &str, flags: u16, cleanup: u8) -> String {
+    let (flags, cleanup) = _decode_flags(flags, cleanup);
+    names::org_types::replace_display(text, flags, cleanup)
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "remove_org_types")]
+fn py_remove_org_types(text: &str, flags: u16, cleanup: u8, replacement: &str) -> String {
+    let (flags, cleanup) = _decode_flags(flags, cleanup);
+    names::org_types::remove(text, flags, cleanup, replacement)
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "extract_org_types")]
+fn py_extract_org_types(
+    text: &str,
+    flags: u16,
+    cleanup: u8,
+    generic: bool,
+) -> Vec<(String, String)> {
+    let (flags, cleanup) = _decode_flags(flags, cleanup);
+    names::org_types::extract(text, flags, cleanup, generic)
 }
 
 #[cfg(feature = "python")]
@@ -104,5 +139,8 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_normalize, m)?)?;
     m.add_function(wrap_pyfunction!(py_ffi_noop, m)?)?;
     m.add_function(wrap_pyfunction!(py_replace_org_types_compare, m)?)?;
+    m.add_function(wrap_pyfunction!(py_replace_org_types_display, m)?)?;
+    m.add_function(wrap_pyfunction!(py_remove_org_types, m)?)?;
+    m.add_function(wrap_pyfunction!(py_extract_org_types, m)?)?;
     Ok(())
 }

@@ -10,8 +10,6 @@ from rigour.text.scripts import can_latinize_cp
 from rigour.names import normalize_name
 from rigour.addresses.format import _load_formats, _load_template
 from rigour.addresses.normalize import _address_replacer
-from rigour.names.org_types import _compare_replacer, _display_replacer
-from rigour.names.org_types import _generic_replacer, replace_org_types_compare
 from rigour.names.tagging import _get_org_tagger, _get_person_tagger
 
 
@@ -30,10 +28,6 @@ def reset_caches() -> None:
     _load_formats.cache_clear()
     _load_template.cache_clear()
     _address_replacer.cache_clear()
-    _compare_replacer.cache_clear()
-    _display_replacer.cache_clear()
-    _generic_replacer.cache_clear()
-    replace_org_types_compare.cache_clear()
     _get_org_tagger.cache_clear()
     _get_person_tagger.cache_clear()
     get_index.cache_clear()
