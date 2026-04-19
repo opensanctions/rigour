@@ -455,6 +455,24 @@ function call (`entity_names` → `analyze_names`), so the call-site refactor
 is locked in. Step 5 is a pure implementation swap behind the rigour API and
 can land independently.
 
+### Follow-up: rewire the tagger's alias pipeline onto `tokenize_name`
+
+Once `tokenize_name` is Rust-side (lands during Phase 5 as part of the
+primitives for `analyze_names`), retire the ad-hoc `TOKENIZE_SKIP_CHARS`
+pre-strip in `rust/src/names/tagger.rs`. The tagger normalises aliases to
+mirror what the runtime haystack has been through; today it hand-copies
+the Python tokenizer's skip-char list, which is a second source of truth
+that can drift. Replace `strip_tokenize_skip(alias)` with
+`tokenize_name(alias).join(" ")` so the tagger picks up any future
+tokenisation changes (new punctuation rules, CJK segmentation tweaks)
+automatically.
+
+Do a differential check before the switchover: run every alias from
+stopwords + symbols + org_types + territories + person_names through
+both pipelines and diff the outputs. A diff means either the new
+`tokenize_name` has a bug or it's an intentional semantic gain — either
+way, review the diff before landing.
+
 ## Open questions
 
 1. **`lang` hint threading.** `Name` has an optional `lang`. Neither current
