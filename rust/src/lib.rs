@@ -1,4 +1,5 @@
 pub mod names;
+pub mod territories;
 pub mod text;
 
 #[cfg(feature = "python")]
@@ -210,6 +211,18 @@ fn py_person_names_text() -> &'static str {
     names::person_names::raw()
 }
 
+// The full territory database as raw JSONL. Python consumers in
+// `rigour.territories.*` parse line-by-line with orjson at import
+// time (and under `@cache`-decorated index builders), so one ~500 KB
+// PyString allocation per call is fine. The future Rust tagger
+// reads `territories::raw()` directly without crossing the FFI.
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "territories_jsonl")]
+fn py_territories_jsonl() -> &'static str {
+    territories::raw()
+}
+
 #[cfg(feature = "python")]
 #[pymodule]
 fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -235,6 +248,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_generic_person_names_list, m)?)?;
     m.add_function(wrap_pyfunction!(py_ordinals_dict, m)?)?;
     m.add_function(wrap_pyfunction!(py_person_names_text, m)?)?;
+    m.add_function(wrap_pyfunction!(py_territories_jsonl, m)?)?;
     m.add_class::<names::symbol::Symbol>()?;
     m.add_class::<names::symbol::SymbolCategory>()?;
     Ok(())

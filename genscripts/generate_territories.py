@@ -13,7 +13,7 @@ from rigour.ids.wikidata import is_qid
 from rigour.langs import iso_639_alpha3
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes
-from genscripts.util import write_jsonl, norm_string, RESOURCES_PATH, CODE_PATH
+from genscripts.util import write_jsonl, norm_string, RESOURCES_PATH, RUST_DATA_PATH
 
 log = logging.getLogger(__name__)
 yaml = YAML()
@@ -232,7 +232,8 @@ def update_data() -> None:
             msg = "Country is not a jurisdiction: %r" % terr.code
             raise RuntimeError(msg)
 
-    out_path = CODE_PATH / "territories" / "data.jsonl"
+    out_path = RUST_DATA_PATH / "territories" / "data.jsonl"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     write_jsonl(out_path, raw_territories.values())
 
 

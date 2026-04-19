@@ -21,7 +21,7 @@ step lands.
 | `rigour/data/names/org_types.py` | `ORG_TYPES: List[OrgTypeSpec]` | `rigour.names.tagging` imports this at line 94 to build `ORG_CLASS` symbols from the `generic` field. The four `replace_org_types_*` / `extract` / `remove` functions are already Rust-backed and read `rust/data/org_types.json` directly — only the tagger's ORG_CLASS symbol pass still reads the Python list. | **Step 8** (Python tagger goes away) |
 | `rigour/data/addresses/data.py` | `FORMS` address-form mapping | `rigour.addresses.normalize` | Later, separate port (address pipeline isn't on the tagger roadmap) |
 | `rigour/data/langs/iso639.py` | `ISO3_ALL`, `ISO2_MAP`, `ISO3_MAP` | `rigour.langs.*` | Later, separate port; tables are small + ASCII, low priority |
-| `rigour/data/territories/data.jsonl` | Full territory records (code, QID, parent, ISO codes, names, jurisdiction flags) | `rigour.territories.*` | **Stays** indefinitely — full records are Python-consumed. The `{code, name, full_name, names_strong}` subset moves to `rust/data/territory_names.jsonl` in step 6 of `rust-tagger.md` as a *separate* artifact emitted by the same generator; the full `data.jsonl` under `rigour/data/` is unaffected. |
+| `rust/data/territories/data.jsonl` *(moved)* | Full territory records (code, QID, parent, ISO codes, names, jurisdiction flags) | `rigour.territories.*` via `rigour._core.territories_jsonl()`; Rust tagger reads `territories::raw()` directly | **Moved** (not retired). Previously at `rigour/data/territories/data.jsonl`; now Rust-owned at `rust/data/territories/data.jsonl`. Python consumers read through a PyO3 accessor. Retired the earlier plan of emitting a stripped name-subset alongside — full records travel together and the tagger picks out what it needs at build time. |
 
 ## What each step takes out of `rigour/data/`
 
@@ -32,11 +32,19 @@ Python tagger keeps reading `rigour/data/names/data.py` until step 8.
 Explicit intermediate state by design — the JSON is inert scaffolding
 for step 8.
 
-### Step 6 (territory name subset)
+### Step 6 (territories)
 
-**Nothing leaves Python**. `generate_territories.py` gains one extra
-emit (`rust/data/territory_names.jsonl`). `rigour/data/territories/data.jsonl`
-keeps emitting unchanged.
+**The full territory database moves to `rust/data/`.** Earlier drafts
+of the plan proposed emitting a stripped name-subset alongside the
+existing Python-owned `data.jsonl`; we scrapped that in favour of
+moving the whole file and having `rigour.territories.*` read through
+`rigour._core.territories_jsonl()`. Single source of truth, and the
+Rust tagger's name-subset slicing happens at build time on the same
+records the Python side sees.
+
+`rigour/data/territories/` is gone after this step — the only thing
+under `rigour/data/territories/` was `data.jsonl` + an `__init__.py`
+marker, both retired.
 
 ### Step 7 (person-names corpus)
 
@@ -124,21 +132,18 @@ After step 8 + move 1:
 
 ```
 rigour/data/
-├── __init__.py                # DATA_PATH, read_jsonl
+├── __init__.py                # DATA_PATH, iter_jsonl_text
 ├── addresses/
 │   ├── __init__.py
 │   └── data.py                # FORMS (still Python)
-├── langs/
-│   ├── __init__.py
-│   └── iso639.py              # ISO tables (still Python)
-└── territories/
+└── langs/
     ├── __init__.py
-    └── data.jsonl             # full territory records (still Python)
+    └── iso639.py              # ISO tables (still Python)
 ```
 
-Three remaining Python-owned data assets, each with its own
-future-port story outside the tagger sequence. The `names/` and
-`text/` subdirectories are gone.
+Two remaining Python-owned data assets, each with its own future-port
+story outside the tagger sequence. The `names/`, `text/`, and
+`territories/` subdirectories are gone.
 
 ## Verification, when each retirement lands
 

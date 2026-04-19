@@ -153,7 +153,7 @@ rigour/
 │   │   ├── org_types.json
 │   │   ├── org_symbols.json
 │   │   ├── person_symbols.json
-│   │   ├── territory_names.jsonl  # stripped territory subset for the tagger
+│   │   ├── territories/data.jsonl # full territory records (moved from rigour/data)
 │   │   └── names/person_names.txt     # plain UTF-8; build.rs compresses at build time
 │   └── benches/
 │       └── names.rs               # Criterion benchmarks
@@ -250,7 +250,7 @@ Phase):**
 | `text/scripts.py` | Script ranges, Latin char sets | Phase 1 | `rigour/data/text/scripts.py` |
 | `text/stopwords.py` | Stopwords, nullwords, nullplaces | Phase 4 (when pipeline needs them) | `rigour/data/text/stopwords.py` |
 | `names/tagging.py` (+ `addresses/normalize.py`) | Ordinals | Phase 4 — but see below | `rigour/data/text/ordinals.py` |
-| `names/tagging.py` (+ `territories/*`) | Territory *name aliases* (stripped subset) | Phase 4 — but see below | derived from `rigour/data/territories/data.jsonl` |
+| `names/tagging.py` (+ `territories/*`) | Full territory records | Phase 4 | `rust/data/territories/data.jsonl` (moved from `rigour/data/`) |
 
 The focus is **name symbols and org types** — those are the Rust pipeline's
 substantive data dependencies. Everything else listed above follows because the
@@ -280,18 +280,20 @@ regenerates both.
 - **Ordinals**. Consumed by `names/tagging.py` (→ Rust) and `addresses/normalize.py`
   (→ Python). `genscripts/` keeps emitting `rigour/data/text/ordinals.py` for the
   address code *and* emits a parallel Rust-consumable artifact. ~90KB of duplication.
-- **Territory name aliases**. Consumed by `names/tagging.py` for the `LOCATION`
-  symbol category (see `rigour/names/tagging.py:112–120` — it pulls `code`, `name`,
-  `full_name`, `names_strong` per territory) *and* by `rigour.territories.*` for the
-  full territory database. `generate_territories.py` keeps emitting the full
-  `rigour/data/territories/data.jsonl` as today *and* emits a stripped
-  `rust/data/territory_names.jsonl` with just the tagger-relevant fields
-  (~100–200KB). The Rust tagger loads the stripped file; the Python territory API
-  keeps using the full file. Regeneration of both is enforced by the same
-  `make rust-data` target + CI no-diff check.
+- **Territories**. Previously consumed by `names/tagging.py` for the
+  `LOCATION` symbol category *and* by `rigour.territories.*` for the
+  full territory database. Landed as: full records move to
+  `rust/data/territories/data.jsonl` (from the pre-port
+  `rigour/data/territories/data.jsonl`); Python consumers read through
+  `rigour._core.territories_jsonl()`; the Rust tagger consumes the
+  same file via `territories::raw()` + serde when step 8 lands. No
+  separate stripped subset — the tagger picks the tagger-relevant
+  fields out at build time. `make rust-data` + the CI no-diff check
+  cover the single artifact.
 
 The "clean up via `_core` round-trip back to Python" option (Rust owns the data,
-Python reads through the extension) is deferred for both — dual-artifact duplication
+Python reads through the extension) was deferred for ordinals (dual-artifact
+duplication
 is simpler now and doesn't paint us into a corner later.
 
 **What gets deleted, when**
@@ -388,7 +390,7 @@ source stays as the human-edited form; JSON is just the build artifact Rust cons
 | Org types | `resources/names/org_types.yml` | `org_types.json` | `include_str!` + serde in `LazyLock` |
 | Org symbols, domains | `resources/names/symbols.yml` | `org_symbols.json` | `include_str!` + serde in `LazyLock` |
 | Person symbols, nicks | `resources/names/symbols.yml` | `person_symbols.json` | `include_str!` + serde in `LazyLock` |
-| Territory name aliases | `resources/territories/` (stripped subset — `{code, name, full_name, names_strong}`) | `territory_names.jsonl` | `include_str!` + line-by-line serde in `LazyLock` |
+| Territory records | `resources/territories/` (full records) | `rust/data/territories/data.jsonl` (moved from `rigour/data/`) | `include_str!` → `territories::raw()`; Python via `rigour._core.territories_jsonl()`; Rust tagger parses line-by-line with serde in a `LazyLock` |
 
 ### Genscripts stays Python
 
@@ -959,7 +961,7 @@ that simple reject-and-retry loops cannot.
   `Symbol` — or a Symbol + context wrapper — instead of `String`. The
   overlapping-iter + boundary-filter + greedy-select algorithm is
   written once in `matcher.rs` and reused.
-- Tagger loads org symbols, domains, territory name aliases (stripped subset),
+- Tagger loads org symbols, domains, the full territory JSONL (picks out name aliases at build time),
   ordinals, and the person name corpus from embedded data — see the "Sources and
   Embedding" table in the Data Embedding Strategy section for the per-dataset format
 - `tag_org_name`, `tag_person_name`, `_infer_part_tags` all in Rust
@@ -1370,7 +1372,7 @@ Python benchmarks (separate script, not in CI):
 - `rigour/names/org_types.py` — delegate to `_core` (Phase 3)
 - `genscripts/generate_names.py` — emit JSON (org_types, symbols) for Rust. The person-names corpus comes from `contrib/namesdb/Makefile::dump`, not from genscripts; it lands plain at `rust/data/names/person_names.txt` and `rust/build.rs` compresses it at crate-build time.
 - `genscripts/generate_text.py` — emit sorted-slice `.rs` for scripts, stopwords, ordinals
-- `genscripts/generate_territories.py` — emit stripped `territory_names.jsonl` alongside existing full JSONL
+- `genscripts/generate_territories.py` — emit the full `rust/data/territories/data.jsonl` (moved from `rigour/data/`)
 
 ### Removed files (incremental, per phase)
 

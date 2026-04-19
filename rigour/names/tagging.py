@@ -5,7 +5,8 @@ from functools import cache
 from collections import defaultdict
 from typing import Dict, List, Set, Tuple
 
-from rigour.data import read_jsonl
+from rigour._core import territories_jsonl
+from rigour.data import iter_jsonl_text
 from rigour.text.dictionary import Normalizer
 from rigour.text.stopwords import is_stopword
 from rigour.names import Symbol, Name
@@ -13,7 +14,6 @@ from rigour.names import load_person_names
 from rigour.names.part import NamePart
 from rigour.names.tag import NameTypeTag, NamePartTag, INTITIAL_TAGS
 from rigour.names.tokenize import normalize_name
-from rigour.territories.territory import TERRITORIES_FILE
 from rigour.util import resource_lock, unload_module
 
 import ahocorasick_rs
@@ -110,7 +110,7 @@ def _get_org_tagger(normalizer: Normalizer) -> Tagger:
             if nvalue is not None:
                 mapping[nvalue].add(sym)
 
-    for data in read_jsonl(TERRITORIES_FILE):
+    for data in iter_jsonl_text(territories_jsonl()):
         sym = Symbol(Symbol.Category.LOCATION, sys.intern(data["code"]))
         names: List[str] = data.get("names_strong", [])
         names.append(data["name"])

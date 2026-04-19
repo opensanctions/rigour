@@ -40,7 +40,7 @@ becomes Rust-only?
 | `resources/names/stopwords.yml` — `PERSON_NAME_PREFIXES`, `ORG_NAME_PREFIXES`, `OBJ_NAME_PREFIXES`, `NAME_SPLIT_PHRASES`, `GENERIC_PERSON_NAMES` | Python — `rigour/names/{prefix,split_phrases,check}.py` | **Yes** |
 | `resources/text/ordinals.yml` | Python (`rigour/addresses/normalize.py`) and Rust (tagger build) | **Yes** for the Python side; Rust tagger `include_str!`s the same JSON internally |
 | `resources/names/symbols.yml` — `org_symbols`, `org_domains`, `person_symbols`, `person_nick`, `person_name_parts` | Rust-only — only the tagger consumes these | **No** |
-| Territory name aliases (stripped subset from `resources/territories/*.yml`) | Rust-only — tagger LOCATION symbols | **No** |
+| Full territory records (`rust/data/territories/data.jsonl`, moved from `rigour/data/`) | Python (`rigour.territories.*`) **and** the future Rust tagger | **Yes** — `territories_jsonl()` returns the raw JSONL text |
 | `person_names.txt` (committed plain; `build.rs` compresses to OUT_DIR) | Rust-only — person tagger | **No** |
 
 The Rust-only artifacts still live under `rust/data/…`, still get
@@ -59,7 +59,7 @@ No `.pyi` stub, no Python-side accessor, no export from
 | 3 | `names/stopwords.yml` → `rust/data/names/stopwords.json` | `person_name_prefixes()`, `org_name_prefixes()`, `obj_name_prefixes()`, `name_split_phrases()`, `generic_person_names()` | `rigour/names/{prefix,split_phrases,check}.py` read from Rust; `rigour/data/names/data.py` reduces or disappears |
 | 4 | `text/ordinals.yml` → `rust/data/text/ordinals.json` | `ordinals()` for the addresses/normalize consumer | `rigour/addresses/normalize.py` reads from Rust; `rigour/data/text/ordinals.py` deleted |
 | 5 | `symbols.yml` → `rust/data/names/symbols.json` | **None** — Rust-only artifact | Pure `make rust-data` diff; nothing observable until step 8 consumes it |
-| 6 | Territory subset → `rust/data/territory_names.jsonl`. Added as one extra emit in `generate_territories.py`; the full JSONL that `rigour.territories.*` consumes stays unchanged. | **None** | Same — pure data diff until step 8 |
+| 6 | Full territories → `rust/data/territories/data.jsonl` (moved from `rigour/data/territories/`). `generate_territories.py` now writes there. `rigour.territories.*` and `rigour.names.tagging._get_org_tagger` read through `rigour._core.territories_jsonl()`. The Rust tagger will parse the same JSONL via `territories::raw()` + serde when step 8 lands. | `territories_jsonl()` | Python consumers load territory records through the Rust crate; `rigour/data/territories/` is gone |
 | 7 | `rust/data/names/person_names.txt` (committed as plain UTF-8 from the namesdb pipeline). `rust/build.rs` zstd-compresses at build time into `OUT_DIR`; `names::person_names` decodes on first access via `include_bytes!`. Plain text stays in git for diffability; the wheel ships ~2.7 MB of compressed bytes instead of 8.5 MB. | **None** | `rust/data/names/person_names.txt` lands + `names::person_names::raw()` loader; nothing consumes it yet until step 8 |
 | 8 | Tagger port itself — `rust/src/names/tagger.rs`. Consumes steps 4/5/6/7 via `include_str!` / `include_bytes!`, plus the already-landed `org_types.json` for ORG_CLASS symbols. `Needles<Vec<Symbol>>` payload. Flag-keyed cache keyed on `(TaggerKind, Normalize, Cleanup)`. Python `rigour/names/tagging.py` becomes a thin wrapper. | `tag_org_name(name, normalize_flags, cleanup)`, `tag_person_name(name, normalize_flags, cleanup, infer_initials)` | Single-FFI tagger; `ahocorasick-rs` drops from `pyproject.toml`; nomenklatura's hot loop gets the throughput win |
 | 9 | Downstream adapters update: nomenklatura, yente, FTM switch from `normalizer=` to `normalize_flags=` on the tagger entry points. Driven by the corresponding PR in each repo. | n/a | Downstream tests pass against the new rigour |
@@ -169,7 +169,7 @@ pub fn tag_org_name(
 ```rust
 fn load_ordinals() -> &'static [OrdinalSpec] { /* LazyLock<Vec<OrdinalSpec>> */ }
 fn load_symbols() -> &'static NameSymbols { /* same for rust/data/names/symbols.json */ }
-fn load_territory_names() -> &'static [TerritoryName] { /* for rust/data/territory_names.jsonl */ }
+fn load_territory_names() -> &'static [TerritoryName] { /* serde-parses territories::raw() into tagger-relevant fields lazily */ }
 fn load_person_corpus() -> &'static [PersonEntry] { /* parses names::person_names::raw() lazily — the raw corpus is zstd-decoded once on first access, already handled by that module */ }
 ```
 
