@@ -17,6 +17,15 @@ This library contains data validation and cleaning routines that are meant to be
 * Run tests using `pytest --cov rigour`
 * Run typechecking using `mypy --strict rigour`
 
+## Rust
+
+* Run `make rust-fmt` before committing any Rust changes — CI runs
+  `cargo fmt --check` and fails on drift. `make rust-fmt-check`
+  mirrors the CI check locally.
+* Run `cargo clippy --all-targets -- -D warnings` (both with and
+  without `--features python`) before committing — CI treats
+  warnings as errors.
+
 ## Docstrings and mkdocs
 
 Public API docs are built with mkdocs Material + mkdocstrings (Python
