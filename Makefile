@@ -1,6 +1,12 @@
-.PHONY: docs build typecheck test build-iso639 build-territories build-addresses build-names
+.PHONY: docs build typecheck test develop rust-test rust-data build-iso639 build-territories build-addresses build-names
 
 check: build typecheck test
+
+develop:
+	maturin develop --manifest-path rust/Cargo.toml
+
+rust-test:
+	cargo test --manifest-path rust/Cargo.toml
 
 typecheck:
 	mypy --strict rigour

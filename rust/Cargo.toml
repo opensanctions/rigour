@@ -1,0 +1,30 @@
+[package]
+name = "rigour-core"
+version = "1.8.2"
+edition = "2024"
+rust-version = "1.86"
+license = "MIT"
+description = "Rust core for the rigour Python library."
+
+[lib]
+name = "rigour_core"
+crate-type = ["cdylib", "rlib"]
+
+[features]
+# Gating the PyO3 bindings behind a feature lets `cargo test` / `cargo build`
+# exercise pure-Rust logic without needing a Python runtime or libpython at link
+# time. Maturin enables this via `[tool.maturin].features` in pyproject.toml.
+python = ["dep:pyo3"]
+
+[dependencies]
+# generate-import-lib avoids needing a real Python install on the Windows CI
+# runner at link time — PyO3 generates a stub import library instead.
+pyo3 = { version = "0.28", features = ["extension-module", "generate-import-lib"], optional = true }
+
+# Phonetic algorithms (metaphone, soundex). Port of Apache commons-codec, pure
+# Rust. The upstream jellyfish Rust crate can't be used directly because it
+# hard-depends on pyo3 and is published as cdylib-only.
+rphonetic = "3"
+
+# NOTE: no [profile.release] overrides. Defaults are fine; revisit if benchmarks
+# show measurable headroom from LTO / codegen-units=1.

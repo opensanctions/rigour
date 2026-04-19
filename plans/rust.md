@@ -87,14 +87,21 @@ requires = ["maturin>=1.13,<2.0"]
 build-backend = "maturin"
 
 [tool.maturin]
-features = ["pyo3/extension-module"]
+# "python" feature gates the PyO3 bindings — without it, cargo test / cargo build
+# work on pure-Rust logic alone. Pattern copied from the jellyfish Python package.
+features = ["pyo3/extension-module", "python"]
 module-name = "rigour._core"
 manifest-path = "rust/Cargo.toml"
+# python-source defaults to repo root; the rigour/ package lives there, so omit.
 ```
 
 The switch from hatchling is a clean replacement — rigour's current `pyproject.toml`
 doesn't use hatchling features beyond the default (no custom hooks, no version
 plugins), so `build-backend` becomes a single-line change.
+
+**Also required at `rigour/py.typed`**: an empty file. Without this marker, downstream
+`mypy --strict` (FTM, nomenklatura, yente) ignores our `.pyi` stubs and breaks. This
+is the single most commonly-forgotten piece of the typed-Python-package story.
 
 The Rust crate compiles to `rigour/_core.so` — a private module. Python code imports from it:
 
@@ -524,11 +531,12 @@ and cannot go in a `static`. Those use `thread_local!` with a `RefCell`. Under t
 this is effectively a process-lifetime singleton; each interpreter thread pays init
 once. See "Threading: `Transliterator` is `!Send`/`!Sync`" above.
 
-**Not carried over from Python**: the `@lru_cache(maxsize=N)` memoization on
-transliteration, phonetics, distance, and tokenizer lookups — see "Why LRU caches go
-away" below. That also makes `rigour/reset.py`'s `cache_clear()` machinery obsolete:
-`LazyLock` and `thread_local!` have no reset API, but neither do these singletons need
-invalidation (they're derived from embedded data that never changes at runtime).
+**Decided case-by-case**: the `@lru_cache(maxsize=N)` memoization on transliteration,
+phonetics, distance, and tokenizer lookups. See "LRU caches: case-by-case, not blanket
+removal" below — some stay, some go, depending on call cost vs repetition rate.
+`rigour/reset.py`'s `cache_clear()` machinery remains for whichever caches are kept on
+the Python side. Rust-side singletons (`LazyLock`, `thread_local!`) have no reset API
+but don't need one — they're derived from embedded data that never changes at runtime.
 
 ---
 
@@ -571,6 +579,55 @@ swapping in Rust) and validating that ICU4X and maturin work for our use case.
   existing tests still pass, `mypy --strict` still passes with a `.pyi` stub
 - Test the CI pipeline: maturin-action builds wheels for at least one platform
 - Verify Windows build too (one matrix entry) — first real test of the newly-in-scope target
+
+---
+
+### Phase 0.5: MVP — phonetics wrapper
+
+**Goal**: ship the smallest possible real Rust functionality end-to-end, to validate
+the entire tooling + CI chain before committing to the larger phases. Scope: two
+functions (`metaphone`, `soundex`) wrapping the `jellyfish` Rust crate, replacing
+the current `jellyfish` Python dependency for those specific calls.
+
+**Why phonetics and not something bigger**: phonetics is pure `&str → String` with
+no data, no state, no lifetimes, no `#[pyclass]`, no ICU4X. The MVP isn't buying
+performance — it's buying tooling. Benchmarks on this MVP will likely show it's
+marginally *slower* than the current PyO3-backed `jellyfish` package (same FFI
+overhead, no amortisation). That's expected and acceptable — Phase 1+ is where the
+speed case lands. Surfacing CI/maturin/mypy issues on two functions is much cheaper
+than surfacing them mid-Phase-4.
+
+**Files**:
+- `rust/Cargo.toml`, `rust/src/lib.rs`, `rust/src/phonetics.rs` (pure-Rust wrappers)
+- `pyproject.toml` — switch build-backend to maturin, drop `jellyfish` from deps
+- `rigour/_core.pyi` — type stubs for `metaphone` and `soundex`
+- `rigour/py.typed` — empty marker file (without it, downstream mypy ignores the stubs)
+- `rigour/text/phonetics.py` — `from rigour._core import metaphone, soundex`; delete the `@lru_cache` wrappers
+- `Makefile` with `develop` target invoking `maturin develop`
+- `.github/workflows/` — replace the existing wheel-build job with `maturin-action`,
+  per-interpreter wheels (`-i 3.10 3.11 3.12 3.13`), seven OS/arch targets, `sccache: "true"`
+
+**Validation**:
+- `pytest tests/text/test_phonetics.py` passes locally after `maturin develop`
+- CI builds wheels on all seven targets (manylinux x86_64/aarch64, musllinux
+  x86_64/aarch64, macOS x86_64/arm64, Windows x86_64)
+- A wheel install followed by `from rigour.text.phonetics import metaphone; metaphone("Robert")` works in a clean venv
+- Downstream `mypy --strict` in FTM and nomenklatura still passes against the MVP wheel
+- `cargo test --manifest-path rust/Cargo.toml` passes without the `python` feature
+  (pure-Rust logic is exercisable independently)
+
+**Explicitly out of scope for MVP**:
+- Any ICU4X / transliteration — Phase 1
+- Any data embedding (persons.txt, scripts, stopwords) — Phase 1+
+- Distance functions (rapidfuzz) — Phase 2
+- `#[pyclass]` types — Phase 2
+- Batch variants of metaphone/soundex — noted below as a follow-up
+
+**Follow-up not in MVP but worth noting**: the jellyfish Python package exposes
+only single-call functions. A `vec_metaphone(Vec<String>) -> Vec<String>` variant
+would amortise FFI across a batch call — genuinely useful for callers normalising
+thousands of tokens, and a real improvement over what the Python jellyfish package
+offers. Defer to Phase 5 (batch API alignment with `analyze_names`).
 
 ---
 
@@ -1035,8 +1092,16 @@ rust-version = "1.86"
 name = "rigour_core"
 crate-type = ["cdylib"]
 
+[features]
+# Gates the PyO3 bindings. `cargo test` / `cargo build` without this feature
+# compile pure-Rust logic only — lets Rust devs iterate without a Python runtime.
+# Enabled by default via [tool.maturin].features in pyproject.toml.
+python = []
+
 [dependencies]
-pyo3 = { version = "0.28", features = ["extension-module"] }
+# generate-import-lib: avoids needing a real Python install on the Windows CI
+# runner at link time — PyO3 generates a stub import library instead.
+pyo3 = { version = "0.28", features = ["extension-module", "generate-import-lib"] }
 
 # Transliteration (Phase 1) — "unstable" gates icu::experimental::transliterate,
 # "compiled_data" bakes CLDR data into the binary
@@ -1076,30 +1141,42 @@ zstd = "0.13"
 [dev-dependencies]
 criterion = { version = "0.8", features = ["html_reports"] }
 
-[profile.release]
-lto = true
-codegen-units = 1
-opt-level = 3
-strip = true
+# NO [profile.release] overrides. The jellyfish Python package ships with default
+# release profile and is fast. Start without LTO/codegen-units=1/strip — re-add
+# only if Phase 4+ benchmarks show >=10% headroom from them.
 ```
 
 ---
 
 ## Key Design Decisions & Rationale
 
-### Why LRU caches go away
+### LRU caches: case-by-case, not blanket removal
 
 The Python codebase uses LRU caches extensively (65k entries for transliteration, 131k for
 phonetics, 20k for tokenizer lookups, 2k for distance functions) to compensate for Python's
-per-call overhead. In Rust, even the full ICU4X transliteration path is microseconds — the
-cache lookup + hash computation would cost more than re-running the function.
+per-call overhead.
 
-The Python wrapper layer handles trivial fast-paths (e.g. `text.isascii()` before calling
-Rust `ascii_text`), but does no result caching. This also eliminates the `reset.py`
-cache-clearing machinery needed for long-lived processes.
+An earlier version of this plan said "LRU caches go away" categorically. That's too strong.
+The right rule: **keep the cache when the workload has high repetition and the underlying
+call is not dramatically faster than the cache lookup itself.** Remove it where the Rust
+function is cheap enough that cache misses cost more than just re-running.
 
-LRU caches never live in Rust. They remain only in Python for the thin cases where a
-Python-level check avoids crossing to Rust at all.
+- **Transliteration, tokenisation**: Rust is microseconds; cache hit rates are spread
+  over diverse inputs; cache lookup + hash dominates. **Drop the LRU cache.**
+- **Phonetics (metaphone, soundex)**: Rust is ~1µs, but FFI crossing costs ~500ns per
+  call. Matching workloads pound on the same name tokens ("John", "Smith", "Sergei") at
+  90%+ hit rates. Cache avoids the FFI on hits; miss cost (~100ns) is small relative to
+  the FFI it replaces. **Keep the `@lru_cache(maxsize=MEMO_LARGE)` wrapper.**
+- **Distance (levenshtein, jaro-winkler)**: original caches were tiny (2k). Workload-
+  dependent; re-evaluate during Phase 2 benchmarks.
+
+**The MVP of Phase 0.5 demonstrated this nuance concretely**: we tried dropping the
+phonetics caches, realised from the `reset.py` consumers that the repetition was
+load-bearing for matching, and restored them. Document the reasoning in the code so
+it doesn't get re-deleted.
+
+LRU caches never live in Rust — they're always Python-side fast-paths that avoid
+crossing to Rust at all. That's the consistent principle.
 
 ### Why eagerly compute derived properties
 
