@@ -54,21 +54,30 @@ def generate_name_stopwords_file() -> None:
 
 
 def generate_symbols_data_file() -> None:
-    """Emit `rigour/data/names/data.py` with the five nested-dict
-    sections from `resources/names/symbols.yml`
-    (`org_symbols`/`org_domains`/`person_symbols`/`person_nick`/
-    `person_name_parts`). These are consumed by the Python tagger
-    in `rigour/names/tagging.py` for now — they migrate to Rust-only
-    JSON in step 5 of `plans/rust-tagger.md`, after which this file
-    is retired in full."""
-    content = DATA_TEMPLATE
+    """Emit two artifacts from the one YAML source:
 
+    * `rigour/data/names/data.py` — five UPPERCASE module constants
+      (`ORG_SYMBOLS`, `ORG_DOMAINS`, `PERSON_SYMBOLS`, `PERSON_NICK`,
+      `PERSON_NAME_PARTS`) consumed by the Python tagger today.
+      Retired in step 8 of `plans/rust-tagger.md` when the tagger
+      itself ports to Rust.
+    * `rust/data/names/symbols.json` — same data under five
+      lowercase top-level keys. Rust-only artifact; the future
+      tagger in `rust/src/names/tagger.rs` reads it via
+      `include_str!`. No Python-facing accessor (per
+      `rust-tagger.md`'s Rust-only classification for this file).
+
+    Both are built from the same in-memory structure so they can't
+    drift."""
     symbols_path = RESOURCES_PATH / "names" / "symbols.yml"
     with open(symbols_path, "r", encoding="utf-8") as ufh:
         symbols_mappings: Dict[str, Dict[str, str]] = yaml.safe_load(ufh.read())
 
+    content = DATA_TEMPLATE
+    json_data: Dict[str, Dict[str, List[str]]] = {}
+
     for section, value in symbols_mappings.items():
-        section = section.strip().upper()
+        section_upper = section.strip().upper()
         mapping = {}
         group_type = "str"
         for group, items in value.items():
@@ -82,10 +91,22 @@ def generate_symbols_data_file() -> None:
             values = set(norm_string(v) for v in items)
             items = tuple(sorted(v for v in values if len(v) > 0))
             mapping[group] = items
-        content += f"{section}: Dict[{group_type}, Tuple[str, ...]] = {mapping!r}\n\n"
+        content += f"{section_upper}: Dict[{group_type}, Tuple[str, ...]] = {mapping!r}\n\n"
+
+        # Mirror into the Rust-side JSON. Keys stay lowercase here —
+        # Python callers that want uppercase read from data.py. The
+        # Rust consumer handles its own casing policy when building
+        # the tagger.
+        json_data[section.strip().lower()] = {
+            str(k): list(v) for k, v in mapping.items()
+        }
 
     out_path = CODE_PATH / "names" / "data.py"
     write_python(out_path, content)
+
+    rust_out = RUST_DATA_PATH / "names" / "symbols.json"
+    rust_out.parent.mkdir(parents=True, exist_ok=True)
+    write_json(rust_out, json_data)
 
 
 def generate_org_type_file() -> None:
