@@ -35,5 +35,13 @@ icu = { version = "2", features = ["compiled_data", "unstable"] }
 # Bitflags for the Normalize flag set (rigour/text/normalize.rs).
 bitflags = "2"
 
+# String distance — bit-parallel Levenshtein via the rapidfuzz crate.
+# Used internally (e.g. the in-Rust name picker). Not exposed via PyO3:
+# Python callers who need distance functions use the Python `rapidfuzz`
+# package directly, which also provides the opcodes/alignment API the
+# Rust crate lacks. See plans/rust-transliteration.md and rust.md for
+# the "why Rust-side distance isn't exposed to Python" trail.
+rapidfuzz = "0.5"
+
 # NOTE: no [profile.release] overrides. Defaults are fine; revisit if benchmarks
 # show measurable headroom from LTO / codegen-units=1.
