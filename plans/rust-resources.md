@@ -6,6 +6,18 @@ tags: [rigour, rust, resources, stopwords, ordinals, symbols, genscripts]
 
 # Rust-only resources: stopwords, ordinals, name prefixes, symbols
 
+> **Status: superseded (historical).** This doc is an earlier draft of
+> the resource-migration plan. The portions covering
+> `text/stopwords.yml`, `names/stopwords.yml`, `text/ordinals.yml`,
+> and the person-names corpus landed in
+> [`plans/rust-tagger.md`](./rust-tagger.md) steps 2–4 and 7 with a
+> slightly different shape (notably: `symbols.yml` is **Rust-only**,
+> not Python-visible via PyO3 — contrary to what section 4 below
+> proposes). For the current plan of record see `rust-tagger.md`;
+> for the data-directory retirement schedule see
+> [`plans/rust-data-retirement.md`](./rust-data-retirement.md). Kept
+> here as a historical reference for the design discussion trail.
+
 ## Context
 
 The rust-core port is moving text resources from generated Python
