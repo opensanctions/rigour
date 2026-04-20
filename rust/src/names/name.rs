@@ -31,10 +31,6 @@ use crate::names::tag::{NamePartTag, NameTypeTag};
 use crate::text::normalize::casefold;
 use crate::text::tokenize::tokenize_name;
 
-fn prenormalize_name(text: &str) -> String {
-    casefold(text)
-}
-
 fn name_tokenize(text: &str) -> Vec<String> {
     tokenize_name(text, 1)
 }
@@ -70,8 +66,7 @@ pub struct Name {
 impl Name {
     /// Construct a `Name`.
     ///
-    /// `form` defaults to `casefold(original)` (the rigour-wide
-    /// `prenormalize_name` pipeline). `tag` defaults to
+    /// `form` defaults to `casefold(original)`. `tag` defaults to
     /// `NameTypeTag.UNK`. If `parts` is given, it is used as-is;
     /// otherwise `tokenize_name(form)` produces a fresh `NamePart`
     /// per token. `phonetics` is forwarded to each `NamePart`
@@ -90,7 +85,7 @@ impl Name {
     ) -> PyResult<Self> {
         let form_str = match form {
             Some(f) => f.to_string(),
-            None => prenormalize_name(original),
+            None => casefold(original),
         };
 
         let (parts_vec, parts_list): (Vec<Py<NamePart>>, Py<PyList>) = match parts {
@@ -157,7 +152,7 @@ impl Name {
         tag: NamePartTag,
         max_matches: u32,
     ) -> PyResult<()> {
-        let folded = prenormalize_name(text);
+        let folded = casefold(text);
         let tokens = name_tokenize(&folded);
         if tokens.is_empty() {
             return Ok(());

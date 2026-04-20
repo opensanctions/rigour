@@ -53,10 +53,6 @@ fn is_stopword(form: &str) -> bool {
     STOPWORD_SET.contains(form)
 }
 
-fn prenormalize_name(text: &str) -> String {
-    casefold(text)
-}
-
 /// Public entry point — called from PyO3 `py_analyze_names`. See the
 /// Python-side docstring at `rigour/names/analyze.py::analyze_names`
 /// for the semantic spec.
@@ -80,7 +76,7 @@ pub fn analyze_names(
         } else {
             raw.clone()
         };
-        let mut form = prenormalize_name(&working);
+        let mut form = casefold(&working);
         if matches!(type_tag, NameTypeTag::ORG | NameTypeTag::ENT) {
             form = org_types::replace_compare(&form, Normalize::CASEFOLD, Cleanup::Noop, false);
             form = remove_org_prefixes(&form);
@@ -99,7 +95,7 @@ pub fn analyze_names(
         // Name.tag_text, which tokenises + walks parts.
         for (tag, values) in &part_tags {
             for value in values {
-                let folded = prenormalize_name(value);
+                let folded = casefold(value);
                 name_py.bind(py).borrow().tag_text(py, &folded, *tag, 1)?;
             }
         }
