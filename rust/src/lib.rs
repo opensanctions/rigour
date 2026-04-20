@@ -222,14 +222,16 @@ fn py_ordinals_dict() -> std::collections::HashMap<u32, Vec<String>> {
 
 // The full territory database as raw JSONL. Python consumers in
 // `rigour.territories.*` parse line-by-line with orjson at import
-// time (and under `@cache`-decorated index builders), so one ~500 KB
-// PyString allocation per call is fine. The future Rust tagger
-// reads `territories::raw()` directly without crossing the FFI.
+// time under `@cache`-decorated index builders, so the FFI cost is
+// paid exactly once per process. Returning `String` (rather than
+// `&'static str` pointing into a Rust-side static) hands the buffer
+// to PyO3 which copies into a `PyString`; the Rust-side allocation
+// drops, leaving only Python's copy resident.
 #[cfg(feature = "python")]
 #[pyfunction]
 #[pyo3(name = "territories_jsonl")]
-fn py_territories_jsonl() -> &'static str {
-    territories::raw()
+fn py_territories_jsonl() -> String {
+    territories::decompressed()
 }
 
 // Low-level tagger matchers. Python wrappers (`tag_org_name` /

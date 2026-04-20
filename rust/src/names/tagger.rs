@@ -160,8 +160,11 @@ fn build_org_tagger(flags: Normalize) -> Tagger {
     }
 
     // Territories → LOCATION symbols. Walk the JSONL line by line;
-    // serde parses only the tagger-relevant fields.
-    for line in territories::raw().lines() {
+    // serde parses only the tagger-relevant fields. `corpus` is
+    // scoped to this loop — same rationale as the person-names
+    // block below.
+    let corpus = territories::decompressed();
+    for line in corpus.lines() {
         if line.is_empty() {
             continue;
         }
