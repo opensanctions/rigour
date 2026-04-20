@@ -298,11 +298,12 @@ impl Name {
     }
 
     fn __eq__(&self, other: &Bound<'_, PyAny>) -> bool {
-        match other.getattr("form") {
-            Ok(f) => match f.extract::<String>() {
-                Ok(s) => s == self.form_str,
-                Err(_) => false,
-            },
+        // `form` is Name's identity — PER/ORG/ENT/OBJ/UNK tags and
+        // lang can differ without making two Names "different"
+        // (matches the pre-port Python semantics). Extract as Name
+        // rather than duck-typing on `.form` attribute.
+        match other.extract::<PyRef<'_, Name>>() {
+            Ok(n) => n.form_str == self.form_str,
             Err(_) => false,
         }
     }
