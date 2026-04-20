@@ -76,7 +76,7 @@ jobs:
           manylinux: auto
           sccache: "true"
           args: --release --out dist -i 3.10 3.11 3.12 3.13 --manifest-path rust/Cargo.toml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: wheels-manylinux-${{ matrix.target }}
           path: dist
@@ -97,7 +97,7 @@ jobs:
           manylinux: musllinux_1_2
           sccache: "true"
           args: --release --out dist -i 3.10 3.11 3.12 3.13 --manifest-path rust/Cargo.toml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: wheels-musllinux-${{ matrix.target }}
           path: dist
@@ -120,7 +120,7 @@ jobs:
           target: ${{ matrix.target }}
           sccache: "true"
           args: --release --out dist -i 3.10 3.11 3.12 3.13 --manifest-path rust/Cargo.toml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: wheels-macos-${{ matrix.target }}
           path: dist
@@ -144,7 +144,7 @@ jobs:
           target: ${{ matrix.target }}
           sccache: "true"
           args: --release --out dist -i 3.10 3.11 3.12 3.13 --manifest-path rust/Cargo.toml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: wheels-windows-${{ matrix.target }}
           path: dist
@@ -159,7 +159,7 @@ jobs:
         with:
           command: sdist
           args: --out dist --manifest-path rust/Cargo.toml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: wheels-sdist
           path: dist
