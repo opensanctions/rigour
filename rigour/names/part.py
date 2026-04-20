@@ -1,7 +1,8 @@
 from typing import Any, List, Optional
 
+from normality import ascii_text
+
 from rigour.text.scripts import can_latinize
-from rigour.text.transliteration import ascii_text
 from rigour.text.phonetics import metaphone
 from rigour.text.numbers import string_number
 from rigour.names.tag import NamePartTag

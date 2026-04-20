@@ -87,19 +87,6 @@ def test_nfkd_decompose() -> None:
     assert normalize("é", Normalize.NFKD) == "e\u0301"
 
 
-def test_latinize() -> None:
-    out = normalize("Владимир", Normalize.LATIN)
-    assert out is not None
-    # No Cyrillic characters remain
-    assert not any("\u0400" <= c <= "\u04FF" for c in out)
-
-
-def test_ascii() -> None:
-    out = normalize("Владимир", Normalize.ASCII)
-    assert out is not None
-    assert out.isascii()
-
-
 # --- cleanup variants ---
 
 

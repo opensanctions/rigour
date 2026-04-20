@@ -39,7 +39,7 @@ use rapidfuzz::distance::levenshtein;
 
 use crate::text::normalize::casefold;
 use crate::text::scripts::{codepoint_script, text_scripts};
-use crate::text::transliterate::ascii_text;
+use crate::text::translit::{maybe_ascii, should_ascii};
 
 /// Pick the best display name from a bag of multi-script aliases.
 /// Returns `None` iff no usable name survives filtering.
@@ -48,16 +48,18 @@ pub fn pick_name(names: &[&str]) -> Option<String> {
     let mut sorted: Vec<&str> = names.to_vec();
     sorted.sort();
 
-    // Cross-script reinforcement via `ascii_text` is only useful when
-    // the input bag spans multiple scripts — it's what lets a Latin
-    // "Putin" and a Cyrillic "Путин" vote for the same ASCII form.
-    // When every input is in the same script, transliterating each
-    // form to ASCII just produces a phantom parallel form table that
-    // preserves ranking proportionally and doesn't change any
-    // output. Skipping ICU4X entirely in that case is the cheapest
-    // way to avoid the 30–50 µs per-non-ASCII-form cost documented in
-    // `plans/rust-transliteration.md` under *Downstream-port
-    // observations*.
+    // Cross-script reinforcement is only useful when the input bag
+    // spans multiple scripts — it's what lets a Latin "Putin" and a
+    // Cyrillic "Путин" vote for the same ASCII form. When every input
+    // is in the same script, transliterating each form to ASCII just
+    // produces a phantom parallel form table that preserves ranking
+    // proportionally and doesn't change any output.
+    //
+    // Per-form we gate on `should_ascii(form)` — the transliteration
+    // surface is limited to the 6 `LATINIZE_SCRIPTS` (Latin, Cyrillic,
+    // Greek, Armenian, Georgian, Hangul). Forms in other scripts
+    // (Han, Arabic, Hebrew, Devanagari, etc.) stay as their own form
+    // cluster. See `plans/rust-minimal-translit.md`.
     let mut all_scripts: HashSet<&'static str> = HashSet::new();
     for name in &sorted {
         for script in text_scripts(name) {
@@ -81,11 +83,12 @@ pub fn pick_name(names: &[&str]) -> Option<String> {
     // Track Latin-dominant surfaces for the single-Latin short-circuit.
     let mut latin_names: Vec<String> = Vec::new();
 
-    // Memoise `ascii_text` per form. Cache scope is per-call — inside
-    // one `pick_name` the same form appears many times when inputs
-    // repeat (OpenSanctions entities typically have 2–20 alias
-    // variants with case / script duplicates). The per-thread cache
-    // inside `text::ascii_text` handles cross-call repetition.
+    // Memoise `maybe_ascii` per form. Cache scope is per-call —
+    // inside one `pick_name` the same form appears many times when
+    // inputs repeat (OpenSanctions entities typically have 2–20
+    // alias variants with case / script duplicates). The per-thread
+    // cache inside `text::translit::maybe_ascii` handles cross-call
+    // repetition.
     let mut norm_cache: HashMap<String, Option<String>> = HashMap::new();
 
     for name in &sorted {
@@ -113,9 +116,9 @@ pub fn pick_name(names: &[&str]) -> Option<String> {
             (*name).to_string(),
         );
 
-        if cross_script {
+        if cross_script && should_ascii(&form) {
             let norm_entry = norm_cache.entry(form.clone()).or_insert_with(|| {
-                let candidate = ascii_text(&form);
+                let candidate = maybe_ascii(&form, false);
                 if candidate.chars().count() > 2 {
                     Some(candidate)
                 } else {

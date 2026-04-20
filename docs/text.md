@@ -2,6 +2,6 @@
 
 ::: rigour.text.normalize
 
-::: rigour.text.transliteration
+::: rigour.text.translit
 
 ::: rigour.text.scripts

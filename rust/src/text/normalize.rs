@@ -8,9 +8,12 @@
 //   1. STRIP               — trim leading/trailing whitespace
 //   2. NFKD / NFKC / NFC   — at most one is meaningful; later-declared wins
 //   3. CASEFOLD            — Unicode full casefold (ß → ss, not lowercase)
-//   4. ASCII or LATIN      — ASCII is a superset and wins if both are set
-//   5. category_replace    — runs when `cleanup != Cleanup::Noop`
-//   6. SQUASH_SPACES       — collapse runs of whitespace, trim ends
+//   4. category_replace    — runs when `cleanup != Cleanup::Noop`
+//   5. SQUASH_SPACES       — collapse runs of whitespace, trim ends
+//
+// Transliteration is NOT part of this pipeline — rigour's public
+// surface is `text::translit::maybe_ascii` (narrow, opportunistic).
+// See `plans/rust-minimal-translit.md`.
 //
 // Empty output → None, matching the Optional[str] contract of the legacy
 // Python normalizers.
@@ -19,8 +22,6 @@ use bitflags::bitflags;
 use icu::casemap::CaseMapper;
 use icu::normalizer::{ComposingNormalizerBorrowed, DecomposingNormalizerBorrowed};
 use icu::properties::{CodePointMapData, props::GeneralCategory};
-
-use crate::text::transliterate::{ascii_text, latinize_text};
 
 bitflags! {
     // Hash lets `Normalize` be used as part of a HashMap key — see
@@ -33,8 +34,6 @@ bitflags! {
         const NFC           = 1 << 3;
         const NFKC          = 1 << 4;
         const NFKD          = 1 << 5;
-        const LATIN         = 1 << 6;
-        const ASCII         = 1 << 7;
     }
 }
 
@@ -182,12 +181,6 @@ pub fn normalize(text: &str, flags: Normalize, cleanup: Cleanup) -> Option<Strin
 
     if flags.contains(Normalize::CASEFOLD) {
         s = casefold(&s);
-    }
-
-    if flags.contains(Normalize::ASCII) {
-        s = ascii_text(&s);
-    } else if flags.contains(Normalize::LATIN) {
-        s = latinize_text(&s);
     }
 
     if cleanup != Cleanup::Noop {
@@ -349,18 +342,6 @@ mod tests {
         // "é" → "e" + U+0301 under NFKD
         let out = normalize("é", Normalize::NFKD, Cleanup::Noop).unwrap();
         assert_eq!(out, "e\u{0301}");
-    }
-
-    #[test]
-    fn latinize_cyrillic() {
-        let out = normalize("Владимир", Normalize::LATIN, Cleanup::Noop).unwrap();
-        assert!(out.chars().all(|c| !('\u{0400}'..='\u{04FF}').contains(&c)));
-    }
-
-    #[test]
-    fn ascii_cyrillic() {
-        let out = normalize("Владимир", Normalize::ASCII, Cleanup::Noop).unwrap();
-        assert!(out.is_ascii());
     }
 
     // --- cleanup variants ---

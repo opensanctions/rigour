@@ -1,3 +1,4 @@
+pub mod constants;
 pub mod names;
 pub mod territories;
 pub mod text;
@@ -37,16 +38,16 @@ fn py_text_scripts<'py>(py: Python<'py>, text: &str) -> PyResult<Bound<'py, PySe
 
 #[cfg(feature = "python")]
 #[pyfunction]
-#[pyo3(name = "latinize_text")]
-fn py_latinize_text(text: &str) -> String {
-    text::transliterate::latinize_text(text)
+#[pyo3(name = "should_ascii")]
+fn py_should_ascii(text: &str) -> bool {
+    text::translit::should_ascii(text)
 }
 
 #[cfg(feature = "python")]
 #[pyfunction]
-#[pyo3(name = "ascii_text")]
-fn py_ascii_text(text: &str) -> String {
-    text::transliterate::ascii_text(text)
+#[pyo3(name = "maybe_ascii", signature = (text, drop=false))]
+fn py_maybe_ascii(text: &str, drop: bool) -> String {
+    text::translit::maybe_ascii(text, drop)
 }
 
 // Low-level normalize. The nice Python API (IntFlag for Normalize, IntEnum
@@ -274,8 +275,8 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_soundex, m)?)?;
     m.add_function(wrap_pyfunction!(py_codepoint_script, m)?)?;
     m.add_function(wrap_pyfunction!(py_text_scripts, m)?)?;
-    m.add_function(wrap_pyfunction!(py_latinize_text, m)?)?;
-    m.add_function(wrap_pyfunction!(py_ascii_text, m)?)?;
+    m.add_function(wrap_pyfunction!(py_should_ascii, m)?)?;
+    m.add_function(wrap_pyfunction!(py_maybe_ascii, m)?)?;
     m.add_function(wrap_pyfunction!(py_normalize, m)?)?;
     m.add_function(wrap_pyfunction!(py_ffi_noop, m)?)?;
     m.add_function(wrap_pyfunction!(py_string_number, m)?)?;

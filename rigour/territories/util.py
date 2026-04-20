@@ -1,9 +1,8 @@
 import unicodedata
 from typing import List
-from normality import squash_spaces
+from normality import latinize_text, squash_spaces
 
 from rigour.text.scripts import can_latinize_cp
-from rigour.text.transliteration import latinize_text
 
 SKIP_CHARACTERS = ".()[],;:_-/ʻ'’"
 

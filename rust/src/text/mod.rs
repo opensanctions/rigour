@@ -8,4 +8,4 @@ pub mod ordinals;
 pub mod phonetics;
 pub mod scripts;
 pub mod stopwords;
-pub mod transliterate;
+pub mod translit;

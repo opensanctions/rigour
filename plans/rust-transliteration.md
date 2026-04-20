@@ -1,6 +1,6 @@
 ---
-description: ICU4X-backed transliteration for rigour-core — architecture, benchmarks, and alternatives
-date: 2026-04-19
+description: ICU4X-backed transliteration for rigour-core — architecture, benchmarks, and alternatives. Reframe (April 2026) proposes narrowing to `maybe_ascii` over known-good scripts.
+date: 2026-04-20
 tags: [rigour, rust, transliteration, icu4x, anyascii, performance]
 ---
 
@@ -380,6 +380,251 @@ is which of ICU4X / anyascii to route where — the "ICU4X for
 `latinize_text`, anyascii for `ascii_text`" split proposed above is
 the natural answer if we don't get language hints from consumers;
 full anyascii with a `ja`-hint escape hatch is the answer if we do.
+
+## Reframe: opportunistic transliteration (April 2026)
+
+> **Superseded by `plans/rust-minimal-translit.md` (April 20, 2026).**
+> The strategic-option dialogue below is retained for context; the
+> concrete decision is "Keep ICU4X, narrow the callers" + cap new
+> rigour-side transliteration surface at `maybe_ascii` only. See the
+> minimal-translit plan for gotchas and migration path.
+
+
+The preceding sections all assume the goal is "match PyICU's
+`Any-Latin` in Rust, across every script, as fast as possible". That
+goal is increasingly at odds with how rigour and downstream callers
+actually use transliteration.
+
+### The contradiction
+
+On the one hand, we've spent a lot of effort trying to feature-match
+PyICU across every script ICU4X ships — including Chinese, Japanese,
+Korean, where both the quality gap and the perf gap are largest (11–
+20× slower than PyICU, with outputs that are still lossy enough to be
+questionable for matching).
+
+On the other hand, `followthemoney-matching` logic-v2 is already
+moving the *other* direction: instead of "always latinize", it uses
+`can_latinize()` (`rigour/text/scripts.py:71`) to gate the call.
+`rigour/territories/util.py:21-40` already follows the pattern —
+walk chars, compute `can_latinize_cp` for each, only run
+`latinize_text` if every cp passes. The non-Latinizable scripts are
+kept in their original form for matching.
+
+So we're simultaneously (a) building a general-purpose transliterator
+in Rust and (b) deprecating the calls that would use it
+general-purpose. The reframe below takes the deprecation seriously.
+
+### Proposed primitives
+
+- `should_ascii(text: &str) -> bool` — predicate. True iff
+  transliterating `text` to ASCII produces useful output. Initial
+  definition: wraps `can_latinize` (every distinguishing script in
+  `LATINIZE_SCRIPTS`). Refineable per-callsite later.
+- `maybe_ascii(text: &str, drop: bool) -> String` — single primitive
+  that combines the check with the transform. If `should_ascii(text)`
+  is true, return `ascii_text(text)`. Otherwise: return `text` as-is
+  if `drop == false`, empty string if `drop == true`.
+
+Everyone who is currently doing `if can_latinize(x): ascii_text(x)
+else: x` (or `else: ""`) collapses to one call. No new behaviour, but
+a single chokepoint for (a) the eventual backend swap and (b) the
+ASCII fast-path.
+
+**Open semantic question**: whole-string or per-token? `NamePart`
+operates on a single token, so whole-string is fine there. For
+longer strings with mixed scripts (`"Tokyo 東京"`), whole-string
+returns either all-or-nothing; per-token splits at script boundaries
+and transliterates only the Latinizable segments. Decide per caller
+on first port; the primitive starts whole-string and we add a
+per-segment variant if a caller needs it.
+
+### Script-by-script candidate analysis
+
+`LATINIZE_SCRIPTS` today is `{Latin, Cyrillic, Greek, Armenian,
+Georgian, Hangul}` (`rigour/text/scripts.py:10`). The table below
+audits every script we might reasonably consider for `maybe_ascii`,
+including ones currently excluded, against both available backends.
+
+"In set" = currently in `LATINIZE_SCRIPTS`. "ICU4X" = ships in
+`icu 2.2 compiled_data` (rules probed from
+`rust/src/text/transliterate.rs::SCRIPT_LOCALES`). "anyascii" = has
+mappings in the `any_ascii 0.3` codepoint table. "Match-quality" is
+a judgement on whether the transliterated output is useful for
+name-matching, not publication-quality romanisation.
+
+| Script | Typical languages / data source | In set | ICU4X | anyascii | Match-quality verdict |
+|---|---|:---:|:---:|:---:|---|
+| Latin | EN, FR, ES, DE, etc. — baseline | ✓ | identity | identity | Trivial — no transliteration needed; the ASCII fast-path covers it |
+| Cyrillic | RU, UK, BG, SR, KK, MK | ✓ | ✓ | ✓ | Both backends good; outputs differ by ≤1 char on our corpus |
+| Greek | EL | ✓ | ✓ | ✓ | Both good; well-defined romanisation |
+| Armenian | HY (sanctions data) | ✓ | ✓ | ✓ | Both usable; Armenian w/v ambiguity present in both |
+| Georgian | KA (sanctions data) | ✓ | ✓ | ✓ | Both usable; ICU4X slightly nicer apostrophe handling |
+| Hangul | KO | ✓ | ✓ | ✓ | Both produce Revised Romanization; anyascii is CamelCased (`GimMinSeok` vs `gimminseog`) — equivalent for matching after casefold |
+| Hebrew | HE | ✗ | ✓ | ✓ | Consonant-skeleton lossy in both. Usable for matching if "wrong but consistent" is acceptable |
+| Arabic | AR, FA, UR | ✗ | ✓ | ✓ | Vowelless, lossy in both. Same caveat as Hebrew. PyICU does slightly better on vowel insertion |
+| Devanagari | HI, SA, MR, NE | ✗ | ✓ | ✓ | Both usable; standard IAST-adjacent output |
+| Bengali | BN, AS | ✗ | ✓ | ✓ | Both usable; niche for our data |
+| Tamil, Telugu, Kannada, Malayalam | South Indian languages | ✗ | ✓ | ✓ | Both usable; niche for our data |
+| Gujarati, Gurmukhi, Oriya | Indic | ✗ | ✓ | ✓ | Both usable; niche |
+| Ethiopic | AM, TI | ✗ | ✓ | ✓ | Both produce standard romanisation |
+| Thaana | DV (Maldivian) | ✗ | ✓ | ✓ | Niche; both work |
+| Syriac | Liturgical Aramaic | ✗ | ✓ | ✓ | Niche; both work |
+| Myanmar | MY (Burmese) | ✗ | ✓¹ | ✓ | Both work; language-tagged in ICU4X |
+| Hiragana | JA (kana only) | ✗ | ✓² | ✓ | Hepburn, usable for matching |
+| Katakana | JA (kana only) | ✗ | ✓ | ✓ | Hepburn, usable for matching |
+| Han | ZH (simp + trad), JA kanji | ✗ | ✓³ | ✓³ | **Language-ambiguous.** Both default to Pinyin; Japanese kanji gets Chinese readings unless routed through a JA hint. Anyascii CamelCases (`ShenZhen` vs `shen zhen`) — equivalent after casefold |
+| Thai | TH | ✗ | ✗ | ✓ | Only anyascii covers. Quality is pragmatic romanisation, not official RTGS |
+| Khmer | KM | ✗ | ✗ | ✓ | Only anyascii |
+| Lao | LO | ✗ | ✗ | ✓ | Only anyascii |
+| Sinhala | SI | ✗ | ✗ | ✓ | Only anyascii |
+| Tibetan | BO | ✗ | ✗ | ✓ | Only anyascii |
+
+¹ Myanmar ships under `my-Latn-t-my` (language-tagged), not the
+usual `und-Latn-t-und-*` form.
+² Hiragana is routed through the Katakana transliterator —
+ICU4X doesn't ship a distinct Hiragana→Latin transform but the
+Katakana one handles both after NFKD normalisation upstream.
+³ Han is the hardest case: anyascii's table and ICU4X's
+`und-hans` are both one-size-fits-all Chinese Pinyin. The
+Japanese-kanji-in-names case (e.g. `高市早苗`) needs a language
+hint to select Hepburn instead — neither backend can do that
+from codepoints alone.
+
+**Reading the table**:
+
+- **Scripts in the set today** all work in both backends; the
+  choice of ICU4X vs anyascii is a perf/quality trade-off, not a
+  coverage one. This is the bulk of the match-quality-useful
+  surface area.
+- **Indic + Semitic + Ethiopic** scripts are currently excluded
+  but both backends handle them. If we reopen
+  `LATINIZE_SCRIPTS`, adding these expands matching reach with no
+  backend decision required.
+- **CJK is the hard call.** Han's output is "consistent but
+  language-wrong" — great for Chinese names, misleading for
+  Japanese ones. This is the gap where a language hint or a
+  script-kind-aware override matters more than the backend
+  choice. The current Hangul-but-not-Han asymmetry in
+  `LATINIZE_SCRIPTS` is defensible (Korean romanisation is
+  unambiguous; Chinese isn't).
+- **Thai / Khmer / Lao / Sinhala / Tibetan** are the only
+  scripts where backend choice changes coverage: ICU4X doesn't
+  ship them at all in `compiled_data`, anyascii does. If any of
+  these appears meaningfully in our corpora, that's a point in
+  favour of anyascii (or of the hybrid option).
+
+**Recommendation gate**: a list of candidate scripts is only
+decidable against real corpus data. The first concrete action on
+this reframe should be a count of script distribution across a
+representative OpenSanctions export — "how many entity names
+contain Thai / Arabic / Devanagari / Han at all?" — to decide
+which rows above are material and which are theoretical.
+
+### What `NamePart` looks like today
+
+`rigour/names/part.py:19-50` already does the two-step dance by
+hand, with one wart. Today:
+
+```python
+self.latinize = can_latinize(form)            # line 31
+...
+out = ascii_text(self.form)                   # line 48 — called
+                                              # unconditionally from
+                                              # the .ascii property
+```
+
+The `.ascii` property runs full ICU4X transliteration *even on
+non-Latinizable parts* (Chinese, Japanese, Korean). The result is
+then only consumed by `.comparable` and `.metaphone`, which both
+guard on `self.latinize` before using it. So the expensive
+transliteration on CJK parts is always thrown away. `maybe_ascii`
+makes this impossible by construction: non-Latinizable parts don't
+pay the transliteration cost at all.
+
+### Migration path
+
+1. Add `should_ascii` and `maybe_ascii` as thin Rust primitives in
+   `rust/src/text/transliterate.rs`, exposed via `_core`. Near-zero
+   code; they wrap the existing `text_scripts` + `ascii_text`.
+2. Switch `NamePart.__init__` + `.ascii` to a single `maybe_ascii`
+   call. Drop `can_latinize` + conditional `ascii_text`. Remove the
+   wasted CJK transliteration noted above.
+3. Audit other callers: `rigour/territories/util.py`,
+   `contrib/namesdb/namesdb/export.py`, the tagger alias-build path,
+   and downstream consumers (nomenklatura, zavod, yente,
+   followthemoney). For each: is it doing the "always transliterate"
+   pattern, or is it already guarding? If always, does it want to
+   move to `maybe_ascii`?
+4. Once in-repo callers of raw `ascii_text`/`latinize_text` on
+   mixed-script input are gone, the "we must feature-match PyICU"
+   commitment is retired. The remaining direct callers are tests,
+   `latinize_text` for user-visible output (territories generator
+   scripts), and genuine lossy-romanisation use cases.
+
+### Strategic consequences: keep or phase out ICU4X?
+
+If `maybe_ascii` becomes the dominant surface, ICU4X's broad script
+coverage is partially wasted. Options (trade-offs are the
+interesting part; none is a foregone conclusion):
+
+- **Keep ICU4X, narrow the callers.** Cheapest migration. `rust/src/
+  text/transliterate.rs` stays. `ascii_text`/`latinize_text` become
+  internal primitives called almost exclusively by `maybe_ascii`.
+  The 3.4 MB of `compiled_data` stays in the binary but mostly
+  serves `latinize_text` for the tiny number of callers (territory
+  generators, user-visible displays) that genuinely want
+  higher-quality romanisation. No new decisions needed.
+- **Phase out rigour's ICU4X, route through normality.** Remove
+  `rust/src/text/transliterate.rs` entirely; `maybe_ascii` calls
+  back into `normality.ascii_text` via the Python side. Downsides:
+  re-adds PyICU as a mandatory runtime dep (we just dropped it),
+  loses the ASCII fast-path and the thread-local cache, and
+  re-couples us to `normality`'s release cadence. Attractive only
+  if we're planning to **phase out normality entirely** on a longer
+  horizon — in which case this is a step backwards.
+- **Phase out both, switch to anyascii.** One new dep (~600 KB),
+  table-lookup per char, no rule interpretation. Quality on
+  Latinizable scripts (Cyrillic/Greek/Armenian/Georgian/Devanagari)
+  is within 1 char per name of ICU4X in the corpus; speed is
+  projected 10–100× faster. Main loss is quality on
+  `latinize_text`'s user-visible outputs for those scripts, which
+  is the minority use case. Covered in detail two sections above.
+- **Hybrid (ICU4X for `latinize_text`, anyascii for `maybe_ascii`).**
+  The earlier "leading candidate" from *Downstream-port
+  observations*, recast: `latinize_text` stays ICU4X for quality;
+  `maybe_ascii` (the new primary surface) routes through anyascii
+  for speed. Adds both deps. Clean split by use case, but two
+  transliteration backends to maintain is not free.
+
+The reframe changes the *weight* of each option more than it
+eliminates any. "Keep ICU4X, narrow the callers" was not really
+considered before because it didn't pay down the Chinese/Japanese
+perf problem; now that we're explicitly *not* transliterating those
+scripts, the problem disappears and this option becomes viable.
+
+### What we need before implementing
+
+- **Caller audit** across rigour + nomenklatura + zavod + yente +
+  followthemoney. Count: how many call sites guard with
+  `can_latinize` already? How many call `ascii_text`/`latinize_text`
+  unconditionally? What are they using the output for (matching vs.
+  display)? This determines which of the four strategic options is
+  correct.
+- **`maybe_ascii` semantics**: per-token or whole-string for the
+  first version? Drop-or-keep behaviour when called on purely
+  non-Latinizable input (return `""` vs return the original) — both
+  defensible, pick per worked-example.
+- **Should `can_latinize`'s LATINIZE_SCRIPTS set be reopened?**
+  Currently it pins the "known-good" list; the reframe makes that
+  set load-bearing. Worth a look, especially around Thai/Khmer/Lao
+  which ICU4X `compiled_data` doesn't ship at all (so they pass
+  through identity in our pipeline today — which means they're
+  effectively in the `drop=false` bucket already, just by accident).
+
+The next action is the caller audit, not code. This section is a
+marker so the eventual implementation doesn't re-litigate the
+framing.
 
 ## Cargo Dependencies
 

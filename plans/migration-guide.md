@@ -200,9 +200,16 @@ No known callsites that use the changed APIs directly. Audit on
   implementation.
 - **`rigour.text.phonetics.metaphone` / `.soundex`** are Rust-backed
   now; output is identical (same upstream algorithm).
-- **`ascii_text` / `latinize_text`** are Rust-backed via ICU4X; `pyicu`
-  is no longer a dependency. Output should be identical for all
-  covered scripts.
+- **`rigour.text.transliteration` is removed.** rigour no longer
+  exposes broad-script `ascii_text` / `latinize_text`. The public
+  replacement is `rigour.text.translit.maybe_ascii` — narrow,
+  opportunistic, only Latin/Cyrillic/Greek/Armenian/Georgian/
+  Hangul. For broader coverage use `normality.ascii_text` /
+  `normality.latinize_text` directly. See
+  `plans/rust-minimal-translit.md`.
+- **`Normalize.ASCII` / `Normalize.LATIN`** bits removed from the
+  `Normalize` flag set (unused across rigour + nomenklatura + FTM
+  + OpenSanctions + yente at time of removal).
 - **`_core.pyi` ships with `py.typed`**, so downstream `mypy
   --strict` sees the Rust-extension types transparently.
 

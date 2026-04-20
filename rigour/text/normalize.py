@@ -41,9 +41,14 @@ value:
                               are set, Rust applies the first one
                               listed in its dispatch (NFKD)
     3. CASEFOLD             — Unicode full casefold (ß → ss, not lowercase)
-    4. ASCII or LATIN       — ASCII wins if both are set
-    5. Cleanup              — category_replace, unless Cleanup.Noop
-    6. SQUASH_SPACES        — collapse whitespace runs, trim ends
+    4. Cleanup              — category_replace, unless Cleanup.Noop
+    5. SQUASH_SPACES        — collapse whitespace runs, trim ends
+
+Transliteration is NOT part of this pipeline. rigour's public
+transliteration surface is [rigour.text.translit][] — opportunistic,
+limited to Latin/Cyrillic/Greek/Armenian/Georgian/Hangul. For
+broader-script lossy romanisation use
+`normality.ascii_text` / `normality.latinize_text`.
 
 Empty output is coalesced to ``None``, matching the contract of the
 pre-flags `Optional[str]` normalisers.
@@ -64,10 +69,6 @@ and friends are pinned to these:
 * **Squash-only (`Normalize.SQUASH_SPACES`)** — the pre-flags
   `normalize_display`. Whitespace-tidies without touching case, used
   by display-form replacers that want to preserve caller case.
-* **Full match key (`Normalize.CASEFOLD | Normalize.ASCII | Normalize.SQUASH_SPACES`
-  + `Cleanup.Strong`)** — aggressive match-key builder that collapses
-  diacritics and punctuation. Used for stopword lookup and similar
-  "I want the roughest possible shape" workflows.
 
 ## Implementation note
 
@@ -112,18 +113,8 @@ class Normalize(IntFlag):
             while keeping a composed form. Mutually exclusive with
             NFC/NFKD.
         NFKD: Apply Unicode Normal Form KD (compatibility decomposition).
-            Splits composed characters apart — useful when the next
-            step strips marks (ASCII does this). Mutually exclusive
+            Splits composed characters apart. Mutually exclusive
             with NFC/NFKC.
-        LATIN: Transliterate to Latin script, preserving diacritics.
-            No-op on text already in Latin script. Implemented by
-            dispatching to per-script ICU4X transliterators. See
-            [latinize_text][rigour.text.transliteration.latinize_text].
-        ASCII: Transliterate all the way to ASCII — includes LATIN
-            plus NFKD + nonspacing-mark stripping + a fallback table
-            for ø→o, ß→ss, etc. ASCII is a superset of LATIN; setting
-            both is equivalent to setting ASCII alone. See
-            [ascii_text][rigour.text.transliteration.ascii_text].
     """
 
     # Bit values MUST match rust/src/text/normalize.rs `bitflags! Normalize`.
@@ -133,8 +124,6 @@ class Normalize(IntFlag):
     NFC = 1 << 3
     NFKC = 1 << 4
     NFKD = 1 << 5
-    LATIN = 1 << 6
-    ASCII = 1 << 7
 
 
 class Cleanup(IntEnum):

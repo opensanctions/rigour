@@ -2,7 +2,6 @@ import gc
 
 from rigour.text.distance import levenshtein, dam_levenshtein, jaro_winkler
 from rigour.text.phonetics import soundex, metaphone
-from rigour.text.transliteration import ascii_text, latinize_text
 from rigour.territories.territory import get_index
 from rigour.territories.lookup import lookup_territory
 from rigour.territories.lookup import _get_identifier_map, _get_territory_names
@@ -26,8 +25,6 @@ from rigour.addresses.normalize import _address_replacer
 def reset_caches() -> None:
     """Reset LRU caches in the rigour module. This is meant to be used
     in long-lived processes to prevent memory expansion."""
-    ascii_text.cache_clear()
-    latinize_text.cache_clear()
     levenshtein.cache_clear()
     normalize_name.cache_clear()
     dam_levenshtein.cache_clear()
