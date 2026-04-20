@@ -429,12 +429,26 @@ step). See the "Reference-data normalisation" subsection above for the
 full design:
 
 - `rigour/names/tagging.py`: `_get_org_tagger`, `_get_person_tagger`,
-  `tag_org_name`, `tag_person_name`
-- `rigour/text/stopwords.py`: `is_stopword`, `is_nullword`, `is_nullplace`
+  `tag_org_name`, `tag_person_name` *(landed — default
+  `CASEFOLD | SQUASH_SPACES`; no `NAME` because the Rust tagger runs
+  `tokenize_name + join` unconditionally in `Builder::norm`)*
+- `rigour/text/stopwords.py`: `is_stopword`, `is_nullword`,
+  `is_nullplace` *(pending; post-port default should be
+  `CASEFOLD | SQUASH_SPACES` + `Cleanup.Slug` to match today's
+  `normalize_text` callback — no `NAME`)*
 - `rigour/names/check.py`: `is_stopword`, `is_nullword`,
-  `is_generic_person_name`
+  `is_generic_person_name` *(pending; post-port default should be
+  `CASEFOLD | NAME` because today's default callback is
+  `normalize_name` = casefold + tokenize + join. The `NAME` flag
+  exists specifically to preserve that behaviour through the port.)*
 - `rigour/names/org_types.py`: `replace_org_types_compare`,
   `replace_org_types_display`, `remove_org_types`, `extract_org_types`
+  *(landed — defaults are `CASEFOLD` (compare/remove/extract) or
+  `CASEFOLD | SQUASH_SPACES` (display). Historical Python callbacks
+  were `_normalize_display` (squash) / `_normalize_compare` (squash +
+  lower), never `normalize_name`, so `NAME` is not a backward-compat
+  fit here — adding it would silently desync alias shape from caller
+  runtime input.)*
 
 The signature shape changes (callable → flags), but the role of the
 parameter is unchanged: it configures how the function's internal
@@ -442,11 +456,13 @@ reference data is normalised when the regex / automaton is built.
 Callers that were passing `normalizer=prenormalize_name` today should
 pass `normalize_flags=Normalize.CASEFOLD` post-port; callers relying on
 the Python default `_normalize_compare` should pass
-`normalize_flags=Normalize.CASEFOLD | Normalize.SQUASH_SPACES`. This is
-still a breaking API change (callable-shaped → int-shaped argument);
-given rigour is pre-2.0 and the consumers are small (ourselves +
-nomenklatura + FTM), break cleanly in one PR rather than doing a
-deprecation dance.
+`normalize_flags=Normalize.CASEFOLD | Normalize.SQUASH_SPACES`; callers
+relying on `normalize_name` (the casefold + tokenize + join recipe)
+should pass `normalize_flags=Normalize.CASEFOLD | Normalize.NAME`.
+This is still a breaking API change (callable-shaped → int-shaped
+argument); given rigour is pre-2.0 and the consumers are small
+(ourselves + nomenklatura + FTM), break cleanly in one PR rather than
+doing a deprecation dance.
 
 ### Rust wiring
 
