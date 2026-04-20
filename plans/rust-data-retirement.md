@@ -28,23 +28,16 @@ rigour/data/
 │   ├── __init__.py
 │   ├── data.py                   # FORMS — TO DO (see below)
 │   └── formats.yml
-├── langs/
-│   ├── __init__.py
-│   └── iso639.py                 # ISO tables — TO DO (see below)
-├── names/
-│   └── __init__.py               # empty marker — can delete
-└── text/
-    └── __init__.py               # empty marker — can delete
+└── langs/
+    ├── __init__.py
+    └── iso639.py                 # ISO tables — TO DO (see below)
 ```
 
+The previously-dangling `rigour/data/names/` and `rigour/data/text/`
+directories (both holding nothing but an empty `__init__.py` after
+their respective `data.py` files were deleted) are gone.
+
 ## Still to retire
-
-### Empty `__init__.py` markers (trivial)
-
-`rigour/data/names/__init__.py` and `rigour/data/text/__init__.py` are
-both zero-byte stubs left over after their respective `data.py` files
-were deleted. They can go in whichever next PR touches this area. One-
-liner cleanup; no code depends on either as a package.
 
 ### `rigour/data/addresses/data.py` — `FORMS` mapping
 

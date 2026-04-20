@@ -25,7 +25,7 @@ from typing import Set
 from rigour._core import tag_org_matches, tag_person_matches
 from rigour.names import Name, Symbol
 from rigour.names.part import NamePart
-from rigour.names.tag import INTITIAL_TAGS, NamePartTag, NameTypeTag
+from rigour.names.tag import INITIAL_TAGS, NamePartTag, NameTypeTag
 from rigour.names.tokenize import normalize_name
 from rigour.text.normalize import Normalize
 from rigour.text.stopwords import is_stopword
@@ -135,7 +135,7 @@ def tag_person_name(
         sym = Symbol(Symbol.Category.INITIAL, part.comparable[0])
         if any_initials and len(part.form) == 1:
             name.apply_part(part, sym)
-        elif part.tag in INTITIAL_TAGS:
+        elif part.tag in INITIAL_TAGS:
             name.apply_part(part, sym)
 
     matches = tag_person_matches(name.norm_form, int(normalize_flags))
