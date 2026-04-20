@@ -32,15 +32,16 @@ from rigour.text.stopwords import is_stopword
 
 __all__ = ["tag_org_name", "tag_person_name"]
 
-# Default flags for tagger reference-data normalisation. CASEFOLD
-# gives case-insensitive matching; SQUASH_SPACES is implicit in the
-# tokens-joined-by-single-space shape the tagger produces but kept
-# here so callers normalising their own haystacks get the same
-# whitespace handling. The tagger internally runs tokenize_name over
-# its aliases (Unicode-category handling + skip-char deletion),
-# matching what Python's `Name` constructor does for the haystack
-# side, so no Cleanup is needed or accepted.
-_DEFAULT_FLAGS = Normalize.CASEFOLD | Normalize.SQUASH_SPACES
+# Default flags for tagger reference-data normalisation. Mirrors the
+# shape of `Name.norm_form` on the haystack side —
+# `' '.join(tokenize_name(casefold(original)))` — as a single flag
+# composition. The `NAME` flag runs `tokenize_name + ' '.join` as the
+# final pipeline step, subsuming both SQUASH_SPACES and the Unicode-
+# category handling / skip-char deletion that the tagger used to do
+# in a hardcoded post-pass. No Cleanup is accepted: tokenize_name
+# already handles categories, and `Cleanup.Strong` would drop chars
+# the haystack keeps (CJK Lm, Mc), breaking matches.
+_DEFAULT_FLAGS = Normalize.CASEFOLD | Normalize.NAME
 
 
 def _infer_part_tags(name: Name) -> Name:
@@ -92,9 +93,10 @@ def tag_org_name(
         name: The `Name` to tag. Mutated in place (spans added,
             parts' tags promoted); also returned for chaining.
         normalize_flags: `Normalize` flags used on the tagger's internal
-            alias set. Aliases are tokenized via `tokenize_name` (same
-            as the haystack) and then normalised with these flags.
-            Default is `CASEFOLD | SQUASH_SPACES`.
+            alias set. Default is `CASEFOLD | NAME` — the `NAME` flag
+            runs `tokenize_name + join` as the final pipeline step,
+            producing the same shape as `Name.norm_form` on the
+            haystack side.
 
     Returns:
         The mutated `name`.

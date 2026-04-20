@@ -34,7 +34,6 @@ use crate::names::symbols as name_symbols;
 use crate::territories;
 use crate::text::normalize::{Cleanup, Normalize, normalize};
 use crate::text::ordinals;
-use crate::text::tokenize::tokenize_name;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum TaggerKind {
@@ -82,29 +81,17 @@ impl Builder {
     }
 
     fn norm(&self, s: &str) -> Option<String> {
-        // Mirror the Python haystack pipeline:
-        //
-        //   Name.norm_form = " ".join(part.form for part in parts)
-        //                  = " ".join(tokenize_name(casefold(original)))
-        //
-        // So aliases get normalised with the same shape:
-        //   1. caller's flags (for casefold and any Unicode-normalisation bits)
-        //      minus SQUASH_SPACES — the tokens-joined-by-ASCII-space shape
-        //      below makes squashing redundant.
-        //   2. tokenize_name() → tokens → join with ASCII space.
-        //
-        // No Cleanup is applied — tokenize_name subsumes its role
-        // (Unicode-category handling + skip-char deletion) and the
-        // runtime haystack never goes through `Cleanup::Strong` either.
-        // Applying it here would drop chars the haystack keeps (CJK
-        // Lm, Mc), breaking matches.
-        let pre_flags = self.flags - Normalize::SQUASH_SPACES;
-        let pre = normalize(s, pre_flags, Cleanup::Noop)?;
-        let tokens = tokenize_name(&pre, 1);
-        if tokens.is_empty() {
-            return None;
-        }
-        Some(tokens.join(" "))
+        // Plain caller-driven normalization. To match the Python
+        // haystack shape
+        //   Name.norm_form = " ".join(tokenize_name(casefold(original)))
+        // callers pass `Normalize::CASEFOLD | Normalize::NAME` — the
+        // `NAME` flag runs `tokenize_name + ' '.join` as the final
+        // pipeline step. No Cleanup is applied: tokenize_name subsumes
+        // its role (Unicode-category handling + skip-char deletion)
+        // and the runtime haystack never goes through `Cleanup::Strong`
+        // either — applying it here would drop chars the haystack
+        // keeps (CJK Lm, Mc), breaking matches.
+        normalize(s, self.flags, Cleanup::Noop)
     }
 
     fn add(&mut self, alias: &str, symbol: &Symbol) {

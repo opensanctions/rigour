@@ -21,7 +21,7 @@ split by breaking change and then by repo.
 | Change | Affected API | Rough edit |
 |---|---|---|
 | **`Symbol.id` is always `str`** (was `int \| str`) | `Symbol`, every `Symbol(...)` constructor, every `symbol.id` read | Compare against strings, not ints (`"1001"` not `1001`). Wikidata QIDs now include the `Q` prefix (`"Q4925477"` not `4925477`). |
-| **Tagger `normalizer=` callback → `normalize_flags=` bitflags** | `tag_org_name`, `tag_person_name`, `replace_org_types_compare`, `replace_org_types_display`, `remove_org_types`, `extract_org_types` | Pass `normalize_flags=Normalize.CASEFOLD` (typical production default) instead of `normalizer=prenormalize_name`. |
+| **Tagger `normalizer=` callback → `normalize_flags=` bitflags** | `tag_org_name`, `tag_person_name`, `replace_org_types_compare`, `replace_org_types_display`, `remove_org_types`, `extract_org_types` | Pass `normalize_flags=Normalize.CASEFOLD` instead of `normalizer=prenormalize_name`. For `tag_org_name`/`tag_person_name`, the drop-in replacement for `normalizer=normalize_name` is `normalize_flags=Normalize.CASEFOLD \| Normalize.NAME` (the `NAME` flag runs `tokenize_name + ' '.join` as the final step; that matches `Name.norm_form` shape). Typically the default is enough — omit the kwarg. |
 | **Tagger `cleanup=` parameter removed** | `tag_org_name`, `tag_person_name` | Delete the argument if passed; tagger uses `tokenize_name` for category handling. |
 | **`any_initials` → `infer_initials`** | `tag_person_name` | Rename the kwarg. |
 | **Retired: `rigour.data.names.*`, `rigour.data.types`** | `ORG_TYPES`, `ORG_SYMBOLS`, `OrgTypeSpec`, etc. | No replacement at the Python data-module layer; the Rust tagger reads this data internally. Consumers using these symbols directly were only seen in test fixtures — update tests to construct expected values differently. |
@@ -92,7 +92,7 @@ tag_person_name(name, normalize_name, any_initials=is_query)
 
 # After
 from rigour.names import tag_person_name
-tag_person_name(name, infer_initials=is_query)  # default: normalize_flags=CASEFOLD|SQUASH_SPACES
+tag_person_name(name, infer_initials=is_query)  # default: normalize_flags=CASEFOLD|NAME
 ```
 
 If you need a non-default flag set:

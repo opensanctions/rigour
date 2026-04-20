@@ -284,21 +284,14 @@ def _stopword_key(text):
 ```python
 # rigour/names/tagging.py — tag_org_name / tag_person_name
 #   The old normalizer was normalize_name (casefold + tokenize + join).
-#   Tokenisation is a separate concern (rigour.names.tokenize.tokenize_name)
-#   and tokenize_name's internal category handling is not exposed as a
-#   Cleanup variant — that's tangled with tokenizer semantics and will be
-#   revisited when the tokenizer ports over.
-#
-#   Until then, the tagger calls tokenize_name directly on pre-normalized
-#   input, rather than round-tripping through the flag-based normalizer:
-from rigour.text.normalize import normalize, Normalize
-from rigour.names.tokenize import tokenize_name
-
-def _name_tokens(text):
-    # Casefold via normalize, then tokenize. No Cleanup pass — the
-    # tokenizer already handles category-based separation internally.
-    folded = normalize(text, Normalize.CASEFOLD)
-    return tokenize_name(folded) if folded else []
+#   With the NAME flag landed, that recipe is expressible as a single
+#   flag composition: `CASEFOLD | NAME` runs casefold then tokenize+join
+#   as the final pipeline step. The tagger's `Builder::norm` (Rust) is
+#   now a plain `normalize(s, self.flags, Cleanup::Noop)` call, and
+#   `_DEFAULT_FLAGS` in rigour/names/tagging.py is `CASEFOLD | NAME`.
+#   No Cleanup pass — tokenize_name already handles category-based
+#   separation, and Cleanup.Strong would drop CJK Lm / Mc chars the
+#   haystack keeps.
 ```
 
 The callback-taking functions (`tag_org_name`, `is_stopword`, etc.)
@@ -430,8 +423,10 @@ full design:
 
 - `rigour/names/tagging.py`: `_get_org_tagger`, `_get_person_tagger`,
   `tag_org_name`, `tag_person_name` *(landed — default
-  `CASEFOLD | SQUASH_SPACES`; no `NAME` because the Rust tagger runs
-  `tokenize_name + join` unconditionally in `Builder::norm`)*
+  `CASEFOLD | NAME`. `Builder::norm` is now a plain
+  `normalize(s, self.flags, Cleanup::Noop)` call; the `NAME` flag
+  expresses the tokenize+join step that used to be hardcoded after
+  the normalizer.)*
 - `rigour/text/stopwords.py`: `is_stopword`, `is_nullword`,
   `is_nullplace` *(pending; post-port default should be
   `CASEFOLD | SQUASH_SPACES` + `Cleanup.Slug` to match today's

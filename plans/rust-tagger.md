@@ -63,6 +63,11 @@ shape. Each downstream repo lands its own PR:
 
 - Replace `normalizer=prenormalize_name` with
   `normalize_flags=Normalize.CASEFOLD`.
+- Replace `normalizer=normalize_name` with
+  `normalize_flags=Normalize.CASEFOLD | Normalize.NAME` — the drop-in
+  match for the pre-port callback, now also the rigour default for
+  `tag_org_name` / `tag_person_name`, so typically the kwarg can be
+  omitted.
 - Replace `normalizer=_normalize_compare` (squash + casefold) with
   `normalize_flags=Normalize.CASEFOLD | Normalize.SQUASH_SPACES`.
 - Drop local `normalizer()` helpers that existed only to feed this

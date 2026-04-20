@@ -41,15 +41,15 @@ def run_checks():
 
     print("After loading org types:", sizeof_fmt(get_mem()))
 
-    from rigour.names import Name, tag_org_name, tag_person_name, normalize_name
+    from rigour.names import Name, tag_org_name, tag_person_name
 
     name = Name("Example Organization")
-    tag_org_name(name, normalize_name)
+    tag_org_name(name)
 
     print("After loading org names:", sizeof_fmt(get_mem()))
 
     name = Name("John Doe")
-    tag_person_name(name, normalize_name)
+    tag_person_name(name)
 
     print("After loading person names:", sizeof_fmt(get_mem()))
 
