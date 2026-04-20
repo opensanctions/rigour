@@ -3,7 +3,7 @@ from rigour.langs import LangStr, PREFERRED_LANG
 from rigour.names.pick import (
     pick_name,
     pick_lang_name,
-    levenshtein_pick,
+    _levenshtein_pick,
     pick_case,
     reduce_names,
 )
@@ -114,16 +114,16 @@ def test_pick_weird():
 
 
 def test_levenshtein_pick():
-    assert levenshtein_pick([], {}) == []
+    assert _levenshtein_pick([], {}) == []
     names = [
         "Vladimir Vladimirovich Putin",
         "Vladimir Vladimirovich PUTN",
         "Vladimir Vladimirovich PUTINY",
         "Vladimir Vladimirovich PUTIN",
     ]
-    assert levenshtein_pick(names, {})[0] == "Vladimir Vladimirovich PUTIN"
+    assert _levenshtein_pick(names, {})[0] == "Vladimir Vladimirovich PUTIN"
     weights = {"Vladimir Vladimirovich Putin": 3.0}
-    assert levenshtein_pick(names, weights)[0] == "Vladimir Vladimirovich Putin"
+    assert _levenshtein_pick(names, weights)[0] == "Vladimir Vladimirovich Putin"
 
 
 def test_pick_lang_name():

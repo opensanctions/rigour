@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 _LATIN_SHARE_PARTIAL = {"Cyrillic", "Greek"}
 
 
-def latin_share(text: str) -> float:
+def _latin_share(text: str) -> float:
     """Determine the percentage of a string that's latin."""
     latin = 0.0
     skipped = 0
@@ -30,7 +30,7 @@ def latin_share(text: str) -> float:
     return latin / max(1, len(text) - skipped)
 
 
-def levenshtein_pick(names: List[str], weights: Dict[str, float]) -> List[str]:
+def _levenshtein_pick(names: List[str], weights: Dict[str, float]) -> List[str]:
     """Pick the best name from a list of names, using a weighted levenshtein distances."""
     if len(names) < 2:
         return names
@@ -61,7 +61,7 @@ def pick_name(names: List[str]) -> Optional[str]:
         if len(form) == 0:
             continue
         # even totally non-Latin names have a base weight of 1:
-        latin_shr = latin_share(name)
+        latin_shr = _latin_share(name)
         if latin_shr > 0.85:
             latin_names.append(name)
         weight = 1 + latin_shr
@@ -77,8 +77,8 @@ def pick_name(names: List[str]) -> Optional[str]:
     if len(latin_names) == 1:
         return latin_names[0]
 
-    for form in levenshtein_pick(list(weights.keys()), weights):
-        for surface in levenshtein_pick(forms.get(form, []), {}):
+    for form in _levenshtein_pick(list(weights.keys()), weights):
+        for surface in _levenshtein_pick(forms.get(form, []), {}):
             if surface in names:
                 return surface
     return None
@@ -160,6 +160,7 @@ def reduce_names(names: List[str], require_names: bool = False) -> List[str]:
 
     Args:
         names (List[str]): A list of names.
+        require_names: If True, only return names that pass the `is_name` check.
 
     Returns:
         List[str]: The reduced list of names.
