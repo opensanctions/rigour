@@ -76,6 +76,13 @@ fn py_ffi_noop(text: &str) -> String {
     text.to_string()
 }
 
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "string_number")]
+fn py_string_number(text: &str) -> Option<f64> {
+    text::numbers::string_number(text)
+}
+
 // Low-level org-types replacers. The nice Python API (Normalize
 // IntFlag, Cleanup IntEnum) lives in rigour/names/org_types.py and
 // passes plain ints through here. Bit values must match the Python-
@@ -247,6 +254,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_ascii_text, m)?)?;
     m.add_function(wrap_pyfunction!(py_normalize, m)?)?;
     m.add_function(wrap_pyfunction!(py_ffi_noop, m)?)?;
+    m.add_function(wrap_pyfunction!(py_string_number, m)?)?;
     m.add_function(wrap_pyfunction!(py_replace_org_types_compare, m)?)?;
     m.add_function(wrap_pyfunction!(py_replace_org_types_display, m)?)?;
     m.add_function(wrap_pyfunction!(py_remove_org_types, m)?)?;

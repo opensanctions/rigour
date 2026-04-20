@@ -1,30 +1,10 @@
-import unicodedata
+"""Numeric string parsing with Unicode digit / Roman / fraction / CJK
+support.
 
+Rust-backed via :func:`rigour._core.string_number`. See the header of
+``rust/src/text/numbers.rs`` for the coverage and multi-character rules.
+"""
 
-def string_number(text: str) -> float | None:
-    """Convert Unicode numeric strings to their numeric values. This handles cases in
-    which numbers are given in non-latin scripts.
+from rigour._core import string_number
 
-    Args:
-        text: The text to convert (must be a valid number string).
-
-    Returns:
-        The numeric value as a float, or None if conversion failed.
-    """
-    # Try standard int conversion first (for ASCII digits)
-    try:
-        return float(text)
-    except ValueError:
-        pass
-
-    # Handle Unicode numeric characters
-    result: float | None = None
-    for char in text:
-        try:
-            value = unicodedata.numeric(char)
-            if result is None:
-                result = 0.0
-            result = result * 10 + value
-        except ValueError:
-            return None
-    return result
+__all__ = ["string_number"]
