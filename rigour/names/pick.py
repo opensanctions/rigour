@@ -3,11 +3,12 @@ from itertools import combinations
 from collections import defaultdict
 from typing import Dict, Optional, List
 
+from rigour._core import pick_name as pick_name
 from rigour.langs import LangStr, PREFERRED_LANG, PREFERRED_LANGS
-from rigour.text.transliteration import ascii_text
 from rigour.names.check import is_name
 from rigour.text.distance import levenshtein
 from rigour.text.scripts import codepoint_script
+from rigour.text.transliteration import ascii_text
 
 log = logging.getLogger(__name__)
 
@@ -15,7 +16,12 @@ _LATIN_SHARE_PARTIAL = {"Cyrillic", "Greek"}
 
 
 def _latin_share(text: str) -> float:
-    """Determine the percentage of a string that's latin."""
+    """Determine the percentage of a string that's latin.
+
+    Pre-port reference implementation; `pick_name` itself now goes
+    through `rigour._core.pick_name`. Kept for the benchmark harness
+    (`benchmarks/bench_pick_name.py`) and any diagnostic callers.
+    """
     latin = 0.0
     skipped = 0
     for char in text:
@@ -31,7 +37,11 @@ def _latin_share(text: str) -> float:
 
 
 def _levenshtein_pick(names: List[str], weights: Dict[str, float]) -> List[str]:
-    """Pick the best name from a list of names, using a weighted levenshtein distances."""
+    """Pick the best name from a list of names, using a weighted levenshtein distances.
+
+    Thin helper used by tests; the production `pick_name` routes through
+    `rigour._core.pick_name` which has its own Rust-internal equivalent.
+    """
     if len(names) < 2:
         return names
     edits: Dict[str, float] = defaultdict(float)
@@ -43,15 +53,11 @@ def _levenshtein_pick(names: List[str], weights: Dict[str, float]) -> List[str]:
     return [n for (n, _) in sorted(edits.items(), key=lambda x: x[1], reverse=True)]
 
 
-def pick_name(names: List[str]) -> Optional[str]:
-    """Pick the best name from a list of names. This is meant to pick a centroid
-    name, with a bias towards names in a latin script.
-
-    Args:
-        names (List[str]): A list of names.
-
-    Returns:
-        Optional[str]: The best name for display.
+def _pick_name_python(names: List[str]) -> Optional[str]:
+    """Pre-port pure-Python `pick_name`. Retained for the benchmark
+    harness (head-to-head against the Rust implementation in
+    `rigour._core.pick_name`). Behaviour-identical to the Rust version;
+    if they ever diverge, the Rust port has regressed.
     """
     weights: Dict[str, float] = defaultdict(float)
     forms: Dict[str, List[str]] = defaultdict(list)
@@ -60,7 +66,7 @@ def pick_name(names: List[str]) -> Optional[str]:
         form = name.strip().casefold()
         if len(form) == 0:
             continue
-        # even totally non-Latin names have a base weight of 1:
+        # Even totally non-Latin names have a base weight of 1:
         latin_shr = _latin_share(name)
         if latin_shr > 0.85:
             latin_names.append(name)

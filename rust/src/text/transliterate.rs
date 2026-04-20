@@ -190,13 +190,47 @@ pub fn latinize_text(text: &str) -> String {
     result
 }
 
+// Per-thread cache of ascii_text results. The Python wrapper in
+// `rigour/text/transliteration.py` keeps an `@lru_cache(maxsize=
+// MEMO_LARGE)` in front of this; that LRU avoids the FFI crossing
+// for repeat inputs *from Python*, but doesn't help Rust-internal
+// callers (pick_name, analyze_names, tagger alias build). Caching
+// on the Rust side means all callers — Python or Rust — skip the
+// expensive ICU4X transliterate pipeline on repeat inputs.
+//
+// ICU4X transliteration costs 20–50 µs per non-ASCII input; the
+// realistic input universe (person / org names seen during an
+// OpenSanctions export) repeats enough that this cache turns most
+// calls into a HashMap lookup. Cap is a soft clear-when-full (not
+// true LRU) — simpler than a real LRU, and good enough given the
+// access pattern is "read once per entity, repeats often across
+// entities".
+const ASCII_CACHE_CAP: usize = 131_072;
+
+thread_local! {
+    static ASCII_CACHE: RefCell<HashMap<String, String>> = RefCell::new(HashMap::new());
+}
+
 pub fn ascii_text(text: &str) -> String {
     if text.is_ascii() {
         return text.to_string();
     }
+    // Cache lookup. String-to-String keys so the owned result can
+    // live in the cache independent of the caller's input lifetime.
+    if let Some(cached) = ASCII_CACHE.with(|c| c.borrow().get(text).cloned()) {
+        return cached;
+    }
     let latin = latinize_text(text);
     let stripped = nfkd_strip_marks(&latin);
-    ascii_fallback(&stripped)
+    let out = ascii_fallback(&stripped);
+    ASCII_CACHE.with(|c| {
+        let mut cache = c.borrow_mut();
+        if cache.len() >= ASCII_CACHE_CAP {
+            cache.clear();
+        }
+        cache.insert(text.to_string(), out.clone());
+    });
+    out
 }
 
 #[cfg(test)]

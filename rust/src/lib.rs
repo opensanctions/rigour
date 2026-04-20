@@ -83,6 +83,14 @@ fn py_string_number(text: &str) -> Option<f64> {
     text::numbers::string_number(text)
 }
 
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "pick_name")]
+fn py_pick_name(names: Vec<String>) -> Option<String> {
+    let refs: Vec<&str> = names.iter().map(String::as_str).collect();
+    names::pick::pick_name(&refs)
+}
+
 // Low-level org-types replacers. The nice Python API (Normalize
 // IntFlag, Cleanup IntEnum) lives in rigour/names/org_types.py and
 // passes plain ints through here. Bit values must match the Python-
@@ -255,6 +263,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_normalize, m)?)?;
     m.add_function(wrap_pyfunction!(py_ffi_noop, m)?)?;
     m.add_function(wrap_pyfunction!(py_string_number, m)?)?;
+    m.add_function(wrap_pyfunction!(py_pick_name, m)?)?;
     m.add_function(wrap_pyfunction!(py_replace_org_types_compare, m)?)?;
     m.add_function(wrap_pyfunction!(py_replace_org_types_display, m)?)?;
     m.add_function(wrap_pyfunction!(py_remove_org_types, m)?)?;

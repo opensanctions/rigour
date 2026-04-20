@@ -221,6 +221,28 @@ Phases 0, 0.5, 1, 3, 4 are complete. Short pointers:
   `SymbolCategory` enum. Design record: `plans/rust-symbols.md`.
 - **Normalizer design** (`Normalize` bitflags + `Cleanup` enum).
   Design record: `plans/rust-normalizer.md`.
+- **`string_number` port.** `rigour.text.numbers.string_number` →
+  `rigour._core.string_number` via `rust/src/text/numbers.rs`. Fast
+  path for ASCII via `f64::from_str`, hand-coded tables for Unicode
+  decimal digit blocks (Arabic-Indic, Devanagari, fullwidth, etc.),
+  Roman numerals in U+2160..U+2188, vulgar fractions, and CJK
+  numerals. Fixes two latent Python bugs: `"3½"` was 30.5 (now
+  None), `"ⅯⅮⅭ"` was 105100 (now None). Also filters inf/NaN
+  outputs via an `is_finite()` guard — 400-digit strings no longer
+  leak infinity.
+- **Phase 6 — `pick_name` port.** `rigour.names.pick.pick_name` →
+  `rigour._core.pick_name` via `rust/src/names/pick.rs`. **4.5×
+  speedup** on the `benchmarks/bench_pick_name.py` harness (100k
+  synthetic picks with 1–20 multi-script candidates). Design
+  record: `plans/rust-pick-name.md`. Key subtleties that turned out
+  to matter for parity: Python's `defaultdict(float)` aggregation
+  ties scores by float-accumulation order, so the Rust port
+  reproduces Python's `combinations(entries, 2)` add sequence on
+  an O(M²) unique-string similarity matrix rather than a
+  count-based shortcut. Also added a thread-local LRU-ish cache to
+  Rust `ascii_text` — without it, pick_name was actually *slower*
+  than Python because Python's `@lru_cache` on the Python wrapper
+  was absorbing the cost.
 
 Downstream adapter migration (nomenklatura / yente / FTM switching
 from `normalizer=` callback to `normalize_flags=`) is tracked as the
@@ -307,25 +329,15 @@ construction. The FTM-side `entity_names` adapter collapses to a
 thin wrapper. Prerequisites: Phase 2 object-graph port for the
 returned `Name` instances.
 
-### Phase 6 candidate: `rigour.names.pick`
+### Phase 6 follow-ups in `rigour.names.pick`
 
-Not scheduled but noted. `pick_name` / `levenshtein_pick` /
-`reduce_names` / `pick_case` in `rigour/names/pick.py` is a
-plausible next port after `analyze_names` lands.
-
-*Why tempting*: hot path during OpenSanctions data export (run per
-entity to choose a display name from a bag of aliases);
-`levenshtein_pick` is O(n²) distance calls; `latin_share` iterates
-every char in every name with per-char FFI. Moving the loop into
-Rust reduces boundary crossings from `O(n² + k·m)` to one.
-
-*What to measure first*: profile a real OpenSanctions export to
-confirm `pick_name` is in the top-N sinks. If it's not, this is
-premature optimisation.
-
-*Prerequisites*: distance functions exposed via `_core` (gated on
-the rapidfuzz opcodes gap — see below) and script detection
-(already Rust-backed).
+**`pick_name` itself is ported** (see the landed list above —
+4.5× speedup on the 100k-pick benchmark). The sibling helpers in
+`rigour/names/pick.py` stay Python: `pick_lang_name` is a thin
+language-filter wrapper, `pick_case` is case-bias scoring on
+identical-content inputs, `reduce_names` dedupes a name list.
+Port only if profiling shows any of them hot; `pick_name` was the
+O(n²) centroid that justified the move.
 
 ---
 
