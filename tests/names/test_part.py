@@ -11,7 +11,10 @@ def test_name_part():
     assert john.latinize is True
     assert john.numeric is False
     assert len(john) == 4
-    assert hash(john) == hash((0, "john"))
+    # Hash is consistent across equivalent constructions; the exact
+    # numeric value is an implementation detail (Rust-side SipHash).
+    assert hash(john) == hash(NamePart("john", 0))
+    assert hash(john) != hash(NamePart("john", 1))
     assert john == NamePart("john", 0)
     assert john != NamePart("john", 1)
     assert repr(john) == "<NamePart('john', 0, 'UNSET')>"

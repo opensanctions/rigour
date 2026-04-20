@@ -20,8 +20,10 @@
 // All fields cached on the struct; Python attribute reads are
 // plain INCREFs / copies.
 
+use std::hash::{DefaultHasher, Hash, Hasher};
+
 use pyo3::prelude::*;
-use pyo3::types::{PyString, PyTuple};
+use pyo3::types::PyString;
 
 use crate::names::tag::{NAME_TAGS_ORDER, NamePartTag};
 use crate::text::numbers::string_number;
@@ -239,7 +241,7 @@ impl NamePart {
             compute_comparable(&form_str, numeric, latinize, integer, ascii_s.as_deref());
         let metaphone_s = compute_metaphone(phonetics, latinize, numeric, ascii_s.as_deref());
 
-        let hash = hash_namepart(py, index, &form_str);
+        let hash = hash_namepart(index, &form_str);
 
         let form_py = PyString::new(py, &form_str).unbind();
         let ascii_py = ascii_s.as_ref().map(|s| PyString::new(py, s).unbind());
@@ -272,18 +274,16 @@ impl NamePart {
     }
 }
 
-fn hash_namepart(py: Python<'_>, index: Option<u32>, form: &str) -> isize {
-    // Mirror Python's `hash((index, form))`. Tuple hashing is handled
-    // by CPython — cheaper to call through than to reimplement.
-    let idx_obj: Py<PyAny> = match index {
-        Some(i) => i.into_pyobject(py).unwrap().unbind().into_any(),
-        None => py.None(),
-    };
-    let form_obj = PyString::new(py, form).unbind();
-    let Ok(tup) = PyTuple::new(py, [idx_obj, form_obj.into_any()]) else {
-        return 0;
-    };
-    tup.hash().unwrap_or(0)
+fn hash_namepart(index: Option<u32>, form: &str) -> isize {
+    // Rust-side SipHash over the two immutable fields. The specific
+    // numeric value doesn't matter — Python's `__hash__` contract
+    // only requires consistency (equal objects hash equal), which
+    // this preserves because both fields are frozen after
+    // construction. Avoids a CPython tuple-hash round-trip.
+    let mut hasher = DefaultHasher::new();
+    index.hash(&mut hasher);
+    form.hash(&mut hasher);
+    hasher.finish() as isize
 }
 
 /// A symbol applied to one or more parts of a `Name`.
@@ -353,7 +353,7 @@ impl Span {
         let comparable_str = segments.join(" ");
         let comparable_py = PyString::new(py, &comparable_str).unbind();
 
-        let hash = hash_span(py, &parts, &symbol)?;
+        let hash = hash_span(py, &parts, &symbol);
         let parts_list = pyo3::types::PyList::new(py, &parts)?.unbind();
 
         Ok(Self {
@@ -370,12 +370,17 @@ fn hash_span(
     py: Python<'_>,
     parts: &[Py<NamePart>],
     symbol: &Py<crate::names::symbol::Symbol>,
-) -> PyResult<isize> {
-    // Mirror Python `hash((tuple(parts), symbol))`. Python's hash on a
-    // tuple of NameParts is computed from their `__hash__`; since
-    // NamePart exposes `__hash__` in Rust, the tuple hash just calls
-    // them. We build the tuple in Python and hash it once.
-    let parts_tup = PyTuple::new(py, parts)?;
-    let full = PyTuple::new(py, [parts_tup.as_any(), symbol.bind(py).as_any()])?;
-    full.hash()
+) -> isize {
+    // Rust-side SipHash: fold each part's cached hash plus the
+    // symbol's derived hash into a single `DefaultHasher`. Python's
+    // hash contract is satisfied because equal spans hash equal —
+    // `NamePart`'s hash is stable (form + index) and `Symbol` is
+    // frozen with derived Hash.
+    let mut hasher = DefaultHasher::new();
+    for p in parts {
+        let h = p.bind(py).borrow().hash;
+        h.hash(&mut hasher);
+    }
+    symbol.bind(py).borrow().hash(&mut hasher);
+    hasher.finish() as isize
 }

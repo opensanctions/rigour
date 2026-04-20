@@ -21,6 +21,7 @@
 // would require invalidation.
 
 use std::collections::HashSet;
+use std::hash::{DefaultHasher, Hash, Hasher};
 
 use pyo3::prelude::*;
 use pyo3::types::{PyList, PyString};
@@ -125,7 +126,7 @@ impl Name {
         let norm_form_py = PyString::new(py, &norm_form_str).unbind();
         let spans_list = PyList::empty(py).unbind();
 
-        let hash = hash_form(py, &form_str)?;
+        let hash = hash_form(&form_str);
 
         Ok(Self {
             original: original_py,
@@ -414,7 +415,12 @@ fn list_intersection(a: &[String], b: &[String]) -> Vec<String> {
     out
 }
 
-fn hash_form(py: Python<'_>, form: &str) -> PyResult<isize> {
-    // Mirror Python `hash(form)` for cross-language parity.
-    PyString::new(py, form).hash()
+fn hash_form(form: &str) -> isize {
+    // Rust-side SipHash. Python `__hash__` only requires consistency
+    // (equal Names hash equal) — which holds because `form` is
+    // immutable after Name construction. The specific numeric value
+    // is an implementation detail.
+    let mut hasher = DefaultHasher::new();
+    form.hash(&mut hasher);
+    hasher.finish() as isize
 }
