@@ -153,9 +153,9 @@ Measured after landing `ascii_text`/`latinize_text` via ICU4X. Release build
 inputs. See `benchmarks/bench_transliteration.py` (Python) and
 `rust/examples/bench_transliterate.rs` (pure Rust, no PyO3).
 
-**FFI overhead is not the bottleneck** — a no-op PyO3 function (`_ffi_noop`,
-`str`→`str`, zero work) measures 63–201 ns per call across input sizes. All the
-cost below is library work, not boundary-crossing.
+**FFI overhead is not the bottleneck** — a no-op PyO3 function (`str`→`str`,
+zero work) measured 63–201 ns per call across input sizes during the port.
+All the cost below is library work, not boundary-crossing.
 
 Cache-miss cost per call, PyICU vs rigour's Rust/ICU4X path:
 

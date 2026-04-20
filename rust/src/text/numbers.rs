@@ -1,4 +1,5 @@
-// Port of `rigour.text.numbers.string_number`. Converts a numeric string
+// Port of the former `rigour.text.numbers.string_number` wrapper (now
+// collapsed into `rigour._core.string_number`). Converts a numeric string
 // to an `f64`, handling Unicode digit scripts (Arabic-Indic, Devanagari,
 // fullwidth, …), CJK numerals (一二三, 萬), Roman numerals in the
 // dedicated U+2160 block, and vulgar fractions (½, ¼, …).

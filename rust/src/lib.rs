@@ -67,16 +67,6 @@ fn py_normalize(text: &str, flags: u16, cleanup: u8) -> Option<String> {
     text::normalize::normalize(text, flags, cleanup)
 }
 
-// Minimal PyO3 function used by benchmarks/bench_transliteration.py to
-// measure pure FFI overhead (String in, String out) independent of any
-// transliteration work.
-#[cfg(feature = "python")]
-#[pyfunction]
-#[pyo3(name = "_ffi_noop")]
-fn py_ffi_noop(text: &str) -> String {
-    text.to_string()
-}
-
 #[cfg(feature = "python")]
 #[pyfunction]
 #[pyo3(name = "string_number")]
@@ -278,7 +268,6 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_should_ascii, m)?)?;
     m.add_function(wrap_pyfunction!(py_maybe_ascii, m)?)?;
     m.add_function(wrap_pyfunction!(py_normalize, m)?)?;
-    m.add_function(wrap_pyfunction!(py_ffi_noop, m)?)?;
     m.add_function(wrap_pyfunction!(py_string_number, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_name, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_case, m)?)?;

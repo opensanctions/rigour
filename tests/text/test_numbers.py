@@ -1,4 +1,4 @@
-from rigour.text.numbers import string_number
+from rigour._core import string_number
 
 
 def test_ascii_ints_and_floats():

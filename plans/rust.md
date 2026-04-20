@@ -221,8 +221,10 @@ Phases 0, 0.5, 1, 3, 4 are complete. Short pointers:
   `SymbolCategory` enum. Design record: `plans/rust-symbols.md`.
 - **Normalizer design** (`Normalize` bitflags + `Cleanup` enum).
   Design record: `plans/rust-normalizer.md`.
-- **`string_number` port.** `rigour.text.numbers.string_number` →
-  `rigour._core.string_number` via `rust/src/text/numbers.rs`. Fast
+- **`string_number` port.** Collapsed to `rigour._core.string_number`
+  via `rust/src/text/numbers.rs` — the `rigour/text/numbers.py`
+  wrapper was retired after the port since the only consumers are
+  `rigour/names/part.py` and `tests/text/test_numbers.py`. Fast
   path for ASCII via `f64::from_str`, hand-coded tables for Unicode
   decimal digit blocks (Arabic-Indic, Devanagari, fullwidth, etc.),
   Roman numerals in U+2160..U+2188, vulgar fractions, and CJK
