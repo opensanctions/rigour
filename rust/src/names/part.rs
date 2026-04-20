@@ -145,19 +145,13 @@ impl NamePart {
     }
 
     fn __eq__(&self, other: &Bound<'_, PyAny>) -> bool {
-        // Mirror the Python impl: compare precomputed hash. Duck-type
-        // on `_hash` so pre-port Python NamePart instances that may
-        // still be around (tests, downstream unpickled state) also
-        // compare correctly during a migration window.
-        match other.getattr("_hash") {
-            Ok(h) => match h.extract::<isize>() {
-                Ok(h) => h == self.hash,
-                Err(_) => false,
-            },
-            Err(_) => match other.extract::<PyRef<'_, NamePart>>() {
-                Ok(n) => n.hash == self.hash,
-                Err(_) => false,
-            },
+        // Compare the immutable fields directly — `(index, form)` is
+        // NamePart's identity. The pre-port Python impl compared the
+        // cached hash, which a SipHash collision would corrupt; here
+        // we sidestep the theoretical case.
+        match other.extract::<PyRef<'_, NamePart>>() {
+            Ok(n) => n.index == self.index && n.form_str == self.form_str,
+            Err(_) => false,
         }
     }
 
@@ -178,14 +172,6 @@ impl NamePart {
                 .unwrap_or_else(|| "None".to_string()),
             self.tag.value(),
         )
-    }
-
-    /// Expose the cached hash as `_hash` so the legacy
-    /// `other._hash == self._hash` equality check from pre-port
-    /// Python code keeps working across the boundary.
-    #[getter]
-    fn _hash(&self) -> isize {
-        self.hash
     }
 
     /// Stable sort of `parts` by `NAME_TAGS_ORDER` position of each

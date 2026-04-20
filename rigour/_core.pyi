@@ -142,9 +142,6 @@ class NamePart:
 
     def __len__(self) -> int: ...
 
-    @property
-    def _hash(self) -> int: ...
-
     @classmethod
     def tag_sort(cls, parts: list["NamePart"]) -> list["NamePart"]: ...
 
