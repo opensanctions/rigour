@@ -91,6 +91,22 @@ fn py_pick_name(names: Vec<String>) -> Option<String> {
     names::pick::pick_name(&refs)
 }
 
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "pick_case")]
+fn py_pick_case(names: Vec<String>) -> Option<String> {
+    let refs: Vec<&str> = names.iter().map(String::as_str).collect();
+    names::pick::pick_case(&refs)
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "reduce_names")]
+fn py_reduce_names(names: Vec<String>) -> Vec<String> {
+    let refs: Vec<&str> = names.iter().map(String::as_str).collect();
+    names::pick::reduce_names(&refs)
+}
+
 // Low-level org-types replacers. The nice Python API (Normalize
 // IntFlag, Cleanup IntEnum) lives in rigour/names/org_types.py and
 // passes plain ints through here. Bit values must match the Python-
@@ -264,6 +280,8 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_ffi_noop, m)?)?;
     m.add_function(wrap_pyfunction!(py_string_number, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_name, m)?)?;
+    m.add_function(wrap_pyfunction!(py_pick_case, m)?)?;
+    m.add_function(wrap_pyfunction!(py_reduce_names, m)?)?;
     m.add_function(wrap_pyfunction!(py_replace_org_types_compare, m)?)?;
     m.add_function(wrap_pyfunction!(py_replace_org_types_display, m)?)?;
     m.add_function(wrap_pyfunction!(py_remove_org_types, m)?)?;

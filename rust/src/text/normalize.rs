@@ -145,12 +145,15 @@ fn squash_spaces(text: &str) -> String {
     out
 }
 
-fn casefold(text: &str) -> String {
-    // ICU4X CaseMapper::fold_string — full Unicode casefold. Matches
-    // Python's str.casefold() for our corpus (ß → ss, Greek sigma
-    // forms normalised, etc.). Preserves the composition form of the
-    // input: no implicit NFC/NFKD. If the caller wants composed output
-    // they set Normalize::NFC; for decomposed they set NFKD.
+/// Unicode full casefold (ICU4X `CaseMapper::fold_string`).
+/// Matches Python's `str.casefold()` for our corpus (ß → ss, Greek
+/// sigma forms normalised, etc.). Preserves the composition form of
+/// the input: no implicit NFC / NFKD.
+///
+/// Callers that also want the bigger normalisation pipeline should
+/// use [`normalize`] with `Normalize::CASEFOLD` set; callers that
+/// just want casefolding alone go through this primitive directly.
+pub fn casefold(text: &str) -> String {
     CaseMapper::new().fold_string(text).into_owned()
 }
 

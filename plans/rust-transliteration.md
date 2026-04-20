@@ -201,6 +201,14 @@ example matching Python numbers minus FFI):
 
 **Actionable optimisations if the regression starts hurting:**
 
+- **Skip transliteration when the input is single-script.** `ascii_text` is
+  called from `pick_name` (and future `analyze_names`) to produce a
+  cross-script ASCII key for vote-stacking, but within a single cluster
+  most candidates share one script. A cheap upfront check via
+  `text_scripts(name).len() == 1` (already Rust-backed, constant-time
+  lookup) could bypass the ICU4X pipeline whenever script reinforcement
+  is pointless. Small effort, high-leverage — see *Downstream-port
+  observations* below for why.
 - **Script-slicing**: instead of passing the whole string to each script's
   transliterator, split the input by script and only send each slice to its
   matching transliterator. Would flatten `mixed_three` from ~855µs toward the
@@ -210,6 +218,114 @@ example matching Python numbers minus FFI):
   Build a single compound at init time that dispatches internally. Medium effort,
   needs research against ICU4X 2.x API.
 - **Swap backend to `anyascii`** (see next section).
+
+## Downstream-port observations (Phase 4+, `pick_name`, `tagger`)
+
+After landing `ascii_text` (Phase 1) and starting to build larger ports
+on top of it (Phase 3 org_types, Phase 4 tagger, `pick_name`), the
+per-call microbenchmark numbers above understate how much
+transliteration ends up costing in the real workloads.
+
+### The thread-local cache we ended up adding
+
+`rust/src/text/transliterate.rs::ascii_text` carries a per-thread
+`HashMap<String, String>` cache, cap 131k entries, clear-on-full.
+Added during the `pick_name` port when it surfaced that the Python
+wrapper's `@lru_cache(maxsize=MEMO_LARGE)` was silently absorbing the
+20–50 µs per non-ASCII call for Python callers, while Rust-internal
+callers (pick_name, analyze_names, the tagger alias-build path) were
+paying the full ICU4X cost on every lookup.
+
+With the cache in place:
+
+- Python callers see no regression (their own LRU already covered them,
+  and a cached Rust hit is comparable to a Python dict hit).
+- Rust-internal callers get the same mask, so repeat inputs within a
+  hot loop are free.
+- Production impact depends on workload shape. If your input has
+  repetition (matcher query × many candidates: query text repeats
+  across calls), hit rate is high. If your input has mostly-unique
+  strings (OpenSanctions export: one pass over millions of distinct
+  entity names), hit rate collapses and transliteration dominates.
+
+This split in hit rate is what makes benchmark numbers for `pick_name`
+vary from 4.5× (synthetic 25-cluster pool with reuse) to 1.3×
+(synthetic unique-suffix-per-case) — same algorithm, same code, very
+different ratios depending on how much the cache helps.
+
+### Cost decomposition for a typical `pick_name` call (cache-defeated)
+
+Per pick with ~10 candidates in mixed scripts, 100,000 picks:
+
+| Operation | Count | Per-call | Per 100k | Fraction |
+|---|---|---|---|---|
+| `ascii_text` non-ASCII (full ICU4X pipeline) | ~5 | 30–50 µs | **15–25 s** | **~70%** |
+| `levenshtein_pick` form matrix (~45 pairs × 1 µs) | 1 | 100 µs | 10 s | ~30% |
+| `casefold` (ICU CaseMapper) | ~10 | 1–2 µs | 1–2 s | ~6% |
+| `latin_share` per-char `codepoint_script` | ~150 | 50 ns | 800 ms | ~3% |
+
+Observed Rust total: 18.5 s. Observed Python total: 24.6 s.
+
+The 6 s gap is Python's interpreter overhead (dict operations, `for`
+loops, `combinations`, PyO3 marshalling). That's the real Rust
+speedup for this workload — about 25% of the total cost. Everything
+else is ICU4X work that Python and Rust both pay into via the same
+code path.
+
+### What this tells us about the port's overall shape
+
+Not every Rust port yields a big speedup. The rule-of-thumb that fell
+out of this work:
+
+- **Ports bottlenecked on Python-side FFI + dict/list operations get
+  huge wins.** Phase 3 `org_types` landed at **190× faster** because
+  the Python version crossed the PyO3 boundary thousands of times per
+  call into `ahocorasick-rs` and did Python-level dict manipulation
+  around it. Pulling the whole loop into Rust collapsed that.
+
+- **Ports bottlenecked on actual Unicode / ICU work get modest wins.**
+  `pick_name`, `string_number`, parts of the tagger alias-build all
+  fall here. Both Python and Rust end up calling the same ICU4X code;
+  Rust only gets to eliminate the thin Python overhead on top.
+
+For the "make OpenSanctions export faster" motivation behind
+`pick_name`, the realistic production win is the ~1.3× number, not
+the ~4.5× cache-favourable one. If we want more, we have to cut
+ICU4X transliteration calls, not optimise the surrounding code.
+
+### Why this sharpens the anyascii question
+
+The per-call microbench numbers above (Chinese 11× slower, mixed
+three-script 20× slower) were defensible when we thought the cost
+was bounded: "we call `ascii_text` occasionally, when we really need
+it". What the downstream work exposed is that we call it *a lot* —
+10 times per `pick_name` call, eventually once per name-part in
+`analyze_names`, and on every alias at tagger-build time. Each call
+that hits the slow path costs 30–50 µs on realistic inputs.
+
+This flips the anyascii trade-off. Quality-wise anyascii is
+"deterministic ASCII, language-blind", which for the
+name-matching use case is usually *acceptable* (matching logic is
+tolerant of "wrong but consistent"); speed-wise it's projected at
+10–100× faster than ICU4X. The Japanese-kanji-collapses-to-Pinyin
+issue is real but constrained — it only affects one script family,
+and we can route `ja`-tagged inputs through ICU4X as a fallback if
+we ever gain language hints.
+
+Decision gate (revised): anyascii is now the *leading candidate* for
+the next wave of transliteration work if pick_name / analyze_names
+performance matters in production. The one-line dep addition and
+~10 lines of wrapper code from the earlier evaluation are still
+accurate. What's changed is that the evidence for needing it has
+moved from "theoretical" to "measured in the downstream port".
+
+A middle path worth considering: **ICU4X for `latinize_text`, anyascii
+for `ascii_text`.** `latinize_text` is user-visible (it's used where
+the output matters, e.g. display); `ascii_text` is internal glue for
+matching where the output is never shown, just compared. anyascii's
+deterministic-but-lossy output is fine for the latter. This lets us
+keep ICU4X's higher-quality romanisation where users see it and get
+the speedup where they don't.
 
 ## Alternative: anyascii (evaluated, not chosen yet)
 
@@ -256,13 +372,14 @@ phonetic/token matchers want. The Japanese kanji limitation is real but
 addressable as "route `ja`-tagged inputs through ICU4X first, then anyascii
 for everything else" if and when language hints become available.
 
-**Decision gate — not taken yet**: revisit once we have either (a) a real-world
-profile showing the Chinese/mixed-three regression matters, or (b) a decision
-about whether rigour consumers (nomenklatura, FTM) can provide language hints
-so we can do the two-stage (`ja` → ICU4X, else → anyascii) approach cleanly.
-Until then, ICU4X remains the primary path. If we do switch, `any_ascii =
-"0.3.3"` would be the one-line dep addition and the wrapper would collapse to
-about 10 lines of Rust.
+**Decision gate — leaning yes, see _Downstream-port observations_ above**:
+the "we have a profile showing transliteration dominates" condition is
+now met. The specific next action is still a small PR: `any_ascii =
+"0.3.3"` as a one-line dep and a ~10-line wrapper. The open question
+is which of ICU4X / anyascii to route where — the "ICU4X for
+`latinize_text`, anyascii for `ascii_text`" split proposed above is
+the natural answer if we don't get language hints from consumers;
+full anyascii with a `ja`-hint escape hatch is the answer if we do.
 
 ## Cargo Dependencies
 

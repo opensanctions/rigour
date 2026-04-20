@@ -1,183 +1,131 @@
 ---
-description: Port `rigour.names.pick.pick_name` to Rust — hot path of OpenSanctions data export, runs millions of times per export. Includes a benchmark harness and a parity / speedup scorecard.
+description: Port `rigour.names.pick.pick_name` + `pick_case` + `reduce_names` to Rust — hot path of OpenSanctions data export. Design record.
 date: 2026-04-20
 tags: [rigour, rust, names, pick, performance, opensanctions]
-status: plan
+status: landed
 ---
 
-# Rust port: `pick_name`
+# Rust port: `pick_name` + `pick_case` + `reduce_names`
+
+**Status: landed.** All three functions live in
+`rust/src/names/pick.rs` and are exposed via `rigour._core` with
+Python-side re-exports in `rigour/names/pick.py`. This doc keeps the
+design trade-offs so the decisions don't have to be re-litigated.
 
 ## Motivation
 
 `rigour.names.pick.pick_name` is called **per entity** during
-OpenSanctions data export to choose the display name for downstream
-publication. At OpenSanctions scale that's millions of invocations per
-export run, each of which does:
+OpenSanctions data export to choose the display name from a bag of
+multi-script aliases. At OpenSanctions scale that's millions of
+invocations per export run.
 
-- O(chars × names) `codepoint_script` lookups for Latin-share
-  computation (each crosses the PyO3 boundary today since script
-  detection is already Rust-backed).
-- An `ascii_text` call per surface form (already Rust-backed, still a
-  PyO3 crossing per name).
-- O(N²) `levenshtein` calls across casefolded + ASCII-reduced forms,
-  each a crossing into Python `rapidfuzz` (C++-backed but still FFI).
+The Python implementation paid two costs repeatedly per call:
+- Per-character `codepoint_script` FFI lookups for Latin-share
+  computation.
+- O(N²) `levenshtein` FFI calls for centroid scoring.
 
-The Python function itself is ~80 lines of scoring logic; the wall
-clock is dominated by interpreter overhead + FFI per small operation.
-Moving the loop into Rust collapses all of this to **one** FFI call
-per pick.
+The Rust port collapses both to one FFI call per pick. Measured
+speedup depends heavily on workload shape — see
+`plans/rust-transliteration.md` *Downstream-port observations* for
+why the realistic production win is modest (~1.3×), not the
+10×+ originally hypothesised.
 
-`plans/rust.md` already lists this as the Phase-6 candidate. This
-doc is the concrete port plan with a measurement rig attached so the
-speedup claim isn't hand-wavy.
+## Spec (inherited from the Python implementation + tests)
 
-## Spec (inferred from the Python implementation + tests)
-
-See `tests/names/test_pick.py` for the pinned behaviours. Summary:
+`tests/names/test_pick.py` pins the behaviour. Summary:
 
 - **Contract**: `Vec<&str>` in, `Option<String>` out. The returned
-  string must be a literal element of the input list (not a
-  derived / title-cased / transliterated form).
+  string is a literal element of the input list (not a derived
+  form).
 - **Filter**: strip + casefold; drop empties.
-- **Latin bias**: per-char Latin = 1.0, Cyrillic/Greek = 0.3,
-  other alpha = 0.0, non-alpha skipped. `latin_share = sum /
+- **Latin bias**: per-char Latin = 1.0, Cyrillic/Greek = 0.3, other
+  alpha = 0.0, non-alpha skipped. `latin_share = sum /
   alpha_count`. Weight per name = `1 + latin_share`.
 - **Single-Latin short-circuit**: if exactly one name has
   `latin_share > 0.85`, return it without running the centroid.
-- **Cross-script reinforcement**: for each form, also index its
-  `ascii_text` transliteration as an extra form (with the same
-  weight) when `len > 2`. This lets `"Putin" + "Путин" + "Путін"`
-  all stack onto the ASCII-form `"putin"`.
-- **Case bias**: `name.title()` gets added to the form's surface
-  bucket so Title Case beats ALL-CAPS / all-lower on tiebreaks.
-- **Centroid**: for each form pair `(a, b)`, `sim = 1 -
-  levenshtein(a, b) / max(len(a), len(b), 1)`. Each side's score
-  accumulates `sim × peer_weight`. Rank descending.
-- **Return path**: iterate ranked forms, within each form rank
-  surfaces via unweighted centroid, return the first surface that's
-  in the input.
-- **Determinism**: input order mustn't affect output; Python does
-  `sorted(names)` at intake. Rust must preserve this.
+- **Cross-script reinforcement**: each form also indexes its
+  `ascii_text` transliteration as an extra form (same weight) when
+  `len > 2`, stacking votes across scripts on the ASCII cluster.
+  Skipped when `text_scripts` reports a single script across the
+  whole input bag (no reinforcement possible).
+- **Centroid**: weighted Levenshtein similarity via an O(M²)
+  count-based algorithm (not O(N²) pair-enumeration). Tied scores
+  break by first-appearance insertion order, not float-rounding
+  accidents.
+- **Surface pick within the winning form** uses a three-level rule
+  `(latin_share DESC, case_error_score ASC, alphabetical ASC)`.
+  No synthetic title-case variants injected into the surface
+  bucket (the pre-port "ballot-box" hack).
+- **Determinism**: input order doesn't affect output — `sorted(names)`
+  at intake.
 
-## Design
+## Design notes worth preserving
 
-### Rust-side shape
+### No synthetic title-case injection
 
-```rust
-// rust/src/names/pick.rs
+The pre-port Python used `forms[form].append(name.title())` to
+inflate the centroid score of whichever surface matched a title-cased
+variant. This produced exact ties on balanced input (`GAZPROM × N +
+Gazprom × M`) that Python broke via accidental IEEE-754 rounding
+order.
 
-/// Pick the best name from a bag of aliases, biased toward Latin
-/// readability. Returns `None` iff no usable name survives filtering.
-pub fn pick_name(names: &[&str]) -> Option<String>;
-```
+Replaced with a principled `case_error_score` port of `pick_case`'s
+heuristic (word-start-upper + mid-word-lower, length-normalised).
+The surface rule is deterministic and reorder-invariant. Some
+Python outputs differ on tied-score inputs; intentional
+functional-equivalence divergence.
 
-Internals:
+### Count-based O(M²) Levenshtein
 
-- Reuse `text::scripts::codepoint_script` (already Rust) for
-  `latin_share` — loop stays inside the crate, no FFI.
-- Reuse `text::transliterate::ascii_text` (already Rust) — one
-  allocation per name, still no FFI.
-- Use the existing `rapidfuzz` crate dependency for Levenshtein
-  (already in `Cargo.toml` for the in-Rust name picker — this is
-  the caller we anticipated).
-- `HashMap<String, f64>` for form-weights, `HashMap<String,
-  Vec<String>>` for form → surfaces.
+Python's `_levenshtein_pick` enumerated `combinations(entries, 2)`
+and accumulated into a `defaultdict(float)`. For duplicate-heavy
+surface buckets (18 `"GAZPROM"` + 18 `"Gazprom"`) this did C(36, 2)
+= 630 distance calls for a score that depends on only 1 unique
+pair.
 
-### PyO3 boundary
+The Rust version dedupes first, then uses the algebraic identity:
+for entries with counts `c_X, c_Y` and similarity `sim`,
+`edits[X] += c_X · (c_X-1) · w_X + c_X · c_Y · sim · w_X`. Same
+output, O(M²) distance calls instead of O(N²).
 
-```rust
-#[pyfunction]
-#[pyo3(name = "pick_name")]
-fn py_pick_name(names: Vec<String>) -> Option<String> {
-    let refs: Vec<&str> = names.iter().map(|s| s.as_str()).collect();
-    names::pick::pick_name(&refs)
-}
-```
+### `ascii_text` cache in `text::transliterate`
 
-Python `rigour/names/pick.py`:
+The `pick_name` port exposed that Rust-internal callers of
+`ascii_text` were paying the full ICU4X cost per call (~30–50 µs),
+whereas Python's `@lru_cache(maxsize=MEMO_LARGE)` wrapper was
+absorbing it. Added a per-thread cap-131k cache inside
+`rust::text::transliterate::ascii_text` so every Rust-internal
+caller (pick_name, analyze_names, tagger alias-build) benefits.
 
-```python
-from rigour._core import pick_name
-```
+### Cross-script skip
 
-The existing Python helpers (`pick_lang_name`, `pick_case`,
-`reduce_names`, `_levenshtein_pick`) stay Python — they're either
-trivial wrappers around `pick_name` or unrelated logic. Only
-`pick_name` itself moves.
+`pick_name` runs `text_scripts` over the whole input bag upfront.
+If every input is in the same script, cross-script reinforcement
+can't help — skip the ICU4X `ascii_text` pipeline entirely. Covered
+via a `cross_script: bool` flag guarding the norm-path inside the
+main loop. See `plans/rust-transliteration.md` for the per-call
+cost this saves.
 
-### What this port deliberately doesn't change
+## Related ports
 
-- Behaviour is held constant. Every existing test in
-  `tests/names/test_pick.py` must pass unchanged against the
-  Rust-backed function.
-- No API additions, no new flags.
-- `pick_lang_name` and `reduce_names` keep their `pick_name` call
-  — they inherit the speedup for free.
+- **`pick_case` port** landed as part of the same work — avoids
+  duplicating the case-quality heuristic. Used inside `pick_name`'s
+  surface tiebreak AND exposed as a standalone primitive via
+  `rigour._core.pick_case`. Python wrapper in `rigour/names/pick.py`
+  preserves the pre-port `ValueError` on empty input.
+- **`reduce_names` port** landed in the same work too. The
+  `require_names` parameter (previously gated by `is_name`) was
+  dropped — never exercised in production. `is_name` stays Python.
+- **`pick_lang_name`** stays Python — thin language-filter wrapper
+  around `pick_name`, not worth the FFI surface.
 
-## Benchmark harness
+## Verification
 
-Goal: **measure** the port, not guess.
-
-New file `benchmarks/bench_pick_name.py`:
-
-- Builds a pool of ~25 realistic multi-script name clusters (Putin,
-  Xi, Merkel, Macron, Abe, al-Sisi, Lula, Modi, ...). Each cluster
-  has 5–12 cross-script variants representing what the OpenSanctions
-  `alias` / `previousName` / schema-language `name` set actually
-  looks like in production.
-- Generates **100,000 synthetic pick cases** using a seeded PRNG:
-  - `k ~ Uniform(1, 20)` candidates per call.
-  - Each candidate is sampled from a randomly-chosen cluster, with
-    some cases collapsing to all-Latin minor variants (~30%), some
-    all-non-Latin (~10%), the rest mixed (~60%).
-- Runs **three implementations** back-to-back on the same 100,000
-  cases:
-  1. Python `pick_name` (current).
-  2. Rust `pick_name` (new).
-  3. A parity check: pick 5,000 random cases, assert
-     `py_result == rust_result` on all of them.
-- Reports per-implementation: total wall clock, ns/call, ops/sec,
-  and speedup factor.
-
-Running the bench: `python benchmarks/bench_pick_name.py` (no pytest
-wrapping — this is a perf harness, not a unit test).
-
-## Acceptance criteria
-
-- All existing tests in `tests/names/test_pick.py` pass against the
-  Rust-backed `pick_name`.
-- The parity check on 5,000 random benchmark cases reports 100%
-  agreement.
-- Benchmark reports a meaningful speedup (expected ≥10×; will
-  re-evaluate against numbers).
-- `cargo test --manifest-path rust/Cargo.toml` includes unit tests
-  for the Rust `pick_name` covering: empty input, single-name
-  input, single-Latin short-circuit, cross-script reinforcement,
-  case bias, determinism across input reorder.
-- `cargo clippy --all-targets -- -D warnings` clean on both
-  feature variants.
-
-## Sequencing
-
-1. Write this doc (done).
-2. Write `benchmarks/bench_pick_name.py` against today's Python
-   implementation only. Get the baseline number committed.
-3. Implement `rust/src/names/pick.rs`. Run unit tests.
-4. Wire PyO3 accessor + `.pyi` stub; swap Python shim.
-5. Re-run the benchmark, now including the Rust implementation.
-   Commit the speedup number in the PR description.
-6. Retire the local Python scoring helpers if they become
-   internal-only (`_latin_share` drops in particular).
-
-## Out of scope
-
-- Porting `pick_case`, `pick_lang_name`, `reduce_names` — they're
-  either case-sensitive fiddly logic unrelated to scoring
-  (`pick_case`), or thin wrappers around `pick_name`
-  (`pick_lang_name`, `reduce_names`). Revisit only if profiling
-  shows them as hot after this port lands.
-- Changing the scoring algorithm. Even if we suspect the
-  Cyrillic-as-0.3 constant is rough, that's a behaviour change and
-  belongs in a separate doc.
-- Exposing `latin_share` / `_levenshtein_pick` directly to Python.
-  They're Python-side helpers today; stay that way.
+- `cargo test names::pick` covers: empty/single inputs, single-Latin
+  short-circuit, cross-script centroid, reorder determinism,
+  balanced case bias, `pick_case` Turkish/German/Armenian/Greek/
+  weird-mix cases, `case_error_score` orderings, `reduce_names`
+  grouping and Greek case variants.
+- `pytest tests/names/test_pick.py` — 14 existing Python tests
+  exercise the Rust-backed path through `rigour._core`.
+- `mypy --strict rigour` — clean against the updated `.pyi` stub.
