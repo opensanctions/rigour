@@ -24,7 +24,11 @@ def test_name_part():
     assert petro != 3
 
     osama = NamePart("أسامة", 0)
-    assert osama.ascii == "asamt"
+    # Non-latinize scripts now identity-pass via maybe_ascii and the
+    # `if not latinize: return None` gate in `NamePart.ascii` —
+    # pre-port behaviour was a PyICU Any-Latin transliteration ("asamt").
+    # See `plans/rust-minimal-translit.md` for the scope decision.
+    assert osama.ascii is None
     assert osama.comparable == "أسامة"
     assert osama.latinize is False
     assert osama.metaphone is None

@@ -78,3 +78,124 @@ class Symbol:
         """The interned id string."""
         ...
 
+
+class NameTypeTag:
+    """Metadata on what sort of object is described by a name."""
+
+    UNK: "NameTypeTag"
+    ENT: "NameTypeTag"
+    PER: "NameTypeTag"
+    ORG: "NameTypeTag"
+    OBJ: "NameTypeTag"
+
+    @property
+    def value(self) -> str: ...
+
+
+class NamePartTag:
+    """Within a name, identify name-part types."""
+
+    UNSET: "NamePartTag"
+    AMBIGUOUS: "NamePartTag"
+    TITLE: "NamePartTag"
+    GIVEN: "NamePartTag"
+    MIDDLE: "NamePartTag"
+    FAMILY: "NamePartTag"
+    TRIBAL: "NamePartTag"
+    PATRONYMIC: "NamePartTag"
+    MATRONYMIC: "NamePartTag"
+    HONORIFIC: "NamePartTag"
+    SUFFIX: "NamePartTag"
+    NICK: "NamePartTag"
+    STOP: "NamePartTag"
+    NUM: "NamePartTag"
+    LEGAL: "NamePartTag"
+
+    @property
+    def value(self) -> str: ...
+
+    def can_match(self, other: "NamePartTag") -> bool: ...
+
+
+class NamePart:
+    """A tagged component of a name. See rigour/names/part.py."""
+
+    form: str
+    index: int | None
+    tag: NamePartTag
+    latinize: bool
+    numeric: bool
+    ascii: str | None
+    integer: int | None
+    comparable: str
+    metaphone: str | None
+
+    def __init__(
+        self,
+        form: str,
+        index: int | None = None,
+        tag: NamePartTag = ...,
+        phonetics: bool = True,
+    ) -> None: ...
+
+    def can_match(self, other: "NamePart") -> bool: ...
+
+    def __len__(self) -> int: ...
+
+    @property
+    def _hash(self) -> int: ...
+
+    @classmethod
+    def tag_sort(cls, parts: list["NamePart"]) -> list["NamePart"]: ...
+
+
+class Span:
+    """A set of parts of a name tagged with a Symbol."""
+
+    parts: list[NamePart]
+    symbol: Symbol
+    comparable: str
+
+    def __init__(self, parts: list[NamePart], symbol: Symbol) -> None: ...
+
+    def __len__(self) -> int: ...
+
+
+class Name:
+    """A name — top of the rigour.names object graph."""
+
+    original: str
+    form: str
+    tag: NameTypeTag
+    lang: str | None
+    parts: list[NamePart]
+    spans: list[Span]
+    comparable: str
+    norm_form: str
+
+    def __init__(
+        self,
+        original: str,
+        form: str | None = None,
+        tag: NameTypeTag = ...,
+        lang: str | None = None,
+        parts: list[NamePart] | None = None,
+        phonetics: bool = True,
+    ) -> None: ...
+
+    @property
+    def symbols(self) -> set[Symbol]: ...
+
+    def tag_text(
+        self, text: str, tag: NamePartTag, max_matches: int = 1
+    ) -> None: ...
+
+    def apply_phrase(self, phrase: str, symbol: Symbol) -> None: ...
+
+    def apply_part(self, part: NamePart, symbol: Symbol) -> None: ...
+
+    def contains(self, other: "Name") -> bool: ...
+
+    @classmethod
+    def consolidate_names(cls, names: "object") -> set["Name"]: ...
+
