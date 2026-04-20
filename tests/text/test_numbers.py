@@ -80,3 +80,19 @@ def test_cjk_per_digit_run():
 def test_cjk_mixed_rejected():
     # "萬五" mixes a large value (10000) with a small digit — reject.
     assert string_number("萬五") is None
+
+
+def test_overflow_to_infinity_rejected():
+    # f64 silently overflows to inf around 308 digits. Guard against
+    # inf escaping to the Python side where a caller would treat it
+    # as "this is a huge number".
+    assert string_number("1" * 400) is None
+    assert string_number("九" * 400) is None
+
+
+def test_nan_and_inf_literals_rejected():
+    # Rust f64::from_str accepts these tokens; we don't.
+    assert string_number("inf") is None
+    assert string_number("-inf") is None
+    assert string_number("NaN") is None
+    assert string_number("nan") is None

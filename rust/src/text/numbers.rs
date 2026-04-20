@@ -47,30 +47,34 @@ pub fn string_number(text: &str) -> Option<f64> {
     }
 
     // Fast path: ASCII int/float (including signs, decimal point, e-notation).
-    if let Ok(v) = text.parse::<f64>() {
-        return Some(v);
-    }
+    let raw = if let Ok(v) = text.parse::<f64>() {
+        Some(v)
+    } else {
+        // Per-char numeric lookup. If any char lacks a value, bail.
+        let values: Vec<f64> = text
+            .chars()
+            .map(numeric_value)
+            .collect::<Option<Vec<_>>>()?;
 
-    // Per-char numeric lookup. If any char lacks a value, bail.
-    let values: Vec<f64> = text
-        .chars()
-        .map(numeric_value)
-        .collect::<Option<Vec<_>>>()?;
+        if values.len() == 1 {
+            Some(values[0])
+        } else if values
+            .iter()
+            .all(|&v| v.fract() == 0.0 && (0.0..10.0).contains(&v))
+        {
+            // Multi-character: only plain 0..10 integer digits accumulate.
+            // Rejects "3½" (3 + 0.5), "ⅯⅮⅭ" (1000+500+100), mixed Nd+Nl.
+            Some(values.iter().fold(0.0, |acc, &v| acc * 10.0 + v))
+        } else {
+            None
+        }
+    };
 
-    if values.len() == 1 {
-        return Some(values[0]);
-    }
-
-    // Multi-character: only plain 0..10 integer digits accumulate.
-    // Rejects "3½" (3 + 0.5), "ⅯⅮⅭ" (1000+500+100), mixed Nd+Nl, etc.
-    if values
-        .iter()
-        .all(|&v| v.fract() == 0.0 && (0.0..10.0).contains(&v))
-    {
-        return Some(values.iter().fold(0.0, |acc, &v| acc * 10.0 + v));
-    }
-
-    None
+    // Guard against inf / NaN: very long digit runs overflow f64 to
+    // infinity, and some exotic ASCII inputs parse as NaN ("nan",
+    // "inf", "-inf"). Treat these as unparseable — f64 silently
+    // swallows overflow but the caller expects a real number.
+    raw.filter(|v| v.is_finite())
 }
 
 /// Numeric value of a single char, or `None` if it has no Unicode
@@ -329,5 +333,25 @@ mod tests {
     fn cjk_mixed_rejected() {
         // "萬五" — 10000 and 5 mixed; 10000 isn't a 0..10 digit, bail.
         assert_eq!(string_number("萬五"), None);
+    }
+
+    #[test]
+    fn overflow_to_infinity_rejected() {
+        // f64 silently overflows to inf somewhere around 308 digits.
+        // The caller expects a real number, not inf — return None.
+        let huge = "1".repeat(400);
+        assert_eq!(string_number(&huge), None);
+        // Same via the CJK accumulation path.
+        let huge_cjk = "九".repeat(400);
+        assert_eq!(string_number(&huge_cjk), None);
+    }
+
+    #[test]
+    fn nan_and_inf_literals_rejected() {
+        // f64::from_str accepts these; we don't.
+        assert_eq!(string_number("inf"), None);
+        assert_eq!(string_number("-inf"), None);
+        assert_eq!(string_number("NaN"), None);
+        assert_eq!(string_number("nan"), None);
     }
 }
