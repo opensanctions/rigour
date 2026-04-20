@@ -87,7 +87,7 @@ are no per-repo adapter copies.
 - `schema_type_tag(schema) -> NameTypeTag` (already lives here).
 - `PROP_PART_TAGS: tuple[tuple[str, NamePartTag], ...]` (already lives here).
 - **New:** `entity_names(entity, props=None, *, infer_initials=False,
-  phonetics=False, numerics=False, consolidate=False) -> set[Name]` —
+  phonetics=True, numerics=True, consolidate=True) -> set[Name]` —
   reads properties off the entity, packages them into rigour's input shape,
   and forwards to `rigour.names.analyze_names`. This is the unified
   replacement for the two near-duplicate `entity_names()` functions in
@@ -96,11 +96,13 @@ are no per-repo adapter copies.
   no concept of property names.
 
 **rigour** owns the name engine:
-- `analyze_names(names, type_tag, part_tags, *, infer_initials=False,
-  phonetics=False, numerics=False, consolidate=False) -> set[Name]` —
+- `analyze_names(type_tag, names, part_tags, *, infer_initials=False,
+  phonetics=True, numerics=True, consolidate=True) -> set[Name]` —
   single public API (Phase 5). Accepts plain strings + a
   `Mapping[NamePartTag, Sequence[str]]`. Never sees `EntityProxy`, never
-  imports FTM.
+  imports FTM. `phonetics`, `numerics`, `consolidate` default to
+  `True` (suits the matcher and the indexer's needs); `infer_initials`
+  defaults to `False` because initials are a query-side concept.
 - The primitives that underpin it (`tokenize_name`, `prenormalize_name`,
   `remove_person_prefixes`, `remove_org_prefixes`, `replace_org_types_compare`,
   `tag_org_name`, `tag_person_name`) stay importable because downstream code
@@ -119,19 +121,31 @@ becomes a re-export; the flattening to `name_parts` / `name_phonemes` /
 ### The `analyze_names` contract
 
 ```python
-# rigour/names/analysis.py  (thin Python wrapper around rigour._core._analyze_names)
+# rigour/names/analyze.py  (thin Python wrapper around rigour._core._analyze_names)
 def analyze_names(
-    names: Sequence[str],
     type_tag: NameTypeTag,
-    part_tags: Mapping[NamePartTag, Sequence[str]] = {},
+    names: Sequence[str],
+    part_tags: Optional[Mapping[NamePartTag, Sequence[str]]] = None,
     *,
     infer_initials: bool = False,
-    phonetics: bool = False,
-    numerics: bool = False,
-    consolidate: bool = False,
+    phonetics: bool = True,
+    numerics: bool = True,
+    consolidate: bool = True,
 ) -> set[Name]:
     ...
 ```
+
+Argument ordering puts `type_tag` first — the type is the most
+load-bearing piece of context for the whole call; `names` is the data
+it operates on; `part_tags` is optional annotation. Mirrors the old
+nomenklatura `entity_names(type_tag, entity, ...)` signature.
+
+`phonetics`, `numerics`, and `consolidate` default to `True` —
+suits both the matcher and the indexer's primary call shape.
+`infer_initials` defaults to `False` because initials are a
+query-side concept (only one side of a match sets them). **Indexers
+must pass `consolidate=False`** to keep partial-name recall. See
+the per-flag rationale below.
 
 Rationale for the shape:
 
@@ -166,32 +180,36 @@ Rationale for the shape:
   `entity_names` both extends `names` with `weakAlias` values *and*
   populates `part_tags[NICK]` with them. Rigour stays pure — `names` is
   just names, `part_tags` is just annotation.
-- **`consolidate` is opt-in, default `False`.** When `True`, the returned
-  set has `Name.consolidate_names` applied to it — short names that are
-  substrings of longer names in the same set are dropped. This is a
-  *matching-side* policy (prevents a short "John Smith" from spuriously
-  matching a query "John K Smith" when the longer candidate "John R
-  Smith" would correctly mismatch); the indexer must not use it or it
-  loses recall on partial-name searches. Folding consolidation into the
-  same FFI call avoids an extra Python→Rust round-trip in nomenklatura's
-  matcher, which is the call site that needs it. See Divergences row #9.
-- **`phonetics` is opt-in, default `False`.** When `True`, `NamePart.metaphone`
-  is populated (the jellyfish/rphonetic `metaphone` of the part's ASCII form,
-  gated on `latinize && !numeric && len(ascii) > 2`). When `False`, the field
-  stays `None` and the phonetics crate isn't called. Consumers that feed
-  `part.metaphone` into downstream fields — yente's `name_phonemes` ES field
-  is the live example — pass `True`. Callers that don't consume the
-  property (nomenklatura logic-v2 scoring, display pipelines, entity export,
-  enrichment) leave it off and save a metaphone call per part.
-- **`numerics` is opt-in, default `False`.** When `True`, the post-tagger
-  `_infer_part_tags` pass adds `Symbol(NUMERIC, int_value)` for numeric-
-  looking name parts that the AC tagger's ordinal list didn't already
-  match (e.g. large arbitrary numbers like `"123456789"` in `"123456789
-  Batallion"`, not the cardinals/ordinals the AC list covers). When
-  `False`, parts still get their `NamePartTag.NUM` tag (cheap structural
-  info) but no NUMERIC symbol is added — matchers that use numeric-symbol
-  overlap for disambiguation pass `True`; callers that only need the tag
-  structure leave it off.
+- **`consolidate` defaults to `True` — indexers must opt out.** When
+  `True` (default), the returned set has `Name.consolidate_names`
+  applied: short names that are substrings of longer names in the
+  same set are dropped. This is the matching-side shape (prevents a
+  short "John Smith" from spuriously matching a query "John K Smith"
+  when the longer candidate "John R Smith" would correctly
+  mismatch). **Indexer call sites must pass `consolidate=False`** to
+  preserve partial-name recall in ES; without the opt-out, yente
+  would silently lose index coverage on aliases that are substrings
+  of primary names. Folding consolidation into the same FFI call
+  avoids an extra Python→Rust round-trip in nomenklatura's matcher,
+  which is the call site that gets the default behaviour for free.
+  See Divergences row #9.
+- **`phonetics` defaults to `True`.** When `True`, `NamePart.metaphone`
+  is populated (the jellyfish/rphonetic `metaphone` of the part's ASCII
+  form, gated on `latinize && !numeric && len(ascii) > 2`). When
+  `False`, the field stays `None` and the phonetics crate isn't called.
+  Yente's indexer consumes `part.metaphone` via the `name_phonemes` ES
+  field and gets the default behaviour; nomenklatura logic-v2 scoring
+  doesn't score on phoneme overlap and can pass `False` to skip the
+  metaphone call per part (marginal saving).
+- **`numerics` defaults to `True`.** When `True`, the post-tagger
+  `_infer_part_tags` pass adds `Symbol(NUMERIC, int_value)` for
+  numeric-looking name parts that the AC tagger's ordinal list didn't
+  already match (e.g. large arbitrary numbers like `"123456789"` in
+  `"123456789 Batallion"`, not the cardinals/ordinals the AC list
+  covers). When `False`, parts still get their `NamePartTag.NUM` tag
+  (cheap structural info) but no NUMERIC symbol is added — a caller
+  that wants only the tag structure and no numeric-symbol overlap
+  scoring opts out.
 - **Return type is `set[Name]`.** Both current callsites use a set, and
   deduplication happens inside `analyze_names` anyway, so returning one is
   truth in advertising. Hashing is by the `Name` object's identity for now
@@ -293,9 +311,9 @@ def entity_names(
     props: Optional[Sequence[str]] = None,
     *,
     infer_initials: bool = False,
-    phonetics: bool = False,
-    numerics: bool = False,
-    consolidate: bool = False,
+    phonetics: bool = True,
+    numerics: bool = True,
+    consolidate: bool = True,
 ) -> Set[Name]:
     """Build Name objects from an FTM entity.
 
@@ -310,10 +328,11 @@ def entity_names(
     not contribute standalone names. Exception: `weakAlias` is both a
     standalone name and a NICK annotation on other names.
 
-    `consolidate=True` drops short names that are substrings of longer
-    names in the result set (matching-side policy — avoids a short alias
-    masking a longer-name mismatch). Indexers should leave this as
-    `False` to preserve partial-name recall.
+    `consolidate=True` (the default) drops short names that are
+    substrings of longer names in the result set (matching-side
+    policy — avoids a short alias masking a longer-name mismatch).
+    Indexers **must pass `consolidate=False`** to preserve
+    partial-name recall.
     """
     type_tag = schema_type_tag(entity.schema)
 
@@ -424,11 +443,11 @@ everyone.
 | 2 | `remove_org_prefixes` | yes | **no** | **Run it.** Yente's omission looks like a simple oversight — stripping a leading "The" is plainly the right thing for both matching and indexing. |
 | 3 | Tag parts from `PROP_PART_TAGS` (firstName→GIVEN etc.) | yes | **no** | **Run it.** Yente currently discards tag information that FTM already knows. For matching and for symbol-driven index tokens, this is information it would otherwise re-infer less accurately. |
 | 4 | `weakAlias` added to the `names` list | no | **yes** | **Keep yente's behaviour as the unified rule: treat `weakAlias` both as a full name AND as NICK-tagged parts on the main names.** Weak aliases *are* names (a crawler explicitly asserted so); they deserve their own `Name` object. Tagging them as NICK on other names is additive — FTM's `entity_names` populates both `names` and `part_tags[NICK]` with the weak-alias values. Nomenklatura gains coverage; yente keeps coverage. |
-| 5 | `is_query` / `any_initials` | yes (matching) | n/a (indexing never has a query side) | **Parameter stays but renamed to `infer_initials`** to describe the behaviour, not the caller. Default `False`; matcher sets `True` only on the query entity. Indexer always passes `False`. |
+| 5 | `is_query` / `any_initials` | yes (matching) | n/a (indexing never has a query side) | **Parameter stays but renamed to `infer_initials`** to describe the behaviour, not the caller. Default `False` — only the matcher's query side passes `True`; indexer and matcher-candidate side get the default. |
 | 6 | `@lru_cache(maxsize=200)` at the adapter | yes | no | **Cache lives on the FTM-side `entity_names` as temporary scaffolding** — until Phase 5 of `rust.md` makes the pipeline fast enough to drop it. Keyed by `EntityProxy.__hash__` (ID-only). Do not build features on top of this cache. |
 | 7 | `Symbol.Category.INITIAL` treated as non-matchable | n/a | yes (yente's `NON_MATCHABLE_SYMBOLS`) | **Move the `is_matchable` predicate onto `Symbol` in rigour** — it's semantic data about the symbol category, not an indexer policy. Yente keeps using it for index filtering; nomenklatura gets it for free if ever relevant. |
 | 8 | `fatherName` / `motherName` tagging | PATRONYMIC / MATRONYMIC | same | **Feed `fatherName` and `motherName` values into both `part_tags[MIDDLE]` and `part_tags[FAMILY]`.** These properties are genuinely ambiguous — Slavic sources use them as patronymics (structurally MIDDLE, sitting between given and family), Hispanic sources use them as additional family names (structurally FAMILY). Rather than detect locale or force crawlers to choose, tag both. The matcher aligns whichever interpretation actually fires against the candidate. No `PATRONYMIC`/`MATRONYMIC` tags produced by the FTM adapter (they remain in the `NamePartTag` enum for backwards compatibility and any future hand-tagged use). No per-call override kwargs — the multi-tag is the whole policy. |
-| 9 | `Name.consolidate_names` — drop short substring names | called *after* `entity_names` in `logic_v2/names/match.py:234-235` | **not called** | **Fold in as an opt-in `consolidate` flag on `entity_names` / `analyze_names`, defaulting `False`.** The matcher passes `True` (and drops the current explicit `Name.consolidate_names(...)` calls in `match.py`); the indexer leaves it as `False` to preserve partial-name recall in ES. Folding it inside the single FFI call keeps Phase 5's "one crossing per entity" property even for the matching side. Zavod's ExportPolicy overrides (e.g. `test_consolidate_names_never_remove_ofac_names`) are a separate dataset-level policy that consumes the primitive — unaffected by this move. |
+| 9 | `Name.consolidate_names` — drop short substring names | called *after* `entity_names` in `logic_v2/names/match.py:234-235` | **not called** | **Fold in as a `consolidate` flag on `entity_names` / `analyze_names`, defaulting `True`.** The matcher gets the default behaviour (and drops the current explicit `Name.consolidate_names(...)` calls in `match.py`); **the indexer must pass `consolidate=False`** to preserve partial-name recall in ES. Folding consolidation inside the single FFI call keeps Phase 5's "one crossing per entity" property on the matching side. Zavod's ExportPolicy overrides (e.g. `test_consolidate_names_never_remove_ofac_names`) are a separate dataset-level policy that consumes the primitive — unaffected by this move. |
 
 Items 2, 3, 4 are the biggest real changes: yente's indexed representation
 gains org-prefix stripping, property-tag hints, and weak-alias-as-name. These

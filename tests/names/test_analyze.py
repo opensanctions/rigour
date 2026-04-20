@@ -29,7 +29,7 @@ def _part_tags(name: Name) -> dict[str, NamePartTag]:
 
 
 def test_person_simple():
-    result = analyze_names(["John Doe"], NameTypeTag.PER)
+    result = analyze_names(NameTypeTag.PER, ["John Doe"])
     name = _only(result)
     assert name.tag == NameTypeTag.PER
     assert name.form == "john doe"
@@ -38,8 +38,8 @@ def test_person_simple():
 
 def test_person_with_part_tags():
     result = analyze_names(
-        ["John Doe"],
         NameTypeTag.PER,
+        ["John Doe"],
         {NamePartTag.GIVEN: ["John"], NamePartTag.FAMILY: ["Doe"]},
     )
     name = _only(result)
@@ -50,8 +50,8 @@ def test_person_with_part_tags():
 
 def test_person_three_tags_slavic():
     result = analyze_names(
-        ["Vladimir Vladimirovitch Putin"],
         NameTypeTag.PER,
+        ["Vladimir Vladimirovitch Putin"],
         {
             NamePartTag.GIVEN: ["Vladimir"],
             NamePartTag.MIDDLE: ["Vladimirovitch"],
@@ -70,8 +70,8 @@ def test_person_multi_token_given():
     # "claude" parts — Name.tag_text tokenises the value and walks the
     # name parts matching the sequence.
     result = analyze_names(
-        ["Jean Claude Juncker"],
         NameTypeTag.PER,
+        ["Jean Claude Juncker"],
         {
             NamePartTag.GIVEN: ["Jean Claude"],
             NamePartTag.FAMILY: ["Juncker"],
@@ -90,9 +90,7 @@ def test_person_multi_token_given():
 def test_company_simple():
     # "Aktiengesellschaft" is the German spelt-out form of "AG" — the
     # org-types table rewrites it to "ag" at compare-form time.
-    result = analyze_names(
-        ["Siemens Aktiengesellschaft"], NameTypeTag.ORG
-    )
+    result = analyze_names(NameTypeTag.ORG, ["Siemens Aktiengesellschaft"])
     name = _only(result)
     assert name.form == "siemens ag"
     assert any(
@@ -105,7 +103,7 @@ def test_entity_upgrade_to_org():
     # ORG_CLASS span whose len(span) (character count) is 3 > 2.
     # _infer_part_tags promotes ENT → ORG on that threshold.
     result = analyze_names(
-        ["Acme Limited Liability Partnership"], NameTypeTag.ENT
+        NameTypeTag.ENT, ["Acme Limited Liability Partnership"]
     )
     name = _only(result)
     assert name.tag == NameTypeTag.ORG
@@ -113,7 +111,7 @@ def test_entity_upgrade_to_org():
 
 def test_entity_no_upgrade():
     # ENT name without any ORG_CLASS span stays ENT.
-    result = analyze_names(["Apollo Missions Archive"], NameTypeTag.ENT)
+    result = analyze_names(NameTypeTag.ENT, ["Apollo Missions Archive"])
     name = _only(result)
     assert name.tag == NameTypeTag.ENT
 
@@ -121,7 +119,7 @@ def test_entity_no_upgrade():
 def test_org_prefix_stripped():
     # "The" is a configured org-prefix; remove_org_prefixes drops it.
     result = analyze_names(
-        ["The Siemens Aktiengesellschaft"], NameTypeTag.ORG
+        NameTypeTag.ORG, ["The Siemens Aktiengesellschaft"]
     )
     name = _only(result)
     assert not name.form.startswith("the ")
@@ -133,7 +131,7 @@ def test_org_prefix_stripped():
 
 
 def test_person_prefix_stripped():
-    result = analyze_names(["Mr. John Smith"], NameTypeTag.PER)
+    result = analyze_names(NameTypeTag.PER, ["Mr. John Smith"])
     name = _only(result)
     assert "mr" not in name.form.split()
     assert "john" in name.form.split()
@@ -146,7 +144,7 @@ def test_person_prefix_stripped():
 def test_infer_initials_query_side():
     # Query-side "J Smith": single-char part gets INITIAL symbol.
     result = analyze_names(
-        ["J Smith"], NameTypeTag.PER, infer_initials=True
+        NameTypeTag.PER, ["J Smith"], infer_initials=True
     )
     name = _only(result)
     initials = {
@@ -159,7 +157,7 @@ def test_infer_initials_off():
     # Without the flag and without a GIVEN/MIDDLE tag on "J",
     # no INITIAL symbol fires.
     result = analyze_names(
-        ["J Smith"], NameTypeTag.PER, infer_initials=False
+        NameTypeTag.PER, ["J Smith"], infer_initials=False
     )
     name = _only(result)
     initials = {
@@ -172,10 +170,11 @@ def test_infer_initials_off():
 
 
 def test_consolidate_drops_substring():
-    # Two input pairs, both should reduce to the longer name only.
+    # Two input pairs, both should reduce to the longer name only
+    # under the default `consolidate=True`.
     # Pair 1: adjacent-shape substring ("John Smith" ⊂ "John R Smith").
     short_long_adjacent = ["John Smith", "John R Smith"]
-    pair1 = analyze_names(short_long_adjacent, NameTypeTag.PER, consolidate=True)
+    pair1 = analyze_names(NameTypeTag.PER, short_long_adjacent)
     assert len(pair1) == 1
     assert _only(pair1).form == "john r smith"
 
@@ -186,14 +185,19 @@ def test_consolidate_drops_substring():
         "Vladimir Putin",
         "Vladimir Vladimirovitch Putin",
     ]
-    pair2 = analyze_names(short_long_slavic, NameTypeTag.PER, consolidate=True)
+    pair2 = analyze_names(NameTypeTag.PER, short_long_slavic)
     assert len(pair2) == 1
     assert _only(pair2).form == "vladimir vladimirovitch putin"
 
-    # Sanity check: without consolidate=True, both names survive.
-    pair1_raw = analyze_names(short_long_adjacent, NameTypeTag.PER)
+    # Opt-out: with consolidate=False both names survive — this is the
+    # indexer-side mode that preserves partial-name recall.
+    pair1_raw = analyze_names(
+        NameTypeTag.PER, short_long_adjacent, consolidate=False
+    )
     assert len(pair1_raw) == 2
-    pair2_raw = analyze_names(short_long_slavic, NameTypeTag.PER)
+    pair2_raw = analyze_names(
+        NameTypeTag.PER, short_long_slavic, consolidate=False
+    )
     assert len(pair2_raw) == 2
 
 
@@ -204,7 +208,7 @@ def test_numerics_on_adds_symbol():
     # A large arbitrary number the AC ordinal list doesn't cover should
     # get a NUMERIC symbol when numerics=True.
     result = analyze_names(
-        ["123456789 Battalion"], NameTypeTag.ORG, numerics=True
+        NameTypeTag.ORG, ["123456789 Battalion"], numerics=True
     )
     name = _only(result)
     numerics = [
@@ -215,7 +219,7 @@ def test_numerics_on_adds_symbol():
 
 def test_numerics_off_tags_but_no_symbol():
     result = analyze_names(
-        ["123456789 Battalion"], NameTypeTag.ORG, numerics=False
+        NameTypeTag.ORG, ["123456789 Battalion"], numerics=False
     )
     name = _only(result)
     # Part still tagged NUM (cheap structural info).
@@ -235,25 +239,25 @@ def test_numerics_off_tags_but_no_symbol():
 
 def test_dedup_by_form():
     # All three casefold to "ibm" — one Name in the result.
-    result = analyze_names(["IBM", "ibm", "Ibm"], NameTypeTag.ORG)
+    result = analyze_names(NameTypeTag.ORG, ["IBM", "ibm", "Ibm"])
     assert len(result) == 1
     assert _only(result).form == "ibm"
 
 
 def test_empty_names():
-    assert analyze_names([], NameTypeTag.PER) == set()
-    assert analyze_names([], NameTypeTag.ORG) == set()
+    assert analyze_names(NameTypeTag.PER, []) == set()
+    assert analyze_names(NameTypeTag.ORG, []) == set()
 
 
 def test_obj_type_tag_no_tagging():
-    result = analyze_names(["Hubble Space Telescope"], NameTypeTag.OBJ)
+    result = analyze_names(NameTypeTag.OBJ, ["Hubble Space Telescope"])
     name = _only(result)
     assert name.tag == NameTypeTag.OBJ
     assert name.symbols == set()
 
 
 def test_unk_type_tag_no_tagging():
-    result = analyze_names(["some mystery string"], NameTypeTag.UNK)
+    result = analyze_names(NameTypeTag.UNK, ["some mystery string"])
     name = _only(result)
     assert name.tag == NameTypeTag.UNK
     assert name.symbols == set()

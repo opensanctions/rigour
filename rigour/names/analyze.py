@@ -40,27 +40,27 @@ __all__ = ["analyze_names"]
 
 
 def analyze_names(
-    names: Sequence[str],
     type_tag: NameTypeTag,
+    names: Sequence[str],
     part_tags: Optional[Mapping[NamePartTag, Sequence[str]]] = None,
     *,
     infer_initials: bool = False,
-    phonetics: bool = False,
-    numerics: bool = False,
-    consolidate: bool = False,
+    phonetics: bool = True,
+    numerics: bool = True,
+    consolidate: bool = True,
 ) -> Set[Name]:
     """Build a set of tagged [Name][rigour.names.Name] objects from raw strings.
 
     Args:
-        names: Raw name strings as harvested from the source entity.
-            Empty strings and inputs that normalise to empty are
-            dropped. Duplicates (after prenormalisation) are de-duplicated.
         type_tag: The [NameTypeTag][rigour.names.NameTypeTag] for
             every name in this batch. Drives which prefix/org-type/
             tagger passes run: `PER` → person prefix strip + person
             tagger; `ORG`/`ENT` → org-type replacement + org prefix
             strip + org tagger; `OBJ`/`UNK` → no tagging, just
             construction.
+        names: Raw name strings as harvested from the source entity.
+            Empty strings and inputs that normalise to empty are
+            dropped. Duplicates (after prenormalisation) are de-duplicated.
         part_tags: Pre-classified part annotations, typically produced
             by an adapter that reads structured name-part properties
             off the source entity (e.g. firstName → `GIVEN`,
@@ -71,29 +71,34 @@ def analyze_names(
         infer_initials: Passed through to
             [tag_person_name][rigour.names.tagging.tag_person_name].
             When `True`, every single-character latin name part is
-            tagged with an `INITIAL` symbol (matching-query side, e.g.
-            `"J Smith"`). When `False`, only parts already tagged as
-            `GIVEN` / `MIDDLE` get `INITIAL` symbols. Ignored for non-
-            person names.
+            tagged with an `INITIAL` symbol — useful on a free-text
+            query side where `"J Smith"` arrives without a label on
+            `"J"`. When `False` (default), only parts already tagged
+            as `GIVEN` / `MIDDLE` pick up `INITIAL` symbols. Default
+            `False` because initials are a query-side concept; the
+            indexer and the candidate side of a matcher pass `False`,
+            so the leaner default suits the common call. Ignored for
+            non-person names.
         phonetics: Accepted for API forward-compatibility with the
             future Rust port. In this Python shim it has **no runtime
             effect** — `NamePart.metaphone` is a computed property
             that always runs on access. Once the Rust port lands,
             `phonetics=False` will skip the metaphone computation at
-            construction time; until then, callers can pass the flag
-            without behaviour change.
-        numerics: When `True`, numeric-looking name parts that the AC
-            tagger's ordinal list didn't cover get a
-            `Symbol(NUMERIC, int_value)` applied. When `False`
-            (default), parts still get `NamePartTag.NUM` (cheap
-            structural info) but no NUMERIC symbol is emitted.
-            Matchers that score on numeric-symbol overlap pass
-            `True`; display/export paths leave it off.
-        consolidate: When `True`, the returned set has
+            construction time; until then, the flag is inert.
+        numerics: When `True` (default), numeric-looking name parts
+            that the AC tagger's ordinal list didn't cover get a
+            `Symbol(NUMERIC, int_value)` applied. When `False`, parts
+            still get `NamePartTag.NUM` (cheap structural info) but
+            no NUMERIC symbol is emitted. Callers that don't use
+            numeric-symbol overlap for scoring can save the symbol
+            allocation.
+        consolidate: When `True` (default), the returned set has
             [Name.consolidate_names][rigour.names.Name.consolidate_names]
             applied — short names that are substrings of longer names
-            in the same set are dropped. Matching-side policy; indexers
-            should leave this `False` to preserve partial-name recall.
+            in the same set are dropped. **Indexers should pass
+            `consolidate=False`** to preserve partial-name recall
+            (e.g. letting `"John Smith"` match `"John K Smith"` from
+            the other side).
 
     Returns:
         A set of tagged `Name` objects, de-duplicated by normalised
