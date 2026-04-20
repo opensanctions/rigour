@@ -255,7 +255,11 @@ fn build_person_tagger(flags: Normalize) -> Tagger {
     // Python parity: skip records with <2 distinct normalised aliases —
     // a mapping of one form to itself adds no matching power. Matches
     // tagging.py:234.
-    for line in person_names::raw().lines() {
+    //
+    // `corpus` is scoped to this loop — the ~8.5 MB decompressed buffer
+    // drops as soon as the AC automaton below is assembled.
+    let corpus = person_names::decompressed();
+    for line in corpus.lines() {
         let line = line.trim();
         if line.is_empty() {
             continue;
