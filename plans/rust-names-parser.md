@@ -87,7 +87,7 @@ are no per-repo adapter copies.
 - `schema_type_tag(schema) -> NameTypeTag` (already lives here).
 - `PROP_PART_TAGS: tuple[tuple[str, NamePartTag], ...]` (already lives here).
 - **New:** `entity_names(entity, props=None, *, infer_initials=False,
-  father_name_tag=PATRONYMIC, mother_name_tag=MATRONYMIC) -> set[Name]` —
+  phonetics=False, numerics=False, consolidate=False) -> set[Name]` —
   reads properties off the entity, packages them into rigour's input shape,
   and forwards to `rigour.names.analyze_names`. This is the unified
   replacement for the two near-duplicate `entity_names()` functions in
@@ -96,8 +96,9 @@ are no per-repo adapter copies.
   no concept of property names.
 
 **rigour** owns the name engine:
-- `analyze_names(names, type_tag, part_tags, *, infer_initials=False) ->
-  set[Name]` — single public API (Phase 5). Accepts plain strings + a
+- `analyze_names(names, type_tag, part_tags, *, infer_initials=False,
+  phonetics=False, numerics=False, consolidate=False) -> set[Name]` —
+  single public API (Phase 5). Accepts plain strings + a
   `Mapping[NamePartTag, Sequence[str]]`. Never sees `EntityProxy`, never
   imports FTM.
 - The primitives that underpin it (`tokenize_name`, `prenormalize_name`,
@@ -125,6 +126,8 @@ def analyze_names(
     part_tags: Mapping[NamePartTag, Sequence[str]] = {},
     *,
     infer_initials: bool = False,
+    phonetics: bool = False,
+    numerics: bool = False,
     consolidate: bool = False,
 ) -> set[Name]:
     ...
@@ -164,6 +167,23 @@ Rationale for the shape:
   loses recall on partial-name searches. Folding consolidation into the
   same FFI call avoids an extra Python→Rust round-trip in nomenklatura's
   matcher, which is the call site that needs it. See Divergences row #9.
+- **`phonetics` is opt-in, default `False`.** When `True`, `NamePart.metaphone`
+  is populated (the jellyfish/rphonetic `metaphone` of the part's ASCII form,
+  gated on `latinize && !numeric && len(ascii) > 2`). When `False`, the field
+  stays `None` and the phonetics crate isn't called. Matchers and indexers
+  that feed `name_phonemes` into Elasticsearch or into Levenshtein-on-phonemes
+  comparisons pass `True`; lightweight callers (display pipelines, entity
+  export, enrichment that doesn't score on phonemes) leave it off and save
+  a metaphone call per part.
+- **`numerics` is opt-in, default `False`.** When `True`, the post-tagger
+  `_infer_part_tags` pass adds `Symbol(NUMERIC, int_value)` for numeric-
+  looking name parts that the AC tagger's ordinal list didn't already
+  match (e.g. large arbitrary numbers like `"123456789"` in `"123456789
+  Batallion"`, not the cardinals/ordinals the AC list covers). When
+  `False`, parts still get their `NamePartTag.NUM` tag (cheap structural
+  info) but no NUMERIC symbol is added — matchers that use numeric-symbol
+  overlap for disambiguation pass `True`; callers that only need the tag
+  structure leave it off.
 - **Return type is `set[Name]`.** Both current callsites use a set, and
   deduplication happens inside `analyze_names` anyway, so returning one is
   truth in advertising. Hashing is by the `Name` object's identity for now
@@ -184,7 +204,10 @@ for raw in names:
         form = remove_org_prefixes(form)             # Phase 3
     if form in seen: continue
     seen.insert(form)
-    name = Name::new(raw, form, type_tag)            # Phase 2 — parts+derivations eager
+    # Phase 2 construction. ascii/comparable/latinize/numeric/integer are
+    # always eager (cheap). metaphone is eager iff `phonetics` — otherwise
+    # NamePart.metaphone returns None.
+    name = Name::new(raw, form, type_tag, phonetics)
     for (part_tag, values) in part_tags:
         for v in values:
             name.tag_text(prenormalize_name(v), part_tag)
@@ -192,6 +215,8 @@ for raw in names:
         tag_org_name(&mut name)                      # Phase 4 AC tagger
     if type_tag == PER:
         tag_person_name(&mut name, infer_initials)   # Phase 4 AC tagger
+    infer_part_tags(&mut name, numerics)             # LEGAL/NUM/STOP tags;
+                                                     # numeric Symbols iff numerics
     names.push(name)
 if consolidate:
     names = consolidate_names(names)                 # drop substring-dominated names
@@ -200,7 +225,8 @@ return names
 
 No Python callbacks. No FFI crossings during the loop. Everything the pipeline
 needs is either embedded data (AC tables, org types, prefixes, symbols) or
-precomputed on `NamePart` at construction time (ascii, comparable, metaphone).
+precomputed on `NamePart` at construction time (ascii, comparable, plus
+metaphone if `phonetics=True`).
 
 ## The FTM-side adapter
 
@@ -259,6 +285,8 @@ def entity_names(
     props: Optional[Sequence[str]] = None,
     *,
     infer_initials: bool = False,
+    phonetics: bool = False,
+    numerics: bool = False,
     consolidate: bool = False,
 ) -> Set[Name]:
     """Build Name objects from an FTM entity.
@@ -306,6 +334,8 @@ def entity_names(
         type_tag,
         part_tags,
         infer_initials=infer_initials,
+        phonetics=phonetics,
+        numerics=numerics,
         consolidate=consolidate,
     )
 ```
@@ -336,9 +366,10 @@ from followthemoney.names import entity_names  # re-export or direct use
 
 All existing callers of the old `entity_names(type_tag, entity, prop, is_query)`
 signature update to the new `entity_names(entity, props=[prop] if prop else None,
-infer_initials=is_query)` shape. The `type_tag` parameter goes away — FTM
-infers it from the schema, and the old call sites always computed it from the
-entity anyway.
+infer_initials=is_query, phonetics=True, numerics=True)` shape. The matcher
+needs both phoneme overlap and numeric-symbol overlap, so it opts in on both.
+The `type_tag` parameter goes away — FTM infers it from the schema, and the
+old call sites always computed it from the entity anyway.
 
 ### yente (indexing)
 
@@ -353,7 +384,16 @@ Uses `Name` to produce three flat field lists for Elasticsearch:
 
 ```python
 from followthemoney.names import entity_names
+
+# Indexer call
+entity_names(entity, phonetics=True, numerics=True)
 ```
+
+Yente needs `phonetics=True` because `name_phonemes` is an ES field derived
+from `part.metaphone`, and `numerics=True` because `name_symbols` includes
+NUMERIC IDs from large-number parts that the AC ordinal list doesn't cover.
+Both have always been implicit in today's Python pipeline; the new
+`analyze_names` makes them explicit opt-ins.
 
 The flattening in `build_indexable_entity_doc` is untouched — it is yente's
 business to decide what ends up in ES, and a couple of `for` loops over a
@@ -435,17 +475,20 @@ Phase 5 in `rust.md` is the landing point. Incremental staging:
    `nomenklatura/matching/logic_v2/names/analysis.py:entity_names` with a
    re-export from FTM (or update callers directly). Delete the now-unused
    `replace_org_types_compare(..., normalizer=...)` callsite. Callers pass
-   `infer_initials=True` only on the query side, and `consolidate=True`
-   on both the query and candidate call (matching the current behaviour
-   of `match.py:234-235`). Drop the explicit
+   `phonetics=True, numerics=True` on both sides (matching's scoring uses
+   both), `infer_initials=True` only on the query side, and
+   `consolidate=True` on both the query and candidate call (matching the
+   current behaviour of `match.py:234-235`). Drop the explicit
    `Name.consolidate_names(...)` calls from `match.py` — the flag on
    `entity_names` replaces them.
 4. **Migrate yente.** Replace `yente/data/util.py:entity_names` with a
-   re-export from FTM. Drop yente's `NON_MATCHABLE_SYMBOLS` +
-   `is_matchable_symbol` (use `Symbol.is_matchable`). This is where the
-   Divergences items 2/3/4 actually change behaviour — expect a small set
-   of fixture-test updates around org-prefix stripping, property-tagged
-   parts, and weak-alias-as-name.
+   re-export from FTM. Indexer passes `phonetics=True, numerics=True`
+   (they feed `name_phonemes` and `name_symbols` in ES). Drop yente's
+   `NON_MATCHABLE_SYMBOLS` + `is_matchable_symbol` (use
+   `Symbol.is_matchable`). This is where the Divergences items 2/3/4
+   actually change behaviour — expect a small set of fixture-test
+   updates around org-prefix stripping, property-tagged parts, and
+   weak-alias-as-name.
 5. **Collapse the Python shim into the single Rust call** (Phase 5 proper).
    The API does not change; only the implementation moves. Benchmarks
    validate the crossing-reduction claim.
