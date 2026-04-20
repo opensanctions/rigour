@@ -1,258 +1,177 @@
-"""
-#### Organization and Company Types Database
+"""Organisation and company-types database.
 
-This module provides functionality to normalize and replace organization types - such as company
-legal forms - in an entity name. The objective is to standardize the representation of these types
-and to facilitate name matching on organizations and companies.
+Normalise and replace organisation types — such as company legal
+forms — in an entity name. The objective is to standardise the
+representation of these types and to facilitate name matching on
+organisations and companies.
 
-This previous existed as part of `fingerprints` library. The implementation in `rigour` tries to
-make a clearer separation between other string cleaning a user may want to perform on a company name
-(eg. romanisation) and the company type detection logic. This module only handles the latter.
-
-Please improve this by adding more organization types to the database located here:
-
-* [org_types.yml](https://github.com/opensanctions/rigour/blob/main/resources/names/org_types.yml)
-
-The database is originally based on three different sources:
+The resource data lives in
+[org_types.yml](https://github.com/opensanctions/rigour/blob/main/resources/names/org_types.yml).
+The database is originally based on three sources:
 
 * A [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1Cw2xQ3hcZOAgnnzejlY5Sv3OeMxKePTqcRhXQU8rCAw/edit?ts=5e7754cf#gid=0)
   created by OCCRP.
-* The ISO 20275: [Entity Legal Forms Code List](https://www.gleif.org/en/about-lei/code-lists/iso-20275-entity-legal-forms-code-list)
-* Wikipedia maintains an index of [types of business entity](https://en.wikipedia.org/wiki/Types_of_business_entity).
+* ISO 20275: [Entity Legal Forms Code List](https://www.gleif.org/en/about-lei/code-lists/iso-20275-entity-legal-forms-code-list).
+* Wikipedia's index of [types of business entity](https://en.wikipedia.org/wiki/Types_of_business_entity).
 
+All four public functions take `normalize_flags` and `cleanup`
+parameters that control how the YAML alias list is normalised at
+match-table build time. The caller is expected to normalise runtime
+input with the *same* flags before calling — see
+[rigour.text.normalize][] for the canonical reference on flag
+semantics and common compositions.
+
+Implementation is Rust-backed via `rigour._core`: an Aho-Corasick
+automaton with a Python-style `(?<!\\w)X(?!\\w)` boundary check,
+compiled once per `(kind, flags, cleanup)` combination.
 """
 
-import sys
-import logging
-from functools import cache, lru_cache
-from normality import squash_spaces
-from typing import Dict, List, Optional, Set, Tuple
+from typing import List, Tuple
 
-from rigour.text.dictionary import Normalizer, Replacer
-from rigour.util import resource_lock, unload_module
+from rigour._core import (
+    extract_org_types as _extract_org_types,
+    remove_org_types as _remove_org_types,
+    replace_org_types_compare as _replace_org_types_compare,
+    replace_org_types_display as _replace_org_types_display,
+)
+from rigour.text.normalize import Cleanup, Normalize
 
-log = logging.getLogger(__name__)
-
-
-def normalize_display(text: Optional[str]) -> Optional[str]:
-    """Normalize the display name for the organization type."""
-    if text is None:
-        return None
-    text = squash_spaces(text)
-    if len(text) == 0:
-        return None
-    return text
+__all__ = [
+    "replace_org_types_compare",
+    "replace_org_types_display",
+    "remove_org_types",
+    "extract_org_types",
+]
 
 
-def _normalize_compare(text: Optional[str]) -> Optional[str]:
-    """Stub normalizer for more heavy string cleanup."""
-    if text is None:
-        return None
-    norm = squash_spaces(text)
-    if len(norm) == 0:
-        return None
-    return norm.casefold()
+def replace_org_types_compare(
+    name: str,
+    normalize_flags: Normalize = Normalize.CASEFOLD,
+    cleanup: Cleanup = Cleanup.Noop,
+    generic: bool = False,
+) -> str:
+    """Replace organisation types in a name with a heavily normalised form.
 
+    Country-specific entity types (e.g. GmbH, Aktiengesellschaft, ООО) are
+    rewritten into a simplified comparison form (e.g. ``gmbh``, ``ag``,
+    ``ooo``) suitable for string-distance matching. The result is meant
+    for comparison pipelines, not for presentation.
 
-@cache
-def _display_replacer(normalizer: Normalizer = normalize_display) -> Replacer:
-    """Get a replacer for the display names of organization types."""
-    from rigour.data.names.org_types import ORG_TYPES
+    Args:
+        name: The text to be processed. Assumed to already be normalised
+            with the same `normalize_flags` + `cleanup` the alias table
+            was built from.
+        normalize_flags: `Normalize` flag
+            set applied to the alias list at build time. Default
+            `Normalize.CASEFOLD` matches production callers
+            (nomenklatura/yente/FTM via `prenormalize_name`).
+        cleanup: `Cleanup` variant applied
+            during alias normalisation. Default `Cleanup.Noop`.
+        generic: If True, substitute the generic form of the organisation
+            type (e.g. ``llc``, ``jsc``) instead of the type-specific
+            compare form. Specs without a `generic` field are left
+            unchanged in generic mode.
 
-    mapping: Dict[str, str] = {}
-    clashes: Set[str] = set()
-    for org_type in ORG_TYPES:
-        display_norm = normalizer(org_type.get("display"))
-        if display_norm is None:
-            continue
-        for alias in org_type.get("aliases", []):
-            alias_norm = normalizer(alias)
-            if alias_norm is None or len(alias_norm.strip()) == 0:
-                continue
-            if alias_norm == display_norm:
-                continue
-            if alias_norm in mapping and mapping[alias_norm] != display_norm:
-                log.warning(
-                    "Duplicate alias: %r (for %r, and %r)",
-                    alias_norm,
-                    display_norm,
-                    mapping[alias_norm],
-                )  # pragma: no cover
-                clashes.add(alias_norm)
-            mapping[alias_norm] = display_norm
-    for alias in clashes:
-        mapping.pop(alias, None)
-
-    unload_module("rigour.data.names.org_types")
-    return Replacer(mapping, ignore_case=True)
+    Returns:
+        The text with recognised organisation types substituted. If every
+        match would reduce the text to an empty string, the original
+        text is returned unchanged.
+    """
+    return _replace_org_types_compare(name, int(normalize_flags), int(cleanup), generic)
 
 
 def replace_org_types_display(
-    name: str, normalizer: Normalizer = normalize_display
+    name: str,
+    normalize_flags: Normalize = Normalize.CASEFOLD | Normalize.SQUASH_SPACES,
+    cleanup: Cleanup = Cleanup.Noop,
 ) -> str:
-    """Replace organization types in the text with their shortened form. This will perform
-    a display-safe (light) form of normalization, useful for shortening spelt-out legal forms
-    into common abbreviations (eg. Siemens Aktiengesellschaft -> Siemens AG).
+    """Replace organisation types in a name with their short display form.
 
-    If the result of the replacement yields an empty string, the original text is returned as-is.
+    Spelt-out legal forms are shortened into common abbreviations
+    (e.g. ``"Siemens Aktiengesellschaft"`` → ``"Siemens AG"``), preserving
+    the case of non-matched portions. If the whole input is uppercase
+    (`str.isupper()`), the whole output is re-uppercased.
 
-    Args:
-        name (str): The text to be processed. It is assumed to be already normalized (see below).
-        normalizer (Callable[[str | None], str | None]): A text normalization function to run on the
-            lookup values before matching to remove text anomalies and make matches more likely.
-
-    Returns:
-        Optional[str]: The text with organization types replaced.
-    """
-    is_uppercase = name.isupper()
-    with resource_lock:
-        replacer = _display_replacer(normalizer=normalizer)
-        out_text = replacer(name)
-    if out_text is None:
-        return name
-    if is_uppercase:
-        out_text = out_text.upper()
-    return out_text
-
-
-@cache
-def _compare_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
-    """Get a replacer for the display names of organization types."""
-    from rigour.data.names.org_types import ORG_TYPES
-
-    mapping: Dict[str, str] = {}
-    for org_type in ORG_TYPES:
-        display_form = normalizer(org_type.get("display"))
-        compare_form = org_type.get("compare", display_form)
-        # Allow for empty compare forms, which are used to indicate that the
-        # organization type be removed before comparison:
-        compare_norm = (
-            normalizer(compare_form)
-            if compare_form is None or len(compare_form) > 0
-            else ""
-        )
-        if compare_norm is None:
-            continue
-        compare_norm = sys.intern(compare_norm)
-        for alias in org_type.get("aliases", []):
-            alias_norm = normalizer(alias)
-            if alias_norm is None:
-                continue
-            if alias_norm in mapping and mapping[alias_norm] != compare_norm:
-                log.warning(
-                    "Duplicate alias: %r (for %r, and %r)",
-                    alias_norm,
-                    compare_norm,
-                    mapping[alias_norm],
-                )  # pragma: no cover
-            mapping[alias_norm] = compare_norm
-
-        display_norm = normalizer(display_form)
-        if display_norm is not None and display_norm not in mapping:
-            mapping[display_norm] = compare_norm
-
-    unload_module("rigour.data.names.org_types")
-    return Replacer(mapping, ignore_case=True)
-
-
-@cache
-def _generic_replacer(normalizer: Normalizer = _normalize_compare) -> Replacer:
-    """Get a replacer for the names of organization types, mapping them to generic types like LLC, JSC."""
-    from rigour.data.names.org_types import ORG_TYPES
-
-    mapping: Dict[str, str] = {}
-    for org_type in ORG_TYPES:
-        generic_norm = normalizer(org_type.get("generic"))
-        if generic_norm is None:
-            continue
-        generic_norm = sys.intern(generic_norm)
-        for alias in org_type.get("aliases", []):
-            alias_norm = normalizer(alias)
-            if alias_norm is None:
-                continue
-            if alias_norm in mapping and mapping[alias_norm] != generic_norm:
-                log.warning(
-                    "Duplicate alias: %r (for %r, and %r)",
-                    alias_norm,
-                    generic_norm,
-                    mapping[alias_norm],
-                )  # pragma: no cover
-            mapping[alias_norm] = generic_norm
-
-        display_norm = normalizer(org_type.get("display"))
-        if display_norm is not None and display_norm not in mapping:
-            mapping[display_norm] = generic_norm
-
-    unload_module("rigour.data.names.org_types")
-    return Replacer(mapping, ignore_case=True)
-
-
-@lru_cache(maxsize=1024)
-def replace_org_types_compare(
-    name: str, normalizer: Normalizer = _normalize_compare, generic: bool = False
-) -> str:
-    """Replace any organization type indicated in the given entity name (often as a prefix or suffix)
-    with a heavily normalized form label. This will re-write country-specific entity types (eg. GmbH)
-    into a simplified spelling suitable for comparison using string distance. The resulting text is
-    meant to be used in comparison processes, but no longer fit for presentation to a user.
+    Matches case-insensitively across Unicode by casefolding a copy of
+    the input internally for the match step — `normalize_flags` must
+    therefore include `Normalize.CASEFOLD` so the alias table is
+    casefolded too. The default does this.
 
     Args:
-        name (str): The text to be processed. It is assumed to be already normalized (see below).
-        normalizer (Callable[[str | None], str | None]): A text normalization function to run on the
-            lookup values before matching to remove text anomalies and make matches more likely.
-        generic (bool): If True, return the generic form of the organization type (e.g. LLC, JSC) instead
-            of the type-specific comparison form (GmbH, AB, NV).
+        name: The text to be processed.
+        normalize_flags: `Normalize` flag
+            set applied to the alias list at build time. Must include
+            `Normalize.CASEFOLD` for Unicode-case-insensitive matching.
+            Default `CASEFOLD | SQUASH_SPACES`.
+        cleanup: `Cleanup` variant applied
+            during alias normalisation. Default `Cleanup.Noop`.
 
     Returns:
-        Optional[str]: The text with organization types replaced.
+        The text with recognised organisation types substituted for
+        their display form. Non-matched regions keep their original case.
     """
-    with resource_lock:
-        _func = _generic_replacer if generic else _compare_replacer
-        replacer = _func(normalizer=normalizer)
-    return replacer(name) or name
-
-
-def extract_org_types(
-    name: str, normalizer: Normalizer = _normalize_compare, generic: bool = False
-) -> List[Tuple[str, str]]:
-    """Match any organization type designation (e.g. LLC, Inc, GmbH) in the given entity name and
-    return the extracted type.
-
-    This can be used as a very poor man's method to determine if a given string is a company name.
-
-    Args:
-        name (str): The text to be processed. It is assumed to be already normalized (see below).
-        normalizer (Callable[[str | None], str | None]): A text normalization function to run on the
-            lookup values before matching to remove text anomalies and make matches more likely.
-        generic (bool): If True, return the generic form of the organization type (e.g. LLC, JSC) instead
-            of the type-specific comparison form (GmbH, AB, NV).
-
-    Returns:
-        Tuple[str, str]: Tuple of the org type as matched, and the compare form of it.
-    """
-    with resource_lock:
-        _func = _generic_replacer if generic else _compare_replacer
-        replacer = _func(normalizer=normalizer)
-    matches: List[Tuple[str, str]] = []
-    for matched in replacer.extract(name):
-        matches.append((matched, replacer.mapping.get(matched, matched)))
-    return matches
+    return _replace_org_types_display(name, int(normalize_flags), int(cleanup))
 
 
 def remove_org_types(
-    name: str, replacement: str = "", normalizer: Normalizer = _normalize_compare
+    name: str,
+    replacement: str = "",
+    normalize_flags: Normalize = Normalize.CASEFOLD,
+    cleanup: Cleanup = Cleanup.Noop,
 ) -> str:
-    """Match any organization type designation (e.g. LLC, Inc, GmbH) in the given entity name and
-    replace it with the given fixed string (empty by default, which signals removal).
+    """Remove organisation-type designations from a name.
+
+    Every recognised alias (LLC, Inc, GmbH, ...) in `name` is replaced
+    with `replacement`. Useful as a preprocessing step when you want
+    the entity name stripped of legal-form noise.
 
     Args:
-        name (str): The text to be processed. It is assumed to be already normalized (see below).
-        normalizer (Callable[[str | None], str | None]): A text normalization function to run on the
-            lookup values before matching to remove text anomalies and make matches more likely.
+        name: The text to be processed. Assumed to already be normalised
+            with the same `normalize_flags` + `cleanup` the alias table
+            was built from.
+        replacement: The string to replace each matched alias with.
+            Default ``""`` (strip).
+        normalize_flags: `Normalize` flag
+            set applied to the alias list at build time. Default
+            `Normalize.CASEFOLD`.
+        cleanup: `Cleanup` variant applied
+            during alias normalisation. Default `Cleanup.Noop`.
 
     Returns:
-        str: The text with organization types replaced/removed.
+        The text with recognised organisation types replaced. May be
+        empty if the input consisted entirely of matched aliases and
+        `replacement` is the empty string.
     """
-    with resource_lock:
-        replacer = _compare_replacer(normalizer=normalizer)
-    return replacer.remove(name, replacement=replacement)
+    return _remove_org_types(name, int(normalize_flags), int(cleanup), replacement)
+
+
+def extract_org_types(
+    name: str,
+    normalize_flags: Normalize = Normalize.CASEFOLD,
+    cleanup: Cleanup = Cleanup.Noop,
+    generic: bool = False,
+) -> List[Tuple[str, str]]:
+    """Find every organisation-type designation in a name.
+
+    Scans `name` for recognised aliases (LLC, Inc, GmbH, ...) and returns
+    the matched substring and its canonical target. A poor-person's
+    "is this a company name?" detector.
+
+    Args:
+        name: The text to be processed. Assumed to already be normalised
+            with the same `normalize_flags` + `cleanup` the alias table
+            was built from.
+        normalize_flags: `Normalize` flag
+            set applied to the alias list at build time. Default
+            `Normalize.CASEFOLD`.
+        cleanup: `Cleanup` variant applied
+            during alias normalisation. Default `Cleanup.Noop`.
+        generic: If True, target values are the generic form (``llc``,
+            ``jsc``) instead of the type-specific compare form. Matches
+            :func:`replace_org_types_compare`.
+
+    Returns:
+        A list of ``(matched_text, target)`` tuples, one per
+        non-overlapping match. Empty if nothing matches.
+    """
+    return _extract_org_types(name, int(normalize_flags), int(cleanup), generic)

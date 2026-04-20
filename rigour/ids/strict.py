@@ -1,5 +1,6 @@
 from typing import Optional
-from normality.transliteration import ascii_text
+
+from normality import ascii_text
 
 from rigour.ids.common import IdentifierFormat
 

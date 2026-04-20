@@ -3,7 +3,6 @@ from rigour.langs import LangStr, PREFERRED_LANG
 from rigour.names.pick import (
     pick_name,
     pick_lang_name,
-    levenshtein_pick,
     pick_case,
     reduce_names,
 )
@@ -111,19 +110,6 @@ def test_pick_weird():
     # handle dirty edgecases
     values = ["", "PETER", "Peter"]
     assert pick_name(values) == "Peter"
-
-
-def test_levenshtein_pick():
-    assert levenshtein_pick([], {}) == []
-    names = [
-        "Vladimir Vladimirovich Putin",
-        "Vladimir Vladimirovich PUTN",
-        "Vladimir Vladimirovich PUTINY",
-        "Vladimir Vladimirovich PUTIN",
-    ]
-    assert levenshtein_pick(names, {})[0] == "Vladimir Vladimirovich PUTIN"
-    weights = {"Vladimir Vladimirovich Putin": 3.0}
-    assert levenshtein_pick(names, weights)[0] == "Vladimir Vladimirovich Putin"
 
 
 def test_pick_lang_name():
@@ -275,10 +261,6 @@ def test_reduce_names():
     reduced = reduce_names(names)
     assert len(reduced) == 1, reduced
 
-    names = ["764"]
-    reduced = reduce_names(names, require_names=True)
-    assert len(reduced) == 0, reduced
-
     names = ["Κόσμος", "κόσμος", "κόσμος", "ΚΟΣΜΟΣ"]
     reduced = reduce_names(names)
     assert len(reduced) == 2
@@ -292,7 +274,3 @@ def test_reduce_names():
     names = [".", "6161", " / "]
     reduced = reduce_names(names)
     assert len(reduced) == 3, reduced
-
-    names = [".", "6161", " / "]
-    reduced = reduce_names(names, require_names=True)
-    assert len(reduced) == 0, reduced

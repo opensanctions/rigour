@@ -3,9 +3,10 @@ from functools import cache, lru_cache
 from rapidfuzz.distance import Levenshtein
 from typing import Dict, Generator, List, Optional, Tuple
 
-from rigour.data import read_jsonl
+from rigour._core import territories_jsonl
+from rigour.data import iter_jsonl_text
 from rigour.territories.territory import Territory
-from rigour.territories.territory import TERRITORIES_FILE, get_index as _get_index
+from rigour.territories.territory import get_index as _get_index
 from rigour.territories.util import clean_code, normalize_territory_name
 from rigour.util import MEMO_MEDIUM, resource_lock
 
@@ -52,7 +53,7 @@ def _load_territory_names() -> Generator[
 ]:
     """Load the mapping of normalized territory names to Territory objects."""
     index = _get_index()
-    for data in read_jsonl(TERRITORIES_FILE):
+    for data in iter_jsonl_text(territories_jsonl()):
         code = data["code"]
         territory = index.get(code)
         if territory is None:  # pragma: no cover

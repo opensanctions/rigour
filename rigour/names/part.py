@@ -1,9 +1,10 @@
 from typing import Any, List, Optional
 
 from normality import ascii_text
+
 from rigour.text.scripts import can_latinize
 from rigour.text.phonetics import metaphone
-from rigour.text.numbers import string_number
+from rigour._core import string_number
 from rigour.names.tag import NamePartTag
 from rigour.names.symbol import Symbol
 from rigour.names.tag import NAME_TAGS_ORDER

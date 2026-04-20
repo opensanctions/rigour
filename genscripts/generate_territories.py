@@ -13,7 +13,7 @@ from rigour.ids.wikidata import is_qid
 from rigour.langs import iso_639_alpha3
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes
-from genscripts.util import write_jsonl, norm_string, RESOURCES_PATH, CODE_PATH
+from genscripts.util import write_jsonl, norm_string, RESOURCES_PATH, RUST_DATA_PATH
 
 log = logging.getLogger(__name__)
 yaml = YAML()
@@ -29,7 +29,11 @@ TERRITORIES: Dict[str, Any] = %r
 
 
 def territory_files() -> Generator[Path, None, None]:
-    for filename in os.listdir(TERRITORIES_DIR):
+    # Sort the listdir result: os.listdir returns filenames in
+    # filesystem-dependent order (alphabetical on macOS APFS, inode
+    # order on Linux ext4), which leaks into rust/data/territories/
+    # data.jsonl and breaks CI's no-diff check.
+    for filename in sorted(os.listdir(TERRITORIES_DIR)):
         if filename.endswith(".yml"):
             yield Path(TERRITORIES_DIR / filename).resolve()
 
@@ -232,7 +236,8 @@ def update_data() -> None:
             msg = "Country is not a jurisdiction: %r" % terr.code
             raise RuntimeError(msg)
 
-    out_path = CODE_PATH / "territories" / "data.jsonl"
+    out_path = RUST_DATA_PATH / "territories" / "data.jsonl"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     write_jsonl(out_path, raw_territories.values())
 
 

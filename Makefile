@@ -1,6 +1,31 @@
-.PHONY: docs build typecheck test build-iso639 build-territories build-addresses build-names
+.PHONY: docs build typecheck test develop develop-debug rust-test rust-fmt rust-fmt-check bench rust-data build-iso639 build-territories build-addresses build-names
 
 check: build typecheck test
+
+# Release build by default: the ICU4X trie-heavy transliteration path is
+# ~100x slower in debug and benchmark numbers are meaningless there. Use
+# `make develop-debug` for fast Rust-iteration cycles where speed of the
+# compiled code doesn't matter.
+develop:
+	maturin develop --manifest-path rust/Cargo.toml --release
+
+develop-debug:
+	maturin develop --manifest-path rust/Cargo.toml
+
+rust-test:
+	cargo test --manifest-path rust/Cargo.toml
+
+# Format Rust sources in place. CI runs `cargo fmt --check` so drift
+# fails the build; this target is the one-command local fix. Run it
+# before committing Rust changes.
+rust-fmt:
+	cargo fmt --manifest-path rust/Cargo.toml
+
+rust-fmt-check:
+	cargo fmt --manifest-path rust/Cargo.toml --check
+
+bench:
+	python benchmarks/bench_transliteration.py
 
 typecheck:
 	mypy --strict rigour
@@ -29,6 +54,12 @@ build-text:
 	python genscripts/generate_text.py
 
 build: build-iso639 build-territories build-addresses build-names build-text
+
+# Regenerate Rust-consumed data artifacts (under rust/data and
+# rust/src/generated). Generators are dual-emit — running them produces the
+# Rust artifacts alongside the existing Python ones, which keeps the two
+# from drifting. CI calls this + git-diffs to catch stale checkins.
+rust-data: build-names build-text build-territories
 
 docs:
 	mkdocs build -c -d site

@@ -3,6 +3,8 @@ from typing import Optional, Sequence, Set
 
 from normality import category_replace, squash_spaces
 from normality.constants import SLUG_CATEGORIES
+
+from rigour._core import nullplaces_list, nullwords_list, stopwords_list
 from rigour.text.dictionary import Normalizer, noop_normalizer
 
 
@@ -28,9 +30,7 @@ def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
 @cache
 def _load_stopwords(normalizer: Normalizer) -> Set[str]:
     """Load the stopwords from the data file and normalize them using the provided normalizer."""
-    from rigour.data.text.stopwords import STOPWORDS
-
-    return _load_wordlist(STOPWORDS, normalizer)
+    return _load_wordlist(stopwords_list(), normalizer)
 
 
 def is_stopword(
@@ -56,9 +56,7 @@ def is_stopword(
 @cache
 def _load_nullwords(normalizer: Normalizer) -> set[str]:
     """Load the nullwords from the data file and normalize them using the provided normalizer."""
-    from rigour.data.text.stopwords import NULLWORDS
-
-    return _load_wordlist(NULLWORDS, normalizer)
+    return _load_wordlist(nullwords_list(), normalizer)
 
 
 def is_nullword(
@@ -85,9 +83,7 @@ def is_nullword(
 @cache
 def _load_nullplaces(normalizer: Normalizer) -> set[str]:
     """Load the nullplaces from the data file and normalize them using the provided normalizer."""
-    from rigour.data.text.stopwords import NULLPLACES
-
-    return _load_wordlist(NULLPLACES, normalizer)
+    return _load_wordlist(nullplaces_list(), normalizer)
 
 
 def is_nullplace(

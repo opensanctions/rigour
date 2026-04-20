@@ -1,5 +1,44 @@
+from rigour.text.scripts import codepoint_script, text_scripts
 from rigour.text.scripts import is_latin
-from rigour.text.scripts import can_latinize, is_modern_alphabet, is_dense_script
+from rigour.text.scripts import can_latinize, can_latinize_cp
+from rigour.text.scripts import is_modern_alphabet, is_dense_script
+
+
+def test_codepoint_script_basic():
+    assert codepoint_script(ord("A")) == "Latin"
+    assert codepoint_script(ord("а")) == "Cyrillic"
+    assert codepoint_script(ord("中")) == "Han"
+    assert codepoint_script(ord("가")) == "Hangul"
+    assert codepoint_script(ord("Α")) == "Greek"
+    assert codepoint_script(ord("Ա")) == "Armenian"
+    assert codepoint_script(ord("ა")) == "Georgian"
+
+
+def test_codepoint_script_common_inherited():
+    # codepoint_script is a faithful Unicode lookup — Common and Inherited
+    # are returned as-is rather than filtered out.
+    assert codepoint_script(ord(" ")) == "Common"
+    assert codepoint_script(ord("0")) == "Common"
+    assert codepoint_script(0x0301) == "Inherited"  # combining acute
+    assert codepoint_script(0xD800) is None  # lone surrogate
+
+
+def test_text_scripts_mixed():
+    assert text_scripts("Hello, мир! 中文 123") == {"Latin", "Cyrillic", "Han"}
+    assert text_scripts("") == set()
+    assert text_scripts("123 !@#") == set()  # Common-only input → empty set
+    assert text_scripts("Hello") == {"Latin"}
+    assert text_scripts("你好") == {"Han"}
+
+
+def test_can_latinize_cp():
+    assert can_latinize_cp(ord("A")) is True
+    assert can_latinize_cp(ord("а")) is True  # Cyrillic
+    assert can_latinize_cp(ord("中")) is False
+    # Non-alphanumeric or no real script → None
+    assert can_latinize_cp(ord(" ")) is None
+    assert can_latinize_cp(ord("0")) is None  # digit — Common script
+    assert can_latinize_cp(ord("!")) is None
 
 
 def test_is_latin():
@@ -85,20 +124,28 @@ def test_scripts_turkish():
 
 
 def test_scripts_georgian():
-    """Georgian: can_latinize=True but is_modern_alphabet=False."""
+    """Georgian is both latinizable and a modern alphabet.
+
+    Behaviour change from the pre-Rust-port implementation: previously
+    is_modern_alphabet(georgian) returned False because the underlying
+    LATINIZABLE_CHARS set only held Latin+Cyrillic+Greek, contradicting the
+    docstring's intent to include Armenian and Georgian. The set-based
+    rewrite aligns code with docstring.
+    """
     geo = "ნინო ბურჯანაძე"
     assert not is_latin(geo)
     assert can_latinize(geo)
-    assert not is_modern_alphabet(geo)
+    assert is_modern_alphabet(geo)
     assert not is_dense_script(geo)
 
 
 def test_scripts_armenian():
-    """Armenian: can_latinize=True, but is_modern_alphabet=False (not in LATINIZABLE_CHARS)."""
+    """Armenian is both latinizable and a modern alphabet. See test_scripts_georgian
+    for the behaviour-change rationale."""
     arm = "Միթչել Մակքոնել"
     assert not is_latin(arm)
     assert can_latinize(arm)
-    assert not is_modern_alphabet(arm)
+    assert is_modern_alphabet(arm)
     assert not is_dense_script(arm)
 
 
@@ -125,3 +172,76 @@ def test_scripts_boundary_codepoints():
     # CJK Unified Ideograph (U+4E00)
     assert not can_latinize("一")
     assert is_dense_script("一")
+
+
+# --- Mixed scripts: text_scripts detection ---
+
+
+def test_text_scripts_two_non_latin():
+    """Two non-Latin scripts, no Latin, no whitespace — text_scripts still
+    splits them despite the missing separator."""
+    assert text_scripts("Москва北京") == {"Cyrillic", "Han"}
+
+
+def test_text_scripts_latin_plus_diacritics_only():
+    """Latin with diacritics should still resolve to just {Latin}."""
+    assert text_scripts("François Müller") == {"Latin"}
+
+
+def test_text_scripts_four_scripts():
+    """Four scripts in one string — an unrealistic but boundary-useful input."""
+    # Hebrew + Arabic + Hangul + Latin
+    assert text_scripts("שלום سلام 안녕 Hello") == {
+        "Hebrew",
+        "Arabic",
+        "Hangul",
+        "Latin",
+    }
+
+
+def test_text_scripts_ignores_numbers_and_punctuation():
+    """Common-script characters don't show up as 'Common' in the result."""
+    assert text_scripts("2024-12-31 09:42:07") == set()
+
+
+def test_text_scripts_transition_without_whitespace():
+    """Bilingual compound names where scripts collide mid-token."""
+    assert text_scripts("Tokyo東京") == {"Latin", "Han"}
+    assert text_scripts("Smith-Петров") == {"Latin", "Cyrillic"}
+
+
+# --- Mixed scripts: predicates ---
+
+
+def test_predicates_latin_plus_cyrillic():
+    mixed = "Hello мир"
+    assert not is_latin(mixed)
+    assert can_latinize(mixed)  # both scripts are in LATINIZE_SCRIPTS
+    assert is_modern_alphabet(mixed)  # both are modern alphabets
+    assert not is_dense_script(mixed)
+
+
+def test_predicates_latin_plus_han():
+    mixed = "Tokyo東京"
+    assert not is_latin(mixed)
+    assert not can_latinize(mixed)  # Han isn't in LATINIZE_SCRIPTS
+    assert not is_modern_alphabet(mixed)
+    assert is_dense_script(mixed)  # Han triggers dense
+
+
+def test_predicates_latin_plus_hangul():
+    """Hangul is both latinizable and dense — unusual overlap."""
+    mixed = "Kim 김민석"
+    assert not is_latin(mixed)
+    assert can_latinize(mixed)
+    assert is_dense_script(mixed)
+
+
+def test_predicates_pure_punctuation():
+    """No script-bearing chars — predicates fall out to vacuously True on
+    subset-style checks, False on intersection-style checks."""
+    punct = "2024-12-31 !@#$"
+    assert is_latin(punct)  # vacuously — text_scripts returns empty set
+    assert is_modern_alphabet(punct)
+    assert can_latinize(punct)
+    assert not is_dense_script(punct)

@@ -1,7 +1,6 @@
 import logging
-from pathlib import Path
 from collections import defaultdict
-from typing import Dict, Iterable, Set
+from typing import Dict, Generator, Iterable, Set, Tuple
 import unicodedata
 from normality import ascii_text
 from normality.cleaning import remove_unsafe_chars
@@ -32,8 +31,7 @@ def normalize_form(text: str) -> str:
     return text
 
 
-def dump_file_export(path: Path):
-    log.info("Exporting namesdb mappings to %r", path.as_posix())
+def generate_export_lines() -> Generator[Tuple[str, int], None, None]:
     block_groups()
     block_phrases()
     block_forms()
@@ -64,21 +62,13 @@ def dump_file_export(path: Path):
 
         written = 0
         forms_written = 0
-        with open(path, "w") as fh:
-            for group, forms in sorted(mappings.items()):
-                if len(forms) < 2:
-                    continue
-                if can_translit_match(forms):
-                    # log.info("Skipping mapping for: %r", forms)
-                    continue
-                written += 1
-                forms_written += len(forms)
-                fstr = ", ".join(sorted(forms))
-                fh.write(f"{fstr} => {group}\n")
-
-        log.info(
-            "Wrote %d mappings (%d forms) to %r",
-            written,
-            forms_written,
-            path.as_posix(),
-        )
+        for group, forms in sorted(mappings.items()):
+            if len(forms) < 2:
+                continue
+            if can_translit_match(forms):
+                # log.info("Skipping mapping for: %r", forms)
+                continue
+            written += 1
+            forms_written += len(forms)
+            fstr = ", ".join(sorted(forms))
+            yield f"{fstr} => {group}\n", len(forms)

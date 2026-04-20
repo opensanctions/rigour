@@ -1,12 +1,12 @@
-from normality.transliteration import latinize_text
+from rigour.text.distance import levenshtein
 
 from rigour.reset import reset_caches
 
 
 def test_reset_caches():
-    latinize_text.cache_clear()
-    assert latinize_text.cache_info().currsize == 0
-    latinize_text("foo")
-    assert latinize_text.cache_info().currsize == 1
+    levenshtein.cache_clear()
+    assert levenshtein.cache_info().currsize == 0
+    levenshtein("foo", "bar")
+    assert levenshtein.cache_info().currsize == 1
     reset_caches()
-    assert latinize_text.cache_info().currsize == 0
+    assert levenshtein.cache_info().currsize == 0

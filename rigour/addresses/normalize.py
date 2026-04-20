@@ -3,8 +3,8 @@ import logging
 import unicodedata
 from functools import cache
 from typing import Dict, List, Optional
+from normality import ascii_text
 from normality.constants import WS
-from normality.transliteration import ascii_text
 from normality.util import Categories
 
 from rigour.text.dictionary import Replacer
@@ -58,7 +58,7 @@ def normalize_address(
     """
     tokens: List[List[str]] = []
     token: List[str] = []
-    for char in address.lower():
+    for char in address.casefold():
         if char in CHARS_ALLOWED:
             chr: Optional[str] = char
         else:
@@ -101,9 +101,9 @@ def _address_replacer(latinize: bool = False) -> Replacer:
         A function that takes a string and returns its normalized form.
     """
     from rigour.data.addresses.data import FORMS
-    from rigour.data.text.ordinals import ORDINALS
+    from rigour._core import ordinals_dict
 
-    ordinals = [(str(k), v) for k, v in ORDINALS.items()]
+    ordinals = [(str(k), v) for k, v in ordinals_dict().items()]
     forms = list(FORMS.items()) + ordinals
 
     mapping: Dict[str, str] = {}
@@ -148,7 +148,8 @@ def _address_replacer(latinize: bool = False) -> Replacer:
             mapping[name_norm] = target
 
     unload_module("rigour.data.addresses.data")
-    unload_module("rigour.data.text.ordinals")
+    # ordinals data now lives in Rust (via rigour._core.ordinals_dict);
+    # no Python module to unload.
     return Replacer(mapping, ignore_case=True)
 
 

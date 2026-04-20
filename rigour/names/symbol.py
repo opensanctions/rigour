@@ -1,41 +1,28 @@
-from enum import Enum
-from typing import Any
+"""Symbol type — a semantic interpretation applied to one or more parts
+of a name.
 
+Rust-backed via `rigour._core`; the actual struct is a 24-byte
+`{ category: SymbolCategory, id: Arc<str> }` with a global string
+interner behind the id. See `plans/rust-symbols.md` for the design
+rationale and memory-footprint budget.
 
-class Symbol:
-    """A symbol is a semantic interpretation applied to one or more parts of a name. Symbols can
-    represent various categories such as organization classes, initials, names, numeric, or phonetic
-    transcriptions. Each symbol has a category and an identifier."""
+The class is exposed as `rigour.names.Symbol`; the category enum lives
+as both `rigour.names.SymbolCategory` and `Symbol.Category` (the
+pre-port nested-class access pattern used across rigour, FTM,
+nomenklatura, and yente).
 
-    class Category(Enum):
-        # ORG_TYPE = "ORGTYPE"
-        ORG_CLASS = "ORGCLS"
-        SYMBOL = "SYMBOL"
-        DOMAIN = "DOMAIN"
-        INITIAL = "INITIAL"
-        NAME = "NAME"
-        NICK = "NICK"
-        NUMERIC = "NUM"
-        LOCATION = "LOC"
-        PHONETIC = "PHON"
+Breaking change vs. the pre-port Python implementation: `Symbol.id`
+is always `str`. Ids originally passed as `int` are decimal-stringified
+at construction. Downstream code that compared `symbol.id` against an
+int literal needs to compare against the string form.
+"""
 
-    __slots__ = ["category", "id"]
+from rigour._core import Symbol, SymbolCategory
 
-    def __init__(self, category: Category, id: Any) -> None:
-        """Create a symbol with a category and an id."""
-        self.category = category
-        self.id = id
+# Preserve the pre-port nested-class access pattern
+# (`Symbol.Category.ORG_CLASS`) used across the stack. The enum type
+# is identical to the top-level `SymbolCategory` — just two names for
+# the same object.
+Symbol.Category = SymbolCategory
 
-    def __hash__(self) -> int:
-        return hash((self.category, self.id))
-
-    def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, Symbol):
-            return False
-        return self.category == other.category and self.id == other.id
-
-    def __str__(self) -> str:
-        return f"[{self.category.value}:{self.id}]"
-
-    def __repr__(self) -> str:
-        return f"<Symbol({self.category}, {self.id})>"
+__all__ = ["Symbol", "SymbolCategory"]

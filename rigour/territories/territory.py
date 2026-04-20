@@ -2,9 +2,8 @@ import sys
 from typing import Dict, Any, List, Optional, Set
 from functools import cache, total_ordering
 
-from rigour.data import read_jsonl
-
-TERRITORIES_FILE = "territories/data.jsonl"
+from rigour._core import territories_jsonl
+from rigour.data import iter_jsonl_text
 
 
 @total_ordering
@@ -172,7 +171,7 @@ class Territory(object):
 @cache
 def get_index() -> Dict[str, Territory]:
     index: Dict[str, Territory] = {}
-    for data in read_jsonl(TERRITORIES_FILE):
+    for data in iter_jsonl_text(territories_jsonl()):
         code = sys.intern(data["code"])
         index[code] = Territory(index, code, data)
     for territory in list(index.values()):
