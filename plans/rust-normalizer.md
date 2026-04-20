@@ -1,6 +1,6 @@
 ---
 description: Replace rigour's normalizer-callback pattern with a flag-based normalize() + named CategoryProfile; policy for Python/Rust function duplication
-date: 2026-04-19
+date: 2026-04-20
 tags: [rigour, rust, normalization, api-design, names]
 ---
 
@@ -74,9 +74,14 @@ Rust function, one Python wrapper, no Python parallel of the steps.
   define their own flag composition inline and name it locally if they
   want. The module exposes `normalize()` + `Normalize` flags + a tiny
   `CategoryProfile` enum, nothing else.
-- **No TOKENIZE flag.** Tokenisation is a separate concern with its own
-  return type (`List[str]`, not `Optional[str]`) and lives in
-  `rigour.names.tokenize`. It is not a normalization step.
+- **`NAME` flag — tokenize+rejoin as a pipeline step.** Tokenisation
+  itself still lives in `rigour.names.tokenize.tokenize_name` with its
+  own `List[str]` return type. The `NAME` flag is the "tokenize then
+  `' '.join`" composition expressed inside the flag pipeline — it runs
+  `tokenize_name(s, 1)` and rejoins with a single ASCII space as the
+  final step. This supersedes the legacy `normalize_name` (casefold +
+  tokenize + join) as a single `Normalize::CASEFOLD | Normalize::NAME`
+  call.
 - **`category_replace` is in scope** as a normalization step — it's what
   most of rigour's existing normalizers use to collapse punctuation /
   symbols / controls. Instead of exposing the full category-map as a
@@ -98,7 +103,7 @@ primitives below, three are domain-specific wrappers that stay as-is.
 | Function | File | Steps |
 |----------|------|-------|
 | `normalize_text` | `rigour/text/stopwords.py` | casefold → category_replace(SLUG) → squash_spaces |
-| `normalize_name` | `rigour/names/tokenize.py` | casefold → tokenize → join  (tokenize is not part of the flag system; this becomes a `normalize(..., NAME) + tokenize_name()` composition on the Python side) |
+| `normalize_name` | `rigour/names/tokenize.py` | casefold → tokenize → join — landed as `Normalize::CASEFOLD \| Normalize::NAME` |
 | `normalize_display` | `rigour/names/org_types.py` | squash_spaces |
 | `_normalize_compare` | `rigour/names/org_types.py` | squash_spaces → casefold |
 | `normalize_address` | `rigour/addresses/normalize.py` | lower → category_replace(custom) → optional ascii → squash |
@@ -173,9 +178,8 @@ bitflags! {
         const NFKC          = 1 << 4;
         const NFKD          = 1 << 5;
 
-        // Script conversion (ASCII implies LATIN at a lower level)
-        const LATIN      = 1 << 6;
-        const ASCII         = 1 << 7;
+        // tokenize_name + ' '.join as the final step
+        const NAME          = 1 << 6;
     }
 }
 
@@ -204,13 +208,17 @@ pub fn normalize(
 2. NFC / NFKC / NFKD (first-set-wins, or apply in declaration order if
    multiple somehow set — shouldn't happen in practice)
 3. CASEFOLD
-4. ASCII, else LATIN (ASCII is a superset — running ASCII subsumes
-   LATIN if both are set)
-5. category_replace (if `cleanup != Cleanup::Noop`)
-6. SQUASH_SPACES
+4. category_replace (if `cleanup != Cleanup::Noop`)
+5. SQUASH_SPACES
+6. NAME — `tokenize_name(s, 1).join(" ")`. Runs last so the tokenizer
+   sees already-case-folded, already-cleaned input; the split +
+   rejoin step also subsumes whitespace squashing.
 
 Empty result → `None`, matching the existing contract on every observed
 normalizer.
+
+(Transliteration — ASCII / LATIN — is not part of this pipeline. See
+`plans/rust-minimal-translit.md`.)
 
 ### Python exposure
 
@@ -392,7 +400,7 @@ internal reference data.
 | Old function | New composition |
 |--------------|-----------------|
 | `normalize_text` | `CASEFOLD \| SQUASH_SPACES` + `Cleanup.Slug` |
-| `normalize_name` | `CASEFOLD`, then `tokenize_name()` if tokens are wanted. No `Cleanup` pass — tokenizer handles category separation internally. Revisit when the tokenizer ports over. |
+| `normalize_name` | `CASEFOLD \| NAME` — the `NAME` flag runs `tokenize_name` and rejoins with a single space as the final step. No `Cleanup` pass — tokenizer handles category separation internally. |
 | `normalize_display` | `STRIP \| SQUASH_SPACES` (no cleanup) |
 | `_normalize_compare` | `STRIP \| CASEFOLD \| SQUASH_SPACES` (no cleanup) |
 | `normalize_code` | `STRIP \| CASEFOLD` (no cleanup) |

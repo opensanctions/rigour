@@ -43,6 +43,9 @@ value:
     3. CASEFOLD             — Unicode full casefold (ß → ss, not lowercase)
     4. Cleanup              — category_replace, unless Cleanup.Noop
     5. SQUASH_SPACES        — collapse whitespace runs, trim ends
+    6. NAME                 — tokenize via
+                              [tokenize_name][rigour.names.tokenize.tokenize_name]
+                              and rejoin with a single ASCII space
 
 Transliteration is NOT part of this pipeline. rigour's public
 transliteration surface is [rigour.text.translit][] — opportunistic,
@@ -69,6 +72,10 @@ and friends are pinned to these:
 * **Squash-only (`Normalize.SQUASH_SPACES`)** — the pre-flags
   `normalize_display`. Whitespace-tidies without touching case, used
   by display-form replacers that want to preserve caller case.
+* **Casefold + name (`Normalize.CASEFOLD | Normalize.NAME`)** — the
+  pre-flags `normalize_name`. Casefolds and tokenises with
+  [rigour.names.tokenize.tokenize_name][], yielding a stable
+  space-separated name key for matching.
 
 ## Implementation note
 
@@ -115,6 +122,12 @@ class Normalize(IntFlag):
         NFKD: Apply Unicode Normal Form KD (compatibility decomposition).
             Splits composed characters apart. Mutually exclusive
             with NFC/NFKC.
+        NAME: Run the string through
+            [tokenize_name][rigour.names.tokenize.tokenize_name] and
+            rejoin the tokens with a single ASCII space. Runs as the
+            final pipeline step, so it also subsumes whitespace
+            squashing. Supersedes the legacy
+            `normalize_name` composition (casefold + tokenize + join).
     """
 
     # Bit values MUST match rust/src/text/normalize.rs `bitflags! Normalize`.
@@ -124,6 +137,7 @@ class Normalize(IntFlag):
     NFC = 1 << 3
     NFKC = 1 << 4
     NFKD = 1 << 5
+    NAME = 1 << 6
 
 
 class Cleanup(IntEnum):

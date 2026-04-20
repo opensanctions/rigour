@@ -119,6 +119,44 @@ def test_cleanup_slug_deletes_controls() -> None:
     assert normalize("a\u0007b", Normalize(0), Cleanup.Slug) == "ab"
 
 
+# --- NAME flag ---
+#
+# Mirrors the Rust unit tests across the FFI. NAME runs tokenize_name
+# then joins with a single ASCII space, as the final pipeline step.
+
+
+def test_name_only_tokenizes_and_rejoins() -> None:
+    # SKIP_CHARS (dots, apostrophes) deleted; Po punctuation splits.
+    assert normalize("O'Brien, James", Normalize.NAME) == "OBrien James"
+    assert normalize("U.S.A.", Normalize.NAME) == "USA"
+
+
+def test_name_casefold_matches_legacy_normalize_name() -> None:
+    flags = Normalize.CASEFOLD | Normalize.NAME
+    assert normalize("John DOE", flags) == "john doe"
+    assert normalize("Bashar al-Assad", flags) == "bashar al assad"
+    assert normalize("Straße", flags) == "strasse"
+
+
+def test_name_collapses_unicode_whitespace() -> None:
+    # NBSP, ideographic space — tokenize_name splits on them.
+    assert normalize("a\u00A0b\u3000c", Normalize.NAME) == "a b c"
+
+
+def test_name_empty_becomes_none() -> None:
+    assert normalize("...", Normalize.NAME) is None
+    assert normalize("   ", Normalize.NAME) is None
+    assert normalize("", Normalize.NAME) is None
+
+
+def test_name_preserves_cjk_prolonged_mark() -> None:
+    # U+30FC (ー) is in KEEP_CHARS; U+30FB (・) is Po → splits.
+    assert (
+        normalize("ウラジーミル・プーチン", Normalize.NAME)
+        == "ウラジーミル プーチン"
+    )
+
+
 # --- None input ---
 
 

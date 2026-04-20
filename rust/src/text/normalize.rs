@@ -10,6 +10,7 @@
 //   3. CASEFOLD            — Unicode full casefold (ß → ss, not lowercase)
 //   4. category_replace    — runs when `cleanup != Cleanup::Noop`
 //   5. SQUASH_SPACES       — collapse runs of whitespace, trim ends
+//   6. NAME                — tokenize_name then join with a single space
 //
 // Transliteration is NOT part of this pipeline — rigour's public
 // surface is `text::translit::maybe_ascii` (narrow, opportunistic).
@@ -23,6 +24,8 @@ use icu::casemap::CaseMapper;
 use icu::normalizer::{ComposingNormalizerBorrowed, DecomposingNormalizerBorrowed};
 use icu::properties::{CodePointMapData, props::GeneralCategory};
 
+use crate::text::tokenize::tokenize_name;
+
 bitflags! {
     // Hash lets `Normalize` be used as part of a HashMap key — see
     // the per-flag Replacer cache in names::org_types.
@@ -34,6 +37,10 @@ bitflags! {
         const NFC           = 1 << 3;
         const NFKC          = 1 << 4;
         const NFKD          = 1 << 5;
+        // Runs tokenize_name on the intermediate string and rejoins the
+        // tokens with a single ASCII space. Supersedes the legacy
+        // `normalize_name` composition (casefold + tokenize + ' '.join).
+        const NAME          = 1 << 6;
     }
 }
 
@@ -46,7 +53,7 @@ pub enum Cleanup {
 }
 
 /// Per-codepoint verdict used by the category-driven loops in this
-/// module (`category_replace`) and in `names::tokenize`. Shared here
+/// module (`category_replace`) and in `text::tokenize`. Shared here
 /// because both consumers classify a `GeneralCategory` into the same
 /// three-way action.
 pub enum CharAction {
@@ -189,6 +196,14 @@ pub fn normalize(text: &str, flags: Normalize, cleanup: Cleanup) -> Option<Strin
 
     if flags.contains(Normalize::SQUASH_SPACES) {
         s = squash_spaces(&s);
+    }
+
+    if flags.contains(Normalize::NAME) {
+        // token_min_length = 1 matches `normalize_name`'s call to
+        // `tokenize_name(name)` with its default. `split_whitespace`
+        // inside the tokenizer already collapses runs and trims edges,
+        // so SQUASH_SPACES plus NAME is harmless overlap, not a bug.
+        s = tokenize_name(&s, 1).join(" ");
     }
 
     if s.is_empty() { None } else { Some(s) }
@@ -432,6 +447,83 @@ mod tests {
             Cleanup::Slug,
         );
         assert_eq!(out, Some("hello world".to_string()));
+    }
+
+    // --- NAME flag ---
+
+    #[test]
+    fn name_only_tokenizes_and_rejoins() {
+        // Punctuation inside abbreviations is deleted (SKIP_CHARS);
+        // other punctuation separates tokens; output is joined with
+        // single ASCII space.
+        assert_eq!(
+            normalize("O'Brien, James", Normalize::NAME, Cleanup::Noop),
+            Some("OBrien James".to_string())
+        );
+        assert_eq!(
+            normalize("U.S.A.", Normalize::NAME, Cleanup::Noop),
+            Some("USA".to_string())
+        );
+    }
+
+    #[test]
+    fn name_casefold_parity_with_legacy_normalize_name() {
+        // Old Python `normalize_name` ≡ prenormalize_name (casefold) +
+        // tokenize_name + ' '.join. Mirror: CASEFOLD | NAME.
+        let flags = Normalize::CASEFOLD | Normalize::NAME;
+        assert_eq!(
+            normalize("John DOE", flags, Cleanup::Noop),
+            Some("john doe".to_string())
+        );
+        assert_eq!(
+            normalize("Bashar al-Assad", flags, Cleanup::Noop),
+            Some("bashar al assad".to_string())
+        );
+        assert_eq!(
+            normalize("Straße", flags, Cleanup::Noop),
+            Some("strasse".to_string())
+        );
+    }
+
+    #[test]
+    fn name_collapses_unicode_whitespace() {
+        // tokenize_name's split_whitespace handles NBSP / ideographic
+        // space / etc., so NAME alone does the job SQUASH_SPACES does.
+        assert_eq!(
+            normalize("a\u{00A0}b\u{3000}c", Normalize::NAME, Cleanup::Noop),
+            Some("a b c".to_string())
+        );
+    }
+
+    #[test]
+    fn name_empty_output_becomes_none() {
+        // Pure punctuation → all tokens filtered → empty string → None.
+        assert_eq!(normalize("...", Normalize::NAME, Cleanup::Noop), None);
+        assert_eq!(normalize("   ", Normalize::NAME, Cleanup::Noop), None);
+        assert_eq!(normalize("", Normalize::NAME, Cleanup::Noop), None);
+    }
+
+    #[test]
+    fn name_preserves_cjk_prolonged_mark() {
+        // U+30FC (ー) is in KEEP_CHARS — kept inside tokens despite
+        // being Lm. U+30FB (・) is Po — splits.
+        assert_eq!(
+            normalize("ウラジーミル・プーチン", Normalize::NAME, Cleanup::Noop),
+            Some("ウラジーミル プーチン".to_string())
+        );
+    }
+
+    #[test]
+    fn name_plus_squash_is_idempotent() {
+        // SQUASH runs before NAME. Result should match NAME-alone.
+        let with_both = normalize(
+            "  Hello   World  ",
+            Normalize::NAME | Normalize::SQUASH_SPACES,
+            Cleanup::Noop,
+        );
+        let name_only = normalize("  Hello   World  ", Normalize::NAME, Cleanup::Noop);
+        assert_eq!(with_both, Some("Hello World".to_string()));
+        assert_eq!(with_both, name_only);
     }
 
     // --- empty result ---

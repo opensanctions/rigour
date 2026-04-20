@@ -31,10 +31,10 @@ use crate::names::org_types;
 use crate::names::person_names;
 use crate::names::symbol::{Symbol, SymbolCategory};
 use crate::names::symbols as name_symbols;
-use crate::names::tokenize::tokenize_name;
 use crate::territories;
 use crate::text::normalize::{Cleanup, Normalize, normalize};
 use crate::text::ordinals;
+use crate::text::tokenize::tokenize_name;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum TaggerKind {
