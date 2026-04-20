@@ -24,12 +24,12 @@ def test_tag_person_name():
     tagged_name = tag_person_name(name)
     assert jsym in tagged_name.symbols
     name = Name("J Doe", tag=NameTypeTag.PER)
-    tagged_name = tag_person_name(name, any_initials=False)
+    tagged_name = tag_person_name(name, infer_initials=False)
     assert tagged_name is not None
     assert jsym not in tagged_name.symbols
 
     name = Name("J Doe", tag=NameTypeTag.PER)
-    tagged_name = tag_person_name(name, any_initials=True)
+    tagged_name = tag_person_name(name, infer_initials=True)
     assert tagged_name is not None
     assert jsym in tagged_name.symbols
 

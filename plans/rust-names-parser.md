@@ -39,7 +39,7 @@ Both paths:
 4. For ORG/ENT: `replace_org_types_compare(form, normalizer=prenormalize_name)`.
 5. Construct `Name(raw, form=form, tag=type_tag)`.
 6. Call `tag_org_name(name, normalize_name)` or
-   `tag_person_name(name, normalize_name, any_initials=is_query)`.
+   `tag_person_name(name, normalize_name, infer_initials=is_query)`.
 
 They differ in small but real ways (collected in *Divergences* below). Every one of
 those differences is either an outright bug in one path or a policy decision that
@@ -140,16 +140,16 @@ Rationale for the shape:
   change here.
 - **No `normalizer=` callback.** Per `rust-normalizer.md`. The inside of
   `analyze_names` picks the right normalisation for each step itself.
-- **`infer_initials` instead of `is_query`.** The old name described the
-  caller, not the behaviour. What the flag actually controls is
-  `tag_person_name(any_initials=...)` at `rigour/names/tagging.py:253`:
+- **`infer_initials` instead of `is_query`.** nomenklatura historically
+  called this `is_query` — describing the caller, not the behaviour.
+  What the flag actually controls in `tag_person_name(infer_initials=...)`:
   with it off, only parts already tagged GIVEN/MIDDLE (from
   `part_tags`) get mapped to `Symbol.INITIAL` when they're a single
   character; with it on, *any* single-character latin part becomes an
   INITIAL symbol. That's useful for free-text query sides where "J Smith"
-  arrives without a label on "J". Renaming to `infer_initials` makes the
-  semantics self-documenting — and it applies equally on the indexing side
-  if an indexer ever wants aggressive initial coverage.
+  arrives without a label on "J". The tagger parameter already uses
+  `infer_initials`; `analyze_names` adopts the same name for
+  end-to-end consistency.
 - **`weak_alias` and the weak-alias-as-name policy live in the FTM
   adapter**, not in `analyze_names`. See Divergences row #4: FTM's
   `entity_names` both extends `names` with `weakAlias` values *and*

@@ -108,7 +108,7 @@ def tag_org_name(
 def tag_person_name(
     name: Name,
     normalize_flags: Normalize = _DEFAULT_FLAGS,
-    any_initials: bool = False,
+    infer_initials: bool = False,
 ) -> Name:
     """Tag a person Name with name-part + nick + ordinal + initial
     symbols.
@@ -117,7 +117,7 @@ def tag_person_name(
         name: The `Name` to tag. Mutated in place.
         normalize_flags: `Normalize` flags. Same role as in
             :func:`tag_org_name`.
-        any_initials: If True, treat every single-character latin
+        infer_initials: If True, treat every single-character latin
             name part as an INITIAL symbol (used on the matching query
             side where "J Smith" arrives without a GIVEN/MIDDLE tag).
             When False, only parts already tagged as GIVEN/MIDDLE pick
@@ -133,7 +133,7 @@ def tag_person_name(
         if not part.latinize:
             continue
         sym = Symbol(Symbol.Category.INITIAL, part.comparable[0])
-        if any_initials and len(part.form) == 1:
+        if infer_initials and len(part.form) == 1:
             name.apply_part(part, sym)
         elif part.tag in INITIAL_TAGS:
             name.apply_part(part, sym)
