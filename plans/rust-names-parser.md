@@ -141,6 +141,14 @@ Rationale for the shape:
   PyO3 as a `HashMap<NamePartTag, Vec<String>>`; enum variant discrimination
   is cheap. Open-ended: adding a new `NamePartTag` does not require an API
   change here.
+  Values may be **multi-token strings** — e.g. `part_tags[GIVEN] =
+  ["Jean Claude"]` against a name `"Jean Claude Juncker"` tags both
+  the `"jean"` and `"claude"` parts as `GIVEN`. `Name.tag_text`
+  (`rigour/names/name.py:49`) tokenises each value and walks the name
+  parts matching the sequence in order; non-adjacency is tolerated, so
+  `part_tags[GIVEN] = ["Vladimir Putin"]` would tag both parts of
+  `"Vladimir Vladimirovitch Putin"`. No extra work in the adapter —
+  feeding a raw multi-token property value works directly.
 - **No `normalizer=` callback.** Per `rust-normalizer.md`. The inside of
   `analyze_names` picks the right normalisation for each step itself.
 - **`infer_initials` instead of `is_query`.** nomenklatura historically
@@ -466,11 +474,14 @@ Benchmarks to pin before declaring Phase 5 done:
 
 Phase 5 in `rust.md` is the landing point. Incremental staging:
 
-1. **Land the rigour-side API as a Python shim first.** Once Phases 1–4 are
-   in, `rigour.names.analyze_names(names, type_tag, part_tags, *,
-   infer_initials)` can be implemented as Python glue calling the existing
-   Rust-backed primitives one by one. This lets consumers migrate before
-   Phase 5's single-FFI version exists — the API contract is the same.
+1. **Land the rigour-side API as a Python shim first.** **Done** —
+   `rigour.names.analyze_names(names, type_tag, part_tags, *,
+   infer_initials, phonetics, numerics, consolidate)` lives in
+   `rigour/names/analyze.py` and composes the existing Rust-backed
+   primitives. `phonetics` is accepted as API scaffolding with no
+   runtime effect in the Python shim (gating only kicks in at Rust
+   port time); the other three flags behave per contract. Tests in
+   `tests/names/test_analyze.py`.
 2. **Hoist the adapter into FTM.** Add `followthemoney.names.entity_names`
    with the signature above, keep `schema_type_tag` and `PROP_PART_TAGS` as
    they are (the latter becomes an implementation detail of the adapter but
