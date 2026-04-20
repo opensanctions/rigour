@@ -199,3 +199,14 @@ class Name:
     @classmethod
     def consolidate_names(cls, names: "object") -> set["Name"]: ...
 
+
+def analyze_names(
+    type_tag: NameTypeTag,
+    names: list[str],
+    part_tags: dict[NamePartTag, list[str]] | None = None,
+    *,
+    infer_initials: bool = False,
+    phonetics: bool = True,
+    numerics: bool = True,
+    consolidate: bool = True,
+) -> set[Name]: ...

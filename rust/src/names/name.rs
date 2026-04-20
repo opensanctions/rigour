@@ -79,7 +79,7 @@ impl Name {
     /// supplied.
     #[new]
     #[pyo3(signature = (original, form = None, tag = NameTypeTag::UNK, lang = None, parts = None, phonetics = true))]
-    fn new(
+    pub fn new(
         py: Python<'_>,
         original: &str,
         form: Option<&str>,
@@ -150,7 +150,7 @@ impl Name {
     /// Tag name parts matching the tokenised form of `text`. See
     /// `rigour/names/name.py::Name.tag_text` for the full semantics.
     #[pyo3(signature = (text, tag, max_matches = 1))]
-    fn tag_text(
+    pub fn tag_text(
         &self,
         py: Python<'_>,
         text: &str,
@@ -188,7 +188,7 @@ impl Name {
 
     /// Apply `symbol` to parts matching the space-separated tokens of
     /// `phrase`. Each non-overlapping match appends a `Span`.
-    fn apply_phrase(&self, py: Python<'_>, phrase: &str, symbol: Py<Symbol>) -> PyResult<()> {
+    pub fn apply_phrase(&self, py: Python<'_>, phrase: &str, symbol: Py<Symbol>) -> PyResult<()> {
         let tokens: Vec<&str> = phrase.split(' ').collect();
         if tokens.is_empty() {
             return Ok(());
@@ -217,7 +217,12 @@ impl Name {
 
     /// Apply `symbol` to a single `NamePart` by appending a `Span`
     /// with just that part.
-    fn apply_part(&self, py: Python<'_>, part: Py<NamePart>, symbol: Py<Symbol>) -> PyResult<()> {
+    pub fn apply_part(
+        &self,
+        py: Python<'_>,
+        part: Py<NamePart>,
+        symbol: Py<Symbol>,
+    ) -> PyResult<()> {
         let span = Span::build(py, vec![part], symbol)?;
         let span_py = Py::new(py, span)?;
         self.spans.bind(py).append(span_py)?;
@@ -239,7 +244,7 @@ impl Name {
 
     /// `True` iff this name contains `other` under the PER-aware
     /// rules. See Python docstring for details.
-    fn contains(&self, py: Python<'_>, other: PyRef<'_, Name>) -> PyResult<bool> {
+    pub fn contains(&self, py: Python<'_>, other: PyRef<'_, Name>) -> PyResult<bool> {
         // Identity short-circuit via form equality.
         if self.form_str == other.form_str {
             return Ok(false);

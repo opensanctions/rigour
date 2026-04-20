@@ -59,6 +59,13 @@ lru = "0.17"
 # filter is cheap.
 aho-corasick = "1"
 
+# `regex` crate — used by `names::prefix` for the anchored
+# case-insensitive prefix-alternation pattern that Python's
+# `_build_prefix_regex` compiles. The pattern has no lookaround so
+# `regex` is a fit; one compiled `Regex` per prefix set, cached in a
+# LazyLock.
+regex = "1"
+
 # Serde + serde_json for reading committed JSON data artifacts like
 # rust/data/org_types.json inside a LazyLock at first use.
 serde = { version = "1", features = ["derive"] }

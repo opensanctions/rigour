@@ -264,6 +264,12 @@ impl NamePart {
     pub fn form_str(&self) -> &str {
         &self.form_str
     }
+
+    /// Internal accessor for the cached hash. Useful for Rust-internal
+    /// part-identity tracking (e.g. in `names::analyze::infer_part_tags`).
+    pub fn hash_isize(&self) -> isize {
+        self.hash
+    }
 }
 
 fn hash_namepart(py: Python<'_>, index: Option<u32>, form: &str) -> isize {
