@@ -170,11 +170,11 @@ Rationale for the shape:
 - **`phonetics` is opt-in, default `False`.** When `True`, `NamePart.metaphone`
   is populated (the jellyfish/rphonetic `metaphone` of the part's ASCII form,
   gated on `latinize && !numeric && len(ascii) > 2`). When `False`, the field
-  stays `None` and the phonetics crate isn't called. Matchers and indexers
-  that feed `name_phonemes` into Elasticsearch or into Levenshtein-on-phonemes
-  comparisons pass `True`; lightweight callers (display pipelines, entity
-  export, enrichment that doesn't score on phonemes) leave it off and save
-  a metaphone call per part.
+  stays `None` and the phonetics crate isn't called. Consumers that feed
+  `part.metaphone` into downstream fields — yente's `name_phonemes` ES field
+  is the live example — pass `True`. Callers that don't consume the
+  property (nomenklatura logic-v2 scoring, display pipelines, entity export,
+  enrichment) leave it off and save a metaphone call per part.
 - **`numerics` is opt-in, default `False`.** When `True`, the post-tagger
   `_infer_part_tags` pass adds `Symbol(NUMERIC, int_value)` for numeric-
   looking name parts that the AC tagger's ordinal list didn't already
@@ -366,10 +366,15 @@ from followthemoney.names import entity_names  # re-export or direct use
 
 All existing callers of the old `entity_names(type_tag, entity, prop, is_query)`
 signature update to the new `entity_names(entity, props=[prop] if prop else None,
-infer_initials=is_query, phonetics=True, numerics=True)` shape. The matcher
-needs both phoneme overlap and numeric-symbol overlap, so it opts in on both.
-The `type_tag` parameter goes away — FTM infers it from the schema, and the
-old call sites always computed it from the entity anyway.
+infer_initials=is_query, numerics=True)` shape. Logic-v2 weights
+`Symbol.Category.NUMERIC` in its scoring (`matching/logic_v2/names/magic.py`)
+so `numerics=True` is required; it does **not** score on phoneme overlap,
+so `phonetics` stays at the default `False`. (Legacy matchers in
+`logic_v1/phonetic.py` and `name_based/` do use phonemes but call
+`metaphone()` directly on tokens — they don't go through `NamePart.metaphone`
+and don't need this flag.) The `type_tag` parameter goes away — FTM infers
+it from the schema, and the old call sites always computed it from the
+entity anyway.
 
 ### yente (indexing)
 
@@ -475,12 +480,13 @@ Phase 5 in `rust.md` is the landing point. Incremental staging:
    `nomenklatura/matching/logic_v2/names/analysis.py:entity_names` with a
    re-export from FTM (or update callers directly). Delete the now-unused
    `replace_org_types_compare(..., normalizer=...)` callsite. Callers pass
-   `phonetics=True, numerics=True` on both sides (matching's scoring uses
-   both), `infer_initials=True` only on the query side, and
+   `numerics=True` on both sides (logic-v2 weights `NUMERIC` symbols in
+   `magic.py`), `infer_initials=True` only on the query side, and
    `consolidate=True` on both the query and candidate call (matching the
    current behaviour of `match.py:234-235`). Drop the explicit
    `Name.consolidate_names(...)` calls from `match.py` — the flag on
-   `entity_names` replaces them.
+   `entity_names` replaces them. `phonetics` stays `False` — logic-v2
+   doesn't score on phoneme overlap.
 4. **Migrate yente.** Replace `yente/data/util.py:entity_names` with a
    re-export from FTM. Indexer passes `phonetics=True, numerics=True`
    (they feed `name_phonemes` and `name_symbols` in ES). Drop yente's
