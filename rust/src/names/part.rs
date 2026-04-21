@@ -128,16 +128,61 @@ impl NamePart {
     /// it is across the rigour pipeline). `index` is the part's
     /// position in the parent `Name` if any. `tag` defaults to
     /// `NamePartTag.UNSET`. `phonetics` gates metaphone computation.
+    ///
+    /// `#[new]` makes this the Python constructor; the fn itself is
+    /// also called directly from Rust (`Name::new` during tokenisation)
+    /// — same entry point for both sides of the FFI.
     #[new]
     #[pyo3(signature = (form, index = None, tag = NamePartTag::UNSET, phonetics = true))]
-    fn new(
+    pub fn new(
         py: Python<'_>,
         form: &str,
         index: Option<u32>,
         tag: NamePartTag,
         phonetics: bool,
     ) -> Self {
-        Self::build(py, form, index, tag, phonetics)
+        let form_str = form.to_string();
+        let numeric = !form_str.is_empty() && form_str.chars().all(|c| c.is_numeric());
+        let latinize = should_ascii(form);
+        let integer = if numeric {
+            match string_number(form) {
+                Some(v) if v.is_finite() && v.fract() == 0.0 => {
+                    if v >= i64::MIN as f64 && v <= i64::MAX as f64 {
+                        Some(v as i64)
+                    } else {
+                        None
+                    }
+                }
+                _ => None,
+            }
+        } else {
+            None
+        };
+        let ascii_s = compute_ascii(&form_str, numeric, latinize, integer);
+        let comparable_s =
+            compute_comparable(&form_str, numeric, latinize, integer, ascii_s.as_deref());
+        let metaphone_s = compute_metaphone(phonetics, latinize, numeric, ascii_s.as_deref());
+
+        let hash = hash_namepart(index, &form_str);
+
+        let form_py = PyString::new(py, &form_str).unbind();
+        let ascii_py = ascii_s.as_ref().map(|s| PyString::new(py, s).unbind());
+        let comparable_py = PyString::new(py, &comparable_s).unbind();
+        let metaphone_py = metaphone_s.as_ref().map(|s| PyString::new(py, s).unbind());
+
+        Self {
+            form: form_py,
+            index,
+            tag,
+            latinize,
+            numeric,
+            ascii: ascii_py,
+            integer,
+            comparable: comparable_py,
+            metaphone: metaphone_py,
+            form_str,
+            hash,
+        }
     }
 
     fn can_match(&self, other: PyRef<'_, NamePart>) -> bool {
@@ -196,59 +241,6 @@ impl NamePart {
 }
 
 impl NamePart {
-    /// Internal constructor — callable from Rust without PyO3 getter
-    /// ceremony. Used by `Name::new` when tokenising.
-    pub fn build(
-        py: Python<'_>,
-        form: &str,
-        index: Option<u32>,
-        tag: NamePartTag,
-        phonetics: bool,
-    ) -> Self {
-        let form_str = form.to_string();
-        let numeric = !form_str.is_empty() && form_str.chars().all(|c| c.is_numeric());
-        let latinize = should_ascii(form);
-        let integer = if numeric {
-            match string_number(form) {
-                Some(v) if v.is_finite() && v.fract() == 0.0 => {
-                    if v >= i64::MIN as f64 && v <= i64::MAX as f64 {
-                        Some(v as i64)
-                    } else {
-                        None
-                    }
-                }
-                _ => None,
-            }
-        } else {
-            None
-        };
-        let ascii_s = compute_ascii(&form_str, numeric, latinize, integer);
-        let comparable_s =
-            compute_comparable(&form_str, numeric, latinize, integer, ascii_s.as_deref());
-        let metaphone_s = compute_metaphone(phonetics, latinize, numeric, ascii_s.as_deref());
-
-        let hash = hash_namepart(index, &form_str);
-
-        let form_py = PyString::new(py, &form_str).unbind();
-        let ascii_py = ascii_s.as_ref().map(|s| PyString::new(py, s).unbind());
-        let comparable_py = PyString::new(py, &comparable_s).unbind();
-        let metaphone_py = metaphone_s.as_ref().map(|s| PyString::new(py, s).unbind());
-
-        Self {
-            form: form_py,
-            index,
-            tag,
-            latinize,
-            numeric,
-            ascii: ascii_py,
-            integer,
-            comparable: comparable_py,
-            metaphone: metaphone_py,
-            form_str,
-            hash,
-        }
-    }
-
     pub fn form_str(&self) -> &str {
         &self.form_str
     }
@@ -291,38 +283,7 @@ pub struct Span {
 #[pymethods]
 impl Span {
     #[new]
-    fn new(
-        py: Python<'_>,
-        parts: Vec<Py<NamePart>>,
-        symbol: Py<crate::names::symbol::Symbol>,
-    ) -> PyResult<Self> {
-        Self::build(py, parts, symbol)
-    }
-
-    fn __len__(&self) -> usize {
-        self.len_chars
-    }
-
-    fn __hash__(&self) -> isize {
-        self.hash
-    }
-
-    fn __eq__(&self, other: &Bound<'_, PyAny>) -> bool {
-        match other.extract::<PyRef<'_, Span>>() {
-            Ok(s) => s.hash == self.hash,
-            Err(_) => false,
-        }
-    }
-
-    fn __repr__(&self, py: Python<'_>) -> PyResult<String> {
-        let parts_repr: String = self.parts.bind(py).repr()?.extract()?;
-        let sym_repr: String = self.symbol.bind(py).repr()?.extract()?;
-        Ok(format!("<Span({}, {})>", parts_repr, sym_repr))
-    }
-}
-
-impl Span {
-    pub fn build(
+    pub fn new(
         py: Python<'_>,
         parts: Vec<Py<NamePart>>,
         symbol: Py<crate::names::symbol::Symbol>,
@@ -349,6 +310,27 @@ impl Span {
             len_chars,
             hash,
         })
+    }
+
+    fn __len__(&self) -> usize {
+        self.len_chars
+    }
+
+    fn __hash__(&self) -> isize {
+        self.hash
+    }
+
+    fn __eq__(&self, other: &Bound<'_, PyAny>) -> bool {
+        match other.extract::<PyRef<'_, Span>>() {
+            Ok(s) => s.hash == self.hash,
+            Err(_) => false,
+        }
+    }
+
+    fn __repr__(&self, py: Python<'_>) -> PyResult<String> {
+        let parts_repr: String = self.parts.bind(py).repr()?.extract()?;
+        let sym_repr: String = self.symbol.bind(py).repr()?.extract()?;
+        Ok(format!("<Span({}, {})>", parts_repr, sym_repr))
     }
 }
 

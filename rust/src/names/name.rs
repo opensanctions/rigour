@@ -99,7 +99,7 @@ impl Name {
                 let mut built: Vec<Py<NamePart>> = Vec::with_capacity(tokens.len());
                 for (i, token) in tokens.into_iter().enumerate() {
                     let part =
-                        NamePart::build(py, &token, Some(i as u32), NamePartTag::UNSET, phonetics);
+                        NamePart::new(py, &token, Some(i as u32), NamePartTag::UNSET, phonetics);
                     let part_py = Py::new(py, part)?;
                     built.push(part_py);
                 }
@@ -202,7 +202,7 @@ impl Name {
             if matching.len() == tokens.len() {
                 let span_parts: Vec<Py<NamePart>> =
                     matching.iter().map(|p| p.clone_ref(py)).collect();
-                let span = Span::build(py, span_parts, symbol.clone_ref(py))?;
+                let span = Span::new(py, span_parts, symbol.clone_ref(py))?;
                 let span_py = Py::new(py, span)?;
                 spans_bound.append(span_py)?;
                 matching.clear();
@@ -219,7 +219,7 @@ impl Name {
         part: Py<NamePart>,
         symbol: Py<Symbol>,
     ) -> PyResult<()> {
-        let span = Span::build(py, vec![part], symbol)?;
+        let span = Span::new(py, vec![part], symbol)?;
         let span_py = Py::new(py, span)?;
         self.spans.bind(py).append(span_py)?;
         Ok(())
