@@ -1,20 +1,23 @@
-// Rust-native versions of `NameTypeTag` and `NamePartTag`, ported
-// from `rigour/names/tag.py`. Mirrors the `SymbolCategory` pattern:
-// sealed enums exposed to Python as `#[pyclass]` types, variant
-// names match the Python attribute set exactly (SCREAMING_SNAKE_CASE
-// so no `#[pyo3(name = ...)]` renames are needed).
-//
-// The auxiliary Python constants (`WILDCARDS`, `INITIAL_TAGS`,
-// `GIVEN_NAME_TAGS`, `FAMILY_NAME_TAGS`, `NAME_TAGS_ORDER`) stay on
-// the Python side — `rigour/names/tag.py` rebuilds them from the
-// Rust-exposed variants so downstream `part.tag in INITIAL_TAGS`
-// membership checks keep working unchanged.
+//! Tag enums for classifying names and name parts.
+//!
+//! - [`NameTypeTag`] — what kind of thing a name describes
+//!   (person / organisation / object / unknown).
+//! - [`NamePartTag`] — the structural role of a part within a name
+//!   (given / family / middle / honorific / stopword / …).
+//!
+//! Both are exposed to Python as `#[pyclass]` enums. Hashing and
+//! equality are structural.
 
 #[cfg(feature = "python")]
 use pyo3::prelude::*;
 
-/// What kind of thing a name describes. Mirrors the pre-port
-/// `rigour.names.tag.NameTypeTag` string-valued enum.
+/// What kind of thing a name describes.
+///
+/// Drives which pipeline passes apply when a [`crate::names::name::Name`]
+/// is analysed:
+/// * `PER` → person-prefix strip + person tagger
+/// * `ORG` / `ENT` → org-type replacement + org-prefix strip + org tagger
+/// * `OBJ` / `UNK` → construction only, no tagging
 #[allow(non_camel_case_types)]
 #[cfg_attr(
     feature = "python",
@@ -30,8 +33,8 @@ pub enum NameTypeTag {
 }
 
 impl NameTypeTag {
-    /// Pre-port Python `.value` string — downstream uses this as a
-    /// stable serialisation key.
+    /// Short stable string key used for downstream serialisation
+    /// (index fields, logs, JSON output). Matches the variant name.
     pub fn value(&self) -> &'static str {
         match self {
             NameTypeTag::UNK => "UNK",
@@ -52,8 +55,12 @@ impl NameTypeTag {
     }
 }
 
-/// Within a name, identify name-part types. Mirrors the pre-port
-/// `rigour.names.tag.NamePartTag`.
+/// The structural role of a part within a name.
+///
+/// A newly-constructed [`crate::names::part::NamePart`] starts as
+/// `UNSET`; the tagging pipeline promotes it to one of the concrete
+/// variants based on surrounding context, external hints (firstName,
+/// lastName, …), or pattern matches (numeric, stopword, legal form).
 #[allow(non_camel_case_types)]
 #[cfg_attr(
     feature = "python",
@@ -80,16 +87,17 @@ pub enum NamePartTag {
     LEGAL,
 }
 
-/// Tags whose semantics mean "match anything" during part-tagging.
-/// Mirrors `rigour.names.tag.WILDCARDS`.
+/// Tags that match anything under [`NamePartTag::can_match`] —
+/// neutral placeholders (`UNSET`, `AMBIGUOUS`) and stopwords
+/// (semantically carry no name-side information).
 pub const WILDCARDS: &[NamePartTag] = &[
     NamePartTag::UNSET,
     NamePartTag::AMBIGUOUS,
     NamePartTag::STOP,
 ];
 
-/// Tags eligible for INITIAL-symbol promotion on single-char parts.
-/// Mirrors `rigour.names.tag.INITIAL_TAGS`.
+/// Tags whose parts can receive an `INITIAL` symbol when they
+/// consist of a single character.
 pub const INITIAL_TAGS: &[NamePartTag] = &[
     NamePartTag::GIVEN,
     NamePartTag::MIDDLE,
@@ -97,8 +105,7 @@ pub const INITIAL_TAGS: &[NamePartTag] = &[
     NamePartTag::MATRONYMIC,
 ];
 
-/// Tags that sit on the given-name side of a name. Mirrors
-/// `rigour.names.tag.GIVEN_NAME_TAGS`.
+/// Tags that sit on the given-name side of a name.
 pub const GIVEN_NAME_TAGS: &[NamePartTag] = &[
     NamePartTag::GIVEN,
     NamePartTag::MIDDLE,
@@ -109,8 +116,7 @@ pub const GIVEN_NAME_TAGS: &[NamePartTag] = &[
     NamePartTag::NICK,
 ];
 
-/// Tags that sit on the family-name side of a name. Mirrors
-/// `rigour.names.tag.FAMILY_NAME_TAGS`.
+/// Tags that sit on the family-name side of a name.
 pub const FAMILY_NAME_TAGS: &[NamePartTag] = &[
     NamePartTag::PATRONYMIC,
     NamePartTag::MATRONYMIC,
@@ -122,8 +128,10 @@ pub const FAMILY_NAME_TAGS: &[NamePartTag] = &[
     NamePartTag::STOP,
 ];
 
-/// Canonical sort order for display — used by `NamePart.tag_sort`.
-/// Mirrors `rigour.names.tag.NAME_TAGS_ORDER`.
+/// Canonical display order for name parts by tag.
+///
+/// Every [`NamePartTag`] variant appears exactly once — consumers can
+/// rely on [`NamePartTag::order_index`] never panicking.
 pub const NAME_TAGS_ORDER: &[NamePartTag] = &[
     NamePartTag::HONORIFIC,
     NamePartTag::TITLE,
@@ -143,6 +151,8 @@ pub const NAME_TAGS_ORDER: &[NamePartTag] = &[
 ];
 
 impl NamePartTag {
+    /// Short stable string key used for downstream serialisation
+    /// (logs, index fields). Matches the variant name.
     pub fn value(&self) -> &'static str {
         match self {
             NamePartTag::UNSET => "UNSET",
@@ -163,8 +173,9 @@ impl NamePartTag {
         }
     }
 
-    /// Position in `NAME_TAGS_ORDER` — used for sorting. Since
-    /// every variant appears in that array the lookup is infallible.
+    /// Position in [`NAME_TAGS_ORDER`] — used as the sort key in
+    /// [`crate::names::part::NamePart::tag_sort`]. Infallible; every
+    /// variant is in the order array.
     pub fn order_index(&self) -> usize {
         NAME_TAGS_ORDER
             .iter()
@@ -172,11 +183,13 @@ impl NamePartTag {
             .expect("every NamePartTag variant is in NAME_TAGS_ORDER")
     }
 
-    /// Mirrors the Python `NamePartTag.can_match`:
-    ///   * wildcards on either side → True
-    ///   * equal tags → True
-    ///   * otherwise, tags on opposite name-sides → False
-    ///   * default → True
+    /// True if this tag is compatible with `other` under the
+    /// name-part matching rules:
+    ///
+    /// * A [wildcard][WILDCARDS] on either side matches anything.
+    /// * Equal tags always match.
+    /// * Tags restricted to one name-side (given vs. family) only
+    ///   match other tags on the same side.
     pub fn can_match(&self, other: NamePartTag) -> bool {
         if WILDCARDS.contains(self) || WILDCARDS.contains(&other) {
             return true;
@@ -227,33 +240,23 @@ mod tests {
     }
 
     #[test]
-    fn given_vs_family_sides_cannot_match() {
-        // GIVEN is on the given side; FAMILY is on the family side.
-        // Neither is a wildcard. Both sides reject.
+    fn given_vs_family_sides_reject() {
         assert!(!NamePartTag::GIVEN.can_match(NamePartTag::FAMILY));
         assert!(!NamePartTag::FAMILY.can_match(NamePartTag::GIVEN));
     }
 
     #[test]
-    fn patronymic_pickings() {
-        // PATRONYMIC is in both side sets but the asymmetric gates
-        // reject matches against tags that sit in only one side.
-        // GIVEN is GIVEN-side only — reject.
+    fn patronymic_sides() {
+        // PATRONYMIC is in both side sets, but the rule rejects a
+        // match against any tag that sits in only one side.
         assert!(!NamePartTag::PATRONYMIC.can_match(NamePartTag::GIVEN));
-        // MIDDLE is GIVEN-side only (not in FAMILY_NAME_TAGS) — reject.
         assert!(!NamePartTag::PATRONYMIC.can_match(NamePartTag::MIDDLE));
-        // MATRONYMIC is in both side sets — accept.
-        assert!(NamePartTag::PATRONYMIC.can_match(NamePartTag::MATRONYMIC));
-        // FAMILY is FAMILY-side only; PATRONYMIC also in FAMILY side
-        // — the "self in GIVEN, other not in GIVEN" gate fires:
-        // FAMILY is not in GIVEN_NAME_TAGS → reject.
         assert!(!NamePartTag::PATRONYMIC.can_match(NamePartTag::FAMILY));
+        assert!(NamePartTag::PATRONYMIC.can_match(NamePartTag::MATRONYMIC));
     }
 
     #[test]
     fn order_covers_every_variant() {
-        // Every declared NamePartTag must have an order position,
-        // or NamePart.tag_sort would panic on unordered tags.
         for t in &[
             NamePartTag::UNSET,
             NamePartTag::AMBIGUOUS,

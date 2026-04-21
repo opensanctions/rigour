@@ -1,24 +1,7 @@
-// Rust-backed `Name` — the top-level name object. Python wrapper at
-// `rigour/names/name.py` re-exports from `rigour._core`.
-//
-// Eager construction pipeline at `Name::new`:
-//   1. original (input)
-//   2. form (input, default casefold(original))
-//   3. tag (input, NameTypeTag, default UNK)
-//   4. lang (input, Option<str>)
-//   5. parts (input or tokenise(form) -> NamePart)
-//   6. spans (empty list, grows via apply_phrase/apply_part)
-//   7. comparable = " ".join(part.comparable for part in parts)
-//   8. norm_form = " ".join(part.form for part in parts)
-//   9. hash = hash(form)
-//
-// `parts` is a `Py<PyList>` of `Py<NamePart>` — built once, stored
-// once, returned via INCREF on `.parts` access. `spans` is the same
-// shape, but grows over time.
-//
-// `symbols` is intentionally *not* cached — recomputed each access
-// from `spans`. Spans grow via `apply_phrase` / `apply_part`; caching
-// would require invalidation.
+//! The [`Name`] pyclass — the entry point to the rigour names
+//! object graph. A `Name` wraps the original input string alongside
+//! a tokenised list of [`NamePart`]s and any [`Span`]s the tagger
+//! has attached.
 
 use std::collections::HashSet;
 use std::hash::{DefaultHasher, Hash, Hasher};
@@ -36,18 +19,32 @@ fn name_tokenize(text: &str) -> Vec<String> {
     tokenize_name(text, 1)
 }
 
-/// A name of a thing — person, organisation, object, or unknown.
-/// See `rigour/names/name.py` for the Python-side documentation.
+/// A personal, organisational, or object name.
+///
+/// Exposed attributes:
+///
+/// | field | type | notes |
+/// |---|---|---|
+/// | `original` | `str` | input string, verbatim |
+/// | `form` | `str` | normalised form (casefolded by default) |
+/// | `tag` | [`NameTypeTag`] | mutable |
+/// | `lang` | `str \| None` | optional language hint, mutable |
+/// | `parts` | `list[NamePart]` | tokens of `form` |
+/// | `spans` | `list[Span]` | tagger output — grows via `apply_phrase` / `apply_part` |
+/// | `comparable` | `str` | space-joined `part.comparable`, precomputed |
+/// | `norm_form` | `str` | space-joined `part.form`, precomputed |
+/// | `symbols` | `set[Symbol]` | dynamic — rebuilt from `spans` on each access |
+///
+/// Equality and hashing are over `form`. A `Name`'s `tag` and `lang`
+/// can change, and `spans` grows, without affecting hash or equality.
 #[pyclass(module = "rigour._core")]
 pub struct Name {
     #[pyo3(get)]
     pub original: Py<PyString>,
     #[pyo3(get)]
     pub form: Py<PyString>,
-    /// Mutable — `_infer_part_tags` can flip ENT→ORG after tagging.
     #[pyo3(get, set)]
     pub tag: NameTypeTag,
-    /// Mutable — callers may attach a language hint post-construction.
     #[pyo3(get, set)]
     pub lang: Option<Py<PyString>>,
     #[pyo3(get)]
@@ -67,12 +64,21 @@ pub struct Name {
 impl Name {
     /// Construct a `Name`.
     ///
-    /// `form` defaults to `casefold(original)`. `tag` defaults to
-    /// `NameTypeTag.UNK`. If `parts` is given, it is used as-is;
-    /// otherwise `tokenize_name(form)` produces a fresh `NamePart`
-    /// per token. `phonetics` is forwarded to each `NamePart`
-    /// constructor during tokenisation — ignored when `parts` is
-    /// supplied.
+    /// Args:
+    ///   * `original` — the raw input string.
+    ///   * `form` — a pre-normalised form. If omitted, the
+    ///     constructor casefolds `original` and uses that.
+    ///   * `tag` — initial [`NameTypeTag`], defaulting to `UNK`.
+    ///   * `lang` — optional ISO language hint.
+    ///   * `parts` — pre-tokenised [`NamePart`]s. If omitted, the
+    ///     constructor tokenises `form` and builds one `NamePart`
+    ///     per token.
+    ///   * `phonetics` — forwarded to each constructed `NamePart`;
+    ///     when `false`, skips metaphone computation. Ignored when
+    ///     `parts` is supplied.
+    ///
+    /// `comparable` and `norm_form` are computed eagerly from the
+    /// parts and cached. `spans` starts empty.
     #[new]
     #[pyo3(signature = (original, form = None, tag = NameTypeTag::UNK, lang = None, parts = None, phonetics = true))]
     pub fn new(
@@ -108,7 +114,6 @@ impl Name {
             }
         };
 
-        // Compute comparable and norm_form by folding the parts.
         let mut comparable_segs: Vec<String> = Vec::with_capacity(parts_vec.len());
         let mut norm_segs: Vec<String> = Vec::with_capacity(parts_vec.len());
         for p in &parts_vec {
@@ -143,8 +148,14 @@ impl Name {
         })
     }
 
-    /// Tag name parts matching the tokenised form of `text`. See
-    /// `rigour/names/name.py::Name.tag_text` for the full semantics.
+    /// Tag parts matching the tokenised form of `text`.
+    ///
+    /// Walks `self.parts` left-to-right looking for a contiguous
+    /// (adjacency-insensitive) match of the tokens in `text`. On a
+    /// hit, each matched part's tag is set to `tag` — unless the
+    /// part already carries a tag that conflicts under
+    /// [`NamePartTag::can_match`], in which case it is demoted to
+    /// `AMBIGUOUS`. Stops after `max_matches` successful matches.
     #[pyo3(signature = (text, tag, max_matches = 1))]
     pub fn tag_text(
         &self,
@@ -182,8 +193,9 @@ impl Name {
         Ok(())
     }
 
-    /// Apply `symbol` to parts matching the space-separated tokens of
-    /// `phrase`. Each non-overlapping match appends a `Span`.
+    /// Attach `symbol` to every contiguous run of parts whose tokens
+    /// match `phrase` (space-separated). Each run becomes a new
+    /// [`Span`] appended to `self.spans`.
     pub fn apply_phrase(&self, py: Python<'_>, phrase: &str, symbol: Py<Symbol>) -> PyResult<()> {
         let tokens: Vec<&str> = phrase.split(' ').collect();
         if tokens.is_empty() {
@@ -211,8 +223,8 @@ impl Name {
         Ok(())
     }
 
-    /// Apply `symbol` to a single `NamePart` by appending a `Span`
-    /// with just that part.
+    /// Attach `symbol` to a single `NamePart`, appending a new
+    /// [`Span`] to `self.spans`.
     pub fn apply_part(
         &self,
         py: Python<'_>,
@@ -225,8 +237,9 @@ impl Name {
         Ok(())
     }
 
-    /// Dynamic `set[Symbol]` aggregated from every span. Recomputed
-    /// on each access; intentionally not cached.
+    /// Set of unique [`Symbol`]s attached via `spans`. Recomputed
+    /// on each access — the set is small and `spans` can grow over
+    /// the object's lifetime, so caching would need invalidation.
     #[getter]
     fn symbols(&self, py: Python<'_>) -> PyResult<Py<pyo3::types::PySet>> {
         let out = pyo3::types::PySet::empty(py)?;
@@ -238,10 +251,16 @@ impl Name {
         Ok(out.unbind())
     }
 
-    /// `True` iff this name contains `other` under the PER-aware
-    /// rules. See Python docstring for details.
+    /// `True` iff this name structurally contains `other`.
+    ///
+    /// For `NameTypeTag::PER`, comparison is adjacency-insensitive
+    /// across `part.comparable` values, with a shortcut for
+    /// single-character `INITIAL` parts: if `other` carries one and
+    /// `self` shares that symbol, the initial is credited as
+    /// matching. For any other tag (and for non-PER names), falls
+    /// back to substring containment of `norm_form`. Always `False`
+    /// for names tagged `UNK` or when the two names are equal.
     pub fn contains(&self, py: Python<'_>, other: PyRef<'_, Name>) -> PyResult<bool> {
-        // Identity short-circuit via form equality.
         if self.form_str == other.form_str {
             return Ok(false);
         }
@@ -259,9 +278,6 @@ impl Name {
             let other_forms = comparable_list(py, &other.parts)?;
             let mut common = list_intersection(&self_forms, &other_forms);
 
-            // INITIAL-symbol shortcut: if `other` has a single-char
-            // INITIAL that matches a symbol in `self`, credit its
-            // comparable.
             let other_spans = other.spans.bind(py);
             let self_spans = self.spans.bind(py);
             for o_item in other_spans.iter() {
@@ -298,10 +314,6 @@ impl Name {
     }
 
     fn __eq__(&self, other: &Bound<'_, PyAny>) -> bool {
-        // `form` is Name's identity — PER/ORG/ENT/OBJ/UNK tags and
-        // lang can differ without making two Names "different"
-        // (matches the pre-port Python semantics). Extract as Name
-        // rather than duck-typing on `.form` attribute.
         match other.extract::<PyRef<'_, Name>>() {
             Ok(n) => n.form_str == self.form_str,
             Err(_) => false,
@@ -326,10 +338,12 @@ impl Name {
         ))
     }
 
-    /// Drop short names that are contained in longer names (PER-aware
-    /// rule). Used by the matcher to prevent short-name false-positives.
-    /// Accepts any Python iterable of `Name` (set, list, tuple,
-    /// generator).
+    /// Return `names` with short names that are substrings of longer
+    /// names in the set dropped. Uses [`Name::contains`], so the
+    /// PER-aware rules apply — a short name is kept if the longer
+    /// one is tagged `UNK` (contains always returns `False` there).
+    ///
+    /// Accepts any Python iterable of `Name`. Returns a new set.
     #[classmethod]
     fn consolidate_names(
         _cls: &Bound<'_, pyo3::types::PyType>,
@@ -344,7 +358,6 @@ impl Name {
         }
         let mut kept: HashSet<usize> = (0..collected.len()).collect();
 
-        // Replicate itertools.product semantics. O(n^2) as today.
         let len = collected.len();
         for i in 0..len {
             if !kept.contains(&i) {
@@ -371,9 +384,6 @@ impl Name {
 }
 
 fn apply_tag_to_matching(py: Python<'_>, matching: &[Py<NamePart>], new_tag: NamePartTag) {
-    // Mirrors Python logic:
-    //   if part.tag == NamePartTag.UNSET: part.tag = new_tag
-    //   elif not part.tag.can_match(new_tag): part.tag = AMBIGUOUS
     for part in matching {
         let bind = part.bind(py);
         let current = bind.borrow().tag;
@@ -398,9 +408,8 @@ fn comparable_list(py: Python<'_>, parts: &Py<PyList>) -> PyResult<Vec<String>> 
     Ok(out)
 }
 
-/// Multi-set intersection mirroring `rigour.util.list_intersection`.
-/// Each element in `a` that has a matching (not-yet-consumed) element
-/// in `b` contributes once to the result.
+/// Multi-set intersection: each element in `a` consumes at most one
+/// matching element in `b`; the matched elements form the output.
 fn list_intersection(a: &[String], b: &[String]) -> Vec<String> {
     let mut avail: Vec<Option<&String>> = b.iter().map(Some).collect();
     let mut out = Vec::new();
@@ -417,10 +426,6 @@ fn list_intersection(a: &[String], b: &[String]) -> Vec<String> {
 }
 
 fn hash_form(form: &str) -> isize {
-    // Rust-side SipHash. Python `__hash__` only requires consistency
-    // (equal Names hash equal) — which holds because `form` is
-    // immutable after Name construction. The specific numeric value
-    // is an implementation detail.
     let mut hasher = DefaultHasher::new();
     form.hash(&mut hasher);
     hasher.finish() as isize

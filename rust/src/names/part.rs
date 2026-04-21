@@ -1,38 +1,19 @@
-// Rust-backed `NamePart` and `Span` — the two leaf classes of the
-// `rigour.names` object graph. Python wrappers at
-// `rigour/names/part.py` are thin re-exports.
-//
-// Linear eager pipeline at `NamePart::new`:
-//   1. form (input)
-//   2. index (input, Option<u32>)
-//   3. tag (input, NamePartTag, default UNSET)
-//   4. numeric = every char numeric
-//   5. latinize = should_ascii(form)
-//   6. integer = if numeric { string_number -> int if is_integer }
-//   7. ascii = per the Python impl, now over maybe_ascii instead of
-//             normality.ascii_text. Non-latinize parts resolve to
-//             None (was previously whatever ICU produced) — matches
-//             the narrow-translit scope documented in
-//             `plans/rust-minimal-translit.md`.
-//   8. comparable = numeric→str(integer); !latinize→form; else ascii|form
-//   9. metaphone = if phonetics && latinize && !numeric && len(ascii)>2
-//
-// All fields cached on the struct; Python attribute reads are
-// plain INCREFs / copies.
+//! Leaf classes of the names object graph:
+//!
+//! - [`NamePart`] — a single tagged component of a name (token-level).
+//! - [`Span`] — one or more [`NamePart`]s associated with a
+//!   [`crate::names::symbol::Symbol`].
 
 use std::hash::{DefaultHasher, Hash, Hasher};
 
 use pyo3::prelude::*;
 use pyo3::types::PyString;
 
-use crate::names::tag::{NAME_TAGS_ORDER, NamePartTag};
+use crate::names::tag::NamePartTag;
 use crate::text::numbers::string_number;
 use crate::text::phonetics::metaphone;
 use crate::text::translit::{maybe_ascii, should_ascii};
 
-/// Strip non-alphanumeric chars from a string; return None if the
-/// result is empty. Mirrors `"".join(c for c in s if c.isalnum())`
-/// in the Python `NamePart.ascii` body.
 fn strip_nonalnum(text: &str) -> Option<String> {
     let out: String = text.chars().filter(|c| c.is_alphanumeric()).collect();
     if out.is_empty() { None } else { Some(out) }
@@ -92,16 +73,31 @@ fn compute_metaphone(
     Some(metaphone(text))
 }
 
-/// A tagged component of a name (e.g. a given name, family name, or
-/// stop word). See `rigour/names/part.py` for the Python-side
-/// documentation.
+/// A single tagged component of a [`crate::names::name::Name`].
+///
+/// Exposed attributes:
+///
+/// | field | type | notes |
+/// |---|---|---|
+/// | `form` | `str` | token text, as tokenised from the parent name |
+/// | `index` | `int \| None` | position in the parent name |
+/// | `tag` | [`NamePartTag`] | mutable — set by the tagging pipeline |
+/// | `latinize` | `bool` | whether the form is in an admitted script |
+/// | `numeric` | `bool` | whether the form is all numeric chars |
+/// | `ascii` | `str \| None` | ASCII form for admitted-script parts, else `None` |
+/// | `integer` | `int \| None` | parsed value for numeric parts |
+/// | `comparable` | `str` | best-effort matchable form |
+/// | `metaphone` | `str \| None` | phonetic key for latinisable parts, else `None` |
+///
+/// Equality and hashing are over `(index, form)` — the immutable
+/// identity of the part. `tag` can be re-written after construction
+/// without invalidating either.
 #[pyclass(module = "rigour._core")]
 pub struct NamePart {
     #[pyo3(get)]
     pub form: Py<PyString>,
     #[pyo3(get)]
     pub index: Option<u32>,
-    /// Mutable — the tagger rewrites this after construction.
     #[pyo3(get, set)]
     pub tag: NamePartTag,
     #[pyo3(get)]
@@ -122,16 +118,20 @@ pub struct NamePart {
 
 #[pymethods]
 impl NamePart {
-    /// Build a `NamePart` from `form`.
+    /// Construct a `NamePart`.
     ///
-    /// `form` is the raw text (expected casefolded by the caller, as
-    /// it is across the rigour pipeline). `index` is the part's
-    /// position in the parent `Name` if any. `tag` defaults to
-    /// `NamePartTag.UNSET`. `phonetics` gates metaphone computation.
+    /// Args:
+    ///   * `form` — the raw token text. Callers typically feed
+    ///     casefolded input; no further normalisation is performed
+    ///     here.
+    ///   * `index` — position in the parent name, or `None` for a
+    ///     free-standing part.
+    ///   * `tag` — initial structural tag, defaulting to `UNSET`.
+    ///   * `phonetics` — when `true`, populate `metaphone`; when
+    ///     `false`, leave it `None` and skip the phonetic computation.
     ///
-    /// `#[new]` makes this the Python constructor; the fn itself is
-    /// also called directly from Rust (`Name::new` during tokenisation)
-    /// — same entry point for both sides of the FFI.
+    /// `ascii`, `comparable`, `integer`, and `metaphone` are
+    /// computed eagerly from `form` and cached.
     #[new]
     #[pyo3(signature = (form, index = None, tag = NamePartTag::UNSET, phonetics = true))]
     pub fn new(
@@ -185,15 +185,13 @@ impl NamePart {
         }
     }
 
+    /// True if this part's tag is structurally compatible with the
+    /// other part's tag. See [`NamePartTag::can_match`].
     fn can_match(&self, other: PyRef<'_, NamePart>) -> bool {
         self.tag.can_match(other.tag)
     }
 
     fn __eq__(&self, other: &Bound<'_, PyAny>) -> bool {
-        // Compare the immutable fields directly — `(index, form)` is
-        // NamePart's identity. The pre-port Python impl compared the
-        // cached hash, which a SipHash collision would corrupt; here
-        // we sidestep the theoretical case.
         match other.extract::<PyRef<'_, NamePart>>() {
             Ok(n) => n.index == self.index && n.form_str == self.form_str,
             Err(_) => false,
@@ -219,15 +217,15 @@ impl NamePart {
         )
     }
 
-    /// Stable sort of `parts` by `NAME_TAGS_ORDER` position of each
-    /// part's tag. Mirrors the pre-port Python classmethod.
+    /// Return `parts` sorted by the canonical display order of their
+    /// tags (see [`crate::names::tag::NAME_TAGS_ORDER`]). The sort is
+    /// stable.
     #[classmethod]
     fn tag_sort(
         _cls: &Bound<'_, pyo3::types::PyType>,
         py: Python<'_>,
         parts: Vec<Py<NamePart>>,
     ) -> Vec<Py<NamePart>> {
-        let _ = NAME_TAGS_ORDER; // silence unused-import lint in non-test builds
         let mut indexed: Vec<(usize, Py<NamePart>)> = parts
             .into_iter()
             .map(|p| {
@@ -241,35 +239,38 @@ impl NamePart {
 }
 
 impl NamePart {
+    /// Rust-only accessor for the token text. Cheaper than
+    /// `self.form.bind(py).extract::<String>()` when you already hold
+    /// a `&NamePart`.
     pub fn form_str(&self) -> &str {
         &self.form_str
     }
 
-    /// Internal accessor for the cached hash. Useful for Rust-internal
-    /// part-identity tracking (e.g. in `names::analyze::infer_part_tags`).
+    /// Rust-only accessor for the cached hash. Used for part-identity
+    /// tracking in the analyze pipeline.
     pub fn hash_isize(&self) -> isize {
         self.hash
     }
 }
 
 fn hash_namepart(index: Option<u32>, form: &str) -> isize {
-    // Rust-side SipHash over the two immutable fields. The specific
-    // numeric value doesn't matter — Python's `__hash__` contract
-    // only requires consistency (equal objects hash equal), which
-    // this preserves because both fields are frozen after
-    // construction. Avoids a CPython tuple-hash round-trip.
     let mut hasher = DefaultHasher::new();
     index.hash(&mut hasher);
     form.hash(&mut hasher);
     hasher.finish() as isize
 }
 
-/// A symbol applied to one or more parts of a `Name`.
+/// A contiguous group of [`NamePart`]s annotated with a
+/// [`crate::names::symbol::Symbol`] — the tagger's output unit.
+///
+/// The `parts` list holds the *same* `Py<NamePart>` references that
+/// live in the parent [`crate::names::name::Name`]'s `.parts`, so
+/// `span.parts[0] is name.parts[i]` is True from Python.
+///
+/// `comparable` and `__len__` (total character count across the
+/// parts' `form` strings) are precomputed at construction.
 #[pyclass(module = "rigour._core")]
 pub struct Span {
-    /// Shared Python list of `NamePart`s — the same `Py<NamePart>`
-    /// refs live in `Name.parts`. Identity is preserved
-    /// (`span.parts[0] is name.parts[i]` is `True` from Python).
     #[pyo3(get)]
     pub parts: Py<pyo3::types::PyList>,
     #[pyo3(get)]
@@ -288,7 +289,6 @@ impl Span {
         parts: Vec<Py<NamePart>>,
         symbol: Py<crate::names::symbol::Symbol>,
     ) -> PyResult<Self> {
-        // Precompute comparable and char-count length from the parts.
         let mut segments: Vec<String> = Vec::with_capacity(parts.len());
         let mut len_chars: usize = 0;
         for part_ref in &parts {
@@ -339,11 +339,6 @@ fn hash_span(
     parts: &[Py<NamePart>],
     symbol: &Py<crate::names::symbol::Symbol>,
 ) -> isize {
-    // Rust-side SipHash: fold each part's cached hash plus the
-    // symbol's derived hash into a single `DefaultHasher`. Python's
-    // hash contract is satisfied because equal spans hash equal —
-    // `NamePart`'s hash is stable (form + index) and `Symbol` is
-    // frozen with derived Hash.
     let mut hasher = DefaultHasher::new();
     for p in parts {
         let h = p.bind(py).borrow().hash;
