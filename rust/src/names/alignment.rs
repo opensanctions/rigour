@@ -164,8 +164,8 @@ fn align_views(
     left_views: &[PartView],
     right_views: &[PartView],
 ) -> (Vec<usize>, Vec<usize>, bool) {
-    // Stable length-desc sort — R9.4 requires deterministic tie-break
-    // via input order.
+    // Stable length-desc sort keeps the tie-break deterministic via
+    // input order.
     let mut left_active: Vec<usize> = (0..left_views.len()).collect();
     left_active.sort_by(|a, b| left_views[*b].form_len.cmp(&left_views[*a].form_len));
     let mut right_active: Vec<usize> = (0..right_views.len()).collect();
@@ -183,9 +183,7 @@ fn align_views(
         let mut best_left: Vec<usize> = Vec::new();
         let mut best_right: Vec<usize> = Vec::new();
 
-        // Left-major product walk — mirrors Python
-        // `itertools.product(left, right)` for iteration-order
-        // determinism.
+        // Left-major product walk for iteration-order determinism.
         'outer: for &li in &left_active {
             for &ri in &right_active {
                 let lv = &left_views[li];
@@ -263,12 +261,21 @@ fn align_views(
     (left_out, right_out, matched)
 }
 
-/// Rust-callable alignment entry point. Preserves the Python
-/// `align_person_name_order` contract:
-/// * Empty left → `([], tag_sort(right))`.
-/// * No pair scored → `(tag_sort(left), tag_sort(right))`.
-/// * Otherwise → greedy-aligned pair of lists, same length as inputs.
-pub fn align_person_name_order(
+/// Greedy-align two lists of name parts so comparable tokens share
+/// the same output index.
+///
+/// Used by the name matcher to reorder remaining tokens after
+/// symbolic tagging so a downstream per-index similarity pass
+/// compares like with like. Pairs are chosen by a length-desc,
+/// left-major walk over edit-similarity scores; ties are broken
+/// stably by input order so the output is deterministic.
+///
+/// Returns `([], tag_sort(right))` when `left` is empty, falls back
+/// to `(tag_sort(left), tag_sort(right))` when no pair scores above
+/// the similarity floor, otherwise returns the greedy-aligned pair.
+#[pyfunction]
+#[pyo3(name = "align_person_name_order")]
+pub fn py_align_person_name_order(
     py: Python<'_>,
     left: Vec<Py<NamePart>>,
     right: Vec<Py<NamePart>>,
@@ -294,16 +301,6 @@ pub fn align_person_name_order(
         .map(|&i| right[right_views[i].origin].clone_ref(py))
         .collect();
     (left_result, right_result)
-}
-
-#[pyfunction]
-#[pyo3(name = "align_person_name_order")]
-pub fn py_align_person_name_order(
-    py: Python<'_>,
-    left: Vec<Py<NamePart>>,
-    right: Vec<Py<NamePart>>,
-) -> (Vec<Py<NamePart>>, Vec<Py<NamePart>>) {
-    align_person_name_order(py, left, right)
 }
 
 #[cfg(test)]
