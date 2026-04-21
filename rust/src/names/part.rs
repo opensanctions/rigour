@@ -83,10 +83,9 @@ pub struct NamePart {
     /// Token text, as tokenised from the parent name's form.
     #[pyo3(get)]
     pub form: Py<PyString>,
-    /// Position in the parent name, or `None` for a free-standing
-    /// part.
+    /// Position of this part within the parent name's `parts` list.
     #[pyo3(get)]
-    pub index: Option<u32>,
+    pub index: u32,
     /// Structural role of this part. Set by the tagging pipeline;
     /// `UNSET` at construction.
     #[pyo3(get, set)]
@@ -118,6 +117,7 @@ pub struct NamePart {
     #[pyo3(get)]
     pub metaphone: Option<Py<PyString>>,
     form_str: String,
+    comparable_str: String,
     hash: isize,
 }
 
@@ -125,27 +125,17 @@ pub struct NamePart {
 impl NamePart {
     /// Construct a `NamePart`.
     ///
-    /// Args:
-    ///   * `form` — the raw token text. Callers typically feed
-    ///     casefolded input; no further normalisation is performed
-    ///     here.
-    ///   * `index` — position in the parent name, or `None` for a
-    ///     free-standing part.
-    ///   * `tag` — initial structural tag, defaulting to `UNSET`.
-    ///   * `phonetics` — when `true`, populate `metaphone`; when
-    ///     `false`, leave it `None` and skip the phonetic computation.
+    /// `form` is the raw token text; callers feed casefolded input.
+    /// `index` is the part's position in the parent name's `parts`
+    /// list. `tag` is the initial structural tag (usually left as
+    /// `UNSET` and filled in later). `phonetics=false` skips the
+    /// metaphone computation — leaves the field as `None`.
     ///
     /// `ascii`, `comparable`, `integer`, and `metaphone` are
     /// computed eagerly from `form` and cached.
     #[new]
-    #[pyo3(signature = (form, index = None, tag = NamePartTag::UNSET, phonetics = true))]
-    pub fn new(
-        py: Python<'_>,
-        form: &str,
-        index: Option<u32>,
-        tag: NamePartTag,
-        phonetics: bool,
-    ) -> Self {
+    #[pyo3(signature = (form, index, tag = NamePartTag::UNSET, phonetics = true))]
+    pub fn new(py: Python<'_>, form: &str, index: u32, tag: NamePartTag, phonetics: bool) -> Self {
         let form_str = form.to_string();
         let numeric = !form_str.is_empty() && form_str.chars().all(|c| c.is_numeric());
         let latinize = should_ascii(form);
@@ -164,7 +154,7 @@ impl NamePart {
             None
         };
         let ascii_s = compute_ascii(&form_str, numeric, latinize, integer);
-        let comparable_s =
+        let comparable_str =
             compute_comparable(&form_str, numeric, latinize, integer, ascii_s.as_deref());
         let metaphone_s = compute_metaphone(phonetics, latinize, numeric, ascii_s.as_deref());
 
@@ -172,7 +162,7 @@ impl NamePart {
 
         let form_py = PyString::new(py, &form_str).unbind();
         let ascii_py = ascii_s.as_ref().map(|s| PyString::new(py, s).unbind());
-        let comparable_py = PyString::new(py, &comparable_s).unbind();
+        let comparable_py = PyString::new(py, &comparable_str).unbind();
         let metaphone_py = metaphone_s.as_ref().map(|s| PyString::new(py, s).unbind());
 
         Self {
@@ -186,18 +176,9 @@ impl NamePart {
             comparable: comparable_py,
             metaphone: metaphone_py,
             form_str,
+            comparable_str,
             hash,
         }
-    }
-
-    /// Whether two parts can plausibly be the same role in a name.
-    ///
-    /// Used when aligning two names part-by-part: a part tagged
-    /// `FAMILY` shouldn't be aligned with one tagged `GIVEN`, but
-    /// should with one tagged `UNSET` (which hasn't committed to a
-    /// role yet). Delegates to [`NamePartTag::can_match`].
-    fn can_match(&self, other: PyRef<'_, NamePart>) -> bool {
-        self.tag.can_match(other.tag)
     }
 
     fn __eq__(&self, other: &Bound<'_, PyAny>) -> bool {
@@ -219,9 +200,7 @@ impl NamePart {
         format!(
             "<NamePart('{}', {}, '{}')>",
             self.form_str,
-            self.index
-                .map(|i| i.to_string())
-                .unwrap_or_else(|| "None".to_string()),
+            self.index,
             self.tag.value(),
         )
     }
@@ -263,6 +242,14 @@ impl NamePart {
         &self.form_str
     }
 
+    /// Rust-only accessor for the cached comparable form. Hot-path
+    /// win when the analyze / contains pipelines walk parts and
+    /// read `.comparable` per part — avoids a per-iteration
+    /// `PyString` extract.
+    pub fn comparable_str(&self) -> &str {
+        &self.comparable_str
+    }
+
     /// Rust-only accessor for the cached hash. Used for part-identity
     /// tracking in the analyze pipeline.
     pub fn hash_isize(&self) -> isize {
@@ -270,7 +257,7 @@ impl NamePart {
     }
 }
 
-fn hash_namepart(index: Option<u32>, form: &str) -> isize {
+fn hash_namepart(index: u32, form: &str) -> isize {
     let mut hasher = DefaultHasher::new();
     index.hash(&mut hasher);
     form.hash(&mut hasher);
@@ -310,8 +297,7 @@ impl Span {
         let mut len_chars: usize = 0;
         for part_ref in &parts {
             let part = part_ref.bind(py).borrow();
-            let comparable: String = part.comparable.bind(py).extract()?;
-            segments.push(comparable);
+            segments.push(part.comparable_str().to_string());
             len_chars += part.form_str.chars().count();
         }
         let comparable_str = segments.join(" ");

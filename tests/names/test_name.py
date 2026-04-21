@@ -4,7 +4,7 @@ from rigour.names.tag import NamePartTag, NameTypeTag
 
 
 def test_name_object():
-    name = Name("John Spencer", lang="eng")
+    name = Name("John Spencer")
     assert name.original == "John Spencer"
     assert str(name) == "John Spencer"
     assert name.form == "john spencer"
@@ -12,7 +12,7 @@ def test_name_object():
     assert "Spencer" in repr(name)
     assert "UNK" in repr(name)
 
-    other = Name("John Spencer", lang="fra")
+    other = Name("John Spencer")
     assert name == other
     assert hash(name) == hash(other)
     assert name != "john spencer"
@@ -23,7 +23,7 @@ def test_name_object():
     assert name.parts[0].tag == NamePartTag.UNSET
     assert name.comparable == "john spencer"
 
-    putin = Name("Владимир Путин", lang="rus")
+    putin = Name("Владимир Путин")
     assert putin.form == "владимир путин"
     assert putin.norm_form == "владимир путин"
     assert putin.comparable == "vladimir putin"
@@ -61,7 +61,7 @@ def test_consolidate_names():
 
 
 def test_cjk_name():
-    name = Name("维克托·亚历山德罗维奇·卢卡申科", lang="zho")
+    name = Name("维克托·亚历山德罗维奇·卢卡申科")
     assert name.form == "维克托·亚历山德罗维奇·卢卡申科"
     assert name.norm_form == "维克托 亚历山德罗维奇 卢卡申科"
     assert name.comparable == "维克托 亚历山德罗维奇 卢卡申科"

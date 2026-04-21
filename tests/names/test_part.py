@@ -58,14 +58,14 @@ def test_name_part_empty():
 def test_name_part_tags():
     john = NamePart("john", 0)
     steven = NamePart("steven", 0, NamePartTag.GIVEN)
-    assert steven.can_match(john)
+    assert steven.tag.can_match(john.tag)
     stevens = NamePart("stevens", 0, NamePartTag.FAMILY)
-    assert not steven.can_match(stevens)
-    assert not stevens.can_match(steven)
+    assert not steven.tag.can_match(stevens.tag)
+    assert not stevens.tag.can_match(steven.tag)
 
     anyst = NamePart("steven", 0, NamePartTag.UNSET)
-    assert anyst.can_match(steven)
-    assert anyst.can_match(stevens)
+    assert anyst.tag.can_match(steven.tag)
+    assert anyst.tag.can_match(stevens.tag)
 
 
 def test_name_part_numeric():

@@ -88,7 +88,7 @@ pub fn analyze_names(
 
         // Construct Name (which tokenises internally). `working` is
         // the post-prefix-strip raw; Name's `original` remembers it.
-        let name_obj = Name::new(py, &working, Some(&form), type_tag, None, None, phonetics)?;
+        let name_obj = Name::new(py, &working, Some(&form), type_tag, phonetics)?;
         let name_py = Py::new(py, name_obj)?;
 
         // Apply part_tags — each value is prenormalised then fed to
@@ -142,8 +142,7 @@ fn apply_initial_preamble(py: Python<'_>, name: &Py<Name>, infer_initials: bool)
         if !part.latinize {
             continue;
         }
-        let comparable: String = part.comparable.bind(py).extract()?;
-        let Some(first_char) = comparable.chars().next() else {
+        let Some(first_char) = part.comparable_str().chars().next() else {
             continue;
         };
         let sym_id = first_char.to_string();

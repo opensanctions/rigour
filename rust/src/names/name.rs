@@ -21,8 +21,8 @@ fn name_tokenize(text: &str) -> Vec<String> {
 
 /// A personal, organisational, or object name.
 ///
-/// Equality and hashing are over `form`. A `Name`'s `tag` and `lang`
-/// can change, and `spans` grows, without affecting either.
+/// Equality and hashing are over `form`. A `Name`'s `tag` can change
+/// and `spans` grows without affecting either.
 #[pyclass(module = "rigour._core")]
 pub struct Name {
     /// Input string, verbatim.
@@ -36,9 +36,6 @@ pub struct Name {
     /// `infer_part_tags` may upgrade `ENT` → `ORG` after tagging.
     #[pyo3(get, set)]
     pub tag: NameTypeTag,
-    /// Optional ISO language hint.
-    #[pyo3(get, set)]
-    pub lang: Option<Py<PyString>>,
     /// Tokens of `form`, one [`NamePart`] per token.
     #[pyo3(get)]
     pub parts: Py<PyList>,
@@ -61,30 +58,22 @@ pub struct Name {
 impl Name {
     /// Construct a `Name`.
     ///
-    /// Args:
-    ///   * `original` — the raw input string.
-    ///   * `form` — a pre-normalised form. If omitted, the
-    ///     constructor casefolds `original` and uses that.
-    ///   * `tag` — initial [`NameTypeTag`], defaulting to `UNK`.
-    ///   * `lang` — optional ISO language hint.
-    ///   * `parts` — pre-tokenised [`NamePart`]s. If omitted, the
-    ///     constructor tokenises `form` and builds one `NamePart`
-    ///     per token.
-    ///   * `phonetics` — forwarded to each constructed `NamePart`;
-    ///     when `false`, skips metaphone computation. Ignored when
-    ///     `parts` is supplied.
+    /// `original` is the raw input string; `form` is an optional
+    /// pre-normalised variant (defaults to `casefold(original)`).
+    /// `tag` sets the name-type classification. `phonetics=false`
+    /// skips metaphone computation on each tokenised part.
     ///
-    /// `comparable` and `norm_form` are computed eagerly from the
-    /// parts and cached. `spans` starts empty.
+    /// `form` is tokenised into one [`NamePart`] per token;
+    /// `comparable` and `norm_form` are computed eagerly from those
+    /// parts and cached. `spans` starts empty and grows via
+    /// `apply_phrase` / `apply_part`.
     #[new]
-    #[pyo3(signature = (original, form = None, tag = NameTypeTag::UNK, lang = None, parts = None, phonetics = true))]
+    #[pyo3(signature = (original, form = None, tag = NameTypeTag::UNK, phonetics = true))]
     pub fn new(
         py: Python<'_>,
         original: &str,
         form: Option<&str>,
         tag: NameTypeTag,
-        lang: Option<&str>,
-        parts: Option<Vec<Py<NamePart>>>,
         phonetics: bool,
     ) -> PyResult<Self> {
         let form_str = match form {
@@ -92,30 +81,19 @@ impl Name {
             None => casefold(original),
         };
 
-        let (parts_vec, parts_list): (Vec<Py<NamePart>>, Py<PyList>) = match parts {
-            Some(given) => {
-                let list = PyList::new(py, &given)?.unbind();
-                (given, list)
-            }
-            None => {
-                let tokens = name_tokenize(&form_str);
-                let mut built: Vec<Py<NamePart>> = Vec::with_capacity(tokens.len());
-                for (i, token) in tokens.into_iter().enumerate() {
-                    let part =
-                        NamePart::new(py, &token, Some(i as u32), NamePartTag::UNSET, phonetics);
-                    let part_py = Py::new(py, part)?;
-                    built.push(part_py);
-                }
-                let list = PyList::new(py, &built)?.unbind();
-                (built, list)
-            }
-        };
+        let tokens = name_tokenize(&form_str);
+        let mut parts_vec: Vec<Py<NamePart>> = Vec::with_capacity(tokens.len());
+        for (i, token) in tokens.into_iter().enumerate() {
+            let part = NamePart::new(py, &token, i as u32, NamePartTag::UNSET, phonetics);
+            parts_vec.push(Py::new(py, part)?);
+        }
+        let parts_list = PyList::new(py, &parts_vec)?.unbind();
 
         let mut comparable_segs: Vec<String> = Vec::with_capacity(parts_vec.len());
         let mut norm_segs: Vec<String> = Vec::with_capacity(parts_vec.len());
         for p in &parts_vec {
             let part = p.bind(py).borrow();
-            comparable_segs.push(part.comparable.bind(py).extract()?);
+            comparable_segs.push(part.comparable_str().to_string());
             norm_segs.push(part.form_str().to_string());
         }
         let comparable_str = comparable_segs.join(" ");
@@ -123,7 +101,6 @@ impl Name {
 
         let original_py = PyString::new(py, original).unbind();
         let form_py = PyString::new(py, &form_str).unbind();
-        let lang_py = lang.map(|l| PyString::new(py, l).unbind());
         let comparable_py = PyString::new(py, &comparable_str).unbind();
         let norm_form_py = PyString::new(py, &norm_form_str).unbind();
         let spans_list = PyList::empty(py).unbind();
@@ -134,7 +111,6 @@ impl Name {
             original: original_py,
             form: form_py,
             tag,
-            lang: lang_py,
             parts: parts_list,
             spans: spans_list,
             comparable: comparable_py,
@@ -429,8 +405,7 @@ fn comparable_list(py: Python<'_>, parts: &Py<PyList>) -> PyResult<Vec<String>> 
     let mut out = Vec::with_capacity(bound.len());
     for item in bound.iter() {
         let part = item.cast::<NamePart>()?.borrow();
-        let s: String = part.comparable.bind(py).extract()?;
-        out.push(s);
+        out.push(part.comparable_str().to_string());
     }
     Ok(out)
 }

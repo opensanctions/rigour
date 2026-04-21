@@ -121,7 +121,7 @@ class NamePart:
     """A tagged component of a name. See rigour/names/part.py."""
 
     form: str
-    index: int | None
+    index: int
     tag: NamePartTag
     latinize: bool
     numeric: bool
@@ -133,12 +133,10 @@ class NamePart:
     def __init__(
         self,
         form: str,
-        index: int | None = None,
+        index: int,
         tag: NamePartTag = ...,
         phonetics: bool = True,
     ) -> None: ...
-
-    def can_match(self, other: "NamePart") -> bool: ...
 
     def __len__(self) -> int: ...
 
@@ -164,7 +162,6 @@ class Name:
     original: str
     form: str
     tag: NameTypeTag
-    lang: str | None
     parts: list[NamePart]
     spans: list[Span]
     comparable: str
@@ -175,8 +172,6 @@ class Name:
         original: str,
         form: str | None = None,
         tag: NameTypeTag = ...,
-        lang: str | None = None,
-        parts: list[NamePart] | None = None,
         phonetics: bool = True,
     ) -> None: ...
 
