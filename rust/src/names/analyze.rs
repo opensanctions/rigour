@@ -1,7 +1,7 @@
-// Single-FFI name-analysis orchestrator — the Rust-side of Phase 5
-// from `plans/rust.md`. Collapses the Python shim in
-// `rigour/names/analyze.py` into one function call; same contract,
-// no Python callbacks between the steps.
+// Single-FFI name-analysis orchestrator. Collapses what used to be
+// a per-step Python pipeline (prefix strip → casefold → org-type
+// replacement → tagger → infer) into one function call with no
+// Python callbacks between the steps.
 //
 // Pipeline per input string:
 //   1. For PER: remove_person_prefixes

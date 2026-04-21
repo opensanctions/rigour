@@ -87,9 +87,15 @@ pub enum NamePartTag {
     FAMILY,
     /// Tribal name or clan designation.
     TRIBAL,
-    /// Patronymic — name derived from the father's name.
+    /// Patronymic — name derived from the father's name. Legacy; the
+    /// current tagging pipeline never produces this tag (ambiguous
+    /// father-name values are tagged `MIDDLE` + `FAMILY` to cover
+    /// both Slavic patronymic and Hispanic additional-family-name
+    /// conventions). Kept for callers that hand-tag names from
+    /// sources with explicit patronymic structure.
     PATRONYMIC,
-    /// Matronymic — name derived from the mother's name.
+    /// Matronymic — name derived from the mother's name. Legacy; see
+    /// the note on `PATRONYMIC`.
     MATRONYMIC,
     /// Honorific particle (Sir, Dame, …). Semantically adjacent to
     /// `TITLE`; kept distinct for locale-specific handling.

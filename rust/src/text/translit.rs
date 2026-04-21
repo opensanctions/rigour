@@ -9,8 +9,6 @@
 // Devanagari, etc.) callers use `normality.ascii_text` /
 // `normality.latinize_text` directly. rigour does not try to
 // duplicate that surface.
-//
-// Design record: `plans/rust-minimal-translit.md`.
 
 use icu::experimental::transliterate::Transliterator;
 use icu::locale::Locale;

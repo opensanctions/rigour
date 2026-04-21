@@ -14,8 +14,8 @@ from genscripts.util import (
 
 class OrgTypeSpec(TypedDict, total=False):
     """One org-type record. Inlined here since `rigour.data.types`
-    (the previous home of this TypedDict) was retired with the
-    Python tagger in plans/rust-tagger.md step 8."""
+    (the previous home of this TypedDict) was retired when the
+    Python tagger moved to Rust."""
 
     display: Optional[str]
     compare: Optional[str]
@@ -57,8 +57,8 @@ def generate_symbols_file() -> None:
     sections from `resources/names/symbols.yml` (`org_symbols`,
     `org_domains`, `person_symbols`, `person_nick`,
     `person_name_parts`). Consumed by the Rust tagger
-    (`rust/src/names/symbols.rs`); no Python-side accessor per
-    `plans/rust-tagger.md`'s Rust-only classification."""
+    (`rust/src/names/symbols.rs`); no Python-side accessor — symbols
+    are an internal detail of the tagger."""
     symbols_path = RESOURCES_PATH / "names" / "symbols.yml"
     with open(symbols_path, "r", encoding="utf-8") as ufh:
         symbols_mappings: Dict[str, Dict[str, str]] = yaml.safe_load(ufh.read())

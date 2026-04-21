@@ -6,13 +6,13 @@ tags: [rigour, followthemoney, nomenklatura, yente, rust, names, analyze-names, 
 
 # Rust name-parsing: end-to-end architecture
 
-This document zooms into what `rust.md` calls Phase 5 — the single `analyze_names`
-FFI entry point — and fixes its contract against its real consumers. It is the
-**cross-stack** view: rigour is the name engine, but the shape of that engine is
-determined by what nomenklatura and yente need out the other side.
+This document defines the single `analyze_names` FFI entry point and fixes
+its contract against its real consumers. It is the **cross-stack** view:
+rigour is the name engine, but the shape of that engine is determined by
+what nomenklatura and yente need out the other side.
 
 Related plans:
-- `rust.md` — umbrella Rust port plan; Phase 5 is this work.
+- `rust.md` — umbrella Rust port plan.
 - `rust-normalizer.md` — flag-based `normalize()` replaces the `normalizer=`
   callback argument that both current `entity_names()` paths pass around.
 - `rust-transliteration.md` — ICU4X-backed `ascii_text`/`latinize_text` that
@@ -31,25 +31,16 @@ functions in the stack:
 Yente's own comment flags it: *"this does ca. the same thing as `logic_v2.names.analysis`.
 Should we extract that into followthemoney or has it not yet stabilised enough?"*
 
-Both paths:
+Both paths run the same schema→tag + prenorm + prefix-strip + org-type-replace +
+tagger pipeline, but they diverge in small but real ways (see *Divergences*
+below). Every difference is either an outright bug in one path or a policy
+decision that should be made once. The Rust port is the moment to pick one
+canonical pipeline.
 
-1. Map schema → `NameTypeTag` (PER/ORG/ENT/OBJ/UNK) via FTM's `schema_type_tag`.
-2. For PER: `remove_person_prefixes(raw)`.
-3. `prenormalize_name(raw)` → `form`.
-4. For ORG/ENT: `replace_org_types_compare(form, normalizer=prenormalize_name)`.
-5. Construct `Name(raw, form=form, tag=type_tag)`.
-6. Call `tag_org_name(name, normalize_name)` or
-   `tag_person_name(name, normalize_name, infer_initials=is_query)`.
-
-They differ in small but real ways (collected in *Divergences* below). Every one of
-those differences is either an outright bug in one path or a policy decision that
-should be made once. The Rust port is the moment to pick one canonical pipeline.
-
-Secondary motivation: **performance**. Each call above is a separate Python→Rust
-boundary crossing once the Rust port lands. For a large yente reindex or a
-nomenklatura scoring pass, that's tens of millions of crossings. The
-`fafo-rust` lesson applies: move the whole pipeline behind a single coarse
-FFI call.
+Secondary motivation: **performance**. Each step in the Python pipeline is a
+separate Python→Rust boundary crossing. For a large yente reindex or a
+nomenklatura scoring pass, that's tens of millions of crossings. Moving the
+whole pipeline behind a single coarse FFI call removes that overhead.
 
 ## Target architecture
 
@@ -97,17 +88,13 @@ are no per-repo adapter copies.
 
 **rigour** owns the name engine:
 - `analyze_names(type_tag, names, part_tags, *, infer_initials=False,
-  phonetics=True, numerics=True, consolidate=True) -> set[Name]` —
-  single public API (Phase 5). Accepts plain strings + a
-  `Mapping[NamePartTag, Sequence[str]]`. Never sees `EntityProxy`, never
-  imports FTM. `phonetics`, `numerics`, `consolidate` default to
-  `True` (suits the matcher and the indexer's needs); `infer_initials`
-  defaults to `False` because initials are a query-side concept.
-- The primitives that underpin it (`tokenize_name`, `prenormalize_name`,
-  `remove_person_prefixes`, `remove_org_prefixes`, `replace_org_types_compare`,
-  `tag_org_name`, `tag_person_name`) stay importable because downstream code
-  and tests still use them individually. Their `normalizer=` parameter goes
-  away per `rust-normalizer.md`.
+  phonetics=True, numerics=True, consolidate=True) -> set[Name]` — single
+  public API. Accepts plain strings and a `{NamePartTag: [str]}` mapping.
+  Never sees `EntityProxy`, never imports FTM.
+- The underlying primitives (`tokenize_name`, `prenormalize_name`,
+  `remove_person_prefixes`, `remove_org_prefixes`,
+  `replace_org_types_compare`, `tag_org_name`, `tag_person_name`) stay
+  importable for direct callers and tests.
 
 **nomenklatura** imports `entity_names` from FTM. Its
 `logic_v2/names/analysis.py` collapses to a re-export plus the existing
@@ -120,139 +107,31 @@ becomes a re-export; the flattening to `name_parts` / `name_phonemes` /
 
 ### The `analyze_names` contract
 
-```python
-# rigour/names/analyze.py  (thin Python wrapper around rigour._core._analyze_names)
-def analyze_names(
-    type_tag: NameTypeTag,
-    names: Sequence[str],
-    part_tags: Optional[Mapping[NamePartTag, Sequence[str]]] = None,
-    *,
-    infer_initials: bool = False,
-    phonetics: bool = True,
-    numerics: bool = True,
-    consolidate: bool = True,
-) -> set[Name]:
-    ...
-```
+Signature and per-flag semantics live in the `analyze_names` docstring
+(`rigour/names/analyze.py`); readers should look there for defaults,
+behaviour, and opt-outs. The cross-stack policies this plan commits to:
 
-Argument ordering puts `type_tag` first — the type is the most
-load-bearing piece of context for the whole call; `names` is the data
-it operates on; `part_tags` is optional annotation. Mirrors the old
-nomenklatura `entity_names(type_tag, entity, ...)` signature.
+- Argument ordering: `type_tag` first (load-bearing context),
+  `names` second (the data), `part_tags` third (optional annotation).
+- `phonetics`, `numerics`, `consolidate` default to `True`;
+  `infer_initials` defaults to `False`.
+- **Indexers must pass `consolidate=False`** to preserve partial-name
+  recall; matchers get the default.
+- `part_tags` is a single `{NamePartTag: [str]}` mapping. Values may
+  be multi-token strings — tagging walks tokens in order, non-adjacency
+  tolerated.
+- No `normalizer=` callback (per `rust-normalizer.md` — flag-based
+  normalisation is picked inside).
+- `infer_initials` is the historical `is_query`, renamed to describe
+  the behaviour rather than the caller.
+- `weakAlias` as name vs. as NICK tag is the FTM adapter's concern,
+  not `analyze_names`'s. See Divergences row #4.
+- Return type is `set[Name]`; dedup by normalised form happens inside.
 
-`phonetics`, `numerics`, and `consolidate` default to `True` —
-suits both the matcher and the indexer's primary call shape.
-`infer_initials` defaults to `False` because initials are a
-query-side concept (only one side of a match sets them). **Indexers
-must pass `consolidate=False`** to keep partial-name recall. See
-the per-flag rationale below.
-
-Rationale for the shape:
-
-- **Single `part_tags` dict.** The caller has already done the FTM-side
-  projection — by the time we reach rigour, there are no property names,
-  just pre-classified string bags keyed by `NamePartTag`. Marshals across
-  PyO3 as a `HashMap<NamePartTag, Vec<String>>`; enum variant discrimination
-  is cheap. Open-ended: adding a new `NamePartTag` does not require an API
-  change here.
-  Values may be **multi-token strings** — e.g. `part_tags[GIVEN] =
-  ["Jean Claude"]` against a name `"Jean Claude Juncker"` tags both
-  the `"jean"` and `"claude"` parts as `GIVEN`. `Name.tag_text`
-  (`rigour/names/name.py:49`) tokenises each value and walks the name
-  parts matching the sequence in order; non-adjacency is tolerated, so
-  `part_tags[GIVEN] = ["Vladimir Putin"]` would tag both parts of
-  `"Vladimir Vladimirovitch Putin"`. No extra work in the adapter —
-  feeding a raw multi-token property value works directly.
-- **No `normalizer=` callback.** Per `rust-normalizer.md`. The inside of
-  `analyze_names` picks the right normalisation for each step itself.
-- **`infer_initials` instead of `is_query`.** nomenklatura historically
-  called this `is_query` — describing the caller, not the behaviour.
-  What the flag actually controls in `tag_person_name(infer_initials=...)`:
-  with it off, only parts already tagged GIVEN/MIDDLE (from
-  `part_tags`) get mapped to `Symbol.INITIAL` when they're a single
-  character; with it on, *any* single-character latin part becomes an
-  INITIAL symbol. That's useful for free-text query sides where "J Smith"
-  arrives without a label on "J". The tagger parameter already uses
-  `infer_initials`; `analyze_names` adopts the same name for
-  end-to-end consistency.
-- **`weak_alias` and the weak-alias-as-name policy live in the FTM
-  adapter**, not in `analyze_names`. See Divergences row #4: FTM's
-  `entity_names` both extends `names` with `weakAlias` values *and*
-  populates `part_tags[NICK]` with them. Rigour stays pure — `names` is
-  just names, `part_tags` is just annotation.
-- **`consolidate` defaults to `True` — indexers must opt out.** When
-  `True` (default), the returned set has `Name.consolidate_names`
-  applied: short names that are substrings of longer names in the
-  same set are dropped. This is the matching-side shape (prevents a
-  short "John Smith" from spuriously matching a query "John K Smith"
-  when the longer candidate "John R Smith" would correctly
-  mismatch). **Indexer call sites must pass `consolidate=False`** to
-  preserve partial-name recall in ES; without the opt-out, yente
-  would silently lose index coverage on aliases that are substrings
-  of primary names. Folding consolidation into the same FFI call
-  avoids an extra Python→Rust round-trip in nomenklatura's matcher,
-  which is the call site that gets the default behaviour for free.
-  See Divergences row #9.
-- **`phonetics` defaults to `True`.** When `True`, `NamePart.metaphone`
-  is populated (the jellyfish/rphonetic `metaphone` of the part's ASCII
-  form, gated on `latinize && !numeric && len(ascii) > 2`). When
-  `False`, the field stays `None` and the phonetics crate isn't called.
-  Yente's indexer consumes `part.metaphone` via the `name_phonemes` ES
-  field and gets the default behaviour; nomenklatura logic-v2 scoring
-  doesn't score on phoneme overlap and can pass `False` to skip the
-  metaphone call per part (marginal saving).
-- **`numerics` defaults to `True`.** When `True`, the post-tagger
-  `_infer_part_tags` pass adds `Symbol(NUMERIC, int_value)` for
-  numeric-looking name parts that the AC tagger's ordinal list didn't
-  already match (e.g. large arbitrary numbers like `"123456789"` in
-  `"123456789 Batallion"`, not the cardinals/ordinals the AC list
-  covers). When `False`, parts still get their `NamePartTag.NUM` tag
-  (cheap structural info) but no NUMERIC symbol is added — a caller
-  that wants only the tag structure and no numeric-symbol overlap
-  scoring opts out.
-- **Return type is `set[Name]`.** Both current callsites use a set, and
-  deduplication happens inside `analyze_names` anyway, so returning one is
-  truth in advertising. Hashing is by the `Name` object's identity for now
-  (Python `set` semantics); if duplicate-merge-across-ingest becomes a need
-  later we revisit.
-
-### Rust-side pipeline (one FFI call)
-
-Inside Rust, for a single `analyze_names` invocation:
-
-```text
-for raw in names:
-    if type_tag == PER:
-        raw = remove_person_prefixes(raw)           # Phase 3
-    form = prenormalize_name(raw)                    # Phase 1 (casefold)
-    if type_tag in (ORG, ENT):
-        form = replace_org_types_compare(form)       # Phase 3
-        form = remove_org_prefixes(form)             # Phase 3
-    if form in seen: continue
-    seen.insert(form)
-    # Phase 2 construction. ascii/comparable/latinize/numeric/integer are
-    # always eager (cheap). metaphone is eager iff `phonetics` — otherwise
-    # NamePart.metaphone returns None.
-    name = Name::new(raw, form, type_tag, phonetics)
-    for (part_tag, values) in part_tags:
-        for v in values:
-            name.tag_text(prenormalize_name(v), part_tag)
-    if type_tag in (ORG, ENT):
-        tag_org_name(&mut name)                      # Phase 4 AC tagger
-    if type_tag == PER:
-        tag_person_name(&mut name, infer_initials)   # Phase 4 AC tagger
-    infer_part_tags(&mut name, numerics)             # LEGAL/NUM/STOP tags;
-                                                     # numeric Symbols iff numerics
-    names.push(name)
-if consolidate:
-    names = consolidate_names(names)                 # drop substring-dominated names
-return names
-```
-
-No Python callbacks. No FFI crossings during the loop. Everything the pipeline
-needs is either embedded data (AC tables, org types, prefixes, symbols) or
-precomputed on `NamePart` at construction time (ascii, comparable, plus
-metaphone if `phonetics=True`).
+The Rust-side pipeline (one FFI call, no Python callbacks, all data
+either embedded or precomputed eagerly on `NamePart`) lives in
+`rust/src/names/analyze.rs` — its module header documents the step
+order.
 
 ## The FTM-side adapter
 
@@ -491,15 +370,9 @@ Benchmarks to pin before declaring Phase 5 done:
 
 ## Phasing and rollout
 
-Phase 5 in `rust.md` is the landing point. Incremental staging:
-
-1. **Land the rigour-side API as a Python shim first.** **Done** —
-   `rigour.names.analyze_names(names, type_tag, part_tags, *,
-   infer_initials, phonetics, numerics, consolidate)` lives in
-   `rigour/names/analyze.py` and composes the existing Rust-backed
-   primitives. `phonetics` is accepted as API scaffolding with no
-   runtime effect in the Python shim (gating only kicks in at Rust
-   port time); the other three flags behave per contract. Tests in
+1. **Rigour-side API + Rust pipeline.** **Done** —
+   `rigour.names.analyze_names` in `rigour/names/analyze.py`, backed by
+   the single-FFI `rust/src/names/analyze.rs`. Tests in
    `tests/names/test_analyze.py`.
 2. **Hoist the adapter into FTM.** Add `followthemoney.names.entity_names`
    with the signature above, keep `schema_type_tag` and `PROP_PART_TAGS` as
@@ -525,25 +398,6 @@ Phase 5 in `rust.md` is the landing point. Incremental staging:
    actually change behaviour — expect a small set of fixture-test
    updates around org-prefix stripping, property-tagged parts, and
    weak-alias-as-name.
-5. **Collapse the Python shim into the single Rust call** (Phase 5 proper).
-   The API does not change; only the implementation moves. Benchmarks
-   validate the crossing-reduction claim.
-
-Between steps 1 and 5, both consumers already go through a *single* Python
-function call (`entity_names` → `analyze_names`), so the call-site refactor
-is locked in. Step 5 is a pure implementation swap behind the rigour API and
-can land independently.
-
-### Follow-up: rewire the tagger's alias pipeline onto `tokenize_name`
-
-**Done.** The `rust/src/names/tagger.rs` alias builder now calls
-`tokenize_name` directly (single source of truth for category /
-skip-char handling) and drops the ad-hoc `TOKENIZE_SKIP_CHARS`
-pre-strip. As a consequence the `cleanup` argument was removed from
-the tagger's public API end-to-end — `tokenize_name` subsumes its
-role. Aligning the tagger with the runtime haystack pipeline also
-fixed a latent bug where `Cleanup::Strong` deleted CJK Lm and Mc
-chars that `tokenize_name` keeps (e.g. `ー` in `ウラジーミル`).
 
 ## Open questions
 

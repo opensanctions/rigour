@@ -65,8 +65,7 @@ stringifies ints, so construction stays convenient. Reads
 The tagger and `replace_org_types_*` functions used to accept a
 `normalizer: Callable[[Optional[str]], Optional[str]]` that they
 applied to their internal reference data at build time. The
-parameter now accepts `Normalize` bitflags instead (full rationale
-in `plans/rust-normalizer.md`).
+parameter now accepts `Normalize` bitflags instead.
 
 The default `normalize_flags` value matches what nomenklatura /
 yente / FTM already pass in practice — `Normalize.CASEFOLD` — so
@@ -205,8 +204,7 @@ No known callsites that use the changed APIs directly. Audit on
   replacement is `rigour.text.translit.maybe_ascii` — narrow,
   opportunistic, only Latin/Cyrillic/Greek/Armenian/Georgian/
   Hangul. For broader coverage use `normality.ascii_text` /
-  `normality.latinize_text` directly. See
-  `plans/rust-minimal-translit.md`.
+  `normality.latinize_text` directly.
 - **`Normalize.ASCII` / `Normalize.LATIN`** bits removed from the
   `Normalize` flag set (unused across rigour + nomenklatura + FTM
   + OpenSanctions + yente at time of removal).

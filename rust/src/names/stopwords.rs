@@ -1,8 +1,7 @@
 // Rust-side ownership of `resources/names/stopwords.yml` → exposes
 // five flat wordlists to Python. The YAML file's name is misleading
 // (contents are prefixes + split phrases + generic full names, not
-// stopwords); kept for now to minimise diff. See `plans/rust-tagger.md`
-// step 3 for the migration.
+// stopwords); kept for now to minimise diff.
 //
 // Python consumers:
 //   - `rigour.names.prefix` — reads `person_name_prefixes_list`,

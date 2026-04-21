@@ -9,8 +9,6 @@ empty (``drop=True``).
 For broader-script, lossy transliteration (Han, Arabic, Devanagari,
 etc.) use `normality.ascii_text` / `normality.latinize_text` —
 rigour deliberately does not try to duplicate that surface.
-
-See `plans/rust-minimal-translit.md` for the scope rationale.
 """
 
 from rigour._core import maybe_ascii as maybe_ascii

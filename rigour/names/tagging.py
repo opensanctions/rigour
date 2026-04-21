@@ -17,7 +17,7 @@ Rust (`rust/src/names/tagger.rs`) with a flag-keyed cache.
 `ahocorasick-rs` is no longer needed.
 
 See :mod:`rigour.text.normalize` for the `normalize_flags` / `cleanup`
-vocabulary and :doc:`plans/rust-tagger.md` for the port design.
+vocabulary.
 """
 
 from typing import Set

@@ -4,8 +4,7 @@
 //! optional early-exit cutoff variant. Not wired through PyO3 —
 //! Python callers use the `rapidfuzz` package directly (which also
 //! provides the opcodes / alignment API the Rust `rapidfuzz` crate
-//! doesn't). See `plans/rust-transliteration.md` for the decision
-//! trail on why Rust-side distance isn't exposed to Python.
+//! doesn't).
 //!
 //! Backed by the `rapidfuzz` crate's bit-parallel implementations
 //! (Myers/Hyyrö for short strings, block-wise with Ukkonen band

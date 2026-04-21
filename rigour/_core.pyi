@@ -18,8 +18,7 @@ def extract_org_types(
 
 
 # Resource accessors — plain data returners read once at import time
-# by Python consumers. See `plans/rust-tagger.md` for the sourcing
-# table.
+# by Python consumers.
 def stopwords_list() -> list[str]: ...
 def nullwords_list() -> list[str]: ...
 def nullplaces_list() -> list[str]: ...

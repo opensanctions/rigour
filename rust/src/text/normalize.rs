@@ -1,6 +1,5 @@
 // Flag-based text normalization. Replaces the `normalizer: Callable[[Optional[str]], Optional[str]]`
-// callback pattern that rigour inherited from the normality library. See
-// plans/rust-normalizer.md for the design rationale.
+// callback pattern that rigour inherited from the normality library.
 //
 // `normalize(text, flags, cleanup)` runs the requested steps in a fixed
 // pipeline order independent of bit order:
@@ -14,7 +13,6 @@
 //
 // Transliteration is NOT part of this pipeline — rigour's public
 // surface is `text::translit::maybe_ascii` (narrow, opportunistic).
-// See `plans/rust-minimal-translit.md`.
 //
 // Empty output → None, matching the Optional[str] contract of the legacy
 // Python normalizers.
