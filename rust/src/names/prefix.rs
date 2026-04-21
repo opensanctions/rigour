@@ -1,14 +1,6 @@
-// Prefix removers for person / org / object names. Port of
-// `rigour.names.prefix` — each function strips a leading run of
-// honorific / article prefixes from the input.
-//
-// The Python impl compiles a regex of the shape
-//   ^\W*((alt1|alt2|...)\.?\s+)*
-// with case-insensitive + Unicode flags, and calls `.sub("", name)`.
-// We mirror that precisely here using the `regex` crate. No
-// lookarounds, so `regex` is a fit (unlike the org-types pipeline
-// which needs Python-style `(?<!\w)X(?!\w)` boundaries and goes
-// through `Needles` instead).
+//! Leading-prefix removers for person, organisation, and object
+//! names — strip honorifics, articles, and vessel-class markers from
+//! the head of a name before matching or indexing.
 
 use std::sync::LazyLock;
 
@@ -19,14 +11,15 @@ use crate::names::stopwords::{
 };
 
 fn build_prefix_regex(prefixes: &[String]) -> Regex {
-    let escaped: Vec<String> = prefixes.iter().map(|p| regex::escape(p)).collect();
-    let joined = escaped.join("|");
-    // (?i) = case-insensitive. `\W` in `regex` with Unicode enabled
-    // already matches non-word Unicode chars, same as Python's
-    // `re.I | re.U`. `\W*` at the front eats a leading run of
-    // punctuation / whitespace, then `((alt|alt|...)\.?\s+)*`
-    // consumes one-or-more prefix tokens each followed by optional
-    // `.` and required whitespace.
+    // Escape alternatives, join with `|`, wrap in the Python-compatible
+    // anchored shape: `^\W*((alt|alt|...)\.?\s+)*`. Matches an optional
+    // leading punctuation run, then zero-or-more prefix tokens each
+    // followed by an optional `.` and required whitespace.
+    let joined = prefixes
+        .iter()
+        .map(|p| regex::escape(p))
+        .collect::<Vec<_>>()
+        .join("|");
     let pattern = format!(r"(?i)^\W*(({})\.?\s+)*", joined);
     Regex::new(&pattern).expect("prefix regex compiles")
 }
@@ -40,20 +33,22 @@ static ORG_PREFIX_RE: LazyLock<Regex> =
 static OBJ_PREFIX_RE: LazyLock<Regex> =
     LazyLock::new(|| build_prefix_regex(&obj_name_prefixes_list()));
 
-/// Remove honorific prefixes like "Mr.", "Mrs.", "Dr." from the head
-/// of a person name.
+/// Strip honorific prefixes ("Mr.", "Mrs.", "Dr.", "Lady", …) from
+/// the head of a person name. Called before analysing or matching to
+/// stop honorifics from contaminating part alignment.
 pub fn remove_person_prefixes(name: &str) -> String {
     PERSON_PREFIX_RE.replace(name, "").into_owned()
 }
 
-/// Remove article-like prefixes like "The" from the head of an
-/// organisation name.
+/// Strip article-like prefixes ("The", …) from the head of an
+/// organisation name. Drops "The Charitable Trust" → "Charitable
+/// Trust" so matching doesn't penalise the shorter variant.
 pub fn remove_org_prefixes(name: &str) -> String {
     ORG_PREFIX_RE.replace(name, "").into_owned()
 }
 
-/// Remove object-name prefixes like "MV", "The" from the head of an
-/// object name (vessel, security, etc).
+/// Strip vessel-class markers ("M/V", "SS", …) and generic articles
+/// from the head of an object name. `"M/V Oceanic"` → `"Oceanic"`.
 pub fn remove_obj_prefixes(name: &str) -> String {
     OBJ_PREFIX_RE.replace(name, "").into_owned()
 }
@@ -87,5 +82,10 @@ mod tests {
     #[test]
     fn org_prefix_no_match_is_identity() {
         assert_eq!(remove_org_prefixes("Acme Corp"), "Acme Corp");
+    }
+
+    #[test]
+    fn obj_prefix_dropped() {
+        assert_eq!(remove_obj_prefixes("M/V Oceanic"), "Oceanic");
     }
 }
