@@ -285,6 +285,28 @@ mod tests {
     }
 
     #[test]
+    fn tag_sort_is_stable_across_equal_tags() {
+        // `tag_sort_parts` in `names::part` sorts via
+        // `sort_by_key(|_| tag.order_index())`. Same-tag parts must
+        // preserve input order — the alignment fallback path depends
+        // on it for deterministic output. Guard against a future
+        // refactor swapping to `sort_unstable_by_key`.
+        let mut v: Vec<(NamePartTag, &'static str)> = vec![
+            (NamePartTag::UNSET, "a"),
+            (NamePartTag::UNSET, "c"),
+            (NamePartTag::UNSET, "x"),
+            (NamePartTag::GIVEN, "j"),
+            (NamePartTag::UNSET, "e"),
+        ];
+        v.sort_by_key(|(t, _)| t.order_index());
+        let order: Vec<&'static str> = v.iter().map(|(_, s)| *s).collect();
+        // GIVEN has a lower order_index than UNSET (given-names
+        // display before unknowns); the four UNSETs keep their
+        // input order: a, c, x, e.
+        assert_eq!(order, vec!["j", "a", "c", "x", "e"]);
+    }
+
+    #[test]
     fn order_covers_every_variant() {
         for t in &[
             NamePartTag::UNSET,
