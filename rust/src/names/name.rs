@@ -21,38 +21,35 @@ fn name_tokenize(text: &str) -> Vec<String> {
 
 /// A personal, organisational, or object name.
 ///
-/// Exposed attributes:
-///
-/// | field | type | notes |
-/// |---|---|---|
-/// | `original` | `str` | input string, verbatim |
-/// | `form` | `str` | normalised form (casefolded by default) |
-/// | `tag` | [`NameTypeTag`] | mutable |
-/// | `lang` | `str \| None` | optional language hint, mutable |
-/// | `parts` | `list[NamePart]` | tokens of `form` |
-/// | `spans` | `list[Span]` | tagger output — grows via `apply_phrase` / `apply_part` |
-/// | `comparable` | `str` | space-joined `part.comparable`, precomputed |
-/// | `norm_form` | `str` | space-joined `part.form`, precomputed |
-/// | `symbols` | `set[Symbol]` | dynamic — rebuilt from `spans` on each access |
-///
 /// Equality and hashing are over `form`. A `Name`'s `tag` and `lang`
-/// can change, and `spans` grows, without affecting hash or equality.
+/// can change, and `spans` grows, without affecting either.
 #[pyclass(module = "rigour._core")]
 pub struct Name {
+    /// Input string, verbatim.
     #[pyo3(get)]
     pub original: Py<PyString>,
+    /// Normalised form. Defaults to `casefold(original)` if not
+    /// supplied at construction.
     #[pyo3(get)]
     pub form: Py<PyString>,
+    /// What kind of thing the name describes. Mutable —
+    /// `infer_part_tags` may upgrade `ENT` → `ORG` after tagging.
     #[pyo3(get, set)]
     pub tag: NameTypeTag,
+    /// Optional ISO language hint.
     #[pyo3(get, set)]
     pub lang: Option<Py<PyString>>,
+    /// Tokens of `form`, one [`NamePart`] per token.
     #[pyo3(get)]
     pub parts: Py<PyList>,
+    /// Tagger output — grows over the name's lifetime via
+    /// `apply_phrase` / `apply_part`.
     #[pyo3(get)]
     pub spans: Py<PyList>,
+    /// Space-joined `part.comparable` across the parts. Precomputed.
     #[pyo3(get)]
     pub comparable: Py<PyString>,
+    /// Space-joined `part.form` across the parts. Precomputed.
     #[pyo3(get)]
     pub norm_form: Py<PyString>,
     form_str: String,

@@ -8,27 +8,10 @@ use pyo3::prelude::*;
 use std::collections::HashMap;
 use std::sync::{Arc, LazyLock, RwLock};
 
-/// The kind of semantic annotation a [`Symbol`] carries.
-///
-/// Used when matching or scoring names to decide how strongly a
-/// symbol should count: a name with a matching `ORG_CLASS` symbol
-/// is a strong signal the two sides describe the same kind of
-/// entity, while a matching `INITIAL` symbol is weaker evidence
-/// that needs corroboration from the rest of the parts.
-///
-/// | variant | meaning | typical id |
-/// |---|---|---|
-/// | `ORG_CLASS` | legal-form class (LLC, GmbH, …) | `"LLC"`, `"AG"` |
-/// | `SYMBOL` | generic qualifier keyword | `"INDUSTRY"`, `"FINANCE"` |
-/// | `DOMAIN` | industry / sector | `"ENERGY"`, `"BANKING"` |
-/// | `INITIAL` | single-letter stand-in for a given name | `"j"` |
-/// | `NAME` | known personal name from the corpus | Wikidata QID |
-/// | `NICK` | nickname / weak alias | short form |
-/// | `NUMERIC` | integer value from a numeric part | decimal string |
-/// | `LOCATION` | place reference | territory code |
-/// | `PHONETIC` | phonetic key across names | metaphone hash |
-///
-/// Adding a variant is a cross-stack data-model change.
+/// The kind of semantic annotation a [`Symbol`] carries. Drives how
+/// strongly a symbol match counts during scoring — an `ORG_CLASS`
+/// match is a strong corporate-form signal, an `INITIAL` match is
+/// weak evidence that needs token-level corroboration.
 // Variants use SCREAMING_SNAKE_CASE so the Python-facing attribute
 // names (via `#[pyclass]`) match without individual `#[pyo3(name = …)]`
 // renames; the latter don't play well with `cfg_attr` gating.
@@ -39,14 +22,27 @@ use std::sync::{Arc, LazyLock, RwLock};
 )]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 pub enum SymbolCategory {
+    /// Legal-form class abbreviation (LLC, GmbH, AG, …).
     ORG_CLASS,
+    /// Generic organisational qualifier keyword (e.g. `INDUSTRY`,
+    /// `FINANCE`, `HOLDING`).
     SYMBOL,
+    /// Industry or sector domain (e.g. `ENERGY`, `BANKING`).
     DOMAIN,
+    /// Single-letter initial standing in for a given name (`j` for
+    /// "John"); attached to single-character latin name parts.
     INITIAL,
+    /// A known personal name from the reference corpus; id is the
+    /// Wikidata QID (e.g. `Q4925477` for "John") or an `X`-prefixed
+    /// manual-override id.
     NAME,
+    /// Nickname or weak alias attached to a name part.
     NICK,
+    /// Integer-valued parse of a numeric part (e.g. `"1984"`).
     NUMERIC,
+    /// Place reference (territory code).
     LOCATION,
+    /// Phonetic bucket key used for fuzzy grouping across names.
     PHONETIC,
 }
 
@@ -109,21 +105,18 @@ pub fn intern(s: &str) -> Arc<str> {
     arc
 }
 
-/// A semantic annotation attached to one or more parts of a name.
+/// A semantic interpretation applied to one or more parts of a name.
 ///
-/// The tagger emits `Symbol`s as it walks a name's parts — e.g. on
-/// "Siemens Aktiengesellschaft" the Rust `ORG_CLASS` tagger would
-/// attach `Symbol(ORG_CLASS, "AG")` to the span covering
-/// "aktiengesellschaft". Downstream matchers compare the set of
-/// symbols on two names as a coarse "are these plausibly the same
-/// kind of thing?" signal before descending into token-level
-/// alignment; indexers flatten them into searchable ES fields.
+/// Carries a [`SymbolCategory`] and an id. Tagger pipelines emit
+/// Symbols during name analysis; matchers compare them between
+/// names as a coarse compatibility signal, and indexers flatten
+/// them into searchable fields. Equality and hashing are
+/// structural over `(category, id)`.
 ///
-/// Equality and hashing are structural over `(category, id)`. Ids
-/// are always `str` — integer-sourced ids (Wikidata QIDs,
-/// ordinals) are decimal-stringified at construction. Distinct
-/// `Symbol`s with equal ids share one [`Arc<str>`] heap allocation
-/// via [`intern`].
+/// Ids are always `str` — integer-sourced ids (Wikidata QIDs,
+/// ordinals, initial codepoints) are decimal-stringified at
+/// construction. Distinct `Symbol`s with equal ids share one
+/// [`Arc<str>`] heap allocation via [`intern`].
 #[cfg_attr(
     feature = "python",
     pyclass(eq, hash, frozen, from_py_object, module = "rigour._core")

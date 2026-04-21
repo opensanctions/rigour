@@ -75,41 +75,46 @@ fn compute_metaphone(
 
 /// A single tagged component of a [`crate::names::name::Name`].
 ///
-/// Exposed attributes:
-///
-/// | field | type | notes |
-/// |---|---|---|
-/// | `form` | `str` | token text, as tokenised from the parent name |
-/// | `index` | `int \| None` | position in the parent name |
-/// | `tag` | [`NamePartTag`] | mutable — set by the tagging pipeline |
-/// | `latinize` | `bool` | whether the form is in an admitted script |
-/// | `numeric` | `bool` | whether the form is all numeric chars |
-/// | `ascii` | `str \| None` | ASCII form for admitted-script parts, else `None` |
-/// | `integer` | `int \| None` | parsed value for numeric parts |
-/// | `comparable` | `str` | best-effort matchable form |
-/// | `metaphone` | `str \| None` | phonetic key for latinisable parts, else `None` |
-///
 /// Equality and hashing are over `(index, form)` — the immutable
 /// identity of the part. `tag` can be re-written after construction
 /// without invalidating either.
 #[pyclass(module = "rigour._core")]
 pub struct NamePart {
+    /// Token text, as tokenised from the parent name's form.
     #[pyo3(get)]
     pub form: Py<PyString>,
+    /// Position in the parent name, or `None` for a free-standing
+    /// part.
     #[pyo3(get)]
     pub index: Option<u32>,
+    /// Structural role of this part. Set by the tagging pipeline;
+    /// `UNSET` at construction.
     #[pyo3(get, set)]
     pub tag: NamePartTag,
+    /// `True` if `form` is in an admitted-script set (Latin,
+    /// Cyrillic, Greek, Armenian, Georgian, Hangul) and thus can
+    /// be meaningfully ASCII-ified.
     #[pyo3(get)]
     pub latinize: bool,
+    /// `True` if `form` is entirely numeric characters.
     #[pyo3(get)]
     pub numeric: bool,
+    /// ASCII-ified form of `form` for admitted-script parts;
+    /// `None` when the part is outside the admitted scripts or
+    /// reduces to empty after stripping non-alphanumerics.
     #[pyo3(get)]
     pub ascii: Option<Py<PyString>>,
+    /// Parsed integer value for numeric parts, or `None` when the
+    /// part isn't numeric or doesn't fit an `i64`.
     #[pyo3(get)]
     pub integer: Option<i64>,
+    /// Best-effort matchable form: integer string for numerics,
+    /// `form` for non-latinize parts, `ascii` otherwise.
     #[pyo3(get)]
     pub comparable: Py<PyString>,
+    /// Metaphone phonetic key, or `None` when phonetics were
+    /// disabled at construction or the part doesn't qualify
+    /// (non-latinize, numeric, or shorter than three characters).
     #[pyo3(get)]
     pub metaphone: Option<Py<PyString>>,
     form_str: String,
@@ -274,19 +279,19 @@ fn hash_namepart(index: Option<u32>, form: &str) -> isize {
 
 /// A contiguous group of [`NamePart`]s annotated with a
 /// [`crate::names::symbol::Symbol`] — the tagger's output unit.
-///
-/// The `parts` list holds the *same* `Py<NamePart>` references that
-/// live in the parent [`crate::names::name::Name`]'s `.parts`, so
-/// `span.parts[0] is name.parts[i]` is True from Python.
-///
-/// `comparable` and `__len__` (total character count across the
-/// parts' `form` strings) are precomputed at construction.
 #[pyclass(module = "rigour._core")]
 pub struct Span {
+    /// The [`NamePart`]s covered by this span. Same `Py<NamePart>`
+    /// references that live in the parent [`crate::names::name::Name`]'s
+    /// `.parts`, so `span.parts[0] is name.parts[i]` is `True` from
+    /// Python.
     #[pyo3(get)]
     pub parts: Py<pyo3::types::PyList>,
+    /// The symbol this span carries.
     #[pyo3(get)]
     pub symbol: Py<crate::names::symbol::Symbol>,
+    /// Space-joined `part.comparable` over the covered parts, for
+    /// use in matcher-side substring checks.
     #[pyo3(get)]
     pub comparable: Py<PyString>,
     len_chars: usize,

@@ -11,13 +11,8 @@
 #[cfg(feature = "python")]
 use pyo3::prelude::*;
 
-/// What kind of thing a name describes.
-///
-/// Drives which pipeline passes apply when a [`crate::names::name::Name`]
-/// is analysed:
-/// * `PER` → person-prefix strip + person tagger
-/// * `ORG` / `ENT` → org-type replacement + org-prefix strip + org tagger
-/// * `OBJ` / `UNK` → construction only, no tagging
+/// What kind of thing a name describes. Drives which pipeline passes
+/// apply when a [`crate::names::name::Name`] is analysed.
 #[allow(non_camel_case_types)]
 #[cfg_attr(
     feature = "python",
@@ -25,10 +20,20 @@ use pyo3::prelude::*;
 )]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 pub enum NameTypeTag {
+    /// Unknown — default for names without a schema hint. No
+    /// tagger pass runs.
     UNK,
+    /// Legal entity, possibly a person or organisation — used when
+    /// the schema can't disambiguate. Triggers org-type replacement
+    /// + org tagger; may upgrade to `ORG` during `infer_part_tags`.
     ENT,
+    /// Person. Triggers person-prefix strip + person tagger.
     PER,
+    /// Organisation / company. Triggers org-type replacement +
+    /// org-prefix strip + org tagger.
     ORG,
+    /// Object (vessel, security, aircraft, …). Name is constructed
+    /// but no tagger pass runs.
     OBJ,
 }
 
@@ -55,12 +60,10 @@ impl NameTypeTag {
     }
 }
 
-/// The structural role of a part within a name.
-///
-/// A newly-constructed [`crate::names::part::NamePart`] starts as
-/// `UNSET`; the tagging pipeline promotes it to one of the concrete
-/// variants based on surrounding context, external hints (firstName,
-/// lastName, …), or pattern matches (numeric, stopword, legal form).
+/// The structural role of a part within a name. A newly-constructed
+/// [`crate::names::part::NamePart`] starts as `UNSET`; the tagging
+/// pipeline promotes it based on external hints (firstName,
+/// lastName, …) or pattern matches (numeric, stopword, legal form).
 #[allow(non_camel_case_types)]
 #[cfg_attr(
     feature = "python",
@@ -68,22 +71,39 @@ impl NameTypeTag {
 )]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 pub enum NamePartTag {
+    /// Untagged — default at construction, pending inference.
     UNSET,
+    /// The part matched an external hint but conflicts with its
+    /// existing tag; no single role fits.
     AMBIGUOUS,
 
+    /// Professional or courtesy title (Prof., Dr., …).
     TITLE,
+    /// Given name (firstName / forename).
     GIVEN,
+    /// Middle name.
     MIDDLE,
+    /// Family name (surname / lastName).
     FAMILY,
+    /// Tribal name or clan designation.
     TRIBAL,
+    /// Patronymic — name derived from the father's name.
     PATRONYMIC,
+    /// Matronymic — name derived from the mother's name.
     MATRONYMIC,
+    /// Honorific particle (Sir, Dame, …). Semantically adjacent to
+    /// `TITLE`; kept distinct for locale-specific handling.
     HONORIFIC,
+    /// Generational suffix (Jr., Sr., III, …).
     SUFFIX,
+    /// Nickname / weak alias attached to a name.
     NICK,
 
+    /// Stopword (low-information token like "the", "of", "and").
     STOP,
+    /// Purely numeric part (ordinal, year, identifier number).
     NUM,
+    /// Legal-form component of an organisation name (LLC, Inc, …).
     LEGAL,
 }
 
