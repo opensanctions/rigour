@@ -281,9 +281,11 @@ pub struct Span {
     /// The [`NamePart`]s covered by this span. Same `Py<NamePart>`
     /// references that live in the parent [`crate::names::name::Name`]'s
     /// `.parts`, so `span.parts[0] is name.parts[i]` is `True` from
-    /// Python.
+    /// Python. Exposed as a tuple — hashable, so downstream code can
+    /// key on `(span.parts, span.symbol.category)` when deduplicating
+    /// pairings.
     #[pyo3(get)]
-    pub parts: Py<pyo3::types::PyList>,
+    pub parts: Py<pyo3::types::PyTuple>,
     /// The symbol this span carries.
     #[pyo3(get)]
     pub symbol: Py<crate::names::symbol::Symbol>,
@@ -314,7 +316,7 @@ impl Span {
         let comparable_py = PyString::new(py, &comparable_str).unbind();
 
         let hash = hash_span(py, &parts, &symbol);
-        let parts_list = pyo3::types::PyList::new(py, &parts)?.unbind();
+        let parts_list = pyo3::types::PyTuple::new(py, &parts)?.unbind();
 
         Ok(Self {
             parts: parts_list,

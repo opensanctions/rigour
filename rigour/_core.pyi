@@ -146,7 +146,7 @@ class NamePart:
 class Span:
     """A set of parts of a name tagged with a Symbol."""
 
-    parts: list[NamePart]
+    parts: tuple[NamePart, ...]
     symbol: Symbol
     comparable: str
 
@@ -161,7 +161,7 @@ class Name:
     original: str
     form: str
     tag: NameTypeTag
-    parts: list[NamePart]
+    parts: tuple[NamePart, ...]
     spans: list[Span]
     comparable: str
     norm_form: str

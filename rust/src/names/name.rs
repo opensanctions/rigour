@@ -7,7 +7,7 @@ use std::collections::HashSet;
 use std::hash::{DefaultHasher, Hash, Hasher};
 
 use pyo3::prelude::*;
-use pyo3::types::{PyList, PyString};
+use pyo3::types::{PyList, PyString, PyTuple};
 
 use crate::names::part::{NamePart, Span};
 use crate::names::symbol::{Symbol, SymbolCategory};
@@ -36,9 +36,11 @@ pub struct Name {
     /// `infer_part_tags` may upgrade `ENT` → `ORG` after tagging.
     #[pyo3(get, set)]
     pub tag: NameTypeTag,
-    /// Tokens of `form`, one [`NamePart`] per token.
+    /// Tokens of `form`, one [`NamePart`] per token. Exposed as a
+    /// tuple so it's hashable — downstream code keys on
+    /// `(span.parts, span.symbol.category)` etc.
     #[pyo3(get)]
-    pub parts: Py<PyList>,
+    pub parts: Py<PyTuple>,
     /// Tagger output — grows over the name's lifetime via
     /// `apply_phrase` / `apply_part`.
     #[pyo3(get)]
@@ -87,7 +89,7 @@ impl Name {
             let part = NamePart::new(py, &token, i as u32, NamePartTag::UNSET, phonetics);
             parts_vec.push(Py::new(py, part)?);
         }
-        let parts_list = PyList::new(py, &parts_vec)?.unbind();
+        let parts_list = PyTuple::new(py, &parts_vec)?.unbind();
 
         let mut comparable_segs: Vec<String> = Vec::with_capacity(parts_vec.len());
         let mut norm_segs: Vec<String> = Vec::with_capacity(parts_vec.len());
@@ -400,7 +402,7 @@ fn apply_tag_to_matching(py: Python<'_>, matching: &[Py<NamePart>], new_tag: Nam
     }
 }
 
-fn comparable_list(py: Python<'_>, parts: &Py<PyList>) -> PyResult<Vec<String>> {
+fn comparable_list(py: Python<'_>, parts: &Py<PyTuple>) -> PyResult<Vec<String>> {
     let bound = parts.bind(py);
     let mut out = Vec::with_capacity(bound.len());
     for item in bound.iter() {
