@@ -29,8 +29,6 @@ with different lifecycles:
    before calling. Functions in this bucket cache one compiled
    automaton per distinct flag combination.
 
-See `plans/rust-normalizer.md` for the full design rationale.
-
 ## Pipeline order
 
 Steps run in a fixed order regardless of bit-ordering in the flag
@@ -156,9 +154,11 @@ class Cleanup(IntEnum):
         Strong: Aggressive cleanup — punctuation and symbols become
             whitespace; controls, formats, and marks are deleted. Use
             when you want a matching key stripped of all decoration.
-        Slug: URL-slug-style cleanup — similar to `Strong` but
-            preserves modifier letters (Lm) and nonspacing marks (Mn).
-            Use for stopword keys and slug generation.
+        Slug: URL-slug-style cleanup. Differs from `Strong` in two
+            places: preserves modifier letters (Lm) and nonspacing
+            marks (Mn) that `Strong` deletes, and deletes control
+            characters (Cc) that `Strong` turns into whitespace. Use
+            for stopword keys and slug generation.
     """
 
     # Values MUST match the tag encoding in rust/src/lib.rs py_normalize().

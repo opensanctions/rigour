@@ -41,8 +41,7 @@ bitflags = "2"
 # Used internally (e.g. the in-Rust name picker). Not exposed via PyO3:
 # Python callers who need distance functions use the Python `rapidfuzz`
 # package directly, which also provides the opcodes/alignment API the
-# Rust crate lacks. See plans/rust-transliteration.md and rust.md for
-# the "why Rust-side distance isn't exposed to Python" trail.
+# Rust crate lacks.
 rapidfuzz = "0.5"
 
 # LRU caches. Currently used for `maybe_ascii`'s per-thread result
@@ -58,6 +57,13 @@ lru = "0.17"
 # tool for pure literal search, and boundary checking as a post-
 # filter is cheap.
 aho-corasick = "1"
+
+# `regex` crate — used by `names::prefix` for the anchored
+# case-insensitive prefix-alternation pattern that Python's
+# `_build_prefix_regex` compiles. The pattern has no lookaround so
+# `regex` is a fit; one compiled `Regex` per prefix set, cached in a
+# LazyLock.
+regex = "1"
 
 # Serde + serde_json for reading committed JSON data artifacts like
 # rust/data/org_types.json inside a LazyLock at first use.

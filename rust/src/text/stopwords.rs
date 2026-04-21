@@ -3,7 +3,7 @@
 // / `nullwords_list` / `nullplaces_list`. The Python-side consumer in
 // `rigour/text/stopwords.py` reads these once at import time and
 // builds its own `@cache`d normalised sets (one per normalizer) on
-// top. See `plans/rust-tagger.md` step 2 for the migration.
+// top.
 
 use serde::Deserialize;
 use std::sync::LazyLock;

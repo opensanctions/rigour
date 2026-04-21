@@ -1,7 +1,6 @@
-// Port of `rigour.names.pick.pick_name` and `pick_case`. Hot paths of
-// OpenSanctions data export (pick_name runs per entity; pick_case is
-// called from `reduce_names` per casefold-group). See
-// `plans/rust-pick-name.md` for the design.
+// `pick_name` and `pick_case` — hot paths of OpenSanctions data
+// export (`pick_name` runs per entity; `pick_case` is called from
+// `reduce_names` per casefold-group).
 //
 // ## Division of labour
 //
@@ -59,7 +58,7 @@ pub fn pick_name(names: &[&str]) -> Option<String> {
     // surface is limited to the 6 `LATINIZE_SCRIPTS` (Latin, Cyrillic,
     // Greek, Armenian, Georgian, Hangul). Forms in other scripts
     // (Han, Arabic, Hebrew, Devanagari, etc.) stay as their own form
-    // cluster. See `plans/rust-minimal-translit.md`.
+    // cluster.
     let mut all_scripts: HashSet<&'static str> = HashSet::new();
     for name in &sorted {
         for script in text_scripts(name) {

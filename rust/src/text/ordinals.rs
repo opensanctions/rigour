@@ -2,7 +2,6 @@
 // `ordinals_dict()` returning `dict[int, list[str]]` to Python. The
 // shape matches Python consumer expectations (`.items()` iteration in
 // `rigour/names/tagging.py:75` and `rigour/addresses/normalize.py:104`).
-// See `plans/rust-tagger.md` step 4 for the migration.
 //
 // The JSON on disk is an array of `{number, forms}` records (see
 // `genscripts/generate_text.py::generate_ordinals`); we deserialise
@@ -30,9 +29,8 @@ pub fn ordinals_dict() -> HashMap<u32, Vec<String>> {
     DATA.iter().map(|o| (o.number, o.forms.clone())).collect()
 }
 
-/// Pure-Rust accessor for the raw spec list. Used by the future
-/// Rust tagger build path (step 8 of `plans/rust-tagger.md`), which
-/// iterates without needing a HashMap.
+/// Pure-Rust accessor for the raw spec list. Used by the Rust
+/// tagger build path, which iterates without needing a HashMap.
 pub fn ordinals() -> &'static [OrdinalSpec] {
     &DATA
 }

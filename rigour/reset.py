@@ -15,11 +15,10 @@ from rigour.names.prefix import (
 from rigour.names.split_phrases import _split_phrase_regex
 from rigour.addresses.format import _load_formats, _load_template
 from rigour.addresses.normalize import _address_replacer
-# Tagger caches live Rust-side now (per plans/rust-tagger.md step 8),
-# keyed on (TaggerKind, Normalize, Cleanup) in a process-lifetime
-# RwLock<HashMap>. There's no Python-side handle to reset; the
-# built automata stay until process exit. Same shape as the
-# org_types Replacer cache.
+# Tagger caches live Rust-side, keyed on (TaggerKind, Normalize,
+# Cleanup) in a process-lifetime RwLock<HashMap>. There's no
+# Python-side handle to reset; the built automata stay until process
+# exit. Same shape as the org_types Replacer cache.
 
 
 def reset_caches() -> None:

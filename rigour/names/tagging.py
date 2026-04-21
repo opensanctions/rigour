@@ -17,7 +17,7 @@ Rust (`rust/src/names/tagger.rs`) with a flag-keyed cache.
 `ahocorasick-rs` is no longer needed.
 
 See :mod:`rigour.text.normalize` for the `normalize_flags` / `cleanup`
-vocabulary and :doc:`plans/rust-tagger.md` for the port design.
+vocabulary.
 """
 
 from typing import Set
@@ -44,7 +44,7 @@ __all__ = ["tag_org_name", "tag_person_name"]
 _DEFAULT_FLAGS = Normalize.CASEFOLD | Normalize.NAME
 
 
-def _infer_part_tags(name: Name) -> Name:
+def _infer_part_tags(name: Name, numerics: bool = True) -> Name:
     """Promote `UNSET` name parts based on collected symbols.
 
     Post-pass run after every tagger call:
@@ -52,11 +52,20 @@ def _infer_part_tags(name: Name) -> Name:
     * A part inside an `ORG_CLASS`-categorised span flips to
       `NamePartTag.LEGAL`; a long such span also upgrades the whole
       name's tag from `ENT` to `ORG`.
-    * A numeric-looking UNSET part flips to `NamePartTag.NUM` and
-      gains a `NUMERIC` symbol if it doesn't already have one.
+    * A numeric-looking UNSET part flips to `NamePartTag.NUM` and —
+      when `numerics=True` — gains a `NUMERIC` symbol if it doesn't
+      already have one from an ordinal/cardinal AC match.
     * An UNSET part that's a stopword flips to `NamePartTag.STOP`.
+
+    Args:
+        name: The `Name` to mutate in place.
+        numerics: If `True` (default), emit `Symbol(NUMERIC, value)`
+            for numeric-looking parts the AC tagger didn't already
+            cover. If `False`, still tag structure (`NamePartTag.NUM`)
+            but skip the symbol emission — useful for callers that
+            don't consume numeric-symbol overlap for scoring.
     """
-    numerics: Set[NamePart] = set()
+    known_numerics: Set[NamePart] = set()
     for span in name.spans:
         if span.symbol.category == Symbol.Category.ORG_CLASS:
             if name.tag == NameTypeTag.ENT and len(span) > 2:
@@ -66,17 +75,17 @@ def _infer_part_tags(name: Name) -> Name:
                     part.tag = NamePartTag.LEGAL
         if span.symbol.category == Symbol.Category.NUMERIC:
             for part in span.parts:
-                numerics.add(part)
+                known_numerics.add(part)
     for part in name.parts:
         if part.tag == NamePartTag.UNSET:
             if part.numeric:
                 part.tag = NamePartTag.NUM
-                if part not in numerics:
+                if numerics and part not in known_numerics:
                     value = part.integer
                     if value is not None:
                         sym = Symbol(Symbol.Category.NUMERIC, value)
                         name.apply_part(part, sym)
-                    numerics.add(part)
+                    known_numerics.add(part)
             elif is_stopword(part.form, normalizer=normalize_name):
                 part.tag = NamePartTag.STOP
     return name
@@ -85,6 +94,7 @@ def _infer_part_tags(name: Name) -> Name:
 def tag_org_name(
     name: Name,
     normalize_flags: Normalize = _DEFAULT_FLAGS,
+    numerics: bool = True,
 ) -> Name:
     """Tag an organisation Name with org-class + location + ordinal
     symbols.
@@ -97,6 +107,10 @@ def tag_org_name(
             runs `tokenize_name + join` as the final pipeline step,
             producing the same shape as `Name.norm_form` on the
             haystack side.
+        numerics: Forwarded to :func:`_infer_part_tags`. Default
+            `True` preserves historical behaviour (emit NUMERIC
+            symbols on arbitrary numeric parts). Pass `False` to
+            tag structure only.
 
     Returns:
         The mutated `name`.
@@ -104,13 +118,14 @@ def tag_org_name(
     matches = tag_org_matches(name.norm_form, int(normalize_flags))
     for phrase, symbol in matches:
         name.apply_phrase(phrase, symbol)
-    return _infer_part_tags(name)
+    return _infer_part_tags(name, numerics=numerics)
 
 
 def tag_person_name(
     name: Name,
     normalize_flags: Normalize = _DEFAULT_FLAGS,
     infer_initials: bool = False,
+    numerics: bool = True,
 ) -> Name:
     """Tag a person Name with name-part + nick + ordinal + initial
     symbols.
@@ -124,6 +139,7 @@ def tag_person_name(
             side where "J Smith" arrives without a GIVEN/MIDDLE tag).
             When False, only parts already tagged as GIVEN/MIDDLE pick
             up INITIAL symbols.
+        numerics: Forwarded to :func:`_infer_part_tags`.
 
     Returns:
         The mutated `name`.
@@ -144,4 +160,4 @@ def tag_person_name(
     for phrase, symbol in matches:
         name.apply_phrase(phrase, symbol)
 
-    return _infer_part_tags(name)
+    return _infer_part_tags(name, numerics=numerics)

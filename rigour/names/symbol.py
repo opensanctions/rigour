@@ -3,8 +3,9 @@ of a name.
 
 Rust-backed via `rigour._core`; the actual struct is a 24-byte
 `{ category: SymbolCategory, id: Arc<str> }` with a global string
-interner behind the id. See `plans/rust-symbols.md` for the design
-rationale and memory-footprint budget.
+interner behind the id — symbols are heavily duplicated across
+tagged names (every "John" part carries the same `NAME:Q4925477`
+symbol) and interning the id keeps the per-`Name` footprint flat.
 
 The class is exposed as `rigour.names.Symbol`; the category enum lives
 as both `rigour.names.SymbolCategory` and `Symbol.Category` (the

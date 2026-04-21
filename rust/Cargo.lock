@@ -850,6 +850,7 @@ dependencies = [
  "lru",
  "pyo3",
  "rapidfuzz",
+ "regex",
  "rphonetic",
  "serde",
  "serde_json",

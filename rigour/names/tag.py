@@ -1,82 +1,73 @@
-from enum import Enum
+"""Name-tag enums — `NameTypeTag` (person/org/entity/object/unknown)
+and `NamePartTag` (given/family/middle/etc.) — plus the helper sets
+used by the tagging and sorting pipelines.
+
+Rust-backed via `rigour._core.NameTypeTag` / `NamePartTag`. The
+Python-side surface preserves the pre-port constants exactly —
+downstream code can keep importing `INITIAL_TAGS`, `WILDCARDS`,
+`GIVEN_NAME_TAGS`, `FAMILY_NAME_TAGS`, `NAME_TAGS_ORDER` from here
+without change.
+
+`NamePartTag.can_match` is now a native Rust method; the Python
+sets below mirror the equivalent Rust constants in
+`rust/src/names/tag.rs` and are rebuilt here for the membership
+checks downstream code performs (e.g. `part.tag in INITIAL_TAGS`).
+"""
+from rigour._core import NamePartTag, NameTypeTag
+
+__all__ = [
+    "NamePartTag",
+    "NameTypeTag",
+    "WILDCARDS",
+    "INITIAL_TAGS",
+    "GIVEN_NAME_TAGS",
+    "FAMILY_NAME_TAGS",
+    "NAME_TAGS_ORDER",
+]
 
 
-class NameTypeTag(Enum):
-    """Metadata on what sort of object is described by a name"""
+WILDCARDS = frozenset(
+    {
+        NamePartTag.UNSET,
+        NamePartTag.AMBIGUOUS,
+        NamePartTag.STOP,
+    }
+)
 
-    UNK = "UNK"  # Unknown
-    ENT = "ENT"  # Entity
-    PER = "PER"  # Person
-    ORG = "ORG"  # Organization/Company
-    OBJ = "OBJ"  # Object - Vessel, Security, etc.
+INITIAL_TAGS = frozenset(
+    {
+        NamePartTag.GIVEN,
+        NamePartTag.MIDDLE,
+        NamePartTag.PATRONYMIC,
+        NamePartTag.MATRONYMIC,
+    }
+)
 
+GIVEN_NAME_TAGS = frozenset(
+    {
+        NamePartTag.GIVEN,
+        NamePartTag.MIDDLE,
+        NamePartTag.PATRONYMIC,
+        NamePartTag.MATRONYMIC,
+        NamePartTag.HONORIFIC,
+        NamePartTag.STOP,
+        NamePartTag.NICK,
+    }
+)
 
-class NamePartTag(Enum):
-    """Within a name, identify name part types."""
+FAMILY_NAME_TAGS = frozenset(
+    {
+        NamePartTag.PATRONYMIC,
+        NamePartTag.MATRONYMIC,
+        NamePartTag.FAMILY,
+        NamePartTag.SUFFIX,
+        NamePartTag.TRIBAL,
+        NamePartTag.HONORIFIC,
+        NamePartTag.NUM,
+        NamePartTag.STOP,
+    }
+)
 
-    UNSET = "UNSET"
-    AMBIGUOUS = "AMBIGUOUS"
-
-    TITLE = "TITLE"
-    GIVEN = "GIVEN"
-    MIDDLE = "MIDDLE"
-    FAMILY = "FAMILY"
-    TRIBAL = "TRIBAL"
-    PATRONYMIC = "PATRONYMIC"
-    MATRONYMIC = "MATRONYMIC"
-    HONORIFIC = "HONORIFIC"
-    SUFFIX = "SUFFIX"
-    NICK = "NICK"
-
-    STOP = "STOP"  # Stopword
-    NUM = "NUM"
-    LEGAL = "LEGAL"  # Legal form of an organisation
-
-    def can_match(self, other: "NamePartTag") -> bool:
-        """Check if this tag can match the other tag."""
-        if self in WILDCARDS or other in WILDCARDS:
-            return True
-        if self == other:
-            return True
-        if self in GIVEN_NAME_TAGS and other not in GIVEN_NAME_TAGS:
-            return False
-        if self in FAMILY_NAME_TAGS and other not in FAMILY_NAME_TAGS:
-            return False
-        return True
-
-
-WILDCARDS = {
-    NamePartTag.UNSET,
-    NamePartTag.AMBIGUOUS,
-    NamePartTag.STOP,
-}
-INITIAL_TAGS = {
-    NamePartTag.GIVEN,
-    NamePartTag.MIDDLE,
-    NamePartTag.PATRONYMIC,
-    NamePartTag.MATRONYMIC,
-}
-GIVEN_NAME_TAGS = {
-    NamePartTag.GIVEN,
-    NamePartTag.MIDDLE,
-    NamePartTag.PATRONYMIC,
-    NamePartTag.MATRONYMIC,
-    NamePartTag.HONORIFIC,
-    NamePartTag.STOP,
-    NamePartTag.NICK,
-}
-FAMILY_NAME_TAGS = {
-    NamePartTag.PATRONYMIC,
-    NamePartTag.MATRONYMIC,
-    NamePartTag.FAMILY,
-    NamePartTag.SUFFIX,
-    NamePartTag.TRIBAL,
-    NamePartTag.HONORIFIC,
-    NamePartTag.NUM,
-    NamePartTag.STOP,
-}
-
-# All models are lies, but some are useful.
 NAME_TAGS_ORDER = (
     NamePartTag.HONORIFIC,
     NamePartTag.TITLE,
@@ -94,6 +85,3 @@ NAME_TAGS_ORDER = (
     NamePartTag.LEGAL,
     NamePartTag.STOP,
 )
-
-UNORDERED = set(list(NamePartTag)) - set(NAME_TAGS_ORDER)
-assert len(UNORDERED) == 0, UNORDERED
