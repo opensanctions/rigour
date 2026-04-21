@@ -228,6 +228,10 @@ impl NamePart {
 
 /// Rust-callable version of [`NamePart::tag_sort`]. Shared by the
 /// classmethod and by [`crate::names::alignment`]'s fallback path.
+///
+/// **Stable**: parts with the same tag preserve their input order.
+/// Relied on by the alignment fallback path, which depends on the
+/// output being deterministic for a given input sequence.
 pub fn tag_sort_parts(py: Python<'_>, parts: Vec<Py<NamePart>>) -> Vec<Py<NamePart>> {
     let mut indexed: Vec<(usize, Py<NamePart>)> = parts
         .into_iter()
