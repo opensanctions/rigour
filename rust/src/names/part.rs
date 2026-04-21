@@ -222,16 +222,22 @@ impl NamePart {
         py: Python<'_>,
         parts: Vec<Py<NamePart>>,
     ) -> Vec<Py<NamePart>> {
-        let mut indexed: Vec<(usize, Py<NamePart>)> = parts
-            .into_iter()
-            .map(|p| {
-                let pos = p.bind(py).borrow().tag.order_index();
-                (pos, p)
-            })
-            .collect();
-        indexed.sort_by_key(|(pos, _)| *pos);
-        indexed.into_iter().map(|(_, p)| p).collect()
+        tag_sort_parts(py, parts)
     }
+}
+
+/// Rust-callable version of [`NamePart::tag_sort`]. Shared by the
+/// classmethod and by [`crate::names::alignment`]'s fallback path.
+pub fn tag_sort_parts(py: Python<'_>, parts: Vec<Py<NamePart>>) -> Vec<Py<NamePart>> {
+    let mut indexed: Vec<(usize, Py<NamePart>)> = parts
+        .into_iter()
+        .map(|p| {
+            let pos = p.bind(py).borrow().tag.order_index();
+            (pos, p)
+        })
+        .collect();
+    indexed.sort_by_key(|(pos, _)| *pos);
+    indexed.into_iter().map(|(_, p)| p).collect()
 }
 
 impl NamePart {

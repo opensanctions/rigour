@@ -202,3 +202,9 @@ def analyze_names(
     numerics: bool = True,
     consolidate: bool = True,
 ) -> set[Name]: ...
+
+
+def align_person_name_order(
+    left: list[NamePart],
+    right: list[NamePart],
+) -> tuple[list[NamePart], list[NamePart]]: ...

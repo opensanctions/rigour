@@ -291,6 +291,10 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_tag_org_matches, m)?)?;
     m.add_function(wrap_pyfunction!(py_tag_person_matches, m)?)?;
     m.add_function(wrap_pyfunction!(names::analyze::py_analyze_names, m)?)?;
+    m.add_function(wrap_pyfunction!(
+        names::alignment::py_align_person_name_order,
+        m
+    )?)?;
     m.add_class::<names::symbol::Symbol>()?;
     m.add_class::<names::symbol::SymbolCategory>()?;
     m.add_class::<names::tag::NameTypeTag>()?;

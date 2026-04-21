@@ -2,6 +2,8 @@
 // tagging, and the various Replacer/Scanner dictionaries.
 
 #[cfg(feature = "python")]
+pub mod alignment;
+#[cfg(feature = "python")]
 pub mod analyze;
 pub mod matcher;
 #[cfg(feature = "python")]
