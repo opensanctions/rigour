@@ -33,6 +33,29 @@ Downstream, `nomenklatura/matching/logic_v2/names/match.py:118`
 calls it on remaining-parts-after-symbolic-tagging before running
 the per-position `weighted_edit_similarity`.
 
+### The common case: no part tags
+
+Data coverage on structured name-part hints (FTM `firstName`,
+`lastName`, `middleName`, …) is thin. Most entities in the stack
+arrive with name strings and **no per-part tag information** — every
+part is `NamePartTag.UNSET` by the time it reaches alignment. That's
+the dominant input shape; the tag-aware code path is the minority.
+
+This shapes the port's priority ordering:
+
+1. **All-UNSET is the hot path.** The fuzzy score-and-pack logic
+   must produce good alignments without any tag signal. Tests like
+   `"John Dow"` vs `"Doe, John"` and the whole `test_name_packing`
+   block exercise this regime — none of those parts carry tags.
+2. **Tagged alignment is a refinement.** When tags *are* present,
+   `NamePartTag.can_match` prunes impossible pairs; the rest of the
+   machinery is unchanged.
+3. **Stability matters more than cleverness for all-UNSET.** Two
+   identical runs on the same input must produce the same output,
+   and small surface variations ("Doe John" vs "Doe, John") must
+   not produce wildly different alignments. The matcher depends on
+   this for reproducible scores across retries.
+
 ## How the Python impl works today
 
 Location: `rigour/names/alignment.py`.
@@ -155,21 +178,31 @@ least in a canonical tag order.
 * **R6.5** **Packing stops once the packed length meets or exceeds
   the anchor length** — no over-packing.
 
-### R7. Tag-aware matching
+### R7. Tag handling
 
-* **R7.1** `NamePartTag.can_match(a, b)` gates every pair under
-  consideration — a `GIVEN` part never aligns with a `FAMILY` part
-  (except through wildcards). Test:
-  `test_align_tagged_person_name_parts` fifth block (`query` with
-  mis-tagged parts → output has mismatched forms at same index).
-* **R7.2** `UNSET` tags are wildcards and align with any tag on the
-  other side. Test: `test_align_tagged_person_name_parts` third
-  block — both-UNSET query matches against a GIVEN/FAMILY-tagged
-  result.
-* **R7.3** Mixed tag sets on one side — e.g. query with a `GIVEN`,
-  a `UNSET`, and another `GIVEN` — align each part against the
-  best-scoring tag-compatible candidate on the other side. Test:
-  fourth block of `test_align_tagged_person_name_parts`.
+Because the common case is all-UNSET input (see context above), the
+tag machinery must be a refinement, not a precondition. Alignment
+must work correctly when no tags are present on either side.
+
+* **R7.1** **All-UNSET input is the primary regime.** With every
+  part tagged `UNSET`, alignment falls back to pure fuzzy
+  matching + packing and must still produce a sensible output.
+  Every test block in `test_align_person_name_order` and
+  `test_name_packing` uses UNSET parts — these are the reference
+  cases.
+* **R7.2** `UNSET` acts as a wildcard — pairs an UNSET part with
+  any tag on the other side. Covered by
+  [`NamePartTag::WILDCARDS`][crate::names::tag::WILDCARDS].
+* **R7.3** When tags *are* present on both sides,
+  `NamePartTag.can_match(a, b)` gates pair consideration — a
+  `GIVEN` never aligns with a `FAMILY` (except through wildcards).
+  Test: `test_align_tagged_person_name_parts` fifth block
+  (mis-tagged query → output has mismatched forms at the same
+  output index).
+* **R7.4** Mixed tag sets on one side (e.g. two GIVENs and a
+  UNSET) align each part against the best-scoring tag-compatible
+  candidate on the other. Test: fourth block of
+  `test_align_tagged_person_name_parts`.
 
 ### R8. Fallback when nothing aligns
 
@@ -181,7 +214,7 @@ least in a canonical tag order.
 * **R8.2** The fallback tag-sort respects `NAME_TAGS_ORDER` — the
   same ordering used for display.
 
-### R9. Iteration semantics
+### R9. Iteration semantics and stability
 
 * **R9.1** Each part appears in the output exactly once — `unused`
   lists are reduced by removing matched parts before the next
@@ -189,8 +222,19 @@ least in a canonical tag order.
 * **R9.2** Length of each output list equals the length of its
   input list. Tested explicitly in every block of every test via
   `len(query_sorted)` / `len(result_sorted)` assertions.
-* **R9.3** Iteration is deterministic given the same inputs — the
-  sort + product order is stable.
+* **R9.3** **Fully deterministic.** The same input pair produces
+  the same output pair on every call. No hash-map iteration order,
+  no random seed, no dependency on allocation addresses.
+* **R9.4** **Stable under ties.** When multiple pairs score equally,
+  the choice is decided by input order — specifically, the
+  length-descending sort of the unused list, then the left-to-right
+  walk of the Cartesian product. Matters for all-UNSET input where
+  every tag-based tie-break is absent and ties are the common case.
+* **R9.5** **Tokenisation-robust.** Small surface variations
+  (`"Doe, John"` vs `"Doe John"`, spacing differences) normalise
+  through `part.comparable` and don't perturb the alignment. The
+  comma-separator case is already covered by
+  `test_align_person_name_order`.
 
 ### R10. Performance
 
