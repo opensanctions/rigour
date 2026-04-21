@@ -3,10 +3,39 @@
 //! per-index similarity scoring when the two sides present their
 //! parts in different orders or tokenisations.
 //!
-//! Requirements, rationale, and the full test-case map live in
-//! `plans/rust-alignment.md`. This module implements the Rust
-//! version; all existing Python tests in
-//! `tests/names/test_alignment.py` must pass unmodified.
+//! Behaviour pinned by `tests/names/test_alignment.py`.
+//!
+//! ## Invariants
+//!
+//! * **All-UNSET input is the primary regime.** Real-world data
+//!   rarely carries per-part tags; alignment has to work on
+//!   untagged input via fuzzy scoring and packing alone. Tag-aware
+//!   pair-gating is a refinement, not a precondition.
+//! * **Deterministic.** Same input produces the same output on
+//!   every call — no hash-map iteration or hidden state.
+//! * **Stable under ties.** Equal-scoring pairs are decided by
+//!   input order: a length-descending **stable** sort of each
+//!   side plus a left-major product walk gives the same winner
+//!   every time. Matters because the all-UNSET regime produces
+//!   ties as the common case.
+//! * **Score floor of 0.3.** Pairs below it don't align — guards
+//!   against "John" pairing with "Xyz" just because the greedy
+//!   loop needs a match.
+//! * **Packing handles tokenisation differences.** A long token
+//!   ("alsabah") aligns with shorter parts ("al" + "sabah") by
+//!   packing them together on the opposite side. Each candidate
+//!   for packing is gated on `NamePartTag::can_match` against the
+//!   anchor's tag.
+//! * **Nothing-aligned fallback.** When no pair scores above the
+//!   floor, both sides come back via `tag_sort_parts` instead of
+//!   interleaved.
+//! * **Empty-left short-circuits** to `([], tag_sort(right))`.
+//!   Empty-right falls through to the nothing-aligned fallback.
+//! * **Comparable-based**, not form-based — surface variations
+//!   (spacing, commas, diacritics) normalise through
+//!   `NamePart.comparable` before scoring.
+//! * **Person-specific.** ORG / ENT / OBJ names use
+//!   `tag_sort_parts` directly; this function only handles PER.
 
 use pyo3::prelude::*;
 
