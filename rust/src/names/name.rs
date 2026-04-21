@@ -148,14 +148,21 @@ impl Name {
         })
     }
 
-    /// Tag parts matching the tokenised form of `text`.
+    /// Tag the parts that spell out `text` with the given tag.
     ///
-    /// Walks `self.parts` left-to-right looking for a contiguous
-    /// (adjacency-insensitive) match of the tokens in `text`. On a
-    /// hit, each matched part's tag is set to `tag` — unless the
-    /// part already carries a tag that conflicts under
-    /// [`NamePartTag::can_match`], in which case it is demoted to
-    /// `AMBIGUOUS`. Stops after `max_matches` successful matches.
+    /// Used when external metadata tells the caller the structural
+    /// role of a subset of the name's tokens. For example, an FTM
+    /// `firstName` property of "Jean Claude" on a name "Jean Claude
+    /// Juncker" marks both the `jean` and `claude` parts as
+    /// `GIVEN`; a `lastName` of "Juncker" then marks the remaining
+    /// part as `FAMILY`.
+    ///
+    /// Walks `self.parts` looking for a contiguous
+    /// (adjacency-insensitive) match of the tokenised `text`. On a
+    /// hit, each matched part's tag is set to `tag`; parts that
+    /// already carry a tag that conflicts under
+    /// [`NamePartTag::can_match`] demote to `AMBIGUOUS` instead.
+    /// Stops after `max_matches` successful matches.
     #[pyo3(signature = (text, tag, max_matches = 1))]
     pub fn tag_text(
         &self,
@@ -193,9 +200,14 @@ impl Name {
         Ok(())
     }
 
-    /// Attach `symbol` to every contiguous run of parts whose tokens
-    /// match `phrase` (space-separated). Each run becomes a new
-    /// [`Span`] appended to `self.spans`.
+    /// Record that `phrase` in this name carries `symbol`.
+    ///
+    /// The tagger's output path: when the AC automaton reports a
+    /// recognised phrase (e.g. "limited liability company" →
+    /// `ORG_CLASS:LLP`), the match is attached as a [`Span`] so
+    /// downstream matching and inference can see which tokens the
+    /// symbol covers. Every non-overlapping occurrence of `phrase`
+    /// in the name gets its own `Span`.
     pub fn apply_phrase(&self, py: Python<'_>, phrase: &str, symbol: Py<Symbol>) -> PyResult<()> {
         let tokens: Vec<&str> = phrase.split(' ').collect();
         if tokens.is_empty() {
@@ -223,8 +235,12 @@ impl Name {
         Ok(())
     }
 
-    /// Attach `symbol` to a single `NamePart`, appending a new
-    /// [`Span`] to `self.spans`.
+    /// Record that a single [`NamePart`] carries `symbol`.
+    ///
+    /// The single-part variant of [`Name::apply_phrase`]. Used for
+    /// symbols that inherently apply to one token: `INITIAL` on a
+    /// single-character latin part, `NUMERIC` inferred from a part
+    /// like "123456789" that the ordinal tagger didn't cover.
     pub fn apply_part(
         &self,
         py: Python<'_>,
@@ -237,9 +253,10 @@ impl Name {
         Ok(())
     }
 
-    /// Set of unique [`Symbol`]s attached via `spans`. Recomputed
-    /// on each access — the set is small and `spans` can grow over
-    /// the object's lifetime, so caching would need invalidation.
+    /// Aggregate view of every symbol the tagger has attached to
+    /// this name. Useful when you want the symbol set regardless of
+    /// which parts carry them (e.g. indexing the name's semantic
+    /// annotations into a flat field).
     #[getter]
     fn symbols(&self, py: Python<'_>) -> PyResult<Py<pyo3::types::PySet>> {
         let out = pyo3::types::PySet::empty(py)?;
@@ -253,13 +270,20 @@ impl Name {
 
     /// `True` iff this name structurally contains `other`.
     ///
-    /// For `NameTypeTag::PER`, comparison is adjacency-insensitive
-    /// across `part.comparable` values, with a shortcut for
-    /// single-character `INITIAL` parts: if `other` carries one and
-    /// `self` shares that symbol, the initial is credited as
-    /// matching. For any other tag (and for non-PER names), falls
-    /// back to substring containment of `norm_form`. Always `False`
-    /// for names tagged `UNK` or when the two names are equal.
+    /// Used by matcher pipelines to detect when one name's evidence
+    /// is a subset of another's — e.g. "John Smith" is contained in
+    /// "John K Smith", and the longer form supersedes the shorter
+    /// when consolidating candidate names before scoring
+    /// (see [`Name::consolidate_names`]). Also backs middle-initial
+    /// matching: "John Smith" contains "J. Smith" when the `J`
+    /// carries an `INITIAL` symbol that `self` also has.
+    ///
+    /// Rule: for PER names, every part of `other` must have a
+    /// (not-necessarily-adjacent) comparable-equal counterpart in
+    /// `self`. For non-PER names, or when the PER rule doesn't find
+    /// a full subset, falls back to substring containment of
+    /// `norm_form`. Returns `False` when `self.tag == UNK` or when
+    /// the two names are equal.
     pub fn contains(&self, py: Python<'_>, other: PyRef<'_, Name>) -> PyResult<bool> {
         if self.form_str == other.form_str {
             return Ok(false);
@@ -338,12 +362,18 @@ impl Name {
         ))
     }
 
-    /// Return `names` with short names that are substrings of longer
-    /// names in the set dropped. Uses [`Name::contains`], so the
-    /// PER-aware rules apply — a short name is kept if the longer
-    /// one is tagged `UNK` (contains always returns `False` there).
+    /// Drop short names that are contained in longer names.
     ///
-    /// Accepts any Python iterable of `Name`. Returns a new set.
+    /// Useful when building a matcher to prevent a scenario where a
+    /// short version of a name ("John Smith") is matched against a
+    /// query "John K Smith" — where the longer candidate version
+    /// would have correctly disqualified the match
+    /// ("John K Smith" != "John R Smith"). Keeping only the longer
+    /// form forces the matcher to reckon with the full evidence.
+    ///
+    /// Containment uses [`Name::contains`]; see there for the
+    /// PER-aware subset rule. Accepts any Python iterable of `Name`;
+    /// returns a new set.
     #[classmethod]
     fn consolidate_names(
         _cls: &Bound<'_, pyo3::types::PyType>,

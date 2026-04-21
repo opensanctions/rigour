@@ -183,9 +183,18 @@ impl NamePartTag {
             .expect("every NamePartTag variant is in NAME_TAGS_ORDER")
     }
 
-    /// True if this tag is compatible with `other` under the
-    /// name-part matching rules:
+    /// Whether two tags are compatible when aligning name parts
+    /// across two names.
     ///
+    /// Used by the matcher to decide if the part labelled `self` on
+    /// one name can plausibly pair with the part labelled `other`
+    /// on another. A `GIVEN` part shouldn't pair with a `FAMILY`
+    /// part — they carry different structural information. A
+    /// tagger-added `GIVEN` *should* pair with an unlabelled
+    /// `UNSET` part, though, because the latter hasn't committed to
+    /// a role yet.
+    ///
+    /// Rule:
     /// * A [wildcard][WILDCARDS] on either side matches anything.
     /// * Equal tags always match.
     /// * Tags restricted to one name-side (given vs. family) only

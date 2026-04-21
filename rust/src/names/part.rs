@@ -185,8 +185,12 @@ impl NamePart {
         }
     }
 
-    /// True if this part's tag is structurally compatible with the
-    /// other part's tag. See [`NamePartTag::can_match`].
+    /// Whether two parts can plausibly be the same role in a name.
+    ///
+    /// Used when aligning two names part-by-part: a part tagged
+    /// `FAMILY` shouldn't be aligned with one tagged `GIVEN`, but
+    /// should with one tagged `UNSET` (which hasn't committed to a
+    /// role yet). Delegates to [`NamePartTag::can_match`].
     fn can_match(&self, other: PyRef<'_, NamePart>) -> bool {
         self.tag.can_match(other.tag)
     }
@@ -217,9 +221,17 @@ impl NamePart {
         )
     }
 
-    /// Return `parts` sorted by the canonical display order of their
-    /// tags (see [`crate::names::tag::NAME_TAGS_ORDER`]). The sort is
-    /// stable.
+    /// Sort name parts into canonical display order.
+    ///
+    /// Used when rendering a name back out for humans: honorifics
+    /// come first, then given names, middle, family, suffixes,
+    /// legal forms, and stopwords — independent of the input word
+    /// order. A tokeniser might hand the parts over as "Guttenberg
+    /// zu Karl-Theodor" (order from the source data); `tag_sort`
+    /// restores "Karl-Theodor zu Guttenberg" shape once the parts
+    /// have been tagged. Sort is stable across parts with the same
+    /// tag; see [`crate::names::tag::NAME_TAGS_ORDER`] for the full
+    /// ordering.
     #[classmethod]
     fn tag_sort(
         _cls: &Bound<'_, pyo3::types::PyType>,
