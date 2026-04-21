@@ -234,6 +234,47 @@ def test_numerics_off_tags_but_no_symbol():
     assert Symbol(Symbol.Category.NUMERIC, 123456789) not in numerics
 
 
+# --- symbols master switch ---
+
+
+def test_symbols_off_strips_all_symbols():
+    # An ORG fixture that would normally emit ORG_CLASS ("ag") and
+    # NUMERIC (for the large number) symbols: both are absent when
+    # symbols=False.
+    result = analyze_names(
+        NameTypeTag.ORG, ["Siemens 123456789 Aktiengesellschaft"], symbols=False
+    )
+    name = _only(result)
+    assert name.symbols == set()
+
+    # A PER fixture with infer_initials=True would normally emit an
+    # INITIAL symbol for "j": also absent when symbols=False
+    # (infer_initials becomes a no-op).
+    result_per = analyze_names(
+        NameTypeTag.PER, ["J Smith"], infer_initials=True, symbols=False
+    )
+    name_per = _only(result_per)
+    assert name_per.symbols == set()
+
+
+def test_symbols_off_preserves_part_tags_and_num_tag():
+    # NamePartTag labelling still fires on UNSET numeric parts,
+    # and part_tags values are still applied via Name.tag_text.
+    result = analyze_names(
+        NameTypeTag.ORG,
+        ["Acme 123456789 Holdings"],
+        {NamePartTag.LEGAL: ["Holdings"]},
+        symbols=False,
+    )
+    name = _only(result)
+    assert name.symbols == set()
+    tags = _part_tags(name)
+    # UNSET → NUM promotion from the inference pass.
+    assert tags["123456789"] == NamePartTag.NUM
+    # part_tags application via Name.tag_text is independent of symbol emission.
+    assert tags["holdings"] == NamePartTag.LEGAL
+
+
 # --- dedup & edge cases ---
 
 

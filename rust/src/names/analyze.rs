@@ -63,6 +63,7 @@ pub fn analyze_names(
     names: Vec<String>,
     part_tags: HashMap<NamePartTag, Vec<String>>,
     infer_initials: bool,
+    symbols: bool,
     phonetics: bool,
     numerics: bool,
     consolidate: bool,
@@ -100,24 +101,22 @@ pub fn analyze_names(
             }
         }
 
-        match type_tag {
-            NameTypeTag::PER => {
-                if infer_initials {
-                    apply_initial_preamble(py, &name_py, true)?;
-                } else {
-                    apply_initial_preamble(py, &name_py, false)?;
+        if symbols {
+            match type_tag {
+                NameTypeTag::PER => {
+                    apply_initial_preamble(py, &name_py, infer_initials)?;
+                    apply_tagger(py, &name_py, TaggerKind::Person)?;
                 }
-                apply_tagger(py, &name_py, TaggerKind::Person)?;
-            }
-            NameTypeTag::ORG | NameTypeTag::ENT => {
-                apply_tagger(py, &name_py, TaggerKind::Org)?;
-            }
-            NameTypeTag::OBJ | NameTypeTag::UNK => {
-                // No tagger pass — Name just wraps raw + form + parts.
+                NameTypeTag::ORG | NameTypeTag::ENT => {
+                    apply_tagger(py, &name_py, TaggerKind::Org)?;
+                }
+                NameTypeTag::OBJ | NameTypeTag::UNK => {
+                    // No tagger pass — Name just wraps raw + form + parts.
+                }
             }
         }
 
-        infer_part_tags(py, &name_py, numerics)?;
+        infer_part_tags(py, &name_py, symbols, numerics)?;
         built.push(name_py);
     }
 
@@ -180,8 +179,10 @@ fn apply_tagger(py: Python<'_>, name: &Py<Name>, kind: TaggerKind) -> PyResult<(
 }
 
 /// Post-tagger pass — port of `rigour.names.tagging._infer_part_tags`.
-/// Mutates the Name and its NamePart tags in place.
-fn infer_part_tags(py: Python<'_>, name: &Py<Name>, numerics: bool) -> PyResult<()> {
+/// Mutates the Name and its NamePart tags in place. `symbols` gates
+/// NUMERIC-symbol emission; when `false` the NamePartTag promotions
+/// (NUM / STOP / LEGAL) still fire but no new Symbol is attached.
+fn infer_part_tags(py: Python<'_>, name: &Py<Name>, symbols: bool, numerics: bool) -> PyResult<()> {
     // First pass: walk spans, collect numeric-symbol parts, promote
     // ORG_CLASS-covered parts to LEGAL, upgrade ENT→ORG on a long
     // ORG_CLASS span.
@@ -255,7 +256,7 @@ fn infer_part_tags(py: Python<'_>, name: &Py<Name>, numerics: bool) -> PyResult<
         }
         if is_numeric {
             part_b.borrow_mut().tag = NamePartTag::NUM;
-            if numerics && !numeric_part_hashes.contains(&part_hash) {
+            if symbols && numerics && !numeric_part_hashes.contains(&part_hash) {
                 if let Some(v) = integer_val {
                     let sym = Symbol::from_u32(SymbolCategory::NUMERIC, v as u32);
                     let sym_py = Py::new(py, sym)?;
@@ -302,7 +303,7 @@ fn consolidate_names(py: Python<'_>, names: Vec<Py<Name>>) -> PyResult<Py<PySet>
 /// PyO3 wrapper.
 #[pyfunction]
 #[pyo3(name = "analyze_names")]
-#[pyo3(signature = (type_tag, names, part_tags = None, *, infer_initials = false, phonetics = true, numerics = true, consolidate = true))]
+#[pyo3(signature = (type_tag, names, part_tags = None, *, infer_initials = false, symbols = true, phonetics = true, numerics = true, consolidate = true))]
 #[allow(clippy::too_many_arguments)]
 pub fn py_analyze_names(
     py: Python<'_>,
@@ -310,6 +311,7 @@ pub fn py_analyze_names(
     names: Vec<String>,
     part_tags: Option<HashMap<NamePartTag, Vec<String>>>,
     infer_initials: bool,
+    symbols: bool,
     phonetics: bool,
     numerics: bool,
     consolidate: bool,
@@ -320,6 +322,7 @@ pub fn py_analyze_names(
         names,
         part_tags.unwrap_or_default(),
         infer_initials,
+        symbols,
         phonetics,
         numerics,
         consolidate,

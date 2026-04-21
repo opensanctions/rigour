@@ -37,6 +37,7 @@ def analyze_names(
     part_tags: Optional[Mapping[NamePartTag, Sequence[str]]] = None,
     *,
     infer_initials: bool = False,
+    symbols: bool = True,
     phonetics: bool = True,
     numerics: bool = True,
     consolidate: bool = True,
@@ -68,7 +69,20 @@ def analyze_names(
             symbols. Default `False` because initials are a
             query-side concept; the indexer and the candidate side
             of a matcher pass `False`, so the leaner default suits
-            the common call. Ignored for non-person names.
+            the common call. Ignored for non-person names. No-op
+            when `symbols=False`.
+        symbols: Master switch for symbol emission. When `True`
+            (default), the INITIAL preamble, the AC tagger's
+            match-and-apply pass, and NUMERIC-symbol emission all
+            run. When `False`, no symbols are attached to the
+            returned names — `name.symbols` is empty and
+            `name.spans` stays empty. NamePartTag labelling
+            (including the `NUM` / `STOP` / `LEGAL` promotions in
+            the inference pass) still fires, and `part_tags` values
+            are still applied via `Name.tag_text`. Useful for
+            callers that only need tokens + part tags and don't
+            match on symbol overlap; skipping the AC tagger is the
+            main performance saving.
         phonetics: When `True` (default), each `NamePart.metaphone`
             is populated at construction; when `False`, the field
             stays `None` and the phonetics crate isn't called.
@@ -105,6 +119,7 @@ def analyze_names(
         list(names),
         tag_dict,
         infer_initials=infer_initials,
+        symbols=symbols,
         phonetics=phonetics,
         numerics=numerics,
         consolidate=consolidate,

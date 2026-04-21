@@ -197,6 +197,7 @@ def analyze_names(
     part_tags: dict[NamePartTag, list[str]] | None = None,
     *,
     infer_initials: bool = False,
+    symbols: bool = True,
     phonetics: bool = True,
     numerics: bool = True,
     consolidate: bool = True,
