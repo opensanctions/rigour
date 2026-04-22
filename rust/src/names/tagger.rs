@@ -1,5 +1,6 @@
-// AC-based name tagger — the Rust side of
-// `rigour.names.tagging.tag_{org,person}_name`.
+// AC-based name tagger. Called from `analyze_names` via
+// [`apply_tagger`][crate::names::analyze] to attach symbol spans
+// to a Name's tokens.
 //
 // Consumes every Rust-owned tagger data source at build time:
 //
@@ -12,14 +13,13 @@
 //
 // Each source contributes to a `HashMap<String, Vec<Symbol>>` that
 // seeds `Needles<Vec<Symbol>>`. Aliases are normalised with the
-// caller's `(Normalize, Cleanup)` flags before insertion — callers
-// must normalise runtime input with the same flags. Python callers
-// use `tag_{org,person}_matches` over FFI; match results flow back
-// as `(matched_phrase, Symbol)` pairs and the Python `tag_*_name`
-// wrappers apply each via `Name.apply_phrase`.
+// caller's `Normalize` flags before insertion — callers must
+// normalise runtime input with the same flags. Overlapping match
+// iteration emits every recognised phrase as an independent
+// `(matched_phrase, Symbol)` pair.
 //
-// Flag-keyed cache: one compiled Tagger per `(TaggerKind, Normalize,
-// Cleanup)` combination, same shape as the org_types Replacer cache.
+// Flag-keyed cache: one compiled Tagger per `(TaggerKind, Normalize)`
+// combination, same shape as the org_types Replacer cache.
 
 use std::collections::HashMap;
 use std::sync::{Arc, LazyLock, RwLock};

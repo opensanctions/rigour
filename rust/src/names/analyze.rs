@@ -149,8 +149,12 @@ pub fn analyze_names(
     }
 }
 
-/// INITIAL-symbol pre-pass for PER names. Mirrors
-/// `rigour.names.tagging.tag_person_name` lines 131-141.
+/// INITIAL-symbol pre-pass for PER names. Attaches `INITIAL:<char>`
+/// to single-character latin parts (when `infer_initials`) or to
+/// parts already tagged with one of [`INITIAL_TAGS`] (GIVEN,
+/// MIDDLE, PATRONYMIC, MATRONYMIC). Runs before the AC tagger so
+/// INITIAL symbols are visible to downstream matchers that
+/// compare against spelled-out given names.
 fn apply_initial_preamble(py: Python<'_>, name: &Py<Name>, infer_initials: bool) -> PyResult<()> {
     let parts_list = name.bind(py).borrow().parts.clone_ref(py);
     for item in parts_list.bind(py).iter() {
@@ -196,10 +200,20 @@ fn apply_tagger(py: Python<'_>, name: &Py<Name>, kind: TaggerKind) -> PyResult<(
     Ok(())
 }
 
-/// Post-tagger pass — port of `rigour.names.tagging._infer_part_tags`.
-/// Mutates the Name and its NamePart tags in place. `symbols` gates
-/// NUMERIC-symbol emission; when `false` the NamePartTag promotions
-/// (NUM / STOP / LEGAL) still fire but no new Symbol is attached.
+/// Post-tagger inference pass. Walks the spans produced by the
+/// tagger to promote UNSET parts based on collected evidence:
+///
+/// * Parts inside an ORG_CLASS span become `NamePartTag::LEGAL`;
+///   a long enough ORG_CLASS span upgrades the Name's tag from
+///   ENT to ORG.
+/// * Numeric-looking UNSET parts become `NamePartTag::NUM` and —
+///   when `numerics` is true — gain a `NUMERIC` symbol if the
+///   ordinal tagger didn't already cover them.
+/// * UNSET parts that are stopwords become `NamePartTag::STOP`.
+///
+/// `symbols` gates NUMERIC-symbol emission: when `false`, NUM /
+/// STOP / LEGAL part-tag promotions still fire but no new Symbol
+/// is attached. Mutates the Name and its NamePart tags in place.
 fn infer_part_tags(py: Python<'_>, name: &Py<Name>, symbols: bool, numerics: bool) -> PyResult<()> {
     // First pass: walk spans, collect numeric-symbol parts, promote
     // ORG_CLASS-covered parts to LEGAL, upgrade ENT→ORG on a long

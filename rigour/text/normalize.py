@@ -21,9 +21,10 @@ with different lifecycles:
    directly.
 2. **Reference-data normalisation.** A lookup/tagger function (e.g.
    [replace_org_types_compare][rigour.names.org_types.replace_org_types_compare],
-   [tag_org_name][rigour.names.tagging.tag_org_name]) builds an
-   internal regex/automaton from static YAML data (aliases, stopwords,
-   AC patterns) and uses `normalize_flags` + `cleanup` to decide how
+   or the AC tagger inside
+   [analyze_names][rigour.names.analyze_names]) builds an internal
+   regex/automaton from static YAML data (aliases, stopwords, AC
+   patterns) and uses `normalize_flags` + `cleanup` to decide how
    that static data gets normalised at build time. The caller is
    expected to normalise its runtime input with the *same* flags
    before calling. Functions in this bucket cache one compiled
@@ -95,10 +96,9 @@ class Normalize(IntFlag):
 
     Compose flags with bitwise OR and pass to [normalize][rigour.text.normalize.normalize] or to
     any rigour function that exposes a `normalize_flags=` parameter
-    (e.g. :func:`rigour.names.org_types.replace_org_types_compare`,
-    :func:`rigour.names.tagging.tag_org_name`). See the module
-    docstring for the fixed pipeline order the flags compose into
-    and for common flag compositions.
+    (e.g. :func:`rigour.names.org_types.replace_org_types_compare`).
+    See the module docstring for the fixed pipeline order the flags
+    compose into and for common flag compositions.
 
     Attributes:
         STRIP: Trim leading and trailing whitespace.

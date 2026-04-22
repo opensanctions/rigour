@@ -2,11 +2,7 @@
 // `(?<!\w)X(?!\w)` word boundaries. Used to back:
 //
 //   - rigour.names.org_types.replace_org_types_compare (payload = target String)
-//   - rigour.names.tagging.tag_org_name / tag_person_name (payload = Symbol)
-//     [future — not yet wired up]
-//
-// Consolidates what was previously split between a fancy-regex
-// Replacer in org_types and a Python-side `ahocorasick-rs` tagger.
+//   - names::tagger, invoked from analyze_names (payload = Symbol)
 //
 // ## Design
 //

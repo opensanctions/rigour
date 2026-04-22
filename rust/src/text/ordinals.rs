@@ -1,7 +1,7 @@
 // Rust-side ownership of `resources/text/ordinals.yml` → exposes
-// `ordinals_dict()` returning `dict[int, list[str]]` to Python. The
-// shape matches Python consumer expectations (`.items()` iteration in
-// `rigour/names/tagging.py:75` and `rigour/addresses/normalize.py:104`).
+// `ordinals_dict()` returning `dict[int, list[str]]` to Python.
+// The dict-of-lists shape matches the iteration pattern in
+// `rigour.addresses.normalize` and the Rust tagger build path.
 //
 // The JSON on disk is an array of `{number, forms}` records (see
 // `genscripts/generate_text.py::generate_ordinals`); we deserialise

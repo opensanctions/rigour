@@ -22,7 +22,8 @@ between versions.
 | Tokenisation (`tokenize_name` — Rust version) | — (internal; Python copy still lives at `rigour.names.tokenize.tokenize_name`) | `rust/src/text/tokenize.rs` |
 | Numeric-string parsing (`string_number`) | `rigour._core.string_number` (no Python wrapper) | `rust/src/text/numbers.rs` |
 | Org-type replacement (`replace_org_types_compare` / `_display`, `remove_org_types`, `extract_org_types`) | `rigour.names.org_types` | `rust/src/names/org_types.rs` + `matcher.rs` |
-| AC name tagger (`tag_org_name`, `tag_person_name`) | `rigour.names.tagging` | `rust/src/names/tagger.rs` |
+| AC name tagger | — (internal; called from `analyze_names`) | `rust/src/names/tagger.rs` |
+| Name analysis pipeline (`analyze_names`, `pair_symbols`) | `rigour.names.analyze`, `rigour.names.symbol` | `rust/src/names/analyze.rs` + `pairing.rs` |
 | Name picking (`pick_name`, `pick_case`, `reduce_names`) | `rigour.names.pick` | `rust/src/names/pick.rs` |
 | `Symbol` / `SymbolCategory` | `rigour.names.symbol` (re-exports Rust class) | `rust/src/names/symbol.rs` |
 | Territories database | `rigour.territories.*` | `rust/src/territories.rs` (reads the JSONL blob) |
