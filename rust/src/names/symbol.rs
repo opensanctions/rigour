@@ -20,7 +20,7 @@ use std::sync::{Arc, LazyLock, RwLock};
     feature = "python",
     pyclass(eq, hash, frozen, from_py_object, module = "rigour._core")
 )]
-#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SymbolCategory {
     /// Legal-form class abbreviation (LLC, GmbH, AG, …).
     ORG_CLASS,

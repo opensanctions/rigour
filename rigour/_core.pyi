@@ -208,3 +208,24 @@ def align_person_name_order(
     left: list[NamePart],
     right: list[NamePart],
 ) -> tuple[list[NamePart], list[NamePart]]: ...
+
+
+class PairedEdge:
+    """Rust-side representation of one paired span in a pairing.
+
+    Prefer the higher-level `rigour.names.symbol.pair_symbols`
+    wrapper, which returns `SymbolEdge` dataclasses with resolved
+    `NamePart` references; this pyclass exposes raw part indices
+    (`int`s) and is primarily useful when calling the Rust entry
+    point directly.
+    """
+
+    @property
+    def query_parts(self) -> tuple[int, ...]: ...
+    @property
+    def result_parts(self) -> tuple[int, ...]: ...
+    @property
+    def symbol(self) -> Symbol: ...
+
+
+def pair_symbols(query: Name, result: Name) -> list[tuple[PairedEdge, ...]]: ...

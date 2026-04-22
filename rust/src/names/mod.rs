@@ -10,6 +10,8 @@ pub mod matcher;
 pub mod name;
 pub mod org_types;
 #[cfg(feature = "python")]
+pub mod pairing;
+#[cfg(feature = "python")]
 pub mod part;
 pub mod person_names;
 pub mod pick;
