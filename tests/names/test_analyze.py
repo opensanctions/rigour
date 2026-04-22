@@ -302,3 +302,301 @@ def test_unk_type_tag_no_tagging():
     name = _only(result)
     assert name.tag == NameTypeTag.UNK
     assert name.symbols == set()
+
+
+# --- rewrite=False: tagger-only mode (canonicalisation skipped) ---
+#
+# With `rewrite=False` the pipeline skips honorific/article prefix
+# removal and org-type compare-form substitution. The tagger still
+# fires on the raw tokens because its alias set covers both
+# original and canonical forms. These tests exercise the tagger's
+# behaviour on literal input.
+
+
+def test_raw_person_name_corpus_match():
+    # Wikidata QID match: the tagger's person-names corpus maps
+    # "John" to its canonical NAME symbol. The exact QID may shift
+    # if the corpus regenerates; the shape (some NAME symbol for
+    # "John" in the symbols set) is what's stable.
+    result = analyze_names(NameTypeTag.PER, ["John Doe"], rewrite=False)
+    name = _only(result)
+    assert name.comparable == "john doe"
+    john = Symbol(Symbol.Category.NAME, "Q4925477")
+    assert john in name.symbols
+
+
+def test_raw_person_name_initial_from_given_tag():
+    # Without a GIVEN/MIDDLE part tag, "John" is UNSET after
+    # tokenisation and doesn't pick up an INITIAL symbol.
+    jsym = Symbol(Symbol.Category.INITIAL, "j")
+    result = analyze_names(NameTypeTag.PER, ["John Doe"], rewrite=False)
+    name = _only(result)
+    assert jsym not in name.symbols
+
+    # Pre-tagging "John" as GIVEN triggers the INITIAL preamble to
+    # emit INITIAL:j for the first char.
+    result = analyze_names(
+        NameTypeTag.PER,
+        ["John Doe"],
+        {NamePartTag.GIVEN: ["John"], NamePartTag.FAMILY: ["Doe"]},
+        rewrite=False,
+    )
+    name = _only(result)
+    assert jsym in name.symbols
+
+
+def test_raw_person_initial_infer_flag():
+    # Single-character part: only picks up INITIAL when
+    # `infer_initials=True` (query-side behaviour).
+    jsym = Symbol(Symbol.Category.INITIAL, "j")
+
+    result_off = analyze_names(
+        NameTypeTag.PER, ["J Doe"], infer_initials=False, rewrite=False
+    )
+    assert jsym not in _only(result_off).symbols
+
+    result_on = analyze_names(
+        NameTypeTag.PER, ["J Doe"], infer_initials=True, rewrite=False
+    )
+    assert jsym in _only(result_on).symbols
+
+
+def test_raw_person_name_arabic_pass_through():
+    # Arabic given name: corpus coverage varies, so we assert only
+    # that the pipeline completes without error and preserves the
+    # input form.
+    result = analyze_names(NameTypeTag.PER, ["أسامة"], rewrite=False)
+    name = _only(result)
+    assert name.comparable == "أسامة"
+
+
+def test_raw_person_name_korean_overlapping():
+    # Korean compound names: the person-names corpus has entries
+    # mapping multiple Wikidata QIDs to overlapping form sets.
+    # With overlapping AC matching, every recognised phrase lands
+    # as its own Span. Smoke-checks that five expected QIDs all
+    # surface.
+    result = analyze_names(NameTypeTag.PER, ["jeong jae ho"], rewrite=False)
+    name = _only(result)
+    jae_ho = Symbol(Symbol.Category.NAME, "Q17151901")
+    jeong = Symbol(Symbol.Category.NAME, "Q37489860")
+    jeong_jae = Symbol(Symbol.Category.NAME, "Q69509157")
+    ho = Symbol(Symbol.Category.NAME, "Q104377081")
+    jae = Symbol(Symbol.Category.NAME, "Q16255943")
+    assert {jae_ho, jeong, jeong_jae, ho, jae} - name.symbols == set()
+
+
+def test_raw_person_multi_token_spans():
+    # "Jean-Claude" tokenises to ["jean", "claude"] and the tagger
+    # matches "jean", "claude", and the compound "jean claude" —
+    # each as an independent span.
+    result = analyze_names(NameTypeTag.PER, ["Jean-Claude"], rewrite=False)
+    name = _only(result)
+    span_texts = {s.comparable for s in name.spans}
+    assert "jean" in span_texts
+    assert "claude" in span_texts
+    assert "jean claude" in span_texts
+
+
+def test_raw_person_numeric_part_tagging():
+    # Trailing numeric part gets NamePartTag.NUM from the inference
+    # pass, regardless of symbol emission.
+    result = analyze_names(
+        NameTypeTag.PER, ["Jean-Claude, 2"], rewrite=False
+    )
+    name = _only(result)
+    assert name.parts[-1].tag == NamePartTag.NUM
+
+
+def test_raw_org_industry_and_org_class():
+    # "Doe Industries, Inc." — with rewrite off, `Inc.` stays
+    # literal and the tagger emits ORG_CLASS:LLC on the "inc" token.
+    # "Industries" fires SYMBOL:INDUSTRY as a generic-qualifier hit.
+    result = analyze_names(
+        NameTypeTag.ORG, ["Doe Industries, Inc."], rewrite=False
+    )
+    name = _only(result)
+    assert name.comparable == "doe industries inc"
+    indus = Symbol(Symbol.Category.SYMBOL, "INDUSTRY")
+    assert indus in name.symbols
+    assert len(name.spans) == 2
+    # First span is the SYMBOL:INDUSTRY on "industries".
+    assert name.spans[0].symbol.category == Symbol.Category.SYMBOL
+    # Second span is the ORG_CLASS on "inc".
+    llc_span = name.spans[1]
+    assert llc_span.symbol.category == Symbol.Category.ORG_CLASS
+    assert llc_span.symbol.id == "LLC"
+    for part in llc_span.parts:
+        assert part.tag == NamePartTag.LEGAL
+
+
+def test_raw_org_name_location():
+    # Location symbol on a territory name inside a company name.
+    result = analyze_names(
+        NameTypeTag.ORG, ["Doe Industries (New York) Inc."], rewrite=False
+    )
+    name = _only(result)
+    assert Symbol(Symbol.Category.LOCATION, "us-ny") in name.symbols
+
+
+def test_raw_org_tag_sort_legal_last():
+    # After tagging, LEGAL-tagged parts sort last (display order).
+    from rigour.names.part import NamePart
+
+    result = analyze_names(NameTypeTag.ORG, ["OOO ORION"], rewrite=False)
+    name = _only(result)
+    assert NamePart.tag_sort(list(name.parts))[0].form == "orion"
+
+
+def test_raw_ent_stays_ent_without_orgclass():
+    # ENT without a long-enough ORG_CLASS span keeps its ENT tag.
+    result = analyze_names(
+        NameTypeTag.ENT, ["Benevolent Foundation"], rewrite=False
+    )
+    assert _only(result).tag == NameTypeTag.ENT
+
+
+def test_raw_ent_upgrades_to_org_on_orgclass():
+    # ORG_CLASS span longer than 2 chars promotes ENT → ORG.
+    result = analyze_names(
+        NameTypeTag.ENT, ["Benevolent, LLC"], rewrite=False
+    )
+    assert _only(result).tag == NameTypeTag.ORG
+
+
+def test_raw_ent_stopword_tagging():
+    # Stopwords like "the" / "and" get NamePartTag.STOP from the
+    # inference pass; other UNSET parts remain UNSET.
+    result = analyze_names(
+        NameTypeTag.ENT, ["The Bow and Arrow"], rewrite=False
+    )
+    name = _only(result)
+    tags = _part_tags(name)
+    assert tags["the"] == NamePartTag.STOP
+    assert tags["bow"] == NamePartTag.UNSET
+    assert tags["and"] == NamePartTag.STOP
+
+
+def test_raw_org_ordinals_to_numeric():
+    # Ordinal markers ("5.", "5", "Fifth") all normalise to the same
+    # NUMERIC:5 symbol via the tagger's ordinal corpus + the
+    # trailing-period tokeniser behaviour.
+    for variant in ["5. Batallion", "5 Batallion", "Fifth Batallion"]:
+        result = analyze_names(NameTypeTag.ENT, [variant], rewrite=False)
+        name = _only(result)
+        assert any(
+            sym.category == Symbol.Category.NUMERIC and sym.id == "5"
+            for sym in name.symbols
+        ), variant
+
+
+def test_raw_org_large_numbers_get_numeric_symbol():
+    # Large arbitrary numbers outside the ordinal corpus still get
+    # a NUMERIC symbol via the inference pass.
+    result = analyze_names(
+        NameTypeTag.ENT, ["123456789 Batallion"], rewrite=False
+    )
+    name = _only(result)
+    assert name.parts[0].tag == NamePartTag.NUM
+    assert any(
+        sym.category == Symbol.Category.NUMERIC and sym.id == "123456789"
+        for sym in name.symbols
+    )
+
+    # Number after a hyphen — the tokeniser splits on punctuation so
+    # "Rungra-888" becomes ["rungra", "888"].
+    result = analyze_names(NameTypeTag.ENT, ["Rungra-888"], rewrite=False)
+    name = _only(result)
+    assert name.parts[1].tag == NamePartTag.NUM
+    assert any(
+        sym.category == Symbol.Category.NUMERIC and sym.id == "888"
+        for sym in name.symbols
+    )
+
+
+def test_raw_org_cyrillic_prefix():
+    # Russian convention: the org-type token ("ООО") appears before
+    # the company name and maps to ORG_CLASS:LLC. Only the ООО
+    # token should be LEGAL-tagged — not Газпром.
+    result = analyze_names(NameTypeTag.ORG, ["ООО Газпром"], rewrite=False)
+    name = _only(result)
+    llc = Symbol(Symbol.Category.ORG_CLASS, "LLC")
+    assert llc in name.symbols
+    legal_parts = [p for p in name.parts if p.tag == NamePartTag.LEGAL]
+    assert len(legal_parts) == 1
+    assert legal_parts[0].form == "ооо"
+
+
+def test_raw_org_cjk_pass_through():
+    # Chinese company name (no spaces) must not crash. 有限公司
+    # is in the alias-only form — not in compare/display — so the
+    # tagger's corpus doesn't index it and no ORG_CLASS fires.
+    result = analyze_names(NameTypeTag.ORG, ["招商银行有限公司"], rewrite=False)
+    name = _only(result)
+    assert Symbol(Symbol.Category.ORG_CLASS, "LLC") not in name.symbols
+
+
+def test_raw_org_arabic_pass_through():
+    # Arabic company name must not crash. المحدودة is
+    # alias-only — absent from the tagger's compare/display
+    # mapping — so no ORG_CLASS symbol fires.
+    result = analyze_names(
+        NameTypeTag.ORG, ["شركة أرامكو السعودية المحدودة"], rewrite=False
+    )
+    name = _only(result)
+    assert not any(
+        sym.category == Symbol.Category.ORG_CLASS for sym in name.symbols
+    )
+
+
+def test_raw_org_no_false_positive_in_longer_word():
+    # Short org-type tokens (SA, AS, AG) must not match inside
+    # longer words. "Samsung" ends in "sa-ng" but shouldn't trigger
+    # an ORG_CLASS:SA match.
+    result = analyze_names(
+        NameTypeTag.ORG, ["Samsung Electronics"], rewrite=False
+    )
+    name = _only(result)
+    assert not any(
+        s.symbol.category == Symbol.Category.ORG_CLASS for s in name.spans
+    )
+
+
+def test_raw_org_cyrillic_quoted_with_number():
+    # Russian-style quoted company name with a year. Quotes are
+    # stripped by the tokeniser; parts become [ооо, аяс, 2000].
+    result = analyze_names(
+        NameTypeTag.ORG, ['ООО "АЯС 2000"'], rewrite=False
+    )
+    name = _only(result)
+    assert Symbol(Symbol.Category.ORG_CLASS, "LLC") in name.symbols
+    assert any(
+        s.category == Symbol.Category.NUMERIC and s.id == "2000"
+        for s in name.symbols
+    )
+
+
+def test_raw_org_polish_sp_z_oo():
+    # "Sp. z o.o." — Polish limited-company form. tokenize_name
+    # strips periods, yielding ["sp", "z", "oo"]; the tagger has
+    # this exact three-token phrase as an ORG_CLASS:LLC alias, so
+    # all three tokens end up LEGAL-tagged.
+    result = analyze_names(
+        NameTypeTag.ORG, ["Faberlic Europe Sp. z o.o."], rewrite=False
+    )
+    name = _only(result)
+    assert Symbol(Symbol.Category.ORG_CLASS, "LLC") in name.symbols
+    legal_forms = {p.form for p in name.parts if p.tag == NamePartTag.LEGAL}
+    assert legal_forms == {"sp", "z", "oo"}
+
+
+def test_raw_org_double_legal_type():
+    # Two different org-class markers in one name: both fire, both
+    # parts are LEGAL.
+    result = analyze_names(
+        NameTypeTag.ORG, ["Siemens AG GmbH"], rewrite=False
+    )
+    name = _only(result)
+    assert Symbol(Symbol.Category.ORG_CLASS, "JSC") in name.symbols
+    assert Symbol(Symbol.Category.ORG_CLASS, "LLC") in name.symbols
+    assert len([p for p in name.parts if p.tag == NamePartTag.LEGAL]) == 2

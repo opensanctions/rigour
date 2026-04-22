@@ -201,6 +201,7 @@ def analyze_names(
     phonetics: bool = True,
     numerics: bool = True,
     consolidate: bool = True,
+    rewrite: bool = True,
 ) -> set[Name]: ...
 
 

@@ -1,21 +1,28 @@
-// Single-FFI name-analysis orchestrator. Collapses what used to be
-// a per-step Python pipeline (prefix strip → casefold → org-type
-// replacement → tagger → infer) into one function call with no
-// Python callbacks between the steps.
+// Single-FFI name-analysis orchestrator. Runs the full name
+// pipeline (prefix strip → casefold → org-type rewrite → tagger →
+// infer) in one function call with no Python callbacks between
+// the steps.
 //
 // Pipeline per input string:
-//   1. For PER: remove_person_prefixes
+//   1. For PER, if `rewrite`: remove_person_prefixes
 //   2. casefold → form
-//   3. For ORG/ENT: replace_org_types_compare + remove_org_prefixes
+//   3. For ORG/ENT, if `rewrite`: replace_org_types_compare +
+//      remove_org_prefixes
 //   4. Dedup by form
 //   5. Construct Name + NamePart objects (all eager on construction)
 //   6. Apply part_tags via Name.tag_text for each (tag, values) entry
-//   7. For PER: INITIAL-symbol preamble
-//   8. Tagger match → apply_phrase per (phrase, symbol)
+//   7. For PER: INITIAL-symbol preamble (if `symbols`)
+//   8. Tagger match → apply_phrase per (phrase, symbol) (if `symbols`)
 //   9. infer_part_tags post-pass (NUMERIC / STOP / LEGAL promotion,
 //      ENT → ORG upgrade)
 // Optionally:
 //   10. Name::consolidate_names to drop substring-dominated names
+//
+// The `rewrite` flag gates the two pre-tagger canonicalisation
+// stages. Callers that want to index or display a name in its
+// literal form — no honorific strip, no "Inc. → LLC" substitution —
+// pass `rewrite=False`. The tagger still fires on the raw tokens
+// (its alias set covers both the original and canonical forms).
 
 use std::collections::{HashMap, HashSet};
 use std::sync::LazyLock;
@@ -33,9 +40,19 @@ use crate::names::tagger::{TaggerKind, get_tagger};
 use crate::text::normalize::{Cleanup, Normalize, casefold, normalize};
 use crate::text::stopwords::stopwords_list;
 
-/// Default flags mirror `rigour.names.tagging._DEFAULT_FLAGS`
-/// (`CASEFOLD | NAME`). The tagger expects its internal alias set
-/// normalised the same way as `Name.norm_form` on the haystack side.
+/// Normalise-flag combination for the tagger's alias set.
+///
+/// Must match the shape of `Name.norm_form` on the haystack side
+/// so the AC automaton's needles line up with the text it's
+/// searching. `NAME` runs `tokenize_name + ' '.join` as the final
+/// pipeline step — this subsumes `SQUASH_SPACES` and the
+/// Unicode-category handling + skip-char deletion the pre-port
+/// tagger used to do in a hardcoded post-pass.
+///
+/// No `Cleanup` accepted: `tokenize_name` already handles Unicode
+/// categories, and `Cleanup::Strong` would drop Lm/Mc characters
+/// (CJK / combining marks) the haystack keeps, breaking matches
+/// on non-Latin scripts.
 const TAGGER_FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::NAME);
 
 /// Stopword set, keyed on `normalize_name`-shaped strings. Used by
@@ -67,18 +84,19 @@ pub fn analyze_names(
     phonetics: bool,
     numerics: bool,
     consolidate: bool,
+    rewrite: bool,
 ) -> PyResult<Py<PySet>> {
     let mut seen: HashSet<String> = HashSet::new();
     let mut built: Vec<Py<Name>> = Vec::with_capacity(names.len());
 
     for raw in names {
-        let working = if matches!(type_tag, NameTypeTag::PER) {
+        let working = if rewrite && matches!(type_tag, NameTypeTag::PER) {
             remove_person_prefixes(&raw)
         } else {
             raw.clone()
         };
         let mut form = casefold(&working);
-        if matches!(type_tag, NameTypeTag::ORG | NameTypeTag::ENT) {
+        if rewrite && matches!(type_tag, NameTypeTag::ORG | NameTypeTag::ENT) {
             form = org_types::replace_compare(&form, Normalize::CASEFOLD, Cleanup::Noop, false);
             form = remove_org_prefixes(&form);
         }
@@ -303,7 +321,7 @@ fn consolidate_names(py: Python<'_>, names: Vec<Py<Name>>) -> PyResult<Py<PySet>
 /// PyO3 wrapper.
 #[pyfunction]
 #[pyo3(name = "analyze_names")]
-#[pyo3(signature = (type_tag, names, part_tags = None, *, infer_initials = false, symbols = true, phonetics = true, numerics = true, consolidate = true))]
+#[pyo3(signature = (type_tag, names, part_tags = None, *, infer_initials = false, symbols = true, phonetics = true, numerics = true, consolidate = true, rewrite = true))]
 #[allow(clippy::too_many_arguments)]
 pub fn py_analyze_names(
     py: Python<'_>,
@@ -315,6 +333,7 @@ pub fn py_analyze_names(
     phonetics: bool,
     numerics: bool,
     consolidate: bool,
+    rewrite: bool,
 ) -> PyResult<Py<PySet>> {
     analyze_names(
         py,
@@ -326,5 +345,6 @@ pub fn py_analyze_names(
         phonetics,
         numerics,
         consolidate,
+        rewrite,
     )
 }
