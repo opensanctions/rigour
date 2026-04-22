@@ -60,6 +60,42 @@ def test_consolidate_names():
     assert acme_corp not in consolidated_orgs
 
 
+def test_consolidate_case_variants():
+    """Case-only variants share a Name identity (form is casefolded at
+    construction) and collapse through set semantics, independent of
+    the containment rule."""
+    lower = Name("John Smith", tag=NameTypeTag.PER)
+    upper = Name("John SMITH", tag=NameTypeTag.PER)
+    mixed = Name("JOHN smith", tag=NameTypeTag.PER)
+    # All three casefold to the same form — equal as Name objects.
+    assert lower == upper == mixed
+    assert hash(lower) == hash(upper) == hash(mixed)
+    # contains() returns False for equal forms; the dedup is entirely
+    # the PySet's work.
+    assert lower.contains(upper) is False
+    consolidated = Name.consolidate_names([lower, upper, mixed])
+    assert len(consolidated) == 1
+
+
+def test_consolidate_exact_duplicates():
+    """Passing the same Name twice yields a single entry."""
+    name = Name("Acme Inc", tag=NameTypeTag.ORG)
+    consolidated = Name.consolidate_names([name, name])
+    assert len(consolidated) == 1
+
+
+def test_consolidate_case_variants_with_substring():
+    """Case-variant collapse composes with the substring rule: the
+    short-form case variants dedup to one Name, which is then dropped
+    by the longer-form containment check."""
+    short_lower = Name("John Smith", tag=NameTypeTag.PER)
+    short_upper = Name("JOHN SMITH", tag=NameTypeTag.PER)
+    long_name = Name("John K Smith", tag=NameTypeTag.PER)
+    consolidated = Name.consolidate_names([short_lower, short_upper, long_name])
+    assert len(consolidated) == 1
+    assert long_name in consolidated
+
+
 def test_cjk_name():
     name = Name("维克托·亚历山德罗维奇·卢卡申科")
     assert name.form == "维克托·亚历山德罗维奇·卢卡申科"
