@@ -208,3 +208,23 @@ def align_person_name_order(
     left: list[NamePart],
     right: list[NamePart],
 ) -> tuple[list[NamePart], list[NamePart]]: ...
+
+
+class PairedEdge:
+    """One paired span in a [pair_symbols][rigour.names.symbol.pair_symbols] alignment.
+
+    The part fields are part-index tuples into `query.parts` /
+    `result.parts`; the Python wrapper in `rigour.names.symbol`
+    resolves them to `NamePart` references before exposing
+    pairings to callers.
+    """
+
+    @property
+    def query_parts(self) -> tuple[int, ...]: ...
+    @property
+    def result_parts(self) -> tuple[int, ...]: ...
+    @property
+    def symbol(self) -> Symbol: ...
+
+
+def pair_symbols(query: Name, result: Name) -> list[tuple[PairedEdge, ...]]: ...

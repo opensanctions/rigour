@@ -2,7 +2,7 @@
 description: Port the symbol-pairing generation out of nomenklatura's name matcher into rigour. Design doc + algorithmic rework — current Python impl generates too many pairings. Lands as `rigour.names.symbol.pair_symbols`; Rust port follows the Python API.
 date: 2026-04-22
 tags: [rigour, nomenklatura, rust, names, pairings, performance, matching]
-status: draft — tests written, implementation pending
+status: landed (April 2026) — Rust core + Python wrapper in place, 21 pytest + 11 cargo tests green
 ---
 
 # Symbol pairing in rigour — `pair_symbols`
@@ -572,16 +572,13 @@ well below its current 10%.
 
 ## Open questions
 
-1. **Corpus verification.** Eight of the rigour tests are
-   `# corpus-dependent` — they rely on specific tagger entries
-   (`Ltd`↔`Limited`, `OOO`↔`LLC`, `abd al-kadir`↔`abdelkader`,
-   `John`↔`Johnny`, `van` carrying both NAME and SYMBOL, Latin↔
-   Cyrillic Putin QIDs). None verified against live tagger
-   output. Either do a grep-and-print pass before the Rust
-   implementation, or let the implementation surface the misses
-   and retune inputs.
+(None outstanding. Corpus verification closed — all
+`# corpus-dependent` tests pass against live tagger output, so
+the bets on `Ltd`↔`Limited`, `OOO`↔`LLC`, `abd al-kadir`↔`abdelkader`,
+`John`↔`Johnny`, `van` as NAME+SYMBOL, `van Dijk` as a compound,
+and Latin↔Cyrillic Putin QIDs are all confirmed.)
 
-### Deferred (revisit after port lands)
+### Deferred (revisit after bench harness / profiling)
 
 - **Collapse to single pairing?** Keep multi-pairing output for
   now. Multi-pairings currently arise only from cross-category

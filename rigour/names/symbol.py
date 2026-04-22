@@ -22,6 +22,7 @@ from dataclasses import dataclass
 from typing import List, Tuple
 
 from rigour._core import Symbol, SymbolCategory
+from rigour._core import pair_symbols as _pair_symbols
 from rigour.names.name import Name
 from rigour.names.part import NamePart
 
@@ -57,11 +58,25 @@ def pair_symbols(query: Name, result: Name) -> List[Tuple[SymbolEdge, ...]]:
     Levenshtein comparison.
 
     Returns a list of pairings; each pairing is a tuple of
-    non-conflicting `SymbolEdge`s whose joint coverage is maximal
-    within its equivalence class. The first element is always the
-    empty tuple so callers that iterate have a guaranteed fallback.
+    non-conflicting [SymbolEdge][rigour.names.symbol.SymbolEdge]s
+    whose joint coverage is maximal within its equivalence class.
+    The first element is always the empty tuple so callers that
+    iterate have a guaranteed fallback.
     """
-    raise NotImplementedError("pair_symbols is being ported to Rust; stub in place")
+    q_parts = query.parts
+    r_parts = result.parts
+    raw = _pair_symbols(query, result)
+    return [
+        tuple(
+            SymbolEdge(
+                query_parts=tuple(q_parts[i] for i in edge.query_parts),
+                result_parts=tuple(r_parts[i] for i in edge.result_parts),
+                symbol=edge.symbol,
+            )
+            for edge in pairing
+        )
+        for pairing in raw
+    ]
 
 
 __all__ = ["Symbol", "SymbolCategory", "SymbolEdge", "pair_symbols"]
