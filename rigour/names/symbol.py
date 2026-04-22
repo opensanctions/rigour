@@ -18,7 +18,12 @@ at construction. Downstream code that compared `symbol.id` against an
 int literal needs to compare against the string form.
 """
 
+from dataclasses import dataclass
+from typing import List, Tuple
+
 from rigour._core import Symbol, SymbolCategory
+from rigour.names.name import Name
+from rigour.names.part import NamePart
 
 # Preserve the pre-port nested-class access pattern
 # (`Symbol.Category.ORG_CLASS`) used across the stack. The enum type
@@ -26,4 +31,37 @@ from rigour._core import Symbol, SymbolCategory
 # the same object.
 Symbol.Category = SymbolCategory
 
-__all__ = ["Symbol", "SymbolCategory"]
+
+@dataclass(frozen=True)
+class SymbolEdge:
+    """One paired span in a [pair_symbols][rigour.names.symbol.pair_symbols] alignment.
+
+    `query_parts` and `result_parts` are the `NamePart`s covered on
+    each side (same references as in `query.parts` / `result.parts`).
+    `symbol` is the shared `Symbol` the two spans carry. Frozen so
+    pairings are hashable and safe to dedup.
+    """
+
+    query_parts: Tuple[NamePart, ...]
+    result_parts: Tuple[NamePart, ...]
+    symbol: Symbol
+
+
+def pair_symbols(query: Name, result: Name) -> List[Tuple[SymbolEdge, ...]]:
+    """Align the symbol spans of two names into coverage-maximal pairings.
+
+    Used by name-matching pipelines to short-cut expensive string
+    distance on the portions of two names that the tagger has already
+    explained with a shared symbol — e.g. Latin "Vladimir" and
+    Cyrillic "Владимир" both carrying `NAME:QxxxxxPutin` don't need
+    Levenshtein comparison.
+
+    Returns a list of pairings; each pairing is a tuple of
+    non-conflicting `SymbolEdge`s whose joint coverage is maximal
+    within its equivalence class. The first element is always the
+    empty tuple so callers that iterate have a guaranteed fallback.
+    """
+    raise NotImplementedError("pair_symbols is being ported to Rust; stub in place")
+
+
+__all__ = ["Symbol", "SymbolCategory", "SymbolEdge", "pair_symbols"]
