@@ -60,8 +60,10 @@ def pair_symbols(query: Name, result: Name) -> List[Tuple[SymbolEdge, ...]]:
     Returns a list of pairings; each pairing is a tuple of
     non-conflicting [SymbolEdge][rigour.names.symbol.SymbolEdge]s
     whose joint coverage is maximal within its equivalence class.
-    The first element is always the empty tuple so callers that
-    iterate have a guaranteed fallback.
+    When any candidate edge survives, only non-empty coverings are
+    returned; the empty tuple is emitted only as a fallback when
+    no symbol evidence is available (no tagger output on either
+    side, no shared symbols, or more than 64 tokens on a name).
     """
     q_parts = query.parts
     r_parts = result.parts

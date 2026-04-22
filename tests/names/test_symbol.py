@@ -361,13 +361,18 @@ def test_cross_script_names():  # corpus-dependent
 # --- structural contracts ---
 
 
-def test_empty_pairing_always_first():
-    # The first pairing is always empty, so downstream callers have
-    # a guaranteed fallback when no symbol coverage wins.
+def test_no_empty_pairing_when_edges_exist():
+    # The empty covering is a fallback, not a baseline. When any
+    # candidate edge survives, we commit to using the symbol
+    # evidence and don't offer empty as an alternative (which
+    # would let full-string Levenshtein score higher than a
+    # symbol-matched coverage on literal-equal inputs, making the
+    # symbol layer useless).
     q = _only(analyze_names(NameTypeTag.PER, ["John Smith"]))
     r = _only(analyze_names(NameTypeTag.PER, ["John Smith"]))
     shape = pair_shape(pair_symbols(q, r))
-    assert shape[0] == []
+    assert [] not in shape
+    assert len(shape) >= 1
 
 
 def test_too_many_parts_refuses_pairing():

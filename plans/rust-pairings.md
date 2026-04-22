@@ -91,10 +91,17 @@ def pair_symbols(
 ```
 
 Each returned pairing is a tuple of edges (frozen so it's
-hashable). The list always starts with the empty pairing `()` so
-callers have a guaranteed fallback. `query_used` / `result_used`
-are not returned — they're the union of `query_parts` /
-`result_parts` over the edges and trivial to compute caller-side.
+hashable). When any candidate edge survives, only non-empty
+coverings are returned; the empty tuple is emitted only as a
+fallback when no symbol evidence is available at all (no tagger
+spans on either side, no shared symbols, or the > 64-parts
+guard fires). This matches NK's design: once the symbol layer
+has something to say, commit to it rather than re-offering the
+full-string Levenshtein path as an alternative.
+
+`query_used` / `result_used` are not returned — they're the union
+of `query_parts` / `result_parts` over the edges and trivial to
+compute caller-side.
 
 ### Rust-side representation
 
@@ -351,10 +358,13 @@ Three phases, all Rust-side, no FFI between phases:
    intra-symbol binding.
 
 4. **Emit paired-edge records.** Convert each surviving selection
-   into a `Vec<PairedEdge>`. The empty selection (no edges chosen)
-   is always emitted as the first element — the fallback the
-   Python-side scoring loop uses when no symbol coverage wins
-   outright.
+   into a `Vec<PairedEdge>`. The empty selection is emitted only
+   when no candidate edges survive — not as a baseline alongside
+   non-empty coverings. Emitting it as a baseline would let the
+   scoring loop prefer full-string Levenshtein over symbol-matched
+   coverage on literal-equal inputs, effectively neutering the
+   symbol layer; the literal-equality override in `match_name_symbolic`
+   handles that case at the edge level instead.
 
 ### Why not max-weight bipartite matching
 
@@ -448,10 +458,12 @@ assertions are order-free, list (not set) so multiplicity is
 preserved for cases like "two identical edges inside one pairing".
 Coverage groups:
 
-- **Degenerate inputs.** No shared symbols → single empty pairing;
-  neither name carries any symbol at all → single empty pairing
-  (so downstream full-name Levenshtein still runs); empty query
-  `Name` against a populated result → single empty pairing.
+- **Degenerate inputs.** No shared symbols → single empty pairing
+  (the fallback case); neither name carries any symbol at all →
+  single empty pairing (so downstream full-name Levenshtein still
+  runs); empty query `Name` against a populated result → single
+  empty pairing. A normal case with edges emits *only* non-empty
+  coverings — no empty fallback alongside.
 - **Person names, happy path.** Identical; reordered; partial
   overlap (unmatched tokens land in the remainder, not in edges);
   INITIAL ↔ full given-name pairing; INITIAL rejected when both
@@ -484,7 +496,8 @@ Coverage groups:
   Cyrillic `Владимир Путин` — NAME edges pair across scripts via
   the Wikidata alias corpus; `Vladimirovich` with no counterpart
   stays in the remainder.
-- **Structural contracts.** The empty pairing is always first;
+- **Structural contracts.** When edges exist, no empty pairing is
+  emitted alongside (NK-compatible — commit to the symbol coverage);
   names with more than 64 parts short-circuit to the empty-only
   fallback (guards the `u64` bitmask fast path).
 

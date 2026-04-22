@@ -15,6 +15,7 @@
 //! key, (4) emit.
 
 use std::collections::{HashMap, HashSet};
+use std::sync::Arc;
 
 use pyo3::prelude::*;
 use pyo3::types::{PyList, PyTuple};
@@ -30,6 +31,10 @@ use crate::names::tag::NamePartTag;
 /// that large are almost always data errors.
 const MAX_PARTS: usize = 64;
 
+/// Bundled output of [`collect_spans`] — the per-span records plus
+/// the `Symbol → Py<Symbol>` map for output-time reuse.
+type SpansAndSymbols = (Vec<SpanInfo>, HashMap<Symbol, Py<Symbol>>);
+
 /// Per-part info retained at span-collection time. The `tag` field
 /// is needed for `NAME` / `NICK` `can_match` filtering; `char_len`
 /// is needed for the `INITIAL` single-character rule.
@@ -43,23 +48,24 @@ struct PartInfo {
 /// One span on one side of the pairing, flattened for Rust-side
 /// use. `parts` preserves the span's original (position) order so
 /// `parts[0]` means the same thing here as in the pre-port
-/// Python's `span.parts[0]`.
+/// Python's `span.parts[0]`. `min_idx` is cached for the
+/// span-ordering sort in `collect_spans`.
 #[derive(Clone, Debug)]
 struct SpanInfo {
     parts: Vec<PartInfo>,
     mask: u64,
+    min_idx: u32,
     symbol: Symbol,
 }
 
 /// A candidate edge — an intra-symbol binding of one qspan to one
-/// rspan. Internal to the algorithm; the exposed type is
-/// [`PairedEdge`].
+/// rspan. Part coverage lives in the bitmasks (single source of
+/// truth); the output-time `mask_to_part_vec` helper expands them
+/// when building [`PairedEdge`].
 #[derive(Clone, Debug)]
 struct Edge {
     qmask: u64,
     rmask: u64,
-    qparts: Vec<u32>,
-    rparts: Vec<u32>,
     symbol: Symbol,
 }
 
@@ -81,18 +87,21 @@ pub struct PairedEdge {
     pub symbol: Py<Symbol>,
 }
 
-/// Read the spans off a [`Name`], flattening each one into a
-/// [`SpanInfo`] with its part indices, tags, character lengths,
-/// and the carried `Symbol`. Sorted by `(min_part_idx, max_part_idx)`
-/// — the greedy-binding pass relies on deterministic order.
-fn collect_spans(py: Python<'_>, name: &Name) -> PyResult<Vec<SpanInfo>> {
+/// Read the spans off a [`Name`] in one pass, producing
+/// [`SpanInfo`] records and a `Symbol → Py<Symbol>` map for
+/// output-time reuse of the tagger-emitted Python symbol objects.
+/// Sorted by `min_idx` — the greedy-binding pass relies on
+/// deterministic order.
+fn collect_spans(py: Python<'_>, name: &Name) -> PyResult<SpansAndSymbols> {
     let spans_list = name.spans.bind(py);
     let mut out: Vec<SpanInfo> = Vec::with_capacity(spans_list.len());
+    let mut sym_py: HashMap<Symbol, Py<Symbol>> = HashMap::new();
     for item in spans_list.iter() {
         let span = item.cast::<Span>()?.borrow();
         let parts_tuple = span.parts.bind(py);
         let mut parts: Vec<PartInfo> = Vec::with_capacity(parts_tuple.len());
         let mut mask: u64 = 0;
+        let mut min_idx: u32 = u32::MAX;
         for part_item in parts_tuple.iter() {
             let part = part_item.cast::<NamePart>()?.borrow();
             let info = PartInfo {
@@ -103,21 +112,24 @@ fn collect_spans(py: Python<'_>, name: &Name) -> PyResult<Vec<SpanInfo>> {
             if info.index < MAX_PARTS as u32 {
                 mask |= 1u64 << info.index;
             }
+            if info.index < min_idx {
+                min_idx = info.index;
+            }
             parts.push(info);
         }
         let symbol: Symbol = span.symbol.bind(py).extract()?;
+        sym_py
+            .entry(symbol.clone())
+            .or_insert_with(|| span.symbol.clone_ref(py));
         out.push(SpanInfo {
             parts,
             mask,
+            min_idx,
             symbol,
         });
     }
-    out.sort_by_key(|s| {
-        let min_idx = s.parts.iter().map(|p| p.index).min().unwrap_or(u32::MAX);
-        let max_idx = s.parts.iter().map(|p| p.index).max().unwrap_or(u32::MAX);
-        (min_idx, max_idx)
-    });
-    Ok(out)
+    out.sort_by_key(|s| s.min_idx);
+    Ok((out, sym_py))
 }
 
 /// Per-edge compatibility filter, mirroring `Pairing.can_pair`
@@ -179,15 +191,9 @@ fn build_candidate_edges(q_spans: &[SpanInfo], r_spans: &[SpanInfo]) -> Vec<Edge
                 let rspan = &r_spans[ri];
                 if spans_can_pair(qspan, rspan) {
                     r_taken[r_pos] = true;
-                    let mut qparts: Vec<u32> = qspan.parts.iter().map(|p| p.index).collect();
-                    let mut rparts: Vec<u32> = rspan.parts.iter().map(|p| p.index).collect();
-                    qparts.sort_unstable();
-                    rparts.sort_unstable();
                     edges.push(Edge {
                         qmask: qspan.mask,
                         rmask: rspan.mask,
-                        qparts,
-                        rparts,
                         symbol: sym.clone(),
                     });
                     break;
@@ -235,25 +241,39 @@ fn prune_subsumed(edges: &mut Vec<Edge>) {
 
 /// Canonical sort key for edges going into the DFS. Puts
 /// earlier-in-name edges first, then stabilises on category and
-/// symbol id so ties break deterministically.
-fn edge_sort_key(e: &Edge) -> (u32, u32, u8, String) {
-    let qmin = e.qparts.first().copied().unwrap_or(u32::MAX);
-    let rmin = e.rparts.first().copied().unwrap_or(u32::MAX);
-    (qmin, rmin, e.symbol.category as u8, e.symbol.id.to_string())
+/// symbol id so ties break deterministically. `trailing_zeros`
+/// on a non-zero mask gives the lowest set bit (= min part
+/// index); cloning `Arc<str>` is a single atomic increment.
+fn edge_sort_key(e: &Edge) -> (u32, u32, SymbolCategory, Arc<str>) {
+    (
+        e.qmask.trailing_zeros(),
+        e.rmask.trailing_zeros(),
+        e.symbol.category,
+        e.symbol.id.clone(),
+    )
 }
 
 /// Step 3 — enumerate maximal non-conflicting edge selections,
 /// deduplicated on `(qmask, rmask, sorted categories)`.
 ///
-/// The first element of the returned list is always the empty
-/// selection (index list `[]`). If edges exist and at least one
-/// maximal non-empty covering is found, it's appended; if none
-/// are found (all edges conflict trivially, unlikely but
-/// defensively covered) the empty selection is the only output.
+/// The empty covering is emitted *only* when no candidate edges
+/// exist — it's a fallback for the "no symbol evidence" case, not
+/// a baseline alongside non-empty coverings. Mirrors the NK design
+/// choice: once the symbol layer has something to say, we commit
+/// to it and don't re-offer the full-string Levenshtein path as
+/// an alternative. (If the Levenshtein path is actually better,
+/// the literal-equality override in `match_name_symbolic` upgrades
+/// a comparable-equal symbol edge to `score = 1.0`.)
+///
+/// The maximality check in `dfs` enforces this naturally: when
+/// edges is empty, the DFS hits its base case immediately with
+/// trivial maximality (no un-picked edges to be added) and emits
+/// the empty selection; when edges is non-empty, skipping every
+/// edge fails the maximality check because at least one un-picked
+/// edge has disjoint masks, so empty is never emitted.
 fn enumerate_coverings(edges: &[Edge]) -> Vec<Vec<usize>> {
-    let mut results: Vec<Vec<usize>> = vec![vec![]];
-    let mut seen: HashSet<(u64, u64, Vec<u8>)> = HashSet::new();
-    seen.insert((0, 0, Vec::new()));
+    let mut results: Vec<Vec<usize>> = Vec::new();
+    let mut seen: HashSet<(u64, u64, Vec<SymbolCategory>)> = HashSet::new();
 
     let mut picked: Vec<usize> = Vec::new();
     dfs(edges, 0, 0, 0, &mut picked, &mut results, &mut seen);
@@ -267,7 +287,7 @@ fn dfs(
     rmask: u64,
     picked: &mut Vec<usize>,
     results: &mut Vec<Vec<usize>>,
-    seen: &mut HashSet<(u64, u64, Vec<u8>)>,
+    seen: &mut HashSet<(u64, u64, Vec<SymbolCategory>)>,
 ) {
     if i == edges.len() {
         // Maximality check — every un-picked edge must conflict
@@ -281,10 +301,8 @@ fn dfs(
                 return;
             }
         }
-        let mut cats: Vec<u8> = picked
-            .iter()
-            .map(|&j| edges[j].symbol.category as u8)
-            .collect();
+        let mut cats: Vec<SymbolCategory> =
+            picked.iter().map(|&j| edges[j].symbol.category).collect();
         cats.sort_unstable();
         let key = (qmask, rmask, cats);
         if seen.insert(key) {
@@ -320,8 +338,24 @@ fn empty_output(py: Python<'_>) -> PyResult<Py<PyList>> {
     Ok(list.unbind())
 }
 
+/// Expand a part-index bitmask to an ascending `Vec<u32>`. Called
+/// once per edge at output time — the DFS never materialises these
+/// vectors. `m &= m - 1` clears the lowest set bit; together with
+/// `trailing_zeros` it's the textbook set-bit iteration and runs
+/// in O(count_ones).
+fn mask_to_part_vec(mut mask: u64) -> Vec<u32> {
+    let mut out: Vec<u32> = Vec::with_capacity(mask.count_ones() as usize);
+    while mask != 0 {
+        out.push(mask.trailing_zeros());
+        mask &= mask - 1;
+    }
+    out
+}
+
 /// Convert a coverage selection into a Python tuple of
-/// [`PairedEdge`] instances.
+/// [`PairedEdge`] instances. Re-uses the tagger-emitted
+/// `Py<Symbol>` objects via `q_symbols` so two edges carrying the
+/// same symbol compare as Python `is`-equal at the boundary.
 fn build_pairing(
     py: Python<'_>,
     edges: &[Edge],
@@ -331,15 +365,14 @@ fn build_pairing(
     let mut edge_objs: Vec<Py<PairedEdge>> = Vec::with_capacity(indices.len());
     for &i in indices {
         let e = &edges[i];
-        let qparts_tuple = PyTuple::new(py, &e.qparts)?.unbind();
-        let rparts_tuple = PyTuple::new(py, &e.rparts)?.unbind();
-        // Re-use a single Py<Symbol> per distinct Symbol so two
-        // edges carrying the same symbol compare as Python
-        // `is`-equal at the boundary.
+        let qparts_tuple = PyTuple::new(py, mask_to_part_vec(e.qmask))?.unbind();
+        let rparts_tuple = PyTuple::new(py, mask_to_part_vec(e.rmask))?.unbind();
+        // Every edge.symbol came from a query span, so q_symbols
+        // has it by construction.
         let symbol_py = q_symbols
             .get(&e.symbol)
-            .map(|s| s.clone_ref(py))
-            .unwrap_or_else(|| Py::new(py, e.symbol.clone()).expect("Py::new<Symbol> cannot fail"));
+            .expect("edge.symbol must come from q_symbols")
+            .clone_ref(py);
         let edge = PairedEdge {
             query_parts: qparts_tuple,
             result_parts: rparts_tuple,
@@ -348,23 +381,6 @@ fn build_pairing(
         edge_objs.push(Py::new(py, edge)?);
     }
     Ok(PyTuple::new(py, &edge_objs)?.unbind())
-}
-
-/// Collect the query-side `Py<Symbol>` objects into a map keyed on
-/// the Rust-owned `Symbol`, so `build_pairing` can reuse the
-/// tagger-emitted Python objects instead of minting fresh ones per
-/// edge. Cheap either way (Symbols are `Arc<str>`-interned) but
-/// this preserves identity for callers that care.
-fn collect_symbol_py(py: Python<'_>, name: &Name) -> PyResult<HashMap<Symbol, Py<Symbol>>> {
-    let spans_list = name.spans.bind(py);
-    let mut out: HashMap<Symbol, Py<Symbol>> = HashMap::new();
-    for item in spans_list.iter() {
-        let span = item.cast::<Span>()?.borrow();
-        let sym_py = span.symbol.clone_ref(py);
-        let sym: Symbol = span.symbol.bind(py).extract()?;
-        out.entry(sym).or_insert(sym_py);
-    }
-    Ok(out)
 }
 
 /// PyO3 entry point — see the Python-side docstring on
@@ -382,8 +398,8 @@ pub fn py_pair_symbols(
         return empty_output(py);
     }
 
-    let q_spans = collect_spans(py, &query)?;
-    let r_spans = collect_spans(py, &result)?;
+    let (q_spans, q_symbols) = collect_spans(py, &query)?;
+    let (r_spans, _r_symbols) = collect_spans(py, &result)?;
     if q_spans.is_empty() || r_spans.is_empty() {
         return empty_output(py);
     }
@@ -393,8 +409,6 @@ pub fn py_pair_symbols(
     edges.sort_by_cached_key(edge_sort_key);
 
     let coverings = enumerate_coverings(&edges);
-
-    let q_symbols = collect_symbol_py(py, &query)?;
 
     let pairings: Vec<Py<PyTuple>> = coverings
         .iter()
@@ -418,12 +432,17 @@ mod tests {
 
     fn mk_span(parts: Vec<PartInfo>, symbol: Symbol) -> SpanInfo {
         let mut mask: u64 = 0;
+        let mut min_idx: u32 = u32::MAX;
         for p in &parts {
             mask |= 1u64 << p.index;
+            if p.index < min_idx {
+                min_idx = p.index;
+            }
         }
         SpanInfo {
             parts,
             mask,
+            min_idx,
             symbol,
         }
     }
@@ -458,8 +477,8 @@ mod tests {
         )];
         let edges = build_candidate_edges(&q, &r);
         assert_eq!(edges.len(), 1);
-        assert_eq!(edges[0].qparts, vec![0]);
-        assert_eq!(edges[0].rparts, vec![0]);
+        assert_eq!(edges[0].qmask, 1 << 0);
+        assert_eq!(edges[0].rmask, 1 << 0);
     }
 
     #[test]
@@ -477,7 +496,8 @@ mod tests {
         )];
         let edges = build_candidate_edges(&q, &r);
         assert_eq!(edges.len(), 1);
-        assert_eq!(edges[0].qparts, vec![0]); // first qspan wins
+        // First qspan (index 0) wins the binding.
+        assert_eq!(edges[0].qmask, 1 << 0);
     }
 
     #[test]
@@ -523,24 +543,21 @@ mod tests {
         assert!(edges.is_empty());
     }
 
+    fn mk_edge(qmask: u64, rmask: u64, symbol: Symbol) -> Edge {
+        Edge {
+            qmask,
+            rmask,
+            symbol,
+        }
+    }
+
     #[test]
     fn subsumption_drops_shorter_same_category() {
-        let name_sym = SymbolCategory::NAME;
-        let short = Edge {
-            qmask: 1 << 1,
-            rmask: 1 << 1,
-            qparts: vec![1],
-            rparts: vec![1],
-            symbol: sym(name_sym, "QShort"),
-        };
-        let long = Edge {
-            qmask: (1 << 1) | (1 << 2),
-            rmask: (1 << 1) | (1 << 2),
-            qparts: vec![1, 2],
-            rparts: vec![1, 2],
-            symbol: sym(name_sym, "QLong"),
-        };
-        let mut edges = vec![short, long];
+        let cat = SymbolCategory::NAME;
+        let mut edges = vec![
+            mk_edge(1 << 1, 1 << 1, sym(cat, "QShort")),
+            mk_edge((1 << 1) | (1 << 2), (1 << 1) | (1 << 2), sym(cat, "QLong")),
+        ];
         prune_subsumed(&mut edges);
         assert_eq!(edges.len(), 1);
         assert_eq!(edges[0].symbol.id.as_ref(), "QLong");
@@ -548,74 +565,53 @@ mod tests {
 
     #[test]
     fn subsumption_preserves_cross_category() {
-        let short_sym = Edge {
-            qmask: 1 << 1,
-            rmask: 1 << 1,
-            qparts: vec![1],
-            rparts: vec![1],
-            symbol: sym(SymbolCategory::SYMBOL, "van"),
-        };
-        let long_name = Edge {
-            qmask: (1 << 1) | (1 << 2),
-            rmask: (1 << 1) | (1 << 2),
-            qparts: vec![1, 2],
-            rparts: vec![1, 2],
-            symbol: sym(SymbolCategory::NAME, "QvanDijk"),
-        };
-        let mut edges = vec![short_sym, long_name];
+        let mut edges = vec![
+            mk_edge(1 << 1, 1 << 1, sym(SymbolCategory::SYMBOL, "van")),
+            mk_edge(
+                (1 << 1) | (1 << 2),
+                (1 << 1) | (1 << 2),
+                sym(SymbolCategory::NAME, "QvanDijk"),
+            ),
+        ];
         prune_subsumed(&mut edges);
         assert_eq!(edges.len(), 2, "cross-category edge must survive");
     }
 
     #[test]
     fn dfs_empty_edges_returns_empty_pairing() {
+        // No candidate edges → the empty covering is the only
+        // emitted pairing (the fallback case).
         let coverings = enumerate_coverings(&[]);
         assert_eq!(coverings, vec![Vec::<usize>::new()]);
     }
 
     #[test]
     fn dfs_two_disjoint_edges_single_covering() {
+        // Edges exist → empty covering is NOT emitted alongside.
         let edges = vec![
-            Edge {
-                qmask: 1 << 0,
-                rmask: 1 << 0,
-                qparts: vec![0],
-                rparts: vec![0],
-                symbol: sym(SymbolCategory::NAME, "QA"),
-            },
-            Edge {
-                qmask: 1 << 1,
-                rmask: 1 << 1,
-                qparts: vec![1],
-                rparts: vec![1],
-                symbol: sym(SymbolCategory::NAME, "QB"),
-            },
+            mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::NAME, "QA")),
+            mk_edge(1 << 1, 1 << 1, sym(SymbolCategory::NAME, "QB")),
         ];
         let coverings = enumerate_coverings(&edges);
-        assert_eq!(coverings.len(), 2); // empty + full
-        assert_eq!(coverings[1], vec![0, 1]);
+        assert_eq!(coverings, vec![vec![0, 1]]);
     }
 
     #[test]
     fn dfs_cross_category_on_same_parts_emits_two() {
+        // Two conflicting edges (same masks, different categories)
+        // → NAME-only and SYMBOL-only coverings; no empty.
         let edges = vec![
-            Edge {
-                qmask: 1 << 0,
-                rmask: 1 << 0,
-                qparts: vec![0],
-                rparts: vec![0],
-                symbol: sym(SymbolCategory::NAME, "Qvan"),
-            },
-            Edge {
-                qmask: 1 << 0,
-                rmask: 1 << 0,
-                qparts: vec![0],
-                rparts: vec![0],
-                symbol: sym(SymbolCategory::SYMBOL, "van"),
-            },
+            mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::NAME, "Qvan")),
+            mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::SYMBOL, "van")),
         ];
         let coverings = enumerate_coverings(&edges);
-        // empty + NAME-only + SYMBOL-only
-        assert_eq!(coverings.len(), 3);
+        assert_eq!(coverings.len(), 2);
+    }
+
+    #[test]
+    fn mask_to_part_vec_ascending() {
+        assert_eq!(mask_to_part_vec(0), Vec::<u32>::new());
+        assert_eq!(mask_to_part_vec(0b1011), vec![0, 1, 3]);
+        assert_eq!(mask_to_part_vec(1u64 << 63), vec![63]);
     }
 }
