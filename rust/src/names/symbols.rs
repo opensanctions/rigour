@@ -5,14 +5,16 @@
 // object where the group_key becomes the `Symbol.id` (uppercased by
 // the tagger) and the aliases become needles in the AC automaton.
 //
-// Internal to the Rust crate — no PyO3 surface. Consumed by
+// The JSON is indented on disk for reviewability; build.rs
+// zstd-compresses it into OUT_DIR and this module decodes on first
+// use. Internal to the Rust crate — no PyO3 surface. Consumed by
 // `names::tagger::build_{org,person}_tagger`.
 
 use serde::Deserialize;
 use std::collections::HashMap;
 use std::sync::LazyLock;
 
-const JSON: &str = include_str!("../../data/names/symbols.json");
+const SYMBOLS_ZST: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/symbols.json.zst"));
 
 #[derive(Debug, Deserialize)]
 pub struct NameSymbols {
@@ -23,8 +25,19 @@ pub struct NameSymbols {
     pub person_name_parts: HashMap<String, Vec<String>>,
 }
 
-static DATA: LazyLock<NameSymbols> =
-    LazyLock::new(|| serde_json::from_str(JSON).expect("symbols.json parses"));
+static DATA: LazyLock<NameSymbols> = LazyLock::new(|| {
+    if SYMBOLS_ZST.is_empty() {
+        return NameSymbols {
+            org_symbols: HashMap::new(),
+            org_domains: HashMap::new(),
+            person_symbols: HashMap::new(),
+            person_nick: HashMap::new(),
+            person_name_parts: HashMap::new(),
+        };
+    }
+    let bytes = zstd::decode_all(SYMBOLS_ZST).expect("zstd decode symbols.json.zst");
+    serde_json::from_slice(&bytes).expect("symbols.json parses")
+});
 
 pub fn data() -> &'static NameSymbols {
     &DATA

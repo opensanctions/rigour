@@ -7,7 +7,7 @@
 //   - `text/ordinals.json`      → NUMERIC symbols (both taggers)
 //   - `names/symbols.json`      → SYMBOL / DOMAIN / NAME / NICK symbols
 //   - `territories/data.jsonl`  → LOCATION symbols (org only)
-//   - `org_types.json`          → ORG_CLASS symbols (org only, from generic field)
+//   - `names/org_types.json`    → ORG_CLASS symbols (org only, from generic field)
 //   - `names/person_names.txt`  → NAME symbols with Wikidata/X-prefixed ids
 //                                 (person only, via names::person_names)
 //

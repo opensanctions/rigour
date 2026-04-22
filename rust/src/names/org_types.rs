@@ -1,8 +1,10 @@
 // Rust port of `rigour.names.org_types.*`.
 //
-// Loads rust/data/org_types.json (generated from
-// resources/names/org_types.yml by genscripts/generate_names.py) and
-// exposes the four public org-type functions: replace_compare,
+// Source data: rust/data/names/org_types.json (generated from
+// resources/names/org_types.yml by genscripts/generate_names.py).
+// The JSON is indented on disk for reviewability; build.rs
+// zstd-compresses it into OUT_DIR and this module decodes on first
+// use. Exposes the four public org-type functions: replace_compare,
 // replace_display, remove, extract. All four go through the shared
 // `names::matcher::Needles<T>` substrate (Aho-Corasick + Python-style
 // `(?<!\w)X(?!\w)` boundaries); differences live in which mapping
@@ -48,10 +50,15 @@ pub(crate) struct OrgTypeSpec {
     pub(crate) aliases: Vec<String>,
 }
 
-const ORG_TYPES_JSON: &str = include_str!("../../data/org_types.json");
+const ORG_TYPES_ZST: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/org_types.json.zst"));
 
-pub(crate) static ORG_TYPE_SPECS: LazyLock<Vec<OrgTypeSpec>> =
-    LazyLock::new(|| serde_json::from_str(ORG_TYPES_JSON).expect("org_types.json parses"));
+pub(crate) static ORG_TYPE_SPECS: LazyLock<Vec<OrgTypeSpec>> = LazyLock::new(|| {
+    if ORG_TYPES_ZST.is_empty() {
+        return Vec::new();
+    }
+    let bytes = zstd::decode_all(ORG_TYPES_ZST).expect("zstd decode org_types.json.zst");
+    serde_json::from_slice(&bytes).expect("org_types.json parses")
+});
 
 /// Selects which mapping (alias → target) the Replacer is built from.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]

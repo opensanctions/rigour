@@ -1,10 +1,12 @@
-// Compile-time zstd compression for the large data files embedded in the
-// binary. Source files are committed plain for diffability; `build.rs`
-// compresses each into `OUT_DIR` and the corresponding Rust module picks
-// it up via `include_bytes!`.
+// Compile-time zstd compression for data files embedded in the
+// binary. Source files are committed plain (JSON indented, text raw
+// UTF-8) for diffability; `build.rs` compresses each into `OUT_DIR`
+// and the corresponding Rust module picks it up via `include_bytes!`.
 //
 // Current files:
 //   - `data/names/person_names.txt`        (~8.1 MB → ~2.7 MB)
+//   - `data/names/symbols.json`            (~85 KiB → ~12 KiB)
+//   - `data/names/org_types.json`          (~125 KiB → ~15 KiB)
 //   - `data/territories/data.jsonl`        (~783 KiB → ~214 KiB)
 //
 // If a source file is missing (fresh checkout before
@@ -36,6 +38,20 @@ const FILES: &[Compress] = &[
         missing: "rust/data/territories/data.jsonl not found — \
                   compiling empty territories blob. Run \
                   `make build-territories` to regenerate.",
+    },
+    Compress {
+        src: "data/names/symbols.json",
+        dst: "symbols.json.zst",
+        missing: "rust/data/names/symbols.json not found — \
+                  compiling empty symbols blob. Run \
+                  `make rust-data` to regenerate.",
+    },
+    Compress {
+        src: "data/names/org_types.json",
+        dst: "org_types.json.zst",
+        missing: "rust/data/names/org_types.json not found — \
+                  compiling empty org-types blob. Run \
+                  `make rust-data` to regenerate.",
     },
 ];
 

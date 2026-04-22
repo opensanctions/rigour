@@ -49,7 +49,7 @@ def generate_name_stopwords_file() -> None:
 
     out_path = RUST_DATA_PATH / "names" / "stopwords.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    write_json(out_path, out_data)
+    write_json(out_path, out_data, indent=True)
 
 
 def generate_symbols_file() -> None:
@@ -83,11 +83,11 @@ def generate_symbols_file() -> None:
 
     rust_out = RUST_DATA_PATH / "names" / "symbols.json"
     rust_out.parent.mkdir(parents=True, exist_ok=True)
-    write_json(rust_out, json_data)
+    write_json(rust_out, json_data, indent=True)
 
 
 def generate_org_type_file() -> None:
-    """Emit `rust/data/org_types.json` from `resources/names/org_types.yml`.
+    """Emit `rust/data/names/org_types.json` from `resources/names/org_types.yml`.
 
     Consumed by `rust/src/names/org_types.rs` (the Replacer + Rust
     tagger's ORG_CLASS symbol loop). No Python output — `rigour/data/
@@ -140,7 +140,7 @@ def generate_org_type_file() -> None:
     for k, v in generic_types.most_common():
         print(f"  {k}: {v}")
 
-    write_json(RUST_DATA_PATH / "org_types.json", clean_types)
+    write_json(RUST_DATA_PATH / "names" / "org_types.json", clean_types, indent=True)
 
 
 if __name__ == "__main__":
