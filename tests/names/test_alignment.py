@@ -7,7 +7,7 @@ from rigour.names.tag import NamePartTag
 
 def make(name: str) -> List[NamePart]:
     obj = Name(name, form=name.lower())
-    return obj.parts
+    return list(obj.parts)
 
 
 def tokens_eq(a: List[NamePart], b: List[str]) -> bool:
@@ -205,7 +205,9 @@ def test_align_deterministic():
     query = make("Maria Conchita Alonso")
     result = make("Alonso, Maria C.")
     a_left, a_right = align_person_name_order(query, result)
-    b_left, b_right = align_person_name_order(make("Maria Conchita Alonso"), make("Alonso, Maria C."))
+    b_left, b_right = align_person_name_order(
+        make("Maria Conchita Alonso"), make("Alonso, Maria C.")
+    )
     assert [p.form for p in a_left] == [p.form for p in b_left]
     assert [p.form for p in a_right] == [p.form for p in b_right]
 
