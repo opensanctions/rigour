@@ -233,31 +233,6 @@ fn py_territories_jsonl() -> String {
     territories::decompressed()
 }
 
-// Low-level tagger matchers. Python wrappers (`tag_org_name` /
-// `tag_person_name` in rigour/names/tagging.py) call these and
-// apply each (phrase, symbol) pair to the Name via apply_phrase,
-// then run `_infer_part_tags` locally.
-//
-// No `cleanup` argument: the tagger uses `tokenize_name` for
-// category handling (same pipeline as the Python haystack), so the
-// Cleanup vocabulary is irrelevant here. See the norm() comment in
-// names/tagger.rs for rationale.
-#[cfg(feature = "python")]
-#[pyfunction]
-#[pyo3(name = "tag_org_matches")]
-fn py_tag_org_matches(text: &str, flags: u16) -> Vec<(String, names::symbol::Symbol)> {
-    let flags = text::normalize::Normalize::from_bits_truncate(flags);
-    names::tagger::get_tagger(names::tagger::TaggerKind::Org, flags).tag(text)
-}
-
-#[cfg(feature = "python")]
-#[pyfunction]
-#[pyo3(name = "tag_person_matches")]
-fn py_tag_person_matches(text: &str, flags: u16) -> Vec<(String, names::symbol::Symbol)> {
-    let flags = text::normalize::Normalize::from_bits_truncate(flags);
-    names::tagger::get_tagger(names::tagger::TaggerKind::Person, flags).tag(text)
-}
-
 #[cfg(feature = "python")]
 #[pymodule]
 fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
@@ -286,8 +261,6 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_generic_person_names_list, m)?)?;
     m.add_function(wrap_pyfunction!(py_ordinals_dict, m)?)?;
     m.add_function(wrap_pyfunction!(py_territories_jsonl, m)?)?;
-    m.add_function(wrap_pyfunction!(py_tag_org_matches, m)?)?;
-    m.add_function(wrap_pyfunction!(py_tag_person_matches, m)?)?;
     m.add_function(wrap_pyfunction!(names::analyze::py_analyze_names, m)?)?;
     m.add_function(wrap_pyfunction!(
         names::alignment::py_align_person_name_order,

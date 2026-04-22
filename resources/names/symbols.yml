@@ -1091,7 +1091,8 @@ org_symbols:
     - named for
     - named in honor of
     - named in memory of
-  socalled: # EU slang
+  socalled:
+    # EU slang
     - SO-CALLED
     - Self-proclaimed
     - the so-called
@@ -1645,7 +1646,8 @@ org_domains:
     - 房地產 # Chinese (traditional)
     - 不动产 # Chinese (simplified)
     - 不動產 # Chinese (traditional)
-  jail: # may want to combine with prison below
+  jail:
+    # may want to combine with prison below
     - jail
     - jailhouse
     - gaol
@@ -1656,7 +1658,8 @@ org_domains:
     - tutkintavankila
     - СИЗО
     - 看守所
-  prison: # may want to combine with jail above
+  prison:
+    # may want to combine with jail above
     - prison
     - penitentiary
     - centre de détention
@@ -3428,6 +3431,7 @@ org_domains:
     - Al-Qaida Organization
     - Al Qaida/Islamic Army
     - Al Qa’ida/Islamic Army
+    - Al-Qa'ida/Islamic Army
   irgc:
     - IRGC
     - Islamic Revolutionary Guard Corps

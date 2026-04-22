@@ -21,7 +21,6 @@ from rigour.names.check import is_name, is_stopword
 from rigour.names.tokenize import tokenize_name, prenormalize_name, normalize_name
 from rigour.names.prefix import remove_person_prefixes, remove_org_prefixes
 from rigour.names.prefix import remove_obj_prefixes
-from rigour.names.tagging import tag_person_name, tag_org_name
 from rigour.names.analyze import analyze_names
 from rigour.names.org_types import replace_org_types_display
 from rigour.names.org_types import replace_org_types_compare
@@ -55,8 +54,6 @@ __all__ = [
     "align_person_name_order",
     "extract_org_types",
     "remove_org_types",
-    "tag_person_name",
-    "tag_org_name",
     "analyze_names",
     "contains_split_phrase",
 ]

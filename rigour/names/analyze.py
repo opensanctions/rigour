@@ -41,6 +41,7 @@ def analyze_names(
     phonetics: bool = True,
     numerics: bool = True,
     consolidate: bool = True,
+    rewrite: bool = True,
 ) -> Set[Name]:
     """Build a set of tagged [Name][rigour.names.Name] objects from raw strings.
 
@@ -104,6 +105,16 @@ def analyze_names(
             `consolidate=False`** to preserve partial-name recall
             (e.g. letting `"John Smith"` match `"John K Smith"` from
             the other side).
+        rewrite: When `True` (default), the pre-tagger canonicalisation
+            stages run: honorific-prefix removal for PER names
+            (`Mr.`, `Dr.`, `Sir`), and for ORG/ENT names both
+            article-prefix removal (`The`) and org-type compare-form
+            rewriting (`Inc.`→`LLC`, `GmbH`→`JSC`, …). Pass `False`
+            to keep the literal input form — the tagger still fires
+            on the raw tokens because its alias set covers both
+            original and canonical forms. Useful for debugging the
+            tagger in isolation and for callers that want to display
+            or index a name without the canonical substitutions.
 
     Returns:
         A set of tagged `Name` objects, de-duplicated by normalised
@@ -123,4 +134,5 @@ def analyze_names(
         phonetics=phonetics,
         numerics=numerics,
         consolidate=consolidate,
+        rewrite=rewrite,
     )

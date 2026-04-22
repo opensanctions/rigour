@@ -15,7 +15,6 @@ from rigour.names import (
     Name,
     NamePartTag,
     NameTypeTag,
-    Symbol,
     analyze_names,
 )
 from rigour.names.symbol import SymbolEdge, pair_symbols
@@ -186,9 +185,7 @@ def test_symbol_twice_on_one_side():  # corpus-dependent
     # span: N=2, M=1, bind min(N, M)=1 pair. Intra-symbol binding
     # is greedy by span-index order, so the first qspan
     # ("abd al kadir") wins and "abdel kader" stays unaligned.
-    q = _only(
-        analyze_names(NameTypeTag.PER, ["abd al-kadir abdel-kader husseini"])
-    )
+    q = _only(analyze_names(NameTypeTag.PER, ["abd al-kadir abdel-kader husseini"]))
     r = _only(analyze_names(NameTypeTag.PER, ["abdelkader husseini"]))
     shape = pair_shape(pair_symbols(q, r))
     assert [
@@ -260,9 +257,7 @@ def test_same_category_subsumption():  # corpus-dependent
     r = _only(analyze_names(NameTypeTag.PER, ["Jan van Dijk"]))
     shape = pair_shape(pair_symbols(q, r))
     # The compound NAME edge surfaces in at least one pairing.
-    assert any(
-        ("van dijk", "van dijk", "NAME") in pairing for pairing in shape
-    )
+    assert any(("van dijk", "van dijk", "NAME") in pairing for pairing in shape)
     # No pairing carries a NAME edge that's a strict-subset on the
     # same parts as the compound — those are pruned at step 2.
     for pairing in shape:
@@ -271,9 +266,7 @@ def test_same_category_subsumption():  # corpus-dependent
     # SYMBOL:van is a different category, so subsumption does not
     # apply — it survives and surfaces in a pairing alongside the
     # compound coverage it excludes.
-    assert any(
-        ("van", "van", "SYMBOL") in pairing for pairing in shape
-    )
+    assert any(("van", "van", "SYMBOL") in pairing for pairing in shape)
 
 
 # --- ambiguity on the result side ---
@@ -305,9 +298,7 @@ def test_org_class_abbreviation():
     q = _only(analyze_names(NameTypeTag.ORG, ["Acme Ltd"]))
     r = _only(analyze_names(NameTypeTag.ORG, ["Acme Limited"]))
     shape = pair_shape(pair_symbols(q, r))
-    assert any(
-        any(cat == "ORGCLS" for _, _, cat in pairing) for pairing in shape
-    )
+    assert any(any(cat == "ORGCLS" for _, _, cat in pairing) for pairing in shape)
 
 
 def test_org_class_position_independent():  # corpus-dependent
@@ -317,9 +308,7 @@ def test_org_class_position_independent():  # corpus-dependent
     q = _only(analyze_names(NameTypeTag.ORG, ["OOO Garant"]))
     r = _only(analyze_names(NameTypeTag.ORG, ["Garant LLC"]))
     shape = pair_shape(pair_symbols(q, r))
-    assert any(
-        any(cat == "ORGCLS" for _, _, cat in pairing) for pairing in shape
-    )
+    assert any(any(cat == "ORGCLS" for _, _, cat in pairing) for pairing in shape)
 
 
 def test_company_pairs_ignoring_extra_qualifiers():  # corpus-dependent
@@ -330,9 +319,7 @@ def test_company_pairs_ignoring_extra_qualifiers():  # corpus-dependent
     # on the result side have no query-side counterpart and stay
     # out of the pairing edges.
     q = _only(analyze_names(NameTypeTag.ORG, ["Stripe Company"]))
-    r = _only(
-        analyze_names(NameTypeTag.ORG, ["Stripe Limited Liability Company"])
-    )
+    r = _only(analyze_names(NameTypeTag.ORG, ["Stripe Limited Liability Company"]))
     shape = pair_shape(pair_symbols(q, r))
     for pairing in shape:
         r_parts_in_edges = set()
