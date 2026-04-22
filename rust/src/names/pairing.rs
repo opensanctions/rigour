@@ -1,18 +1,18 @@
 //! Symbol pairing — align the symbol spans of two [`Name`]s into
 //! coverage-maximal pairings.
 //!
-//! The cheap short-cut for the matcher: given two names where the
-//! tagger has already attached semantic annotations (NAME symbols
-//! for recognised persons, ORG_CLASS for legal forms, and so on),
-//! produce alignments between symbol spans that score
-//! identically to whatever the downstream string-distance layer
-//! would have computed on the same tokens.
+//! When a matcher has two tagger-annotated names and wants to
+//! skip string-distance work on the tokens the tagger has already
+//! explained (shared Wikidata QIDs on person names, matching
+//! legal-form symbols, cross-script alias links), it calls
+//! [`py_pair_symbols`]. The returned pairings carry the symbol
+//! edges; the matcher runs Levenshtein on the remainder.
 //!
-//! Full design: `plans/rust-pairings.md`. Four phases, all in
-//! Rust: (1) intra-symbol greedy binding to `min(N, M)` edges,
-//! (2) same-category subsumption prune, (3) DFS enumeration of
-//! maximal coverings with a `(qmask, rmask, categories)` dedup
-//! key, (4) emit.
+//! Each returned pairing is a non-conflicting set of edges whose
+//! joint coverage is maximal within its scoring-equivalence class.
+//! The empty pairing is a fallback emitted only when no symbol
+//! evidence is available on either side — callers that iterate
+//! can rely on the list being non-empty.
 
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
@@ -25,19 +25,17 @@ use crate::names::part::{NamePart, Span};
 use crate::names::symbol::{Symbol, SymbolCategory};
 use crate::names::tag::NamePartTag;
 
-/// Maximum name-part count the `u64` bitmask fast path supports.
-/// Names larger than this short-circuit to the empty fallback
-/// rather than falling back to a `Vec<u64>` slow path — names
-/// that large are almost always data errors.
+/// Upper bound on name-part count. Inputs beyond this short-circuit
+/// to the empty-only fallback; bitmask-based coverage tracking needs
+/// to fit in a `u64`.
 const MAX_PARTS: usize = 64;
 
-/// Bundled output of [`collect_spans`] — the per-span records plus
-/// the `Symbol → Py<Symbol>` map for output-time reuse.
+/// Bundled output of [`collect_spans`].
 type SpansAndSymbols = (Vec<SpanInfo>, HashMap<Symbol, Py<Symbol>>);
 
-/// Per-part info retained at span-collection time. The `tag` field
-/// is needed for `NAME` / `NICK` `can_match` filtering; `char_len`
-/// is needed for the `INITIAL` single-character rule.
+/// Per-part fields the pairing algorithm reads: tag (for
+/// NAME/NICK compatibility checks) and character length (for
+/// the INITIAL single-char rule).
 #[derive(Clone, Debug)]
 struct PartInfo {
     index: u32,
@@ -45,11 +43,7 @@ struct PartInfo {
     char_len: usize,
 }
 
-/// One span on one side of the pairing, flattened for Rust-side
-/// use. `parts` preserves the span's original (position) order so
-/// `parts[0]` means the same thing here as in the pre-port
-/// Python's `span.parts[0]`. `min_idx` is cached for the
-/// span-ordering sort in `collect_spans`.
+/// One tagger-attached span flattened for pairing-side use.
 #[derive(Clone, Debug)]
 struct SpanInfo {
     parts: Vec<PartInfo>,
@@ -58,10 +52,9 @@ struct SpanInfo {
     symbol: Symbol,
 }
 
-/// A candidate edge — an intra-symbol binding of one qspan to one
-/// rspan. Part coverage lives in the bitmasks (single source of
-/// truth); the output-time `mask_to_part_vec` helper expands them
-/// when building [`PairedEdge`].
+/// A candidate edge — a tentative binding of one query span to
+/// one result span. Coverage lives in the bitmasks;
+/// [`mask_to_part_vec`] expands them to index lists at output.
 #[derive(Clone, Debug)]
 struct Edge {
     qmask: u64,
@@ -69,11 +62,12 @@ struct Edge {
     symbol: Symbol,
 }
 
-/// One paired edge in a returned pairing. Crosses the PyO3
-/// boundary as a frozen `#[pyclass]`; the Python wrapper
-/// (`rigour.names.symbol.pair_symbols`) converts each `PairedEdge`
-/// to a `SymbolEdge` dataclass, resolving `query_parts` /
-/// `result_parts` indices against the source `Name.parts`.
+/// One paired span in a returned pairing — the Rust-side
+/// representation Python wraps as `SymbolEdge`.
+///
+/// `query_parts` / `result_parts` are `NamePart` index tuples
+/// into the input names' `parts` attributes; `symbol` is the
+/// shared [`Symbol`] both sides carry.
 #[pyclass(module = "rigour._core", frozen)]
 pub struct PairedEdge {
     /// Indices into `query.parts` covered by this edge, ascending.
@@ -87,11 +81,10 @@ pub struct PairedEdge {
     pub symbol: Py<Symbol>,
 }
 
-/// Read the spans off a [`Name`] in one pass, producing
-/// [`SpanInfo`] records and a `Symbol → Py<Symbol>` map for
-/// output-time reuse of the tagger-emitted Python symbol objects.
-/// Sorted by `min_idx` — the greedy-binding pass relies on
-/// deterministic order.
+/// Flatten a [`Name`]'s tagger spans into pairing-ready
+/// [`SpanInfo`] records, and index the Python `Symbol` objects
+/// by their Rust-side equivalents for zero-alloc reuse at output.
+/// Output is sorted by span start position.
 fn collect_spans(py: Python<'_>, name: &Name) -> PyResult<SpansAndSymbols> {
     let spans_list = name.spans.bind(py);
     let mut out: Vec<SpanInfo> = Vec::with_capacity(spans_list.len());
@@ -132,16 +125,16 @@ fn collect_spans(py: Python<'_>, name: &Name) -> PyResult<SpansAndSymbols> {
     Ok((out, sym_py))
 }
 
-/// Per-edge compatibility filter, mirroring `Pairing.can_pair`
-/// with the one deliberate deviation: `NAME` / `NICK` checks use
-/// the full cartesian product instead of `zip()`-truncation.
+/// Per-edge compatibility filter. `INITIAL` edges require at
+/// least one single-character part (a `J` ↔ `John` pairing makes
+/// sense; `Jan` ↔ `John` through an `INITIAL:j` symbol doesn't).
+/// `NAME` and `NICK` edges require every qspan part to be
+/// [`NamePartTag::can_match`]-compatible with every rspan part,
+/// so a span mixing GIVEN and FAMILY parts can't pair with one
+/// that swaps them.
 fn spans_can_pair(qspan: &SpanInfo, rspan: &SpanInfo) -> bool {
     match qspan.symbol.category {
         SymbolCategory::INITIAL => {
-            // At least one side must have a single-character first
-            // part — the INITIAL symbol semantic ("J stands in for
-            // John"). Both multi-char would mean the symbol was
-            // mis-applied.
             let q_first_len = qspan.parts.first().map(|p| p.char_len).unwrap_or(0);
             let r_first_len = rspan.parts.first().map(|p| p.char_len).unwrap_or(0);
             !(q_first_len > 1 && r_first_len > 1)
@@ -160,12 +153,11 @@ fn spans_can_pair(qspan: &SpanInfo, rspan: &SpanInfo) -> bool {
     }
 }
 
-/// Step 1 — build the candidate-edge set.
-///
-/// Group qspans and rspans by `Symbol` (full identity, not just
-/// category); for each shared symbol, greedy-bind qspan to the
-/// first unbound rspan that passes [`spans_can_pair`]. Produces
-/// at most `min(|qspans|, |rspans|)` edges per symbol.
+/// Build candidate edges by greedy-binding query spans to result
+/// spans for each shared [`Symbol`]. When a symbol occurs N times
+/// on one side and M times on the other, this yields `min(N, M)`
+/// edges — not N × M — because instances of the same symbol are
+/// interchangeable for scoring.
 fn build_candidate_edges(q_spans: &[SpanInfo], r_spans: &[SpanInfo]) -> Vec<Edge> {
     let mut q_by_sym: HashMap<Symbol, Vec<usize>> = HashMap::new();
     for (i, s) in q_spans.iter().enumerate() {
@@ -204,8 +196,12 @@ fn build_candidate_edges(q_spans: &[SpanInfo], r_spans: &[SpanInfo]) -> Vec<Edge
     edges
 }
 
-/// Step 2 — drop same-category edges strictly dominated by
-/// another edge on both the query and result masks.
+/// Drop edges strictly dominated by another edge in the same
+/// category. A compound `NAME:QvanDijk` covering `[van, Dijk]`
+/// absorbs a shorter `NAME:Qvan` covering `[van]` — the matcher
+/// would score the compound as the more specific signal anyway.
+/// Cross-category edges (e.g. `SYMBOL:van` alongside the compound
+/// NAME) are untouched.
 fn prune_subsumed(edges: &mut Vec<Edge>) {
     let n = edges.len();
     if n < 2 {
@@ -239,11 +235,8 @@ fn prune_subsumed(edges: &mut Vec<Edge>) {
     });
 }
 
-/// Canonical sort key for edges going into the DFS. Puts
-/// earlier-in-name edges first, then stabilises on category and
-/// symbol id so ties break deterministically. `trailing_zeros`
-/// on a non-zero mask gives the lowest set bit (= min part
-/// index); cloning `Arc<str>` is a single atomic increment.
+/// Deterministic sort key: earlier-in-name edges first, ties
+/// broken by category and symbol id.
 fn edge_sort_key(e: &Edge) -> (u32, u32, SymbolCategory, Arc<str>) {
     (
         e.qmask.trailing_zeros(),
@@ -253,24 +246,13 @@ fn edge_sort_key(e: &Edge) -> (u32, u32, SymbolCategory, Arc<str>) {
     )
 }
 
-/// Step 3 — enumerate maximal non-conflicting edge selections,
-/// deduplicated on `(qmask, rmask, sorted categories)`.
+/// Enumerate maximal non-conflicting edge selections, one per
+/// `(qmask, rmask, sorted categories)` equivalence class.
 ///
-/// The empty covering is emitted *only* when no candidate edges
-/// exist — it's a fallback for the "no symbol evidence" case, not
-/// a baseline alongside non-empty coverings. Mirrors the NK design
-/// choice: once the symbol layer has something to say, we commit
-/// to it and don't re-offer the full-string Levenshtein path as
-/// an alternative. (If the Levenshtein path is actually better,
-/// the literal-equality override in `match_name_symbolic` upgrades
-/// a comparable-equal symbol edge to `score = 1.0`.)
-///
-/// The maximality check in `dfs` enforces this naturally: when
-/// edges is empty, the DFS hits its base case immediately with
-/// trivial maximality (no un-picked edges to be added) and emits
-/// the empty selection; when edges is non-empty, skipping every
-/// edge fails the maximality check because at least one un-picked
-/// edge has disjoint masks, so empty is never emitted.
+/// Emits the empty selection only when no candidate edges exist
+/// — once any symbol evidence is available, we commit to it and
+/// don't return an empty-covering alternative that would compete
+/// with the symbol-matched pairings in downstream scoring.
 fn enumerate_coverings(edges: &[Edge]) -> Vec<Vec<usize>> {
     let mut results: Vec<Vec<usize>> = Vec::new();
     let mut seen: HashSet<(u64, u64, Vec<SymbolCategory>)> = HashSet::new();
@@ -329,20 +311,17 @@ fn dfs(
     }
 }
 
-/// Build the empty-only output (`[()]`) — returned when either
-/// name exceeds `MAX_PARTS`, when no spans exist on either side,
-/// or when no candidate edges survive.
+/// The degenerate-case output: a list with one empty pairing.
+/// Used when input guards trip (> 64 parts, missing spans) so
+/// callers get a well-formed but non-matched result they can
+/// fall through to full Levenshtein on.
 fn empty_output(py: Python<'_>) -> PyResult<Py<PyList>> {
     let empty_tuple = PyTuple::empty(py);
     let list = PyList::new(py, [empty_tuple])?;
     Ok(list.unbind())
 }
 
-/// Expand a part-index bitmask to an ascending `Vec<u32>`. Called
-/// once per edge at output time — the DFS never materialises these
-/// vectors. `m &= m - 1` clears the lowest set bit; together with
-/// `trailing_zeros` it's the textbook set-bit iteration and runs
-/// in O(count_ones).
+/// Expand a part-index bitmask to an ascending index vector.
 fn mask_to_part_vec(mut mask: u64) -> Vec<u32> {
     let mut out: Vec<u32> = Vec::with_capacity(mask.count_ones() as usize);
     while mask != 0 {
@@ -353,9 +332,9 @@ fn mask_to_part_vec(mut mask: u64) -> Vec<u32> {
 }
 
 /// Convert a coverage selection into a Python tuple of
-/// [`PairedEdge`] instances. Re-uses the tagger-emitted
-/// `Py<Symbol>` objects via `q_symbols` so two edges carrying the
-/// same symbol compare as Python `is`-equal at the boundary.
+/// [`PairedEdge`] instances. Re-uses the tagger's `Py<Symbol>`
+/// objects so two edges carrying the same symbol compare as
+/// `is`-equal on the Python side.
 fn build_pairing(
     py: Python<'_>,
     edges: &[Edge],
@@ -383,8 +362,20 @@ fn build_pairing(
     Ok(PyTuple::new(py, &edge_objs)?.unbind())
 }
 
-/// PyO3 entry point — see the Python-side docstring on
-/// `rigour.names.symbol.pair_symbols` for the semantic spec.
+/// Align the symbol spans of two [`Name`]s into coverage-maximal
+/// pairings.
+///
+/// Each returned pairing is a tuple of non-conflicting
+/// [`PairedEdge`]s; edges within a pairing cover disjoint parts
+/// on each side. Pairings are distinguished by their coverage and
+/// category multiset — two pairings that cover the same parts
+/// with the same category mix are collapsed to one. Distinct
+/// category choices on the same parts (e.g. a token carrying both
+/// `NAME:Qvan` and `SYMBOL:van`) surface as separate pairings.
+///
+/// Returns `[()]` (a single empty pairing) when either name has
+/// more than 64 parts, when either name has no tagger spans, or
+/// when no symbol is shared between the two sides.
 #[pyfunction]
 #[pyo3(name = "pair_symbols")]
 pub fn py_pair_symbols(

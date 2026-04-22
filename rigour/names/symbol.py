@@ -1,21 +1,20 @@
-"""Symbol type — a semantic interpretation applied to one or more parts
-of a name.
+"""Symbol type and symbol-pairing helpers.
 
-Rust-backed via `rigour._core`; the actual struct is a 24-byte
-`{ category: SymbolCategory, id: Arc<str> }` with a global string
-interner behind the id — symbols are heavily duplicated across
-tagged names (every "John" part carries the same `NAME:Q4925477`
-symbol) and interning the id keeps the per-`Name` footprint flat.
+A [Symbol][rigour.names.symbol.Symbol] is a `(category, id)` pair
+the tagger attaches to name parts: `NAME:Q4925477` for a recognised
+person name, `ORG_CLASS:LLC` for a legal form, `INITIAL:j` for a
+single-letter stand-in. Downstream matchers and indexers read them
+to build semantic annotations on top of raw tokens.
 
-The class is exposed as `rigour.names.Symbol`; the category enum lives
-as both `rigour.names.SymbolCategory` and `Symbol.Category` (the
-pre-port nested-class access pattern used across rigour, FTM,
-nomenklatura, and yente).
+[pair_symbols][rigour.names.symbol.pair_symbols] aligns the symbol
+spans of two names into coverage-maximal pairings — the fast path
+that lets matchers skip expensive string distance on tokens the
+tagger has already explained on both sides.
 
-Breaking change vs. the pre-port Python implementation: `Symbol.id`
-is always `str`. Ids originally passed as `int` are decimal-stringified
-at construction. Downstream code that compared `symbol.id` against an
-int literal needs to compare against the string form.
+`Symbol.Category` is an alias for
+[SymbolCategory][rigour.names.symbol.SymbolCategory]; either form
+works for the nested-access pattern used across the OpenSanctions
+stack.
 """
 
 from dataclasses import dataclass
@@ -26,10 +25,6 @@ from rigour._core import pair_symbols as _pair_symbols
 from rigour.names.name import Name
 from rigour.names.part import NamePart
 
-# Preserve the pre-port nested-class access pattern
-# (`Symbol.Category.ORG_CLASS`) used across the stack. The enum type
-# is identical to the top-level `SymbolCategory` — just two names for
-# the same object.
 Symbol.Category = SymbolCategory
 
 
@@ -37,10 +32,12 @@ Symbol.Category = SymbolCategory
 class SymbolEdge:
     """One paired span in a [pair_symbols][rigour.names.symbol.pair_symbols] alignment.
 
-    `query_parts` and `result_parts` are the `NamePart`s covered on
-    each side (same references as in `query.parts` / `result.parts`).
-    `symbol` is the shared `Symbol` the two spans carry. Frozen so
-    pairings are hashable and safe to dedup.
+    Attributes:
+        query_parts: `NamePart`s from `query.parts` that this edge
+            covers. Same object references, not copies.
+        result_parts: `NamePart`s from `result.parts` that this
+            edge covers.
+        symbol: The `Symbol` both sides carry.
     """
 
     query_parts: Tuple[NamePart, ...]
@@ -51,19 +48,30 @@ class SymbolEdge:
 def pair_symbols(query: Name, result: Name) -> List[Tuple[SymbolEdge, ...]]:
     """Align the symbol spans of two names into coverage-maximal pairings.
 
-    Used by name-matching pipelines to short-cut expensive string
-    distance on the portions of two names that the tagger has already
-    explained with a shared symbol — e.g. Latin "Vladimir" and
-    Cyrillic "Владимир" both carrying `NAME:QxxxxxPutin` don't need
-    Levenshtein comparison.
+    Reach for this when matching two tagged names and you want to
+    skip Levenshtein on tokens the tagger has already explained —
+    e.g. Latin "Vladimir" and Cyrillic "Владимир" both carrying
+    the same `NAME:Q...` Putin symbol should pair without string
+    comparison.
 
-    Returns a list of pairings; each pairing is a tuple of
-    non-conflicting [SymbolEdge][rigour.names.symbol.SymbolEdge]s
-    whose joint coverage is maximal within its equivalence class.
-    When any candidate edge survives, only non-empty coverings are
-    returned; the empty tuple is emitted only as a fallback when
-    no symbol evidence is available (no tagger output on either
-    side, no shared symbols, or more than 64 tokens on a name).
+    Each returned pairing is a tuple of non-conflicting
+    [SymbolEdge][rigour.names.symbol.SymbolEdge]s whose joint
+    coverage is maximal within its scoring-equivalence class.
+    Coverings that cover the same parts with the same category mix
+    are collapsed to one; distinct category choices on the same
+    parts (e.g. a token carrying both `NAME` and `SYMBOL`) surface
+    as separate pairings.
+
+    Args:
+        query: The "left" name.
+        result: The "right" name.
+
+    Returns:
+        One or more pairings. A single empty pairing `[()]` is
+        returned when neither name has tagger output, when no
+        symbol is shared between the two sides, or when either
+        name has more than 64 parts. When the symbol layer found
+        any shared evidence, only non-empty coverings are returned.
     """
     q_parts = query.parts
     r_parts = result.parts
