@@ -41,7 +41,7 @@ def write_jsonl(file_path: Path, data: Iterable[Any]) -> None:
             fh.write(orjson.dumps(item, option=orjson.OPT_APPEND_NEWLINE))
 
 
-def write_json(file_path: Path, data: Any) -> None:
+def write_json(file_path: Path, data: Any, indent: bool = False) -> None:
     """Write a single JSON document to disk.
 
     Used for Tier-3 Rust data artifacts (structured records that the Rust
@@ -50,5 +50,7 @@ def write_json(file_path: Path, data: Any) -> None:
     change.
     """
     opts = orjson.OPT_SORT_KEYS | orjson.OPT_APPEND_NEWLINE
+    if indent:
+        opts |= orjson.OPT_INDENT_2
     with open(file_path, "wb") as fh:
         fh.write(orjson.dumps(data, option=opts))

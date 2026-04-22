@@ -30,7 +30,7 @@ def generate_ordinals() -> None:
 
     out_path = RUST_DATA_PATH / "text" / "ordinals.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    write_json(out_path, records)
+    write_json(out_path, records, indent=True)
 
 
 def generate_stopwords() -> None:
@@ -52,7 +52,7 @@ def generate_stopwords() -> None:
 
     out_path = RUST_DATA_PATH / "text" / "stopwords.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    write_json(out_path, out_data)
+    write_json(out_path, out_data, indent=True)
 
 
 if __name__ == "__main__":
