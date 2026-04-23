@@ -70,6 +70,15 @@ fn compute_metaphone(
     if text.chars().count() <= 2 {
         return None;
     }
+    // Metaphone is ASCII-only; non-ASCII input (e.g. `ĸ` surviving
+    // `maybe_ascii` because it's already Latin) would cause the
+    // `rphonetic` crate to panic on byte-indexed slicing. The
+    // wrapper in `text::phonetics::metaphone` also short-circuits,
+    // but we surface the skip as `None` here so the field stays
+    // `None` rather than `Some("")`.
+    if !text.is_ascii() {
+        return None;
+    }
     Some(metaphone(text))
 }
 

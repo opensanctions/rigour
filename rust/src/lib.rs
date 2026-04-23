@@ -38,6 +38,13 @@ fn py_text_scripts<'py>(py: Python<'py>, text: &str) -> PyResult<Bound<'py, PySe
 
 #[cfg(feature = "python")]
 #[pyfunction]
+#[pyo3(name = "common_scripts")]
+fn py_common_scripts<'py>(py: Python<'py>, a: &str, b: &str) -> PyResult<Bound<'py, PySet>> {
+    PySet::new(py, text::scripts::common_scripts(a, b))
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
 #[pyo3(name = "should_ascii")]
 fn py_should_ascii(text: &str) -> bool {
     text::translit::should_ascii(text)
@@ -240,6 +247,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_soundex, m)?)?;
     m.add_function(wrap_pyfunction!(py_codepoint_script, m)?)?;
     m.add_function(wrap_pyfunction!(py_text_scripts, m)?)?;
+    m.add_function(wrap_pyfunction!(py_common_scripts, m)?)?;
     m.add_function(wrap_pyfunction!(py_should_ascii, m)?)?;
     m.add_function(wrap_pyfunction!(py_maybe_ascii, m)?)?;
     m.add_function(wrap_pyfunction!(py_normalize, m)?)?;

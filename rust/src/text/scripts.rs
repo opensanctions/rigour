@@ -47,6 +47,23 @@ pub fn text_scripts(text: &str) -> Vec<&'static str> {
     scripts
 }
 
+/// Return the scripts both strings have in common. Equivalent to
+/// `text_scripts(a) ∩ text_scripts(b)` — only real scripts from
+/// Letter/Number codepoints; Common/Inherited/Unknown are never
+/// returned. Order: first-appearance in `a`.
+///
+/// An empty result is ambiguous — it can mean "scripts are
+/// disjoint" *or* "one side has no real scripts" (numeric-only,
+/// punctuation-only, empty). Pruning callers that care about the
+/// distinction should treat empty-script inputs as wildcards.
+pub fn common_scripts(a: &str, b: &str) -> Vec<&'static str> {
+    let b_scripts: std::collections::HashSet<&'static str> = text_scripts(b).into_iter().collect();
+    text_scripts(a)
+        .into_iter()
+        .filter(|s| b_scripts.contains(s))
+        .collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -109,5 +126,68 @@ mod tests {
         // single input with repeated script
         let scripts = text_scripts("abcabc");
         assert_eq!(scripts, vec!["Latin"]);
+    }
+
+    // --- common_scripts ---
+
+    #[test]
+    fn common_scripts_both_latin() {
+        assert_eq!(common_scripts("Hello", "World"), vec!["Latin"]);
+    }
+
+    #[test]
+    fn common_scripts_disjoint_latin_han() {
+        assert!(common_scripts("Hello", "你好").is_empty());
+        assert!(common_scripts("你好", "Hello").is_empty());
+    }
+
+    #[test]
+    fn common_scripts_mixed_both_sides() {
+        // Both sides contain Latin + Han; both survive intersection.
+        let out = common_scripts("Hello 你好", "Tokyo 東京");
+        assert_eq!(out.len(), 2);
+        assert!(out.contains(&"Latin"));
+        assert!(out.contains(&"Han"));
+    }
+
+    #[test]
+    fn common_scripts_partial_overlap() {
+        // a has Latin + Cyrillic, b has Cyrillic only.
+        assert_eq!(common_scripts("Hello мир", "Владимир"), vec!["Cyrillic"]);
+    }
+
+    #[test]
+    fn common_scripts_numbers_only() {
+        // Both are Common-only → both text_scripts return empty → empty.
+        assert!(common_scripts("007", "123").is_empty());
+    }
+
+    #[test]
+    fn common_scripts_punctuation_only() {
+        assert!(common_scripts("!@#", "...").is_empty());
+    }
+
+    #[test]
+    fn common_scripts_numbers_vs_latin() {
+        // One side is pure Common — no real scripts to intersect.
+        assert!(common_scripts("007", "Hello").is_empty());
+        assert!(common_scripts("Hello", "007").is_empty());
+    }
+
+    #[test]
+    fn common_scripts_empty_inputs() {
+        assert!(common_scripts("", "").is_empty());
+        assert!(common_scripts("", "Hello").is_empty());
+        assert!(common_scripts("Hello", "").is_empty());
+    }
+
+    #[test]
+    fn common_scripts_never_returns_pseudo_scripts() {
+        // Even when both strings are loaded with Common/Inherited
+        // codepoints, neither is a valid return value.
+        let out = common_scripts("2024 !@# 1-2", "!!! ... ???");
+        assert!(out.is_empty());
+        assert!(!out.contains(&"Common"));
+        assert!(!out.contains(&"Inherited"));
     }
 }

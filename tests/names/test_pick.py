@@ -5,6 +5,7 @@ from rigour.names.pick import (
     pick_lang_name,
     pick_case,
     reduce_names,
+    representative_names,
 )
 
 PUTIN = [
@@ -274,3 +275,90 @@ def test_reduce_names():
     names = [".", "6161", " / "]
     reduced = reduce_names(names)
     assert len(reduced) == 3, reduced
+
+
+# ---- representative_names ----
+
+
+def test_representative_names_empty_and_limits():
+    assert representative_names([], 5) == []
+    assert representative_names(["Vladimir Putin"], 0) == []
+    assert representative_names(["Vladimir Putin"], -1) == []
+
+
+def test_representative_names_passthrough_short():
+    # Fewer inputs than limit → returns them (after reduce_names dedup).
+    names = ["Vladimir Putin", "Vladimir PUTIN"]
+    reps = representative_names(names, 5)
+    assert reps == ["Vladimir Putin"]
+
+
+def test_representative_names_transliterations_collapse():
+    # 20 transliterations of one Cyrillic name should collapse to a
+    # handful of reps — enough to cover distinct Romanization schemes
+    # and the Cyrillic original, not 20 near-identical Latin queries.
+    ermakov = [
+        "ERMAKOV Valery Nikolaevich",
+        "Ermacov Valeryi Nycolaevych",
+        "Ermakov Valerij Nikolaevich",
+        "Ermakov Valerij Nikolaevič",
+        "Ermakov Valerijj Nikolaevich",
+        "Ermakov Valeriy Nikolaevich",
+        "Ermakov Valery Nykolaevych",
+        "Ermakov Valeryi Nykolaevych",
+        "Ermakov Valeryy Nikolaevich",
+        "Ermakov Valeryy Nykolaevych",
+        "Ermakov Valerȳĭ Nȳkolaevȳch",
+        "Iermakov Valerii Mykolaiovych",
+        "Jermakov Valerij Mikolajovich",
+        "Jermakov Valerij Mikolajovič",
+        "Jermakov Valerij Mykolajovyč",
+        "Yermakov Valerii Mykolaiovych",
+        "Yermakov Valerij Mykolajovych",
+        "Yermakov Valeriy Mykolayovych",
+        "Êrmakov Valerìj Mikolajovič",
+        "ЕРМАКОВ Валерий Николаевич",
+    ]
+    reps = representative_names(ermakov, 10)
+    # Much fewer than the 20 inputs — the cap is enforced.
+    assert 1 <= len(reps) <= 5, reps
+    # The Cyrillic original is its own cluster (distance ~1.0 to every
+    # Latin form) and should be represented.
+    assert any(any("Ѐ" <= c <= "ӿ" for c in r) for r in reps), reps
+
+
+def test_representative_names_distinct_names_mandela():
+    # Nelson Mandela was also known as Rolihlahla Mandela — genuinely
+    # different names. Both should be represented.
+    aliases = ["Nelson Mandela", "Rolihlahla Mandela"]
+    reps = representative_names(aliases, 5)
+    assert len(reps) == 2, reps
+    joined = " ".join(reps).lower()
+    assert "nelson" in joined
+    assert "rolihlahla" in joined
+
+
+def test_representative_names_limit_is_a_cap():
+    # Even with limit=10, one-cluster input (case-variants of a single
+    # name) returns 1. The cap is an upper bound, not a quota.
+    aliases = ["Vladimir Putin", "VLADIMIR PUTIN", "vladimir putin"]
+    reps = representative_names(aliases, 10)
+    assert reps == ["Vladimir Putin"]
+
+
+def test_representative_names_returns_originals():
+    # Output strings are originals from the input (not casefolded /
+    # normalised). pick_name picks the best-case variant per cluster.
+    aliases = ["VLADIMIR PUTIN", "Vladimir Putin", "vladimir putin"]
+    reps = representative_names(aliases, 3)
+    assert reps == ["Vladimir Putin"]
+
+
+def test_representative_names_threshold_tunable():
+    # "John Smith" vs "John Smithey" — lev=3, max_len=12, ratio=0.25.
+    # Tight threshold splits them, loose threshold merges.
+    aliases = ["John Smith", "John Smithey"]
+    tight = representative_names(aliases, 5, cluster_threshold=0.1)
+    loose = representative_names(aliases, 5, cluster_threshold=0.5)
+    assert len(tight) == 2, tight
+    assert len(loose) == 1, loose

@@ -1,4 +1,4 @@
-from rigour.text.scripts import codepoint_script, text_scripts
+from rigour.text.scripts import codepoint_script, text_scripts, common_scripts
 from rigour.text.scripts import is_latin
 from rigour.text.scripts import can_latinize, can_latinize_cp
 from rigour.text.scripts import is_modern_alphabet, is_dense_script
@@ -245,3 +245,55 @@ def test_predicates_pure_punctuation():
     assert is_modern_alphabet(punct)
     assert can_latinize(punct)
     assert not is_dense_script(punct)
+
+
+# --- common_scripts ---
+
+
+def test_common_scripts_both_latin():
+    assert common_scripts("Hello", "World") == {"Latin"}
+
+
+def test_common_scripts_disjoint_latin_han():
+    assert common_scripts("Hello", "你好") == set()
+    assert common_scripts("你好", "Hello") == set()
+
+
+def test_common_scripts_mixed_both_sides():
+    # Both contain Latin + Han — intersection preserves both.
+    assert common_scripts("Hello 你好", "Tokyo 東京") == {"Latin", "Han"}
+
+
+def test_common_scripts_partial_overlap():
+    # Query has Latin + Cyrillic, candidate has Cyrillic only.
+    assert common_scripts("Hello мир", "Владимир") == {"Cyrillic"}
+
+
+def test_common_scripts_numbers_only():
+    # Pure Common on both sides → empty intersection.
+    assert common_scripts("007", "123") == set()
+
+
+def test_common_scripts_punctuation_only():
+    assert common_scripts("!@#", "...") == set()
+
+
+def test_common_scripts_numbers_vs_latin():
+    # One pure-Common side → no real scripts to intersect.
+    assert common_scripts("007", "Hello") == set()
+    assert common_scripts("Hello", "007") == set()
+
+
+def test_common_scripts_empty_inputs():
+    assert common_scripts("", "") == set()
+    assert common_scripts("", "Hello") == set()
+    assert common_scripts("Hello", "") == set()
+
+
+def test_common_scripts_never_returns_pseudo_scripts():
+    # Even when both strings are loaded with Common/Inherited
+    # codepoints, neither is a valid return value.
+    out = common_scripts("2024 !@# 1-2", "!!! ... ???")
+    assert "Common" not in out
+    assert "Inherited" not in out
+    assert out == set()
