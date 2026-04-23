@@ -57,8 +57,7 @@ pub fn text_scripts(text: &str) -> Vec<&'static str> {
 /// punctuation-only, empty). Pruning callers that care about the
 /// distinction should treat empty-script inputs as wildcards.
 pub fn common_scripts(a: &str, b: &str) -> Vec<&'static str> {
-    let b_scripts: std::collections::HashSet<&'static str> =
-        text_scripts(b).into_iter().collect();
+    let b_scripts: std::collections::HashSet<&'static str> = text_scripts(b).into_iter().collect();
     text_scripts(a)
         .into_iter()
         .filter(|s| b_scripts.contains(s))
