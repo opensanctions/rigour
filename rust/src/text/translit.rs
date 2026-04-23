@@ -32,10 +32,11 @@ const LATINIZE_SCRIPTS: &[&str] = &[
 ];
 
 // BCP-47-T locale IDs for the 5 non-Latin scripts in
-// `LATINIZE_SCRIPTS`. Latin is absent because Latin input is
-// returned untransliterated by the ASCII fast-path in `maybe_ascii`
-// (diacritic folding happens via NFKD + marks strip + fallback,
-// which runs after the per-script pass for all inputs).
+// `LATINIZE_SCRIPTS`. Latin is absent from this per-script table
+// because Latin input needs no script-to-Latin transliteration;
+// however it still goes through `LATIN_ASCII_LOCALE` below to
+// strip Latin Extended letters (ĸ, ĳ, ɓ, ƙ, etc.) that NFKD can't
+// decompose.
 const SCRIPT_LOCALES: &[(&str, &str)] = &[
     ("Cyrillic", "und-Latn-t-und-cyrl"),
     ("Greek", "und-Latn-t-und-grek"),
@@ -43,6 +44,15 @@ const SCRIPT_LOCALES: &[(&str, &str)] = &[
     ("Georgian", "und-Latn-t-und-geor"),
     ("Hangul", "und-Latn-t-und-hang"),
 ];
+
+// CLDR's Latin-ASCII transliterator, baked into icu_experimental_data.
+// Applied unconditionally after the per-script pass so Latin Extended
+// input (never processed by the per-script loop) and Latin-Extended
+// residue from the per-script loop (e.g. Greek → Latin emits
+// diacritics) both get simplified to ASCII where CLDR has a rule.
+// Letters CLDR leaves intact (schwa Ə/ə, …) are caught by the
+// subsequent NFKD + strip-marks + `ASCII_FALLBACK` tail.
+const LATIN_ASCII_LOCALE: &str = "und-t-und-latn-d0-ascii";
 
 fn locale_for_script(script: &str) -> Option<&'static str> {
     SCRIPT_LOCALES
@@ -115,6 +125,58 @@ const ASCII_FALLBACK: &[(char, &str)] = &[
     ('\u{02C8}', "'"),
     ('\u{02CA}', "'"),
     ('\u{02CB}', "'"),
+    // Catalan `Ŀ`/`ŀ` (U+013F/0140) NFKD-decompose to `L·`/`l·`; the
+    // middle dot is Punctuation, skips both LA and mark-strip. Drop it
+    // once we're confident we're on the latinization path (this table
+    // only runs after `should_ascii`).
+    ('\u{00B7}', ""),
+    // --- CORE Latin ranges: Africanist / IPA / medievalist letters
+    // CLDR Latin-ASCII leaves alone. Conventional ASCII mappings for
+    // name-matching purposes. See `maybe_ascii_latin_roundtrip` test
+    // for the authoritative source of this list.
+    ('Ƅ', "B"),
+    ('ƅ', "b"), // tone six
+    ('Ɔ', "O"), // open O (uppercase; ɔ → o is CLDR)
+    ('ƍ', "d"), // turned delta
+    ('Ǝ', "E"), // turned E (uppercase; ǝ already below)
+    ('Ɣ', "G"), // gamma (uppercase; ɣ handled by CLDR)
+    ('ƛ', "l"), // lambda with stroke
+    ('Ɯ', "M"), // turned M (uppercase)
+    ('Ɵ', "O"), // barred O (uppercase)
+    ('Ʀ', "R"), // small-cap R
+    ('Ƨ', "S"),
+    ('ƨ', "s"), // tone two
+    ('Ʃ', "S"), // esh (uppercase)
+    ('ƪ', "l"), // reversed esh loop
+    ('Ʊ', "U"), // Latin upsilon (uppercase)
+    ('Ʒ', "Z"),
+    ('ʒ', "z"), // ezh (also resolves `Ǯ → Ʒ` / `ǯ → ʒ`)
+    ('Ƹ', "Z"),
+    ('ƹ', "z"), // reversed ezh
+    ('ƺ', "z"), // ezh with tail
+    ('ƻ', "2"), // two with stroke
+    ('Ƽ', "5"),
+    ('ƽ', "5"), // tone five
+    ('ƾ', ""),  // inverted glottal stop with stroke
+    ('ƿ', "w"), // wynn
+    ('ǀ', ""),
+    ('ǁ', ""), // Khoisan clicks — drop; no informative ASCII
+    ('ǂ', ""),
+    ('ǃ', ""),
+    ('ǝ', "e"), // turned e (lowercase)
+    ('Ƕ', "Hv"),
+    ('Ƿ', "W"), // hwair, wynn (Old English/Gothic)
+    ('Ȝ', "Y"),
+    ('ȝ', "y"), // yogh (Middle English)
+    ('Ƞ', "N"), // N with long right leg
+    ('Ȣ', "Ou"),
+    ('ȣ', "ou"), // OU ligature (Huron/Wyandot)
+    ('Ɂ', ""),
+    ('ɂ', ""),  // glottal stop
+    ('Ʌ', "V"), // turned V (uppercase; ʌ already in IPA block)
+    ('Ɋ', "Q"),
+    ('ɋ', "q"), // Q with hook tail
+    ('ẟ', "d"), // small Latin delta (Latin Extended Additional)
 ];
 
 fn ascii_fallback(input: &str) -> String {
@@ -168,11 +230,27 @@ thread_local! {
 }
 
 /// If every distinguishing script in `text` is in
-/// `LATINIZE_SCRIPTS`, transliterate to ASCII: per-script pass
-/// (Cyrillic, Greek, Armenian, Georgian, Hangul) → NFKD → strip
-/// nonspacing marks → small fallback table (ø→o, ß→ss, etc.).
+/// `LATINIZE_SCRIPTS`, transliterate to ASCII via a layered pipeline:
 ///
-/// If any script is outside the admitted set, return `text`
+/// 1. **Per-script pass** (Cyrillic → Latin, Greek → Latin, etc.) —
+///    non-Latin scripts go through their ICU4X transliterator to
+///    produce Latin output. Latin input skips this step.
+/// 2. **NFKD + nonspacing-mark strip** — decomposes base+combiner
+///    sequences (é → e + acute → e) and resolves compatibility
+///    variants (modifier letter ʱ → ɦ, superscript ᵋ → ɛ).
+/// 3. **CLDR Latin-ASCII pass** — applied unconditionally. Handles
+///    Latin Extended letters (`ĸ → q`, `ĳ → ij`, `ƙ → k`, `ɓ → b`,
+///    …) including the simplified base letters surfaced by step 2.
+/// 4. **`ASCII_FALLBACK`** — rigour's opinionated overrides for
+///    cases where CLDR's Latin-ASCII keeps a non-ASCII letter
+///    (e.g. Azerbaijani schwa `Ə → A`, African uppercase IPA letters
+///    `Ʒ → Z`, `Ɔ → O`, …).
+///
+/// The ordering matters: NFKD before Latin-ASCII lets CLDR's rules
+/// act on the decomposed base letters rather than being stopped by
+/// compatibility wrappers.
+///
+/// If any script is outside `LATINIZE_SCRIPTS`, return `text`
 /// unchanged (when `drop == false`) or `""` (when `drop == true`).
 ///
 /// Pure-ASCII input bypasses the ICU4X pipeline entirely.
@@ -202,7 +280,12 @@ pub fn maybe_ascii(text: &str, drop: bool) -> String {
             result = transliterate_with(locale_id, result);
         }
     }
+    // NFKD first — compatibility decompositions turn modifier letters
+    // and superscript Latin variants into their base letters (e.g.
+    // ʱ → ɦ, ᵋ → ɛ). Running Latin-ASCII afterwards catches the
+    // simplified base where CLDR has a rule.
     result = nfkd_strip_marks(&result);
+    result = transliterate_with(LATIN_ASCII_LOCALE, result);
     result = ascii_fallback(&result);
     MAYBE_ASCII_CACHE.with(|c| {
         c.borrow_mut().put((drop, key_text), result.clone());
@@ -275,6 +358,25 @@ mod tests {
         assert_eq!(maybe_ascii("Lars Løkke", false), "Lars Lokke");
         assert_eq!(maybe_ascii("weißbier", false), "weissbier");
         assert_eq!(maybe_ascii("Əhməd", false), "Ahmad");
+    }
+
+    #[test]
+    fn maybe_ascii_latin_extended_residue_cases() {
+        // The original panic trigger: U+0138 KRA mid-string.
+        let out = maybe_ascii("ALAĸSANDRAVIC", false);
+        assert!(out.is_ascii(), "{out}");
+        assert_eq!(out.to_lowercase(), "alaqsandravic");
+        // Dutch ij ligature.
+        assert_eq!(maybe_ascii("ĳsselmeer", false), "ijsselmeer");
+        assert_eq!(maybe_ascii("Ĳsselmeer", false), "IJsselmeer");
+        // Africanist / medievalist letters handled by CLDR or fallback.
+        assert!(maybe_ascii("ƙarshe", false).is_ascii());
+        assert!(maybe_ascii("ɓolo", false).is_ascii());
+        assert!(maybe_ascii("Ɓolo", false).is_ascii());
+        assert!(maybe_ascii("Ǝkwu", false).is_ascii());
+        assert!(maybe_ascii("Ʒandarma", false).is_ascii());
+        // Catalan geminate middle dot is stripped.
+        assert_eq!(maybe_ascii("paraŀlel", false), "parallel");
     }
 
     #[test]
@@ -370,5 +472,81 @@ mod tests {
         // Call again to exercise cached code paths.
         assert_eq!(maybe_ascii("中国", false), "中国");
         assert_eq!(maybe_ascii("中国", true), "");
+    }
+
+    // --- Latin-script round-trip coverage ---
+
+    #[test]
+    fn maybe_ascii_latin_roundtrip() {
+        // Every codepoint in the "core" Latin blocks — those that
+        // realistically appear in real-world name data — must
+        // round-trip through `maybe_ascii` to pure ASCII. Blocks
+        // outside this range (IPA Extensions, Phonetic Extensions,
+        // Latin Extended-C/D/E/F, Letterlike Symbols, etc.) carry
+        // symbols that don't show up in names; leaving them as non-
+        // ASCII residue is an accepted gap — downstream code that
+        // cares (e.g. `metaphone`) guards against non-ASCII input
+        // directly.
+        //
+        // Any failure here is a forced conversation: add an
+        // `ASCII_FALLBACK` entry or expand the excluded ranges with
+        // explicit justification.
+        use crate::text::scripts::codepoint_script;
+        const CORE_LATIN_RANGES: &[(u32, u32)] = &[
+            (0x0080, 0x00FF), // Latin-1 Supplement
+            (0x0100, 0x017F), // Latin Extended-A
+            (0x0180, 0x024F), // Latin Extended-B
+            (0x1E00, 0x1EFF), // Latin Extended Additional (Vietnamese-heavy)
+            (0xFB00, 0xFB06), // Latin Ligatures
+        ];
+        let gc = CodePointMapData::<GeneralCategory>::new();
+        let mut misses: Vec<(u32, char, String)> = Vec::new();
+        for (lo, hi) in CORE_LATIN_RANGES {
+            for cp in *lo..=*hi {
+                let ch = match char::from_u32(cp) {
+                    Some(c) => c,
+                    None => continue,
+                };
+                if codepoint_script(cp) != Some("Latin") {
+                    continue;
+                }
+                // `text_scripts` only reports scripts for Letter /
+                // Number category codepoints; mirror that so the test
+                // covers what real inputs actually exercise.
+                let category = gc.get(ch);
+                let is_letter = matches!(
+                    category,
+                    GeneralCategory::UppercaseLetter
+                        | GeneralCategory::LowercaseLetter
+                        | GeneralCategory::TitlecaseLetter
+                        | GeneralCategory::ModifierLetter
+                        | GeneralCategory::OtherLetter
+                );
+                let is_number = matches!(
+                    category,
+                    GeneralCategory::DecimalNumber
+                        | GeneralCategory::LetterNumber
+                        | GeneralCategory::OtherNumber
+                );
+                if !is_letter && !is_number {
+                    continue;
+                }
+                let input = ch.to_string();
+                let output = maybe_ascii(&input, false);
+                if !output.is_ascii() {
+                    misses.push((cp, ch, output));
+                }
+            }
+        }
+        if !misses.is_empty() {
+            eprintln!(
+                "{} core-Latin codepoint(s) did not round-trip to ASCII:",
+                misses.len()
+            );
+            for (cp, ch, out) in &misses {
+                eprintln!("  U+{:04X} {:?} -> {:?}", cp, ch, out);
+            }
+            panic!("Latin-ASCII round-trip coverage incomplete");
+        }
     }
 }
