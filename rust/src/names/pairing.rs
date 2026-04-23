@@ -158,6 +158,15 @@ fn spans_can_pair(qspan: &SpanInfo, rspan: &SpanInfo) -> bool {
 /// on one side and M times on the other, this yields `min(N, M)`
 /// edges — not N × M — because instances of the same symbol are
 /// interchangeable for scoring.
+///
+/// Both sides are bound widest-first (popcount-descending on the
+/// span mask). When the AC tagger produces overlapping same-symbol
+/// spans on one side — e.g. `[pla]` and `[pla, china]` both tagged
+/// `DOMAIN:PLA` against the phrase `"PLA China"` — the narrower
+/// span is strictly worse evidence and we want the wider one to
+/// claim the r-side first. Ties fall back to insertion order, so
+/// disjoint duplicates (`[john]`, `[john]`) still bind in their
+/// natural `min_idx` order.
 fn build_candidate_edges(q_spans: &[SpanInfo], r_spans: &[SpanInfo]) -> Vec<Edge> {
     let mut q_by_sym: HashMap<Symbol, Vec<usize>> = HashMap::new();
     for (i, s) in q_spans.iter().enumerate() {
@@ -173,10 +182,14 @@ fn build_candidate_edges(q_spans: &[SpanInfo], r_spans: &[SpanInfo]) -> Vec<Edge
         let Some(r_indices) = r_by_sym.get(sym) else {
             continue;
         };
-        let mut r_taken: Vec<bool> = vec![false; r_indices.len()];
-        for &qi in q_indices {
+        let mut q_ordered: Vec<usize> = q_indices.clone();
+        q_ordered.sort_by_key(|&i| std::cmp::Reverse(q_spans[i].mask.count_ones()));
+        let mut r_ordered: Vec<usize> = r_indices.clone();
+        r_ordered.sort_by_key(|&i| std::cmp::Reverse(r_spans[i].mask.count_ones()));
+        let mut r_taken: Vec<bool> = vec![false; r_ordered.len()];
+        for &qi in &q_ordered {
             let qspan = &q_spans[qi];
-            for (r_pos, &ri) in r_indices.iter().enumerate() {
+            for (r_pos, &ri) in r_ordered.iter().enumerate() {
                 if r_taken[r_pos] {
                     continue;
                 }
@@ -489,6 +502,41 @@ mod tests {
         assert_eq!(edges.len(), 1);
         // First qspan (index 0) wins the binding.
         assert_eq!(edges[0].qmask, 1 << 0);
+    }
+
+    #[test]
+    fn overlapping_q_spans_bind_widest_first() {
+        // The AC tagger emits overlapping same-symbol spans when
+        // one alias is a prefix of another (e.g. "PLA" and
+        // "PLA China" both map to DOMAIN:PLA against "PLA China").
+        // The wider span must claim the lone r-side span; the
+        // narrower one is strictly worse evidence and drops out.
+        let sym_pla = sym(SymbolCategory::DOMAIN, "PLA");
+        let q = vec![
+            // Insertion order mirrors the AC tagger: shorter match
+            // completes first, so the [pla]-only span arrives before
+            // the [pla, china] span.
+            mk_span(vec![mk_part(0, NamePartTag::UNSET, 3)], sym_pla.clone()),
+            mk_span(
+                vec![
+                    mk_part(0, NamePartTag::UNSET, 3),
+                    mk_part(1, NamePartTag::UNSET, 5),
+                ],
+                sym_pla.clone(),
+            ),
+        ];
+        let r = vec![mk_span(
+            vec![
+                mk_part(0, NamePartTag::UNSET, 7),
+                mk_part(1, NamePartTag::UNSET, 10),
+                mk_part(2, NamePartTag::UNSET, 4),
+            ],
+            sym_pla.clone(),
+        )];
+        let edges = build_candidate_edges(&q, &r);
+        assert_eq!(edges.len(), 1);
+        assert_eq!(edges[0].qmask, 0b11, "wider q-span must win");
+        assert_eq!(edges[0].rmask, 0b111);
     }
 
     #[test]
