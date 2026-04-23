@@ -3432,6 +3432,7 @@ org_domains:
     - Al Qaida/Islamic Army
     - Al Qa’ida/Islamic Army
     - Al-Qa'ida/Islamic Army
+    - Al-Kaida/Islamic Army
   irgc:
     - IRGC
     - Islamic Revolutionary Guard Corps
@@ -3443,6 +3444,27 @@ org_domains:
     - Corps des gardiens de la révolution islamique
     - پاسداران
     - سپاه پاسداران انقلاب اسلامی
+  pla:
+    - PLA
+    - PLA China
+    - People's Liberation Army
+    - People’s Liberation Army
+    - Peoples Liberation Army
+    - Chinese People's Liberation Army
+    - China People's Liberation Army
+    - Chinese PLA
+    - 中国人民解放军
+    - 中国人民解放軍
+  ccp:
+    - CCP
+    - Chinese Communist Party
+    - 中国共产党
+    - Communist Party of China
+  cia:
+    - CIA
+    - Central Intelligence Agency
+    - ЦРУ
+    - Центральное разведывательное управление
 person_symbols:
   jr:
     - "Jr"

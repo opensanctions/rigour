@@ -147,6 +147,7 @@
       "Al Qaida/Islamic Army",
       "Al Qa’ida/Islamic Army",
       "Al-Kaida",
+      "Al-Kaida/Islamic Army",
       "Al-Qa'ida",
       "Al-Qa'ida/Islamic Army",
       "Al-Qaida Organization",
@@ -340,6 +341,12 @@
       "kazino",
       "казино"
     ],
+    "CCP": [
+      "CCP",
+      "Chinese Communist Party",
+      "Communist Party of China",
+      "中国共产党"
+    ],
     "CHEMICAL": [
       "chemical",
       "chemicals",
@@ -357,6 +364,12 @@
       "化学",
       "化學",
       "化工"
+    ],
+    "CIA": [
+      "CIA",
+      "Central Intelligence Agency",
+      "ЦРУ",
+      "Центральное разведывательное управление"
     ],
     "COMMS": [
       "comms",
@@ -1452,6 +1465,17 @@
       "фармацевтичні",
       "фармация",
       "фармація"
+    ],
+    "PLA": [
+      "Chinese PLA",
+      "Chinese People's Liberation Army",
+      "PLA",
+      "PLA China",
+      "People's Liberation Army",
+      "Peoples Liberation Army",
+      "People’s Liberation Army",
+      "中国人民解放军",
+      "中国人民解放軍"
     ],
     "POLICE": [
       "constabulary",
