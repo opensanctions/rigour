@@ -17,6 +17,7 @@ from rigour.names.symbol import Symbol, SymbolCategory, SymbolEdge, pair_symbols
 from rigour.names.part import NamePart, Span
 from rigour.names.tag import NamePartTag, NameTypeTag
 from rigour.names.pick import pick_name, pick_case, reduce_names
+from rigour.names.pick import representative_names
 from rigour.names.check import is_name, is_stopword
 from rigour.names.tokenize import tokenize_name, prenormalize_name, normalize_name
 from rigour.names.prefix import remove_person_prefixes, remove_org_prefixes
@@ -32,6 +33,7 @@ __all__ = [
     "pick_name",
     "pick_case",
     "reduce_names",
+    "representative_names",
     "tokenize_name",
     "prenormalize_name",
     "normalize_name",
