@@ -2,6 +2,7 @@ from functools import lru_cache
 from typing import Optional
 
 from rigour._core import codepoint_script as _codepoint_script
+from rigour._core import common_scripts as _common_scripts
 from rigour._core import text_scripts as _text_scripts
 from rigour.util import MEMO_MEDIUM
 
@@ -49,6 +50,26 @@ def text_scripts(text: str) -> set[str]:
     combining marks don't count as their own script.
     """
     return _text_scripts(text)
+
+
+def common_scripts(a: str, b: str) -> set[str]:
+    """Return the scripts both strings have in common.
+
+    Equivalent to ``text_scripts(a) & text_scripts(b)`` — only real scripts
+    from Letter/Number codepoints; Common, Inherited, and Unknown are never
+    returned.
+
+    **Empty-result caveat.** An empty return is ambiguous: it can mean
+    "scripts are disjoint" (e.g. Latin vs Han) *or* "one side has no real
+    scripts" (numeric-only, punctuation-only, empty). The two cases have
+    different matching implications — a numeric-only name like "007" can
+    still match "Agent 007" via shared NUMERIC symbols even though
+    `common_scripts` is empty. Pruning callers should guard this: treat
+    empty-script inputs as wildcards that bypass the script gate and fall
+    through to symbol-overlap or scoring. Callers that need to distinguish
+    the two cases should call `text_scripts` on each side explicitly.
+    """
+    return _common_scripts(a, b)
 
 
 @lru_cache(maxsize=MEMO_MEDIUM)
