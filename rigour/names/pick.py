@@ -35,21 +35,29 @@ def representative_names(
     limit: int,
     cluster_threshold: float = 0.3,
 ) -> List[str]:
-    """Pick display representatives of the distinct name-clusters in a bag
-    of aliases.
+    """Reduce a bag of aliases to at most `limit` representatives
+    without extreme information loss.
 
-    Useful when a downstream process (e.g. building a search query) wants to
-    probe the alias space broadly with a small number of queries. For a
-    person with 20 transliterations of one name, this returns 1
-    representative; for a person with two genuinely different names (e.g.
-    Nelson Mandela / Rolihlahla Mandela), it returns 2 — because N
-    transliterations of the same name don't add recall, but a second
-    *name* does.
+    Useful when a downstream process (e.g. building a search-index
+    query) wants to probe the alias space broadly under a budget
+    cap. For a person with 20 transliterations of one name and
+    `limit=5`, this returns ~1-5 centroid-selected representatives
+    rather than all 20 near-identical forms. For a person with two
+    genuinely distinct names (Nelson Mandela / Rolihlahla Mandela),
+    both survive — N transliterations of one name don't add recall,
+    but a second *name* does.
 
-    `limit` is a cap, not a quota: if all aliases collapse into one
-    cluster, the result is one name regardless of `limit`. Returned
-    strings are originals from the input (via :func:`pick_name` per
-    cluster), ordered by centroid first, then farthest cluster, etc.
+    **Fast path**: if the input already collapses to `<= limit`
+    distinct names (after casefold-dedup via :func:`reduce_names`),
+    those names are returned as-is without clustering. Compression
+    only runs when the input actually needs to be compressed. This
+    means `cluster_threshold` has no effect when the fast path
+    fires.
+
+    Ordering of the returned list is not guaranteed. Returned
+    strings are originals from the input — :func:`pick_name` per
+    cluster selects the best-case representative when clustering
+    runs.
 
     Args:
         names: input aliases, typically all belonging to one entity.
@@ -57,12 +65,13 @@ def representative_names(
         cluster_threshold: normalized Levenshtein distance (0..1) above
             which two names are considered distinct *names* rather than
             variants of one. Default 0.3 keeps transliterations together
-            while separating genuinely different names.
+            while separating genuinely different names. Ignored when
+            the fast path fires.
     """
     if limit <= 0 or not names:
         return []
     reduced = reduce_names(names)
-    if len(reduced) <= 1:
+    if len(reduced) <= limit:
         return list(reduced)
 
     # Casefolded/whitespace-normalised form of each reduced name, for
