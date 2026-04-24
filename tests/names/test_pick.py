@@ -355,10 +355,27 @@ def test_representative_names_returns_originals():
 
 
 def test_representative_names_threshold_tunable():
-    # "John Smith" vs "John Smithey" — lev=3, max_len=12, ratio=0.25.
-    # Tight threshold splits them, loose threshold merges.
-    aliases = ["John Smith", "John Smithey"]
-    tight = representative_names(aliases, 5, cluster_threshold=0.1)
-    loose = representative_names(aliases, 5, cluster_threshold=0.5)
+    # With len(reduced) > limit, clustering runs and the threshold
+    # decides whether the outlier is distinct enough to become a
+    # second seed.
+    aliases = ["John Smith", "John Smithey", "Jonathan Smithey"]
+    # Tight threshold → outlier exceeds threshold, two seeds (loop
+    # exits via the `while len(seeds) < limit` condition).
+    tight = representative_names(aliases, 2, cluster_threshold=0.1)
+    # Loose threshold → outlier swallowed into the one cluster.
+    loose = representative_names(aliases, 2, cluster_threshold=0.9)
     assert len(tight) == 2, tight
     assert len(loose) == 1, loose
+
+
+def test_representative_names_fast_path_returns_reduced():
+    # Fewer distinct names (after reduce_names) than `limit` → the
+    # fast path returns all of them without collapsing similar
+    # spellings into a single centroid. `cluster_threshold` has no
+    # effect here.
+    aliases = ["John Smith", "John Smithey", "Jonathan Smithey"]
+    reps = representative_names(aliases, 10)
+    assert set(reps) == set(aliases), reps
+    # Threshold is ignored when the fast path fires.
+    aggressive = representative_names(aliases, 10, cluster_threshold=0.01)
+    assert set(aggressive) == set(aliases), aggressive
