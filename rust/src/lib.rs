@@ -57,6 +57,13 @@ fn py_maybe_ascii(text: &str, drop: bool) -> String {
     text::translit::maybe_ascii(text, drop)
 }
 
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "tokenize_name", signature = (text, token_min_length=1))]
+fn py_tokenize_name(text: &str, token_min_length: usize) -> Vec<String> {
+    text::tokenize::tokenize_name(text, token_min_length)
+}
+
 // Low-level normalize. The nice Python API (IntFlag for Normalize, IntEnum
 // for Cleanup) lives in rigour/text/normalize.py and passes plain ints
 // through this function. The flag bit values and cleanup tags must match
@@ -250,6 +257,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_common_scripts, m)?)?;
     m.add_function(wrap_pyfunction!(py_should_ascii, m)?)?;
     m.add_function(wrap_pyfunction!(py_maybe_ascii, m)?)?;
+    m.add_function(wrap_pyfunction!(py_tokenize_name, m)?)?;
     m.add_function(wrap_pyfunction!(py_normalize, m)?)?;
     m.add_function(wrap_pyfunction!(py_string_number, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_name, m)?)?;
