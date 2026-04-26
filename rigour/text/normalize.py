@@ -57,24 +57,20 @@ pre-flags `Optional[str]` normalisers.
 
 ## Common compositions
 
-These are the flag sets in use across rigour, FTM, nomenklatura, and
-yente — the defaults on
-[replace_org_types_compare][rigour.names.org_types.replace_org_types_compare]
-and friends are pinned to these:
+The flag sets pinned as defaults across the rigour API:
 
-* **Casefold-only (`Normalize.CASEFOLD`)** — production default.
-  Equivalent to the pre-flags `prenormalize_name`. Used to build
-  comparison keys while preserving whitespace and script.
-* **Casefold + squash (`Normalize.CASEFOLD | Normalize.SQUASH_SPACES`)**
-  — the pre-flags `_normalize_compare`. Adds whitespace collapsing on
-  top of casefold; useful when input whitespace is unreliable.
-* **Squash-only (`Normalize.SQUASH_SPACES`)** — the pre-flags
-  `normalize_display`. Whitespace-tidies without touching case, used
-  by display-form replacers that want to preserve caller case.
-* **Casefold + name (`Normalize.CASEFOLD | Normalize.NAME`)** — the
-  pre-flags `normalize_name`. Casefolds and tokenises with
-  [rigour.names.tokenize.tokenize_name][], yielding a stable
-  space-separated name key for matching.
+* **`Normalize.CASEFOLD`** — production default for comparison
+  keys that should preserve whitespace and script.
+* **`Normalize.CASEFOLD | Normalize.SQUASH_SPACES`** — adds
+  whitespace collapsing on top. Used when input whitespace is
+  unreliable, and by display-style replacers that need
+  case-insensitive matching with tidied whitespace.
+* **`Normalize.SQUASH_SPACES`** — whitespace-tidy without case
+  change. Used by display-form replacers that want to preserve
+  caller case.
+* **`Normalize.CASEFOLD | Normalize.NAME`** — casefold and
+  tokenise with [rigour.names.tokenize.tokenize_name][], yielding
+  a stable space-separated name key for matching.
 
 ## Implementation note
 
@@ -92,21 +88,29 @@ from rigour._core import _normalize
 __all__ = ["normalize", "Normalize", "Cleanup", "Normalizer", "noop_normalizer"]
 
 
-# Type alias for the "normalizer protocol" — a callable that maps an
-# optional string to an optional string, returning None for inputs
-# that normalise to nothing meaningful. Used by the parametric
-# `is_stopword` / `is_nullword` / `is_nullplace` /
-# `is_generic_person_name` predicates so callers can plug in whatever
-# normalisation shape they need.
+#: Normalizer protocol — callable mapping optional string to
+#: optional string, where `None` means "nothing meaningful here."
+#: Used by parametric predicates
+#: ([rigour.text.stopwords.is_stopword][] / `is_nullword` /
+#: `is_nullplace`,
+#: [rigour.names.check.is_generic_person_name][]) so callers can
+#: plug in whatever normalisation shape they need — both the
+#: wordlist build and runtime lookups must use the same callable.
 Normalizer = Callable[[Optional[str]], Optional[str]]
 
 
 def noop_normalizer(text: Optional[str]) -> Optional[str]:
     """Identity normalizer that strips whitespace and rejects empty.
 
-    Useful as a default `Normalizer` argument when the caller's input
-    is already in the desired shape — strips edges and returns
-    ``None`` for empty / whitespace-only input.
+    Default :data:`Normalizer` for callers whose input is already
+    in the desired shape — only edge whitespace is removed.
+
+    Args:
+        text: A string, or `None`.
+
+    Returns:
+        The stripped string, or `None` for `None` input or
+        empty / whitespace-only input.
     """
     if text is None:
         return None
@@ -146,11 +150,10 @@ class Normalize(IntFlag):
             Splits composed characters apart. Mutually exclusive
             with NFC/NFKC.
         NAME: Run the string through
-            [tokenize_name][rigour.names.tokenize.tokenize_name] and
-            rejoin the tokens with a single ASCII space. Runs as the
-            final pipeline step, so it also subsumes whitespace
-            squashing. Supersedes the legacy
-            `normalize_name` composition (casefold + tokenize + join).
+            [tokenize_name][rigour.names.tokenize.tokenize_name]
+            and rejoin the tokens with a single ASCII space. Runs
+            as the final pipeline step, so it also subsumes
+            whitespace squashing.
     """
 
     # Bit values MUST match rust/src/text/normalize.rs `bitflags! Normalize`.
@@ -217,10 +220,10 @@ def normalize(
             skips that step.
 
     Returns:
-        The normalised string, or ``None`` if `text` was ``None`` or
-        if the pipeline reduced the text to an empty string. The
-        empty-output-to-``None`` coalescence matches the contract of
-        the pre-flags Python normalisers.
+        The normalised string, or ``None`` if `text` was ``None``
+        or if the pipeline reduced the text to an empty string.
+        The empty-output-to-``None`` coalescence is the
+        Optional-string contract.
     """
     if text is None:
         return None
