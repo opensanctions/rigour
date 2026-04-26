@@ -6,7 +6,7 @@ from rigour.territories.territory import get_index
 from rigour.territories.lookup import lookup_territory
 from rigour.territories.lookup import _get_identifier_map, _get_territory_names
 from rigour.text.scripts import can_latinize_cp
-from rigour.names.tokenize import _normalize_name
+from rigour.names.tokenize import normalize_name
 from rigour.names.prefix import (
     _person_prefix_regex,
     _org_prefix_regex,
@@ -25,7 +25,7 @@ def reset_caches() -> None:
     """Reset LRU caches in the rigour module. This is meant to be used
     in long-lived processes to prevent memory expansion."""
     levenshtein.cache_clear()
-    _normalize_name.cache_clear()
+    normalize_name.cache_clear()
     dam_levenshtein.cache_clear()
     jaro_winkler.cache_clear()
     soundex.cache_clear()

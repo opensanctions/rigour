@@ -83,6 +83,7 @@ module is the idiomatic Python surface — `IntFlag` for the bit set,
 `IntEnum` for the variant, both crossing the FFI boundary as plain
 ints at ~zero marshalling cost.
 """
+
 from enum import IntEnum, IntFlag
 from typing import Optional
 
