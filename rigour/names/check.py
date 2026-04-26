@@ -3,7 +3,7 @@ from typing import Sequence, Set
 import unicodedata
 import warnings
 
-from rigour.text.dictionary import Normalizer
+from rigour.text.normalize import Normalizer
 from rigour.names.tokenize import normalize_name
 
 # Re-export stopword and nullword functions from rigour.text.stopwords for backwards compatibility
