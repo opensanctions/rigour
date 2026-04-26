@@ -186,8 +186,8 @@ script sets are disjoint.
 - Which symbol categories count? `INITIAL` almost certainly
   shouldn't — a shared "J" carries no evidence. `NUMERIC` on its own
   is weak evidence for PER but strong for ORG. The
-  `Symbol.is_matchable` predicate added in the rust-names-parser
-  plan may be the right gate.
+  `Symbol.is_matchable` predicate (see `arch-name-pipeline.md`)
+  may be the right gate.
 - Does "non-empty overlap" suffice or do we need a minimum weight
   (e.g. weighted by `SYM_SCORES` / `SYM_WEIGHTS`)?
 - How often does the tagger *actually* label non-latinizable-script
@@ -538,11 +538,10 @@ Open policy questions raised by this variant:
 
 ## Related
 
-- `plans/rust-names-parser.md` — `entity_names`, `analyze_names`,
-  and the `consolidate` flag. Provides the `Name` / `Symbol` object
-  graph this plan builds on.
-- `plans/rust-pick-name.md` — `reduce_names` (casefold-only
-  dedup). A sibling primitive to the transliteration-reduction
+- `plans/arch-name-pipeline.md` — `entity_names`, `analyze_names`,
+  the `consolidate` flag, and the `Name` / `Symbol` object graph
+  this plan builds on. Also covers `reduce_names` (casefold-only
+  dedup), a sibling primitive to the transliteration-reduction
   concern mentioned above.
 - `nomenklatura/matching/logic_v2/names/match.py` — the current
   N × M loop and its `# This combinatorial explosion…` comment,

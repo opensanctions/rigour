@@ -2,8 +2,8 @@
 
 `tokenize_name` is Rust-backed via :func:`rigour._core.tokenize_name`
 — one FFI call per invocation, no per-codepoint Python-side
-category lookups. `normalize_name` remains as a Python wrapper
-(deprecated) that composes `tokenize_name` with `str.casefold`.
+category lookups. `normalize_name` is a small composed convenience
+that callers reach for as the cheapest "key for matching" shape.
 """
 
 from functools import lru_cache
@@ -24,25 +24,37 @@ def tokenize_name(text: str, token_min_length: int = 1) -> List[str]:
     numbers, and a small set of CJK modifier marks are kept.
 
     Args:
-        text (str): The name to tokenize.
-        token_min_length (int): Minimum length of tokens to keep.
+        text: The name to tokenize.
+        token_min_length: Drop tokens shorter than this many
+            codepoints. Defaults to 1 (drop only zero-length).
 
     Returns:
-        List[str]: A list of name tokens.
+        Tokens in left-to-right order, with any deletion or
+        whitespace-substitution applied. Order matches input.
     """
     return _tokenize_name(text, token_min_length)
 
 
 @lru_cache(maxsize=MEMO_SMALL)
 def normalize_name(name: Optional[str]) -> Optional[str]:
-    """Normalize a name for tokenization and matching. This is used internally by
-    utility functions, but should not be picked up by external callers.
+    """Casefold and tokenise a name into a stable matching key.
+
+    Convenience composition of :func:`tokenize_name` over a
+    casefolded input, rejoined with single ASCII spaces.
+    Equivalent to calling
+    `normalize(name, Normalize.CASEFOLD | Normalize.NAME)` —
+    use that directly when callers want explicit flag control.
+
+    Used internally by the rigour name-matching utilities; not
+    intended as a general-purpose public surface.
 
     Args:
-        name (Optional[str]): The name to normalize.
+        name: A name string, or `None`.
 
     Returns:
-        Optional[str]: The normalized name, or None if the input is None or empty.
+        Normalised name (lowercase, single-space-separated
+        tokens), or `None` if input is `None` or normalises to
+        empty.
     """
     if name is None:
         return None
