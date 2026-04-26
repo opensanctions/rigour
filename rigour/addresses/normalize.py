@@ -1,13 +1,13 @@
+import re
 import string
 import logging
 import unicodedata
 from functools import cache
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 from normality import ascii_text
 from normality.constants import WS
 from normality.util import Categories
 
-from rigour.text.dictionary import Replacer
 from rigour.territories.lookup import _load_territory_names
 from rigour.util import resource_lock, unload_module
 
@@ -90,15 +90,15 @@ def normalize_address(
 
 
 @cache
-def _address_replacer(latinize: bool = False) -> Replacer:
-    """Create a function that replaces common address tokens with their normalized forms.
+def _address_replacer(latinize: bool = False) -> Tuple[re.Pattern[str], Dict[str, str]]:
+    """Build the (compiled regex, form → target mapping) tuple used by
+    `shorten_address_keywords` and `remove_address_keywords`.
 
-    Args:
-        sep: The separator to use for joining the normalized tokens.
-        latinize: Whether to convert non-Latin characters to their Latin equivalents.
-
-    Returns:
-        A function that takes a string and returns its normalized form.
+    Both halves are built once per `latinize` flag and cached for the
+    lifetime of the process. The regex is shaped
+    `(?<!\\w)(form|...)(?!\\w)` with longest-form-first ordering so the
+    multi-token forms (e.g. `"united arab emirates"` → `"ae"`) win over
+    their single-token components.
     """
     from rigour.data.addresses.data import FORMS
     from rigour._core import ordinals_dict
@@ -150,7 +150,20 @@ def _address_replacer(latinize: bool = False) -> Replacer:
     unload_module("rigour.data.addresses.data")
     # ordinals data now lives in Rust (via rigour._core.ordinals_dict);
     # no Python module to unload.
-    return Replacer(mapping, ignore_case=True)
+
+    # Longest-form-first ordering so multi-token forms aren't shadowed
+    # by single-token prefixes in the alternation.
+    forms_sorted = sorted(set(mapping.keys()), key=len, reverse=True)
+    pattern = re.compile(
+        r"(?<!\w)(%s)(?!\w)" % "|".join(re.escape(f) for f in forms_sorted),
+        re.U | re.I,
+    )
+    # Lowercased-key mapping for the case-insensitive substitution
+    # callback. `normalize_address` already casefolds, but keeping the
+    # explicit lower() preserves the contract from the pre-inline
+    # `Replacer(mapping, ignore_case=True)` shape.
+    mapping_ci = {k.lower(): v for k, v in mapping.items()}
+    return pattern, mapping_ci
 
 
 def remove_address_keywords(
@@ -170,8 +183,8 @@ def remove_address_keywords(
         The address, without any stopwords.
     """
     with resource_lock:
-        replacer = _address_replacer(latinize=latinize)
-    return replacer.remove(address, replacement=replacement)
+        pattern, _ = _address_replacer(latinize=latinize)
+    return pattern.sub(replacement, address)
 
 
 def shorten_address_keywords(address: str, latinize: bool = False) -> Optional[str]:
@@ -186,5 +199,10 @@ def shorten_address_keywords(address: str, latinize: bool = False) -> Optional[s
     Returns:
         The address, with keywords shortened.
     """
-    replacer = _address_replacer(latinize=latinize)
-    return replacer(address)
+    pattern, mapping = _address_replacer(latinize=latinize)
+
+    def _sub(match: re.Match[str]) -> str:
+        value = match.group(1)
+        return mapping.get(value.lower(), value)
+
+    return pattern.sub(_sub, address)

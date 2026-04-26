@@ -85,11 +85,35 @@ ints at ~zero marshalling cost.
 """
 
 from enum import IntEnum, IntFlag
-from typing import Optional
+from typing import Callable, Optional
 
 from rigour._core import _normalize
 
-__all__ = ["normalize", "Normalize", "Cleanup"]
+__all__ = ["normalize", "Normalize", "Cleanup", "Normalizer", "noop_normalizer"]
+
+
+# Type alias for the "normalizer protocol" — a callable that maps an
+# optional string to an optional string, returning None for inputs
+# that normalise to nothing meaningful. Used by the parametric
+# `is_stopword` / `is_nullword` / `is_nullplace` /
+# `is_generic_person_name` predicates so callers can plug in whatever
+# normalisation shape they need.
+Normalizer = Callable[[Optional[str]], Optional[str]]
+
+
+def noop_normalizer(text: Optional[str]) -> Optional[str]:
+    """Identity normalizer that strips whitespace and rejects empty.
+
+    Useful as a default `Normalizer` argument when the caller's input
+    is already in the desired shape — strips edges and returns
+    ``None`` for empty / whitespace-only input.
+    """
+    if text is None:
+        return None
+    text = text.strip()
+    if len(text) == 0:
+        return None
+    return text
 
 
 class Normalize(IntFlag):
