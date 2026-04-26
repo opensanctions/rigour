@@ -9,6 +9,21 @@ from rigour.text.normalize import Normalizer, noop_normalizer
 
 
 def normalize_text(text: Optional[str]) -> Optional[str]:
+    """Default normalizer for stopword / nullword / nullplace lookup.
+
+    Composes casefold + slug-category replacement + whitespace
+    squash. Used as the default :data:`Normalizer` for the three
+    lookup predicates below; callers must apply the same
+    normaliser to runtime input as the one used to load the
+    wordlist for membership checks to be consistent.
+
+    Args:
+        text: Input string, or `None`.
+
+    Returns:
+        Normalised string, or `None` when input is `None` or
+        normalisation produces an empty string.
+    """
     if text is None:
         return None
     text = text.casefold()
@@ -18,7 +33,9 @@ def normalize_text(text: Optional[str]) -> Optional[str]:
 
 
 def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
-    """Load a list of words and normalize them using the provided normalizer."""
+    """Apply `normalizer` to every word and return the non-empty
+    results as a set. Internal builder used by the per-list
+    `_load_*` helpers below."""
     wordlist = set()
     for word in words:
         norm = normalizer(word)
@@ -29,22 +46,34 @@ def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
 
 @cache
 def _load_stopwords(normalizer: Normalizer) -> Set[str]:
-    """Load the stopwords from the data file and normalize them using the provided normalizer."""
+    """Build the stopword set using `normalizer`. Cached so the
+    same `(normalizer, wordlist)` combination is built once per
+    process."""
     return _load_wordlist(stopwords_list(), normalizer)
 
 
 def is_stopword(
     form: str, *, normalizer: Normalizer = normalize_text, normalize: bool = False
 ) -> bool:
-    """Check if the given form is a stopword. The stopword list is normalized first.
+    """Check whether `form` is a stopword.
+
+    Stopwords are common words that carry no identifying signal
+    in name-matching contexts (`"the"`, `"and"`, `"of"`, etc.).
+    Both the wordlist and the runtime input must be normalised
+    with the same `normalizer` for the membership check to be
+    meaningful.
 
     Args:
-        form (str): The token to check, must already be normalized.
-        normalizer (Normalizer): The normalizer to use for checking stopwords.
-        normalize (bool): Whether to normalize the form before checking.
+        form: The token to check.
+        normalizer: Normalizer applied to the wordlist at load
+            time, and to `form` when `normalize=True`.
+        normalize: When `True`, run `normalizer(form)` before the
+            lookup. When `False` (default), `form` is assumed to
+            be pre-normalised by the caller.
 
     Returns:
-        bool: True if the form is a stopword, False otherwise.
+        `True` iff the (possibly normalised) form is in the
+        stopword list.
     """
     norm_form = normalizer(form) if normalize else form
     if norm_form is None:
@@ -55,23 +84,32 @@ def is_stopword(
 
 @cache
 def _load_nullwords(normalizer: Normalizer) -> set[str]:
-    """Load the nullwords from the data file and normalize them using the provided normalizer."""
+    """Build the nullword set using `normalizer`. Cached per
+    `(normalizer, wordlist)`."""
     return _load_wordlist(nullwords_list(), normalizer)
 
 
 def is_nullword(
     form: str, *, normalizer: Normalizer = normalize_text, normalize: bool = False
 ) -> bool:
-    """Check if the given form is a nullword. Nullwords are words that imply a missing value, such
-    as "none", "not available", "n/a", etc. The nullword list is normalized first.
+    """Check whether `form` is a nullword.
+
+    Nullwords are tokens that imply a missing value:
+    `"none"`, `"not available"`, `"n/a"`, `"unknown"`, etc.
+    Useful for filtering out records where an alias slot was
+    populated with a placeholder rather than real data.
 
     Args:
-        form (str): The token to check, must already be normalized.
-        normalizer (Normalizer): The normalizer to use for checking nullwords.
-        normalize (bool): Whether to normalize the form before checking.
+        form: The token to check.
+        normalizer: Normalizer applied to the wordlist at load
+            time, and to `form` when `normalize=True`.
+        normalize: When `True`, run `normalizer(form)` before the
+            lookup. When `False` (default), `form` is assumed to
+            be pre-normalised.
 
     Returns:
-        bool: True if the form is a nullword, False otherwise.
+        `True` iff the (possibly normalised) form is in the
+        nullword list.
     """
     norm_form = normalizer(form) if normalize else form
     if norm_form is None:
@@ -82,24 +120,33 @@ def is_nullword(
 
 @cache
 def _load_nullplaces(normalizer: Normalizer) -> set[str]:
-    """Load the nullplaces from the data file and normalize them using the provided normalizer."""
+    """Build the nullplace set using `normalizer`. Cached per
+    `(normalizer, wordlist)`."""
     return _load_wordlist(nullplaces_list(), normalizer)
 
 
 def is_nullplace(
     form: str, *, normalizer: Normalizer = normalize_text, normalize: bool = False
 ) -> bool:
-    """Check if the given form is a nullplace. Nullplaces are place names that don't refer to a
-    specific location, such as "overseas", "abroad", "stateless", etc. The nullplace list is
-    normalized first.
+    """Check whether `form` is a nullplace.
+
+    Nullplaces are place names that don't refer to a specific
+    location: `"overseas"`, `"abroad"`, `"stateless"`,
+    `"international waters"`, etc. Useful for filtering out
+    records where a country / address slot was populated with a
+    placeholder rather than a real geography.
 
     Args:
-        form (str): The string to check, must already be normalized.
-        normalizer (Normalizer): The normalizer to use for checking nullplaces.
-        normalize (bool): Whether to normalize the form before checking.
+        form: The string to check.
+        normalizer: Normalizer applied to the wordlist at load
+            time, and to `form` when `normalize=True`.
+        normalize: When `True`, run `normalizer(form)` before the
+            lookup. When `False` (default), `form` is assumed to
+            be pre-normalised.
 
     Returns:
-        bool: True if the form is a nullplace, False otherwise.
+        `True` iff the (possibly normalised) form is in the
+        nullplace list.
     """
     norm_form = normalizer(form) if normalize else form
     if norm_form is None:

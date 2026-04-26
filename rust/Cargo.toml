@@ -71,12 +71,12 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
 # zstd — compile-time compression of the person-names corpus
-# (`rust/data/names/person_names.txt`, ~8.5 MB of text) into ~2–3 MB of
-# bytes baked into the binary via OUT_DIR. Runtime decodes on first
-# access in `names::person_names`. See `build.rs` for the compression step
-# and `rust-tagger.md` step 7 for the design. Listed in both
-# [dependencies] (runtime decode) and [build-dependencies] (build.rs
-# uses the same crate for encoding).
+# (`rust/data/names/person_names.txt`) into compressed bytes baked
+# into the binary via OUT_DIR. Runtime decodes on first access in
+# `names::person_names`. See `build.rs` for the compression step
+# and `plans/arch-rust-core.md` for the three-tier data-embedding
+# strategy. Listed in both [dependencies] (runtime decode) and
+# [build-dependencies] (build.rs uses the same crate for encoding).
 zstd = "0.13"
 
 [build-dependencies]

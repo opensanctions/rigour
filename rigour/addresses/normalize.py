@@ -45,16 +45,27 @@ log = logging.getLogger(__name__)
 def normalize_address(
     address: str, latinize: bool = False, min_length: int = 4
 ) -> Optional[str]:
-    """Normalize the given address string for comparison, in a way that is destructive to
-    the ability for displaying it (makes it ugly).
+    """Build a comparison key from an address.
+
+    Casefolds, replaces punctuation/symbols with whitespace,
+    tokenises on Unicode general-category, and rejoins with
+    single-space separators. The output is a flat lowercase token
+    sequence suitable for substring matching, equality keys, or
+    feeding :func:`shorten_address_keywords` /
+    :func:`remove_address_keywords` — **not** a display form.
 
     Args:
-        address: The address to be normalized.
-        latinize: Whether to convert non-Latin characters to their Latin equivalents.
-        min_length: Minimum length of the normalized address.
+        address: The address to normalise.
+        latinize: When `True`, transliterate non-ASCII tokens to
+            ASCII via `normality.ascii_text`. Default `False`
+            preserves the original script.
+        min_length: Reject the result as `None` if it would be
+            shorter than this many characters. Defaults to 4 to
+            filter out single-token noise.
 
     Returns:
-        The normalized address.
+        Normalised address, or `None` when the result is shorter
+        than `min_length`.
     """
     tokens: List[List[str]] = []
     token: List[str] = []
@@ -169,18 +180,29 @@ def _address_replacer(latinize: bool = False) -> Tuple[re.Pattern[str], Dict[str
 def remove_address_keywords(
     address: str, latinize: bool = False, replacement: str = WS
 ) -> Optional[str]:
-    """Remove common address keywords (such as "street", "road", "south", etc.) from the
-    given address string. The address string is assumed to have already been normalized
-    using `normalize_address`.
+    """Strip common address keywords from a normalised address.
 
-    The output may contain multiple consecutive whitespace characters, which are not collapsed.
+    Removes recognised forms (`"street"`, `"road"`, `"south"`,
+    territory names, ordinals, …) by substituting each match with
+    `replacement`. Consecutive matches produce consecutive
+    `replacement` runs — whitespace is **not** collapsed, so the
+    output may contain multi-space gaps. Use
+    `normality.squash_spaces` afterwards if a single-space
+    output is wanted.
+
+    Input must already be normalised with :func:`normalize_address`
+    using the same `latinize` flag — the alias table is built
+    against that normalised form.
 
     Args:
-        address: The address to be cleaned.
-        latinize: Whether to convert non-Latin characters to their Latin equivalents.
+        address: A pre-normalised address string.
+        latinize: Must match the flag passed to
+            :func:`normalize_address`. Default `False`.
+        replacement: String substituted in place of each match.
+            Defaults to a single ASCII space.
 
     Returns:
-        The address, without any stopwords.
+        The address with recognised keywords removed.
     """
     with resource_lock:
         pattern, _ = _address_replacer(latinize=latinize)
@@ -188,16 +210,26 @@ def remove_address_keywords(
 
 
 def shorten_address_keywords(address: str, latinize: bool = False) -> Optional[str]:
-    """Shorten common address keywords (such as "street", "road", "south", etc.) in the
-    given address string. The address string is assumed to have already been normalized
-    using `normalize_address`.
+    """Shorten common address keywords in a normalised address.
+
+    Replaces recognised forms with their canonical short form
+    (`"street"` → `"st"`, `"avenue"` → `"av"`, `"united arab
+    emirates"` → `"ae"`, …). Multi-token forms beat single-token
+    components via longest-form-first ordering in the alias
+    pattern, so country names win over their constituent words.
+
+    Input must already be normalised with :func:`normalize_address`
+    using the same `latinize` flag — the alias table is built
+    against that normalised form.
 
     Args:
-        address: The address to be cleaned.
-        latinize: Whether to convert non-Latin characters to their Latin equivalents.
+        address: A pre-normalised address string.
+        latinize: Must match the flag passed to
+            :func:`normalize_address`. Default `False`.
 
     Returns:
-        The address, with keywords shortened.
+        The address with recognised keywords shortened. Tokens
+        that don't match any alias pass through unchanged.
     """
     pattern, mapping = _address_replacer(latinize=latinize)
 

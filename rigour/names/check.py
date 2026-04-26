@@ -12,8 +12,19 @@ from rigour.text.stopwords import is_nullword as _is_nullword
 
 
 def is_name(name: str) -> bool:
-    """Check if the given string is a name. The string is considered a name if it contains at least
-    one character that is a letter (category 'L' in Unicode)."""
+    """Check whether `name` plausibly contains a name.
+
+    Loose filter — true iff at least one character is a Unicode
+    letter (general category `L*`). Useful for rejecting purely
+    numeric (`"007"`) or punctuation-only (`"---"`) inputs before
+    handing them to the rest of the name pipeline.
+
+    Args:
+        name: A string.
+
+    Returns:
+        `True` iff `name` contains at least one letter.
+    """
     for char in name:
         category = unicodedata.category(char)
         if category[0] == "L":
@@ -91,17 +102,29 @@ def _load_generic_person_names(normalizer: Normalizer) -> Set[str]:
 def is_generic_person_name(
     form: str, *, normalizer: Normalizer = normalize_name, normalize: bool = False
 ) -> bool:
-    """Check if the given form is a generic person name. Generic person names are t, when used
-    on their own as a full name, not meaningful identifiers of an individual. Examples would include the word
-    "Muhammed", "Abu Bakr", etc. The generic person name list is normalized first.
+    """Check whether `form` is a generic given/family name.
+
+    Generic person names are common forms that, used on their own
+    as a full name, don't meaningfully identify an individual —
+    `"Muhammed"`, `"John"`, `"Maria"`, etc. Useful for flagging
+    records where the alias slot was populated with a single
+    generic name rather than a discriminating one.
+
+    Both the wordlist and runtime input must be normalised with
+    the same `normalizer` for the membership check to be
+    meaningful.
 
     Args:
-        form (str): The string to check, must already be normalized.
-        normalizer (Normalizer): The normalizer to use for checking generic person names.
-        normalize (bool): Whether to normalize the form before checking.
+        form: The string to check.
+        normalizer: Normalizer applied to the wordlist at load
+            time, and to `form` when `normalize=True`.
+        normalize: When `True`, run `normalizer(form)` before the
+            lookup. When `False` (default), `form` is assumed to
+            be pre-normalised.
 
     Returns:
-        bool: True if the form is a generic person name, False otherwise.
+        `True` iff the (possibly normalised) form is in the
+        generic-person-names list.
     """
     norm_form = normalizer(form) if normalize else form
     if norm_form is None:
