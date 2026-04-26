@@ -19,7 +19,7 @@ from rigour.names.tag import NamePartTag, NameTypeTag
 from rigour.names.pick import pick_name, pick_case, reduce_names
 from rigour.names.pick import representative_names
 from rigour.names.check import is_name, is_stopword
-from rigour.names.tokenize import tokenize_name, prenormalize_name, normalize_name
+from rigour.names.tokenize import tokenize_name, normalize_name
 from rigour.names.prefix import remove_person_prefixes, remove_org_prefixes
 from rigour.names.prefix import remove_obj_prefixes
 from rigour.names.analyze import analyze_names
@@ -35,7 +35,6 @@ __all__ = [
     "reduce_names",
     "representative_names",
     "tokenize_name",
-    "prenormalize_name",
     "normalize_name",
     "is_name",
     "is_stopword",
