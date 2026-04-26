@@ -5,7 +5,7 @@ from normality import category_replace, squash_spaces
 from normality.constants import SLUG_CATEGORIES
 
 from rigour._core import nullplaces_list, nullwords_list, stopwords_list
-from rigour.text.dictionary import Normalizer, noop_normalizer
+from rigour.text.normalize import Normalizer, noop_normalizer
 
 
 def normalize_text(text: Optional[str]) -> Optional[str]:
