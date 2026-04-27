@@ -50,8 +50,9 @@ def analyze_names(
             every name in this batch. Drives which prefix/org-type/
             tagger passes run: `PER` → person prefix strip + person
             tagger; `ORG`/`ENT` → org-type replacement + org prefix
-            strip + org tagger; `OBJ`/`UNK` → no tagging, just
-            construction.
+            strip + org tagger; `OBJ` → object prefix strip ("M/V",
+            "SS", …) but no tagger; `UNK` → no rewrites or tagging,
+            just construction.
         names: Raw name strings as harvested from the source entity.
             Empty strings and inputs that normalise to empty are
             dropped. Duplicates (after prenormalisation) are de-duplicated.

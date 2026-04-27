@@ -297,6 +297,20 @@ def test_obj_type_tag_no_tagging():
     assert name.symbols == set()
 
 
+def test_obj_prefix_stripped_when_rewrite():
+    result = analyze_names(NameTypeTag.OBJ, ["M/V Oceanic"])
+    name = _only(result)
+    assert name.original == "M/V Oceanic"
+    assert "m/v" not in name.form
+    assert name.form.endswith("oceanic")
+
+
+def test_obj_prefix_kept_when_rewrite_false():
+    result = analyze_names(NameTypeTag.OBJ, ["M/V Oceanic"], rewrite=False)
+    name = _only(result)
+    assert "m/v" in name.form
+
+
 def test_unk_type_tag_no_tagging():
     result = analyze_names(NameTypeTag.UNK, ["some mystery string"])
     name = _only(result)
