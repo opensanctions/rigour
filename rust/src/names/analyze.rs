@@ -7,7 +7,7 @@
 //   1. For PER, if `rewrite`: remove_person_prefixes
 //   2. casefold → form
 //   3. For ORG/ENT, if `rewrite`: replace_org_types_compare +
-//      remove_org_prefixes
+//      remove_org_prefixes; for OBJ, if `rewrite`: remove_obj_prefixes
 //   4. Dedup by form
 //   5. Construct Name + NamePart objects (all eager on construction)
 //   6. Apply part_tags via Name.tag_text for each (tag, values) entry
@@ -33,7 +33,7 @@ use pyo3::types::PySet;
 use crate::names::name::Name;
 use crate::names::org_types;
 use crate::names::part::{NamePart, Span};
-use crate::names::prefix::{remove_org_prefixes, remove_person_prefixes};
+use crate::names::prefix::{remove_obj_prefixes, remove_org_prefixes, remove_person_prefixes};
 use crate::names::symbol::{Symbol, SymbolCategory};
 use crate::names::tag::{INITIAL_TAGS, NamePartTag, NameTypeTag};
 use crate::names::tagger::{TaggerKind, get_tagger};
@@ -99,6 +99,8 @@ pub fn analyze_names(
         if rewrite && matches!(type_tag, NameTypeTag::ORG | NameTypeTag::ENT) {
             form = org_types::replace_compare(&form, Normalize::CASEFOLD, Cleanup::Noop, false);
             form = remove_org_prefixes(&form);
+        } else if rewrite && matches!(type_tag, NameTypeTag::OBJ) {
+            form = remove_obj_prefixes(&form);
         }
         if form.is_empty() || seen.contains(&form) {
             continue;
