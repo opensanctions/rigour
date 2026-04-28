@@ -1,0 +1,32 @@
+# Reference data for the residue-distance comparator (compare_parts).
+#
+# Read by the Rust port at rigour.names.compare_parts. The harness's
+# Python prototype (contrib/name_comparison/comparators/compare_parts_orig.py)
+# keeps an inline mirror during phase 2 — that prototype is throwaway
+# scaffolding that retires once the Rust port hits parity, so a separate
+# Python emit isn't worth the genscript complexity. If they drift, the
+# parity test (qsv diff between compare_python and compare_rust) catches
+# it during phase 3.
+#
+# Genscript: genscripts/generate_names.py:generate_compare_file
+# Output:    rust/data/names/compare.json (Tier-3, serde-loaded)
+
+# Visual / phonetic single-char confusables. The cost-folded DP charges
+# the confusable cost tier (cheaper than a default substitute, cheaper
+# still than a digit mismatch) when an edit involves a pair listed here.
+# Listed once, applied bidirectionally — ["0", "o"] covers ("0"→"o") and
+# ("o"→"0").
+similar_pairs:
+  - ["0", "o"]
+  - ["1", "i"]
+  - ["1", "l"]
+  - ["g", "9"]
+  - ["q", "9"]
+  - ["b", "6"]
+  - ["5", "s"]
+  - ["e", "i"]
+  - ["o", "u"]
+  - ["i", "j"]
+  - ["i", "y"]
+  - ["c", "k"]
+  - ["n", "h"]
