@@ -309,3 +309,261 @@ nk_unit_tests,081,Person,Hannibal,Hannibol,true,single_tps,test_single_name,0.76
 nk_unit_tests,082,Person,Hannibal,Hanniball,true,single_tps,test_single_name,0.8889,true,TP
 nk_unit_tests,083,Person,Michelle Michaela,Michelle Michi,true,soundex_tps,test_soundex_name_comparison,0.5000,false,FN
 nk_unit_tests,084,Person,Michelle Michaela,Donald Duck,false,soundex_fps,test_soundex_name_comparison,0.0000,false,TN
+synth_companies,001,Company,"Amazonis.com, Inc.","Amazon.com, Inc.",false,LLM-proposed deviation,word substitution (real word collision),0.8930,true,FP
+synth_companies,002,Company,Wallmart Inc.,Walmart Inc.,false,LLM-proposed deviation,doubled consonant,0.9265,true,FP
+synth_companies,003,Company,State Grid Corporation of Chile,State Grid Corporation of China,false,LLM-proposed deviation,geographic swap,0.6970,false,TN
+synth_companies,004,Company,Saudi Arabian Gas Company,Saudi Arabian Oil Company,false,LLM-proposed deviation,industry-word swap,0.6970,false,TN
+synth_companies,005,Company,China National Pipeline Corporation,China National Petroleum Corporation,false,LLM-proposed deviation,industry-word swap,0.5833,false,TN
+synth_companies,006,Company,China Petromechanical Corporation,China Petrochemical Corporation,false,LLM-proposed deviation,coined compound substitution,0.5238,false,TN
+synth_companies,007,Company,Appel Inc.,Apple Inc.,false,LLM-proposed deviation,phonetic-near surname (Dutch/German real word),0.7882,true,FP
+synth_companies,008,Company,Alphanet Inc.,Alphabet Inc.,false,LLM-proposed deviation,word substitution,0.8621,true,FP
+synth_companies,009,Company,"UnitedWealth Group, Inc.","UnitedHealth Group, Inc.",false,LLM-proposed deviation,single-char sub flips meaning,0.9201,true,FP
+synth_companies,010,Company,Berkshire Halloway Inc.,Berkshire Hathaway Inc.,false,LLM-proposed deviation,phonetic-near surname,0.6296,false,TN
+synth_companies,011,Company,CVC Health Corporation,CVS Health Corporation,false,LLM-proposed deviation,acronym single-char sub (CVC is a real PE firm),0.5000,false,TN
+synth_companies,012,Company,Volkswerk Aktiengesellschaft,Volkswagen Aktiengesellschaft,false,LLM-proposed deviation,German compound second-element swap,0.4118,false,TN
+synth_companies,013,Company,Exxor Mobil Corporation,Exxon Mobil Corporation,false,LLM-proposed deviation,single-char sub,0.8671,true,FP
+synth_companies,014,Company,Vital Holding S.A.,Vitol Holding S.A.,false,LLM-proposed deviation,one-letter shift to real word,0.8200,true,FP
+synth_companies,015,Company,Schell plc,Shell plc,false,LLM-proposed deviation,added consonant (real surname),0.9020,true,FP
+synth_companies,016,Company,China State Construction Equipment Corporation,China State Construction Engineering Corporation,false,LLM-proposed deviation,domain-word swap,0.6774,false,TN
+synth_companies,017,Company,Tayota Motor Corporation,Toyota Motor Corporation,false,LLM-proposed deviation,vowel reorder,0.8846,true,FP
+synth_companies,018,Company,McKenton Corporation,McKesson Corporation,false,LLM-proposed deviation,plausible-alternate Scottish surname,0.6635,false,TN
+synth_companies,019,Company,Macrosoft Corporation,Microsoft Corporation,false,LLM-proposed deviation,prefix antonym (micro/macro),0.8386,true,FP
+synth_companies,020,Company,"Sencora, Inc.","Cencora, Inc.",false,LLM-proposed deviation,initial-letter sub,0.8439,true,FP
+synth_companies,021,Company,Trafalgura Group Pte. Ltd.,Trafigura Group Pte. Ltd.,false,LLM-proposed deviation,internal vowel sub,0.8556,true,FP
+synth_companies,022,Company,Cosco Wholesale Corporation,Costco Wholesale Corporation,false,LLM-proposed deviation,dropped consonant (collides with real Cosco shipping),0.9379,true,FP
+synth_companies,023,Company,JPMorgon Chace & Co.,JPMorgan Chase & Co.,false,LLM-proposed deviation,phonetic-near surname (Chace is a real surname),0.7522,true,FP
+synth_companies,024,Company,Industrial and Commercial Bank of Chad Limited,Industrial and Commercial Bank of China Limited,false,LLM-proposed deviation,geographic swap,0.7872,true,FP
+synth_companies,025,Company,TotalEnergias SE,TotalEnergies SE,false,LLM-proposed deviation,Spanish-form pluralisation,0.9130,true,FP
+synth_companies,026,Company,Glenmore plc,Glencore plc,false,LLM-proposed deviation,Scottish-place-name sub (Glenmore is a real distillery),0.8621,true,FP
+synth_companies,027,Company,Invidia Corporation,NVIDIA Corporation,false,LLM-proposed deviation,Latin word substitution,0.8901,true,FP
+synth_companies,028,Company,BD p.l.c.,BP p.l.c.,false,LLM-proposed deviation,two-letter ticker collision (BD = Becton Dickinson),0.4118,false,TN
+synth_companies,029,Company,"Cardinal Wealth, Inc.","Cardinal Health, Inc.",false,LLM-proposed deviation,domain-word sub (Health/Wealth),0.8868,true,FP
+synth_companies,030,Company,Stellaris N.V.,Stellantis N.V.,false,LLM-proposed deviation,truncated-and-substituted stem,0.8301,true,FP
+synth_companies,031,Company,Chevon Corporation,Chevron Corporation,false,LLM-proposed deviation,dropped consonant (Chevon is a real meat brand),0.8901,true,FP
+synth_companies,032,Company,China Construction Trust Corporation,China Construction Bank Corporation,false,LLM-proposed deviation,sector-word swap (Bank/Trust),0.7031,true,FP
+synth_companies,033,Company,"Samsong Electronics Co., Ltd.","Samsung Electronics Co., Ltd.",false,LLM-proposed deviation,Korean-Romanisation vowel sub,0.9208,true,FP
+synth_companies,034,Company,"Hon Wai Precision Industry Co., Ltd.","Hon Hai Precision Industry Co., Ltd.",false,LLM-proposed deviation,plausible-alternate Cantonese name,0.7500,true,FP
+synth_companies,035,Company,The Sigma Group,The Cigna Group,false,LLM-proposed deviation,Greek-letter near-homophone,0.2308,false,TN
+synth_companies,036,Company,Agriculture Bank of China Limited,Agricultural Bank of China Limited,false,LLM-proposed deviation,morphological variant (noun/adjective),0.9806,true,FP
+synth_companies,037,Company,Schwartz Gruppe,Schwarz Gruppe,false,LLM-proposed deviation,Yiddish/German surname-spelling collision,0.9444,true,FP
+synth_companies,038,Company,China Railroad Engineering Corporation,China Railway Engineering Corporation,false,LLM-proposed deviation,US/UK English synonym (Railroad/Railway),0.6429,false,TN
+synth_companies,039,Company,"Cargille, Incorporated","Cargill, Incorporated",false,LLM-proposed deviation,French-orthography surname variant,0.9265,true,FP
+synth_companies,040,Company,Fjord Motor Company,Ford Motor Company,false,LLM-proposed deviation,Norse-word substitution (real word),0.9275,true,FP
+synth_companies,041,Company,Bank of Chima Limited,Bank of China Limited,false,LLM-proposed deviation,one-letter geographic decoy,0.9014,true,FP
+synth_companies,042,Company,Bank of Armenia Corporation,Bank of America Corporation,false,LLM-proposed deviation,geographic swap (shared first phoneme),0.8380,true,FP
+synth_companies,043,Company,General Mortars Company,General Motors Company,false,LLM-proposed deviation,phonetic-near common-noun (Motors/Mortars),0.3750,false,TN
+synth_companies,044,Company,"Elegance Health, Inc.","Elevance Health, Inc.",false,LLM-proposed deviation,brand-stem one-letter shift to real word,0.9023,true,FP
+synth_companies,045,Company,Berliner Motoren Werke Aktiengesellschaft,Bayerische Motoren Werke Aktiengesellschaft,false,LLM-proposed deviation,German-region word swap (BMW expansion),0.7297,true,FP
+synth_companies,046,Company,Mercedes-Benn Group AG,Mercedes-Benz Group AG,false,LLM-proposed deviation,final-consonant doubling,0.6667,false,TN
+synth_companies,047,Company,"Beta Platforms, Inc.","Meta Platforms, Inc.",false,LLM-proposed deviation,Greek-letter sub,0.8667,true,FP
+synth_companies,048,Company,China Railway Constructors Corporation,China Railway Construction Corporation,false,LLM-proposed deviation,nominalisation variant,0.8909,true,FP
+synth_companies,049,Company,China Baowei Steel Group Corporation Limited,China Baowu Steel Group Corporation Limited,false,LLM-proposed deviation,Pinyin syllable swap,0.7368,true,FP
+synth_companies,050,Company,Citygroup Inc.,Citigroup Inc.,false,LLM-proposed deviation,brand-stem English-spelling sub,0.9121,true,FP
+synth_people,001,Person,Vladimir Pulin,Vladimir Putin,false,LLM-proposed deviation,RU surname single-char sub (Latin),0.8200,true,FP
+synth_people,002,Person,Владимир Пулин,Владимир Путин,false,LLM-proposed deviation,RU surname single-char sub (Cyrillic),0.8200,true,FP
+synth_people,003,Person,Xi Jinpeng,Xi Jinping,false,LLM-proposed deviation,CN given-name vowel sub (Pinyin),0.9050,true,FP
+synth_people,004,Person,习近朋,习近平,false,LLM-proposed deviation,CN given-name char sub (朋 péng vs 平 píng),0.0000,false,TN
+synth_people,005,Person,Kim Jong On,Kim Jong Un,false,LLM-proposed deviation,KP given-name vowel sub (Latin),0.9667,true,FP
+synth_people,006,Person,김종은,김정은,false,LLM-proposed deviation,KP given-name syllable sub (Hangul),0.9091,true,FP
+synth_people,007,Person,Lee Jae Hyung,Lee Jae Myung,false,LLM-proposed deviation,KR given-name onset sub (Latin),0.8800,true,FP
+synth_people,008,Person,이재형,이재명,false,LLM-proposed deviation,KR given-name syllable sub (Hangul),0.8100,true,FP
+synth_people,009,Person,Sanae Takaishi,Sanae Takaichi,false,LLM-proposed deviation,JP surname plausible-alternate (Latin),0.8828,true,FP
+synth_people,010,Person,高石早苗,高市早苗,false,LLM-proposed deviation,JP surname-character sub (Kanji 石 vs 市),0.0000,false,TN
+synth_people,011,Person,Benjamin Natanyahu,Benjamin Netanyahu,false,LLM-proposed deviation,IL surname vowel sub (Latin),0.8951,true,FP
+synth_people,012,Person,בנימין נתניחו,בנימין נתניהו,false,LLM-proposed deviation,IL surname char sub ה→ח (Hebrew),0.8472,true,FP
+synth_people,013,Person,Masoud Pezeshfar,Masoud Pezeshkian,false,LLM-proposed deviation,IR surname-suffix swap (Latin),0.5000,false,TN
+synth_people,014,Person,مسعود پزشک‌فر,مسعود پزشکیان,false,LLM-proposed deviation,IR surname-suffix swap (Persian),0.5000,false,TN
+synth_people,015,Person,Mohammed bin Sultan,Mohammed bin Salman,false,LLM-proposed deviation,SA patronymic swap (Latin),0.6667,false,TN
+synth_people,016,Person,محمد بن سلطان,محمد بن سلمان,false,LLM-proposed deviation,SA patronymic swap (Arabic),0.8800,true,FP
+synth_people,017,Person,Abdel Fattah el-Sirri,Abdel Fattah el-Sisi,false,LLM-proposed deviation,EG surname consonant sub (Latin),0.6667,false,TN
+synth_people,018,Person,عبد الفتاح السري,عبد الفتاح السيسي,false,LLM-proposed deviation,EG surname consonant sub (Arabic),0.5000,false,TN
+synth_people,019,Person,Kyriakos Mitsotakos,Kyriakos Mitsotakis,false,LLM-proposed deviation,GR surname-ending -ος/-ης (Latin),0.9050,true,FP
+synth_people,020,Person,Κυριάκος Μητσοτάκος,Κυριάκος Μητσοτάκης,false,LLM-proposed deviation,GR surname-ending -ος/-ης (Greek),0.9050,true,FP
+synth_people,021,Person,Narender Modi,Narendra Modi,false,LLM-proposed deviation,IN given-name plausible-alternate (Latin),0.7812,true,FP
+synth_people,022,Person,नरेन्द्र मोडी,नरेन्द्र मोदी,false,LLM-proposed deviation,IN surname retroflex/dental swap ड/द (Devanagari),0.5000,false,TN
+synth_people,023,Person,Vajiralongkron,Vajiralongkorn,false,LLM-proposed deviation,TH royal-name vowel reorder (Latin),0.8622,true,FP
+synth_people,024,Person,วชิราลงกรน,วชิราลงกรณ,false,LLM-proposed deviation,TH final-consonant sub น/ณ (Thai),0.7901,true,FP
+synth_people,025,Person,Aleksandar Vukić,Aleksandar Vučić,false,LLM-proposed deviation,RS surname plausible-alternate Vukić (Latin),0.8698,true,FP
+synth_people,026,Person,Александар Вукић,Александар Вучић,false,LLM-proposed deviation,RS surname plausible-alternate (Cyrillic),0.8698,true,FP
+synth_people,027,Person,Iliana Iordanova,Iliana Iotova,false,LLM-proposed deviation,BG surname stem swap (Latin),0.5000,false,TN
+synth_people,028,Person,Илиана Йорданова,Илиана Йотова,false,LLM-proposed deviation,BG surname stem swap (Cyrillic),0.5000,false,TN
+synth_people,029,Person,Alexander Lukashevich,Alexander Lukashenko,false,LLM-proposed deviation,BY surname-suffix swap -evich/-enko (Latin),0.5000,false,TN
+synth_people,030,Person,Аляксандр Лукашэвіч,Аляксандр Лукашэнка,false,LLM-proposed deviation,BY surname-suffix swap (Belarusian Cyrillic),0.5000,false,TN
+synth_people,031,Person,Ukhnaagiin Khürelchükh,Ukhnaagiin Khürelsükh,false,LLM-proposed deviation,MN surname consonant sub (Latin),0.8682,true,FP
+synth_people,032,Person,Ухнаагийн Хүрэлчүх,Ухнаагийн Хүрэлсүх,false,LLM-proposed deviation,MN surname consonant sub (Mongolian Cyrillic),0.8828,true,FP
+synth_people,033,Person,Mohammed Shamsuddin,Mohammed Shahabuddin,false,LLM-proposed deviation,BD given-name stem swap (Latin),0.5000,false,TN
+synth_people,034,Person,মোহাম্মদ শামসুদ্দিন,মোহাম্মদ সাহাবুদ্দিন,false,LLM-proposed deviation,BD given-name stem swap (Bengali),0.5000,false,TN
+synth_people,035,Person,Arif Ali Zardari,Asif Ali Zardari,false,LLM-proposed deviation,PK given-name onset sub (Latin),0.6667,false,TN
+synth_people,036,Person,عارف علی زرداری,آصف علی زرداری,false,LLM-proposed deviation,PK given-name onset sub (Urdu),0.6667,false,TN
+synth_people,037,Person,Kassym-Jomart Tukayev,Kassym-Jomart Tokayev,false,LLM-proposed deviation,KZ surname vowel sub (Latin),0.9367,true,FP
+synth_people,038,Person,Қасым-Жомарт Тұқаев,Қасым-Жомарт Тоқаев,false,LLM-proposed deviation,KZ surname vowel sub ұ/о (Kazakh Cyrillic),0.9367,true,FP
+synth_people,039,Person,Abiyot Ahmed,Abiy Ahmed,false,LLM-proposed deviation,ET given-name plausible-alternate (Latin),0.5000,false,TN
+synth_people,040,Person,ዐቢዮት አሕመድ,ዐቢይ አሕመድ,false,LLM-proposed deviation,ET given-name plausible-alternate (Amharic/Ge'ez),0.5000,false,TN
+synth_people,041,Person,Hun Manat,Hun Manet,false,LLM-proposed deviation,KH given-name vowel sub (Latin),0.8200,true,FP
+synth_people,042,Person,ហ៊ុន ម៉ាណាត,ហ៊ុន ម៉ាណែត,false,LLM-proposed deviation,KH given-name vowel sub (Khmer),0.8200,true,FP
+synth_people,043,Person,Mohammed Sherif al-Sudani,Mohammed Shia' al-Sudani,false,LLM-proposed deviation,IQ given-name stem swap (Latin),0.7500,true,FP
+synth_people,044,Person,محمد شريف السوداني,محمد شياع السوداني,false,LLM-proposed deviation,IQ given-name stem swap (Arabic),0.6667,false,TN
+synth_people,045,Person,Friedrich Mertz,Friedrich Merz,false,LLM-proposed deviation,DE surname doubled-consonant (Mertz is real surname),0.9000,true,FP
+synth_people,046,Person,Emmanuel Marcon,Emmanuel Macron,false,LLM-proposed deviation,FR surname vowel reorder,0.8472,true,FP
+synth_people,047,Person,Giorgia Meleni,Giorgia Meloni,false,LLM-proposed deviation,IT surname vowel sub,0.8472,true,FP
+synth_people,048,Person,Pedro Sancho,Pedro Sánchez,false,LLM-proposed deviation,ES surname truncation/sub (Sancho is real Spanish surname),0.5000,false,TN
+synth_people,049,Person,Viktor Orbach,Viktor Orbán,false,LLM-proposed deviation,HU surname-ending swap to Germanic,0.5000,false,TN
+synth_people,050,Person,Recep Tayyip Erdem,Recep Tayyip Erdoğan,false,LLM-proposed deviation,TR surname truncation/sub (Erdem is real surname),0.6667,false,TN
+synth_people,051,Person,Javier Mihel,Javier Milei,false,LLM-proposed deviation,AR surname plausible-alternate,0.5000,false,TN
+synth_people,052,Person,Luiz Inácio Lula da Souza,Luiz Inácio Lula da Silva,false,LLM-proposed deviation,BR surname swap to common Portuguese surname,0.8000,true,FP
+synth_people,053,Person,Claudia Steinbaum,Claudia Sheinbaum,false,LLM-proposed deviation,MX surname Yiddish/German collision,0.8951,true,FP
+synth_people,054,Person,Prabowo Subandrio,Prabowo Subianto,false,LLM-proposed deviation,ID surname collision with historical PM Subandrio,0.5000,false,TN
+synth_people,055,Person,Keir Starkey,Keir Starmer,false,LLM-proposed deviation,GB surname plausible-alternate (Starkey is real English surname),0.5000,false,TN
+synth_people,056,Person,Mark Cooney,Mark Carney,false,LLM-proposed deviation,CA surname plausible-alternate (Cooney is real Irish-Canadian surname),0.5000,false,TN
+synth_people,057,Person,Anthony Albano,Anthony Albanese,false,LLM-proposed deviation,AU surname truncation to real Italian surname Albano,0.5000,false,TN
+synth_people,058,Person,Bart De Vries,Bart De Wever,false,LLM-proposed deviation,BE surname swap to common Dutch surname,0.6667,false,TN
+synth_people,059,Person,Anders Kristersson,Ulf Kristersson,false,LLM-proposed deviation,SE given-name sub (Anders is common Swedish),0.5000,false,TN
+synth_people,060,Person,Jonas Gahr Stoltenberg,Jonas Gahr Støre,false,LLM-proposed deviation,NO surname collision with prior Norwegian PM Stoltenberg,0.6667,false,TN
+synth_people,061,Person,Pekka Orpo,Petteri Orpo,false,LLM-proposed deviation,FI given-name sub (Pekka is common Finnish),0.5000,false,TN
+synth_people,062,Person,Mette Henriksen,Mette Frederiksen,false,LLM-proposed deviation,DK surname swap to other Danish patronymic,0.5000,false,TN
+synth_people,063,Person,Micheál Mahon,Micheál Martin,false,LLM-proposed deviation,IE surname swap to other Irish surname (Mahon),0.5000,false,TN
+synth_people,064,Person,Daniel Tusk,Donald Tusk,false,LLM-proposed deviation,PL given-name sub,0.5000,false,TN
+synth_people,065,Person,Antonín Babiš,Andrej Babiš,false,LLM-proposed deviation,CZ given-name sub (Antonín is common Czech),0.5000,false,TN
+synth_people,066,Person,Roman Fico,Robert Fico,false,LLM-proposed deviation,SK given-name sub,0.5000,false,TN
+synth_people,067,Person,Marcel Dan,Nicușor Dan,false,LLM-proposed deviation,RO given-name sub (Marcel is real Romanian),0.5000,false,TN
+synth_people,068,Person,Ante Plenković,Andrej Plenković,false,LLM-proposed deviation,HR given-name sub (Ante is common Croatian),0.5000,false,TN
+synth_people,069,Person,Luís Monteiro,Luís Montenegro,false,LLM-proposed deviation,PT surname swap to related Portuguese surname Monteiro,0.5000,false,TN
+synth_people,070,Person,Halla Jónsdóttir,Halla Tómasdóttir,false,LLM-proposed deviation,IS patronymic swap (different father),0.5000,false,TN
+synth_people,071,Person,Christopher Luxford,Christopher Luxon,false,LLM-proposed deviation,NZ surname plausible-alternate,0.5000,false,TN
+synth_people,072,Person,Cyril Ramatlhodi,Cyril Ramaphosa,false,LLM-proposed deviation,ZA surname collision with real SA politician (Ngoako Ramatlhodi),0.5000,false,TN
+synth_people,073,Person,Tunde Tinubu,Bola Tinubu,false,LLM-proposed deviation,NG given-name sub (Tunde is common Yoruba),0.5000,false,TN
+synth_people,074,Person,William Mutua,William Ruto,false,LLM-proposed deviation,KE surname swap to common Kenyan surname,0.5000,false,TN
+synth_people,075,Person,Bassirou Diomaye Sarr,Bassirou Diomaye Faye,false,LLM-proposed deviation,SN surname swap to common Senegalese surname,0.6667,false,TN
+synth_people,076,Person,Manuel Díaz-Canel,Miguel Díaz-Canel,false,LLM-proposed deviation,CU given-name sub,0.6667,false,TN
+synth_people,077,Person,Bongbong Aquino,Bongbong Marcos,false,LLM-proposed deviation,PH surname swap to opposing political-dynasty surname Aquino,0.5000,false,TN
+synth_people,078,Person,Ahmad Ibrahim,Anwar Ibrahim,false,LLM-proposed deviation,MY given-name sub (collides with historical SG politician Ahmad Ibrahim),0.5000,false,TN
+synth_people,079,Person,Wladimir Putin,Vladimir Putin,true,LLM-proposed deviation,RU DE/PL transliteration of Cyrillic В (V/W),0.9500,true,TP
+synth_people,080,Person,Vladimir Vladimirovich Putin,Vladimir Putin,true,LLM-proposed deviation,RU patronymic added,0.7143,true,TP
+synth_people,081,Person,V. Putin,Vladimir Putin,true,LLM-proposed deviation,RU given-name reduced to initial,0.5000,false,FN
+synth_people,082,Person,Vladmir Putin,Vladimir Putin,true,LLM-proposed deviation,tiny defect (missing i in given name),0.9375,true,TP
+synth_people,083,Person,Volodymyr Zelensky,Volodymyr Zelenskyy,true,LLM-proposed deviation,UA single-y vs double-y romanisation,0.9500,true,TP
+synth_people,084,Person,Wolodymyr Selenskyj,Volodymyr Zelenskyy,true,LLM-proposed deviation,UA German transliteration (W-/S-/-yj),0.9000,true,TP
+synth_people,085,Person,Hsi Chin-ping,Xi Jinping,true,LLM-proposed deviation,CN Wade-Giles vs Pinyin,0.6276,false,FN
+synth_people,086,Person,Mao Tse-tung,Mao Zedong,true,LLM-proposed deviation,CN Wade-Giles vs Pinyin (historical),0.9500,true,TP
+synth_people,087,Person,Mohamed bin Salman,Mohammed bin Salman,true,LLM-proposed deviation,SA single-m vs double-m transliteration,0.9667,true,TP
+synth_people,088,Person,Muhammad bin Salman,Mohammed bin Salman,true,LLM-proposed deviation,SA Mu/Mo transliteration variants,0.9667,true,TP
+synth_people,089,Person,Moammar Qaddafi,Muammar Gaddafi,true,LLM-proposed deviation,LY competing Arabic transliterations,0.9000,true,TP
+synth_people,090,Person,Usama bin Ladin,Osama bin Laden,true,LLM-proposed deviation,SA UN-style vs media-style transliteration,0.8799,true,TP
+synth_people,091,Person,Saddam Husayn,Saddam Hussein,true,LLM-proposed deviation,IQ scholarly vs popular Arabic transliteration,0.9500,true,TP
+synth_people,092,Person,Hasan Rohani,Hassan Rouhani,true,LLM-proposed deviation,IR Persian transliteration variant,0.8786,true,TP
+synth_people,093,Person,Bachar el-Assad,Bashar al-Assad,true,LLM-proposed deviation,SY French vs English transliteration,0.7600,true,TP
+synth_people,094,Person,Mahmood Ahmadinezhad,Mahmoud Ahmadinejad,true,LLM-proposed deviation,IR Persian transliteration variant,0.8288,true,TP
+synth_people,095,Person,Recep Tayyip Erdogan,Recep Tayyip Erdoğan,true,LLM-proposed deviation,TR Turkish ğ stripped,1.0000,true,TP
+synth_people,096,Person,Aleksandar Vucic,Aleksandar Vučić,true,LLM-proposed deviation,RS diacritics stripped,1.0000,true,TP
+synth_people,097,Person,Andrej Plenkovic,Andrej Plenković,true,LLM-proposed deviation,HR diacritic stripped,1.0000,true,TP
+synth_people,098,Person,Francois Hollande,François Hollande,true,LLM-proposed deviation,FR cedilla stripped,1.0000,true,TP
+synth_people,099,Person,Donlad Trump,Donald Trump,true,LLM-proposed deviation,tiny defect (letter transposition al→la),0.8472,true,TP
+synth_people,100,Person,Olaf Schloz,Olaf Scholz,true,LLM-proposed deviation,tiny defect (letter transposition ho→oh),0.8472,true,TP
+synth_people,101,Person,Anglea Merkel,Angela Merkel,true,LLM-proposed deviation,tiny defect (letter transposition el→le),0.8472,true,TP
+synth_people,102,Person,Boris Jonson,Boris Johnson,true,LLM-proposed deviation,tiny defect (missing h in surname),0.9286,true,TP
+synth_people,103,Person,Justin Trudoau,Justin Trudeau,true,LLM-proposed deviation,tiny defect (letter transposition ea→oa),0.8673,true,TP
+synth_people,104,Person,"Putin, Vladimir",Vladimir Putin,true,LLM-proposed deviation,RU last-first comma form,1.0000,true,TP
+synth_people,105,Person,Sergey Viktorovich Lavrov,Sergey Lavrov,true,LLM-proposed deviation,RU patronymic added,0.7143,true,TP
+synth_people,106,Person,Kim Jong-un,Kim Jong Un,true,LLM-proposed deviation,KP hyphenation + case in given name,1.0000,true,TP
+synth_people,107,Person,Jean Marie Le Pen,Jean-Marie Le Pen,true,LLM-proposed deviation,FR hyphen vs space in given name,1.0000,true,TP
+synth_people,108,Person,Bibi Netanyahu,Benjamin Netanyahu,true,LLM-proposed deviation,IL diminutive nickname (Bibi),0.5000,false,FN
+synth_companies,051,Company,"Bowne of Atlanta, Inc.","Bowne of Boston, Inc.",false,LLM-proposed deviation,city qualifier swap,0.7059,true,FP
+synth_companies,052,Company,"Bowne of Chicago, Inc.","Bowne of Cleveland, Inc.",false,LLM-proposed deviation,city qualifier swap (shared C-),0.7059,true,FP
+synth_companies,053,Company,"Bowne of Dallas, L.P.","Bowne of Phoenix, Inc.",false,LLM-proposed deviation,city qualifier + entity-form swap,0.5000,false,TN
+synth_companies,054,Company,"Bowne of New York City, L.L.C.","Bowne of Los Angeles, Inc.",false,LLM-proposed deviation,city qualifier swap,0.3348,false,TN
+synth_companies,055,Company,"Bowne of South Bend, Inc.","Bowne of Boston, Inc.",false,LLM-proposed deviation,city qualifier swap (shared S-/B-),0.5714,false,TN
+synth_companies,056,Company,"Bowne Global Solutions (France), S.A.R.L.","Bowne Global Solutions (Germany), G.m.b.H.",false,LLM-proposed deviation,country qualifier swap,0.7389,true,FP
+synth_companies,057,Company,"Bowne Global Solutions (Spain), S.L.","Bowne Global Solutions (Netherlands), B.V.",false,LLM-proposed deviation,country qualifier swap,0.5469,false,TN
+synth_companies,058,Company,"Bowne Global Solutions (Ireland), Ltd.","Bowne Global Solutions Japan, Inc.",false,LLM-proposed deviation,country qualifier swap (paren vs unparen form),0.7389,true,FP
+synth_companies,059,Company,Bowne Global Solutions II (Sweden) AB,Bowne Global Solutions II (Finland) AB,false,LLM-proposed deviation,country qualifier swap (with II marker shared),0.8462,true,FP
+synth_companies,060,Company,Bowne Global Solutions II (U.K.) Limited,"Bowne Global Solutions II Canada, Inc.",false,LLM-proposed deviation,country qualifier swap on II series,0.8082,true,FP
+synth_companies,061,Company,"Bowne Global Solutions, Inc.","Bowne Global Solutions II, Inc.",false,LLM-proposed deviation,Roman-numeral series marker (original vs II),0.9390,true,FP
+synth_companies,062,Company,"Bowne International, S.A.R.L.",Bowne International de Mexico S.A. de C.V.,false,LLM-proposed deviation,country qualifier addition,0.5752,false,TN
+synth_companies,063,Company,"Bowne Business Solutions, Inc.","Bowne Business Enterprises, L.P.",false,LLM-proposed deviation,functional-token swap (Solutions/Enterprises),0.4815,false,TN
+synth_companies,064,Company,"Bowne Enterprise Solutions, L.L.C.","Bowne Technology Enterprise, L.L.C.",false,LLM-proposed deviation,functional-token reorder + swap,0.7246,true,FP
+synth_companies,065,Company,"Bowne Litigation Solutions, L.P.","Bowne Solutions, L.L.C.",false,LLM-proposed deviation,prefix-token addition,0.4643,false,TN
+synth_companies,066,Company,"Bowne Localization, Inc.","Bowne Global Solutions, Inc.",false,LLM-proposed deviation,line-of-business token swap,0.5986,false,TN
+synth_companies,067,Company,"Mendez, B.V.B.A","Mendez Nederland, B.V.",false,LLM-proposed deviation,country-token addition,0.8211,true,FP
+synth_companies,068,Company,"Mendez, Denmark A/S",Mendez Norge A/S,false,LLM-proposed deviation,country-token swap,0.6800,false,TN
+synth_companies,069,Company,"L & H Sweden, AB","L & H Mendez Sweden, AB",false,LLM-proposed deviation,brand-token addition mid-name,0.9500,true,FP
+synth_companies,070,Company,"L & H Editions, S.A.","L & H Linguex, S.A.",false,LLM-proposed deviation,brand-token swap,0.7297,true,FP
+synth_companies,071,Company,"Bowne Global Solutions Denmark, A/S",Bowne Global Solutions II Denmark A/S,false,LLM-proposed deviation,II series marker addition,0.9519,true,FP
+synth_companies,072,Company,Bowne Global Solutions II France S.A.S.,"Bowne Global Solutions (France), S.A.R.L.",false,LLM-proposed deviation,II marker + entity-form swap same country,0.7994,true,FP
+synth_companies,073,Company,Blackstone Real Estate Partners V L.P.,Blackstone Real Estate Partners VI L.P.,false,LLM-proposed deviation,Roman-numeral vintage swap (PE fund series),0.7297,true,FP
+synth_companies,074,Company,Blackstone Real Estate Partners IV L.P.,Blackstone Real Estate Partners V L.P.,false,LLM-proposed deviation,Roman-numeral vintage swap,0.7297,true,FP
+synth_companies,075,Company,Blackstone Capital Partners VII L.P.,Blackstone Capital Partners VIII L.P.,false,LLM-proposed deviation,Roman-numeral vintage swap,0.6970,false,TN
+synth_companies,076,Company,KKR Asian Fund III L.P.,KKR Asian Fund IV L.P.,false,LLM-proposed deviation,Roman-numeral vintage swap,0.6977,false,TN
+synth_companies,077,Company,KKR North America Fund XII L.P.,KKR North America Fund XIII L.P.,false,LLM-proposed deviation,Roman-numeral vintage swap (XII/XIII),0.7917,true,FP
+synth_companies,078,Company,Apollo Investment Fund VIII L.P.,Apollo Investment Fund IX L.P.,false,LLM-proposed deviation,Roman-numeral vintage swap (VIII/IX),0.6977,false,TN
+synth_companies,079,Company,Carlyle Partners VII L.P.,Carlyle Partners VIII L.P.,false,LLM-proposed deviation,Roman-numeral vintage swap,0.6667,false,TN
+synth_companies,080,Company,Bain Capital Fund X L.P.,Bain Capital Fund XI L.P.,false,LLM-proposed deviation,Roman-numeral vintage swap (X/XI),0.6970,false,TN
+synth_companies,081,Company,Goldman Sachs Capital Partners V L.P.,Goldman Sachs Capital Partners VI L.P.,false,LLM-proposed deviation,Roman-numeral vintage swap,0.7674,true,FP
+synth_companies,082,Company,Goldman Sachs Mortgage Loan Trust 2004-1,Goldman Sachs Mortgage Loan Trust 2004-2,false,LLM-proposed deviation,SPV trust series suffix swap (-1/-2),0.8116,true,FP
+synth_companies,083,Company,Goldman Sachs Mortgage Loan Trust 2004-1,Goldman Sachs Mortgage Loan Trust 2005-1,false,LLM-proposed deviation,SPV trust vintage-year swap,0.8485,true,FP
+synth_companies,084,Company,Citigroup Mortgage Loan Trust 2007-AHL1,Citigroup Mortgage Loan Trust 2007-AHL2,false,LLM-proposed deviation,SPV trust tranche-marker swap,0.8214,true,FP
+synth_companies,085,Company,Bear Stearns Asset Backed Securities Trust 2006-2,Bear Stearns Asset Backed Securities Trust 2007-2,false,LLM-proposed deviation,SPV trust vintage swap,0.8485,true,FP
+synth_companies,086,Company,Wells Fargo Mortgage Backed Securities Trust 2005-AR16,Wells Fargo Mortgage Backed Securities Trust 2006-AR16,false,LLM-proposed deviation,SPV trust vintage swap,0.8571,true,FP
+synth_companies,087,Company,JPMorgan Mortgage Trust Series 2007-1,JPMorgan Mortgage Trust Series 2007-2,false,LLM-proposed deviation,SPV trust series-suffix swap,0.7797,true,FP
+synth_companies,088,Company,Citigroup Capital Trust I,Citigroup Capital Trust II,false,LLM-proposed deviation,Roman-numeral series swap (capital-trust shelf),0.6154,false,TN
+synth_companies,089,Company,Citigroup Capital Trust XV,Citigroup Capital Trust XX,false,LLM-proposed deviation,Roman-numeral series swap (XV/XX),0.6154,false,TN
+synth_companies,090,Company,ICBC (Asia) Limited,ICBC (London) plc,false,LLM-proposed deviation,jurisdiction-paren swap + form change,0.3704,false,TN
+synth_companies,091,Company,Bank of China (Hong Kong) Limited,Bank of China (Singapore) Limited,false,LLM-proposed deviation,jurisdiction-paren swap (HK/SG),0.6223,false,TN
+synth_companies,092,Company,Bank of China (Hong Kong) Limited,Bank of China (Australia) Limited,false,LLM-proposed deviation,jurisdiction-paren swap (HK/AU),0.6223,false,TN
+synth_companies,093,Company,CCB International Capital Corporation Limited,CCB International (Holdings) Limited,false,LLM-proposed deviation,structural-token swap (Capital Corp / Holdings),0.6468,false,TN
+synth_companies,094,Company,Mitsubishi UFJ Trust and Banking Corporation,Mitsubishi UFJ Lease and Finance Corporation,false,LLM-proposed deviation,line-of-business mid-name swap (Trust/Lease),0.6303,false,TN
+synth_companies,095,Company,Sumitomo Mitsui Trust Bank Limited,Sumitomo Mitsui Banking Corporation,false,LLM-proposed deviation,structural-token swap (Trust Bank / Banking),0.6713,false,TN
+synth_companies,096,Company,Mizuho Securities Co. Ltd.,Mizuho Trust & Banking Co. Ltd.,false,LLM-proposed deviation,line-of-business mid-name swap (Securities/Trust & Banking),0.6686,false,TN
+synth_companies,097,Company,Banco Santander S.A.,Banco Santander México S.A.,false,LLM-proposed deviation,country-token addition mid-name,0.9231,true,FP
+synth_companies,098,Company,Banco Santander S.A.,Banco Santander Chile S.A.,false,LLM-proposed deviation,country-token addition mid-name,0.9375,true,FP
+synth_companies,099,Company,Banco Santander México S.A.,Banco Santander Chile S.A.,false,LLM-proposed deviation,sister-country-sub swap,0.7143,true,FP
+synth_companies,100,Company,BNP Paribas Securities Services,BNP Paribas Personal Finance,false,LLM-proposed deviation,line-of-business swap (Securities/Personal Finance),0.5319,false,TN
+synth_people,109,Person,Elon Mosk,Elon Musk,false,LLM-proposed deviation,surname single-char sub (vowel),0.8403,true,FP
+synth_people,110,Person,Mark Zuckermann,Mark Zuckerberg,false,LLM-proposed deviation,surname swap to plausible-alt German-Jewish surname,0.5000,false,TN
+synth_people,111,Person,Jeff Brezos,Jeff Bezos,false,LLM-proposed deviation,surname single-char insertion,0.9167,true,FP
+synth_people,112,Person,Bill Cates,Bill Gates,false,LLM-proposed deviation,surname swap (Cates is real English surname),0.8200,true,FP
+synth_people,113,Person,Larry Allison,Larry Ellison,false,LLM-proposed deviation,surname swap (Allison is real surname),0.8673,true,FP
+synth_people,114,Person,Tom Cook,Tim Cook,false,LLM-proposed deviation,given-name sub,0.5000,false,TN
+synth_people,115,Person,Sandeep Pichai,Sundar Pichai,false,LLM-proposed deviation,given-name sub (Sandeep is common Indian),0.5000,false,TN
+synth_people,116,Person,Satya Nandela,Satya Nadella,false,LLM-proposed deviation,surname swap to plausible-alt Indian surname,0.8673,true,FP
+synth_people,117,Person,Harry Page,Larry Page,false,LLM-proposed deviation,given-name sub,0.8200,true,FP
+synth_people,118,Person,Jansen Huang,Jensen Huang,false,LLM-proposed deviation,given-name sub (Jansen is Dutch),0.8472,true,FP
+synth_people,119,Person,Lionel Bessi,Lionel Messi,false,LLM-proposed deviation,surname swap (Bessi is real Italian surname),0.8200,true,FP
+synth_people,120,Person,Cristiano Ronaldinho,Cristiano Ronaldo,false,LLM-proposed deviation,surname collision with real different Brazilian footballer,0.5000,false,TN
+synth_people,121,Person,Kylian Mbembe,Kylian Mbappé,false,LLM-proposed deviation,surname collision with real Cameroonian philosopher Achille Mbembe,0.5000,false,TN
+synth_people,122,Person,Roger Federman,Roger Federer,false,LLM-proposed deviation,surname swap to plausible-alt,0.5000,false,TN
+synth_people,123,Person,Selena Williams,Serena Williams,false,LLM-proposed deviation,given-name sub,0.8472,true,FP
+synth_people,124,Person,Tom Brody,Tom Brady,false,LLM-proposed deviation,surname single-char sub (Brody is real surname),0.8200,true,FP
+synth_people,125,Person,LeBron Jones,LeBron James,false,LLM-proposed deviation,surname swap (both common),0.5000,false,TN
+synth_people,126,Person,Michael Jorgan,Michael Jordan,false,LLM-proposed deviation,surname single-char sub,0.8472,true,FP
+synth_people,127,Person,Tigran Woods,Tiger Woods,false,LLM-proposed deviation,given-name swap (Tigran is Armenian),0.5000,false,TN
+synth_people,128,Person,Rafael Nadar,Rafael Nadal,false,LLM-proposed deviation,surname swap (Nadar is real Tamil surname),0.8200,true,FP
+synth_people,129,Person,Boris Abramovich,Roman Abramovich,false,LLM-proposed deviation,given-name sub,0.5000,false,TN
+synth_people,130,Person,Mikhail Khordorovsky,Mikhail Khodorkovsky,false,LLM-proposed deviation,surname syllable rearrangement,0.9201,true,FP
+synth_people,131,Person,Igor Sechev,Igor Sechin,false,LLM-proposed deviation,surname-suffix swap -in/-ev,0.5000,false,TN
+synth_people,132,Person,Alisher Asilov,Alisher Usmanov,false,LLM-proposed deviation,surname swap to plausible-alt Uzbek,0.5000,false,TN
+synth_people,133,Person,Dmitry Mendeleev,Dmitry Medvedev,false,LLM-proposed deviation,surname collision with real chemist Mendeleev,0.5000,false,TN
+synth_people,134,Person,Andrei Navalny,Alexei Navalny,false,LLM-proposed deviation,given-name sub,0.5000,false,TN
+synth_people,135,Person,Sergey Prigozhin,Yevgeny Prigozhin,false,LLM-proposed deviation,given-name sub,0.5000,false,TN
+synth_people,136,Person,Boris Vekselberg,Viktor Vekselberg,false,LLM-proposed deviation,given-name sub,0.5000,false,TN
+synth_people,137,Person,Igor Deripaska,Oleg Deripaska,false,LLM-proposed deviation,given-name sub,0.5000,false,TN
+synth_people,138,Person,Viktor Yakunin,Vladimir Yakunin,false,LLM-proposed deviation,given-name sub,0.5000,false,TN
+synth_people,139,Person,Hugo Chacón,Hugo Chávez,false,LLM-proposed deviation,surname swap (Chacón is real Spanish surname),0.5000,false,TN
+synth_people,140,Person,Fernando Castro,Fidel Castro,false,LLM-proposed deviation,given-name sub,0.5000,false,TN
+synth_people,141,Person,Raúl Castillo,Raúl Castro,false,LLM-proposed deviation,surname swap (Castillo is real Spanish),0.5000,false,TN
+synth_people,142,Person,Daniel Ortiz,Daniel Ortega,false,LLM-proposed deviation,surname swap (Ortiz is real Spanish),0.5000,false,TN
+synth_people,143,Person,Evo Morillo,Evo Morales,false,LLM-proposed deviation,surname swap (Morillo is real Spanish),0.5000,false,TN
+synth_people,144,Person,Hugo Beltrán,Hugo Banzer,false,LLM-proposed deviation,surname swap (Beltrán is real Spanish),0.5000,false,TN
+synth_people,145,Person,Augusto Pinosa,Augusto Pinochet,false,LLM-proposed deviation,surname truncation/sub,0.5000,false,TN
+synth_people,146,Person,Carlos Saldívar,Carlos Salinas,false,LLM-proposed deviation,surname swap (Saldívar is real Mexican),0.5000,false,TN
+synth_people,147,Person,Luis Echegaray,Luis Echeverría,false,LLM-proposed deviation,surname swap (Echegaray is real Spanish — Nobel laureate),0.5000,false,TN
+synth_people,148,Person,Roberto Fox,Vicente Fox,false,LLM-proposed deviation,given-name sub,0.5000,false,TN
+synth_people,149,Person,Lee Kuan Hsien,Lee Kuan Yew,false,LLM-proposed deviation,given-name final-syllable sub (real Chinese name),0.6667,false,TN
+synth_people,150,Person,Mahir Mohamad,Mahathir Mohamad,false,LLM-proposed deviation,given-name truncation/sub (Mahir is distinct Arabic name),0.5000,false,TN
+synth_people,151,Person,Chen Kai-shek,Chiang Kai-shek,false,LLM-proposed deviation,surname swap (Chen and Chiang both real Chinese),0.6667,false,TN
+synth_people,152,Person,Sukamto,Sukarno,false,LLM-proposed deviation,surname swap to plausible-alt Indonesian,0.0000,false,TN
+synth_people,153,Person,Ferdinand Marquez,Ferdinand Marcos,false,LLM-proposed deviation,surname swap (Marquez is real Spanish-Filipino),0.5000,false,TN
+synth_people,154,Person,Park Joon-hee,Park Chung-hee,false,LLM-proposed deviation,given-name sub (real Korean name),0.6667,false,TN
+synth_people,155,Person,Aung San Suu Win,Aung San Suu Kyi,false,LLM-proposed deviation,surname swap (Win is real Burmese),0.7500,true,FP
+synth_people,156,Person,Imran Khaja,Imran Khan,false,LLM-proposed deviation,surname swap (Khaja is real Pakistani),0.5000,false,TN
+synth_people,157,Person,Pervez Musafir,Pervez Musharraf,false,LLM-proposed deviation,surname swap (Musafir is real Arabic-origin),0.5000,false,TN
+synth_people,158,Person,Indira Gokhale,Indira Gandhi,false,LLM-proposed deviation,surname swap (Gokhale is real Indian — historical politician),0.5000,false,TN
