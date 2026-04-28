@@ -17,6 +17,7 @@ from typing import Callable, Dict
 
 from .levenshtein import levenshtein_baseline
 from .compare_parts_orig import wrapped_compare_parts_orig
+from .orchestration import orchestrated_compare_parts_orig
 
 
 Comparator = Callable[[str, str, str], float]
@@ -25,6 +26,7 @@ Comparator = Callable[[str, str, str], float]
 COMPARATORS: Dict[str, Comparator] = {
     "levenshtein": levenshtein_baseline,
     "compare_parts_orig": wrapped_compare_parts_orig,
+    "compare_parts_orig_orchestrated": orchestrated_compare_parts_orig,
 }
 
 
