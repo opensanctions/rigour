@@ -32,15 +32,7 @@ from itertools import chain, zip_longest
 from typing import Dict, List, Set, Tuple
 
 from rapidfuzz.distance import Levenshtein
-from followthemoney import model
-from followthemoney.names import schema_type_tag
-from rigour.names import (
-    Name,
-    NamePart,
-    NameTypeTag,
-    align_person_name_order,
-    analyze_names,
-)
+from rigour.names import NamePart
 
 
 # Token boundary in the joined string used by the alignment.
@@ -286,11 +278,9 @@ def compare_parts_orig(
     """Score the alignment of two NamePart lists.
 
     Inputs are residue parts (post-pruning, post-symbol-pairing,
-    already tag-sorted by the caller — but the harness's wrapper
-    skips symbol pairing for now and feeds the full part lists).
-    Output is one `Comparison` per cluster, including solo records
-    for unmatched parts. Every input NamePart appears in exactly one
-    `Comparison`.
+    already tag-sorted by the caller). Output is one `Comparison`
+    per cluster, including solo records for unmatched parts. Every
+    input NamePart appears in exactly one `Comparison`.
     """
     align = _align(qry_parts, res_parts)
     clusters = _cluster(qry_parts, res_parts, align)
@@ -298,61 +288,3 @@ def compare_parts_orig(
         Comparison(qps=list(c.qps), rps=list(c.rps), score=_score(c, align, bias))
         for c in clusters
     ]
-
-
-# ---------------------------------------------------------------------------
-# Wrapped Comparator for the harness registry
-# ---------------------------------------------------------------------------
-
-
-def _schema_to_tag(schema: str) -> NameTypeTag:
-    sch = model.get(schema)
-    if sch is None:
-        return NameTypeTag.UNK
-    return schema_type_tag(sch)
-
-
-def wrapped_compare_parts_orig(name1: str, name2: str, schema: str) -> float:
-    """Comparator adapter: analyze_names + compare_parts_orig + simple aggregate.
-
-    This wrapper is intentionally minimal — no pair_symbols, no
-    extra-name / family-name weight policies, no literal-1.0 override.
-    Those land when `comparators/orchestration.py` lifts the full
-    match.py shape. For now, this exercises the prototype in isolation
-    so we can see the residue-distance behaviour on cases.csv before
-    layering policy on top.
-
-    Aggregate: average score across all comparisons including solos
-    (solos contribute 0). Equivalent to running `compare_parts_orig`
-    with all comparisons weighted at 1.0.
-    """
-    type_tag = _schema_to_tag(schema)
-    if type_tag == NameTypeTag.UNK:
-        return 0.0
-
-    qry_set = analyze_names(type_tag, [name1])
-    res_set = analyze_names(type_tag, [name2])
-    if not qry_set or not res_set:
-        return 0.0
-
-    qry: Name = next(iter(qry_set))
-    res: Name = next(iter(res_set))
-
-    # Literal short-circuit on comparable form.
-    if qry.comparable == res.comparable:
-        return 1.0
-
-    qry_parts = list(qry.parts)
-    res_parts = list(res.parts)
-
-    if type_tag == NameTypeTag.PER:
-        qry_parts, res_parts = align_person_name_order(qry_parts, res_parts)
-    else:
-        qry_parts = NamePart.tag_sort(qry_parts)
-        res_parts = NamePart.tag_sort(res_parts)
-
-    comparisons = compare_parts_orig(qry_parts, res_parts)
-    if not comparisons:
-        return 0.0
-
-    return sum(c.score for c in comparisons) / len(comparisons)

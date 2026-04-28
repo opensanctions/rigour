@@ -860,22 +860,22 @@ trade-off curve in microcosm — visible from a single run.
 
 ### `compare_parts_orig` prototype (in the harness)
 
-The Python prototype lives in
+The Python prototype residue function lives in
 `contrib/name_comparison/comparators/compare_parts_orig.py`.
 **The `_orig` suffix is intentional**: it marks this as the
 original Python reference, and reserves the unsuffixed name
 `compare_parts` for the eventual Rust port in
-`rigour.names.compare_parts`. During the porting phase both
-implementations exist side-by-side in the harness so we can
-A/B them on `cases.csv` and assert parity (within float
-tolerance) before retiring `_orig`.
+`rigour.names.compare_parts`. During phase 3 both
+implementations live side-by-side in the harness, registered
+as separate comparators (`compare_python` vs `compare_rust`),
+so `qsv diff` between their per-case outputs is the parity
+check.
 
 Phase 2 (spec iteration) operates on `_orig`. Phase 3 (Rust
 port) reuses `_orig`'s settled spec as the reference for the
 Rust implementation.
 
-Internal three-function decomposition inside `_orig` during
-iteration:
+Internal three-function decomposition inside `_orig`:
 
 ```python
 def compare_parts_orig(qry, res) -> List[Comparison]:
@@ -885,20 +885,21 @@ def compare_parts_orig(qry, res) -> List[Comparison]:
 ```
 
 Iterating one spec decision means swapping one of the three
-internal functions and registering a new variant in
-`COMPARATORS`
-(`compare_parts_orig_geometric_mean`,
-`compare_parts_orig_fraction_budget`, …). When the spec
-settles, the variants collapse into one `compare_parts_orig`
-body that becomes the reference for the Rust port.
+internal functions; the variant registers as a new comparator
+in `COMPARATORS` under `compare_python_<variant>`
+(e.g. `compare_python_geometric_mean`,
+`compare_python_fraction_budget`). When the spec settles,
+the variants collapse into one `compare_parts_orig` body
+that becomes the reference for the Rust port.
 
-The harness's `orchestration.py` wraps the prototype into a
-`(name1, name2) -> float` Comparator (via `analyze_names` +
-`pair_symbols` + tag-sort + `compare_parts_orig` + weight
-policies + aggregation) for the registry. The wrapper
-bridges the harness's string-level interface to the
-part-level primitive — keeping the primitive unaware of
-weights / threshold / `Match`.
+The harness's `orchestration.py` wraps the residue function
+into a `(name1, name2, schema) -> float` Comparator (via
+`analyze_names` + `pair_symbols` + tag-sort +
+`compare_parts_orig` + weight policies + aggregation) and
+registers it as `compare_python`. The wrapper bridges the
+harness's string-level interface to the part-level primitive
+— keeping the primitive unaware of weights / threshold /
+`Match`.
 
 ### Iteration loop
 
@@ -1098,12 +1099,12 @@ Takes the residue function as a parameter. Different
 comparators plug different residue functions in without
 each rewriting the pipeline.
 
-**`compare_parts_orig.py`** — the Python prototype. The
-`_orig` suffix marks it as the original Python reference;
-the unsuffixed name `compare_parts` is reserved for the
-eventual Rust port (see *Naming during the porting phase*
-below). Same signature and semantics as the eventual rigour
-symbol; phase 2 iterates this file's body.
+**`compare_parts_orig.py`** — the Python prototype residue
+function. The `_orig` suffix marks it as the original Python
+reference; the unsuffixed name `compare_parts` is reserved
+for the eventual Rust port (see *Naming during the porting
+phase* below). Same signature and semantics as the eventual
+rigour symbol; phase 2 iterates this file's body.
 
 Internal three-function decomposition:
 
@@ -1114,40 +1115,54 @@ def compare_parts_orig(qry, res) -> List[Comparison]:
     return [_score(c, align) for c in clusters]
 ```
 
-Each iteration on the spec is a new variant tuple
-(`_align_default`, `_cluster_connectivity`,
-`_score_geometric`, etc.) registered as a separate entry
-in `COMPARATORS`. The harness diffs between them via
-`qsv diff`. When the spec settles, the variants collapse
-into one `compare_parts_orig` body that becomes the spec
-reference for the Rust port.
+`compare_parts_orig` is a *function*, not a registered
+comparator. The registered comparator is `compare_python`
+(in `orchestration.py`) — the full pipeline that uses
+`compare_parts_orig` as its residue function. Spec
+iterations register variants in `COMPARATORS` under names
+like `compare_python_geometric_mean`, each one wrapping a
+sibling residue function (or a `compare_parts_orig` invoked
+with different internal-stage choices).
 
 **`comparators/__init__.py`** — the registry:
 ```python
 COMPARATORS: Dict[str, Comparator] = {
     "levenshtein": levenshtein_baseline,
-    "comparable": comparable_baseline,
-    "compare_parts_orig": compare_parts_orig_default,
-    "compare_parts_orig_geometric_mean": compare_parts_orig_v2,
+    "compare_python": compare_python,                 # default
+    # added during phase 2 spec iteration:
+    # "compare_python_geometric_mean": compare_python_v2,
+    # "compare_python_fraction_budget": compare_python_v3,
     # added in phase 3 once the Rust port lands:
-    # "compare_parts": rigour.names.compare_parts,
-    ...
+    # "compare_rust": compare_rust,
 }
+
+if _LOGICV2_AVAILABLE:
+    COMPARATORS["logicv2"] = logicv2_baseline         # frozen reference
 ```
 
 ### Naming during the porting phase
 
-Phase 3 (Rust port) creates `rigour.names.compare_parts` —
-the unsuffixed name. The harness adds a new
-`comparators/compare_parts.py` that wraps the Rust call and
-registers it in `COMPARATORS` alongside `compare_parts_orig`.
-Both run on every harness invocation; `qsv diff` between the
-two outputs is the parity check.
+Two namespaces in tension, intentionally kept distinct:
+
+- **Residue function**: `compare_parts_orig` (Python
+  prototype) → `compare_parts` (Rust port at
+  `rigour.names.compare_parts`).
+- **Comparator** (full pipeline registered in
+  `COMPARATORS`): `compare_python` (uses Python residue) →
+  `compare_rust` (uses Rust residue) added in phase 3
+  alongside `compare_python`.
+
+The orchestration is identical between `compare_python` and
+`compare_rust` — only the residue function changes. Both
+run on every harness invocation during phase 3; `qsv diff`
+between their per-case outputs is the parity check.
 
 Once the Rust port hits parity-within-tolerance on
-`cases.csv`, `compare_parts_orig` retires — the Python
-implementation is no longer load-bearing. Until then, it's
-the reference for what the Rust port has to reproduce.
+`cases.csv`, `compare_parts_orig` retires (the Python
+prototype is no longer load-bearing) and `compare_python`
+also retires. `compare_rust` becomes the canonical
+comparator. Until then, the Python prototype is the
+reference for what the Rust port has to reproduce.
 
 ### Layer 3 — frozen logic_v2 reference (one-time)
 
@@ -1274,6 +1289,23 @@ phases gate on earlier ones.
      exactly the failure modes the design predicts
      (cross-script, reordering, abbreviation all at
      F1 = 0).
+   - ✅ `comparators/policies.py` lifts SYM_SCORES,
+     SYM_WEIGHTS, EXTRAS_WEIGHTS, weight_extra_match plus
+     the four ScoringConfig defaults from logic_v2.
+   - ✅ `comparators/orchestration.py` implements
+     `compare_python` — the simplified `match_name_symbolic`
+     shape calling `compare_parts_orig` for the residue.
+     F1 = 0.885 on cases.csv.
+   - ✅ `comparators/compare_parts_orig.py` — Python residue
+     function with three-stage decomposition.
+   - ✅ Frozen logic_v2 reference: `comparators/logicv2.py`
+     wraps the real `nomenklatura.matching.logic_v2.LogicV2.compare`
+     (soft-deps); `run.py --frozen` writes
+     `run_data/logicv2-frozen.csv` (committed; gitignore
+     exception on `*-frozen.csv`). F1 = 0.896. Diff against
+     `compare_python` is 4 cases out of 310 (3 vessel-schema
+     cases via `match_object_names`'s separate path, 1
+     initials handling).
    - **Pending:** yente fixtures (`qarin_negatives`,
      `un_sc_positives`, `us_congress`) added as additional
      `case_group` values in `cases.csv`. Population is a
@@ -1283,15 +1315,6 @@ phases gate on earlier ones.
      mirrors. Single source of truth read by both the
      Rust port (eventually) and the harness's prototype
      (during phase 2).
-   - **Pending:** lift logic_v2 orchestration into the harness:
-     `comparators/policies.py` (constants from nomenklatura's
-     `magic.py` + `util.py`), `comparators/orchestration.py`
-     (simplified `match_name_symbolic` shape), the
-     `comparators/compare_parts_orig.py` prototype.
-   - **Pending:** frozen logic_v2 reference dump
-     (`run_data/logicv2-frozen.csv`) — generated once from
-     inside nomenklatura's `name_benchmark/`, committed
-     here as a reference baseline for iteration diffs.
 
 2. **Spec iteration on the harness (rigour Python only,
    no Rust).**
@@ -1300,9 +1323,12 @@ phases gate on earlier ones.
      curve) as variants of the
      `compare_parts_orig` prototype's three internal
      functions (`_align`, `_cluster`, `_score`).
-   - Each iteration: register variant in `COMPARATORS`,
-     run, `qsv diff` against the previous best run + the
-     frozen logic_v2 baseline + ground truth.
+   - Each variant registers in `COMPARATORS` under
+     `compare_python_<variant>`, e.g.
+     `compare_python_geometric_mean`. Run via
+     `python run.py -c compare_python_<variant>`, `qsv diff`
+     against `compare_python` (current default) and
+     `logicv2-frozen.csv` (frozen reference).
    - Acceptance: harness numbers stable, FP-rate / recall on
      the yente fixtures equal-or-better than baseline. Spec
      decisions move from "still open" to "resolved" in this
@@ -1321,14 +1347,15 @@ phases gate on earlier ones.
    - Rust-side unit tests for cost table, traceback, and
      part-boundary cursor logic.
    - Harness adds a new `comparators/compare_parts.py` that
-     adapts `rigour.names.compare_parts` and registers it
-     in `COMPARATORS` alongside the existing
-     `compare_parts_orig`. Both run in every harness
-     invocation; `qsv diff` between their per-case dumps is
-     the parity check.
+     adapts `rigour.names.compare_parts` (Rust) and
+     registers `compare_rust` as a sibling of
+     `compare_python` — same orchestration, different
+     residue function. Both run in every harness invocation
+     until parity is met.
    - Acceptance: per-case parity within float tolerance on
-     `cases.csv`; once met, `compare_parts_orig` retires
-     (file deleted, registry entries removed).
+     `cases.csv` between `compare_python` and `compare_rust`;
+     once met, `compare_parts_orig` and `compare_python`
+     retire (files deleted, registry entries removed).
 
 4. **Nomenklatura migration.**
    - Replace `weighted_edit_similarity`'s body with a wrapper
@@ -1388,13 +1415,17 @@ phases gate on earlier ones.
   (`rigour/data/names/compare.py`) artifacts. Single source
   of truth read by the harness's prototype during phase 2
   and the Rust port after.
-- **`compare_parts_orig` (harness Python prototype) and
-  `compare_parts` (Rust port) named distinctly from day
-  one.** Both implementations run side-by-side in the
-  harness during phase 3 so `qsv diff` between their
-  outputs is the parity check. Once the Rust port matches
-  the Python within tolerance on `cases.csv`,
-  `compare_parts_orig` retires.
+- **Two-level naming distinguishes residue function from
+  comparator.** Residue function: `compare_parts_orig`
+  (Python prototype) → `compare_parts` (Rust port at
+  `rigour.names.compare_parts`). Comparator (full pipeline
+  registered in COMPARATORS): `compare_python` (uses
+  Python residue) → `compare_rust` (uses Rust residue),
+  both registered alongside in phase 3. The orchestration
+  is identical; only the residue function changes. `qsv
+  diff` between `compare_python` and `compare_rust` per-
+  case outputs is the parity check. Once parity is met,
+  both Python entries retire.
 - **WeightTable shortcut rejected.** Rust `rapidfuzz`
   exposes `WeightTable` for per-edit-type weights only
   (fixed insert/delete/substitute scalars). Can't express

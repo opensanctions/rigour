@@ -166,17 +166,16 @@ def _match_name_symbolic(query: Name, result: Name, bias: float) -> float:
     return best
 
 
-def orchestrated_compare_parts_orig(
-    name1: str, name2: str, schema: str
-) -> float:
-    """Comparator: full orchestration over compare_parts_orig.
+def compare_python(name1: str, name2: str, schema: str) -> float:
+    """Comparator: full Python pipeline over compare_parts_orig.
 
     analyze_names → pair_symbols → symbol-edge records →
     compare_parts_orig on residue → weight policies → aggregate.
 
-    Differs from `wrapped_compare_parts_orig` (the bare wrapper) by
-    layering symbol pairing, weight policies, and the literal-1.0
-    override on top of the same residue-distance prototype.
+    The pure-Python equivalent of nomenklatura's logic_v2 name
+    matcher. Once the Rust port lands as `rigour.names.compare_parts`,
+    a sibling `compare_rust` comparator will register alongside this
+    one with identical orchestration but the Rust residue function.
     """
     type_tag = _schema_to_tag(schema)
     if type_tag == NameTypeTag.UNK:

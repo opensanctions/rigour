@@ -22,37 +22,48 @@ interpreted).
   - `-s <run.csv>` re-renders the summary from a stored run
     CSV. Useful for re-thresholding (`-t 0.85`) and comparing
     runs without re-executing.
-- `run_data/` — timestamped per-case dumps from `-c` runs
-  (`<comparator>-YYYYMMDD-HHMMSS.csv`). Gitignored — commit
-  selectively if a particular run is meaningful.
+- `run_data/` — per-case dumps from `-c` runs. Timestamped
+  by default; `--frozen` writes a stable `<comparator>-frozen.csv`.
+  Timestamped runs are gitignored; `*-frozen.csv` is committed.
+
+## Comparators
+
+| Name | What it runs |
+|---|---|
+| `levenshtein` | naive Levenshtein similarity over casefolded strings — the unconditional floor |
+| `compare_python` | full Python pipeline: `analyze_names` → `pair_symbols` → `compare_parts_orig` (residue) → weight policies → aggregate. Mirror of `match_name_symbolic`. |
+| `logicv2` | actual `nomenklatura.matching.logic_v2.LogicV2.compare` — soft-deps; only registered if nomenklatura is importable. The reference; freeze via `--frozen`. |
 
 ## Running
 
 ```bash
 # from the rigour repo root
 
-# Run the levenshtein baseline, store + summarise.
-python contrib/name_comparison/run.py -c levenshtein
+# Run a comparator, store + summarise.
+python contrib/name_comparison/run.py -c compare_python
 
 # Re-summarise a stored run at a tighter threshold.
 python contrib/name_comparison/run.py \
-    -s contrib/name_comparison/run_data/levenshtein-20260428-163103.csv \
+    -s contrib/name_comparison/run_data/compare_python-20260428-172833.csv \
     -t 0.85
 
 # Run quietly (just dump, no console summary).
-python contrib/name_comparison/run.py -c levenshtein --quiet
+python contrib/name_comparison/run.py -c compare_python --quiet
 
-# Diff two runs to see which cases flipped.
+# Re-freeze the logic_v2 reference (rare — only when logic_v2
+# changes upstream).
+python contrib/name_comparison/run.py -c logicv2 --frozen
+
+# Diff a new run against the frozen logic_v2 reference.
 qsv diff \
-    contrib/name_comparison/run_data/levenshtein-20260428-163103.csv \
-    contrib/name_comparison/run_data/comparable-20260428-170012.csv
+    contrib/name_comparison/run_data/logicv2-frozen.csv \
+    contrib/name_comparison/run_data/compare_python-20260428-172833.csv
 ```
 
-Adding a new comparator: implement a `Callable[[str, str], float]`
-in `run.py` and register it in the `COMPARATORS` dict. Each
-comparator is one entry. Iterating on the spec is then "add a
-new comparator, run it, diff the per-case CSV against the
-previous run."
+Adding a new comparator: drop a new module under
+`comparators/` defining a `Callable[[str, str, str], float]`,
+import it in `comparators/__init__.py`, register in
+`COMPARATORS`. Each iteration is one new entry.
 
 ## Schema (v1)
 
