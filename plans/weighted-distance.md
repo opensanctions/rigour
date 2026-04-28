@@ -858,41 +858,38 @@ at `t=0.85` precision climbs to 0.80, recall drops to 0.35;
 F1 stays roughly the same (0.49). Industry's precision/recall
 trade-off curve in microcosm — visible from a single run.
 
-### `rigour/names/compare.py` (pending)
+### `compare_parts` prototype (in the harness)
 
-The Python implementation of the spec'd primitive. Not yet
-written — currently the harness exercises only
-`levenshtein_baseline` directly via the registry.
+The Python prototype of the spec'd primitive lives in
+`contrib/name_comparison/comparators/compare_parts.py`,
+**not** in `rigour/names/`. Same name, same signature as
+the eventual rigour symbol — when the spec settles and the
+function ports to Rust, "move the body" is the migration;
+no rename. Detailed division of work is in §[Division of
+work](#division-of-work) above.
 
-Once the spec iteration begins, `compare.py` will expose:
+Internal three-function decomposition during iteration:
 
 ```python
-def compare_parts(
-    qry_parts: List[NamePart],
-    res_parts: List[NamePart],
-) -> List[Comparison]:
-    """Score residue alignment between two NamePart lists.
-
-    Each returned Comparison is either a paired record (qps
-    and rps both non-empty) or a solo record (one side
-    empty, the other a single part). Every input part
-    appears in exactly one Comparison.
-    """
+def compare_parts(qry, res) -> List[Comparison]:
+    align = _align(qry, res)            # cost model
+    clusters = _cluster(align)          # pairing rule
+    return [_score(c, align) for c in clusters]
 ```
 
-`Comparison` is a small dataclass with `qps: List[NamePart]`,
-`rps: List[NamePart]`, `score: float`, `weight: float`. No
-dependency on `Match` — that stays in nomenklatura. The two
-shapes are isomorphic; nomenklatura's wrapper is a one-liner
-per record.
+Iterating one spec decision means swapping one of the three
+internal functions and registering a new variant in
+`COMPARATORS`. When the spec settles, the variants collapse
+into one body that gets ported to Rust as
+`rigour.names.compare_parts`.
 
-The harness wraps `compare_parts` in a `Comparator` adapter
-(taking `(name1, name2) -> float` via `analyze_names` +
-`pair_symbols` + tag-sort + `compare_parts` + score
-aggregation) and registers it in `COMPARATORS`. The wrapper
-is the bridge between the harness's string-level interface
-and the part-level primitive — keeping the primitive
-unaware of the harness, and the harness unaware of `Match`.
+The harness's `orchestration.py` wraps the prototype into a
+`(name1, name2) -> float` Comparator (via `analyze_names` +
+`pair_symbols` + tag-sort + `compare_parts` + weight policies
++ aggregation) for the registry. The wrapper bridges the
+harness's string-level interface to the part-level
+primitive — keeping the primitive unaware of weights /
+threshold / `Match`.
 
 ### Iteration loop
 
@@ -919,22 +916,264 @@ through the harness as additional `case_group` rows in
 
 ## Cost-table data
 
-`SIMILAR_PAIRS` is small (~26 entries after the symmetric
-expansion). Two natural homes:
+The cost model needs at least one reference table — the
+visual/phonetic confusable pairs — and probably more reference
+data over time (digit→letter equivalences, weight tweaks per
+NameTypeTag, etc.). This lives as a **single shared YAML
+resource** under rigour's resource tree, **read by both the
+Rust port and the harness's Python prototype** so iteration
+on the table happens in one place.
 
-- **Inline in Rust source.** A `phf_set!` or sorted `&[(char,
-  char)]` literal in `rust/src/names/distance.rs`. Lookup is a
-  binary-search or hash on each non-equal char pair.
-- **YAML resource under `resources/names/`** with `genscripts/`
-  emitting a Rust slice literal under `rust/src/generated/`.
-  Same Tier-2 pattern as the script-range tables (see
-  `arch-rust-core.md`).
+Resource path: `resources/names/compare.yml` — broader
+scope than just SIMILAR_PAIRS so we can grow it without
+adding files. Initial contents:
 
-The YAML approach is consistent with how rigour treats every
-other linguistic resource. Recommend it.
+```yaml
+similar_pairs:
+  # Visual / phonetic confusables. The cost-folded DP
+  # treats any pair listed here at the confusable cost
+  # tier, regardless of substitute / insert+delete path.
+  - ["0", "o"]
+  - ["1", "i"]
+  - ["1", "l"]
+  - ["g", "9"]
+  - ["q", "9"]
+  - ["b", "6"]
+  - ["5", "s"]
+  - ["e", "i"]
+  - ["o", "u"]
+  - ["i", "j"]
+  - ["i", "y"]
+  - ["c", "k"]
+  - ["n", "h"]
+```
+
+Tier-2 pattern from `arch-rust-core.md`:
+
+- `genscripts/` reads `resources/names/compare.yml` and emits:
+  - a Rust slice literal under
+    `rust/src/generated/names_compare.rs` (sorted, for
+    binary-search at lookup time)
+  - a Python module under `rigour/data/names/compare.py`
+    (mirror dict / set, used by the harness during phase 2
+    while the Rust port doesn't exist yet)
+- Both artifacts are committed; CI re-runs `make rust-data`
+  on each PR and fails on diff.
+- `make rust-data` regenerates everything when `compare.yml`
+  changes. No manual sync.
+
+This locks out the trap where the harness has its own copy
+of the table that drifts from rigour's. One source of truth
+from day one.
 
 `is_stopword` is already in Rust (`text::stopwords`). Existing
-accessor; the Python-side wrapper just calls it.
+accessor; both the harness and the eventual Rust port call it
+directly.
+
+## Division of work
+
+A specific allocation of every concept in this design across
+three layers, with the principle: **rigour gets one new
+public symbol, the harness reproduces logic_v2-style
+orchestration locally, nomenklatura's logic_v2 remains
+untouched until migration**.
+
+### Layer 1 — rigour (additive)
+
+After the spec settles, **one new public symbol**:
+
+```python
+def compare_parts(
+    qry: List[NamePart],
+    res: List[NamePart],
+) -> List[Comparison]:
+    """Score residue alignment between two NamePart lists.
+
+    Residue = parts that survived pruning and symbol pairing,
+    already tag-sorted by the caller. The function aligns
+    them via cost-folded edit distance, clusters parts by
+    alignment connectivity, and returns one Comparison per
+    cluster (paired or solo). Knows nothing about Match,
+    weights, stopwords, family-name boost, extra-name
+    penalty, or the alert threshold.
+    """
+```
+
+`Comparison` is a small dataclass / pyclass:
+`qps: List[NamePart]`, `rps: List[NamePart]`, `score: float`.
+**No `weight` field** — weight is matcher policy.
+
+The function owns three internal stages (decomposed in
+the harness prototype, collapsed in the final Rust port):
+
+1. **Alignment** — cost-folded Wagner-Fischer + traceback
+   over the joined NamePart strings. Output is a list of
+   edit operations + per-character ownership + per-pair
+   overlap counts.
+2. **Clustering** — group `(qry_part, res_part)` pairs into
+   `Comparison` records. Spec rule: alignment-connectivity
+   (≥1 equal-character step connects two parts), with
+   transitive closure.
+3. **Scoring** — per-cluster combination function over
+   per-part costs, with the length-budget cap.
+
+These are separate decisions but live behind one entry
+point — the alignment determines what clustering can see;
+clustering determines which costs go into scoring.
+Splitting them across the FFI boundary would create two
+round-trips for the matcher and inflate the public API
+surface. Keep them in one call.
+
+### Layer 1.5 — rigour primitives unchanged
+
+Already in rigour, used by the harness as-is:
+
+- `Name`, `NamePart`, `Symbol`, `NameTypeTag`, `NamePartTag`
+- `analyze_names`
+- `pair_symbols`
+- `align_person_name_order`, `NamePart.tag_sort`
+- `text.distance.*` (used by simpler comparators)
+- `text.stopwords.is_stopword`
+
+No changes needed during phase 2. `compare.yml` adds via
+the `make rust-data` pipeline; it doesn't change Python
+imports.
+
+### Layer 2 — harness (`contrib/name_comparison/`)
+
+Throwaway scaffolding that reproduces logic_v2's
+orchestration in pure Python so we can evaluate end-to-end
+behaviour from `(name1, name2)` strings to a final aggregate
+score on `cases.csv`.
+
+Layout:
+
+```
+contrib/name_comparison/
+├── cases.csv
+├── run.py                          # CLI + reporting
+├── comparators/
+│   ├── __init__.py                 # COMPARATORS registry
+│   ├── policies.py                 # lifted matcher-policy constants
+│   ├── orchestration.py            # match_name_symbolic-shape pipeline
+│   ├── levenshtein.py              # current naïve baseline
+│   ├── comparable.py               # analyze_names + comparable form + LD
+│   └── compare_parts.py            # the future rigour primitive, prototyped
+└── run_data/
+```
+
+**`policies.py`** — constants lifted verbatim from
+nomenklatura:
+- `SYM_SCORES`, `SYM_WEIGHTS` (per-`SymbolCategory` weights)
+- `EXTRA_QUERY_NAME`, `EXTRA_RESULT_NAME`,
+  `FAMILY_NAME_WEIGHT`, `FUZZY_CUTOFF_FACTOR` defaults
+- `weight_extra_match` (the function that computes the
+  extra-name bias)
+
+`SIMILAR_PAIRS` is **not** in `policies.py` — read instead
+from `rigour.data.names.compare` (the genscript-emitted
+Python mirror of `compare.yml`). Single source of truth.
+
+**`orchestration.py`** — a simplified `match_name_symbolic`
+in ~80-120 lines:
+1. `analyze_names` on each side using the row's `schema`.
+2. `pair_symbols` to get edge-pairings.
+3. For each pairing: build cluster records from edges
+   (using `SYM_SCORES`/`SYM_WEIGHTS`); compute residue;
+   tag-sort; hand residue to the comparator's residue
+   function; apply weight policies (extra-name,
+   family-name, stopword); aggregate.
+4. Return the best aggregate score across pairings.
+
+Takes the residue function as a parameter. Different
+comparators plug different residue functions in without
+each rewriting the pipeline.
+
+**`compare_parts.py`** — the prototype of the future rigour
+primitive. Same name, same signature, same semantics as the
+eventual rigour symbol — when the spec settles and the
+function ports to Rust, the migration is "move the body,"
+no rename. Internal three-function decomposition:
+
+```python
+def compare_parts(qry, res) -> List[Comparison]:
+    align = _align(qry, res)            # cost model lives here
+    clusters = _cluster(align)          # pairing rule lives here
+    return [_score(c, align) for c in clusters]
+```
+
+Each iteration on the spec is a new variant tuple
+(`_align_default`, `_cluster_connectivity`,
+`_score_geometric`, etc.) registered as a separate entry
+in `COMPARATORS`. The harness diffs between them via
+`qsv diff`. When the spec settles, the variants collapse
+into one `compare_parts` body that gets ported to Rust.
+
+**`comparators/__init__.py`** — the registry:
+```python
+COMPARATORS: Dict[str, Comparator] = {
+    "levenshtein": levenshtein_baseline,
+    "comparable": comparable_baseline,
+    "compare_parts": compare_parts_default,
+    "compare_parts_geometric_mean": compare_parts_v2,
+    ...
+}
+```
+
+### Layer 3 — frozen logic_v2 reference (one-time)
+
+To anchor iteration against current behaviour without
+making the harness depend on nomenklatura, **run logic_v2
+once** over `cases.csv` from inside nomenklatura
+(`contrib/name_benchmark/`'s existing harness handles
+this), dump the per-case results, and commit the CSV here
+as `run_data/logicv2-frozen.csv`. The harness then
+compares its iterations against three things: ground
+truth (`is_match`), the previous iteration, and the
+frozen logic_v2 baseline. Frozen file generated once, not
+re-run during iteration.
+
+### Layer 4 — nomenklatura (deferred to migration phase)
+
+Untouched during phase 2. When the spec settles and the
+Rust port lands:
+
+- Replace `weighted_edit_similarity`'s body with a wrapper
+  over `rigour.names.compare_parts`, assembling `Match`
+  objects from the returned `Comparison`s.
+- Drop `_opcodes`, `_edit_cost`, the local `SIMILAR_PAIRS`
+  constant.
+- `strict_levenshtein` unchanged — out of scope.
+- Match class, match_name_symbolic orchestration,
+  weight policies (`weight_extra_match`, `SYM_*` tables),
+  `ScoringConfig` knobs — all stay.
+
+The harness's `orchestration.py` and `policies.py` retire
+or hang around as a regression cross-check. nomenklatura
+keeps its own orchestration (which is the actual ship
+path); the harness's copy is throwaway scaffolding.
+
+### Trade-offs
+
+**Cost:** harness duplicates ~120 lines of logic_v2's
+orchestration plus the policy constants. During iteration
+that's manageable — the duplicated code is read-only
+matcher policy, frozen unless we explicitly change it for
+an ablation. Drift from nomenklatura is detectable via the
+frozen baseline diff.
+
+**Benefit:** rigour's API surface is one function. No
+`Match`, no weights, no thresholds, no `ScoringConfig`.
+FFI boundary at port time is `Vec<NamePart>` in,
+`Vec<Comparison>` out — minimal, no policy crossing the
+boundary. nomenklatura's matcher.py changes by exactly one
+function call swap. logic_v2 stays logic_v2's
+responsibility.
+
+**No backflow:** harness orchestration never migrates
+back to nomenklatura. logic_v2's existing orchestration is
+the ship path; the harness reproduces it solely to
+evaluate end-to-end on cases.csv during iteration.
 
 ## Caching
 
@@ -1010,37 +1249,53 @@ phases gate on earlier ones.
      `un_sc_positives`, `us_congress`) added as additional
      `case_group` values in `cases.csv`. Population is a
      one-shot — no converter scripts retained.
-   - **Pending:** `rigour/names/compare.py` implementing
-     today's `weighted_edit_similarity` behaviour as
-     `compare_parts`, returning `Comparison` records (no
-     `Match` dependency). Adapter in `run.py` registers it
-     as a comparator.
+   - **Pending:** `resources/names/compare.yml` with the
+     SIMILAR_PAIRS table; genscript emitting Rust + Python
+     mirrors. Single source of truth read by both the
+     Rust port (eventually) and the harness's prototype
+     (during phase 2).
+   - **Pending:** lift logic_v2 orchestration into the harness:
+     `comparators/policies.py` (constants from nomenklatura's
+     `magic.py` + `util.py`), `comparators/orchestration.py`
+     (simplified `match_name_symbolic` shape), the
+     `comparators/compare_parts.py` prototype.
+   - **Pending:** frozen logic_v2 reference dump
+     (`run_data/logicv2-frozen.csv`) — generated once from
+     inside nomenklatura's `name_benchmark/`, committed
+     here as a reference baseline for iteration diffs.
+   - **Pending:** yente fixtures (`qarin_negatives`,
+     `un_sc_positives`, `us_congress`) added as additional
+     `case_group` values in `cases.csv`. Population is a
+     one-shot — no converter scripts retained.
 
-2. **Spec iteration on the harness (rigour, Python only).**
+2. **Spec iteration on the harness (rigour Python only,
+   no Rust).**
    - Implement the still-open spec decisions (combination
-     function, budget shape, pairing-by-connectivity,
-     uniform cost model, multi-token stopword) in
-     `compare.py`.
-   - Each iteration: run harness, diff confusion matrix and
-     per-case scores against baseline, decide.
+     function, budget shape, pairing rule details, stopword
+     curve) as variants of the harness's `compare_parts`
+     prototype's three internal functions (`_align`,
+     `_cluster`, `_score`).
+   - Each iteration: register variant in `COMPARATORS`,
+     run, `qsv diff` against the previous best run + the
+     frozen logic_v2 baseline + ground truth.
    - Acceptance: harness numbers stable, FP-rate / recall on
      the yente fixtures equal-or-better than baseline. Spec
      decisions move from "still open" to "resolved" in this
      plan as they land.
 
 3. **Rust port (rigour).**
-   - New module `rust/src/names/distance.rs` exposing the
-     spec-finalised primitive. Cost-folded Wagner-Fischer +
-     per-part cost accumulation + alignment-connectivity
-     pairing.
-   - Cost-table location decided per (D1, D2) above —
-     inline Rust constants vs. YAML+genscript.
-   - PyO3 binding + `_core.pyi` stub entry.
+   - New module `rust/src/names/compare.rs` exposing
+     `compare_parts` — the Rust implementation of the
+     spec-finalised primitive.
+   - `compare.yml` resource ports the SIMILAR_PAIRS table
+     (genscript emits `rust/src/generated/names_compare.rs`).
+   - PyO3 binding + `_core.pyi` stub entry +
+     `rigour/names/compare.py` wrapper for the Python
+     surface.
    - Rust-side unit tests for cost table, traceback, and
-     the part-boundary cursor logic.
-   - `rigour/names/compare.py` becomes a thin wrapper over
-     the Rust call. Output equality with the Python baseline
-     verified on the harness (within float tolerance).
+     part-boundary cursor logic.
+   - Output equality with the harness's Python prototype
+     verified on `cases.csv` (within float tolerance).
 
 4. **Nomenklatura migration.**
    - Replace `weighted_edit_similarity`'s body with a wrapper
@@ -1083,15 +1338,40 @@ phases gate on earlier ones.
 - **Match-identity / NamePart hashing.** NamePart hashes are
   stable and existing tests cover this; not a re-litigation
   point.
-- **`PartCosts` (or equivalent struct) return type, not
-  `List[Match]`.** Keeps `Match` assembly in nomenklatura.
+- **`Comparison` return type, not `List[Match]`.** Keeps
+  `Match` assembly in nomenklatura. `Comparison(qps, rps,
+  score)` — no `weight` field; weight is matcher policy.
+- **Rigour returns clusters, not raw alignment.** Option 1
+  in the alignment-vs-clustering trade-off. Both stages
+  (alignment, clustering) live behind one `compare_parts`
+  call. Splitting them across the FFI would inflate the
+  public surface and add a round-trip; clustering is a
+  name-distance concern, not a matcher concern, so it
+  belongs with alignment.
+- **Cost-table data: shared YAML resource.**
+  `resources/names/compare.yml` (broader-scope name in case
+  more reference data joins). Genscript emits both Rust
+  (`rust/src/generated/names_compare.rs`) and Python
+  (`rigour/data/names/compare.py`) artifacts. Single source
+  of truth read by the harness's prototype during phase 2
+  and the Rust port after.
+- **`compare_parts` named from day one.** No `proto_`
+  prefix on the harness prototype. Same name and signature
+  the rigour port will expose; migration is "move the body."
 - **WeightTable shortcut rejected.** Rust `rapidfuzz`
   exposes `WeightTable` for per-edit-type weights only
   (fixed insert/delete/substitute scalars). Can't express
   "0.7 for SIMILAR_PAIRS, 1.5 for digits, 0.2 for SEP-drop"
   — those are character-pair-conditional, not edit-type-
   conditional.
-- **Stopword weight stays Python.** Matcher policy.
+- **Stopword weight stays Python.** Matcher policy. Lives
+  in the harness's `policies.py` during iteration, in
+  nomenklatura's logic_v2 long-term.
+- **No backflow from harness to nomenklatura.** Harness
+  orchestration is throwaway scaffolding; logic_v2's
+  existing orchestration is the ship path. The migration
+  swaps logic_v2's `weighted_edit_similarity` call for one
+  to `rigour.names.compare_parts`; nothing else moves.
 
 ## Acceptance bar
 
@@ -1139,16 +1419,15 @@ one variant + a harness re-run away from a number.
   base), fraction-of-length-capped (e.g. `min(len*0.25, 4)`),
   sqrt-based, or piecewise. Same "very short → off, sub-
   linear after" shape; legibility differs.
-- **Confusable-pair table.** Today's SIMILAR_PAIRS is
-  visual-only (~13 entries). Whether to add phonetic-
+- **Confusable-pair table content.** Today's SIMILAR_PAIRS
+  is visual-only (~13 entries). Whether to add phonetic-
   confusable rows, and whether the table varies by
-  `NameTypeTag` (D1) — both decide on harness evidence.
+  `NameTypeTag` — decide on harness evidence. Resource
+  location is settled (`resources/names/compare.yml`); only
+  the contents are open.
 - **Stopword down-weight curve.** Linear-in-fraction,
   threshold-when-any, or exponential decay. Small in
   practice; harness-driven.
-- **(D2) Cost-table location.** Inline Rust constants vs.
-  YAML resource. ~13 entries don't earn the YAML+genscript
-  pipeline; a multi-tag table might. Follows D1.
 - **Cache or no cache.** Defer to production-shaped
   measurement; default no cache. Reintroduce at the
   `Comparison`-list granularity if hit rate justifies.
