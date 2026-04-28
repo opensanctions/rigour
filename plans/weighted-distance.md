@@ -689,6 +689,45 @@ Iterate the spec on a measurement loop, not on intuition.
 Phase 1 has landed under `contrib/name_comparison/`; remaining
 work is iterating the comparator.
 
+#### Important caveat: the harness operates on degraded input
+
+`cases.csv` carries only `name1` / `name2` strings — single
+collapsed forms. Production matching in nomenklatura goes
+through `followthemoney.names.entity_names`, which projects
+the entity's structured properties (`firstName`, `lastName`,
+`middleName`, `fatherName`, `motherName`, `title`,
+`nameSuffix`, `weakAlias`) into `analyze_names`'s
+`part_tags` argument. This gives parts authoritative
+`GIVEN` / `FAMILY` / `MIDDLE` / `HONORIFIC` / `SUFFIX` /
+`NICK` tags up-front, which:
+
+- lets `align_person_name_order` canonicalise reliably
+  ("Friedrich Hans" stays distinct from "Hans Friedrich"
+  because tags differ),
+- prevents cross-part-type pairing (a GIVEN token doesn't
+  pair with a FAMILY token from the other side),
+- amplifies `family_name_weight` correctly on FAMILY
+  mismatches.
+
+The harness deliberately does **not** reproduce this layer —
+extending the schema to carry per-property tags is iteration
+two in `cases.csv`, and is currently out of scope. As a
+result, some PER-class failures the harness surfaces are
+input-degradation artefacts, not residue-distance bugs.
+
+Concretely, when interpreting failures: PER cases where
+the failure mode is reorder-sensitive ("Friedrich Hans" vs
+"Hans Friedrich"), family-name-mismatch ("Aung San Suu
+Win" vs "Aung San Suu Kyi"), or middle-initial expansion
+("Hans J Friedrich" vs "Hans Joachim Friedrich") are
+known to be handled in production via the part-tag
+projection. **Don't tune `compare_parts_orig` to fix these
+on bare-string input** — it would over-optimise for the
+harness against the wrong scenario. ORG cases (single-
+token-near-typo, Roman/digit disagreement, geographic
+qualifiers, location-extras) don't have an upstream-tag
+escape hatch and are real iteration targets.
+
 ### `contrib/name_comparison/` (top-level, mirroring `nomenklatura/contrib/name_benchmark/`)
 
 Self-contained harness with two CLI modes: run a named
