@@ -302,6 +302,12 @@ def main(argv: Optional[List[str]] = None) -> int:
         "--quiet", action="store_true",
         help="Run mode only: skip the summary after dumping.",
     )
+    parser.add_argument(
+        "--frozen", action="store_true",
+        help="Run mode only: write to <comparator>-frozen.csv (stable name) "
+        "instead of timestamped. Use for runs you want to commit as a "
+        "stable reference (e.g. logicv2-frozen.csv).",
+    )
     args = parser.parse_args(argv)
 
     console = Console()
@@ -310,8 +316,11 @@ def main(argv: Optional[List[str]] = None) -> int:
         comparator = COMPARATORS[args.comparator]
         rows = load_cases(args.csv)
         results = evaluate(rows, comparator, args.threshold)
-        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-        out_path = args.out_dir / f"{args.comparator}-{timestamp}.csv"
+        if args.frozen:
+            out_path = args.out_dir / f"{args.comparator}-frozen.csv"
+        else:
+            timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+            out_path = args.out_dir / f"{args.comparator}-{timestamp}.csv"
         dump_csv(results, out_path)
         console.print(f"[bold]Comparator[/bold]: {args.comparator}")
         console.print(f"Stored {len(results)} rows in [cyan]{out_path}[/cyan]")

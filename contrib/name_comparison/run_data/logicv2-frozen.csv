@@ -1,0 +1,311 @@
+case_group,case_id,schema,name1,name2,is_match,category,notes,score,predicted_match,outcome
+nk_checks,001,Person,Olaf Scholze,Olaf Scholz,true,,,0.9286,true,TP
+nk_checks,002,Person,Olaf Schulze,Olaf Scholz,false,,,0.8344,true,FP
+nk_checks,003,Person,Octavian Scholz,Olaf Scholz,false,,,0.5000,false,TN
+nk_checks,004,Person,Angelo Cruz,Angela Merkel,false,,,0.3673,false,TN
+nk_checks,005,Person,Angelo Mercaz,Angela Merkel,false,,,0.3673,false,TN
+nk_checks,006,Person,Angela Merkur,Angela Merkel,false,,,0.5000,false,TN
+nk_checks,007,Company,Siemens Aktiengesellschaft,Siemens AG,true,,,1.0000,true,TP
+nk_checks,008,Company,SiemensAG,Siemens AG,true,,,0.9800,true,TP
+nk_checks,009,Company,Siemens Aktiengeselschaft,Siemens AG,true,,,1.0000,true,TP
+nk_checks,010,Company,Volkswagen Aktiengesellschaft,Siemens Aktiengesellschaft,false,,,0.4118,false,TN
+nk_checks,011,Person,Shaikh Isa Bin Tarif Al Bin Ali,Shaikh Isa Bin Tarif Al Bin Ali,true,,,1.0000,true,TP
+nk_checks,012,Person,Isa Bin Tarif Al Bin Ali,Shaikh Isa Bin Tarif Al Bin Ali,true,,,0.9772,true,TP
+nk_checks,013,Person,"AL BEN ALI, Isa Ben Tarif",Shaikh Isa Bin Tarif Al Bin Ali,true,,,0.9578,true,TP
+nk_checks,014,Person,Usama bin Laden,Shaikh Isa Bin Tarif Al Bin Ali,false,,,0.2826,false,TN
+nk_checks,015,Person,"AL BEN MAHMOUD, Isa Ben Tarif",Shaikh Isa Bin Tarif Al Bin Ali,false,,,0.7468,true,FP
+nk_checks,016,Person,MOHAMMADHASNI HAJI SSAD KHAN ZARKARI,HAJI ASAD KHAN ZARKARI MOHAMMADHASNI,true,,,0.8000,true,TP
+nk_checks,017,Person,MOHAMMAD HASNI HAJI SSAD KHAN ZARKARI,HAJI ASAD KHAN ZARKARI MOHAMMADHASNI,true,,,0.7973,true,TP
+nk_checks,018,Person,Hans Friedrich,Hans Friedrich,true,,,1.0000,true,TP
+nk_checks,019,Person,Friedrich Hans,Hans Friedrich,false,,,1.0000,true,FP
+nk_checks,020,Person,Hans O Friedrich,Hans Joachim Friedrich,false,,,0.6667,false,TN
+nk_checks,021,Person,Hans J Friedrich,Hans Joachim Friedrich,true,,,0.6667,false,FN
+nk_checks,022,Person,REINALDO GREGORIO LENIN CERNA JUARE,Reinaldo Lenin Gregorio Cerna Juarez,true,,,0.9667,true,TP
+nk_checks,023,Person,Vita Klave,Фуад Гулієв,false,,,0.0000,false,TN
+nk_checks,024,Person,Olga Barynova,Oleg BARANOV,false,,,0.3403,false,TN
+nk_checks,025,Person,Ginta Boreza,Janett Borez,false,,,0.4286,false,TN
+nk_checks,026,Company,Deutsche Bank AG,Deutsche Bank,true,,,0.7522,true,TP
+nk_checks,027,Company,Deutsche Bank's AG,Deutsche Bank AG,true,,,0.9259,true,TP
+nk_checks,028,Company,Deutsche Bank AG,Deutsche Bank Aktiengesellschaft,true,,,1.0000,true,TP
+nk_checks,029,Company,Deutsche Bank (Schweiz) AG,Deutsche Bank AG,true,,,0.7895,true,TP
+nk_checks,030,Company,Deutsche Bank AG,Deutsche Bank (Schweiz) AG,true,,,0.9375,true,TP
+nk_checks,031,Company,Deutsche Bank AG,Deutsche Bank GmbH,false,,,0.7083,true,FP
+nk_checks,032,Company,Deutsche Bank Trust Company,Deutsche Bank,false,,,0.6028,false,TN
+nk_checks,033,Company,OAO Gazprom,Open Joint Stock Company Gazprom,true,,,0.9176,true,TP
+nk_checks,034,Company,HOMS REFINERY CORPORATION,The Homs Refinery Company,true,,,0.9870,true,TP
+nk_checks,035,Person,Friedrych Lindenberg,Friedrich Lindenberg,true,,,0.9252,true,TP
+nk_checks,036,Person,Fridrich Lindenberg,Friedrich Lindenberg,true,,,0.9444,true,TP
+nk_checks,037,Person,FridrichLindenberg,Friedrich Lindenberg,true,,,0.9400,true,TP
+nk_checks,038,Person,Friedrich Lindenbergo,Friedrich Lindenberg,true,,,0.9545,true,TP
+nk_checks,039,Person,Frederick Lindenberg,Friedrich Lindenberg,false,,,0.8025,true,FP
+nk_checks,040,Person,Lars Friedrich Lindemann,Friedrich Lindenberg,false,,,0.3571,false,TN
+nk_checks,041,Person,Wolfgang Friedrich Ischinger,Friedrich Lindenberg,false,,,0.3571,false,TN
+nk_checks,042,Person,Gerhard Friedrich Karl Westdickenberg,Friedrich Lindenberg,false,,,0.2778,false,TN
+nk_checks,043,Person,Klaus-Peter Friedrich Walter Schulze,Friedrich Lindenberg,false,,,0.2273,false,TN
+nk_checks,044,Person,Frank Richter,Frederik Richter,false,,,0.5000,false,TN
+nk_checks,045,Person,Фрэнк Рихтер,Frederik Richter,false,,,0.4500,false,TN
+nk_checks,046,Person,Ig0r Sech1n,Igor Sechin,true,Alphanumeric Swap,,0.8401,true,TP
+nk_checks,047,Person,I9or Sech1n,Igor Sechin,true,Alphanumeric Swap,,0.7453,true,TP
+nk_checks,048,Person,Sergi Lavrov,Sergei Lavrov,true,Character Deletion,,0.9167,true,TP
+nk_checks,049,Person,SergeiLavrov,Sergei Lavrov,true,,,0.9846,true,TP
+nk_checks,050,Person,Serei Lavrov,Sergei Lavrov,true,Character Deletion,,0.9167,true,TP
+nk_checks,051,Person,Alexandr Lukashnko,Alexander Lukashenko,true,Character Addition/Deletion,,0.9000,true,TP
+nk_checks,052,Person,Alexander Luakshenko,Alexander Lukashenko,true,Character Addition/Deletion,,0.9050,true,TP
+nk_checks,053,Person,Kim Jong-uun,Kim Jong-un,true,Character Repetition,,0.6667,false,FN
+nk_checks,054,Person,Kim Joonng-un,Kim Jong-un,true,Character Repetition,,0.6667,false,FN
+nk_checks,055,Person,rimaldiV nituP,Vladimir Putin,true,Character Reversal,,0.0000,false,FN
+nk_checks,056,Person,Vladimir nitPu,Vladimir Putin,true,Character Reversal,,0.5000,false,FN
+nk_checks,057,Person,Nicolás Maduro SA,Nicolás Maduro,true,Contextual Ending,,0.7143,true,TP
+nk_checks,058,Person,Nicolás Maduro LLC,Nicolás Maduro,true,Contextual Ending,,0.7143,true,TP
+nk_checks,059,Person,Mr. Recep Tayyip Erdoğan,Recep Tayyip Erdoğan,true,Contextual Beginning,,1.0000,true,TP
+nk_checks,060,Person,President Erdoğan,Recep Tayyip Erdoğan,true,Contextual Beginning,,0.7143,true,TP
+nk_checks,061,Person,Basharr al-Assad,Bashar al-Assad,true,Fat Finger Typo,,0.9524,true,TP
+nk_checks,062,Person,Bashar al-Asasd,Bashar al-Assad,true,Fat Finger Typo,,0.8800,true,TP
+nk_checks,063,Person,Shi Jinping,Xi Jinping,true,Phonetic Replacement,,0.9500,true,TP
+nk_checks,064,Person,Si Jinpin,Xi Jinping,true,Phonetic Replacement,,0.8786,true,TP
+nk_checks,065,Person,Margarita-Simonyan,Margarita Simonyan,true,Special Characters Addition,,1.0000,true,TP
+nk_checks,066,Person,Margarita Simonyán,Margarita Simonyan,true,Special Characters Addition,,1.0000,true,TP
+nk_checks,067,Person,A. Khamenei,Ali Khamenei,true,Initials Usage,,0.5882,false,FN
+nk_checks,068,Person,J.-C. Juncker,Jean-Claude Juncker,true,Initials Usage,,0.9500,true,TP
+nk_checks,069,Person,JC Juncker,Jean-Claude Juncker,true,Initials Usage,,0.9500,true,TP
+nk_checks,070,Organization,PLA,People’s Liberation Army,true,Abbreviation,,0.9000,true,TP
+nk_checks,071,Organization,PLA China,People’s Liberation Army,true,Abbreviation,,0.9000,true,TP
+nk_checks,072,Person,AlisherUsmanov,Alisher Usmanov,true,Word Joining,,0.9867,true,TP
+nk_checks,073,Person,Alisher-Usmanov,Alisher Usmanov,true,Word Joining,,1.0000,true,TP
+nk_checks,074,Person,Nikolai Patr ushev,Nikolai Platonovich Patrushev,true,Word Splitting,,0.8911,true,TP
+nk_checks,075,Person,Nikolai Plat Ono Vich Patrushev,Nikolai Platonovich Patrushev,true,Word Splitting,,0.9897,true,TP
+nk_checks,076,Person,bin Salman Mohammed,Mohammed bin Salman,true,Word Reordering,,1.0000,true,TP
+nk_checks,077,Person,Salman Mohammed bin,Mohammed bin Salman,true,Word Reordering,,1.0000,true,TP
+nk_checks,078,Company,1st International Bank,First International Bank,true,Ordinal Number Variation,,0.9435,true,TP
+nk_checks,079,Company,First Bank Int’l,First International Bank,true,Ordinal Number Variation,,0.9870,true,TP
+nk_checks,080,Organization,Brigade Forty-Four,Brigade 44,true,Digit to Text Conversion,,0.9350,true,TP
+nk_checks,081,Organization,Brigade Forty 4,Brigade 44,true,Digit to Text Conversion,,0.2555,false,FN
+nk_checks,082,Organization,3 Percenters,Three Percenters,true,Text to Digit Conversion,,0.9435,true,TP
+nk_checks,083,Organization,3%ers,Three Percenters,true,Text to Digit Conversion,,0.5087,false,FN
+nk_checks,084,Person,Sergey Sergey Shoigu,Sergey Shoigu,true,Name Duplication Removal,,0.7143,true,TP
+nk_checks,085,Person,Shoigu Shoigu Sergey,Sergey Shoigu,true,Name Duplication Removal,,0.7143,true,TP
+nk_checks,086,Person,N. Nazarbayev,Nursultan Nazarbayev,true,Initials Addition,,0.5000,false,FN
+nk_checks,087,Person,A. Nazarbayev,Nursultan Nazarbayev,false,,,0.5882,false,TN
+nk_checks,088,Person,Nar Nazarbayev,Nursultan Nazarbayev,false,,,0.5000,false,TN
+nk_checks,089,Person,N.N.,Nursultan Nazarbayev,false,Initials Addition,,0.0000,false,TN
+nk_checks,090,Person,Dr. Rami Makhlouf,Rami Makhlouf,true,Title Addition,,1.0000,true,TP
+nk_checks,091,Person,Mr. Rami Makhlouf,Rami Makhlouf,true,Title Addition,,1.0000,true,TP
+nk_checks,092,Person,RamiMakhlouf,Rami Makhlouf,true,,,0.9846,true,TP
+nk_checks,093,Person,Ihab Makhlouf,Rami Makhlouf,false,,,0.5000,false,TN
+nk_checks,094,Person,Hafez Makhlouf,Rami Makhlouf,false,,,0.5000,false,TN
+nk_checks,095,Person,Bibi Netanyahu,Benjamin Netanyahu,true,Nickname Usage,,0.5000,false,FN
+nk_checks,096,Person,Ben Netanyahu,Benjamin Netanyahu,true,Nickname Usage,,0.8222,true,TP
+nk_checks,097,Person,Boris Netanyahu,Benjamin Netanyahu,false,,,0.5000,false,TN
+nk_checks,098,Person,Emanuel Macron,Emmanuel Macron,true,Common Misspelling,,0.9500,true,TP
+nk_checks,099,Person,Emmanuel Macrone,Emmanuel Macron,true,Common Misspelling,,0.9286,true,TP
+nk_checks,100,Person,Pot Pouv,Pol Pot,false,,,0.5000,false,TN
+nk_checks,101,Person,PolPot,Pol Pot,true,,,0.9714,true,TP
+nk_checks,102,Person,ប៉ុល ពត,Pol Pot,true,,,0.9000,true,TP
+nk_checks,103,Person,Paul Murphy,Pol Pot,false,,,0.4500,false,TN
+nk_checks,104,Person,Pol Pot,Paul Murphy,false,,,0.4500,false,TN
+nk_checks,105,Person,ماري تيريز أدينا أوندوا,Marie-Therese Abena Ondoa,true,,,0.4500,false,FN
+nk_checks,106,Person,Barack Obama,George Hussein Onyango Obama,false,,,0.4167,false,TN
+nk_checks,107,Person,Barack Obama,Բարակ Օբամա,true,,,0.9167,true,TP
+nk_checks,108,Person,Barack Obama,バラク・オバマ,true,,,0.9000,true,TP
+nk_checks,109,Person,Barak Obama,Barack Obama,true,,,0.9167,true,TP
+nk_checks,110,Person,Barry Obama,Barack Obama,true,,,0.5000,false,FN
+nk_checks,111,Person,贝拉克·奥巴马,Barack Obama,true,,,0.9000,true,TP
+nk_checks,112,Person,Präsident Barack Obama,Barack Obama,true,,,1.0000,true,TP
+nk_checks,113,Person,Barack Obama,Барак Хусеин Обама,true,,,0.8636,true,TP
+nk_checks,114,Person,ბარაკ ობამა,Barack Obama,true,,,0.9167,true,TP
+nk_checks,115,Person,Michel Obama,Michelle Obama,false,,,0.8750,true,FP
+nk_checks,116,Person,Marie-Thérèse Obama,Michelle Obama,false,,,0.3571,false,TN
+nk_checks,117,Person,Hannibal,Hannibal,true,,,1.0000,true,TP
+nk_checks,118,Person,Hanniball,Hannibal,true,,,0.8889,true,TP
+nk_checks,119,Person,Sergejs Lavrovs,Sergey Viktorovich LAVROV,true,,,0.7876,true,TP
+nk_checks,120,Person,Sergey Ivanov,Sergey Viktorovich LAVROV,false,,,0.4545,false,TN
+nk_checks,121,Person,Sergey Ivanevich Lavrov,Sergey Viktorovich LAVROV,false,,,0.6667,false,TN
+nk_checks,122,Person,Sergey Viktorovich Lavrov,Sergey Viktorovich LAVROV,true,,,1.0000,true,TP
+nk_checks,123,Person,Sergey Viktorovich Lavrov,Sergey Ivanevich LAVROV,false,,,0.6667,false,TN
+nk_checks,124,Person,Sergej Viktorovich Navros,Sergey Viktorovich LAVROV,false,,,0.6333,false,TN
+nk_checks,125,Person,Jeremy Thomas England,Thomas Lindemann,false,,,0.3571,false,TN
+nk_checks,126,Person,Niranjan Thomas Alva,Thomas Lindemann,false,,,0.3571,false,TN
+nk_checks,127,Person,Thomas A. Lind,Thomas Lindemann,false,,,0.5000,false,TN
+nk_checks,128,Person,Thomas A. Lindeman,Thomas Lindemann,true,,,0.7917,true,TP
+nk_checks,129,Person,Ротенберг Аркадий,Arkadii Romanovich Rotenberg,true,,,0.8636,true,TP
+nk_checks,130,Person,Osama bin Laden,Usāma bin Muhammad ibn Awad ibn Lādin,true,,,0.5284,false,FN
+nk_checks,131,Person,Muhammad bin Salman,Usāma bin Muhammad ibn Awad ibn Lādin,false,,,0.5562,false,TN
+nk_checks,132,Company,Goodwill Company,Good Will Company,true,,,0.9829,true,TP
+nk_checks,133,Organization,Government of Estonia,Government of Ethiopia,false,,,0.2308,false,TN
+nk_checks,134,Company,CRYSTALORD LIMITED,CRYSTALORD LTD,true,,,1.0000,true,TP
+nk_checks,135,Company,CRISTALORD LIMITED,CRYSTALORD LTD,true,,,0.9205,true,TP
+nk_checks,136,Company,CRYSTALORD SYSTEMS LIMITED,CRYSTALORD LTD,false,,,0.7522,true,FP
+nk_checks,137,Company,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,,,1.0000,true,TP
+nk_checks,138,Company,TACTICAL MISSILES CORPORATION JOINT STOCK COMPAN,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,,,1.0000,true,TP
+nk_checks,139,Company,JSC TACTICAL MISSILES CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,,,1.0000,true,TP
+nk_checks,140,Company,OJSC TACTICAL MISSILES CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,,,0.9533,true,TP
+nk_checks,141,Company,JSC TACTICAL MISSILES CORP.,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,,,0.9889,true,TP
+nk_checks,142,Company,OJSC TACTICAL KITTENS CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,false,,,0.5778,false,TN
+nk_checks,143,Company,OJSC TACTICAL MISSIVES CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,false,,,0.8613,true,FP
+nk_checks,144,Company,Oboronnye Initsiativy OOO,OOO Oboronnye Initsiativy,true,,,1.0000,true,TP
+nk_checks,145,Company,Oboronnye Initsiativy o.O.O.,OOO Oboronnye Initsiativy,true,,,1.0000,true,TP
+nk_checks,146,Company,Iskusstvo Krasoty,LIMITED LIABILITY COMPANY ISKUSSTVO KRASOTY,true,,,0.9346,true,TP
+nk_checks,147,Company,ANO Iskusstvo Krasoty,LIMITED LIABILITY COMPANY ISKUSSTVO KRASOTY,false,,,0.6803,false,TN
+nk_checks,148,Company,faberlic,FABERLIC EUROPE Sp. z o.o.,true,,,0.7463,true,TP
+nk_checks,149,LegalEntity,faberlic,FABERLIC EUROPE Sp. z o.o.,true,,,0.7463,true,TP
+nk_checks,150,Person,Boris Johnson,Alexandre Boris de Pfeffel Johnson,true,,,0.8000,true,TP
+nk_checks,151,Person,Geoffrey Boris Johnson,Alexandre Boris de Pfeffel Johnson,false,,,0.6061,false,TN
+nk_checks,152,Person,Boris de Pfeffel Johnson,Alexandre Boris de Pfeffel Johnson,true,,,0.9524,true,TP
+nk_checks,153,Person,Boris Johnson de Pfeffel,Alexandre Boris de Pfeffel Johnson,true,,,0.9524,true,TP
+nk_checks,154,Company,A.B.C. Company,A.B.C. Company,true,,,1.0000,true,TP
+nk_checks,155,Company,ABC Company,A.B.C. Company,true,,,1.0000,true,TP
+nk_checks,156,Company,ABC Co.,A.B.C. Company,true,,,0.9769,true,TP
+nk_checks,157,Company,CDE Company,A.B.C. Company,false,,,0.2308,false,TN
+nk_checks,158,Company,C.B.A. Company,A.B.C. Company,false,,,0.2308,false,TN
+nk_checks,159,Company,N.A.B.C. Company,A.B.C. Company,false,,,0.2308,false,TN
+nk_checks,160,Company,ABC International,A.B.C. Company,false,,,0.5882,false,TN
+nk_checks,161,Organization,Yamahdi (UK) Limited,YA MAHDI INDUSTRIES GROUP,false,,,0.3943,false,TN
+nk_checks,162,Organization,MAHDI & YASMIN LTD,YA MAHDI INDUSTRIES GROUP,false,,,0.3521,false,TN
+nk_checks,163,Organization,MAHDI & YASMIN LTD,YA MAHDI INDUSTRIES GROUP,false,,,0.3521,false,TN
+nk_checks,164,Person,Niels Oscar Rost,Niels Oscar TROOST,false,,,0.6667,false,TN
+nk_checks,165,Person,Nils Trosterich,Niels Oscar TROOST,false,,,0.3788,false,TN
+nk_checks,166,LegalEntity,Nils Trosterich,Niels Oscar TROOST,false,,,0.3788,false,TN
+nk_checks,167,Person,Ali A. Velayati,Ali Akbar Velayati,true,,,0.7407,true,TP
+nk_checks,168,Person,Ali Vellabati,Ali Akbar Velayati,false,,,0.7609,true,FP
+nk_checks,169,Person,Kim Myong-sik,Kim Myong-guk,false,,,0.6667,false,TN
+nk_checks,170,Person,Kim Pong-ryul,Kim Pyong-ryul,false,,,0.9333,true,FP
+nk_checks,171,Person,Choe Ryong-hae,Choe Kyong-song,false,,,0.5648,false,TN
+nk_checks,172,Person,Kim Yong-chol,Kim Yong-chun,false,,,0.6667,false,TN
+nk_checks,173,LegalEntity,Kim Yong-chol,Kim Yong-chun,false,,,0.6667,false,TN
+nk_checks,174,LegalEntity,Volodymyr Groysman,Volodymyr Oleksandrovych Zelenskyy,false,,,0.4545,false,TN
+nk_checks,175,Person,Володимир Зеленський,Volodymyr Oleksandrovych Zelenskyy,true,,,0.8182,true,TP
+nk_checks,176,Person,Oleksandr Zelenskyy,Volodymyr Oleksandrovych Zelenskyy,false,,,0.4545,false,TN
+nk_checks,177,LegalEntity,"Nantahala Capital Offshore Fund, Ltd.","Nantahala Capital Offshore Fund I, Ltd.",false,,,0.9375,true,FP
+nk_checks,178,LegalEntity,C G Clow Will Trust,CG City Funding Limited,false,,,0.2610,false,TN
+nk_checks,179,LegalEntity,The Pudney Trust,The Puccini Trust,false,,,0.2308,false,TN
+nk_checks,180,LegalEntity,The Puffin Trust,The Puccini Trust,false,,,0.2308,false,TN
+nk_checks,181,LegalEntity,LVMH Aviation,"THEIA AVIATION, LLC",false,,,0.3804,false,TN
+nk_checks,182,Company,СБ Дако ООО,СБ Банк (ООО),false,,,0.6296,false,TN
+nk_checks,183,Company,"ООО ""БАЙ""","ООО""БАЗО""",false,,,0.4118,false,TN
+nk_checks,184,Company,"ООО ""БАЙ""","ООО ""БАЙКАЛ""",false,,,0.4118,false,TN
+nk_checks,185,Company,ООО АЯС 2000,"ООО ""АЯС 2000""",true,,,1.0000,true,TP
+nk_checks,186,Company,"ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ ""БАЙ""","ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ ""БАЙКАЛ""",false,,,0.4118,false,TN
+nk_checks,187,Company,"СВЕРДЛОВСКАЯ ОБЛАСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ ""ЦЕНТР СОЦИАЛЬНОЙ АДАПТАЦИИ ""АЛЬЯНС""","СВЕРДЛОВСКАЯ ОБЛАСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ ""ЦЕНТР ИССЛЕДОВАНИЯ БОЕВЫХ ИСКУССТВ ""УРАЛЬСКИЙ БУДОКАН""",false,,,0.3876,false,TN
+nk_checks,188,LegalEntity,Nanshan Group,Nanshan Group Co Ltd,true,,,0.9028,true,TP
+nk_checks,189,Company,Societatea cu Răspundere Limitată PRO TRAFFIC,SRL PRO TRAFFIC,true,,,1.0000,true,TP
+nk_checks,190,Company,Societatea cu Răspundere Limitată CON TRAFFIC,Societatea cu Răspundere Limitată PRO TRAFFIC,false,,,0.6296,false,TN
+nk_checks,191,Company,S.R.L. CON TRAFFIC,Societatea cu Răspundere Limitată PRO TRAFFIC,false,,,0.6296,false,TN
+nk_checks,192,Company,JSC Murom Instrument-Making Plant,Акционерное общество “Муромский приборостроительный завод”,true,,,0.5871,false,FN
+nk_checks,193,Organization,ndrangheta,'Ndrangheta,true,,,1.0000,true,TP
+nk_checks,194,Organization,Andrang Heta,'Ndrangheta,false,,,0.9000,true,FP
+nk_checks,195,Organization,Al Qaeda,Al Qa'ida,true,,,0.9000,true,TP
+nk_checks,196,Organization,Al Qaeda,Al-Qa'ida/Islamic Army,true,,,0.9000,true,TP
+nk_checks,197,Organization,Al-Qaida in Iraq,Al-Qaida in the Arabian Peninsula,false,,,0.5512,false,TN
+nk_checks,198,Person,'Abd al-Aziz al-Nuristani,Abdul Aziz Nooristani,true,,,0.8037,true,TP
+nk_checks,199,Person,"NURISTANI, Abdul Aziz",Abdul Aziz Nooristani,true,,,0.9565,true,TP
+nk_checks,200,Person,"NURISTANI, Abdul Aziz",ABDUL AZIZ Aziz Nooristani,true,,,0.9565,true,TP
+nk_checks,201,Vessel,Hellenic Spirit,MV Hellenic Spirit,true,,,1.0000,true,TP
+nk_checks,202,Vessel,Lady Leila,Lady Rania,false,,,0.0000,false,TN
+nk_checks,203,Vessel,Zu Zag Bong 6,Zu Zag Bong 5,false,,,0.5964,false,TN
+nk_checks,204,Vessel,Yerotsakos,YEVGENY PRIMAKOV,false,,,0.0000,false,TN
+nk_checks,205,Vessel,Yard No. 9918779 Zvezda-Dsme,YARD NO. 455 IRAN MARINE,false,,,0.0000,false,TN
+nk_checks,206,Vessel,Victory,Victory 3,false,,,0.0000,false,TN
+nk_checks,207,Vessel,Victory,VICTOR KONETSKY,false,,,0.0000,false,TN
+nk_checks,208,Vessel,VELIKIY NOVGOROD,Velikiy Novgorod,true,,,1.0000,true,TP
+nk_checks,209,Person,"Frost, William W.",William W Frost,true,,,1.0000,true,TP
+nk_checks,210,Person,"Frost, William G.",William W Frost,false,,,0.6667,false,TN
+nk_checks,211,Person,GENA C RANDOLPH,"Randolph, Gena",true,,,0.7143,true,TP
+nk_checks,212,Person,GERD RANDOLPH,"Randolph, Gena",false,,,0.5000,false,TN
+nk_checks,213,Organization,The BSF Foundation,The BIRD Foundation,false,,,0.2308,false,TN
+nk_checks,214,Person,Eric A. Wendt,Josh A. Wendt,false,,,0.6667,false,TN
+nk_checks,215,Person,Aaron A. Wendt,Josh A. Wendt,false,,,0.6667,false,TN
+nk_checks,216,Company,"BWI Industries, Inc.","BAE Industries, Inc.",false,,,0.5000,false,TN
+nk_checks,217,LegalEntity,"BWI Industries, Inc.","BAE Industries, Inc.",false,,,0.5000,false,TN
+nk_checks,218,Company,"BAE Systems, Inc.","BAE Industries, Inc.",false,,,0.6296,false,TN
+nk_checks,219,Person,Allaidin Hussain ALWAN,Ahmad al-Hamidawi,false,,,0.0000,false,TN
+nk_checks,220,Organization,"Academy of Military Medical Sciences, Insitute of Medical Equipment","Academy of Military Medical Sciences, Institute of Micobiology and Epidemiology",false,,,0.6773,false,TN
+nk_checks,221,Company,Management Company,Westminister Management Company,false,,,0.7500,true,FP
+nk_checks,222,Company,Management Company 23,Management Company,false,,,0.3659,false,TN
+nk_checks,223,LegalEntity,Elois,Alice Costandina Titus,false,,,0.0000,false,TN
+nk_checks,224,Person,Elois,Alice Costandina Titus,false,,,0.0000,false,TN
+nk_checks,225,Company,Blinq Holdings Pty Ltd,Bailey Holdings Pty Ltd,false,,,0.5000,false,TN
+nk_checks,226,Person,Ilie Bolojan,Monsieur Ilie-Gabril Bolojan,true,,,0.9091,true,TP
+nk_unit_tests,001,Person,John Doe,John Doe,true,logic_v2_cases,test_logic_v2_cases.py CASES,1.0000,true,TP
+nk_unit_tests,002,Person,John Doe,Juan Doe,false,logic_v2_cases,test_logic_v2_cases.py CASES,0.5000,false,TN
+nk_unit_tests,003,Person,John Doeburg,John Dowburg,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.8673,true,TP
+nk_unit_tests,004,Person,John Doe,John Down,false,logic_v2_cases,test_logic_v2_cases.py CASES,0.5000,false,TN
+nk_unit_tests,005,Person,Serei Lavrov,Sergei Lavrov,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.9167,true,TP
+nk_unit_tests,006,Person,Serej Lavrov,Сергей Викторович Лавров,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.8312,true,TP
+nk_unit_tests,007,Person,Ramimakhlouf,Rami Makhlouf,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.9846,true,TP
+nk_unit_tests,008,Person,A Nazarbayev,Nursultan Naza,false,logic_v2_cases,test_logic_v2_cases.py CASES,0.0000,false,TN
+nk_unit_tests,009,Person,Ted Doe,Theodore Doe,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.8222,true,TP
+nk_unit_tests,010,Person,باراك أوباما,محمد بن سلمان آل سعود,false,logic_v2_cases,test_logic_v2_cases.py CASES,0.0000,false,TN
+nk_unit_tests,011,Person,Ted Doe,Theodore Doe,false,logic_v2_cases,test_logic_v2_cases.py CASES,0.8222,true,FP
+nk_unit_tests,012,Company,OAO Gazprom,Gazprom JSC,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.9176,true,TP
+nk_unit_tests,013,Company,OAO Gazprom,Gasprom JSC,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.7616,true,TP
+nk_unit_tests,014,Company,OAO Gazprom,Open Joint Stock Company Gasprom,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.7616,true,TP
+nk_unit_tests,015,Company,Gazprom Neft JSC,Gazprom Neft OAO,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.9417,true,TP
+nk_unit_tests,016,Company,LXC Aviation,LAU Aviation,false,logic_v2_cases,test_logic_v2_cases.py CASES,0.4118,false,TN
+nk_unit_tests,017,Company,LXC Aviatio,LAU Aviation,false,logic_v2_cases,test_logic_v2_cases.py CASES,0.4375,false,TN
+nk_unit_tests,018,Company,LXC Aviation,L.X.C Aviation,true,logic_v2_cases,test_logic_v2_cases.py CASES,1.0000,true,TP
+nk_unit_tests,019,Company,L.X.C. Aviation,LAU Aviation,false,logic_v2_cases,test_logic_v2_cases.py CASES,0.4118,false,TN
+nk_unit_tests,020,Company,OJSC TACTICAL KITTENS CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,false,logic_v2_cases,test_logic_v2_cases.py CASES,0.5778,false,TN
+nk_unit_tests,021,Company,FABERLIC EUROPE,FABERLIC EUROPE Sp. z o.o.,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.9346,true,TP
+nk_unit_tests,022,Organization,Brigade Fourty-four,Brigade 44,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.9350,true,TP
+nk_unit_tests,023,Vessel,Snow,SNOW,true,logic_v2_cases,test_logic_v2_cases.py CASES,1.0000,true,TP
+nk_unit_tests,024,Vessel,Snow,Snoe,false,logic_v2_cases,test_logic_v2_cases.py CASES,0.0000,false,TN
+nk_unit_tests,025,Vessel,Snow Storm 1,Snow Stom 1,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.8403,true,TP
+nk_unit_tests,026,Vessel,Snow Storm 1,Snow Storm 2,false,logic_v2_cases,test_logic_v2_cases.py CASES,0.5882,false,TN
+nk_unit_tests,027,Vessel,Snow Storm 1,Snow Storm 2,true,logic_v2_cases,test_logic_v2_cases.py CASES,0.5882,false,FN
+nk_unit_tests,028,Person,Friedrich Lindenberg,Lars Friedrich Lindemann,false,friedrich_fps,test_jaro_friedrich,0.4545,false,TN
+nk_unit_tests,029,Person,Friedrich Lindenberg,Wolfgang Friedrich Ischinger,false,friedrich_fps,test_jaro_friedrich,0.4545,false,TN
+nk_unit_tests,030,Person,Friedrich Lindenberg,Gerhard Friedrich Karl Westdickenberg,false,friedrich_fps,test_jaro_friedrich,0.4167,false,TN
+nk_unit_tests,031,Person,Friedrich Lindenberg,Klaus-Peter Friedrich Walter Schulze,false,friedrich_fps,test_jaro_friedrich,0.3846,false,TN
+nk_unit_tests,032,Person,Friedrich Lindenberg,Fridrich Lindenberg,true,friedrich_tps,test_jaro_friedrich,0.9444,true,TP
+nk_unit_tests,033,Person,Friedrich Lindenberg,Fredrich Lindenberg,true,friedrich_tps,test_jaro_friedrich,0.9444,true,TP
+nk_unit_tests,034,Person,Friedrich Lindenberg,Friedrich Lindenburg,true,friedrich_tps,test_jaro_friedrich,0.9050,true,TP
+nk_unit_tests,035,Person,Friedrich Lindenberg,Friedrich Lyndenburg,true,friedrich_tps,test_jaro_friedrich,0.8445,true,TP
+nk_unit_tests,036,Person,Frederik Richter,Frederick Matthias Benjamin Bolte,false,frederik_fps,test_jaro_frederik,0.3750,false,TN
+nk_unit_tests,037,Person,Frederik Richter,Matthi Bolte-Richter,false,frederik_fps,test_jaro_frederik,0.4545,false,TN
+nk_unit_tests,038,Person,Frederik Richter,Frank Richter,false,frederik_fps,test_jaro_frederik,0.5000,false,TN
+nk_unit_tests,039,Person,Barack Obama,George Hussein Onyango Obama,false,obama_fps,test_jaro_obamas,0.4167,false,TN
+nk_unit_tests,040,Person,Barack Obama,Barak Obama,true,obama_tps,test_jaro_obamas,0.9167,true,TP
+nk_unit_tests,041,Person,Barack Obama,Barackk Obama,true,obama_tps,test_jaro_obamas,0.9286,true,TP
+nk_unit_tests,042,Person,Barack Obama,Michelle Obama,false,obama_fps,test_jaro_obamas,0.5000,false,TN
+nk_unit_tests,043,Person,Michelle Obama,Marie-Thérèse Obama,false,obama_fps,test_jaro_obamas,0.4545,false,TN
+nk_unit_tests,044,Person,Pol Pot,Paul Murphy,false,pol_fps,test_jaro_pol,0.4500,false,TN
+nk_unit_tests,045,Person,Pol Pot,Paul Mitchell,false,pol_fps,test_jaro_pol,0.4500,false,TN
+nk_unit_tests,046,Person,Pol Pot,Pot Pouv,false,pol_fps,test_jaro_pol,0.5000,false,TN
+nk_unit_tests,047,Person,Sergejs Lavrovs,Sergey Viktorovich LAVROV,true,lavrov_tps,test_jaro_lavrov,0.7876,true,TP
+nk_unit_tests,048,Person,Thomas Lindemann,Jeremy Thomas England,false,lindemann_fps,test_jaro_lindemann,0.4545,false,TN
+nk_unit_tests,049,Person,Thomas Lindemann,Niranjan Thomas Alva,false,lindemann_fps,test_jaro_lindemann,0.4545,false,TN
+nk_unit_tests,050,Person,Thomas Lindemann,Iain Thomas Rankin,false,lindemann_fps,test_jaro_lindemann,0.4545,false,TN
+nk_unit_tests,051,Person,Michelle Michaela,Michaela Michelle Micheli,true,duplicative_tps,test_duplicative_name_similarity,0.9091,true,TP
+nk_unit_tests,052,Person,Michele Michaela,Michaela Michelle Micheli,true,duplicative_tps,test_duplicative_name_similarity,0.8485,true,TP
+nk_unit_tests,053,Person,Michele Nichaela,Michaela Michelle Micheli,true,duplicative_tps,test_duplicative_name_similarity,0.7531,true,TP
+nk_unit_tests,054,Person,Michele Nychaela,Michaela Michelle Micheli,true,duplicative_tps,test_duplicative_name_similarity,0.6864,false,FN
+nk_unit_tests,055,Person,Michele Mugaloo,Michaela Michelle Micheli,false,duplicative_fps,test_duplicative_name_similarity,0.4040,false,TN
+nk_unit_tests,056,Person,Michaela,Michaela Michelle Micheli,true,duplicative_tps,test_duplicative_name_similarity,0.7143,true,TP
+nk_unit_tests,057,Person,Michaela,Michelle Obama,false,duplicative_fps,test_duplicative_name_similarity,0.0000,false,TN
+nk_unit_tests,058,Person,Jan Daniel Bothma,RAZAFIMAHATRATRA Jean Daniel Christian,false,jw_person_fps,test_person_name_jaro_winkler,0.5625,false,TN
+nk_unit_tests,059,Person,Jan Daniel Bothma,JanDaniel Bothma,true,jw_person_tps,test_person_name_jaro_winkler,0.9900,true,TP
+nk_unit_tests,060,Company,Siemens AG,Siemens Aktiengesellschaft,true,fingerprint_tps,test_name_fingerprint_levenshtein,1.0000,true,TP
+nk_unit_tests,061,Company,Siemens AG,SiemensAG,true,fingerprint_tps,test_name_fingerprint_levenshtein,0.9800,true,TP
+nk_unit_tests,062,Company,Siemens AG,Siemens AkG,true,fingerprint_tps,test_name_fingerprint_levenshtein,0.5000,false,FN
+nk_unit_tests,063,Company,Good Will Company,Goodwill Company,true,fingerprint_tps,test_name_fingerprint_levenshtein,0.9829,true,TP
+nk_unit_tests,064,Company,Government of Estonia,Government of Ethiopia,false,fingerprint_fps,test_name_fingerprint_levenshtein,0.2308,false,TN
+nk_unit_tests,065,Company,construction ltd,LLC CONSTRUCTION DREDGING COMPANY,false,fingerprint_fps,test_name_fingerprint_levenshtein,0.7241,true,FP
+nk_unit_tests,066,Company,CRYSTALORD LIMITED,CRYSTALORD LTD,true,crystalord_tps,test_org_name_partial_match,1.0000,true,TP
+nk_unit_tests,067,Company,CRYSTALORD SYSTEMS LIMITED,CRYSTALORD LTD,false,crystalord_fps,test_org_name_partial_match,0.7522,true,FP
+nk_unit_tests,068,Company,CRYSTALORD,CRYSTALORD LTD,true,crystalord_tps,test_org_name_partial_match,0.8772,true,TP
+nk_unit_tests,069,Company,CRISTALORD LIMITED,CRYSTALORD LTD,true,crystalord_tps,test_org_name_partial_match,0.9205,true,TP
+nk_unit_tests,070,Company,faberlic,FABERLIC EUROPE Sp. z o.o.,true,faberlic_tps,test_org_name_example_1,0.7463,true,TP
+nk_unit_tests,071,Company,faberlick,FABERLIC EUROPE Sp. z o.o.,true,faberlic_tps,test_org_name_example_1,0.6486,false,FN
+nk_unit_tests,072,Company,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,TACTICAL MISSILES CORPORATION JSC,true,missiles_tps,test_org_name_example_2,1.0000,true,TP
+nk_unit_tests,073,Company,TACTICAL MISSILES CORPORATION OJSC,TACTICAL MISSILES CORPORATION JSC,true,missiles_tps,test_org_name_example_2,0.9533,true,TP
+nk_unit_tests,074,Company,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,TACTICAL MISSILES CORPORATION JOYNT STOCK COMPANY,true,missiles_tps,test_org_name_example_2,0.6319,false,FN
+nk_unit_tests,075,Company,Iskusstvo Krasoty,LIMITED LIABILITY COMPANY ISKUSSTVO KRASOTY,true,iskusstvo_tps,test_org_name_example_3,0.9346,true,TP
+nk_unit_tests,076,Company,Iskustvo Krasoty,LIMITED LIABILITY COMPANY ISKUSSTVO KRASOTY,true,iskusstvo_tps,test_org_name_example_3,0.8879,true,TP
+nk_unit_tests,077,Person,Shaikh Isa Bin Tarif Al Bin Ali,Shaikh Isa Bin Tarif Al Bin Ali,true,arabic_tps,test_arabic_name_similarity,1.0000,true,TP
+nk_unit_tests,078,Person,Isa Bin Tarif Al Bin Ali,Shaikh Isa Bin Tarif Al Bin Ali,true,arabic_tps,test_arabic_name_similarity,0.9772,true,TP
+nk_unit_tests,079,Person,John Smith,"Smith, John",true,reorder_tps,test_name_match,1.0000,true,TP
+nk_unit_tests,080,Person,Vladimir Putin,Vladimir Pudin,true,putin_tps,test_heuristic_scoring,0.8200,true,TP
+nk_unit_tests,081,Person,Hannibal,Hannibol,true,single_tps,test_single_name,0.7656,true,TP
+nk_unit_tests,082,Person,Hannibal,Hanniball,true,single_tps,test_single_name,0.8889,true,TP
+nk_unit_tests,083,Person,Michelle Michaela,Michelle Michi,true,soundex_tps,test_soundex_name_comparison,0.5000,false,FN
+nk_unit_tests,084,Person,Michelle Michaela,Donald Duck,false,soundex_fps,test_soundex_name_comparison,0.0000,false,TN
