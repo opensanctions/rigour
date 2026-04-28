@@ -29,35 +29,22 @@ from collections import defaultdict
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Callable, Dict, List, Optional
+from typing import Dict, List, Optional
 
 from rich.console import Console
 from rich.table import Table
 
-from rigour.text.distance import levenshtein_similarity
+# Make the local `comparators` package importable when run.py is invoked
+# directly (without rigour being installed in editable mode pointing here).
+sys.path.insert(0, str(Path(__file__).parent))
+
+from comparators import COMPARATORS, Comparator  # noqa: E402
 
 
 HERE = Path(__file__).parent
 DEFAULT_CSV = HERE / "cases.csv"
 DEFAULT_RUN_DATA = HERE / "run_data"
 DEFAULT_THRESHOLD = 0.7
-
-
-Comparator = Callable[[str, str], float]
-
-
-def levenshtein_baseline(name1: str, name2: str) -> float:
-    """Naive baseline: Levenshtein similarity over casefolded strings.
-
-    No symbol pairing, no transliteration, no part-aware alignment.
-    Surfaces the unconditional baseline number to beat.
-    """
-    return levenshtein_similarity(name1.casefold().strip(), name2.casefold().strip())
-
-
-COMPARATORS: Dict[str, Comparator] = {
-    "levenshtein": levenshtein_baseline,
-}
 
 
 @dataclass
@@ -101,7 +88,7 @@ def evaluate(
 ) -> List[CaseResult]:
     out: List[CaseResult] = []
     for row in rows:
-        score = comparator(row["name1"], row["name2"])
+        score = comparator(row["name1"], row["name2"], row["schema"])
         out.append(
             CaseResult(
                 case_group=row["case_group"],
