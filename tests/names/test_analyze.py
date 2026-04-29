@@ -100,8 +100,9 @@ def test_company_simple():
 
 def test_entity_upgrade_to_org():
     # "Limited Liability Partnership" normalises to "llp" — single
-    # ORG_CLASS span whose len(span) (character count) is 3 > 2.
-    # _infer_part_tags promotes ENT → ORG on that threshold.
+    # ORG_CLASS span whose 3-char length meets the upgrade threshold.
+    # The org-tagger short-circuit promotes ENT → ORG and skips the
+    # person tagger.
     result = analyze_names(
         NameTypeTag.ENT, ["Acme Limited Liability Partnership"]
     )
@@ -114,6 +115,79 @@ def test_entity_no_upgrade():
     result = analyze_names(NameTypeTag.ENT, ["Apollo Missions Archive"])
     name = _only(result)
     assert name.tag == NameTypeTag.ENT
+
+
+def test_entity_runs_person_tagger_when_no_org_class():
+    # ENT input with no ORG_CLASS evidence falls through to the person
+    # tagger; a well-known person name should pick up at least one
+    # NAME symbol from the reference corpus, and the Name stays ENT.
+    result = analyze_names(NameTypeTag.ENT, ["Vladimir Putin"])
+    name = _only(result)
+    assert name.tag == NameTypeTag.ENT
+    assert any(
+        sym.category == Symbol.Category.NAME for sym in name.symbols
+    ), name.symbols
+
+
+def test_entity_long_org_class_upgrades_with_non_llc_code():
+    # The exact-boundary upgrade case is covered by
+    # `test_entity_upgrade_to_org` (LLP, 3 chars). This pins the
+    # strictly-above-threshold path with a different code: "GmbH"
+    # rewrites to "gmbh" (4 chars), comfortably above
+    # `ORG_CLASS_UPGRADE_MIN_CHARS`. The promotion fires and the
+    # person tagger does not run on the (in-corpus) "Schmidt".
+    result = analyze_names(NameTypeTag.ENT, ["Schmidt GmbH"])
+    name = _only(result)
+    assert name.tag == NameTypeTag.ORG
+    assert not any(
+        sym.category == Symbol.Category.NAME for sym in name.symbols
+    ), name.symbols
+
+
+def test_entity_short_org_class_does_not_upgrade():
+    # An ORG_CLASS span shorter than the upgrade threshold (3 chars,
+    # `ORG_CLASS_UPGRADE_MIN_CHARS` in analyze.rs) does not trigger
+    # the ENT→ORG promotion — the person tagger still runs and the
+    # tag stays ENT. "Smith II" exercises the boundary organically:
+    # the org tagger emits an `ORGCLS:SP` span on the 2-char "ii"
+    # token, but 2 < 3 so the structural signal is treated as too
+    # ambiguous to promote a Roman-numeralled person name to ORG.
+    result = analyze_names(NameTypeTag.ENT, ["Smith II"], rewrite=False)
+    name = _only(result)
+    assert name.tag == NameTypeTag.ENT
+    assert any(
+        sym.category == Symbol.Category.ORG_CLASS for sym in name.symbols
+    ), f"expected an ORG_CLASS span on the input: {name.symbols}"
+    assert any(
+        sym.category == Symbol.Category.NAME for sym in name.symbols
+    ), f"expected person tagger to have run after no-upgrade: {name.symbols}"
+
+
+def test_entity_org_class_short_circuits_person_tagger():
+    # When the org tagger's evidence triggers ENT → ORG, the person
+    # tagger does not run — so even an org name built around a known
+    # person ("Eli Lilly") carries no NAME symbol.
+    result = analyze_names(
+        NameTypeTag.ENT, ["Eli Lilly Limited Liability Partnership"]
+    )
+    name = _only(result)
+    assert name.tag == NameTypeTag.ORG
+    assert not any(
+        sym.category == Symbol.Category.NAME for sym in name.symbols
+    ), name.symbols
+
+
+def test_apply_phrase_dedups_phrase_symbol_pair():
+    # Calling apply_phrase twice with the same (phrase, symbol) on a
+    # Name yields the same set of spans as a single call — the dedup
+    # guard in apply_phrase keeps the "no duplicate (phrase, symbol)
+    # spans" invariant intact when more than one tagger fires.
+    name = Name("John Smith", tag=NameTypeTag.PER)
+    sym = Symbol(Symbol.Category.NAME, "Q42")
+    name.apply_phrase("smith", sym)
+    spans_after_first = list(name.spans)
+    name.apply_phrase("smith", sym)
+    assert list(name.spans) == spans_after_first
 
 
 def test_org_prefix_stripped():
