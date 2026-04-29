@@ -85,11 +85,12 @@ import it in `comparators/__init__.py`, register in
 
 | Column       | Required | Notes |
 |--------------|----------|-------|
-| `case_group` | yes      | Source/corpus tag (`nk_checks`, `nk_unit_tests`, `synth_companies`, `synth_people`, …). |
+| `case_group` | yes      | Source/corpus tag (`nk_checks`, `nk_unit_tests`, `synth_companies`, `synth_corp_positives`, `synth_people`, …). |
 | `schema`     | yes      | FtM schema name. Drives `analyze_names`'s `NameTypeTag`. Currently used: Person, Company, Organization, LegalEntity, Vessel. |
 | `name1`      | yes      | Query-side name. Single string; analyze_names infers tags. |
 | `name2`      | yes      | Result-side name. |
 | `is_match`   | yes      | `true` / `false`. Ground-truth label. |
+| `quality`    | optional | `STRONG` / `MEDIUM` / `WEAK`; blank → `MEDIUM`. Strength of evidence for the labelled outcome. See below. |
 | `category`   | optional | Mutation/heuristic class for slicing reports. Blank if unlabelled. |
 | `notes`      | optional | Free-text human-readable comment. Used for traceback to source tests, etc. |
 
@@ -100,6 +101,31 @@ between runs still works. This means cases.csv is hand-editable
 without case_id management — drop a row in anywhere, save, run.
 Duplicate `(case_group, schema, name1, name2)` tuples are flagged
 with a stderr warning at load.
+
+### `quality` — strength of evidence for the labelled outcome
+
+Three tiers, applied symmetrically to matches and non-matches:
+
+- **STRONG** — clearly true. Both label and outcome are unambiguous;
+  the matcher *must* get this right. Typos in long words, identical
+  strings, clean cross-script transliteration on common entities.
+  STRONG-tier failures get their own leaderboard in the run summary
+  and should be treated as P0 bugs.
+- **MEDIUM** — clearly true with some structural nuance. Most cases
+  default here. A failure is a regression worth investigating but
+  not a P0.
+- **WEAK** — borderline; the label is more tiebreaker than fact.
+  Nicknames, gender variants, sibling-fund cases, single-char
+  brand-stem swaps. Tolerated to fail on the verdict; expected to
+  land in the score band near the threshold.
+
+Defaults to MEDIUM when blank. Labelling is incremental — only
+hand-tag cases at the obvious extremes (STRONG / WEAK); everything
+else can stay MEDIUM. The run summary reports per-quality F1 and a
+**calibration check**: mean scores should walk monotonically from
+STRONG match → MEDIUM match → WEAK match → WEAK non-match → MEDIUM
+non-match → STRONG non-match. Inversions or ties between adjacent
+tiers indicate score-curve mis-calibration.
 
 ### v2 (deferred)
 

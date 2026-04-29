@@ -30,7 +30,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 from rich.console import Console
 from rich.table import Table
@@ -56,6 +56,7 @@ class CaseResult:
     name1: str
     name2: str
     is_match: bool
+    quality: str
     category: str
     notes: str
     score: float
@@ -94,8 +95,17 @@ def compute_case_id(case_group: str, schema: str, name1: str, name2: str) -> str
     return h.hexdigest()
 
 
+QUALITY_TIERS = ("STRONG", "MEDIUM", "WEAK")
+DEFAULT_QUALITY = "MEDIUM"
+
+
 def load_cases(csv_path: Path) -> List[Dict[str, str]]:
-    """Load cases.csv and synthesise `case_id` from row content."""
+    """Load cases.csv, synthesise `case_id`, normalise `quality`.
+
+    `quality` is optional in the CSV; blank or missing values default to
+    `MEDIUM`. Values are normalised to upper case; unknown values fall back
+    to `MEDIUM` with a stderr warning.
+    """
     with csv_path.open("r", encoding="utf-8", newline="") as fh:
         rows = list(csv.DictReader(fh))
     seen: Dict[str, Dict[str, str]] = {}
@@ -111,6 +121,15 @@ def load_cases(csv_path: Path) -> List[Dict[str, str]]:
             )
         seen[cid] = row
         row["case_id"] = cid
+        q = (row.get("quality") or "").strip().upper()
+        if q == "":
+            q = DEFAULT_QUALITY
+        elif q not in QUALITY_TIERS:
+            sys.stderr.write(
+                f"WARN: unknown quality {q!r} on {cid}; defaulting to {DEFAULT_QUALITY}\n"
+            )
+            q = DEFAULT_QUALITY
+        row["quality"] = q
         out.append(row)
     return out
 
@@ -129,6 +148,7 @@ def evaluate(
                 name1=row["name1"],
                 name2=row["name2"],
                 is_match=row["is_match"].lower() == "true",
+                quality=row.get("quality", DEFAULT_QUALITY),
                 category=row.get("category", ""),
                 notes=row.get("notes", ""),
                 score=score,
@@ -140,7 +160,7 @@ def evaluate(
 
 DUMP_FIELDS = [
     "case_group", "case_id", "schema", "name1", "name2",
-    "is_match", "category", "notes",
+    "is_match", "quality", "category", "notes",
     "score", "predicted_match", "outcome",
 ]
 
@@ -159,6 +179,7 @@ def dump_csv(results: List[CaseResult], path: Path) -> None:
                     "name1": r.name1,
                     "name2": r.name2,
                     "is_match": "true" if r.is_match else "false",
+                    "quality": r.quality,
                     "category": r.category,
                     "notes": r.notes,
                     "score": f"{r.score:.4f}",
@@ -183,6 +204,7 @@ def load_results(path: Path, threshold: float) -> List[CaseResult]:
                     name1=row["name1"],
                     name2=row["name2"],
                     is_match=row["is_match"].lower() == "true",
+                    quality=row.get("quality", DEFAULT_QUALITY),
                     category=row.get("category", ""),
                     notes=row.get("notes", ""),
                     score=float(row["score"]),
@@ -285,6 +307,22 @@ def print_summary(
         console,
     )
 
+    # Per-quality slice. Tier order is fixed (STRONG → MEDIUM → WEAK);
+    # this orders the table the same way the calibration check below
+    # expects scores to walk monotonically.
+    by_quality: Dict[str, List[CaseResult]] = defaultdict(list)
+    for r in results:
+        by_quality[r.quality].append(r)
+    console.print()
+    metrics_table(
+        "By quality (STRONG-tier failures = bugs; WEAK-tier are tolerated)",
+        [(q, confusion(by_quality[q])) for q in QUALITY_TIERS if q in by_quality],
+        console,
+    )
+
+    print_calibration(by_quality, console)
+    print_strong_failures(results, console)
+
     by_category: Dict[str, List[CaseResult]] = defaultdict(list)
     for r in results:
         if r.category:
@@ -300,6 +338,89 @@ def print_summary(
     if top > 0:
         console.print()
         print_disagreements(results, top, console)
+
+
+def print_calibration(
+    by_quality: Dict[str, List[CaseResult]], console: Console
+) -> None:
+    """Score-curve monotonicity check: STRONG match scores should sit
+    above MEDIUM, MEDIUM above WEAK; symmetrically on the non-match side.
+    Inversions or ties between adjacent tiers indicate the curve isn't
+    differentiating cleanly — a calibration concern.
+    """
+    means: Dict[Tuple[str, bool], float] = {}
+    for q in QUALITY_TIERS:
+        for is_match in (True, False):
+            scores = [r.score for r in by_quality.get(q, []) if r.is_match == is_match]
+            if scores:
+                means[(q, is_match)] = sum(scores) / len(scores)
+
+    table = Table(title="Mean score by (quality, label) — should walk monotonically")
+    table.add_column("quality")
+    table.add_column("matches", justify="right")
+    table.add_column("non-matches", justify="right")
+    for q in QUALITY_TIERS:
+        m = means.get((q, True))
+        n = means.get((q, False))
+        table.add_row(
+            q,
+            f"{m:.3f}" if m is not None else "—",
+            f"{n:.3f}" if n is not None else "—",
+        )
+    console.print()
+    console.print(table)
+
+    # Monotonicity warnings.
+    warnings: List[str] = []
+    match_seq = [means[(q, True)] for q in QUALITY_TIERS if (q, True) in means]
+    nonmatch_seq = [means[(q, False)] for q in QUALITY_TIERS if (q, False) in means]
+    for i in range(len(match_seq) - 1):
+        if match_seq[i] <= match_seq[i + 1]:
+            warnings.append(
+                f"  match scores not monotonic: {QUALITY_TIERS[i]}={match_seq[i]:.3f} "
+                f"≤ {QUALITY_TIERS[i + 1]}={match_seq[i + 1]:.3f}"
+            )
+    for i in range(len(nonmatch_seq) - 1):
+        if nonmatch_seq[i] >= nonmatch_seq[i + 1]:
+            warnings.append(
+                f"  non-match scores not monotonic: {QUALITY_TIERS[i]}={nonmatch_seq[i]:.3f} "
+                f"≥ {QUALITY_TIERS[i + 1]}={nonmatch_seq[i + 1]:.3f}"
+            )
+    if warnings:
+        console.print("[yellow]calibration warnings:[/yellow]")
+        for w in warnings:
+            console.print(f"[yellow]{w}[/yellow]")
+
+
+def print_strong_failures(results: List[CaseResult], console: Console) -> None:
+    """STRONG-tier failures are bugs: the labelled outcome is unambiguous
+    by construction, so a wrong verdict here is a real regression.
+    """
+    failures = [r for r in results if r.quality == "STRONG" and r.outcome in ("FP", "FN")]
+    if not failures:
+        return
+    failures.sort(key=lambda r: (r.outcome, -abs(r.score - r.threshold)))
+    table = Table(
+        title=f"STRONG-tier failures ({len(failures)}) — these should not fail",
+        title_style="red",
+    )
+    table.add_column("group/id")
+    table.add_column("schema")
+    table.add_column("outcome")
+    table.add_column("score", justify="right")
+    table.add_column("name1")
+    table.add_column("name2")
+    for r in failures:
+        table.add_row(
+            f"{r.case_group}/{r.case_id}",
+            r.schema,
+            r.outcome,
+            f"{r.score:.3f}",
+            r.name1,
+            r.name2,
+        )
+    console.print()
+    console.print(table)
 
 
 # --- CLI ---
