@@ -1779,6 +1779,176 @@ one variant + a harness re-run away from a number.
   measurement; default no cache. Reintroduce at the
   `Comparison`-list granularity if hit rate justifies.
 
+## Systematizing and tuning the magic numbers
+
+The cost function and surrounding policy carry ~25 magic numbers
+between them. They've accumulated organically and we don't have a
+defensible argument for the specific values today's defaults take.
+This section lays out an approach to (a) consolidating where those
+numbers live so changing one is a one-line edit and (b) finding
+better values empirically without overfitting.
+
+### Inventory: two distinct layers, different homes
+
+**Layer A — residue distance** (in `compare_parts`).
+Shapes the `_align` / `_score` math directly:
+
+| Constant | Today | Tunable? |
+|---|---:|---|
+| `_edit_cost` SIMILAR_PAIRS substitute | 0.7 | yes |
+| `_edit_cost` SEP-on-one-side | 0.2 | yes |
+| `_edit_cost` digit-mismatch | 1.5 | yes |
+| `_edit_cost` default substitute / insert / delete | 1.0 | structural (the unit) |
+| `_costs_similarity` log base | 2.35 | yes |
+| `_costs_similarity` `len - 2` floor | (formula) | structural |
+| `_cluster` overlap threshold | 0.51 | structural — *replace*, don't tune |
+| Score combination function | product | structural — *replace*, don't tune |
+
+3-4 tunable scalars. The "structural" entries aren't tuning
+targets — changing them is spec replacement, registered as a new
+COMPARATORS variant.
+
+**Layer B — matcher policy** (in `policies.py`, lifted from
+nomenklatura `magic.py` + `model.py`). Shapes the
+`match_name_symbolic`-shape orchestration around the residue:
+
+| Constant | Today | Notes |
+|---|---:|---|
+| `EXTRA_QUERY_NAME` | 0.8 | unmatched query parts |
+| `EXTRA_RESULT_NAME` | 0.2 | unmatched result parts |
+| `FAMILY_NAME_WEIGHT` | 1.3 | family-name boost |
+| `FUZZY_CUTOFF_FACTOR` | 1.0 | bias on `_costs_similarity` budget |
+| `SYM_SCORES` per category | 0.6–0.9 (8 values) | symbol-edge scores |
+| `SYM_WEIGHTS` per category | 0.3–1.3 (7 values) | symbol-edge weights |
+| `EXTRAS_WEIGHTS` per category | 0.7–1.3 (4 values) | one-sided symbol weight |
+| Stopword down-weights | 0.5 / 0.7 | inside `weight_extra_match` |
+
+~17 tunable scalars. **Not phase 2's job.** These are matcher
+policy that nomenklatura owns long-term; they came from real
+production tuning. Phase 2 tunes Layer A only, with Layer B
+frozen at today's logic_v2 defaults. Phase 4 (nomenklatura
+migration) is the place to revisit Layer B if needed.
+
+### Systematization
+
+**Layer A scalars → `resources/names/compare.yml`.** Today the
+YAML holds only `similar_pairs:`. Extend to:
+
+```yaml
+similar_pairs:
+  - ["0", "o"]
+  ...
+
+costs:
+  similar_pair: 0.7
+  sep_drop: 0.2
+  digit_mismatch: 1.5
+  default: 1.0           # the unit; changing it rescales everything
+
+budget:
+  log_base: 2.35
+  short_token_floor: 2   # `len - N` floor; encodes "below N+1 chars, fuzzy off"
+```
+
+`genscripts/generate_names.py:generate_compare_file` extends to
+emit these into `rust/data/names/compare.json` alongside the
+pairs. Both the Python prototype and the Rust port read from the
+compiled JSON via the same loader path. Changing a scalar = one
+YAML edit, one `make rust-data`, one rebuild — single source of
+truth.
+
+This is materially better than today, where editing the digit
+cost requires touching `compare_parts_orig.py` AND
+`rust/src/names/compare.rs` and trusting they stay in sync.
+
+**Layer B (matcher policy) stays in `policies.py`.** Don't move
+it across the rigour/nomenklatura boundary just to enable
+sweeping; sweep locally during phase 2 if needed and re-sync
+back to nomenklatura's `magic.py` and `model.py` at migration.
+
+**Structural choices stay in code, switchable via COMPARATORS.**
+Combination function, cluster rule, budget shape — each is a
+fundamentally different algorithm. Different values aren't
+sweepable scalars; they're sibling registry entries
+(`compare_python_geometric_mean`,
+`compare_python_alignment_connectivity`, etc.).
+
+### Tuning approach: coordinate descent on the harness
+
+In increasing rigour:
+
+1. **Make the knobs swappable in the Python prototype.**
+   `compare_parts_orig` accepts overrides via kwargs (default =
+   today's values, eventually loaded from the genscript-emitted
+   data). The harness gets a `compare_python_costsweep` factory
+   that registers a parameterised variant per swept value.
+   Don't touch Rust yet — tuning happens on the Python prototype
+   first, settled values re-port to Rust once.
+2. **Build `contrib/name_comparison/sweep.py`.** Takes a
+   parameter name and a value range, runs the harness for each,
+   reports F1 + per-`case_group` breakdown + per-`category`
+   breakdown per value. Tells you not just "best value" but
+   "which kind of failure does each value affect."
+3. **Coordinate descent.** One parameter at a time. Hold others
+   fixed at defaults. Sweep, take the value that maximises F1
+   under a recall-floor constraint. Lock. Move to next.
+   Repeat until no parameter improves.
+   ~3-4 parameters × ~5 sweep values = ~20 harness runs. Fast.
+4. **Per-category constraint reporting.** Catch tunes that
+   improve overall F1 by tanking one specific failure class
+   (overfitting to common cases at the expense of rare-but-
+   important ones). Reject any tune that drops a category's F1
+   below its baseline.
+5. **Re-port settled values.** Update `compare.yml`, regenerate
+   the JSON, rebuild Rust, verify `compare_rust` parity with
+   `compare_python` post-tune.
+
+### Caveats
+
+**Overfitting to `cases.csv`.** Our 569 cases have known biases:
+`nk_checks` and `nk_unit_tests` are regression sets (biased
+toward historically-broken cases); `synth_*` is LLM-generated
+adversarial (skewed `is_match=false`). Tuning to maximise F1
+here produces a function tuned to *this corpus*, not to general
+name-distance behaviour. Two mitigations:
+
+- **Hold out a partition during sweeps.** E.g. tune on
+  `nk_checks + nk_unit_tests`, validate on `synth_*`. Drop any
+  tune that improves training F1 but worsens validation F1.
+  The synthetic set was generated independently of the cost
+  function, so it functions as held-out data.
+- **Constrain by per-category recall.** Recall-protective
+  stance — sanctions context wants false negatives below false
+  positives in cost.
+
+**Don't tune Layer B in phase 2.** Those values came from real
+production tuning at OpenSanctions. Moving them is a logic_v2
+change with downstream impact on the matcher's calibration.
+
+**The 0.7 alert threshold is fixed** (per Threshold target
+above). Tune the score curve, not the threshold. If a tune
+produces a distribution where 0.65 separates TP/FP better than
+0.7 does, that's not a win — that's evidence the tune broke
+calibration.
+
+### Concrete next step
+
+The plumbing PR (no behaviour change):
+
+1. Extend `resources/names/compare.yml` with `costs:` and
+   `budget:` tables.
+2. Update genscript to emit them into
+   `rust/data/names/compare.json`.
+3. Refactor Python prototype: read from
+   `rigour.data.names.compare` (or a small loader during the
+   transition), accept kwargs overrides.
+4. Refactor Rust port: read scalars from the JSON via a
+   `LazyLock<CompareCosts>`-style struct, replace inline
+   constants.
+5. Verify zero behaviour change — same numbers as today.
+
+Sweep harness lands as a follow-up. Tuning runs after that.
+
 ## Notes for the implementation
 
 - **SEP choice.** Single space is fine because `comparable`
