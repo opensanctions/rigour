@@ -353,10 +353,7 @@ struct AlignmentData {
 /// The walk advances a cursor on each side every time it consumes a
 /// SEP — which is how cost / overlap end up attributed to the right
 /// part instead of bleeding across token boundaries.
-fn run_align(
-    qry_comparable: &[String],
-    res_comparable: &[String],
-) -> AlignmentData {
+fn run_align(qry_comparable: &[String], res_comparable: &[String]) -> AlignmentData {
     let n_q = qry_comparable.len();
     let n_r = res_comparable.len();
     let mut qry_costs: Vec<Vec<f64>> = vec![Vec::new(); n_q];
@@ -387,11 +384,7 @@ fn run_align(
         let qc = step.qc;
         let rc = step.rc;
         if step.op == Op::Equal {
-            if qc.is_some()
-                && qc != Some(SEP)
-                && rc.is_some()
-                && rc != Some(SEP)
-            {
+            if qc.is_some() && qc != Some(SEP) && rc.is_some() && rc != Some(SEP) {
                 *overlaps.entry((qry_idx, res_idx)).or_insert(0) += 1;
             }
         }
@@ -459,11 +452,8 @@ fn run_cluster(
     // identity assigned to each part is deterministic — when
     // multiple pairs would compete to claim a part, the
     // earliest-indexed pair wins.
-    let mut entries: Vec<((usize, usize), u32)> = align
-        .overlaps
-        .iter()
-        .map(|(&k, &v)| (k, v))
-        .collect();
+    let mut entries: Vec<((usize, usize), u32)> =
+        align.overlaps.iter().map(|(&k, &v)| (k, v)).collect();
     entries.sort_by_key(|(k, _)| *k);
 
     for ((qp, rp), overlap) in entries {
@@ -480,7 +470,10 @@ fn run_cluster(
                 (Some(&i), _) => i,
                 (None, Some(&i)) => i,
                 (None, None) => {
-                    clusters.push(Cluster { qps: Vec::new(), rps: Vec::new() });
+                    clusters.push(Cluster {
+                        qps: Vec::new(),
+                        rps: Vec::new(),
+                    });
                     clusters.len() - 1
                 }
             };
@@ -679,16 +672,10 @@ pub fn py_compare_parts(
     let mut out: Vec<Py<Comparison>> = Vec::with_capacity(clusters.len());
     for cluster in &clusters {
         let score = run_score(cluster, &align, fuzzy_tolerance);
-        let qps_parts: Vec<Py<NamePart>> = cluster
-            .qps
-            .iter()
-            .map(|&i| qry[i].clone_ref(py))
-            .collect();
-        let rps_parts: Vec<Py<NamePart>> = cluster
-            .rps
-            .iter()
-            .map(|&i| res[i].clone_ref(py))
-            .collect();
+        let qps_parts: Vec<Py<NamePart>> =
+            cluster.qps.iter().map(|&i| qry[i].clone_ref(py)).collect();
+        let rps_parts: Vec<Py<NamePart>> =
+            cluster.rps.iter().map(|&i| res[i].clone_ref(py)).collect();
         let qps_tuple = PyTuple::new(py, &qps_parts)?.unbind();
         let rps_tuple = PyTuple::new(py, &rps_parts)?.unbind();
         let comp = Comparison {
