@@ -1,26 +1,35 @@
-//! Residue-distance comparator — Rust port of the Python prototype
-//! `compare_parts_orig` (in `contrib/name_comparison/comparators/`).
+//! Residue-distance scoring for two `NamePart` lists.
 //!
-//! Three internal stages, mirroring the prototype:
+//! Reach for [`py_compare_parts`] when a name matcher has already
+//! peeled off the parts it can explain by other means (symbol
+//! pairing, alias tagging, identifier hits) and is left with a
+//! residue that needs a fuzzy-match verdict — typically misspellings,
+//! transliteration drift, or surface-form variants of the same
+//! token.
 //!
-//! 1. `align` — cost-folded Wagner-Fischer with traceback over the
-//!    SEP-joined NamePart strings. Walks the alignment to accumulate
-//!    per-part cost streams + per-pair overlap counts.
-//! 2. `cluster` — pair `(qry_part, res_part)` into clusters via the
-//!    0.51 overlap rule with transitive closure (matches the prototype's
-//!    behaviour exactly so phase-3 parity is achievable).
-//! 3. `score` — product of per-side similarities, gated by a
-//!    log-budget cap (also mirrors the prototype).
+//! The function returns one [`Comparison`] per cluster of aligned
+//! parts (paired or solo). Every input part appears in exactly one
+//! `Comparison`, so a caller can sum / weight / threshold the result
+//! without losing track of which inputs got accounted for.
 //!
-//! Returns `Vec<Comparison>` where each `Comparison` is a paired or
-//! solo cluster. Every input NamePart appears in exactly one
-//! Comparison.
+//! Three concerns are folded into one call: how characters of
+//! one side line up against the other (alignment), which parts
+//! count as "talking about the same thing" (clustering), and
+//! how confident we are per cluster (scoring). Splitting them
+//! across the FFI would force callers to reconstruct context
+//! they don't need; keeping them together also lets the cost
+//! model parameterise the alignment directly, so the alignment
+//! the matcher actually scores is the alignment a human-meaningful
+//! cost function chose, not one chosen under unit costs and
+//! retrofit-scored.
 //!
-//! Spec context: `plans/weighted-distance.md`. This file deliberately
-//! does NOT optimise — the goal of the first port is parity (within
-//! float tolerance) with the Python prototype, measured via
-//! `qsv diff` between `compare_python` and `compare_rust` per-case
-//! dumps in the harness.
+//! Cost weights live in `resources/names/compare.yml` (visual /
+//! phonetic confusables) and as constants in this file (digit,
+//! SEP-drop, default substitute). They encode "what kinds of edit
+//! count as evidence of typo vs. evidence of distinct entity":
+//! confusable substitutes are cheap, digit mismatches are punitive,
+//! SEP gain/loss is near-free (token-merge / token-split is a
+//! common artifact of casual data entry).
 
 use std::collections::{HashMap, HashSet};
 use std::sync::LazyLock;
@@ -31,19 +40,20 @@ use serde::Deserialize;
 
 use crate::names::part::NamePart;
 
-/// SEP character used to join NamePart `comparable` strings before
-/// running the alignment. A single space is fine because `comparable`
-/// forms are casefolded with whitespace squashed (analyze_names
-/// guarantees this); if the contract ever drifts, change to a
-/// non-character like `\u{0001}`.
+/// Token boundary in the joined-name string the alignment runs over.
+/// A single space works because `NamePart.comparable` is whitespace-
+/// squashed casefold; if the contract ever drifts to admit literal
+/// spaces inside a part's `comparable`, the SEP needs to move to a
+/// non-character (e.g. `\u{0001}`) to stay unambiguous.
 const SEP: char = ' ';
 
-/// Bias on the per-side length budget. Mirrors logic_v2's
-/// `nm_fuzzy_cutoff_factor` default. Hard-coded for now; the harness
-/// can plumb a real config later if iteration justifies.
+/// Multiplier on the per-side cost budget. Lower is stricter (less
+/// edit tolerated before a cluster scores zero); higher is more
+/// permissive. Callers tune this per scenario — KYC at onboarding
+/// runs more permissive than payment screening.
 const DEFAULT_BIAS: f64 = 1.0;
 
-// --- Cost table loaded from compiled YAML ------------------------------
+// --- Cost table -----------------------------------------------------
 
 #[derive(Debug, Deserialize)]
 struct CompareData {
@@ -52,6 +62,10 @@ struct CompareData {
 
 const COMPARE_JSON: &str = include_str!("../../data/names/compare.json");
 
+/// Visually / phonetically confusable single-char pairs. Pre-expanded
+/// to both directions at load time so the lookup is a single hash
+/// probe — for `("0", "o")` the table contains both `('0', 'o')` and
+/// `('o', '0')`.
 static SIMILAR_PAIRS: LazyLock<HashSet<(char, char)>> = LazyLock::new(|| {
     let data: CompareData =
         serde_json::from_str(COMPARE_JSON).expect("rust/data/names/compare.json parses");
@@ -64,7 +78,26 @@ static SIMILAR_PAIRS: LazyLock<HashSet<(char, char)>> = LazyLock::new(|| {
     out
 });
 
-/// Char-pair cost lookup. Mirrors `compare_parts_orig._edit_cost`.
+/// What an edit between `qc` (query side) and `rc` (result side)
+/// "costs" in the alignment.
+///
+/// The tiers are deliberately spread out — the budget cap downstream
+/// is per-side, so the gap between "cheap edit" (0.2) and "expensive
+/// edit" (1.5) is what determines whether a cluster squeaks under
+/// the cap or fails it.
+///
+///   - **0.0** — equal characters (no edit).
+///   - **0.2** — losing or gaining a SEP on one side. Token merge /
+///     split is a frequent surface-form variant of the same name
+///     (`vanderbilt` ↔ `van der bilt`); we charge it almost nothing.
+///   - **0.7** — confusable-pair substitute (`0`/`o`, `1`/`l`, …).
+///     OCR / transliteration / homoglyph noise; cheaper than a
+///     normal edit because the writer was probably aiming at the
+///     same token.
+///   - **1.5** — digit involved. Digits identify specific things
+///     (vintage years, vessel hulls, fund numbers), so a digit
+///     mismatch is evidence of a different entity, not a typo.
+///   - **1.0** — default insert / delete / substitute. The unit.
 fn edit_cost(op: Op, qc: Option<char>, rc: Option<char>) -> f64 {
     if op == Op::Equal {
         return 0.0;
@@ -89,7 +122,7 @@ fn edit_cost(op: Op, qc: Option<char>, rc: Option<char>) -> f64 {
     1.0
 }
 
-// --- Wagner-Fischer DP with traceback ----------------------------------
+// --- Alignment ------------------------------------------------------
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 enum Op {
@@ -102,14 +135,17 @@ enum Op {
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 enum BackPtr {
     None,
-    Match,    // diagonal, equal
+    Match,
     Substitute,
-    Insert,   // came from left (rc consumed, qc not)
-    Delete,   // came from above (qc consumed, rc not)
+    Insert,
+    Delete,
 }
 
-/// One alignment step. `qc` / `rc` track which character on each
-/// side this step consumed (or `None` if the step is one-sided).
+/// One step of the alignment as a `(qc, rc)` pair.
+///
+/// `qc=None` means the step is a result-only insert (no query
+/// character consumed); `rc=None` means a query-only delete. Both
+/// `Some` is either an `Equal` or a `Replace`.
 #[derive(Clone, Debug)]
 struct Step {
     op: Op,
@@ -117,15 +153,18 @@ struct Step {
     rc: Option<char>,
 }
 
-/// Run cost-folded Wagner-Fischer over (q_chars, r_chars) and return
-/// the alignment as a forward sequence of edit steps.
+/// Best-cost alignment between two character sequences under
+/// [`edit_cost`].
 ///
-/// The cost-folded approach uses `edit_cost` directly inside the DP,
-/// so the optimal alignment is genuinely optimal under the cost
-/// model — distinct from the prototype's unit-cost-then-rescore via
-/// `Levenshtein.opcodes`. This is the spec's chosen design (see plan
-/// § Cost-folded DP); a small amount of scoring drift vs. the Python
-/// prototype on tied-alignment cases is expected.
+/// The cost function is folded into the DP recurrence, so the path
+/// returned is optimal under the actual scoring model — a substitute
+/// of `0`/`o` (cost 0.7) genuinely beats a default substitute (cost
+/// 1.0) at the cell level, not as a post-hoc re-score of a unit-cost
+/// alignment. This matters when the cost tiers create real choices:
+/// a sub-then-sub transposition costs 2.0 but doubles cost on a
+/// single span; a del-then-match-then-ins around the same pair also
+/// costs 2.0 but distributes 1.0 to each side. The tie-break (see
+/// inline) prefers the distributive path.
 fn align_chars(q_chars: &[char], r_chars: &[char]) -> Vec<Step> {
     let n = q_chars.len();
     let m = r_chars.len();
@@ -161,23 +200,15 @@ fn align_chars(q_chars: &[char], r_chars: &[char]) -> Vec<Step> {
             // Insert from result
             let ins_cost = cost[i][j - 1] + edit_cost(Op::Insert, None, Some(rc));
 
-            // Pick minimum. Tie-breaking: match wins outright on cost
-            // tie (always preferred for `equal` runs); on cost-tied
-            // non-match paths we prefer one-sided edits (delete /
-            // insert) over substitution.
-            //
-            // Why: substitution attributes cost to **both** sides
-            // (qry_costs gets the cost for the consumed qc AND
-            // res_costs gets it for the consumed rc), while delete
-            // attributes only to qry and insert only to res. For
-            // transposition-like patterns ("Donlad" vs "Donald"),
-            // sub+sub doubles cost on a single span; del+match+ins
-            // splits cost across sides. Total work is identical, but
-            // the per-side budget cap in `_costs_similarity` cares
-            // about distribution, not just totals — del+ins survives
-            // the cap where sub+sub fails it. Picking the more
-            // distributive alignment respects that downstream
-            // accounting.
+            // Tie-break on cost: prefer one-sided edits (delete /
+            // insert) over substitution. Substitution attributes
+            // cost to both sides simultaneously; delete attributes
+            // only to qry, insert only to res. The downstream
+            // budget cap is per-side, so concentrating cost on one
+            // span with a substitute can fail the cap where the
+            // same total cost split across sides would pass. The
+            // distributive path is the alignment a per-side scorer
+            // genuinely wants.
             let mut best = sub_cost;
             let mut bp = BackPtr::Substitute;
             if let Some(mc) = match_cost {
@@ -249,20 +280,27 @@ fn align_chars(q_chars: &[char], r_chars: &[char]) -> Vec<Step> {
     steps
 }
 
-// --- Alignment walk: per-part cost streams + per-pair overlaps --------
+// --- Alignment → per-part cost streams + per-pair overlaps ---------
 
+/// Two views of an alignment that downstream stages need.
+///
+/// `qry_costs[i]` / `res_costs[i]` are the per-character cost streams
+/// attributed to part `i` on each side — used by the scorer to compute
+/// per-side similarity. `overlaps` counts `Equal`-step matches between
+/// each `(q_part, r_part)` pair — used by the clusterer to decide
+/// which parts pair up.
 struct AlignmentData {
-    /// `qry_costs[i]` — char-level costs accumulated against query
-    /// part `i` (in the order the alignment walked through them).
     qry_costs: Vec<Vec<f64>>,
-    /// Same for result side.
     res_costs: Vec<Vec<f64>>,
-    /// `(q_idx, r_idx) -> equal-character count`. Only `Equal` steps
-    /// where neither side is SEP contribute; populated as the walk
-    /// advances the part-cursors.
     overlaps: HashMap<(usize, usize), u32>,
 }
 
+/// Run the DP over the SEP-joined strings and accumulate per-part
+/// cost streams + per-pair overlap counts as we walk the alignment.
+///
+/// The walk advances a cursor on each side every time it consumes a
+/// SEP — which is how cost / overlap end up attributed to the right
+/// part instead of bleeding across token boundaries.
 fn run_align(
     qry_comparable: &[String],
     res_comparable: &[String],
@@ -327,17 +365,32 @@ fn run_align(
     }
 }
 
-// --- Clustering --------------------------------------------------------
+// --- Clustering ----------------------------------------------------
 
-/// One alignment cluster — qry-side + res-side part indices.
+/// Indices of parts that align with each other.
+///
+/// One side empty means "this part has no counterpart" — the part
+/// surfaces in the output as a solo record so callers know it went
+/// unaccounted-for. Both sides non-empty means "these parts are
+/// talking about the same thing" (subject to the matcher's notion
+/// of *thing*).
 struct Cluster {
     qps: Vec<usize>,
     rps: Vec<usize>,
 }
 
-/// Group `(q_idx, r_idx)` overlap pairs into clusters via the 0.51
-/// overlap rule with transitive closure. Mirrors
-/// `compare_parts_orig._cluster`.
+/// Pair query/result parts into clusters, with transitive closure.
+///
+/// A pair `(qp, rp)` joins a cluster when the alignment matched more
+/// than half the shorter part's characters between them — strong
+/// enough overlap that they're plausibly the same token, ignoring
+/// noise. Transitive closure folds in chained pairings, so the
+/// `vanderbilt` ↔ `[van, der, bilt]` token-split case lands as one
+/// cluster instead of three near-misses.
+///
+/// Parts that no overlap pair clears the threshold for surface as
+/// solo clusters at the end. Every input part appears in exactly
+/// one output cluster — paired or solo.
 fn run_cluster(
     align: &AlignmentData,
     qry_lengths: &[usize],
@@ -350,9 +403,10 @@ fn run_cluster(
     let mut r_to_cluster: HashMap<usize, usize> = HashMap::new();
     let mut clusters: Vec<Cluster> = Vec::new();
 
-    // Iterate overlap pairs in stable order — sort by (q_idx, r_idx)
-    // to mirror Python dict insertion-order behaviour for cases where
-    // alignment populates them in that sequence.
+    // Iterate overlap pairs in (q_idx, r_idx) order so the cluster
+    // identity assigned to each part is deterministic — when
+    // multiple pairs would compete to claim a part, the
+    // earliest-indexed pair wins.
     let mut entries: Vec<((usize, usize), u32)> = align
         .overlaps
         .iter()
@@ -411,10 +465,24 @@ fn run_cluster(
     clusters
 }
 
-// --- Scoring -----------------------------------------------------------
+// --- Scoring -------------------------------------------------------
 
-/// Per-side similarity from accumulated char-level costs.
-/// Mirrors `compare_parts_orig._costs_similarity`.
+/// Convert one side's accumulated cost stream to a similarity in
+/// `[0, 1]`.
+///
+/// Two design points worth knowing:
+///
+/// 1. The score has a **cliff**: if total cost exceeds a length-
+///    dependent budget, the side scores zero. The budget grows
+///    sub-linearly with character count (log base 2.35), so longer
+///    tokens absorb more edits before failing — but very short
+///    tokens (`< 3` chars) get budget zero and any non-zero cost
+///    fails the cap. That's deliberate: fuzzy-matching 2-char tokens
+///    is mostly noise (Chinese given names, vessel hull suffixes,
+///    initials) and we'd rather fail closed than over-fire.
+/// 2. Below the cap, similarity is `1 - total_cost / len_chars` —
+///    a clean linear walk-down. The non-linearity is in the cliff,
+///    not in the score curve, which keeps the math transparent.
 fn costs_similarity(costs: &[f64], bias: f64) -> f64 {
     if costs.is_empty() {
         return 0.0;
@@ -431,8 +499,19 @@ fn costs_similarity(costs: &[f64], bias: f64) -> f64 {
     1.0 - (total_cost / costs.len() as f64)
 }
 
-/// Per-cluster score: product of per-side similarities. Solo clusters
-/// score 0.0 by definition.
+/// Combine per-side similarities into one cluster score.
+///
+/// The product (rather than mean / min) is intentional: it's
+/// punitive in the middle of the curve. A 99 %/50 % pair scores
+/// 0.495, not 0.745 — either side being noisy zeros the cluster
+/// quickly. That's the right shape for a recall-protective alert
+/// threshold: above 0.8 means both sides are clean, below 0.5
+/// means at least one side is unreliable, and the middle is a
+/// triage zone for human review.
+///
+/// Solo clusters (one side empty) score 0.0 by construction —
+/// they represent unmatched parts and have no pair-based
+/// similarity to compute.
 fn run_score(cluster: &Cluster, align: &AlignmentData, bias: f64) -> f64 {
     if cluster.qps.is_empty() || cluster.rps.is_empty() {
         return 0.0;
@@ -458,28 +537,28 @@ fn run_score(cluster: &Cluster, align: &AlignmentData, bias: f64) -> f64 {
     costs_similarity(&q_costs, bias) * costs_similarity(&r_costs, bias)
 }
 
-// --- Comparison pyclass ------------------------------------------------
+// --- Comparison pyclass --------------------------------------------
 
-/// One residue-distance cluster.
+/// One cluster from the [`py_compare_parts`] return — either a
+/// paired record where parts on both sides aligned, or a solo
+/// record where a part went unaccounted-for.
 ///
-/// Either a paired record (both sides non-empty) representing parts
-/// that align with each other, or a solo record (one side empty)
-/// representing an unmatched part. Every input NamePart appears in
-/// exactly one Comparison.
+/// Every input `NamePart` appears in exactly one `Comparison`,
+/// which is what lets a caller iterate the result and compute a
+/// total — the paired clusters carry positive evidence, the solo
+/// clusters carry the "unexplained part" penalty.
 ///
-/// Returned as a flat `Vec<Comparison>` from
-/// [`py_compare_parts`]; nomenklatura wraps each into a `Match` with
-/// matcher-policy weights applied.
+/// `qps` and `rps` reference the same `NamePart` Python objects
+/// the caller passed in, so identity is preserved across the
+/// boundary.
 #[pyclass(module = "rigour._core")]
 pub struct Comparison {
-    /// Query-side parts in this cluster (`Py<NamePart>` references
-    /// preserve identity with the inputs).
     #[pyo3(get)]
     pub qps: Py<PyTuple>,
-    /// Result-side parts.
     #[pyo3(get)]
     pub rps: Py<PyTuple>,
-    /// Score in `[0, 1]`. Solo records (one side empty) score 0.0.
+    /// Similarity in `[0, 1]`. `0.0` for solo clusters; otherwise the
+    /// product of per-side similarities (see `run_score` for shape).
     #[pyo3(get)]
     pub score: f64,
 }
@@ -496,13 +575,21 @@ impl Comparison {
     }
 }
 
-// --- Public entry point ------------------------------------------------
+// --- Public entry point --------------------------------------------
 
-/// Score the alignment of two NamePart lists.
+/// Score the alignment of two `NamePart` lists.
 ///
-/// Inputs are residue parts (post-pruning, post-symbol-pairing,
-/// already tag-sorted by the caller). Output is one `Comparison`
-/// per cluster, including solo records for unmatched parts.
+/// Callers should hand over the *residue* — parts that earlier stages
+/// (symbol pairing, alias tagging, identifier matching) couldn't
+/// explain by themselves — already canonicalised into positional
+/// order (`tag_sort` for ORG/ENT, `align_person_name_order` for PER).
+/// The function returns one [`Comparison`] per cluster, paired or
+/// solo; every input part appears exactly once across the output.
+///
+/// `bias` rescales the per-side cost budget. Higher = more permissive
+/// (KYC-onboarding profile); lower = stricter (payment-screening
+/// profile). The default of `1.0` matches industry-typical recall-
+/// protective tuning.
 #[pyfunction]
 #[pyo3(name = "compare_parts", signature = (qry, res, bias = DEFAULT_BIAS))]
 pub fn py_compare_parts(
@@ -514,8 +601,9 @@ pub fn py_compare_parts(
     let n_q = qry.len();
     let n_r = res.len();
 
-    // Pre-extract the comparable strings + lengths so the alignment +
-    // clustering passes don't re-bind on every read.
+    // Pull comparable strings + char-lengths off the NameParts up front;
+    // the alignment + clustering stages each iterate over them and
+    // we'd otherwise pay the PyO3 borrow cost per cell.
     let mut q_comparable: Vec<String> = Vec::with_capacity(n_q);
     let mut q_lengths: Vec<usize> = Vec::with_capacity(n_q);
     for p in &qry {
@@ -567,8 +655,9 @@ mod tests {
 
     #[test]
     fn similar_pairs_loaded() {
-        // Sanity: the JSON deserialises and at least one known pair
-        // is present (bidirectional, since the genscript expanded).
+        // Confusable-pair lookup must hit on both directions of a
+        // listed pair without the caller normalising them — the
+        // genscript pre-expands.
         assert!(SIMILAR_PAIRS.contains(&('0', 'o')));
         assert!(SIMILAR_PAIRS.contains(&('o', '0')));
         assert!(SIMILAR_PAIRS.contains(&('1', 'l')));
@@ -608,7 +697,10 @@ mod tests {
 
     #[test]
     fn costs_similarity_short_disables() {
-        // 2-char token with nonzero cost: log(max(0,1)) = 0, total > max
+        // The fail-closed property: 2-char tokens have budget zero,
+        // so any non-zero edit fails the cap. Stops the matcher
+        // from over-firing on 2-char Chinese given names, vessel
+        // hull suffixes, initials, etc.
         let costs = vec![1.0, 0.0];
         assert_eq!(costs_similarity(&costs, 1.0), 0.0);
     }
@@ -621,11 +713,13 @@ mod tests {
 
     #[test]
     fn align_transposition_prefers_distributive_path() {
-        // "donlad" vs "donald" has two equally-optimal alignments at
-        // total cost 2.0: sub+sub or del+match+ins. The tie-break
-        // prefers del+ins so cost distributes 1.0 per side instead of
-        // doubling on a single cell. This is what lets the per-side
-        // budget cap accept the match.
+        // Adjacent transpositions ("donlad" vs "donald") have two
+        // equally-optimal alignments under unit cost — sub+sub
+        // (concentrates 2.0 on one span, both sides) or
+        // del+match+ins (1.0 to each side). The tie-break must
+        // pick the distributive path, otherwise the per-side
+        // budget cap rejects the cluster on a typo it should
+        // accept.
         let q: Vec<char> = "donlad".chars().collect();
         let r: Vec<char> = "donald".chars().collect();
         let steps = align_chars(&q, &r);
