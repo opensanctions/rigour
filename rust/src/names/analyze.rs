@@ -16,8 +16,9 @@
 //        - PER: person tagger.
 //        - ORG: org tagger.
 //        - ENT: org tagger, then ENT→ORG upgrade if its ORG_CLASS
-//               evidence trips the `> 2` char threshold; otherwise
-//               also run the person tagger and leave the tag at ENT.
+//               evidence meets the ORG_CLASS_UPGRADE_MIN_CHARS
+//               threshold; otherwise also run the person tagger
+//               and leave the tag at ENT.
 //   9. infer_part_tags post-pass (NUMERIC / STOP / LEGAL promotion)
 // Optionally:
 //   10. Name::consolidate_names to drop substring-dominated names
@@ -58,6 +59,24 @@ use crate::text::stopwords::stopwords_list;
 /// (CJK / combining marks) the haystack keeps, breaking matches
 /// on non-Latin scripts.
 const TAGGER_FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::NAME);
+
+/// Minimum total `form_str` char count of an `ORG_CLASS` span before
+/// it can promote an `ENT` Name to `ORG`.
+///
+/// Two-character legal-form codes (Swedish "AB", Italian "SS",
+/// Romanian "II") collide too easily with non-legal text — a Roman
+/// numeral suffix, a regional abbreviation, an initial pair — and
+/// would mis-classify person names as orgs. Three-character codes
+/// (`LLC`, `SRL`, `GmbH` after compare-form rewrite to `gmbh`) carry
+/// enough distinctiveness that an ORG_CLASS hit is reliable evidence
+/// the input is an organisation.
+///
+/// Used by [`upgrade_ent_to_org`] as the routing gate that decides
+/// whether the person tagger runs on an ENT input. The same
+/// threshold also implicitly tunes how aggressively ENT collapses
+/// to ORG — too low produces false orgs on Roman-numeralled person
+/// names, too high leaves obviously-corporate inputs at ENT.
+const ORG_CLASS_UPGRADE_MIN_CHARS: usize = 3;
 
 /// Stopword set, keyed on `normalize_name`-shaped strings. Used by
 /// the STOP-tag promotion in `infer_part_tags`. The set is built once
@@ -224,9 +243,9 @@ fn apply_tagger(py: Python<'_>, name: &Py<Name>, kind: TaggerKind) -> PyResult<(
 /// Decide whether the ENT→ORG upgrade fires based on the org tagger's
 /// output already attached to `name`. Returns `true` iff there is at
 /// least one `ORG_CLASS` span whose combined `form_str` char count
-/// is `> 2` — the same threshold used historically inside
-/// `infer_part_tags`. Used as a routing gate on ENT inputs to skip
-/// the person tagger when the structural ORG signal is strong.
+/// meets [`ORG_CLASS_UPGRADE_MIN_CHARS`]. Used as a routing gate on
+/// ENT inputs to skip the person tagger when the structural ORG
+/// signal is strong.
 fn upgrade_ent_to_org(py: Python<'_>, name: &Py<Name>) -> PyResult<bool> {
     let name_ref = name.bind(py).borrow();
     let spans = name_ref.spans.bind(py);
@@ -247,7 +266,7 @@ fn upgrade_ent_to_org(py: Python<'_>, name: &Py<Name>) -> PyResult<bool> {
                     .unwrap_or(0)
             })
             .sum();
-        if span_len > 2 {
+        if span_len >= ORG_CLASS_UPGRADE_MIN_CHARS {
             return Ok(true);
         }
     }

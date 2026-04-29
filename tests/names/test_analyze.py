@@ -100,7 +100,7 @@ def test_company_simple():
 
 def test_entity_upgrade_to_org():
     # "Limited Liability Partnership" normalises to "llp" — single
-    # ORG_CLASS span whose len(span) (character count) is 3 > 2.
+    # ORG_CLASS span whose 3-char length meets the upgrade threshold.
     # The org-tagger short-circuit promotes ENT → ORG and skips the
     # person tagger.
     result = analyze_names(
