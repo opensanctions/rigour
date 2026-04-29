@@ -53,6 +53,70 @@ const SEP: char = ' ';
 /// runs more permissive than payment screening.
 const DEFAULT_FUZZY_TOLERANCE: f64 = 1.0;
 
+// --- Edit-cost tiers ------------------------------------------------
+//
+// What an edit between `(qc, rc)` "costs" in the alignment. The
+// downstream budget cap is per-side, so the *gap* between cheap
+// (0.2) and expensive (1.5) edits is what determines whether a
+// cluster squeaks under the cap or fails it. Tuning these values
+// is one of the main levers in `plans/weighted-distance.md`'s
+// "Systematizing and tuning" section.
+
+/// Equal characters — no edit. Constant for symmetry; the function
+/// doesn't actually call this.
+const COST_EQUAL: f64 = 0.0;
+
+/// Token boundary lost or gained on one side. Token merge/split
+/// (`vanderbilt` ↔ `van der bilt`) is a common surface-form variant
+/// of the same name; we charge it almost nothing so the alignment
+/// doesn't refuse to bridge across whitespace artifacts.
+const COST_SEP_DROP: f64 = 0.2;
+
+/// Substitute between a confusable pair from
+/// `resources/names/compare.yml` (`0`/`o`, `1`/`l`, …). OCR /
+/// transliteration / homoglyph noise — the writer was probably
+/// aiming at the same character.
+const COST_CONFUSABLE: f64 = 0.7;
+
+/// Default insert / delete / substitute cost. The unit; everything
+/// else is calibrated relative to this.
+const COST_DEFAULT: f64 = 1.0;
+
+/// Edit involving a digit on either side (mismatched). Digits
+/// identify specific things — vintage years, vessel hull numbers,
+/// fund vintages — so a digit mismatch is evidence of a different
+/// entity, not a typo.
+const COST_DIGIT: f64 = 1.5;
+
+// --- Per-side budget shape ------------------------------------------
+
+/// Logarithm base in the per-side cost-budget formula
+/// `log_BUDGET_LOG_BASE(max(len - BUDGET_SHORT_FLOOR, 1)) *
+/// fuzzy_tolerance`. The base controls how aggressively the budget
+/// grows with token length — smaller base = faster growth = more
+/// permissive on long names. The current value is calibrated so a
+/// 6-character token tolerates ~1.6 edits at default tolerance.
+const BUDGET_LOG_BASE: f64 = 2.35;
+
+/// Short-token floor: tokens shorter than this contribute zero to
+/// the budget, so any non-zero edit fails the cap. This is the
+/// fail-closed property — the matcher refuses to fuzzy-match on
+/// 1-2 character tokens (vessel hull suffixes, isolated initials,
+/// 2-char Chinese given names) where typo / distinct-entity signal
+/// is too weak.
+const BUDGET_SHORT_FLOOR: usize = 2;
+
+// --- Clustering -----------------------------------------------------
+
+/// Overlap fraction (matched chars / shorter-side length) above
+/// which two parts pair into a cluster. A pair below this threshold
+/// surfaces as solo records — the matched-character evidence is
+/// too thin to claim the parts are talking about the same token.
+/// The 0.51 value (i.e. "more than half") is the lowest value where
+/// majority of the shorter token agrees; below half is dominated by
+/// noise, above half is dominated by signal.
+const CLUSTER_OVERLAP_MIN: f64 = 0.51;
+
 // --- Cost table -----------------------------------------------------
 
 #[derive(Debug, Deserialize)]
@@ -78,48 +142,36 @@ static SIMILAR_PAIRS: LazyLock<HashSet<(char, char)>> = LazyLock::new(|| {
     out
 });
 
-/// What an edit between `qc` (query side) and `rc` (result side)
-/// "costs" in the alignment.
+/// Cost of one edit step between `qc` (query side) and `rc`
+/// (result side), keyed off the [edit-cost tiers](`COST_DEFAULT`)
+/// at the top of the module.
 ///
-/// The tiers are deliberately spread out — the budget cap downstream
-/// is per-side, so the gap between "cheap edit" (0.2) and "expensive
-/// edit" (1.5) is what determines whether a cluster squeaks under
-/// the cap or fails it.
-///
-///   - **0.0** — equal characters (no edit).
-///   - **0.2** — losing or gaining a SEP on one side. Token merge /
-///     split is a frequent surface-form variant of the same name
-///     (`vanderbilt` ↔ `van der bilt`); we charge it almost nothing.
-///   - **0.7** — confusable-pair substitute (`0`/`o`, `1`/`l`, …).
-///     OCR / transliteration / homoglyph noise; cheaper than a
-///     normal edit because the writer was probably aiming at the
-///     same token.
-///   - **1.5** — digit involved. Digits identify specific things
-///     (vintage years, vessel hulls, fund numbers), so a digit
-///     mismatch is evidence of a different entity, not a typo.
-///   - **1.0** — default insert / delete / substitute. The unit.
+/// Tier-selection is order-sensitive: SEP-drop checks come before
+/// confusable lookup (so a SEP→non-SEP substitute falls through to
+/// digit / default), and confusable beats digit (a `0`/`o` swap
+/// gets COST_CONFUSABLE even though `0` is a digit).
 fn edit_cost(op: Op, qc: Option<char>, rc: Option<char>) -> f64 {
     if op == Op::Equal {
-        return 0.0;
+        return COST_EQUAL;
     }
     if qc == Some(SEP) && rc.is_none() {
-        return 0.2;
+        return COST_SEP_DROP;
     }
     if rc == Some(SEP) && qc.is_none() {
-        return 0.2;
+        return COST_SEP_DROP;
     }
     if let (Some(q), Some(r)) = (qc, rc) {
         if SIMILAR_PAIRS.contains(&(q, r)) {
-            return 0.7;
+            return COST_CONFUSABLE;
         }
     }
     if matches!(qc, Some(c) if c.is_ascii_digit()) {
-        return 1.5;
+        return COST_DIGIT;
     }
     if matches!(rc, Some(c) if c.is_ascii_digit()) {
-        return 1.5;
+        return COST_DIGIT;
     }
-    1.0
+    COST_DEFAULT
 }
 
 // --- Alignment ------------------------------------------------------
@@ -422,7 +474,7 @@ fn run_cluster(
             continue;
         }
         let frac = overlap as f64 / min_len as f64;
-        if frac > 0.51 {
+        if frac > CLUSTER_OVERLAP_MIN {
             // Find existing cluster for either side, else create one.
             let cluster_idx = match (q_to_cluster.get(&qp), r_to_cluster.get(&rp)) {
                 (Some(&i), _) => i,
@@ -472,23 +524,23 @@ fn run_cluster(
 ///
 /// Two design points worth knowing:
 ///
-/// 1. The score has a **cliff**: if total cost exceeds a length-
-///    dependent budget, the side scores zero. The budget grows
-///    sub-linearly with character count (log base 2.35), so longer
-///    tokens absorb more edits before failing — but very short
-///    tokens (`< 3` chars) get budget zero and any non-zero cost
-///    fails the cap. That's deliberate: fuzzy-matching 2-char tokens
-///    is mostly noise (Chinese given names, vessel hull suffixes,
-///    initials) and we'd rather fail closed than over-fire.
-/// 2. Below the cap, similarity is `1 - total_cost / len_chars` —
-///    a clean linear walk-down. The non-linearity is in the cliff,
-///    not in the score curve, which keeps the math transparent.
+/// 1. The score has a **cliff**: if total cost exceeds the
+///    length-dependent budget (see [`BUDGET_LOG_BASE`] and
+///    [`BUDGET_SHORT_FLOOR`]), the side scores zero. Below the cap,
+///    similarity is `1 - total_cost / len_chars` — a clean linear
+///    walk-down. The non-linearity is in the cliff, not in the
+///    score curve, which keeps the math transparent.
+/// 2. Tokens shorter than the floor get budget zero and any
+///    non-zero cost fails the cap. That fail-closed behaviour is
+///    deliberate: fuzzy-matching 1-2 char tokens (vessel hull
+///    suffixes, isolated initials, 2-char Chinese given names) is
+///    mostly noise and we'd rather miss those than over-fire.
 fn costs_similarity(costs: &[f64], fuzzy_tolerance: f64) -> f64 {
     if costs.is_empty() {
         return 0.0;
     }
-    let len_minus_2 = (costs.len() as i64 - 2).max(1) as f64;
-    let max_cost = len_minus_2.log(2.35) * fuzzy_tolerance;
+    let effective_len = (costs.len() as i64 - BUDGET_SHORT_FLOOR as i64).max(1) as f64;
+    let max_cost = effective_len.log(BUDGET_LOG_BASE) * fuzzy_tolerance;
     let total_cost: f64 = costs.iter().sum();
     if total_cost == 0.0 {
         return 1.0;
