@@ -76,6 +76,12 @@ const TAGGER_FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::NAME);
 /// threshold also implicitly tunes how aggressively ENT collapses
 /// to ORG — too low produces false orgs on Roman-numeralled person
 /// names, too high leaves obviously-corporate inputs at ENT.
+///
+/// TODO: 2-char legal forms — German `AG`, Swedish `AB`, Italian
+/// `SS` — slip below this threshold and stay at ENT, so a name like
+/// "Schmidt AG" (form "schmidt ag") falls through to the person
+/// tagger. Consider a position-aware rule (head/tail-only) or a
+/// per-code allowlist if real data shows these getting mis-classified.
 const ORG_CLASS_UPGRADE_MIN_CHARS: usize = 3;
 
 /// Stopword set, keyed on `normalize_name`-shaped strings. Used by
