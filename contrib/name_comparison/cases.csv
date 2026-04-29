@@ -27,10 +27,10 @@ nk_checks,Person,Ginta Boreza,Janett Borez,false,MEDIUM,,
 nk_checks,Company,Deutsche Bank AG,Deutsche Bank,true,MEDIUM,,
 nk_checks,Company,Deutsche Bank's AG,Deutsche Bank AG,true,MEDIUM,,
 nk_checks,Company,Deutsche Bank AG,Deutsche Bank Aktiengesellschaft,true,STRONG,,
-nk_checks,Company,Deutsche Bank (Schweiz) AG,Deutsche Bank AG,true,MEDIUM,,
-nk_checks,Company,Deutsche Bank AG,Deutsche Bank (Schweiz) AG,true,MEDIUM,,
-nk_checks,Company,Deutsche Bank AG,Deutsche Bank GmbH,false,MEDIUM,,
-nk_checks,Company,Deutsche Bank Trust Company,Deutsche Bank,true,MEDIUM,,
+nk_checks,Company,Deutsche Bank (Schweiz) AG,Deutsche Bank AG,true,WEAK,,
+nk_checks,Company,Deutsche Bank AG,Deutsche Bank (Schweiz) AG,true,WEAK,,
+nk_checks,Company,Deutsche Bank AG,Deutsche Bank GmbH,false,WEAK,,
+nk_checks,Company,Deutsche Bank Trust Company,Deutsche Bank,false,WEAK,,
 nk_checks,Company,OAO Gazprom,Open Joint Stock Company Gazprom,true,MEDIUM,,
 nk_checks,Company,HOMS REFINERY CORPORATION,The Homs Refinery Company,true,MEDIUM,,
 nk_checks,Person,Friedrych Buchenberg,Friedrich Buchenberg,true,MEDIUM,,
@@ -149,17 +149,17 @@ nk_checks,Company,ANO Iskusstvo Krasoty,LIMITED LIABILITY COMPANY ISKUSSTVO KRAS
 nk_checks,Company,faberlic,FABERLIC EUROPE Sp. z o.o.,true,MEDIUM,,
 nk_checks,LegalEntity,faberlic,FABERLIC EUROPE Sp. z o.o.,true,MEDIUM,,
 nk_checks,Person,Boris Johnson,Alexandre Boris de Pfeffel Johnson,true,MEDIUM,,
-nk_checks,Person,Geoffrey Boris Johnson,Alexandre Boris de Pfeffel Johnson,false,MEDIUM,,
+nk_checks,Person,Geoffrey Boris Johnson,Alexandre Boris de Pfeffel Johnson,false,STRONG,,
 nk_checks,Person,Boris de Pfeffel Johnson,Alexandre Boris de Pfeffel Johnson,true,MEDIUM,,
 nk_checks,Person,Boris Johnson de Pfeffel,Alexandre Boris de Pfeffel Johnson,true,MEDIUM,,
-nk_checks,Company,A.B.C. Company,A.B.C. Company,true,MEDIUM,,
-nk_checks,Company,ABC Company,A.B.C. Company,true,MEDIUM,,
+nk_checks,Company,A.B.C. Company,A.B.C. Company,true,STRONG,,
+nk_checks,Company,ABC Company,A.B.C. Company,true,STRONG,,
 nk_checks,Company,ABC Co.,A.B.C. Company,true,MEDIUM,,
 nk_checks,Company,CDE Company,A.B.C. Company,false,MEDIUM,,
-nk_checks,Company,C.B.A. Company,A.B.C. Company,true,MEDIUM,,
-nk_checks,Company,N.A.B.C. Company,A.B.C. Company,true,MEDIUM,,
+nk_checks,Company,C.B.A. Company,A.B.C. Company,false,STRONG,,
+nk_checks,Company,N.A.B.C. Company,A.B.C. Company,false,MEDIUM,,
 nk_checks,Company,ABC International,A.B.C. Company,false,MEDIUM,,
-nk_checks,Organization,Yamahdi (UK) Limited,YA MAHDI INDUSTRIES GROUP,false,MEDIUM,,
+nk_checks,Organization,Yamahdi (UK) Limited,YA MAHDI INDUSTRIES GROUP,false,STRONG,,
 nk_checks,Organization,MAHDI & YASMIN LTD,YA MAHDI INDUSTRIES GROUP,false,MEDIUM,,
 nk_checks,Person,Niels Oscar Rost,Niels Oscar TROOST,true,MEDIUM,,
 nk_checks,Person,Nils Trosterich,Niels Oscar TROOST,false,MEDIUM,,
@@ -187,13 +187,13 @@ nk_checks,Company,"ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВ
 nk_checks,Company,"СВЕРДЛОВСКАЯ ОБЛАСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ ""ЦЕНТР СОЦИАЛЬНОЙ АДАПТАЦИИ ""АЛЬЯНС""","СВЕРДЛОВСКАЯ ОБЛАСТНАЯ ОБЩЕСТВЕННАЯ ОРГАНИЗАЦИЯ ""ЦЕНТР ИССЛЕДОВАНИЯ БОЕВЫХ ИСКУССТВ ""УРАЛЬСКИЙ БУДОКАН""",false,MEDIUM,,
 nk_checks,LegalEntity,Nanshan Group,Nanshan Group Co Ltd,true,MEDIUM,,
 nk_checks,Company,Societatea cu Răspundere Limitată PRO TRAFFIC,SRL PRO TRAFFIC,true,MEDIUM,,
-nk_checks,Company,Societatea cu Răspundere Limitată CON TRAFFIC,Societatea cu Răspundere Limitată PRO TRAFFIC,false,MEDIUM,,
+nk_checks,Company,Societatea cu Răspundere Limitată CON TRAFFIC,Societatea cu Răspundere Limitată PRO TRAFFIC,false,STRONG,,
 nk_checks,Company,S.R.L. CON TRAFFIC,Societatea cu Răspundere Limitată PRO TRAFFIC,false,MEDIUM,,
 nk_checks,Company,JSC Murom Instrument-Making Plant,Акционерное общество “Муромский приборостроительный завод”,true,MEDIUM,,
 nk_checks,Organization,ndrangheta,'Ndrangheta,true,MEDIUM,,
 nk_checks,Organization,Andrang Heta,'Ndrangheta,true,MEDIUM,,
-nk_checks,Organization,Al Qaeda,Al Qa'ida,true,MEDIUM,,
-nk_checks,Organization,Al Qaeda,Al-Qa'ida/Islamic Army,true,MEDIUM,,
+nk_checks,Organization,Al Qaeda,Al Qa'ida,true,STRONG,,
+nk_checks,Organization,Al Qaeda,Al-Qa'ida/Islamic Army,true,STRONG,,
 nk_checks,Organization,Al-Qaida in Iraq,Al-Qaida in the Arabian Peninsula,false,MEDIUM,,
 nk_checks,Person,'Abd al-Aziz al-Nuristani,Abdul Aziz Nooristani,true,MEDIUM,,
 nk_checks,Person,"NURISTANI, Abdul Aziz",Abdul Aziz Nooristani,true,MEDIUM,,
@@ -213,7 +213,7 @@ nk_checks,Person,GERD RANDOLPH,"Randolph, Gena",false,MEDIUM,,
 nk_checks,Organization,The BSF Foundation,The BIRD Foundation,false,MEDIUM,,
 nk_checks,Person,Eric A. Wendt,Josh A. Wendt,false,MEDIUM,,
 nk_checks,Person,Aaron A. Wendt,Josh A. Wendt,false,MEDIUM,,
-nk_checks,Company,"BWI Industries, Inc.","BAE Industries, Inc.",true,MEDIUM,,
+nk_checks,Company,"BWI Industries, Inc.","BAE Industries, Inc.",false,STRONG,,
 nk_checks,LegalEntity,"BWI Industries, Inc.","BAE Industries, Inc.",true,MEDIUM,,
 nk_checks,Company,"BAE Systems, Inc.","BAE Industries, Inc.",false,MEDIUM,,
 nk_checks,Person,Allaidin Hussain ALWAN,Ahmad al-Hamidawi,false,MEDIUM,,
@@ -484,7 +484,7 @@ synth_companies,Company,"Bowne Litigation Solutions, L.P.","Bowne Solutions, L.L
 synth_companies,Company,"Bowne Localization, Inc.","Bowne Global Solutions, Inc.",false,MEDIUM,LLM-proposed deviation,line-of-business token swap
 synth_companies,Company,"Mendez, B.V.B.A","Mendez Nederland, B.V.",false,MEDIUM,LLM-proposed deviation,country-token addition
 synth_companies,Company,"Mendez, Denmark A/S",Mendez Norge A/S,false,MEDIUM,LLM-proposed deviation,country-token swap
-synth_companies,Company,"L & H Sweden, AB","L & H Mendez Sweden, AB",true,MEDIUM,LLM-proposed deviation,brand-token addition mid-name
+synth_companies,Company,"L & H Sweden, AB","L & H Mendez Sweden, AB",false,WEAK,LLM-proposed deviation,brand-token addition mid-name
 synth_companies,Company,"L & H Editions, S.A.","L & H Linguex, S.A.",false,MEDIUM,LLM-proposed deviation,brand-token swap
 synth_companies,Company,"Bowne Global Solutions Denmark, A/S",Bowne Global Solutions II Denmark A/S,false,MEDIUM,LLM-proposed deviation,II series marker addition
 synth_companies,Company,Bowne Global Solutions II France S.A.S.,"Bowne Global Solutions (France), S.A.R.L.",false,MEDIUM,LLM-proposed deviation,II marker + entity-form swap same country
@@ -512,12 +512,12 @@ synth_companies,Company,CCB International Capital Corporation Limited,CCB Intern
 synth_companies,Company,Mitsubishi UFJ Trust and Banking Corporation,Mitsubishi UFJ Lease and Finance Corporation,false,MEDIUM,LLM-proposed deviation,line-of-business mid-name swap (Trust/Lease)
 synth_companies,Company,Sumitomo Mitsui Trust Bank Limited,Sumitomo Mitsui Banking Corporation,false,MEDIUM,LLM-proposed deviation,structural-token swap (Trust Bank / Banking)
 synth_companies,Company,Mizuho Securities Co. Ltd.,Mizuho Trust & Banking Co. Ltd.,false,MEDIUM,LLM-proposed deviation,line-of-business mid-name swap (Securities/Trust & Banking)
-synth_companies,Company,Banco Santander S.A.,Banco Santander México S.A.,true,MEDIUM,LLM-proposed deviation,country-token addition mid-name
-synth_companies,Company,Banco Santander S.A.,Banco Santander Chile S.A.,true,MEDIUM,LLM-proposed deviation,country-token addition mid-name
+synth_companies,Company,Banco Santander S.A.,Banco Santander México S.A.,false,WEAK,LLM-proposed deviation,country-token addition mid-name
+synth_companies,Company,Banco Santander S.A.,Banco Santander Chile S.A.,false,WEAK,LLM-proposed deviation,country-token addition mid-name
 synth_companies,Company,Banco Santander México S.A.,Banco Santander Chile S.A.,false,MEDIUM,LLM-proposed deviation,sister-country-sub swap
 synth_companies,Company,BNP Paribas Securities Services,BNP Paribas Personal Finance,false,MEDIUM,LLM-proposed deviation,line-of-business swap (Securities/Personal Finance)
 synth_people,Person,Elon Mosk,Elon Musk,true,MEDIUM,LLM-proposed deviation,surname single-char sub (vowel)
-synth_people,Person,Mark Zuckermann,Mark Zuckerberg,false,MEDIUM,LLM-proposed deviation,surname swap to plausible-alt German-Jewish surname
+synth_people,Person,Mark Zuckermann,Mark Zuckerberg,false,STRONG,LLM-proposed deviation,surname swap to plausible-alt German-Jewish surname
 synth_people,Person,Jeff Brezos,Jeff Bezos,true,MEDIUM,LLM-proposed deviation,surname single-char insertion
 synth_people,Person,Bill Cates,Bill Gates,true,MEDIUM,LLM-proposed deviation,surname swap (Cates is real English surname)
 synth_people,Person,Larry Allison,Larry Ellison,true,MEDIUM,LLM-proposed deviation,surname swap (Allison is real surname)
@@ -537,7 +537,7 @@ synth_people,Person,LeBron Jones,LeBron James,true,MEDIUM,LLM-proposed deviation
 synth_people,Person,Michael Jorgan,Michael Jordan,true,MEDIUM,LLM-proposed deviation,surname single-char sub
 synth_people,Person,Tigran Woods,Tiger Woods,false,MEDIUM,LLM-proposed deviation,given-name swap (Tigran is Armenian)
 synth_people,Person,Rafael Nadar,Rafael Nadal,true,MEDIUM,LLM-proposed deviation,surname swap (Nadar is real Tamil surname)
-synth_people,Person,Boris Abramovich,Roman Abramovich,false,MEDIUM,LLM-proposed deviation,given-name sub
+synth_people,Person,Boris Abramovich,Roman Abramovich,false,STRONG,LLM-proposed deviation,given-name sub
 synth_people,Person,Mikhail Khordorovsky,Mikhail Khodorkovsky,true,MEDIUM,LLM-proposed deviation,surname syllable rearrangement
 synth_people,Person,Igor Sechev,Igor Sechin,true,MEDIUM,LLM-proposed deviation,surname-suffix swap -in/-ev
 synth_people,Person,Alisher Asilov,Alisher Usmanov,false,MEDIUM,LLM-proposed deviation,surname swap to plausible-alt Uzbek
@@ -638,7 +638,7 @@ synth_people,Person,SAYED MOHAMMAD ABDUL AGHA,SAYED MOHAMMAD AZIM AGHA,false,MED
 synth_people,Person,NAZIRULLAH HANAFI HAMIDULLAH,NAZIRULLAH HANAFI WALIULLAH,false,MEDIUM,LLM-proposed deviation,Pashtun grandfather swap
 synth_people,Person,ATIQULLAH ABDUL MOHAMMAD,ATIQULLAH WALI MOHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap
 synth_people,Person,AREFULLAH AREF ABDULRAHMAN MOHAMMAD,AREFULLAH AREF GHAZI MOHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun grandfather swap
-synth_people,Person,ABDUL KABIR ABDUL JAN,ABDUL KABIR MOHAMMAD JAN,true,MEDIUM,LLM-proposed deviation,Pashtun father-name swap
+synth_people,Person,ABDUL KABIR ABDUL JAN,ABDUL KABIR MOHAMMAD JAN,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap
 synth_people,Person,SALEH MOHAMMAD ZADRAN AKHTAR MUHAMMAD,SALEH MOHAMMAD KAKAR AKHTAR MUHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun tribal-clan swap (Zadran/Kakar)
 synth_people,Person,FAIZULLAH KHAN ZADRAN na,FAIZULLAH KHAN NOORZAI na,false,MEDIUM,LLM-proposed deviation,Pashtun tribal swap
 synth_people,Person,ABDUL BASIR HAQQANI,ABDUL BASIR NOORZAI,false,MEDIUM,LLM-proposed deviation,Pashtun tribal swap
@@ -664,7 +664,7 @@ synth_people,Person,RI MYONG-CHUL,RI PYONG CHUL,true,MEDIUM,LLM-proposed deviati
 synth_people,Person,SON YONG HYOK,SON JONG HYOK,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,KIM JONG MAN,KIM JONG SIK,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,CHO HYO'K SAN,CHO CHUN RYONG,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
-synth_people,Person,CHANG SU HA,CHANG CHANG HA,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
+synth_people,Person,CHANG SU HA,CHANG CHANG HA,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,PAK YONG-CHUN,PAK IL KYU,false,MEDIUM,LLM-proposed deviation,Korean given-name swap (UN-list collision)
 synth_people,Person,HAN BONG SU,HAN JANG SU,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,CHOE KWANG HO,CHOE SONG IL,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
@@ -701,7 +701,7 @@ synth_people,Person,MYRNA AJIJUL JAMIRI,MYRNA AJIJUL MABANZA,false,MEDIUM,LLM-pr
 synth_people,Person,ANGELO RAMIREZ DE GUZMAN,ANGELO RAMIREZ TRINIDAD,false,MEDIUM,LLM-proposed deviation,Filipino surname swap
 synth_people,Person,ISNILON TOTONI MISUARI,ISNILON TOTONI HAPILON,false,MEDIUM,LLM-proposed deviation,Filipino Moro surname swap (Misuari is real different MNLF leader)
 synth_people,Person,PIO ABOGNE DE LEON,PIO ABOGNE DE VERA,false,MEDIUM,LLM-proposed deviation,Filipino Spanish-style surname swap
-synth_people,Person,ABDULLAHI MOHAMED MOHAMED CADDOW,ABDULLAHI OSMAN MOHAMED CADDOW,true,MEDIUM,LLM-proposed deviation,Somali patronymic swap
+synth_people,Person,ABDULLAHI MOHAMED MOHAMED CADDOW,ABDULLAHI OSMAN MOHAMED CADDOW,false,MEDIUM,LLM-proposed deviation,Somali patronymic swap
 synth_people,Person,MAXAMED CABDULLAAHI CIISE,MAXAMED CABDULLAAH CIISE,true,MEDIUM,LLM-proposed deviation,Somali patronymic suffix swap (multi-char)
 synth_people,Person,ABDIKADIR HASSAN ABDIKADIR,ABDIKADIR MOHAMED ABDIKADIR,false,MEDIUM,LLM-proposed deviation,Somali patronymic swap
 synth_people,Person,HASSAN DAHIR FARAH,HASSAN DAHIR AWEYS,false,MEDIUM,LLM-proposed deviation,Somali clan-name swap
