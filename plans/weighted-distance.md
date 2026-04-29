@@ -1391,39 +1391,67 @@ phases gate on earlier ones.
      family-name swaps on PER, middle-initial expansion)
      are explicitly **out of scope**.
 
-3. **Rust port (rigour) — start in parallel with phase 2.**
-   - First port reproduces `compare_parts_orig`'s **current**
-     behaviour, not phase-2-settled behaviour. The point is to
-     get something fast we can play with, including for perf
-     measurement; spec iteration after the port can target
-     either Python or Rust and re-sync via the parity gate.
-   - New module `rust/src/names/compare.rs`. (Tentative
-     location; if the cost-folded DP grows into a re-usable
-     primitive over arbitrary char sequences, the alignment
-     core may slide down to `rust/src/text/compare.rs` and
-     `names/compare.rs` becomes the part-aware wrapper.
-     Decide based on what falls out of the implementation.)
-   - Reads SIMILAR_PAIRS from `rust/data/names/compare.json`
-     (already emitted by genscript; see phase 1).
-   - **`Comparison` is a Rust pyclass** — same convention as
-     `Name`/`NamePart`/`Symbol`. Returns `Vec<Py<Comparison>>`
-     across the FFI; nomenklatura's wrapper builds `Match`
-     objects from each Comparison directly.
-   - PyO3 binding + `_core.pyi` stub entry +
-     `rigour/names/compare.py` Python wrapper.
-   - Rust-side unit tests for cost table lookup, alignment
-     traceback, part-boundary cursor logic.
-   - Harness adds a new `comparators/compare_parts.py` that
-     adapts `rigour.names.compare_parts` (Rust) and registers
-     `compare_rust` as a sibling of `compare_python` — same
-     orchestration, different residue function. Both run in
-     every harness invocation until parity is met.
-   - Acceptance: per-case parity within float tolerance on
-     `cases.csv` between `compare_python` and `compare_rust`
-     (when both implement the same spec). Once a settled spec
-     locks in across both layers, `compare_parts_orig` and
-     `compare_python` retire (files deleted, registry entries
-     removed).
+3. **Rust port (rigour).** ✅ **First port landed (sketch quality).**
+   - ✅ `rust/src/names/compare.rs` — cost-folded
+     Wagner-Fischer with traceback, alignment-walk for
+     per-part cost streams + per-pair overlap, 0.51-overlap
+     clustering with transitive closure, product-of-side-
+     similarities scoring with log-budget cap.
+   - ✅ `Comparison` is a Rust pyclass (same convention as
+     `Name`/`NamePart`/`Symbol`). FFI returns
+     `Vec<Py<Comparison>>`.
+   - ✅ Reads SIMILAR_PAIRS from `rust/data/names/compare.json`
+     via `LazyLock<HashSet>`.
+   - ✅ PyO3 binding (`rigour._core.compare_parts`),
+     `_core.pyi` stub entries for `Comparison` +
+     `compare_parts`. **No `rigour/names/compare.py` Python
+     wrapper yet** — direct `_core.compare_parts` usage works
+     fine for the harness; add the wrapper when the
+     mkdocs-facing surface lands.
+   - ✅ 6 Rust unit tests (cost-table lookup, edit-cost tiers,
+     alignment basics, budget cap).
+   - ✅ Harness adapter `comparators/compare_rust.py` registered
+     as `compare_rust` in `COMPARATORS`. `orchestration.py`
+     factored to take a `residue_fn` parameter; `compare_python`
+     and `compare_rust` are sibling wrappers.
+
+   **First-port numbers** at threshold 0.7 (cases.csv n=569):
+
+   | Comparator     |    F1 |     P |     R |
+   |----------------|------:|------:|------:|
+   | compare_python | 0.707 | 0.590 | 0.883 |
+   | compare_rust   | 0.689 | 0.582 | 0.844 |
+
+   **Parity status**: 12 cases out of 569 diverge. All are
+   tied-cost alignment paths where Python's rapidfuzz
+   `Levenshtein.opcodes` picks `insert+delete` and the Rust
+   cost-folded DP picks `replace+replace`. Both alignments
+   are mathematically optimal under their respective cost
+   models; the divergence is exactly the small drift the
+   spec's *Cost-folded DP* section warned about. The
+   typo-correction cluster (`Donlad/Donald`,
+   `Olaf Schloz/Olaf Scholz`) is the affected pattern.
+
+   **Tentative location.** If the cost-folded DP later grows
+   into a re-usable primitive over arbitrary char sequences,
+   the alignment core may slide down to
+   `rust/src/text/compare.rs` and `names/compare.rs` becomes
+   the part-aware wrapper. Decide once spec iteration
+   surfaces text-level reuse.
+
+   **Acceptance** (revised, given small drift is expected):
+   the open question is which side picks the
+   parity-tightening tie-breaker. Two options for closing the
+   12-case gap:
+     - (A) Match Python's tie-break in Rust (prefer
+       `insert+delete` on tied paths). Keeps the harness
+       diff at zero; locks the Rust side to a Python
+       artefact.
+     - (B) Accept Rust's choice as canonical (cleaner
+       semantics: cost-folded DP picks the alignment that
+       minimises *side-summed* cost). Re-pin Python prototype
+       to match.
+   Decide alongside spec-iteration outcomes.
 
 4. **Nomenklatura migration.**
    - Replace `weighted_edit_similarity`'s body with a wrapper
@@ -1534,6 +1562,12 @@ These show up in `cases.csv` failures but are out of scope:
   phase-2-settled behaviour. Spec iteration after the port
   lands targets either layer; the parity gate catches
   divergence.
+- **First Rust port is sketch quality, no optimisation.**
+  Plain `O(NM)` Wagner-Fischer with traceback, no
+  bit-parallelism, no caches, no FFI memoisation.
+  Optimisation work is sequenced after spec settles —
+  premature optimisation against an algorithm that may still
+  shift makes for wasted effort.
 - **Explicit out-of-scope failure modes.** Reverse-name
   cases, Western-convention reorder, family-name swap on
   PER, cross-script for non-latinizable scripts. Detail in
