@@ -1808,6 +1808,8 @@ org_domains:
     - askeriye # Turkish
     - militar # Spanish - adjective
     - militares # Spanish - adjective plural
+    - عسكري
+    - عسكري
     - 军事 # Chinese (simplified)
     - 軍事 # Chinese (traditional)
     - 军队 # Chinese (simplified)
@@ -1833,6 +1835,7 @@ org_domains:
     - 陸軍 # Chinese (traditional)
     - 军队 # Chinese (simplified)
     - 軍隊 # Chinese (traditional)
+    - عسكر
   aviation:
     - aviation
     - aviación
@@ -3433,6 +3436,17 @@ org_domains:
     - Al Qa’ida/Islamic Army
     - Al-Qa'ida/Islamic Army
     - Al-Kaida/Islamic Army
+  hezbollah:
+    - Hezbollah
+    - Hizbollah
+    - Hezballah
+    - Hizballah
+    - Hizbullah
+    - حزب الله
+    - حزب‌الله
+    - حزب اللّه
+    - حزب اللّه
+    - حزب‌الله
   irgc:
     - IRGC
     - Islamic Revolutionary Guard Corps
