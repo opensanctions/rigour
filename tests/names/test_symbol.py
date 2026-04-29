@@ -373,3 +373,34 @@ def test_too_many_parts_refuses_pairing():
     r = _only(analyze_names(NameTypeTag.PER, [long_name]))
     assert len(q.parts) == 70
     assert pair_shape(pair_symbols(q, r)) == [[]]
+
+
+def test_repeated_token_pairings_collapsed():  # corpus-dependent
+    # Repeated tokens carrying overlapping symbol coverage used to
+    # explode the DFS — `bin` appearing twice with ~8 NAME symbols
+    # produced 27 candidate edges across only 7 distinct
+    # (qmask, rmask, category) classes, driving the search to
+    # ~7290 leaves (issue #198). Edge-level dedup collapses them
+    # before DFS; the user-visible pairings are still exactly the
+    # category multiset choices on each token.
+    q = _only(analyze_names(NameTypeTag.PER, ["Isa Bin Tarif Al Bin Ali"]))
+    r = _only(analyze_names(NameTypeTag.PER, ["Shaikh Isa Bin Tarif Al Bin Ali"]))
+    shape = sorted(pair_shape(pair_symbols(q, r)))
+    # Three pairings, distinguished by NAME-vs-SYMBOL choice on the
+    # two `bin` instances: NAME+NAME, NAME+SYMBOL, SYMBOL+SYMBOL.
+    assert len(shape) == 3
+    bin_categories = [
+        sorted(cat for q_text, _, cat in pairing if q_text == "bin")
+        for pairing in shape
+    ]
+    assert bin_categories == [
+        ["NAME", "NAME"],
+        ["NAME", "SYMBOL"],
+        ["SYMBOL", "SYMBOL"],
+    ]
+    # Every pairing covers the four corpus-known query tokens
+    # (`tarif` isn't in the person-names corpus, so no edge fires
+    # on it) — no covered token is dropped after dedup.
+    for pairing in shape:
+        q_tokens = {q_text for q_text, _, _ in pairing}
+        assert q_tokens == {"isa", "bin", "al", "ali"}

@@ -248,6 +248,34 @@ fn prune_subsumed(edges: &mut Vec<Edge>) {
     });
 }
 
+/// Collapse edges sharing `(qmask, rmask, category)`. Such edges
+/// differ only in `symbol.id` — the DFS coverage dedup at the leaf
+/// keys on `(qmask, rmask, sorted_categories)` and already drops
+/// the redundant ones, but only after walking every selection path
+/// that reaches them. Pre-collapsing here cuts the DFS branching
+/// factor proportionally; on the `Isa Bin Tarif Al Bin Ali` /
+/// `Shaikh …` repro it's 27 → 7 edges, ~7290 → ~32 leaves.
+///
+/// Keeps the alphabetically-smallest `symbol.id` per class as the
+/// canonical edge for deterministic output.
+fn dedupe_equivalent_edges(edges: &mut Vec<Edge>) {
+    if edges.len() < 2 {
+        return;
+    }
+    let mut by_class: HashMap<(u64, u64, SymbolCategory), Edge> = HashMap::new();
+    for edge in edges.drain(..) {
+        let key = (edge.qmask, edge.rmask, edge.symbol.category);
+        let replace = match by_class.get(&key) {
+            Some(existing) => edge.symbol.id < existing.symbol.id,
+            None => true,
+        };
+        if replace {
+            by_class.insert(key, edge);
+        }
+    }
+    edges.extend(by_class.into_values());
+}
+
 /// Deterministic sort key: earlier-in-name edges first, ties
 /// broken by category and symbol id.
 fn edge_sort_key(e: &Edge) -> (u32, u32, SymbolCategory, Arc<str>) {
@@ -410,6 +438,7 @@ pub fn py_pair_symbols(
 
     let mut edges = build_candidate_edges(&q_spans, &r_spans);
     prune_subsumed(&mut edges);
+    dedupe_equivalent_edges(&mut edges);
     edges.sort_by_cached_key(edge_sort_key);
 
     let coverings = enumerate_coverings(&edges);
@@ -614,6 +643,45 @@ mod tests {
         ];
         prune_subsumed(&mut edges);
         assert_eq!(edges.len(), 2, "cross-category edge must survive");
+    }
+
+    #[test]
+    fn dedupe_collapses_same_qrcat_keeps_smallest_id() {
+        // Three edges sharing (qmask, rmask, NAME) and one cross-class
+        // edge. Only the alphabetically-smallest id survives in the
+        // NAME class; the cross-class edge is left alone.
+        let mut edges = vec![
+            mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::NAME, "Q3")),
+            mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::NAME, "Q1")),
+            mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::NAME, "Q2")),
+            mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::SYMBOL, "FOO")),
+        ];
+        dedupe_equivalent_edges(&mut edges);
+        assert_eq!(edges.len(), 2);
+        let kept: HashSet<(SymbolCategory, String)> = edges
+            .iter()
+            .map(|e| (e.symbol.category, e.symbol.id.to_string()))
+            .collect();
+        let expected: HashSet<(SymbolCategory, String)> = [
+            (SymbolCategory::NAME, "Q1".to_string()),
+            (SymbolCategory::SYMBOL, "FOO".to_string()),
+        ]
+        .into_iter()
+        .collect();
+        assert_eq!(kept, expected);
+    }
+
+    #[test]
+    fn dedupe_preserves_distinct_masks() {
+        // Same category, same id, but different qmasks → distinct
+        // edges (each binds a different q-instance to its r-counterpart).
+        let s = sym(SymbolCategory::NAME, "QBin");
+        let mut edges = vec![
+            mk_edge(1 << 1, 1 << 2, s.clone()),
+            mk_edge(1 << 4, 1 << 5, s.clone()),
+        ];
+        dedupe_equivalent_edges(&mut edges);
+        assert_eq!(edges.len(), 2, "distinct masks must not collapse");
     }
 
     #[test]

@@ -21,7 +21,7 @@
 // Flag-keyed cache: one compiled Tagger per `(TaggerKind, Normalize)`
 // combination, same shape as the org_types Replacer cache.
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::sync::{Arc, LazyLock, RwLock};
 
 use serde::Deserialize;
@@ -55,10 +55,20 @@ impl Tagger {
         // recognised phrase as an independent match, not a
         // non-overlapping greedy selection. Same semantic as today's
         // Python tagger calling `ahocorasick-rs` with overlapping=True.
+        //
+        // Dedupe `(phrase, symbol)` here: a token repeated N times in
+        // the haystack fires N AC hits, each iterating the K-symbol
+        // payload, which would emit N×K identical entries. `apply_phrase`
+        // already walks all token-instances per call, so one entry per
+        // pair is what downstream wants. See issue #197.
+        let mut seen: HashSet<(String, Symbol)> = HashSet::new();
         let mut out: Vec<(String, Symbol)> = Vec::new();
         for m in self.needles.find_overlapping(text) {
             for sym in m.payload {
-                out.push((m.matched.to_string(), sym.clone()));
+                let key = (m.matched.to_string(), sym.clone());
+                if seen.insert(key.clone()) {
+                    out.push(key);
+                }
             }
         }
         out
@@ -373,5 +383,22 @@ mod tests {
         let org = get_tagger(TaggerKind::Org, FLAGS);
         let person = get_tagger(TaggerKind::Person, FLAGS);
         assert!(!Arc::ptr_eq(&org, &person));
+    }
+
+    #[test]
+    fn tagger_dedupes_repeated_tokens() {
+        // `bin` occurs twice and carries multiple symbols (SYMBOL:BIN
+        // plus several NAME:Qxxx entries from the person-names corpus).
+        // Without the dedupe in `tag`, the AC iteration would emit
+        // 2 × K identical `(phrase, symbol)` pairs for it.
+        let tagger = get_tagger(TaggerKind::Person, FLAGS);
+        let matches = tagger.tag("isa bin tarif al bin ali");
+        let distinct: HashSet<_> = matches.iter().cloned().collect();
+        assert_eq!(
+            matches.len(),
+            distinct.len(),
+            "tag() must not return duplicate (phrase, symbol) pairs, got {:?}",
+            matches
+        );
     }
 }
