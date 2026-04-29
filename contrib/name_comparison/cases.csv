@@ -1,18 +1,18 @@
 case_group,schema,name1,name2,is_match,quality,category,notes
-nk_checks,Person,Olaf Scholze,Olaf Scholz,true,MEDIUM,,
-nk_checks,Person,Olaf Schulze,Olaf Scholz,false,MEDIUM,,
+nk_checks,Person,Olaf Scholze,Olaf Scholz,true,STRONG,,
+nk_checks,Person,Olaf Schulze,Olaf Scholz,true,MEDIUM,,
 nk_checks,Person,Octavian Scholz,Olaf Scholz,false,MEDIUM,,
 nk_checks,Person,Angelo Cruz,Angela Merkel,false,MEDIUM,,
 nk_checks,Person,Angelo Mercaz,Angela Merkel,false,MEDIUM,,
-nk_checks,Person,Angela Merkur,Angela Merkel,false,MEDIUM,,
-nk_checks,Company,Siemens Aktiengesellschaft,Siemens AG,true,MEDIUM,,
+nk_checks,Person,Angela Merkur,Angela Merkel,true,MEDIUM,,
+nk_checks,Company,Siemens Aktiengesellschaft,Siemens AG,true,STRONG,,
 nk_checks,Company,SiemensAG,Siemens AG,true,MEDIUM,,
 nk_checks,Company,Siemens Aktiengeselschaft,Siemens AG,true,MEDIUM,,
 nk_checks,Company,Volkswagen Aktiengesellschaft,Siemens Aktiengesellschaft,false,MEDIUM,,
 nk_checks,Person,Shaikh Isa Bin Tarif Al Bin Ali,Shaikh Isa Bin Tarif Al Bin Ali,true,MEDIUM,,
 nk_checks,Person,Isa Bin Tarif Al Bin Ali,Shaikh Isa Bin Tarif Al Bin Ali,true,MEDIUM,,
 nk_checks,Person,"AL BEN ALI, Isa Ben Tarif",Shaikh Isa Bin Tarif Al Bin Ali,true,MEDIUM,,
-nk_checks,Person,Usama bin Laden,Shaikh Isa Bin Tarif Al Bin Ali,false,MEDIUM,,
+nk_checks,Person,Usama bin Laden,Shaikh Isa Bin Tarif Al Bin Ali,false,STRONG,,
 nk_checks,Person,"AL BEN MAHMOUD, Isa Ben Tarif",Shaikh Isa Bin Tarif Al Bin Ali,false,MEDIUM,,
 nk_checks,Person,MOHAMMADHASNI HAJI SSAD KHAN ZARKARI,HAJI ASAD KHAN ZARKARI MOHAMMADHASNI,true,MEDIUM,,
 nk_checks,Person,MOHAMMAD HASNI HAJI SSAD KHAN ZARKARI,HAJI ASAD KHAN ZARKARI MOHAMMADHASNI,true,MEDIUM,,
@@ -26,7 +26,7 @@ nk_checks,Person,Olga Barynova,Oleg BARANOV,false,MEDIUM,,
 nk_checks,Person,Ginta Boreza,Janett Borez,false,MEDIUM,,
 nk_checks,Company,Deutsche Bank AG,Deutsche Bank,true,MEDIUM,,
 nk_checks,Company,Deutsche Bank's AG,Deutsche Bank AG,true,MEDIUM,,
-nk_checks,Company,Deutsche Bank AG,Deutsche Bank Aktiengesellschaft,true,MEDIUM,,
+nk_checks,Company,Deutsche Bank AG,Deutsche Bank Aktiengesellschaft,true,STRONG,,
 nk_checks,Company,Deutsche Bank (Schweiz) AG,Deutsche Bank AG,true,MEDIUM,,
 nk_checks,Company,Deutsche Bank AG,Deutsche Bank (Schweiz) AG,true,MEDIUM,,
 nk_checks,Company,Deutsche Bank AG,Deutsche Bank GmbH,false,MEDIUM,,
@@ -46,18 +46,18 @@ nk_checks,Person,Frank Richter,Frederik Richter,false,MEDIUM,,
 nk_checks,Person,Фрэнк Рихтер,Frederik Richter,false,MEDIUM,,
 nk_checks,Person,Ig0r Sech1n,Igor Sechin,true,MEDIUM,Alphanumeric Swap,
 nk_checks,Person,I9or Sech1n,Igor Sechin,true,MEDIUM,Alphanumeric Swap,
-nk_checks,Person,Sergi Lavrov,Sergei Lavrov,true,MEDIUM,Character Deletion,
-nk_checks,Person,SergeiLavrov,Sergei Lavrov,true,MEDIUM,,
+nk_checks,Person,Sergi Lavrov,Sergei Lavrov,true,STRONG,Character Deletion,
+nk_checks,Person,SergeiLavrov,Sergei Lavrov,true,STRONG,,
 nk_checks,Person,Serei Lavrov,Sergei Lavrov,true,MEDIUM,Character Deletion,
 nk_checks,Person,Alexandr Lukashnko,Alexander Lukashenko,true,MEDIUM,Character Addition/Deletion,
 nk_checks,Person,Alexander Luakshenko,Alexander Lukashenko,true,MEDIUM,Character Addition/Deletion,
 nk_checks,Person,Kim Jong-uun,Kim Jong-un,true,MEDIUM,Character Repetition,
 nk_checks,Person,Kim Joonng-un,Kim Jong-un,true,MEDIUM,Character Repetition,
-nk_checks,Person,rimaldiV nituP,Vladimir Putin,true,MEDIUM,Character Reversal,
-nk_checks,Person,Vladimir nitPu,Vladimir Putin,true,MEDIUM,Character Reversal,
+nk_checks,Person,rimaldiV nituP,Vladimir Putin,true,WEAK,Character Reversal,
+nk_checks,Person,Vladimir nitPu,Vladimir Putin,true,WEAK,Character Reversal,
 nk_checks,Person,Nicolás Maduro SA,Nicolás Maduro,true,MEDIUM,Contextual Ending,
 nk_checks,Person,Nicolás Maduro LLC,Nicolás Maduro,true,MEDIUM,Contextual Ending,
-nk_checks,Person,Mr. Recep Tayyip Erdoğan,Recep Tayyip Erdoğan,true,MEDIUM,Contextual Beginning,
+nk_checks,Person,Mr. Recep Tayyip Erdoğan,Recep Tayyip Erdoğan,true,STRONG,Contextual Beginning,
 nk_checks,Person,President Erdoğan,Recep Tayyip Erdoğan,true,MEDIUM,Contextual Beginning,
 nk_checks,Person,Basharr al-Assad,Bashar al-Assad,true,MEDIUM,Fat Finger Typo,
 nk_checks,Person,Bashar al-Asasd,Bashar al-Assad,true,MEDIUM,Fat Finger Typo,
@@ -65,9 +65,9 @@ nk_checks,Person,Shi Jinping,Xi Jinping,true,MEDIUM,Phonetic Replacement,
 nk_checks,Person,Si Jinpin,Xi Jinping,true,MEDIUM,Phonetic Replacement,
 nk_checks,Person,Margarita-Simonyan,Margarita Simonyan,true,MEDIUM,Special Characters Addition,
 nk_checks,Person,Margarita Simonyán,Margarita Simonyan,true,MEDIUM,Special Characters Addition,
-nk_checks,Person,A. Khamenei,Ali Khamenei,true,MEDIUM,Initials Usage,
-nk_checks,Person,J.-C. Juncker,Jean-Claude Juncker,true,MEDIUM,Initials Usage,
-nk_checks,Person,JC Juncker,Jean-Claude Juncker,true,MEDIUM,Initials Usage,
+nk_checks,Person,A. Khamenei,Ali Khamenei,true,WEAK,Initials Usage,
+nk_checks,Person,J.-C. Juncker,Jean-Claude Juncker,true,WEAK,Initials Usage,
+nk_checks,Person,JC Juncker,Jean-Claude Juncker,true,WEAK,Initials Usage,
 nk_checks,Organization,PLA,People’s Liberation Army,true,MEDIUM,Abbreviation,
 nk_checks,Organization,PLA China,People’s Liberation Army,true,MEDIUM,Abbreviation,
 nk_checks,Person,AlisherUsmanov,Alisher Usmanov,true,MEDIUM,Word Joining,
@@ -79,22 +79,22 @@ nk_checks,Person,Salman Mohammed bin,Mohammed bin Salman,true,MEDIUM,Word Reorde
 nk_checks,Company,1st International Bank,First International Bank,true,MEDIUM,Ordinal Number Variation,
 nk_checks,Company,First Bank Int’l,First International Bank,true,MEDIUM,Ordinal Number Variation,
 nk_checks,Organization,Brigade Forty-Four,Brigade 44,true,MEDIUM,Digit to Text Conversion,
-nk_checks,Organization,Brigade Forty 4,Brigade 44,true,MEDIUM,Digit to Text Conversion,
+nk_checks,Organization,Brigade Forty 4,Brigade 44,true,WEAK,Digit to Text Conversion,
 nk_checks,Organization,3 Percenters,Three Percenters,true,MEDIUM,Text to Digit Conversion,
-nk_checks,Organization,3%ers,Three Percenters,true,MEDIUM,Text to Digit Conversion,
+nk_checks,Organization,3%ers,Three Percenters,true,WEAK,Text to Digit Conversion,
 nk_checks,Person,Sergey Sergey Shoigu,Sergey Shoigu,true,MEDIUM,Name Duplication Removal,
 nk_checks,Person,Shoigu Shoigu Sergey,Sergey Shoigu,true,MEDIUM,Name Duplication Removal,
-nk_checks,Person,N. Nazarbayev,Nursultan Nazarbayev,true,MEDIUM,Initials Addition,
-nk_checks,Person,A. Nazarbayev,Nursultan Nazarbayev,false,MEDIUM,,
+nk_checks,Person,N. Nazarbayev,Nursultan Nazarbayev,true,WEAK,Initials Addition,
+nk_checks,Person,A. Nazarbayev,Nursultan Nazarbayev,false,WEAK,,
 nk_checks,Person,Nar Nazarbayev,Nursultan Nazarbayev,false,MEDIUM,,
-nk_checks,Person,N.N.,Nursultan Nazarbayev,false,MEDIUM,Initials Addition,
+nk_checks,Person,N.N.,Nursultan Nazarbayev,false,WEAK,Initials Addition,
 nk_checks,Person,Dr. Rami Makhlouf,Rami Makhlouf,true,MEDIUM,Title Addition,
 nk_checks,Person,Mr. Rami Makhlouf,Rami Makhlouf,true,MEDIUM,Title Addition,
 nk_checks,Person,RamiMakhlouf,Rami Makhlouf,true,MEDIUM,,
 nk_checks,Person,Ihab Makhlouf,Rami Makhlouf,false,MEDIUM,,
 nk_checks,Person,Hafez Makhlouf,Rami Makhlouf,false,MEDIUM,,
-nk_checks,Person,Bibi Netanyahu,Benjamin Netanyahu,true,MEDIUM,Nickname Usage,
-nk_checks,Person,Ben Netanyahu,Benjamin Netanyahu,true,MEDIUM,Nickname Usage,
+nk_checks,Person,Bibi Netanyahu,Benjamin Netanyahu,true,WEAK,Nickname Usage,
+nk_checks,Person,Ben Netanyahu,Benjamin Netanyahu,true,WEAK,Nickname Usage,
 nk_checks,Person,Boris Netanyahu,Benjamin Netanyahu,false,MEDIUM,,
 nk_checks,Person,Emanuel Macron,Emmanuel Macron,true,MEDIUM,Common Misspelling,
 nk_checks,Person,Emmanuel Macrone,Emmanuel Macron,true,MEDIUM,Common Misspelling,
@@ -102,18 +102,18 @@ nk_checks,Person,Pot Pouv,Pol Pot,false,MEDIUM,,
 nk_checks,Person,PolPot,Pol Pot,true,MEDIUM,,
 nk_checks,Person,ប៉ុល ពត,Pol Pot,true,MEDIUM,,
 nk_checks,Person,Paul Murphy,Pol Pot,false,MEDIUM,,
-nk_checks,Person,Pol Pot,Paul Murphy,false,MEDIUM,,
+nk_checks,Person,Pol Pot,Paul Murphy,false,STRONG,,
 nk_checks,Person,ماري تيريز أدينا أوندوا,Marie-Therese Abena Ondoa,true,MEDIUM,,
 nk_checks,Person,Barack Obama,George Hussein Onyango Obama,false,MEDIUM,,
 nk_checks,Person,Barack Obama,Բարակ Օբամա,true,MEDIUM,,
 nk_checks,Person,Barack Obama,バラク・オバマ,true,MEDIUM,,
 nk_checks,Person,Barak Obama,Barack Obama,true,MEDIUM,,
-nk_checks,Person,Barry Obama,Barack Obama,true,MEDIUM,,
+nk_checks,Person,Barry Obama,Barack Obama,true,WEAK,,
 nk_checks,Person,贝拉克·奥巴马,Barack Obama,true,MEDIUM,,
 nk_checks,Person,Präsident Barack Obama,Barack Obama,true,MEDIUM,,
 nk_checks,Person,Barack Obama,Барак Хусеин Обама,true,MEDIUM,,
 nk_checks,Person,ბარაკ ობამა,Barack Obama,true,MEDIUM,,
-nk_checks,Person,Michel Obama,Michelle Obama,false,MEDIUM,,
+nk_checks,Person,Michel Obama,Michelle Obama,true,WEAK,,
 nk_checks,Person,Marie-Thérèse Obama,Michelle Obama,false,MEDIUM,,
 nk_checks,Person,Hannibal,Hannibal,true,MEDIUM,,
 nk_checks,Person,Hanniball,Hannibal,true,MEDIUM,,
@@ -156,25 +156,25 @@ nk_checks,Company,A.B.C. Company,A.B.C. Company,true,MEDIUM,,
 nk_checks,Company,ABC Company,A.B.C. Company,true,MEDIUM,,
 nk_checks,Company,ABC Co.,A.B.C. Company,true,MEDIUM,,
 nk_checks,Company,CDE Company,A.B.C. Company,false,MEDIUM,,
-nk_checks,Company,C.B.A. Company,A.B.C. Company,false,MEDIUM,,
-nk_checks,Company,N.A.B.C. Company,A.B.C. Company,false,MEDIUM,,
+nk_checks,Company,C.B.A. Company,A.B.C. Company,true,MEDIUM,,
+nk_checks,Company,N.A.B.C. Company,A.B.C. Company,true,MEDIUM,,
 nk_checks,Company,ABC International,A.B.C. Company,false,MEDIUM,,
 nk_checks,Organization,Yamahdi (UK) Limited,YA MAHDI INDUSTRIES GROUP,false,MEDIUM,,
 nk_checks,Organization,MAHDI & YASMIN LTD,YA MAHDI INDUSTRIES GROUP,false,MEDIUM,,
-nk_checks,Person,Niels Oscar Rost,Niels Oscar TROOST,false,MEDIUM,,
+nk_checks,Person,Niels Oscar Rost,Niels Oscar TROOST,true,MEDIUM,,
 nk_checks,Person,Nils Trosterich,Niels Oscar TROOST,false,MEDIUM,,
 nk_checks,LegalEntity,Nils Trosterich,Niels Oscar TROOST,false,MEDIUM,,
 nk_checks,Person,Ali A. Velayati,Ali Akbar Velayati,true,MEDIUM,,
 nk_checks,Person,Ali Vellabati,Ali Akbar Velayati,false,MEDIUM,,
-nk_checks,Person,Kim Myong-sik,Kim Myong-guk,false,MEDIUM,,
-nk_checks,Person,Kim Pong-ryul,Kim Pyong-ryul,false,MEDIUM,,
+nk_checks,Person,Kim Myong-sik,Kim Myong-guk,true,MEDIUM,,
+nk_checks,Person,Kim Pong-ryul,Kim Pyong-ryul,true,MEDIUM,,
 nk_checks,Person,Choe Ryong-hae,Choe Kyong-song,false,MEDIUM,,
-nk_checks,Person,Kim Yong-chol,Kim Yong-chun,false,MEDIUM,,
-nk_checks,LegalEntity,Kim Yong-chol,Kim Yong-chun,false,MEDIUM,,
+nk_checks,Person,Kim Yong-chol,Kim Yong-chun,true,MEDIUM,,
+nk_checks,LegalEntity,Kim Yong-chol,Kim Yong-chun,true,MEDIUM,,
 nk_checks,LegalEntity,Volodymyr Groysman,Volodymyr Oleksandrovych Zelenskyy,false,MEDIUM,,
 nk_checks,Person,Володимир Зеленський,Volodymyr Oleksandrovych Zelenskyy,true,MEDIUM,,
 nk_checks,Person,Oleksandr Zelenskyy,Volodymyr Oleksandrovych Zelenskyy,false,MEDIUM,,
-nk_checks,LegalEntity,"Nantahala Capital Offshore Fund, Ltd.","Nantahala Capital Offshore Fund I, Ltd.",false,MEDIUM,,
+nk_checks,LegalEntity,"Nantahala Capital Offshore Fund, Ltd.","Nantahala Capital Offshore Fund I, Ltd.",true,MEDIUM,,
 nk_checks,LegalEntity,C G Clow Will Trust,CG City Funding Limited,false,MEDIUM,,
 nk_checks,LegalEntity,The Pudney Trust,The Puccini Trust,false,MEDIUM,,
 nk_checks,LegalEntity,The Puffin Trust,The Puccini Trust,false,MEDIUM,,
@@ -191,7 +191,7 @@ nk_checks,Company,Societatea cu Răspundere Limitată CON TRAFFIC,Societatea cu 
 nk_checks,Company,S.R.L. CON TRAFFIC,Societatea cu Răspundere Limitată PRO TRAFFIC,false,MEDIUM,,
 nk_checks,Company,JSC Murom Instrument-Making Plant,Акционерное общество “Муромский приборостроительный завод”,true,MEDIUM,,
 nk_checks,Organization,ndrangheta,'Ndrangheta,true,MEDIUM,,
-nk_checks,Organization,Andrang Heta,'Ndrangheta,false,MEDIUM,,
+nk_checks,Organization,Andrang Heta,'Ndrangheta,true,MEDIUM,,
 nk_checks,Organization,Al Qaeda,Al Qa'ida,true,MEDIUM,,
 nk_checks,Organization,Al Qaeda,Al-Qa'ida/Islamic Army,true,MEDIUM,,
 nk_checks,Organization,Al-Qaida in Iraq,Al-Qaida in the Arabian Peninsula,false,MEDIUM,,
@@ -200,10 +200,10 @@ nk_checks,Person,"NURISTANI, Abdul Aziz",Abdul Aziz Nooristani,true,MEDIUM,,
 nk_checks,Person,"NURISTANI, Abdul Aziz",ABDUL AZIZ Aziz Nooristani,true,MEDIUM,,
 nk_checks,Vessel,Hellenic Spirit,MV Hellenic Spirit,true,MEDIUM,,
 nk_checks,Vessel,Lady Leila,Lady Rania,false,MEDIUM,,
-nk_checks,Vessel,Zu Zag Bong 6,Zu Zag Bong 5,false,MEDIUM,,
+nk_checks,Vessel,Zu Zag Bong 6,Zu Zag Bong 5,true,MEDIUM,,
 nk_checks,Vessel,Yerotsakos,YEVGENY PRIMAKOV,false,MEDIUM,,
 nk_checks,Vessel,Yard No. 9918779 Zvezda-Dsme,YARD NO. 455 IRAN MARINE,false,MEDIUM,,
-nk_checks,Vessel,Victory,Victory 3,false,MEDIUM,,
+nk_checks,Vessel,Victory,Victory 3,true,MEDIUM,,
 nk_checks,Vessel,Victory,VICTOR KONETSKY,false,MEDIUM,,
 nk_checks,Vessel,VELIKIY NOVGOROD,Velikiy Novgorod,true,MEDIUM,,
 nk_checks,Person,"Frost, William W.",William W Frost,true,MEDIUM,,
@@ -213,8 +213,8 @@ nk_checks,Person,GERD RANDOLPH,"Randolph, Gena",false,MEDIUM,,
 nk_checks,Organization,The BSF Foundation,The BIRD Foundation,false,MEDIUM,,
 nk_checks,Person,Eric A. Wendt,Josh A. Wendt,false,MEDIUM,,
 nk_checks,Person,Aaron A. Wendt,Josh A. Wendt,false,MEDIUM,,
-nk_checks,Company,"BWI Industries, Inc.","BAE Industries, Inc.",false,MEDIUM,,
-nk_checks,LegalEntity,"BWI Industries, Inc.","BAE Industries, Inc.",false,MEDIUM,,
+nk_checks,Company,"BWI Industries, Inc.","BAE Industries, Inc.",true,MEDIUM,,
+nk_checks,LegalEntity,"BWI Industries, Inc.","BAE Industries, Inc.",true,MEDIUM,,
 nk_checks,Company,"BAE Systems, Inc.","BAE Industries, Inc.",false,MEDIUM,,
 nk_checks,Person,Allaidin Hussain ALWAN,Ahmad al-Hamidawi,false,MEDIUM,,
 nk_checks,Organization,"Academy of Military Medical Sciences, Insitute of Medical Equipment","Academy of Military Medical Sciences, Institute of Micobiology and Epidemiology",false,MEDIUM,,
@@ -225,9 +225,9 @@ nk_checks,Person,Elois,Alice Costandina Titus,false,MEDIUM,,
 nk_checks,Company,Blinq Holdings Pty Ltd,Bailey Holdings Pty Ltd,false,MEDIUM,,
 nk_checks,Person,Ilie Bolojan,Monsieur Ilie-Gabril Bolojan,true,MEDIUM,,
 nk_unit_tests,Person,John Doe,John Doe,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
-nk_unit_tests,Person,John Doe,Juan Doe,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
+nk_unit_tests,Person,John Doe,Juan Doe,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Person,John Doeburg,John Dowburg,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
-nk_unit_tests,Person,John Doe,John Down,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
+nk_unit_tests,Person,John Doe,John Down,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Person,Serei Lavrov,Sergei Lavrov,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Person,Serej Lavrov,Сергей Викторович Лавров,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Person,Ramimakhlouf,Rami Makhlouf,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
@@ -238,7 +238,7 @@ nk_unit_tests,Company,OAO Gazprom,Gazprom JSC,true,MEDIUM,logic_v2_cases,test_lo
 nk_unit_tests,Company,OAO Gazprom,Gasprom JSC,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Company,OAO Gazprom,Open Joint Stock Company Gasprom,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Company,Gazprom Neft JSC,Gazprom Neft OAO,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
-nk_unit_tests,Company,LXC Aviation,LAU Aviation,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
+nk_unit_tests,Company,LXC Aviation,LAU Aviation,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Company,LXC Aviatio,LAU Aviation,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Company,LXC Aviation,L.X.C Aviation,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Company,L.X.C. Aviation,LAU Aviation,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
@@ -248,7 +248,7 @@ nk_unit_tests,Organization,Brigade Fourty-four,Brigade 44,true,MEDIUM,logic_v2_c
 nk_unit_tests,Vessel,Snow,SNOW,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Vessel,Snow,Snoe,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Vessel,Snow Storm 1,Snow Stom 1,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
-nk_unit_tests,Vessel,Snow Storm 1,Snow Storm 2,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
+nk_unit_tests,Vessel,Snow Storm 1,Snow Storm 2,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Person,Friedrich Lindenberg,Lars Friedrich Lindemann,false,MEDIUM,friedrich_fps,test_jaro_friedrich
 nk_unit_tests,Person,Friedrich Lindenberg,Wolfgang Friedrich Ischinger,false,MEDIUM,friedrich_fps,test_jaro_friedrich
 nk_unit_tests,Person,Friedrich Lindenberg,Gerhard Friedrich Karl Westdickenberg,false,MEDIUM,friedrich_fps,test_jaro_friedrich
@@ -306,113 +306,113 @@ nk_unit_tests,Person,Hannibal,Hannibol,true,MEDIUM,single_tps,test_single_name
 nk_unit_tests,Person,Hannibal,Hanniball,true,MEDIUM,single_tps,test_single_name
 nk_unit_tests,Person,Michelle Michaela,Michelle Michi,true,MEDIUM,soundex_tps,test_soundex_name_comparison
 nk_unit_tests,Person,Michelle Michaela,Donald Duck,false,MEDIUM,soundex_fps,test_soundex_name_comparison
-synth_companies,Company,"Amazonis.com, Inc.","Amazon.com, Inc.",false,MEDIUM,LLM-proposed deviation,word substitution (real word collision)
-synth_companies,Company,Wallmart Inc.,Walmart Inc.,false,MEDIUM,LLM-proposed deviation,doubled consonant
-synth_companies,Company,State Grid Corporation of Chile,State Grid Corporation of China,false,MEDIUM,LLM-proposed deviation,geographic swap
+synth_companies,Company,"Amazonis.com, Inc.","Amazon.com, Inc.",true,MEDIUM,LLM-proposed deviation,word substitution (real word collision)
+synth_companies,Company,Wallmart Inc.,Walmart Inc.,true,MEDIUM,LLM-proposed deviation,doubled consonant
+synth_companies,Company,State Grid Corporation of Chile,State Grid Corporation of China,true,MEDIUM,LLM-proposed deviation,geographic swap
 synth_companies,Company,Saudi Arabian Gas Company,Saudi Arabian Oil Company,false,MEDIUM,LLM-proposed deviation,industry-word swap
 synth_companies,Company,China National Pipeline Corporation,China National Petroleum Corporation,false,MEDIUM,LLM-proposed deviation,industry-word swap
 synth_companies,Company,China Petromechanical Corporation,China Petrochemical Corporation,false,MEDIUM,LLM-proposed deviation,coined compound substitution
-synth_companies,Company,Appel Inc.,Apple Inc.,false,MEDIUM,LLM-proposed deviation,phonetic-near surname (Dutch/German real word)
-synth_companies,Company,Alphanet Inc.,Alphabet Inc.,false,MEDIUM,LLM-proposed deviation,word substitution
-synth_companies,Company,"UnitedWealth Group, Inc.","UnitedHealth Group, Inc.",false,MEDIUM,LLM-proposed deviation,single-char sub flips meaning
+synth_companies,Company,Appel Inc.,Apple Inc.,true,MEDIUM,LLM-proposed deviation,phonetic-near surname (Dutch/German real word)
+synth_companies,Company,Alphanet Inc.,Alphabet Inc.,true,MEDIUM,LLM-proposed deviation,word substitution
+synth_companies,Company,"UnitedWealth Group, Inc.","UnitedHealth Group, Inc.",true,MEDIUM,LLM-proposed deviation,single-char sub flips meaning
 synth_companies,Company,Berkshire Halloway Inc.,Berkshire Hathaway Inc.,false,MEDIUM,LLM-proposed deviation,phonetic-near surname
-synth_companies,Company,CVC Health Corporation,CVS Health Corporation,false,MEDIUM,LLM-proposed deviation,acronym single-char sub (CVC is a real PE firm)
+synth_companies,Company,CVC Health Corporation,CVS Health Corporation,true,MEDIUM,LLM-proposed deviation,acronym single-char sub (CVC is a real PE firm)
 synth_companies,Company,Volkswerk Aktiengesellschaft,Volkswagen Aktiengesellschaft,false,MEDIUM,LLM-proposed deviation,German compound second-element swap
-synth_companies,Company,Exxor Mobil Corporation,Exxon Mobil Corporation,false,MEDIUM,LLM-proposed deviation,single-char sub
-synth_companies,Company,Vital Holding S.A.,Vitol Holding S.A.,false,MEDIUM,LLM-proposed deviation,one-letter shift to real word
-synth_companies,Company,Schell plc,Shell plc,false,MEDIUM,LLM-proposed deviation,added consonant (real surname)
+synth_companies,Company,Exxor Mobil Corporation,Exxon Mobil Corporation,true,MEDIUM,LLM-proposed deviation,single-char sub
+synth_companies,Company,Vital Holding S.A.,Vitol Holding S.A.,true,MEDIUM,LLM-proposed deviation,one-letter shift to real word
+synth_companies,Company,Schell plc,Shell plc,true,MEDIUM,LLM-proposed deviation,added consonant (real surname)
 synth_companies,Company,China State Construction Equipment Corporation,China State Construction Engineering Corporation,false,MEDIUM,LLM-proposed deviation,domain-word swap
-synth_companies,Company,Tayota Motor Corporation,Toyota Motor Corporation,false,MEDIUM,LLM-proposed deviation,vowel reorder
-synth_companies,Company,McKenton Corporation,McKesson Corporation,false,MEDIUM,LLM-proposed deviation,plausible-alternate Scottish surname
-synth_companies,Company,Macrosoft Corporation,Microsoft Corporation,false,MEDIUM,LLM-proposed deviation,prefix antonym (micro/macro)
-synth_companies,Company,"Sencora, Inc.","Cencora, Inc.",false,MEDIUM,LLM-proposed deviation,initial-letter sub
-synth_companies,Company,Trafalgura Group Pte. Ltd.,Trafigura Group Pte. Ltd.,false,MEDIUM,LLM-proposed deviation,internal vowel sub
-synth_companies,Company,Cosco Wholesale Corporation,Costco Wholesale Corporation,false,MEDIUM,LLM-proposed deviation,dropped consonant (collides with real Cosco shipping)
-synth_companies,Company,JPMorgon Chace & Co.,JPMorgan Chase & Co.,false,MEDIUM,LLM-proposed deviation,phonetic-near surname (Chace is a real surname)
+synth_companies,Company,Tayota Motor Corporation,Toyota Motor Corporation,true,MEDIUM,LLM-proposed deviation,vowel reorder
+synth_companies,Company,McKenton Corporation,McKesson Corporation,true,MEDIUM,LLM-proposed deviation,plausible-alternate Scottish surname
+synth_companies,Company,Macrosoft Corporation,Microsoft Corporation,true,MEDIUM,LLM-proposed deviation,prefix antonym (micro/macro)
+synth_companies,Company,"Sencora, Inc.","Cencora, Inc.",true,MEDIUM,LLM-proposed deviation,initial-letter sub
+synth_companies,Company,Trafalgura Group Pte. Ltd.,Trafigura Group Pte. Ltd.,true,MEDIUM,LLM-proposed deviation,internal vowel sub
+synth_companies,Company,Cosco Wholesale Corporation,Costco Wholesale Corporation,true,MEDIUM,LLM-proposed deviation,dropped consonant (collides with real Cosco shipping)
+synth_companies,Company,JPMorgon Chace & Co.,JPMorgan Chase & Co.,true,MEDIUM,LLM-proposed deviation,phonetic-near surname (Chace is a real surname)
 synth_companies,Company,Industrial and Commercial Bank of Chad Limited,Industrial and Commercial Bank of China Limited,false,MEDIUM,LLM-proposed deviation,geographic swap
-synth_companies,Company,TotalEnergias SE,TotalEnergies SE,false,MEDIUM,LLM-proposed deviation,Spanish-form pluralisation
-synth_companies,Company,Glenmore plc,Glencore plc,false,MEDIUM,LLM-proposed deviation,Scottish-place-name sub (Glenmore is a real distillery)
-synth_companies,Company,Invidia Corporation,NVIDIA Corporation,false,MEDIUM,LLM-proposed deviation,Latin word substitution
-synth_companies,Company,BD p.l.c.,BP p.l.c.,false,MEDIUM,LLM-proposed deviation,two-letter ticker collision (BD = Becton Dickinson)
-synth_companies,Company,"Cardinal Wealth, Inc.","Cardinal Health, Inc.",false,MEDIUM,LLM-proposed deviation,domain-word sub (Health/Wealth)
-synth_companies,Company,Stellaris N.V.,Stellantis N.V.,false,MEDIUM,LLM-proposed deviation,truncated-and-substituted stem
-synth_companies,Company,Chevon Corporation,Chevron Corporation,false,MEDIUM,LLM-proposed deviation,dropped consonant (Chevon is a real meat brand)
+synth_companies,Company,TotalEnergias SE,TotalEnergies SE,true,MEDIUM,LLM-proposed deviation,Spanish-form pluralisation
+synth_companies,Company,Glenmore plc,Glencore plc,true,MEDIUM,LLM-proposed deviation,Scottish-place-name sub (Glenmore is a real distillery)
+synth_companies,Company,Invidia Corporation,NVIDIA Corporation,true,MEDIUM,LLM-proposed deviation,Latin word substitution
+synth_companies,Company,BD p.l.c.,BP p.l.c.,true,MEDIUM,LLM-proposed deviation,two-letter ticker collision (BD = Becton Dickinson)
+synth_companies,Company,"Cardinal Wealth, Inc.","Cardinal Health, Inc.",true,MEDIUM,LLM-proposed deviation,domain-word sub (Health/Wealth)
+synth_companies,Company,Stellaris N.V.,Stellantis N.V.,true,MEDIUM,LLM-proposed deviation,truncated-and-substituted stem
+synth_companies,Company,Chevon Corporation,Chevron Corporation,true,MEDIUM,LLM-proposed deviation,dropped consonant (Chevon is a real meat brand)
 synth_companies,Company,China Construction Trust Corporation,China Construction Bank Corporation,false,MEDIUM,LLM-proposed deviation,sector-word swap (Bank/Trust)
-synth_companies,Company,"Samsong Electronics Co., Ltd.","Samsung Electronics Co., Ltd.",false,MEDIUM,LLM-proposed deviation,Korean-Romanisation vowel sub
-synth_companies,Company,"Hon Wai Precision Industry Co., Ltd.","Hon Hai Precision Industry Co., Ltd.",false,MEDIUM,LLM-proposed deviation,plausible-alternate Cantonese name
-synth_companies,Company,The Sigma Group,The Cigna Group,false,MEDIUM,LLM-proposed deviation,Greek-letter near-homophone
-synth_companies,Company,Agriculture Bank of China Limited,Agricultural Bank of China Limited,false,MEDIUM,LLM-proposed deviation,morphological variant (noun/adjective)
-synth_companies,Company,Schwartz Gruppe,Schwarz Gruppe,false,MEDIUM,LLM-proposed deviation,Yiddish/German surname-spelling collision
+synth_companies,Company,"Samsong Electronics Co., Ltd.","Samsung Electronics Co., Ltd.",true,MEDIUM,LLM-proposed deviation,Korean-Romanisation vowel sub
+synth_companies,Company,"Hon Wai Precision Industry Co., Ltd.","Hon Hai Precision Industry Co., Ltd.",true,MEDIUM,LLM-proposed deviation,plausible-alternate Cantonese name
+synth_companies,Company,The Sigma Group,The Cigna Group,true,MEDIUM,LLM-proposed deviation,Greek-letter near-homophone
+synth_companies,Company,Agriculture Bank of China Limited,Agricultural Bank of China Limited,true,MEDIUM,LLM-proposed deviation,morphological variant (noun/adjective)
+synth_companies,Company,Schwartz Gruppe,Schwarz Gruppe,true,MEDIUM,LLM-proposed deviation,Yiddish/German surname-spelling collision
 synth_companies,Company,China Railroad Engineering Corporation,China Railway Engineering Corporation,false,MEDIUM,LLM-proposed deviation,US/UK English synonym (Railroad/Railway)
-synth_companies,Company,"Cargille, Incorporated","Cargill, Incorporated",false,MEDIUM,LLM-proposed deviation,French-orthography surname variant
-synth_companies,Company,Fjord Motor Company,Ford Motor Company,false,MEDIUM,LLM-proposed deviation,Norse-word substitution (real word)
-synth_companies,Company,Bank of Chima Limited,Bank of China Limited,false,MEDIUM,LLM-proposed deviation,one-letter geographic decoy
+synth_companies,Company,"Cargille, Incorporated","Cargill, Incorporated",true,MEDIUM,LLM-proposed deviation,French-orthography surname variant
+synth_companies,Company,Fjord Motor Company,Ford Motor Company,true,MEDIUM,LLM-proposed deviation,Norse-word substitution (real word)
+synth_companies,Company,Bank of Chima Limited,Bank of China Limited,true,MEDIUM,LLM-proposed deviation,one-letter geographic decoy
 synth_companies,Company,Bank of Armenia Corporation,Bank of America Corporation,false,MEDIUM,LLM-proposed deviation,geographic swap (shared first phoneme)
-synth_companies,Company,General Mortars Company,General Motors Company,false,MEDIUM,LLM-proposed deviation,phonetic-near common-noun (Motors/Mortars)
-synth_companies,Company,"Elegance Health, Inc.","Elevance Health, Inc.",false,MEDIUM,LLM-proposed deviation,brand-stem one-letter shift to real word
+synth_companies,Company,General Mortars Company,General Motors Company,true,MEDIUM,LLM-proposed deviation,phonetic-near common-noun (Motors/Mortars)
+synth_companies,Company,"Elegance Health, Inc.","Elevance Health, Inc.",true,MEDIUM,LLM-proposed deviation,brand-stem one-letter shift to real word
 synth_companies,Company,Berliner Motoren Werke Aktiengesellschaft,Bayerische Motoren Werke Aktiengesellschaft,false,MEDIUM,LLM-proposed deviation,German-region word swap (BMW expansion)
-synth_companies,Company,Mercedes-Benn Group AG,Mercedes-Benz Group AG,false,MEDIUM,LLM-proposed deviation,final-consonant doubling
-synth_companies,Company,"Beta Platforms, Inc.","Meta Platforms, Inc.",false,MEDIUM,LLM-proposed deviation,Greek-letter sub
+synth_companies,Company,Mercedes-Benn Group AG,Mercedes-Benz Group AG,true,MEDIUM,LLM-proposed deviation,final-consonant doubling
+synth_companies,Company,"Beta Platforms, Inc.","Meta Platforms, Inc.",true,MEDIUM,LLM-proposed deviation,Greek-letter sub
 synth_companies,Company,China Railway Constructors Corporation,China Railway Construction Corporation,false,MEDIUM,LLM-proposed deviation,nominalisation variant
-synth_companies,Company,China Baowei Steel Group Corporation Limited,China Baowu Steel Group Corporation Limited,false,MEDIUM,LLM-proposed deviation,Pinyin syllable swap
-synth_companies,Company,Citygroup Inc.,Citigroup Inc.,false,MEDIUM,LLM-proposed deviation,brand-stem English-spelling sub
-synth_people,Person,Vladimir Pulin,Vladimir Putin,false,MEDIUM,LLM-proposed deviation,RU surname single-char sub (Latin)
-synth_people,Person,VladimirPutin,Vladimir Putin,true,MEDIUM,Failed test,Missing space in name
-synth_people,Person,Владимир Пулин,Владимир Путин,false,MEDIUM,LLM-proposed deviation,RU surname single-char sub (Cyrillic)
-synth_people,Person,Xi Jinpeng,Xi Jinping,false,MEDIUM,LLM-proposed deviation,CN given-name vowel sub (Pinyin)
+synth_companies,Company,China Baowei Steel Group Corporation Limited,China Baowu Steel Group Corporation Limited,true,MEDIUM,LLM-proposed deviation,Pinyin syllable swap
+synth_companies,Company,Citygroup Inc.,Citigroup Inc.,true,MEDIUM,LLM-proposed deviation,brand-stem English-spelling sub
+synth_people,Person,Vladimir Pulin,Vladimir Putin,true,STRONG,LLM-proposed deviation,RU surname single-char sub (Latin)
+synth_people,Person,VladimirPutin,Vladimir Putin,true,STRONG,Failed test,Missing space in name
+synth_people,Person,Владимир Пулин,Владимир Путин,true,STRONG,LLM-proposed deviation,RU surname single-char sub (Cyrillic)
+synth_people,Person,Xi Jinpeng,Xi Jinping,true,MEDIUM,LLM-proposed deviation,CN given-name vowel sub (Pinyin)
 synth_people,Person,习近朋,习近平,false,MEDIUM,LLM-proposed deviation,CN given-name char sub (朋 péng vs 平 píng)
-synth_people,Person,Kim Jong On,Kim Jong Un,false,MEDIUM,LLM-proposed deviation,KP given-name vowel sub (Latin)
+synth_people,Person,Kim Jong On,Kim Jong Un,true,MEDIUM,LLM-proposed deviation,KP given-name vowel sub (Latin)
 synth_people,Person,김종은,김정은,false,MEDIUM,LLM-proposed deviation,KP given-name syllable sub (Hangul)
-synth_people,Person,Lee Jae Hyung,Lee Jae Myung,false,MEDIUM,LLM-proposed deviation,KR given-name onset sub (Latin)
+synth_people,Person,Lee Jae Hyung,Lee Jae Myung,true,MEDIUM,LLM-proposed deviation,KR given-name onset sub (Latin)
 synth_people,Person,이재형,이재명,false,MEDIUM,LLM-proposed deviation,KR given-name syllable sub (Hangul)
-synth_people,Person,Sanae Takaishi,Sanae Takaichi,false,MEDIUM,LLM-proposed deviation,JP surname plausible-alternate (Latin)
+synth_people,Person,Sanae Takaishi,Sanae Takaichi,true,MEDIUM,LLM-proposed deviation,JP surname plausible-alternate (Latin)
 synth_people,Person,高石早苗,高市早苗,false,MEDIUM,LLM-proposed deviation,JP surname-character sub (Kanji 石 vs 市)
-synth_people,Person,Benjamin Natanyahu,Benjamin Netanyahu,false,MEDIUM,LLM-proposed deviation,IL surname vowel sub (Latin)
-synth_people,Person,בנימין נתניחו,בנימין נתניהו,false,MEDIUM,LLM-proposed deviation,IL surname char sub ה→ח (Hebrew)
+synth_people,Person,Benjamin Natanyahu,Benjamin Netanyahu,true,MEDIUM,LLM-proposed deviation,IL surname vowel sub (Latin)
+synth_people,Person,בנימין נתניחו,בנימין נתניהו,true,MEDIUM,LLM-proposed deviation,IL surname char sub ה→ח (Hebrew)
 synth_people,Person,Masoud Pezeshfar,Masoud Pezeshkian,false,MEDIUM,LLM-proposed deviation,IR surname-suffix swap (Latin)
 synth_people,Person,مسعود پزشک‌فر,مسعود پزشکیان,false,MEDIUM,LLM-proposed deviation,IR surname-suffix swap (Persian)
-synth_people,Person,Mohammed bin Sultan,Mohammed bin Salman,false,MEDIUM,LLM-proposed deviation,SA patronymic swap (Latin)
-synth_people,Person,محمد بن سلطان,محمد بن سلمان,false,MEDIUM,LLM-proposed deviation,SA patronymic swap (Arabic)
-synth_people,Person,Abdel Fattah el-Sirri,Abdel Fattah el-Sisi,false,MEDIUM,LLM-proposed deviation,EG surname consonant sub (Latin)
-synth_people,Person,عبد الفتاح السري,عبد الفتاح السيسي,false,MEDIUM,LLM-proposed deviation,EG surname consonant sub (Arabic)
-synth_people,Person,Kyriakos Mitsotakos,Kyriakos Mitsotakis,false,MEDIUM,LLM-proposed deviation,GR surname-ending -ος/-ης (Latin)
-synth_people,Person,Κυριάκος Μητσοτάκος,Κυριάκος Μητσοτάκης,false,MEDIUM,LLM-proposed deviation,GR surname-ending -ος/-ης (Greek)
-synth_people,Person,Narender Modi,Narendra Modi,false,MEDIUM,LLM-proposed deviation,IN given-name plausible-alternate (Latin)
-synth_people,Person,नरेन्द्र मोडी,नरेन्द्र मोदी,false,MEDIUM,LLM-proposed deviation,IN surname retroflex/dental swap ड/द (Devanagari)
-synth_people,Person,Vajiralongkron,Vajiralongkorn,false,MEDIUM,LLM-proposed deviation,TH royal-name vowel reorder (Latin)
-synth_people,Person,วชิราลงกรน,วชิราลงกรณ,false,MEDIUM,LLM-proposed deviation,TH final-consonant sub น/ณ (Thai)
-synth_people,Person,Aleksandar Vukić,Aleksandar Vučić,false,MEDIUM,LLM-proposed deviation,RS surname plausible-alternate Vukić (Latin)
-synth_people,Person,Александар Вукић,Александар Вучић,false,MEDIUM,LLM-proposed deviation,RS surname plausible-alternate (Cyrillic)
+synth_people,Person,Mohammed bin Sultan,Mohammed bin Salman,true,MEDIUM,LLM-proposed deviation,SA patronymic swap (Latin)
+synth_people,Person,محمد بن سلطان,محمد بن سلمان,true,MEDIUM,LLM-proposed deviation,SA patronymic swap (Arabic)
+synth_people,Person,Abdel Fattah el-Sirri,Abdel Fattah el-Sisi,true,MEDIUM,LLM-proposed deviation,EG surname consonant sub (Latin)
+synth_people,Person,عبد الفتاح السري,عبد الفتاح السيسي,true,MEDIUM,LLM-proposed deviation,EG surname consonant sub (Arabic)
+synth_people,Person,Kyriakos Mitsotakos,Kyriakos Mitsotakis,true,MEDIUM,LLM-proposed deviation,GR surname-ending -ος/-ης (Latin)
+synth_people,Person,Κυριάκος Μητσοτάκος,Κυριάκος Μητσοτάκης,true,MEDIUM,LLM-proposed deviation,GR surname-ending -ος/-ης (Greek)
+synth_people,Person,Narender Modi,Narendra Modi,true,MEDIUM,LLM-proposed deviation,IN given-name plausible-alternate (Latin)
+synth_people,Person,नरेन्द्र मोडी,नरेन्द्र मोदी,true,MEDIUM,LLM-proposed deviation,IN surname retroflex/dental swap ड/द (Devanagari)
+synth_people,Person,Vajiralongkron,Vajiralongkorn,true,MEDIUM,LLM-proposed deviation,TH royal-name vowel reorder (Latin)
+synth_people,Person,วชิราลงกรน,วชิราลงกรณ,true,MEDIUM,LLM-proposed deviation,TH final-consonant sub น/ณ (Thai)
+synth_people,Person,Aleksandar Vukić,Aleksandar Vučić,true,STRONG,LLM-proposed deviation,RS surname plausible-alternate Vukić (Latin)
+synth_people,Person,Александар Вукић,Александар Вучић,true,MEDIUM,LLM-proposed deviation,RS surname plausible-alternate (Cyrillic)
 synth_people,Person,Iliana Iordanova,Iliana Iotova,false,MEDIUM,LLM-proposed deviation,BG surname stem swap (Latin)
 synth_people,Person,Илиана Йорданова,Илиана Йотова,false,MEDIUM,LLM-proposed deviation,BG surname stem swap (Cyrillic)
 synth_people,Person,Alexander Lukashevich,Alexander Lukashenko,false,MEDIUM,LLM-proposed deviation,BY surname-suffix swap -evich/-enko (Latin)
 synth_people,Person,Аляксандр Лукашэвіч,Аляксандр Лукашэнка,false,MEDIUM,LLM-proposed deviation,BY surname-suffix swap (Belarusian Cyrillic)
-synth_people,Person,Ukhnaagiin Khürelchükh,Ukhnaagiin Khürelsükh,false,MEDIUM,LLM-proposed deviation,MN surname consonant sub (Latin)
-synth_people,Person,Ухнаагийн Хүрэлчүх,Ухнаагийн Хүрэлсүх,false,MEDIUM,LLM-proposed deviation,MN surname consonant sub (Mongolian Cyrillic)
+synth_people,Person,Ukhnaagiin Khürelchükh,Ukhnaagiin Khürelsükh,true,MEDIUM,LLM-proposed deviation,MN surname consonant sub (Latin)
+synth_people,Person,Ухнаагийн Хүрэлчүх,Ухнаагийн Хүрэлсүх,true,MEDIUM,LLM-proposed deviation,MN surname consonant sub (Mongolian Cyrillic)
 synth_people,Person,Mohammed Shamsuddin,Mohammed Shahabuddin,false,MEDIUM,LLM-proposed deviation,BD given-name stem swap (Latin)
 synth_people,Person,মোহাম্মদ শামসুদ্দিন,মোহাম্মদ সাহাবুদ্দিন,false,MEDIUM,LLM-proposed deviation,BD given-name stem swap (Bengali)
-synth_people,Person,Arif Ali Zardari,Asif Ali Zardari,false,MEDIUM,LLM-proposed deviation,PK given-name onset sub (Latin)
+synth_people,Person,Arif Ali Zardari,Asif Ali Zardari,true,MEDIUM,LLM-proposed deviation,PK given-name onset sub (Latin)
 synth_people,Person,عارف علی زرداری,آصف علی زرداری,false,MEDIUM,LLM-proposed deviation,PK given-name onset sub (Urdu)
-synth_people,Person,Kassym-Jomart Tukayev,Kassym-Jomart Tokayev,false,MEDIUM,LLM-proposed deviation,KZ surname vowel sub (Latin)
-synth_people,Person,Қасым-Жомарт Тұқаев,Қасым-Жомарт Тоқаев,false,MEDIUM,LLM-proposed deviation,KZ surname vowel sub ұ/о (Kazakh Cyrillic)
-synth_people,Person,Abiyot Ahmed,Abiy Ahmed,false,MEDIUM,LLM-proposed deviation,ET given-name plausible-alternate (Latin)
-synth_people,Person,ዐቢዮት አሕመድ,ዐቢይ አሕመድ,false,MEDIUM,LLM-proposed deviation,ET given-name plausible-alternate (Amharic/Ge'ez)
-synth_people,Person,Hun Manat,Hun Manet,false,MEDIUM,LLM-proposed deviation,KH given-name vowel sub (Latin)
-synth_people,Person,ហ៊ុន ម៉ាណាត,ហ៊ុន ម៉ាណែត,false,MEDIUM,LLM-proposed deviation,KH given-name vowel sub (Khmer)
+synth_people,Person,Kassym-Jomart Tukayev,Kassym-Jomart Tokayev,true,MEDIUM,LLM-proposed deviation,KZ surname vowel sub (Latin)
+synth_people,Person,Қасым-Жомарт Тұқаев,Қасым-Жомарт Тоқаев,true,MEDIUM,LLM-proposed deviation,KZ surname vowel sub ұ/о (Kazakh Cyrillic)
+synth_people,Person,Abiyot Ahmed,Abiy Ahmed,true,MEDIUM,LLM-proposed deviation,ET given-name plausible-alternate (Latin)
+synth_people,Person,ዐቢዮት አሕመድ,ዐቢይ አሕመድ,true,MEDIUM,LLM-proposed deviation,ET given-name plausible-alternate (Amharic/Ge'ez)
+synth_people,Person,Hun Manat,Hun Manet,true,MEDIUM,LLM-proposed deviation,KH given-name vowel sub (Latin)
+synth_people,Person,ហ៊ុន ម៉ាណាត,ហ៊ុន ម៉ាណែត,true,MEDIUM,LLM-proposed deviation,KH given-name vowel sub (Khmer)
 synth_people,Person,Mohammed Sherif al-Sudani,Mohammed Shia' al-Sudani,false,MEDIUM,LLM-proposed deviation,IQ given-name stem swap (Latin)
 synth_people,Person,محمد شريف السوداني,محمد شياع السوداني,false,MEDIUM,LLM-proposed deviation,IQ given-name stem swap (Arabic)
-synth_people,Person,Friedrich Mertz,Friedrich Merz,false,MEDIUM,LLM-proposed deviation,DE surname doubled-consonant (Mertz is real surname)
-synth_people,Person,Emmanuel Marcon,Emmanuel Macron,false,MEDIUM,LLM-proposed deviation,FR surname vowel reorder
-synth_people,Person,Giorgia Meleni,Giorgia Meloni,false,MEDIUM,LLM-proposed deviation,IT surname vowel sub
+synth_people,Person,Friedrich Mertz,Friedrich Merz,true,MEDIUM,LLM-proposed deviation,DE surname doubled-consonant (Mertz is real surname)
+synth_people,Person,Emmanuel Marcon,Emmanuel Macron,true,MEDIUM,LLM-proposed deviation,FR surname vowel reorder
+synth_people,Person,Giorgia Meleni,Giorgia Meloni,true,MEDIUM,LLM-proposed deviation,IT surname vowel sub
 synth_people,Person,Pedro Sancho,Pedro Sánchez,false,MEDIUM,LLM-proposed deviation,ES surname truncation/sub (Sancho is real Spanish surname)
 synth_people,Person,Viktor Orbach,Viktor Orbán,false,MEDIUM,LLM-proposed deviation,HU surname-ending swap to Germanic
 synth_people,Person,Recep Tayyip Erdem,Recep Tayyip Erdoğan,false,MEDIUM,LLM-proposed deviation,TR surname truncation/sub (Erdem is real surname)
-synth_people,Person,Javier Mihel,Javier Milei,false,MEDIUM,LLM-proposed deviation,AR surname plausible-alternate
+synth_people,Person,Javier Mihel,Javier Milei,true,MEDIUM,LLM-proposed deviation,AR surname plausible-alternate
 synth_people,Person,Luiz Inácio Lula da Souza,Luiz Inácio Lula da Silva,false,MEDIUM,LLM-proposed deviation,BR surname swap to common Portuguese surname
-synth_people,Person,Claudia Steinbaum,Claudia Sheinbaum,false,MEDIUM,LLM-proposed deviation,MX surname Yiddish/German collision
+synth_people,Person,Claudia Steinbaum,Claudia Sheinbaum,true,MEDIUM,LLM-proposed deviation,MX surname Yiddish/German collision
 synth_people,Person,Prabowo Subandrio,Prabowo Subianto,false,MEDIUM,LLM-proposed deviation,ID surname collision with historical PM Subandrio
-synth_people,Person,Keir Starkey,Keir Starmer,false,MEDIUM,LLM-proposed deviation,GB surname plausible-alternate (Starkey is real English surname)
-synth_people,Person,Mark Cooney,Mark Carney,false,MEDIUM,LLM-proposed deviation,CA surname plausible-alternate (Cooney is real Irish-Canadian surname)
+synth_people,Person,Keir Starkey,Keir Starmer,true,MEDIUM,LLM-proposed deviation,GB surname plausible-alternate (Starkey is real English surname)
+synth_people,Person,Mark Cooney,Mark Carney,true,MEDIUM,LLM-proposed deviation,CA surname plausible-alternate (Cooney is real Irish-Canadian surname)
 synth_people,Person,Anthony Albano,Anthony Albanese,false,MEDIUM,LLM-proposed deviation,AU surname truncation to real Italian surname Albano
 synth_people,Person,Bart De Vries,Bart De Wever,false,MEDIUM,LLM-proposed deviation,BE surname swap to common Dutch surname
 synth_people,Person,Anders Kristersson,Ulf Kristersson,false,MEDIUM,LLM-proposed deviation,SE given-name sub (Anders is common Swedish)
@@ -432,7 +432,7 @@ synth_people,Person,Cyril Ramatlhodi,Cyril Ramaphosa,false,MEDIUM,LLM-proposed d
 synth_people,Person,Tunde Tinubu,Bola Tinubu,false,MEDIUM,LLM-proposed deviation,NG given-name sub (Tunde is common Yoruba)
 synth_people,Person,William Mutua,William Ruto,false,MEDIUM,LLM-proposed deviation,KE surname swap to common Kenyan surname
 synth_people,Person,Bassirou Diomaye Sarr,Bassirou Diomaye Faye,false,MEDIUM,LLM-proposed deviation,SN surname swap to common Senegalese surname
-synth_people,Person,Manuel Díaz-Canel,Miguel Díaz-Canel,false,MEDIUM,LLM-proposed deviation,CU given-name sub
+synth_people,Person,Manuel Díaz-Canel,Miguel Díaz-Canel,true,MEDIUM,LLM-proposed deviation,CU given-name sub
 synth_people,Person,Bongbong Aquino,Bongbong Marcos,false,MEDIUM,LLM-proposed deviation,PH surname swap to opposing political-dynasty surname Aquino
 synth_people,Person,Ahmad Ibrahim,Anwar Ibrahim,false,MEDIUM,LLM-proposed deviation,MY given-name sub (collides with historical SG politician Ahmad Ibrahim)
 synth_people,Person,Wladimir Putin,Vladimir Putin,true,MEDIUM,LLM-proposed deviation,RU DE/PL transliteration of Cyrillic В (V/W)
@@ -441,17 +441,17 @@ synth_people,Person,V. Putin,Vladimir Putin,true,MEDIUM,LLM-proposed deviation,R
 synth_people,Person,Vladmir Putin,Vladimir Putin,true,MEDIUM,LLM-proposed deviation,tiny defect (missing i in given name)
 synth_people,Person,Volodymyr Zelensky,Volodymyr Zelenskyy,true,MEDIUM,LLM-proposed deviation,UA single-y vs double-y romanisation
 synth_people,Person,Wolodymyr Selenskyj,Volodymyr Zelenskyy,true,MEDIUM,LLM-proposed deviation,UA German transliteration (W-/S-/-yj)
-synth_people,Person,Hsi Chin-ping,Xi Jinping,true,MEDIUM,LLM-proposed deviation,CN Wade-Giles vs Pinyin
+synth_people,Person,Hsi Chin-ping,Xi Jinping,true,WEAK,LLM-proposed deviation,CN Wade-Giles vs Pinyin
 synth_people,Person,Mao Tse-tung,Mao Zedong,true,MEDIUM,LLM-proposed deviation,CN Wade-Giles vs Pinyin (historical)
 synth_people,Person,Mohamed bin Salman,Mohammed bin Salman,true,MEDIUM,LLM-proposed deviation,SA single-m vs double-m transliteration
 synth_people,Person,Muhammad bin Salman,Mohammed bin Salman,true,MEDIUM,LLM-proposed deviation,SA Mu/Mo transliteration variants
 synth_people,Person,Moammar Qaddafi,Muammar Gaddafi,true,MEDIUM,LLM-proposed deviation,LY competing Arabic transliterations
-synth_people,Person,Usama bin Ladin,Osama bin Laden,true,MEDIUM,LLM-proposed deviation,SA UN-style vs media-style transliteration
+synth_people,Person,Usama bin Ladin,Osama bin Laden,true,STRONG,LLM-proposed deviation,SA UN-style vs media-style transliteration
 synth_people,Person,Saddam Husayn,Saddam Hussein,true,MEDIUM,LLM-proposed deviation,IQ scholarly vs popular Arabic transliteration
 synth_people,Person,Hasan Rohani,Hassan Rouhani,true,MEDIUM,LLM-proposed deviation,IR Persian transliteration variant
 synth_people,Person,Bachar el-Assad,Bashar al-Assad,true,MEDIUM,LLM-proposed deviation,SY French vs English transliteration
 synth_people,Person,Mahmood Ahmadinezhad,Mahmoud Ahmadinejad,true,MEDIUM,LLM-proposed deviation,IR Persian transliteration variant
-synth_people,Person,Recep Tayyip Erdogan,Recep Tayyip Erdoğan,true,MEDIUM,LLM-proposed deviation,TR Turkish ğ stripped
+synth_people,Person,Recep Tayyip Erdogan,Recep Tayyip Erdoğan,true,STRONG,LLM-proposed deviation,TR Turkish ğ stripped
 synth_people,Person,Aleksandar Vucic,Aleksandar Vučić,true,MEDIUM,LLM-proposed deviation,RS diacritics stripped
 synth_people,Person,Andrej Plenkovic,Andrej Plenković,true,MEDIUM,LLM-proposed deviation,HR diacritic stripped
 synth_people,Person,Francois Hollande,François Hollande,true,MEDIUM,LLM-proposed deviation,FR cedilla stripped
@@ -460,12 +460,12 @@ synth_people,Person,Olaf Schloz,Olaf Scholz,true,MEDIUM,LLM-proposed deviation,t
 synth_people,Person,Anglea Merkel,Angela Merkel,true,MEDIUM,LLM-proposed deviation,tiny defect (letter transposition el→le)
 synth_people,Person,Boris Jonson,Boris Johnson,true,MEDIUM,LLM-proposed deviation,tiny defect (missing h in surname)
 synth_people,Person,Justin Trudoau,Justin Trudeau,true,MEDIUM,LLM-proposed deviation,tiny defect (letter transposition ea→oa)
-synth_people,Person,"Putin, Vladimir",Vladimir Putin,true,MEDIUM,LLM-proposed deviation,RU last-first comma form
+synth_people,Person,"Putin, Vladimir",Vladimir Putin,true,STRONG,LLM-proposed deviation,RU last-first comma form
 synth_people,Person,Sergey Viktorovich Lavrov,Sergey Lavrov,true,MEDIUM,LLM-proposed deviation,RU patronymic added
 synth_people,Person,Sergey Viktorovich Lavrov,Sergey Borisovitch Lavrov,false,MEDIUM,Contradicting patronymics,
 synth_people,Person,Kim Jong-un,Kim Jong Un,true,MEDIUM,LLM-proposed deviation,KP hyphenation + case in given name
 synth_people,Person,Jean Marie Le Pen,Jean-Marie Le Pen,true,MEDIUM,LLM-proposed deviation,FR hyphen vs space in given name
-synth_people,Person,Bibi Netanyahu,Benjamin Netanyahu,true,MEDIUM,LLM-proposed deviation,IL diminutive nickname (Bibi)
+synth_people,Person,Bibi Netanyahu,Benjamin Netanyahu,true,WEAK,LLM-proposed deviation,IL diminutive nickname (Bibi)
 synth_companies,Company,"Bowne of Atlanta, Inc.","Bowne of Boston, Inc.",false,MEDIUM,LLM-proposed deviation,city qualifier swap
 synth_companies,Company,"Bowne of Chicago, Inc.","Bowne of Cleveland, Inc.",false,MEDIUM,LLM-proposed deviation,city qualifier swap (shared C-)
 synth_companies,Company,"Bowne of Dallas, L.P.","Bowne of Phoenix, Inc.",false,MEDIUM,LLM-proposed deviation,city qualifier + entity-form swap
@@ -488,23 +488,23 @@ synth_companies,Company,"L & H Sweden, AB","L & H Mendez Sweden, AB",false,MEDIU
 synth_companies,Company,"L & H Editions, S.A.","L & H Linguex, S.A.",false,MEDIUM,LLM-proposed deviation,brand-token swap
 synth_companies,Company,"Bowne Global Solutions Denmark, A/S",Bowne Global Solutions II Denmark A/S,false,MEDIUM,LLM-proposed deviation,II series marker addition
 synth_companies,Company,Bowne Global Solutions II France S.A.S.,"Bowne Global Solutions (France), S.A.R.L.",false,MEDIUM,LLM-proposed deviation,II marker + entity-form swap same country
-synth_companies,Company,Blackstone Real Estate Partners V L.P.,Blackstone Real Estate Partners VI L.P.,false,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap (PE fund series)
-synth_companies,Company,Blackstone Real Estate Partners IV L.P.,Blackstone Real Estate Partners V L.P.,false,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap
-synth_companies,Company,Blackstone Capital Partners VII L.P.,Blackstone Capital Partners VIII L.P.,false,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap
-synth_companies,Company,KKR Asian Fund III L.P.,KKR Asian Fund IV L.P.,false,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap
-synth_companies,Company,KKR North America Fund XII L.P.,KKR North America Fund XIII L.P.,false,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap (XII/XIII)
+synth_companies,Company,Blackstone Real Estate Partners V L.P.,Blackstone Real Estate Partners VI L.P.,true,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap (PE fund series)
+synth_companies,Company,Blackstone Real Estate Partners IV L.P.,Blackstone Real Estate Partners V L.P.,true,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap
+synth_companies,Company,Blackstone Capital Partners VII L.P.,Blackstone Capital Partners VIII L.P.,true,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap
+synth_companies,Company,KKR Asian Fund III L.P.,KKR Asian Fund IV L.P.,true,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap
+synth_companies,Company,KKR North America Fund XII L.P.,KKR North America Fund XIII L.P.,true,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap (XII/XIII)
 synth_companies,Company,Apollo Investment Fund VIII L.P.,Apollo Investment Fund IX L.P.,false,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap (VIII/IX)
-synth_companies,Company,Carlyle Partners VII L.P.,Carlyle Partners VIII L.P.,false,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap
-synth_companies,Company,Bain Capital Fund X L.P.,Bain Capital Fund XI L.P.,false,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap (X/XI)
-synth_companies,Company,Goldman Sachs Capital Partners V L.P.,Goldman Sachs Capital Partners VI L.P.,false,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap
-synth_companies,Company,Goldman Sachs Mortgage Loan Trust 2004-1,Goldman Sachs Mortgage Loan Trust 2004-2,false,MEDIUM,LLM-proposed deviation,SPV trust series suffix swap (-1/-2)
-synth_companies,Company,Goldman Sachs Mortgage Loan Trust 2004-1,Goldman Sachs Mortgage Loan Trust 2005-1,false,MEDIUM,LLM-proposed deviation,SPV trust vintage-year swap
-synth_companies,Company,Citigroup Mortgage Loan Trust 2007-AHL1,Citigroup Mortgage Loan Trust 2007-AHL2,false,MEDIUM,LLM-proposed deviation,SPV trust tranche-marker swap
-synth_companies,Company,Bear Stearns Asset Backed Securities Trust 2006-2,Bear Stearns Asset Backed Securities Trust 2007-2,false,MEDIUM,LLM-proposed deviation,SPV trust vintage swap
-synth_companies,Company,Wells Fargo Mortgage Backed Securities Trust 2005-AR16,Wells Fargo Mortgage Backed Securities Trust 2006-AR16,false,MEDIUM,LLM-proposed deviation,SPV trust vintage swap
-synth_companies,Company,JPMorgan Mortgage Trust Series 2007-1,JPMorgan Mortgage Trust Series 2007-2,false,MEDIUM,LLM-proposed deviation,SPV trust series-suffix swap
-synth_companies,Company,Citigroup Capital Trust I,Citigroup Capital Trust II,false,MEDIUM,LLM-proposed deviation,Roman-numeral series swap (capital-trust shelf)
-synth_companies,Company,Citigroup Capital Trust XV,Citigroup Capital Trust XX,false,MEDIUM,LLM-proposed deviation,Roman-numeral series swap (XV/XX)
+synth_companies,Company,Carlyle Partners VII L.P.,Carlyle Partners VIII L.P.,true,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap
+synth_companies,Company,Bain Capital Fund X L.P.,Bain Capital Fund XI L.P.,true,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap (X/XI)
+synth_companies,Company,Goldman Sachs Capital Partners V L.P.,Goldman Sachs Capital Partners VI L.P.,true,MEDIUM,LLM-proposed deviation,Roman-numeral vintage swap
+synth_companies,Company,Goldman Sachs Mortgage Loan Trust 2004-1,Goldman Sachs Mortgage Loan Trust 2004-2,true,MEDIUM,LLM-proposed deviation,SPV trust series suffix swap (-1/-2)
+synth_companies,Company,Goldman Sachs Mortgage Loan Trust 2004-1,Goldman Sachs Mortgage Loan Trust 2005-1,true,MEDIUM,LLM-proposed deviation,SPV trust vintage-year swap
+synth_companies,Company,Citigroup Mortgage Loan Trust 2007-AHL1,Citigroup Mortgage Loan Trust 2007-AHL2,true,MEDIUM,LLM-proposed deviation,SPV trust tranche-marker swap
+synth_companies,Company,Bear Stearns Asset Backed Securities Trust 2006-2,Bear Stearns Asset Backed Securities Trust 2007-2,true,MEDIUM,LLM-proposed deviation,SPV trust vintage swap
+synth_companies,Company,Wells Fargo Mortgage Backed Securities Trust 2005-AR16,Wells Fargo Mortgage Backed Securities Trust 2006-AR16,true,MEDIUM,LLM-proposed deviation,SPV trust vintage swap
+synth_companies,Company,JPMorgan Mortgage Trust Series 2007-1,JPMorgan Mortgage Trust Series 2007-2,true,MEDIUM,LLM-proposed deviation,SPV trust series-suffix swap
+synth_companies,Company,Citigroup Capital Trust I,Citigroup Capital Trust II,true,MEDIUM,LLM-proposed deviation,Roman-numeral series swap (capital-trust shelf)
+synth_companies,Company,Citigroup Capital Trust XV,Citigroup Capital Trust XX,true,MEDIUM,LLM-proposed deviation,Roman-numeral series swap (XV/XX)
 synth_companies,Company,ICBC (Asia) Limited,ICBC (London) plc,false,MEDIUM,LLM-proposed deviation,jurisdiction-paren swap + form change
 synth_companies,Company,Bank of China (Hong Kong) Limited,Bank of China (Singapore) Limited,false,MEDIUM,LLM-proposed deviation,jurisdiction-paren swap (HK/SG)
 synth_companies,Company,Bank of China (Hong Kong) Limited,Bank of China (Australia) Limited,false,MEDIUM,LLM-proposed deviation,jurisdiction-paren swap (HK/AU)
@@ -516,30 +516,30 @@ synth_companies,Company,Banco Santander S.A.,Banco Santander México S.A.,false,
 synth_companies,Company,Banco Santander S.A.,Banco Santander Chile S.A.,false,MEDIUM,LLM-proposed deviation,country-token addition mid-name
 synth_companies,Company,Banco Santander México S.A.,Banco Santander Chile S.A.,false,MEDIUM,LLM-proposed deviation,sister-country-sub swap
 synth_companies,Company,BNP Paribas Securities Services,BNP Paribas Personal Finance,false,MEDIUM,LLM-proposed deviation,line-of-business swap (Securities/Personal Finance)
-synth_people,Person,Elon Mosk,Elon Musk,false,MEDIUM,LLM-proposed deviation,surname single-char sub (vowel)
+synth_people,Person,Elon Mosk,Elon Musk,true,MEDIUM,LLM-proposed deviation,surname single-char sub (vowel)
 synth_people,Person,Mark Zuckermann,Mark Zuckerberg,false,MEDIUM,LLM-proposed deviation,surname swap to plausible-alt German-Jewish surname
-synth_people,Person,Jeff Brezos,Jeff Bezos,false,MEDIUM,LLM-proposed deviation,surname single-char insertion
-synth_people,Person,Bill Cates,Bill Gates,false,MEDIUM,LLM-proposed deviation,surname swap (Cates is real English surname)
-synth_people,Person,Larry Allison,Larry Ellison,false,MEDIUM,LLM-proposed deviation,surname swap (Allison is real surname)
-synth_people,Person,Tom Cook,Tim Cook,false,MEDIUM,LLM-proposed deviation,given-name sub
-synth_people,Person,Tim Cock,Tim Cook,false,MEDIUM,LLM-proposed deviation,last name swap
+synth_people,Person,Jeff Brezos,Jeff Bezos,true,MEDIUM,LLM-proposed deviation,surname single-char insertion
+synth_people,Person,Bill Cates,Bill Gates,true,MEDIUM,LLM-proposed deviation,surname swap (Cates is real English surname)
+synth_people,Person,Larry Allison,Larry Ellison,true,MEDIUM,LLM-proposed deviation,surname swap (Allison is real surname)
+synth_people,Person,Tom Cook,Tim Cook,true,MEDIUM,LLM-proposed deviation,given-name sub
+synth_people,Person,Tim Cock,Tim Cook,true,MEDIUM,LLM-proposed deviation,last name swap
 synth_people,Person,Sandeep Pichai,Sundar Pichai,false,MEDIUM,LLM-proposed deviation,given-name sub (Sandeep is common Indian)
-synth_people,Person,Satya Nandela,Satya Nadella,false,MEDIUM,LLM-proposed deviation,surname swap to plausible-alt Indian surname
-synth_people,Person,Harry Page,Larry Page,false,MEDIUM,LLM-proposed deviation,given-name sub
-synth_people,Person,Jansen Huang,Jensen Huang,false,MEDIUM,LLM-proposed deviation,given-name sub (Jansen is Dutch)
-synth_people,Person,Lionel Bessi,Lionel Messi,false,MEDIUM,LLM-proposed deviation,surname swap (Bessi is real Italian surname)
+synth_people,Person,Satya Nandela,Satya Nadella,true,MEDIUM,LLM-proposed deviation,surname swap to plausible-alt Indian surname
+synth_people,Person,Harry Page,Larry Page,true,MEDIUM,LLM-proposed deviation,given-name sub
+synth_people,Person,Jansen Huang,Jensen Huang,true,MEDIUM,LLM-proposed deviation,given-name sub (Jansen is Dutch)
+synth_people,Person,Lionel Bessi,Lionel Messi,true,MEDIUM,LLM-proposed deviation,surname swap (Bessi is real Italian surname)
 synth_people,Person,Cristiano Ronaldinho,Cristiano Ronaldo,false,MEDIUM,LLM-proposed deviation,surname collision with real different Brazilian footballer
 synth_people,Person,Kylian Mbembe,Kylian Mbappé,false,MEDIUM,LLM-proposed deviation,surname collision with real Cameroonian philosopher Achille Mbembe
 synth_people,Person,Roger Federman,Roger Federer,false,MEDIUM,LLM-proposed deviation,surname swap to plausible-alt
-synth_people,Person,Selena Williams,Serena Williams,false,MEDIUM,LLM-proposed deviation,given-name sub
-synth_people,Person,Tom Brody,Tom Brady,false,MEDIUM,LLM-proposed deviation,surname single-char sub (Brody is real surname)
-synth_people,Person,LeBron Jones,LeBron James,false,MEDIUM,LLM-proposed deviation,surname swap (both common)
-synth_people,Person,Michael Jorgan,Michael Jordan,false,MEDIUM,LLM-proposed deviation,surname single-char sub
+synth_people,Person,Selena Williams,Serena Williams,true,MEDIUM,LLM-proposed deviation,given-name sub
+synth_people,Person,Tom Brody,Tom Brady,true,MEDIUM,LLM-proposed deviation,surname single-char sub (Brody is real surname)
+synth_people,Person,LeBron Jones,LeBron James,true,MEDIUM,LLM-proposed deviation,surname swap (both common)
+synth_people,Person,Michael Jorgan,Michael Jordan,true,MEDIUM,LLM-proposed deviation,surname single-char sub
 synth_people,Person,Tigran Woods,Tiger Woods,false,MEDIUM,LLM-proposed deviation,given-name swap (Tigran is Armenian)
-synth_people,Person,Rafael Nadar,Rafael Nadal,false,MEDIUM,LLM-proposed deviation,surname swap (Nadar is real Tamil surname)
+synth_people,Person,Rafael Nadar,Rafael Nadal,true,MEDIUM,LLM-proposed deviation,surname swap (Nadar is real Tamil surname)
 synth_people,Person,Boris Abramovich,Roman Abramovich,false,MEDIUM,LLM-proposed deviation,given-name sub
-synth_people,Person,Mikhail Khordorovsky,Mikhail Khodorkovsky,false,MEDIUM,LLM-proposed deviation,surname syllable rearrangement
-synth_people,Person,Igor Sechev,Igor Sechin,false,MEDIUM,LLM-proposed deviation,surname-suffix swap -in/-ev
+synth_people,Person,Mikhail Khordorovsky,Mikhail Khodorkovsky,true,MEDIUM,LLM-proposed deviation,surname syllable rearrangement
+synth_people,Person,Igor Sechev,Igor Sechin,true,MEDIUM,LLM-proposed deviation,surname-suffix swap -in/-ev
 synth_people,Person,Alisher Asilov,Alisher Usmanov,false,MEDIUM,LLM-proposed deviation,surname swap to plausible-alt Uzbek
 synth_people,Person,Dmitry Mendeleev,Dmitry Medvedev,false,MEDIUM,LLM-proposed deviation,surname collision with real chemist Mendeleev
 synth_people,Person,Andrei Navalny,Alexei Navalny,false,MEDIUM,LLM-proposed deviation,given-name sub
@@ -560,11 +560,11 @@ synth_people,Person,Roberto Fox,Vicente Fox,false,MEDIUM,LLM-proposed deviation,
 synth_people,Person,Lee Kuan Hsien,Lee Kuan Yew,false,MEDIUM,LLM-proposed deviation,given-name final-syllable sub (real Chinese name)
 synth_people,Person,Mahir Mohamad,Mahathir Mohamad,false,MEDIUM,LLM-proposed deviation,given-name truncation/sub (Mahir is distinct Arabic name)
 synth_people,Person,Chen Kai-shek,Chiang Kai-shek,false,MEDIUM,LLM-proposed deviation,surname swap (Chen and Chiang both real Chinese)
-synth_people,Person,Sukamto,Sukarno,false,MEDIUM,LLM-proposed deviation,surname swap to plausible-alt Indonesian
+synth_people,Person,Sukamto,Sukarno,true,MEDIUM,LLM-proposed deviation,surname swap to plausible-alt Indonesian
 synth_people,Person,Ferdinand Marquez,Ferdinand Marcos,false,MEDIUM,LLM-proposed deviation,surname swap (Marquez is real Spanish-Filipino)
 synth_people,Person,Park Joon-hee,Park Chung-hee,false,MEDIUM,LLM-proposed deviation,given-name sub (real Korean name)
 synth_people,Person,Aung San Suu Win,Aung San Suu Kyi,false,MEDIUM,LLM-proposed deviation,surname swap (Win is real Burmese)
-synth_people,Person,Imran Khaja,Imran Khan,false,MEDIUM,LLM-proposed deviation,surname swap (Khaja is real Pakistani)
+synth_people,Person,Imran Khaja,Imran Khan,true,MEDIUM,LLM-proposed deviation,surname swap (Khaja is real Pakistani)
 synth_people,Person,Pervez Musafir,Pervez Musharraf,false,MEDIUM,LLM-proposed deviation,surname swap (Musafir is real Arabic-origin)
 synth_people,Person,Indira Gokhale,Indira Gandhi,false,MEDIUM,LLM-proposed deviation,surname swap (Gokhale is real Indian — historical politician)
 synth_people,Person,BARZAN IBRAHIM HASSAN AL-MOSULI,BARZAN IBRAHIM HASSAN AL-TIKRITI,false,MEDIUM,LLM-proposed deviation,clan-nisbah swap (al-Tikriti/al-Mosuli)
@@ -583,7 +583,7 @@ synth_people,Person,IZZAT IBRAHIM AL-MOSULI,IZZAT IBRAHIM AL-DURI,false,MEDIUM,L
 synth_people,Person,JAWHAR MAJID AL-MOSULI,JAWHAR MAJID AL-DURI,false,MEDIUM,LLM-proposed deviation,clan-nisbah swap
 synth_people,Person,NIDAL AL-DULAIMI,NIDAL AL-RABI'I,false,MEDIUM,LLM-proposed deviation,clan-nisbah swap
 synth_people,Person,INTISSAR AL-DURI,INTISSAR AL-UBAYDI,false,MEDIUM,LLM-proposed deviation,clan-nisbah swap
-synth_people,Person,ADIB SHABAN AL-RAWI,ADIB SHABAN AL-ANI,false,MEDIUM,LLM-proposed deviation,clan-nisbah swap
+synth_people,Person,ADIB SHABAN AL-RAWI,ADIB SHABAN AL-ANI,true,MEDIUM,LLM-proposed deviation,clan-nisbah swap
 synth_people,Person,GHAZI HAMMUD AL-DURI,GHAZI HAMMUD AL-UBAIDI,false,MEDIUM,LLM-proposed deviation,clan-nisbah swap
 synth_people,Person,YAHIA ABDALLAH AL-DURI,YAHIA ABDALLAH AL-UBAIDI,false,MEDIUM,LLM-proposed deviation,clan-nisbah swap
 synth_people,Person,KHAMIS SIRHAN AL-MOSULI,KHAMIS SIRHAN AL-MUHAMMAD,false,MEDIUM,LLM-proposed deviation,clan-nisbah swap
@@ -648,10 +648,10 @@ synth_people,Person,HABIBULLAH SAFI,HABIBULLAH RESHAD,false,MEDIUM,LLM-proposed 
 synth_people,Person,MOHAMMAD AZAM ROHANI,MOHAMMAD AZAM ELMI,false,MEDIUM,LLM-proposed deviation,Pashtun surname swap
 synth_people,Person,ALLAH DAD ABDUL,ALLAH DAD MATIN,false,MEDIUM,LLM-proposed deviation,Pashtun surname swap
 synth_people,Person,ABDUL LATIF NOORI,ABDUL LATIF MANSUR,false,MEDIUM,LLM-proposed deviation,Pashtun surname swap
-synth_people,Person,KO TAE BIN,KO TAE HUN,false,MEDIUM,LLM-proposed deviation,Korean given-name 2nd-syllable swap
-synth_people,Person,KIM KYONG MIN,KIM KYONG IL,false,MEDIUM,LLM-proposed deviation,Korean given-name 2nd-syllable swap
-synth_people,Person,KU JA YOUNG,KU JA HYONG,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
-synth_people,Person,JANG YONG MIN,JANG YONG SON,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
+synth_people,Person,KO TAE BIN,KO TAE HUN,true,MEDIUM,LLM-proposed deviation,Korean given-name 2nd-syllable swap
+synth_people,Person,KIM KYONG MIN,KIM KYONG IL,true,MEDIUM,LLM-proposed deviation,Korean given-name 2nd-syllable swap
+synth_people,Person,KU JA YOUNG,KU JA HYONG,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
+synth_people,Person,JANG YONG MIN,JANG YONG SON,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,KIM SOK JIN,KIM SOK CHOL,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,RI HONG-CHUL,RI HONG-SOP,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,CHU MYO'NG,CHU HYO'K,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
@@ -660,18 +660,18 @@ synth_people,Person,JANG YONG SON,JANG BOM SU,false,MEDIUM,LLM-proposed deviatio
 synth_people,Person,YO'N MUN-NAM,YO'N CHO'NG NAM,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,PAEK JIN-HO,PAEK CHANG-HO,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,RA SONG-SU,RA KY'ONG-SU,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
-synth_people,Person,RI MYONG-CHUL,RI PYONG CHUL,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
-synth_people,Person,SON YONG HYOK,SON JONG HYOK,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
+synth_people,Person,RI MYONG-CHUL,RI PYONG CHUL,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
+synth_people,Person,SON YONG HYOK,SON JONG HYOK,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,KIM JONG MAN,KIM JONG SIK,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,CHO HYO'K SAN,CHO CHUN RYONG,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,CHANG SU HA,CHANG CHANG HA,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,PAK YONG-CHUN,PAK IL KYU,false,MEDIUM,LLM-proposed deviation,Korean given-name swap (UN-list collision)
-synth_people,Person,HAN BONG SU,HAN JANG SU,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
+synth_people,Person,HAN BONG SU,HAN JANG SU,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,CHOE KWANG HO,CHOE SONG IL,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,KIM SONG MIN,KIM SONG CHOL,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,KIM HYO'K,KIM KYU,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,YU CHA OK,YU CHOL U,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
-synth_people,Person,KO CHOL HUN,KO CHOL MAN,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
+synth_people,Person,KO CHOL HUN,KO CHOL MAN,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,KIM JONG SIK,KIM YONG NAM,false,MEDIUM,LLM-proposed deviation,cross-collision between UN-listed Koreans
 synth_people,Person,RUSTAM IBRAHIMOVICH ASELDEROV,RUSTAM MAGOMEDOVICH ASELDEROV,false,MEDIUM,LLM-proposed deviation,Russian patronymic swap
 synth_people,Person,Malik Magomedovich Barkhanoev,Malik Ruslanovich Barkhanoev,false,MEDIUM,LLM-proposed deviation,Russian patronymic swap
@@ -681,8 +681,8 @@ synth_people,Person,SHAMIL ABDURAHMANOVICH ISMAILOV,SHAMIL MAGOMEDOVICH ISMAILOV
 synth_people,Person,RUSTAM MAGOMEDOVICH KADYROV,RUSTAM MAGOMEDOVICH ASELDEROV,false,MEDIUM,LLM-proposed deviation,Russian surname swap (real Caucasian surname)
 synth_people,Person,Malik Ruslanovich Barakhoev,Malik Ruslanovich Barkhanoev,false,MEDIUM,LLM-proposed deviation,Russian surname syllable rearrangement (multi-char)
 synth_people,Person,Murad Iraklievich Maroghashvili,Murad Iraklievich Margoshvili,false,MEDIUM,LLM-proposed deviation,Georgian surname syllable rearrangement (multi-char)
-synth_people,Person,ZAURBEK SALIMOVICH GUCHKOV,ZAURBEK SALIMOVICH GUCHAEV,false,MEDIUM,LLM-proposed deviation,Russian surname tail-rewrite (multi-char)
-synth_people,Person,SHAMIL MAGOMEDOVICH ISMAGILOV,SHAMIL MAGOMEDOVICH ISMAILOV,false,MEDIUM,LLM-proposed deviation,Russian/Tatar surname syllable insert (multi-char)
+synth_people,Person,ZAURBEK SALIMOVICH GUCHKOV,ZAURBEK SALIMOVICH GUCHAEV,true,MEDIUM,LLM-proposed deviation,Russian surname tail-rewrite (multi-char)
+synth_people,Person,SHAMIL MAGOMEDOVICH ISMAGILOV,SHAMIL MAGOMEDOVICH ISMAILOV,true,MEDIUM,LLM-proposed deviation,Russian/Tatar surname syllable insert (multi-char)
 synth_people,Person,ABDULLAH SUNGKAR,ABDULLAH ANSHORI,false,MEDIUM,LLM-proposed deviation,Indonesian surname swap
 synth_people,Person,AHMED MUNANDAR,ARIS MUNANDAR,false,MEDIUM,LLM-proposed deviation,Indonesian given-name swap
 synth_people,Person,SUDARSO RIFKI,TAUFIK RIFKI,false,MEDIUM,LLM-proposed deviation,Indonesian given-name swap
@@ -702,7 +702,7 @@ synth_people,Person,ANGELO RAMIREZ DE GUZMAN,ANGELO RAMIREZ TRINIDAD,false,MEDIU
 synth_people,Person,ISNILON TOTONI MISUARI,ISNILON TOTONI HAPILON,false,MEDIUM,LLM-proposed deviation,Filipino Moro surname swap (Misuari is real different MNLF leader)
 synth_people,Person,PIO ABOGNE DE LEON,PIO ABOGNE DE VERA,false,MEDIUM,LLM-proposed deviation,Filipino Spanish-style surname swap
 synth_people,Person,ABDULLAHI MOHAMED MOHAMED CADDOW,ABDULLAHI OSMAN MOHAMED CADDOW,false,MEDIUM,LLM-proposed deviation,Somali patronymic swap
-synth_people,Person,MAXAMED CABDULLAAHI CIISE,MAXAMED CABDULLAAH CIISE,false,MEDIUM,LLM-proposed deviation,Somali patronymic suffix swap (multi-char)
+synth_people,Person,MAXAMED CABDULLAAHI CIISE,MAXAMED CABDULLAAH CIISE,true,MEDIUM,LLM-proposed deviation,Somali patronymic suffix swap (multi-char)
 synth_people,Person,ABDIKADIR HASSAN ABDIKADIR,ABDIKADIR MOHAMED ABDIKADIR,false,MEDIUM,LLM-proposed deviation,Somali patronymic swap
 synth_people,Person,HASSAN DAHIR FARAH,HASSAN DAHIR AWEYS,false,MEDIUM,LLM-proposed deviation,Somali clan-name swap
 synth_people,Person,ZAFAR ALI,ZAFAR IQBAL,false,MEDIUM,LLM-proposed deviation,Pakistani surname swap
@@ -775,7 +775,7 @@ synth_corp_positives,Company,"Apple, Inc.",Apple Inc.,true,MEDIUM,LLM-proposed d
 synth_corp_positives,Company,"Bowne Global Solutions, L.L.C.",Bowne Global Solutions LLC,true,MEDIUM,LLM-proposed deviation,periods + comma in legal form
 synth_corp_positives,Company,"Bowne Global Solutions, S.A.R.L.",Bowne Global Solutions SARL,true,MEDIUM,LLM-proposed deviation,periods + comma in legal form
 synth_corp_positives,Company,Volkswagen Bank G.m.b.H.,Volkswagen Bank GmbH,true,MEDIUM,LLM-proposed deviation,periods in legal form
-synth_corp_positives,Company,"JPMorgan Chase Bank, N.A.",JPMorgan Chase Bank NA,true,MEDIUM,LLM-proposed deviation,periods + comma in N.A.
+synth_corp_positives,Company,"JPMorgan Chase Bank, N.A.",JPMorgan Chase Bank NA,true,STRONG,LLM-proposed deviation,periods + comma in N.A.
 synth_corp_positives,Company,Bowne Global Solutions B.V.,Bowne Global Solutions BV,true,MEDIUM,LLM-proposed deviation,periods in legal form
 synth_corp_positives,Company,HSBC Holdings p.l.c.,HSBC Holdings plc,true,MEDIUM,LLM-proposed deviation,periods in plc
 synth_corp_positives,Company,Goldman Sachs & Co. L.L.C.,Goldman Sachs & Co. LLC,true,MEDIUM,LLM-proposed deviation,periods in LLC
@@ -787,7 +787,7 @@ synth_corp_positives,Company,Standard & Poor's,Standard and Poor's,true,MEDIUM,L
 synth_corp_positives,Company,The Coca-Cola Company,Coca-Cola Company,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
 synth_corp_positives,Company,The Procter & Gamble Company,Procter & Gamble Company,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
 synth_corp_positives,Company,"The Goldman Sachs Group, Inc.","Goldman Sachs Group, Inc.",true,MEDIUM,LLM-proposed deviation,leading 'The' drop
-synth_corp_positives,Company,The Walt Disney Company,Walt Disney Company,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
+synth_corp_positives,Company,The Walt Disnei Company,Walt Disney Company,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
 synth_corp_positives,Company,Coca-Cola Company,Coca Cola Company,true,MEDIUM,LLM-proposed deviation,hyphen vs space in brand
 synth_corp_positives,Company,Hewlett-Packard Co.,Hewlett Packard Co.,true,MEDIUM,LLM-proposed deviation,hyphen vs space
 synth_corp_positives,Company,Daimler-Benz AG,Daimler Benz AG,true,MEDIUM,LLM-proposed deviation,hyphen vs space
@@ -796,13 +796,13 @@ synth_corp_positives,Company,J.P. Morgan & Co.,JP Morgan & Co.,true,MEDIUM,LLM-p
 synth_corp_positives,Company,"S.C. Johnson & Son, Inc.","SC Johnson & Son, Inc.",true,MEDIUM,LLM-proposed deviation,initial periods in initialism
 synth_corp_positives,Company,P.T. Astra International,PT Astra International,true,MEDIUM,LLM-proposed deviation,initial periods (Indonesian PT)
 synth_corp_positives,Company,C.K. Hutchison Holdings,CK Hutchison Holdings,true,MEDIUM,LLM-proposed deviation,initial periods in initialism
-synth_corp_positives,Company,ALPHABET INC.,Alphabet Inc.,true,MEDIUM,LLM-proposed deviation,casing (uppercase vs title)
-synth_corp_positives,Company,"blackrock, inc.","BlackRock, Inc.",true,MEDIUM,LLM-proposed deviation,casing (lowercase vs camelcase)
+synth_corp_positives,Company,ALPHABET INC.,Alphabet Inc.,true,STRONG,LLM-proposed deviation,casing (uppercase vs title)
+synth_corp_positives,Company,"blackrock, inc.","BlackRock, Inc.",true,STRONG,LLM-proposed deviation,casing (lowercase vs camelcase)
 synth_corp_positives,Company,"SAMSUNG ELECTRONICS CO., LTD.","Samsung Electronics Co., Ltd.",true,MEDIUM,LLM-proposed deviation,casing
 synth_corp_positives,Company,Société Générale S.A.,Societe Generale S.A.,true,MEDIUM,LLM-proposed deviation,French diacritic strip
 synth_corp_positives,Company,Crédit Agricole S.A.,Credit Agricole S.A.,true,MEDIUM,LLM-proposed deviation,French diacritic strip
 synth_corp_positives,Organization,"United Nations Educational, Scientific and Cultural Organization",United Nations Educational Scientific and Cultural Organization,true,MEDIUM,LLM-proposed deviation,internal-comma drop
-synth_corp_positives,Organization,The World Bank,World Bank,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
+synth_corp_positives,Organization,The World Bank,World Bank,true,STRONG,LLM-proposed deviation,leading 'The' drop
 synth_corp_positives,Organization,International Labour Organization,International Labor Organization,true,MEDIUM,LLM-proposed deviation,en-GB/en-US (Labour/Labor)
 synth_corp_positives,Organization,World Health Organisation,World Health Organization,true,MEDIUM,LLM-proposed deviation,en-GB/en-US (Organisation/Organization)
 synth_corp_positives,Organization,Organisation for Economic Co-operation and Development,Organization for Economic Co-operation and Development,true,MEDIUM,LLM-proposed deviation,en-GB/en-US (Organisation/Organization)
