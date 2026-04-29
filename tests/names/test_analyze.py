@@ -129,6 +129,21 @@ def test_entity_runs_person_tagger_when_no_org_class():
     ), name.symbols
 
 
+def test_entity_long_org_class_upgrades_with_non_llc_code():
+    # The exact-boundary upgrade case is covered by
+    # `test_entity_upgrade_to_org` (LLP, 3 chars). This pins the
+    # strictly-above-threshold path with a different code: "GmbH"
+    # rewrites to "gmbh" (4 chars), comfortably above
+    # `ORG_CLASS_UPGRADE_MIN_CHARS`. The promotion fires and the
+    # person tagger does not run on the (in-corpus) "Schmidt".
+    result = analyze_names(NameTypeTag.ENT, ["Schmidt GmbH"])
+    name = _only(result)
+    assert name.tag == NameTypeTag.ORG
+    assert not any(
+        sym.category == Symbol.Category.NAME for sym in name.symbols
+    ), name.symbols
+
+
 def test_entity_short_org_class_does_not_upgrade():
     # An ORG_CLASS span shorter than the upgrade threshold (3 chars,
     # `ORG_CLASS_UPGRADE_MIN_CHARS` in analyze.rs) does not trigger
