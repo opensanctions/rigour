@@ -1258,6 +1258,75 @@ back to nomenklatura. logic_v2's existing orchestration is
 the ship path; the harness reproduces it solely to
 evaluate end-to-end on cases.csv during iteration.
 
+## Performance outliers — `pair_symbols` redundant spans on repeated tokens
+
+Investigation triggered by the `Isa Bin Tarif Al Bin Ali` cases
+in `cases.csv` running at ~2400 μs/call vs. a median of ~30 μs
+across all comparators (compare_python, compare_rust, logicv2 —
+the outlier is the *same* on all of them, ratio holds).
+
+Stage timings on this case (after first-call warmup):
+
+| Stage                       |    μs |
+|-----------------------------|------:|
+| `analyze_names` (both sides)|   ~20 |
+| `pair_symbols`              | **~2000** |
+| `compare_parts` (Rust, full)|   ~14 |
+
+`pair_symbols` is the dominant cost. `compare_parts` is essentially
+free even on this input — the Rust port does **not** help here
+because residue distance isn't the bottleneck.
+
+### Root cause: redundant spans per duplicated token
+
+The tagger emits one span per `(token-instance × matching-QID)`
+pair without collapsing duplicates. On `Isa Bin Tarif Al Bin Ali`:
+
+- `bin` appears twice, each instance matches ~9 distinct
+  Wikidata QIDs in the person-names corpus (Q104253346,
+  Q106992786, Q12599518, Q20065424, Q512778, Q66361456,
+  Q836636, plus duplicates). Each `(QID, instance)` pair fires
+  separately → **32 spans on `bin` alone** for the 6-token
+  query.
+- Total spans: 43 on the 6-token query, 45 on the 7-token
+  candidate. Of the 43, only 19 are unique by
+  `(category, id, parts-form)` — 24 are functional duplicates.
+- Naive `q-span × r-span` edge count for shared symbols: **139
+  candidate edges**. `pair_symbols`' bitmask-based
+  non-conflicting-coverage search has to enumerate over this
+  space to find the maximal-coverage subset.
+
+### Implications
+
+- The 2400 μs outlier is a `pair_symbols` issue, not a
+  weighted-distance issue. Tuning `compare_parts` won't move
+  it.
+- The Rust port of `compare_parts` produces the same outlier
+  pattern — both `compare_python` and `compare_rust` show the
+  same 2400 μs median on this case. Any optimisation here lives
+  in rigour's tagger (`rust/src/names/symbols.rs`,
+  `tagger.rs`) or `pair_symbols` (`rust/src/names/pairing.rs`).
+
+### Two avenues (out of scope for this plan)
+
+1. **Tagger-side span deduplication.** Collapse spans that are
+   equivalent at the symbol level — same `(category, id,
+   parts-form)` but on different token instances. Requires the
+   tagger to either coalesce on emit, or a downstream pass to
+   project to a canonical span set before `pair_symbols` runs.
+   Moves the 32 → effectively 9 (one span per unique QID,
+   matching against any of the candidate token instances) on
+   the `bin` case.
+2. **`pair_symbols`-side pre-collapse.** Inside the pairing
+   algorithm, recognise when multiple edges are equivalent
+   (same symbol coverage at the bitset level) and treat them as
+   one. Doesn't reduce span emission cost but reduces the
+   pairing search space.
+
+Recorded here for traceability — work belongs in
+`plans/arch-name-pipeline.md` if/when prioritised. Not blocking
+the weighted-distance / Rust port work.
+
 ## Caching
 
 Current Python state:
