@@ -62,10 +62,11 @@ SIMILAR_PAIRS: Set[Tuple[str, str]] = set(_SIMILAR_PAIRS_RAW) | {
 }
 
 
-# Bias on the per-side length budget. logic_v2 reads this from
-# `nm_fuzzy_cutoff_factor` on ScoringConfig. Hard-coded here — the
-# harness can plumb a real config later if iteration needs it.
-DEFAULT_BIAS = 1.0
+# Multiplier on the per-side cost budget — higher = more permissive
+# (more edits tolerated before the score caps to zero), lower =
+# stricter. logic_v2 plumbs this via `nm_fuzzy_cutoff_factor` on
+# ScoringConfig; hard-coded here for the prototype.
+DEFAULT_FUZZY_TOLERANCE = 1.0
 
 
 @dataclass
@@ -230,18 +231,18 @@ def _cluster(
 # ---------------------------------------------------------------------------
 
 
-def _costs_similarity(costs: List[float], bias: float = DEFAULT_BIAS) -> float:
+def _costs_similarity(costs: List[float], fuzzy_tolerance: float = DEFAULT_FUZZY_TOLERANCE) -> float:
     """Per-side similarity from accumulated char-level costs.
 
     `1 - total_cost / len(costs)`, gated by a length-dependent budget
-    cap (`log_{2.35}(max(len-2, 1)) * bias`). The log floor disables
+    cap (`log_{2.35}(max(len-2, 1)) * fuzzy_tolerance`). The log floor disables
     fuzzy matching for very short tokens; the magic-base 2.35 mirrors
     today's logic_v2 behaviour and is one of the spec's still-open
     knobs (see plan § Still open / Length budget shape).
     """
     if not costs:
         return 0.0
-    max_cost = math.log(max(len(costs) - 2, 1), 2.35) * bias
+    max_cost = math.log(max(len(costs) - 2, 1), 2.35) * fuzzy_tolerance
     total_cost = sum(costs)
     if total_cost == 0:
         return 1.0
@@ -250,7 +251,7 @@ def _costs_similarity(costs: List[float], bias: float = DEFAULT_BIAS) -> float:
     return 1 - (total_cost / len(costs))
 
 
-def _score(cluster: _Cluster, align: _AlignmentData, bias: float = DEFAULT_BIAS) -> float:
+def _score(cluster: _Cluster, align: _AlignmentData, fuzzy_tolerance: float = DEFAULT_FUZZY_TOLERANCE) -> float:
     """Per-cluster score: product of per-side similarities.
 
     Solo clusters score 0.0 — they represent unmatched parts and have
@@ -262,7 +263,7 @@ def _score(cluster: _Cluster, align: _AlignmentData, bias: float = DEFAULT_BIAS)
         return 0.0
     qcosts = list(chain.from_iterable(align.qry_costs.get(p, [1.0]) for p in cluster.qps))
     rcosts = list(chain.from_iterable(align.res_costs.get(p, [1.0]) for p in cluster.rps))
-    return _costs_similarity(qcosts, bias) * _costs_similarity(rcosts, bias)
+    return _costs_similarity(qcosts, fuzzy_tolerance) * _costs_similarity(rcosts, fuzzy_tolerance)
 
 
 # ---------------------------------------------------------------------------
@@ -273,7 +274,7 @@ def _score(cluster: _Cluster, align: _AlignmentData, bias: float = DEFAULT_BIAS)
 def compare_parts_orig(
     qry_parts: List[NamePart],
     res_parts: List[NamePart],
-    bias: float = DEFAULT_BIAS,
+    fuzzy_tolerance: float = DEFAULT_FUZZY_TOLERANCE,
 ) -> List[Comparison]:
     """Score the alignment of two NamePart lists.
 
@@ -285,6 +286,6 @@ def compare_parts_orig(
     align = _align(qry_parts, res_parts)
     clusters = _cluster(qry_parts, res_parts, align)
     return [
-        Comparison(qps=list(c.qps), rps=list(c.rps), score=_score(c, align, bias))
+        Comparison(qps=list(c.qps), rps=list(c.rps), score=_score(c, align, fuzzy_tolerance))
         for c in clusters
     ]

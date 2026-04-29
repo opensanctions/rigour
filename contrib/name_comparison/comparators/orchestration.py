@@ -40,7 +40,7 @@ from typing import Callable
 
 from .compare_parts_orig import Comparison, compare_parts_orig
 
-# A residue function takes (qry_parts, res_parts, bias) → list of
+# A residue function takes (qry_parts, res_parts, fuzzy_tolerance) → list of
 # Comparison-shaped records. Both the Python prototype and the Rust
 # port adapter satisfy this protocol.
 ResidueFn = Callable[[List[NamePart], List[NamePart], float], List[Comparison]]
@@ -93,7 +93,7 @@ def _schema_to_tag(schema: str) -> NameTypeTag:
 
 
 def _match_name_symbolic(
-    query: Name, result: Name, bias: float, residue_fn: ResidueFn
+    query: Name, result: Name, fuzzy_tolerance: float, residue_fn: ResidueFn
 ) -> float:
     """Lifted from logic_v2/names/match.py:match_name_symbolic.
 
@@ -137,7 +137,7 @@ def _match_name_symbolic(
                 query_rem = NamePart.tag_sort(query_rem)
                 result_rem = NamePart.tag_sort(result_rem)
 
-            for comp in residue_fn(query_rem, result_rem, bias):
+            for comp in residue_fn(query_rem, result_rem, fuzzy_tolerance):
                 records.append(
                     _Record(qps=list(comp.qps), rps=list(comp.rps), score=comp.score, weight=1.0)
                 )
@@ -221,8 +221,8 @@ def compare_python_via(
     return best
 
 
-def _python_residue(qry_parts, res_parts, bias) -> List[Comparison]:
-    return compare_parts_orig(qry_parts, res_parts, bias=bias)
+def _python_residue(qry_parts, res_parts, fuzzy_tolerance) -> List[Comparison]:
+    return compare_parts_orig(qry_parts, res_parts, fuzzy_tolerance=fuzzy_tolerance)
 
 
 def compare_python(name1: str, name2: str, schema: str) -> float:

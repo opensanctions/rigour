@@ -51,7 +51,7 @@ const SEP: char = ' ';
 /// edit tolerated before a cluster scores zero); higher is more
 /// permissive. Callers tune this per scenario — KYC at onboarding
 /// runs more permissive than payment screening.
-const DEFAULT_BIAS: f64 = 1.0;
+const DEFAULT_FUZZY_TOLERANCE: f64 = 1.0;
 
 // --- Cost table -----------------------------------------------------
 
@@ -483,12 +483,12 @@ fn run_cluster(
 /// 2. Below the cap, similarity is `1 - total_cost / len_chars` —
 ///    a clean linear walk-down. The non-linearity is in the cliff,
 ///    not in the score curve, which keeps the math transparent.
-fn costs_similarity(costs: &[f64], bias: f64) -> f64 {
+fn costs_similarity(costs: &[f64], fuzzy_tolerance: f64) -> f64 {
     if costs.is_empty() {
         return 0.0;
     }
     let len_minus_2 = (costs.len() as i64 - 2).max(1) as f64;
-    let max_cost = len_minus_2.log(2.35) * bias;
+    let max_cost = len_minus_2.log(2.35) * fuzzy_tolerance;
     let total_cost: f64 = costs.iter().sum();
     if total_cost == 0.0 {
         return 1.0;
@@ -512,7 +512,7 @@ fn costs_similarity(costs: &[f64], bias: f64) -> f64 {
 /// Solo clusters (one side empty) score 0.0 by construction —
 /// they represent unmatched parts and have no pair-based
 /// similarity to compute.
-fn run_score(cluster: &Cluster, align: &AlignmentData, bias: f64) -> f64 {
+fn run_score(cluster: &Cluster, align: &AlignmentData, fuzzy_tolerance: f64) -> f64 {
     if cluster.qps.is_empty() || cluster.rps.is_empty() {
         return 0.0;
     }
@@ -534,7 +534,7 @@ fn run_score(cluster: &Cluster, align: &AlignmentData, bias: f64) -> f64 {
             r_costs.extend_from_slice(sub);
         }
     }
-    costs_similarity(&q_costs, bias) * costs_similarity(&r_costs, bias)
+    costs_similarity(&q_costs, fuzzy_tolerance) * costs_similarity(&r_costs, fuzzy_tolerance)
 }
 
 // --- Comparison pyclass --------------------------------------------
@@ -586,17 +586,17 @@ impl Comparison {
 /// The function returns one [`Comparison`] per cluster, paired or
 /// solo; every input part appears exactly once across the output.
 ///
-/// `bias` rescales the per-side cost budget. Higher = more permissive
+/// `fuzzy_tolerance` rescales the per-side cost budget. Higher = more permissive
 /// (KYC-onboarding profile); lower = stricter (payment-screening
 /// profile). The default of `1.0` matches industry-typical recall-
 /// protective tuning.
 #[pyfunction]
-#[pyo3(name = "compare_parts", signature = (qry, res, bias = DEFAULT_BIAS))]
+#[pyo3(name = "compare_parts", signature = (qry, res, fuzzy_tolerance = DEFAULT_FUZZY_TOLERANCE))]
 pub fn py_compare_parts(
     py: Python<'_>,
     qry: Vec<Py<NamePart>>,
     res: Vec<Py<NamePart>>,
-    bias: f64,
+    fuzzy_tolerance: f64,
 ) -> PyResult<Vec<Py<Comparison>>> {
     let n_q = qry.len();
     let n_r = res.len();
@@ -626,7 +626,7 @@ pub fn py_compare_parts(
 
     let mut out: Vec<Py<Comparison>> = Vec::with_capacity(clusters.len());
     for cluster in &clusters {
-        let score = run_score(cluster, &align, bias);
+        let score = run_score(cluster, &align, fuzzy_tolerance);
         let qps_parts: Vec<Py<NamePart>> = cluster
             .qps
             .iter()

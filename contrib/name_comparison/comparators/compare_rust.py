@@ -23,8 +23,8 @@ from .orchestration import compare_python_via  # injected below
 
 
 # Adapter: call Rust, return a list with the same shape orchestration expects.
-def _rust_residue(qry_parts, res_parts, bias=1.0) -> List[_PyComparison]:
-    rust_results = _rust_compare_parts(list(qry_parts), list(res_parts), bias)
+def _rust_residue(qry_parts, res_parts, fuzzy_tolerance=1.0) -> List[_PyComparison]:
+    rust_results = _rust_compare_parts(list(qry_parts), list(res_parts), fuzzy_tolerance)
     out: List[_PyComparison] = []
     for r in rust_results:
         out.append(_PyComparison(qps=list(r.qps), rps=list(r.rps), score=r.score))

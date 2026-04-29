@@ -248,5 +248,5 @@ class Comparison:
 def compare_parts(
     qry: list[NamePart],
     res: list[NamePart],
-    bias: float = 1.0,
+    fuzzy_tolerance: float = 1.0,
 ) -> list[Comparison]: ...
