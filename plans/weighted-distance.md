@@ -1277,24 +1277,55 @@ Stage timings on this case (after first-call warmup):
 free even on this input — the Rust port does **not** help here
 because residue distance isn't the bottleneck.
 
-### Root cause: redundant spans per duplicated token
+### Root cause: literal duplicate spans from `tagger.tag()` × `apply_phrase` interaction
 
-The tagger emits one span per `(token-instance × matching-QID)`
-pair without collapsing duplicates. On `Isa Bin Tarif Al Bin Ali`:
+The tagger emits **the same symbol multiple times on the same
+NamePart instance** when a token appears more than once in the
+name. Two interacting behaviours produce the duplication:
 
-- `bin` appears twice, each instance matches ~9 distinct
-  Wikidata QIDs in the person-names corpus (Q104253346,
-  Q106992786, Q12599518, Q20065424, Q512778, Q66361456,
-  Q836636, plus duplicates). Each `(QID, instance)` pair fires
-  separately → **32 spans on `bin` alone** for the 6-token
-  query.
-- Total spans: 43 on the 6-token query, 45 on the 7-token
-  candidate. Of the 43, only 19 are unique by
-  `(category, id, parts-form)` — 24 are functional duplicates.
-- Naive `q-span × r-span` edge count for shared symbols: **139
-  candidate edges**. `pair_symbols`' bitmask-based
-  non-conflicting-coverage search has to enumerate over this
-  space to find the maximal-coverage subset.
+1. **`tagger.tag()`** (in `rust/src/names/tagger.rs`) iterates
+   the AC `find_overlapping` matches and emits one
+   `(phrase, symbol)` entry per `(text-position × symbol)`. For
+   text `"isa bin tarif al bin ali"`, the AC fires on `"bin"`
+   at two text positions; each fire iterates the symbol Vec
+   attached to the AC pattern. With 8 symbols on the `"bin"`
+   pattern (1 SYMBOL:BIN + 7 NAME:Qxxx from the person-names
+   corpus), this yields 8 × 2 = **16 entries**, all with
+   `phrase="bin"` and a duplicated `(phrase, symbol)` shape.
+2. **`apply_phrase(phrase, symbol)`** (in
+   `rust/src/names/name.rs`) walks the entire parts list and
+   emits one span per occurrence of the phrase token sequence
+   — independent of which text-position the AC match came
+   from. Each call for `("bin", sym)` therefore emits a span on
+   `bin@idx1` AND a span on `bin@idx4`.
+
+Combined: 16 `(phrase, symbol)` entries × 2 spans per call =
+**32 spans on `bin` alone**. All literal duplicates by
+`(category, id, exact-NamePart-instance)`.
+
+Surface effect on this case:
+
+- `Isa Bin Tarif Al Bin Ali`: 43 spans total, 27 distinct by
+  `(category, id, exact-NamePart-instance)` — 16 are pure
+  duplicates.
+- `Shaikh Isa Bin Tarif Al Bin Ali`: same shape on the
+  candidate side, 45 spans.
+- Naive `q-span × r-span` edge count for shared symbols: 139.
+  `pair_symbols`' non-conflicting-coverage search enumerates
+  this space.
+
+Multiplicity formula: a token occurring N times in a name,
+matched by an AC pattern with K symbols, produces **N² × K**
+spans for that token. Tokens that occur once aren't affected.
+
+### The fix — small, well-scoped
+
+Dedupe `(phrase, symbol)` in `tagger.tag()`'s output. Two-line
+change inside the iteration; `apply_phrase` already handles
+emitting one span per token-instance correctly. Repro test:
+the case above should drop from 43 spans → 27 spans on the
+query side, the `pair_symbols` outlier should collapse from
+~2000 µs to roughly the median.
 
 ### Implications
 
@@ -1307,25 +1338,9 @@ pair without collapsing duplicates. On `Isa Bin Tarif Al Bin Ali`:
   in rigour's tagger (`rust/src/names/symbols.rs`,
   `tagger.rs`) or `pair_symbols` (`rust/src/names/pairing.rs`).
 
-### Two avenues (out of scope for this plan)
-
-1. **Tagger-side span deduplication.** Collapse spans that are
-   equivalent at the symbol level — same `(category, id,
-   parts-form)` but on different token instances. Requires the
-   tagger to either coalesce on emit, or a downstream pass to
-   project to a canonical span set before `pair_symbols` runs.
-   Moves the 32 → effectively 9 (one span per unique QID,
-   matching against any of the candidate token instances) on
-   the `bin` case.
-2. **`pair_symbols`-side pre-collapse.** Inside the pairing
-   algorithm, recognise when multiple edges are equivalent
-   (same symbol coverage at the bitset level) and treat them as
-   one. Doesn't reduce span emission cost but reduces the
-   pairing search space.
-
-Recorded here for traceability — work belongs in
-`plans/arch-name-pipeline.md` if/when prioritised. Not blocking
-the weighted-distance / Rust port work.
+Recorded here for traceability — fix work belongs in
+`rigour/rust/src/names/tagger.rs::Tagger::tag` and is not
+blocking the weighted-distance / Rust port work.
 
 ## Caching
 
