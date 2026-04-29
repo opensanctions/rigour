@@ -12,7 +12,7 @@ nk_checks,ea8bf6f0,Company,Volkswagen Aktiengesellschaft,Siemens Aktiengesellsch
 nk_checks,57f6b397,Person,Shaikh Isa Bin Tarif Al Bin Ali,Shaikh Isa Bin Tarif Al Bin Ali,true,MEDIUM,,,1.0000,true,TP
 nk_checks,97b4ed6e,Person,Isa Bin Tarif Al Bin Ali,Shaikh Isa Bin Tarif Al Bin Ali,true,MEDIUM,,,0.9772,true,TP
 nk_checks,4796f2a8,Person,"AL BEN ALI, Isa Ben Tarif",Shaikh Isa Bin Tarif Al Bin Ali,true,MEDIUM,,,0.9578,true,TP
-nk_checks,ecda9a1b,Person,Usama bin Laden,Shaikh Isa Bin Tarif Al Bin Ali,false,STRONG,,,0.2826,false,TN
+nk_checks,ecda9a1b,Person,Usama bin Laden,Shaikh Isa Bin Tarif Al Bin Ali,false,STRONG,,,0.2793,false,TN
 nk_checks,5292ed89,Person,"AL BEN MAHMOUD, Isa Ben Tarif",Shaikh Isa Bin Tarif Al Bin Ali,false,MEDIUM,,,0.7468,true,FP
 nk_checks,88aa5c0c,Person,MOHAMMADHASNI HAJI SSAD KHAN ZARKARI,HAJI ASAD KHAN ZARKARI MOHAMMADHASNI,true,MEDIUM,,,0.8000,true,TP
 nk_checks,3b99af10,Person,MOHAMMAD HASNI HAJI SSAD KHAN ZARKARI,HAJI ASAD KHAN ZARKARI MOHAMMADHASNI,true,MEDIUM,,,0.7973,true,TP
@@ -37,7 +37,7 @@ nk_checks,696fd577,Person,Friedrych Buchenberg,Friedrich Buchenberg,true,MEDIUM,
 nk_checks,64ab04f9,Person,Fridrich Buchenberg,Friedrich Buchenberg,true,MEDIUM,,,0.9444,true,TP
 nk_checks,bcf9926b,Person,FridrichBuchenberg,Friedrich Buchenberg,true,MEDIUM,,,0.9400,true,TP
 nk_checks,aaf49f7a,Person,Friedrich Buchenbergo,Friedrich Buchenberg,true,MEDIUM,,,0.9545,true,TP
-nk_checks,dde86bdd,Person,Frederick Buchenberg,Friedrich Buchenberg,false,MEDIUM,,,0.8025,true,FP
+nk_checks,dde86bdd,Person,Frederick Buchenberg,Friedrich Buchenberg,false,WEAK,,,0.8025,true,FP
 nk_checks,8db0860a,Person,Lars Friedrich Lindemann,Friedrich Buchenberg,false,MEDIUM,,,0.3571,false,TN
 nk_checks,f78f990e,Person,Wolfgang Friedrich Ischinger,Friedrich Buchenberg,false,MEDIUM,,,0.3571,false,TN
 nk_checks,92c9a52d,Person,Gerhard Friedrich Karl Westdickenberg,Friedrich Buchenberg,false,MEDIUM,,,0.2778,false,TN
@@ -128,20 +128,20 @@ nk_checks,588971d9,Person,Niranjan Thomas Alva,Thomas Lindemann,false,MEDIUM,,,0
 nk_checks,55e29636,Person,Thomas A. Lind,Thomas Lindemann,false,MEDIUM,,,0.5000,false,TN
 nk_checks,9e17e0a0,Person,Thomas A. Lindeman,Thomas Lindemann,true,MEDIUM,,,0.7917,true,TP
 nk_checks,7501a126,Person,Ротенберг Аркадий,Arkadii Romanovich Rotenberg,true,MEDIUM,,,0.8636,true,TP
-nk_checks,aab171a4,Person,Osama bin Laden,Usāma bin Muhammad ibn Awad ibn Lādin,true,MEDIUM,,,0.5284,false,FN
-nk_checks,7839701e,Person,Muhammad bin Salman,Usāma bin Muhammad ibn Awad ibn Lādin,false,MEDIUM,,,0.5562,false,TN
+nk_checks,aab171a4,Person,Osama bin Laden,Usāma bin Muhammad ibn Awad ibn Lādin,true,MEDIUM,,,0.5163,false,FN
+nk_checks,7839701e,Person,Muhammad bin Salman,Usāma bin Muhammad ibn Awad ibn Lādin,false,MEDIUM,,,0.5435,false,TN
 nk_checks,2c108e72,Company,Goodwill Company,Good Will Company,true,MEDIUM,,,0.9829,true,TP
 nk_checks,e89e0d84,Organization,Government of Estonia,Government of Ethiopia,false,MEDIUM,,,0.2308,false,TN
 nk_checks,3d3369f1,Company,CRYSTALORD LIMITED,CRYSTALORD LTD,true,MEDIUM,,,1.0000,true,TP
 nk_checks,aa536cea,Company,CRISTALORD LIMITED,CRYSTALORD LTD,true,MEDIUM,,,0.9205,true,TP
-nk_checks,b50ebbe3,Company,CRYSTALORD SYSTEMS LIMITED,CRYSTALORD LTD,false,MEDIUM,,,0.7522,true,FP
+nk_checks,b50ebbe3,Company,CRYSTALORD SYSTEMS LIMITED,CRYSTALORD LTD,false,WEAK,,,0.7522,true,FP
 nk_checks,f36c459f,Company,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,MEDIUM,,,1.0000,true,TP
 nk_checks,ded3b89b,Company,TACTICAL MISSILES CORPORATION JOINT STOCK COMPAN,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,MEDIUM,,,1.0000,true,TP
 nk_checks,90ac62c2,Company,JSC TACTICAL MISSILES CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,MEDIUM,,,1.0000,true,TP
 nk_checks,34864cf5,Company,OJSC TACTICAL MISSILES CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,MEDIUM,,,0.9533,true,TP
 nk_checks,7e1dc456,Company,JSC TACTICAL MISSILES CORP.,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,MEDIUM,,,0.9889,true,TP
 nk_checks,c1e5fa1f,Company,OJSC TACTICAL KITTENS CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,false,MEDIUM,,,0.5778,false,TN
-nk_checks,6c6fd9f2,Company,OJSC TACTICAL MISSIVES CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,false,MEDIUM,,,0.8613,true,FP
+nk_checks,6c6fd9f2,Company,OJSC TACTICAL MISSIVES CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,WEAK,,,0.8613,true,TP
 nk_checks,f4045d5e,Company,Oboronnye Initsiativy OOO,OOO Oboronnye Initsiativy,true,MEDIUM,,,1.0000,true,TP
 nk_checks,819ed21a,Company,Oboronnye Initsiativy o.O.O.,OOO Oboronnye Initsiativy,true,MEDIUM,,,1.0000,true,TP
 nk_checks,5d62297c,Company,Iskusstvo Krasoty,LIMITED LIABILITY COMPANY ISKUSSTVO KRASOTY,true,MEDIUM,,,0.9346,true,TP
@@ -337,7 +337,7 @@ synth_companies,32a0c054,Company,BD p.l.c.,BP p.l.c.,true,MEDIUM,LLM-proposed de
 synth_companies,f949679e,Company,"Cardinal Wealth, Inc.","Cardinal Health, Inc.",true,MEDIUM,LLM-proposed deviation,domain-word sub (Health/Wealth),0.8868,true,TP
 synth_companies,9dd03591,Company,Stellaris N.V.,Stellantis N.V.,true,MEDIUM,LLM-proposed deviation,truncated-and-substituted stem,0.8301,true,TP
 synth_companies,e38a1fb2,Company,Chevon Corporation,Chevron Corporation,true,MEDIUM,LLM-proposed deviation,dropped consonant (Chevon is a real meat brand),0.8901,true,TP
-synth_companies,1e09a6bb,Company,China Construction Trust Corporation,China Construction Bank Corporation,false,MEDIUM,LLM-proposed deviation,sector-word swap (Bank/Trust),0.7031,true,FP
+synth_companies,1e09a6bb,Company,China Construction Trust Corporation,China Construction Bank Corporation,false,WEAK,LLM-proposed deviation,sector-word swap (Bank/Trust),0.7031,true,FP
 synth_companies,099c3673,Company,"Samsong Electronics Co., Ltd.","Samsung Electronics Co., Ltd.",true,MEDIUM,LLM-proposed deviation,Korean-Romanisation vowel sub,0.9208,true,TP
 synth_companies,9dc88ec2,Company,"Hon Wai Precision Industry Co., Ltd.","Hon Hai Precision Industry Co., Ltd.",true,MEDIUM,LLM-proposed deviation,plausible-alternate Cantonese name,0.7500,true,TP
 synth_companies,3b6710ee,Company,The Sigma Group,The Cigna Group,true,MEDIUM,LLM-proposed deviation,Greek-letter near-homophone,0.2308,false,FN
@@ -350,10 +350,10 @@ synth_companies,59cc256b,Company,Bank of Chima Limited,Bank of China Limited,tru
 synth_companies,e629519b,Company,Bank of Armenia Corporation,Bank of America Corporation,false,MEDIUM,LLM-proposed deviation,geographic swap (shared first phoneme),0.8380,true,FP
 synth_companies,c5b9dc8b,Company,General Mortars Company,General Motors Company,true,MEDIUM,LLM-proposed deviation,phonetic-near common-noun (Motors/Mortars),0.3750,false,FN
 synth_companies,7bc64a3c,Company,"Elegance Health, Inc.","Elevance Health, Inc.",true,MEDIUM,LLM-proposed deviation,brand-stem one-letter shift to real word,0.9023,true,TP
-synth_companies,5754bdd0,Company,Berliner Motoren Werke Aktiengesellschaft,Bayerische Motoren Werke Aktiengesellschaft,false,MEDIUM,LLM-proposed deviation,German-region word swap (BMW expansion),0.7297,true,FP
+synth_companies,5754bdd0,Company,Berliner Motoren Werke Aktiengesellschaft,Bayerische Motoren Werke Aktiengesellschaft,false,STRONG,LLM-proposed deviation,German-region word swap (BMW expansion),0.7297,true,FP
 synth_companies,61fed6df,Company,Mercedes-Benn Group AG,Mercedes-Benz Group AG,true,MEDIUM,LLM-proposed deviation,final-consonant doubling,0.6667,false,FN
 synth_companies,9351c8a1,Company,"Beta Platforms, Inc.","Meta Platforms, Inc.",true,MEDIUM,LLM-proposed deviation,Greek-letter sub,0.8667,true,TP
-synth_companies,f3d73f48,Company,China Railway Constructors Corporation,China Railway Construction Corporation,false,MEDIUM,LLM-proposed deviation,nominalisation variant,0.8909,true,FP
+synth_companies,f3d73f48,Company,China Railway Constructors Corporation,China Railway Construction Corporation,false,WEAK,LLM-proposed deviation,nominalisation variant,0.8909,true,FP
 synth_companies,4700e651,Company,China Baowei Steel Group Corporation Limited,China Baowu Steel Group Corporation Limited,true,MEDIUM,LLM-proposed deviation,Pinyin syllable swap,0.7368,true,TP
 synth_companies,0a55f724,Company,Citygroup Inc.,Citigroup Inc.,true,MEDIUM,LLM-proposed deviation,brand-stem English-spelling sub,0.9121,true,TP
 synth_people,d5c3cc6f,Person,Vladimir Pulin,Vladimir Putin,true,STRONG,LLM-proposed deviation,RU surname single-char sub (Latin),0.8200,true,TP
@@ -632,13 +632,13 @@ synth_people,d33042bc,Person,NIK MOHAMMAD ABDUL MOHAMMAD,NIK MOHAMMAD DOST MOHAM
 synth_people,82c3cac8,Person,ABDUL JALIL HAQQANI MIR MOHAMMAD,ABDUL JALIL HAQQANI WALI MOHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap,0.7674,true,FP
 synth_people,8df52525,Person,SHER MOHAMMAD ABBAS STANEKZAI ABDUL KHAN,SHER MOHAMMAD ABBAS STANEKZAI PADSHAH KHAN,false,MEDIUM,LLM-proposed deviation,Pashtun grandfather swap,0.8681,true,FP
 synth_people,dfc8c4fc,Person,NOORUDDIN TURABI MUHAMMAD ABDUL,NOORUDDIN TURABI MUHAMMAD QASIM,false,MEDIUM,LLM-proposed deviation,Pashtun grandfather swap,0.7979,true,FP
-synth_people,39a5a73e,Person,ABDUL BAQI BASIR ABDUL ARIF,ABDUL BAQI BASIR AWAL SHAH,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap,0.5910,false,TN
+synth_people,39a5a73e,Person,ABDUL BAQI BASIR ABDUL ARIF,ABDUL BAQI BASIR AWAL SHAH,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap,0.5665,false,TN
 synth_people,3158624e,Person,ABDUL GHAFAR QURISHI ABDUL HAMID,ABDUL GHAFAR QURISHI ABDUL GHANI,false,MEDIUM,LLM-proposed deviation,Pashtun grandfather swap,0.8000,true,FP
 synth_people,1174dd71,Person,SAYED MOHAMMAD ABDUL AGHA,SAYED MOHAMMAD AZIM AGHA,false,MEDIUM,LLM-proposed deviation,Pashtun middle-name swap,0.7979,true,FP
 synth_people,5f7a1585,Person,NAZIRULLAH HANAFI HAMIDULLAH,NAZIRULLAH HANAFI WALIULLAH,false,MEDIUM,LLM-proposed deviation,Pashtun grandfather swap,0.6667,false,TN
 synth_people,1e36bf33,Person,ATIQULLAH ABDUL MOHAMMAD,ATIQULLAH WALI MOHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap,0.7246,true,FP
 synth_people,10fc9264,Person,AREFULLAH AREF ABDULRAHMAN MOHAMMAD,AREFULLAH AREF GHAZI MOHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun grandfather swap,0.7500,true,FP
-synth_people,b2697240,Person,ABDUL KABIR ABDUL JAN,ABDUL KABIR MOHAMMAD JAN,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap,0.8352,true,FP
+synth_people,b2697240,Person,ABDUL KABIR ABDUL JAN,ABDUL KABIR MOHAMMAD JAN,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap,0.7979,true,FP
 synth_people,b630b978,Person,SALEH MOHAMMAD ZADRAN AKHTAR MUHAMMAD,SALEH MOHAMMAD KAKAR AKHTAR MUHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun tribal-clan swap (Zadran/Kakar),0.8000,true,FP
 synth_people,669d8db6,Person,FAIZULLAH KHAN ZADRAN na,FAIZULLAH KHAN NOORZAI na,false,MEDIUM,LLM-proposed deviation,Pashtun tribal swap,0.7500,true,FP
 synth_people,6d4ee8f1,Person,ABDUL BASIR HAQQANI,ABDUL BASIR NOORZAI,false,MEDIUM,LLM-proposed deviation,Pashtun tribal swap,0.6667,false,TN
@@ -735,16 +735,16 @@ synth_people,7785e33c,Person,SAIF AL-DIN AL-RAWI,SAIF-AL-DIN FULAYYIH HASSAN TAH
 synth_people,7a052edb,Person,MOHAMMED MIR WALI RAHIM,MOHAMMED QASIM MIR WALI KHUDAI RAHIM,true,MEDIUM,LLM-proposed deviation,dropped 2 middle parts,0.9091,true,TP
 synth_people,c43ac765,Person,MUHAMMAD AL-AHDAL,MOHAMMAD HAMDI MOHAMMAD SADIQ AL-AHDAL,false,MEDIUM,LLM-proposed deviation,dropped 3 middle parts,0.7005,true,FP
 synth_people,1cf6b80a,Person,JAMAL SULTAN AL-TIKRITI,JAMAL MUSTAFA ABDALLAH SULTAN AL-TIKRITI,true,MEDIUM,LLM-proposed deviation,dropped 2 middle patronymics,0.9091,true,TP
-synth_people,197a42e9,Person,ABDUL GHANI TURK,ABDUL GHANI BARADAR ABDUL AHMAD TURK,true,MEDIUM,LLM-proposed deviation,dropped 3 middle parts,0.8220,true,TP
+synth_people,197a42e9,Person,ABDUL GHANI TURK,ABDUL GHANI BARADAR ABDUL AHMAD TURK,true,MEDIUM,LLM-proposed deviation,dropped 3 middle parts,0.8099,true,TP
 synth_people,eb275b5b,Person,AKHTAR MANSOUR,AKHTAR MOHAMMAD MANSOUR SHAH MOHAMMED,true,MEDIUM,LLM-proposed deviation,dropped middle and tail,0.7692,true,TP
 synth_people,6006d296,Person,YASSIN AL-ANABI,ABU UBAYDAH YUSUF AL-ANABI,false,MEDIUM,LLM-proposed deviation,dropped kunya+given+patronymic,0.5988,false,TN
 synth_people,621e38fc,Person,RAMZI ABDULLAH BINALSHIBH,RAMZI MOHAMED ABDULLAH BINALSHIBH,true,MEDIUM,LLM-proposed deviation,dropped middle (Mohamed),0.9375,true,TP
 synth_people,755b2443,Person,SIRAJUDDIN HAQQANI,SIRAJUDDIN JALLALOUDINE HAQQANI,true,MEDIUM,LLM-proposed deviation,dropped father patronymic,0.9091,true,TP
 synth_people,79edb6a9,Person,FAZEEL AL-PESHAWARI,FAZEEL-A-TUL SHAYKH ABU MOHAMMED AMEEN AL-PESHAWARI,false,MEDIUM,LLM-proposed deviation,dropped 4 middle parts,0.7538,true,FP
-synth_people,a3782dd0,Person,SALMAN BIN MUHAMMAD AL-RAWI,MUHAMMAD BIN SALMAN AL-RAWI,false,MEDIUM,LLM-proposed deviation,patronymic reversal (father vs son flip),1.0000,true,FP
-synth_people,cad2cc2a,Person,ABDULLAH BIN OMAR AL-MUHAMMAD,OMAR BIN ABDULLAH AL-MUHAMMAD,false,MEDIUM,LLM-proposed deviation,patronymic reversal,1.0000,true,FP
-synth_people,ef35369a,Person,AHMAD BIN HASAN AL-UBAIDI,HASAN BIN AHMAD AL-UBAIDI,false,MEDIUM,LLM-proposed deviation,patronymic reversal,1.0000,true,FP
-synth_people,d65fdd34,Person,IBRAHIM BIN AL-DIN AL-MASRI,SAIF-AL-DIN BIN IBRAHIM AL-MASRI,false,MEDIUM,LLM-proposed deviation,patronymic reversal + structure change,0.9677,true,FP
+synth_people,a3782dd0,Person,SALMAN BIN MUHAMMAD AL-RAWI,MUHAMMAD BIN SALMAN AL-RAWI,false,WEAK,LLM-proposed deviation,patronymic reversal (father vs son flip),1.0000,true,FP
+synth_people,cad2cc2a,Person,ABDULLAH BIN OMAR AL-MUHAMMAD,OMAR BIN ABDULLAH AL-MUHAMMAD,false,WEAK,LLM-proposed deviation,patronymic reversal,1.0000,true,FP
+synth_people,ef35369a,Person,AHMAD BIN HASAN AL-UBAIDI,HASAN BIN AHMAD AL-UBAIDI,false,WEAK,LLM-proposed deviation,patronymic reversal,1.0000,true,FP
+synth_people,d65fdd34,Person,IBRAHIM BIN AL-DIN AL-MASRI,SAIF-AL-DIN BIN IBRAHIM AL-MASRI,false,WEAK,LLM-proposed deviation,patronymic reversal + structure change,0.9677,true,FP
 synth_people,9239f110,Person,ZIMURINDA MWANGACHUCHU,INNOCENT ZIMURINDA,false,MEDIUM,LLM-proposed deviation,dropped given + added invented surname,0.5000,false,TN
 synth_people,bcc9af19,Person,LEODOMIR HABIYAREMYE,LEODOMIR MUGARAGU,false,MEDIUM,LLM-proposed deviation,Rwandan surname swap (different real name),0.5000,false,TN
 synth_people,38ec8ccf,Person,LUCIEN HABIMANA,LUCIEN NZAMBAMWITA,false,MEDIUM,LLM-proposed deviation,Rwandan surname swap,0.5000,false,TN

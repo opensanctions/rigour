@@ -61,6 +61,7 @@ nk_checks,Person,Mr. Recep Tayyip Erdoğan,Recep Tayyip Erdoğan,true,STRONG,Con
 nk_checks,Person,President Erdoğan,Recep Tayyip Erdoğan,true,MEDIUM,Contextual Beginning,
 nk_checks,Person,Basharr al-Assad,Bashar al-Assad,true,MEDIUM,Fat Finger Typo,
 nk_checks,Person,Bashar al-Asasd,Bashar al-Assad,true,MEDIUM,Fat Finger Typo,
+nk_checks,Person,Bashar xal-Assad,Bashar al-Assad,true,STRONG,Fat Finger Typo,
 nk_checks,Person,Shi Jinping,Xi Jinping,true,MEDIUM,Phonetic Replacement,
 nk_checks,Person,Si Jinpin,Xi Jinping,true,MEDIUM,Phonetic Replacement,
 nk_checks,Person,Margarita-Simonyan,Margarita Simonyan,true,MEDIUM,Special Characters Addition,
