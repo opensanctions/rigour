@@ -129,6 +129,25 @@ def test_entity_runs_person_tagger_when_no_org_class():
     ), name.symbols
 
 
+def test_entity_short_org_class_does_not_upgrade():
+    # An ORG_CLASS span shorter than the upgrade threshold (3 chars,
+    # `ORG_CLASS_UPGRADE_MIN_CHARS` in analyze.rs) does not trigger
+    # the ENT→ORG promotion — the person tagger still runs and the
+    # tag stays ENT. "Smith II" exercises the boundary organically:
+    # the org tagger emits an `ORGCLS:SP` span on the 2-char "ii"
+    # token, but 2 < 3 so the structural signal is treated as too
+    # ambiguous to promote a Roman-numeralled person name to ORG.
+    result = analyze_names(NameTypeTag.ENT, ["Smith II"], rewrite=False)
+    name = _only(result)
+    assert name.tag == NameTypeTag.ENT
+    assert any(
+        sym.category == Symbol.Category.ORG_CLASS for sym in name.symbols
+    ), f"expected an ORG_CLASS span on the input: {name.symbols}"
+    assert any(
+        sym.category == Symbol.Category.NAME for sym in name.symbols
+    ), f"expected person tagger to have run after no-upgrade: {name.symbols}"
+
+
 def test_entity_org_class_short_circuits_person_tagger():
     # When the org tagger's evidence triggers ENT → ORG, the person
     # tagger does not run — so even an org name built around a known
