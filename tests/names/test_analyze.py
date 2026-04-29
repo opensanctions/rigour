@@ -614,3 +614,18 @@ def test_raw_org_double_legal_type():
     assert Symbol(Symbol.Category.ORG_CLASS, "JSC") in name.symbols
     assert Symbol(Symbol.Category.ORG_CLASS, "LLC") in name.symbols
     assert len([p for p in name.parts if p.tag == NamePartTag.LEGAL]) == 2
+
+
+def test_repeated_token_no_duplicate_spans():
+    # `bin` occurs twice and carries multiple symbols; without dedupe
+    # in `Tagger::tag`, the AC iteration would produce N²×K spans on
+    # `bin` alone (issue #197). Each span on the same parts with the
+    # same symbol must appear at most once.
+    name = _only(analyze_names(NameTypeTag.PER, ["Isa Bin Tarif Al Bin Ali"]))
+    keys = [
+        (s.symbol.category, s.symbol.id, tuple(id(p) for p in s.parts))
+        for s in name.spans
+    ]
+    assert len(keys) == len(set(keys)), (
+        f"duplicate spans: {len(keys)} total, {len(set(keys))} distinct"
+    )
