@@ -85,14 +85,21 @@ import it in `comparators/__init__.py`, register in
 
 | Column       | Required | Notes |
 |--------------|----------|-------|
-| `case_group` | yes      | Source/corpus tag (`nk_checks`, `nk_unit_tests`, future: `qarin_negatives`, `un_sc_positives`, `us_congress`, …). |
-| `case_id`    | yes      | Stable ID within group. Composite key is `(case_group, case_id)`. |
+| `case_group` | yes      | Source/corpus tag (`nk_checks`, `nk_unit_tests`, `synth_companies`, `synth_people`, …). |
 | `schema`     | yes      | FtM schema name. Drives `analyze_names`'s `NameTypeTag`. Currently used: Person, Company, Organization, LegalEntity, Vessel. |
 | `name1`      | yes      | Query-side name. Single string; analyze_names infers tags. |
 | `name2`      | yes      | Result-side name. |
 | `is_match`   | yes      | `true` / `false`. Ground-truth label. |
-| `category`   | optional | Mutation/heuristic class for slicing reports (e.g. `Character Deletion`, `friedrich_fps`). Blank if unlabelled. |
+| `category`   | optional | Mutation/heuristic class for slicing reports. Blank if unlabelled. |
 | `notes`      | optional | Free-text human-readable comment. Used for traceback to source tests, etc. |
+
+`case_id` is **derived, not stored** — `run.py` computes a stable
+8-char blake2b digest over `(case_group, schema, name1, name2)` at
+load time. The harness emits it into per-case dump CSVs so `qsv diff`
+between runs still works. This means cases.csv is hand-editable
+without case_id management — drop a row in anywhere, save, run.
+Duplicate `(case_group, schema, name1, name2)` tuples are flagged
+with a stderr warning at load.
 
 ### v2 (deferred)
 

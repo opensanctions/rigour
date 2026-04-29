@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import sys
 from collections import defaultdict
 from dataclasses import dataclass
@@ -78,9 +79,40 @@ class CaseResult:
 # --- IO ---
 
 
+def compute_case_id(case_group: str, schema: str, name1: str, name2: str) -> str:
+    """Stable 8-char hex id derived from (case_group, schema, name1, name2).
+
+    cases.csv doesn't carry a `case_id` column — managing sequential ids
+    by hand was annoying when iterating on the test set. The id is
+    computed at load time and emitted into per-case dump CSVs so qsv
+    diff between runs still works.
+    """
+    h = hashlib.blake2b(
+        f"{case_group}|{schema}|{name1}|{name2}".encode("utf-8"),
+        digest_size=4,
+    )
+    return h.hexdigest()
+
+
 def load_cases(csv_path: Path) -> List[Dict[str, str]]:
+    """Load cases.csv and synthesise `case_id` from row content."""
     with csv_path.open("r", encoding="utf-8", newline="") as fh:
-        return list(csv.DictReader(fh))
+        rows = list(csv.DictReader(fh))
+    seen: Dict[str, Dict[str, str]] = {}
+    out: List[Dict[str, str]] = []
+    for row in rows:
+        cid = compute_case_id(
+            row["case_group"], row["schema"], row["name1"], row["name2"]
+        )
+        if cid in seen:
+            sys.stderr.write(
+                f"WARN: duplicate case_id {cid}: "
+                f"{(row['case_group'], row['schema'], row['name1'], row['name2'])}\n"
+            )
+        seen[cid] = row
+        row["case_id"] = cid
+        out.append(row)
+    return out
 
 
 def evaluate(

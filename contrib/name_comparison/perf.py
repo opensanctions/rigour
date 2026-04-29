@@ -25,6 +25,10 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+# Reuse run.py's loader so case_id computation stays in one place.
+sys.path.insert(0, str(Path(__file__).parent))
+from run import load_cases  # noqa: E402
+
 from rich.console import Console
 from rich.table import Table
 
@@ -41,11 +45,6 @@ DEFAULT_TOP_SLOW_PCT = 5.0
 
 
 CaseKey = Tuple[str, str]
-
-
-def load_cases(path: Path) -> List[Dict[str, str]]:
-    with path.open("r", encoding="utf-8", newline="") as fh:
-        return list(csv.DictReader(fh))
 
 
 def time_comparator(
