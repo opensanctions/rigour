@@ -37,7 +37,7 @@ nk_checks,Person,Friedrych Buchenberg,Friedrich Buchenberg,true,MEDIUM,,
 nk_checks,Person,Fridrich Buchenberg,Friedrich Buchenberg,true,MEDIUM,,
 nk_checks,Person,FridrichBuchenberg,Friedrich Buchenberg,true,MEDIUM,,
 nk_checks,Person,Friedrich Buchenbergo,Friedrich Buchenberg,true,MEDIUM,,
-nk_checks,Person,Frederick Buchenberg,Friedrich Buchenberg,false,MEDIUM,,
+nk_checks,Person,Frederick Buchenberg,Friedrich Buchenberg,false,WEAK,,
 nk_checks,Person,Lars Friedrich Lindemann,Friedrich Buchenberg,false,MEDIUM,,
 nk_checks,Person,Wolfgang Friedrich Ischinger,Friedrich Buchenberg,false,MEDIUM,,
 nk_checks,Person,Gerhard Friedrich Karl Westdickenberg,Friedrich Buchenberg,false,MEDIUM,,
@@ -134,14 +134,14 @@ nk_checks,Company,Goodwill Company,Good Will Company,true,MEDIUM,,
 nk_checks,Organization,Government of Estonia,Government of Ethiopia,false,MEDIUM,,
 nk_checks,Company,CRYSTALORD LIMITED,CRYSTALORD LTD,true,MEDIUM,,
 nk_checks,Company,CRISTALORD LIMITED,CRYSTALORD LTD,true,MEDIUM,,
-nk_checks,Company,CRYSTALORD SYSTEMS LIMITED,CRYSTALORD LTD,false,MEDIUM,,
+nk_checks,Company,CRYSTALORD SYSTEMS LIMITED,CRYSTALORD LTD,false,WEAK,,
 nk_checks,Company,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,MEDIUM,,
 nk_checks,Company,TACTICAL MISSILES CORPORATION JOINT STOCK COMPAN,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,MEDIUM,,
 nk_checks,Company,JSC TACTICAL MISSILES CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,MEDIUM,,
 nk_checks,Company,OJSC TACTICAL MISSILES CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,MEDIUM,,
 nk_checks,Company,JSC TACTICAL MISSILES CORP.,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,MEDIUM,,
 nk_checks,Company,OJSC TACTICAL KITTENS CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,false,MEDIUM,,
-nk_checks,Company,OJSC TACTICAL MISSIVES CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,false,MEDIUM,,
+nk_checks,Company,OJSC TACTICAL MISSIVES CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,WEAK,,
 nk_checks,Company,Oboronnye Initsiativy OOO,OOO Oboronnye Initsiativy,true,MEDIUM,,
 nk_checks,Company,Oboronnye Initsiativy o.O.O.,OOO Oboronnye Initsiativy,true,MEDIUM,,
 nk_checks,Company,Iskusstvo Krasoty,LIMITED LIABILITY COMPANY ISKUSSTVO KRASOTY,true,MEDIUM,,
@@ -337,7 +337,7 @@ synth_companies,Company,BD p.l.c.,BP p.l.c.,true,MEDIUM,LLM-proposed deviation,t
 synth_companies,Company,"Cardinal Wealth, Inc.","Cardinal Health, Inc.",true,MEDIUM,LLM-proposed deviation,domain-word sub (Health/Wealth)
 synth_companies,Company,Stellaris N.V.,Stellantis N.V.,true,MEDIUM,LLM-proposed deviation,truncated-and-substituted stem
 synth_companies,Company,Chevon Corporation,Chevron Corporation,true,MEDIUM,LLM-proposed deviation,dropped consonant (Chevon is a real meat brand)
-synth_companies,Company,China Construction Trust Corporation,China Construction Bank Corporation,false,MEDIUM,LLM-proposed deviation,sector-word swap (Bank/Trust)
+synth_companies,Company,China Construction Trust Corporation,China Construction Bank Corporation,false,WEAK,LLM-proposed deviation,sector-word swap (Bank/Trust)
 synth_companies,Company,"Samsong Electronics Co., Ltd.","Samsung Electronics Co., Ltd.",true,MEDIUM,LLM-proposed deviation,Korean-Romanisation vowel sub
 synth_companies,Company,"Hon Wai Precision Industry Co., Ltd.","Hon Hai Precision Industry Co., Ltd.",true,MEDIUM,LLM-proposed deviation,plausible-alternate Cantonese name
 synth_companies,Company,The Sigma Group,The Cigna Group,true,MEDIUM,LLM-proposed deviation,Greek-letter near-homophone
@@ -350,10 +350,10 @@ synth_companies,Company,Bank of Chima Limited,Bank of China Limited,true,MEDIUM,
 synth_companies,Company,Bank of Armenia Corporation,Bank of America Corporation,false,MEDIUM,LLM-proposed deviation,geographic swap (shared first phoneme)
 synth_companies,Company,General Mortars Company,General Motors Company,true,MEDIUM,LLM-proposed deviation,phonetic-near common-noun (Motors/Mortars)
 synth_companies,Company,"Elegance Health, Inc.","Elevance Health, Inc.",true,MEDIUM,LLM-proposed deviation,brand-stem one-letter shift to real word
-synth_companies,Company,Berliner Motoren Werke Aktiengesellschaft,Bayerische Motoren Werke Aktiengesellschaft,false,MEDIUM,LLM-proposed deviation,German-region word swap (BMW expansion)
+synth_companies,Company,Berliner Motoren Werke Aktiengesellschaft,Bayerische Motoren Werke Aktiengesellschaft,false,STRONG,LLM-proposed deviation,German-region word swap (BMW expansion)
 synth_companies,Company,Mercedes-Benn Group AG,Mercedes-Benz Group AG,true,MEDIUM,LLM-proposed deviation,final-consonant doubling
 synth_companies,Company,"Beta Platforms, Inc.","Meta Platforms, Inc.",true,MEDIUM,LLM-proposed deviation,Greek-letter sub
-synth_companies,Company,China Railway Constructors Corporation,China Railway Construction Corporation,false,MEDIUM,LLM-proposed deviation,nominalisation variant
+synth_companies,Company,China Railway Constructors Corporation,China Railway Construction Corporation,false,WEAK,LLM-proposed deviation,nominalisation variant
 synth_companies,Company,China Baowei Steel Group Corporation Limited,China Baowu Steel Group Corporation Limited,true,MEDIUM,LLM-proposed deviation,Pinyin syllable swap
 synth_companies,Company,Citygroup Inc.,Citigroup Inc.,true,MEDIUM,LLM-proposed deviation,brand-stem English-spelling sub
 synth_people,Person,Vladimir Pulin,Vladimir Putin,true,STRONG,LLM-proposed deviation,RU surname single-char sub (Latin)
@@ -741,10 +741,10 @@ synth_people,Person,YASSIN AL-ANABI,ABU UBAYDAH YUSUF AL-ANABI,false,MEDIUM,LLM-
 synth_people,Person,RAMZI ABDULLAH BINALSHIBH,RAMZI MOHAMED ABDULLAH BINALSHIBH,true,MEDIUM,LLM-proposed deviation,dropped middle (Mohamed)
 synth_people,Person,SIRAJUDDIN HAQQANI,SIRAJUDDIN JALLALOUDINE HAQQANI,true,MEDIUM,LLM-proposed deviation,dropped father patronymic
 synth_people,Person,FAZEEL AL-PESHAWARI,FAZEEL-A-TUL SHAYKH ABU MOHAMMED AMEEN AL-PESHAWARI,false,MEDIUM,LLM-proposed deviation,dropped 4 middle parts
-synth_people,Person,SALMAN BIN MUHAMMAD AL-RAWI,MUHAMMAD BIN SALMAN AL-RAWI,false,MEDIUM,LLM-proposed deviation,patronymic reversal (father vs son flip)
-synth_people,Person,ABDULLAH BIN OMAR AL-MUHAMMAD,OMAR BIN ABDULLAH AL-MUHAMMAD,false,MEDIUM,LLM-proposed deviation,patronymic reversal
-synth_people,Person,AHMAD BIN HASAN AL-UBAIDI,HASAN BIN AHMAD AL-UBAIDI,false,MEDIUM,LLM-proposed deviation,patronymic reversal
-synth_people,Person,IBRAHIM BIN AL-DIN AL-MASRI,SAIF-AL-DIN BIN IBRAHIM AL-MASRI,false,MEDIUM,LLM-proposed deviation,patronymic reversal + structure change
+synth_people,Person,SALMAN BIN MUHAMMAD AL-RAWI,MUHAMMAD BIN SALMAN AL-RAWI,false,WEAK,LLM-proposed deviation,patronymic reversal (father vs son flip)
+synth_people,Person,ABDULLAH BIN OMAR AL-MUHAMMAD,OMAR BIN ABDULLAH AL-MUHAMMAD,false,WEAK,LLM-proposed deviation,patronymic reversal
+synth_people,Person,AHMAD BIN HASAN AL-UBAIDI,HASAN BIN AHMAD AL-UBAIDI,false,WEAK,LLM-proposed deviation,patronymic reversal
+synth_people,Person,IBRAHIM BIN AL-DIN AL-MASRI,SAIF-AL-DIN BIN IBRAHIM AL-MASRI,false,WEAK,LLM-proposed deviation,patronymic reversal + structure change
 synth_people,Person,ZIMURINDA MWANGACHUCHU,INNOCENT ZIMURINDA,false,MEDIUM,LLM-proposed deviation,dropped given + added invented surname
 synth_people,Person,LEODOMIR HABIYAREMYE,LEODOMIR MUGARAGU,false,MEDIUM,LLM-proposed deviation,Rwandan surname swap (different real name)
 synth_people,Person,LUCIEN HABIMANA,LUCIEN NZAMBAMWITA,false,MEDIUM,LLM-proposed deviation,Rwandan surname swap

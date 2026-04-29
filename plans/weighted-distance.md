@@ -237,6 +237,20 @@ Sanctions context is recall-protective. A false negative
 (human review). Where the spec offers margin, err toward
 keeping borderline matches.
 
+**The recall-protective rule applies to typos / transliterations
+/ aliases of the same legal entity, not to structurally different
+sub-entities of the same brand.** Sister/sub-entity pairs
+(`Bowne of Atlanta` vs `Bowne of Boston`,
+`Banco Santander S.A.` vs `Banco Santander Chile S.A.`,
+`Deutsche Bank AG` vs `Deutsche Bank GmbH`) are **non-matches** —
+the matcher identifies specific legal entities, not corporate
+hierarchies. See `name-screening.md` § *What the matcher is for*
+for the full framing. Implication for tuning: `EXTRAS_WEIGHTS`
+on `LOCATION` / `ORG_CLASS` (currently 0.8 / 0.7) probably needs
+to climb toward 1.0+ for ORG/ENT schemas — a missing region or
+legal-form token is **evidence of a different entity**, not noise
+to discount.
+
 ### Score response curve
 
 The score function must produce a *confidence cliff*: most of
@@ -1607,6 +1621,15 @@ These show up in `cases.csv` failures but are out of scope:
 
 ## Resolved
 
+- **The matcher identifies specific legal entities, not corporate
+  hierarchies.** Sister/sub-entity pairs of the same parent brand
+  (`Bowne of Atlanta` vs `Bowne of Boston`, `Banco Santander S.A.`
+  vs `Banco Santander Chile S.A.`, `Deutsche Bank AG` vs
+  `Deutsche Bank GmbH`) are **non-matches**. The recall-protective
+  stance applies to typos / transliterations / aliases of the same
+  entity — not to brand-shared sub-entities. Implication: missing
+  `LOCATION` or `ORG_CLASS` qualifier is evidence of a distinct
+  entity. Detail in `name-screening.md` § *What the matcher is for*.
 - **API in `NamePart` terms.** Generic strings+offsets shape
   rejected. Rigour speaks NamePart for names; the only
   consumer is a name matcher.

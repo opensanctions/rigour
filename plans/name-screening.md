@@ -16,6 +16,55 @@ it without re-litigating from primary sources.
 Not a design plan. Specific design plans
 (`weighted-distance.md`, `name-matcher-pruning.md`) link here.
 
+## What the matcher is for
+
+The matcher identifies **specific legal entities**, not corporate
+hierarchies or shared brand stems. Two names sharing a brand prefix
+do not match if a qualifier distinguishes them as different legal
+entities — even if a human would group them mentally under the same
+parent.
+
+Concretely, these are **non-matches** for the matcher's purposes
+(despite human-level "same brand" intuition):
+
+- **Different region / city sub-entity**: `Bowne of Atlanta, Inc.`
+  vs `Bowne of Boston, Inc.` — different US-state-incorporated
+  subsidiaries.
+- **Parent vs. subsidiary**: `Banco Santander S.A.` vs
+  `Banco Santander Chile S.A.` — the Spanish parent and the Chilean
+  subsidiary are distinct legal entities.
+- **Different legal form** of same brand: `Deutsche Bank AG` vs
+  `Deutsche Bank GmbH` — different jurisdictions, different
+  registrations, different legal personhood.
+- **Different sector / division**: `China Construction Bank
+  Corporation` vs `China Construction Trust Corporation` —
+  different SOEs.
+- **Sub-brand variants**: `CRYSTALORD LTD` vs `CRYSTALORD SYSTEMS
+  LIMITED` — different lines, different legal entities.
+- **Series / vintage variants**: `Bowne Global Solutions, Inc.` vs
+  `Bowne Global Solutions II, Inc.` — successor or sibling fund,
+  different entity.
+
+The recall-protective stance applies to **typos and aliases of the
+same entity** (`Olaf Scholze` vs `Olaf Scholz`, `Vladimir Putin` vs
+`Владимир Путин`, `Friedrich Lindenberg` vs `Fridrich Lindenberg`),
+not to **structurally different sub-entities of the same brand**.
+A typo creates an ambiguity to resolve; a different qualifier
+creates a different entity.
+
+This matters for tuning the matcher's response to unmatched parts.
+A `LOCATION` or `ORG_CLASS` token on one side that's absent from
+the other is **evidence of distinct entity**, not just noise to
+discount. The current `EXTRAS_WEIGHTS` (LOCATION = 0.8, ORG_CLASS =
+0.7) lean too lenient by this principle — bumping these toward 1.0+
+for ORG/ENT schemas is a phase-2 tuning target.
+
+The dual case — when *should* the matcher fire on close-but-distinct
+inputs — is *typo / transliteration / alias of the same legal
+entity*. A `1-2` Levenshtein distance on a long name is a typo
+worth flagging; a missing `Chile` token is a missing legal-entity
+qualifier and a clean reject.
+
 ## The two consumer scenarios
 
 The matcher serves two operationally distinct screening
