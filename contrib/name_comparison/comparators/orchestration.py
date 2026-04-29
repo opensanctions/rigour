@@ -36,7 +36,14 @@ from rigour.names import (
 )
 from rigour.names.symbol import pair_symbols
 
+from typing import Callable
+
 from .compare_parts_orig import Comparison, compare_parts_orig
+
+# A residue function takes (qry_parts, res_parts, bias) → list of
+# Comparison-shaped records. Both the Python prototype and the Rust
+# port adapter satisfy this protocol.
+ResidueFn = Callable[[List[NamePart], List[NamePart], float], List[Comparison]]
 from .policies import (
     EXTRA_QUERY_NAME,
     EXTRA_RESULT_NAME,
@@ -85,12 +92,18 @@ def _schema_to_tag(schema: str) -> NameTypeTag:
     return schema_type_tag(sch)
 
 
-def _match_name_symbolic(query: Name, result: Name, bias: float) -> float:
+def _match_name_symbolic(
+    query: Name, result: Name, bias: float, residue_fn: ResidueFn
+) -> float:
     """Lifted from logic_v2/names/match.py:match_name_symbolic.
 
     Returns the best aggregate score across all pairings produced by
     pair_symbols. Each pairing produces a list of weighted records;
     the pairing's score is sum(weighted_score) / sum(weight).
+
+    `residue_fn` is the swappable residue-distance function — either
+    the Python prototype (`compare_parts_orig`) or a Rust adapter
+    (`compare_rust._rust_residue`). Both have the same signature.
     """
     best = 0.0
 
@@ -124,9 +137,9 @@ def _match_name_symbolic(query: Name, result: Name, bias: float) -> float:
                 query_rem = NamePart.tag_sort(query_rem)
                 result_rem = NamePart.tag_sort(result_rem)
 
-            for comp in compare_parts_orig(query_rem, result_rem, bias=bias):
+            for comp in residue_fn(query_rem, result_rem, bias):
                 records.append(
-                    _Record(qps=comp.qps, rps=comp.rps, score=comp.score, weight=1.0)
+                    _Record(qps=list(comp.qps), rps=list(comp.rps), score=comp.score, weight=1.0)
                 )
 
         # Stage 3: weight policies on every record (symbol-edge AND
@@ -166,16 +179,14 @@ def _match_name_symbolic(query: Name, result: Name, bias: float) -> float:
     return best
 
 
-def compare_python(name1: str, name2: str, schema: str) -> float:
-    """Comparator: full Python pipeline over compare_parts_orig.
+def compare_python_via(
+    name1: str, name2: str, schema: str, *, residue_fn: ResidueFn
+) -> float:
+    """Comparator factory: orchestration around any residue function.
 
-    analyze_names → pair_symbols → symbol-edge records →
-    compare_parts_orig on residue → weight policies → aggregate.
-
-    The pure-Python equivalent of nomenklatura's logic_v2 name
-    matcher. Once the Rust port lands as `rigour.names.compare_parts`,
-    a sibling `compare_rust` comparator will register alongside this
-    one with identical orchestration but the Rust residue function.
+    `residue_fn` swaps between the Python prototype and the Rust port
+    adapter. Both `compare_python` and `compare_rust` are thin
+    wrappers over this with their own residue function bound.
     """
     type_tag = _schema_to_tag(schema)
     if type_tag == NameTypeTag.UNK:
@@ -200,9 +211,20 @@ def compare_python(name1: str, name2: str, schema: str) -> float:
     best = 0.0
     for qry_name in qry_set:
         for res_name in res_set:
-            score = _match_name_symbolic(qry_name, res_name, FUZZY_CUTOFF_FACTOR)
+            score = _match_name_symbolic(
+                qry_name, res_name, FUZZY_CUTOFF_FACTOR, residue_fn
+            )
             if score > best:
                 best = score
                 if best == 1.0:
                     return best
     return best
+
+
+def _python_residue(qry_parts, res_parts, bias) -> List[Comparison]:
+    return compare_parts_orig(qry_parts, res_parts, bias=bias)
+
+
+def compare_python(name1: str, name2: str, schema: str) -> float:
+    """Comparator: full Python pipeline using compare_parts_orig as residue."""
+    return compare_python_via(name1, name2, schema, residue_fn=_python_residue)

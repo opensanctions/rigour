@@ -230,3 +230,23 @@ class PairedEdge:
 
 
 def pair_symbols(query: Name, result: Name) -> list[tuple[PairedEdge, ...]]: ...
+
+
+class Comparison:
+    """One residue-distance cluster.
+
+    Either a paired record (both `qps` and `rps` non-empty) or a solo
+    record (one side empty, the other a single part). Returned by
+    [compare_parts][rigour._core.compare_parts].
+    """
+
+    qps: tuple[NamePart, ...]
+    rps: tuple[NamePart, ...]
+    score: float
+
+
+def compare_parts(
+    qry: list[NamePart],
+    res: list[NamePart],
+    bias: float = 1.0,
+) -> list[Comparison]: ...

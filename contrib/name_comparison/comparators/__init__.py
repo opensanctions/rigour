@@ -17,6 +17,7 @@ from typing import Callable, Dict
 
 from .levenshtein import levenshtein_baseline
 from .orchestration import compare_python
+from .compare_rust import compare_rust
 from .logicv2 import logicv2_baseline, AVAILABLE as _LOGICV2_AVAILABLE
 
 
@@ -26,6 +27,7 @@ Comparator = Callable[[str, str, str], float]
 COMPARATORS: Dict[str, Comparator] = {
     "levenshtein": levenshtein_baseline,
     "compare_python": compare_python,
+    "compare_rust": compare_rust,
 }
 
 if _LOGICV2_AVAILABLE:
