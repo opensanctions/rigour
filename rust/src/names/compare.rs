@@ -161,9 +161,23 @@ fn align_chars(q_chars: &[char], r_chars: &[char]) -> Vec<Step> {
             // Insert from result
             let ins_cost = cost[i][j - 1] + edit_cost(Op::Insert, None, Some(rc));
 
-            // Pick minimum. Tie-breaking order: match > substitute >
-            // delete > insert. Match-first ensures `equal` runs cluster
-            // tightly; the rest of the order is arbitrary but stable.
+            // Pick minimum. Tie-breaking: match wins outright on cost
+            // tie (always preferred for `equal` runs); on cost-tied
+            // non-match paths we prefer one-sided edits (delete /
+            // insert) over substitution.
+            //
+            // Why: substitution attributes cost to **both** sides
+            // (qry_costs gets the cost for the consumed qc AND
+            // res_costs gets it for the consumed rc), while delete
+            // attributes only to qry and insert only to res. For
+            // transposition-like patterns ("Donlad" vs "Donald"),
+            // sub+sub doubles cost on a single span; del+match+ins
+            // splits cost across sides. Total work is identical, but
+            // the per-side budget cap in `_costs_similarity` cares
+            // about distribution, not just totals — del+ins survives
+            // the cap where sub+sub fails it. Picking the more
+            // distributive alignment respects that downstream
+            // accounting.
             let mut best = sub_cost;
             let mut bp = BackPtr::Substitute;
             if let Some(mc) = match_cost {
@@ -172,11 +186,11 @@ fn align_chars(q_chars: &[char], r_chars: &[char]) -> Vec<Step> {
                     bp = BackPtr::Match;
                 }
             }
-            if del_cost < best {
+            if del_cost <= best {
                 best = del_cost;
                 bp = BackPtr::Delete;
             }
-            if ins_cost < best {
+            if ins_cost <= best {
                 best = ins_cost;
                 bp = BackPtr::Insert;
             }
@@ -603,5 +617,24 @@ mod tests {
     fn costs_similarity_zero_cost_gives_one() {
         let costs = vec![0.0, 0.0, 0.0, 0.0, 0.0];
         assert_eq!(costs_similarity(&costs, 1.0), 1.0);
+    }
+
+    #[test]
+    fn align_transposition_prefers_distributive_path() {
+        // "donlad" vs "donald" has two equally-optimal alignments at
+        // total cost 2.0: sub+sub or del+match+ins. The tie-break
+        // prefers del+ins so cost distributes 1.0 per side instead of
+        // doubling on a single cell. This is what lets the per-side
+        // budget cap accept the match.
+        let q: Vec<char> = "donlad".chars().collect();
+        let r: Vec<char> = "donald".chars().collect();
+        let steps = align_chars(&q, &r);
+        let n_sub = steps.iter().filter(|s| s.op == Op::Replace).count();
+        let n_del = steps.iter().filter(|s| s.op == Op::Delete).count();
+        let n_ins = steps.iter().filter(|s| s.op == Op::Insert).count();
+        // Distributive path: 1 delete + 1 insert + 0 substitutes.
+        assert_eq!(n_sub, 0, "tie-break should avoid substitution");
+        assert_eq!(n_del, 1);
+        assert_eq!(n_ins, 1);
     }
 }
