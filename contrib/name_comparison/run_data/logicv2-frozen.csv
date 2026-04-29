@@ -30,7 +30,7 @@ nk_checks,9c948b41,Company,Deutsche Bank AG,Deutsche Bank Aktiengesellschaft,tru
 nk_checks,380313eb,Company,Deutsche Bank (Schweiz) AG,Deutsche Bank AG,true,MEDIUM,,,0.7895,true,TP
 nk_checks,f84ca4ef,Company,Deutsche Bank AG,Deutsche Bank (Schweiz) AG,true,MEDIUM,,,0.9375,true,TP
 nk_checks,2e1ed587,Company,Deutsche Bank AG,Deutsche Bank GmbH,false,MEDIUM,,,0.7083,true,FP
-nk_checks,9c19e2b3,Company,Deutsche Bank Trust Company,Deutsche Bank,false,MEDIUM,,,0.6028,false,TN
+nk_checks,9c19e2b3,Company,Deutsche Bank Trust Company,Deutsche Bank,true,MEDIUM,,,0.6028,false,FN
 nk_checks,8505a508,Company,OAO Gazprom,Open Joint Stock Company Gazprom,true,MEDIUM,,,0.9176,true,TP
 nk_checks,1801829b,Company,HOMS REFINERY CORPORATION,The Homs Refinery Company,true,MEDIUM,,,0.9870,true,TP
 nk_checks,696fd577,Person,Friedrych Buchenberg,Friedrich Buchenberg,true,MEDIUM,,,0.9252,true,TP
@@ -239,7 +239,7 @@ nk_unit_tests,5c075522,Company,OAO Gazprom,Gasprom JSC,true,MEDIUM,logic_v2_case
 nk_unit_tests,50cd090c,Company,OAO Gazprom,Open Joint Stock Company Gasprom,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES,0.7616,true,TP
 nk_unit_tests,3fa6978b,Company,Gazprom Neft JSC,Gazprom Neft OAO,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES,0.9417,true,TP
 nk_unit_tests,be58c9b8,Company,LXC Aviation,LAU Aviation,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES,0.4118,false,FN
-nk_unit_tests,4e1d90db,Company,LXC Aviatio,LAU Aviation,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES,0.4375,false,TN
+nk_unit_tests,4e1d90db,Company,LXC Aviatio,LAU Aviation,false,STRONG,logic_v2_cases,test_logic_v2_cases.py CASES,0.4375,false,TN
 nk_unit_tests,8ca27e5a,Company,LXC Aviation,L.X.C Aviation,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES,1.0000,true,TP
 nk_unit_tests,fe421cee,Company,L.X.C. Aviation,LAU Aviation,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES,0.4118,false,TN
 nk_unit_tests,9a361885,Company,OJSC TACTICAL KITTENS CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES,0.5778,false,TN
@@ -452,7 +452,7 @@ synth_people,ee6d0d6d,Person,Hasan Rohani,Hassan Rouhani,true,MEDIUM,LLM-propose
 synth_people,66c0befd,Person,Bachar el-Assad,Bashar al-Assad,true,MEDIUM,LLM-proposed deviation,SY French vs English transliteration,0.7600,true,TP
 synth_people,afe9031e,Person,Mahmood Ahmadinezhad,Mahmoud Ahmadinejad,true,MEDIUM,LLM-proposed deviation,IR Persian transliteration variant,0.8288,true,TP
 synth_people,3b323049,Person,Recep Tayyip Erdogan,Recep Tayyip Erdoğan,true,STRONG,LLM-proposed deviation,TR Turkish ğ stripped,1.0000,true,TP
-synth_people,6513c92b,Person,Aleksandar Vucic,Aleksandar Vučić,true,MEDIUM,LLM-proposed deviation,RS diacritics stripped,1.0000,true,TP
+synth_people,6513c92b,Person,Aleksandar Vucic,Aleksandar Vučić,true,STRONG,LLM-proposed deviation,RS diacritics stripped,1.0000,true,TP
 synth_people,bae66c2f,Person,Andrej Plenkovic,Andrej Plenković,true,MEDIUM,LLM-proposed deviation,HR diacritic stripped,1.0000,true,TP
 synth_people,8092e54c,Person,Francois Hollande,François Hollande,true,MEDIUM,LLM-proposed deviation,FR cedilla stripped,1.0000,true,TP
 synth_people,d234e9e4,Person,Donlad Trump,Donald Trump,true,MEDIUM,LLM-proposed deviation,tiny defect (letter transposition al→la),0.8472,true,TP
@@ -484,7 +484,7 @@ synth_companies,13ef7be3,Company,"Bowne Litigation Solutions, L.P.","Bowne Solut
 synth_companies,a617116b,Company,"Bowne Localization, Inc.","Bowne Global Solutions, Inc.",false,MEDIUM,LLM-proposed deviation,line-of-business token swap,0.5986,false,TN
 synth_companies,d2030860,Company,"Mendez, B.V.B.A","Mendez Nederland, B.V.",false,MEDIUM,LLM-proposed deviation,country-token addition,0.8211,true,FP
 synth_companies,71749cbf,Company,"Mendez, Denmark A/S",Mendez Norge A/S,false,MEDIUM,LLM-proposed deviation,country-token swap,0.6800,false,TN
-synth_companies,9e12c9c6,Company,"L & H Sweden, AB","L & H Mendez Sweden, AB",false,MEDIUM,LLM-proposed deviation,brand-token addition mid-name,0.9500,true,FP
+synth_companies,9e12c9c6,Company,"L & H Sweden, AB","L & H Mendez Sweden, AB",true,MEDIUM,LLM-proposed deviation,brand-token addition mid-name,0.9500,true,TP
 synth_companies,413d9140,Company,"L & H Editions, S.A.","L & H Linguex, S.A.",false,MEDIUM,LLM-proposed deviation,brand-token swap,0.7297,true,FP
 synth_companies,43dd1956,Company,"Bowne Global Solutions Denmark, A/S",Bowne Global Solutions II Denmark A/S,false,MEDIUM,LLM-proposed deviation,II series marker addition,0.9519,true,FP
 synth_companies,5128b9bb,Company,Bowne Global Solutions II France S.A.S.,"Bowne Global Solutions (France), S.A.R.L.",false,MEDIUM,LLM-proposed deviation,II marker + entity-form swap same country,0.7994,true,FP
@@ -512,8 +512,8 @@ synth_companies,e9d82431,Company,CCB International Capital Corporation Limited,C
 synth_companies,58b64cd1,Company,Mitsubishi UFJ Trust and Banking Corporation,Mitsubishi UFJ Lease and Finance Corporation,false,MEDIUM,LLM-proposed deviation,line-of-business mid-name swap (Trust/Lease),0.6303,false,TN
 synth_companies,eb3b1627,Company,Sumitomo Mitsui Trust Bank Limited,Sumitomo Mitsui Banking Corporation,false,MEDIUM,LLM-proposed deviation,structural-token swap (Trust Bank / Banking),0.6713,false,TN
 synth_companies,fcf648f5,Company,Mizuho Securities Co. Ltd.,Mizuho Trust & Banking Co. Ltd.,false,MEDIUM,LLM-proposed deviation,line-of-business mid-name swap (Securities/Trust & Banking),0.6686,false,TN
-synth_companies,f446d020,Company,Banco Santander S.A.,Banco Santander México S.A.,false,MEDIUM,LLM-proposed deviation,country-token addition mid-name,0.9231,true,FP
-synth_companies,367b873e,Company,Banco Santander S.A.,Banco Santander Chile S.A.,false,MEDIUM,LLM-proposed deviation,country-token addition mid-name,0.9375,true,FP
+synth_companies,f446d020,Company,Banco Santander S.A.,Banco Santander México S.A.,true,MEDIUM,LLM-proposed deviation,country-token addition mid-name,0.9231,true,TP
+synth_companies,367b873e,Company,Banco Santander S.A.,Banco Santander Chile S.A.,true,MEDIUM,LLM-proposed deviation,country-token addition mid-name,0.9375,true,TP
 synth_companies,6e8a92fd,Company,Banco Santander México S.A.,Banco Santander Chile S.A.,false,MEDIUM,LLM-proposed deviation,sister-country-sub swap,0.7143,true,FP
 synth_companies,64211bdb,Company,BNP Paribas Securities Services,BNP Paribas Personal Finance,false,MEDIUM,LLM-proposed deviation,line-of-business swap (Securities/Personal Finance),0.5319,false,TN
 synth_people,530ac335,Person,Elon Mosk,Elon Musk,true,MEDIUM,LLM-proposed deviation,surname single-char sub (vowel),0.8403,true,TP
@@ -638,7 +638,7 @@ synth_people,1174dd71,Person,SAYED MOHAMMAD ABDUL AGHA,SAYED MOHAMMAD AZIM AGHA,
 synth_people,5f7a1585,Person,NAZIRULLAH HANAFI HAMIDULLAH,NAZIRULLAH HANAFI WALIULLAH,false,MEDIUM,LLM-proposed deviation,Pashtun grandfather swap,0.6667,false,TN
 synth_people,1e36bf33,Person,ATIQULLAH ABDUL MOHAMMAD,ATIQULLAH WALI MOHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap,0.7246,true,FP
 synth_people,10fc9264,Person,AREFULLAH AREF ABDULRAHMAN MOHAMMAD,AREFULLAH AREF GHAZI MOHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun grandfather swap,0.7500,true,FP
-synth_people,b2697240,Person,ABDUL KABIR ABDUL JAN,ABDUL KABIR MOHAMMAD JAN,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap,0.8352,true,FP
+synth_people,b2697240,Person,ABDUL KABIR ABDUL JAN,ABDUL KABIR MOHAMMAD JAN,true,MEDIUM,LLM-proposed deviation,Pashtun father-name swap,0.8352,true,TP
 synth_people,b630b978,Person,SALEH MOHAMMAD ZADRAN AKHTAR MUHAMMAD,SALEH MOHAMMAD KAKAR AKHTAR MUHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun tribal-clan swap (Zadran/Kakar),0.8000,true,FP
 synth_people,669d8db6,Person,FAIZULLAH KHAN ZADRAN na,FAIZULLAH KHAN NOORZAI na,false,MEDIUM,LLM-proposed deviation,Pashtun tribal swap,0.7500,true,FP
 synth_people,6d4ee8f1,Person,ABDUL BASIR HAQQANI,ABDUL BASIR NOORZAI,false,MEDIUM,LLM-proposed deviation,Pashtun tribal swap,0.6667,false,TN
@@ -664,7 +664,7 @@ synth_people,59c6b4f2,Person,RI MYONG-CHUL,RI PYONG CHUL,true,MEDIUM,LLM-propose
 synth_people,112d4f5e,Person,SON YONG HYOK,SON JONG HYOK,true,MEDIUM,LLM-proposed deviation,Korean given-name swap,0.9667,true,TP
 synth_people,2b49105d,Person,KIM JONG MAN,KIM JONG SIK,false,MEDIUM,LLM-proposed deviation,Korean given-name swap,0.6667,false,TN
 synth_people,6b2d8260,Person,CHO HYO'K SAN,CHO CHUN RYONG,false,MEDIUM,LLM-proposed deviation,Korean given-name swap,0.3623,false,TN
-synth_people,ccac131d,Person,CHANG SU HA,CHANG CHANG HA,false,MEDIUM,LLM-proposed deviation,Korean given-name swap,0.6667,false,TN
+synth_people,ccac131d,Person,CHANG SU HA,CHANG CHANG HA,true,MEDIUM,LLM-proposed deviation,Korean given-name swap,0.6667,false,FN
 synth_people,c4f34fef,Person,PAK YONG-CHUN,PAK IL KYU,false,MEDIUM,LLM-proposed deviation,Korean given-name swap (UN-list collision),0.3333,false,TN
 synth_people,41c2b45b,Person,HAN BONG SU,HAN JANG SU,true,MEDIUM,LLM-proposed deviation,Korean given-name swap,0.6667,false,FN
 synth_people,a193edeb,Person,CHOE KWANG HO,CHOE SONG IL,false,MEDIUM,LLM-proposed deviation,Korean given-name swap,0.3333,false,TN
@@ -701,7 +701,7 @@ synth_people,306b89d5,Person,MYRNA AJIJUL JAMIRI,MYRNA AJIJUL MABANZA,false,MEDI
 synth_people,67368630,Person,ANGELO RAMIREZ DE GUZMAN,ANGELO RAMIREZ TRINIDAD,false,MEDIUM,LLM-proposed deviation,Filipino surname swap,0.5882,false,TN
 synth_people,81e749c8,Person,ISNILON TOTONI MISUARI,ISNILON TOTONI HAPILON,false,MEDIUM,LLM-proposed deviation,Filipino Moro surname swap (Misuari is real different MNLF leader),0.6667,false,TN
 synth_people,32691f10,Person,PIO ABOGNE DE LEON,PIO ABOGNE DE VERA,false,MEDIUM,LLM-proposed deviation,Filipino Spanish-style surname swap,0.7500,true,FP
-synth_people,4610e5ea,Person,ABDULLAHI MOHAMED MOHAMED CADDOW,ABDULLAHI OSMAN MOHAMED CADDOW,false,MEDIUM,LLM-proposed deviation,Somali patronymic swap,0.7500,true,FP
+synth_people,4610e5ea,Person,ABDULLAHI MOHAMED MOHAMED CADDOW,ABDULLAHI OSMAN MOHAMED CADDOW,true,MEDIUM,LLM-proposed deviation,Somali patronymic swap,0.7500,true,TP
 synth_people,2c525c6d,Person,MAXAMED CABDULLAAHI CIISE,MAXAMED CABDULLAAH CIISE,true,MEDIUM,LLM-proposed deviation,Somali patronymic suffix swap (multi-char),0.9697,true,TP
 synth_people,9c380c91,Person,ABDIKADIR HASSAN ABDIKADIR,ABDIKADIR MOHAMED ABDIKADIR,false,MEDIUM,LLM-proposed deviation,Somali patronymic swap,0.6667,false,TN
 synth_people,4192561e,Person,HASSAN DAHIR FARAH,HASSAN DAHIR AWEYS,false,MEDIUM,LLM-proposed deviation,Somali clan-name swap,0.6667,false,TN
@@ -709,37 +709,37 @@ synth_people,17981923,Person,ZAFAR ALI,ZAFAR IQBAL,false,MEDIUM,LLM-proposed dev
 synth_people,2e178a69,Person,ZAKI-UR-REHMAN MAKKI,ZAKI-UR-REHMAN LAKHVI,false,MEDIUM,LLM-proposed deviation,Pakistani surname swap (Makki is real LeT figure),0.7500,true,FP
 synth_people,e8913d55,Person,MOHAMMED YAHYA AZHAR,MOHAMMED YAHYA MUJAHID,false,MEDIUM,LLM-proposed deviation,Pakistani surname swap,0.6667,false,TN
 synth_people,67b3589f,Person,MAHMOOD AHMED BASHIR-UD-DIN,MAHMOOD SULTAN BASHIR-UD-DIN,false,MEDIUM,LLM-proposed deviation,Pakistani middle-name swap,0.8000,true,FP
-synth_people,94017c0e,Person,ANJEM IFTIKHAR CHOUDARY MAHMOOD,ANJEM CHOUDARY,false,MEDIUM,LLM-proposed deviation,added 2 invented middle parts,0.5556,false,TN
+synth_people,94017c0e,Person,ANJEM IFTIKHAR CHOUDARY MAHMOOD,ANJEM CHOUDARY,true,MEDIUM,LLM-proposed deviation,added 2 invented middle parts,0.5556,false,FN
 synth_people,6f9490ad,Person,WALIJAN ABDUL GHAFOOR HAQQANI,WALIJAN,false,MEDIUM,LLM-proposed deviation,added father+grandfather+tribal,0.3165,false,TN
 synth_people,bfbceaa8,Person,SHAMSUDDIN MOHAMMED HAQQANI,SHAMSUDDIN,false,MEDIUM,LLM-proposed deviation,added father+tribal,0.3846,false,TN
-synth_people,e005d943,Person,JANAN MOHAMMAD AHMED AGHA,JANAN AGHA,false,MEDIUM,LLM-proposed deviation,added father+grandfather names,0.5556,false,TN
-synth_people,4aa4f878,Person,ABDULHAI ABDUL GHAFOOR SALEK,ABDULHAI SALEK,false,MEDIUM,LLM-proposed deviation,added father-grandfather chain,0.5952,false,TN
-synth_people,57474b11,Person,ABDUL JALIL MOHAMMAD RASUL AYYUB,MOHAMMAD RASUL AYYUB,false,MEDIUM,LLM-proposed deviation,added prefix-name (different person),0.6881,false,TN
-synth_people,7eedab5a,Person,FAZL RABI ABDUL HAMID,FAZL RABI,false,MEDIUM,LLM-proposed deviation,added father+grandfather,0.5952,false,TN
-synth_people,e3612dc2,Person,DOST MOHAMMAD KHAN HAQQANI,DOST MOHAMMAD,false,MEDIUM,LLM-proposed deviation,added grandfather+tribal,0.5556,false,TN
-synth_people,77def66b,Person,UMAR PATEK ABDULLAH ANSHORI,UMAR PATEK,false,MEDIUM,LLM-proposed deviation,added unrelated UN-listed person's parts,0.5556,false,TN
-synth_people,b8ddc0bb,Person,GUL AHMAD WAZIRI HAKIMI,GUL AHMAD HAKIMI,false,MEDIUM,LLM-proposed deviation,added invented middle clan name,0.7895,true,FP
-synth_people,c342a3f9,Person,NOOR MOHAMMAD HAQQANI SAQIB,NOOR MOHAMMAD SAQIB,false,MEDIUM,LLM-proposed deviation,added invented middle clan name,0.7895,true,FP
-synth_people,29719af0,Person,MOHAMMAD ABDUL ABBAS AKHUND,MOHAMMAD ABBAS AKHUND,false,MEDIUM,LLM-proposed deviation,added invented middle name,0.8427,true,FP
-synth_people,049c2986,Person,AMIR SAYYID ABDULLAH,AMIR ABDULLAH,false,MEDIUM,LLM-proposed deviation,added middle title-name,0.7143,true,FP
-synth_people,72e31417,Person,MOHAMMAD JAWAD HAMID WAZIRI,MOHAMMAD JAWAD WAZIRI,false,MEDIUM,LLM-proposed deviation,added invented middle,0.7895,true,FP
-synth_people,2f68e7a7,Person,MOHAMMAD YAQOUB HAQQANI,MOHAMMAD YAQOUB,false,MEDIUM,LLM-proposed deviation,added clan name,0.7143,true,FP
-synth_people,063927be,Person,DIN MOHAMMAD ABDUL HANIF,DIN MOHAMMAD HANIF,false,MEDIUM,LLM-proposed deviation,added invented father-name,0.8427,true,FP
-synth_people,64d0ee0e,Person,SADUDDIN MULLAH SAYYED,SADUDDIN SAYYED,false,MEDIUM,LLM-proposed deviation,added title-name,0.7143,true,FP
-synth_people,f3c61a71,Person,QARI ABDUL SAIFULLAH TOKHI,QARI SAIFULLAH TOKHI,false,MEDIUM,LLM-proposed deviation,added middle-name,0.8427,true,FP
-synth_people,9b707c89,Person,ABDUL HAQQANI MANAN MOHAMMAD ISHAK,ABDUL MANAN MOHAMMAD ISHAK,false,MEDIUM,LLM-proposed deviation,added invented clan,0.8333,true,FP
-synth_people,716388a5,Person,ABDUL WALI HAMID SEDDIQI,ABDUL WALI SEDDIQI,false,MEDIUM,LLM-proposed deviation,added invented middle name,0.7895,true,FP
-synth_people,fe7bf0cd,Person,FAZL MOHAMMAD HAMID MAZLOOM,FAZL MOHAMMAD MAZLOOM,false,MEDIUM,LLM-proposed deviation,added invented middle,0.7895,true,FP
-synth_people,a4b215bd,Person,SHER ABBAS STANEKZAI,SHER MOHAMMAD ABBAS STANEKZAI PADSHAH KHAN,false,MEDIUM,LLM-proposed deviation,dropped middle+grandfather+tribal,0.8333,true,FP
+synth_people,e005d943,Person,JANAN MOHAMMAD AHMED AGHA,JANAN AGHA,true,MEDIUM,LLM-proposed deviation,added father+grandfather names,0.5556,false,FN
+synth_people,4aa4f878,Person,ABDULHAI ABDUL GHAFOOR SALEK,ABDULHAI SALEK,true,MEDIUM,LLM-proposed deviation,added father-grandfather chain,0.5952,false,FN
+synth_people,57474b11,Person,ABDUL JALIL MOHAMMAD RASUL AYYUB,MOHAMMAD RASUL AYYUB,true,MEDIUM,LLM-proposed deviation,added prefix-name (different person),0.6881,false,FN
+synth_people,7eedab5a,Person,FAZL RABI ABDUL HAMID,FAZL RABI,true,MEDIUM,LLM-proposed deviation,added father+grandfather,0.5952,false,FN
+synth_people,e3612dc2,Person,DOST MOHAMMAD KHAN HAQQANI,DOST MOHAMMAD,true,MEDIUM,LLM-proposed deviation,added grandfather+tribal,0.5556,false,FN
+synth_people,77def66b,Person,UMAR PATEK ABDULLAH ANSHORI,UMAR PATEK,true,MEDIUM,LLM-proposed deviation,added unrelated UN-listed person's parts,0.5556,false,FN
+synth_people,b8ddc0bb,Person,GUL AHMAD WAZIRI HAKIMI,GUL AHMAD HAKIMI,true,MEDIUM,LLM-proposed deviation,added invented middle clan name,0.7895,true,TP
+synth_people,c342a3f9,Person,NOOR MOHAMMAD HAQQANI SAQIB,NOOR MOHAMMAD SAQIB,true,MEDIUM,LLM-proposed deviation,added invented middle clan name,0.7895,true,TP
+synth_people,29719af0,Person,MOHAMMAD ABDUL ABBAS AKHUND,MOHAMMAD ABBAS AKHUND,true,MEDIUM,LLM-proposed deviation,added invented middle name,0.8427,true,TP
+synth_people,049c2986,Person,AMIR SAYYID ABDULLAH,AMIR ABDULLAH,true,MEDIUM,LLM-proposed deviation,added middle title-name,0.7143,true,TP
+synth_people,72e31417,Person,MOHAMMAD JAWAD HAMID WAZIRI,MOHAMMAD JAWAD WAZIRI,true,MEDIUM,LLM-proposed deviation,added invented middle,0.7895,true,TP
+synth_people,2f68e7a7,Person,MOHAMMAD YAQOUB HAQQANI,MOHAMMAD YAQOUB,true,MEDIUM,LLM-proposed deviation,added clan name,0.7143,true,TP
+synth_people,063927be,Person,DIN MOHAMMAD ABDUL HANIF,DIN MOHAMMAD HANIF,true,MEDIUM,LLM-proposed deviation,added invented father-name,0.8427,true,TP
+synth_people,64d0ee0e,Person,SADUDDIN MULLAH SAYYED,SADUDDIN SAYYED,true,MEDIUM,LLM-proposed deviation,added title-name,0.7143,true,TP
+synth_people,f3c61a71,Person,QARI ABDUL SAIFULLAH TOKHI,QARI SAIFULLAH TOKHI,true,MEDIUM,LLM-proposed deviation,added middle-name,0.8427,true,TP
+synth_people,9b707c89,Person,ABDUL HAQQANI MANAN MOHAMMAD ISHAK,ABDUL MANAN MOHAMMAD ISHAK,true,MEDIUM,LLM-proposed deviation,added invented clan,0.8333,true,TP
+synth_people,716388a5,Person,ABDUL WALI HAMID SEDDIQI,ABDUL WALI SEDDIQI,true,MEDIUM,LLM-proposed deviation,added invented middle name,0.7895,true,TP
+synth_people,fe7bf0cd,Person,FAZL MOHAMMAD HAMID MAZLOOM,FAZL MOHAMMAD MAZLOOM,true,MEDIUM,LLM-proposed deviation,added invented middle,0.7895,true,TP
+synth_people,a4b215bd,Person,SHER ABBAS STANEKZAI,SHER MOHAMMAD ABBAS STANEKZAI PADSHAH KHAN,true,MEDIUM,LLM-proposed deviation,dropped middle+grandfather+tribal,0.8333,true,TP
 synth_people,7785e33c,Person,SAIF AL-DIN AL-RAWI,SAIF-AL-DIN FULAYYIH HASSAN TAHA AL-RAWI,false,MEDIUM,LLM-proposed deviation,dropped 3 middle parts,0.8333,true,FP
-synth_people,7a052edb,Person,MOHAMMED MIR WALI RAHIM,MOHAMMED QASIM MIR WALI KHUDAI RAHIM,false,MEDIUM,LLM-proposed deviation,dropped 2 middle parts,0.9091,true,FP
+synth_people,7a052edb,Person,MOHAMMED MIR WALI RAHIM,MOHAMMED QASIM MIR WALI KHUDAI RAHIM,true,MEDIUM,LLM-proposed deviation,dropped 2 middle parts,0.9091,true,TP
 synth_people,c43ac765,Person,MUHAMMAD AL-AHDAL,MOHAMMAD HAMDI MOHAMMAD SADIQ AL-AHDAL,false,MEDIUM,LLM-proposed deviation,dropped 3 middle parts,0.7005,true,FP
-synth_people,1cf6b80a,Person,JAMAL SULTAN AL-TIKRITI,JAMAL MUSTAFA ABDALLAH SULTAN AL-TIKRITI,false,MEDIUM,LLM-proposed deviation,dropped 2 middle patronymics,0.9091,true,FP
-synth_people,197a42e9,Person,ABDUL GHANI TURK,ABDUL GHANI BARADAR ABDUL AHMAD TURK,false,MEDIUM,LLM-proposed deviation,dropped 3 middle parts,0.8220,true,FP
-synth_people,eb275b5b,Person,AKHTAR MANSOUR,AKHTAR MOHAMMAD MANSOUR SHAH MOHAMMED,false,MEDIUM,LLM-proposed deviation,dropped middle and tail,0.7692,true,FP
+synth_people,1cf6b80a,Person,JAMAL SULTAN AL-TIKRITI,JAMAL MUSTAFA ABDALLAH SULTAN AL-TIKRITI,true,MEDIUM,LLM-proposed deviation,dropped 2 middle patronymics,0.9091,true,TP
+synth_people,197a42e9,Person,ABDUL GHANI TURK,ABDUL GHANI BARADAR ABDUL AHMAD TURK,true,MEDIUM,LLM-proposed deviation,dropped 3 middle parts,0.8220,true,TP
+synth_people,eb275b5b,Person,AKHTAR MANSOUR,AKHTAR MOHAMMAD MANSOUR SHAH MOHAMMED,true,MEDIUM,LLM-proposed deviation,dropped middle and tail,0.7692,true,TP
 synth_people,6006d296,Person,YASSIN AL-ANABI,ABU UBAYDAH YUSUF AL-ANABI,false,MEDIUM,LLM-proposed deviation,dropped kunya+given+patronymic,0.5988,false,TN
-synth_people,621e38fc,Person,RAMZI ABDULLAH BINALSHIBH,RAMZI MOHAMED ABDULLAH BINALSHIBH,false,MEDIUM,LLM-proposed deviation,dropped middle (Mohamed),0.9375,true,FP
-synth_people,755b2443,Person,SIRAJUDDIN HAQQANI,SIRAJUDDIN JALLALOUDINE HAQQANI,false,MEDIUM,LLM-proposed deviation,dropped father patronymic,0.9091,true,FP
+synth_people,621e38fc,Person,RAMZI ABDULLAH BINALSHIBH,RAMZI MOHAMED ABDULLAH BINALSHIBH,true,MEDIUM,LLM-proposed deviation,dropped middle (Mohamed),0.9375,true,TP
+synth_people,755b2443,Person,SIRAJUDDIN HAQQANI,SIRAJUDDIN JALLALOUDINE HAQQANI,true,MEDIUM,LLM-proposed deviation,dropped father patronymic,0.9091,true,TP
 synth_people,79edb6a9,Person,FAZEEL AL-PESHAWARI,FAZEEL-A-TUL SHAYKH ABU MOHAMMED AMEEN AL-PESHAWARI,false,MEDIUM,LLM-proposed deviation,dropped 4 middle parts,0.7538,true,FP
 synth_people,a3782dd0,Person,SALMAN BIN MUHAMMAD AL-RAWI,MUHAMMAD BIN SALMAN AL-RAWI,false,MEDIUM,LLM-proposed deviation,patronymic reversal (father vs son flip),1.0000,true,FP
 synth_people,cad2cc2a,Person,ABDULLAH BIN OMAR AL-MUHAMMAD,OMAR BIN ABDULLAH AL-MUHAMMAD,false,MEDIUM,LLM-proposed deviation,patronymic reversal,1.0000,true,FP

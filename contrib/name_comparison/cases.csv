@@ -30,7 +30,7 @@ nk_checks,Company,Deutsche Bank AG,Deutsche Bank Aktiengesellschaft,true,STRONG,
 nk_checks,Company,Deutsche Bank (Schweiz) AG,Deutsche Bank AG,true,MEDIUM,,
 nk_checks,Company,Deutsche Bank AG,Deutsche Bank (Schweiz) AG,true,MEDIUM,,
 nk_checks,Company,Deutsche Bank AG,Deutsche Bank GmbH,false,MEDIUM,,
-nk_checks,Company,Deutsche Bank Trust Company,Deutsche Bank,false,MEDIUM,,
+nk_checks,Company,Deutsche Bank Trust Company,Deutsche Bank,true,MEDIUM,,
 nk_checks,Company,OAO Gazprom,Open Joint Stock Company Gazprom,true,MEDIUM,,
 nk_checks,Company,HOMS REFINERY CORPORATION,The Homs Refinery Company,true,MEDIUM,,
 nk_checks,Person,Friedrych Buchenberg,Friedrich Buchenberg,true,MEDIUM,,
@@ -238,8 +238,8 @@ nk_unit_tests,Company,OAO Gazprom,Gazprom JSC,true,MEDIUM,logic_v2_cases,test_lo
 nk_unit_tests,Company,OAO Gazprom,Gasprom JSC,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Company,OAO Gazprom,Open Joint Stock Company Gasprom,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Company,Gazprom Neft JSC,Gazprom Neft OAO,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
-nk_unit_tests,Company,LXC Aviation,LAU Aviation,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
-nk_unit_tests,Company,LXC Aviatio,LAU Aviation,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
+nk_unit_tests,Company,LXC Aviation,LAU Aviation,false,STRONG,logic_v2_cases,test_logic_v2_cases.py CASES
+nk_unit_tests,Company,LXC Aviatio,LAU Aviation,false,STRONG,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Company,LXC Aviation,L.X.C Aviation,true,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Company,L.X.C. Aviation,LAU Aviation,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
 nk_unit_tests,Company,OJSC TACTICAL KITTENS CORPORATION,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,false,MEDIUM,logic_v2_cases,test_logic_v2_cases.py CASES
@@ -452,7 +452,7 @@ synth_people,Person,Hasan Rohani,Hassan Rouhani,true,MEDIUM,LLM-proposed deviati
 synth_people,Person,Bachar el-Assad,Bashar al-Assad,true,MEDIUM,LLM-proposed deviation,SY French vs English transliteration
 synth_people,Person,Mahmood Ahmadinezhad,Mahmoud Ahmadinejad,true,MEDIUM,LLM-proposed deviation,IR Persian transliteration variant
 synth_people,Person,Recep Tayyip Erdogan,Recep Tayyip Erdoğan,true,STRONG,LLM-proposed deviation,TR Turkish ğ stripped
-synth_people,Person,Aleksandar Vucic,Aleksandar Vučić,true,MEDIUM,LLM-proposed deviation,RS diacritics stripped
+synth_people,Person,Aleksandar Vucic,Aleksandar Vučić,true,STRONG,LLM-proposed deviation,RS diacritics stripped
 synth_people,Person,Andrej Plenkovic,Andrej Plenković,true,MEDIUM,LLM-proposed deviation,HR diacritic stripped
 synth_people,Person,Francois Hollande,François Hollande,true,MEDIUM,LLM-proposed deviation,FR cedilla stripped
 synth_people,Person,Donlad Trump,Donald Trump,true,MEDIUM,LLM-proposed deviation,tiny defect (letter transposition al→la)
@@ -484,7 +484,7 @@ synth_companies,Company,"Bowne Litigation Solutions, L.P.","Bowne Solutions, L.L
 synth_companies,Company,"Bowne Localization, Inc.","Bowne Global Solutions, Inc.",false,MEDIUM,LLM-proposed deviation,line-of-business token swap
 synth_companies,Company,"Mendez, B.V.B.A","Mendez Nederland, B.V.",false,MEDIUM,LLM-proposed deviation,country-token addition
 synth_companies,Company,"Mendez, Denmark A/S",Mendez Norge A/S,false,MEDIUM,LLM-proposed deviation,country-token swap
-synth_companies,Company,"L & H Sweden, AB","L & H Mendez Sweden, AB",false,MEDIUM,LLM-proposed deviation,brand-token addition mid-name
+synth_companies,Company,"L & H Sweden, AB","L & H Mendez Sweden, AB",true,MEDIUM,LLM-proposed deviation,brand-token addition mid-name
 synth_companies,Company,"L & H Editions, S.A.","L & H Linguex, S.A.",false,MEDIUM,LLM-proposed deviation,brand-token swap
 synth_companies,Company,"Bowne Global Solutions Denmark, A/S",Bowne Global Solutions II Denmark A/S,false,MEDIUM,LLM-proposed deviation,II series marker addition
 synth_companies,Company,Bowne Global Solutions II France S.A.S.,"Bowne Global Solutions (France), S.A.R.L.",false,MEDIUM,LLM-proposed deviation,II marker + entity-form swap same country
@@ -512,8 +512,8 @@ synth_companies,Company,CCB International Capital Corporation Limited,CCB Intern
 synth_companies,Company,Mitsubishi UFJ Trust and Banking Corporation,Mitsubishi UFJ Lease and Finance Corporation,false,MEDIUM,LLM-proposed deviation,line-of-business mid-name swap (Trust/Lease)
 synth_companies,Company,Sumitomo Mitsui Trust Bank Limited,Sumitomo Mitsui Banking Corporation,false,MEDIUM,LLM-proposed deviation,structural-token swap (Trust Bank / Banking)
 synth_companies,Company,Mizuho Securities Co. Ltd.,Mizuho Trust & Banking Co. Ltd.,false,MEDIUM,LLM-proposed deviation,line-of-business mid-name swap (Securities/Trust & Banking)
-synth_companies,Company,Banco Santander S.A.,Banco Santander México S.A.,false,MEDIUM,LLM-proposed deviation,country-token addition mid-name
-synth_companies,Company,Banco Santander S.A.,Banco Santander Chile S.A.,false,MEDIUM,LLM-proposed deviation,country-token addition mid-name
+synth_companies,Company,Banco Santander S.A.,Banco Santander México S.A.,true,MEDIUM,LLM-proposed deviation,country-token addition mid-name
+synth_companies,Company,Banco Santander S.A.,Banco Santander Chile S.A.,true,MEDIUM,LLM-proposed deviation,country-token addition mid-name
 synth_companies,Company,Banco Santander México S.A.,Banco Santander Chile S.A.,false,MEDIUM,LLM-proposed deviation,sister-country-sub swap
 synth_companies,Company,BNP Paribas Securities Services,BNP Paribas Personal Finance,false,MEDIUM,LLM-proposed deviation,line-of-business swap (Securities/Personal Finance)
 synth_people,Person,Elon Mosk,Elon Musk,true,MEDIUM,LLM-proposed deviation,surname single-char sub (vowel)
@@ -638,7 +638,7 @@ synth_people,Person,SAYED MOHAMMAD ABDUL AGHA,SAYED MOHAMMAD AZIM AGHA,false,MED
 synth_people,Person,NAZIRULLAH HANAFI HAMIDULLAH,NAZIRULLAH HANAFI WALIULLAH,false,MEDIUM,LLM-proposed deviation,Pashtun grandfather swap
 synth_people,Person,ATIQULLAH ABDUL MOHAMMAD,ATIQULLAH WALI MOHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap
 synth_people,Person,AREFULLAH AREF ABDULRAHMAN MOHAMMAD,AREFULLAH AREF GHAZI MOHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun grandfather swap
-synth_people,Person,ABDUL KABIR ABDUL JAN,ABDUL KABIR MOHAMMAD JAN,false,MEDIUM,LLM-proposed deviation,Pashtun father-name swap
+synth_people,Person,ABDUL KABIR ABDUL JAN,ABDUL KABIR MOHAMMAD JAN,true,MEDIUM,LLM-proposed deviation,Pashtun father-name swap
 synth_people,Person,SALEH MOHAMMAD ZADRAN AKHTAR MUHAMMAD,SALEH MOHAMMAD KAKAR AKHTAR MUHAMMAD,false,MEDIUM,LLM-proposed deviation,Pashtun tribal-clan swap (Zadran/Kakar)
 synth_people,Person,FAIZULLAH KHAN ZADRAN na,FAIZULLAH KHAN NOORZAI na,false,MEDIUM,LLM-proposed deviation,Pashtun tribal swap
 synth_people,Person,ABDUL BASIR HAQQANI,ABDUL BASIR NOORZAI,false,MEDIUM,LLM-proposed deviation,Pashtun tribal swap
@@ -664,7 +664,7 @@ synth_people,Person,RI MYONG-CHUL,RI PYONG CHUL,true,MEDIUM,LLM-proposed deviati
 synth_people,Person,SON YONG HYOK,SON JONG HYOK,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,KIM JONG MAN,KIM JONG SIK,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,CHO HYO'K SAN,CHO CHUN RYONG,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
-synth_people,Person,CHANG SU HA,CHANG CHANG HA,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
+synth_people,Person,CHANG SU HA,CHANG CHANG HA,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,PAK YONG-CHUN,PAK IL KYU,false,MEDIUM,LLM-proposed deviation,Korean given-name swap (UN-list collision)
 synth_people,Person,HAN BONG SU,HAN JANG SU,true,MEDIUM,LLM-proposed deviation,Korean given-name swap
 synth_people,Person,CHOE KWANG HO,CHOE SONG IL,false,MEDIUM,LLM-proposed deviation,Korean given-name swap
@@ -701,7 +701,7 @@ synth_people,Person,MYRNA AJIJUL JAMIRI,MYRNA AJIJUL MABANZA,false,MEDIUM,LLM-pr
 synth_people,Person,ANGELO RAMIREZ DE GUZMAN,ANGELO RAMIREZ TRINIDAD,false,MEDIUM,LLM-proposed deviation,Filipino surname swap
 synth_people,Person,ISNILON TOTONI MISUARI,ISNILON TOTONI HAPILON,false,MEDIUM,LLM-proposed deviation,Filipino Moro surname swap (Misuari is real different MNLF leader)
 synth_people,Person,PIO ABOGNE DE LEON,PIO ABOGNE DE VERA,false,MEDIUM,LLM-proposed deviation,Filipino Spanish-style surname swap
-synth_people,Person,ABDULLAHI MOHAMED MOHAMED CADDOW,ABDULLAHI OSMAN MOHAMED CADDOW,false,MEDIUM,LLM-proposed deviation,Somali patronymic swap
+synth_people,Person,ABDULLAHI MOHAMED MOHAMED CADDOW,ABDULLAHI OSMAN MOHAMED CADDOW,true,MEDIUM,LLM-proposed deviation,Somali patronymic swap
 synth_people,Person,MAXAMED CABDULLAAHI CIISE,MAXAMED CABDULLAAH CIISE,true,MEDIUM,LLM-proposed deviation,Somali patronymic suffix swap (multi-char)
 synth_people,Person,ABDIKADIR HASSAN ABDIKADIR,ABDIKADIR MOHAMED ABDIKADIR,false,MEDIUM,LLM-proposed deviation,Somali patronymic swap
 synth_people,Person,HASSAN DAHIR FARAH,HASSAN DAHIR AWEYS,false,MEDIUM,LLM-proposed deviation,Somali clan-name swap
@@ -709,37 +709,37 @@ synth_people,Person,ZAFAR ALI,ZAFAR IQBAL,false,MEDIUM,LLM-proposed deviation,Pa
 synth_people,Person,ZAKI-UR-REHMAN MAKKI,ZAKI-UR-REHMAN LAKHVI,false,MEDIUM,LLM-proposed deviation,Pakistani surname swap (Makki is real LeT figure)
 synth_people,Person,MOHAMMED YAHYA AZHAR,MOHAMMED YAHYA MUJAHID,false,MEDIUM,LLM-proposed deviation,Pakistani surname swap
 synth_people,Person,MAHMOOD AHMED BASHIR-UD-DIN,MAHMOOD SULTAN BASHIR-UD-DIN,false,MEDIUM,LLM-proposed deviation,Pakistani middle-name swap
-synth_people,Person,ANJEM IFTIKHAR CHOUDARY MAHMOOD,ANJEM CHOUDARY,false,MEDIUM,LLM-proposed deviation,added 2 invented middle parts
+synth_people,Person,ANJEM IFTIKHAR CHOUDARY MAHMOOD,ANJEM CHOUDARY,true,MEDIUM,LLM-proposed deviation,added 2 invented middle parts
 synth_people,Person,WALIJAN ABDUL GHAFOOR HAQQANI,WALIJAN,false,MEDIUM,LLM-proposed deviation,added father+grandfather+tribal
 synth_people,Person,SHAMSUDDIN MOHAMMED HAQQANI,SHAMSUDDIN,false,MEDIUM,LLM-proposed deviation,added father+tribal
-synth_people,Person,JANAN MOHAMMAD AHMED AGHA,JANAN AGHA,false,MEDIUM,LLM-proposed deviation,added father+grandfather names
-synth_people,Person,ABDULHAI ABDUL GHAFOOR SALEK,ABDULHAI SALEK,false,MEDIUM,LLM-proposed deviation,added father-grandfather chain
-synth_people,Person,ABDUL JALIL MOHAMMAD RASUL AYYUB,MOHAMMAD RASUL AYYUB,false,MEDIUM,LLM-proposed deviation,added prefix-name (different person)
-synth_people,Person,FAZL RABI ABDUL HAMID,FAZL RABI,false,MEDIUM,LLM-proposed deviation,added father+grandfather
-synth_people,Person,DOST MOHAMMAD KHAN HAQQANI,DOST MOHAMMAD,false,MEDIUM,LLM-proposed deviation,added grandfather+tribal
-synth_people,Person,UMAR PATEK ABDULLAH ANSHORI,UMAR PATEK,false,MEDIUM,LLM-proposed deviation,added unrelated UN-listed person's parts
-synth_people,Person,GUL AHMAD WAZIRI HAKIMI,GUL AHMAD HAKIMI,false,MEDIUM,LLM-proposed deviation,added invented middle clan name
-synth_people,Person,NOOR MOHAMMAD HAQQANI SAQIB,NOOR MOHAMMAD SAQIB,false,MEDIUM,LLM-proposed deviation,added invented middle clan name
-synth_people,Person,MOHAMMAD ABDUL ABBAS AKHUND,MOHAMMAD ABBAS AKHUND,false,MEDIUM,LLM-proposed deviation,added invented middle name
-synth_people,Person,AMIR SAYYID ABDULLAH,AMIR ABDULLAH,false,MEDIUM,LLM-proposed deviation,added middle title-name
-synth_people,Person,MOHAMMAD JAWAD HAMID WAZIRI,MOHAMMAD JAWAD WAZIRI,false,MEDIUM,LLM-proposed deviation,added invented middle
-synth_people,Person,MOHAMMAD YAQOUB HAQQANI,MOHAMMAD YAQOUB,false,MEDIUM,LLM-proposed deviation,added clan name
-synth_people,Person,DIN MOHAMMAD ABDUL HANIF,DIN MOHAMMAD HANIF,false,MEDIUM,LLM-proposed deviation,added invented father-name
-synth_people,Person,SADUDDIN MULLAH SAYYED,SADUDDIN SAYYED,false,MEDIUM,LLM-proposed deviation,added title-name
-synth_people,Person,QARI ABDUL SAIFULLAH TOKHI,QARI SAIFULLAH TOKHI,false,MEDIUM,LLM-proposed deviation,added middle-name
-synth_people,Person,ABDUL HAQQANI MANAN MOHAMMAD ISHAK,ABDUL MANAN MOHAMMAD ISHAK,false,MEDIUM,LLM-proposed deviation,added invented clan
-synth_people,Person,ABDUL WALI HAMID SEDDIQI,ABDUL WALI SEDDIQI,false,MEDIUM,LLM-proposed deviation,added invented middle name
-synth_people,Person,FAZL MOHAMMAD HAMID MAZLOOM,FAZL MOHAMMAD MAZLOOM,false,MEDIUM,LLM-proposed deviation,added invented middle
-synth_people,Person,SHER ABBAS STANEKZAI,SHER MOHAMMAD ABBAS STANEKZAI PADSHAH KHAN,false,MEDIUM,LLM-proposed deviation,dropped middle+grandfather+tribal
+synth_people,Person,JANAN MOHAMMAD AHMED AGHA,JANAN AGHA,true,MEDIUM,LLM-proposed deviation,added father+grandfather names
+synth_people,Person,ABDULHAI ABDUL GHAFOOR SALEK,ABDULHAI SALEK,true,MEDIUM,LLM-proposed deviation,added father-grandfather chain
+synth_people,Person,ABDUL JALIL MOHAMMAD RASUL AYYUB,MOHAMMAD RASUL AYYUB,true,MEDIUM,LLM-proposed deviation,added prefix-name (different person)
+synth_people,Person,FAZL RABI ABDUL HAMID,FAZL RABI,true,MEDIUM,LLM-proposed deviation,added father+grandfather
+synth_people,Person,DOST MOHAMMAD KHAN HAQQANI,DOST MOHAMMAD,true,MEDIUM,LLM-proposed deviation,added grandfather+tribal
+synth_people,Person,UMAR PATEK ABDULLAH ANSHORI,UMAR PATEK,true,MEDIUM,LLM-proposed deviation,added unrelated UN-listed person's parts
+synth_people,Person,GUL AHMAD WAZIRI HAKIMI,GUL AHMAD HAKIMI,true,MEDIUM,LLM-proposed deviation,added invented middle clan name
+synth_people,Person,NOOR MOHAMMAD HAQQANI SAQIB,NOOR MOHAMMAD SAQIB,true,MEDIUM,LLM-proposed deviation,added invented middle clan name
+synth_people,Person,MOHAMMAD ABDUL ABBAS AKHUND,MOHAMMAD ABBAS AKHUND,true,MEDIUM,LLM-proposed deviation,added invented middle name
+synth_people,Person,AMIR SAYYID ABDULLAH,AMIR ABDULLAH,true,MEDIUM,LLM-proposed deviation,added middle title-name
+synth_people,Person,MOHAMMAD JAWAD HAMID WAZIRI,MOHAMMAD JAWAD WAZIRI,true,MEDIUM,LLM-proposed deviation,added invented middle
+synth_people,Person,MOHAMMAD YAQOUB HAQQANI,MOHAMMAD YAQOUB,true,MEDIUM,LLM-proposed deviation,added clan name
+synth_people,Person,DIN MOHAMMAD ABDUL HANIF,DIN MOHAMMAD HANIF,true,MEDIUM,LLM-proposed deviation,added invented father-name
+synth_people,Person,SADUDDIN MULLAH SAYYED,SADUDDIN SAYYED,true,MEDIUM,LLM-proposed deviation,added title-name
+synth_people,Person,QARI ABDUL SAIFULLAH TOKHI,QARI SAIFULLAH TOKHI,true,MEDIUM,LLM-proposed deviation,added middle-name
+synth_people,Person,ABDUL HAQQANI MANAN MOHAMMAD ISHAK,ABDUL MANAN MOHAMMAD ISHAK,true,MEDIUM,LLM-proposed deviation,added invented clan
+synth_people,Person,ABDUL WALI HAMID SEDDIQI,ABDUL WALI SEDDIQI,true,MEDIUM,LLM-proposed deviation,added invented middle name
+synth_people,Person,FAZL MOHAMMAD HAMID MAZLOOM,FAZL MOHAMMAD MAZLOOM,true,MEDIUM,LLM-proposed deviation,added invented middle
+synth_people,Person,SHER ABBAS STANEKZAI,SHER MOHAMMAD ABBAS STANEKZAI PADSHAH KHAN,true,MEDIUM,LLM-proposed deviation,dropped middle+grandfather+tribal
 synth_people,Person,SAIF AL-DIN AL-RAWI,SAIF-AL-DIN FULAYYIH HASSAN TAHA AL-RAWI,false,MEDIUM,LLM-proposed deviation,dropped 3 middle parts
-synth_people,Person,MOHAMMED MIR WALI RAHIM,MOHAMMED QASIM MIR WALI KHUDAI RAHIM,false,MEDIUM,LLM-proposed deviation,dropped 2 middle parts
+synth_people,Person,MOHAMMED MIR WALI RAHIM,MOHAMMED QASIM MIR WALI KHUDAI RAHIM,true,MEDIUM,LLM-proposed deviation,dropped 2 middle parts
 synth_people,Person,MUHAMMAD AL-AHDAL,MOHAMMAD HAMDI MOHAMMAD SADIQ AL-AHDAL,false,MEDIUM,LLM-proposed deviation,dropped 3 middle parts
-synth_people,Person,JAMAL SULTAN AL-TIKRITI,JAMAL MUSTAFA ABDALLAH SULTAN AL-TIKRITI,false,MEDIUM,LLM-proposed deviation,dropped 2 middle patronymics
-synth_people,Person,ABDUL GHANI TURK,ABDUL GHANI BARADAR ABDUL AHMAD TURK,false,MEDIUM,LLM-proposed deviation,dropped 3 middle parts
-synth_people,Person,AKHTAR MANSOUR,AKHTAR MOHAMMAD MANSOUR SHAH MOHAMMED,false,MEDIUM,LLM-proposed deviation,dropped middle and tail
+synth_people,Person,JAMAL SULTAN AL-TIKRITI,JAMAL MUSTAFA ABDALLAH SULTAN AL-TIKRITI,true,MEDIUM,LLM-proposed deviation,dropped 2 middle patronymics
+synth_people,Person,ABDUL GHANI TURK,ABDUL GHANI BARADAR ABDUL AHMAD TURK,true,MEDIUM,LLM-proposed deviation,dropped 3 middle parts
+synth_people,Person,AKHTAR MANSOUR,AKHTAR MOHAMMAD MANSOUR SHAH MOHAMMED,true,MEDIUM,LLM-proposed deviation,dropped middle and tail
 synth_people,Person,YASSIN AL-ANABI,ABU UBAYDAH YUSUF AL-ANABI,false,MEDIUM,LLM-proposed deviation,dropped kunya+given+patronymic
-synth_people,Person,RAMZI ABDULLAH BINALSHIBH,RAMZI MOHAMED ABDULLAH BINALSHIBH,false,MEDIUM,LLM-proposed deviation,dropped middle (Mohamed)
-synth_people,Person,SIRAJUDDIN HAQQANI,SIRAJUDDIN JALLALOUDINE HAQQANI,false,MEDIUM,LLM-proposed deviation,dropped father patronymic
+synth_people,Person,RAMZI ABDULLAH BINALSHIBH,RAMZI MOHAMED ABDULLAH BINALSHIBH,true,MEDIUM,LLM-proposed deviation,dropped middle (Mohamed)
+synth_people,Person,SIRAJUDDIN HAQQANI,SIRAJUDDIN JALLALOUDINE HAQQANI,true,MEDIUM,LLM-proposed deviation,dropped father patronymic
 synth_people,Person,FAZEEL AL-PESHAWARI,FAZEEL-A-TUL SHAYKH ABU MOHAMMED AMEEN AL-PESHAWARI,false,MEDIUM,LLM-proposed deviation,dropped 4 middle parts
 synth_people,Person,SALMAN BIN MUHAMMAD AL-RAWI,MUHAMMAD BIN SALMAN AL-RAWI,false,MEDIUM,LLM-proposed deviation,patronymic reversal (father vs son flip)
 synth_people,Person,ABDULLAH BIN OMAR AL-MUHAMMAD,OMAR BIN ABDULLAH AL-MUHAMMAD,false,MEDIUM,LLM-proposed deviation,patronymic reversal
