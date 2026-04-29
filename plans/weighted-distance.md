@@ -1345,56 +1345,85 @@ phases gate on earlier ones.
      `compare_python` is 4 cases out of 310 (3 vessel-schema
      cases via `match_object_names`'s separate path, 1
      initials handling).
-   - **Pending:** yente fixtures (`qarin_negatives`,
-     `un_sc_positives`, `us_congress`) added as additional
-     `case_group` values in `cases.csv`. Population is a
-     one-shot — no converter scripts retained.
-   - **Pending:** `resources/names/compare.yml` with the
-     SIMILAR_PAIRS table; genscript emitting Rust + Python
-     mirrors. Single source of truth read by both the
-     Rust port (eventually) and the harness's prototype
-     (during phase 2).
+   - ✅ 258 LLM-generated synthetic adversarial cases added
+     under `case_group=synth_companies` and
+     `case_group=synth_people`. Generated interactively;
+     subject to manual post-filtering. cases.csv → 568 rows.
+     Updated scores at threshold 0.7: levenshtein F1=0.404,
+     compare_python F1=0.707, logicv2 F1=0.715.
+   - ✅ `resources/names/compare.yml` with the SIMILAR_PAIRS
+     table; `genscripts/generate_names.py:generate_compare_file`
+     emits `rust/data/names/compare.json` (bidirectional pairs,
+     sorted, ready for `LazyLock<HashMap>` consumption from
+     Rust). No Python emit — harness's Python prototype keeps
+     an inline mirror until phase 3 retires it.
+   - **Pending:** `contrib/name_comparison/perf.py` —
+     timing-only runner (loop cases.csv 10x / 100x per
+     comparator, report wall time + per-comparison median).
+     Lets the Rust port show its perf win directly.
+   - **Yente fixtures dropped from scope.** They run against
+     real watchlist data, not (name1, name2, is_match) pairs;
+     they don't fit the harness schema.
 
-2. **Spec iteration on the harness (rigour Python only,
-   no Rust).**
-   - Implement the still-open spec decisions (combination
+2. **Spec iteration on the harness.**
+   - Implement still-open spec decisions (combination
      function, budget shape, pairing rule details, stopword
-     curve) as variants of the
-     `compare_parts_orig` prototype's three internal
-     functions (`_align`, `_cluster`, `_score`).
-   - Each variant registers in `COMPARATORS` under
-     `compare_python_<variant>`, e.g.
-     `compare_python_geometric_mean`. Run via
+     curve) as variants of `compare_parts_orig`'s three
+     internal functions (`_align`, `_cluster`, `_score`).
+   - Each variant registers under `compare_python_<variant>`
+     (e.g. `compare_python_geometric_mean`). Run via
      `python run.py -c compare_python_<variant>`, `qsv diff`
      against `compare_python` (current default) and
      `logicv2-frozen.csv` (frozen reference).
-   - Acceptance: harness numbers stable, FP-rate / recall on
-     the yente fixtures equal-or-better than baseline. Spec
-     decisions move from "still open" to "resolved" in this
-     plan as they land.
+   - Phase 2 and phase 3 can run in **parallel**: phase 3
+     ports current behaviour (not phase-2-settled behaviour),
+     and spec iteration after the port lands can target
+     either layer. Once a variant is chosen on the Python
+     side, it gets re-ported to Rust to maintain parity.
+     The compare_python ↔ compare_rust `qsv diff` is the
+     parity gate at every step.
+   - Acceptance: per-category gains where the failure mode
+     is genuinely about the residue distance (ORG single-
+     token-near-typo, Roman/digit disagreement, geographic
+     qualifier on ORG, borderline-at-threshold). Failures
+     covered by upstream part-tag projection in
+     followthemoney (`Friedrich Hans` vs `Hans Friedrich`,
+     family-name swaps on PER, middle-initial expansion)
+     are explicitly **out of scope**.
 
-3. **Rust port (rigour).**
-   - New module `rust/src/names/compare.rs` exposing
-     `compare_parts` — the Rust implementation of the
-     spec-finalised primitive (matches
-     `compare_parts_orig`'s settled behaviour).
-   - `compare.yml` resource ports the SIMILAR_PAIRS table
-     (genscript emits `rust/src/generated/names_compare.rs`).
+3. **Rust port (rigour) — start in parallel with phase 2.**
+   - First port reproduces `compare_parts_orig`'s **current**
+     behaviour, not phase-2-settled behaviour. The point is to
+     get something fast we can play with, including for perf
+     measurement; spec iteration after the port can target
+     either Python or Rust and re-sync via the parity gate.
+   - New module `rust/src/names/compare.rs`. (Tentative
+     location; if the cost-folded DP grows into a re-usable
+     primitive over arbitrary char sequences, the alignment
+     core may slide down to `rust/src/text/compare.rs` and
+     `names/compare.rs` becomes the part-aware wrapper.
+     Decide based on what falls out of the implementation.)
+   - Reads SIMILAR_PAIRS from `rust/data/names/compare.json`
+     (already emitted by genscript; see phase 1).
+   - **`Comparison` is a Rust pyclass** — same convention as
+     `Name`/`NamePart`/`Symbol`. Returns `Vec<Py<Comparison>>`
+     across the FFI; nomenklatura's wrapper builds `Match`
+     objects from each Comparison directly.
    - PyO3 binding + `_core.pyi` stub entry +
-     `rigour/names/compare.py` wrapper for the Python
-     surface.
-   - Rust-side unit tests for cost table, traceback, and
-     part-boundary cursor logic.
+     `rigour/names/compare.py` Python wrapper.
+   - Rust-side unit tests for cost table lookup, alignment
+     traceback, part-boundary cursor logic.
    - Harness adds a new `comparators/compare_parts.py` that
-     adapts `rigour.names.compare_parts` (Rust) and
-     registers `compare_rust` as a sibling of
-     `compare_python` — same orchestration, different
-     residue function. Both run in every harness invocation
-     until parity is met.
+     adapts `rigour.names.compare_parts` (Rust) and registers
+     `compare_rust` as a sibling of `compare_python` — same
+     orchestration, different residue function. Both run in
+     every harness invocation until parity is met.
    - Acceptance: per-case parity within float tolerance on
-     `cases.csv` between `compare_python` and `compare_rust`;
-     once met, `compare_parts_orig` and `compare_python`
-     retire (files deleted, registry entries removed).
+     `cases.csv` between `compare_python` and `compare_rust`
+     (when both implement the same spec). Once a settled spec
+     locks in across both layers, `compare_parts_orig` and
+     `compare_python` retire (files deleted, registry entries
+     removed).
 
 4. **Nomenklatura migration.**
    - Replace `weighted_edit_similarity`'s body with a wrapper
@@ -1406,12 +1435,48 @@ phases gate on earlier ones.
      where the spec drift legitimately changed an
      expectation), `checks.yml` confusion matrix
      equal-or-better, FP-rate fixtures equal-or-better.
+   - **Adoption notes go in this plan**, not in code: target
+     nomenklatura release timing is out of scope per session,
+     but every step that lands gets a corresponding entry in
+     the *Resolved* section so future readers can trace what
+     shipped when.
 
 5. **Production validation.**
-   - `contrib/name_benchmark/performance.py` for local
-     before/after.
-   - Yente production-shaped run without the LRU artefact.
+   - `contrib/name_comparison/perf.py` (added in phase 1) for
+     local Python-vs-Rust before/after on cases.csv.
+   - Production-shaped run (yente or equivalent) when the
+     migration lands; not part of this plan.
    - Cache decision based on production hit rate.
+
+### Threshold target
+
+The matcher is tuned to a **0.7 alert threshold** — that's a
+fixed design target across all spec iterations, not a tuning
+variable. As `_score` changes, the curve shape adapts to keep
+0.7 as the place where TP/FP clusters separate. We don't hunt
+for a "better" threshold from the data; we keep 0.7 and shape
+the curve around it.
+
+### Explicitly ignored failure modes
+
+These show up in `cases.csv` failures but are out of scope:
+
+- **Reverse-name cases** (`rimaldiV nituP` vs `Vladimir Putin`,
+  `Vladimir nitPu` vs `Vladimir Putin`): not a realistic input
+  shape outside artificial tests.
+- **Western-convention reorder FPs** (`Friedrich Hans` vs
+  `Hans Friedrich`): handled in production by part-tag
+  projection from FtM `firstName`/`lastName` properties (see
+  the *Important caveat* section above). Not a residue-
+  distance bug.
+- **Family-name-swap on PER** (`Aung San Suu Win` vs
+  `Aung San Suu Kyi`, `Lula da Souza` vs `Lula da Silva`):
+  same — covered by `family_name_weight` once parts are
+  FAMILY-tagged via structured input.
+- **Cross-script for non-latinizable scripts** (Khmer / Thai /
+  Arabic / CJK ↔ Latin where `analyze_names` doesn't
+  latinize): tagger / transliteration concern, lives in
+  `rigour.text.translit` and `normality`, not here.
 
 ## Resolved
 
@@ -1447,13 +1512,33 @@ phases gate on earlier ones.
   public surface and add a round-trip; clustering is a
   name-distance concern, not a matcher concern, so it
   belongs with alignment.
-- **Cost-table data: shared YAML resource.**
+- **Cost-table data: YAML resource, Rust-only emit.**
   `resources/names/compare.yml` (broader-scope name in case
-  more reference data joins). Genscript emits both Rust
-  (`rust/src/generated/names_compare.rs`) and Python
-  (`rigour/data/names/compare.py`) artifacts. Single source
-  of truth read by the harness's prototype during phase 2
-  and the Rust port after.
+  more reference data joins). `genscripts/generate_names.py:
+  generate_compare_file` emits `rust/data/names/compare.json`
+  for the Rust loader. **No Python emit** — the harness's
+  Python prototype keeps an inline mirror until phase 3
+  retires it; a shared Python artifact for a few-week
+  prototype isn't worth the genscript complexity. Drift
+  caught by the parity test in phase 3.
+- **`Comparison` is a Rust pyclass.** Same convention as
+  `Name`/`NamePart`/`Symbol`. FFI returns `Vec<Py<Comparison>>`;
+  no Python dataclass version once phase 3 lands.
+- **0.7 threshold is fixed.** Tune the score curve to keep
+  TP/FP separation around 0.7; don't search for a better
+  threshold from the data. Industry-typical alert tier
+  starts at 75% similarity; matching that bar is the design
+  target.
+- **Phase 2 and phase 3 run in parallel.** First Rust port
+  reproduces current `compare_parts_orig` behaviour, not
+  phase-2-settled behaviour. Spec iteration after the port
+  lands targets either layer; the parity gate catches
+  divergence.
+- **Explicit out-of-scope failure modes.** Reverse-name
+  cases, Western-convention reorder, family-name swap on
+  PER, cross-script for non-latinizable scripts. Detail in
+  the *Explicitly ignored failure modes* subsection of the
+  Migration path.
 - **Two-level naming distinguishes residue function from
   comparator.** Residue function: `compare_parts_orig`
   (Python prototype) → `compare_parts` (Rust port at
