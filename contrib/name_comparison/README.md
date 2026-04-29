@@ -15,13 +15,18 @@ interpreted).
 - `cases.csv` — labelled name-pair test set, schema documented
   below. **Source of truth.** Hand-edit to add cases, fix
   labels, refine categories.
-- `run.py` — CLI runner. Two modes (mutually exclusive):
+- `run.py` — accuracy harness. Two modes (mutually exclusive):
   - `-c <comparator>` runs a named comparator over `cases.csv`,
     stores the per-case result in `run_data/`, and prints the
     summary.
   - `-s <run.csv>` re-renders the summary from a stored run
     CSV. Useful for re-thresholding (`-t 0.85`) and comparing
     runs without re-executing.
+- `perf.py` — perf harness. Times each comparator across N
+  runs of `cases.csv`, prints an apples-to-apples scoreboard
+  (F1 + μs mean/p50/p95) plus a top-N% slowest-cases
+  leaderboard per comparator. Useful for showing the perf win
+  of the Rust port and surfacing pathologically slow inputs.
 - `run_data/` — per-case dumps from `-c` runs. Timestamped
   by default; `--frozen` writes a stable `<comparator>-frozen.csv`.
   Timestamped runs are gitignored; `*-frozen.csv` is committed.
@@ -58,6 +63,15 @@ python contrib/name_comparison/run.py -c logicv2 --frozen
 qsv diff \
     contrib/name_comparison/run_data/logicv2-frozen.csv \
     contrib/name_comparison/run_data/compare_python-20260428-172833.csv
+
+# Time all comparators (10 runs per case).
+python contrib/name_comparison/perf.py
+
+# Time only one comparator with a longer run.
+python contrib/name_comparison/perf.py -c compare_python --runs 100
+
+# Show the top 10% slowest cases.
+python contrib/name_comparison/perf.py --top-slow-pct 10
 ```
 
 Adding a new comparator: drop a new module under
