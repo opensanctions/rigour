@@ -12,9 +12,13 @@
 //   5. Construct Name + NamePart objects (all eager on construction)
 //   6. Apply part_tags via Name.tag_text for each (tag, values) entry
 //   7. For PER: INITIAL-symbol preamble (if `symbols`)
-//   8. Tagger match → apply_phrase per (phrase, symbol) (if `symbols`)
-//   9. infer_part_tags post-pass (NUMERIC / STOP / LEGAL promotion,
-//      ENT → ORG upgrade)
+//   8. Tagger dispatch (if `symbols`):
+//        - PER: person tagger.
+//        - ORG: org tagger.
+//        - ENT: org tagger, then ENT→ORG upgrade if its ORG_CLASS
+//               evidence trips the `> 2` char threshold; otherwise
+//               also run the person tagger and leave the tag at ENT.
+//   9. infer_part_tags post-pass (NUMERIC / STOP / LEGAL promotion)
 // Optionally:
 //   10. Name::consolidate_names to drop substring-dominated names
 //
@@ -127,8 +131,23 @@ pub fn analyze_names(
                     apply_initial_preamble(py, &name_py, infer_initials)?;
                     apply_tagger(py, &name_py, TaggerKind::Person)?;
                 }
-                NameTypeTag::ORG | NameTypeTag::ENT => {
+                NameTypeTag::ORG => {
                     apply_tagger(py, &name_py, TaggerKind::Org)?;
+                }
+                NameTypeTag::ENT => {
+                    // Org tagger first; if its ORG_CLASS evidence is
+                    // strong enough to upgrade ENT→ORG, the structural
+                    // signal wins and we don't sprinkle person-name
+                    // symbols over what's clearly an organisation
+                    // ("Eli Lilly LLP"). Otherwise run the person
+                    // tagger to surface NAME / honorific / patronymic
+                    // evidence; the tag stays ENT.
+                    apply_tagger(py, &name_py, TaggerKind::Org)?;
+                    if upgrade_ent_to_org(py, &name_py)? {
+                        name_py.bind(py).borrow_mut().tag = NameTypeTag::ORG;
+                    } else {
+                        apply_tagger(py, &name_py, TaggerKind::Person)?;
+                    }
                 }
                 NameTypeTag::OBJ | NameTypeTag::UNK => {
                     // No tagger pass — Name just wraps raw + form + parts.
@@ -202,12 +221,43 @@ fn apply_tagger(py: Python<'_>, name: &Py<Name>, kind: TaggerKind) -> PyResult<(
     Ok(())
 }
 
+/// Decide whether the ENT→ORG upgrade fires based on the org tagger's
+/// output already attached to `name`. Returns `true` iff there is at
+/// least one `ORG_CLASS` span whose combined `form_str` char count
+/// is `> 2` — the same threshold used historically inside
+/// `infer_part_tags`. Used as a routing gate on ENT inputs to skip
+/// the person tagger when the structural ORG signal is strong.
+fn upgrade_ent_to_org(py: Python<'_>, name: &Py<Name>) -> PyResult<bool> {
+    let name_ref = name.bind(py).borrow();
+    let spans = name_ref.spans.bind(py);
+    for span_item in spans.iter() {
+        let span = span_item.cast::<Span>()?.borrow();
+        let sym = span.symbol.bind(py).borrow();
+        if !matches!(sym.category, SymbolCategory::ORG_CLASS) {
+            continue;
+        }
+        let span_len: usize = span
+            .parts
+            .bind(py)
+            .iter()
+            .map(|p| {
+                p.cast::<NamePart>()
+                    .ok()
+                    .map(|b| b.borrow().form_str().chars().count())
+                    .unwrap_or(0)
+            })
+            .sum();
+        if span_len > 2 {
+            return Ok(true);
+        }
+    }
+    Ok(false)
+}
+
 /// Post-tagger inference pass. Walks the spans produced by the
 /// tagger to promote UNSET parts based on collected evidence:
 ///
-/// * Parts inside an ORG_CLASS span become `NamePartTag::LEGAL`;
-///   a long enough ORG_CLASS span upgrades the Name's tag from
-///   ENT to ORG.
+/// * Parts inside an ORG_CLASS span become `NamePartTag::LEGAL`.
 /// * Numeric-looking UNSET parts become `NamePartTag::NUM` and —
 ///   when `numerics` is true — gain a `NUMERIC` symbol if the
 ///   ordinal tagger didn't already cover them.
@@ -216,12 +266,15 @@ fn apply_tagger(py: Python<'_>, name: &Py<Name>, kind: TaggerKind) -> PyResult<(
 /// `symbols` gates NUMERIC-symbol emission: when `false`, NUM /
 /// STOP / LEGAL part-tag promotions still fire but no new Symbol
 /// is attached. Mutates the Name and its NamePart tags in place.
+///
+/// The ENT→ORG upgrade is no longer made here — it has moved
+/// upstream into the tagger dispatch, where it acts as a routing
+/// gate that decides whether the person tagger runs (see
+/// [`upgrade_ent_to_org`]).
 fn infer_part_tags(py: Python<'_>, name: &Py<Name>, symbols: bool, numerics: bool) -> PyResult<()> {
     // First pass: walk spans, collect numeric-symbol parts, promote
-    // ORG_CLASS-covered parts to LEGAL, upgrade ENT→ORG on a long
-    // ORG_CLASS span.
+    // ORG_CLASS-covered parts to LEGAL.
     let mut numeric_part_hashes: HashSet<isize> = HashSet::new();
-    let mut should_upgrade = false;
     {
         let name_ref = name.bind(py).borrow();
         let spans = name_ref.spans.bind(py);
@@ -230,22 +283,6 @@ fn infer_part_tags(py: Python<'_>, name: &Py<Name>, symbols: bool, numerics: boo
             let sym = span.symbol.bind(py).borrow();
             match sym.category {
                 SymbolCategory::ORG_CLASS => {
-                    if matches!(name_ref.tag, NameTypeTag::ENT) {
-                        let span_len: usize = span
-                            .parts
-                            .bind(py)
-                            .iter()
-                            .map(|p| {
-                                p.cast::<NamePart>()
-                                    .ok()
-                                    .map(|b| b.borrow().form_str().chars().count())
-                                    .unwrap_or(0)
-                            })
-                            .sum();
-                        if span_len > 2 {
-                            should_upgrade = true;
-                        }
-                    }
                     for p_item in span.parts.bind(py).iter() {
                         let part_b = p_item.cast::<NamePart>()?;
                         let part = part_b.borrow();
@@ -265,9 +302,6 @@ fn infer_part_tags(py: Python<'_>, name: &Py<Name>, symbols: bool, numerics: boo
                 _ => {}
             }
         }
-    }
-    if should_upgrade {
-        name.bind(py).borrow_mut().tag = NameTypeTag::ORG;
     }
 
     // Second pass: walk parts, promote UNSET numerics → NUM (+ NUMERIC

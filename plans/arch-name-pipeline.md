@@ -143,11 +143,18 @@ tags are supplied. The Rust implementation runs in
    parts looking for the token sequence (non-adjacent tolerated).
 7. **PER `INITIAL` symbol preamble** (gated by `symbols` and
    `infer_initials`).
-8. **Tagger match-and-apply** (gated by `symbols`): person tagger
-   for PER, org tagger for ORG/ENT.
-9. **`infer_part_tags` post-pass**: NUM/STOP/LEGAL promotion,
-   ENT→ORG upgrade if the name carries enough ORG_CLASS
-   evidence.
+8. **Tagger dispatch** (gated by `symbols`):
+   - PER: person tagger.
+   - ORG: org tagger.
+   - ENT: org tagger first; if its ORG_CLASS evidence trips the
+     `> 2` char threshold, set `tag = ORG` and stop. Otherwise
+     also run the person tagger and leave `tag = ENT`. The
+     structural ORG signal short-circuits the bag-of-names lookup
+     so a confirmed-ORG (e.g. "Eli Lilly LLP") doesn't get
+     sprinkled with person-name spans.
+9. **`infer_part_tags` post-pass**: NUM/STOP/LEGAL promotion. The
+   ENT→ORG upgrade has moved upstream into step 8 — it's now a
+   routing gate rather than a post-pass inference.
 10. **`consolidate_names`** if requested: drop names that are
     structurally contained in longer names in the result.
 

@@ -183,9 +183,19 @@ impl Name {
     /// downstream matching and inference can see which tokens the
     /// symbol covers. Every non-overlapping occurrence of `phrase`
     /// in the name gets its own `Span`.
+    ///
+    /// Idempotent on `(phrase, symbol)`: if any existing `Span` on
+    /// this name already carries the same symbol over the same
+    /// joined-form sequence, the call is a no-op. This keeps the
+    /// invariant "no duplicate `(phrase, symbol)` Spans" intact even
+    /// when more than one tagger fires on the same Name (e.g. the
+    /// org and person taggers both running on an `ENT` input).
     pub fn apply_phrase(&self, py: Python<'_>, phrase: &str, symbol: Py<Symbol>) -> PyResult<()> {
         let tokens: Vec<&str> = phrase.split(' ').collect();
         if tokens.is_empty() {
+            return Ok(());
+        }
+        if span_already_applied(py, &self.spans, &symbol, phrase)? {
             return Ok(());
         }
         let parts_bound = self.parts.bind(py);
@@ -222,6 +232,10 @@ impl Name {
         part: Py<NamePart>,
         symbol: Py<Symbol>,
     ) -> PyResult<()> {
+        let part_form = part.bind(py).borrow().form_str().to_string();
+        if span_already_applied(py, &self.spans, &symbol, &part_form)? {
+            return Ok(());
+        }
         let span = Span::new(py, vec![part], symbol)?;
         let span_py = Py::new(py, span)?;
         self.spans.bind(py).append(span_py)?;
@@ -433,4 +447,42 @@ fn hash_form(form: &str) -> isize {
     let mut hasher = DefaultHasher::new();
     form.hash(&mut hasher);
     hasher.finish() as isize
+}
+
+/// Has a `Span` carrying `symbol` over a parts sequence whose
+/// `form_str` join equals `phrase` already been appended?
+///
+/// Used by [`Name::apply_phrase`] / [`Name::apply_part`] to keep the
+/// invariant that no two `Span`s on the same `Name` share both a
+/// symbol and a parts-form sequence — needed once more than one
+/// tagger fires on the same `Name` (e.g. the org and person taggers
+/// both running on an `ENT` input).
+fn span_already_applied(
+    py: Python<'_>,
+    spans: &Py<PyList>,
+    symbol: &Py<Symbol>,
+    phrase: &str,
+) -> PyResult<bool> {
+    let target_symbol = symbol.bind(py).borrow();
+    let spans_bound = spans.bind(py);
+    for item in spans_bound.iter() {
+        let span = item.cast::<Span>()?.borrow();
+        let existing_symbol = span.symbol.bind(py).borrow();
+        if *existing_symbol != *target_symbol {
+            continue;
+        }
+        let parts_bound = span.parts.bind(py);
+        let mut joined = String::new();
+        for (idx, part_item) in parts_bound.iter().enumerate() {
+            if idx > 0 {
+                joined.push(' ');
+            }
+            let part = part_item.cast::<NamePart>()?.borrow();
+            joined.push_str(part.form_str());
+        }
+        if joined == phrase {
+            return Ok(true);
+        }
+    }
+    Ok(false)
 }
