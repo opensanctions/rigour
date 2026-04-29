@@ -1441,10 +1441,10 @@ phases gate on earlier ones.
      sorted, ready for `LazyLock<HashMap>` consumption from
      Rust). No Python emit — harness's Python prototype keeps
      an inline mirror until phase 3 retires it.
-   - **Pending:** `contrib/name_comparison/perf.py` —
-     timing-only runner (loop cases.csv 10x / 100x per
-     comparator, report wall time + per-comparison median).
-     Lets the Rust port show its perf win directly.
+   - ✅ `contrib/name_comparison/perf.py` — apples-to-apples
+     scoreboard combining accuracy (F1, P, R) with timing
+     (μs mean / p50 / p95) per comparator, plus a top-N%
+     slowest-cases leaderboard.
    - **Yente fixtures dropped from scope.** They run against
      real watchlist data, not (name1, name2, is_match) pairs;
      they don't fit the harness schema.
@@ -1475,7 +1475,7 @@ phases gate on earlier ones.
      family-name swaps on PER, middle-initial expansion)
      are explicitly **out of scope**.
 
-3. **Rust port (rigour).** ✅ **First port landed (sketch quality).**
+3. **Rust port (rigour).** ✅ **First port landed; parity essentially closed.**
    - ✅ `rust/src/names/compare.rs` — cost-folded
      Wagner-Fischer with traceback, alignment-walk for
      per-part cost streams + per-pair overlap, 0.51-overlap
@@ -1492,29 +1492,58 @@ phases gate on earlier ones.
      wrapper yet** — direct `_core.compare_parts` usage works
      fine for the harness; add the wrapper when the
      mkdocs-facing surface lands.
-   - ✅ 6 Rust unit tests (cost-table lookup, edit-cost tiers,
-     alignment basics, budget cap).
+   - ✅ 7 Rust unit tests (cost-table lookup, edit-cost tiers,
+     alignment basics, budget cap, transposition tie-break).
    - ✅ Harness adapter `comparators/compare_rust.py` registered
      as `compare_rust` in `COMPARATORS`. `orchestration.py`
      factored to take a `residue_fn` parameter; `compare_python`
      and `compare_rust` are sibling wrappers.
+   - ✅ **Tie-break landed**: cost-folded Wagner-Fischer in
+     Rust prefers one-sided edits (delete / insert) over
+     substitution on cost-tied paths. Principled choice — a
+     substitute step attributes cost to *both* sides, while
+     delete attributes only qry and insert only res. The
+     per-side budget cap in `_costs_similarity` cares about
+     distribution, not totals; the distributive alignment
+     respects that downstream accounting. Closes the
+     transposition-class typo gap (Donlad/Donald,
+     Olaf Schloz/Olaf Scholz, etc.).
 
-   **First-port numbers** at threshold 0.7 (cases.csv n=569):
+   **Numbers post-tie-break-fix** at threshold 0.7
+   (cases.csv n=569):
 
-   | Comparator     |    F1 |     P |     R |
-   |----------------|------:|------:|------:|
-   | compare_python | 0.707 | 0.590 | 0.883 |
-   | compare_rust   | 0.689 | 0.582 | 0.844 |
+   | Comparator     |    F1 |     P |     R | μs mean | μs p50 | μs p95 |
+   |----------------|------:|------:|------:|--------:|-------:|-------:|
+   | compare_python | 0.707 | 0.590 | 0.883 |    39.7 |   28.0 |   61.4 |
+   | compare_rust   | 0.708 | 0.589 | 0.888 |    35.1 |   23.3 |   53.9 |
+   | logicv2        | 0.715 | 0.599 | 0.888 |    92.7 |   81.3 |  119.1 |
 
-   **Parity status**: 12 cases out of 569 diverge. All are
-   tied-cost alignment paths where Python's rapidfuzz
-   `Levenshtein.opcodes` picks `insert+delete` and the Rust
-   cost-folded DP picks `replace+replace`. Both alignments
-   are mathematically optimal under their respective cost
-   models; the divergence is exactly the small drift the
-   spec's *Cost-folded DP* section warned about. The
-   typo-correction cluster (`Donlad/Donald`,
-   `Olaf Schloz/Olaf Scholz`) is the affected pattern.
+   **Parity status**: 2 case divergences out of 569. Same
+   total error count as compare_python (150 each); the
+   errors differ in pattern by 2 cases. Specifically:
+     - `nk_checks/130` "Osama bin Laden" vs expanded form
+       (is_match=true): **Rust correct (TP@0.732)**, Python
+       wrong (FN@0.528). Rust's distributive alignment
+       handles the long-form expansion better.
+     - `nk_checks/218` "BAE Systems, Inc." vs "BAE
+       Industries, Inc." (is_match=false): Rust wrong
+       (FP@0.708), Python correct (TN@0.630). The 0.51-overlap
+       clustering rule is sensitive to alignment-shape
+       changes — the new tie-break produces fewer Equal-step
+       chars between (systems, industries), so they don't
+       cluster as a paired-but-zero-score record. Solo
+       records (with extra-name penalty) drag the aggregate
+       down less than one paired-zero record. Symptom of a
+       fragile clustering rule, not a tie-break issue;
+       phase-2 spec iteration territory.
+
+   **Speed**: ~12% faster on mean, ~17% on p50, ~12% on p95
+   vs compare_python. Modest because the orchestration
+   (analyze_names, pair_symbols, weight policies, aggregate)
+   is shared Python code; only the residue function differs.
+   The big speedup pattern would require moving more
+   orchestration into Rust — out of scope per the
+   division-of-work principle.
 
    **Tentative location.** If the cost-folded DP later grows
    into a re-usable primitive over arbitrary char sequences,
@@ -1522,20 +1551,6 @@ phases gate on earlier ones.
    `rust/src/text/compare.rs` and `names/compare.rs` becomes
    the part-aware wrapper. Decide once spec iteration
    surfaces text-level reuse.
-
-   **Acceptance** (revised, given small drift is expected):
-   the open question is which side picks the
-   parity-tightening tie-breaker. Two options for closing the
-   12-case gap:
-     - (A) Match Python's tie-break in Rust (prefer
-       `insert+delete` on tied paths). Keeps the harness
-       diff at zero; locks the Rust side to a Python
-       artefact.
-     - (B) Accept Rust's choice as canonical (cleaner
-       semantics: cost-folded DP picks the alignment that
-       minimises *side-summed* cost). Re-pin Python prototype
-       to match.
-   Decide alongside spec-iteration outcomes.
 
 4. **Nomenklatura migration.**
    - Replace `weighted_edit_similarity`'s body with a wrapper
@@ -1652,6 +1667,16 @@ These show up in `cases.csv` failures but are out of scope:
   Optimisation work is sequenced after spec settles —
   premature optimisation against an algorithm that may still
   shift makes for wasted effort.
+- **DP tie-break: prefer one-sided edits (delete / insert)
+  over substitution on cost-tied paths.** Substitution
+  attributes cost to both sides simultaneously; delete and
+  insert attribute only one side per step. Same total work,
+  different per-side accounting. The per-side budget cap in
+  `_costs_similarity` cares about distribution, not totals,
+  so the distributive alignment respects that downstream
+  accounting. Closes the transposition-class typo gap
+  (Donlad/Donald, etc.) — without it Rust matched 12 fewer
+  cases than Python on cases.csv.
 - **Explicit out-of-scope failure modes.** Reverse-name
   cases, Western-convention reorder, family-name swap on
   PER, cross-script for non-latinizable scripts. Detail in
@@ -1738,6 +1763,18 @@ one variant + a harness re-run away from a number.
 - **Stopword down-weight curve.** Linear-in-fraction,
   threshold-when-any, or exponential decay. Small in
   practice; harness-driven.
+- **Clustering rule fragility.** The 0.51-overlap rule is
+  sensitive to alignment-shape changes — when the alignment
+  produces N+1 vs N Equal-step characters between two parts,
+  the cluster either forms (paired-but-zero-score record,
+  weight 1.0) or doesn't (two solo records with extra-name
+  weights). The two outcomes drag the orchestration aggregate
+  down by different amounts even though the underlying string
+  similarity is comparable. The phase-3 BAE Systems / BAE
+  Industries case is a concrete example. Replacing the
+  threshold with alignment-connectivity (per the spec's
+  Pairing rule section) should make this less fragile;
+  iterate on the harness.
 - **Cache or no cache.** Defer to production-shaped
   measurement; default no cache. Reintroduce at the
   `Comparison`-list granularity if hit rate justifies.
