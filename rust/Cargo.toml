@@ -46,7 +46,7 @@ rapidfuzz = "0.5"
 
 # LRU caches. Currently used for `maybe_ascii`'s per-thread result
 # cache. Tiny crate (~500 LoC, no deps), O(1) get/put.
-lru = "0.17"
+lru = "0.18"
 
 # Aho-Corasick automaton for the multi-needle string search used by
 # `names::matcher::Needles`, which backs org_types replacement, the
