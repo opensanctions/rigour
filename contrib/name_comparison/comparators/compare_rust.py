@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from typing import List
 
-from rigour._core import compare_parts as _rust_compare_parts
+from rigour.names import compare_parts as _rust_compare_parts
 
 # Reuse the orchestration's Comparison adapter. The Rust call returns
 # `rigour._core.Comparison` instances which expose `qps`, `rps`, `score`
