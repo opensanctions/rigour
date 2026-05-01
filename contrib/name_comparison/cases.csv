@@ -341,7 +341,7 @@ synth_companies,Company,Chevon Corporation,Chevron Corporation,true,MEDIUM,LLM-p
 synth_companies,Company,China Construction Trust Corporation,China Construction Bank Corporation,false,WEAK,LLM-proposed deviation,sector-word swap (Bank/Trust)
 synth_companies,Company,"Samsong Electronics Co., Ltd.","Samsung Electronics Co., Ltd.",true,MEDIUM,LLM-proposed deviation,Korean-Romanisation vowel sub
 synth_companies,Company,"Hon Wai Precision Industry Co., Ltd.","Hon Hai Precision Industry Co., Ltd.",true,MEDIUM,LLM-proposed deviation,plausible-alternate Cantonese name
-synth_companies,Company,The Sigma Group,The Cigna Group,true,MEDIUM,LLM-proposed deviation,Greek-letter near-homophone
+synth_companies,Company,The Sigma Group,The Cigna Group,false,MEDIUM,LLM-proposed deviation,Greek-letter near-homophone
 synth_companies,Company,Agriculture Bank of China Limited,Agricultural Bank of China Limited,true,MEDIUM,LLM-proposed deviation,morphological variant (noun/adjective)
 synth_companies,Company,Schwartz Gruppe,Schwarz Gruppe,true,MEDIUM,LLM-proposed deviation,Yiddish/German surname-spelling collision
 synth_companies,Company,China Railroad Engineering Corporation,China Railway Engineering Corporation,false,MEDIUM,LLM-proposed deviation,US/UK English synonym (Railroad/Railway)
