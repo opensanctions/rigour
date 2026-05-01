@@ -2222,6 +2222,8 @@ org_domains:
     - rasteniye
     - растение
     - usine
+    - werk
+    - werke
     - zavod
     - závod
     - завод
@@ -3087,6 +3089,21 @@ org_domains:
     - مصرف
     - bankacılık # Turkish
     - 银行 # Chinese (simplified)
+  motor:
+    - motor
+    - motors
+    - motoren
+    - motoru
+    - motorları
+    - motorlar
+    - motorlu
+    - мотор
+    - моторы
+    - моторный
+    - моторная
+    - моторные
+    - 发动机 # Chinese (simplified)
+    - 發動機 # Chinese (traditional)
   offshore:
     - offshore
     - ofshor
