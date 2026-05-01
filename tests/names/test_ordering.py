@@ -1,7 +1,7 @@
 from typing import List
 from rigour.names.name import Name
 from rigour.names.part import NamePart
-from rigour.names.alignment import align_person_name_order
+from rigour.names.ordering import align_person_name_order
 from rigour.names.tag import NamePartTag
 
 

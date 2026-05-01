@@ -8,11 +8,15 @@
 //! [`py_pair_symbols`]. The returned pairings carry the symbol
 //! edges; the matcher runs Levenshtein on the remainder.
 //!
-//! Each returned pairing is a non-conflicting set of edges whose
-//! joint coverage is maximal within its scoring-equivalence class.
-//! The empty pairing is a fallback emitted only when no symbol
-//! evidence is available on either side — callers that iterate
-//! can rely on the list being non-empty.
+//! Each returned pairing is a non-conflicting set of [`Alignment`]s
+//! whose joint coverage is maximal within its scoring-equivalence
+//! class. Each `Alignment` has `symbol = Some(_)` (the shared
+//! `Symbol` both sides carry) and a placeholder `score = 1.0` —
+//! consumers are expected to override the score with a per-category
+//! default (e.g. `NAME → 0.9`, `NICK → 0.6`) at the point they wrap
+//! the alignment for scoring. The empty pairing is a fallback
+//! emitted only when no symbol evidence is available on either side
+//! — callers that iterate can rely on the list being non-empty.
 
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
@@ -20,6 +24,7 @@ use std::sync::Arc;
 use pyo3::prelude::*;
 use pyo3::types::{PyList, PyTuple};
 
+use crate::names::alignment::Alignment;
 use crate::names::name::Name;
 use crate::names::part::{NamePart, Span};
 use crate::names::symbol::{Symbol, SymbolCategory};
@@ -60,25 +65,6 @@ struct Edge {
     qmask: u64,
     rmask: u64,
     symbol: Symbol,
-}
-
-/// One paired span in a returned pairing — the Rust-side
-/// representation Python wraps as `SymbolEdge`.
-///
-/// `query_parts` / `result_parts` are `NamePart` index tuples
-/// into the input names' `parts` attributes; `symbol` is the
-/// shared [`Symbol`] both sides carry.
-#[pyclass(module = "rigour._core", frozen)]
-pub struct PairedEdge {
-    /// Indices into `query.parts` covered by this edge, ascending.
-    #[pyo3(get)]
-    pub query_parts: Py<PyTuple>,
-    /// Indices into `result.parts` covered by this edge, ascending.
-    #[pyo3(get)]
-    pub result_parts: Py<PyTuple>,
-    /// The shared `Symbol` both sides carry.
-    #[pyo3(get)]
-    pub symbol: Py<Symbol>,
 }
 
 /// Flatten a [`Name`]'s tagger spans into pairing-ready
@@ -373,32 +359,51 @@ fn mask_to_part_vec(mut mask: u64) -> Vec<u32> {
 }
 
 /// Convert a coverage selection into a Python tuple of
-/// [`PairedEdge`] instances. Re-uses the tagger's `Py<Symbol>`
-/// objects so two edges carrying the same symbol compare as
-/// `is`-equal on the Python side.
+/// [`Alignment`] instances. Re-uses the tagger's `Py<Symbol>`
+/// objects so two alignments carrying the same symbol compare
+/// as `is`-equal on the Python side. Resolves part-index
+/// bitmasks against the input names' `parts` tuples to fill
+/// each alignment's `qps` / `rps` with the actual `NamePart`
+/// references.
 fn build_pairing(
     py: Python<'_>,
     edges: &[Edge],
     indices: &[usize],
     q_symbols: &HashMap<Symbol, Py<Symbol>>,
+    query_parts: &Bound<'_, PyTuple>,
+    result_parts: &Bound<'_, PyTuple>,
 ) -> PyResult<Py<PyTuple>> {
-    let mut edge_objs: Vec<Py<PairedEdge>> = Vec::with_capacity(indices.len());
+    let mut edge_objs: Vec<Py<Alignment>> = Vec::with_capacity(indices.len());
     for &i in indices {
         let e = &edges[i];
-        let qparts_tuple = PyTuple::new(py, mask_to_part_vec(e.qmask))?.unbind();
-        let rparts_tuple = PyTuple::new(py, mask_to_part_vec(e.rmask))?.unbind();
+        let qparts: Vec<Py<NamePart>> = mask_to_part_vec(e.qmask)
+            .into_iter()
+            .map(|idx| -> PyResult<Py<NamePart>> {
+                Ok(query_parts
+                    .get_item(idx as usize)?
+                    .cast::<NamePart>()?
+                    .clone()
+                    .unbind())
+            })
+            .collect::<PyResult<_>>()?;
+        let rparts: Vec<Py<NamePart>> = mask_to_part_vec(e.rmask)
+            .into_iter()
+            .map(|idx| -> PyResult<Py<NamePart>> {
+                Ok(result_parts
+                    .get_item(idx as usize)?
+                    .cast::<NamePart>()?
+                    .clone()
+                    .unbind())
+            })
+            .collect::<PyResult<_>>()?;
         // Every edge.symbol came from a query span, so q_symbols
         // has it by construction.
         let symbol_py = q_symbols
             .get(&e.symbol)
             .expect("edge.symbol must come from q_symbols")
             .clone_ref(py);
-        let edge = PairedEdge {
-            query_parts: qparts_tuple,
-            result_parts: rparts_tuple,
-            symbol: symbol_py,
-        };
-        edge_objs.push(Py::new(py, edge)?);
+        let alignment = Alignment::build(py, qparts, rparts, Some(symbol_py), 1.0)?;
+        edge_objs.push(Py::new(py, alignment)?);
     }
     Ok(PyTuple::new(py, &edge_objs)?.unbind())
 }
@@ -407,8 +412,11 @@ fn build_pairing(
 /// pairings.
 ///
 /// Each returned pairing is a tuple of non-conflicting
-/// [`PairedEdge`]s; edges within a pairing cover disjoint parts
-/// on each side. Pairings are distinguished by their coverage and
+/// [`Alignment`]s; edges within a pairing cover disjoint parts on
+/// each side. Each `Alignment` has `symbol = Some(_)` and a
+/// placeholder `score = 1.0` — consumers should override the
+/// score with a per-category default before composing the pairing
+/// total. Pairings are distinguished by their coverage and
 /// category multiset — two pairings that cover the same parts
 /// with the same category mix are collapsed to one. Distinct
 /// category choices on the same parts (e.g. a token carrying both
@@ -424,8 +432,10 @@ pub fn py_pair_symbols(
     query: PyRef<'_, Name>,
     result: PyRef<'_, Name>,
 ) -> PyResult<Py<PyList>> {
-    let q_parts_len = query.parts.bind(py).len();
-    let r_parts_len = result.parts.bind(py).len();
+    let query_parts = query.parts.bind(py);
+    let result_parts = result.parts.bind(py);
+    let q_parts_len = query_parts.len();
+    let r_parts_len = result_parts.len();
     if q_parts_len > MAX_PARTS || r_parts_len > MAX_PARTS {
         return empty_output(py);
     }
@@ -443,9 +453,11 @@ pub fn py_pair_symbols(
 
     let coverings = enumerate_coverings(&edges);
 
+    let qp_ref = &query_parts;
+    let rp_ref = &result_parts;
     let pairings: Vec<Py<PyTuple>> = coverings
         .iter()
-        .map(|indices| build_pairing(py, &edges, indices, &q_symbols))
+        .map(|indices| build_pairing(py, &edges, indices, &q_symbols, qp_ref, rp_ref))
         .collect::<PyResult<Vec<_>>>()?;
 
     Ok(PyList::new(py, &pairings)?.unbind())

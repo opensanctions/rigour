@@ -279,12 +279,12 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_territories_jsonl, m)?)?;
     m.add_function(wrap_pyfunction!(names::analyze::py_analyze_names, m)?)?;
     m.add_function(wrap_pyfunction!(
-        names::alignment::py_align_person_name_order,
+        names::ordering::py_align_person_name_order,
         m
     )?)?;
     m.add_function(wrap_pyfunction!(names::pairing::py_pair_symbols, m)?)?;
     m.add_function(wrap_pyfunction!(names::compare::py_compare_parts, m)?)?;
-    m.add_class::<names::compare::Comparison>()?;
+    m.add_class::<names::alignment::Alignment>()?;
     m.add_class::<names::symbol::Symbol>()?;
     m.add_class::<names::symbol::SymbolCategory>()?;
     m.add_class::<names::tag::NameTypeTag>()?;
@@ -292,6 +292,5 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<names::part::NamePart>()?;
     m.add_class::<names::part::Span>()?;
     m.add_class::<names::name::Name>()?;
-    m.add_class::<names::pairing::PairedEdge>()?;
     Ok(())
 }

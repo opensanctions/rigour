@@ -1,6 +1,6 @@
 from typing import List
 
-from rigour.names.compare import Comparison, compare_parts
+from rigour.names.compare import Alignment, compare_parts
 from rigour.names.part import NamePart
 
 
@@ -124,7 +124,7 @@ def test_token_merge_is_cheap() -> None:
 
 
 def test_score_is_in_unit_interval() -> None:
-    # Across a few shapes, every Comparison's score must be in [0, 1].
+    # Across a few shapes, every Alignment's score must be in [0, 1].
     fixtures = [
         (parts("john", "smith"), parts("jon", "smyth")),
         (parts("vladimir"), parts("vladimer")),
@@ -137,7 +137,7 @@ def test_score_is_in_unit_interval() -> None:
 
 
 def test_part_object_identity_preserved() -> None:
-    # The Comparison's qps / rps reference the same NamePart objects
+    # The Alignment's qps / rps reference the same NamePart objects
     # the caller passed in — callers rely on identity to look back into
     # their own metadata.
     p_qry = NamePart("vladimir", 0)
@@ -148,18 +148,32 @@ def test_part_object_identity_preserved() -> None:
     assert out[0].rps[0] is p_res
 
 
+def test_residue_alignment_has_no_symbol() -> None:
+    # compare_parts produces residue-distance alignments; symbol is None.
+    out = compare_parts(parts("john"), parts("john"))
+    assert len(out) == 1
+    assert out[0].symbol is None
+
+
+def test_qstr_rstr_cached() -> None:
+    # qstr / rstr are space-joined comparable forms, precomputed.
+    out = compare_parts(parts("john", "smith"), parts("john", "smith"))
+    assert any(a.qstr == "john" and a.rstr == "john" for a in out)
+    assert any(a.qstr == "smith" and a.rstr == "smith" for a in out)
+
+
 def test_repr_shape() -> None:
     out = compare_parts(parts("john"), parts("john"))
     assert len(out) == 1
     r = repr(out[0])
-    assert r.startswith("<Comparison(")
+    assert r.startswith("<Alignment(")
     assert "score=" in r
 
 
-def test_comparison_is_importable_from_public_module() -> None:
+def test_alignment_is_importable_from_public_module() -> None:
     # Productized surface check: both names are reachable from
     # `rigour.names` itself, not just `rigour.names.compare`.
-    from rigour.names import Comparison as Top, compare_parts as top_fn
+    from rigour.names import Alignment as Top, compare_parts as top_fn
 
-    assert Top is Comparison
+    assert Top is Alignment
     assert top_fn is compare_parts

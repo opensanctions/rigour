@@ -10,6 +10,8 @@ pub mod compare;
 pub mod matcher;
 #[cfg(feature = "python")]
 pub mod name;
+#[cfg(feature = "python")]
+pub mod ordering;
 pub mod org_types;
 #[cfg(feature = "python")]
 pub mod pairing;

@@ -7,10 +7,13 @@
 //! transliteration drift, or surface-form variants of the same
 //! token.
 //!
-//! The function returns one [`Comparison`] per cluster of aligned
+//! The function returns one [`Alignment`] per cluster of aligned
 //! parts (paired or solo). Every input part appears in exactly one
-//! `Comparison`, so a caller can sum / weight / threshold the result
-//! without losing track of which inputs got accounted for.
+//! alignment, so a caller can sum / weight / threshold the result
+//! without losing track of which inputs got accounted for. Returned
+//! alignments carry `symbol = None` (residue distance is non-symbolic
+//! by definition); the per-cluster `score` is the product of per-side
+//! similarities, capped at zero by the length-dependent budget.
 //!
 //! Three concerns are folded into one call: how characters of
 //! one side line up against the other (alignment), which parts
@@ -35,8 +38,9 @@ use std::collections::{HashMap, HashSet};
 use std::sync::LazyLock;
 
 use pyo3::prelude::*;
-use pyo3::types::PyTuple;
 use serde::Deserialize;
+
+use crate::names::alignment::Alignment;
 
 use crate::names::part::NamePart;
 
@@ -379,10 +383,13 @@ fn run_align(qry_comparable: &[String], res_comparable: &[String]) -> AlignmentD
     for step in &steps {
         let qc = step.qc;
         let rc = step.rc;
-        if step.op == Op::Equal {
-            if qc.is_some() && qc != Some(SEP) && rc.is_some() && rc != Some(SEP) {
-                *overlaps.entry((qry_idx, res_idx)).or_insert(0) += 1;
-            }
+        if step.op == Op::Equal
+            && qc.is_some()
+            && qc != Some(SEP)
+            && rc.is_some()
+            && rc != Some(SEP)
+        {
+            *overlaps.entry((qry_idx, res_idx)).or_insert(0) += 1;
         }
         let cost = edit_cost(step.op, qc, rc);
         if let Some(c) = qc {
@@ -578,44 +585,6 @@ fn run_score(cluster: &Cluster, align: &AlignmentData, fuzzy_tolerance: f64) -> 
     costs_similarity(&q_costs, fuzzy_tolerance) * costs_similarity(&r_costs, fuzzy_tolerance)
 }
 
-// --- Comparison pyclass --------------------------------------------
-
-/// One cluster from the [`py_compare_parts`] return — either a
-/// paired record where parts on both sides aligned, or a solo
-/// record where a part went unaccounted-for.
-///
-/// Every input `NamePart` appears in exactly one `Comparison`,
-/// which is what lets a caller iterate the result and compute a
-/// total — the paired clusters carry positive evidence, the solo
-/// clusters carry the "unexplained part" penalty.
-///
-/// `qps` and `rps` reference the same `NamePart` Python objects
-/// the caller passed in, so identity is preserved across the
-/// boundary.
-#[pyclass(module = "rigour._core")]
-pub struct Comparison {
-    #[pyo3(get)]
-    pub qps: Py<PyTuple>,
-    #[pyo3(get)]
-    pub rps: Py<PyTuple>,
-    /// Similarity in `[0, 1]`. `0.0` for solo clusters; otherwise the
-    /// product of per-side similarities (see `run_score` for shape).
-    #[pyo3(get)]
-    pub score: f64,
-}
-
-#[pymethods]
-impl Comparison {
-    fn __repr__(&self, py: Python<'_>) -> PyResult<String> {
-        let qps_repr: String = self.qps.bind(py).repr()?.extract()?;
-        let rps_repr: String = self.rps.bind(py).repr()?.extract()?;
-        Ok(format!(
-            "<Comparison(qps={}, rps={}, score={:.4})>",
-            qps_repr, rps_repr, self.score
-        ))
-    }
-}
-
 // --- Public entry point --------------------------------------------
 
 /// Score the alignment of two `NamePart` lists.
@@ -624,8 +593,10 @@ impl Comparison {
 /// (symbol pairing, alias tagging, identifier matching) couldn't
 /// explain by themselves — already canonicalised into positional
 /// order (`tag_sort` for ORG/ENT, `align_person_name_order` for PER).
-/// The function returns one [`Comparison`] per cluster, paired or
+/// The function returns one [`Alignment`] per cluster, paired or
 /// solo; every input part appears exactly once across the output.
+/// Returned alignments carry `symbol = None` (residue distance is
+/// non-symbolic by definition).
 ///
 /// `fuzzy_tolerance` rescales the per-side cost budget. Higher = more permissive
 /// (KYC-onboarding profile); lower = stricter (payment-screening
@@ -638,7 +609,7 @@ pub fn py_compare_parts(
     qry: Vec<Py<NamePart>>,
     res: Vec<Py<NamePart>>,
     fuzzy_tolerance: f64,
-) -> PyResult<Vec<Py<Comparison>>> {
+) -> PyResult<Vec<Py<Alignment>>> {
     let n_q = qry.len();
     let n_r = res.len();
 
@@ -665,21 +636,15 @@ pub fn py_compare_parts(
     let align = run_align(&q_comparable, &r_comparable);
     let clusters = run_cluster(&align, &q_lengths, &r_lengths, n_q, n_r);
 
-    let mut out: Vec<Py<Comparison>> = Vec::with_capacity(clusters.len());
+    let mut out: Vec<Py<Alignment>> = Vec::with_capacity(clusters.len());
     for cluster in &clusters {
         let score = run_score(cluster, &align, fuzzy_tolerance);
         let qps_parts: Vec<Py<NamePart>> =
             cluster.qps.iter().map(|&i| qry[i].clone_ref(py)).collect();
         let rps_parts: Vec<Py<NamePart>> =
             cluster.rps.iter().map(|&i| res[i].clone_ref(py)).collect();
-        let qps_tuple = PyTuple::new(py, &qps_parts)?.unbind();
-        let rps_tuple = PyTuple::new(py, &rps_parts)?.unbind();
-        let comp = Comparison {
-            qps: qps_tuple,
-            rps: rps_tuple,
-            score,
-        };
-        out.push(Py::new(py, comp)?);
+        let alignment = Alignment::build(py, qps_parts, rps_parts, None, score)?;
+        out.push(Py::new(py, alignment)?);
     }
     Ok(out)
 }

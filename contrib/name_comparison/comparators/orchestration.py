@@ -115,8 +115,8 @@ def _match_name_symbolic(
         for edge in edges:
             records.append(
                 _Record(
-                    qps=list(edge.query_parts),
-                    rps=list(edge.result_parts),
+                    qps=list(edge.qps),
+                    rps=list(edge.rps),
                     score=SYM_SCORES.get(edge.symbol.category, 1.0),
                     weight=SYM_WEIGHTS.get(edge.symbol.category, 1.0),
                     symbol=edge.symbol,
@@ -125,8 +125,8 @@ def _match_name_symbolic(
 
         # Stage 2: residue — parts not covered by any edge in this
         # pairing. Run them through compare_parts_orig.
-        query_used: Set[NamePart] = {p for edge in edges for p in edge.query_parts}
-        result_used: Set[NamePart] = {p for edge in edges for p in edge.result_parts}
+        query_used: Set[NamePart] = {p for edge in edges for p in edge.qps}
+        result_used: Set[NamePart] = {p for edge in edges for p in edge.rps}
         query_rem = [p for p in query.parts if p not in query_used]
         result_rem = [p for p in result.parts if p not in result_used]
 

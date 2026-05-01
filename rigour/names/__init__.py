@@ -13,7 +13,7 @@ is used to represent individual parts of a name, such as the first name, middle 
 """
 
 from rigour.names.name import Name
-from rigour.names.symbol import Symbol, SymbolCategory, SymbolEdge, pair_symbols
+from rigour.names.symbol import Symbol, SymbolCategory, pair_symbols
 from rigour.names.part import NamePart, Span
 from rigour.names.tag import NamePartTag, NameTypeTag
 from rigour.names.pick import pick_name, pick_case, reduce_names
@@ -23,11 +23,11 @@ from rigour.names.tokenize import tokenize_name, normalize_name
 from rigour.names.prefix import remove_person_prefixes, remove_org_prefixes
 from rigour.names.prefix import remove_obj_prefixes
 from rigour.names.analyze import analyze_names
-from rigour.names.compare import Comparison, compare_parts
+from rigour.names.compare import Alignment, compare_parts
 from rigour.names.org_types import replace_org_types_display
 from rigour.names.org_types import replace_org_types_compare
 from rigour.names.org_types import extract_org_types, remove_org_types
-from rigour.names.alignment import align_person_name_order
+from rigour.names.ordering import align_person_name_order
 from rigour.names.split_phrases import contains_split_phrase
 
 __all__ = [
@@ -42,7 +42,6 @@ __all__ = [
     "Name",
     "Symbol",
     "SymbolCategory",
-    "SymbolEdge",
     "pair_symbols",
     "Span",
     "NamePart",
@@ -57,7 +56,7 @@ __all__ = [
     "extract_org_types",
     "remove_org_types",
     "analyze_names",
-    "Comparison",
+    "Alignment",
     "compare_parts",
     "contains_split_phrase",
 ]

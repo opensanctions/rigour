@@ -6,10 +6,13 @@ means — symbol pairing, alias tagging, identifier hits — and is left
 with a residue that needs a fuzzy-match verdict (typo, transliteration
 drift, surface-form variants of the same token).
 
-The function returns one [Comparison][rigour.names.compare.Comparison]
-per cluster of aligned parts (paired or solo). Every input part appears
-in exactly one `Comparison`, so a caller can sum / weight / threshold
-the result without losing track of which inputs got accounted for.
+The function returns one
+[Alignment][rigour.names.compare.Alignment] per cluster of aligned
+parts (paired or solo). Every input part appears in exactly one
+alignment, so a caller can sum / weight / threshold the result
+without losing track of which inputs got accounted for. Returned
+alignments carry `symbol = None` (residue distance is non-symbolic
+by definition).
 
 The cost model penalises digit mismatches more than letter mismatches,
 treats visually / phonetically confusable pairs (`0`/`o`, `1`/`l`,
@@ -24,6 +27,6 @@ permissive (KYC-onboarding profile); lower = stricter (payment-
 screening profile).
 """
 
-from rigour._core import Comparison, compare_parts
+from rigour._core import Alignment, compare_parts
 
-__all__ = ["Comparison", "compare_parts"]
+__all__ = ["Alignment", "compare_parts"]

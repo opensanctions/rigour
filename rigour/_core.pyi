@@ -211,42 +211,49 @@ def align_person_name_order(
 ) -> tuple[list[NamePart], list[NamePart]]: ...
 
 
-class PairedEdge:
-    """Rust-side representation of one paired span in a pairing.
+class Alignment:
+    """One unit of name-comparison evidence.
 
-    Prefer the higher-level `rigour.names.symbol.pair_symbols`
-    wrapper, which returns `SymbolEdge` dataclasses with resolved
-    `NamePart` references; this pyclass exposes raw part indices
-    (`int`s) and is primarily useful when calling the Rust entry
-    point directly.
-    """
+    Three modes:
 
-    @property
-    def query_parts(self) -> tuple[int, ...]: ...
-    @property
-    def result_parts(self) -> tuple[int, ...]: ...
-    @property
-    def symbol(self) -> Symbol: ...
+    - **Symbol-paired edge** — `symbol` is set; both sides carry
+      the same `Symbol`. Returned by `pair_symbols`. Default
+      `score` is `1.0`; consumers may override with a category
+      default (e.g. `SYM_SCORES[NAME] = 0.9`).
+    - **Residue cluster** — `symbol` is `None`, both sides
+      non-empty. Returned by `compare_parts` for parts that
+      aligned by edit distance.
+    - **Extra** — `symbol` is `None`, exactly one side is empty.
+      Represents a part that found no counterpart on the other
+      side; the matcher applies a side-specific weight.
 
-
-def pair_symbols(query: Name, result: Name) -> list[tuple[PairedEdge, ...]]: ...
-
-
-class Comparison:
-    """One residue-distance cluster.
-
-    Either a paired record (both `qps` and `rps` non-empty) or a solo
-    record (one side empty, the other a single part). Returned by
-    [compare_parts][rigour._core.compare_parts].
+    `qstr` / `rstr` are the space-joined `comparable` forms of
+    each side, precomputed at construction. `__hash__` and
+    `__eq__` key on `(symbol, qps, rps)` — `NamePart` already
+    hashes by `(index, form)`, so position is preserved.
     """
 
     qps: tuple[NamePart, ...]
     rps: tuple[NamePart, ...]
+    symbol: Symbol | None
     score: float
+    qstr: str
+    rstr: str
+
+    def __init__(
+        self,
+        qps: list[NamePart] | tuple[NamePart, ...],
+        rps: list[NamePart] | tuple[NamePart, ...],
+        symbol: Symbol | None = None,
+        score: float = 0.0,
+    ) -> None: ...
+
+
+def pair_symbols(query: Name, result: Name) -> list[tuple[Alignment, ...]]: ...
 
 
 def compare_parts(
     qry: list[NamePart],
     res: list[NamePart],
     fuzzy_tolerance: float = 1.0,
-) -> list[Comparison]: ...
+) -> list[Alignment]: ...
