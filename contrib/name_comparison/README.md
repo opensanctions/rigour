@@ -5,10 +5,10 @@ under `rigour/names/compare.py`. Loads labelled name pairs from
 `cases.csv`, runs them through a comparator, and prints a
 confusion matrix sliced by case group and category.
 
-The design context lives in `plans/weighted-distance.md` (this
-harness is phase 1 of the migration path) and
-`plans/name-screening.md` (industry context on how scores are
-interpreted).
+The design context lives in `plans/weighted-distance.md`
+(this harness drove phases 1–4 of the residue-distance migration
+into Rust) and `plans/name-screening.md` (industry context on
+how scores are interpreted).
 
 ## Files
 
@@ -36,8 +36,12 @@ interpreted).
 | Name | What it runs |
 |---|---|
 | `levenshtein` | naive Levenshtein similarity over casefolded strings — the unconditional floor |
-| `compare_python` | full Python pipeline: `analyze_names` → `pair_symbols` → `compare_parts_orig` (residue) → weight policies → aggregate. Mirror of `match_name_symbolic`. |
 | `logicv2` | actual `nomenklatura.matching.logic_v2.LogicV2.compare` — soft-deps; only registered if nomenklatura is importable. The reference; freeze via `--frozen`. |
+
+The Phase-3 spec-validation comparators (`compare_python`,
+`compare_rust`) have been retired now that nomenklatura adopts
+`rigour.names.compare_parts` directly — `logicv2` covers the
+end-to-end behaviour they were validating.
 
 ## Running
 
@@ -45,15 +49,15 @@ interpreted).
 # from the rigour repo root
 
 # Run a comparator, store + summarise.
-python contrib/name_comparison/run.py -c compare_python
+python contrib/name_comparison/run.py -c logicv2
 
 # Re-summarise a stored run at a tighter threshold.
 python contrib/name_comparison/run.py \
-    -s contrib/name_comparison/run_data/compare_python-20260428-172833.csv \
+    -s contrib/name_comparison/run_data/logicv2-20260501-104607.csv \
     -t 0.85
 
 # Run quietly (just dump, no console summary).
-python contrib/name_comparison/run.py -c compare_python --quiet
+python contrib/name_comparison/run.py -c logicv2 --quiet
 
 # Re-freeze the logic_v2 reference (rare — only when logic_v2
 # changes upstream).
@@ -62,13 +66,13 @@ python contrib/name_comparison/run.py -c logicv2 --frozen
 # Diff a new run against the frozen logic_v2 reference.
 qsv diff \
     contrib/name_comparison/run_data/logicv2-frozen.csv \
-    contrib/name_comparison/run_data/compare_python-20260428-172833.csv
+    contrib/name_comparison/run_data/logicv2-20260501-104607.csv
 
 # Time all comparators (10 runs per case).
 python contrib/name_comparison/perf.py
 
 # Time only one comparator with a longer run.
-python contrib/name_comparison/perf.py -c compare_python --runs 100
+python contrib/name_comparison/perf.py -c logicv2 --runs 100
 
 # Show the top 10% slowest cases.
 python contrib/name_comparison/perf.py --top-slow-pct 10

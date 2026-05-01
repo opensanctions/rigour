@@ -402,7 +402,7 @@ fn build_pairing(
             .get(&e.symbol)
             .expect("edge.symbol must come from q_symbols")
             .clone_ref(py);
-        let alignment = Alignment::build(py, qparts, rparts, Some(symbol_py), 1.0)?;
+        let alignment = Alignment::build(py, qparts, rparts, Some(symbol_py), 1.0, 1.0)?;
         edge_objs.push(Py::new(py, alignment)?);
     }
     Ok(PyTuple::new(py, &edge_objs)?.unbind())

@@ -227,16 +227,23 @@ class Alignment:
       Represents a part that found no counterpart on the other
       side; the matcher applies a side-specific weight.
 
+    `qps` / `rps` / `symbol` / `qstr` / `rstr` are immutable
+    post-construction. `score` and `weight` are mutable so the
+    matcher can apply policy passes (literal-equality rescue,
+    extras-weight override, family-name boost) in place.
+
     `qstr` / `rstr` are the space-joined `comparable` forms of
     each side, precomputed at construction. `__hash__` and
     `__eq__` key on `(symbol, qps, rps)` — `NamePart` already
-    hashes by `(index, form)`, so position is preserved.
+    hashes by `(index, form)`, so position is preserved. `score`
+    and `weight` are not part of identity.
     """
 
     qps: tuple[NamePart, ...]
     rps: tuple[NamePart, ...]
     symbol: Symbol | None
     score: float
+    weight: float
     qstr: str
     rstr: str
 
@@ -246,6 +253,7 @@ class Alignment:
         rps: list[NamePart] | tuple[NamePart, ...],
         symbol: Symbol | None = None,
         score: float = 0.0,
+        weight: float = 1.0,
     ) -> None: ...
 
 

@@ -643,7 +643,7 @@ pub fn py_compare_parts(
             cluster.qps.iter().map(|&i| qry[i].clone_ref(py)).collect();
         let rps_parts: Vec<Py<NamePart>> =
             cluster.rps.iter().map(|&i| res[i].clone_ref(py)).collect();
-        let alignment = Alignment::build(py, qps_parts, rps_parts, None, score)?;
+        let alignment = Alignment::build(py, qps_parts, rps_parts, None, score, 1.0)?;
         out.push(Py::new(py, alignment)?);
     }
     Ok(out)

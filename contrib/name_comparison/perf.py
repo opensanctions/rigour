@@ -10,7 +10,7 @@ Usage:
 
     python contrib/name_comparison/perf.py
     python contrib/name_comparison/perf.py --runs 100
-    python contrib/name_comparison/perf.py -c compare_python -c logicv2
+    python contrib/name_comparison/perf.py -c logicv2 -c levenshtein
     python contrib/name_comparison/perf.py --top-slow-pct 10
 """
 

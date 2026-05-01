@@ -1,6 +1,6 @@
 ---
-description: Migrate nomenklatura's name-part weighted_edit_similarity onto rigour's Rust compare_parts primitive. Phases 1–3 (harness, spec, Rust port + productisation) have landed; phase 4 (nomenklatura migration), phase 5 (production validation), and the open spec / magic-number tuning are tracked here.
-date: 2026-04-30
+description: Migrate nomenklatura's name-part weighted_edit_similarity onto rigour's Rust compare_parts primitive. Phases 1–4 shipped; phase 5 (production validation) and the open spec / magic-number tuning are tracked here.
+date: 2026-05-01
 tags: [rigour, nomenklatura, names, distance, migration]
 status: in-progress
 ---
@@ -20,17 +20,17 @@ what's shipped vs. what's still open.
 
 | Phase | Status | Notes |
 |---|---|---|
-| 1. Harness + Python baseline | ✅ shipped | `contrib/name_comparison/` with 813-row `cases.csv`, accuracy + perf runners, comparator registry. |
+| 1. Harness + Python baseline | ✅ shipped | `contrib/name_comparison/` with 818-row `cases.csv`, accuracy + perf runners, comparator registry. |
 | 2. Spec iteration | ⚠ partial | One round (DP tie-break) shipped. Combination function, budget shape, clustering rule, stopword curve still open. |
-| 3. Rust port + productisation | ✅ shipped | `rigour.names.compare_parts` + `Comparison`, mkdocs page, 15 Python unit tests, harness adapter. |
-| 4. Nomenklatura migration | ☐ open | Replace `weighted_edit_similarity`'s body with a wrapper over `rigour.names.compare_parts`. |
+| 3. Rust port + productisation | ✅ shipped | `rigour.names.compare_parts` returning `Alignment`, mkdocs page, 17 Python unit tests. |
+| 4. Nomenklatura migration | ✅ shipped | `weighted_edit_similarity` is now a thin wrapper over `rigour.names.compare_parts`; phase-3 shadow comparators (`compare_python`, `compare_rust`) retired. |
 | 5. Production validation | ☐ open | Yente-shaped run; cache decision based on production hit rate. |
 
 ## What landed
 
 ### Phase 1 — harness (`contrib/name_comparison/`)
 
-- `cases.csv`: 813 labelled name pairs across 5 case_groups
+- `cases.csv`: 818 labelled name pairs across 5 case_groups
   (`nk_checks`, `nk_unit_tests`, `synth_companies`,
   `synth_corp_positives`, `synth_people`). Schema: `case_group,
   case_id, schema, name1, name2, is_match, quality, category, notes`.
@@ -40,15 +40,11 @@ what's shipped vs. what's still open.
   and per-`category` slices, top-N FP/FN by score margin.
 - `perf.py`: timing harness with apples-to-apples scoreboard (F1, P,
   R, μs mean / p50 / p95 / total ms) and slowest-case leaderboard.
-- `comparators/` registry: `levenshtein`, `compare_python`,
-  `compare_rust`, `logicv2` (frozen reference, soft-deps on
-  nomenklatura).
-- `policies.py`: lifted SYM_SCORES, SYM_WEIGHTS, EXTRAS_WEIGHTS,
-  weight_extra_match plus the four ScoringConfig defaults from
-  logic_v2.
-- `orchestration.py`: simplified `match_name_symbolic`-shape pipeline
-  parameterised on `residue_fn`, so `compare_python` and
-  `compare_rust` are sibling wrappers around the same orchestration.
+- `comparators/` registry: `levenshtein`, `logicv2`. The Phase-3
+  spec-validation comparators (`compare_python`, `compare_rust`)
+  and their backing Python prototype + lifted-policy modules were
+  retired post-Phase-4 — `logicv2` covers the end-to-end behaviour
+  they were validating.
 
 ### Phase 2 — spec iteration (partial)
 
@@ -65,70 +61,69 @@ what's shipped vs. what's still open.
   traceback, alignment-walk for per-part cost streams + per-pair
   overlap, 0.51-overlap clustering with transitive closure,
   product-of-side-similarities scoring with log-budget cap.
-- `Comparison` is a Rust pyclass with frozen `(qps, rps, score)`
-  shape; FFI returns `Vec<Py<Comparison>>`.
+- Returns the unified `Alignment` pyclass (qps, rps, symbol=None,
+  score, qstr, rstr — see `arch-name-pipeline.md` § Alignment).
+  FFI returns `Vec<Py<Alignment>>`.
 - Reads SIMILAR_PAIRS from `rust/data/names/compare.json` via
   `LazyLock<HashSet>`. Source YAML at `resources/names/compare.yml`,
   emitted by `genscripts/generate_names.py:generate_compare_file`.
 - 7 Rust unit tests (cost-table lookup, edit-cost tiers, alignment
   basics, budget cap, transposition tie-break).
 - **Public surface**: `rigour/names/compare.py` re-exports
-  `compare_parts` and `Comparison` from `_core`; both are reachable
+  `compare_parts` and `Alignment` from `_core`; both are reachable
   from `rigour.names`. mkdocs entry at `docs/names.md`.
-- **Python tests**: 15 cases in `tests/names/test_compare.py`
+- **Python tests**: 17 cases in `tests/names/test_compare.py`
   covering empty inputs, identical-pair → 1.0, fuzzy edit, budget
   cliff, confusable / digit cost tiers, fuzzy_tolerance scaling,
   short-token fail-closed, token merge cheap, score in [0, 1],
-  object identity preserved, repr shape, public-module reachability.
-- Harness adapter `comparators/compare_rust.py` registered in
-  `COMPARATORS`; uses public `rigour.names.compare_parts` (not
-  `_core`).
-
-### Numbers post-productisation (cases.csv n=813, threshold 0.7)
-
-| Comparator     |    F1 |     P |     R | μs mean | μs p50 | μs p95 | total ms |
-|----------------|------:|------:|------:|--------:|-------:|-------:|---------:|
-| compare_rust   | 0.790 | 0.758 | 0.824 |    32.6 |   26.6 |   71.2 |     26.5 |
-| logicv2        | 0.789 | 0.762 | 0.819 |    88.5 |   84.0 |  134.5 |     72.0 |
-
-**~2.7× faster end-to-end vs. logic_v2** at F1 parity (with the LRU on
-`_opcodes` disabled in nomenklatura's `distance.py` — production-shape
-measurement). Recall slightly higher on the Rust side, precision
-slightly higher on logic_v2. Numbers track to ~3 fractional case
-flips between the two.
-
-## Still open
+  object identity preserved, repr shape, public-module reachability,
+  qstr/rstr caching, residue alignments carry symbol=None.
 
 ### Phase 4 — nomenklatura migration
 
-The single change: replace
-`nomenklatura/matching/logic_v2/names/distance.py:weighted_edit_similarity`'s
-body with a wrapper over `rigour.names.compare_parts`, assembling
-`Match` objects from the returned `Comparison`s. Drop `_opcodes`,
-`_edit_cost`, the local `SIMILAR_PAIRS` constant.
+`nomenklatura/matching/logic_v2/names/distance.py:weighted_edit_similarity`
+is now a thin wrapper over `rigour.names.compare_parts`. Dropped:
+`_opcodes`, `_edit_cost`, `_costs_similarity`, `SIMILAR_PAIRS`,
+the cluster-build loop, `_PartCluster` scaffold (~120 lines).
 
-What stays in nomenklatura:
+Stayed in nomenklatura:
 
-- `Match` class (carries matcher-policy fields `weight`, `symbol`,
-  `is_family_name`).
-- `match_name_symbolic` orchestration in `match.py`.
-- Weight policies: `weight_extra_match`, `SYM_*` tables,
+- Matcher-policy weights: `weight_extra_match`, `SYM_*` tables,
   `FAMILY_NAME_WEIGHT`, the literal-equality override, the stopword
   down-weight.
+- `match_name_symbolic` orchestration in `match.py` — now mutates
+  `Alignment.weight` / `Alignment.score` directly (rigour's
+  `Alignment` is non-frozen post-Phase-4 with `Py<PyFloat>`-backed
+  mutable score/weight; see `plans/alignment-type.md` history).
 - `ScoringConfig` knobs (`nm_fuzzy_cutoff_factor` flows through as
   `fuzzy_tolerance`).
 - `strict_levenshtein` (used only by `match_object_names`, out of scope).
+- `is_family_name(alignment)` and `explain_alignment(alignment)` as
+  free functions in `names/util.py` — matcher policy that stays
+  with the matcher.
 
-Acceptance:
+Parity check on swap: 4 outcome flips out of 818 cases on
+`cases.csv` (none STRONG-tier). Two flips correct (`Osama bin
+Laden` ↔ `Usāma bin Muhammad ibn Awad ibn Lādin` cross-script
+recall, `MUHAMMAD AL-AHDAL` long-form FP rejected), two regress
+(`BAE Systems`/`BAE Industries` and `MOHAMAD IQBAL ABDURRAHIM`/`…
+ABDURRAHMAN`) — both driven by the spec change documented in
+[arch-name-distance.md § DP tie-break](arch-name-distance.md#dp-tie-break-prefer-one-sided-edits-over-substitution)
+and the fragility of the 0.51-overlap cluster threshold near a
+single-character cliff. Net F1 unchanged at 0.795.
 
-- `nomenklatura/tests/matching/` passes. Some test expectations may
-  need re-pinning under the redesign premise; each re-pinned test
-  should be defensible per the spec.
-- `nomenklatura/contrib/name_benchmark/checks.yml` confusion matrix
-  comparable to current Python implementation. Per-case drift is
-  expected; aggregate correctness must hold.
-- `yente/contrib/candidate_generation_benchmark/` FP-rate fixtures
-  equal-or-better.
+Perf on `nomenklatura/contrib/name_benchmark/`:
+
+| Run | Total | vs prev |
+|---|---|---|
+| `15_rig21baseline.perf` (rigour 2.1, pre-refactor) | 70.58s | — |
+| `17_align.perf` (Alignment refactor) | 52.41s | −25.8% |
+| `18_compare.perf` (compare_parts adopted) | 41.99s | −19.9% |
+
+`weighted_edit_similarity` cumtime collapsed from 10.72s to 2.08s
+(−81%); per-call cost from 27.2μs to 5.3μs (5.1× faster).
+
+## Still open
 
 ### Open spec knobs
 
@@ -164,7 +159,7 @@ plus a harness re-run away from a number.
 
 The cost function carries ~25 magic numbers between the residue layer
 (in `compare.rs`) and the matcher policy (in nomenklatura
-`policies.py`). They've accumulated organically and we don't have a
+`magic.py`). They've accumulated organically and we don't have a
 defensible argument for the specific values today.
 
 **Two layers, different homes:**
