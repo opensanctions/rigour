@@ -62,10 +62,6 @@ const DEFAULT_FUZZY_TOLERANCE: f64 = 1.0;
 // is one of the main levers in `plans/weighted-distance.md`'s
 // "Systematizing and tuning" section.
 
-/// Equal characters — no edit. Constant for symmetry; the function
-/// doesn't actually call this.
-const COST_EQUAL: f64 = 0.0;
-
 /// Token boundary lost or gained on one side. Token merge/split
 /// (`vanderbilt` ↔ `van der bilt`) is a common surface-form variant
 /// of the same name; we charge it almost nothing so the alignment
@@ -152,7 +148,7 @@ static SIMILAR_PAIRS: LazyLock<HashSet<(char, char)>> = LazyLock::new(|| {
 /// gets COST_CONFUSABLE even though `0` is a digit).
 fn edit_cost(op: Op, qc: Option<char>, rc: Option<char>) -> f64 {
     if op == Op::Equal {
-        return COST_EQUAL;
+        return 0.0;
     }
     if qc == Some(SEP) && rc.is_none() {
         return COST_SEP_DROP;
