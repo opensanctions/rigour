@@ -16,7 +16,7 @@ nk_checks,Person,Usama bin Laden,Shaikh Isa Bin Tarif Al Bin Ali,false,STRONG,,
 nk_checks,Person,"AL BEN MAHMOUD, Isa Ben Tarif",Shaikh Isa Bin Tarif Al Bin Ali,false,MEDIUM,,
 nk_checks,Person,MOHAMMADHASNI HAJI SSAD KHAN ZARKARI,HAJI ASAD KHAN ZARKARI MOHAMMADHASNI,true,MEDIUM,,
 nk_checks,Person,MOHAMMAD HASNI HAJI SSAD KHAN ZARKARI,HAJI ASAD KHAN ZARKARI MOHAMMADHASNI,true,MEDIUM,,
-nk_checks,Person,Hans Friedrich,Hans Friedrich,true,MEDIUM,,
+nk_checks,Person,Hans Friedrich,Hans Friedrich,true,STRONG,,
 nk_checks,Person,Friedrich Hans,Hans Friedrich,false,MEDIUM,,
 nk_checks,Person,Hans O Friedrich,Hans Joachim Friedrich,false,MEDIUM,,
 nk_checks,Person,Hans J Friedrich,Hans Joachim Friedrich,true,MEDIUM,,
@@ -58,7 +58,7 @@ nk_checks,Person,Vladimir nitPu,Vladimir Putin,true,WEAK,Character Reversal,
 nk_checks,Person,Nicolás Maduro SA,Nicolás Maduro,true,MEDIUM,Contextual Ending,
 nk_checks,Person,Nicolás Maduro LLC,Nicolás Maduro,true,MEDIUM,Contextual Ending,
 nk_checks,Person,Mr. Recep Tayyip Erdoğan,Recep Tayyip Erdoğan,true,STRONG,Contextual Beginning,
-nk_checks,Person,President Erdoğan,Recep Tayyip Erdoğan,true,MEDIUM,Contextual Beginning,
+nk_checks,Person,President Erdoğan,Recep Tayyip Erdoğan,true,WEAK,Contextual Beginning,
 nk_checks,Person,Basharr al-Assad,Bashar al-Assad,true,MEDIUM,Fat Finger Typo,
 nk_checks,Person,Bashar al-Asasd,Bashar al-Assad,true,MEDIUM,Fat Finger Typo,
 nk_checks,Person,Bashar xal-Assad,Bashar al-Assad,true,STRONG,Fat Finger Typo,
@@ -69,7 +69,7 @@ nk_checks,Person,Margarita Simonyán,Margarita Simonyan,true,MEDIUM,Special Char
 nk_checks,Person,A. Khamenei,Ali Khamenei,true,WEAK,Initials Usage,
 nk_checks,Person,J.-C. Juncker,Jean-Claude Juncker,true,WEAK,Initials Usage,
 nk_checks,Person,JC Juncker,Jean-Claude Juncker,true,WEAK,Initials Usage,
-nk_checks,Organization,PLA,People’s Liberation Army,true,MEDIUM,Abbreviation,
+nk_checks,Organization,PLA,People’s Liberation Army,true,WEAK,Abbreviation,
 nk_checks,Organization,PLA China,People’s Liberation Army,true,MEDIUM,Abbreviation,
 nk_checks,Person,AlisherUsmanov,Alisher Usmanov,true,MEDIUM,Word Joining,
 nk_checks,Person,Alisher-Usmanov,Alisher Usmanov,true,MEDIUM,Word Joining,
@@ -96,7 +96,7 @@ nk_checks,Person,Ihab Makhlouf,Rami Makhlouf,false,MEDIUM,,
 nk_checks,Person,Hafez Makhlouf,Rami Makhlouf,false,MEDIUM,,
 nk_checks,Person,Bibi Netanyahu,Benjamin Netanyahu,true,WEAK,Nickname Usage,
 nk_checks,Person,Ben Netanyahu,Benjamin Netanyahu,true,WEAK,Nickname Usage,
-nk_checks,Person,Boris Netanyahu,Benjamin Netanyahu,false,MEDIUM,,
+nk_checks,Person,Boris Netanyahu,Benjamin Netanyahu,false,STRONG,,
 nk_checks,Person,Emanuel Macron,Emmanuel Macron,true,MEDIUM,Common Misspelling,
 nk_checks,Person,Emmanuel Macrone,Emmanuel Macron,true,MEDIUM,Common Misspelling,
 nk_checks,Person,Pot Pouv,Pol Pot,false,MEDIUM,,
@@ -129,11 +129,11 @@ nk_checks,Person,Niranjan Thomas Alva,Thomas Lindemann,false,MEDIUM,,
 nk_checks,Person,Thomas A. Lind,Thomas Lindemann,false,MEDIUM,,
 nk_checks,Person,Thomas A. Lindeman,Thomas Lindemann,true,MEDIUM,,
 nk_checks,Person,Ротенберг Аркадий,Arkadii Romanovich Rotenberg,true,MEDIUM,,
-nk_checks,Person,Osama bin Laden,Usāma bin Muhammad ibn Awad ibn Lādin,true,MEDIUM,,
+nk_checks,Person,Osama bin Laden,Usāma bin Muhammad ibn Awad ibn Lādin,true,WEAK,,
 nk_checks,Person,Muhammad bin Salman,Usāma bin Muhammad ibn Awad ibn Lādin,false,MEDIUM,,
 nk_checks,Company,Goodwill Company,Good Will Company,true,MEDIUM,,
 nk_checks,Organization,Government of Estonia,Government of Ethiopia,false,MEDIUM,,
-nk_checks,Company,CRYSTALORD LIMITED,CRYSTALORD LTD,true,MEDIUM,,
+nk_checks,Company,CRYSTALORD LIMITED,CRYSTALORD LTD,true,STRONG,,
 nk_checks,Company,CRISTALORD LIMITED,CRYSTALORD LTD,true,MEDIUM,,
 nk_checks,Company,CRYSTALORD SYSTEMS LIMITED,CRYSTALORD LTD,false,WEAK,,
 nk_checks,Company,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,TACTICAL MISSILES CORPORATION JOINT STOCK COMPANY,true,MEDIUM,,
@@ -334,7 +334,7 @@ synth_companies,Company,Industrial and Commercial Bank of Chad Limited,Industria
 synth_companies,Company,TotalEnergias SE,TotalEnergies SE,true,MEDIUM,LLM-proposed deviation,Spanish-form pluralisation
 synth_companies,Company,Glenmore plc,Glencore plc,true,MEDIUM,LLM-proposed deviation,Scottish-place-name sub (Glenmore is a real distillery)
 synth_companies,Company,Invidia Corporation,NVIDIA Corporation,true,MEDIUM,LLM-proposed deviation,Latin word substitution
-synth_companies,Company,BD p.l.c.,BP p.l.c.,true,MEDIUM,LLM-proposed deviation,two-letter ticker collision (BD = Becton Dickinson)
+synth_companies,Company,BD p.l.c.,BP p.l.c.,false,MEDIUM,LLM-proposed deviation,two-letter ticker collision (BD = Becton Dickinson)
 synth_companies,Company,"Cardinal Wealth, Inc.","Cardinal Health, Inc.",true,MEDIUM,LLM-proposed deviation,domain-word sub (Health/Wealth)
 synth_companies,Company,Stellaris N.V.,Stellantis N.V.,true,MEDIUM,LLM-proposed deviation,truncated-and-substituted stem
 synth_companies,Company,Chevon Corporation,Chevron Corporation,true,MEDIUM,LLM-proposed deviation,dropped consonant (Chevon is a real meat brand)
@@ -762,53 +762,58 @@ synth_people,Person,JANAN AGHA,JALALUDDIN HAQQANI,false,MEDIUM,LLM-proposed devi
 synth_people,Person,HASSAN DAHIR AWEYS,ABDIKADIR MOHAMED ABDIKADIR,false,MEDIUM,LLM-proposed deviation,both Somali al-Shabaab era; completely different
 synth_people,Person,SALLY-ANNE FRANCES JONES,NASSER AHMED MUTHANA,false,MEDIUM,LLM-proposed deviation,both UK ISIS recruits; completely different
 synth_people,Person,ALEXANDA AMON KOTEY,MOSTAFA KAMEL MOSTAFA IBRAHIM,false,MEDIUM,LLM-proposed deviation,both UK figures; completely different
-synth_corp_positives,Company,Apple Incorporated,Apple Inc.,true,MEDIUM,LLM-proposed deviation,legal-form expansion (Inc./Incorporated)
-synth_corp_positives,Company,Siemens Aktiengesellschaft,Siemens AG,true,MEDIUM,LLM-proposed deviation,legal-form expansion (AG/Aktiengesellschaft)
-synth_corp_positives,Company,BMW Aktiengesellschaft,BMW AG,true,MEDIUM,LLM-proposed deviation,legal-form expansion (AG)
-synth_corp_positives,Company,Vodafone Limited,Vodafone Ltd,true,MEDIUM,LLM-proposed deviation,legal-form expansion (Ltd/Limited)
-synth_corp_positives,Company,Volkswagen Gesellschaft mit beschränkter Haftung,Volkswagen GmbH,true,MEDIUM,LLM-proposed deviation,legal-form expansion (GmbH)
-synth_corp_positives,Company,Microsoft Corporation,Microsoft Corp.,true,MEDIUM,LLM-proposed deviation,legal-form expansion (Corp./Corporation)
-synth_corp_positives,Company,Toyota Motor Corporation,Toyota Motor Corp,true,MEDIUM,LLM-proposed deviation,legal-form expansion (Corp/Corporation)
-synth_corp_positives,Company,Daimler Aktiengesellschaft,Daimler AG,true,MEDIUM,LLM-proposed deviation,legal-form expansion (AG)
-synth_corp_positives,Company,Walmart Incorporated,Walmart Inc.,true,MEDIUM,LLM-proposed deviation,legal-form expansion
-synth_corp_positives,Company,Lloyds Banking Group Public Limited Company,Lloyds Banking Group plc,true,MEDIUM,LLM-proposed deviation,legal-form expansion (plc)
-synth_corp_positives,Company,"Apple, Inc.",Apple Inc.,true,MEDIUM,LLM-proposed deviation,comma before legal form
-synth_corp_positives,Company,"Bowne Global Solutions, L.L.C.",Bowne Global Solutions LLC,true,MEDIUM,LLM-proposed deviation,periods + comma in legal form
-synth_corp_positives,Company,"Bowne Global Solutions, S.A.R.L.",Bowne Global Solutions SARL,true,MEDIUM,LLM-proposed deviation,periods + comma in legal form
-synth_corp_positives,Company,Volkswagen Bank G.m.b.H.,Volkswagen Bank GmbH,true,MEDIUM,LLM-proposed deviation,periods in legal form
-synth_corp_positives,Company,"JPMorgan Chase Bank, N.A.",JPMorgan Chase Bank NA,true,STRONG,LLM-proposed deviation,periods + comma in N.A.
-synth_corp_positives,Company,Bowne Global Solutions B.V.,Bowne Global Solutions BV,true,MEDIUM,LLM-proposed deviation,periods in legal form
-synth_corp_positives,Company,HSBC Holdings p.l.c.,HSBC Holdings plc,true,MEDIUM,LLM-proposed deviation,periods in plc
-synth_corp_positives,Company,Goldman Sachs & Co. L.L.C.,Goldman Sachs & Co. LLC,true,MEDIUM,LLM-proposed deviation,periods in LLC
-synth_corp_positives,Company,Procter & Gamble Co.,Procter and Gamble Co.,true,MEDIUM,LLM-proposed deviation,& vs and
-synth_corp_positives,Company,AT&T Inc.,AT and T Inc.,true,MEDIUM,LLM-proposed deviation,& vs and
-synth_corp_positives,Company,JPMorgan Chase & Co.,JPMorgan Chase and Co.,true,MEDIUM,LLM-proposed deviation,& vs and
-synth_corp_positives,Company,H&M Hennes & Mauritz AB,H and M Hennes and Mauritz AB,true,MEDIUM,LLM-proposed deviation,& vs and (multiple)
-synth_corp_positives,Company,Standard & Poor's,Standard and Poor's,true,MEDIUM,LLM-proposed deviation,& vs and
-synth_corp_positives,Company,The Coca-Cola Company,Coca-Cola Company,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
-synth_corp_positives,Company,The Procter & Gamble Company,Procter & Gamble Company,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
-synth_corp_positives,Company,"The Goldman Sachs Group, Inc.","Goldman Sachs Group, Inc.",true,MEDIUM,LLM-proposed deviation,leading 'The' drop
-synth_corp_positives,Company,The Walt Disnei Company,Walt Disney Company,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
-synth_corp_positives,Company,Coca-Cola Company,Coca Cola Company,true,MEDIUM,LLM-proposed deviation,hyphen vs space in brand
-synth_corp_positives,Company,Hewlett-Packard Co.,Hewlett Packard Co.,true,MEDIUM,LLM-proposed deviation,hyphen vs space
-synth_corp_positives,Company,Daimler-Benz AG,Daimler Benz AG,true,MEDIUM,LLM-proposed deviation,hyphen vs space
-synth_corp_positives,Company,PricewaterhouseCoopers LLP,Pricewaterhouse Coopers LLP,true,MEDIUM,LLM-proposed deviation,joined-camelcase vs spaced
-synth_corp_positives,Company,J.P. Morgan & Co.,JP Morgan & Co.,true,MEDIUM,LLM-proposed deviation,initial periods in initialism
-synth_corp_positives,Company,"S.C. Johnson & Son, Inc.","SC Johnson & Son, Inc.",true,MEDIUM,LLM-proposed deviation,initial periods in initialism
-synth_corp_positives,Company,P.T. Astra International,PT Astra International,true,MEDIUM,LLM-proposed deviation,initial periods (Indonesian PT)
-synth_corp_positives,Company,C.K. Hutchison Holdings,CK Hutchison Holdings,true,MEDIUM,LLM-proposed deviation,initial periods in initialism
-synth_corp_positives,Company,ALPHABET INC.,Alphabet Inc.,true,STRONG,LLM-proposed deviation,casing (uppercase vs title)
-synth_corp_positives,Company,"blackrock, inc.","BlackRock, Inc.",true,STRONG,LLM-proposed deviation,casing (lowercase vs camelcase)
-synth_corp_positives,Company,"SAMSUNG ELECTRONICS CO., LTD.","Samsung Electronics Co., Ltd.",true,MEDIUM,LLM-proposed deviation,casing
-synth_corp_positives,Company,Société Générale S.A.,Societe Generale S.A.,true,MEDIUM,LLM-proposed deviation,French diacritic strip
-synth_corp_positives,Company,Crédit Agricole S.A.,Credit Agricole S.A.,true,MEDIUM,LLM-proposed deviation,French diacritic strip
-synth_corp_positives,Organization,"United Nations Educational, Scientific and Cultural Organization",United Nations Educational Scientific and Cultural Organization,true,MEDIUM,LLM-proposed deviation,internal-comma drop
-synth_corp_positives,Organization,The World Bank,World Bank,true,STRONG,LLM-proposed deviation,leading 'The' drop
-synth_corp_positives,Organization,International Labour Organization,International Labor Organization,true,MEDIUM,LLM-proposed deviation,en-GB/en-US (Labour/Labor)
-synth_corp_positives,Organization,World Health Organisation,World Health Organization,true,MEDIUM,LLM-proposed deviation,en-GB/en-US (Organisation/Organization)
-synth_corp_positives,Organization,Organisation for Economic Co-operation and Development,Organization for Economic Co-operation and Development,true,MEDIUM,LLM-proposed deviation,en-GB/en-US (Organisation/Organization)
-synth_corp_positives,Organization,North Atlantic Treaty Organization,North Atlantic Treaty Organisation,true,MEDIUM,LLM-proposed deviation,en-US/en-GB
-synth_corp_positives,Organization,International Federation of Red Cross and Red Crescent Societies,International Federation of the Red Cross and Red Crescent Societies,true,MEDIUM,LLM-proposed deviation,internal 'the' insertion
-synth_corp_positives,Organization,U.S. Department of State,United States Department of State,true,MEDIUM,LLM-proposed deviation,U.S. abbreviation expansion
-synth_corp_positives,Organization,Government of the United Kingdom,Government of United Kingdom,true,MEDIUM,LLM-proposed deviation,internal 'the' drop
-synth_corp_positives,Organization,The Bank for International Settlements,Bank for International Settlements,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
+synth_companies,Company,Apple Incorporated,Apple Inc.,true,MEDIUM,LLM-proposed deviation,legal-form expansion (Inc./Incorporated)
+synth_companies,Company,Siemens Aktiengesellschaft,Siemens AG,true,MEDIUM,LLM-proposed deviation,legal-form expansion (AG/Aktiengesellschaft)
+synth_companies,Company,BMW Aktiengesellschaft,BMW AG,true,MEDIUM,LLM-proposed deviation,legal-form expansion (AG)
+synth_companies,Company,Vodafone Limited,Vodafone Ltd,true,MEDIUM,LLM-proposed deviation,legal-form expansion (Ltd/Limited)
+synth_companies,Company,Volkswagen Gesellschaft mit beschränkter Haftung,Volkswagen GmbH,true,MEDIUM,LLM-proposed deviation,legal-form expansion (GmbH)
+synth_companies,Company,Microsoft Corporation,Microsoft Corp.,true,MEDIUM,LLM-proposed deviation,legal-form expansion (Corp./Corporation)
+synth_companies,Company,Toyota Motor Corporation,Toyota Motor Corp,true,MEDIUM,LLM-proposed deviation,legal-form expansion (Corp/Corporation)
+synth_companies,Company,Daimler Aktiengesellschaft,Daimler AG,true,MEDIUM,LLM-proposed deviation,legal-form expansion (AG)
+synth_companies,Company,Walmart Incorporated,Walmart Inc.,true,MEDIUM,LLM-proposed deviation,legal-form expansion
+synth_companies,Company,Lloyds Banking Group Public Limited Company,Lloyds Banking Group plc,true,MEDIUM,LLM-proposed deviation,legal-form expansion (plc)
+synth_companies,Company,"Apple, Inc.",Apple Inc.,true,MEDIUM,LLM-proposed deviation,comma before legal form
+synth_companies,Company,"Bowne Global Solutions, L.L.C.",Bowne Global Solutions LLC,true,MEDIUM,LLM-proposed deviation,periods + comma in legal form
+synth_companies,Company,"Bowne Global Solutions, S.A.R.L.",Bowne Global Solutions SARL,true,MEDIUM,LLM-proposed deviation,periods + comma in legal form
+synth_companies,Company,Volkswagen Bank G.m.b.H.,Volkswagen Bank GmbH,true,MEDIUM,LLM-proposed deviation,periods in legal form
+synth_companies,Company,"JPMorgan Chase Bank, N.A.",JPMorgan Chase Bank NA,true,STRONG,LLM-proposed deviation,periods + comma in N.A.
+synth_companies,Company,Bowne Global Solutions B.V.,Bowne Global Solutions BV,true,MEDIUM,LLM-proposed deviation,periods in legal form
+synth_companies,Company,HSBC Holdings p.l.c.,HSBC Holdings plc,true,MEDIUM,LLM-proposed deviation,periods in plc
+synth_companies,Company,Goldman Sachs & Co. L.L.C.,Goldman Sachs & Co. LLC,true,MEDIUM,LLM-proposed deviation,periods in LLC
+synth_companies,Company,Procter & Gamble Co.,Procter and Gamble Co.,true,MEDIUM,LLM-proposed deviation,& vs and
+synth_companies,Company,AT&T Inc.,AT and T Inc.,true,MEDIUM,LLM-proposed deviation,& vs and
+synth_companies,Company,JPMorgan Chase & Co.,JPMorgan Chase and Co.,true,MEDIUM,LLM-proposed deviation,& vs and
+synth_companies,Company,H&M Hennes & Mauritz AB,H and M Hennes and Mauritz AB,true,MEDIUM,LLM-proposed deviation,& vs and (multiple)
+synth_companies,Company,Standard & Poor's,Standard and Poor's,true,MEDIUM,LLM-proposed deviation,& vs and
+synth_companies,Company,The Coca-Cola Company,Coca-Cola Company,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
+synth_companies,Company,The Procter & Gamble Company,Procter & Gamble Company,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
+synth_companies,Company,"The Goldman Sachs Group, Inc.","Goldman Sachs Group, Inc.",true,MEDIUM,LLM-proposed deviation,leading 'The' drop
+synth_companies,Company,The Walt Disnei Company,Walt Disney Company,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
+synth_companies,Company,Coca-Cola Company,Coca Cola Company,true,MEDIUM,LLM-proposed deviation,hyphen vs space in brand
+synth_companies,Company,Hewlett-Packard Co.,Hewlett Packard Co.,true,MEDIUM,LLM-proposed deviation,hyphen vs space
+synth_companies,Company,Daimler-Benz AG,Daimler Benz AG,true,MEDIUM,LLM-proposed deviation,hyphen vs space
+synth_companies,Company,PricewaterhouseCoopers LLP,Pricewaterhouse Coopers LLP,true,MEDIUM,LLM-proposed deviation,joined-camelcase vs spaced
+synth_companies,Company,J.P. Morgan & Co.,JP Morgan & Co.,true,MEDIUM,LLM-proposed deviation,initial periods in initialism
+synth_companies,Company,"S.C. Johnson & Son, Inc.","SC Johnson & Son, Inc.",true,MEDIUM,LLM-proposed deviation,initial periods in initialism
+synth_companies,Company,P.T. Astra International,PT Astra International,true,MEDIUM,LLM-proposed deviation,initial periods (Indonesian PT)
+synth_companies,Company,C.K. Hutchison Holdings,CK Hutchison Holdings,true,MEDIUM,LLM-proposed deviation,initial periods in initialism
+synth_companies,Company,ALPHABET INC.,Alphabet Inc.,true,STRONG,LLM-proposed deviation,casing (uppercase vs title)
+synth_companies,Company,"blackrock, inc.","BlackRock, Inc.",true,STRONG,LLM-proposed deviation,casing (lowercase vs camelcase)
+synth_companies,Company,"SAMSUNG ELECTRONICS CO., LTD.","Samsung Electronics Co., Ltd.",true,MEDIUM,LLM-proposed deviation,casing
+synth_companies,Company,Société Générale S.A.,Societe Generale S.A.,true,MEDIUM,LLM-proposed deviation,French diacritic strip
+synth_companies,Company,Crédit Agricole S.A.,Credit Agricole S.A.,true,MEDIUM,LLM-proposed deviation,French diacritic strip
+synth_companies,Organization,"United Nations Educational, Scientific and Cultural Organization",United Nations Educational Scientific and Cultural Organization,true,MEDIUM,LLM-proposed deviation,internal-comma drop
+synth_companies,Organization,The World Bank,World Bank,true,STRONG,LLM-proposed deviation,leading 'The' drop
+synth_companies,Organization,International Labour Organization,International Labor Organization,true,MEDIUM,LLM-proposed deviation,en-GB/en-US (Labour/Labor)
+synth_companies,Organization,World Health Organisation,World Health Organization,true,MEDIUM,LLM-proposed deviation,en-GB/en-US (Organisation/Organization)
+synth_companies,Organization,Organisation for Economic Co-operation and Development,Organization for Economic Co-operation and Development,true,MEDIUM,LLM-proposed deviation,en-GB/en-US (Organisation/Organization)
+synth_companies,Organization,North Atlantic Treaty Organization,North Atlantic Treaty Organisation,true,MEDIUM,LLM-proposed deviation,en-US/en-GB
+synth_companies,Organization,International Federation of Red Cross and Red Crescent Societies,International Federation of the Red Cross and Red Crescent Societies,true,MEDIUM,LLM-proposed deviation,internal 'the' insertion
+synth_companies,Organization,U.S. Department of State,United States Department of State,true,MEDIUM,LLM-proposed deviation,U.S. abbreviation expansion
+synth_companies,Organization,Government of the United Kingdom,Government of United Kingdom,true,MEDIUM,LLM-proposed deviation,internal 'the' drop
+synth_companies,Organization,The Bank for International Settlements,Bank for International Settlements,true,MEDIUM,LLM-proposed deviation,leading 'The' drop
+cust_cases,Person,NOUREDDINE BEN ALI BEN BELKASSEM DR,Noureddine Ben Ali Ben Belkassem DRISSI,true,STRONG,Customer-provided deviation,Partial surname
+cust_cases,Organization,Stripe LLC,Stripe Limited Liability Company,true,STRONG,Customer-provided deviation,Legal-form expansion
+cust_cases,Organization,Stripe LLC,Strip Limited Liability Company,true,STRONG,Customer-provided deviation,Legal-form expansion
+cust_cases,Organization,Sparkles Business Corporation,Sporks Business Corporation,false,STRONG,Customer-provided deviation,Discounting common company name parts
+cust_cases,Person,"فرناندو بيريز",Fernando Pérez,true,STRONG,Customer-provided deviation,Alphabetic transliteration of Arabic name
