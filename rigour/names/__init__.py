@@ -23,7 +23,7 @@ from rigour.names.tokenize import tokenize_name, normalize_name
 from rigour.names.prefix import remove_person_prefixes, remove_org_prefixes
 from rigour.names.prefix import remove_obj_prefixes
 from rigour.names.analyze import analyze_names
-from rigour.names.compare import Alignment, compare_parts
+from rigour.names.compare import Alignment, CompareConfig, compare_parts
 from rigour.names.org_types import replace_org_types_display
 from rigour.names.org_types import replace_org_types_compare
 from rigour.names.org_types import extract_org_types, remove_org_types
@@ -57,6 +57,7 @@ __all__ = [
     "remove_org_types",
     "analyze_names",
     "Alignment",
+    "CompareConfig",
     "compare_parts",
     "contains_split_phrase",
 ]

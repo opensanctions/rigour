@@ -166,22 +166,69 @@ defensible argument for the specific values today.
 
 | Layer | Where | What | Tunable? |
 |---|---|---|---|
-| A — residue distance | `compare.rs` constants | `COST_*`, `BUDGET_LOG_BASE`, `BUDGET_SHORT_FLOOR`, `CLUSTER_OVERLAP_MIN` | 3–4 scalars; rest are structural |
+| A — residue distance | `CompareConfig` (frozen pyclass in `compare.rs`) | `cost_sep_drop`, `cost_confusable`, `cost_digit`, `budget_log_base`, `budget_short_floor`, `budget_tolerance`, `cluster_overlap_min` | 7 scalars; `COST_DEFAULT = 1.0` stays a compile-time unit anchor |
 | B — matcher policy | nomenklatura `magic.py` / `model.py` | `EXTRA_QUERY_NAME`, `EXTRA_RESULT_NAME`, `FAMILY_NAME_WEIGHT`, `SYM_SCORES`, `SYM_WEIGHTS`, `EXTRAS_WEIGHTS`, stopword weights | ~17 scalars; came from real production tuning |
 
-**Plumbing PR (no behaviour change):** lift Layer A scalars from
-`compare.rs` constants into `resources/names/compare.yml` under
-`costs:` and `budget:` keys. Genscript emits them into
-`rust/data/names/compare.json` alongside the pairs. `LazyLock<...>`
-pulls them at startup. Single source of truth; editing a scalar
-becomes one YAML edit + `make rust-data`.
+**Plumbing: `CompareConfig` (no behaviour change).** Lift Layer A
+scalars out of `compare.rs` constants into a frozen pyclass passed
+explicitly to `compare_parts`. Two motivations: parametric sweeping
+becomes one Python kwarg instead of a recompile, and the existing
+`fuzzy_tolerance` kwarg stops being a special-case singleton — it's
+just one of seven knobs in the same struct.
+
+```python
+@dataclass(frozen=True)  # actual: #[pyclass(frozen)] in Rust
+class CompareConfig:
+    cost_sep_drop: float = 0.2     # was COST_SEP_DROP
+    cost_confusable: float = 0.7   # was COST_CONFUSABLE
+    cost_digit: float = 1.5        # was COST_DIGIT
+
+    budget_log_base: float = 2.35  # was BUDGET_LOG_BASE
+    budget_short_floor: float = 2.0  # was BUDGET_SHORT_FLOOR (usize → f64)
+    budget_tolerance: float = 1.0  # was the fuzzy_tolerance kwarg
+
+    cluster_overlap_min: float = 0.51  # was CLUSTER_OVERLAP_MIN
+
+# new signature
+compare_parts(qry, res, *, config=None) -> list[Alignment]
+```
+
+`COST_DEFAULT = 1.0` stays a compile-time constant — it's the unit
+anchor for the cost-tier scale; sweeping it is just rescaling
+everything else.
+
+**Why frozen:** `CompareConfig` is immutable after construction.
+Sweep scripts build a new instance per iteration
+(`CompareConfig(cost_digit=1.4)`); the matcher caches one instance
+per request. Two payoffs: `Py<CompareConfig>` is shareable across
+threads with no runtime borrow checking, and the Rust side reads
+`&CompareConfig` directly via PyO3 argument extraction — field
+reads in the inner DP loop are native struct loads (no getter
+dispatch, no boxing). Estimated per-call regression vs today's
+const-folded constants: ~1–3% on `compare_parts` worst case,
+<0.2% on full-matcher throughput. Within cases.csv noise.
+
+**Default fast-path:** `config=None` resolves to a `LazyLock<CompareConfig>`
+baked at startup. Callers that don't tune pay zero PyO3 boundary
+cost (no borrow, no extraction) and get exactly today's behaviour.
+
+**Caller pattern:** `nomenklatura.matching.logic_v2`'s
+`weighted_edit_similarity` builds one `CompareConfig` from
+`ScoringConfig` once at the top of `name_match` and threads it
+down. `ScoringConfig` is invariant per matcher run, so reuse is
+trivial — no per-`compare_parts` allocation.
+
+**Budget rework still open.** The "very short → off, sub-linear
+after" budget shape is up for revisit (see [Open spec knobs](#open-spec-knobs)).
+When it lands, `budget_*` fields shift in/out of `CompareConfig`
+without further API churn — that's the point of having the struct.
 
 **Tuning sweep:** `nomenklatura/contrib/name_bench/sweep.py` (not
-yet written) — coordinate descent on Layer A scalars, holding
-Layer B frozen. Per-`category` constraint reporting catches tunes
-that improve overall F1 by tanking one specific failure class.
-Hold out `synth_*` partition for validation against `nk_*`
-training.
+yet written) — coordinate descent on `CompareConfig` fields,
+holding Layer B frozen. Per-`category` constraint reporting
+catches tunes that improve overall F1 by tanking one specific
+failure class. Hold out `synth_*` partition for validation
+against `nk_*` training.
 
 Layer B is **not phase 2 or phase 4 territory.** Those values came
 from real production tuning at OpenSanctions; moving them is a

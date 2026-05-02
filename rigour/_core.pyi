@@ -260,8 +260,36 @@ class Alignment:
 def pair_symbols(query: Name, result: Name) -> list[tuple[Alignment, ...]]: ...
 
 
+class CompareConfig:
+    """Tunable cost / budget / clustering scalars for `compare_parts`.
+
+    Frozen — fields cannot be reassigned after construction. Sweep
+    scripts build a fresh instance per iteration; matchers cache one
+    per request.
+    """
+
+    cost_sep_drop: float
+    cost_confusable: float
+    cost_digit: float
+    budget_log_base: float
+    budget_short_floor: float
+    budget_tolerance: float
+    cluster_overlap_min: float
+
+    def __init__(
+        self,
+        cost_sep_drop: float = 0.2,
+        cost_confusable: float = 0.7,
+        cost_digit: float = 1.5,
+        budget_log_base: float = 2.35,
+        budget_short_floor: float = 2.0,
+        budget_tolerance: float = 1.0,
+        cluster_overlap_min: float = 0.51,
+    ) -> None: ...
+
+
 def compare_parts(
     qry: list[NamePart],
     res: list[NamePart],
-    fuzzy_tolerance: float = 1.0,
+    config: CompareConfig | None = None,
 ) -> list[Alignment]: ...

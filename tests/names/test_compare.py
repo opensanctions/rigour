@@ -1,6 +1,8 @@
 from typing import List
 
-from rigour.names.compare import Alignment, compare_parts
+import pytest
+
+from rigour.names.compare import Alignment, CompareConfig, compare_parts
 from rigour.names.part import NamePart
 
 
@@ -90,17 +92,61 @@ def test_digit_edit_penalty() -> None:
     assert digit_out[0].score < letter_out[0].score
 
 
-def test_fuzzy_tolerance_scales_budget() -> None:
+def test_budget_tolerance_scales_budget() -> None:
     # A token that fails the cap at default tolerance should pass it
     # at high tolerance, without changing inputs.
     qry = parts("abcdefghij")
     res = parts("zzcdefghzz")
-    strict = compare_parts(qry, res, fuzzy_tolerance=0.5)
-    permissive = compare_parts(qry, res, fuzzy_tolerance=3.0)
+    strict = compare_parts(qry, res, config=CompareConfig(budget_tolerance=0.5))
+    permissive = compare_parts(qry, res, config=CompareConfig(budget_tolerance=3.0))
     assert strict[0].score <= permissive[0].score
     # Strict mode should hit the cliff; permissive should pass it.
     assert strict[0].score == 0.0
     assert permissive[0].score > 0.0
+
+
+def test_compare_config_defaults() -> None:
+    cfg = CompareConfig()
+    assert cfg.cost_sep_drop == 0.2
+    assert cfg.cost_confusable == 0.7
+    assert cfg.cost_digit == 1.5
+    assert cfg.budget_log_base == 2.35
+    assert cfg.budget_short_floor == 2.0
+    assert cfg.budget_tolerance == 1.0
+    assert cfg.cluster_overlap_min == 0.51
+
+
+def test_compare_config_kwargs_override() -> None:
+    cfg = CompareConfig(cost_digit=0.3, budget_tolerance=2.5)
+    assert cfg.cost_digit == 0.3
+    assert cfg.budget_tolerance == 2.5
+    # Untouched fields stay at defaults.
+    assert cfg.cost_sep_drop == 0.2
+
+
+def test_compare_config_is_frozen() -> None:
+    cfg = CompareConfig()
+    with pytest.raises(AttributeError):
+        cfg.cost_digit = 0.99  # type: ignore[misc]
+
+
+def test_compare_config_default_matches_no_config() -> None:
+    # Passing CompareConfig() with all defaults must reproduce the
+    # config=None fast path bit-for-bit.
+    qry = parts("vladimer", "putin")
+    res = parts("vladimir", "putin")
+    a = compare_parts(qry, res)
+    b = compare_parts(qry, res, config=CompareConfig())
+    assert [c.score for c in a] == [c.score for c in b]
+
+
+def test_compare_config_cost_override_changes_score() -> None:
+    # Drop the digit-mismatch cost to default-letter level — a digit
+    # edit should now score the same as an equivalent letter edit.
+    cfg = CompareConfig(cost_digit=1.0)
+    digit_letter = compare_parts(parts("fund2024"), parts("fund2025"), config=cfg)
+    letter_letter = compare_parts(parts("fundabcd"), parts("fundabce"))
+    assert digit_letter[0].score == letter_letter[0].score
 
 
 def test_short_tokens_disable_fuzzy_match() -> None:

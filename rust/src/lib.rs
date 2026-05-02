@@ -284,6 +284,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     )?)?;
     m.add_function(wrap_pyfunction!(names::pairing::py_pair_symbols, m)?)?;
     m.add_function(wrap_pyfunction!(names::compare::py_compare_parts, m)?)?;
+    m.add_class::<names::compare::CompareConfig>()?;
     m.add_class::<names::alignment::Alignment>()?;
     m.add_class::<names::symbol::Symbol>()?;
     m.add_class::<names::symbol::SymbolCategory>()?;

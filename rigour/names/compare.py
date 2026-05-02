@@ -22,11 +22,13 @@ at zero once the total cost exceeds what's plausible for typo noise —
 the matcher refuses to fuzzy-match when the edit-density crosses into
 distinct-entity territory.
 
-`fuzzy_tolerance` rescales the per-side budget. Higher = more
-permissive (KYC-onboarding profile); lower = stricter (payment-
-screening profile).
+Pass a [CompareConfig][rigour.names.compare.CompareConfig] to override
+the cost / budget / clustering scalars — e.g. `budget_tolerance` to
+shift between strict (payment-screening) and permissive (KYC-
+onboarding) profiles, or `cost_*` for sweep-based calibration. The
+default is recall-protective and matches industry-typical tuning.
 """
 
-from rigour._core import Alignment, compare_parts
+from rigour._core import Alignment, CompareConfig, compare_parts
 
-__all__ = ["Alignment", "compare_parts"]
+__all__ = ["Alignment", "CompareConfig", "compare_parts"]

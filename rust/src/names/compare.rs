@@ -51,71 +51,156 @@ use crate::names::part::NamePart;
 /// non-character (e.g. `\u{0001}`) to stay unambiguous.
 const SEP: char = ' ';
 
-/// Multiplier on the per-side cost budget. Lower is stricter (less
-/// edit tolerated before a cluster scores zero); higher is more
-/// permissive. Callers tune this per scenario — KYC at onboarding
-/// runs more permissive than payment screening.
-const DEFAULT_FUZZY_TOLERANCE: f64 = 1.0;
-
-// --- Edit-cost tiers ------------------------------------------------
-//
-// What an edit between `(qc, rc)` "costs" in the alignment. The
-// downstream budget cap is per-side, so the *gap* between cheap
-// (0.2) and expensive (1.5) edits is what determines whether a
-// cluster squeaks under the cap or fails it. Tuning these values
-// is one of the main levers in `plans/weighted-distance.md`'s
-// "Systematizing and tuning" section.
-
-/// Token boundary lost or gained on one side. Token merge/split
-/// (`vanderbilt` ↔ `van der bilt`) is a common surface-form variant
-/// of the same name; we charge it almost nothing so the alignment
-/// doesn't refuse to bridge across whitespace artifacts.
-const COST_SEP_DROP: f64 = 0.2;
-
-/// Substitute between a confusable pair from
-/// `resources/names/compare.yml` (`0`/`o`, `1`/`l`, …). OCR /
-/// transliteration / homoglyph noise — the writer was probably
-/// aiming at the same character.
-const COST_CONFUSABLE: f64 = 0.7;
-
-/// Default insert / delete / substitute cost. The unit; everything
-/// else is calibrated relative to this.
+/// Default insert / delete / substitute cost. The unit anchor for
+/// the cost-tier scale; everything else in [`CompareConfig`] is
+/// calibrated relative to this. Sweeping it would just rescale the
+/// rest, so it stays a compile-time constant.
 const COST_DEFAULT: f64 = 1.0;
 
-/// Edit involving a digit on either side (mismatched). Digits
-/// identify specific things — vintage years, vessel hull numbers,
-/// fund vintages — so a digit mismatch is evidence of a different
-/// entity, not a typo.
-const COST_DIGIT: f64 = 1.5;
+// --- Tunable scalars (CompareConfig) --------------------------------
+//
+// Seven scalars carved out of the residue-distance cost function so
+// callers can pass alternatives without recompiling. The downstream
+// budget cap is per-side, so the *gap* between cheap (cost_sep_drop)
+// and expensive (cost_digit) edits is what determines whether a
+// cluster squeaks under the cap or fails it. See
+// `plans/weighted-distance.md` § Magic-number systematisation for the
+// tuning context.
 
-// --- Per-side budget shape ------------------------------------------
+/// Tunable cost / budget / clustering scalars for [`py_compare_parts`].
+///
+/// Frozen by design: a sweep iteration constructs a fresh
+/// `CompareConfig`, the matcher caches one per request. Mutability
+/// would buy nothing (the values are read once per name pair) and
+/// would cost a runtime borrow check on each Rust-side access.
+///
+/// The default values reproduce the constants this struct replaced;
+/// `compare_parts(qry, res)` with no `config` argument is exactly
+/// equivalent to the pre-`CompareConfig` call.
+#[pyclass(frozen, from_py_object, module = "rigour._core")]
+#[derive(Clone, Debug)]
+pub struct CompareConfig {
+    /// Token boundary lost or gained on one side. Token merge/split
+    /// (`vanderbilt` ↔ `van der bilt`) is a common surface-form
+    /// variant of the same name; charging it almost nothing keeps
+    /// the alignment from refusing to bridge whitespace artifacts.
+    #[pyo3(get)]
+    pub cost_sep_drop: f64,
 
-/// Logarithm base in the per-side cost-budget formula
-/// `log_BUDGET_LOG_BASE(max(len - BUDGET_SHORT_FLOOR, 1)) *
-/// fuzzy_tolerance`. The base controls how aggressively the budget
-/// grows with token length — smaller base = faster growth = more
-/// permissive on long names. The current value is calibrated so a
-/// 6-character token tolerates ~1.6 edits at default tolerance.
-const BUDGET_LOG_BASE: f64 = 2.35;
+    /// Substitute between a confusable pair from
+    /// `resources/names/compare.yml` (`0`/`o`, `1`/`l`, …). OCR /
+    /// transliteration / homoglyph noise — the writer was probably
+    /// aiming at the same character.
+    #[pyo3(get)]
+    pub cost_confusable: f64,
 
-/// Short-token floor: tokens shorter than this contribute zero to
-/// the budget, so any non-zero edit fails the cap. This is the
-/// fail-closed property — the matcher refuses to fuzzy-match on
-/// 1-2 character tokens (vessel hull suffixes, isolated initials,
-/// 2-char Chinese given names) where typo / distinct-entity signal
-/// is too weak.
-const BUDGET_SHORT_FLOOR: usize = 2;
+    /// Edit involving a digit on either side. Digits identify
+    /// specific things — vintage years, vessel hull numbers, fund
+    /// vintages — so a digit mismatch is evidence of a different
+    /// entity, not a typo.
+    #[pyo3(get)]
+    pub cost_digit: f64,
 
-// --- Clustering -----------------------------------------------------
+    /// Logarithm base in the per-side cost-budget formula
+    /// `log_budget_log_base(max(len - budget_short_floor, 1)) *
+    /// budget_tolerance`. The base controls how aggressively the
+    /// budget grows with token length — smaller base = faster
+    /// growth = more permissive on long names.
+    #[pyo3(get)]
+    pub budget_log_base: f64,
 
-/// Overlap fraction (matched chars / shorter-side length) above
-/// which two parts pair into a cluster. A pair below this threshold
-/// surfaces as solo records — the matched-character evidence is
-/// too thin to claim the parts are talking about the same token.
-/// The 0.51 value (i.e. "more than half") is the lowest value where
-/// majority of the shorter token agrees; below half is dominated by
-/// noise, above half is dominated by signal.
-const CLUSTER_OVERLAP_MIN: f64 = 0.51;
+    /// Short-token floor: tokens shorter than this contribute zero
+    /// to the budget, so any non-zero edit fails the cap. This is
+    /// the fail-closed property — the matcher refuses to fuzzy-
+    /// match on 1-2 character tokens (vessel hull suffixes,
+    /// isolated initials, 2-char Chinese given names) where typo /
+    /// distinct-entity signal is too weak.
+    #[pyo3(get)]
+    pub budget_short_floor: f64,
+
+    /// Multiplier on the per-side cost budget. Lower is stricter
+    /// (less edit tolerated before a cluster scores zero); higher
+    /// is more permissive. Callers tune this per scenario — KYC at
+    /// onboarding runs more permissive than payment screening.
+    #[pyo3(get)]
+    pub budget_tolerance: f64,
+
+    /// Overlap fraction (matched chars / shorter-side length) above
+    /// which two parts pair into a cluster. A pair below this
+    /// threshold surfaces as solo records — the matched-character
+    /// evidence is too thin to claim the parts are talking about
+    /// the same token. The 0.51 default (i.e. "more than half") is
+    /// the lowest value where majority of the shorter token agrees.
+    #[pyo3(get)]
+    pub cluster_overlap_min: f64,
+}
+
+impl Default for CompareConfig {
+    fn default() -> Self {
+        Self {
+            cost_sep_drop: 0.2,
+            cost_confusable: 0.7,
+            cost_digit: 1.5,
+            budget_log_base: 2.35,
+            budget_short_floor: 2.0,
+            budget_tolerance: 1.0,
+            cluster_overlap_min: 0.51,
+        }
+    }
+}
+
+#[pymethods]
+impl CompareConfig {
+    #[new]
+    #[pyo3(signature = (
+        cost_sep_drop = 0.2,
+        cost_confusable = 0.7,
+        cost_digit = 1.5,
+        budget_log_base = 2.35,
+        budget_short_floor = 2.0,
+        budget_tolerance = 1.0,
+        cluster_overlap_min = 0.51,
+    ))]
+    fn new(
+        cost_sep_drop: f64,
+        cost_confusable: f64,
+        cost_digit: f64,
+        budget_log_base: f64,
+        budget_short_floor: f64,
+        budget_tolerance: f64,
+        cluster_overlap_min: f64,
+    ) -> Self {
+        Self {
+            cost_sep_drop,
+            cost_confusable,
+            cost_digit,
+            budget_log_base,
+            budget_short_floor,
+            budget_tolerance,
+            cluster_overlap_min,
+        }
+    }
+
+    fn __repr__(&self) -> String {
+        format!(
+            "CompareConfig(cost_sep_drop={}, cost_confusable={}, cost_digit={}, \
+             budget_log_base={}, budget_short_floor={}, budget_tolerance={}, \
+             cluster_overlap_min={})",
+            self.cost_sep_drop,
+            self.cost_confusable,
+            self.cost_digit,
+            self.budget_log_base,
+            self.budget_short_floor,
+            self.budget_tolerance,
+            self.cluster_overlap_min,
+        )
+    }
+}
+
+/// Process-wide default `CompareConfig`, returned to the
+/// `compare_parts(..., config=None)` fast path. One allocation at
+/// startup; reads are zero-cost field accesses thereafter.
+static DEFAULT_CONFIG: LazyLock<CompareConfig> = LazyLock::new(CompareConfig::default);
 
 // --- Cost table -----------------------------------------------------
 
@@ -143,33 +228,32 @@ static SIMILAR_PAIRS: LazyLock<HashSet<(char, char)>> = LazyLock::new(|| {
 });
 
 /// Cost of one edit step between `qc` (query side) and `rc`
-/// (result side), keyed off the [edit-cost tiers](`COST_DEFAULT`)
-/// at the top of the module.
+/// (result side), keyed off the cost tiers in [`CompareConfig`].
 ///
 /// Tier-selection is order-sensitive: SEP-drop checks come before
 /// confusable lookup (so a SEP→non-SEP substitute falls through to
 /// digit / default), and confusable beats digit (a `0`/`o` swap
-/// gets COST_CONFUSABLE even though `0` is a digit).
-fn edit_cost(op: Op, qc: Option<char>, rc: Option<char>) -> f64 {
+/// gets `cost_confusable` even though `0` is a digit).
+fn edit_cost(cfg: &CompareConfig, op: Op, qc: Option<char>, rc: Option<char>) -> f64 {
     if op == Op::Equal {
         return 0.0;
     }
     if qc == Some(SEP) && rc.is_none() {
-        return COST_SEP_DROP;
+        return cfg.cost_sep_drop;
     }
     if rc == Some(SEP) && qc.is_none() {
-        return COST_SEP_DROP;
+        return cfg.cost_sep_drop;
     }
     if let (Some(q), Some(r)) = (qc, rc) {
         if SIMILAR_PAIRS.contains(&(q, r)) {
-            return COST_CONFUSABLE;
+            return cfg.cost_confusable;
         }
     }
     if matches!(qc, Some(c) if c.is_ascii_digit()) {
-        return COST_DIGIT;
+        return cfg.cost_digit;
     }
     if matches!(rc, Some(c) if c.is_ascii_digit()) {
-        return COST_DIGIT;
+        return cfg.cost_digit;
     }
     COST_DEFAULT
 }
@@ -217,7 +301,7 @@ struct Step {
 /// single span; a del-then-match-then-ins around the same pair also
 /// costs 2.0 but distributes 1.0 to each side. The tie-break (see
 /// inline) prefers the distributive path.
-fn align_chars(q_chars: &[char], r_chars: &[char]) -> Vec<Step> {
+fn align_chars(cfg: &CompareConfig, q_chars: &[char], r_chars: &[char]) -> Vec<Step> {
     let n = q_chars.len();
     let m = r_chars.len();
 
@@ -226,11 +310,11 @@ fn align_chars(q_chars: &[char], r_chars: &[char]) -> Vec<Step> {
     let mut back: Vec<Vec<BackPtr>> = vec![vec![BackPtr::None; m + 1]; n + 1];
 
     for i in 1..=n {
-        cost[i][0] = cost[i - 1][0] + edit_cost(Op::Delete, Some(q_chars[i - 1]), None);
+        cost[i][0] = cost[i - 1][0] + edit_cost(cfg, Op::Delete, Some(q_chars[i - 1]), None);
         back[i][0] = BackPtr::Delete;
     }
     for j in 1..=m {
-        cost[0][j] = cost[0][j - 1] + edit_cost(Op::Insert, None, Some(r_chars[j - 1]));
+        cost[0][j] = cost[0][j - 1] + edit_cost(cfg, Op::Insert, None, Some(r_chars[j - 1]));
         back[0][j] = BackPtr::Insert;
     }
 
@@ -246,11 +330,11 @@ fn align_chars(q_chars: &[char], r_chars: &[char]) -> Vec<Step> {
                 None
             };
             // Substitute (replace)
-            let sub_cost = cost[i - 1][j - 1] + edit_cost(Op::Replace, Some(qc), Some(rc));
+            let sub_cost = cost[i - 1][j - 1] + edit_cost(cfg, Op::Replace, Some(qc), Some(rc));
             // Delete from query
-            let del_cost = cost[i - 1][j] + edit_cost(Op::Delete, Some(qc), None);
+            let del_cost = cost[i - 1][j] + edit_cost(cfg, Op::Delete, Some(qc), None);
             // Insert from result
-            let ins_cost = cost[i][j - 1] + edit_cost(Op::Insert, None, Some(rc));
+            let ins_cost = cost[i][j - 1] + edit_cost(cfg, Op::Insert, None, Some(rc));
 
             // Tie-break on cost: prefer one-sided edits (delete /
             // insert) over substitution. Substitution attributes
@@ -353,7 +437,11 @@ struct AlignmentData {
 /// The walk advances a cursor on each side every time it consumes a
 /// SEP — which is how cost / overlap end up attributed to the right
 /// part instead of bleeding across token boundaries.
-fn run_align(qry_comparable: &[String], res_comparable: &[String]) -> AlignmentData {
+fn run_align(
+    cfg: &CompareConfig,
+    qry_comparable: &[String],
+    res_comparable: &[String],
+) -> AlignmentData {
     let n_q = qry_comparable.len();
     let n_r = res_comparable.len();
     let mut qry_costs: Vec<Vec<f64>> = vec![Vec::new(); n_q];
@@ -374,7 +462,7 @@ fn run_align(qry_comparable: &[String], res_comparable: &[String]) -> AlignmentD
     let q_chars: Vec<char> = q_text.chars().collect();
     let r_chars: Vec<char> = r_text.chars().collect();
 
-    let steps = align_chars(&q_chars, &r_chars);
+    let steps = align_chars(cfg, &q_chars, &r_chars);
 
     // Walk the alignment, advancing part-cursors on each SEP.
     let mut qry_idx: usize = 0;
@@ -391,7 +479,7 @@ fn run_align(qry_comparable: &[String], res_comparable: &[String]) -> AlignmentD
         {
             *overlaps.entry((qry_idx, res_idx)).or_insert(0) += 1;
         }
-        let cost = edit_cost(step.op, qc, rc);
+        let cost = edit_cost(cfg, step.op, qc, rc);
         if let Some(c) = qc {
             qry_costs[qry_idx].push(cost);
             if c == SEP && qry_idx + 1 < n_q {
@@ -440,6 +528,7 @@ struct Cluster {
 /// solo clusters at the end. Every input part appears in exactly
 /// one output cluster — paired or solo.
 fn run_cluster(
+    cfg: &CompareConfig,
     align: &AlignmentData,
     qry_lengths: &[usize],
     res_lengths: &[usize],
@@ -467,7 +556,7 @@ fn run_cluster(
             continue;
         }
         let frac = overlap as f64 / min_len as f64;
-        if frac > CLUSTER_OVERLAP_MIN {
+        if frac > cfg.cluster_overlap_min {
             // Find existing cluster for either side, else create one.
             let cluster_idx = match (q_to_cluster.get(&qp), r_to_cluster.get(&rp)) {
                 (Some(&i), _) => i,
@@ -521,8 +610,9 @@ fn run_cluster(
 /// Two design points worth knowing:
 ///
 /// 1. The score has a **cliff**: if total cost exceeds the
-///    length-dependent budget (see [`BUDGET_LOG_BASE`] and
-///    [`BUDGET_SHORT_FLOOR`]), the side scores zero. Below the cap,
+///    length-dependent budget (`budget_log_base`,
+///    `budget_short_floor`, `budget_tolerance` on
+///    [`CompareConfig`]), the side scores zero. Below the cap,
 ///    similarity is `1 - total_cost / len_chars` — a clean linear
 ///    walk-down. The non-linearity is in the cliff, not in the
 ///    score curve, which keeps the math transparent.
@@ -531,12 +621,12 @@ fn run_cluster(
 ///    deliberate: fuzzy-matching 1-2 char tokens (vessel hull
 ///    suffixes, isolated initials, 2-char Chinese given names) is
 ///    mostly noise and we'd rather miss those than over-fire.
-fn costs_similarity(costs: &[f64], fuzzy_tolerance: f64) -> f64 {
+fn costs_similarity(cfg: &CompareConfig, costs: &[f64]) -> f64 {
     if costs.is_empty() {
         return 0.0;
     }
-    let effective_len = (costs.len() as i64 - BUDGET_SHORT_FLOOR as i64).max(1) as f64;
-    let max_cost = effective_len.log(BUDGET_LOG_BASE) * fuzzy_tolerance;
+    let effective_len = (costs.len() as f64 - cfg.budget_short_floor).max(1.0);
+    let max_cost = effective_len.log(cfg.budget_log_base) * cfg.budget_tolerance;
     let total_cost: f64 = costs.iter().sum();
     if total_cost == 0.0 {
         return 1.0;
@@ -560,7 +650,7 @@ fn costs_similarity(costs: &[f64], fuzzy_tolerance: f64) -> f64 {
 /// Solo clusters (one side empty) score 0.0 by construction —
 /// they represent unmatched parts and have no pair-based
 /// similarity to compute.
-fn run_score(cluster: &Cluster, align: &AlignmentData, fuzzy_tolerance: f64) -> f64 {
+fn run_score(cfg: &CompareConfig, cluster: &Cluster, align: &AlignmentData) -> f64 {
     if cluster.qps.is_empty() || cluster.rps.is_empty() {
         return 0.0;
     }
@@ -582,7 +672,7 @@ fn run_score(cluster: &Cluster, align: &AlignmentData, fuzzy_tolerance: f64) -> 
             r_costs.extend_from_slice(sub);
         }
     }
-    costs_similarity(&q_costs, fuzzy_tolerance) * costs_similarity(&r_costs, fuzzy_tolerance)
+    costs_similarity(cfg, &q_costs) * costs_similarity(cfg, &r_costs)
 }
 
 // --- Public entry point --------------------------------------------
@@ -598,18 +688,21 @@ fn run_score(cluster: &Cluster, align: &AlignmentData, fuzzy_tolerance: f64) -> 
 /// Returned alignments carry `symbol = None` (residue distance is
 /// non-symbolic by definition).
 ///
-/// `fuzzy_tolerance` rescales the per-side cost budget. Higher = more permissive
-/// (KYC-onboarding profile); lower = stricter (payment-screening
-/// profile). The default of `1.0` matches industry-typical recall-
-/// protective tuning.
+/// `config` overrides the cost / budget / clustering scalars. Pass
+/// `None` (the default) to use the process-wide defaults — those
+/// match industry-typical recall-protective tuning. Sweep scripts
+/// build a fresh [`CompareConfig`] per iteration; matchers cache one
+/// per request.
 #[pyfunction]
-#[pyo3(name = "compare_parts", signature = (qry, res, fuzzy_tolerance = DEFAULT_FUZZY_TOLERANCE))]
+#[pyo3(name = "compare_parts", signature = (qry, res, config = None))]
 pub fn py_compare_parts(
     py: Python<'_>,
     qry: Vec<Py<NamePart>>,
     res: Vec<Py<NamePart>>,
-    fuzzy_tolerance: f64,
+    config: Option<&CompareConfig>,
 ) -> PyResult<Vec<Py<Alignment>>> {
+    let cfg: &CompareConfig = config.unwrap_or(&DEFAULT_CONFIG);
+
     let n_q = qry.len();
     let n_r = res.len();
 
@@ -633,12 +726,12 @@ pub fn py_compare_parts(
         r_comparable.push(c);
     }
 
-    let align = run_align(&q_comparable, &r_comparable);
-    let clusters = run_cluster(&align, &q_lengths, &r_lengths, n_q, n_r);
+    let align = run_align(cfg, &q_comparable, &r_comparable);
+    let clusters = run_cluster(cfg, &align, &q_lengths, &r_lengths, n_q, n_r);
 
     let mut out: Vec<Py<Alignment>> = Vec::with_capacity(clusters.len());
     for cluster in &clusters {
-        let score = run_score(cluster, &align, fuzzy_tolerance);
+        let score = run_score(cfg, cluster, &align);
         let qps_parts: Vec<Py<NamePart>> =
             cluster.qps.iter().map(|&i| qry[i].clone_ref(py)).collect();
         let rps_parts: Vec<Py<NamePart>> =
@@ -665,30 +758,44 @@ mod tests {
 
     #[test]
     fn edit_cost_basic() {
-        assert_eq!(edit_cost(Op::Equal, Some('a'), Some('a')), 0.0);
-        assert_eq!(edit_cost(Op::Replace, Some('a'), Some('b')), 1.0);
+        let cfg = CompareConfig::default();
+        assert_eq!(edit_cost(&cfg, Op::Equal, Some('a'), Some('a')), 0.0);
+        assert_eq!(edit_cost(&cfg, Op::Replace, Some('a'), Some('b')), 1.0);
         // Confusable
-        assert_eq!(edit_cost(Op::Replace, Some('0'), Some('o')), 0.7);
+        assert_eq!(edit_cost(&cfg, Op::Replace, Some('0'), Some('o')), 0.7);
         // Digit
-        assert_eq!(edit_cost(Op::Replace, Some('5'), Some('8')), 1.5);
+        assert_eq!(edit_cost(&cfg, Op::Replace, Some('5'), Some('8')), 1.5);
         // Lone SEP
-        assert_eq!(edit_cost(Op::Insert, None, Some(SEP)), 0.2);
-        assert_eq!(edit_cost(Op::Delete, Some(SEP), None), 0.2);
+        assert_eq!(edit_cost(&cfg, Op::Insert, None, Some(SEP)), 0.2);
+        assert_eq!(edit_cost(&cfg, Op::Delete, Some(SEP), None), 0.2);
+    }
+
+    #[test]
+    fn edit_cost_honours_config_overrides() {
+        // Override the digit-mismatch cost — the same DP would
+        // otherwise return the default 1.5.
+        let cfg = CompareConfig {
+            cost_digit: 0.3,
+            ..CompareConfig::default()
+        };
+        assert_eq!(edit_cost(&cfg, Op::Replace, Some('5'), Some('8')), 0.3);
     }
 
     #[test]
     fn align_identical_strings() {
+        let cfg = CompareConfig::default();
         let chars: Vec<char> = "putin".chars().collect();
-        let steps = align_chars(&chars, &chars);
+        let steps = align_chars(&cfg, &chars, &chars);
         assert_eq!(steps.len(), 5);
         assert!(steps.iter().all(|s| s.op == Op::Equal));
     }
 
     #[test]
     fn align_one_substitute() {
+        let cfg = CompareConfig::default();
         let q: Vec<char> = "putin".chars().collect();
         let r: Vec<char> = "potin".chars().collect();
-        let steps = align_chars(&q, &r);
+        let steps = align_chars(&cfg, &q, &r);
         assert_eq!(steps.len(), 5);
         // 4 equal + 1 replace
         assert_eq!(steps.iter().filter(|s| s.op == Op::Equal).count(), 4);
@@ -701,14 +808,16 @@ mod tests {
         // so any non-zero edit fails the cap. Stops the matcher
         // from over-firing on 2-char Chinese given names, vessel
         // hull suffixes, initials, etc.
+        let cfg = CompareConfig::default();
         let costs = vec![1.0, 0.0];
-        assert_eq!(costs_similarity(&costs, 1.0), 0.0);
+        assert_eq!(costs_similarity(&cfg, &costs), 0.0);
     }
 
     #[test]
     fn costs_similarity_zero_cost_gives_one() {
+        let cfg = CompareConfig::default();
         let costs = vec![0.0, 0.0, 0.0, 0.0, 0.0];
-        assert_eq!(costs_similarity(&costs, 1.0), 1.0);
+        assert_eq!(costs_similarity(&cfg, &costs), 1.0);
     }
 
     #[test]
@@ -720,9 +829,10 @@ mod tests {
         // pick the distributive path, otherwise the per-side
         // budget cap rejects the cluster on a typo it should
         // accept.
+        let cfg = CompareConfig::default();
         let q: Vec<char> = "donlad".chars().collect();
         let r: Vec<char> = "donald".chars().collect();
-        let steps = align_chars(&q, &r);
+        let steps = align_chars(&cfg, &q, &r);
         let n_sub = steps.iter().filter(|s| s.op == Op::Replace).count();
         let n_del = steps.iter().filter(|s| s.op == Op::Delete).count();
         let n_ins = steps.iter().filter(|s| s.op == Op::Insert).count();
