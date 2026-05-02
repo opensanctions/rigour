@@ -746,6 +746,8 @@
       "plant",
       "rasteniye",
       "usine",
+      "werk",
+      "werke",
       "zavod",
       "závod",
       "завод",
@@ -1308,6 +1310,22 @@
       "горнодобывающая",
       "矿业",
       "礦業"
+    ],
+    "MOTOR": [
+      "motor",
+      "motoren",
+      "motorlar",
+      "motorları",
+      "motorlu",
+      "motors",
+      "motoru",
+      "мотор",
+      "моторная",
+      "моторные",
+      "моторный",
+      "моторы",
+      "发动机",
+      "發動機"
     ],
     "MUSEUM": [
       "musei",
