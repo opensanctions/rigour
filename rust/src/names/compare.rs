@@ -515,18 +515,31 @@ struct Cluster {
     rps: Vec<usize>,
 }
 
-/// Pair query/result parts into clusters, with transitive closure.
+/// Pair query/result parts into clusters by overlap-fraction
+/// threshold, with shared-vertex merging.
 ///
 /// A pair `(qp, rp)` joins a cluster when the alignment matched more
-/// than half the shorter part's characters between them — strong
-/// enough overlap that they're plausibly the same token, ignoring
-/// noise. Transitive closure folds in chained pairings, so the
-/// `vanderbilt` ↔ `[van, der, bilt]` token-split case lands as one
-/// cluster instead of three near-misses.
+/// than `cfg.cluster_overlap_min` of the shorter part's characters
+/// between them — strong enough overlap that they're plausibly the
+/// same token, ignoring noise. Eligible pairs are processed in
+/// sorted order; each pair joins the cluster that already contains
+/// either side, or creates a fresh cluster if neither side has been
+/// seen. This handles star-shaped patterns (e.g. `vanderbilt` ↔
+/// `[van, der, bilt]` — one query part bound to three result parts)
+/// and chain-shaped patterns (`q0`↔`r0`, `q0`↔`r1`, `q1`↔`r1`)
+/// cleanly: each new edge shares a vertex with the growing cluster.
+///
+/// **X-bridge limitation.** Two already-existing clusters are not
+/// merged when a later edge bridges them — the bridging edge joins
+/// one and the other remains separate, leaving a part referenced
+/// from both. Rare in practice (the 0.51 threshold keeps most parts
+/// to a single dominant counterpart) but a real invariant
+/// violation; tracked in `plans/weighted-distance.md` § Open spec
+/// knobs as part of the clustering-rule fragility item, alongside
+/// the alignment-connectivity replacement for the threshold.
 ///
 /// Parts that no overlap pair clears the threshold for surface as
-/// solo clusters at the end. Every input part appears in exactly
-/// one output cluster — paired or solo.
+/// solo clusters at the end.
 fn run_cluster(
     cfg: &CompareConfig,
     align: &AlignmentData,

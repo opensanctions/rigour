@@ -146,14 +146,12 @@ def generate_org_type_file() -> None:
 def generate_compare_file() -> None:
     """Emit `rust/data/names/compare.json` from `resources/names/compare.yml`.
 
-    Currently holds the visual/phonetic confusable pair table used by
-    the cost-folded DP in the future Rust `compare_parts` (see
-    `plans/weighted-distance.md`). Each pair is emitted in both
-    directions, sorted, so the Rust loader does a single `binary_search`
-    per char-pair lookup with no per-call expansion.
-
-    No Python output — the harness's Python prototype keeps an inline
-    mirror; it retires once the Rust port hits parity.
+    Holds the visual/phonetic confusable pair table read at startup
+    by `rigour.names.compare_parts` (Rust). Each pair is emitted in
+    both directions and deduped, so the loader builds a single
+    `HashSet<(char, char)>` (via `LazyLock`) and the cost-folded DP
+    pays one hash probe per non-equal char pair without expanding
+    per call.
     """
     compare_path = RESOURCES_PATH / "names" / "compare.yml"
     with open(compare_path, "r", encoding="utf-8") as fh:

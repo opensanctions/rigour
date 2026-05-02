@@ -146,14 +146,26 @@ plus a harness re-run away from a number.
   harness-driven. See [issue #202](https://github.com/opensanctions/rigour/issues/202)
   for the Bashar-class particle case (extending the existing 0.7
   weight to fire when *either* side is a stopword).
-- **Clustering rule fragility.** The 0.51-overlap rule is sensitive
-  to alignment-shape changes — a paired-but-zero-score cluster vs.
-  two solos with extra-name weights drag the orchestration aggregate
-  down by different amounts even when underlying similarity is
-  comparable. The phase-3 BAE Systems / BAE Industries case is a
-  concrete example. Replacing the threshold with alignment-
-  connectivity (≥1 equal-char step) per the spec's pairing rule
-  should make this less fragile.
+- **Clustering rule fragility.** Two related issues:
+  - The 0.51-overlap rule is sensitive to alignment-shape changes —
+    a paired-but-zero-score cluster vs. two solos with extra-name
+    weights drag the orchestration aggregate down by different
+    amounts even when underlying similarity is comparable. The
+    phase-3 BAE Systems / BAE Industries case is a concrete
+    example. Replacing the threshold with alignment-connectivity
+    (≥1 equal-char step) per the spec's pairing rule should make
+    this less fragile.
+  - The current clusterer joins a new `(qp, rp)` edge to whichever
+    existing cluster already contains either side, but does not
+    merge two existing clusters when a later edge bridges them
+    (X-bridge). A part can end up referenced from two clusters in
+    that case — rare under the 0.51 threshold (most parts have a
+    single dominant counterpart) but a real invariant violation.
+    The cost-stream layout means the duplicated part contributes
+    its costs to both downstream cluster scores; downstream
+    averaging tolerates it but it's not what the docstring promises.
+    A union-find / DSU rewrite is the fix; landing it together with
+    the connectivity-based pairing rule above is the natural shape.
 
 ### Magic-number systematisation
 
@@ -258,8 +270,6 @@ for the durable list.
   of the residue-distance primitive.
 - [arch-name-pipeline.md](arch-name-pipeline.md) — `Name`/`NamePart`
   object graph, `analyze_names`, `pair_symbols`.
-- [name-screening.md](name-screening.md) — industry context driving
-  the score-as-ranking framing and confidence-cliff curve.
 - [name-matcher-pruning.md](name-matcher-pruning.md) — orthogonal
   pruning that reduces the *number* of pairs reaching this primitive.
 - `nomenklatura/matching/logic_v2/names/distance.py` — the file phase 4

@@ -217,18 +217,26 @@ three modes:
   a part with no counterpart on the other side; the matcher
   applies a side-specific weight policy.
 
-Frozen pyclass. `qps` / `rps` are `tuple[NamePart, ...]`; `qstr`
-/ `rstr` are space-joined `comparable` forms cached at
-construction, so the literal-equality rescue collapses to one
-string compare and `__str__` rendering doesn't rebuild on every
-call. `__hash__` and `__eq__` key on `(symbol, qps, rps)` —
-`NamePart` already hashes by `(index, form)` so position survives
-the join.
+Pyclass with mixed mutability. `qps` / `rps` / `symbol` / `qstr`
+/ `rstr` are immutable post-construction; `qstr` / `rstr` are
+space-joined `comparable` forms cached at construction so the
+literal-equality rescue collapses to one string compare and
+`__str__` rendering doesn't rebuild on every call. `score` and
+`weight` are `#[pyo3(get, set)]` and *intentionally* mutable —
+the matcher's policy passes (literal-equality rescue, extras
+override, family-name boost, stopword multiplier) overwrite them
+in place after rigour returns the alignment. Both stored as
+`Py<PyFloat>` so Python-side reads are an INCREF rather than a
+fresh allocation. `__hash__` and `__eq__` key on
+`(symbol, qps, rps)` — `score` and `weight` are not part of
+identity, so policy mutation doesn't change a hashed record's
+identity.
 
-Matcher-policy concerns (weight, family-name boost, score
-override at the literal-equality rescue) live downstream in
-nomenklatura's `WeightedAlignment` wrapper. rigour ships the
-immutable evidence record; consumers compose policy on top.
+rigour ships the evidence record with default
+`score` / `weight` values (1.0 placeholders for symbol-paired
+edges, the per-cluster product for residue clusters, 0.0 for
+extras). nomenklatura `logic_v2` mutates them directly during
+matcher policy; no wrapper type required.
 
 ## `pair_symbols`
 
