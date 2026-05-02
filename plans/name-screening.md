@@ -231,9 +231,9 @@ land on, the rationale has to be defensible to a supervisor.
 
 For us, calibration concretely means:
 
-- The harness in `rigour/contrib/name_comparison/` (per
+- The harness in `nomenklatura/contrib/name_bench/` (per
   `weighted-distance.md`) is the calibration tool.
-- `nomenklatura/contrib/name_benchmark/checks.yml` plus the
+- `nomenklatura/contrib/entity_bench/checks.yml` plus the
   qarin-generated negatives and UN-SC / US-Congress positive
   fixtures in
   `yente/contrib/candidate_generation_benchmark/fixtures/`

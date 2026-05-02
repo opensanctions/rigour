@@ -20,7 +20,7 @@ what's shipped vs. what's still open.
 
 | Phase | Status | Notes |
 |---|---|---|
-| 1. Harness + Python baseline | ✅ shipped | `contrib/name_comparison/` with 818-row `cases.csv`, accuracy + perf runners, comparator registry. |
+| 1. Harness + Python baseline | ✅ shipped | `nomenklatura/contrib/name_bench/` with 818-row `cases.csv`, accuracy + perf runners, comparator registry. (Originally landed in `rigour/contrib/name_comparison/`; moved to nomenklatura post-Phase-4.) |
 | 2. Spec iteration | ⚠ partial | One round (DP tie-break) shipped. Combination function, budget shape, clustering rule, stopword curve still open. |
 | 3. Rust port + productisation | ✅ shipped | `rigour.names.compare_parts` returning `Alignment`, mkdocs page, 17 Python unit tests. |
 | 4. Nomenklatura migration | ✅ shipped | `weighted_edit_similarity` is now a thin wrapper over `rigour.names.compare_parts`; phase-3 shadow comparators (`compare_python`, `compare_rust`) retired. |
@@ -28,7 +28,7 @@ what's shipped vs. what's still open.
 
 ## What landed
 
-### Phase 1 — harness (`contrib/name_comparison/`)
+### Phase 1 — harness (`nomenklatura/contrib/name_bench/`)
 
 - `cases.csv`: 818 labelled name pairs across 5 case_groups
   (`nk_checks`, `nk_unit_tests`, `synth_companies`,
@@ -112,7 +112,7 @@ ABDURRAHMAN`) — both driven by the spec change documented in
 and the fragility of the 0.51-overlap cluster threshold near a
 single-character cliff. Net F1 unchanged at 0.795.
 
-Perf on `nomenklatura/contrib/name_benchmark/`:
+Perf on `nomenklatura/contrib/entity_bench/`:
 
 | Run | Total | vs prev |
 |---|---|---|
@@ -176,11 +176,12 @@ defensible argument for the specific values today.
 pulls them at startup. Single source of truth; editing a scalar
 becomes one YAML edit + `make rust-data`.
 
-**Tuning sweep:** `contrib/name_comparison/sweep.py` (not yet
-written) — coordinate descent on Layer A scalars, holding Layer B
-frozen. Per-`category` constraint reporting catches tunes that
-improve overall F1 by tanking one specific failure class. Hold out
-`synth_*` partition for validation against `nk_*` training.
+**Tuning sweep:** `nomenklatura/contrib/name_bench/sweep.py` (not
+yet written) — coordinate descent on Layer A scalars, holding
+Layer B frozen. Per-`category` constraint reporting catches tunes
+that improve overall F1 by tanking one specific failure class.
+Hold out `synth_*` partition for validation against `nk_*`
+training.
 
 Layer B is **not phase 2 or phase 4 territory.** Those values came
 from real production tuning at OpenSanctions; moving them is a
