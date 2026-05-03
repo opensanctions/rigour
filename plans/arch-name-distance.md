@@ -203,7 +203,7 @@ Notes:
 Visual / phonetic confusable pairs live in `resources/names/compare.yml`
 (committed YAML). The genscript emits `rust/data/names/compare.json`
 with both directions pre-expanded so the lookup is a single hash probe.
-Editing the table is one YAML edit + `make rust-data`.
+Editing the table is one YAML edit + `make build`.
 
 The remaining scalars (`COST_*`, `BUDGET_LOG_BASE`, `BUDGET_SHORT_FLOOR`,
 `CLUSTER_OVERLAP_MIN`) live as named constants at the top of
