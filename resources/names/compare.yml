@@ -1,0 +1,26 @@
+# Reference data for the residue-distance comparator (compare_parts).
+#
+# Read at startup by rigour.names.compare_parts (Rust impl).
+#
+# Genscript: genscripts/generate_names.py:generate_compare_file
+# Output:    rust/data/names/compare.json (Tier-3, serde-loaded)
+
+# Visual / phonetic single-char confusables. The cost-folded DP charges
+# the confusable cost tier (cheaper than a default substitute, cheaper
+# still than a digit mismatch) when an edit involves a pair listed here.
+# Listed once, applied bidirectionally — ["0", "o"] covers ("0"→"o") and
+# ("o"→"0").
+similar_pairs:
+  - ["0", "o"]
+  - ["1", "i"]
+  - ["1", "l"]
+  - ["g", "9"]
+  - ["q", "9"]
+  - ["b", "6"]
+  - ["5", "s"]
+  - ["e", "i"]
+  - ["o", "u"]
+  - ["i", "j"]
+  - ["i", "y"]
+  - ["c", "k"]
+  - ["n", "h"]

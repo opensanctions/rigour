@@ -12,12 +12,13 @@ may need their inputs retuned if the data shifts.
 from typing import List, Tuple
 
 from rigour.names import (
+    Alignment,
     Name,
     NamePartTag,
     NameTypeTag,
     analyze_names,
 )
-from rigour.names.symbol import SymbolEdge, pair_symbols
+from rigour.names.symbol import pair_symbols
 
 
 def _only(names: "set[Name]") -> Name:
@@ -27,7 +28,7 @@ def _only(names: "set[Name]") -> Name:
 
 
 def pair_shape(
-    pairings: List[Tuple[SymbolEdge, ...]],
+    pairings: List[Tuple[Alignment, ...]],
 ) -> List[List[Tuple[str, str, str]]]:
     """Normalise pairings for readable pytest diffs.
 
@@ -41,8 +42,8 @@ def pair_shape(
     return [
         sorted(
             (
-                " ".join(p.form for p in e.query_parts),
-                " ".join(p.form for p in e.result_parts),
+                " ".join(p.form for p in e.qps),
+                " ".join(p.form for p in e.rps),
                 e.symbol.category.value,
             )
             for e in edges

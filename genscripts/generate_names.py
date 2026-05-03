@@ -143,7 +143,42 @@ def generate_org_type_file() -> None:
     write_json(RUST_DATA_PATH / "names" / "org_types.json", clean_types, indent=True)
 
 
+def generate_compare_file() -> None:
+    """Emit `rust/data/names/compare.json` from `resources/names/compare.yml`.
+
+    Holds the visual/phonetic confusable pair table read at startup
+    by `rigour.names.compare_parts` (Rust). Each pair is emitted in
+    both directions and deduped, so the loader builds a single
+    `HashSet<(char, char)>` (via `LazyLock`) and the cost-folded DP
+    pays one hash probe per non-equal char pair without expanding
+    per call.
+    """
+    compare_path = RESOURCES_PATH / "names" / "compare.yml"
+    with open(compare_path, "r", encoding="utf-8") as fh:
+        data: Dict[str, List[List[str]]] = yaml.safe_load(fh.read())
+
+    similar_pairs = data.get("similar_pairs", [])
+    expanded: set = set()
+    for pair in similar_pairs:
+        if len(pair) != 2:
+            raise ValueError(f"similar_pairs entry must be a 2-element list, got {pair!r}")
+        a, b = pair
+        if len(a) != 1 or len(b) != 1:
+            raise ValueError(f"similar_pairs entries must be single chars, got {pair!r}")
+        expanded.add((a, b))
+        expanded.add((b, a))
+
+    out_data = {
+        "similar_pairs": sorted([list(p) for p in expanded]),
+    }
+
+    out_path = RUST_DATA_PATH / "names" / "compare.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    write_json(out_path, out_data, indent=True)
+
+
 if __name__ == "__main__":
     generate_name_stopwords_file()
     generate_symbols_file()
     generate_org_type_file()
+    generate_compare_file()

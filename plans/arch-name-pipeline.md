@@ -1,7 +1,7 @@
 ---
-description: Architecture of rigour's name-analysis pipeline — Symbol/Name/NamePart object graph, the analyze_names single-FFI entry point, pair_symbols, and the pick_name family.
-date: 2026-04-26
-tags: [rigour, names, analyze, symbols, pick-name, architecture]
+description: Architecture of rigour's name-analysis pipeline — Symbol/Name/NamePart object graph, the analyze_names single-FFI entry point, the Alignment evidence type returned by pair_symbols and compare_parts, and the pick_name family.
+date: 2026-05-01
+tags: [rigour, names, analyze, symbols, alignment, pick-name, architecture]
 ---
 
 # Name pipeline: architecture
@@ -194,24 +194,69 @@ followthemoney, not rigour:
 The split: rigour owns the name engine, FTM owns the
 entity-to-strings projection, downstream consumers compose them.
 
+## `Alignment`
+
+`rigour.names.Alignment` (`rust/src/names/alignment.rs`) is the
+unified return shape from both `pair_symbols` (below) and
+`compare_parts` — the residue-distance entry point covered in
+[arch-name-distance.md](arch-name-distance.md). One pyclass,
+three modes:
+
+- **Symbol-paired edge** — `symbol` is `Some(_)`, both `qps` /
+  `rps` non-empty. Returned by `pair_symbols`. The carried
+  `score` is a `1.0` placeholder; consumers override it with a
+  per-category default (e.g. `NAME → 0.9`, `NICK → 0.6`) at the
+  point they wrap the alignment for scoring. The placeholder
+  exists because the per-category table is matcher-policy and
+  lives in nomenklatura's `magic.py`, not in rigour.
+- **Residue cluster** — `symbol = None`, both sides non-empty.
+  Returned by `compare_parts` for parts that aligned by edit
+  distance. `score` is the per-cluster product of per-side
+  similarities, capped at zero by the length-dependent budget.
+- **Extra** — `symbol = None`, exactly one side empty. Represents
+  a part with no counterpart on the other side; the matcher
+  applies a side-specific weight policy.
+
+Pyclass with mixed mutability. `qps` / `rps` / `symbol` / `qstr`
+/ `rstr` are immutable post-construction; `qstr` / `rstr` are
+space-joined `comparable` forms cached at construction so the
+literal-equality rescue collapses to one string compare and
+`__str__` rendering doesn't rebuild on every call. `score` and
+`weight` are `#[pyo3(get, set)]` and *intentionally* mutable —
+the matcher's policy passes (literal-equality rescue, extras
+override, family-name boost, stopword multiplier) overwrite them
+in place after rigour returns the alignment. Both stored as
+`Py<PyFloat>` so Python-side reads are an INCREF rather than a
+fresh allocation. `__hash__` and `__eq__` key on
+`(symbol, qps, rps)` — `score` and `weight` are not part of
+identity, so policy mutation doesn't change a hashed record's
+identity.
+
+rigour ships the evidence record with default
+`score` / `weight` values (1.0 placeholders for symbol-paired
+edges, the per-cluster product for residue clusters, 0.0 for
+extras). nomenklatura `logic_v2` mutates them directly during
+matcher policy; no wrapper type required.
+
 ## `pair_symbols`
 
 `rigour.names.pair_symbols(query, result)` aligns the symbol
-spans of two `Name`s into coverage-maximal pairings. Implementation
-in `rust/src/names/pairing.rs`; Python wrapper in
-`rigour/names/symbol.py`.
+spans of two `Name`s into coverage-maximal pairings.
+Implementation in `rust/src/names/pairing.rs`; re-exported
+through `rigour/names/symbol.py`.
 
 Used by matchers to skip Levenshtein on tokens the tagger has
 already explained on both sides — Latin "Vladimir" and Cyrillic
 "Владимир" both carrying the same `NAME:Q...` Putin symbol pair
 without string comparison.
 
-Each returned pairing is a tuple of non-conflicting `SymbolEdge`s
+Each returned pairing is a tuple of non-conflicting `Alignment`s
 whose joint coverage is maximal within its scoring-equivalence
-class. Coverings that cover the same parts with the same category
-mix collapse to one; distinct category choices on the same parts
-(e.g. a token carrying both `NAME` and `SYMBOL`) surface as
-separate pairings.
+class. Each carries `symbol = Some(_)` and the `1.0` score
+placeholder (see [Alignment](#alignment) above). Pairings that
+cover the same parts with the same category mix collapse to one;
+distinct category choices on the same parts (e.g. a token
+carrying both `NAME` and `SYMBOL`) surface as separate pairings.
 
 A single empty pairing `[()]` is returned when neither name has
 tagger output, when no symbol is shared, or when either name has

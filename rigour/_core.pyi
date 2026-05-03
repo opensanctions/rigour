@@ -211,22 +211,85 @@ def align_person_name_order(
 ) -> tuple[list[NamePart], list[NamePart]]: ...
 
 
-class PairedEdge:
-    """Rust-side representation of one paired span in a pairing.
+class Alignment:
+    """One unit of name-comparison evidence.
 
-    Prefer the higher-level `rigour.names.symbol.pair_symbols`
-    wrapper, which returns `SymbolEdge` dataclasses with resolved
-    `NamePart` references; this pyclass exposes raw part indices
-    (`int`s) and is primarily useful when calling the Rust entry
-    point directly.
+    Three modes:
+
+    - **Symbol-paired edge** — `symbol` is set; both sides carry
+      the same `Symbol`. Returned by `pair_symbols`. Default
+      `score` is `1.0`; consumers may override with a category
+      default (e.g. `SYM_SCORES[NAME] = 0.9`).
+    - **Residue cluster** — `symbol` is `None`, both sides
+      non-empty. Returned by `compare_parts` for parts that
+      aligned by edit distance.
+    - **Extra** — `symbol` is `None`, exactly one side is empty.
+      Represents a part that found no counterpart on the other
+      side; the matcher applies a side-specific weight.
+
+    `qps` / `rps` / `symbol` / `qstr` / `rstr` are immutable
+    post-construction. `score` and `weight` are mutable so the
+    matcher can apply policy passes (literal-equality rescue,
+    extras-weight override, family-name boost) in place.
+
+    `qstr` / `rstr` are the space-joined `comparable` forms of
+    each side, precomputed at construction. `__hash__` and
+    `__eq__` key on `(symbol, qps, rps)` — `NamePart` already
+    hashes by `(index, form)`, so position is preserved. `score`
+    and `weight` are not part of identity.
     """
 
-    @property
-    def query_parts(self) -> tuple[int, ...]: ...
-    @property
-    def result_parts(self) -> tuple[int, ...]: ...
-    @property
-    def symbol(self) -> Symbol: ...
+    qps: tuple[NamePart, ...]
+    rps: tuple[NamePart, ...]
+    symbol: Symbol | None
+    score: float
+    weight: float
+    qstr: str
+    rstr: str
+
+    def __init__(
+        self,
+        qps: list[NamePart] | tuple[NamePart, ...],
+        rps: list[NamePart] | tuple[NamePart, ...],
+        symbol: Symbol | None = None,
+        score: float = 0.0,
+        weight: float = 1.0,
+    ) -> None: ...
 
 
-def pair_symbols(query: Name, result: Name) -> list[tuple[PairedEdge, ...]]: ...
+def pair_symbols(query: Name, result: Name) -> list[tuple[Alignment, ...]]: ...
+
+
+class CompareConfig:
+    """Tunable cost / budget / clustering scalars for `compare_parts`.
+
+    Frozen — fields cannot be reassigned after construction. Sweep
+    scripts build a fresh instance per iteration; matchers cache one
+    per request.
+    """
+
+    cost_sep_drop: float
+    cost_confusable: float
+    cost_digit: float
+    budget_log_base: float
+    budget_short_floor: float
+    budget_tolerance: float
+    cluster_overlap_min: float
+
+    def __init__(
+        self,
+        cost_sep_drop: float = 0.2,
+        cost_confusable: float = 0.7,
+        cost_digit: float = 1.5,
+        budget_log_base: float = 2.35,
+        budget_short_floor: float = 2.0,
+        budget_tolerance: float = 1.0,
+        cluster_overlap_min: float = 0.51,
+    ) -> None: ...
+
+
+def compare_parts(
+    qry: list[NamePart],
+    res: list[NamePart],
+    config: CompareConfig | None = None,
+) -> list[Alignment]: ...
