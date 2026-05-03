@@ -201,7 +201,7 @@ human-inspectable when a regeneration looks wrong. `serde` /
 The generators use the broader Python ecosystem (Wikidata client,
 `unidecode`, existing rigour utilities), run rarely, and would
 double in size to rewrite. The clean split is **Python generates,
-Rust consumes.** `make rust-data` regenerates everything under
+Rust consumes.** `make build` regenerates everything under
 `rust/data/` + `rust/src/generated/`; CI runs it and `git diff`s
 against the committed artifacts as the contract.
 

@@ -58,10 +58,10 @@ iso639.py` (ISO-639 tables for `rigour.langs`) and
 Treat them the same as any Python source — not a pattern to
 replicate for new data.
 
-`make rust-data` regenerates everything under `rust/data/` from
-`resources/`. CI runs it and fails on diff, so after editing anything
-under `resources/` you need to run `make rust-data` and commit the
-regenerated artifacts.
+`make build` regenerates everything under `rust/data/` (and the
+remaining Python data tables) from `resources/`. CI runs it and
+fails on diff, so after editing anything under `resources/` you
+need to run `make build` and commit the regenerated artifacts.
 
 ### Dev workflow for Rust-touching changes
 

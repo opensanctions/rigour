@@ -44,14 +44,14 @@ const FILES: &[Compress] = &[
         dst: "symbols.json.zst",
         missing: "rust/data/names/symbols.json not found — \
                   compiling empty symbols blob. Run \
-                  `make rust-data` to regenerate.",
+                  `make build-names` to regenerate.",
     },
     Compress {
         src: "data/names/org_types.json",
         dst: "org_types.json.zst",
         missing: "rust/data/names/org_types.json not found — \
                   compiling empty org-types blob. Run \
-                  `make rust-data` to regenerate.",
+                  `make build-names` to regenerate.",
     },
 ];
 
