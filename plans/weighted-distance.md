@@ -130,10 +130,14 @@ Perf on `nomenklatura/contrib/entity_bench/`:
 None of these is worth deciding speculatively — each is one variant
 plus a harness re-run away from a number.
 
-- **Per-side score combination.** Product (current, punitive),
-  geometric mean (softer), or length-weighted average
-  (info-symmetric). Choice interacts directly with the 0.7 alert
-  threshold on borderline pairs.
+- **Per-side score combination.** Product (current, punitive) vs.
+  length-weighted average (info-symmetric, untested). Geometric
+  mean was tested on 2026-05-03 against the 826-row cases.csv and
+  produced a clean regression at the 0.7 threshold (F1 0.796 →
+  0.793, 3 TN→FP regressions, 0 improvements) — softening the
+  cliff lets borderline non-matches drift over the alert bar
+  without buying any recall. Choice interacts with the alert
+  threshold; revisiting requires a joint sweep over both knobs.
 - **Length budget shape.** Log-of-`(len-2)` (current, magic base
   2.35), fraction-of-length-capped, sqrt-based, or piecewise. Same
   "very short → off, sub-linear after" shape; legibility differs.
