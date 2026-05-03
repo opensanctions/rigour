@@ -1,4 +1,4 @@
-from rigour.text.distance import levenshtein, dam_levenshtein
+from rigour.text.distance import levenshtein
 from rigour.text.distance import jaro_winkler
 from rigour.text.distance import levenshtein_similarity
 from rigour.text.distance import is_levenshtein_plausible
@@ -10,15 +10,6 @@ def test_levenshtein():
     assert levenshtein("bar", "bra") == 2
     assert levenshtein("foo", "foobar") == 3
     assert levenshtein("foo", "Foo") == 1
-
-
-def test_levenshtein_dam():
-    assert dam_levenshtein("foo", "foo") == 0
-    assert dam_levenshtein("foo", "bar") == 3
-    assert dam_levenshtein("bar", "bar") == 0
-    assert dam_levenshtein("bar", "bra") == 1
-    assert dam_levenshtein("foo", "foobar") == 3
-    assert dam_levenshtein("foo", "Foo") == 1
 
 
 def test_jaro_winkler():

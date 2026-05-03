@@ -37,11 +37,10 @@ icu = { version = "2", features = ["compiled_data", "unstable"] }
 # Bitflags for the Normalize flag set (rigour/text/normalize.rs).
 bitflags = "2"
 
-# String distance — bit-parallel Levenshtein via the rapidfuzz crate.
-# Used internally (e.g. the in-Rust name picker). Not exposed via PyO3:
-# Python callers who need distance functions use the Python `rapidfuzz`
-# package directly, which also provides the opcodes/alignment API the
-# Rust crate lacks.
+# String distance — bit-parallel Levenshtein, Damerau-Levenshtein, and
+# Jaro-Winkler. Backs both the in-Rust callers (`names::pick`,
+# `names::ordering`) and the PyO3-exposed `raw_*` primitives that
+# `rigour.text.distance` and `rigour.territories.lookup` consume.
 rapidfuzz = "0.5"
 
 # LRU caches. Currently used for `maybe_ascii`'s per-thread result
