@@ -108,6 +108,13 @@ fn py_raw_levenshtein_cutoff(a: &str, b: &str, cutoff: usize) -> usize {
 
 #[cfg(feature = "python")]
 #[pyfunction]
+#[pyo3(name = "raw_jaro")]
+fn py_raw_jaro(a: &str, b: &str) -> f64 {
+    text::distance::jaro_similarity(a, b)
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
 #[pyo3(name = "raw_jaro_winkler")]
 fn py_raw_jaro_winkler(a: &str, b: &str) -> f64 {
     text::distance::jaro_winkler_similarity(a, b)
@@ -287,6 +294,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_string_number, m)?)?;
     m.add_function(wrap_pyfunction!(py_raw_levenshtein, m)?)?;
     m.add_function(wrap_pyfunction!(py_raw_levenshtein_cutoff, m)?)?;
+    m.add_function(wrap_pyfunction!(py_raw_jaro, m)?)?;
     m.add_function(wrap_pyfunction!(py_raw_jaro_winkler, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_name, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_case, m)?)?;

@@ -12,7 +12,7 @@
 //! points, so `"café"` vs `"cafe"` is 1 edit (not the UTF-8
 //! byte-delta).
 
-use rapidfuzz::distance::{damerau_levenshtein, jaro_winkler, levenshtein};
+use rapidfuzz::distance::{damerau_levenshtein, jaro, jaro_winkler, levenshtein};
 
 /// Unbounded Levenshtein distance: insertions, deletions, and
 /// substitutions each cost 1. Transpositions cost 2 (one insert +
@@ -46,6 +46,17 @@ pub fn damerau_levenshtein(a: &str, b: &str) -> usize {
 pub fn damerau_levenshtein_cutoff(a: &str, b: &str, cutoff: usize) -> usize {
     let args = damerau_levenshtein::Args::default().score_cutoff(cutoff);
     damerau_levenshtein::distance_with_args(a.chars(), b.chars(), &args).unwrap_or(cutoff + 1)
+}
+
+/// Jaro similarity in `[0.0, 1.0]`: 1.0 means identical, 0.0 means
+/// no shared characters within the matching window. Use this when
+/// shared prefixes shouldn't be weighted any more heavily than
+/// shared characters elsewhere — e.g. matching against names where
+/// a common prefix is just a frequent term ("Saint", "Banco")
+/// rather than evidence of identity. Otherwise prefer
+/// [`jaro_winkler_similarity`].
+pub fn jaro_similarity(a: &str, b: &str) -> f64 {
+    jaro::normalized_similarity(a.chars(), b.chars())
 }
 
 /// Jaro-Winkler similarity in `[0.0, 1.0]`: 1.0 means identical,
@@ -140,6 +151,31 @@ mod tests {
         assert_eq!(damerau_levenshtein_cutoff("bar", "bra", 2), 1);
         // True distance > cutoff → cutoff + 1.
         assert_eq!(damerau_levenshtein_cutoff("foo", "xxxxxxx", 2), 3);
+    }
+
+    // --- jaro_similarity ---
+
+    #[test]
+    fn jaro_identity_and_disjoint() {
+        assert_eq!(jaro_similarity("foo", "foo"), 1.0);
+        assert_eq!(jaro_similarity("abc", "xyz"), 0.0);
+    }
+
+    #[test]
+    fn jaro_no_prefix_bonus() {
+        // The distinguishing case: plain Jaro doesn't reward shared
+        // leading prefixes, so Jaro-Winkler always scores >= Jaro
+        // for inputs that share a prefix.
+        let j = jaro_similarity("Vladimir", "Vladmir");
+        let jw = jaro_winkler_similarity("Vladimir", "Vladmir");
+        assert!(jw > j, "jw={jw} j={j}");
+    }
+
+    #[test]
+    fn jaro_empty_inputs() {
+        assert_eq!(jaro_similarity("", ""), 1.0);
+        assert_eq!(jaro_similarity("abc", ""), 0.0);
+        assert_eq!(jaro_similarity("", "abc"), 0.0);
     }
 
     // --- jaro_winkler_similarity ---
