@@ -202,10 +202,21 @@ impl NamePartTag {
     /// Position in [`NAME_TAGS_ORDER`] — used as the sort key in
     /// [`crate::names::part::NamePart::tag_sort`]. Infallible; every
     /// variant is in the order array.
+    ///
+    /// STOP collapses onto UNSET's index. Stopword-tagged particles
+    /// (Dutch `der`, English `of`, …) carry positional information
+    /// for downstream alignment — sorting them to the end would
+    /// break token-merge cases like `van der bilt` ↔ `vanderbilt`.
+    /// Treating them as positionally neutral keeps them in their
+    /// input position relative to surrounding UNSET tokens.
     pub fn order_index(&self) -> usize {
+        let key = match self {
+            NamePartTag::STOP => &NamePartTag::UNSET,
+            other => other,
+        };
         NAME_TAGS_ORDER
             .iter()
-            .position(|t| t == self)
+            .position(|t| t == key)
             .expect("every NamePartTag variant is in NAME_TAGS_ORDER")
     }
 
