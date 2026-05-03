@@ -1,10 +1,10 @@
-//! String edit-distance primitives for internal Rust consumers.
+//! String edit-distance and similarity primitives.
 //!
-//! Exposes plain Levenshtein and Damerau-Levenshtein, each with an
-//! optional early-exit cutoff variant. Not wired through PyO3 —
-//! Python callers use the `rapidfuzz` package directly (which also
-//! provides the opcodes / alignment API the Rust `rapidfuzz` crate
-//! doesn't).
+//! Exposes plain Levenshtein and Damerau-Levenshtein (each with an
+//! optional early-exit cutoff variant) and Jaro-Winkler similarity.
+//! These back the `raw_*` PyO3 bindings consumed by
+//! `rigour.text.distance`, plus the in-Rust callers in
+//! `names::pick` / `names::ordering`.
 //!
 //! Backed by the `rapidfuzz` crate's bit-parallel implementations
 //! (Myers/Hyyrö for short strings, block-wise with Ukkonen band
@@ -12,7 +12,7 @@
 //! points, so `"café"` vs `"cafe"` is 1 edit (not the UTF-8
 //! byte-delta).
 
-use rapidfuzz::distance::{damerau_levenshtein, levenshtein};
+use rapidfuzz::distance::{damerau_levenshtein, jaro, jaro_winkler, levenshtein};
 
 /// Unbounded Levenshtein distance: insertions, deletions, and
 /// substitutions each cost 1. Transpositions cost 2 (one insert +
@@ -46,6 +46,27 @@ pub fn damerau_levenshtein(a: &str, b: &str) -> usize {
 pub fn damerau_levenshtein_cutoff(a: &str, b: &str, cutoff: usize) -> usize {
     let args = damerau_levenshtein::Args::default().score_cutoff(cutoff);
     damerau_levenshtein::distance_with_args(a.chars(), b.chars(), &args).unwrap_or(cutoff + 1)
+}
+
+/// Jaro similarity in `[0.0, 1.0]`: 1.0 means identical, 0.0 means
+/// no shared characters within the matching window. Use this when
+/// shared prefixes shouldn't be weighted any more heavily than
+/// shared characters elsewhere — e.g. matching against names where
+/// a common prefix is just a frequent term ("Saint", "Banco")
+/// rather than evidence of identity. Otherwise prefer
+/// [`jaro_winkler_similarity`].
+pub fn jaro_similarity(a: &str, b: &str) -> f64 {
+    jaro::normalized_similarity(a.chars(), b.chars())
+}
+
+/// Jaro-Winkler similarity in `[0.0, 1.0]`: 1.0 means identical,
+/// 0.0 means no shared characters within the matching window.
+/// Includes the standard 0.1 prefix bonus weighting up to 4 leading
+/// characters, which makes it the default choice for matching short
+/// names where shared prefixes are strong evidence ("Vladimir" vs
+/// "Vladmir" scores higher than plain Jaro would give).
+pub fn jaro_winkler_similarity(a: &str, b: &str) -> f64 {
+    jaro_winkler::normalized_similarity(a.chars(), b.chars())
 }
 
 #[cfg(test)]
@@ -130,5 +151,68 @@ mod tests {
         assert_eq!(damerau_levenshtein_cutoff("bar", "bra", 2), 1);
         // True distance > cutoff → cutoff + 1.
         assert_eq!(damerau_levenshtein_cutoff("foo", "xxxxxxx", 2), 3);
+    }
+
+    // --- jaro_similarity ---
+
+    #[test]
+    fn jaro_identity_and_disjoint() {
+        assert_eq!(jaro_similarity("foo", "foo"), 1.0);
+        assert_eq!(jaro_similarity("abc", "xyz"), 0.0);
+    }
+
+    #[test]
+    fn jaro_no_prefix_bonus() {
+        // The distinguishing case: plain Jaro doesn't reward shared
+        // leading prefixes, so Jaro-Winkler always scores >= Jaro
+        // for inputs that share a prefix.
+        let j = jaro_similarity("Vladimir", "Vladmir");
+        let jw = jaro_winkler_similarity("Vladimir", "Vladmir");
+        assert!(jw > j, "jw={jw} j={j}");
+    }
+
+    #[test]
+    fn jaro_empty_inputs() {
+        assert_eq!(jaro_similarity("", ""), 1.0);
+        assert_eq!(jaro_similarity("abc", ""), 0.0);
+        assert_eq!(jaro_similarity("", "abc"), 0.0);
+    }
+
+    // --- jaro_winkler_similarity ---
+
+    #[test]
+    fn jaro_winkler_identity_and_disjoint() {
+        assert_eq!(jaro_winkler_similarity("foo", "foo"), 1.0);
+        // No shared codepoints within the matching window.
+        assert_eq!(jaro_winkler_similarity("abc", "xyz"), 0.0);
+    }
+
+    #[test]
+    fn jaro_winkler_prefix_bonus_lifts_near_misses() {
+        // Shared 4-char prefix triggers the Winkler weighting; near-miss
+        // scores noticeably above 0.9.
+        assert!(jaro_winkler_similarity("Vladimir", "Vladmir") > 0.9);
+        assert!(jaro_winkler_similarity("foo", "foox") > 0.9);
+        assert!(jaro_winkler_similarity("foo", "foox") < 1.0);
+    }
+
+    #[test]
+    fn jaro_winkler_unicode_codepoint_correct() {
+        assert_eq!(jaro_winkler_similarity("café", "café"), 1.0);
+        // One-codepoint diff in a 4-char string: comparison happens
+        // at the codepoint level (é ≠ e), and the 3 shared leading
+        // chars trigger the Winkler prefix bonus — score lands in
+        // the high-Jaro band but well below 1.0.
+        let s = jaro_winkler_similarity("café", "cafe");
+        assert!(s > 0.8 && s < 1.0, "got {s}");
+    }
+
+    #[test]
+    fn jaro_winkler_empty_inputs() {
+        // Two empty strings are conventionally identical (1.0) under
+        // the rapidfuzz crate's normalized_similarity.
+        assert_eq!(jaro_winkler_similarity("", ""), 1.0);
+        assert_eq!(jaro_winkler_similarity("abc", ""), 0.0);
+        assert_eq!(jaro_winkler_similarity("", "abc"), 0.0);
     }
 }

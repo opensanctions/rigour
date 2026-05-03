@@ -88,6 +88,38 @@ fn py_string_number(text: &str) -> Option<f64> {
     text::numbers::string_number(text)
 }
 
+// Distance / similarity primitives. The Python wrappers in
+// `rigour.text.distance` add lru_cache, length truncation, and the
+// Jaro-Winkler 0.6 floor on top of these — keep this surface
+// "raw" (no defaults, no policy).
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "raw_levenshtein")]
+fn py_raw_levenshtein(a: &str, b: &str) -> usize {
+    text::distance::levenshtein(a, b)
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "raw_levenshtein_cutoff")]
+fn py_raw_levenshtein_cutoff(a: &str, b: &str, cutoff: usize) -> usize {
+    text::distance::levenshtein_cutoff(a, b, cutoff)
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "raw_jaro")]
+fn py_raw_jaro(a: &str, b: &str) -> f64 {
+    text::distance::jaro_similarity(a, b)
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "raw_jaro_winkler")]
+fn py_raw_jaro_winkler(a: &str, b: &str) -> f64 {
+    text::distance::jaro_winkler_similarity(a, b)
+}
+
 #[cfg(feature = "python")]
 #[pyfunction]
 #[pyo3(name = "pick_name")]
@@ -260,6 +292,10 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_tokenize_name, m)?)?;
     m.add_function(wrap_pyfunction!(py_normalize, m)?)?;
     m.add_function(wrap_pyfunction!(py_string_number, m)?)?;
+    m.add_function(wrap_pyfunction!(py_raw_levenshtein, m)?)?;
+    m.add_function(wrap_pyfunction!(py_raw_levenshtein_cutoff, m)?)?;
+    m.add_function(wrap_pyfunction!(py_raw_jaro, m)?)?;
+    m.add_function(wrap_pyfunction!(py_raw_jaro_winkler, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_name, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_case, m)?)?;
     m.add_function(wrap_pyfunction!(py_reduce_names, m)?)?;
