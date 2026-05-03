@@ -258,33 +258,12 @@ binding all three result parts) and chain-shaped patterns cleanly:
 each new edge shares a vertex with the existing cluster, so they
 fold into one record instead of three near-misses.
 
-**X-bridge limitation.** The clusterer does *not* merge two
-already-existing clusters when a later edge bridges them with both
-sides newly present in different clusters
-(`(q0, r0)` → cluster A, `(q1, r1)` → cluster B, then `(q0, r1)` or
-`(q1, r0)` arrives but neither matches a fresh side). In that case,
-the bridging edge joins one of the two clusters and the other
-remains separate, leaving a part referenced from both clusters. This
-is rare in practice (the 0.51-overlap rule keeps most parts to a
-single dominant counterpart) but it's a real invariant violation
-that the current downstream scoring tolerates because the duplicated
-part contributes the same cost stream to both clusters. A
-union-find rewrite is part of the open clustering work.
-
-Two related fragility points around the 0.51 threshold:
-
-- When the alignment produces N+1 vs N equal-char steps between two
-  parts, the cluster either forms (paired-but-zero-score record,
-  weight 1.0) or doesn't (two solo records with extra-name weights).
-  The two outcomes drag the orchestration aggregate down by
-  different amounts even though the underlying string similarity is
-  comparable.
-- Replacing the threshold with alignment-connectivity (≥1 equal-char
-  step connects two parts) is the spec direction; iteration is
-  open.
-
-Tracked in `weighted-distance.md` § Open spec knobs and § Magic-
-number systematisation.
+The 0.51 threshold is fragile near the cliff (a paired-but-zero-score
+cluster vs. two solos drag the orchestration aggregate down by
+different amounts even when underlying similarity is comparable);
+replacing it with alignment-connectivity (≥1 equal-char step) plus a
+part-id DSU clusterer is the natural follow-up — tracked in
+`weighted-distance.md` § Open spec knobs.
 
 ## Per-cluster score
 

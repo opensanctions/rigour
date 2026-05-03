@@ -529,14 +529,16 @@ struct Cluster {
 /// and chain-shaped patterns (`q0`↔`r0`, `q0`↔`r1`, `q1`↔`r1`)
 /// cleanly: each new edge shares a vertex with the growing cluster.
 ///
-/// **X-bridge limitation.** Two already-existing clusters are not
-/// merged when a later edge bridges them — the bridging edge joins
-/// one and the other remains separate, leaving a part referenced
-/// from both. Rare in practice (the 0.51 threshold keeps most parts
-/// to a single dominant counterpart) but a real invariant
-/// violation; tracked in `plans/weighted-distance.md` § Open spec
-/// knobs as part of the clustering-rule fragility item, alongside
-/// the alignment-connectivity replacement for the threshold.
+/// The shared-vertex merge would mishandle an "X-bridge" where two
+/// already-existing clusters get connected by a later edge that
+/// shares no vertex with either's original. That case is
+/// structurally unreachable here: `align.overlaps` is built by a
+/// monotone DP walk, so its keys form a non-decreasing path in
+/// `(qp, rp)`-space and can't contain the cross pattern an X-bridge
+/// requires. If the DP ever stops being monotone — or the threshold
+/// drops to admit many more edges per the connectivity-rule
+/// proposal in `plans/weighted-distance.md` — replace the loop with
+/// a part-id DSU.
 ///
 /// Parts that no overlap pair clears the threshold for surface as
 /// solo clusters at the end.
