@@ -129,3 +129,35 @@ def test_name_part_sort_stable():
     assert sorted_parts[0].form == "x"
     assert sorted_parts[1].form == "c"
     assert sorted_parts[2].form == "a"
+
+
+def test_name_part_sort_stop_anchored():
+    # STOP-tagged parts (Dutch tussenvoegsels and similar particles)
+    # must keep their original index — they carry positional info
+    # that downstream alignment relies on. Tag-sorting them to the
+    # end would break token-merge cases like
+    # `vanderbilt` ↔ `[van, der, bilt]`.
+    van = NamePart("van", 0, NamePartTag.UNSET)
+    der = NamePart("der", 1, NamePartTag.STOP)
+    bilt = NamePart("bilt", 2, NamePartTag.UNSET)
+    assert NamePart.tag_sort([van, der, bilt]) == [van, der, bilt]
+
+
+def test_name_part_sort_stop_with_non_stop_reordering():
+    # Non-STOP parts get sorted around the STOP anchors. STOP stays
+    # where it was; the non-STOP slots get filled with the
+    # tag-order-sorted remainder.
+    family = NamePart("family", 0, NamePartTag.FAMILY)
+    der = NamePart("der", 1, NamePartTag.STOP)
+    given = NamePart("given", 2, NamePartTag.GIVEN)
+    # GIVEN sorts before FAMILY; STOP stays in the middle slot.
+    assert NamePart.tag_sort([family, der, given]) == [given, der, family]
+
+
+def test_name_part_sort_only_stops():
+    # Edge case: a sequence of only-STOP parts should round-trip
+    # unchanged (no non-STOPs to interleave around).
+    of = NamePart("of", 0, NamePartTag.STOP)
+    the = NamePart("the", 1, NamePartTag.STOP)
+    assert NamePart.tag_sort([of, the]) == [of, the]
+    assert NamePart.tag_sort([the, of]) == [the, of]
