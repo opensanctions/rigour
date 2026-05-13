@@ -6,7 +6,6 @@ def test_ship_imo():
     assert IMO.normalize("IMO9126819") == "IMO9126819"
     assert IMO.normalize("9126819") == "IMO9126819"
     assert IMO.normalize("91268191") is None
-    assert IMO.normalize("IMO 912681") is None
     assert IMO.is_valid("IMO 9126819")
     assert IMO.is_valid("9126819")
     assert not IMO.is_valid("IMO 9126")
@@ -15,6 +14,16 @@ def test_ship_imo():
     assert IMO.format("9126819") == "IMO9126819"
     assert IMO.format("IMO9126819") == "IMO9126819"
     assert IMO.normalize("IMO number: 9126819") == "IMO9126819"
+
+
+def test_imo_leading_zero_stripped():
+    # Sources sometimes strip leading zeros — pad back to 7 before checksum.
+    assert IMO.normalize("912681") == "IMO0912681"
+    assert IMO.normalize("IMO 912681") == "IMO0912681"
+    assert IMO.is_valid("912681")
+    # Padding should not turn an unrelated short number into a valid IMO.
+    assert not IMO.is_valid("9126")
+    assert IMO.normalize("9126") is None
 
 
 def test_org_imo():

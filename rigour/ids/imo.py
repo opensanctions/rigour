@@ -3,7 +3,7 @@ from typing import Optional
 
 from rigour.ids.common import IdentifierFormat
 
-IMO_RE = re.compile(r"\b(IMO)?(\d{7})\b")
+IMO_RE = re.compile(r"\b(IMO)?(\d{1,7})\b")
 
 
 class IMO(IdentifierFormat):
@@ -15,11 +15,16 @@ class IMO(IdentifierFormat):
 
     @classmethod
     def is_valid(cls, text: str) -> bool:
-        """Determine if the given string is a valid IMO number."""
+        """Determine if the given string is a valid IMO number.
+
+        Shorter numeric strings are left-padded with zeros to seven digits
+        before the checksum is verified, since data sources commonly strip
+        leading zeros from IMO fields.
+        """
         match = IMO_RE.search(text)
         if match is None:
             return False
-        value = match.group(2)
+        value = match.group(2).zfill(7)
         digits = [int(d) for d in value]
 
         # Check if it's a vessel IMO number:
@@ -38,11 +43,11 @@ class IMO(IdentifierFormat):
 
     @classmethod
     def normalize(cls, text: str) -> Optional[str]:
-        """Normalize the given string to a valid NPI."""
+        """Normalize the given string to a valid IMO number."""
         match = IMO_RE.search(text)
         if match is None:
             return None
-        value = match.group(2)
+        value = match.group(2).zfill(7)
         if cls.is_valid(value):
             return f"IMO{value}"
         return None
