@@ -1,9 +1,8 @@
 import logging
 from functools import cache, lru_cache
-from rapidfuzz.distance import Levenshtein
 from typing import Dict, Generator, List, Optional, Tuple
 
-from rigour._core import territories_jsonl
+from rigour._core import raw_levenshtein_cutoff, territories_jsonl
 from rigour.data import iter_jsonl_text
 from rigour.territories.territory import Territory
 from rigour.territories.territory import get_index as _get_index
@@ -112,7 +111,7 @@ def _fuzzy_search(name: str) -> Optional[Territory]:
     for cand, territory in names.items():
         if len(cand) <= 4:
             continue
-        distance = Levenshtein.distance(name, cand, score_cutoff=cutoff)
+        distance = raw_levenshtein_cutoff(name, cand, cutoff)
         if distance < best_distance:
             best_distance = distance
             best_territory = territory

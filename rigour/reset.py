@@ -1,6 +1,6 @@
 import gc
 
-from rigour.text.distance import levenshtein, dam_levenshtein, jaro_winkler
+from rigour.text.distance import levenshtein, jaro_winkler
 from rigour.text.phonetics import soundex, metaphone
 from rigour.territories.territory import get_index
 from rigour.territories.lookup import lookup_territory
@@ -26,7 +26,6 @@ def reset_caches() -> None:
     in long-lived processes to prevent memory expansion."""
     levenshtein.cache_clear()
     normalize_name.cache_clear()
-    dam_levenshtein.cache_clear()
     jaro_winkler.cache_clear()
     soundex.cache_clear()
     metaphone.cache_clear()
