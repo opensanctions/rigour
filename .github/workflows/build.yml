@@ -80,7 +80,7 @@ jobs:
           manylinux: auto
           sccache: "true"
           before-script-linux: |
-            cargo install cargo-auditable --locked
+            RUSTC_WRAPPER= cargo install cargo-auditable --locked
           args: --release --out dist -i 3.10 3.11 3.12 3.13 3.14 --manifest-path rust/Cargo.toml
       - uses: actions/upload-artifact@v7
         with:
@@ -108,7 +108,7 @@ jobs:
           manylinux: musllinux_1_2
           sccache: "true"
           before-script-linux: |
-            cargo install cargo-auditable --locked
+            RUSTC_WRAPPER= cargo install cargo-auditable --locked
           args: --release --out dist -i 3.10 3.11 3.12 3.13 3.14 --manifest-path rust/Cargo.toml
       - uses: actions/upload-artifact@v7
         with:
