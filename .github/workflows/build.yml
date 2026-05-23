@@ -62,6 +62,13 @@ jobs:
       - name: mypy --strict
         run: make typecheck
 
+  # cargo-auditable embeds the full Rust dep graph into the compiled .so so
+  # downstream SBOM scanners (syft, cargo audit bin) can see the transitive
+  # crates rigour ships, not just "rigour 2.x.x" as one opaque component.
+  # Setting CARGO=cargo-auditable directly doesn't work because maturin uses
+  # `cargo rustc` (not `cargo build`) and cargo-auditable mis-dispatches that
+  # as rustc-wrapper mode — see rust-secure-code/cargo-auditable#211. We use
+  # the documented wrapper-script workaround instead.
   linux:
     name: wheels / manylinux ${{ matrix.target }}
     runs-on: ubuntu-latest
@@ -169,6 +176,10 @@ jobs:
         with:
           subject-path: 'dist/*.whl'
 
+  # Windows wheels skip cargo-auditable: upstream has no .cmd wrapper recipe
+  # (REPLACING_CARGO.md says "PRs welcome"), and the Linux wheels are the ones
+  # yente consumes downstream. Windows still gets the attest-build-provenance
+  # step below — only the embedded dep graph is missing here.
   windows:
     name: wheels / windows ${{ matrix.target }}
     runs-on: windows-latest
