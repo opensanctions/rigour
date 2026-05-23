@@ -74,13 +74,19 @@ jobs:
       - uses: actions/checkout@v6
       - uses: PyO3/maturin-action@v1
         env:
-          CARGO: cargo-auditable
+          CARGO: /usr/local/bin/cargo-auditable-wrapper
         with:
           target: ${{ matrix.target }}
           manylinux: auto
           sccache: "true"
           before-script-linux: |
             RUSTC_WRAPPER= cargo install cargo-auditable --locked
+            REAL_CARGO=$(command -v cargo)
+            cat > /usr/local/bin/cargo-auditable-wrapper <<EOF
+            #!/bin/sh
+            exec "$REAL_CARGO" auditable "\$@"
+            EOF
+            chmod +x /usr/local/bin/cargo-auditable-wrapper
           args: --release --out dist -i 3.10 3.11 3.12 3.13 3.14 --manifest-path rust/Cargo.toml
       - uses: actions/upload-artifact@v7
         with:
@@ -102,13 +108,19 @@ jobs:
       - uses: actions/checkout@v6
       - uses: PyO3/maturin-action@v1
         env:
-          CARGO: cargo-auditable
+          CARGO: /usr/local/bin/cargo-auditable-wrapper
         with:
           target: ${{ matrix.target }}
           manylinux: musllinux_1_2
           sccache: "true"
           before-script-linux: |
             RUSTC_WRAPPER= cargo install cargo-auditable --locked
+            REAL_CARGO=$(command -v cargo)
+            cat > /usr/local/bin/cargo-auditable-wrapper <<EOF
+            #!/bin/sh
+            exec "$REAL_CARGO" auditable "\$@"
+            EOF
+            chmod +x /usr/local/bin/cargo-auditable-wrapper
           args: --release --out dist -i 3.10 3.11 3.12 3.13 3.14 --manifest-path rust/Cargo.toml
       - uses: actions/upload-artifact@v7
         with:
@@ -134,9 +146,17 @@ jobs:
       - uses: taiki-e/install-action@v2
         with:
           tool: cargo-auditable
+      - name: Create cargo-auditable wrapper for maturin
+        run: |
+          REAL_CARGO=$(command -v cargo)
+          cat > "${RUNNER_TEMP}/cargo-auditable-wrapper" <<EOF
+          #!/bin/sh
+          exec "$REAL_CARGO" auditable "\$@"
+          EOF
+          chmod +x "${RUNNER_TEMP}/cargo-auditable-wrapper"
       - uses: PyO3/maturin-action@v1
         env:
-          CARGO: cargo-auditable
+          CARGO: ${{ runner.temp }}/cargo-auditable-wrapper
         with:
           target: ${{ matrix.target }}
           sccache: "true"
@@ -163,12 +183,7 @@ jobs:
         with:
           python-version: "3.13"
           architecture: ${{ matrix.target }}
-      - uses: taiki-e/install-action@v2
-        with:
-          tool: cargo-auditable
       - uses: PyO3/maturin-action@v1
-        env:
-          CARGO: cargo-auditable
         with:
           target: ${{ matrix.target }}
           sccache: "true"
