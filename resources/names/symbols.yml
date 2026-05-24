@@ -2536,6 +2536,14 @@ org_domains:
     - agricultura
     - agrikultura
     - агрикультура
+    - "agrícola" # es, pt (adjective)
+    - сельское хозяйство # ru (noun)
+    - сельскохозяйственный # ru (adjective)
+    - сільське господарство # uk (noun)
+    - сільськогосподарський # uk (adjective)
+    - сельскохозяйственных # ru (adjective)
+    - сельскохозяйственного # ru (adjective)
+    - сельскохозяйственная # ru (adjective)
   shipbuilding:
     - shipbuilding
     - shipyard
