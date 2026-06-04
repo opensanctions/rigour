@@ -32,7 +32,10 @@ names_weak:
   - Qırım Muhtar Cumhuriyeti
   - crimea (occupied)
   - Автономная Республика Крым # Avtonomnaâ Respublika Krym
-  - Крым # Krym
+  - Sevastopol, Crimea
+  - Севастополь, Крым # Sevastopolʹ, Krym
+  - Севастополь # Sevastopolʹ
+  - Крым        # Krym
 langs:
   - crh
   - rus
