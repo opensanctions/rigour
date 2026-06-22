@@ -19,7 +19,7 @@ python = ["dep:pyo3"]
 [dependencies]
 # generate-import-lib avoids needing a real Python install on the Windows CI
 # runner at link time — PyO3 generates a stub import library instead.
-pyo3 = { version = "0.28", features = ["extension-module", "generate-import-lib"], optional = true }
+pyo3 = { version = "0.29", features = ["extension-module", "generate-import-lib"], optional = true }
 
 # Phonetic algorithms (metaphone, soundex). Port of Apache commons-codec, pure
 # Rust. The upstream jellyfish Rust crate can't be used directly because it
