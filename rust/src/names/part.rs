@@ -46,7 +46,20 @@ fn compute_comparable(
     ascii: Option<&str>,
 ) -> String {
     if numeric {
-        return integer.map(|v| v.to_string()).unwrap_or_default();
+        if let Some(v) = integer {
+            return v.to_string();
+        }
+        // Numbers too large for i64 (20+ digits) keep their digits,
+        // normalised for leading zeros like the integer path — an
+        // empty comparable would make distinct oversized registry
+        // numbers compare equal and leave gaps in joined
+        // comparable strings.
+        let trimmed = form.trim_start_matches('0');
+        return if trimmed.is_empty() {
+            "0".to_string()
+        } else {
+            trimmed.to_string()
+        };
     }
     if !latinize {
         return form.to_string();
@@ -148,17 +161,25 @@ impl NamePart {
         let form_str = form.to_string();
         let numeric = !form_str.is_empty() && form_str.chars().all(|c| c.is_numeric());
         let latinize = should_ascii(form);
+        // Plain ASCII digit strings parse directly — exact up to 19
+        // digits, where the string_number fallback (f64-based, used
+        // for non-ASCII numerals) loses integer precision past 2^53
+        // and would silently corrupt registry-number values.
         let integer = if numeric {
-            match string_number(form) {
-                Some(v) if v.is_finite() && v.fract() == 0.0 => {
-                    if v >= i64::MIN as f64 && v <= i64::MAX as f64 {
+            form_str
+                .parse::<i64>()
+                .ok()
+                .or_else(|| match string_number(form) {
+                    Some(v)
+                        if v.is_finite()
+                            && v.fract() == 0.0
+                            && v >= i64::MIN as f64
+                            && v <= i64::MAX as f64 =>
+                    {
                         Some(v as i64)
-                    } else {
-                        None
                     }
-                }
-                _ => None,
-            }
+                    _ => None,
+                })
         } else {
             None
         };

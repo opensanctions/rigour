@@ -291,6 +291,20 @@ def test_numerics_on_adds_symbol():
     assert Symbol(Symbol.Category.NUMERIC, 123456789) in numerics
 
 
+def test_numerics_wide_values_not_truncated():
+    # A 13-digit OGRN-sized number: the NUMERIC symbol id must carry
+    # the full value. A u32 cast used to wrap 5077746887312 into
+    # 1095543440, creating false shared evidence with any name
+    # containing that unrelated number (issue #226).
+    result = analyze_names(NameTypeTag.ORG, ["Acme 5077746887312"], numerics=True)
+    name = _only(result)
+    numerics = [
+        sym for sym in name.symbols if sym.category == Symbol.Category.NUMERIC
+    ]
+    assert Symbol(Symbol.Category.NUMERIC, 5077746887312) in numerics
+    assert Symbol(Symbol.Category.NUMERIC, 1095543440) not in numerics
+
+
 def test_numerics_off_tags_but_no_symbol():
     result = analyze_names(
         NameTypeTag.ORG, ["123456789 Battalion"], numerics=False

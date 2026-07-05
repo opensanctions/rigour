@@ -141,6 +141,18 @@ impl Symbol {
         }
     }
 
+    /// Build a `Symbol` from a wide integer id. Numeric name parts
+    /// parse into `i64` — registry numbers like Russian INN/OGRN
+    /// run 10–13 digits, far beyond `u32` — and the id must carry
+    /// the full value: truncation would collide distinct numbers
+    /// into shared match evidence.
+    pub fn from_i64(category: SymbolCategory, n: i64) -> Self {
+        Symbol {
+            category,
+            id: intern(&n.to_string()),
+        }
+    }
+
     /// Build a `Symbol` from a string id. Used by the tagger when
     /// attaching symbols with text-shaped ids (`ORG_CLASS:LLC`,
     /// territory codes, Wikidata QIDs with the `Q` prefix).
@@ -244,6 +256,18 @@ mod tests {
     fn int_and_str_constructors_converge() {
         let a = Symbol::from_u32(SymbolCategory::NUMERIC, 5);
         let b = Symbol::from_str(SymbolCategory::NUMERIC, "5");
+        assert_eq!(a, b);
+        assert!(Arc::ptr_eq(&a.id, &b.id));
+    }
+
+    #[test]
+    fn from_i64_preserves_wide_values() {
+        // OGRN-sized (13-digit) ids must survive intact — a u32
+        // cast used to wrap 5077746887312 into 1095543440,
+        // colliding distinct registry numbers (issue #226).
+        let a = Symbol::from_i64(SymbolCategory::NUMERIC, 5077746887312);
+        assert_eq!(a.id.as_ref(), "5077746887312");
+        let b = Symbol::from_str(SymbolCategory::NUMERIC, "5077746887312");
         assert_eq!(a, b);
         assert!(Arc::ptr_eq(&a.id, &b.id));
     }

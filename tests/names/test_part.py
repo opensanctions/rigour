@@ -68,6 +68,29 @@ def test_name_part_tags():
     assert anyst.tag.can_match(stevens.tag)
 
 
+def test_name_part_numeric_wide():
+    # Registry-number-sized values: a 13-digit OGRN must keep its
+    # exact integer, and 16+ digit values must not round through
+    # f64 on the way in.
+    ogrn = NamePart("5077746887312", 0)
+    assert ogrn.integer == 5077746887312
+    assert ogrn.comparable == "5077746887312"
+    wide = NamePart("12345678901234567", 0)
+    assert wide.integer == 12345678901234567
+    assert wide.comparable == "12345678901234567"
+
+    # Beyond i64 the integer stays unset, but the comparable keeps
+    # the digits (leading-zero-normalised, like the integer path)
+    # instead of degrading to "" — distinct oversized numbers must
+    # not compare equal through empty strings.
+    huge = NamePart("99999999999999999999", 0)
+    assert huge.numeric is True
+    assert huge.integer is None
+    assert huge.comparable == "99999999999999999999"
+    padded = NamePart("099999999999999999999", 0)
+    assert padded.comparable == "99999999999999999999"
+
+
 def test_name_part_numeric():
     name = NamePart("Ⅻ", 1)
     assert name.numeric is True

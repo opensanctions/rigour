@@ -351,7 +351,7 @@ fn infer_part_tags(py: Python<'_>, name: &Py<Name>, symbols: bool, numerics: boo
             part_b.borrow_mut().tag = NamePartTag::NUM;
             if symbols && numerics && !numeric_part_hashes.contains(&part_hash) {
                 if let Some(v) = integer_val {
-                    let sym = Symbol::from_u32(SymbolCategory::NUMERIC, v as u32);
+                    let sym = Symbol::from_i64(SymbolCategory::NUMERIC, v);
                     let sym_py = Py::new(py, sym)?;
                     let part_py = part_b.clone().unbind();
                     name.bind(py).borrow().apply_part(py, part_py, sym_py)?;
