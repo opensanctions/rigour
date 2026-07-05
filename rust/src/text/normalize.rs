@@ -120,34 +120,53 @@ fn category_replace(text: &str, cleanup: Cleanup) -> String {
     out
 }
 
+/// Per-codepoint verdict of the SQUASH_SPACES step. Shared with the
+/// offset-mapped haystack in `names::org_types` so the display
+/// replacer classifies input exactly like the needle normalisation.
+pub(crate) enum SquashAction {
+    /// Invisible format characters — copy/paste residue that would
+    /// otherwise block matching ("Gm\u{00AD}bH" must compare equal to
+    /// "GmbH"): zero-width space/joiners, BOM, soft hyphen, word
+    /// joiner and the invisible math operators. These are Cf, not
+    /// White_Space, so the whitespace arm never sees them.
+    Delete,
+    /// Whitespace, collapsed to a single ASCII space per run. Includes
+    /// U+001C..=U+001F (information separators): Python's
+    /// `str.split()` / `\s` treat them as whitespace, the Unicode
+    /// White_Space property behind `char::is_whitespace` does not.
+    Space,
+    Keep,
+}
+
+pub(crate) fn squash_action(ch: char) -> SquashAction {
+    match ch {
+        '\u{200B}'..='\u{200D}' | '\u{FEFF}' | '\u{00AD}' | '\u{2060}'..='\u{2064}' => {
+            SquashAction::Delete
+        }
+        c if c.is_whitespace() || ('\u{1C}'..='\u{1F}').contains(&c) => SquashAction::Space,
+        _ => SquashAction::Keep,
+    }
+}
+
 fn squash_spaces(text: &str) -> String {
     // Delete invisible format characters, collapse runs of whitespace
     // into single ASCII spaces, trim ends. Called inside the hot
     // matching loop, which is why this is a hand-written single-pass
     // loop rather than a regex replace: no per-call LazyLock deref, no
     // intermediate allocation, no regex automaton overhead.
-    //
-    // The deletion set covers copy/paste residue that would otherwise
-    // block matching ("Gm\u{00AD}bH" must compare equal to "GmbH"):
-    // zero-width space/joiners, BOM, soft hyphen, word joiner and the
-    // invisible math operators. These are Cf, not White_Space, so the
-    // whitespace arm never sees them. U+001C..=U+001F (information
-    // separators) collapse like whitespace: Python's `str.split()` /
-    // `\s` treat them as such, the Unicode White_Space property that
-    // `char::is_whitespace` follows does not.
     let mut out = String::with_capacity(text.len());
     let mut last_was_space = true; // suppresses leading whitespace
     for ch in text.chars() {
-        match ch {
-            '\u{200B}'..='\u{200D}' | '\u{FEFF}' | '\u{00AD}' | '\u{2060}'..='\u{2064}' => {}
-            c if c.is_whitespace() || ('\u{1C}'..='\u{1F}').contains(&c) => {
+        match squash_action(ch) {
+            SquashAction::Delete => {}
+            SquashAction::Space => {
                 if !last_was_space {
                     out.push(' ');
                     last_was_space = true;
                 }
             }
-            c => {
-                out.push(c);
+            SquashAction::Keep => {
+                out.push(ch);
                 last_was_space = false;
             }
         }

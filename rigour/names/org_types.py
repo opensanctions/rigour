@@ -88,27 +88,36 @@ def replace_org_types_display(
     """Replace organisation types in a name with their short display form.
 
     Spelt-out legal forms are shortened into common abbreviations
-    (e.g. ``"Siemens Aktiengesellschaft"`` → ``"Siemens AG"``), preserving
-    the case of non-matched portions. If the whole input is uppercase
-    (`str.isupper()`), the whole output is re-uppercased.
+    (e.g. ``"Siemens Aktiengesellschaft"`` → ``"Siemens AG"``), and
+    case-variant forms are canonicalised (``"Siemens GMBH"`` →
+    ``"Siemens GmbH"``). Everything outside a matched span is returned
+    verbatim — case, spacing and stray characters untouched. If the
+    whole input is uppercase (`str.isupper()`), the whole output is
+    re-uppercased, so ``"ACME COMPANY LIMITED"`` becomes
+    ``"ACME COMPANY LTD"`` rather than the odd-looking
+    ``"ACME COMPANY Ltd"``.
 
-    Matches case-insensitively across Unicode by casefolding a copy of
-    the input internally for the match step — `normalize_flags` must
-    therefore include `Normalize.CASEFOLD` so the alias table is
-    casefolded too. The default does this.
+    Matching is Unicode-case- and whitespace-insensitive: the input is
+    normalised internally with the same `normalize_flags` as the alias
+    table (which must therefore include `Normalize.CASEFOLD`; the
+    default does), and matches are mapped back to the original text.
+    Legal forms broken by copy/paste residue — soft hyphens, zero-width
+    characters, doubled spaces — are still recognised, and the
+    replacement swallows the residue.
 
     Args:
         name: The text to be processed.
         normalize_flags: `Normalize` flag
-            set applied to the alias list at build time. Must include
-            `Normalize.CASEFOLD` for Unicode-case-insensitive matching.
+            set applied to the alias list at build time and mirrored on
+            the input at match time. Must include `Normalize.CASEFOLD`
+            for Unicode-case-insensitive matching.
             Default `CASEFOLD | SQUASH_SPACES`.
         cleanup: `Cleanup` variant applied
             during alias normalisation. Default `Cleanup.Noop`.
 
     Returns:
         The text with recognised organisation types substituted for
-        their display form. Non-matched regions keep their original case.
+        their display form and all non-matched regions verbatim.
     """
     return _replace_org_types_display(name, int(normalize_flags), int(cleanup))
 

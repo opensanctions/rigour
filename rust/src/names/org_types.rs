@@ -20,9 +20,11 @@
 // - Generic: alias → generic-form. Skips specs without a `generic`
 //   field. Display-form added as a lookup too.
 // - Display: alias → display-form. Skips specs without `display`,
-//   skips aliases that equal their display form (trivial identity),
-//   pops on clash. Display-form is NOT added as a lookup (matching
-//   Python's `_display_replacer`).
+//   skips aliases whose case-preserving form equals their display
+//   form (trivial identity — case variants like "GMBH" → "GmbH" are
+//   NOT identities, they canonicalise case), pops on clash.
+//   Display-form is NOT added as a lookup (matching Python's
+//   `_display_replacer`).
 //
 // ## Flag-keyed cache
 //
@@ -31,12 +33,13 @@
 // calls hit the cache. Same lifecycle as Python's `@cache`-decorated
 // replacers.
 
+use icu::casemap::CaseMapper;
 use serde::Deserialize;
 use std::collections::{HashMap, HashSet};
 use std::sync::{Arc, LazyLock, RwLock};
 
 use crate::names::matcher::Needles;
-use crate::text::normalize::{Cleanup, Normalize, normalize};
+use crate::text::normalize::{Cleanup, Normalize, SquashAction, normalize, squash_action};
 
 #[derive(Debug, Deserialize)]
 pub(crate) struct OrgTypeSpec {
@@ -219,9 +222,9 @@ fn build_display(flags: Normalize, cleanup: Cleanup) -> Replacer {
     let mut clashes: HashSet<String> = HashSet::new();
 
     for spec in ORG_TYPE_SPECS.iter() {
-        let Some(display_key) = spec.display.as_deref().and_then(&norm) else {
-            continue;
-        };
+        if spec.display.as_deref().and_then(&norm).is_none() {
+            continue; // display doesn't survive key normalisation
+        }
         let Some(display_target) = spec.display.as_deref().and_then(&display_target_norm) else {
             continue;
         };
@@ -229,8 +232,12 @@ fn build_display(flags: Normalize, cleanup: Cleanup) -> Replacer {
             let Some(alias_key) = norm(alias) else {
                 continue;
             };
-            if alias_key.is_empty() || alias_key == display_key {
-                continue; // trivial identity, skip
+            // Trivial identity: skip only when the case-preserving
+            // form of the alias equals the display target, i.e. the
+            // replacement would reproduce the match verbatim.
+            let alias_target = display_target_norm(alias);
+            if alias_key.is_empty() || alias_target.as_deref() == Some(display_target.as_str()) {
+                continue;
             }
             if let Some(prev) = seen_targets.get(&alias_key) {
                 if prev != &display_target {
@@ -290,43 +297,126 @@ pub fn replace_compare(text: &str, flags: Normalize, cleanup: Cleanup, generic: 
     get_replacer(kind, flags, cleanup).replace(text)
 }
 
+/// The display-path haystack: `text` run through the same
+/// normalisation as the needle keys (casefold, whitespace squash,
+/// format-char deletion), with a per-byte map back to the byte range
+/// of the original character that produced it. Matching happens on
+/// `hay`; payloads are spliced into the original text at mapped
+/// offsets, so everything outside a match is returned verbatim.
+struct MappedHaystack {
+    hay: String,
+    /// spans[i] = (start, end) byte range in the original text of
+    /// the character that produced haystack byte i.
+    spans: Vec<(u32, u32)>,
+}
+
+impl MappedHaystack {
+    /// Supports the flag steps whose offsets can be mapped
+    /// char-by-char: CASEFOLD and SQUASH_SPACES (STRIP is subsumed —
+    /// edge whitespace simply never matches a trimmed needle).
+    /// Unicode normal forms, NAME and category cleanup reorder or
+    /// merge characters and are handled by the degraded path in
+    /// `replace_display` instead.
+    fn supported(flags: Normalize, cleanup: Cleanup) -> bool {
+        cleanup == Cleanup::Noop
+            && !flags
+                .intersects(Normalize::NFC | Normalize::NFKC | Normalize::NFKD | Normalize::NAME)
+    }
+
+    fn build(text: &str, flags: Normalize) -> Self {
+        let fold = flags.contains(Normalize::CASEFOLD);
+        let squash = flags.contains(Normalize::SQUASH_SPACES);
+        let mapper = CaseMapper::new();
+        let mut hay = String::with_capacity(text.len());
+        let mut spans: Vec<(u32, u32)> = Vec::with_capacity(text.len());
+        let mut last_was_space = true; // suppresses leading whitespace
+        let mut buf = [0u8; 4];
+        for (i, ch) in text.char_indices() {
+            let span = (i as u32, (i + ch.len_utf8()) as u32);
+            if squash {
+                match squash_action(ch) {
+                    SquashAction::Delete => continue,
+                    SquashAction::Space => {
+                        if !last_was_space {
+                            hay.push(' ');
+                            spans.push(span);
+                            last_was_space = true;
+                        }
+                        continue;
+                    }
+                    SquashAction::Keep => last_was_space = false,
+                }
+            }
+            if fold {
+                // Full casefold is context-free (unlike lowercasing,
+                // which special-cases e.g. Greek final sigma by
+                // position), so folding char-by-char equals folding
+                // the whole string — and gives us the offset map.
+                let folded = mapper.fold_string(ch.encode_utf8(&mut buf));
+                hay.push_str(&folded);
+                for _ in 0..folded.len() {
+                    spans.push(span);
+                }
+            } else {
+                hay.push(ch);
+                for _ in 0..ch.len_utf8() {
+                    spans.push(span);
+                }
+            }
+        }
+        if squash && hay.ends_with(' ') {
+            hay.pop();
+            spans.pop();
+        }
+        Self { hay, spans }
+    }
+}
+
 /// Replace recognised org types with their short display form
-/// (e.g. "Aktiengesellschaft" → "AG"). Matches case-insensitively
-/// across Unicode by casefolding a copy of `text` for the match —
-/// non-matched regions are emitted from `text` so their case is
-/// preserved. If `text` is all uppercase, the whole output is
-/// re-uppercased (mirrors Python's `isupper()` hook).
+/// (e.g. "Aktiengesellschaft" → "AG"), returning everything outside
+/// the matched spans verbatim — case, spacing and stray characters
+/// in non-matched regions are untouched. If `text` is all uppercase
+/// (Python `str.isupper()` semantics), the whole output is
+/// re-uppercased: "ACME COMPANY LIMITED" comes back as
+/// "ACME COMPANY LTD", not the odd-looking "ACME COMPANY Ltd".
 ///
-/// Flags must include `Normalize::CASEFOLD` for aliases to be
-/// casefolded at build time — that's what enables Unicode case-
-/// insensitive matching. The default in `org_types.py` does this.
-///
-/// Byte-position parity between `text` and its casefolded copy is
-/// assumed for position mapping. This holds for ASCII, Cyrillic,
-/// Greek, and CJK — it fails only for rare chars like `ẞ → ss`,
-/// which don't appear in realistic org-type inputs.
+/// Matching is Unicode-case- and whitespace-insensitive: the input
+/// is run through the same normalisation as the alias keys (which
+/// `flags` must therefore include `Normalize::CASEFOLD` for — the
+/// default in `org_types.py` does), and match offsets are mapped
+/// back to the original text. Flag steps that can't be offset-mapped
+/// (Unicode normal forms, NAME, category cleanup) degrade to
+/// matching and splicing on the normalised text itself — correct
+/// matches, but the non-matched regions come back normalised rather
+/// than verbatim.
 pub fn replace_display(text: &str, flags: Normalize, cleanup: Cleanup) -> String {
     let is_upper = python_isupper(text);
     let replacer = get_replacer(ReplacerKind::Display, flags, cleanup);
 
-    // Casefold a copy of text so the AC can match Unicode-case-
-    // insensitively (the aliases in Needles were casefolded at build
-    // time via `flags | CASEFOLD`). If byte lengths diverge, fall back
-    // to matching on text directly — AC's ASCII-only case insensitivity
-    // still handles most inputs.
-    let haystack = text.to_lowercase();
-    let use_cf = haystack.len() == text.len();
-    let matcher_input = if use_cf { haystack.as_str() } else { text };
+    if !MappedHaystack::supported(flags, cleanup) {
+        let Some(hay) = normalize(text, flags, cleanup) else {
+            return text.to_string();
+        };
+        let out = replacer.replace(&hay);
+        return if is_upper { out.to_uppercase() } else { out };
+    }
 
+    let mapped = MappedHaystack::build(text, flags);
     let mut out = String::with_capacity(text.len());
-    let mut cursor = 0;
-    for m in replacer.needles.find_iter(matcher_input) {
-        // Slice original text at matcher-input positions. Byte-parity
-        // between text and matcher_input is guaranteed here (either
-        // matcher_input IS text, or we verified same length above).
-        out.push_str(&text[cursor..m.start]);
+    let mut cursor = 0usize; // byte offset into `text`
+    for m in replacer.needles.find_iter(&mapped.hay) {
+        let orig_start = mapped.spans[m.start].0 as usize;
+        let orig_end = mapped.spans[m.end - 1].1 as usize;
+        // A match boundary inside one char's fold expansion (ß → ss)
+        // can't reach here — the surrounding fold bytes are word
+        // chars, so the boundary check already rejected it. Guard
+        // anyway rather than risk a backwards slice.
+        if orig_start < cursor {
+            continue;
+        }
+        out.push_str(&text[cursor..orig_start]);
         out.push_str(m.payload);
-        cursor = m.end;
+        cursor = orig_end;
     }
     out.push_str(&text[cursor..]);
     if is_upper { out.to_uppercase() } else { out }
@@ -431,6 +521,108 @@ mod tests {
             replace_display(long, COMPARE_FLAGS, Cleanup::Noop),
             "SIEMENS GMBH"
         );
+    }
+
+    #[test]
+    fn display_no_panic_on_byte_shifting_lowercase() {
+        // KELVIN SIGN (U+212A, 3 bytes) lowercases to 'k' (1 byte)
+        // and U+023A (2 bytes) to U+2C65 (3 bytes) — the old total-
+        // byte-length parity check passed while per-char offsets were
+        // misaligned, slicing mid-char and panicking.
+        assert_eq!(
+            replace_display("\u{212A} gmbh \u{23A}\u{23A}", COMPARE_FLAGS, Cleanup::Noop),
+            "\u{212A} GmbH \u{23A}\u{23A}"
+        );
+    }
+
+    #[test]
+    fn display_matches_greek_final_sigma() {
+        // The alias contains word-final 'ς'; casefold maps it to 'σ'
+        // in the needle keys. The haystack must be casefolded the
+        // same way (to_lowercase preserves 'ς' and never matches).
+        assert_eq!(
+            replace_display(
+                "Acme Εταιρία Περιορισμένης Ευθύνης",
+                COMPARE_FLAGS,
+                Cleanup::Noop
+            ),
+            "Acme Ε.Π.Ε."
+        );
+    }
+
+    #[test]
+    fn display_canonicalises_case_variants() {
+        // "GMBH" is a shipped alias of display "GmbH" — a case
+        // variant, not a trivial identity. The identity-skip must
+        // compare case-preserving forms or these aliases are dropped.
+        assert_eq!(
+            replace_display("Siemens GMBH", COMPARE_FLAGS, Cleanup::Noop),
+            "Siemens GmbH"
+        );
+        // ... but ALL-CAPS input stays ALL-CAPS via the isupper hook.
+        assert_eq!(
+            replace_display("SIEMENS GMBH", COMPARE_FLAGS, Cleanup::Noop),
+            "SIEMENS GMBH"
+        );
+    }
+
+    #[test]
+    fn display_matches_through_format_chars_and_extra_spaces() {
+        // Soft hyphen inside the alias (PDF copy/paste residue) and a
+        // doubled space inside a spelt-out form: the haystack is
+        // squashed like the needle keys, so both match; the replaced
+        // span swallows the junk.
+        assert_eq!(
+            replace_display("Acme Gm\u{AD}bH", COMPARE_FLAGS, Cleanup::Noop),
+            "Acme GmbH"
+        );
+        assert_eq!(
+            replace_display(
+                "Siemens Gesellschaft  mit beschränkter Haftung",
+                COMPARE_FLAGS,
+                Cleanup::Noop
+            ),
+            "Siemens GmbH"
+        );
+    }
+
+    #[test]
+    fn display_preserves_unmatched_regions_verbatim() {
+        // Junk outside the matched span — doubled spaces, soft
+        // hyphens — is returned untouched.
+        assert_eq!(
+            replace_display(
+                "Acme  Hol\u{AD}dings Aktiengesellschaft",
+                COMPARE_FLAGS,
+                Cleanup::Noop
+            ),
+            "Acme  Hol\u{AD}dings AG"
+        );
+    }
+
+    #[test]
+    fn display_offsets_survive_fold_expansion() {
+        // 'ß' casefolds to "ss", shifting every haystack offset after
+        // it by one byte; the match must still splice at the right
+        // place in the original.
+        assert_eq!(
+            replace_display(
+                "Meißner Straßenbau Aktiengesellschaft",
+                COMPARE_FLAGS,
+                Cleanup::Noop
+            ),
+            "Meißner Straßenbau AG"
+        );
+    }
+
+    #[test]
+    fn display_degraded_path_for_unmappable_flags() {
+        // NFKD can't be offset-mapped; the degraded path matches and
+        // splices on the normalised text (still no panic, still
+        // replaces) instead of returning verbatim surroundings.
+        let flags = COMPARE_FLAGS.union(Normalize::NFKD);
+        let out = replace_display("Siemens Aktiengesellschaft", flags, Cleanup::Noop);
+        assert_eq!(out, "siemens AG");
     }
 
     #[test]
