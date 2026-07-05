@@ -376,6 +376,25 @@ def test_too_many_parts_refuses_pairing():
     assert pair_shape(pair_symbols(q, r)) == [[]]
 
 
+def test_output_order_deterministic():  # corpus-dependent
+    # Output order is semantics: the NK consumer keeps the first
+    # pairing that attains the max score and builds its explain
+    # detail from it. Every std HashMap instance inside the edge
+    # pipeline iterates in a fresh random order, so repeated
+    # end-to-end runs exercise different internal orders — the
+    # emitted pairing sequence must not change. Uses the bin/ben
+    # multi-pairing case so there is an order to observe.
+    def run() -> List[List[Tuple[str, str, str]]]:
+        q = _only(analyze_names(NameTypeTag.PER, ["Isa Bin Tarif Al Bin Ali"]))
+        r = _only(analyze_names(NameTypeTag.PER, ["Shaikh Isa Bin Tarif Al Bin Ali"]))
+        return pair_shape(pair_symbols(q, r))
+
+    first = run()
+    assert len(first) > 1
+    for _ in range(20):
+        assert run() == first
+
+
 def test_repeated_token_pairings_collapsed():  # corpus-dependent
     # Repeated tokens carrying overlapping symbol coverage used to
     # explode the DFS — `bin` appearing twice with ~8 NAME symbols

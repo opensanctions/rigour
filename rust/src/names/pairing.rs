@@ -263,14 +263,16 @@ fn dedupe_equivalent_edges(edges: &mut Vec<Edge>) {
 }
 
 /// Deterministic sort key: earlier-in-name edges first, ties
-/// broken by category and symbol id.
-fn edge_sort_key(e: &Edge) -> (u32, u32, SymbolCategory, Arc<str>) {
-    (
-        e.qmask.trailing_zeros(),
-        e.rmask.trailing_zeros(),
-        e.symbol.category,
-        e.symbol.id.clone(),
-    )
+/// broken by category and symbol id. Uses the full masks — after
+/// [`dedupe_equivalent_edges`] no two edges share
+/// `(qmask, rmask, category)`, so this is a total order and the
+/// sorted sequence is independent of the `HashMap` iteration
+/// order in edge construction and dedupe. (Projecting the masks
+/// to `trailing_zeros()` here used to collapse cross-bound
+/// same-symbol edges into identical keys, leaking HashMap order
+/// into the output.)
+fn edge_sort_key(e: &Edge) -> (u64, u64, SymbolCategory, Arc<str>) {
+    (e.qmask, e.rmask, e.symbol.category, e.symbol.id.clone())
 }
 
 /// Enumerate maximal non-conflicting edge selections, one per
@@ -694,6 +696,28 @@ mod tests {
         ];
         dedupe_equivalent_edges(&mut edges);
         assert_eq!(edges.len(), 2, "distinct masks must not collapse");
+    }
+
+    #[test]
+    fn edge_sort_key_total_order_on_cross_bound_masks() {
+        // Cross-bound same-symbol edges — e.g. the greedy binder
+        // forced into (q=0b01, r=0b11) / (q=0b11, r=0b01) by a
+        // spans_can_pair rejection — share the lowest set bit on
+        // both sides. A trailing_zeros() projection keys them
+        // identically, so their sorted order (and hence the DFS
+        // visit order and output) would follow pre-sort HashMap
+        // order. The full-mask key must distinguish them and yield
+        // the same sequence from either input permutation.
+        let s = sym(SymbolCategory::INITIAL, "j");
+        let a = mk_edge(0b01, 0b11, s.clone());
+        let b = mk_edge(0b11, 0b01, s.clone());
+        assert_ne!(edge_sort_key(&a), edge_sort_key(&b));
+        let mut fwd = vec![a.clone(), b.clone()];
+        let mut rev = vec![b, a];
+        fwd.sort_by_cached_key(edge_sort_key);
+        rev.sort_by_cached_key(edge_sort_key);
+        let order = |v: &[Edge]| v.iter().map(|e| (e.qmask, e.rmask)).collect::<Vec<_>>();
+        assert_eq!(order(&fwd), order(&rev));
     }
 
     #[test]
