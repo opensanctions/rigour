@@ -65,17 +65,30 @@ def test_squash_unicode_whitespace() -> None:
     assert normalize("\u00A0\u3000\u2028", Normalize.SQUASH_SPACES) is None
 
 
-def test_squash_zero_width_space_survives() -> None:
-    """U+200B is category Cf (Format), not in the White_Space property.
+def test_squash_deletes_invisible_format_chars() -> None:
+    """SQUASH_SPACES deletes invisible format characters outright.
 
-    squash_spaces leaves it alone. Callers that want it gone must use
-    Cleanup.Strong (which replaces Cf with delete).
+    Zero-width space/joiners, BOM, soft hyphen, and word joiners are
+    copy/paste residue in registry data — text pasted from a PDF
+    ("Gm\u00ADbH") must produce the same key as its clean form.
     """
-    assert normalize("a\u200Bb", Normalize.SQUASH_SPACES) == "a\u200Bb"
-    # Cleanup.Strong deletes Cf → zero-width space is removed.
+    assert normalize("a\u200Bb", Normalize.SQUASH_SPACES) == "ab"
+    assert normalize("Gm\u00ADbH", Normalize.SQUASH_SPACES) == "GmbH"
+    assert normalize("\uFEFFhello", Normalize.SQUASH_SPACES) == "hello"
+    assert normalize("a\u2060b\u2064c", Normalize.SQUASH_SPACES) == "abc"
+    # A format char inside a whitespace run must not block collapsing.
+    assert normalize("a \u200B b", Normalize.SQUASH_SPACES) == "a b"
+    # Cleanup.Strong also deletes Cf — same result via that route.
     assert (
         normalize("a\u200Bb", Normalize.SQUASH_SPACES, Cleanup.Strong) == "ab"
     )
+
+
+def test_squash_information_separators() -> None:
+    """U+001C-001F collapse like whitespace, matching Python str.split()."""
+    assert normalize("a\x1Cb", Normalize.SQUASH_SPACES) == "a b"
+    assert normalize("a \x1D\x1F b", Normalize.SQUASH_SPACES) == "a b"
+    assert normalize("\x1C\x1F", Normalize.SQUASH_SPACES) is None
 
 
 def test_nfc_recompose() -> None:

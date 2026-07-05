@@ -41,7 +41,8 @@ value:
                               listed in its dispatch (NFKD)
     3. CASEFOLD             — Unicode full casefold (ß → ss, not lowercase)
     4. Cleanup              — category_replace, unless Cleanup.Noop
-    5. SQUASH_SPACES        — collapse whitespace runs, trim ends
+    5. SQUASH_SPACES        — delete invisible format characters,
+                              collapse whitespace runs, trim ends
     6. NAME                 — tokenize via
                               [tokenize_name][rigour.names.tokenize.tokenize_name]
                               and rejoin with a single ASCII space
@@ -132,10 +133,14 @@ class Normalize(IntFlag):
     Attributes:
         STRIP: Trim leading and trailing whitespace.
         SQUASH_SPACES: Collapse runs of whitespace (including newlines,
-            tabs, Unicode whitespace) into single spaces and trim the
-            edges. Runs as the final pipeline step, so cleaning up
-            whitespace introduced by earlier steps (e.g. category
-            replacement) comes out right.
+            tabs, Unicode whitespace, and the U+001C-001F information
+            separators) into single spaces and trim the edges. Also
+            deletes invisible format characters — zero-width
+            space/joiners (U+200B-U+200D), BOM (U+FEFF), soft hyphen
+            (U+00AD), and word joiners (U+2060-U+2064) — so that text
+            pasted from PDFs or web pages (``Gm\\u00ADbH``) compares
+            equal to its clean form (``GmbH``). Cleans up whitespace
+            introduced by earlier steps (e.g. category replacement).
         CASEFOLD: Unicode full casefold (e.g. ``ß → ss``). This is
             *not* the same as `str.lower()` — casefold is the correct
             tool for case-insensitive comparison across Unicode.

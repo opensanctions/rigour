@@ -8,7 +8,8 @@
 //   2. NFKD / NFKC / NFC   — at most one is meaningful; later-declared wins
 //   3. CASEFOLD            — Unicode full casefold (ß → ss, not lowercase)
 //   4. category_replace    — runs when `cleanup != Cleanup::Noop`
-//   5. SQUASH_SPACES       — collapse runs of whitespace, trim ends
+//   5. SQUASH_SPACES       — delete invisible format chars, collapse
+//                            runs of whitespace, trim ends
 //   6. NAME                — tokenize_name then join with a single space
 //
 // Transliteration is NOT part of this pipeline — rigour's public
@@ -120,27 +121,35 @@ fn category_replace(text: &str, cleanup: Cleanup) -> String {
 }
 
 fn squash_spaces(text: &str) -> String {
-    // Collapse runs of Unicode-whitespace chars into single ASCII spaces;
-    // trim ends. Called inside the hot matching loop, which is why this
-    // is a hand-written single-pass loop rather than a `\s+` regex
-    // replace: no per-call LazyLock deref, no intermediate allocation,
-    // no regex automaton overhead. `char::is_whitespace` follows the
-    // Unicode `White_Space` property — covers ASCII space, tab, CR, LF,
-    // NBSP (U+00A0), narrow NBSP (U+202F), ideographic space (U+3000),
-    // line/paragraph separators (U+2028/U+2029). Does NOT match zero-
-    // width space (U+200B) — that's Cf, not White_Space, and must be
-    // removed by category_replace if unwanted.
+    // Delete invisible format characters, collapse runs of whitespace
+    // into single ASCII spaces, trim ends. Called inside the hot
+    // matching loop, which is why this is a hand-written single-pass
+    // loop rather than a regex replace: no per-call LazyLock deref, no
+    // intermediate allocation, no regex automaton overhead.
+    //
+    // The deletion set covers copy/paste residue that would otherwise
+    // block matching ("Gm\u{00AD}bH" must compare equal to "GmbH"):
+    // zero-width space/joiners, BOM, soft hyphen, word joiner and the
+    // invisible math operators. These are Cf, not White_Space, so the
+    // whitespace arm never sees them. U+001C..=U+001F (information
+    // separators) collapse like whitespace: Python's `str.split()` /
+    // `\s` treat them as such, the Unicode White_Space property that
+    // `char::is_whitespace` follows does not.
     let mut out = String::with_capacity(text.len());
     let mut last_was_space = true; // suppresses leading whitespace
     for ch in text.chars() {
-        if ch.is_whitespace() {
-            if !last_was_space {
-                out.push(' ');
-                last_was_space = true;
+        match ch {
+            '\u{200B}'..='\u{200D}' | '\u{FEFF}' | '\u{00AD}' | '\u{2060}'..='\u{2064}' => {}
+            c if c.is_whitespace() || ('\u{1C}'..='\u{1F}').contains(&c) => {
+                if !last_was_space {
+                    out.push(' ');
+                    last_was_space = true;
+                }
             }
-        } else {
-            out.push(ch);
-            last_was_space = false;
+            c => {
+                out.push(c);
+                last_was_space = false;
+            }
         }
     }
     if out.ends_with(' ') {
@@ -318,11 +327,34 @@ mod tests {
     }
 
     #[test]
-    fn squash_zero_width_space_is_not_whitespace() {
-        // U+200B is Cf (Format), NOT in the White_Space property.
-        // It survives squash_spaces and must be removed via category_replace
-        // if the caller wants it gone.
-        assert_eq!(squash("a\u{200B}b"), Some("a\u{200B}b".to_string()),);
+    fn squash_deletes_invisible_format_chars() {
+        // Zero-width space / non-joiner / joiner, BOM, soft hyphen,
+        // word joiner, invisible math operators: deleted outright —
+        // "Gm\u{00AD}bH" pasted from a PDF must match "GmbH".
+        assert_eq!(squash("a\u{200B}b"), Some("ab".to_string()));
+        assert_eq!(squash("a\u{200C}b"), Some("ab".to_string()));
+        assert_eq!(squash("a\u{200D}b"), Some("ab".to_string()));
+        assert_eq!(squash("\u{FEFF}hello"), Some("hello".to_string()));
+        assert_eq!(squash("Gm\u{00AD}bH"), Some("GmbH".to_string()));
+        assert_eq!(squash("a\u{2060}b\u{2064}c"), Some("abc".to_string()));
+    }
+
+    #[test]
+    fn squash_deleted_chars_do_not_break_space_collapsing() {
+        // A format char inside a whitespace run must not produce a
+        // second space or block the collapse.
+        assert_eq!(squash("a \u{200B} b"), Some("a b".to_string()));
+        assert_eq!(squash("ab\u{00AD}"), Some("ab".to_string()));
+        assert_eq!(squash("\u{200B}\u{FEFF}"), None);
+    }
+
+    #[test]
+    fn squash_information_separators_collapse_like_whitespace() {
+        // U+001C-001F: Python str.split() / \s+ treat these as
+        // whitespace; Unicode White_Space does not. We side with Python.
+        assert_eq!(squash("a\u{1C}b"), Some("a b".to_string()));
+        assert_eq!(squash("a \u{1D}\u{1E}\u{1F} b"), Some("a b".to_string()));
+        assert_eq!(squash("\u{1C}\u{1F}"), None);
     }
 
     #[test]
