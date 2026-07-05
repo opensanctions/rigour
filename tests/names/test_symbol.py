@@ -393,6 +393,27 @@ def test_no_empty_pairing_when_edges_exist():
     assert len(shape) >= 1
 
 
+def test_many_disjoint_symbols_fast():  # corpus-dependent
+    # A long person name paired against itself yields one disjoint
+    # candidate edge per corpus-known token. The pre-rework covering
+    # enumeration was exponential in the edge count even without
+    # conflicts (28 tokens → 0.5s, 40 tokens → effectively hung);
+    # component decomposition makes this linear. If this test is
+    # slow, the enumeration has regressed.
+    tokens = (
+        "john mary peter paul anna maria david sarah michael laura "
+        "thomas emma daniel sophia martin julia robert alice henry "
+        "clara oscar nina victor elena felix diana simon greta ivan olga"
+    )
+    q = _only(analyze_names(NameTypeTag.PER, [tokens]))
+    r = _only(analyze_names(NameTypeTag.PER, [tokens]))
+    shape = pair_shape(pair_symbols(q, r))
+    assert 1 <= len(shape) <= 32
+    # The top pairing aligns every corpus-known token with itself.
+    q_tokens = {q_text for q_text, _, _ in shape[0]}
+    assert len(q_tokens) >= 20
+
+
 def test_too_many_parts_refuses_pairing():
     # Names with more than 64 parts blow past the u64 bitmask fast
     # path. Rather than fall back to Vec<u64> for inputs that are

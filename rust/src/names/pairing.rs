@@ -35,6 +35,34 @@ use crate::names::tag::NamePartTag;
 /// to fit in a `u64`.
 const MAX_PARTS: usize = 64;
 
+/// Post-dedupe cap on candidate edges. Bounds every downstream
+/// structure (conflict graph, components, enumeration) and lets
+/// edge selections live in a `u64` bitset. When it binds — real
+/// names produce single-digit edge counts, so only on adversarial
+/// input — the widest-coverage edges are kept, dropping the weakest
+/// evidence rather than all of it.
+const MAX_EDGES: usize = 64;
+
+/// Cap on emitted pairings. The corpus maximum on real name pairs
+/// is 6; every emitted pairing costs the consumer a residue-distance
+/// pass, so the cap is deliberately far below anything a genuine
+/// name produces while bounding adversarial fan-out.
+const MAX_PAIRINGS: usize = 32;
+
+/// Cap on ranked alternatives kept per conflict component
+/// (corpus maximum: 3). Lowest-coverage alternatives drop first.
+const MAX_COMPONENT_ALTS: usize = 8;
+
+/// Recursion-node budget for one component's maximal-selection
+/// enumeration. On exhaustion the component degrades to its greedy
+/// maximal selection — keeping symbol evidence rather than none.
+const COMPONENT_NODE_BUDGET: usize = 4096;
+
+/// Iteration budget for the cross-component cartesian product.
+/// Guards the case where many combinations dedupe into few
+/// equivalence classes and the product would spin without emitting.
+const PRODUCT_ITER_BUDGET: usize = 4096;
+
 /// Bundled output of [`collect_spans`].
 type SpansAndSymbols = (Vec<SpanInfo>, HashMap<Symbol, Py<Symbol>>);
 
@@ -235,12 +263,11 @@ fn prune_subsumed(edges: &mut Vec<Edge>) {
 }
 
 /// Collapse edges sharing `(qmask, rmask, category)`. Such edges
-/// differ only in `symbol.id` — the DFS coverage dedup at the leaf
-/// keys on `(qmask, rmask, sorted_categories)` and already drops
-/// the redundant ones, but only after walking every selection path
-/// that reaches them. Pre-collapsing here cuts the DFS branching
-/// factor proportionally; on the `Isa Bin Tarif Al Bin Ali` /
-/// `Shaikh …` repro it's 27 → 7 edges, ~7290 → ~32 leaves.
+/// differ only in `symbol.id`, which the selection-level
+/// equivalence dedup ignores — pre-collapsing them here keeps the
+/// conflict graph and per-component enumeration proportionally
+/// smaller; on the `Isa Bin Tarif Al Bin Ali` / `Shaikh …` repro
+/// it's 27 → 7 edges.
 ///
 /// Keeps the alphabetically-smallest `symbol.id` per class as the
 /// canonical edge for deterministic output.
@@ -275,69 +302,276 @@ fn edge_sort_key(e: &Edge) -> (u64, u64, SymbolCategory, Arc<str>) {
     (e.qmask, e.rmask, e.symbol.category, e.symbol.id.clone())
 }
 
-/// Enumerate maximal non-conflicting edge selections, one per
-/// `(qmask, rmask, sorted categories)` equivalence class.
-///
-/// Emits the empty selection only when no candidate edges exist
-/// — once any symbol evidence is available, we commit to it and
-/// don't return an empty-covering alternative that would compete
-/// with the symbol-matched pairings in downstream scoring.
-fn enumerate_coverings(edges: &[Edge]) -> Vec<Vec<usize>> {
-    let mut results: Vec<Vec<usize>> = Vec::new();
-    let mut seen: HashSet<(u64, u64, Vec<SymbolCategory>)> = HashSet::new();
-
-    let mut picked: Vec<usize> = Vec::new();
-    dfs(edges, 0, 0, 0, &mut picked, &mut results, &mut seen);
-    results
+/// Expand an edge-index bitset into an ascending index vector.
+fn bitset_to_indices(mut sel: u64) -> Vec<usize> {
+    let mut out: Vec<usize> = Vec::with_capacity(sel.count_ones() as usize);
+    while sel != 0 {
+        out.push(sel.trailing_zeros() as usize);
+        sel &= sel - 1;
+    }
+    out
 }
 
-fn dfs(
-    edges: &[Edge],
-    i: usize,
-    qmask: u64,
-    rmask: u64,
-    picked: &mut Vec<usize>,
-    results: &mut Vec<Vec<usize>>,
-    seen: &mut HashSet<(u64, u64, Vec<SymbolCategory>)>,
-) {
-    if i == edges.len() {
-        // Maximality check — every un-picked edge must conflict
-        // with the current coverage, otherwise we skipped an
-        // extension and the selection isn't maximal.
-        for (j, edge) in edges.iter().enumerate() {
-            if picked.contains(&j) {
-                continue;
-            }
-            if (edge.qmask & qmask) == 0 && (edge.rmask & rmask) == 0 {
-                return;
-            }
-        }
-        let mut cats: Vec<SymbolCategory> =
-            picked.iter().map(|&j| edges[j].symbol.category).collect();
-        cats.sort_unstable();
-        let key = (qmask, rmask, cats);
-        if seen.insert(key) {
-            results.push(picked.clone());
-        }
-        return;
+/// The scoring-equivalence class of an edge selection: joint part
+/// coverage per side plus the sorted category multiset. Selections
+/// in the same class are interchangeable for downstream scoring.
+fn selection_class(edges: &[Edge], sel: u64) -> (u64, u64, Vec<SymbolCategory>) {
+    let mut qcov: u64 = 0;
+    let mut rcov: u64 = 0;
+    let mut cats: Vec<SymbolCategory> = Vec::with_capacity(sel.count_ones() as usize);
+    for v in bitset_to_indices(sel) {
+        qcov |= edges[v].qmask;
+        rcov |= edges[v].rmask;
+        cats.push(edges[v].symbol.category);
     }
-    // Skip edge i.
-    dfs(edges, i + 1, qmask, rmask, picked, results, seen);
-    // Take edge i if compatible.
-    let e = &edges[i];
-    if (e.qmask & qmask) == 0 && (e.rmask & rmask) == 0 {
-        picked.push(i);
-        dfs(
+    cats.sort_unstable();
+    (qcov, rcov, cats)
+}
+
+/// Enumerate the maximal cliques of the compatibility graph
+/// restricted to `members` — i.e. the maximal non-conflicting edge
+/// selections within one conflict component — via Bron–Kerbosch
+/// with pivoting. Returns `false` when the node budget runs out,
+/// signalling the caller to degrade the component to its greedy
+/// selection.
+fn bron_kerbosch(
+    compat: &[u64],
+    members: u64,
+    r: u64,
+    mut p: u64,
+    mut x: u64,
+    out: &mut Vec<u64>,
+    budget: &mut usize,
+) -> bool {
+    if *budget == 0 {
+        return false;
+    }
+    *budget -= 1;
+    if p == 0 && x == 0 {
+        out.push(r);
+        return true;
+    }
+    // Pivot on the vertex with the most candidates among its
+    // compatible set — on dense compatibility (the common,
+    // few-conflicts case) this collapses the branching to a
+    // single path.
+    let mut pivot: usize = 0;
+    let mut best: i64 = -1;
+    let mut pux = p | x;
+    while pux != 0 {
+        let u = pux.trailing_zeros() as usize;
+        pux &= pux - 1;
+        let cnt = (p & compat[u] & members).count_ones() as i64;
+        if cnt > best {
+            best = cnt;
+            pivot = u;
+        }
+    }
+    let mut cand = p & !(compat[pivot] & members);
+    while cand != 0 {
+        let v = cand.trailing_zeros() as usize;
+        cand &= cand - 1;
+        let vbit = 1u64 << v;
+        let nv = compat[v] & members;
+        if !bron_kerbosch(compat, members, r | vbit, p & nv, x & nv, out, budget) {
+            return false;
+        }
+        p &= !vbit;
+        x |= vbit;
+    }
+    true
+}
+
+/// One maximal selection for a component, built greedily in edge
+/// sort order. Fallback for components whose exhaustive enumeration
+/// blows the node budget — commits to some symbol evidence rather
+/// than dropping the component.
+fn greedy_selection(edges: &[Edge], members: u64) -> u64 {
+    let mut sel: u64 = 0;
+    let mut qcov: u64 = 0;
+    let mut rcov: u64 = 0;
+    for v in bitset_to_indices(members) {
+        if (edges[v].qmask & qcov) == 0 && (edges[v].rmask & rcov) == 0 {
+            sel |= 1u64 << v;
+            qcov |= edges[v].qmask;
+            rcov |= edges[v].rmask;
+        }
+    }
+    sel
+}
+
+/// Best-first rank key for a component selection: joint coverage
+/// popcount descending, then full masks, category multiset and the
+/// selection bitset itself for a deterministic total order.
+type SelectionRank = (std::cmp::Reverse<u32>, u64, u64, Vec<SymbolCategory>, u64);
+
+/// The ranked, deduped maximal selections of one conflict
+/// component, best (highest joint coverage) first, truncated to
+/// [`MAX_COMPONENT_ALTS`].
+fn component_alternatives(edges: &[Edge], compat: &[u64], members: u64, budget: usize) -> Vec<u64> {
+    if members.count_ones() == 1 {
+        return vec![members];
+    }
+    let mut selections: Vec<u64> = Vec::new();
+    let mut node_budget = budget;
+    let complete = bron_kerbosch(
+        compat,
+        members,
+        0,
+        members,
+        0,
+        &mut selections,
+        &mut node_budget,
+    );
+    if !complete {
+        return vec![greedy_selection(edges, members)];
+    }
+    // Rank best-first: joint coverage popcount descending, then a
+    // full-mask key for a deterministic total order. Dedupe by
+    // scoring-equivalence class, keeping the best-ranked selection
+    // per class.
+    let mut keyed: Vec<SelectionRank> = selections
+        .into_iter()
+        .map(|sel| {
+            let (qcov, rcov, cats) = selection_class(edges, sel);
+            (
+                std::cmp::Reverse(qcov.count_ones() + rcov.count_ones()),
+                qcov,
+                rcov,
+                cats,
+                sel,
+            )
+        })
+        .collect();
+    keyed.sort();
+    let mut seen: HashSet<(u64, u64, Vec<SymbolCategory>)> = HashSet::new();
+    let mut out: Vec<u64> = Vec::new();
+    for (_, qcov, rcov, cats, sel) in keyed {
+        if seen.insert((qcov, rcov, cats)) {
+            out.push(sel);
+            if out.len() >= MAX_COMPONENT_ALTS {
+                break;
+            }
+        }
+    }
+    out
+}
+
+/// Enumerate maximal non-conflicting edge selections, one per
+/// `(qmask, rmask, sorted categories)` equivalence class, best
+/// coverage first.
+///
+/// Edges conflict iff their part coverage overlaps on either side.
+/// A maximal global selection is the union of one maximal selection
+/// per connected component of the conflict graph, so enumeration
+/// factorizes: isolated edges are forced into every selection,
+/// genuine alternatives are enumerated per component
+/// (Bron–Kerbosch over the component's compatibility graph), and
+/// the cartesian product across components is deduped by the global
+/// equivalence class — the global category-multiset key collapses
+/// cross-component category swaps on identical masks, so the
+/// product alone would over-emit.
+///
+/// Bounded on adversarial input by [`MAX_COMPONENT_ALTS`],
+/// [`MAX_PAIRINGS`], [`COMPONENT_NODE_BUDGET`] and
+/// [`PRODUCT_ITER_BUDGET`]; all truncation is deterministic and
+/// drops lowest-coverage alternatives first. Emits the empty
+/// selection only when no candidate edges exist — once any symbol
+/// evidence is available, we commit to it and don't return an
+/// empty-covering alternative that would compete with the
+/// symbol-matched pairings in downstream scoring.
+fn enumerate_coverings(edges: &[Edge]) -> Vec<Vec<usize>> {
+    let n = edges.len();
+    if n == 0 {
+        return vec![Vec::new()];
+    }
+    debug_assert!(
+        n <= MAX_EDGES,
+        "edge cap must be applied before enumeration"
+    );
+
+    // Pairwise compatibility bitsets (self-bit excluded).
+    let mut compat: Vec<u64> = vec![0; n];
+    for i in 0..n {
+        for j in (i + 1)..n {
+            let conflict =
+                (edges[i].qmask & edges[j].qmask) != 0 || (edges[i].rmask & edges[j].rmask) != 0;
+            if !conflict {
+                compat[i] |= 1u64 << j;
+                compat[j] |= 1u64 << i;
+            }
+        }
+    }
+    let full: u64 = if n == 64 { u64::MAX } else { (1u64 << n) - 1 };
+
+    // Connected components of the conflict graph, discovered in
+    // ascending edge order so component order is deterministic.
+    let mut assigned: u64 = 0;
+    let mut alt_lists: Vec<Vec<u64>> = Vec::new();
+    for start in 0..n {
+        if assigned & (1u64 << start) != 0 {
+            continue;
+        }
+        let mut members: u64 = 1u64 << start;
+        let mut frontier: u64 = members;
+        while frontier != 0 {
+            let mut next: u64 = 0;
+            for v in bitset_to_indices(frontier) {
+                let conflicts = full & !compat[v] & !(1u64 << v);
+                next |= conflicts & !members;
+            }
+            members |= next;
+            frontier = next;
+        }
+        assigned |= members;
+        alt_lists.push(component_alternatives(
             edges,
-            i + 1,
-            qmask | e.qmask,
-            rmask | e.rmask,
-            picked,
-            results,
-            seen,
-        );
-        picked.pop();
+            &compat,
+            members,
+            COMPONENT_NODE_BUDGET,
+        ));
     }
+
+    // Cartesian product across components in mixed-radix order —
+    // the first combination is every component's best alternative.
+    // Dedupe by global equivalence class while emitting.
+    let mut results: Vec<Vec<usize>> = Vec::new();
+    let mut seen: HashSet<(u64, u64, Vec<SymbolCategory>)> = HashSet::new();
+    let mut idx: Vec<usize> = vec![0; alt_lists.len()];
+    let mut iterations = 0;
+    loop {
+        let mut sel: u64 = 0;
+        for (c, list) in alt_lists.iter().enumerate() {
+            sel |= list[idx[c]];
+        }
+        let class = selection_class(edges, sel);
+        if seen.insert(class) {
+            results.push(bitset_to_indices(sel));
+            if results.len() >= MAX_PAIRINGS {
+                break;
+            }
+        }
+        iterations += 1;
+        if iterations >= PRODUCT_ITER_BUDGET {
+            break;
+        }
+        // Advance the mixed-radix counter; done when it wraps.
+        let mut c = alt_lists.len();
+        let mut advanced = false;
+        while c > 0 {
+            c -= 1;
+            idx[c] += 1;
+            if idx[c] < alt_lists[c].len() {
+                advanced = true;
+                break;
+            }
+            idx[c] = 0;
+        }
+        if !advanced {
+            break;
+        }
+    }
+    results
 }
 
 /// The degenerate-case output: a list with one empty pairing.
@@ -424,6 +658,12 @@ fn build_pairing(
 /// category choices on the same parts (e.g. a token carrying both
 /// `NAME:Qvan` and `SYMBOL:van`) surface as separate pairings.
 ///
+/// At most 32 pairings are returned, ranked by joint coverage;
+/// on adversarial inputs whose alternative structure exceeds
+/// internal budgets, lowest-coverage alternatives are dropped
+/// deterministically. Real name pairs produce single-digit
+/// pairing counts and are never truncated.
+///
 /// Returns `[()]` (a single empty pairing) when either name has
 /// more than 64 parts, when either name has no tagger spans, or
 /// when no symbol is shared between the two sides.
@@ -451,6 +691,21 @@ pub fn py_pair_symbols(
     let mut edges = build_candidate_edges(&q_spans, &r_spans);
     prune_subsumed(&mut edges);
     dedupe_equivalent_edges(&mut edges);
+    if edges.len() > MAX_EDGES {
+        // Keep the widest-coverage edges; deterministic tie-break
+        // on the full sort key. Only reachable on adversarial
+        // input — real names produce single-digit edge counts.
+        edges.sort_by_cached_key(|e| {
+            (
+                std::cmp::Reverse(e.qmask.count_ones() + e.rmask.count_ones()),
+                e.qmask,
+                e.rmask,
+                e.symbol.category,
+                e.symbol.id.clone(),
+            )
+        });
+        edges.truncate(MAX_EDGES);
+    }
     edges.sort_by_cached_key(edge_sort_key);
 
     let coverings = enumerate_coverings(&edges);
@@ -704,10 +959,10 @@ mod tests {
         // forced into (q=0b01, r=0b11) / (q=0b11, r=0b01) by a
         // spans_can_pair rejection — share the lowest set bit on
         // both sides. A trailing_zeros() projection keys them
-        // identically, so their sorted order (and hence the DFS
-        // visit order and output) would follow pre-sort HashMap
-        // order. The full-mask key must distinguish them and yield
-        // the same sequence from either input permutation.
+        // identically, so their sorted order (and hence the
+        // enumeration order and output) would follow pre-sort
+        // HashMap order. The full-mask key must distinguish them
+        // and yield the same sequence from either permutation.
         let s = sym(SymbolCategory::INITIAL, "j");
         let a = mk_edge(0b01, 0b11, s.clone());
         let b = mk_edge(0b11, 0b01, s.clone());
@@ -720,8 +975,32 @@ mod tests {
         assert_eq!(order(&fwd), order(&rev));
     }
 
+    /// Every covering must be internally disjoint on both sides and
+    /// maximal — no un-picked edge compatible with it.
+    fn assert_valid_coverings(edges: &[Edge], coverings: &[Vec<usize>]) {
+        for covering in coverings {
+            let mut qcov: u64 = 0;
+            let mut rcov: u64 = 0;
+            for &i in covering {
+                assert_eq!(edges[i].qmask & qcov, 0, "q-side overlap in covering");
+                assert_eq!(edges[i].rmask & rcov, 0, "r-side overlap in covering");
+                qcov |= edges[i].qmask;
+                rcov |= edges[i].rmask;
+            }
+            for (j, edge) in edges.iter().enumerate() {
+                if covering.contains(&j) {
+                    continue;
+                }
+                assert!(
+                    (edge.qmask & qcov) != 0 || (edge.rmask & rcov) != 0,
+                    "covering not maximal: edge {j} is compatible"
+                );
+            }
+        }
+    }
+
     #[test]
-    fn dfs_empty_edges_returns_empty_pairing() {
+    fn coverings_empty_edges_returns_empty_pairing() {
         // No candidate edges → the empty covering is the only
         // emitted pairing (the fallback case).
         let coverings = enumerate_coverings(&[]);
@@ -729,7 +1008,7 @@ mod tests {
     }
 
     #[test]
-    fn dfs_two_disjoint_edges_single_covering() {
+    fn coverings_two_disjoint_edges_single_covering() {
         // Edges exist → empty covering is NOT emitted alongside.
         let edges = vec![
             mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::NAME, "QA")),
@@ -740,7 +1019,7 @@ mod tests {
     }
 
     #[test]
-    fn dfs_cross_category_on_same_parts_emits_two() {
+    fn coverings_cross_category_on_same_parts_emits_two() {
         // Two conflicting edges (same masks, different categories)
         // → NAME-only and SYMBOL-only coverings; no empty.
         let edges = vec![
@@ -749,6 +1028,84 @@ mod tests {
         ];
         let coverings = enumerate_coverings(&edges);
         assert_eq!(coverings.len(), 2);
+        assert_valid_coverings(&edges, &coverings);
+    }
+
+    #[test]
+    fn coverings_many_disjoint_edges_single_pass() {
+        // The common case: pairwise-disjoint edges. Every edge is
+        // an isolated conflict component and forced into the one
+        // maximal selection. The pre-rework DFS visited 2^E subsets
+        // here — at E = 40 that was ~10^12 leaf visits; this must
+        // complete instantly with exactly one covering.
+        let edges: Vec<Edge> = (0..40)
+            .map(|i| {
+                mk_edge(
+                    1u64 << i,
+                    1u64 << i,
+                    sym(SymbolCategory::NAME, &format!("Q{i:02}")),
+                )
+            })
+            .collect();
+        let coverings = enumerate_coverings(&edges);
+        assert_eq!(coverings, vec![(0..40).collect::<Vec<usize>>()]);
+    }
+
+    #[test]
+    fn coverings_cross_component_swaps_dedupe_globally() {
+        // Two components, each offering a NAME/SYMBOL choice on
+        // identical masks. The per-component product yields 4
+        // combinations, but (NAME, SYMBOL) and (SYMBOL, NAME) share
+        // the global category multiset on the same coverage — the
+        // final global dedup must collapse them to 3 pairings
+        // (mirrors the bin/ben corpus cases).
+        let edges = vec![
+            mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::NAME, "QA")),
+            mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::SYMBOL, "SA")),
+            mk_edge(1 << 1, 1 << 1, sym(SymbolCategory::NAME, "QB")),
+            mk_edge(1 << 1, 1 << 1, sym(SymbolCategory::SYMBOL, "SB")),
+        ];
+        let coverings = enumerate_coverings(&edges);
+        assert_eq!(coverings.len(), 3);
+        assert_valid_coverings(&edges, &coverings);
+    }
+
+    #[test]
+    fn coverings_respect_pairing_cap_best_first() {
+        // Six components, each with two alternatives of distinct
+        // coverage → 64 distinct equivalence classes. Output is
+        // capped at MAX_PAIRINGS, and the first covering is every
+        // component's best (widest-coverage) alternative.
+        let mut edges: Vec<Edge> = Vec::new();
+        for c in 0..6u32 {
+            let narrow = 1u64 << (2 * c);
+            let wide = narrow | (1u64 << (2 * c + 1));
+            edges.push(mk_edge(narrow, narrow, sym(SymbolCategory::NAME, "QN")));
+            edges.push(mk_edge(wide, narrow, sym(SymbolCategory::NAME, "QW")));
+        }
+        let coverings = enumerate_coverings(&edges);
+        assert_eq!(coverings.len(), MAX_PAIRINGS);
+        assert_valid_coverings(&edges, &coverings);
+        // Odd indices are the wide alternatives.
+        assert_eq!(coverings[0], vec![1, 3, 5, 7, 9, 11]);
+    }
+
+    #[test]
+    fn component_budget_exhaustion_degrades_to_greedy() {
+        // With a starved node budget, a component's enumeration
+        // falls back to its single greedy maximal selection instead
+        // of hanging or dropping the component.
+        let edges = vec![
+            mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::NAME, "QA")),
+            mk_edge(1 << 0, 1 << 0, sym(SymbolCategory::SYMBOL, "SA")),
+        ];
+        let mut compat: Vec<u64> = vec![0; 2];
+        // Edges conflict, so compat stays empty on both.
+        compat[0] = 0;
+        compat[1] = 0;
+        let alts = component_alternatives(&edges, &compat, 0b11, 1);
+        assert_eq!(alts, vec![greedy_selection(&edges, 0b11)]);
+        assert_eq!(alts[0], 0b01, "greedy takes the first sorted edge");
     }
 
     #[test]
