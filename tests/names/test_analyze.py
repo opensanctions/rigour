@@ -616,25 +616,26 @@ def test_raw_org_cyrillic_prefix():
 
 
 def test_raw_org_cjk_pass_through():
-    # Chinese company name (no spaces) must not crash. 有限公司
-    # is in the alias-only form — not in compare/display — so the
-    # tagger's corpus doesn't index it and no ORG_CLASS fires.
+    # Chinese company name (no spaces) must not crash. 有限公司 is
+    # indexed by the tagger, but here it is embedded mid-token with
+    # no separator, and CJK characters are word chars — the word-
+    # boundary check rejects the match, so no ORG_CLASS fires.
     result = analyze_names(NameTypeTag.ORG, ["招商银行有限公司"], rewrite=False)
     name = _only(result)
     assert Symbol(Symbol.Category.ORG_CLASS, "LLC") not in name.symbols
 
 
-def test_raw_org_arabic_pass_through():
-    # Arabic company name must not crash. المحدودة is
-    # alias-only — absent from the tagger's compare/display
-    # mapping — so no ORG_CLASS symbol fires.
+def test_raw_org_arabic_tags_alias():
+    # Arabic company name must not crash, and المحدودة — an alias of
+    # a compare="Ltd" spec — carries ORG_CLASS:LLC evidence even on
+    # un-rewritten text. The tagger's needle set is data-driven: the
+    # same class evidence fires whether or not the compare-rewrite
+    # canonicalised the alias to "ltd" first.
     result = analyze_names(
         NameTypeTag.ORG, ["شركة أرامكو السعودية المحدودة"], rewrite=False
     )
     name = _only(result)
-    assert not any(
-        sym.category == Symbol.Category.ORG_CLASS for sym in name.symbols
-    )
+    assert Symbol(Symbol.Category.ORG_CLASS, "LLC") in name.symbols
 
 
 def test_raw_org_no_false_positive_in_longer_word():

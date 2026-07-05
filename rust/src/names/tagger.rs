@@ -193,7 +193,6 @@ fn build_org_tagger(flags: Normalize) -> Tagger {
     }
 
     // Org types → ORG_CLASS symbols keyed on the `generic` field.
-    // Mirrors the Python tagger's loop at tagging.py:123-145.
     let mut class_syms: HashMap<String, Symbol> = HashMap::new();
     for spec in org_types::ORG_TYPE_SPECS.iter() {
         let Some(generic) = spec.generic.as_deref() else {
@@ -207,25 +206,24 @@ fn build_org_tagger(flags: Normalize) -> Tagger {
         if let Some(display) = spec.display.as_deref() {
             b.add(display, &sym);
         }
-        // compare defaults to display when absent; when present but
-        // empty ("" = removal marker for the Replacer) it's not an
-        // alias we want in the tagger — skip.
-        let compare = spec.compare.as_deref().or(spec.display.as_deref());
+        // `compare: ""` is the Replacer's removal marker, not a
+        // surface form — skip it as a needle.
         match spec.compare.as_deref() {
-            Some("") => {}
-            Some(s) => b.add(s, &sym),
-            None => {
-                if let Some(c) = compare {
-                    b.add(c, &sym);
-                }
-            }
+            Some("") | None => {}
+            Some(compare) => b.add(compare, &sym),
         }
-        // Python's Python tagger adds aliases only when compare is
-        // absent — mirror that exactly.
-        if spec.compare.is_none() {
-            for alias in &spec.aliases {
-                b.add(alias, &sym);
-            }
+        // Tag every surface form the data associates with the class,
+        // aliases included. The tagger answers "does this text
+        // contain a marker of org-class X?" — the answer must not
+        // depend on whether the compare-rewrite ran first. On the
+        // default analyze_names path (rewrite=true) these alias
+        // needles never fire, because the rewrite has already
+        // canonicalised the alias to its display/compare form; on
+        // un-rewritten text (rewrite=false, direct tagger use) they
+        // supply the ORG_CLASS evidence that would otherwise be
+        // silently lost.
+        for alias in &spec.aliases {
+            b.add(alias, &sym);
         }
     }
 
@@ -351,6 +349,51 @@ mod tests {
                 .iter()
                 .any(|(_, s)| s.category == SymbolCategory::ORG_CLASS),
             "expected ORG_CLASS match in: {:?}",
+            matches
+        );
+    }
+
+    #[test]
+    fn org_tagger_tags_aliases_on_unrewritten_text() {
+        // "free zone establishment" is an alias of display "FZE"
+        // (generic LLC). On raw, un-rewritten text the alias itself
+        // must carry the ORG_CLASS evidence — the tagger's needle
+        // set is data-driven, not dependent on the compare-rewrite
+        // having canonicalised the alias to "fze" first.
+        let tagger = get_tagger(TaggerKind::Org, FLAGS);
+        let matches = tagger.tag("acme free zone establishment");
+        assert!(
+            matches
+                .iter()
+                .any(|(_, s)| s.category == SymbolCategory::ORG_CLASS && s.id.as_ref() == "LLC"),
+            "expected ORG_CLASS:LLC via the spelt-out alias, got {:?}",
+            matches
+        );
+        // The post-rewrite form must yield the same class evidence.
+        let rewritten = tagger.tag("acme fze");
+        assert!(
+            rewritten
+                .iter()
+                .any(|(_, s)| s.category == SymbolCategory::ORG_CLASS && s.id.as_ref() == "LLC"),
+            "expected ORG_CLASS:LLC via the display form, got {:?}",
+            rewritten
+        );
+    }
+
+    #[test]
+    fn org_tagger_tags_aliases_of_removal_specs() {
+        // The spec for "federal state budgetary institution" has
+        // `compare: ""` — deleted from comparison keys as noise —
+        // but `generic: SOE`: removal-from-comparison and class
+        // evidence are orthogonal, so the alias still tags when it
+        // appears in text.
+        let tagger = get_tagger(TaggerKind::Org, FLAGS);
+        let matches = tagger.tag("federal state budgetary institution rosgeolfond");
+        assert!(
+            matches
+                .iter()
+                .any(|(_, s)| s.category == SymbolCategory::ORG_CLASS && s.id.as_ref() == "SOE"),
+            "expected ORG_CLASS:SOE via the removal-spec alias, got {:?}",
             matches
         );
     }
