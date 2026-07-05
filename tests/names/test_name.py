@@ -174,6 +174,23 @@ def test_name_symbols():
     assert len(name.symbols) == 1
 
 
+def test_apply_part_keyed_on_part_identity():
+    # The apply_part dedup keys on part identity, not surface form:
+    # two same-form parts each get their own span, while a repeat
+    # tagger run over the same part stays a no-op.
+    name = Name("A A Milne")
+    symbol = Symbol(Symbol.Category.INITIAL, "a")
+    name.apply_part(name.parts[0], symbol)
+    name.apply_part(name.parts[1], symbol)
+    assert len(name.spans) == 2
+    covered = {part.index for span in name.spans for part in span.parts}
+    assert covered == {0, 1}
+
+    name.apply_part(name.parts[0], symbol)
+    name.apply_part(name.parts[1], symbol)
+    assert len(name.spans) == 2
+
+
 def test_name_contains_per():
     name1 = Name("John Smith", tag=NameTypeTag.PER)
     assert name1.contains(name1) is False

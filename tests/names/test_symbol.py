@@ -131,6 +131,36 @@ def test_initial_pairs_with_full_given():
     assert [("j", "john", "INITIAL"), ("smith", "smith", "NAME")] in shape
 
 
+def test_repeated_initials_both_align():
+    # "A A Milne": both single-char parts must carry INITIAL:a spans
+    # (the apply_part dedup keys on part identity, so the second "a"
+    # is not starved), and pairing binds min(N, M) = 2 INITIAL edges
+    # against the two GIVEN-tagged given names on the result side.
+    q = _only(analyze_names(NameTypeTag.PER, ["A A Milne"], infer_initials=True))
+    covered = {
+        part.index
+        for span in q.spans
+        if span.symbol.category.value == "INITIAL"
+        for part in span.parts
+    }
+    assert {0, 1} <= covered
+    r = _only(
+        analyze_names(
+            NameTypeTag.PER,
+            ["Alan Alexander Milne"],
+            {
+                NamePartTag.GIVEN: ["Alan", "Alexander"],
+                NamePartTag.FAMILY: ["Milne"],
+            },
+        )
+    )
+    shape = pair_shape(pair_symbols(q, r))
+    initial_counts = [
+        sum(1 for _, _, cat in pairing if cat == "INITIAL") for pairing in shape
+    ]
+    assert max(initial_counts) == 2
+
+
 def test_initial_rejected_when_both_multichar():
     # Both sides carry INITIAL symbols on multi-character parts — the
     # per-edge compatibility rule rejects the edge, leaving only the

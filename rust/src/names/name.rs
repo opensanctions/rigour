@@ -226,14 +226,17 @@ impl Name {
     /// symbols that inherently apply to one token: `INITIAL` on a
     /// single-character latin part, `NUMERIC` inferred from a part
     /// like "123456789" that the ordinal tagger didn't cover.
+    ///
+    /// Idempotent on `(part, symbol)`, keyed on part identity — a
+    /// repeat tagger run over the same part is a no-op, but two
+    /// same-form parts ("A A Milne") each get their own span.
     pub fn apply_part(
         &self,
         py: Python<'_>,
         part: Py<NamePart>,
         symbol: Py<Symbol>,
     ) -> PyResult<()> {
-        let part_form = part.bind(py).borrow().form_str().to_string();
-        if span_already_applied(py, &self.spans, &symbol, &part_form)? {
+        if part_span_already_applied(py, &self.spans, &symbol, &part)? {
             return Ok(());
         }
         let span = Span::new(py, vec![part], symbol)?;
@@ -449,14 +452,51 @@ fn hash_form(form: &str) -> isize {
     hasher.finish() as isize
 }
 
+/// Has a single-part `Span` carrying `symbol` over exactly `part`
+/// already been appended?
+///
+/// The [`Name::apply_part`] idempotency guard. Keys on part
+/// identity (`index` is unique within a `Name`), not the surface
+/// form — two same-form parts each get their own span, while a
+/// second tagger run over the same part must not duplicate it.
+fn part_span_already_applied(
+    py: Python<'_>,
+    spans: &Py<PyList>,
+    symbol: &Py<Symbol>,
+    part: &Py<NamePart>,
+) -> PyResult<bool> {
+    let target_symbol = symbol.bind(py).borrow();
+    let part_index = part.bind(py).borrow().index;
+    let spans_bound = spans.bind(py);
+    for item in spans_bound.iter() {
+        let span = item.cast::<Span>()?.borrow();
+        let existing_symbol = span.symbol.bind(py).borrow();
+        if *existing_symbol != *target_symbol {
+            continue;
+        }
+        let parts_bound = span.parts.bind(py);
+        if parts_bound.len() != 1 {
+            continue;
+        }
+        let existing_part = parts_bound.get_item(0)?.cast::<NamePart>()?.borrow();
+        if existing_part.index == part_index {
+            return Ok(true);
+        }
+    }
+    Ok(false)
+}
+
 /// Has a `Span` carrying `symbol` over a parts sequence whose
 /// `form_str` join equals `phrase` already been appended?
 ///
-/// Used by [`Name::apply_phrase`] / [`Name::apply_part`] to keep the
+/// The [`Name::apply_phrase`] idempotency guard, keeping the
 /// invariant that no two `Span`s on the same `Name` share both a
 /// symbol and a parts-form sequence — needed once more than one
 /// tagger fires on the same `Name` (e.g. the org and person taggers
-/// both running on an `ENT` input).
+/// both running on an `ENT` input). Form-keying is correct here
+/// because a single `apply_phrase` call spans every occurrence of
+/// the phrase atomically; [`Name::apply_part`] targets one part and
+/// uses the identity-keyed guard above instead.
 fn span_already_applied(
     py: Python<'_>,
     spans: &Py<PyList>,
