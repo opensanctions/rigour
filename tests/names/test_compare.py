@@ -92,6 +92,17 @@ def test_digit_edit_penalty() -> None:
     assert digit_out[0].score < letter_out[0].score
 
 
+def test_digit_edit_penalty_unicode() -> None:
+    # The digit tier applies to numerals in any script — a mismatch
+    # between two Arabic-Indic digits is conflicting numeric
+    # evidence, not a typo, exactly like its ASCII counterpart.
+    arabic_out = compare_parts(parts("abcdef٣"), parts("abcdef٤"))
+    letter_out = compare_parts(parts("abcdefx"), parts("abcdefy"))
+    # Both single-edit on 7-char tokens; the numeral edit must be
+    # more expensive than the letter edit.
+    assert arabic_out[0].score < letter_out[0].score
+
+
 def test_budget_tolerance_scales_budget() -> None:
     # A token that fails the cap at default tolerance should pass it
     # at high tolerance, without changing inputs.
