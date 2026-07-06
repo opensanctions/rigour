@@ -2,6 +2,10 @@
 
 # TODO: upload with timestamp
 
+clean:
+	sqlite3 data/names.db "DELETE FROM cache WHERE timestamp < datetime('now', '-100 days');"
+	sqlite3 data/names.db 'VACUUM;'
+
 put:
 	sqlite3 data/names.db '.dump' | gzip > data/names.sql.gz
 	gsutil cp data/names.sql.gz gs://internal-data.opensanctions.org/namesdb/names.sql.gz

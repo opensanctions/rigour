@@ -1,5 +1,4 @@
 import random
-import time
 import logging
 import requests
 from functools import lru_cache
@@ -9,20 +8,23 @@ from typing import List, Optional, Set, Tuple
 from followthemoney import Dataset
 from nomenklatura import settings
 from nomenklatura.cache import Cache
+from nomenklatura.db import Session
 from nomenklatura.wikidata import WikidataClient
+from nomenklatura.wikidata.util import make_session
 
-from namesdb.db import store_mapping, engine, metadata
+from namesdb.db import store_mapping, engine
 from namesdb.blocks import GROUPS as BLOCKED_GROUPS
 from namesdb.util import clean_form
 
 log = logging.getLogger("namesdb.wikidata")
 settings.DB_STMT_TIMEOUT = 10000 * 100000
 dataset = Dataset.make({"name": "synonames", "title": "Synonames"})
-cache = Cache(engine, metadata, dataset, create=True)
-# cache = Cache.make_default(dataset)
+db = Session(engine)
+cache = Cache(db, dataset, create=True)
 # cache.preload(f"{WikidataClient.WD_API}%")
-session = requests.Session()
-session.headers.update({"User-Agent": "opensanctions/namesdb"})
+session = make_session(
+    user_agent="opensanctions-namesdb/1.0 (+https://opensanctions.org; tech@opensanctions.org)"
+)
 client = WikidataClient(cache, session=session, cache_days=200)
 
 
@@ -93,12 +95,9 @@ def process_item(qid: str) -> Optional[Tuple[str, Set[str]]]:
             return None
         return (qid, unique)
     except requests.RequestException as e:
+        # The session retries on server errors and honours Retry-After on
+        # 429/503, so anything surfacing here is a genuine failure to skip.
         log.error(f"Error fetching item {qid}: {e}")
-        if e.response is not None and e.response.status_code == 429:
-            retry_after = e.response.headers.get("Retry-After")
-            if retry_after is not None:
-                log.info(f"Rate limited. Retrying after {retry_after} seconds.")
-                time.sleep(int(retry_after) + 1)
         return None
 
 
@@ -132,11 +131,12 @@ def crawl_mappings():
             qid, uniques = item
             for form in uniques:
                 log.info(f"Storing mapping: {qid} -> {form}")
-                store_mapping(cache.conn, form, qid)
+                store_mapping(db.connection, form, qid)
             if idx > 0 and idx % 1000 == 0:
                 log.info("Crawled: %d", idx)
-                # client.cache.flush()
-                cache.flush()
+                db.checkpoint()
+        db.checkpoint()
+    db.commit()
 
 
 if __name__ == "__main__":
