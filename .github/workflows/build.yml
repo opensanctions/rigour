@@ -93,6 +93,7 @@ jobs:
           name: wheels-manylinux-${{ matrix.target }}
           path: dist
       - uses: actions/attest-build-provenance@v4
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         with:
           subject-path: 'dist/*.whl'
 
@@ -127,6 +128,7 @@ jobs:
           name: wheels-musllinux-${{ matrix.target }}
           path: dist
       - uses: actions/attest-build-provenance@v4
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         with:
           subject-path: 'dist/*.whl'
 
@@ -166,6 +168,7 @@ jobs:
           name: wheels-macos-${{ matrix.target }}
           path: dist
       - uses: actions/attest-build-provenance@v4
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         with:
           subject-path: 'dist/*.whl'
 
@@ -193,6 +196,7 @@ jobs:
           name: wheels-windows-${{ matrix.target }}
           path: dist
       - uses: actions/attest-build-provenance@v4
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         with:
           subject-path: 'dist/*.whl'
 
@@ -211,6 +215,7 @@ jobs:
           name: wheels-sdist
           path: dist
       - uses: actions/attest-build-provenance@v4
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
         with:
           subject-path: 'dist/*.tar.gz'
 
