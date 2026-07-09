@@ -55,15 +55,14 @@ pub struct Alignment {
     /// Similarity in `[0, 1]`. For symbol-paired edges, defaults
     /// to `1.0`; consumers override with a category default. For
     /// residue clusters, the per-cluster product. For extras,
-    /// `0.0`.
-    #[pyo3(get, set)]
+    /// `0.0`. Accessed via the explicit getter/setter below.
     pub score: Py<PyFloat>,
     /// Aggregation weight in the matcher's weighted average.
     /// Defaults to `1.0`; consumers override per category
     /// (`SYM_WEIGHTS`), for extras (`nm_extra_*_name`), for
     /// family-name boost (`nm_family_name_weight`), and for
-    /// stopword down-weight.
-    #[pyo3(get, set)]
+    /// stopword down-weight. Accessed via the explicit
+    /// getter/setter below.
     pub weight: Py<PyFloat>,
     /// `" ".join(p.comparable for p in qps)`, cached.
     #[pyo3(get)]
@@ -72,6 +71,18 @@ pub struct Alignment {
     #[pyo3(get)]
     pub rstr: Py<PyString>,
     hash: isize,
+}
+
+/// Coerce a Python value to a stored `Py<PyFloat>` per the PEP 484
+/// numeric tower: an existing `float` is INCREF'd as-is; anything
+/// else (`int`, objects with `__float__` / `__index__`) is converted
+/// once. Non-numeric values raise `TypeError`.
+fn coerce_pyfloat(value: &Bound<'_, PyAny>) -> PyResult<Py<PyFloat>> {
+    if let Ok(f) = value.cast::<PyFloat>() {
+        return Ok(f.clone().unbind());
+    }
+    let v: f64 = value.extract()?;
+    Ok(PyFloat::new(value.py(), v).unbind())
 }
 
 impl Alignment {
@@ -155,6 +166,32 @@ impl Alignment {
         weight: f64,
     ) -> PyResult<Self> {
         Alignment::build(py, qps, rps, symbol, score, weight)
+    }
+
+    #[getter]
+    fn get_score(&self, py: Python<'_>) -> Py<PyFloat> {
+        self.score.clone_ref(py)
+    }
+
+    /// Explicit setter instead of `#[pyo3(set)]`: the generated
+    /// setter for a `Py<PyFloat>` field downcasts to exact `float`,
+    /// rejecting `int` — contradicting the `score: float` stub and
+    /// PEP 484's numeric tower.
+    #[setter]
+    fn set_score(&mut self, value: &Bound<'_, PyAny>) -> PyResult<()> {
+        self.score = coerce_pyfloat(value)?;
+        Ok(())
+    }
+
+    #[getter]
+    fn get_weight(&self, py: Python<'_>) -> Py<PyFloat> {
+        self.weight.clone_ref(py)
+    }
+
+    #[setter]
+    fn set_weight(&mut self, value: &Bound<'_, PyAny>) -> PyResult<()> {
+        self.weight = coerce_pyfloat(value)?;
+        Ok(())
     }
 
     fn __hash__(&self) -> isize {
