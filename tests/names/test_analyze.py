@@ -65,6 +65,44 @@ def test_person_three_tags_slavic():
     assert tags["putin"] == NamePartTag.FAMILY
 
 
+def test_part_tags_applied_in_insertion_order():
+    # Tag application is first-writer-wins: the part_tags dict's
+    # insertion order decides which tag lands on a part claimed by
+    # two entries. This used to follow Rust HashMap iteration order,
+    # i.e. it was random per process.
+    result = analyze_names(
+        NameTypeTag.PER,
+        ["Jean Dupont"],
+        {NamePartTag.GIVEN: ["Jean"], NamePartTag.MIDDLE: ["Jean"]},
+    )
+    assert _part_tags(_only(result))["jean"] == NamePartTag.GIVEN
+    result = analyze_names(
+        NameTypeTag.PER,
+        ["Jean Dupont"],
+        {NamePartTag.MIDDLE: ["Jean"], NamePartTag.GIVEN: ["Jean"]},
+    )
+    assert _part_tags(_only(result))["jean"] == NamePartTag.MIDDLE
+
+
+def test_part_tags_incompatible_later_tag_marks_ambiguous():
+    # A later compatible tag no-ops: GIVEN.can_match(HONORIFIC) holds,
+    # so GIVEN-first keeps "don" as GIVEN. Reversed, HONORIFIC-first
+    # sees an incompatible GIVEN and degrades the part to AMBIGUOUS.
+    # Pre-fix, which of the two outcomes you got was random per process.
+    result = analyze_names(
+        NameTypeTag.PER,
+        ["Don Camillo"],
+        {NamePartTag.GIVEN: ["Don"], NamePartTag.HONORIFIC: ["Don"]},
+    )
+    assert _part_tags(_only(result))["don"] == NamePartTag.GIVEN
+    result = analyze_names(
+        NameTypeTag.PER,
+        ["Don Camillo"],
+        {NamePartTag.HONORIFIC: ["Don"], NamePartTag.GIVEN: ["Don"]},
+    )
+    assert _part_tags(_only(result))["don"] == NamePartTag.AMBIGUOUS
+
+
 def test_person_multi_token_given():
     # "Jean Claude" as a single GIVEN value should tag BOTH "jean" and
     # "claude" parts — Name.tag_text tokenises the value and walks the
