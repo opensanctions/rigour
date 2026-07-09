@@ -9,10 +9,10 @@
 //   - `data/names/org_types.json`          (~125 KiB → ~15 KiB)
 //   - `data/territories/data.jsonl`        (~783 KiB → ~214 KiB)
 //
-// If a source file is missing (fresh checkout before
-// `contrib/namesdb/Makefile::dump` has been run, for example), we emit
-// an empty blob and print a cargo warning. Callers of the corresponding
-// `raw()` loader see an empty string.
+// All source files are committed, so a missing one means a broken
+// checkout — fail the build rather than embed an empty blob that
+// would ship as a silently non-functional wheel (empty tagger, zero
+// territories).
 
 use std::env;
 use std::fs;
@@ -21,36 +21,32 @@ use std::path::PathBuf;
 struct Compress {
     src: &'static str,     // path under rust/
     dst: &'static str,     // filename under OUT_DIR
-    missing: &'static str, // cargo warning if source file is absent
+    missing: &'static str, // error detail if source file is absent
 }
 
 const FILES: &[Compress] = &[
     Compress {
         src: "data/names/person_names.txt",
         dst: "person_names.txt.zst",
-        missing: "rust/data/names/person_names.txt not found — \
-                  compiling empty person-names corpus. Run \
+        missing: "rust/data/names/person_names.txt not found. Run \
                   `make -C contrib/namesdb dump` to regenerate.",
     },
     Compress {
         src: "data/territories/data.jsonl",
         dst: "territories.jsonl.zst",
-        missing: "rust/data/territories/data.jsonl not found — \
-                  compiling empty territories blob. Run \
+        missing: "rust/data/territories/data.jsonl not found. Run \
                   `make build-territories` to regenerate.",
     },
     Compress {
         src: "data/names/symbols.json",
         dst: "symbols.json.zst",
-        missing: "rust/data/names/symbols.json not found — \
-                  compiling empty symbols blob. Run \
+        missing: "rust/data/names/symbols.json not found. Run \
                   `make build-names` to regenerate.",
     },
     Compress {
         src: "data/names/org_types.json",
         dst: "org_types.json.zst",
-        missing: "rust/data/names/org_types.json not found — \
-                  compiling empty org-types blob. Run \
+        missing: "rust/data/names/org_types.json not found. Run \
                   `make build-names` to regenerate.",
     },
 ];
@@ -64,11 +60,7 @@ fn main() {
         let dest_path = out_dir.join(entry.dst);
         println!("cargo:rerun-if-changed={}", entry.src);
 
-        let Ok(bytes) = fs::read(&source_path) else {
-            println!("cargo:warning={}", entry.missing);
-            fs::write(&dest_path, [] as [u8; 0]).expect("write empty placeholder");
-            continue;
-        };
+        let bytes = fs::read(&source_path).unwrap_or_else(|_| panic!("{}", entry.missing));
 
         // Level 19 is the high-ratio tier — slow compression, but this
         // runs at build time only and gives the best wheel size.

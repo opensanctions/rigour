@@ -227,6 +227,26 @@ def test_repr_shape() -> None:
     assert "score=" in r
 
 
+def test_score_weight_setters_accept_ints() -> None:
+    # The stub declares `score: float`; under PEP 484's numeric
+    # tower an int must be assignable, and it reads back as float.
+    a = Alignment(parts("john"), parts("john"))
+    a.score = 1
+    assert isinstance(a.score, float)
+    assert a.score == 1.0
+    a.weight = 2
+    assert isinstance(a.weight, float)
+    assert a.weight == 2.0
+    # Plain float assignment is unchanged.
+    a.score = 0.5
+    assert a.score == 0.5
+    # Non-numeric values still raise.
+    with pytest.raises(TypeError):
+        a.score = "high"  # type: ignore[assignment]
+    with pytest.raises(TypeError):
+        a.weight = None  # type: ignore[assignment]
+
+
 def test_alignment_is_importable_from_public_module() -> None:
     # Productized surface check: both names are reachable from
     # `rigour.names` itself, not just `rigour.names.compare`.
