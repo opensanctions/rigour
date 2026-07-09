@@ -21,18 +21,14 @@
 // lives in `.rodata`.
 
 /// The compressed corpus — produced by `build.rs` from
-/// `rust/data/names/person_names.txt`. Empty if the source file was
-/// missing at build time (build.rs emits a warning in that case).
+/// `rust/data/names/person_names.txt` (build fails if the source
+/// file is missing).
 const COMPRESSED: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/person_names.txt.zst"));
 
-/// Decompress the corpus into a fresh `String`. Returns empty if
-/// `rust/data/names/person_names.txt` was missing at build time.
-/// Caller owns the allocation and is expected to drop it once
-/// per-line parsing is done — do not stash the result in a static.
+/// Decompress the corpus into a fresh `String`. Caller owns the
+/// allocation and is expected to drop it once per-line parsing is
+/// done — do not stash the result in a static.
 pub fn decompressed() -> String {
-    if COMPRESSED.is_empty() {
-        return String::new();
-    }
     let bytes = zstd::decode_all(COMPRESSED).expect("zstd decode person_names.txt.zst");
     String::from_utf8(bytes).expect("person_names.txt is valid UTF-8")
 }
@@ -44,14 +40,6 @@ mod tests {
     #[test]
     fn loads_and_has_expected_shape() {
         let text = decompressed();
-        // If the corpus was committed for this build, sanity-check
-        // the shape. If build.rs fell through to the empty
-        // placeholder (source file absent on a fresh clone), just
-        // skip — this test should not fail a clone-and-build-and-
-        // test flow before namesdb has dumped.
-        if text.is_empty() {
-            return;
-        }
         let first = text.lines().next().expect("at least one line");
         assert!(
             first.contains(" => "),
@@ -62,9 +50,6 @@ mod tests {
     #[test]
     fn id_prefix_distribution_is_sane() {
         let text = decompressed();
-        if text.is_empty() {
-            return;
-        }
         let mut q_count = 0usize;
         let mut x_count = 0usize;
         let mut other = 0usize;

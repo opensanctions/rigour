@@ -19,19 +19,15 @@
 // Python's cached PyString / the tagger's AC automaton.
 
 /// The compressed blob — produced by `build.rs` from
-/// `rust/data/territories/data.jsonl`. Empty if the source file was
-/// missing at build time (build.rs emits a warning).
+/// `rust/data/territories/data.jsonl` (build fails if the source
+/// file is missing).
 const COMPRESSED: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/territories.jsonl.zst"));
 
-/// Decompress the JSONL into a fresh `String`. Returns empty if
-/// `rust/data/territories/data.jsonl` was missing at build time.
-/// Caller owns the allocation — do not stash the result in a static.
-/// PyO3 boundary: returning `String` to Python makes a fresh
-/// `PyString` and drops the Rust side, leaving only Python's copy.
+/// Decompress the JSONL into a fresh `String`. Caller owns the
+/// allocation — do not stash the result in a static. PyO3 boundary:
+/// returning `String` to Python makes a fresh `PyString` and drops
+/// the Rust side, leaving only Python's copy.
 pub fn decompressed() -> String {
-    if COMPRESSED.is_empty() {
-        return String::new();
-    }
     let bytes = zstd::decode_all(COMPRESSED).expect("zstd decode territories.jsonl.zst");
     String::from_utf8(bytes).expect("territories.jsonl is valid UTF-8")
 }

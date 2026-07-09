@@ -63,9 +63,7 @@ const COST_DEFAULT: f64 = 1.0;
 // callers can pass alternatives without recompiling. The downstream
 // budget cap is per-side, so the *gap* between cheap (cost_sep_drop)
 // and expensive (cost_digit) edits is what determines whether a
-// cluster squeaks under the cap or fails it. See
-// `plans/weighted-distance.md` § Magic-number systematisation for the
-// tuning context.
+// cluster squeaks under the cap or fails it.
 
 /// Tunable cost / budget / clustering scalars for [`py_compare_parts`].
 ///
@@ -542,9 +540,8 @@ struct Cluster {
 /// monotone DP walk, so its keys form a non-decreasing path in
 /// `(qp, rp)`-space and can't contain the cross pattern an X-bridge
 /// requires. If the DP ever stops being monotone — or the threshold
-/// drops to admit many more edges per the connectivity-rule
-/// proposal in `plans/weighted-distance.md` — replace the loop with
-/// a part-id DSU.
+/// drops to admit many more edges — replace the loop with a part-id
+/// DSU.
 ///
 /// Parts that no overlap pair clears the threshold for surface as
 /// solo clusters at the end.

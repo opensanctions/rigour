@@ -50,7 +50,6 @@ const SCORE_FLOOR: f64 = 0.3;
 /// Cheap per-part snapshot, built once at entry so the scoring loop
 /// doesn't re-borrow `Py<NamePart>` per iteration.
 struct PartView {
-    origin: usize,
     form_len: usize,
     comparable: String,
     comparable_len: usize,
@@ -60,14 +59,12 @@ struct PartView {
 fn extract_views(py: Python<'_>, parts: &[Py<NamePart>]) -> Vec<PartView> {
     parts
         .iter()
-        .enumerate()
-        .map(|(origin, p)| {
+        .map(|p| {
             let b = p.bind(py).borrow();
             let comparable = b.comparable_str().to_string();
             let comparable_len = comparable.chars().count();
             let form_len = b.form_str().chars().count();
             PartView {
-                origin,
                 form_len,
                 comparable,
                 comparable_len,
@@ -292,13 +289,11 @@ pub fn py_align_person_name_order(
         return (tag_sort_parts(py, left), tag_sort_parts(py, right));
     }
 
-    let left_result: Vec<Py<NamePart>> = left_order
-        .iter()
-        .map(|&i| left[left_views[i].origin].clone_ref(py))
-        .collect();
+    let left_result: Vec<Py<NamePart>> =
+        left_order.iter().map(|&i| left[i].clone_ref(py)).collect();
     let right_result: Vec<Py<NamePart>> = right_order
         .iter()
-        .map(|&i| right[right_views[i].origin].clone_ref(py))
+        .map(|&i| right[i].clone_ref(py))
         .collect();
     (left_result, right_result)
 }
@@ -307,9 +302,8 @@ pub fn py_align_person_name_order(
 mod tests {
     use super::*;
 
-    fn view(origin: usize, form_len: usize, comparable: &str, tag: NamePartTag) -> PartView {
+    fn view(form_len: usize, comparable: &str, tag: NamePartTag) -> PartView {
         PartView {
-            origin,
             form_len,
             comparable: comparable.to_string(),
             comparable_len: comparable.chars().count(),
@@ -335,10 +329,10 @@ mod tests {
 
     #[test]
     fn pack_greedy_improves_anchor_match() {
-        let anchor = view(0, 7, "alsabah", NamePartTag::UNSET);
+        let anchor = view(7, "alsabah", NamePartTag::UNSET);
         let views = vec![
-            view(0, 2, "al", NamePartTag::UNSET),
-            view(1, 5, "sabah", NamePartTag::UNSET),
+            view(2, "al", NamePartTag::UNSET),
+            view(5, "sabah", NamePartTag::UNSET),
         ];
         let packed = pack_short_parts(&anchor, 1, &[0], &views);
         assert_eq!(packed, vec![0, 1]);
@@ -346,10 +340,10 @@ mod tests {
 
     #[test]
     fn pack_respects_tag_gate() {
-        let anchor = view(0, 7, "alsabah", NamePartTag::FAMILY);
+        let anchor = view(7, "alsabah", NamePartTag::FAMILY);
         let views = vec![
-            view(0, 2, "al", NamePartTag::GIVEN),
-            view(1, 5, "sabah", NamePartTag::FAMILY),
+            view(2, "al", NamePartTag::GIVEN),
+            view(5, "sabah", NamePartTag::FAMILY),
         ];
         let packed = pack_short_parts(&anchor, 1, &[0], &views);
         assert_eq!(packed, vec![1]);
@@ -358,12 +352,12 @@ mod tests {
     #[test]
     fn align_reversed_order_pairs_up() {
         let lv = vec![
-            view(0, 4, "john", NamePartTag::UNSET),
-            view(1, 3, "doe", NamePartTag::UNSET),
+            view(4, "john", NamePartTag::UNSET),
+            view(3, "doe", NamePartTag::UNSET),
         ];
         let rv = vec![
-            view(0, 3, "doe", NamePartTag::UNSET),
-            view(1, 4, "john", NamePartTag::UNSET),
+            view(3, "doe", NamePartTag::UNSET),
+            view(4, "john", NamePartTag::UNSET),
         ];
         let (lout, rout, matched) = align_views(&lv, &rv);
         assert!(matched);
@@ -373,8 +367,8 @@ mod tests {
 
     #[test]
     fn align_no_match_signals_fallback() {
-        let lv = vec![view(0, 4, "john", NamePartTag::UNSET)];
-        let rv = vec![view(0, 3, "xyz", NamePartTag::UNSET)];
+        let lv = vec![view(4, "john", NamePartTag::UNSET)];
+        let rv = vec![view(3, "xyz", NamePartTag::UNSET)];
         let (_lout, _rout, matched) = align_views(&lv, &rv);
         assert!(!matched);
     }

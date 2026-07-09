@@ -257,7 +257,7 @@ impl NamePart {
 }
 
 /// Rust-callable version of [`NamePart::tag_sort`]. Shared by the
-/// classmethod and by [`crate::names::alignment`]'s fallback path.
+/// classmethod and by [`crate::names::ordering`]'s fallback path.
 ///
 /// **Stable**: parts with the same tag-order key preserve their
 /// input order. Note that STOP collapses onto UNSET's order key

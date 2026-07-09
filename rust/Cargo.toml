@@ -43,7 +43,7 @@ bitflags = "2"
 # `rigour.text.distance` and `rigour.territories.lookup` consume.
 rapidfuzz = "0.5"
 
-# LRU caches. Currently used for `maybe_ascii`'s per-thread result
+# LRU caches. Currently used for `maybe_ascii`'s process-wide result
 # cache. Tiny crate (~500 LoC, no deps), O(1) get/put.
 lru = "0.18"
 

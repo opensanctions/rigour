@@ -1,10 +1,10 @@
 //! String edit-distance and similarity primitives.
 //!
-//! Exposes plain Levenshtein and Damerau-Levenshtein (each with an
-//! optional early-exit cutoff variant) and Jaro-Winkler similarity.
+//! Exposes plain Levenshtein (with an early-exit cutoff variant),
+//! cutoff Damerau-Levenshtein, and Jaro / Jaro-Winkler similarity.
 //! These back the `raw_*` PyO3 bindings consumed by
-//! `rigour.text.distance`, plus the in-Rust callers in
-//! `names::pick` / `names::ordering`.
+//! `rigour.text.distance`, plus the in-Rust caller in
+//! `names::ordering`.
 //!
 //! Backed by the `rapidfuzz` crate's bit-parallel implementations
 //! (Myers/Hyyrö for short strings, block-wise with Ukkonen band
@@ -16,8 +16,8 @@ use rapidfuzz::distance::{damerau_levenshtein, jaro, jaro_winkler, levenshtein};
 
 /// Unbounded Levenshtein distance: insertions, deletions, and
 /// substitutions each cost 1. Transpositions cost 2 (one insert +
-/// one delete) — use [`damerau_levenshtein`] if transpositions
-/// should count as 1.
+/// one delete) — use [`damerau_levenshtein_cutoff`] if
+/// transpositions should count as 1.
 pub fn levenshtein(a: &str, b: &str) -> usize {
     levenshtein::distance(a.chars(), b.chars())
 }
@@ -32,17 +32,11 @@ pub fn levenshtein_cutoff(a: &str, b: &str, cutoff: usize) -> usize {
     levenshtein::distance_with_args(a.chars(), b.chars(), &args).unwrap_or(cutoff + 1)
 }
 
-/// Unbounded Damerau-Levenshtein distance: like
-/// [`levenshtein`] but transposing two adjacent characters
+/// Damerau-Levenshtein distance with an early-exit cutoff — like
+/// [`levenshtein_cutoff`] but transposing two adjacent characters
 /// counts as 1 edit instead of 2. Use when near-duplicate typos
 /// with swapped letters ("Barak Obama" vs "Barack Obama") should
 /// score as closer matches than plain Levenshtein reports.
-pub fn damerau_levenshtein(a: &str, b: &str) -> usize {
-    damerau_levenshtein::distance(a.chars(), b.chars())
-}
-
-/// Damerau-Levenshtein distance with an early-exit cutoff — same
-/// `score_cutoff` semantics as [`levenshtein_cutoff`].
 pub fn damerau_levenshtein_cutoff(a: &str, b: &str, cutoff: usize) -> usize {
     let args = damerau_levenshtein::Args::default().score_cutoff(cutoff);
     damerau_levenshtein::distance_with_args(a.chars(), b.chars(), &args).unwrap_or(cutoff + 1)
@@ -119,36 +113,34 @@ mod tests {
         assert_eq!(levenshtein_cutoff("hello", "xxxxx", 1), 2);
     }
 
-    // --- damerau_levenshtein ---
+    // --- damerau_levenshtein_cutoff ---
 
     #[test]
     fn damerau_counts_transposition_as_one() {
         // The distinguishing case: adjacent-char swap is 1 edit
         // under Damerau, 2 under plain Levenshtein.
-        assert_eq!(damerau_levenshtein("bar", "bra"), 1);
-        assert_eq!(damerau_levenshtein("abcd", "abdc"), 1);
+        assert_eq!(damerau_levenshtein_cutoff("bar", "bra", 5), 1);
+        assert_eq!(damerau_levenshtein_cutoff("abcd", "abdc", 5), 1);
         // Non-adjacent swaps still cost 2.
-        assert_eq!(damerau_levenshtein("abcd", "dbca"), 2);
+        assert_eq!(damerau_levenshtein_cutoff("abcd", "dbca", 5), 2);
     }
 
     #[test]
     fn damerau_agrees_with_levenshtein_on_non_transpositions() {
-        assert_eq!(damerau_levenshtein("foo", "foo"), 0);
-        assert_eq!(damerau_levenshtein("foo", "bar"), 3);
-        assert_eq!(damerau_levenshtein("café", "cafe"), 1);
-        assert_eq!(damerau_levenshtein("Путин", "Путен"), 1);
+        assert_eq!(damerau_levenshtein_cutoff("foo", "foo", 5), 0);
+        assert_eq!(damerau_levenshtein_cutoff("foo", "bar", 5), 3);
+        assert_eq!(damerau_levenshtein_cutoff("café", "cafe", 5), 1);
+        assert_eq!(damerau_levenshtein_cutoff("Путин", "Путен", 5), 1);
     }
 
     #[test]
     fn damerau_empty() {
-        assert_eq!(damerau_levenshtein("", ""), 0);
-        assert_eq!(damerau_levenshtein("abc", ""), 3);
+        assert_eq!(damerau_levenshtein_cutoff("", "", 5), 0);
+        assert_eq!(damerau_levenshtein_cutoff("abc", "", 5), 3);
     }
 
     #[test]
-    fn damerau_cutoff_behaves_like_levenshtein_cutoff() {
-        assert_eq!(damerau_levenshtein_cutoff("foo", "foo", 5), 0);
-        assert_eq!(damerau_levenshtein_cutoff("bar", "bra", 2), 1);
+    fn damerau_cutoff_exceeded_returns_cutoff_plus_one() {
         // True distance > cutoff → cutoff + 1.
         assert_eq!(damerau_levenshtein_cutoff("foo", "xxxxxxx", 2), 3);
     }

@@ -1,15 +1,11 @@
-// Port of `rigour.names.tokenize.tokenize_name` — splits a name string
-// into tokens using Unicode General Category as the separator rule.
+// `tokenize_name` — splits a name string into tokens using Unicode
+// General Category as the separator rule. Exposed to Python as
+// `rigour.names.tokenize.tokenize_name`. Each char's category is
+// consulted directly via ICU's `CodePointMapData` — compiled_data is
+// in-memory, look-ups are O(1), and a single pass over the string is
+// fast enough that a per-codepoint cache would only add overhead.
 //
-// Parity target: `rigour/names/tokenize.py`. The Python side keeps a
-// memoised `str.translate()` table (`_TokenizerLookup`) because per-
-// codepoint `unicodedata.category()` lookups over FFI-ish paths are
-// expensive. In Rust we just consult ICU's `CodePointMapData` directly
-// on each char — compiled_data is in-memory, look-ups are O(1), and
-// a single pass over the string is fast enough that a per-codepoint
-// cache would only add overhead.
-//
-// The mapping is the same as Python's `TOKEN_SEP_CATEGORIES` dict:
+// Category mapping:
 //
 //   Whitespace (token separator): Cc, Zs, Zl, Zp, Pc, Pd, Ps, Pe,
 //                                 Pi, Pf, Po, Sm, So
@@ -20,8 +16,7 @@
 //     KEEP_CHARS (prolonged-sound marks, ideographic iteration mark).
 //   * SKIP_CHARS (dot + apostrophe/prime/accent variants) are always
 //     deleted, even though some of those codepoints have a category
-//     that would otherwise map to whitespace. Matches Python's
-//     pre-seeded None entries in `_TokenizerLookup`.
+//     that would otherwise map to whitespace.
 
 use icu::properties::{CodePointMapData, props::GeneralCategory};
 

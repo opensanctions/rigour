@@ -56,9 +56,6 @@ pub(crate) struct OrgTypeSpec {
 const ORG_TYPES_ZST: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/org_types.json.zst"));
 
 pub(crate) static ORG_TYPE_SPECS: LazyLock<Vec<OrgTypeSpec>> = LazyLock::new(|| {
-    if ORG_TYPES_ZST.is_empty() {
-        return Vec::new();
-    }
     let bytes = zstd::decode_all(ORG_TYPES_ZST).expect("zstd decode org_types.json.zst");
     serde_json::from_slice(&bytes).expect("org_types.json parses")
 });
@@ -126,8 +123,6 @@ fn norm_fn(flags: Normalize, cleanup: Cleanup) -> impl Fn(&str) -> Option<String
 fn build_compare(flags: Normalize, cleanup: Cleanup) -> Replacer {
     let norm = norm_fn(flags, cleanup);
     let mut mapping: HashMap<String, String> = HashMap::new();
-    let mut seen_targets: HashMap<String, String> = HashMap::new();
-    let mut clashes: HashSet<String> = HashSet::new();
 
     for spec in ORG_TYPE_SPECS.iter() {
         let display_norm = spec.display.as_deref().and_then(&norm);
@@ -142,17 +137,12 @@ fn build_compare(flags: Normalize, cleanup: Cleanup) -> Replacer {
             continue;
         };
 
+        // Clashing aliases stay in the mapping, last spec wins —
+        // unlike Display, which drops ambiguous aliases entirely.
         for alias in &spec.aliases {
             let Some(alias_norm) = norm(alias) else {
                 continue;
             };
-            if let Some(prev) = seen_targets.get(&alias_norm) {
-                if prev != &compare_norm {
-                    clashes.insert(alias_norm.clone());
-                }
-            } else {
-                seen_targets.insert(alias_norm.clone(), compare_norm.clone());
-            }
             mapping.insert(alias_norm, compare_norm.clone());
         }
 
@@ -162,12 +152,6 @@ fn build_compare(flags: Normalize, cleanup: Cleanup) -> Replacer {
                 .or_insert_with(|| compare_norm.clone());
         }
     }
-
-    // Python pops clashes from the mapping (as opposed to warn-and-keep).
-    // Actually the Python `_compare_replacer` only warns; `_display_replacer`
-    // pops. For Compare we preserve Python's warn-and-keep by NOT popping.
-    // The `clashes` tracking is kept for future diagnostics only.
-    let _ = clashes; // intentional — compare doesn't pop, we still track.
 
     Replacer {
         needles: Needles::build(mapping),

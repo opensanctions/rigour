@@ -54,7 +54,7 @@ jobs:
       - name: Check generated data is up to date
         run: |
           make build
-          git diff --exit-code -- rust/data rust/src/generated
+          git diff --exit-code -- rust/data
 
       - name: pytest
         run: make test

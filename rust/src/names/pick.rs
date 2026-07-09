@@ -85,7 +85,7 @@ pub fn pick_name(names: &[&str]) -> Option<String> {
     // Memoise `maybe_ascii` per form. Cache scope is per-call —
     // inside one `pick_name` the same form appears many times when
     // inputs repeat (OpenSanctions entities typically have 2–20
-    // alias variants with case / script duplicates). The per-thread
+    // alias variants with case / script duplicates). The process-wide
     // cache inside `text::translit::maybe_ascii` handles cross-call
     // repetition.
     let mut norm_cache: HashMap<String, Option<String>> = HashMap::new();
@@ -150,7 +150,7 @@ pub fn pick_name(names: &[&str]) -> Option<String> {
     }
 
     // Rank forms by weighted Levenshtein centroid.
-    let ranked_forms = levenshtein_pick(&weight_keys, &weight_idx, &weights);
+    let ranked_forms = levenshtein_pick(&weight_keys, &weights);
 
     for form in ranked_forms {
         let Some(candidates) = form_candidates.get(&form) else {
@@ -355,95 +355,60 @@ fn add_weight(
     }
 }
 
-/// Rank unique entries by weighted Levenshtein centroid. Used only
-/// for form ranking; `pick_name`'s surface selection uses
+/// Rank entries by weighted Levenshtein centroid. Used only for
+/// form ranking; `pick_name`'s surface selection uses
 /// `best_case_candidate` instead.
 ///
-/// Duplicates in `entries` aggregate into one bucket per unique
-/// string. Deterministic tiebreak: first-appearance order (stable
-/// sort on the insertion-ordered key array). We deliberately do
-/// NOT reproduce Python's per-position `combinations(entries, 2)`
-/// accumulation order — that's a float-rounding accident, not a
-/// design choice.
-fn levenshtein_pick(
-    entries: &[String],
-    weight_idx: &HashMap<String, usize>,
-    weights: &[f64],
-) -> Vec<String> {
+/// `entries` and `weights` are the parallel arrays built by
+/// `add_weight`, so entries are unique and `weights[i]` is the
+/// accumulated weight of `entries[i]`. Deterministic tiebreak:
+/// first-appearance order (stable sort on the insertion-ordered key
+/// array). We deliberately do NOT reproduce Python's per-position
+/// `combinations(entries, 2)` accumulation order — that's a
+/// float-rounding accident, not a design choice.
+fn levenshtein_pick(entries: &[String], weights: &[f64]) -> Vec<String> {
     if entries.len() < 2 {
         return entries.to_vec();
-    }
-
-    let mut keys: Vec<String> = Vec::new();
-    let mut idx: HashMap<String, usize> = HashMap::new();
-    let mut counts: Vec<usize> = Vec::new();
-    for e in entries {
-        if let Some(&i) = idx.get(e) {
-            counts[i] += 1;
-        } else {
-            let i = keys.len();
-            idx.insert(e.clone(), i);
-            keys.push(e.clone());
-            counts.push(1);
-        }
-    }
-
-    let n_unique = keys.len();
-    if n_unique == 1 {
-        return keys;
     }
 
     struct Prepped {
         chars: Vec<char>,
         len: usize,
         weight: f64,
-        count: usize,
     }
-    let prepped: Vec<Prepped> = keys
+    let prepped: Vec<Prepped> = entries
         .iter()
-        .zip(counts.iter().copied())
-        .map(|(s, count)| {
+        .zip(weights.iter().copied())
+        .map(|(s, weight)| {
             let chars: Vec<char> = s.chars().collect();
             let len = chars.len();
-            let weight = weight_idx
-                .get(s)
-                .and_then(|&i| weights.get(i).copied())
-                .unwrap_or(1.0);
-            Prepped {
-                chars,
-                len,
-                weight,
-                count,
-            }
+            Prepped { chars, len, weight }
         })
         .collect();
 
-    // For entry X with count c_X and Y with c_Y, Python's
-    // `combinations(entries, 2)` yields C(c_X, 2) self-pairs for X
-    // (each contributing 2·w_X since both sides land in edits[X])
-    // and c_X·c_Y cross-pairs (X, Y) contributing sim·w_X to X and
-    // sim·w_Y to Y. Aggregate directly — O(M²) Levenshtein calls.
-    let mut scores: Vec<f64> = vec![0.0; n_unique];
-    for i in 0..n_unique {
+    // Each pair (X, Y) contributes sim·w_X to X's score and sim·w_Y
+    // to Y's — O(M²) Levenshtein calls.
+    let n = prepped.len();
+    let mut scores: Vec<f64> = vec![0.0; n];
+    for i in 0..n {
         let left = &prepped[i];
-        let self_pairs = left.count.saturating_sub(1);
-        scores[i] += (left.count * self_pairs) as f64 * left.weight;
-
         let scorer = levenshtein::BatchComparator::new(left.chars.iter().copied());
-        for j in (i + 1)..n_unique {
+        for j in (i + 1)..n {
             let right = &prepped[j];
             let distance = scorer.distance(right.chars.iter().copied());
             let base = left.len.max(right.len).max(1);
             let sim = 1.0 - (distance as f64 / base as f64);
-            let pair_count = (left.count * right.count) as f64;
-            scores[i] += pair_count * sim * left.weight;
-            scores[j] += pair_count * sim * right.weight;
+            scores[i] += sim * left.weight;
+            scores[j] += sim * right.weight;
         }
     }
 
-    let mut indexed: Vec<(usize, f64)> = (0..n_unique).map(|i| (i, scores[i])).collect();
+    let mut indexed: Vec<(usize, f64)> = (0..n).map(|i| (i, scores[i])).collect();
     indexed.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal));
-    indexed.into_iter().map(|(i, _)| keys[i].clone()).collect()
+    indexed
+        .into_iter()
+        .map(|(i, _)| entries[i].clone())
+        .collect()
 }
 
 #[cfg(test)]

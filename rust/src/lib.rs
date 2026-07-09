@@ -72,12 +72,7 @@ fn py_tokenize_name(text: &str, token_min_length: usize) -> Vec<String> {
 #[pyfunction]
 #[pyo3(name = "_normalize")]
 fn py_normalize(text: &str, flags: u16, cleanup: u8) -> Option<String> {
-    let flags = text::normalize::Normalize::from_bits_truncate(flags);
-    let cleanup = match cleanup {
-        1 => text::normalize::Cleanup::Strong,
-        2 => text::normalize::Cleanup::Slug,
-        _ => text::normalize::Cleanup::Noop,
-    };
+    let (flags, cleanup) = _decode_flags(flags, cleanup);
     text::normalize::normalize(text, flags, cleanup)
 }
 

@@ -263,9 +263,8 @@ fn build_person_tagger(flags: Normalize) -> Tagger {
     // distinct ids stay distinct even when prefixes collide with
     // integer values of other categories).
     //
-    // Python parity: skip records with <2 distinct normalised aliases —
-    // a mapping of one form to itself adds no matching power. Matches
-    // tagging.py:234.
+    // Skip records with <2 distinct normalised aliases — a mapping
+    // of one form to itself adds no matching power.
     //
     // `corpus` is scoped to this loop — the ~8.5 MB decompressed buffer
     // drops as soon as the AC automaton below is assembled.
@@ -323,7 +322,8 @@ pub fn get_tagger(kind: TaggerKind, flags: Normalize) -> Arc<Tagger> {
 mod tests {
     use super::*;
 
-    // Matches the default pinned on the Python wrapper.
+    // Test-local flag combination; production uses
+    // `analyze::TAGGER_FLAGS` (CASEFOLD | NAME).
     const FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::SQUASH_SPACES);
 
     #[test]

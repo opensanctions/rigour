@@ -1,5 +1,6 @@
 from typing import Dict, List, Optional
 
+from rigour._core import pick_case as _pick_case
 from rigour._core import pick_name as pick_name
 from rigour._core import reduce_names as reduce_names
 from rigour.langs import LangStr, PREFERRED_LANG, PREFERRED_LANGS
@@ -152,8 +153,6 @@ def pick_case(names: List[str]) -> str:
     Returns:
         str: The best name for display.
     """
-    from rigour._core import pick_case as _pick_case
-
     result = _pick_case(names)
     if result is None:
         raise ValueError("Cannot pick a name from an empty list.")

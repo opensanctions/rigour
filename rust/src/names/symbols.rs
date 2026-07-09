@@ -26,15 +26,6 @@ pub struct NameSymbols {
 }
 
 static DATA: LazyLock<NameSymbols> = LazyLock::new(|| {
-    if SYMBOLS_ZST.is_empty() {
-        return NameSymbols {
-            org_symbols: HashMap::new(),
-            org_domains: HashMap::new(),
-            person_symbols: HashMap::new(),
-            person_nick: HashMap::new(),
-            person_name_parts: HashMap::new(),
-        };
-    }
     let bytes = zstd::decode_all(SYMBOLS_ZST).expect("zstd decode symbols.json.zst");
     serde_json::from_slice(&bytes).expect("symbols.json parses")
 });

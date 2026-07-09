@@ -19,7 +19,7 @@ between versions.
 | Unicode scripts (`codepoint_script`, `text_scripts`, `can_latinize`) | `rigour.text.scripts` | `rust/src/text/scripts.rs` |
 | Transliteration (`should_ascii`, `maybe_ascii` — narrow, 6 admitted scripts) | `rigour.text.translit` | `rust/src/text/translit.rs` |
 | Flag-based normalisation (`normalize`, `Normalize`, `Cleanup`) | `rigour.text.normalize` | `rust/src/text/normalize.rs` |
-| Tokenisation (`tokenize_name` — Rust version) | — (internal; Python copy still lives at `rigour.names.tokenize.tokenize_name`) | `rust/src/text/tokenize.rs` |
+| Tokenisation (`tokenize_name`) | `rigour.names.tokenize` | `rust/src/text/tokenize.rs` |
 | Numeric-string parsing (`string_number`) | `rigour._core.string_number` (no Python wrapper) | `rust/src/text/numbers.rs` |
 | Org-type replacement (`replace_org_types_compare` / `_display`, `remove_org_types`, `extract_org_types`) | `rigour.names.org_types` | `rust/src/names/org_types.rs` + `matcher.rs` |
 | AC name tagger | — (internal; called from `analyze_names`) | `rust/src/names/tagger.rs` |

@@ -128,7 +128,7 @@ pub fn analyze_names(
         let working = if rewrite && matches!(type_tag, NameTypeTag::PER) {
             remove_person_prefixes(&raw)
         } else {
-            raw.clone()
+            raw
         };
         let mut form = casefold(&working);
         if rewrite && matches!(type_tag, NameTypeTag::ORG | NameTypeTag::ENT) {
