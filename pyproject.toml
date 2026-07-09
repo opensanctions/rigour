@@ -60,7 +60,9 @@ docs = [
 ]
 
 [tool.maturin]
-features = ["pyo3/extension-module", "python"]
+# pyo3/generate-import-lib lets the Windows wheel job link without a
+# real Python install (PyO3 generates a stub import library).
+features = ["pyo3/extension-module", "pyo3/generate-import-lib", "python"]
 module-name = "rigour._core"
 manifest-path = "rust/Cargo.toml"
 # `rigour/` is the Python package directory, sitting at the repo root. Maturin

@@ -44,9 +44,17 @@ jobs:
         working-directory: rust
         run: cargo clippy --all-targets -- -D warnings
 
+      - name: cargo clippy (python feature)
+        working-directory: rust
+        run: cargo clippy --all-targets --features python -- -D warnings
+
       - name: cargo test (pure-Rust, no python feature)
         working-directory: rust
         run: cargo test
+
+      - name: cargo test (python feature)
+        working-directory: rust
+        run: cargo test --features python --lib
 
       - name: Install package (builds Rust extension via maturin)
         run: pip install -e ".[dev]"

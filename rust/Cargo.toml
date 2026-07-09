@@ -17,9 +17,11 @@ crate-type = ["cdylib", "rlib"]
 python = ["dep:pyo3"]
 
 [dependencies]
-# generate-import-lib avoids needing a real Python install on the Windows CI
-# runner at link time — PyO3 generates a stub import library instead.
-pyo3 = { version = "0.29", features = ["extension-module", "generate-import-lib"], optional = true }
+# Wheel-only pyo3 features (extension-module, generate-import-lib) are
+# deliberately NOT set here — they live in `[tool.maturin].features` in
+# pyproject.toml. Keeping them out of the crate lets `cargo test
+# --features python` link a standalone test binary against libpython.
+pyo3 = { version = "0.29", optional = true }
 
 # Phonetic algorithms (metaphone, soundex). Port of Apache commons-codec, pure
 # Rust. The upstream jellyfish Rust crate can't be used directly because it
