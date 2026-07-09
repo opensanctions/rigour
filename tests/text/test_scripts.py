@@ -1,6 +1,6 @@
 from rigour.text.scripts import codepoint_script, text_scripts, common_scripts
 from rigour.text.scripts import is_latin
-from rigour.text.scripts import can_latinize, can_latinize_cp
+from rigour.text.scripts import can_latinize
 from rigour.text.scripts import is_modern_alphabet, is_dense_script
 
 
@@ -29,16 +29,6 @@ def test_text_scripts_mixed():
     assert text_scripts("123 !@#") == set()  # Common-only input → empty set
     assert text_scripts("Hello") == {"Latin"}
     assert text_scripts("你好") == {"Han"}
-
-
-def test_can_latinize_cp():
-    assert can_latinize_cp(ord("A")) is True
-    assert can_latinize_cp(ord("а")) is True  # Cyrillic
-    assert can_latinize_cp(ord("中")) is False
-    # Non-alphanumeric or no real script → None
-    assert can_latinize_cp(ord(" ")) is None
-    assert can_latinize_cp(ord("0")) is None  # digit — Common script
-    assert can_latinize_cp(ord("!")) is None
 
 
 def test_is_latin():

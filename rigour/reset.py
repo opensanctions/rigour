@@ -5,7 +5,7 @@ from rigour.text.phonetics import soundex, metaphone
 from rigour.territories.territory import get_index
 from rigour.territories.lookup import lookup_territory
 from rigour.territories.lookup import _get_identifier_map, _get_territory_names
-from rigour.text.scripts import can_latinize_cp
+from rigour.text.scripts import codepoint_script
 from rigour.names.tokenize import normalize_name
 from rigour.names.prefix import (
     _person_prefix_regex,
@@ -29,7 +29,7 @@ def reset_caches() -> None:
     jaro_winkler.cache_clear()
     soundex.cache_clear()
     metaphone.cache_clear()
-    can_latinize_cp.cache_clear()
+    codepoint_script.cache_clear()
     _load_formats.cache_clear()
     _load_template.cache_clear()
     _address_replacer.cache_clear()

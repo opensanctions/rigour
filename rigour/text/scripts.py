@@ -3,14 +3,10 @@ from typing import Optional
 
 from rigour._core import codepoint_script as _codepoint_script
 from rigour._core import common_scripts as _common_scripts
+from rigour._core import should_ascii as _should_ascii
 from rigour._core import text_scripts as _text_scripts
 from rigour.util import MEMO_MEDIUM
 
-
-#: Scripts whose romanisation is well-defined enough that
-#: rigour will automatically transliterate them to ASCII via
-#: :func:`rigour.text.translit.maybe_ascii`.
-LATINIZE_SCRIPTS = {"Hangul", "Cyrillic", "Greek", "Armenian", "Latin", "Georgian"}
 
 #: Letter-based writing systems with explicit vowels — these
 #: transliterate reliably to Latin without language hints.
@@ -99,38 +95,14 @@ def common_scripts(a: str, b: str) -> set[str]:
     return _common_scripts(a, b)
 
 
-@lru_cache(maxsize=MEMO_MEDIUM)
-def can_latinize_cp(cp: int) -> Optional[bool]:
-    """Check whether a single codepoint can be latinized.
-
-    Three-valued: distinguishing-script-bearing codepoints get a
-    True/False; others (digits, punctuation, combining marks)
-    return `None` because the question doesn't apply to them.
-
-    Args:
-        cp: Codepoint as an integer.
-
-    Returns:
-        `True` if the codepoint's script is in
-        :data:`LATINIZE_SCRIPTS`, `False` if it has a real script
-        outside that set, `None` for non-alphanumeric or
-        Common/Inherited/Unknown codepoints.
-    """
-    char = chr(cp)
-    if not char.isalnum():
-        return None
-    script = codepoint_script(cp)
-    if script is None or script in ("Common", "Inherited"):
-        return None
-    return script in LATINIZE_SCRIPTS
-
-
 def can_latinize(word: str) -> bool:
     """Check whether every script in a word is latinizable.
 
-    Equivalent to `text_scripts(word) <= LATINIZE_SCRIPTS`. When
-    True, :func:`rigour.text.translit.maybe_ascii` will produce
-    an ASCII output; when False, it returns the input unchanged.
+    Alias for `should_ascii` in [rigour.text.translit][] — the two
+    call the same Rust predicate, which admits Latin, Cyrillic,
+    Greek, Armenian, Georgian, and Hangul. When True, `maybe_ascii`
+    will produce an ASCII output; when False, it returns the input
+    unchanged.
     Characters with no distinguishing script (digits, punctuation,
     spaces, combining marks) are ignored. Empty input and
     pure-Common input (`"123"`) return True vacuously.
@@ -139,10 +111,10 @@ def can_latinize(word: str) -> bool:
         word: A string.
 
     Returns:
-        True iff every distinguishing script is in
-        :data:`LATINIZE_SCRIPTS`.
+        True iff every distinguishing script is admitted for
+        transliteration.
     """
-    return text_scripts(word) <= LATINIZE_SCRIPTS
+    return _should_ascii(word)
 
 
 def is_modern_alphabet(word: str) -> bool:

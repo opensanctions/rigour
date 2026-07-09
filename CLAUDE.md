@@ -16,8 +16,8 @@ between versions.
 | Area | Python entry point | Rust module |
 |---|---|---|
 | Phonetics (`metaphone`, `soundex`) | `rigour.text.phonetics` | `rust/src/text/phonetics.rs` |
-| Unicode scripts (`codepoint_script`, `text_scripts`, `can_latinize`) | `rigour.text.scripts` | `rust/src/text/scripts.rs` |
-| Transliteration (`should_ascii`, `maybe_ascii` — narrow, 6 admitted scripts) | `rigour.text.translit` | `rust/src/text/translit.rs` |
+| Unicode scripts (`codepoint_script`, `text_scripts`) | `rigour.text.scripts` | `rust/src/text/scripts.rs` |
+| Transliteration (`should_ascii`, `maybe_ascii`, the `LATINIZE_SCRIPTS` policy; `can_latinize` aliases `should_ascii` — narrow, 6 admitted scripts) | `rigour.text.translit` | `rust/src/text/translit.rs` |
 | Flag-based normalisation (`normalize`, `Normalize`, `Cleanup`) | `rigour.text.normalize` | `rust/src/text/normalize.rs` |
 | Tokenisation (`tokenize_name`) | `rigour.names.tokenize` | `rust/src/text/tokenize.rs` |
 | Numeric-string parsing (`string_number`) | `rigour._core.string_number` (no Python wrapper) | `rust/src/text/numbers.rs` |

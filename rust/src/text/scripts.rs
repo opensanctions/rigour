@@ -10,7 +10,7 @@
 //   Iterates chars, keeps only those with General_Category in L* (letter) or
 //   N* (number) groups, excludes Common/Inherited/Unknown from the result.
 //   Foundational for the script-predicate family in rigour.text.scripts
-//   (is_latin, is_modern_alphabet, can_latinize, is_dense_script).
+//   (is_latin, is_modern_alphabet, is_dense_script).
 
 use icu::properties::{
     CodePointMapData,

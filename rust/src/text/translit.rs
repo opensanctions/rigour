@@ -1,9 +1,8 @@
 // Rigour's public transliteration surface: `should_ascii` +
 // `maybe_ascii`. Deliberately narrow — covers only the 6 scripts
-// `rigour.text.scripts.LATINIZE_SCRIPTS` admits (Latin, Cyrillic,
-// Greek, Armenian, Georgian, Hangul). Anything outside that set
-// passes through unchanged (or becomes empty, depending on the
-// `drop` flag).
+// `LATINIZE_SCRIPTS` admits (Latin, Cyrillic, Greek, Armenian,
+// Georgian, Hangul). Anything outside that set passes through
+// unchanged (or becomes empty, depending on the `drop` flag).
 //
 // For broader-script lossy romanisation (Han, Arabic, Thai,
 // Devanagari, etc.) callers use `normality.ascii_text` /
@@ -23,8 +22,9 @@ use std::sync::{LazyLock, Mutex};
 use crate::constants::MEMO_LARGE;
 use crate::text::scripts::text_scripts;
 
-// Script long names admitted by `should_ascii`. Mirrors
-// `rigour.text.scripts.LATINIZE_SCRIPTS` (`rigour/text/scripts.py:10`).
+// Script long names admitted by `should_ascii`. Single source of
+// truth for the admission policy — the Python side has no mirror;
+// `rigour.text.scripts.can_latinize` forwards to `should_ascii`.
 // Latin is trivially admitted (identity transliterator, covered by
 // the ASCII fast-path); the other five each have an ICU4X
 // transliterator below.
