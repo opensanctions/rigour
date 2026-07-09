@@ -18,6 +18,7 @@ use lru::LruCache;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::num::NonZeroUsize;
+use std::sync::{LazyLock, Mutex};
 
 use crate::constants::MEMO_LARGE;
 use crate::text::scripts::text_scripts;
@@ -61,6 +62,10 @@ fn locale_for_script(script: &str) -> Option<&'static str> {
         .map(|(_, loc)| *loc)
 }
 
+// Per-thread by necessity, not choice: `Transliterator` embeds
+// `Box<dyn CustomTransliterator>` without a `Send` bound, so it can't
+// live in a process-global static. Six constructions per thread is an
+// acceptable price; the result memo below is global.
 thread_local! {
     static TRANSLITERATOR_CACHE: RefCell<HashMap<&'static str, Option<Transliterator>>> =
         RefCell::new(HashMap::new());
@@ -220,14 +225,15 @@ pub fn should_ascii(text: &str) -> bool {
     true
 }
 
-// LRU of `maybe_ascii` results. Keyed on `(drop, text)` so the two
-// drop modes don't poison each other's cache lines — for a given
-// input they produce different outputs.
-thread_local! {
-    static MAYBE_ASCII_CACHE: RefCell<LruCache<(bool, String), String>> = RefCell::new(
-        LruCache::new(NonZeroUsize::new(MEMO_LARGE).unwrap())
-    );
-}
+// Process-global LRU of `maybe_ascii` results, probed before any ICU
+// work. `None` records the not-admitted verdict, so repeated Han /
+// Arabic / etc. inputs skip the script scan too; the `drop` flag is
+// applied at return time, letting both drop modes share one entry
+// (past the admission check the pipeline output doesn't depend on
+// `drop`). Guarded by a Mutex: `py_maybe_ascii` holds the GIL, so
+// stock CPython never contends on it.
+static MAYBE_ASCII_CACHE: LazyLock<Mutex<LruCache<String, Option<String>>>> =
+    LazyLock::new(|| Mutex::new(LruCache::new(NonZeroUsize::new(MEMO_LARGE).unwrap())));
 
 /// If every distinguishing script in `text` is in
 /// `LATINIZE_SCRIPTS`, transliterate to ASCII via a layered pipeline:
@@ -258,21 +264,27 @@ pub fn maybe_ascii(text: &str, drop: bool) -> String {
     if text.is_ascii() {
         return text.to_string();
     }
-    if !should_ascii(text) {
+    if let Some(cached) = MAYBE_ASCII_CACHE.lock().unwrap().get(text).cloned() {
+        return match cached {
+            Some(result) => result,
+            None if drop => String::new(),
+            None => text.to_string(),
+        };
+    }
+    let scripts = text_scripts(text);
+    if scripts.iter().any(|s| !LATINIZE_SCRIPTS.contains(s)) {
+        MAYBE_ASCII_CACHE
+            .lock()
+            .unwrap()
+            .put(text.to_string(), None);
         return if drop {
             String::new()
         } else {
             text.to_string()
         };
     }
-    let key_text = text.to_string();
-    if let Some(cached) =
-        MAYBE_ASCII_CACHE.with(|c| c.borrow_mut().get(&(drop, key_text.clone())).cloned())
-    {
-        return cached;
-    }
     let mut result = text.to_string();
-    for script in text_scripts(text) {
+    for script in scripts {
         if script == "Latin" {
             continue;
         }
@@ -287,9 +299,10 @@ pub fn maybe_ascii(text: &str, drop: bool) -> String {
     result = nfkd_strip_marks(&result);
     result = transliterate_with(LATIN_ASCII_LOCALE, result);
     result = ascii_fallback(&result);
-    MAYBE_ASCII_CACHE.with(|c| {
-        c.borrow_mut().put((drop, key_text), result.clone());
-    });
+    MAYBE_ASCII_CACHE
+        .lock()
+        .unwrap()
+        .put(text.to_string(), Some(result.clone()));
     result
 }
 
@@ -464,9 +477,10 @@ mod tests {
     }
 
     #[test]
-    fn maybe_ascii_drop_variants_cached_separately() {
-        // drop=true and drop=false for the same non-Latinizable
-        // input produce different outputs; cache must not alias.
+    fn maybe_ascii_drop_variants_share_cache_entry() {
+        // Both drop modes are served from one cached not-admitted
+        // verdict; the flag is applied at return time and must not
+        // leak the other mode's output.
         assert_eq!(maybe_ascii("中国", false), "中国");
         assert_eq!(maybe_ascii("中国", true), "");
         // Call again to exercise cached code paths.
