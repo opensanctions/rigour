@@ -3,6 +3,8 @@ full_name: Socialist Federal Republic of Yugoslavia
 region: Europe
 subregion: Eastern Europe
 alpha3: yug
+other_codes:
+  - yu
 qid: Q83286
 other_qids:
   - Q36704

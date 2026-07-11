@@ -4,7 +4,7 @@ region: Americas
 subregion: Central America
 alpha3: cpt
 qid: Q161258
-parent: pf
+parent: fr
 is_country: false
 is_ftm: true
 is_jurisdiction: false
