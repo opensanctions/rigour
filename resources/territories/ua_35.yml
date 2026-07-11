@@ -1,0 +1,19 @@
+name: Kirovohrad Oblast
+full_name: Kirovohrad Oblast (Ukraine)
+qid: Q180981
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Кіровоградська область
+  - Кировоградская область
+names_weak:
+  - Kirovohrad # Kírovogradsʹka oblastʹ
+  - Kirovograd # Kirovogradskaâ oblastʹ
+  - Kirovograd Oblast
+  - Kropyvnytskyi
+  - Kirovohrad region
+langs:
+  - ukr
+  - rus

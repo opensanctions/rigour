@@ -1,0 +1,17 @@
+name: Bavaria
+full_name: Bavaria (Germany)
+qid: Q980
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Bayern
+  - Freistaat Bayern
+names_weak:
+  - München
+  - Munich
+  - Baviera
+  - Bavière
+langs:
+  - deu

@@ -1,0 +1,12 @@
+name: Mato Grosso
+full_name: Mato Grosso (Brazil)
+qid: Q42824
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado de Mato Grosso
+names_weak: []
+langs:
+  - por

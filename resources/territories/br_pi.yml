@@ -1,0 +1,13 @@
+name: Piauí
+full_name: Piauí (Brazil)
+qid: Q42722
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Piaui
+  - Estado do Piauí
+names_weak: []
+langs:
+  - por

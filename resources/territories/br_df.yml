@@ -1,0 +1,15 @@
+name: Federal District
+full_name: Federal District (Brazil)
+qid: Q119158
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Distrito Federal do Brasil
+names_weak:
+  - Distrito Federal
+  - Brasília
+  - Brasilia
+langs:
+  - por

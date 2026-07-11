@@ -5,6 +5,8 @@ subregion: Southern Europe
 in_sentence: the Vatican
 alpha3: vat
 qid: Q237
+other_qids:
+  - Q159583
 is_country: true
 is_ftm: true
 is_jurisdiction: true

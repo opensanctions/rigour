@@ -1,0 +1,14 @@
+name: New South Wales
+full_name: New South Wales (Australia)
+qid: Q3224
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: au
+names_strong:
+  - NSW
+  - State of New South Wales
+names_weak:
+  - Sydney
+langs:
+  - eng

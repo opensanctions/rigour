@@ -1,0 +1,19 @@
+name: Lviv Oblast
+full_name: Lviv Oblast (Ukraine)
+qid: Q164193
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Львівська область
+  - Львовская область
+names_weak:
+  - Lviv # Lʹvívsʹka oblastʹ
+  - Lvov # Lʹvovskaâ oblastʹ
+  - Lvov Oblast
+  - Lviv region
+  - Lvivska oblast
+langs:
+  - ukr
+  - rus

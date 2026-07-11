@@ -1,0 +1,20 @@
+name: Zakarpattia Oblast
+full_name: Zakarpattia Oblast (Ukraine)
+qid: Q170213
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Закарпатська область
+  - Закарпатская область
+names_weak:
+  - Zakarpattia    # Zakarpatsʹka oblastʹ
+  - Transcarpathia # Zakarpatskaâ oblastʹ
+  - Zakarpattya Oblast
+  - Transcarpathian region
+  - Uzhhorod
+  - Uzhgorod
+langs:
+  - ukr
+  - rus

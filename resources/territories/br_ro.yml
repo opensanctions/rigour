@@ -1,0 +1,13 @@
+name: Rondônia
+full_name: Rondônia (Brazil)
+qid: Q43235
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Rondonia
+  - Estado de Rondônia
+names_weak: []
+langs:
+  - por

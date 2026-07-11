@@ -1,0 +1,18 @@
+name: Cherkasy Oblast
+full_name: Cherkasy Oblast (Ukraine)
+qid: Q161808
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Черкаська область
+  - Черкасская область
+names_weak:
+  - Cherkasy  # Čerkasʹka oblastʹ
+  - Cherkassy # Čerkasskaâ oblastʹ
+  - Cherkassy Oblast
+  - Cherkasy region
+langs:
+  - ukr
+  - rus

@@ -1,0 +1,13 @@
+name: Saxony-Anhalt
+full_name: Saxony-Anhalt (Germany)
+qid: Q1206
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Sachsen-Anhalt
+  - Land Sachsen-Anhalt
+names_weak: []
+langs:
+  - deu

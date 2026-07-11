@@ -1,0 +1,12 @@
+name: Australian Capital Territory
+full_name: Australian Capital Territory (Australia)
+qid: Q3258
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: au
+names_strong: []
+names_weak:
+  - Canberra
+langs:
+  - eng

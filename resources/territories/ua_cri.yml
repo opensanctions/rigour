@@ -7,6 +7,9 @@ other_qids:
   - Q7835
   - Q15966495
   - Q2677944
+other_codes:
+  - ua-43
+  - ua-40
 is_country: false
 is_ftm: true
 parent: ua

@@ -1,0 +1,16 @@
+name: Sumy Oblast
+full_name: Sumy Oblast (Ukraine)
+qid: Q170446
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Сумська область
+  - Сумская область
+names_weak:
+  - Sumy        # Sumsʹka oblastʹ
+  - Sumy region # Sumskaâ oblastʹ
+langs:
+  - ukr
+  - rus

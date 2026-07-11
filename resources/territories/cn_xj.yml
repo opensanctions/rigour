@@ -8,7 +8,7 @@ other_qids:
   - Q121841103
 is_country: false
 is_ftm: false
-is_jurisdiction: false
+is_jurisdiction: true
 names_strong:
   - 新疆维吾尔自治区
   - Sinkiang Uighur Autonomous Region

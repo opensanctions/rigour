@@ -1,0 +1,12 @@
+name: Santa Catarina
+full_name: Santa Catarina (Brazil)
+qid: Q41115
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado de Santa Catarina
+names_weak: []
+langs:
+  - por

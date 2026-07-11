@@ -1,0 +1,16 @@
+name: Volyn Oblast
+full_name: Volyn Oblast (Ukraine)
+qid: Q167859
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Волинська область
+  - Волынская область
+names_weak:
+  - Volyn        # Volinsʹka oblastʹ
+  - Volyn region # Volynskaâ oblastʹ
+langs:
+  - ukr
+  - rus

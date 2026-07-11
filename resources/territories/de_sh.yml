@@ -1,0 +1,12 @@
+name: Schleswig-Holstein
+full_name: Schleswig-Holstein (Germany)
+qid: Q1194
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Land Schleswig-Holstein
+names_weak: []
+langs:
+  - deu

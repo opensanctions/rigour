@@ -1,0 +1,13 @@
+name: Pernambuco
+full_name: Pernambuco (Brazil)
+qid: Q40942
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado de Pernambuco
+names_weak:
+  - Recife
+langs:
+  - por

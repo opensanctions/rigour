@@ -1,0 +1,14 @@
+name: Bremen
+full_name: Bremen (Germany)
+qid: Q1209
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Freie Hansestadt Bremen
+names_weak:
+  - Land Bremen
+  - Bremen, Germany
+langs:
+  - deu

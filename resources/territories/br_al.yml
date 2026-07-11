@@ -1,0 +1,12 @@
+name: Alagoas
+full_name: Alagoas (Brazil)
+qid: Q40885
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado de Alagoas
+names_weak: []
+langs:
+  - por

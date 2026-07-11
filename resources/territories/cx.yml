@@ -4,7 +4,7 @@ region: Oceania
 subregion: Australia and New Zealand
 alpha3: cxr
 qid: Q31063
-is_country: false
+is_country: true
 is_ftm: true
 is_jurisdiction: true
 parent: au

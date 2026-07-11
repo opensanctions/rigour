@@ -9,6 +9,11 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+summary: >-
+  Thailand, officially the Kingdom of Thailand and historically known as Siam, is
+  a country in Southeast Asia on the Indochinese Peninsula. It is a constitutional
+  monarchy with Bangkok as its capital.
+wikipedia_url: https://en.wikipedia.org/wiki/Thailand
 names_strong:
   - ประเทศไทย
   - Prathet Thai

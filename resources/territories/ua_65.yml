@@ -1,0 +1,16 @@
+name: Kherson Oblast
+full_name: Kherson Oblast (Ukraine)
+qid: Q163271
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Херсонська область
+  - Херсонская область
+names_weak:
+  - Kherson        # Hersonsʹka oblastʹ
+  - Kherson region # Hersonskaâ oblastʹ
+langs:
+  - ukr
+  - rus

@@ -1,0 +1,13 @@
+name: Saxony
+full_name: Saxony (Germany)
+qid: Q1202
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Sachsen
+  - Freistaat Sachsen
+names_weak: []
+langs:
+  - deu

@@ -1,0 +1,13 @@
+name: Rhineland-Palatinate
+full_name: Rhineland-Palatinate (Germany)
+qid: Q1200
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Rheinland-Pfalz
+  - Land Rheinland-Pfalz
+names_weak: []
+langs:
+  - deu

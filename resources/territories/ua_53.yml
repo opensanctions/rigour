@@ -1,0 +1,16 @@
+name: Poltava Oblast
+full_name: Poltava Oblast (Ukraine)
+qid: Q169501
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Полтавська область
+  - Полтавская область
+names_weak:
+  - Poltava        # Poltavsʹka oblastʹ
+  - Poltava region # Poltavskaâ oblastʹ
+langs:
+  - ukr
+  - rus

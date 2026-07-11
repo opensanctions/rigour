@@ -1,0 +1,14 @@
+name: Paraná
+full_name: Paraná (Brazil)
+qid: Q15499
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Parana
+  - Estado do Paraná
+names_weak:
+  - Curitiba
+langs:
+  - por

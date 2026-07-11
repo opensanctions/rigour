@@ -1,0 +1,13 @@
+name: Goiás
+full_name: Goiás (Brazil)
+qid: Q41587
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Goias
+  - Estado de Goiás
+names_weak: []
+langs:
+  - por

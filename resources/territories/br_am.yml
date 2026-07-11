@@ -1,0 +1,13 @@
+name: Amazonas
+full_name: Amazonas (Brazil)
+qid: Q40040
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado do Amazonas
+names_weak:
+  - Manaus
+langs:
+  - por

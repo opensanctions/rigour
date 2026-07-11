@@ -1,0 +1,19 @@
+name: Dnipropetrovsk Oblast
+full_name: Dnipropetrovsk Oblast (Ukraine)
+qid: Q170672
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Дніпропетровська область
+  - Днепропетровская область
+names_weak:
+  - Dnipropetrovsk # Dnípropetrovsʹka oblastʹ
+  - Dnepropetrovsk # Dnepropetrovskaâ oblastʹ
+  - Dnepropetrovsk Oblast
+  - Dnipro
+  - Dnipropetrovsk region
+langs:
+  - ukr
+  - rus

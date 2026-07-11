@@ -1,0 +1,15 @@
+name: Thuringia
+full_name: Thuringia (Germany)
+qid: Q1205
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Thüringen
+  - Freistaat Thüringen
+names_weak:
+  - Thueringen
+  - Thuringen
+langs:
+  - deu

@@ -7,7 +7,7 @@ qid: Q23408
 is_country: false
 is_ftm: true
 is_jurisdiction: true
-parent: dk
+parent: "no"
 names_strong: []
 names_weak:
   - Буве аралы  # Buve araly

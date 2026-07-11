@@ -1,0 +1,18 @@
+name: Kharkiv Oblast
+full_name: Kharkiv Oblast (Ukraine)
+qid: Q170666
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Харківська область
+  - Харьковская область
+names_weak:
+  - Kharkiv # Harkívsʹka oblastʹ
+  - Kharkov # Harʹkovskaâ oblastʹ
+  - Kharkov Oblast
+  - Kharkiv region
+langs:
+  - ukr
+  - rus

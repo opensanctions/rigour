@@ -1,0 +1,12 @@
+name: Saarland
+full_name: Saarland (Germany)
+qid: Q1201
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong: []
+names_weak:
+  - Saar
+langs:
+  - deu

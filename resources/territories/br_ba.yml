@@ -1,0 +1,12 @@
+name: Bahia
+full_name: Bahia (Brazil)
+qid: Q40430
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado da Bahia
+names_weak: []
+langs:
+  - por

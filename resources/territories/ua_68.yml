@@ -1,0 +1,18 @@
+name: Khmelnytskyi Oblast
+full_name: Khmelnytskyi Oblast (Ukraine)
+qid: Q171331
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Хмельницька область
+  - Хмельницкая область
+names_weak:
+  - Khmelnytskyi # Hmelʹnicʹka oblastʹ
+  - Khmelnitsky # Hmelʹnickaâ oblastʹ
+  - Khmelnytsky Oblast
+  - Khmelnytskyi region
+langs:
+  - ukr
+  - rus

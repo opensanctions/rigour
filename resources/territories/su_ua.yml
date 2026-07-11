@@ -1,5 +1,5 @@
 name: Ukrainian SSR
-full_name: Ukrainian Soviet Federative Socialist Republic
+full_name: Ukrainian Soviet Socialist Republic
 region: Europe
 subregion: Eastern Europe
 qid: Q133356
@@ -14,6 +14,7 @@ names_strong:
   - Ukrainian SSR (Ukraine)
 names_weak:
   - Soviet Ukraine
+  - УРСР                                             # URSR
   - Украинская ССР                                   # Ukrainskaâ SSR
   - Украинская Советская Социалистическая Республика # Ukrainskaâ Sovetskaâ Socialističeskaâ Respublika
 langs:

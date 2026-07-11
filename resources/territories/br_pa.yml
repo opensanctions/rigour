@@ -1,0 +1,12 @@
+name: Pará
+full_name: Pará (Brazil)
+qid: Q39517
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado do Pará
+names_weak: []
+langs:
+  - por

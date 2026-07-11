@@ -1,0 +1,13 @@
+name: Lower Saxony
+full_name: Lower Saxony (Germany)
+qid: Q1197
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Niedersachsen
+  - Land Niedersachsen
+names_weak: []
+langs:
+  - deu

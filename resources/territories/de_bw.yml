@@ -1,0 +1,14 @@
+name: Baden-Württemberg
+full_name: Baden-Württemberg (Germany)
+qid: Q985
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Baden-Wuerttemberg
+  - Baden-Wurttemberg
+  - Land Baden-Württemberg
+names_weak: []
+langs:
+  - deu

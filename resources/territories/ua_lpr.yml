@@ -6,6 +6,8 @@ qid: Q16746854
 other_qids:
   - Q134279
   - Q171965
+other_codes:
+  - ua-09
 is_country: false
 is_ftm: true
 parent: ua

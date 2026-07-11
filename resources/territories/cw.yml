@@ -6,7 +6,7 @@ alpha3: cuw
 qid: Q25279
 other_codes:
   - nl-cw
-is_country: false
+is_country: true
 is_ftm: true
 is_jurisdiction: true
 parent: nl

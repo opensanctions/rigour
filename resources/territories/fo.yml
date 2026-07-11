@@ -5,7 +5,7 @@ subregion: Northern Europe
 in_sentence: the Faroe Islands
 alpha3: fro
 qid: Q4628
-is_country: false
+is_country: true
 is_ftm: true
 is_jurisdiction: true
 parent: dk

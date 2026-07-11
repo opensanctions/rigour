@@ -6,6 +6,8 @@ qid: Q16150196
 other_qids:
   - Q2012050
   - Q43070
+other_codes:
+  - ua-14
 is_country: false
 is_ftm: true
 parent: ua

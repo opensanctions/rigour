@@ -7,7 +7,7 @@ alpha3: vir
 qid: Q11703
 other_codes:
   - us-vi
-is_country: true
+is_country: false
 is_ftm: true
 is_jurisdiction: true
 see:

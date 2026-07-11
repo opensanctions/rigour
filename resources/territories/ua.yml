@@ -6,7 +6,7 @@ alpha3: ukr
 qid: Q212
 other_qids:
   - Q243610
-  - Q12163800
+  - Q4470663
   - Q1508143
 is_country: true
 is_ftm: true
@@ -25,9 +25,8 @@ names_strong:
 names_weak:
   - អ៊ុយក្រែន
   - Ukraina
-  - Odessa, Ukraine
   - ꖳꖴꔓꘋ     # Ukraïna
-  - אוקראינה # Ukrajna
+  - אוקראינה # Ukraïna
   - Yukreini # Ukrajna
   - ཡུ་ཀརེན # Ukrajna
   - Ikrɛni

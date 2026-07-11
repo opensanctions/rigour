@@ -1,0 +1,13 @@
+name: Amapá
+full_name: Amapá (Brazil)
+qid: Q40130
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Amapa
+  - Estado do Amapá
+names_weak: []
+langs:
+  - por

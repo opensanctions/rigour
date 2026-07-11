@@ -1,0 +1,14 @@
+name: Tasmania
+full_name: Tasmania (Australia)
+qid: Q34366
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: au
+names_strong:
+  - State of Tasmania
+names_weak:
+  - Hobart
+  - Taswegian
+langs:
+  - eng

@@ -1,0 +1,20 @@
+name: Odesa Oblast
+full_name: Odesa Oblast (Ukraine)
+qid: Q171852
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Одеська область
+  - Одесская область
+names_weak:
+  - Odesa  # Odesʹka oblastʹ
+  - Odessa # Odesskaâ oblastʹ
+  - Odessa Oblast
+  - Odessa, Ukraine
+  - Odesa region
+  - Odessa region
+langs:
+  - ukr
+  - rus

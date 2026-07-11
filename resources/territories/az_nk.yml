@@ -6,7 +6,10 @@ qid: Q244165
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+is_historical: true
 parent: am
+successors:
+  - az
 claims:
   - az
 see:
@@ -14,8 +17,9 @@ see:
   - az
 summary: >-
   Nagorno-Karabakh is a region located in the South Caucasus, covering the southeastern
-  stretch of the Lesser Caucasus mountain range. Nagorno-Karabakh is a disputed territory,
-  with both Armenia and Azerbaijan claiming it.
+  stretch of the Lesser Caucasus mountain range. Long disputed between Armenia and
+  Azerbaijan, the self-declared Republic of Artsakh was dissolved on 1 January 2024
+  after Azerbaijan took control of the territory in September 2023.
 wikipedia_url: https://en.wikipedia.org/wiki/Nagorno-Karabakh
 names_strong:
   - Republic of Artsakh

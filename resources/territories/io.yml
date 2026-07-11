@@ -7,7 +7,7 @@ alpha3: iot
 qid: Q43448
 other_qids:
   - Q192188
-is_country: false
+is_country: true
 is_ftm: true
 is_jurisdiction: true
 parent: gb

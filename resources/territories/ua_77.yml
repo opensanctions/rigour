@@ -1,0 +1,18 @@
+name: Chernivtsi Oblast
+full_name: Chernivtsi Oblast (Ukraine)
+qid: Q168856
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Чернівецька область
+  - Черновицкая область
+names_weak:
+  - Chernivtsi # Černívecʹka oblastʹ
+  - Chernovtsy # Černovickaâ oblastʹ
+  - Chernovtsy Oblast
+  - Chernivtsi region
+langs:
+  - ukr
+  - rus

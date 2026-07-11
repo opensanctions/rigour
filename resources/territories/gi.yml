@@ -7,6 +7,8 @@ qid: Q1410
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+claims:
+  - es
 see:
   - gb
 summary: >-

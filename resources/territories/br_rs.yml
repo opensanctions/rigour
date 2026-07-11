@@ -1,0 +1,13 @@
+name: Rio Grande do Sul
+full_name: Rio Grande do Sul (Brazil)
+qid: Q40030
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado do Rio Grande do Sul
+names_weak:
+  - Porto Alegre
+langs:
+  - por

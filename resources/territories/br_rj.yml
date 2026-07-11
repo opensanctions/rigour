@@ -1,0 +1,13 @@
+name: Rio de Janeiro
+full_name: Rio de Janeiro (Brazil)
+qid: Q41428
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado do Rio de Janeiro
+names_weak:
+  - Fluminense
+langs:
+  - por

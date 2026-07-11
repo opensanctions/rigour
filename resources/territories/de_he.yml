@@ -1,0 +1,13 @@
+name: Hesse
+full_name: Hesse (Germany)
+qid: Q1199
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Hessen
+  - Land Hessen
+names_weak: []
+langs:
+  - deu

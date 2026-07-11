@@ -1,4 +1,4 @@
-name: Russian SSR
+name: Russian SFSR
 full_name: Russian Soviet Federative Socialist Republic
 region: Europe
 subregion: Eastern Europe
@@ -16,6 +16,7 @@ names_strong:
   - RSFSR
   - РСФСР # RSFSR
   - Российская СФСР # Rossiyskaya SFSR
-names_weak: []
+names_weak:
+  - Russian SSR
 langs:
   - rus

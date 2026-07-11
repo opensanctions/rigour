@@ -10,6 +10,8 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+claims:
+  - ma
 summary: >-
   Western Sahara is a disputed territory on the northwest coast and in the Maghreb
   region of North and West Africa. The Western Sahara, given its name in 1975 by the

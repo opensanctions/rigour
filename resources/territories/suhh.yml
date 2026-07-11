@@ -1,6 +1,7 @@
 name: Soviet Union
 full_name: Union of Soviet Socialist Republics
-region: Supranational
+region: Europe
+subregion: Eastern Europe
 in_sentence: the Soviet Union
 alpha3: sun
 qid: Q15180
@@ -45,7 +46,7 @@ summary: >-
   of birth of a number of designated persons.
 names_strong:
   - USSR
-  - УССР # USSR
+  - СССР # SSSR
   - Советский Союз # Sovétskij Soûz
   - Союз Советских Социалистических Республик # Soûz Sovétskih Socialistíčeskih Respúblik
 names_weak:

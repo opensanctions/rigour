@@ -1,0 +1,12 @@
+name: Brandenburg
+full_name: Brandenburg (Germany)
+qid: Q1208
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Land Brandenburg
+names_weak: []
+langs:
+  - deu

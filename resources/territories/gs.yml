@@ -8,6 +8,13 @@ qid: Q35086
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+claims:
+  - ar
+summary: >-
+  South Georgia and the South Sandwich Islands is a British Overseas Territory in
+  the southern Atlantic Ocean. The remote islands have no permanent population.
+wikipedia_url: 
+  https://en.wikipedia.org/wiki/South_Georgia_and_the_South_Sandwich_Islands
 names_strong: []
 names_weak:
   - Südgeorgie und d’südliče Senwičinslä

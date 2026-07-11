@@ -1,0 +1,17 @@
+name: Kyiv
+full_name: Kyiv (Ukraine)
+qid: Q1899
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Київ
+  - Киев
+names_weak:
+  - Kiev      # Kií̈v
+  - Kyiv City # Kiev
+  - City of Kyiv
+langs:
+  - ukr
+  - rus

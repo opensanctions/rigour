@@ -1,0 +1,14 @@
+name: Minas Gerais
+full_name: Minas Gerais (Brazil)
+qid: Q39109
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado de Minas Gerais
+names_weak:
+  - Belo Horizonte
+  - Mineiro
+langs:
+  - por

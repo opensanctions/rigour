@@ -1,0 +1,12 @@
+name: Roraima
+full_name: Roraima (Brazil)
+qid: Q42508
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado de Roraima
+names_weak: []
+langs:
+  - por

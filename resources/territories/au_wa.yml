@@ -1,0 +1,13 @@
+name: Western Australia
+full_name: Western Australia (Australia)
+qid: Q3206
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: au
+names_strong:
+  - State of Western Australia
+names_weak:
+  - Perth
+langs:
+  - eng

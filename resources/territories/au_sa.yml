@@ -1,0 +1,13 @@
+name: South Australia
+full_name: South Australia (Australia)
+qid: Q35715
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: au
+names_strong:
+  - State of South Australia
+names_weak:
+  - Adelaide
+langs:
+  - eng

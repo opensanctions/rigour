@@ -1,0 +1,14 @@
+name: Queensland
+full_name: Queensland (Australia)
+qid: Q36074
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: au
+names_strong:
+  - QLD
+  - State of Queensland
+names_weak:
+  - Brisbane
+langs:
+  - eng

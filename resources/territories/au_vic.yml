@@ -1,0 +1,14 @@
+name: Victoria
+full_name: Victoria (Australia)
+qid: Q36687
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: au
+names_strong:
+  - State of Victoria
+  - Victoria, Australia
+names_weak:
+  - Melbourne
+langs:
+  - eng

@@ -1,0 +1,19 @@
+name: Mykolaiv Oblast
+full_name: Mykolaiv Oblast (Ukraine)
+qid: Q181633
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Миколаївська область
+  - Николаевская область
+names_weak:
+  - Mykolaiv # Mikolaí̈vsʹka oblastʹ
+  - Nikolaev # Nikolaevskaâ oblastʹ
+  - Nikolaev Oblast
+  - Mykolayiv Oblast
+  - Mykolaiv region
+langs:
+  - ukr
+  - rus

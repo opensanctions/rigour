@@ -1,0 +1,12 @@
+name: Acre
+full_name: Acre (Brazil)
+qid: Q40780
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado do Acre
+names_weak: []
+langs:
+  - por

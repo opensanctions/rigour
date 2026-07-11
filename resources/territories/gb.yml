@@ -7,13 +7,11 @@ alpha3: gbr
 qid: Q145
 other_qids:
   - Q174193
-  - Q21
   - Q161885
   - Q5613380
-  - Q179876
   - Q4970586
   - Q46395
-is_country: false
+is_country: true
 is_ftm: true
 is_jurisdiction: true
 see:
@@ -35,10 +33,9 @@ names_strong:
 names_weak:
   - בריטניה
   - 英國
-  - Англия      # Angliâ
-  - سلطنت متحدہ # velikobritaníâ
+  - سلطنت متحدہ  # Velikobritaniâ
   - Стыр Британи # Styr Britani
-  - Britain
+  - Britain      # velikobritaníí̈
   - İNGİLTERE
   - BİRLEŞİK KRALLIK
   - Apvienotā Karaliste
@@ -60,7 +57,6 @@ names_weak:
   - イギリス
   - Worcs
   - County of Hertford
-  - Englishwoman
   - County of Leicester
   - Reinu Unidu
   - ବ୍ରିଟେନ୍
@@ -70,7 +66,6 @@ names_weak:
   - Մեծ Բրիտանիա                                               # Mec Britania
   - i -United Kingdom
   - Norf
-  - London
   - Bungyereza
   - Staffs
   - lnd
@@ -108,7 +103,6 @@ names_weak:
   - Oxon
   - Lincs
   - West Midlands
-  - London, United Kingdom
   - County of Lincoln
   - ສະຫະລາດຊະອະນາຈັກ
   - County of Gloucester
@@ -117,14 +111,12 @@ names_weak:
   - County of Buckingham
   - Huntingdonshire
   - Uingereza
-  - Greater London
   - Huuingereza
   - Велика Британија                                           # Velika Britaniǰa
   - Nottinghamshire
   - Suurbritannia
   - londra
   - დიდი ბრიტანეთისა და ჩრდილოეთ                               # didi britʼanetisa da chrdiloet
-  - Englishman
   - Verenigde Koninkryk
   - Hampshire
   - Rouantelezh -Unanet
@@ -139,7 +131,6 @@ names_weak:
   - Royaume-Uni
   - დიდიბრიტანეთი                                              # didibritʼaneti
   - Essex
-  - English
   - ingilíís
   - დიდი ბრიტანეთისა და ჩრდილოეთ ირლანდიის გაერთიანებული       # didi britʼanetisa da chrdiloet irlandiis gaertianebuli
   - Notts
@@ -214,7 +205,6 @@ names_weak:
   - Nlambɔ́ Ngɛlɛn
   - U K
   - ಬ್ರಿಟನ್/ಇಂಗ್ಲೆಂಡ್
-  - England/United Kingdom
   - Reginavel Unì
   - დიდი ბრიტანეთისა და ჩრდილოეთ ირლანდიის გაერთიანებული სამეფო # didi britʼanetisa da chrdiloet irlandiis gaertianebuli samepo
   - Warwickshire
@@ -238,7 +228,6 @@ names_weak:
   - Cheshire
   - დიდი ბრიტანეთისადა ჩრდილოეთ ირლანდიის გაერთიანებული სამეფო # didi britʼanetisada chrdiloet irlandiis gaertianebuli samepo
   - Stórabretland
-  - Kingdom of England
   - Heref
   - بریتانیا
   - Derbs
@@ -312,7 +301,6 @@ names_weak:
   - Westm
   - ꑱꇩ
   - Reino Unido
-  - England
   - Birleşik Krallık
   - County of Stafford
   - యునైటెడ్ కింగ్డమ్

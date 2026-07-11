@@ -1,0 +1,14 @@
+name: Mecklenburg-Vorpommern
+full_name: Mecklenburg-Vorpommern (Germany)
+qid: Q1196
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Mecklenburg-Western Pomerania
+  - Land Mecklenburg-Vorpommern
+names_weak:
+  - Mecklenburg
+langs:
+  - deu

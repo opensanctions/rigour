@@ -9,6 +9,8 @@ other_codes:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+claims:
+  - cn
 summary: >-
   Taiwan, officially the Republic of China, is a country in East Asia. It is located
   at the junction of the East and South China Seas in the northwestern Pacific Ocean,

@@ -1,0 +1,17 @@
+name: North Rhine-Westphalia
+full_name: North Rhine-Westphalia (Germany)
+qid: Q1198
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Nordrhein-Westfalen
+  - NRW
+  - Land Nordrhein-Westfalen
+names_weak:
+  - North Rhine Westphalia
+  - Northrhine-Westphalia
+  - Nordrhein Westfalen
+langs:
+  - deu

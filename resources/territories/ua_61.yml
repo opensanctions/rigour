@@ -1,0 +1,17 @@
+name: Ternopil Oblast
+full_name: Ternopil Oblast (Ukraine)
+qid: Q173407
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Тернопільська область
+  - Тернопольская область
+names_weak:
+  - Ternopil # Ternopílʹsʹka oblastʹ
+  - Ternopol # Ternopolʹskaâ oblastʹ
+  - Ternopil region
+langs:
+  - ukr
+  - rus

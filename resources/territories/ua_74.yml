@@ -1,0 +1,18 @@
+name: Chernihiv Oblast
+full_name: Chernihiv Oblast (Ukraine)
+qid: Q167874
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Чернігівська область
+  - Черниговская область
+names_weak:
+  - Chernihiv # Černígívsʹka oblastʹ
+  - Chernigov # Černigovskaâ oblastʹ
+  - Chernigov Oblast
+  - Chernihiv region
+langs:
+  - ukr
+  - rus

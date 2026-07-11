@@ -1,0 +1,19 @@
+name: Rivne Oblast
+full_name: Rivne Oblast (Ukraine)
+qid: Q174187
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Рівненська область
+  - Ровненская область
+  - Ровенская область
+names_weak:
+  - Rivne # Rívnensʹka oblastʹ
+  - Rovno # Rovnenskaâ oblastʹ
+  - Rovno Oblast # Rovenskaâ oblastʹ
+  - Rivne region
+langs:
+  - ukr
+  - rus

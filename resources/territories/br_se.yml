@@ -1,0 +1,12 @@
+name: Sergipe
+full_name: Sergipe (Brazil)
+qid: Q43783
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Estado de Sergipe
+names_weak: []
+langs:
+  - por

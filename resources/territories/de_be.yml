@@ -1,0 +1,13 @@
+name: Berlin
+full_name: Berlin (Germany)
+qid: Q64
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Land Berlin
+names_weak:
+  - Berlin, Germany
+langs:
+  - deu

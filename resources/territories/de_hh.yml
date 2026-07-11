@@ -1,0 +1,13 @@
+name: Hamburg
+full_name: Hamburg (Germany)
+qid: Q1055
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: de
+names_strong:
+  - Freie und Hansestadt Hamburg
+names_weak:
+  - Hamburg, Germany
+langs:
+  - deu

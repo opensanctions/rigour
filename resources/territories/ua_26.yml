@@ -1,0 +1,17 @@
+name: Ivano-Frankivsk Oblast
+full_name: Ivano-Frankivsk Oblast (Ukraine)
+qid: Q178269
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: ua
+names_strong:
+  - Івано-Франківська область
+  - Ивано-Франковская область
+names_weak:
+  - Ivano-Frankivsk # Ívano-Frankívsʹka oblastʹ
+  - Ivano-Frankovsk # Ivano-Frankovskaâ oblastʹ
+  - Ivano-Frankivsk region
+langs:
+  - ukr
+  - rus

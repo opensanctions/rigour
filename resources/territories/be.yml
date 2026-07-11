@@ -4,7 +4,7 @@ region: Europe
 subregion: Western Europe
 alpha3: bel
 qid: Q31
-is_country: false
+is_country: true
 is_ftm: true
 is_jurisdiction: true
 see:

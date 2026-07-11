@@ -1,0 +1,14 @@
+name: São Paulo
+full_name: São Paulo (Brazil)
+qid: Q175
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Sao Paulo
+  - Estado de São Paulo
+names_weak:
+  - Paulistano
+langs:
+  - por

@@ -1,0 +1,14 @@
+name: Ceará
+full_name: Ceará (Brazil)
+qid: Q40123
+is_country: false
+is_ftm: false
+is_jurisdiction: true
+parent: br
+names_strong:
+  - Ceara
+  - Estado do Ceará
+names_weak:
+  - Fortaleza
+langs:
+  - por
