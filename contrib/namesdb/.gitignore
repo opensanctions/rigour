@@ -1,4 +1,5 @@
 data/names.db
 data/names.db-journal
 data/names.sql.gz
+data/quickstatements.tsv
 .envrc
