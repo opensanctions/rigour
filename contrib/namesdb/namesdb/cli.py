@@ -3,6 +3,7 @@ import logging
 from pathlib import Path
 from typing import List
 from namesdb.export import generate_export_lines
+from namesdb.quickstatements import generate_statements
 from rich.table import Table
 from rich.console import Console
 from normality import latinize_text
@@ -105,6 +106,46 @@ def load_file(path: Path) -> None:
                     form = form.strip()
                     store_mapping(conn, form, group)
         conn.commit()
+
+
+@cli.command("quickstatements")
+@click.argument("path", type=click.Path(dir_okay=False, writable=True))
+@click.option(
+    "--min-shared", default=4, show_default=True, help="Minimum shared forms per pair."
+)
+@click.option(
+    "--min-jaccard", default=0.7, show_default=True, help="Minimum pair overlap."
+)
+@click.option(
+    "--max-per-pair",
+    default=5,
+    show_default=True,
+    help="Skip a sync direction proposing more aliases than this.",
+)
+@click.option(
+    "--limit", default=500, show_default=True, help="Maximum alias lines to emit."
+)
+def quickstatements(
+    path: Path, min_shared: int, min_jaccard: float, max_per_pair: int, limit: int
+) -> None:
+    """Write QuickStatements alias additions for high-overlap groups."""
+    lines, stats = generate_statements(min_shared, min_jaccard, max_per_pair, limit)
+    with open(path, "w") as fh:
+        for line in lines:
+            fh.write(line + "\n")
+    log.info(
+        "Considered %d pairs, synced %d: %d alias lines -> %r",
+        stats.pairs_considered,
+        stats.pairs_synced,
+        stats.lines,
+        path,
+    )
+    if len(stats.cache_misses) > 0:
+        log.info("Skipped %d items missing from cache", len(stats.cache_misses))
+    if stats.directions_capped > 0:
+        log.info("Capped %d high-volume sync directions", stats.directions_capped)
+    if len(stats.redirects) > 0:
+        log.info("Found %d merged/redirected items", len(stats.redirects))
 
 
 @cli.command("dump")

@@ -1,8 +1,8 @@
 import random
 import logging
 import requests
-from functools import lru_cache
-from typing import List, Optional, Set, Tuple
+from typing import Optional, Set, Tuple
+
 # from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 
 from followthemoney import Dataset
@@ -14,7 +14,7 @@ from nomenklatura.wikidata.util import make_session
 
 from namesdb.db import store_mapping, engine
 from namesdb.blocks import GROUPS as BLOCKED_GROUPS
-from namesdb.util import clean_form
+from namesdb.util import clean_wikidata_name
 
 log = logging.getLogger("namesdb.wikidata")
 settings.DB_STMT_TIMEOUT = 10000 * 100000
@@ -54,22 +54,6 @@ CLASSES = {
 SPARQL = """
 SELECT DISTINCT ?item WHERE { ?item wdt:P31 wd:%s . }
 """
-
-
-@lru_cache(maxsize=1000)
-def clean_wikidata_name(name: Optional[str]) -> List[str]:
-    if name is None:
-        return []
-    names: List[str] = []
-    for part in name.split("/"):
-        part = clean_form(part)
-        if part is None:
-            continue
-        if "," in part or "(" in part or "/" in part or "=" in part or ":" in part:
-            # print("Skipping: ", part)
-            continue
-        names.append(part)
-    return names
 
 
 def process_item(qid: str) -> Optional[Tuple[str, Set[str]]]:
