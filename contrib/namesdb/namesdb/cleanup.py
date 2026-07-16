@@ -50,7 +50,7 @@ def block_forms():
             if len(alnums) < 2:
                 latins = [c for c in alnums if is_latin(c) or c in string.digits]
                 if len(latins) == len(alnums):
-                    log.info("Blocking form: %r", form)
+                    log.info("Blocking form: %r (ID: %s)", form, row._mapping["id"])
                     # stmt = update(mapping_table)
                     # stmt = stmt.where(mapping_table.c.id == row._mapping["id"])
                     # stmt = stmt.values(skip=True)
