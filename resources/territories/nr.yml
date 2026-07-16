@@ -1,5 +1,5 @@
-name: Nauru
-full_name: Nauru
+name: Naoero
+full_name: Republic of Naoero
 region: Oceania
 subregion: Micronesia
 alpha3: nru
@@ -8,11 +8,15 @@ is_country: true
 is_ftm: true
 is_jurisdiction: true
 summary: >-
-  Nauru, officially the Republic of Nauru and formerly known as Pleasant Island, is
-  an island country and microstate in Micronesia, part of Oceania in the Central Pacific.
-  Its nearest neighbour is Banaba of Kiribati, about 300 km to the east.
+  Naoero, officially the Republic of Naoero and formerly known as Nauru and as Pleasant
+  Island, is an island country and microstate in Micronesia, part of Oceania in the
+  Central Pacific. Its nearest neighbour is Banaba of Kiribati, about 300 km to the
+  east. On 26 June 2026, it notified the United Nations that it had changed its name
+  to the Republic of Naoero.
 wikipedia_url: https://en.wikipedia.org/wiki/Nauru
-names_strong: []
+names_strong:
+  - Nauru
+  - Republic of Nauru
 names_weak:
   - نؤرو
   - Nawru
@@ -46,7 +50,6 @@ names_weak:
   - ណូរូ
   - Nauru nutome
   - ⵏⴰⵡⵔⵓ
-  - Republic of Nauru
   - नाउरु
   - nawulú
   - نائوروو
