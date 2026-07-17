@@ -23,6 +23,25 @@ def test_alpha3():
     assert iso_639_alpha3("mul") is None
 
 
+def test_alpha3_subtags():
+    # IETF/BCP 47-style tags resolve via their primary subtag:
+    assert iso_639_alpha3("zh-Hans") == "zho"
+    assert iso_639_alpha3("zh-hant") == "zho"
+    assert iso_639_alpha3("pt-BR") == "por"
+    assert iso_639_alpha3("en-gb") == "eng"
+    assert iso_639_alpha3("sr-el") == "srp"
+    assert iso_639_alpha3("be-tarask") == "bel"
+    assert iso_639_alpha3("kk-cyrl") == "kaz"
+    assert iso_639_alpha3("crh-latn") == "crh"
+    # A known full tag wins over subtag splitting (synonym table):
+    assert iso_639_alpha3("chi_sim") == "zho"
+    assert iso_639_alpha3("aze_cyrl") == "aze"
+    # Collective and non-language primary subtags still fail:
+    assert iso_639_alpha3("roa-tara") is None
+    assert iso_639_alpha3("mul-x-foo") is None
+    assert iso_639_alpha2("pt-BR") == "pt"
+
+
 def test_alpha2():
     assert iso_639_alpha2("") is None
     assert iso_639_alpha2("banana") is None
