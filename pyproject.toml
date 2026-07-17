@@ -24,6 +24,7 @@ requires-python = ">= 3.10"
 dependencies = [
     "pyyaml >= 5.0.0, < 7.0.0",
     "normality >= 3.0.1, < 4.0.0",
+    "prefixdate >= 0.5.0, < 1.0.0",
     "orjson >= 3.0.0, < 4.0.0",
     "python-stdnum >= 2.0, < 3.0.0",
     "jinja2 >= 3.1.0, < 4.0.0",
