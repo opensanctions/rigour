@@ -1,9 +1,9 @@
-"""Compare imprecise FtM dates without pretending they are exact instants.
+"""Compare prefix dates without pretending they are exact instants.
 
-An FtM prefix date such as ``2026`` or ``2026-06`` represents an interval,
-rather than the first instant of that year or month. Use the string wrappers
-for one-off comparisons, or parse a [DateInterval][rigour.dates.DateInterval]
-once when comparing the same value repeatedly.
+A prefix date such as ``2026`` or ``2026-06`` represents an interval, rather
+than the first instant of that year or month. Use the string wrappers for
+one-off comparisons, or parse a [DateInterval][rigour.dates.DateInterval] once
+when comparing the same value repeatedly.
 """
 
 import re
@@ -26,7 +26,7 @@ _SECOND_TIMESTAMP_RE = re.compile(
 class DateInterval:
     """Represent every possible instant described by an imprecise date.
 
-    Use this parsed form when applying multiple comparisons to the same FtM
+    Use this parsed form when applying multiple comparisons to the same prefix
     date. Both bounds are timezone-aware UTC datetimes and ``end`` is exclusive.
 
     Attributes:
@@ -48,7 +48,7 @@ def _ensure_utc(value: datetime) -> datetime:
 def require_utc(value: str) -> datetime:
     """Parse an exact timestamp as an aware UTC datetime.
 
-    Use this at an FtM date boundary where an exact timestamp may carry an
+    Use this at a prefix-date boundary where an exact timestamp may carry an
     offset. Naive timestamps use the ecosystem convention of implicit UTC.
 
     Args:
@@ -73,12 +73,12 @@ def require_utc(value: str) -> datetime:
 def prefix_interval(value: str) -> DateInterval:
     """Expand a canonical prefix date into its represented UTC interval.
 
-    Use this at the boundary between FtM string values and interval comparison.
+    Use this at the boundary between prefix-date strings and interval comparison.
     Exact timestamps with offsets are converted to UTC before their one-second
     interval is constructed.
 
     Args:
-        value: Canonical FtM prefix date, from year through second precision.
+        value: Canonical prefix date, from year through second precision.
 
     Returns:
         The timezone-aware UTC, half-open interval represented by the value.
@@ -158,14 +158,14 @@ def interval_starts_after(value: DateInterval, reference: datetime) -> bool:
 
 
 def ended_before(value: str, reference: datetime) -> bool:
-    """Check whether an FtM prefix date has completely elapsed.
+    """Check whether a prefix date has completely elapsed.
 
     Use this string wrapper for one-off end-date and age-cutoff checks. Parse
     once with [prefix_interval][rigour.dates.prefix_interval] when making
     several comparisons against the same value.
 
     Args:
-        value: Canonical FtM prefix date, from year through second precision.
+        value: Canonical prefix date, from year through second precision.
         reference: UTC point in time. Legacy naive values are interpreted as
             UTC; aware values are converted to UTC.
 
@@ -177,14 +177,14 @@ def ended_before(value: str, reference: datetime) -> bool:
 
 
 def starts_after(value: str, reference: datetime) -> bool:
-    """Check whether an FtM prefix date begins after a point in time.
+    """Check whether a prefix date begins after a point in time.
 
     Use this string wrapper for one-off start-date and future-date checks. Parse
     once with [prefix_interval][rigour.dates.prefix_interval] when reusing the
     same value.
 
     Args:
-        value: Canonical FtM prefix date, from year through second precision.
+        value: Canonical prefix date, from year through second precision.
         reference: UTC point in time. Legacy naive values are interpreted as
             UTC; aware values are converted to UTC.
 
