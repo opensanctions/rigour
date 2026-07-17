@@ -1,6 +1,4 @@
 
-::: rigour.time
-
 ::: rigour.units
 
 ::: rigour.boolean

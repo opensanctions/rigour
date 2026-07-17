@@ -7,8 +7,8 @@ from rigour.dates import (
     ended_before,
     interval_ended_before,
     interval_starts_after,
+    parse_utc,
     prefix_interval,
-    require_utc,
     starts_after,
 )
 
@@ -85,7 +85,7 @@ def test_string_wrapper_converts_aware_reference_to_utc() -> None:
 @pytest.mark.parametrize("suffix", ["Z", "+00", "+0000", "+00:00"])
 def test_utc_suffixes(suffix: str) -> None:
     value = f"2026-12-31T23:59:59{suffix}"
-    assert require_utc(value) == dt("2026-12-31T23:59:59")
+    assert parse_utc(value) == dt("2026-12-31T23:59:59")
     assert ended_before(value, dt("2027-01-01T00:00:00Z"))
 
 
@@ -99,7 +99,7 @@ def test_utc_suffixes(suffix: str) -> None:
     ],
 )
 def test_non_utc_offsets_are_converted(value: str, normalized: str) -> None:
-    assert require_utc(value) == dt(normalized)
+    assert parse_utc(value) == dt(normalized)
     interval = prefix_interval(value)
     assert interval.start == dt(normalized)
     assert interval.end == interval.start + timedelta(seconds=1)

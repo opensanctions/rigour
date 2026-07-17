@@ -4,6 +4,13 @@ A prefix date such as ``2026`` or ``2026-06`` represents an interval, rather
 than the first instant of that year or month. Use the string wrappers for
 one-off comparisons, or parse a [DateInterval][rigour.dates.DateInterval] once
 when comparing the same value repeatedly.
+
+Age and recency checks use the same comparisons with a shifted reference:
+
+```python
+cutoff = now - max_age
+is_recent = not ended_before(value, cutoff)
+```
 """
 
 import re
@@ -45,7 +52,7 @@ def _ensure_utc(value: datetime) -> datetime:
     return value.astimezone(timezone.utc)
 
 
-def require_utc(value: str) -> datetime:
+def parse_utc(value: str) -> datetime:
     """Parse an exact timestamp as an aware UTC datetime.
 
     Use this at a prefix-date boundary where an exact timestamp may carry an
@@ -74,8 +81,9 @@ def prefix_interval(value: str) -> DateInterval:
     """Expand a canonical prefix date into its represented UTC interval.
 
     Use this at the boundary between prefix-date strings and interval comparison.
-    Exact timestamps with offsets are converted to UTC before their one-second
-    interval is constructed.
+    Feed it normalized property values only, not uncleaned source strings. Exact
+    timestamps with offsets are converted to UTC before their one-second interval
+    is constructed.
 
     Args:
         value: Canonical prefix date, from year through second precision.
@@ -88,7 +96,7 @@ def prefix_interval(value: str) -> DateInterval:
             carries a timezone.
     """
     if _SECOND_TIMESTAMP_RE.fullmatch(value) is not None:
-        start = require_utc(value)
+        start = parse_utc(value)
         return DateInterval(start=start, end=start + timedelta(seconds=1))
     has_timezone = value.endswith("Z") or (
         "T" in value and _TIMEZONE_SUFFIX_RE.search(value) is not None
