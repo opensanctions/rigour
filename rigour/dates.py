@@ -1,88 +1,109 @@
 """Compare imprecise FtM dates without pretending they are exact instants.
 
-An FtM date is a prefix such as ``2026`` or ``2026-06``. Each prefix describes
-an interval, not the first instant in that interval: ``2026`` could mean any
-time during that year. The public helpers below deliberately answer questions
-about the interval's start or end so callers do not accidentally fall back to
-lexicographic string comparisons.
+An FtM prefix date such as ``2026`` or ``2026-06`` represents an interval,
+rather than the first instant of that year or month. Use the string wrappers
+for one-off comparisons, or parse a [DateInterval][rigour.dates.DateInterval]
+once when comparing the same value repeatedly.
 """
 
 import re
-from datetime import datetime, timedelta
+from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 from functools import lru_cache
 
 from prefixdate import Precision, parse
 
 from rigour.util import MEMO_SMALL
 
-# ``prefixdate`` intentionally accepts messy source data and may parse only the
-# valid prefix of a string. These helpers operate on normalized FtM values, so
-# first require the whole input to have a canonical prefix-date shape. Calendar
-# validation and precision detection are still delegated to ``prefixdate``.
-_PREFIX_RE = re.compile(
-    r"^[12]\d{3}"
-    r"(?:-\d{2}"
-    r"(?:-\d{2}"
-    r"(?:T\d{2}"
-    r"(?::\d{2}"
-    r"(?::\d{2})?"
-    r")?"
-    r")?"
-    r")?"
-    r")?$"
+_TIMEZONE_SUFFIX_RE = re.compile(r"(?:Z|[+-]\d{2}(?::?\d{2})?)$")
+_SECOND_TIMESTAMP_RE = re.compile(
+    r"^[12]\d{3}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}"
+    r"(?:Z|[+-]\d{2}(?::?\d{2})?)?$"
 )
-# A reference is a point in time rather than another imprecise interval. Require
-# seconds so comparisons against a day or month cannot acquire hidden semantics.
-_REFERENCE_RE = re.compile(r"^[12]\d{3}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?$")
-_OFFSET_RE = re.compile(r"(?P<sign>[+-])(?P<hour>\d{2})(?::?(?P<minute>\d{2}))?$")
 
 
-def _require_string(value: object, name: str) -> str:
-    if not isinstance(value, str):
-        raise TypeError(f"{name} must be a string")
-    return value
+@dataclass(frozen=True)
+class DateInterval:
+    """Represent every possible instant described by an imprecise date.
+
+    Use this parsed form when applying multiple comparisons to the same FtM
+    date. Both bounds are timezone-aware UTC datetimes and ``end`` is exclusive.
+
+    Attributes:
+        start: Earliest instant represented by the date.
+        end: First instant after the represented interval.
+    """
+
+    start: datetime
+    end: datetime
 
 
-def _without_timezone(value: str) -> tuple[str, bool]:
-    """Remove an explicit UTC suffix while rejecting offsets needing conversion."""
-    if value.endswith("Z"):
-        return value[:-1], True
-    if "T" not in value:
-        return value, False
-    match = _OFFSET_RE.search(value)
-    if match is None:
-        return value, False
-    hour = int(match.group("hour"))
-    minute = int(match.group("minute") or 0)
-    # FtM timestamps are either naive UTC or explicitly UTC. Converting another
-    # offset here could hide an upstream violation of that data contract.
-    if hour != 0 or minute != 0:
-        raise ValueError("date timestamps must be naive or UTC")
-    return value[: match.start()], True
+def _ensure_utc(value: datetime) -> datetime:
+    """Adapt legacy naive-UTC values to aware UTC datetimes."""
+    if value.tzinfo is None or value.utcoffset() is None:
+        return value.replace(tzinfo=timezone.utc)
+    return value.astimezone(timezone.utc)
+
+
+def require_utc(value: str) -> datetime:
+    """Parse an exact timestamp as an aware UTC datetime.
+
+    Use this at an FtM date boundary where an exact timestamp may carry an
+    offset. Naive timestamps use the ecosystem convention of implicit UTC.
+
+    Args:
+        value: Canonical second-precision timestamp.
+
+    Returns:
+        The represented instant as a timezone-aware UTC datetime.
+
+    Raises:
+        ValueError: The timestamp is invalid or is not precise to the second.
+    """
+    if _SECOND_TIMESTAMP_RE.fullmatch(value) is None:
+        raise ValueError(f"Invalid exact timestamp: {value!r}")
+    try:
+        timestamp = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise ValueError(f"Invalid timestamp: {value!r}") from exc
+    return _ensure_utc(timestamp)
 
 
 @lru_cache(maxsize=MEMO_SMALL)
-def _date_bounds(value: str) -> tuple[datetime, datetime]:
-    """Expand a prefix date into a half-open ``[start, end)`` interval."""
-    text, had_timezone = _without_timezone(value)
-    if _PREFIX_RE.fullmatch(text) is None:
-        raise ValueError(f"Invalid prefix date: {value!r}")
+def prefix_interval(value: str) -> DateInterval:
+    """Expand a canonical prefix date into its represented UTC interval.
 
-    # The shape check above prevents partial parses. ``prefixdate`` remains the
-    # source of truth for real dates (including leap years) and their precision.
-    prefix = parse(text)
-    if prefix.dt is None or prefix.text is None or prefix.precision == Precision.EMPTY:
-        raise ValueError(f"Invalid prefix date: {value!r}")
-    if prefix.text != text:
-        raise ValueError(f"Prefix date is not canonical: {value!r}")
-    if had_timezone and prefix.precision != Precision.SECOND:
+    Use this at the boundary between FtM string values and interval comparison.
+    Exact timestamps with offsets are converted to UTC before their one-second
+    interval is constructed.
+
+    Args:
+        value: Canonical FtM prefix date, from year through second precision.
+
+    Returns:
+        The timezone-aware UTC, half-open interval represented by the value.
+
+    Raises:
+        ValueError: The value is invalid or non-canonical, or an imprecise value
+            carries a timezone.
+    """
+    if _SECOND_TIMESTAMP_RE.fullmatch(value) is not None:
+        start = require_utc(value)
+        return DateInterval(start=start, end=start + timedelta(seconds=1))
+    has_timezone = value.endswith("Z") or (
+        "T" in value and _TIMEZONE_SUFFIX_RE.search(value) is not None
+    )
+    if has_timezone:
         raise ValueError("timezone suffixes require second precision")
 
-    start = prefix.dt.replace(tzinfo=None)
+    prefix = parse(value)
+    if prefix.dt is None or prefix.text is None or prefix.precision == Precision.EMPTY:
+        raise ValueError(f"Invalid prefix date: {value!r}")
+    if prefix.text != value:
+        raise ValueError(f"Prefix date is not canonical: {value!r}")
+
+    start = prefix.dt.replace(tzinfo=timezone.utc)
     precision = prefix.precision
-    # Advancing by one unit gives an exclusive end without inventing an
-    # artificial "latest" microsecond. It also makes boundaries exact: a day
-    # used as an end date expires at midnight at the start of the next day.
     if precision == Precision.YEAR:
         end = start.replace(year=start.year + 1)
     elif precision == Precision.MONTH:
@@ -100,66 +121,75 @@ def _date_bounds(value: str) -> tuple[datetime, datetime]:
         end = start + timedelta(seconds=1)
     else:
         raise ValueError(f"Unsupported prefix date precision: {value!r}")
-    return start, end
+    return DateInterval(start=start, end=end)
 
 
-@lru_cache(maxsize=MEMO_SMALL)
-def _reference_datetime(value: str) -> datetime:
-    """Parse the exact point against which a prefix interval is compared."""
-    text, _ = _without_timezone(value)
-    if _REFERENCE_RE.fullmatch(text) is None:
-        raise ValueError(f"Invalid reference timestamp: {value!r}")
-    try:
-        return datetime.fromisoformat(text)
-    except ValueError as exc:
-        raise ValueError(f"Invalid reference timestamp: {value!r}") from exc
+def interval_ended_before(value: DateInterval, reference: datetime) -> bool:
+    """Check whether an interval has completely elapsed before a point in time.
+
+    Use this for end dates and age cutoffs when the prefix date has already been
+    parsed.
+
+    Args:
+        value: Interval to compare.
+        reference: Timezone-aware UTC point in time.
+
+    Returns:
+        ``True`` if every instant represented by the interval precedes the
+        reference.
+    """
+    return value.end <= reference
 
 
-def ended_before(value: str, reference: str) -> bool:
-    """Check whether a prefix date has completely elapsed before a timestamp.
+def interval_starts_after(value: DateInterval, reference: datetime) -> bool:
+    """Check whether an interval begins strictly after a point in time.
 
-    Use this for end dates and age cutoffs where an imprecise date should remain
-    current until its latest possible instant has passed.
+    Use this for start dates and future-date guardrails when the prefix date has
+    already been parsed.
+
+    Args:
+        value: Interval to compare.
+        reference: Timezone-aware UTC point in time.
+
+    Returns:
+        ``True`` if the earliest instant in the interval follows the reference.
+    """
+    return value.start > reference
+
+
+def ended_before(value: str, reference: datetime) -> bool:
+    """Check whether an FtM prefix date has completely elapsed.
+
+    Use this string wrapper for one-off end-date and age-cutoff checks. Parse
+    once with [prefix_interval][rigour.dates.prefix_interval] when making
+    several comparisons against the same value.
 
     Args:
         value: Canonical FtM prefix date, from year through second precision.
-        reference: Exact naive or UTC ISO timestamp, including seconds.
+        reference: UTC point in time. Legacy naive values are interpreted as
+            UTC; aware values are converted to UTC.
 
     Returns:
-        True if every instant represented by ``value`` precedes ``reference``.
-
-    Raises:
-        TypeError: If either argument is not a string.
-        ValueError: If either argument is invalid or uses a non-UTC offset.
+        ``True`` if every instant represented by the date precedes the
+        reference.
     """
-    value = _require_string(value, "value")
-    reference = _require_string(reference, "reference")
-    _, end = _date_bounds(value)
-    # With an exclusive end, equality means the whole represented interval has
-    # elapsed: 2026 ends exactly at 2027-01-01T00:00:00.
-    return end <= _reference_datetime(reference)
+    return interval_ended_before(prefix_interval(value), _ensure_utc(reference))
 
 
-def starts_after(value: str, reference: str) -> bool:
-    """Check whether a prefix date begins after a timestamp.
+def starts_after(value: str, reference: datetime) -> bool:
+    """Check whether an FtM prefix date begins after a point in time.
 
-    Use this for start dates and future-date guardrails where even the earliest
-    possible instant must be later than the reference.
+    Use this string wrapper for one-off start-date and future-date checks. Parse
+    once with [prefix_interval][rigour.dates.prefix_interval] when reusing the
+    same value.
 
     Args:
         value: Canonical FtM prefix date, from year through second precision.
-        reference: Exact naive or UTC ISO timestamp, including seconds.
+        reference: UTC point in time. Legacy naive values are interpreted as
+            UTC; aware values are converted to UTC.
 
     Returns:
-        True if every instant represented by ``value`` follows ``reference``.
-
-    Raises:
-        TypeError: If either argument is not a string.
-        ValueError: If either argument is invalid or uses a non-UTC offset.
+        ``True`` if the earliest instant represented by the date follows the
+        reference.
     """
-    value = _require_string(value, "value")
-    reference = _require_string(reference, "reference")
-    start, _ = _date_bounds(value)
-    # Strict comparison keeps a date beginning exactly at the reference from
-    # being labelled as starting after it.
-    return start > _reference_datetime(reference)
+    return interval_starts_after(prefix_interval(value), _ensure_utc(reference))
