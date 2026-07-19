@@ -2,6 +2,20 @@ langs:
   afr:
     - Afrikaans
     - Afrikaans
+    - африкаанс
+    - afrikáans
+    - африкаанс
+    - الأفريقانية
+    - 阿非利卡语
+  amh:
+    - Amharic
+    - አማርኛ
+    - амхарский язык
+    - amharique
+    - amhárico
+    - амхарська мова
+    - الأمهرية
+    - 阿姆哈拉语
   ara:
     - Arabic
     - العربية
@@ -9,65 +23,183 @@ langs:
     - arz
     - apc
     - acm
+    - арабский язык
+    - arabe
+    - árabe
+    - арабська мова
+    - 阿拉伯语
   aze:
     - Azerbaijani
     - Azərbaycan
     - Azeri
     - aze_cyrl
+    - азербайджанский язык
+    - azéri
+    - azerí
+    - азербайджанська мова
+    - الأذرية
+    - 阿塞拜疆语
   bel:
     - Belarusian
     - Belarussian
+    - белорусский язык
+    - biélorusse
+    - bielorruso
+    - білоруська мова
+    - البيلاروسية
+    - 白俄罗斯语
+    - Byelorussian
+    - Belorussian
   ben:
     - Bengali
     - বাংলা
+    - бенгальский язык
+    - bengalí
+    - бенгальська мова
+    - البنغالية
+    - 孟加拉语
   bos:
     - Bosnian
     - Bosanski
+    - боснийский язык
+    - bosnien
+    - bosnio
+    - боснійська мова
+    - البوسنية
+    - 波斯尼亚语
   bul:
     - Bulgarian
     - Български
+    - болгарский язык
+    - bulgare
+    - búlgaro
+    - болгарська мова
+    - البلغارية
+    - 保加利亞語
   cat:
     - Catalan
     - Català
+    - каталанский язык
+    - catalán
+    - каталанська мова
+    - الكتالونية
+    - 加泰罗尼亚语
   ces:
     - Czech
     - Čeština
     - cze
+    - чешский язык
+    - tchèque
+    - checo
+    - чеська мова
+    - التشيكية
+    - 捷克語
   cnr:
     - Montenegrin
     - Crnogorski
+    - черногорский язык
+    - monténégrin
+    - montenegrino
+    - чорногорська мова
+    - المونتنغرية
+    - 蒙特內哥羅語
   dan:
     - Danish
     - Dansk
+    - датский язык
+    - danois
+    - danés
+    - данська мова
+    - الدنماركية
+    - 丹麦语
   deu:
     - German
     - Deutsch
     - ger
+    - немецкий язык
+    - allemand
+    - alemán
+    - німецька мова
+    - الألمانية
+    - 德语
   ell:
     - Greek
     - Ελληνικά
     - gre
+    - новогреческий язык
+    - grec moderne
+    - griego
+    - новогрецька мова
+    - اليونانية الحديثة
+    - 现代希腊语
   eng:
     - English
     - Englisch
     - Anglais
+    - английский язык
+    - inglés
+    - англійська мова
+    - الإنجليزية
+    - 英語
+  est:
+    - Estonian
+    - eesti
+    - eesti keel
+    - эстонский язык
+    - estonien
+    - estonio
+    - естонська мова
+    - الإستونية
+    - 愛沙尼亞語
   fas:
     - Persian
     - Iranian
     - فارسی
     - Farsi
     - per
+    - персидский язык
+    - persan
+    - persa
+    - перська мова
+    - الفارسية
+    - 波斯語
   fin:
     - Finnish
     - Suomi
+    - финский язык
+    - finnois
+    - finés
+    - фінська мова
+    - الفنلندية
+    - 芬兰语
   fil:
     - Filipino
     - Pilipino
+    - филиппинский язык
+    - philippin
+    - idioma filipino
+    - філіппінська
+    - الفلبينية
+    - 菲律賓語
   fra:
     - French
     - Französisch
     - Français
     - fre
+    - французский язык
+    - francés
+    - французька мова
+    - الفرنسية
+    - 法语
+  gle:
+    - Irish
+    - Gaeilge
+    - ирландский язык
+    - irlandais
+    - irlandés
+    - ірландська мова
+    - الأيرلندية
+    - 爱尔兰语
   guj:
     - Gujarati
     - ગુજરાતી
@@ -75,32 +207,77 @@ langs:
     - Hebrew
     - עברית
     - iw
+    - иврит
+    - hébreu
+    - hebreo
+    - іврит
+    - العبرية الحديثة
+    - 現代希伯來語
   hin:
     - Hindi
     - हिंदी
+    - хинди
+    - гінді
+    - الهندية
+    - 印地語
   hrv:
     - Croatian
     - Hrvatski
     - cro
     - scr
+    - хорватский язык
+    - croate
+    - croata
+    - хорватська мова
+    - الكرواتية
+    - 克罗地亚语
   hun:
     - Hungarian
     - Magyar
+    - венгерский язык
+    - hongrois
+    - húngaro
+    - угорська мова
+    - المجرية
+    - 匈牙利語
   hye:
     - Armenian
     - Հայերեն
     - arm
+    - армянский язык
+    - arménien
+    - armenio
+    - вірменська мова
+    - الأرمنية
+    - 亞美尼亞語
   ind:
     - Indonesian
     - Bahasa Indonesia
     - in
+    - индонезийский язык
+    - indonésien
+    - indonesio
+    - індонезійська мова
+    - الإندونيسية
+    - 印尼語
   isl:
     - Icelandic
     - Íslenska
     - ice
+    - исландский язык
+    - islandais
+    - islandés
+    - ісландська мова
+    - الآيسلندية
+    - 冰島語
   ita:
     - Italian
     - Italiano
+    - итальянский язык
+    - italien
+    - італійська мова
+    - الإيطالية
+    - 意大利語
   jav:
     - Javanese
     - Jawa
@@ -110,27 +287,105 @@ langs:
   jpn:
     - Japanese
     - 日本語
+    - японский язык
+    - japonais
+    - japonés
+    - японська мова
+    - اليابانية
+    - 日語
+  kan:
+    - Kannada
+    - ಕನ್ನಡ
+    - каннада
+    - kannara
+    - canarés
+    - каннада
+    - الكنادية
+    - 卡纳达语
   kat:
     - Georgian
     - ქართული
     - geo
+    - грузинский язык
+    - géorgien
+    - georgiano
+    - грузинська мова
+    - الجورجية
+    - 格鲁吉亚语
   kaz:
     - Kazakh
     - Қазақша
     - Qazaq
+    - казахский язык
+    - kazajo
+    - казахська мова
+    - القزاقية
+    - 哈薩克語
   khm:
     - Khmer
+    - Central Khmer
     - ខ្មែរ
+    - кхмерский язык
+    - camboyano
+    - кхмерська мова
+    - الخميرية
+    - 高棉语
+    - Cambodian
   kir:
     - Kirghiz; Kyrgyz
     - Kirghiz
     - Kyrgyz
+    - киргизский язык
+    - kirghize
+    - kirguís
+    - киргизька мова
+    - القرغيزية
+    - 柯尔克孜语
   kor:
     - Korean
     - 한국어
+    - корейский язык
+    - coréen
+    - coreano
+    - корейська мова
+    - الكورية
+    - 朝鮮語
   lao:
     - Lao
     - ລາວ
+    - лаосский язык
+    - лаоська мова
+    - لاو
+    - 老挝语
+  lav:
+    - Latvian
+    - latviešu
+    - latviešu valoda
+    - латышский язык
+    - letton
+    - letón
+    - латиська мова
+    - اللاتفية
+    - 拉脫維亞語
+  lit:
+    - Lithuanian
+    - lietuvių
+    - Lietuvių kalba
+    - литовский язык
+    - lituanien
+    - lituano
+    - литовська мова
+    - اللتوانية
+    - 立陶宛語
+  ltz:
+    - Luxembourgish
+    - Lëtzebuergesch
+    - люксембургский язык
+    - luxembourgeois
+    - luxemburgués
+    - люксембурзька мова
+    - اللوكسمبورغية
+    - 卢森堡语
   mal:
     - Malayalam
     - മലയാളം
@@ -141,36 +396,117 @@ langs:
     - Macedonian
     - Македонски
     - mac
+    - македонский язык
+    - macédonien
+    - macedonio
+    - македонська мова
+    - المقدونية
+    - 马其顿语
+  mlt:
+    - Maltese
+    - Malti
+    - мальтийский язык
+    - maltais
+    - maltés
+    - мальтійська мова
+    - المالطية
+    - 马耳他语
+  mon:
+    - Mongolian
+    - монгол хэл
+    - монгольский язык
+    - mongol
+    - mongol
+    - монгольська мова
+    - المغولية
+    - 蒙古语
   msa:
     - Malay
     - Bahasa Melayu
     - may
+    - малайский язык
+    - malais
+    - malayo
+    - малайська мова
+    - الملايوية
+    - 马来语
   mya:
     - Burmese
     - မြန်မာ
     - bur
+    - бирманский язык
+    - birman
+    - idioma birmano
+    - Бірманська мова
+    - البورمية
+    - 缅甸语
+  nep:
+    - Nepali
+    - Nepalese
+    - नेपाली
+    - npi
+    - непальский язык
+    - népalais
+    - nepalí
+    - непальська мова
+    - النيبالية
+    - 尼泊尔语
   nld:
     - Dutch
     - Nederlands
     - dut
+    - нидерландский язык
+    - néerlandais
+    - neerlandés
+    - нідерландська мова
+    - الهولندية
+    - 荷蘭語
+    - Flemish
   nor:
     - Norwegian
     - Norsk
     - nno
-    - non
-  npi:
-    - Nepali
-    - Nepalese
-    - नेपाली
+    - норвежский язык
+    - norvégien
+    - noruego
+    - норвезька мова
+    - النرويجية
+    - 挪威語
+    - Bokmål
+    - Bokmal
   pan:
     - Punjabi
     - ਪੰਜਾਬੀ
   pol:
     - Polish
     - Polski
+    - польский язык
+    - polonais
+    - polaco
+    - польська мова
+    - البولندية
+    - 波蘭語
   por:
     - Portuguese
     - Português
+    - португальский язык
+    - portugais
+    - portugués
+    - португальська мова
+    - البرتغالية
+    - 葡萄牙语
+  pus:
+    - Pashto
+    - Pashtu
+    - پښتو
+    - пушту
+    - pachto
+    - pastún
+    - пушту
+    - البشتوية
+    - 普什圖語
+    - Pushtu
+    - Pushto
   ron:
     - Romanian
     - Română
@@ -181,54 +517,194 @@ langs:
     - mo
     - mol
     - Romanian; Moldavian; Moldovan
+    - румынский язык
+    - roumain
+    - rumano
+    - румунська мова
+    - الرومانية
+    - 羅馬尼亞語
   rus:
     - Russian
     - Русский
+    - русский язык
+    - russe
+    - ruso
+    - російська мова
+    - الروسية
+    - 俄語
   sin:
     - Sinhala
     - සිංහල
+    - сингальский язык
+    - singhalais
+    - cingalés
+    - сингальська мова
+    - السنهالية
+    - 僧伽罗语
   slk:
     - Slovak
     - Slovenčina
     - slo
+    - словацкий язык
+    - slovaque
+    - eslovaco
+    - словацька мова
+    - السلوفاكية
+    - 斯洛伐克語
+  slv:
+    - Slovenian
+    - Slovene
+    - slovenščina
+    - словенский язык
+    - slovène
+    - esloveno
+    - словенська мова
+    - السلوفينية
+    - 斯洛文尼亚语
   spa:
     - Spanish
     - Español
+    - испанский язык
+    - espagnol
+    - іспанська мова
+    - الإسبانية
+    - 西班牙語
+    - Castilian
   sqi:
     - Albanian
     - Shqip
     - alb
+    - албанский язык
+    - albanais
+    - albanés
+    - албанська мова
+    - الألبانية
+    - 阿爾巴尼亞語
   srp:
     - Serbian
     - Српски
     - scc
+    - сербский язык
+    - serbe
+    - serbio
+    - сербська мова
+    - الصربية
+    - 塞尔维亚语
   swa:
     - Kiswahili
     - Swahili
+    - суахили
+    - suajili
+    - суахілі
+    - السواحلية
+    - 斯瓦希里語
   swe:
     - Swedish
     - Svenska
+    - шведский язык
+    - suédois
+    - sueco
+    - шведська мова
+    - السويدية
+    - 瑞典語
   tam:
     - Tamil
     - தமிழ்
+    - тамильский язык
+    - tamoul
+    - тамільська мова
+    - التملية
+    - 泰米爾語
   tel:
     - Telugu
     - తెలుగు
+    - телугу
+    - télougou
+    - télugu
+    - Телугу
+    - التيلوغوية
+    - 泰卢固语
+  tgk:
+    - Tajik
+    - Tajiki
+    - тоҷикӣ
+    - стандартный таджикский язык
+    - tadjik
+    - tayiko
+    - таджицька мова
+    - الطاجيكية
+    - 塔吉克语
+  tgl:
+    - Tagalog
+    - Wikang Tagalog
+    - тагальский язык
+    - tagalo
+    - тагальська мова
+    - التاغالوغية
+    - 他加祿語
   tha:
     - Thai
     - ภาษาไทย
+    - тайский язык
+    - thaï
+    - tailandés
+    - тайська мова
+    - التايلندية
+    - 泰語
   tur:
     - Turkish
     - Türkçe
+    - турецкий язык
+    - turc
+    - turco
+    - турецька мова
+    - التركية
+    - 土耳其語
+  tuk:
+    - Turkmen
+    - Türkmençe
+    - туркменский язык
+    - turkmène
+    - turcomano
+    - туркменська мова
+    - التركمانية
+    - 土库曼语
   ukr:
     - Ukrainian
     - Українська
+    - украинский язык
+    - ukrainien
+    - ucraniano
+    - українська мова
+    - الأوكرانية
+    - 乌克兰语
   urd:
     - Urdu
     - اردو
+    - урду
+    - ourdou
+    - урду
+    - الأردية
+    - 乌尔都语
+  uzb:
+    - Uzbek
+    - Oʻzbek
+    - Ўзбек тили
+    - узбекский язык
+    - ouzbek
+    - uzbeko
+    - узбецька мова
+    - الأوزبكية
+    - 乌兹别克语
   vie:
     - Vietnamese
     - Tiếng Việt
+    - вьетнамский язык
+    - vietnamien
+    - vietnamita
+    - в'єтнамська
+    - الفيتنامية
+    - 越南语
   yid:
     - Yiddish
     - ji
@@ -241,6 +717,12 @@ langs:
     - chi
     - chi_sim
     - chi_tra
+    - китайский язык
+    - chinois
+    - chino
+    - китайська мова
+    - الصينية
+    - Mandarin
   zul:
     - Zulu
     - isiZulu
