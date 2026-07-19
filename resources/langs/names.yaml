@@ -5,6 +5,8 @@ langs:
     - африкаанс
     - afrikáans
     - африкаанс
+    - الأفريقانية
+    - 阿非利卡语
   amh:
     - Amharic
     - አማርኛ
@@ -12,6 +14,8 @@ langs:
     - amharique
     - amhárico
     - амхарська мова
+    - الأمهرية
+    - 阿姆哈拉语
   ara:
     - Arabic
     - العربية
@@ -23,6 +27,7 @@ langs:
     - arabe
     - árabe
     - арабська мова
+    - 阿拉伯语
   aze:
     - Azerbaijani
     - Azərbaycan
@@ -32,6 +37,8 @@ langs:
     - azéri
     - azerí
     - азербайджанська мова
+    - الأذرية
+    - 阿塞拜疆语
   bel:
     - Belarusian
     - Belarussian
@@ -39,12 +46,18 @@ langs:
     - biélorusse
     - bielorruso
     - білоруська мова
+    - البيلاروسية
+    - 白俄罗斯语
+    - Byelorussian
+    - Belorussian
   ben:
     - Bengali
     - বাংলা
     - бенгальский язык
     - bengalí
     - бенгальська мова
+    - البنغالية
+    - 孟加拉语
   bos:
     - Bosnian
     - Bosanski
@@ -52,6 +65,8 @@ langs:
     - bosnien
     - bosnio
     - боснійська мова
+    - البوسنية
+    - 波斯尼亚语
   bul:
     - Bulgarian
     - Български
@@ -59,12 +74,16 @@ langs:
     - bulgare
     - búlgaro
     - болгарська мова
+    - البلغارية
+    - 保加利亞語
   cat:
     - Catalan
     - Català
     - каталанский язык
     - catalán
     - каталанська мова
+    - الكتالونية
+    - 加泰罗尼亚语
   ces:
     - Czech
     - Čeština
@@ -73,6 +92,8 @@ langs:
     - tchèque
     - checo
     - чеська мова
+    - التشيكية
+    - 捷克語
   cnr:
     - Montenegrin
     - Crnogorski
@@ -80,6 +101,8 @@ langs:
     - monténégrin
     - montenegrino
     - чорногорська мова
+    - المونتنغرية
+    - 蒙特內哥羅語
   dan:
     - Danish
     - Dansk
@@ -87,6 +110,8 @@ langs:
     - danois
     - danés
     - данська мова
+    - الدنماركية
+    - 丹麦语
   deu:
     - German
     - Deutsch
@@ -95,6 +120,8 @@ langs:
     - allemand
     - alemán
     - німецька мова
+    - الألمانية
+    - 德语
   ell:
     - Greek
     - Ελληνικά
@@ -103,6 +130,8 @@ langs:
     - grec moderne
     - griego
     - новогрецька мова
+    - اليونانية الحديثة
+    - 现代希腊语
   eng:
     - English
     - Englisch
@@ -110,6 +139,8 @@ langs:
     - английский язык
     - inglés
     - англійська мова
+    - الإنجليزية
+    - 英語
   est:
     - Estonian
     - eesti
@@ -118,6 +149,8 @@ langs:
     - estonien
     - estonio
     - естонська мова
+    - الإستونية
+    - 愛沙尼亞語
   fas:
     - Persian
     - Iranian
@@ -128,6 +161,8 @@ langs:
     - persan
     - persa
     - перська мова
+    - الفارسية
+    - 波斯語
   fin:
     - Finnish
     - Suomi
@@ -135,6 +170,8 @@ langs:
     - finnois
     - finés
     - фінська мова
+    - الفنلندية
+    - 芬兰语
   fil:
     - Filipino
     - Pilipino
@@ -142,6 +179,8 @@ langs:
     - philippin
     - idioma filipino
     - філіппінська
+    - الفلبينية
+    - 菲律賓語
   fra:
     - French
     - Französisch
@@ -150,6 +189,8 @@ langs:
     - французский язык
     - francés
     - французька мова
+    - الفرنسية
+    - 法语
   gle:
     - Irish
     - Gaeilge
@@ -157,6 +198,8 @@ langs:
     - irlandais
     - irlandés
     - ірландська мова
+    - الأيرلندية
+    - 爱尔兰语
   guj:
     - Gujarati
     - ગુજરાતી
@@ -168,11 +211,15 @@ langs:
     - hébreu
     - hebreo
     - іврит
+    - العبرية الحديثة
+    - 現代希伯來語
   hin:
     - Hindi
     - हिंदी
     - хинди
     - гінді
+    - الهندية
+    - 印地語
   hrv:
     - Croatian
     - Hrvatski
@@ -182,6 +229,8 @@ langs:
     - croate
     - croata
     - хорватська мова
+    - الكرواتية
+    - 克罗地亚语
   hun:
     - Hungarian
     - Magyar
@@ -189,6 +238,8 @@ langs:
     - hongrois
     - húngaro
     - угорська мова
+    - المجرية
+    - 匈牙利語
   hye:
     - Armenian
     - Հայերեն
@@ -197,6 +248,8 @@ langs:
     - arménien
     - armenio
     - вірменська мова
+    - الأرمنية
+    - 亞美尼亞語
   ind:
     - Indonesian
     - Bahasa Indonesia
@@ -205,6 +258,8 @@ langs:
     - indonésien
     - indonesio
     - індонезійська мова
+    - الإندونيسية
+    - 印尼語
   isl:
     - Icelandic
     - Íslenska
@@ -213,12 +268,16 @@ langs:
     - islandais
     - islandés
     - ісландська мова
+    - الآيسلندية
+    - 冰島語
   ita:
     - Italian
     - Italiano
     - итальянский язык
     - italien
     - італійська мова
+    - الإيطالية
+    - 意大利語
   jav:
     - Javanese
     - Jawa
@@ -232,6 +291,8 @@ langs:
     - japonais
     - japonés
     - японська мова
+    - اليابانية
+    - 日語
   kan:
     - Kannada
     - ಕನ್ನಡ
@@ -239,6 +300,8 @@ langs:
     - kannara
     - canarés
     - каннада
+    - الكنادية
+    - 卡纳达语
   kat:
     - Georgian
     - ქართული
@@ -247,6 +310,8 @@ langs:
     - géorgien
     - georgiano
     - грузинська мова
+    - الجورجية
+    - 格鲁吉亚语
   kaz:
     - Kazakh
     - Қазақша
@@ -254,6 +319,8 @@ langs:
     - казахский язык
     - kazajo
     - казахська мова
+    - القزاقية
+    - 哈薩克語
   khm:
     - Khmer
     - Central Khmer
@@ -261,6 +328,9 @@ langs:
     - кхмерский язык
     - camboyano
     - кхмерська мова
+    - الخميرية
+    - 高棉语
+    - Cambodian
   kir:
     - Kirghiz; Kyrgyz
     - Kirghiz
@@ -269,6 +339,8 @@ langs:
     - kirghize
     - kirguís
     - киргизька мова
+    - القرغيزية
+    - 柯尔克孜语
   kor:
     - Korean
     - 한국어
@@ -276,11 +348,15 @@ langs:
     - coréen
     - coreano
     - корейська мова
+    - الكورية
+    - 朝鮮語
   lao:
     - Lao
     - ລາວ
     - лаосский язык
     - лаоська мова
+    - لاو
+    - 老挝语
   lav:
     - Latvian
     - latviešu
@@ -289,6 +365,8 @@ langs:
     - letton
     - letón
     - латиська мова
+    - اللاتفية
+    - 拉脫維亞語
   lit:
     - Lithuanian
     - lietuvių
@@ -297,6 +375,8 @@ langs:
     - lituanien
     - lituano
     - литовська мова
+    - اللتوانية
+    - 立陶宛語
   ltz:
     - Luxembourgish
     - Lëtzebuergesch
@@ -304,6 +384,8 @@ langs:
     - luxembourgeois
     - luxemburgués
     - люксембурзька мова
+    - اللوكسمبورغية
+    - 卢森堡语
   mal:
     - Malayalam
     - മലയാളം
@@ -318,6 +400,8 @@ langs:
     - macédonien
     - macedonio
     - македонська мова
+    - المقدونية
+    - 马其顿语
   mlt:
     - Maltese
     - Malti
@@ -325,6 +409,8 @@ langs:
     - maltais
     - maltés
     - мальтійська мова
+    - المالطية
+    - 马耳他语
   mon:
     - Mongolian
     - монгол хэл
@@ -332,6 +418,8 @@ langs:
     - mongol
     - mongol
     - монгольська мова
+    - المغولية
+    - 蒙古语
   msa:
     - Malay
     - Bahasa Melayu
@@ -340,6 +428,8 @@ langs:
     - malais
     - malayo
     - малайська мова
+    - الملايوية
+    - 马来语
   mya:
     - Burmese
     - မြန်မာ
@@ -348,6 +438,8 @@ langs:
     - birman
     - idioma birmano
     - Бірманська мова
+    - البورمية
+    - 缅甸语
   nep:
     - Nepali
     - Nepalese
@@ -357,6 +449,8 @@ langs:
     - népalais
     - nepalí
     - непальська мова
+    - النيبالية
+    - 尼泊尔语
   nld:
     - Dutch
     - Nederlands
@@ -365,6 +459,9 @@ langs:
     - néerlandais
     - neerlandés
     - нідерландська мова
+    - الهولندية
+    - 荷蘭語
+    - Flemish
   nor:
     - Norwegian
     - Norsk
@@ -373,6 +470,10 @@ langs:
     - norvégien
     - noruego
     - норвезька мова
+    - النرويجية
+    - 挪威語
+    - Bokmål
+    - Bokmal
   pan:
     - Punjabi
     - ਪੰਜਾਬੀ
@@ -383,6 +484,8 @@ langs:
     - polonais
     - polaco
     - польська мова
+    - البولندية
+    - 波蘭語
   por:
     - Portuguese
     - Português
@@ -390,6 +493,8 @@ langs:
     - portugais
     - portugués
     - португальська мова
+    - البرتغالية
+    - 葡萄牙语
   pus:
     - Pashto
     - Pashtu
@@ -398,6 +503,10 @@ langs:
     - pachto
     - pastún
     - пушту
+    - البشتوية
+    - 普什圖語
+    - Pushtu
+    - Pushto
   ron:
     - Romanian
     - Română
@@ -412,6 +521,8 @@ langs:
     - roumain
     - rumano
     - румунська мова
+    - الرومانية
+    - 羅馬尼亞語
   rus:
     - Russian
     - Русский
@@ -419,6 +530,8 @@ langs:
     - russe
     - ruso
     - російська мова
+    - الروسية
+    - 俄語
   sin:
     - Sinhala
     - සිංහල
@@ -426,6 +539,8 @@ langs:
     - singhalais
     - cingalés
     - сингальська мова
+    - السنهالية
+    - 僧伽罗语
   slk:
     - Slovak
     - Slovenčina
@@ -434,6 +549,8 @@ langs:
     - slovaque
     - eslovaco
     - словацька мова
+    - السلوفاكية
+    - 斯洛伐克語
   slv:
     - Slovenian
     - Slovene
@@ -442,12 +559,17 @@ langs:
     - slovène
     - esloveno
     - словенська мова
+    - السلوفينية
+    - 斯洛文尼亚语
   spa:
     - Spanish
     - Español
     - испанский язык
     - espagnol
     - іспанська мова
+    - الإسبانية
+    - 西班牙語
+    - Castilian
   sqi:
     - Albanian
     - Shqip
@@ -456,6 +578,8 @@ langs:
     - albanais
     - albanés
     - албанська мова
+    - الألبانية
+    - 阿爾巴尼亞語
   srp:
     - Serbian
     - Српски
@@ -464,12 +588,16 @@ langs:
     - serbe
     - serbio
     - сербська мова
+    - الصربية
+    - 塞尔维亚语
   swa:
     - Kiswahili
     - Swahili
     - суахили
     - suajili
     - суахілі
+    - السواحلية
+    - 斯瓦希里語
   swe:
     - Swedish
     - Svenska
@@ -477,12 +605,16 @@ langs:
     - suédois
     - sueco
     - шведська мова
+    - السويدية
+    - 瑞典語
   tam:
     - Tamil
     - தமிழ்
     - тамильский язык
     - tamoul
     - тамільська мова
+    - التملية
+    - 泰米爾語
   tel:
     - Telugu
     - తెలుగు
@@ -490,6 +622,8 @@ langs:
     - télougou
     - télugu
     - Телугу
+    - التيلوغوية
+    - 泰卢固语
   tgk:
     - Tajik
     - Tajiki
@@ -498,12 +632,16 @@ langs:
     - tadjik
     - tayiko
     - таджицька мова
+    - الطاجيكية
+    - 塔吉克语
   tgl:
     - Tagalog
     - Wikang Tagalog
     - тагальский язык
     - tagalo
     - тагальська мова
+    - التاغالوغية
+    - 他加祿語
   tha:
     - Thai
     - ภาษาไทย
@@ -511,6 +649,8 @@ langs:
     - thaï
     - tailandés
     - тайська мова
+    - التايلندية
+    - 泰語
   tur:
     - Turkish
     - Türkçe
@@ -518,6 +658,8 @@ langs:
     - turc
     - turco
     - турецька мова
+    - التركية
+    - 土耳其語
   tuk:
     - Turkmen
     - Türkmençe
@@ -525,6 +667,8 @@ langs:
     - turkmène
     - turcomano
     - туркменська мова
+    - التركمانية
+    - 土库曼语
   ukr:
     - Ukrainian
     - Українська
@@ -532,12 +676,16 @@ langs:
     - ukrainien
     - ucraniano
     - українська мова
+    - الأوكرانية
+    - 乌克兰语
   urd:
     - Urdu
     - اردو
     - урду
     - ourdou
     - урду
+    - الأردية
+    - 乌尔都语
   uzb:
     - Uzbek
     - Oʻzbek
@@ -546,6 +694,8 @@ langs:
     - ouzbek
     - uzbeko
     - узбецька мова
+    - الأوزبكية
+    - 乌兹别克语
   vie:
     - Vietnamese
     - Tiếng Việt
@@ -553,6 +703,8 @@ langs:
     - vietnamien
     - vietnamita
     - в'єтнамська
+    - الفيتنامية
+    - 越南语
   yid:
     - Yiddish
     - ji
@@ -569,6 +721,8 @@ langs:
     - chinois
     - chino
     - китайська мова
+    - الصينية
+    - Mandarin
   zul:
     - Zulu
     - isiZulu
