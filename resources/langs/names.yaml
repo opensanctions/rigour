@@ -2,6 +2,9 @@ langs:
   afr:
     - Afrikaans
     - Afrikaans
+  amh:
+    - Amharic
+    - አማርኛ
   ara:
     - Arabic
     - العربية
@@ -51,6 +54,10 @@ langs:
     - English
     - Englisch
     - Anglais
+  est:
+    - Estonian
+    - eesti
+    - eesti keel
   fas:
     - Persian
     - Iranian
@@ -68,6 +75,9 @@ langs:
     - Französisch
     - Français
     - fre
+  gle:
+    - Irish
+    - Gaeilge
   guj:
     - Gujarati
     - ગુજરાતી
@@ -110,6 +120,9 @@ langs:
   jpn:
     - Japanese
     - 日本語
+  kan:
+    - Kannada
+    - ಕನ್ನಡ
   kat:
     - Georgian
     - ქართული
@@ -131,6 +144,17 @@ langs:
   lao:
     - Lao
     - ລາວ
+  lav:
+    - Latvian
+    - latviešu
+    - latviešu valoda
+  lit:
+    - Lithuanian
+    - lietuvių
+    - Lietuvių kalba
+  ltz:
+    - Luxembourgish
+    - Lëtzebuergesch
   mal:
     - Malayalam
     - മലയാളം
@@ -141,6 +165,12 @@ langs:
     - Macedonian
     - Македонски
     - mac
+  mlt:
+    - Maltese
+    - Malti
+  mon:
+    - Mongolian
+    - монгол хэл
   msa:
     - Malay
     - Bahasa Melayu
@@ -170,6 +200,10 @@ langs:
   por:
     - Portuguese
     - Português
+  pus:
+    - Pashto
+    - Pashtu
+    - پښتو
   ron:
     - Romanian
     - Română
@@ -190,6 +224,10 @@ langs:
     - Slovak
     - Slovenčina
     - slo
+  slv:
+    - Slovenian
+    - Slovene
+    - slovenščina
   spa:
     - Spanish
     - Español
@@ -213,18 +251,32 @@ langs:
   tel:
     - Telugu
     - తెలుగు
+  tgk:
+    - Tajik
+    - Tajiki
+    - тоҷикӣ
+  tgl:
+    - Tagalog
+    - Wikang Tagalog
   tha:
     - Thai
     - ภาษาไทย
   tur:
     - Turkish
     - Türkçe
+  tuk:
+    - Turkmen
+    - Türkmençe
   ukr:
     - Ukrainian
     - Українська
   urd:
     - Urdu
     - اردو
+  uzb:
+    - Uzbek
+    - Oʻzbek
+    - Ўзбек тили
   vie:
     - Vietnamese
     - Tiếng Việt
