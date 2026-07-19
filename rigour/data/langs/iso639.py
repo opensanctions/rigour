@@ -16243,6 +16243,7 @@ ISO3_MAP: Dict[str, str] = {
     "ქართული": "kat",
     "қазақша": "kaz",
     "qazaq": "kaz",
+    "central khmer": "khm",
     "ខ្មែរ": "khm",
     "kirghiz; kyrgyz": "kir",
     "kyrgyz": "kir",
