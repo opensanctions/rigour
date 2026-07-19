@@ -36,6 +36,7 @@ use std::collections::{HashMap, HashSet};
 
 use rapidfuzz::distance::levenshtein;
 
+use crate::names::constants::MAX_NAME_LENGTH;
 use crate::text::normalize::casefold;
 use crate::text::scripts::{codepoint_script, text_scripts};
 use crate::text::translit::{maybe_ascii, should_ascii};
@@ -380,7 +381,11 @@ fn levenshtein_pick(entries: &[String], weights: &[f64]) -> Vec<String> {
         .iter()
         .zip(weights.iter().copied())
         .map(|(s, weight)| {
-            let chars: Vec<char> = s.chars().collect();
+            // Cap at MAX_NAME_LENGTH: the pairwise Levenshtein is
+            // O(len²) per pair, so an untruncated long entry blows up
+            // the whole O(M²) matrix (issue #230).
+            let mut chars: Vec<char> = s.chars().collect();
+            chars.truncate(MAX_NAME_LENGTH);
             let len = chars.len();
             Prepped { chars, len, weight }
         })

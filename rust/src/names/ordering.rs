@@ -39,6 +39,7 @@
 
 use pyo3::prelude::*;
 
+use crate::names::constants::MAX_NAME_LENGTH;
 use crate::names::part::{NamePart, tag_sort_parts};
 use crate::names::tag::NamePartTag;
 use crate::text::distance::damerau_levenshtein_cutoff;
@@ -74,6 +75,15 @@ fn extract_views(py: Python<'_>, parts: &[Py<NamePart>]) -> Vec<PartView> {
         .collect()
 }
 
+/// Truncate a string to at most `MAX_NAME_LENGTH` chars on a char
+/// boundary (byte slicing would panic on multi-byte scripts).
+fn cap_chars(s: &str) -> &str {
+    match s.char_indices().nth(MAX_NAME_LENGTH) {
+        Some((idx, _)) => &s[..idx],
+        None => s,
+    }
+}
+
 /// Similarity score between two comparable strings with the 0.3
 /// floor applied. Returns 0.0 when the floor kicks in so callers
 /// can compare with plain `>`.
@@ -81,6 +91,14 @@ fn score(a: &str, a_len: usize, b: &str, b_len: usize) -> f64 {
     if a == b {
         return 1.0;
     }
+    // Cap both sides at MAX_NAME_LENGTH before the O(len²) DP so a
+    // paragraph-length comparable can't blow up the matrix (issue
+    // #230); truncate the lengths in lockstep so the cutoff and score
+    // stay consistent with the strings actually compared.
+    let a = cap_chars(a);
+    let b = cap_chars(b);
+    let a_len = a_len.min(MAX_NAME_LENGTH);
+    let b_len = b_len.min(MAX_NAME_LENGTH);
     let max_len = a_len.max(b_len);
     if max_len == 0 {
         return 1.0;

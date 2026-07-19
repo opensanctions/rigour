@@ -25,15 +25,11 @@ use pyo3::prelude::*;
 use pyo3::types::{PyList, PyTuple};
 
 use crate::names::alignment::Alignment;
+use crate::names::constants::MAX_PARTS;
 use crate::names::name::Name;
 use crate::names::part::{NamePart, Span};
 use crate::names::symbol::{Symbol, SymbolCategory};
 use crate::names::tag::NamePartTag;
-
-/// Upper bound on name-part count. Inputs beyond this short-circuit
-/// to the empty-only fallback; bitmask-based coverage tracking needs
-/// to fit in a `u64`.
-const MAX_PARTS: usize = 64;
 
 /// Post-dedupe cap on candidate edges. Bounds every downstream
 /// structure (conflict graph, components, enumeration) and lets

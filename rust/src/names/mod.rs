@@ -7,6 +7,7 @@ pub mod alignment;
 pub mod analyze;
 #[cfg(feature = "python")]
 pub mod compare;
+pub mod constants;
 pub mod matcher;
 #[cfg(feature = "python")]
 pub mod name;

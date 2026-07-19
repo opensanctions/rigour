@@ -41,6 +41,7 @@ use pyo3::prelude::*;
 use serde::Deserialize;
 
 use crate::names::alignment::Alignment;
+use crate::names::constants::MAX_NAME_LENGTH;
 
 use crate::names::part::NamePart;
 
@@ -460,11 +461,17 @@ fn run_align(
         };
     }
 
-    // Build the SEP-joined char vectors for both sides.
+    // Build the SEP-joined char vectors for both sides, capped at
+    // MAX_NAME_LENGTH each so the O(n·m) alignment matrix can't blow
+    // up on paragraph-length "names" (issue #230). Parts past the cut
+    // get an empty cost stream and fall out as solo clusters, so the
+    // "every part appears exactly once" contract still holds.
     let q_text: String = qry_comparable.join(&SEP.to_string());
     let r_text: String = res_comparable.join(&SEP.to_string());
-    let q_chars: Vec<char> = q_text.chars().collect();
-    let r_chars: Vec<char> = r_text.chars().collect();
+    let mut q_chars: Vec<char> = q_text.chars().collect();
+    let mut r_chars: Vec<char> = r_text.chars().collect();
+    q_chars.truncate(MAX_NAME_LENGTH);
+    r_chars.truncate(MAX_NAME_LENGTH);
 
     let steps = align_chars(cfg, &q_chars, &r_chars);
 
@@ -863,5 +870,19 @@ mod tests {
         assert_eq!(n_sub, 0, "tie-break should avoid substitution");
         assert_eq!(n_del, 1);
         assert_eq!(n_ins, 1);
+    }
+
+    #[test]
+    fn run_align_caps_joined_length() {
+        // A pathological pair of many single-char parts must not
+        // allocate an unbounded matrix (issue #230): only parts whose
+        // chars fall within MAX_NAME_LENGTH get a cost stream; the
+        // rest stay empty and surface as solos downstream.
+        let cfg = CompareConfig::default();
+        let parts: Vec<String> = (0..MAX_NAME_LENGTH * 2).map(|_| "x".to_string()).collect();
+        let align = run_align(&cfg, &parts, &parts);
+        assert_eq!(align.qry_costs.len(), parts.len());
+        let scored = align.qry_costs.iter().filter(|c| !c.is_empty()).count();
+        assert!(scored > 0 && scored < parts.len(), "scored {scored}");
     }
 }

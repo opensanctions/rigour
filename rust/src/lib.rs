@@ -324,5 +324,9 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<names::part::NamePart>()?;
     m.add_class::<names::part::Span>()?;
     m.add_class::<names::name::Name>()?;
+    // Single source of truth for the name-length cap: the Rust DP
+    // paths use this const directly, and `rigour.env` re-exports it
+    // so the Python distance wrappers truncate to the same value.
+    m.add("MAX_NAME_LENGTH", names::constants::MAX_NAME_LENGTH)?;
     Ok(())
 }
