@@ -3,6 +3,8 @@ from typing import Optional
 from zoneinfo import ZoneInfo
 from normality import stringify, DEFAULT_ENCODING
 
+from rigour._core import MAX_NAME_LENGTH as _CORE_MAX_NAME_LENGTH
+
 TRUE_VALUES = {"true", "1", "yes", "y", "t", "on", "enable", "enabled"}
 FALSE_VALUES = {"false", "0", "no", "n", "f", "off", "disable", "disabled"}
 
@@ -56,8 +58,10 @@ PREFERRED_LANG = env_str("RR_PREFERRED_LANG", "eng")
 TZ_NAME = env_str("TZ", "UTC")
 TZ = ZoneInfo(TZ_NAME)
 
-# Person and company name length:
-MAX_NAME_LENGTH = env_int("RR_MAX_NAME_LENGTH", 384)
+# Person and company name length. Fixed by the Rust core so the char
+# cap on the DP paths there stays in lockstep with what the Python
+# distance wrappers truncate to — not env-tunable.
+MAX_NAME_LENGTH = _CORE_MAX_NAME_LENGTH
 
 # Levenshtein tolerance settings:
 LEVENSHTEIN_MAX_EDITS = env_int("RR_LEVENSHTEIN_MAX_EDITS", 4)
