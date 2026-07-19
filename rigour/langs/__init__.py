@@ -103,7 +103,11 @@ def iso_639_alpha2(code: str) -> Optional[str]:
 def list_to_alpha3(languages: Iterable[str], synonyms: bool = True) -> Set[str]:
     """Parse all the language codes in a given list into ISO 639 Part 2 codes
     and optionally expand them with synonyms (i.e. other names for the same
-    language)."""
+    language).
+
+    Synonym groups mix in ISO 639-2/B and Tesseract-style codes (e.g. ``ger``,
+    ``chi``) which aid input matching but are not valid ISO 639-3 identifiers;
+    they are filtered out so the returned set only contains canonical codes."""
     codes: Set[str] = set()
     for language in languages:
         code = iso_639_alpha3(language)
@@ -111,7 +115,9 @@ def list_to_alpha3(languages: Iterable[str], synonyms: bool = True) -> Set[str]:
             continue
         codes.add(code)
         if synonyms:
-            codes.update(expand_synonyms(code))
+            for synonym in expand_synonyms(code):
+                if synonym in ISO3_ALL and synonym not in NON_LANGS:
+                    codes.add(synonym)
     return codes
 
 

@@ -6,10 +6,9 @@ from typing import Iterable
 
 LANG_SYNONYMS = [
     ("srp", "hbs", "hrv", "bos"),
-    ("sli", "alb"),
+    ("sqi", "alb"),
     ("slk", "slo"),
     ("ron", "rum"),
-    ("nor", "non"),
     ("nld", "dut"),
     ("mya", "bur"),
     ("msa", "may"),
@@ -29,10 +28,11 @@ LANG_SYNONYMS = [
     ("aze_cyrl", "aze"),
     ("fil", "tgl"),
     ("nep", "npi"),
-    ("bur", "mya", "int", "tvn", "tco", "rki", "rmz"),
 ]
 
-NON_LANGS = {"mis", "mul", "und", "xzz"}
+# "zxx" is the ISO 639-3 code for "no linguistic content"; "xzz" is a
+# non-standard code kept for legacy compatibility.
+NON_LANGS = {"mis", "mul", "und", "zxx", "xzz"}
 
 
 @cache

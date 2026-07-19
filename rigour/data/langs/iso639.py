@@ -12925,7 +12925,7 @@ ISO3_MAP: Dict[str, str] = {
     "nooksack": "nok",
     "nomlaki": "nol",
     "nocamán": "nom",
-    "non": "nor",
+    "non": "non",
     "old norse": "non",
     "numanggang": "nop",
     "ngongo": "noq",
