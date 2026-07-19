@@ -35,7 +35,7 @@
 // the valid one. Cost is negligible at our data sizes (~1k needles,
 // ~30-char haystacks, a handful of candidates per call).
 
-use aho_corasick::{AhoCorasick, AhoCorasickBuilder, MatchKind};
+use aho_corasick::{AhoCorasick, AhoCorasickBuilder, AhoCorasickKind, MatchKind};
 use std::collections::HashMap;
 
 /// A multi-needle string search automaton with per-needle payload.
@@ -86,6 +86,15 @@ impl<T> Needles<T> {
             // We implement leftmost-longest ourselves via greedy
             // selection on the overlapping match set.
             .match_kind(MatchKind::Standard)
+            // Force the noncontiguous NFA. The builder default (Auto) does
+            // extra work selecting and constructing a contiguous NFA; for the
+            // large needle sets rigour builds (the name tagger seeds ~470k
+            // aliases) that is ~11% of a one-time build that dominates first-
+            // use latency. `kind` changes the internal representation only,
+            // never which matches are returned; the prefilter stays enabled
+            // and our haystacks are short (~30 chars), so search speed is
+            // unchanged in practice.
+            .kind(Some(AhoCorasickKind::NoncontiguousNFA))
             .build(&keys)
             .expect("needle automaton builds");
         Self { ac, payloads }
