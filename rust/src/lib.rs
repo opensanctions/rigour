@@ -76,13 +76,6 @@ fn py_normalize(text: &str, flags: u16, cleanup: u8) -> Option<String> {
     text::normalize::normalize(text, flags, cleanup)
 }
 
-#[cfg(feature = "python")]
-#[pyfunction]
-#[pyo3(name = "string_number")]
-fn py_string_number(text: &str) -> Option<f64> {
-    text::numbers::string_number(text)
-}
-
 // Distance / similarity primitives. The Python wrappers in
 // `rigour.text.distance` add lru_cache, length truncation, and the
 // Jaro-Winkler 0.6 floor on top of these — keep this surface
@@ -286,7 +279,6 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_maybe_ascii, m)?)?;
     m.add_function(wrap_pyfunction!(py_tokenize_name, m)?)?;
     m.add_function(wrap_pyfunction!(py_normalize, m)?)?;
-    m.add_function(wrap_pyfunction!(py_string_number, m)?)?;
     m.add_function(wrap_pyfunction!(py_raw_levenshtein, m)?)?;
     m.add_function(wrap_pyfunction!(py_raw_levenshtein_cutoff, m)?)?;
     m.add_function(wrap_pyfunction!(py_raw_jaro, m)?)?;
