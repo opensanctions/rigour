@@ -67,18 +67,26 @@ __all__ = [
 def iso_639_alpha3(code: str) -> Optional[str]:
     """Convert a given language identifier into an ISO 639 Part 2 code, such
     as "eng" or "deu". This will accept language codes in the two- or three-
-    letter format, and some language names. If the given string cannot be
-    converted, ``None`` will be returned.
+    letter format, some language names, and IETF/BCP 47-style tags with a
+    script or region subtag (e.g. "zh-Hans", "pt-BR"), which resolve to the
+    code of their primary subtag. If the given string cannot be converted,
+    ``None`` will be returned.
 
     >>> iso_639_alpha3('en')
     'eng'
     """
     norm = normalize_code(code)
-    if norm is not None:
-        norm = ISO3_MAP.get(norm, norm)
-    if norm not in ISO3_ALL or norm in NON_LANGS:
+    if norm is None:
         return None
-    return norm
+    resolved = ISO3_MAP.get(norm, norm)
+    if resolved in ISO3_ALL and resolved not in NON_LANGS:
+        return resolved
+    # The full tag takes precedence (the synonym table has entries like
+    # "chi_sim"); only then fall back to the primary subtag.
+    for sep in ("-", "_"):
+        if sep in norm:
+            return iso_639_alpha3(norm.split(sep, 1)[0])
+    return None
 
 
 def iso_639_alpha2(code: str) -> Optional[str]:
