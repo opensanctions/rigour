@@ -329,7 +329,6 @@ pub struct Span {
     /// use in matcher-side substring checks.
     #[pyo3(get)]
     pub comparable: Py<PyString>,
-    len_chars: usize,
     hash: isize,
 }
 
@@ -342,11 +341,9 @@ impl Span {
         symbol: Py<crate::names::symbol::Symbol>,
     ) -> PyResult<Self> {
         let mut segments: Vec<String> = Vec::with_capacity(parts.len());
-        let mut len_chars: usize = 0;
         for part_ref in &parts {
             let part = part_ref.bind(py).borrow();
             segments.push(part.comparable_str().to_string());
-            len_chars += part.form_str.chars().count();
         }
         let comparable_str = segments.join(" ");
         let comparable_py = PyString::new(py, &comparable_str).unbind();
@@ -358,13 +355,29 @@ impl Span {
             parts: parts_list,
             symbol,
             comparable: comparable_py,
-            len_chars,
             hash,
         })
     }
 
-    fn __len__(&self) -> usize {
-        self.len_chars
+    /// Total character length of the covered parts' surface forms.
+    ///
+    /// Computed on demand by walking `parts` rather than cached at
+    /// construction, so building a `Span` nobody measures costs
+    /// nothing. Sums `form` char counts (join spaces excluded), matching
+    /// the pre-cache semantics.
+    fn __len__(&self, py: Python<'_>) -> usize {
+        self.parts
+            .bind(py)
+            .iter()
+            .map(|part| {
+                part.cast::<NamePart>()
+                    .expect("Span.parts holds NamePart")
+                    .borrow()
+                    .form_str
+                    .chars()
+                    .count()
+            })
+            .sum()
     }
 
     fn __hash__(&self) -> isize {
