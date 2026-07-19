@@ -92,6 +92,15 @@ def test_burmish_languages_distinct():
     assert list_to_alpha3(["rki"]) == {"rki"}
 
 
+def test_nepali_collapses_to_macrolanguage():
+    # The individual language "npi" is collapsed into the macrolanguage "nep"
+    # (which carries the two-letter code "ne"), so Nepali resolves to one code.
+    assert iso_639_alpha3("npi") == "nep"
+    assert iso_639_alpha3("ne") == "nep"
+    assert iso_639_alpha3("Nepali") == "nep"
+    assert iso_639_alpha2("nep") == "ne"
+
+
 def test_no_linguistic_content():
     # "zxx" ("no linguistic content") is treated as a non-language.
     assert iso_639_alpha3("zxx") is None

@@ -179,6 +179,11 @@ langs:
     - Burmese
     - မြန်မာ
     - bur
+  nep:
+    - Nepali
+    - Nepalese
+    - नेपाली
+    - npi
   nld:
     - Dutch
     - Nederlands
@@ -187,10 +192,6 @@ langs:
     - Norwegian
     - Norsk
     - nno
-  npi:
-    - Nepali
-    - Nepalese
-    - नेपाली
   pan:
     - Punjabi
     - ਪੰਜਾਬੀ
