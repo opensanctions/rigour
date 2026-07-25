@@ -25,7 +25,7 @@ class LangStr(str):
         return super().__repr__()
 
     def __hash__(self) -> int:
-        return hash((super().__str__(), self.lang))
+        return hash(str(self))
 
     def __eq__(self, value: object) -> bool:
         try:
