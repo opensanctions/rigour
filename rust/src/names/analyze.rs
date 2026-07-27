@@ -45,21 +45,6 @@ use crate::names::tagger::{TaggerKind, get_tagger};
 use crate::text::normalize::{Cleanup, Normalize, casefold, normalize};
 use crate::text::stopwords::stopwords_list;
 
-/// Normalise-flag combination for the tagger's alias set.
-///
-/// Must match the shape of `Name.norm_form` on the haystack side
-/// so the AC automaton's needles line up with the text it's
-/// searching. `NAME` runs `tokenize_name + ' '.join` as the final
-/// pipeline step — this subsumes `SQUASH_SPACES` and the
-/// Unicode-category handling + skip-char deletion the pre-port
-/// tagger used to do in a hardcoded post-pass.
-///
-/// No `Cleanup` accepted: `tokenize_name` already handles Unicode
-/// categories, and `Cleanup::Strong` would drop Lm/Mc characters
-/// (CJK / combining marks) the haystack keeps, breaking matches
-/// on non-Latin scripts.
-const TAGGER_FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::NAME);
-
 /// Minimum total `form_str` char count of an `ORG_CLASS` span before
 /// it can promote an `ENT` Name to `ORG`.
 ///
@@ -243,7 +228,7 @@ fn apply_initial_preamble(py: Python<'_>, name: &Py<Name>, infer_initials: bool)
 /// to `name` via `apply_phrase`.
 fn apply_tagger(py: Python<'_>, name: &Py<Name>, kind: TaggerKind) -> PyResult<()> {
     let norm_form: String = name.bind(py).borrow().norm_form.bind(py).extract()?;
-    let tagger = get_tagger(kind, TAGGER_FLAGS);
+    let tagger = get_tagger(kind);
     let matches = tagger.tag(&norm_form);
     for (phrase, symbol) in matches {
         let sym_py = Py::new(py, symbol)?;

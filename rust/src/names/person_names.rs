@@ -13,8 +13,8 @@
 // authoritative emission.
 //
 // No static `LazyLock<String>` cache — the only consumer is the tagger
-// builder (`names::tagger`), which runs once per `(TaggerKind, flags,
-// cleanup)` combination and drops the decompressed buffer as soon as
+// builder (`names::tagger`), which runs once per tagger static
+// build and drops the decompressed buffer as soon as
 // its AC automaton is assembled. Caching ~8.5 MB of decompressed text
 // for process life when nobody reads it after tagger build would just
 // be dead retention on top of the 2.7 MB compressed copy that already

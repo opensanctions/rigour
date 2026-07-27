@@ -14,7 +14,7 @@
 // returns a fresh owned `String`. Both consumers are one-shot:
 // Python's `rigour.territories.*` reads via `@cache`-decorated index
 // builders (so exactly one FFI hop per process), and the Rust tagger
-// walks the lines once per `(TaggerKind, flags, cleanup)` cache miss.
+// walks the lines once when the Org tagger static is initialised.
 // A persistent Rust-side copy would just duplicate what's already in
 // Python's cached PyString / the tagger's AC automaton.
 

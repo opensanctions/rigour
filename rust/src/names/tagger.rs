@@ -13,16 +13,19 @@
 //
 // Each source contributes to a `HashMap<String, Vec<Symbol>>` that
 // seeds `Needles<Vec<Symbol>>`. Aliases are normalised with the
-// caller's `Normalize` flags before insertion — callers must
-// normalise runtime input with the same flags. Overlapping match
+// production flags (`CASEFOLD | NAME`) before insertion — callers
+// must normalise runtime input with the same flags. Overlapping match
 // iteration emits every recognised phrase as an independent
 // `(matched_phrase, Symbol)` pair.
 //
-// Flag-keyed cache: one compiled Tagger per `(TaggerKind, Normalize)`
-// combination, same shape as the org_types Replacer cache.
+// Two `LazyLock<Tagger>` statics (Org, Person) replace the old
+// per-flag cache: the tagger has no Python surface and is only
+// driven by `analyze_names` with a constant flag combination, so
+// a `RwLock<HashMap<...>>` was guarding against a use-case that
+// never materialised.
 
 use std::collections::{HashMap, HashSet};
-use std::sync::{Arc, LazyLock, RwLock};
+use std::sync::LazyLock;
 
 use serde::Deserialize;
 
@@ -34,6 +37,10 @@ use crate::names::symbols as name_symbols;
 use crate::territories;
 use crate::text::normalize::{Cleanup, Normalize, normalize};
 use crate::text::ordinals;
+
+/// Production-normalisation flags the tagger builds its needles with
+/// and that `analyze_names` uses to normalise the haystack.
+pub(crate) const TAGGER_FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::NAME);
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum TaggerKind {
@@ -301,34 +308,23 @@ fn build_person_tagger(flags: Normalize) -> Tagger {
     b.finish()
 }
 
-type TaggerCache = RwLock<HashMap<(TaggerKind, Normalize), Arc<Tagger>>>;
+static ORG_TAGGER: LazyLock<Tagger> = LazyLock::new(|| build_org_tagger(TAGGER_FLAGS));
+static PERSON_TAGGER: LazyLock<Tagger> = LazyLock::new(|| build_person_tagger(TAGGER_FLAGS));
 
-static TAGGER_CACHE: LazyLock<TaggerCache> = LazyLock::new(|| RwLock::new(HashMap::new()));
-
-pub fn get_tagger(kind: TaggerKind, flags: Normalize) -> Arc<Tagger> {
-    let key = (kind, flags);
-    if let Some(existing) = TAGGER_CACHE.read().unwrap().get(&key) {
-        return existing.clone();
+pub fn get_tagger(kind: TaggerKind) -> &'static Tagger {
+    match kind {
+        TaggerKind::Org => &ORG_TAGGER,
+        TaggerKind::Person => &PERSON_TAGGER,
     }
-    let built = Arc::new(match kind {
-        TaggerKind::Org => build_org_tagger(flags),
-        TaggerKind::Person => build_person_tagger(flags),
-    });
-    let mut writer = TAGGER_CACHE.write().unwrap();
-    Arc::clone(writer.entry(key).or_insert(built))
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    // Test-local flag combination; production uses
-    // `analyze::TAGGER_FLAGS` (CASEFOLD | NAME).
-    const FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::SQUASH_SPACES);
-
     #[test]
     fn org_tagger_matches_ordinals() {
-        let tagger = get_tagger(TaggerKind::Org, FLAGS);
+        let tagger = get_tagger(TaggerKind::Org);
         let matches = tagger.tag("acme number one limited");
         assert!(
             matches
@@ -341,7 +337,7 @@ mod tests {
 
     #[test]
     fn org_tagger_matches_org_class() {
-        let tagger = get_tagger(TaggerKind::Org, FLAGS);
+        let tagger = get_tagger(TaggerKind::Org);
         // "aktiengesellschaft" should map to ORG_CLASS (via generic=JSC).
         let matches = tagger.tag("siemens aktiengesellschaft");
         assert!(
@@ -360,7 +356,7 @@ mod tests {
         // must carry the ORG_CLASS evidence — the tagger's needle
         // set is data-driven, not dependent on the compare-rewrite
         // having canonicalised the alias to "fze" first.
-        let tagger = get_tagger(TaggerKind::Org, FLAGS);
+        let tagger = get_tagger(TaggerKind::Org);
         let matches = tagger.tag("acme free zone establishment");
         assert!(
             matches
@@ -387,7 +383,7 @@ mod tests {
         // but `generic: SOE`: removal-from-comparison and class
         // evidence are orthogonal, so the alias still tags when it
         // appears in text.
-        let tagger = get_tagger(TaggerKind::Org, FLAGS);
+        let tagger = get_tagger(TaggerKind::Org);
         let matches = tagger.tag("federal state budgetary institution rosgeolfond");
         assert!(
             matches
@@ -400,7 +396,7 @@ mod tests {
 
     #[test]
     fn person_tagger_matches_corpus_name() {
-        let tagger = get_tagger(TaggerKind::Person, FLAGS);
+        let tagger = get_tagger(TaggerKind::Person);
         // Any name from the corpus should produce at least one NAME
         // symbol. Pick "john" — extremely common, should resolve to
         // at least one Wikidata-keyed Symbol.
@@ -415,17 +411,17 @@ mod tests {
     }
 
     #[test]
-    fn cache_returns_same_arc() {
-        let a = get_tagger(TaggerKind::Org, FLAGS);
-        let b = get_tagger(TaggerKind::Org, FLAGS);
-        assert!(Arc::ptr_eq(&a, &b));
+    fn repeated_calls_return_same_static() {
+        let a = get_tagger(TaggerKind::Org);
+        let b = get_tagger(TaggerKind::Org);
+        assert!(std::ptr::eq(a, b));
     }
 
     #[test]
-    fn cache_distinguishes_kind() {
-        let org = get_tagger(TaggerKind::Org, FLAGS);
-        let person = get_tagger(TaggerKind::Person, FLAGS);
-        assert!(!Arc::ptr_eq(&org, &person));
+    fn org_and_person_taggers_are_distinct() {
+        let org = get_tagger(TaggerKind::Org);
+        let person = get_tagger(TaggerKind::Person);
+        assert!(!std::ptr::eq(org, person));
     }
 
     #[test]
@@ -434,7 +430,7 @@ mod tests {
         // plus several NAME:Qxxx entries from the person-names corpus).
         // Without the dedupe in `tag`, the AC iteration would emit
         // 2 × K identical `(phrase, symbol)` pairs for it.
-        let tagger = get_tagger(TaggerKind::Person, FLAGS);
+        let tagger = get_tagger(TaggerKind::Person);
         let matches = tagger.tag("isa bin tarif al bin ali");
         let distinct: HashSet<_> = matches.iter().cloned().collect();
         assert_eq!(
