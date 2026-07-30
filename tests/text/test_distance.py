@@ -1,7 +1,9 @@
-from rigour.text.distance import levenshtein
-from rigour.text.distance import jaro_winkler
-from rigour.text.distance import levenshtein_similarity
-from rigour.text.distance import is_levenshtein_plausible
+from rigour.text.distance import (
+    is_levenshtein_plausible,
+    jaro_winkler,
+    levenshtein,
+    levenshtein_similarity,
+)
 
 
 def test_levenshtein():

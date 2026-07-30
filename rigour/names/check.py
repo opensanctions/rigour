@@ -1,14 +1,14 @@
-from functools import cache
-from typing import Sequence, Set
 import unicodedata
 import warnings
+from collections.abc import Sequence
+from functools import cache
 
-from rigour.text.normalize import Normalizer
 from rigour.names.tokenize import normalize_name
+from rigour.text.normalize import Normalizer
+from rigour.text.stopwords import is_nullword as _is_nullword
 
 # Re-export stopword and nullword functions from rigour.text.stopwords for backwards compatibility
 from rigour.text.stopwords import is_stopword as _is_stopword
-from rigour.text.stopwords import is_nullword as _is_nullword
 
 
 def is_name(name: str) -> bool:
@@ -81,7 +81,7 @@ def is_nullword(
     return _is_nullword(form, normalizer=normalizer, normalize=normalize)
 
 
-def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
+def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> set[str]:
     """Load a list of words and normalize them using the provided normalizer."""
     wordlist = set()
     for word in words:
@@ -92,7 +92,7 @@ def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
 
 
 @cache
-def _load_generic_person_names(normalizer: Normalizer) -> Set[str]:
+def _load_generic_person_names(normalizer: Normalizer) -> set[str]:
     """Load the generic person names from the data file and normalize them using the provided normalizer."""
     from rigour._core import generic_person_names_list
 

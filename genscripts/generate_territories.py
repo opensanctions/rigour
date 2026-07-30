@@ -1,19 +1,21 @@
-import os
-from pathlib import Path
-from yaml import safe_load as yaml_load
 import logging
-from typing import Any, Dict, Generator, Set
+import os
+from collections.abc import Generator
+from pathlib import Path
+from typing import Any
+
 from normality import latinize_text, squash_spaces
-from rigour.text.scripts import is_latin, can_latinize
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedSeq
-from ruamel.yaml.scalarstring import FoldedScalarString, DoubleQuotedScalarString
+from ruamel.yaml.scalarstring import DoubleQuotedScalarString, FoldedScalarString
+from yaml import safe_load as yaml_load
 
+from genscripts.util import RESOURCES_PATH, RUST_DATA_PATH, norm_string, write_jsonl
 from rigour.ids.wikidata import is_qid
 from rigour.langs import iso_639_alpha3
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes
-from genscripts.util import write_jsonl, norm_string, RESOURCES_PATH, RUST_DATA_PATH
+from rigour.text.scripts import can_latinize, is_latin
 
 log = logging.getLogger(__name__)
 yaml = YAML()
@@ -45,7 +47,7 @@ def loc_norm(text: str) -> str:
     return squash_spaces(text.lower())
 
 
-def rewrite_territory(global_names: Dict[str, Set[str]], file_path: Path) -> None:
+def rewrite_territory(global_names: dict[str, set[str]], file_path: Path) -> None:
     cc = clean_code(file_path.stem).upper()
     with open(file_path, "r", encoding="utf-8") as f:
         terr = yaml.load(f)
@@ -135,7 +137,7 @@ def rewrite_territory(global_names: Dict[str, Set[str]], file_path: Path) -> Non
 
 
 def rewrite_territories():
-    global_names: Dict[str, Set[str]] = {}
+    global_names: dict[str, set[str]] = {}
     for file_path in territory_files():
         rewrite_territory(global_names, file_path)
     for normed, codes in global_names.items():
@@ -146,9 +148,9 @@ def rewrite_territories():
 
 
 def update_data() -> None:
-    raw_territories: Dict[str, Any] = {}
-    territories: Dict[str, Territory] = {}
-    seen_codes: Set[str] = set()
+    raw_territories: dict[str, Any] = {}
+    territories: dict[str, Territory] = {}
+    seen_codes: set[str] = set()
     for source_file in territory_files():
         filename = os.path.basename(source_file)
         code = clean_code(filename.replace(".yml", ""))

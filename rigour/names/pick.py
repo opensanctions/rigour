@@ -1,13 +1,12 @@
-from typing import Dict, List, Optional
 
 from rigour._core import pick_case as _pick_case
 from rigour._core import pick_name as pick_name
 from rigour._core import reduce_names as reduce_names
-from rigour.langs import LangStr, PREFERRED_LANG, PREFERRED_LANGS
+from rigour.langs import PREFERRED_LANG, PREFERRED_LANGS, LangStr
 from rigour.text import levenshtein
 
 
-def pick_lang_name(names: List[LangStr]) -> Optional[str]:
+def pick_lang_name(names: list[LangStr]) -> str | None:
     """Pick the best name from a list of LangStr objects, prioritizing the preferred language.
 
     Args:
@@ -32,10 +31,10 @@ def pick_lang_name(names: List[LangStr]) -> Optional[str]:
 
 
 def representative_names(
-    names: List[str],
+    names: list[str],
     limit: int,
     cluster_threshold: float = 0.3,
-) -> List[str]:
+) -> list[str]:
     """Reduce a bag of aliases to at most `limit` representatives
     without extreme information loss.
 
@@ -77,7 +76,7 @@ def representative_names(
 
     # Casefolded/whitespace-normalised form of each reduced name, for
     # distance measurement. The originals are what we return.
-    normed: Dict[str, str] = {}
+    normed: dict[str, str] = {}
     for n in reduced:
         nn = " ".join(n.casefold().split())
         if nn:
@@ -93,9 +92,9 @@ def representative_names(
     # Farthest-point-first seed selection with threshold stopping: each
     # new seed must be more than `cluster_threshold` away from every
     # already-picked seed, else we've run out of distinct clusters.
-    seeds: List[str] = [centroid]
+    seeds: list[str] = [centroid]
     while len(seeds) < limit:
-        outlier: Optional[str] = None
+        outlier: str | None = None
         outlier_d = 0.0
         for n in reduced:
             if n in seeds or n not in normed:
@@ -115,7 +114,7 @@ def representative_names(
     # Assign each reduced name to its nearest seed, then pick_name per
     # cluster so the returned rep is the best display form of its group
     # rather than whichever outlier happened to be picked as the seed.
-    clusters: List[List[str]] = [[s] for s in seeds]
+    clusters: list[list[str]] = [[s] for s in seeds]
     for n in reduced:
         if n in seeds or n not in normed:
             continue
@@ -129,7 +128,7 @@ def representative_names(
                 best_i = i
         clusters[best_i].append(n)
 
-    reps: List[str] = []
+    reps: list[str] = []
     for cluster in clusters:
         rep = pick_name(cluster)
         if rep is not None:
@@ -137,7 +136,7 @@ def representative_names(
     return reps
 
 
-def pick_case(names: List[str]) -> str:
+def pick_case(names: list[str]) -> str:
     """Pick the best mix of lower- and uppercase characters from a set of names
     that are identical except for case. If the names are not identical, undefined
     things happen (not recommended).

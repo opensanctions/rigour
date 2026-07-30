@@ -1,6 +1,6 @@
 import requests
 
-from rigour.territories import get_territory, get_ftm_countries
+from rigour.territories import get_ftm_countries, get_territory
 
 res = requests.get(
     "https://opensanctions.directus.app/items/territories?limit=5000"

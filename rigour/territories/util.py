@@ -1,5 +1,5 @@
 import unicodedata
-from typing import List
+
 from normality import latinize_text, squash_spaces
 
 from rigour.text.scripts import can_latinize
@@ -12,7 +12,7 @@ def clean_code(code: str) -> str:
     return code.lower().replace("_", "-").strip()
 
 
-def clean_codes(codes: List[str]) -> List[str]:
+def clean_codes(codes: list[str]) -> list[str]:
     """Clean up a list of territory codes."""
     return [clean_code(code) for code in codes if len(clean_code(code)) > 1]
 
@@ -20,7 +20,7 @@ def clean_codes(codes: List[str]) -> List[str]:
 def normalize_territory_name(name: str) -> str:
     """Normalize a territory name for lookup."""
     name = unicodedata.normalize("NFKD", name).casefold()
-    filtered: List[str] = []
+    filtered: list[str] = []
     for char in name:
         if char in SKIP_CHARACTERS:
             continue

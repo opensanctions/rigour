@@ -1,16 +1,16 @@
-from typing import List
+
 from rigour.names.name import Name
-from rigour.names.part import NamePart
 from rigour.names.ordering import align_person_name_order
+from rigour.names.part import NamePart
 from rigour.names.tag import NamePartTag
 
 
-def make(name: str) -> List[NamePart]:
+def make(name: str) -> list[NamePart]:
     obj = Name(name, form=name.lower())
     return list(obj.parts)
 
 
-def tokens_eq(a: List[NamePart], b: List[str]) -> bool:
+def tokens_eq(a: list[NamePart], b: list[str]) -> bool:
     if len(a) != len(b):
         return False
     for i, part in enumerate(a):

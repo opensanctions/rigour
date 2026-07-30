@@ -1,19 +1,20 @@
 import logging
-from collections import defaultdict
-from typing import Dict, Generator, Iterable, Set, Tuple
 import unicodedata
+from collections import defaultdict
+from collections.abc import Generator, Iterable
+
 from normality import ascii_text
 from normality.cleaning import remove_unsafe_chars
-from rigour.text.scripts import can_latinize
 
 from namesdb.cleanup import block_forms, block_groups, block_phrases
 from namesdb.db import all_mappings, engine
+from rigour.text.scripts import can_latinize
 
 log = logging.getLogger(__name__)
 
 
 def can_translit_match(forms: Iterable[str]) -> bool:
-    latinized: Set[str] = set()
+    latinized: set[str] = set()
     for form in forms:
         if not can_latinize(form):
             return False
@@ -31,20 +32,20 @@ def normalize_form(text: str) -> str:
     return text
 
 
-def generate_export_lines() -> Generator[Tuple[str, int], None, None]:
+def generate_export_lines() -> Generator[tuple[str, int], None, None]:
     block_groups()
     block_phrases()
     block_forms()
     with engine.begin() as conn:
         raw_mappings = dict(all_mappings(conn))
         log.info("Loaded %d name mappings", len(raw_mappings))
-        mappings: Dict[str, Set[str]] = {}
+        mappings: dict[str, set[str]] = {}
         log.info("Normalizing name mappings...")
         for group, aliases in raw_mappings.items():
             normed = [normalize_form(a) for a in aliases]
             mappings[group] = set(n for n in normed if len(n))
         log.info("Deduplicating name groups...")
-        by_names: Dict[str, Set[str]] = defaultdict(set)
+        by_names: dict[str, set[str]] = defaultdict(set)
         for group, aliases in mappings.items():
             for alias in aliases:
                 by_names[alias].add(group)

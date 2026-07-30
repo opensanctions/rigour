@@ -1,18 +1,18 @@
 import re
-from typing import Callable, List, Optional, Tuple
+from collections.abc import Callable
 
 from rigour.ids.common import IdentifierFormat
 
 IMO_RE = re.compile(r"(IMO[\s:.#-]*)?(?<!\d)(\d{5,7})(?!\d)")
 
-Checksum = Callable[[List[int]], bool]
+Checksum = Callable[[list[int]], bool]
 
 
-def _vessel_checksum(digits: List[int]) -> bool:
+def _vessel_checksum(digits: list[int]) -> bool:
     return sum(d * (7 - i) for i, d in enumerate(digits[:6])) % 10 == digits[6]
 
 
-def _company_checksum(digits: List[int]) -> bool:
+def _company_checksum(digits: list[int]) -> bool:
     weights = (8, 6, 4, 2, 9, 7)
     checksum = sum(d * w for d, w in zip(digits, weights))
     return (11 - checksum % 11) % 10 == digits[6]
@@ -79,7 +79,7 @@ class IMO(IdentifierFormat):
         return cls._extract(text, (_company_checksum,)) is not None
 
     @classmethod
-    def normalize(cls, text: str) -> Optional[str]:
+    def normalize(cls, text: str) -> str | None:
         """Extract and normalize an IMO number from the given text.
 
         Args:
@@ -95,7 +95,7 @@ class IMO(IdentifierFormat):
         return f"IMO{value}"
 
     @classmethod
-    def _extract(cls, text: str, checksums: Tuple[Checksum, ...]) -> Optional[str]:
+    def _extract(cls, text: str, checksums: tuple[Checksum, ...]) -> str | None:
         matches = sorted(
             IMO_RE.finditer(text),
             key=lambda m: (-len(m.group(2)), m.group(1) is None, m.start()),

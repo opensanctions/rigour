@@ -1,9 +1,10 @@
-import string
 import logging
-from sqlalchemy import select, update, func
-from namesdb.db import engine, mapping_table
-from namesdb.blocks import GROUPS, CONTAINS, STARTS, SUFFIXES
+import string
 
+from sqlalchemy import func, select, update
+
+from namesdb.blocks import CONTAINS, GROUPS, STARTS, SUFFIXES
+from namesdb.db import engine, mapping_table
 from rigour.text.scripts import is_latin
 
 log = logging.getLogger(__name__)

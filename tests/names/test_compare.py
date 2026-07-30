@@ -1,4 +1,3 @@
-from typing import List
 
 import pytest
 
@@ -6,7 +5,7 @@ from rigour.names.compare import Alignment, CompareConfig, compare_parts
 from rigour.names.part import NamePart
 
 
-def parts(*forms: str) -> List[NamePart]:
+def parts(*forms: str) -> list[NamePart]:
     return [NamePart(form, i) for i, form in enumerate(forms)]
 
 
@@ -250,7 +249,8 @@ def test_score_weight_setters_accept_ints() -> None:
 def test_alignment_is_importable_from_public_module() -> None:
     # Productized surface check: both names are reachable from
     # `rigour.names` itself, not just `rigour.names.compare`.
-    from rigour.names import Alignment as Top, compare_parts as top_fn
+    from rigour.names import Alignment as Top
+    from rigour.names import compare_parts as top_fn
 
     assert Top is Alignment
     assert top_fn is compare_parts

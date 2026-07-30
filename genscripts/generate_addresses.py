@@ -1,14 +1,13 @@
-import yaml
 import logging
 
-from genscripts.util import write_python, RESOURCES_PATH, CODE_PATH
+import yaml
+
+from genscripts.util import CODE_PATH, RESOURCES_PATH, write_python
 
 log = logging.getLogger(__name__)
 
 TEMPLATE = """
-from typing import Dict, List
-
-FORMS: Dict[str, List[str]] = %r
+FORMS: dict[str, list[str]] = %r
 """
 
 

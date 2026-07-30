@@ -1,8 +1,8 @@
 import re
-from typing import Optional
+
 from rigour.ids.common import IdentifierFormat
 
-UEI_RE = re.compile(r"\b([0-9ABCDEFGHJKLMNPQRSTUVWXYZ]{12})\b", re.I)
+UEI_RE = re.compile(r"\b([0-9ABCDEFGHJKLMNPQRSTUVWXYZ]{12})\b", re.IGNORECASE)
 
 
 class UEI(IdentifierFormat):
@@ -32,7 +32,7 @@ class UEI(IdentifierFormat):
         return True
 
     @classmethod
-    def normalize(cls, text: str) -> Optional[str]:
+    def normalize(cls, text: str) -> str | None:
         """Normalize the given string to a valid NPI."""
         match = UEI_RE.search(text)
         if match is None:

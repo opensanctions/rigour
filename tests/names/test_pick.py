@@ -1,9 +1,10 @@
 import pytest
-from rigour.langs import LangStr, PREFERRED_LANG
+
+from rigour.langs import PREFERRED_LANG, LangStr
 from rigour.names.pick import (
-    pick_name,
-    pick_lang_name,
     pick_case,
+    pick_lang_name,
+    pick_name,
     reduce_names,
     representative_names,
 )

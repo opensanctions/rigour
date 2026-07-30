@@ -24,7 +24,6 @@ import csv
 import unicodedata
 from collections import defaultdict
 from pathlib import Path
-from typing import DefaultDict, List, Tuple
 
 from normality import ascii_text as normality_ascii
 
@@ -34,7 +33,7 @@ CORPUS = Path(__file__).parent.parent / "contrib" / "sample_names.csv"
 SAMPLES_PER_SCRIPT = 8
 
 
-def load_names() -> List[str]:
+def load_names() -> list[str]:
     with open(CORPUS, encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)  # header
@@ -82,10 +81,10 @@ def main() -> None:
     )
     print()
 
-    counts: DefaultDict[str, DefaultDict[str, int]] = defaultdict(
+    counts: defaultdict[str, defaultdict[str, int]] = defaultdict(
         lambda: defaultdict(int)
     )
-    diffs: DefaultDict[str, List[Tuple[str, str, str, str]]] = defaultdict(list)
+    diffs: defaultdict[str, list[tuple[str, str, str, str]]] = defaultdict(list)
 
     for name in admitted:
         a = maybe_ascii(name)
@@ -96,7 +95,7 @@ def main() -> None:
         if kind != "exact":
             diffs[script].append((kind, name, a, b))
 
-    totals: DefaultDict[str, int] = defaultdict(int)
+    totals: defaultdict[str, int] = defaultdict(int)
     for script_counts in counts.values():
         for kind, n in script_counts.items():
             totals[kind] += n

@@ -1,4 +1,4 @@
-from rigour.names.check import is_name, is_generic_person_name
+from rigour.names.check import is_generic_person_name, is_name
 
 
 def test_is_name():

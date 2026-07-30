@@ -12,52 +12,57 @@ is used to represent individual parts of a name, such as the first name, middle 
 * [Falsehoods Programmers Believe About Names](https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/)
 """
 
-from rigour.names.name import Name
-from rigour.names.symbol import Symbol, SymbolCategory, pair_symbols
-from rigour.names.part import NamePart, Span
-from rigour.names.tag import NamePartTag, NameTypeTag
-from rigour.names.pick import pick_name, pick_case, reduce_names
-from rigour.names.pick import representative_names
-from rigour.names.check import is_name, is_stopword
-from rigour.names.tokenize import tokenize_name, normalize_name
-from rigour.names.prefix import remove_person_prefixes, remove_org_prefixes
-from rigour.names.prefix import remove_obj_prefixes
 from rigour.names.analyze import analyze_names
+from rigour.names.check import is_name, is_stopword
 from rigour.names.compare import Alignment, CompareConfig, compare_parts
-from rigour.names.org_types import replace_org_types_display
-from rigour.names.org_types import replace_org_types_compare
-from rigour.names.org_types import extract_org_types, remove_org_types
+from rigour.names.name import Name
 from rigour.names.ordering import align_person_name_order
+from rigour.names.org_types import (
+    extract_org_types,
+    remove_org_types,
+    replace_org_types_compare,
+    replace_org_types_display,
+)
+from rigour.names.part import NamePart, Span
+from rigour.names.pick import pick_case, pick_name, reduce_names, representative_names
+from rigour.names.prefix import (
+    remove_obj_prefixes,
+    remove_org_prefixes,
+    remove_person_prefixes,
+)
 from rigour.names.split_phrases import contains_split_phrase
+from rigour.names.symbol import Symbol, SymbolCategory, pair_symbols
+from rigour.names.tag import NamePartTag, NameTypeTag
+from rigour.names.tokenize import normalize_name, tokenize_name
 
 __all__ = [
-    "pick_name",
-    "pick_case",
-    "reduce_names",
-    "representative_names",
-    "tokenize_name",
-    "normalize_name",
-    "is_name",
-    "is_stopword",
+    "Alignment",
+    "CompareConfig",
     "Name",
-    "Symbol",
-    "SymbolCategory",
-    "pair_symbols",
-    "Span",
     "NamePart",
     "NamePartTag",
     "NameTypeTag",
-    "remove_person_prefixes",
-    "remove_org_prefixes",
-    "remove_obj_prefixes",
-    "replace_org_types_display",
-    "replace_org_types_compare",
+    "Span",
+    "Symbol",
+    "SymbolCategory",
     "align_person_name_order",
-    "extract_org_types",
-    "remove_org_types",
     "analyze_names",
-    "Alignment",
-    "CompareConfig",
     "compare_parts",
     "contains_split_phrase",
+    "extract_org_types",
+    "is_name",
+    "is_stopword",
+    "normalize_name",
+    "pair_symbols",
+    "pick_case",
+    "pick_name",
+    "reduce_names",
+    "remove_obj_prefixes",
+    "remove_org_prefixes",
+    "remove_org_types",
+    "remove_person_prefixes",
+    "replace_org_types_compare",
+    "replace_org_types_display",
+    "representative_names",
+    "tokenize_name",
 ]

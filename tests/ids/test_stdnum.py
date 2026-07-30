@@ -1,4 +1,4 @@
-from rigour.ids import ISIN, IBAN, FIGI, BIC, INN, LEI, CPF, CNPJ, SSN, USCC
+from rigour.ids import BIC, CNPJ, CPF, FIGI, IBAN, INN, ISIN, LEI, SSN, USCC
 
 
 def test_isin():

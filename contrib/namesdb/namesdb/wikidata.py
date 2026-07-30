@@ -1,10 +1,10 @@
-import random
 import logging
-import requests
+import random
 from functools import lru_cache
-from typing import List, Optional, Set, Tuple
-# from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 
+import requests
+
+# from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 from followthemoney import Dataset
 from nomenklatura import settings
 from nomenklatura.cache import Cache
@@ -12,8 +12,8 @@ from nomenklatura.db import Session
 from nomenklatura.wikidata import WikidataClient
 from nomenklatura.wikidata.util import make_session
 
-from namesdb.db import store_mapping, engine
 from namesdb.blocks import GROUPS as BLOCKED_GROUPS
+from namesdb.db import engine, store_mapping
 from namesdb.util import clean_form
 
 log = logging.getLogger("namesdb.wikidata")
@@ -57,10 +57,10 @@ SELECT DISTINCT ?item WHERE { ?item wdt:P31 wd:%s . }
 
 
 @lru_cache(maxsize=1000)
-def clean_wikidata_name(name: Optional[str]) -> List[str]:
+def clean_wikidata_name(name: str | None) -> list[str]:
     if name is None:
         return []
-    names: List[str] = []
+    names: list[str] = []
     for part in name.split("/"):
         part = clean_form(part)
         if part is None:
@@ -72,7 +72,7 @@ def clean_wikidata_name(name: Optional[str]) -> List[str]:
     return names
 
 
-def process_item(qid: str) -> Optional[Tuple[str, Set[str]]]:
+def process_item(qid: str) -> tuple[str, set[str]] | None:
     # Helper function to safely fetch an item
     try:
         item = client.fetch_item(qid)

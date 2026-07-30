@@ -1,5 +1,5 @@
 import re
-from typing import Optional
+
 from stdnum import luhn
 
 from rigour.ids.common import IdentifierFormat
@@ -32,7 +32,7 @@ class NPI(IdentifierFormat):
         return bool(luhn.is_valid(text))
 
     @classmethod
-    def normalize(cls, text: str) -> Optional[str]:
+    def normalize(cls, text: str) -> str | None:
         """Normalize the given string to a valid NPI."""
         match = NPI_RE.search(text)
         if match is None:

@@ -1,5 +1,9 @@
-from rigour.ids import get_identifier_format, get_identifier_formats
-from rigour.ids import get_identifier_format_names, get_strong_format_names
+from rigour.ids import (
+    get_identifier_format,
+    get_identifier_format_names,
+    get_identifier_formats,
+    get_strong_format_names,
+)
 from rigour.ids.common import IdentifierFormat
 from rigour.ids.strict import StrictFormat
 

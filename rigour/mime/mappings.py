@@ -1,10 +1,23 @@
-from typing import Dict
 
-from rigour.mime.types import DEFAULT, PLAIN, DIRECTORY
-from rigour.mime.types import EXCEL, PDF, CSV, RTF, PSD, WORD, XML
-from rigour.mime.types import RAR, ZIP, GZIP, TIFF, JPEG
+from rigour.mime.types import (
+    CSV,
+    DEFAULT,
+    DIRECTORY,
+    EXCEL,
+    GZIP,
+    JPEG,
+    PDF,
+    PLAIN,
+    PSD,
+    RAR,
+    RTF,
+    TIFF,
+    WORD,
+    XML,
+    ZIP,
+)
 
-REPLACE: Dict[str, str] = {
+REPLACE: dict[str, str] = {
     "x-unknown/unknown": DEFAULT,
     "unknown/unknown": DEFAULT,
     "x-unknown/octet-stream": DEFAULT,

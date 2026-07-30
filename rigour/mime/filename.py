@@ -1,14 +1,14 @@
 import os
 import sys
-from typing import Optional
 from mimetypes import guess_extension
-from normality import slugify, safe_filename
+
+from normality import safe_filename, slugify
 
 from rigour.mime.mime import normalize_mimetype
 from rigour.mime.types import DEFAULT
 
 
-def normalize_extension(extension: Optional[str]) -> Optional[str]:
+def normalize_extension(extension: str | None) -> str | None:
     """Normalise a file name extension."""
     if extension is None:
         return None
@@ -24,7 +24,7 @@ def normalize_extension(extension: Optional[str]) -> Optional[str]:
     return extension
 
 
-def mimetype_extension(mime_type: Optional[str]) -> Optional[str]:
+def mimetype_extension(mime_type: str | None) -> str | None:
     """Infer a possible extension from a MIME type."""
     mime_type = normalize_mimetype(mime_type)
     if mime_type == DEFAULT:
@@ -36,16 +36,16 @@ def mimetype_extension(mime_type: Optional[str]) -> Optional[str]:
 class FileName(object):
     FALLBACK = "data"
 
-    def __init__(self, file_name: Optional[str]):
+    def __init__(self, file_name: str | None):
         self.file_name = file_name
-        self.base: Optional[str] = None
-        self.extension: Optional[str] = None
+        self.base: str | None = None
+        self.extension: str | None = None
         if file_name is not None:
             self.base, ext = os.path.splitext(file_name)
             self.extension = normalize_extension(ext)
         self.has_extension = self.extension is not None
 
-    def safe(self, extension: Optional[str] = None) -> Optional[str]:
+    def safe(self, extension: str | None = None) -> str | None:
         ext = extension or self.extension
         default = "data.%s" % ext if ext else self.FALLBACK
         return safe_filename(self.file_name, default=default, extension=ext)

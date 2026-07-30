@@ -1,4 +1,5 @@
 import pytest
+
 from rigour.ids import IBAN
 
 TEST_IBANS = [

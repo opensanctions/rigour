@@ -1,5 +1,6 @@
 from rigour.urls.compare import compare_urls
 
+
 def test_compare_url():
     assert compare_urls("https://www.axample.com", "https://www.example.com") == 0.0
     assert compare_urls("", "") == 0.0

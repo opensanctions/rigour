@@ -1,12 +1,13 @@
-import sys
 import csv
+import sys
 from collections import Counter
-from typing import Callable
+from collections.abc import Callable
+
+from rigour.data.names import data
+from rigour.text.dictionary import Scanner
 
 from rigour.names import normalize_name
 from rigour.names.org_types import remove_org_types
-from rigour.text.dictionary import Scanner
-from rigour.data.names import data
 
 
 def org_name_processor() -> Callable[[str], str]:

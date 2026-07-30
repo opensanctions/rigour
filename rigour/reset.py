@@ -1,20 +1,24 @@
 import gc
 
-from rigour.text.distance import levenshtein, jaro_winkler
-from rigour.text.phonetics import soundex, metaphone
-from rigour.territories.territory import get_index
-from rigour.territories.lookup import lookup_territory
-from rigour.territories.lookup import _get_identifier_map, _get_territory_names
-from rigour.text.scripts import codepoint_script
-from rigour.names.tokenize import normalize_name
-from rigour.names.prefix import (
-    _person_prefix_regex,
-    _org_prefix_regex,
-    _obj_prefix_regex,
-)
-from rigour.names.split_phrases import _split_phrase_regex
 from rigour.addresses.format import _load_formats, _load_template
 from rigour.addresses.normalize import _address_replacer
+from rigour.names.prefix import (
+    _obj_prefix_regex,
+    _org_prefix_regex,
+    _person_prefix_regex,
+)
+from rigour.names.split_phrases import _split_phrase_regex
+from rigour.names.tokenize import normalize_name
+from rigour.territories.lookup import (
+    _get_identifier_map,
+    _get_territory_names,
+    lookup_territory,
+)
+from rigour.territories.territory import get_index
+from rigour.text.distance import jaro_winkler, levenshtein
+from rigour.text.phonetics import metaphone, soundex
+from rigour.text.scripts import codepoint_script
+
 # Tagger caches live Rust-side, keyed on (TaggerKind, Normalize,
 # Cleanup) in a process-lifetime RwLock<HashMap>. There's no
 # Python-side handle to reset; the built automata stay until process

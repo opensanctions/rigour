@@ -1,5 +1,6 @@
 import os
-from rigour.env import env_bool, env_str, env_float, env_int, env_opt
+
+from rigour.env import env_bool, env_float, env_int, env_opt, env_str
 
 
 def test_env_str():

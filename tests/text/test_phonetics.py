@@ -1,5 +1,6 @@
 from rigour.text import metaphone, soundex
 
+
 def test_metaphone():
     # rphonetic collapses whitespace; jellyfish preserved it. Production callers
     # always tokenize first (see rigour/names/part.py, nomenklatura phonetic.py),

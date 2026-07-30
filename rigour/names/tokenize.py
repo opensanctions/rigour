@@ -7,15 +7,13 @@ that callers reach for as the cheapest "key for matching" shape.
 """
 
 from functools import lru_cache
-from typing import List, Optional
-
 
 from rigour._core import tokenize_name as _tokenize_name
-from rigour.text.normalize import normalize, Normalize
+from rigour.text.normalize import Normalize, normalize
 from rigour.util import MEMO_SMALL
 
 
-def tokenize_name(text: str, token_min_length: int = 1) -> List[str]:
+def tokenize_name(text: str, token_min_length: int = 1) -> list[str]:
     """Split a person or entity's name into name parts.
 
     Unicode general-category-aware: separator categories (spaces,
@@ -36,7 +34,7 @@ def tokenize_name(text: str, token_min_length: int = 1) -> List[str]:
 
 
 @lru_cache(maxsize=MEMO_SMALL)
-def normalize_name(name: Optional[str]) -> Optional[str]:
+def normalize_name(name: str | None) -> str | None:
     """Casefold and tokenise a name into a stable matching key.
 
     Convenience composition of :func:`tokenize_name` over a

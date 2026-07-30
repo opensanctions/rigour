@@ -1,11 +1,12 @@
-import yaml
-from typing import Dict, Optional, TypedDict
 from functools import cache
-from jinja2 import Template, Environment
+from typing import TypedDict
 
+import yaml
+from jinja2 import Environment, Template
+
+from rigour.addresses.cleaning import clean_address
 from rigour.data import DATA_PATH
 from rigour.env import ENCODING
-from rigour.addresses.cleaning import clean_address
 
 env = Environment()
 
@@ -13,14 +14,14 @@ env = Environment()
 class Format(TypedDict):
     address_template: str
     use_country: str
-    add_component: Dict[str, str]
+    add_component: dict[str, str]
 
 
 @cache
-def _load_formats() -> Dict[str, Format]:
+def _load_formats() -> dict[str, Format]:
     template_file = DATA_PATH / "addresses" / "formats.yml"
     with open(template_file, "r", encoding=ENCODING) as fp:
-        data: Dict[str, Format] = yaml.load(fp, Loader=yaml.FullLoader)
+        data: dict[str, Format] = yaml.load(fp, Loader=yaml.FullLoader)
     return data
 
 
@@ -29,7 +30,7 @@ def _load_template(template: str) -> Template:
     return env.from_string(template)
 
 
-def _format(address: Dict[str, Optional[str]], country: Optional[str] = None) -> str:
+def _format(address: dict[str, str | None], country: str | None = None) -> str:
     country = country.upper() if country is not None else "default"
     formats = _load_formats()
     fmt = formats.get(country)
@@ -50,7 +51,7 @@ def _format(address: Dict[str, Optional[str]], country: Optional[str] = None) ->
                 address[key] = value
         return _format(address, country=use_country)
 
-    cleaned_address: Dict[str, str] = {}
+    cleaned_address: dict[str, str] = {}
     for part, pvalue in address.items():
         if pvalue is None:
             continue
@@ -64,7 +65,7 @@ def _format(address: Dict[str, Optional[str]], country: Optional[str] = None) ->
 
 
 def format_address(
-    address: Dict[str, Optional[str]], country: Optional[str] = None
+    address: dict[str, str | None], country: str | None = None
 ) -> str:
     """Format the given address part into a multi-line string that matches the
     conventions of the country of the given address.
@@ -90,7 +91,7 @@ def format_address(
         A single-line string with the formatted address.
     """
     text = _format(address, country=country)
-    prev: Optional[str] = None
+    prev: str | None = None
     while prev != text:
         prev = text
         text = text.replace("\n\n", "\n").replace("\n ", "\n").strip()
@@ -98,7 +99,7 @@ def format_address(
 
 
 def format_address_line(
-    address: Dict[str, Optional[str]], country: Optional[str] = None
+    address: dict[str, str | None], country: str | None = None
 ) -> str:
     """Format the given address part into a single-line string that matches the
     conventions of the country of the given address.

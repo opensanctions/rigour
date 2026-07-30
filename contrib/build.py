@@ -1,7 +1,7 @@
 import csv
-import yaml
 from pathlib import Path
 
+import yaml
 from followthemoney.types import registry
 
 OUT_PATH = Path(__file__).parent.parent / "rigour" / "data" / "countries" / "world.yml"

@@ -1,12 +1,10 @@
 from functools import lru_cache
-from typing import Optional
 
 from rigour._core import codepoint_script as _codepoint_script
 from rigour._core import common_scripts as _common_scripts
 from rigour._core import should_ascii as _should_ascii
 from rigour._core import text_scripts as _text_scripts
 from rigour.util import MEMO_MEDIUM
-
 
 #: Letter-based writing systems with explicit vowels — these
 #: transliterate reliably to Latin without language hints.
@@ -22,7 +20,7 @@ DENSE_SCRIPTS = {"Han", "Hiragana", "Katakana", "Hangul"}
 
 
 @lru_cache(maxsize=MEMO_MEDIUM)
-def codepoint_script(cp: int) -> Optional[str]:
+def codepoint_script(cp: int) -> str | None:
     """Return the Unicode Script long name for a codepoint.
 
     Faithful exposure of the Unicode Script property via ICU4X.

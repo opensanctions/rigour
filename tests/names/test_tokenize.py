@@ -1,4 +1,4 @@
-from rigour.names import tokenize_name, normalize_name
+from rigour.names import normalize_name, tokenize_name
 
 
 def test_tokenize_name():

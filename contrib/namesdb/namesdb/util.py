@@ -1,5 +1,5 @@
 import unicodedata
-from typing import Optional
+
 from normality.cleaning import remove_unsafe_chars
 
 from rigour.names import is_name
@@ -7,7 +7,7 @@ from rigour.text.cleaning import remove_bracketed_text, remove_emoji
 from rigour.text.scripts import is_modern_alphabet
 
 
-def clean_form(form: str) -> Optional[str]:
+def clean_form(form: str) -> str | None:
     """Clean a name by removing leading and trailing whitespace."""
     form = remove_bracketed_text(form)
     form = remove_emoji(form)

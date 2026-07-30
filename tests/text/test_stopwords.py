@@ -1,4 +1,4 @@
-from rigour.text.stopwords import is_stopword, is_nullword, is_nullplace
+from rigour.text.stopwords import is_nullplace, is_nullword, is_stopword
 
 
 def test_is_stopword():

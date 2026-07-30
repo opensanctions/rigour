@@ -1,7 +1,12 @@
 from rigour.data.langs.iso639 import ISO3_ALL
-from rigour.langs import iso_639_alpha3, iso_639_alpha2
-from rigour.langs import list_to_alpha3, is_lang_better
-from rigour.langs import PREFERRED_LANG, PREFERRED_LANGS
+from rigour.langs import (
+    PREFERRED_LANG,
+    PREFERRED_LANGS,
+    is_lang_better,
+    iso_639_alpha2,
+    iso_639_alpha3,
+    list_to_alpha3,
+)
 
 
 def test_preferred():

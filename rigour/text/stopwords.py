@@ -1,5 +1,5 @@
+from collections.abc import Sequence
 from functools import cache
-from typing import Optional, Sequence, Set
 
 from normality import category_replace, squash_spaces
 from normality.constants import SLUG_CATEGORIES
@@ -8,7 +8,7 @@ from rigour._core import nullplaces_list, nullwords_list, stopwords_list
 from rigour.text.normalize import Normalizer, noop_normalizer
 
 
-def normalize_text(text: Optional[str]) -> Optional[str]:
+def normalize_text(text: str | None) -> str | None:
     """Default normalizer for stopword / nullword / nullplace lookup.
 
     Composes casefold + slug-category replacement + whitespace
@@ -32,7 +32,7 @@ def normalize_text(text: Optional[str]) -> Optional[str]:
     return replaced if len(replaced) > 0 else None
 
 
-def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
+def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> set[str]:
     """Apply `normalizer` to every word and return the non-empty
     results as a set. Internal builder used by the per-list
     `_load_*` helpers below."""
@@ -45,7 +45,7 @@ def _load_wordlist(words: Sequence[str], normalizer: Normalizer) -> Set[str]:
 
 
 @cache
-def _load_stopwords(normalizer: Normalizer) -> Set[str]:
+def _load_stopwords(normalizer: Normalizer) -> set[str]:
     """Build the stopword set using `normalizer`. Cached so the
     same `(normalizer, wordlist)` combination is built once per
     process."""

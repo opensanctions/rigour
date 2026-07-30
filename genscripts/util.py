@@ -1,11 +1,12 @@
-import black
-import orjson
 import logging
 import unicodedata
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Any, Iterable
-from normality.cleaning import remove_unsafe_chars
+from typing import Any
 
+import black
+import orjson
+from normality.cleaning import remove_unsafe_chars
 
 REPO_ROOT = Path(__file__).parent.parent
 RESOURCES_PATH = REPO_ROOT / "resources"

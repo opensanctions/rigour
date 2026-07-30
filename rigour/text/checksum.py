@@ -1,5 +1,6 @@
 from hashlib import sha1
 from unicodedata import normalize
+
 from normality.cleaning import remove_unsafe_chars
 
 from rigour.env import ENCODING

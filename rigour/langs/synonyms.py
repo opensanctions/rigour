@@ -1,8 +1,7 @@
 # This is a set of synonyms for pragmatic usage in NLP. It is based on
 # working with Tesseract 3.04, but should be applicable elsewhere.
+from collections.abc import Iterable
 from functools import cache
-from typing import Iterable
-
 
 LANG_SYNONYMS = [
     ("srp", "hbs", "hrv", "bos"),
