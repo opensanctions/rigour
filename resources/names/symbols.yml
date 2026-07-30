@@ -143,6 +143,7 @@ org_symbols:
     - 協力的な
     - 生活協同組合
     - 合作社
+    - corpn
   coop:
     - co-op
     - coop
@@ -201,6 +202,7 @@ org_symbols:
     - Stowarzyszenie
     - Związek
     - Zwiazek # without diacritic
+    - assn
   ngo:
     - ngo
     - n.g.o.
@@ -321,6 +323,7 @@ org_symbols:
     - tsentrov
     - центров
     - مركز
+    - ctr
   holding:
     - holding
     - holdings
@@ -348,6 +351,8 @@ org_symbols:
     - кооперативів
     - споживче товариство
     - споживча кооперація
+    - hldg
+    - hldgs
   business:
     - business
     - businesses
@@ -389,6 +394,9 @@ org_symbols:
   service:
     - service
     - services
+    - SRVCES
+    - SRVCE
+    - SVC
     - servicio
     - servicios
     - servico
@@ -404,6 +412,7 @@ org_symbols:
     - сервіс
     - услуг
     - обслуживания
+    - svcs
   dept:
     - department
     - dept.
@@ -451,6 +460,7 @@ org_symbols:
     - агентство
     - एजेंसी
     - وكالة
+    - agcy
   fund:
     - fund
     - funds
@@ -497,6 +507,7 @@ org_symbols:
     - grupė
     - grupo
     - grupp
+    - grp
     - gruppo
     - Grupul
     - Grúpa
@@ -540,6 +551,9 @@ org_symbols:
     - Epicheirisi
     - 管理
     - 辖
+    - mgmt
+    - mgt
+    - mngmt
   fed:
     - federal
     - федеральное
@@ -609,6 +623,7 @@ org_symbols:
     - valstybinis
     - 国立
     - 国家的
+    - natl
   allrussian:
     - ВСЕРОССИЙСКИЙ
     - all-russian
@@ -668,6 +683,7 @@ org_symbols:
     - institutului
     - 研究所
     - 学院
+    - inst
   club:
     - club
     - clube
@@ -706,6 +722,7 @@ org_symbols:
     - 財団
     - 基金
     - 設立
+    - fndn
   private:
     - private
     - privat
@@ -775,6 +792,8 @@ org_symbols:
     - endüstri
     - sanayi
     - 業界
+    - inds
+    - indust
   associates:
     - associates
     - ассоциированные
@@ -828,6 +847,7 @@ org_symbols:
     - комітет
     - комітети
     - комитету
+    - cmte
   kombinat:
     - kombinat
     - комбинат
@@ -895,6 +915,7 @@ org_symbols:
     - sistemy
     - システム
     - システムズ
+    - sys
   association:
     - association
     - associations
@@ -949,6 +970,8 @@ org_symbols:
     - 상업적
     - kommersiel
     - 商业的
+    - coml
+    - comml
   municipal:
     - municipal
     - municipality
@@ -1065,6 +1088,8 @@ org_symbols:
     - gobierno de
     - κυβερνηση
     - κυβερνητική
+    - govt
+    - gvt
   region:
     - области
     - област
@@ -1204,6 +1229,7 @@ org_symbols:
     - 商业
     - 商行
     - 贸易公司
+    - trdg
   solution:
     - solution
     - solutions
@@ -1220,6 +1246,8 @@ org_symbols:
     - soluções
     - soluciones
     - solusi
+    - soln
+    - solns
   project:
     - project
     - projects
@@ -1243,6 +1271,7 @@ org_symbols:
     - projektoje
     - projektųje
     - projektoje
+    - proj
   product:
     - product
     - products
@@ -1257,6 +1286,8 @@ org_symbols:
     - προϊόντα
     - ürün
     - ürünler
+    - prod
+    - prods
   alliance:
     - alliance
     - aliança
@@ -1366,6 +1397,7 @@ org_symbols:
     - अधिकार
     - 权威
     - 権限
+    - auth
   party:
     - party
     - páirtí
@@ -1568,6 +1600,7 @@ org_domains:
     - tecnológica # Spanish - adjective
     - 科技 # Chinese (simplified & traditional)
     - 技術 # Chinese (traditional)
+    - tech
   insurance:
     - insurance
     - insurans
@@ -1588,6 +1621,7 @@ org_domains:
     - 保险 # Chinese (simplified)
     - 保險 # Chinese (traditional)
     - 保险公司 # Chinese (simplified)
+    - ins
   intel:
     - intel # en (abbreviation)
     - intelligence # en
@@ -1743,6 +1777,8 @@ org_domains:
     - 設備 # Chinese (traditional)
     - 装备 # Chinese (simplified) - military connotation, less common in civilian entity names
     - 裝備 # Chinese (traditional) - military connotation
+    - equip
+    - eqpt
   hardware:
     - hardware
     - hardwares
@@ -1850,6 +1886,7 @@ org_domains:
     - 航空 # Chinese (simplified & traditional)
     - 航空业 # Chinese (simplified) - means "aviation industry", too generic
     - 航空業 # Chinese (traditional) - means "aviation industry", too generic
+    - avn
   aircraft:
     - aircraft
     - airplane
@@ -2002,6 +2039,8 @@ org_domains:
     - железной
     - железнодорожной
     - железнодорожный
+    - rly
+    - rlwy
   auto:
     - auto
     - automobile
@@ -2102,6 +2141,7 @@ org_domains:
     - petrokimya # Turkish
     - petróleo # Spanish
     - petrolero # Spanish
+    - petro
   steel:
     - steel
     - metal
@@ -2350,6 +2390,10 @@ org_domains:
     - инженерный
     - 工学
     - エンジニアリング
+    - eng
+    - engg
+    - engrg
+    - engr
   scientific:
     - scientific
     - science
@@ -2382,6 +2426,10 @@ org_domains:
     - фармацевтична
     - фармацевтичні
     - фармація
+    - pharma
+    - pharm
+    - pharmaceutical
+    - pharmaceuticals
   machine:
     - machine
     - machines
@@ -2427,6 +2475,7 @@ org_domains:
     - investicija
     - invesment
     - invesmenti
+    - invt
   casino:
     - casino
     - cazinou
@@ -2544,6 +2593,9 @@ org_domains:
     - сельскохозяйственных # ru (adjective)
     - сельскохозяйственного # ru (adjective)
     - сельскохозяйственная # ru (adjective)
+    - agri
+    - agric
+    - agro
   shipbuilding:
     - shipbuilding
     - shipyard
@@ -2561,6 +2613,7 @@ org_domains:
     - proizvodstvennoe
     - производственное
     - производственно
+    - prodn
   construction:
     - construction
     - строительство
@@ -2580,6 +2633,8 @@ org_domains:
     - 建設 # Chinese (traditional)
     - 建筑 # Chinese (simplified)
     - 建築 # Chinese (traditional)
+    - constr
+    - constrn
   building:
     - building
     - buildings
@@ -2597,6 +2652,8 @@ org_domains:
     - 建筑物 # Chinese (simplified)
     - 建築物 # Chinese (traditional)
     - yapı # Turkish
+    - bldg
+    - bldgs
   consulting:
     - consulting
     - консалтинг
@@ -2787,6 +2844,7 @@ org_domains:
     - 運輸 # Chinese (traditional)
     - 交通 # Chinese (simplified & traditional)
     - 运输公司 # Chinese (simplified)
+    - transp
   financial:
     - financial
     - finance
@@ -2816,6 +2874,7 @@ org_domains:
     - communication
     - kommunikation
     - comms
+    - comm
     - коммюникации
     - коммуникация
     - коммуникации
@@ -2831,6 +2890,10 @@ org_domains:
     - 通訊 # Chinese (traditional)
     - 传播 # Chinese (simplified)
     - 傳播 # Chinese (traditional)
+    - telecom
+    - telecoms
+    - telecommunication
+    - telecommunications
   information:
     - information
     - info
@@ -2901,6 +2964,7 @@ org_domains:
     - 電氣 # Chinese (traditional)
     - 电力 # Chinese (simplified)
     - 電力 # Chinese (traditional)
+    - elec
   energy:
     - energy
     - energies
@@ -2975,6 +3039,7 @@ org_domains:
     - 電力 # Chinese (traditional)
     - 动力 # Chinese (simplified)
     - 動力 # Chinese (traditional)
+    - pwr
   chemical:
     - chemical
     - chemicals
@@ -2992,6 +3057,7 @@ org_domains:
     - 化学 # Chinese (simplified)
     - 化學 # Chinese (traditional)
     - 化工 # Chinese (simplified & traditional)
+    - chem
   museum:
     - museum
     - museums
@@ -3222,6 +3288,10 @@ org_domains:
     - production
     - производственный
     - производственная
+    - mfr
+    - mfrs
+    - manufacturer
+    - manufacturers
   medical:
     - medical
     - medicine
@@ -3244,6 +3314,7 @@ org_domains:
     - 醫療 # Chinese (traditional)
     - 医学 # Chinese (simplified)
     - 醫學 # Chinese (traditional)
+    - med
   hospital:
     - hospital
     - hospitals
@@ -3261,6 +3332,7 @@ org_domains:
     - hastanesi # Turkish
     - 医院 # Chinese (simplified)
     - 醫院 # Chinese (traditional)
+    - hosp
   cartel:
     - cartel # en, es, pt
     - cartels # en (plural)

@@ -33,6 +33,8 @@
       "советники"
     ],
     "AGRICULTURE": [
+      "agri",
+      "agric",
       "agricola",
       "agricole",
       "agricoltura",
@@ -40,6 +42,7 @@
       "agricultural",
       "agriculture",
       "agrikultura",
+      "agro",
       "agrícola",
       "агрикультура",
       "сельское хозяйство",
@@ -216,6 +219,7 @@
       "aerospace",
       "aviación",
       "aviation",
+      "avn",
       "havacılık",
       "havacılığı",
       "luftfahrt",
@@ -296,6 +300,8 @@
       "бюджетні"
     ],
     "BUILDING": [
+      "bldg",
+      "bldgs",
       "building",
       "buildings",
       "bâtiment",
@@ -357,6 +363,7 @@
       "中国共产党"
     ],
     "CHEMICAL": [
+      "chem",
       "chemical",
       "chemicals",
       "kimya",
@@ -381,6 +388,7 @@
       "Центральное разведывательное управление"
     ],
     "COMMS": [
+      "comm",
       "comms",
       "communication",
       "communications",
@@ -389,6 +397,10 @@
       "haberleşme",
       "iletişim",
       "kommunikation",
+      "telecom",
+      "telecommunication",
+      "telecommunications",
+      "telecoms",
       "коммуникации",
       "коммуникаций",
       "коммуникация",
@@ -402,6 +414,8 @@
       "通讯"
     ],
     "CONSTRUCTION": [
+      "constr",
+      "constrn",
       "construcao",
       "construcción",
       "construcoes",
@@ -614,6 +628,7 @@
       "общеобразовательное"
     ],
     "ELECTRIC": [
+      "elec",
       "electric",
       "electrical",
       "electrically",
@@ -691,8 +706,12 @@
       "에너지"
     ],
     "ENG": [
+      "eng",
+      "engg",
       "engineering",
       "engineers",
+      "engr",
+      "engrg",
       "ingegneri",
       "ingenierie",
       "ingeniería",
@@ -712,6 +731,8 @@
     "EQUIPMENT": [
       "Ausrüstung",
       "ekipman",
+      "eqpt",
+      "equip",
       "equipamento",
       "equipamentos",
       "equipement",
@@ -830,6 +851,7 @@
     "HOSPITAL": [
       "hastane",
       "hastanesi",
+      "hosp",
       "hospital",
       "hospitals",
       "больница",
@@ -937,6 +959,7 @@
     ],
     "INSURANCE": [
       "aseguradora",
+      "ins",
       "insurance",
       "insurance company",
       "insurans",
@@ -991,6 +1014,7 @@
       "investment",
       "investments",
       "investmet",
+      "invt",
       "иинвестиционный",
       "инвестиции",
       "инвестиционная",
@@ -1183,10 +1207,14 @@
       "машиностроительных"
     ],
     "MANUFACTURING": [
+      "manufacturer",
+      "manufacturers",
       "manufacturies",
       "manufacturing",
       "manufakturynh",
       "mfg.",
+      "mfr",
+      "mfrs",
       "production",
       "производственная",
       "производственный",
@@ -1270,6 +1298,7 @@
       "미디어"
     ],
     "MEDICAL": [
+      "med",
       "medical",
       "medicina",
       "medicine",
@@ -1457,6 +1486,7 @@
       "neft",
       "oil",
       "olje",
+      "petro",
       "petrochemical",
       "petrokimya",
       "petrol",
@@ -1493,6 +1523,10 @@
     ],
     "PHARMACY": [
       "apotheke",
+      "pharm",
+      "pharma",
+      "pharmaceutical",
+      "pharmaceuticals",
       "pharmacy",
       "аптека",
       "фармацевтическая",
@@ -1552,6 +1586,7 @@
       "potencia",
       "power",
       "powers",
+      "pwr",
       "енергетика",
       "енергетична",
       "енергетичний",
@@ -1580,6 +1615,7 @@
       "监狱"
     ],
     "PRODUCTION": [
+      "prodn",
       "production",
       "productions",
       "proizvodstvennoe",
@@ -1619,6 +1655,8 @@
       "railway",
       "railway company",
       "railways",
+      "rlwy",
+      "rly",
       "железнодорожной",
       "железнодорожный",
       "железной"
@@ -1910,6 +1948,7 @@
       "тактичні"
     ],
     "TECH": [
+      "tech",
       "technalohiy",
       "technical",
       "technik",
@@ -2018,6 +2057,7 @@
     "TRANSPORT": [
       "nakliye",
       "taşımacılık",
+      "transp",
       "transpor",
       "transport",
       "transportation",
@@ -2157,6 +2197,7 @@
   },
   "org_symbols": {
     "AGENCY": [
+      "agcy",
       "agence",
       "agencia",
       "agencja",
@@ -2222,6 +2263,7 @@
       "Stowarzyszenie",
       "Zwiazek",
       "Związek",
+      "assn",
       "association",
       "associations",
       "асоціація",
@@ -2242,6 +2284,7 @@
       "ассоциация"
     ],
     "AUTHORITY": [
+      "auth",
       "authority",
       "autoridad",
       "autoridade",
@@ -2344,6 +2387,7 @@
       "centre",
       "centro",
       "cntr",
+      "ctr",
       "tsentr",
       "tsentrov",
       "центр",
@@ -2474,6 +2518,7 @@
       "comercial",
       "comerciale",
       "comercială",
+      "coml",
       "commercial",
       "commerciale",
       "commerciaux",
@@ -2481,6 +2526,7 @@
       "commerciell",
       "commerciële",
       "commerical",
+      "comml",
       "kommercial",
       "kommersiel",
       "εμπορική",
@@ -2497,6 +2543,7 @@
       "상업적"
     ],
     "COMMITTEE": [
+      "cmte",
       "committee",
       "committees",
       "комитет",
@@ -2568,6 +2615,7 @@
       "Corprtn",
       "Korporation",
       "corp",
+      "corpn",
       "corporaciia",
       "corporacion",
       "corporación",
@@ -2686,6 +2734,7 @@
       "Stichting",
       "Stiftung",
       "fdn",
+      "fndn",
       "fondation",
       "foudation",
       "foundation",
@@ -2791,6 +2840,8 @@
       "government of the",
       "governmental",
       "govmnt",
+      "govt",
+      "gvt",
       "regierung",
       "regierung der",
       "regierung von",
@@ -2841,6 +2892,7 @@
       "group",
       "groupe",
       "groupement",
+      "grp",
       "grup",
       "grupo",
       "grupo de empresas",
@@ -2864,6 +2916,8 @@
     "HOLDING": [
       "Symmetoches",
       "Symmetochon",
+      "hldg",
+      "hldgs",
       "holding",
       "holdings",
       "kholding",
@@ -2907,6 +2961,8 @@
       "indastri",
       "indastrial",
       "indastris",
+      "inds",
+      "indust",
       "industra",
       "industria",
       "industriais",
@@ -2950,6 +3006,7 @@
     "INSTITUTE": [
       "industite",
       "insitute",
+      "inst",
       "institiut",
       "instituição",
       "institut",
@@ -3033,6 +3090,9 @@
       "gestion",
       "gestión",
       "management",
+      "mgmt",
+      "mgt",
+      "mngmt",
       "Διαχείριση",
       "мanagement",
       "менеджмент",
@@ -3109,6 +3169,7 @@
       "national",
       "nationalnyy",
       "nationell",
+      "natl",
       "nazionale",
       "národní",
       "ulusal",
@@ -3321,8 +3382,10 @@
       "приватный"
     ],
     "PRODUCT": [
+      "prod",
       "prodotti",
       "prodotto",
+      "prods",
       "product",
       "products",
       "produkt",
@@ -3336,6 +3399,7 @@
       "продукціі"
     ],
     "PROJECT": [
+      "proj",
       "project",
       "projects",
       "projekat",
@@ -3420,6 +3484,9 @@
       "共和国"
     ],
     "SERVICE": [
+      "SRVCE",
+      "SRVCES",
+      "SVC",
       "service",
       "services",
       "servicio",
@@ -3431,6 +3498,7 @@
       "servizio",
       "serviço",
       "serviços",
+      "svcs",
       "обслуживания",
       "сервис",
       "сервіс",
@@ -3458,6 +3526,8 @@
       "Т.нар."
     ],
     "SOLUTION": [
+      "soln",
+      "solns",
       "soluciones",
       "solusi",
       "solutii",
@@ -3500,6 +3570,7 @@
       "sistema",
       "sistemas",
       "sistemy",
+      "sys",
       "system",
       "systeme",
       "systems",
@@ -3535,6 +3606,7 @@
       "ticaret",
       "trade",
       "trading",
+      "trdg",
       "trэid",
       "usaha dagang",
       "Εμπορική",
