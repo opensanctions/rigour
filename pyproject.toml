@@ -41,7 +41,13 @@ dev = [
     "bump2version",
     "wheel>=0.29.0",
     "ruamel.yaml",
+    # black is not just a formatter here: genscripts/util.py imports it to
+    # format the generated Python data tables.
     "black",
+    # Bounded: ruff's default rule selection moves between minor releases, so
+    # an unpinned range would change what `ruff check` reports without any
+    # change to this repo.
+    "ruff >= 0.16.0, < 0.17.0",
     "build",
     "twine",
     "mypy",
@@ -49,7 +55,6 @@ dev = [
     "pytest-cov",
     "types-PyYAML",
     "types-setuptools",
-    "types-PyYAML",
     "coverage>=4.1",
 ]
 docs = [
