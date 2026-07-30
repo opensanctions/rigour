@@ -59,7 +59,7 @@ def rewrite_territory(global_names: dict[str, set[str]], file_path: Path) -> Non
     labels = set()
 
     # Process the territory data as needed
-    used_names = set([loc_norm(cc)])
+    used_names = {loc_norm(cc)}
     name = terr.get("name")
     if name in labels:
         labels.remove(name)
@@ -171,10 +171,10 @@ def update_data() -> None:
             if "in_sentence" in data:
                 data["in_sentence"] = norm_string(data["in_sentence"])
             if "names_strong" in data:
-                names = set(norm_string(name) for name in data["names_strong"])
+                names = {norm_string(name) for name in data["names_strong"]}
                 data["names_strong"] = sorted(names)
             if "names_weak" in data:
-                names = set(norm_string(name) for name in data["names_weak"])
+                names = {norm_string(name) for name in data["names_weak"]}
                 data["names_weak"] = sorted(names)
             data["other_codes"] = clean_codes(data.get("other_codes", []))
             for other in data["other_codes"]:

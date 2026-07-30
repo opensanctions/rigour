@@ -75,7 +75,7 @@ def generate_symbols_file() -> None:
                 group = norm_string(group).upper()
                 if len(group) == 0:
                     continue
-            values = set(norm_string(v) for v in items)
+            values = {norm_string(v) for v in items}
             sorted_values = sorted(v for v in values if len(v) > 0)
             mapping[str(group)] = sorted_values
 

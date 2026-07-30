@@ -43,7 +43,7 @@ def generate_export_lines() -> Generator[tuple[str, int], None, None]:
         log.info("Normalizing name mappings...")
         for group, aliases in raw_mappings.items():
             normed = [normalize_form(a) for a in aliases]
-            mappings[group] = set(n for n in normed if len(n))
+            mappings[group] = {n for n in normed if len(n)}
         log.info("Deduplicating name groups...")
         by_names: dict[str, set[str]] = defaultdict(set)
         for group, aliases in mappings.items():

@@ -16,8 +16,8 @@ def territories_intersect(left: Iterable[str], right: Iterable[str]) -> set[str]
         hierarchical and claim relationships. The most narrow codes are returned.
     """
     index = get_index()
-    left_set: set[Territory] = set(index[code] for code in left if code in index)
-    right_set: set[Territory] = set(index[code] for code in right if code in index)
+    left_set: set[Territory] = {index[code] for code in left if code in index}
+    right_set: set[Territory] = {index[code] for code in right if code in index}
     common: set[Territory] = set()
     for cand in left_set:
         if cand in right_set:
