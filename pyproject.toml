@@ -73,5 +73,17 @@ include = [
     { path = "rigour/_core.pyi", format = "sdist" },
 ]
 
+[tool.ruff.lint]
+ignore = [
+    # `from x import y as y` is the explicit re-export form that mypy requires
+    # under no_implicit_reexport (implied by --strict). Ruff exempts it in
+    # __init__.py and stubs, but not in plain modules, so it fires on the
+    # modules that re-export symbols out of the Rust extension
+    # (rigour.names.pick, rigour.text.translit). Dropping the alias there
+    # would break `from rigour.names.pick import pick_name` for any
+    # strict-mode consumer.
+    "PLC0414",
+]
+
 [tool.coverage.run]
 branch = true
