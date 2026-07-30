@@ -1,6 +1,6 @@
 
 
-class IdentifierFormat(object):
+class IdentifierFormat:
     """Base class for identifier types."""
 
     NAME: str = "generic"

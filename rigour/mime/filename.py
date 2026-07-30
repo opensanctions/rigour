@@ -14,8 +14,7 @@ def normalize_extension(extension: str | None) -> str | None:
         return None
     if isinstance(extension, bytes):
         extension = extension.decode(sys.getfilesystemencoding())
-    if extension.startswith("."):
-        extension = extension[1:]
+    extension = extension.removeprefix(".")
     if "." in extension:
         _, extension = os.path.splitext(extension)
     extension = slugify(extension, sep="")
@@ -33,7 +32,7 @@ def mimetype_extension(mime_type: str | None) -> str | None:
     return normalize_extension(extension)
 
 
-class FileName(object):
+class FileName:
     FALLBACK = "data"
 
     def __init__(self, file_name: str | None):

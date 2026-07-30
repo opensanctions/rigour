@@ -57,7 +57,7 @@ def update_data() -> None:
                 iso3_map[value.lower()] = iso3
 
     output_path = CODE_PATH / "langs" / "iso639.py"
-    content = TEMPLATE % (list(sorted(iso3_ids)), iso3_map, iso2_map)
+    content = TEMPLATE % (sorted(iso3_ids), iso3_map, iso2_map)
     write_python(output_path, content)
 
 

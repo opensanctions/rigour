@@ -7,7 +7,7 @@ from rigour.data import iter_jsonl_text
 
 
 @total_ordering
-class Territory(object):
+class Territory:
     """A territory - country, sub-national, historic, or supranational."""
 
     def __init__(
@@ -149,7 +149,7 @@ class Territory(object):
             data["langs"] = self.langs
         return data
 
-    def __eq__(self, other: Any) -> bool:
+    def __eq__(self, other: object) -> bool:
         try:
             return self.code == other.code  # type: ignore
         except AttributeError:

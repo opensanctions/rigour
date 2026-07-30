@@ -8,8 +8,8 @@ from rigour.mime.mappings import REPLACE
 from rigour.mime.types import DEFAULT, LABELS
 
 
-class MIMEType(object):
-    __slots__ = ["family", "subtype", "params", "name", "normalized"]
+class MIMEType:
+    __slots__ = ["family", "name", "normalized", "params", "subtype"]
 
     SEP = "/"
 
@@ -73,7 +73,7 @@ class MIMEType(object):
             family, subtype = cls.split(default)
         return cls(family, subtype, params=params)
 
-    def __eq__(self, other: Any) -> bool:
+    def __eq__(self, other: object) -> bool:
         return str(self) == str(other)
 
     def __hash__(self) -> int:

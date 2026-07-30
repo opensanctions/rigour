@@ -38,8 +38,7 @@ def write_python(file_path: Path, content: str) -> None:
 def write_jsonl(file_path: Path, data: Iterable[Any]) -> None:
     """Write a list of dictionaries to a JSONL file."""
     with open(file_path, "wb") as fh:
-        for item in data:
-            fh.write(orjson.dumps(item, option=orjson.OPT_APPEND_NEWLINE))
+        fh.writelines(orjson.dumps(item, option=orjson.OPT_APPEND_NEWLINE) for item in data)
 
 
 def write_json(file_path: Path, data: Any, indent: bool = False) -> None:
