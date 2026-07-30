@@ -1,4 +1,5 @@
-from rigour.urls.cleaning import clean_url, clean_url_compare, build_url
+from rigour.urls.cleaning import build_url, clean_url, clean_url_compare
+
 
 def test_clean_url():
     assert clean_url("") is None

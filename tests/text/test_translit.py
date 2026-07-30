@@ -12,7 +12,6 @@ import pytest
 
 from rigour.text.translit import maybe_ascii, should_ascii
 
-
 # --- should_ascii ---
 
 

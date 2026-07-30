@@ -1,35 +1,36 @@
 from email.message import EmailMessage
-from typing import Any, Dict, Optional, Tuple
+from typing import Any
+
 from normality import stringify
 from normality.encoding import tidy_encoding
 
-from rigour.mime.types import DEFAULT, LABELS
 from rigour.mime.mappings import REPLACE
+from rigour.mime.types import DEFAULT, LABELS
 
 
-class MIMEType(object):
-    __slots__ = ["family", "subtype", "params", "name", "normalized"]
+class MIMEType:
+    __slots__ = ["family", "name", "normalized", "params", "subtype"]
 
     SEP = "/"
 
     def __init__(
         self,
-        family: Optional[str],
-        subtype: Optional[str],
-        params: Optional[Dict[str, str]] = None,
+        family: str | None,
+        subtype: str | None,
+        params: dict[str, str] | None = None,
     ):
         self.family = family
         self.subtype = subtype
-        self.name: Optional[str] = None
+        self.name: str | None = None
         if self.family is not None and self.subtype is not None:
             self.name = self.SEP.join((self.family, self.subtype))
-        self.normalized: Optional[str] = self.name
+        self.normalized: str | None = self.name
         if self.name in REPLACE:
             self.normalized = REPLACE.get(self.name, self.name)
-        self.params: Dict[str, str] = params or {}
+        self.params: dict[str, str] = params or {}
 
     @property
-    def label(self) -> Optional[str]:
+    def label(self) -> str | None:
         if self.normalized in LABELS:
             return LABELS.get(self.normalized, self.normalized)
         if self.subtype is not None:
@@ -40,14 +41,14 @@ class MIMEType(object):
         return None
 
     @property
-    def charset(self) -> Optional[str]:
+    def charset(self) -> str | None:
         charset = self.params.get("charset")
         if charset is None:
             return None
         return tidy_encoding(charset)
 
     @classmethod
-    def split(cls, mime_type: Optional[str]) -> Tuple[Optional[str], Optional[str]]:
+    def split(cls, mime_type: str | None) -> tuple[str | None, str | None]:
         if mime_type is None or cls.SEP not in mime_type:
             return None, None
         family, subtype = (p.strip() for p in mime_type.split(cls.SEP, 1))
@@ -57,7 +58,7 @@ class MIMEType(object):
 
     @classmethod
     def parse(
-        cls, mime_type: Optional[str], default: Optional[str] = None
+        cls, mime_type: str | None, default: str | None = None
     ) -> "MIMEType":
         mime_type = stringify(mime_type)
         params = None
@@ -72,7 +73,7 @@ class MIMEType(object):
             family, subtype = cls.split(default)
         return cls(family, subtype, params=params)
 
-    def __eq__(self, other: Any) -> bool:
+    def __eq__(self, other: object) -> bool:
         return str(self) == str(other)
 
     def __hash__(self) -> int:

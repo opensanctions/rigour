@@ -1,7 +1,8 @@
+from collections.abc import Generator
+from datetime import datetime, timezone
 from itertools import count
 from pathlib import Path
-from datetime import datetime, timezone
-from typing import Generator, List, Optional, Set, Tuple
+
 from sqlalchemy import (
     Boolean,
     Column,
@@ -76,22 +77,22 @@ def skip_mapping(conn: Connection, mapping_id: int) -> None:
     conn.execute(stmt)
 
 
-def get_groups(conn: Connection, form: str) -> List[str]:
+def get_groups(conn: Connection, form: str) -> list[str]:
     cleaned = clean_form(form)
     if cleaned is None:
         return []
     stmt = select(mapping_table.c.group)
     stmt = stmt.where(mapping_table.c.form == cleaned)
-    groups: List[str] = []
+    groups: list[str] = []
     for row in conn.execute(stmt):
         groups.append(row._mapping["group"])
     return groups
 
 
-def regex_groups(conn: Connection, pattern: str) -> Set[Tuple[str, int, str, bool]]:
+def regex_groups(conn: Connection, pattern: str) -> set[tuple[str, int, str, bool]]:
     stmt = select(mapping_table)
     stmt = stmt.filter(mapping_table.c.form.regexp_match(pattern))
-    forms: Set[Tuple[str, int, str, bool]] = set()
+    forms: set[tuple[str, int, str, bool]] = set()
     for row in conn.execute(stmt):
         data = (
             row._mapping["group"],
@@ -103,21 +104,21 @@ def regex_groups(conn: Connection, pattern: str) -> Set[Tuple[str, int, str, boo
     return forms
 
 
-def get_forms(conn: Connection, group: str) -> Set[Tuple[int, str, bool]]:
+def get_forms(conn: Connection, group: str) -> set[tuple[int, str, bool]]:
     stmt = select(mapping_table)
     stmt = stmt.filter(mapping_table.c.group == group)
-    forms: Set[Tuple[int, str, bool]] = set()
+    forms: set[tuple[int, str, bool]] = set()
     for row in conn.execute(stmt):
         forms.add((row._mapping["id"], row._mapping["form"], row._mapping["skip"]))
     return forms
 
 
-def all_mappings(conn: Connection) -> Generator[Tuple[str, Set[str]], None, None]:
+def all_mappings(conn: Connection) -> Generator[tuple[str, set[str]], None, None]:
     stmt = select(mapping_table)
     stmt = stmt.filter(mapping_table.c.skip.is_(False))
     stmt = stmt.order_by(mapping_table.c.group.asc())
-    group: Optional[str] = None
-    forms: Set[str] = set()
+    group: str | None = None
+    forms: set[str] = set()
     for row in conn.execute(stmt):
         if group != row._mapping["group"]:
             if group is not None and len(forms):

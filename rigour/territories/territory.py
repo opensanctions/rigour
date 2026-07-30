@@ -1,38 +1,38 @@
 import sys
-from typing import Dict, Any, List, Optional, Set
 from functools import cache, total_ordering
+from typing import Any, Optional
 
 from rigour._core import territories_jsonl
 from rigour.data import iter_jsonl_text
 
 
 @total_ordering
-class Territory(object):
+class Territory:
     """A territory - country, sub-national, historic, or supranational."""
 
     def __init__(
-        self, index: Dict[str, "Territory"], code: str, data: Dict[str, Any]
+        self, index: dict[str, "Territory"], code: str, data: dict[str, Any]
     ) -> None:
         self.index = index
         self.code = code
         self.name: str = data["name"]
         self.full_name: str = data.get("full_name", self.name)
-        self.alpha3: Optional[str] = data.get("alpha3")
+        self.alpha3: str | None = data.get("alpha3")
         self.is_country: bool = data.get("is_country", False)
         self.is_ftm: bool = data.get("is_ftm", False)
         self.is_jurisdiction: bool = data.get("is_jurisdiction", self.is_country)
         self.is_historical: bool = data.get("is_historical", False)
-        self._region: Optional[str] = data.get("region", None)
-        self._subregion: Optional[str] = data.get("subregion", None)
-        self._in_sentence: Optional[str] = data.get("in_sentence", None)
+        self._region: str | None = data.get("region", None)
+        self._subregion: str | None = data.get("subregion", None)
+        self._in_sentence: str | None = data.get("in_sentence", None)
         self.qid: str = str(data.get("qid"))
-        self.other_qids: List[str] = data.get("other_qids", [])
-        self.other_codes: List[str] = data.get("other_codes", [])
-        self._successors: List[str] = data.get("successors", [])
-        self._parent: Optional[str] = data.get("parent")
-        self._claims: List[str] = data.get("claims", [])
-        self._see: List[str] = data.get("see", [])
-        self._langs: List[str] = data.get("langs", [])
+        self.other_qids: list[str] = data.get("other_qids", [])
+        self.other_codes: list[str] = data.get("other_codes", [])
+        self._successors: list[str] = data.get("successors", [])
+        self._parent: str | None = data.get("parent")
+        self._claims: list[str] = data.get("claims", [])
+        self._see: list[str] = data.get("see", [])
+        self._langs: list[str] = data.get("langs", [])
 
     @property
     def parent(self) -> Optional["Territory"]:
@@ -42,7 +42,7 @@ class Territory(object):
         return self.index[self._parent]
 
     @property
-    def region(self) -> Optional[str]:
+    def region(self) -> str | None:
         """Return the global region name."""
         if self._region is not None:
             return self._region
@@ -51,7 +51,7 @@ class Territory(object):
         return None
 
     @property
-    def subregion(self) -> Optional[str]:
+    def subregion(self) -> str | None:
         """Return the subregion name."""
         if self._subregion is not None:
             return self._subregion
@@ -67,29 +67,29 @@ class Territory(object):
         return self.name
 
     @property
-    def successors(self) -> List["Territory"]:
+    def successors(self) -> list["Territory"]:
         """Return a list of successor countries."""
         return [self.index[s] for s in self._successors]
 
     @property
-    def claims(self) -> List["Territory"]:
+    def claims(self) -> list["Territory"]:
         """Return a list of contested claims on this territory."""
         return [self.index[s] for s in self._claims]
 
     @property
-    def see(self) -> List["Territory"]:
+    def see(self) -> list["Territory"]:
         """Return a list of related territories."""
         return [self.index[s] for s in self._see]
 
     @property
-    def qids(self) -> Set[str]:
+    def qids(self) -> set[str]:
         """Return all the QIDs linked to a territory."""
         qids = set(self.other_qids)
         qids.add(self.qid)
         return qids
 
     @property
-    def codes(self) -> Set[str]:
+    def codes(self) -> set[str]:
         """Return all the codes linked to a territory."""
         codes = set(self.other_codes)
         codes.add(self.code)
@@ -98,7 +98,7 @@ class Territory(object):
         return codes
 
     @property
-    def ftm_country(self) -> Optional[str]:
+    def ftm_country(self) -> str | None:
         """Return the FTM country code for this territory."""
         if self.is_ftm:
             return self.code
@@ -107,7 +107,7 @@ class Territory(object):
         return None
 
     @property
-    def langs(self) -> List[str]:
+    def langs(self) -> list[str]:
         """Return the languages for this territory."""
         if len(self._langs) > 0:
             return self._langs
@@ -115,7 +115,7 @@ class Territory(object):
             return self.parent.langs
         return []
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Return a dictionary (JSON-ready) representation of the territory."""
         data = {
             "code": self.code,
@@ -149,7 +149,7 @@ class Territory(object):
             data["langs"] = self.langs
         return data
 
-    def __eq__(self, other: Any) -> bool:
+    def __eq__(self, other: object) -> bool:
         try:
             return self.code == other.code  # type: ignore
         except AttributeError:
@@ -169,8 +169,8 @@ class Territory(object):
 
 
 @cache
-def get_index() -> Dict[str, Territory]:
-    index: Dict[str, Territory] = {}
+def get_index() -> dict[str, Territory]:
+    index: dict[str, Territory] = {}
     for data in iter_jsonl_text(territories_jsonl()):
         code = sys.intern(data["code"])
         index[code] = Territory(index, code, data)

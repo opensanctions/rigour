@@ -1,5 +1,5 @@
-import sys
 import csv
+import sys
 from collections import Counter
 
 from rigour.addresses import normalize_address

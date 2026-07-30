@@ -81,12 +81,12 @@ module is the idiomatic Python surface — `IntFlag` for the bit set,
 ints at ~zero marshalling cost.
 """
 
+from collections.abc import Callable
 from enum import IntEnum, IntFlag
-from typing import Callable, Optional
 
 from rigour._core import _normalize
 
-__all__ = ["normalize", "Normalize", "Cleanup", "Normalizer", "noop_normalizer"]
+__all__ = ["Cleanup", "Normalize", "Normalizer", "noop_normalizer", "normalize"]
 
 
 #: Normalizer protocol — callable mapping optional string to
@@ -97,10 +97,10 @@ __all__ = ["normalize", "Normalize", "Cleanup", "Normalizer", "noop_normalizer"]
 #: [rigour.names.check.is_generic_person_name][]) so callers can
 #: plug in whatever normalisation shape they need — both the
 #: wordlist build and runtime lookups must use the same callable.
-Normalizer = Callable[[Optional[str]], Optional[str]]
+Normalizer = Callable[[str | None], str | None]
 
 
-def noop_normalizer(text: Optional[str]) -> Optional[str]:
+def noop_normalizer(text: str | None) -> str | None:
     """Identity normalizer that strips whitespace and rejects empty.
 
     Default :data:`Normalizer` for callers whose input is already
@@ -201,10 +201,10 @@ class Cleanup(IntEnum):
 
 
 def normalize(
-    text: Optional[str],
+    text: str | None,
     flags: Normalize = Normalize(0),
     cleanup: Cleanup = Cleanup.Noop,
-) -> Optional[str]:
+) -> str | None:
     """Apply a composed sequence of text normalisation steps.
 
     The pipeline order and semantics of each flag are described in the

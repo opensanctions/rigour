@@ -1,26 +1,23 @@
 import csv
 import logging
-from typing import Dict, Set
 
 import yaml
 
+from genscripts.util import CODE_PATH, RESOURCES_PATH, write_python
 from rigour.langs.util import normalize_code
-from genscripts.util import write_python, CODE_PATH, RESOURCES_PATH
 
 # https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab
 log = logging.getLogger(__name__)
 
-TEMPLATE = """from typing import Dict, Set
-
-ISO3_ALL: Set[str] = set(%r)  # noqa
-ISO3_MAP: Dict[str, str] = %r  # noqa
-ISO2_MAP: Dict[str, str] = %r  # noqa
+TEMPLATE = """ISO3_ALL: set[str] = set(%r)  # noqa
+ISO3_MAP: dict[str, str] = %r  # noqa
+ISO2_MAP: dict[str, str] = %r  # noqa
 """
 
 
 def update_data() -> None:
-    iso3_ids: Set[str] = set()
-    iso2_map: Dict[str, str] = {}
+    iso3_ids: set[str] = set()
+    iso2_map: dict[str, str] = {}
     iso3_map = {}
 
     source_path = RESOURCES_PATH / "langs" / "iso-639-3.tab"
@@ -60,7 +57,7 @@ def update_data() -> None:
                 iso3_map[value.lower()] = iso3
 
     output_path = CODE_PATH / "langs" / "iso639.py"
-    content = TEMPLATE % (list(sorted(iso3_ids)), iso3_map, iso2_map)
+    content = TEMPLATE % (sorted(iso3_ids), iso3_map, iso2_map)
     write_python(output_path, content)
 
 

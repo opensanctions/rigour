@@ -43,20 +43,19 @@ class SymbolCategory:
     [rigour.text.normalize][] for related flag-based design.
     """
 
-    ORG_CLASS: "SymbolCategory"
-    SYMBOL: "SymbolCategory"
-    DOMAIN: "SymbolCategory"
-    INITIAL: "SymbolCategory"
-    NAME: "SymbolCategory"
-    NICK: "SymbolCategory"
-    NUMERIC: "SymbolCategory"
-    LOCATION: "SymbolCategory"
-    PHONETIC: "SymbolCategory"
+    ORG_CLASS: SymbolCategory
+    SYMBOL: SymbolCategory
+    DOMAIN: SymbolCategory
+    INITIAL: SymbolCategory
+    NAME: SymbolCategory
+    NICK: SymbolCategory
+    NUMERIC: SymbolCategory
+    LOCATION: SymbolCategory
+    PHONETIC: SymbolCategory
 
     @property
     def value(self) -> str:
         """Short serialisation key (e.g. ``"ORGCLS"``, ``"NUM"``)."""
-        ...
 
 
 class Symbol:
@@ -80,17 +79,16 @@ class Symbol:
     @property
     def id(self) -> str:
         """The interned id string."""
-        ...
 
 
 class NameTypeTag:
     """Metadata on what sort of object is described by a name."""
 
-    UNK: "NameTypeTag"
-    ENT: "NameTypeTag"
-    PER: "NameTypeTag"
-    ORG: "NameTypeTag"
-    OBJ: "NameTypeTag"
+    UNK: NameTypeTag
+    ENT: NameTypeTag
+    PER: NameTypeTag
+    ORG: NameTypeTag
+    OBJ: NameTypeTag
 
     @property
     def value(self) -> str: ...
@@ -99,26 +97,26 @@ class NameTypeTag:
 class NamePartTag:
     """Within a name, identify name-part types."""
 
-    UNSET: "NamePartTag"
-    AMBIGUOUS: "NamePartTag"
-    TITLE: "NamePartTag"
-    GIVEN: "NamePartTag"
-    MIDDLE: "NamePartTag"
-    FAMILY: "NamePartTag"
-    TRIBAL: "NamePartTag"
-    PATRONYMIC: "NamePartTag"
-    MATRONYMIC: "NamePartTag"
-    HONORIFIC: "NamePartTag"
-    SUFFIX: "NamePartTag"
-    NICK: "NamePartTag"
-    STOP: "NamePartTag"
-    NUM: "NamePartTag"
-    LEGAL: "NamePartTag"
+    UNSET: NamePartTag
+    AMBIGUOUS: NamePartTag
+    TITLE: NamePartTag
+    GIVEN: NamePartTag
+    MIDDLE: NamePartTag
+    FAMILY: NamePartTag
+    TRIBAL: NamePartTag
+    PATRONYMIC: NamePartTag
+    MATRONYMIC: NamePartTag
+    HONORIFIC: NamePartTag
+    SUFFIX: NamePartTag
+    NICK: NamePartTag
+    STOP: NamePartTag
+    NUM: NamePartTag
+    LEGAL: NamePartTag
 
     @property
     def value(self) -> str: ...
 
-    def can_match(self, other: "NamePartTag") -> bool: ...
+    def can_match(self, other: NamePartTag) -> bool: ...
 
 
 class NamePart:
@@ -145,7 +143,7 @@ class NamePart:
     def __len__(self) -> int: ...
 
     @classmethod
-    def tag_sort(cls, parts: list["NamePart"]) -> list["NamePart"]: ...
+    def tag_sort(cls, parts: list[NamePart]) -> list[NamePart]: ...
 
 
 class Span:
@@ -190,10 +188,10 @@ class Name:
 
     def apply_part(self, part: NamePart, symbol: Symbol) -> None: ...
 
-    def contains(self, other: "Name") -> bool: ...
+    def contains(self, other: Name) -> bool: ...
 
     @classmethod
-    def consolidate_names(cls, names: "object") -> set["Name"]: ...
+    def consolidate_names(cls, names: object) -> set[Name]: ...
 
 
 def analyze_names(

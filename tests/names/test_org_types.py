@@ -1,7 +1,11 @@
 from rigour.names.org_types import (
     extract_org_types,
     remove_org_types,
+)
+from rigour.names.org_types import (
     replace_org_types_compare as replace_compare,
+)
+from rigour.names.org_types import (
     replace_org_types_display as replace_display,
 )
 from rigour.text.normalize import Cleanup, Normalize, normalize

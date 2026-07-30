@@ -1,5 +1,4 @@
 import re
-from typing import Optional
 
 from rigour.ids.common import IdentifierFormat
 
@@ -27,7 +26,7 @@ class WikidataQID(IdentifierFormat):
         return is_qid(text)
 
     @classmethod
-    def normalize(cls, text: str) -> Optional[str]:
+    def normalize(cls, text: str) -> str | None:
         """Normalize the given string to a valid wikidata QID."""
         text = text.rsplit("/", 1)[-1].strip().upper()
         match = QID.match(text)

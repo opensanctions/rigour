@@ -1,7 +1,7 @@
 from os import environ as env
-from typing import Optional
 from zoneinfo import ZoneInfo
-from normality import stringify, DEFAULT_ENCODING
+
+from normality import DEFAULT_ENCODING, stringify
 
 from rigour._core import MAX_NAME_LENGTH as _CORE_MAX_NAME_LENGTH
 
@@ -9,7 +9,7 @@ TRUE_VALUES = {"true", "1", "yes", "y", "t", "on", "enable", "enabled"}
 FALSE_VALUES = {"false", "0", "no", "n", "f", "off", "disable", "disabled"}
 
 
-def env_opt(name: str) -> Optional[str]:
+def env_opt(name: str) -> str | None:
     """Get an optional environment variable."""
     return stringify(env.get(name))
 

@@ -13,7 +13,6 @@ import pytest
 
 from rigour.text.normalize import Cleanup, Normalize, normalize
 
-
 # --- individual flags ---
 
 

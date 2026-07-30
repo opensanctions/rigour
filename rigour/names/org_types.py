@@ -26,21 +26,26 @@ automaton with a Python-style `(?<!\\w)X(?!\\w)` boundary check,
 compiled once per `(kind, flags, cleanup)` combination.
 """
 
-from typing import List, Tuple
 
 from rigour._core import (
     extract_org_types as _extract_org_types,
+)
+from rigour._core import (
     remove_org_types as _remove_org_types,
+)
+from rigour._core import (
     replace_org_types_compare as _replace_org_types_compare,
+)
+from rigour._core import (
     replace_org_types_display as _replace_org_types_display,
 )
 from rigour.text.normalize import Cleanup, Normalize
 
 __all__ = [
+    "extract_org_types",
+    "remove_org_types",
     "replace_org_types_compare",
     "replace_org_types_display",
-    "remove_org_types",
-    "extract_org_types",
 ]
 
 
@@ -159,7 +164,7 @@ def extract_org_types(
     normalize_flags: Normalize = Normalize.CASEFOLD,
     cleanup: Cleanup = Cleanup.Noop,
     generic: bool = False,
-) -> List[Tuple[str, str]]:
+) -> list[tuple[str, str]]:
     """Find every organisation-type designation in a name.
 
     Scans `name` for recognised aliases (LLC, Inc, GmbH, ...) and returns

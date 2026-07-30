@@ -23,8 +23,8 @@ Corpus is split by `should_ascii`:
 import csv
 import statistics
 import time
+from collections.abc import Callable
 from pathlib import Path
-from typing import Callable, List
 
 from normality import ascii_text as normality_ascii
 
@@ -34,21 +34,21 @@ CORPUS = Path(__file__).parent.parent / "contrib" / "sample_names.csv"
 PASSES = 5
 
 
-def load_names() -> List[str]:
+def load_names() -> list[str]:
     with open(CORPUS, encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)  # header
         return [row[0] for row in reader]
 
 
-def run_pass(fn: Callable[[str], str], inputs: List[str]) -> float:
+def run_pass(fn: Callable[[str], str], inputs: list[str]) -> float:
     start = time.perf_counter()
     for s in inputs:
         fn(s)
     return time.perf_counter() - start
 
 
-def bench_cold(label: str, fn: Callable[[str], str], names: List[str]) -> None:
+def bench_cold(label: str, fn: Callable[[str], str], names: list[str]) -> None:
     """Each pass suffixes every name uniquely → every call is a cache miss."""
     n = len(names)
     # Warmup — prime ICU4X transliterator init, Python import-time
@@ -56,7 +56,7 @@ def bench_cold(label: str, fn: Callable[[str], str], names: List[str]) -> None:
     # below use unique suffixes so the warmup doesn't pollute.
     for s in names:
         fn(s)
-    times: List[float] = []
+    times: list[float] = []
     for p in range(PASSES):
         suffix = f" {p}X{p}"
         mutated = [s + suffix for s in names]
@@ -68,10 +68,10 @@ def bench_cold(label: str, fn: Callable[[str], str], names: List[str]) -> None:
     print(f"    median:  {med * 1000:7.2f} ms   ({n / med:>10,.0f} names/sec)")
 
 
-def bench_hot(label: str, fn: Callable[[str], str], names: List[str]) -> None:
+def bench_hot(label: str, fn: Callable[[str], str], names: list[str]) -> None:
     """All passes use the same inputs — LRU caches fill on pass 1."""
     n = len(names)
-    times: List[float] = []
+    times: list[float] = []
     for _ in range(PASSES):
         times.append(run_pass(fn, names))
     hot = times[1:]

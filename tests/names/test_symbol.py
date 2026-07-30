@@ -9,7 +9,6 @@ organisation name corpora drive the tagger. Tests marked
 may need their inputs retuned if the data shifts.
 """
 
-from typing import List, Tuple
 
 from rigour.names import (
     Alignment,
@@ -28,8 +27,8 @@ def _only(names: "set[Name]") -> Name:
 
 
 def pair_shape(
-    pairings: List[Tuple[Alignment, ...]],
-) -> List[List[Tuple[str, str, str]]]:
+    pairings: list[tuple[Alignment, ...]],
+) -> list[list[tuple[str, str, str]]]:
     """Normalise pairings for readable pytest diffs.
 
     Each pairing becomes a sorted `list` of `(query_text,
@@ -435,7 +434,7 @@ def test_output_order_deterministic():  # corpus-dependent
     # end-to-end runs exercise different internal orders — the
     # emitted pairing sequence must not change. Uses the bin/ben
     # multi-pairing case so there is an order to observe.
-    def run() -> List[List[Tuple[str, str, str]]]:
+    def run() -> list[list[tuple[str, str, str]]]:
         q = _only(analyze_names(NameTypeTag.PER, ["Isa Bin Tarif Al Bin Ali"]))
         r = _only(analyze_names(NameTypeTag.PER, ["Shaikh Isa Bin Tarif Al Bin Ali"]))
         return pair_shape(pair_symbols(q, r))

@@ -1,7 +1,8 @@
 import sys
+from pathlib import Path
+
 import requests
 import yaml
-from pathlib import Path
 
 from rigour.territories import get_territory
 

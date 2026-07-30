@@ -1,7 +1,7 @@
 from rigour.names.prefix import (
-    remove_person_prefixes,
-    remove_org_prefixes,
     remove_obj_prefixes,
+    remove_org_prefixes,
+    remove_person_prefixes,
 )
 
 

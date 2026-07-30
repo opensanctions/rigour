@@ -1,7 +1,6 @@
-from typing import Optional
 
 
-class IdentifierFormat(object):
+class IdentifierFormat:
     """Base class for identifier types."""
 
     NAME: str = "generic"
@@ -14,7 +13,7 @@ class IdentifierFormat(object):
         return norm is not None and len(norm) > 0
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         return value.strip()
 
     @classmethod

@@ -35,21 +35,19 @@ assert parsed.label == 'Plain text'
 This module is an inlined version of the `pantomime` library.
 """
 
+from rigour.mime.filename import FileName, mimetype_extension, normalize_extension
+from rigour.mime.mime import normalize_mimetype, parse_mimetype, useful_mimetype
 from rigour.mime.parse import MIMEType
 from rigour.mime.types import DEFAULT, PLAIN
-from rigour.mime.mime import parse_mimetype, normalize_mimetype
-from rigour.mime.mime import useful_mimetype
-from rigour.mime.filename import FileName
-from rigour.mime.filename import normalize_extension, mimetype_extension
 
 __all__ = [
-    "MIMEType",
-    "FileName",
     "DEFAULT",
     "PLAIN",
-    "parse_mimetype",
-    "normalize_mimetype",
-    "useful_mimetype",
-    "normalize_extension",
+    "FileName",
+    "MIMEType",
     "mimetype_extension",
+    "normalize_extension",
+    "normalize_mimetype",
+    "parse_mimetype",
+    "useful_mimetype",
 ]

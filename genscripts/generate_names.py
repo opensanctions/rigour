@@ -1,14 +1,14 @@
 from collections import Counter
-import yaml
-from typing import Dict, List, Optional, TypedDict
+from typing import TypedDict
 
+import yaml
 from normality import squash_spaces
 
 from genscripts.util import (
-    norm_string,
-    write_json,
     RESOURCES_PATH,
     RUST_DATA_PATH,
+    norm_string,
+    write_json,
 )
 
 
@@ -17,13 +17,13 @@ class OrgTypeSpec(TypedDict, total=False):
     (the previous home of this TypedDict) was retired when the
     Python tagger moved to Rust."""
 
-    display: Optional[str]
-    compare: Optional[str]
-    generic: Optional[str]
-    aliases: List[str]
+    display: str | None
+    compare: str | None
+    generic: str | None
+    aliases: list[str]
 
 
-def _sorted_unique_norm(values: List[str]) -> List[str]:
+def _sorted_unique_norm(values: list[str]) -> list[str]:
     """Normalise, dedupe, and sort a flat string list — stable JSON out."""
     return sorted({norm_string(v) for v in values if norm_string(v)})
 
@@ -38,9 +38,9 @@ def generate_name_stopwords_file() -> None:
     time."""
     stopwords_path = RESOURCES_PATH / "names" / "stopwords.yml"
     with open(stopwords_path, "r", encoding="utf-8") as ufh:
-        name_data: Dict[str, List[str]] = yaml.safe_load(ufh.read())
+        name_data: dict[str, list[str]] = yaml.safe_load(ufh.read())
 
-    out_data: Dict[str, List[str]] = {}
+    out_data: dict[str, list[str]] = {}
     for key, value in name_data.items():
         # YAML section names arrive as SCREAMING_SNAKE_CASE; lower-case
         # them for serde-friendly snake_case field names on the Rust
@@ -61,12 +61,12 @@ def generate_symbols_file() -> None:
     are an internal detail of the tagger."""
     symbols_path = RESOURCES_PATH / "names" / "symbols.yml"
     with open(symbols_path, "r", encoding="utf-8") as ufh:
-        symbols_mappings: Dict[str, Dict[str, str]] = yaml.safe_load(ufh.read())
+        symbols_mappings: dict[str, dict[str, str]] = yaml.safe_load(ufh.read())
 
-    json_data: Dict[str, Dict[str, List[str]]] = {}
+    json_data: dict[str, dict[str, list[str]]] = {}
 
     for section, value in symbols_mappings.items():
-        mapping: Dict[str, List[str]] = {}
+        mapping: dict[str, list[str]] = {}
         for group, items in value.items():
             if group is None:
                 continue
@@ -75,7 +75,7 @@ def generate_symbols_file() -> None:
                 group = norm_string(group).upper()
                 if len(group) == 0:
                     continue
-            values = set(norm_string(v) for v in items)
+            values = {norm_string(v) for v in items}
             sorted_values = sorted(v for v in values if len(v) > 0)
             mapping[str(group)] = sorted_values
 
@@ -96,8 +96,8 @@ def generate_org_type_file() -> None:
     types_path = RESOURCES_PATH / "names" / "org_types.yml"
     generic_types: Counter = Counter()
     with open(types_path, "r", encoding="utf-8") as ofh:
-        data: Dict[str, List[OrgTypeSpec]] = yaml.safe_load(ofh.read())
-        clean_types: List[OrgTypeSpec] = []
+        data: dict[str, list[OrgTypeSpec]] = yaml.safe_load(ofh.read())
+        clean_types: list[OrgTypeSpec] = []
         for spec in data.get("types", []):
             out: OrgTypeSpec = {
                 "display": None,
@@ -155,7 +155,7 @@ def generate_compare_file() -> None:
     """
     compare_path = RESOURCES_PATH / "names" / "compare.yml"
     with open(compare_path, "r", encoding="utf-8") as fh:
-        data: Dict[str, List[List[str]]] = yaml.safe_load(fh.read())
+        data: dict[str, list[list[str]]] = yaml.safe_load(fh.read())
 
     similar_pairs = data.get("similar_pairs", [])
     expanded: set = set()

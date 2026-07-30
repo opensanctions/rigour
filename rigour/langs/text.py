@@ -1,5 +1,9 @@
-from typing import Optional
+
+from typing import TypeVar
+
 from rigour.data.langs.iso639 import ISO3_ALL
+
+LangStrT = TypeVar("LangStrT", bound="LangStr")
 
 
 class LangStr(str):
@@ -10,11 +14,12 @@ class LangStr(str):
 
     __slots__ = ("lang",)
 
-    def __new__(cls, content: str, lang: Optional[str] = None) -> "LangStr":
-        instance = str.__new__(cls, content)
-        return instance
+    def __new__(
+        cls: type[LangStrT], content: str, lang: str | None = None
+    ) -> LangStrT:
+        return str.__new__(cls, content)
 
-    def __init__(self, content: str, lang: Optional[str] = None) -> None:
+    def __init__(self, content: str, lang: str | None = None) -> None:
         if lang is not None and lang not in ISO3_ALL:
             raise ValueError(f"Invalid ISO 639-3 language code: {lang}")
         self.lang = lang

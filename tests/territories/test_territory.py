@@ -1,5 +1,9 @@
-from rigour.territories import get_territory, get_territory_by_qid
-from rigour.territories import get_ftm_countries, get_territories
+from rigour.territories import (
+    get_ftm_countries,
+    get_territories,
+    get_territory,
+    get_territory_by_qid,
+)
 from rigour.territories.util import clean_codes
 
 

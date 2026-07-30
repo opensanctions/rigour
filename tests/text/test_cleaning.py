@@ -1,5 +1,6 @@
 from normality import squash_spaces
-from rigour.text.cleaning import remove_emoji, remove_bracketed_text
+
+from rigour.text.cleaning import remove_bracketed_text, remove_emoji
 
 
 def test_remove_emoji():

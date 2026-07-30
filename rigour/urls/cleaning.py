@@ -1,11 +1,9 @@
 import re
-from ipaddress import ip_address
-from typing import Optional
-from urllib.parse import urlparse, urlunparse, parse_qsl, urlencode
-from urllib.parse import ParseResult
 from collections.abc import Mapping
+from ipaddress import ip_address
+from urllib.parse import ParseResult, parse_qsl, urlencode, urlparse, urlunparse
 
-from rigour.urls.util import ParamsType, DEFAULT_SCHEME, SCHEMES
+from rigour.urls.util import DEFAULT_SCHEME, SCHEMES, ParamsType
 
 # A single host label, capped at the DNS length limit. `\w` matches letters in
 # any script, so a domain is accepted both in its decoded IDN form (`пример.рф`)
@@ -63,7 +61,7 @@ def _is_valid_netloc(parsed: ParseResult) -> bool:
     return True
 
 
-def _clean_url(text: str) -> Optional[ParseResult]:
+def _clean_url(text: str) -> ParseResult | None:
     """Perform intensive care on URLs to make sure they have a scheme
     and a host name. If no scheme is given HTTP is assumed."""
     try:
@@ -96,7 +94,7 @@ def _clean_url(text: str) -> Optional[ParseResult]:
     return parsed
 
 
-def clean_url(text: str) -> Optional[str]:
+def clean_url(text: str) -> str | None:
     """Perform intensive care on URLs to make sure they have a scheme
     and a host name. If no scheme is given HTTP is assumed."""
     parsed = _clean_url(text)
@@ -105,7 +103,7 @@ def clean_url(text: str) -> Optional[str]:
     return parsed.geturl()
 
 
-def clean_url_compare(text: str) -> Optional[str]:
+def clean_url_compare(text: str) -> str | None:
     """Destructively clean a URL for comparison."""
     parsed = _clean_url(text)
     if parsed is None:

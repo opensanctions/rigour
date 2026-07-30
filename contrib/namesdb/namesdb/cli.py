@@ -1,14 +1,21 @@
-import click
 import logging
 from pathlib import Path
-from typing import List
-from namesdb.export import generate_export_lines
-from rich.table import Table
-from rich.console import Console
-from normality import latinize_text
 
-from namesdb.db import engine, make_group_id, regex_groups, store_mapping, skip_mapping
-from namesdb.db import get_groups, get_forms
+import click
+from normality import latinize_text
+from rich.console import Console
+from rich.table import Table
+
+from namesdb.db import (
+    engine,
+    get_forms,
+    get_groups,
+    make_group_id,
+    regex_groups,
+    skip_mapping,
+    store_mapping,
+)
+from namesdb.export import generate_export_lines
 
 log = logging.getLogger(__name__)
 
@@ -29,7 +36,7 @@ def map_forms(group: str, form: str) -> None:
 
 @cli.command("skip")
 @click.argument("ids", type=int, nargs=-1)
-def skip_form(ids: List[int]) -> None:
+def skip_form(ids: list[int]) -> None:
     with engine.begin() as conn:
         for id in ids:
             skip_mapping(conn, id)
@@ -37,7 +44,7 @@ def skip_form(ids: List[int]) -> None:
 
 @cli.command("new")
 @click.argument("forms", type=str, nargs=-1)
-def new_group(forms: List[str]) -> None:
+def new_group(forms: list[str]) -> None:
     with engine.begin() as conn:
         group_id = make_group_id(conn)
         log.info("Generated new group ID: %s", group_id)
@@ -47,7 +54,7 @@ def new_group(forms: List[str]) -> None:
 
 @cli.command("skipgroup")
 @click.argument("groups", type=str, nargs=-1)
-def skip_group(groups: List[str]) -> None:
+def skip_group(groups: list[str]) -> None:
     with engine.begin() as conn:
         for group in groups:
             for mapping_id, form, skip in sorted(get_forms(conn, group)):

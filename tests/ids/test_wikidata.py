@@ -1,4 +1,4 @@
-from rigour.ids.wikidata import is_qid, WikidataQID
+from rigour.ids.wikidata import WikidataQID, is_qid
 
 
 def test_is_qid():

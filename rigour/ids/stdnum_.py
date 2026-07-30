@@ -1,12 +1,12 @@
-from typing import Optional
-from stdnum import isin, iban, figi, bic, lei
+
+from stdnum import bic, figi, iban, isin, lei
+from stdnum.br import cnpj, cpf
+from stdnum.cn import uscc
+from stdnum.exceptions import ValidationError
 from stdnum.ru import inn
 from stdnum.us import ssn
-from stdnum.br import cpf, cnpj
-from stdnum.cn import uscc
 
 from rigour.ids.common import IdentifierFormat
-from stdnum.exceptions import ValidationError
 
 
 class ISIN(IdentifierFormat):
@@ -21,7 +21,7 @@ class ISIN(IdentifierFormat):
         return isin.is_valid(value)
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         try:
             return isin.compact(isin.validate(value))
         except ValidationError:
@@ -40,7 +40,7 @@ class IBAN(IdentifierFormat):
         return iban.is_valid(value)
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         try:
             return iban.compact(iban.validate(value))
         except ValidationError:
@@ -65,7 +65,7 @@ class FIGI(IdentifierFormat):
         return figi.is_valid(value)
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         try:
             return figi.compact(figi.validate(value))
         except ValidationError:
@@ -84,7 +84,7 @@ class BIC(IdentifierFormat):
         return bic.is_valid(value)
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         try:
             norm = bic.compact(bic.validate(value))
             norm = norm[:8].upper()
@@ -111,7 +111,7 @@ class INN(IdentifierFormat):
         return inn.is_valid(value)
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         try:
             return inn.compact(inn.validate(value))
         except ValidationError:
@@ -130,7 +130,7 @@ class LEI(IdentifierFormat):
         return lei.is_valid(value)
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         try:
             return lei.compact(lei.validate(value))
         except ValidationError:
@@ -149,7 +149,7 @@ class SSN(IdentifierFormat):
         return ssn.is_valid(value)
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         try:
             return ssn.compact(ssn.validate(value))
         except ValidationError:
@@ -171,7 +171,7 @@ class CPF(IdentifierFormat):
         return cpf.is_valid(value)
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         try:
             return cpf.compact(cpf.validate(value))
         except ValidationError:
@@ -194,7 +194,7 @@ class CNPJ(IdentifierFormat):
         return cnpj.is_valid(value)
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         try:
             return cnpj.compact(cnpj.validate(value))
         except ValidationError:
@@ -217,7 +217,7 @@ class USCC(IdentifierFormat):
         return uscc.is_valid(value)
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         try:
             return uscc.compact(uscc.validate(value))
         except ValidationError:

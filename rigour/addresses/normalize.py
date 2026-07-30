@@ -1,9 +1,9 @@
+import logging
 import re
 import string
-import logging
 import unicodedata
 from functools import cache
-from typing import Dict, List, Optional, Tuple
+
 from normality import ascii_text
 from normality.constants import WS
 from normality.util import Categories
@@ -44,7 +44,7 @@ log = logging.getLogger(__name__)
 
 def normalize_address(
     address: str, latinize: bool = False, min_length: int = 4
-) -> Optional[str]:
+) -> str | None:
     """Build a comparison key from an address.
 
     Casefolds, replaces punctuation/symbols with whitespace,
@@ -67,11 +67,11 @@ def normalize_address(
         Normalised address, or `None` when the result is shorter
         than `min_length`.
     """
-    tokens: List[List[str]] = []
-    token: List[str] = []
+    tokens: list[list[str]] = []
+    token: list[str] = []
     for char in address.casefold():
         if char in CHARS_ALLOWED:
-            chr: Optional[str] = char
+            chr: str | None = char
         else:
             cat = unicodedata.category(char)
             chr = TOKEN_SEP_CATEGORIES.get(cat, char)
@@ -86,7 +86,7 @@ def normalize_address(
     if len(token):
         tokens.append(token)
 
-    parts: List[str] = []
+    parts: list[str] = []
     for token in tokens:
         token_str = "".join(token)
         if latinize:
@@ -101,7 +101,7 @@ def normalize_address(
 
 
 @cache
-def _address_replacer(latinize: bool = False) -> Tuple[re.Pattern[str], Dict[str, str]]:
+def _address_replacer(latinize: bool = False) -> tuple[re.Pattern[str], dict[str, str]]:
     """Build the (compiled regex, form → target mapping) tuple used by
     `shorten_address_keywords` and `remove_address_keywords`.
 
@@ -111,13 +111,13 @@ def _address_replacer(latinize: bool = False) -> Tuple[re.Pattern[str], Dict[str
     multi-token forms (e.g. `"united arab emirates"` → `"ae"`) win over
     their single-token components.
     """
-    from rigour.data.addresses.data import FORMS
     from rigour._core import ordinals_dict
+    from rigour.data.addresses.data import FORMS
 
     ordinals = [(str(k), v) for k, v in ordinals_dict().items()]
     forms = list(FORMS.items()) + ordinals
 
-    mapping: Dict[str, str] = {}
+    mapping: dict[str, str] = {}
     for repl, values in forms:
         repl_norm = normalize_address(repl, latinize=latinize, min_length=1)
         if repl_norm is None:  # pragma: no cover
@@ -167,7 +167,7 @@ def _address_replacer(latinize: bool = False) -> Tuple[re.Pattern[str], Dict[str
     forms_sorted = sorted(set(mapping.keys()), key=len, reverse=True)
     pattern = re.compile(
         r"(?<!\w)(%s)(?!\w)" % "|".join(re.escape(f) for f in forms_sorted),
-        re.U | re.I,
+        re.UNICODE | re.IGNORECASE,
     )
     # Lowercased-key mapping for the case-insensitive substitution
     # callback. `normalize_address` already casefolds, but keeping the
@@ -179,7 +179,7 @@ def _address_replacer(latinize: bool = False) -> Tuple[re.Pattern[str], Dict[str
 
 def remove_address_keywords(
     address: str, latinize: bool = False, replacement: str = WS
-) -> Optional[str]:
+) -> str | None:
     """Strip common address keywords from a normalised address.
 
     Removes recognised forms (`"street"`, `"road"`, `"south"`,
@@ -209,7 +209,7 @@ def remove_address_keywords(
     return pattern.sub(replacement, address)
 
 
-def shorten_address_keywords(address: str, latinize: bool = False) -> Optional[str]:
+def shorten_address_keywords(address: str, latinize: bool = False) -> str | None:
     """Shorten common address keywords in a normalised address.
 
     Replaces recognised forms with their canonical short form

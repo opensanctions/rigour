@@ -1,8 +1,9 @@
-from typing import Iterable, Set
+from collections.abc import Iterable
+
 from rigour.territories.territory import Territory, get_index
 
 
-def territories_intersect(left: Iterable[str], right: Iterable[str]) -> Set[str]:
+def territories_intersect(left: Iterable[str], right: Iterable[str]) -> set[str]:
     """Get the intersection of two territory code lists. This takes into account
     parent-child relationships and contested claims regarding territories.
 
@@ -15,9 +16,9 @@ def territories_intersect(left: Iterable[str], right: Iterable[str]) -> Set[str]
         hierarchical and claim relationships. The most narrow codes are returned.
     """
     index = get_index()
-    left_set: Set[Territory] = set(index[code] for code in left if code in index)
-    right_set: Set[Territory] = set(index[code] for code in right if code in index)
-    common: Set[Territory] = set()
+    left_set: set[Territory] = {index[code] for code in left if code in index}
+    right_set: set[Territory] = {index[code] for code in right if code in index}
+    common: set[Territory] = set()
     for cand in left_set:
         if cand in right_set:
             common.add(cand)

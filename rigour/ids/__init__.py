@@ -9,22 +9,21 @@ need to introduce a proper, structured identification scheme for identifiers, wi
 """
 
 from functools import cache
-from typing import List, Optional, Tuple, Type
+
 from typing_extensions import TypedDict
 
-from rigour.ids.wikidata import WikidataQID
-from rigour.ids.stdnum_ import ISIN, IBAN, FIGI, BIC, INN, LEI, USCC
-from rigour.ids.stdnum_ import CPF, CNPJ, SSN
-from rigour.ids.ogrn import OGRN
-from rigour.ids.npi import NPI
-from rigour.ids.uei import UEI
-from rigour.ids.imo import IMO
-from rigour.ids.strict import StrictFormat
 from rigour.ids.common import IdentifierFormat
+from rigour.ids.imo import IMO
+from rigour.ids.npi import NPI
+from rigour.ids.ogrn import OGRN
+from rigour.ids.stdnum_ import BIC, CNPJ, CPF, FIGI, IBAN, INN, ISIN, LEI, SSN, USCC
+from rigour.ids.strict import StrictFormat
+from rigour.ids.uei import UEI
+from rigour.ids.wikidata import WikidataQID
 
-FormatType = Type[IdentifierFormat]
+FormatType = type[IdentifierFormat]
 
-_FORMATS: Tuple[FormatType, ...] = (
+_FORMATS: tuple[FormatType, ...] = (
     WikidataQID,
     OGRN,
     IMO,
@@ -62,7 +61,7 @@ class FormatSpec(TypedDict):
 
 
 @cache
-def get_identifier_format(name: str) -> Optional[FormatType]:
+def get_identifier_format(name: str) -> FormatType | None:
     """Get the identifier type class for the given format name."""
     name = FORMAT_ALIASES.get(name, name)
     for fmt in _FORMATS:
@@ -71,14 +70,14 @@ def get_identifier_format(name: str) -> Optional[FormatType]:
     return None
 
 
-def get_identifier_format_names() -> List[str]:
+def get_identifier_format_names() -> list[str]:
     """Get a list of all identifier type names."""
     return [fmt.NAME for fmt in _FORMATS]
 
 
-def get_identifier_formats() -> List[FormatSpec]:
+def get_identifier_formats() -> list[FormatSpec]:
     """Get a list of all identifier formats."""
-    formats: List[FormatSpec] = []
+    formats: list[FormatSpec] = []
     for type_ in _FORMATS:
         name = type_.NAME
         fmt: FormatSpec = {
@@ -92,30 +91,30 @@ def get_identifier_formats() -> List[FormatSpec]:
 
 
 @cache
-def get_strong_format_names() -> List[str]:
+def get_strong_format_names() -> list[str]:
     """Get a list of all strong identifier type names."""
     return [fmt.NAME for fmt in _FORMATS if fmt.STRONG]
 
 
 __all__ = [
+    "BIC",
+    "CNPJ",
+    "CPF",
+    "FIGI",
+    "IBAN",
+    "IMO",
+    "INN",
+    "ISIN",
+    "LEI",
+    "NPI",
+    "OGRN",
+    "SSN",
+    "UEI",
+    "USCC",
     "IdentifierFormat",
     "StrictFormat",
     "WikidataQID",
-    "OGRN",
-    "IMO",
-    "ISIN",
-    "IBAN",
-    "FIGI",
-    "BIC",
-    "INN",
-    "LEI",
-    "NPI",
-    "UEI",
-    "SSN",
-    "CPF",
-    "CNPJ",
-    "USCC",
     "get_identifier_format",
-    "get_identifier_formats",
     "get_identifier_format_names",
+    "get_identifier_formats",
 ]

@@ -1,6 +1,5 @@
 
-from rigour.mime import parse_mimetype, normalize_mimetype, DEFAULT
-from rigour.mime import useful_mimetype
+from rigour.mime import DEFAULT, normalize_mimetype, parse_mimetype, useful_mimetype
 
 
 def test_normalize():

@@ -1,5 +1,4 @@
 import math
-from typing import Optional
 from functools import lru_cache
 
 from rigour import env
@@ -16,7 +15,7 @@ def levenshtein(
     left: str,
     right: str,
     max_length: int = env.MAX_NAME_LENGTH,
-    max_edits: Optional[int] = None,
+    max_edits: int | None = None,
 ) -> int:
     """Compute the Levenshtein distance between two strings.
 
@@ -39,7 +38,7 @@ def levenshtein(
 def levenshtein_similarity(
     left: str,
     right: str,
-    max_edits: Optional[int] = env.LEVENSHTEIN_MAX_EDITS,
+    max_edits: int | None = env.LEVENSHTEIN_MAX_EDITS,
     max_percent: float = env.LEVENSHTEIN_MAX_PERCENT,
     max_length: int = env.MAX_NAME_LENGTH,
 ) -> float:
@@ -76,7 +75,7 @@ def levenshtein_similarity(
 def is_levenshtein_plausible(
     left: str,
     right: str,
-    max_edits: Optional[int] = env.LEVENSHTEIN_MAX_EDITS,
+    max_edits: int | None = env.LEVENSHTEIN_MAX_EDITS,
     max_percent: float = env.LEVENSHTEIN_MAX_PERCENT,
     max_length: int = env.MAX_NAME_LENGTH,
 ) -> bool:

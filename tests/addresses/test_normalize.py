@@ -1,4 +1,5 @@
 from normality import squash_spaces
+
 from rigour.addresses import (
     normalize_address,
     remove_address_keywords,

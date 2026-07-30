@@ -1,5 +1,6 @@
 from rigour.names.split_phrases import contains_split_phrase
 
+
 def test_contains_split_phrase():
     assert not contains_split_phrase("International Business Machines")
     assert contains_split_phrase("International Business Machines dba IBM")

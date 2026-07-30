@@ -11,26 +11,25 @@ to retrieve territories by their codes or QIDs.
 """
 
 from functools import cache
-from typing import List, Optional
-from rigour.territories.territory import Territory
-from rigour.territories.territory import get_index as _get_index
+
 from rigour.territories.lookup import lookup_by_identifier, lookup_territory
 from rigour.territories.match import territories_intersect
+from rigour.territories.territory import Territory
+from rigour.territories.territory import get_index as _get_index
 from rigour.territories.util import clean_code
 
-
 __all__ = [
-    "get_territory",
-    "get_territories",
-    "get_territory_by_qid",
     "get_ftm_countries",
+    "get_territories",
+    "get_territory",
+    "get_territory_by_qid",
     "lookup_by_identifier",
     "lookup_territory",
     "territories_intersect",
 ]
 
 
-def get_territory(code: str) -> Optional[Territory]:
+def get_territory(code: str) -> Territory | None:
     """Get a territory object for the given code.
 
     Args:
@@ -45,7 +44,7 @@ def get_territory(code: str) -> Optional[Territory]:
 
 
 @cache
-def get_territories() -> List[Territory]:
+def get_territories() -> list[Territory]:
     """Get all the territories in the index.
 
     Returns:
@@ -55,7 +54,7 @@ def get_territories() -> List[Territory]:
 
 
 @cache
-def get_territory_by_qid(qid: str) -> Optional[Territory]:
+def get_territory_by_qid(qid: str) -> Territory | None:
     """Get a territory object for the given Wikidata QID.
 
     Args:
@@ -70,14 +69,14 @@ def get_territory_by_qid(qid: str) -> Optional[Territory]:
     return None
 
 
-def get_ftm_countries() -> List[Territory]:
+def get_ftm_countries() -> list[Territory]:
     """Get all the countries that were supported by the FtM `country`
     property type.
 
     Returns:
         A list of territories.
     """
-    territories: List[Territory] = []
+    territories: list[Territory] = []
     for territory in get_territories():
         if territory.is_ftm:
             territories.append(territory)

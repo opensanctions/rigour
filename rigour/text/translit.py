@@ -14,4 +14,4 @@ rigour deliberately does not try to duplicate that surface.
 from rigour._core import maybe_ascii as maybe_ascii
 from rigour._core import should_ascii as should_ascii
 
-__all__ = ["should_ascii", "maybe_ascii"]
+__all__ = ["maybe_ascii", "should_ascii"]

@@ -16,13 +16,13 @@ checks downstream code performs (e.g. `part.tag in INITIAL_TAGS`).
 from rigour._core import NamePartTag, NameTypeTag
 
 __all__ = [
+    "FAMILY_NAME_TAGS",
+    "GIVEN_NAME_TAGS",
+    "INITIAL_TAGS",
+    "NAME_TAGS_ORDER",
+    "WILDCARDS",
     "NamePartTag",
     "NameTypeTag",
-    "WILDCARDS",
-    "INITIAL_TAGS",
-    "GIVEN_NAME_TAGS",
-    "FAMILY_NAME_TAGS",
-    "NAME_TAGS_ORDER",
 ]
 
 

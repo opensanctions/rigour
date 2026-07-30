@@ -1,6 +1,5 @@
 import re
 from functools import cache
-from typing import List
 
 from rigour._core import (
     obj_name_prefixes_list,
@@ -9,9 +8,9 @@ from rigour._core import (
 )
 
 
-def _build_prefix_regex(prefixes: List[str]) -> re.Pattern[str]:
+def _build_prefix_regex(prefixes: list[str]) -> re.Pattern[str]:
     escaped = "|".join(re.escape(p) for p in prefixes)
-    return re.compile(r"^\W*((%s)\.?\s+)*" % escaped, re.I | re.U)
+    return re.compile(r"^\W*((%s)\.?\s+)*" % escaped, re.IGNORECASE | re.UNICODE)
 
 
 @cache

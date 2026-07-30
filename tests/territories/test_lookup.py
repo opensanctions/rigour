@@ -1,5 +1,4 @@
-from rigour.territories import lookup_by_identifier
-from rigour.territories import lookup_territory
+from rigour.territories import lookup_by_identifier, lookup_territory
 
 
 def test_lookup_by_identifier():

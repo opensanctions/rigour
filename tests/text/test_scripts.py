@@ -1,7 +1,12 @@
-from rigour.text.scripts import codepoint_script, text_scripts, common_scripts
-from rigour.text.scripts import is_latin
-from rigour.text.scripts import can_latinize
-from rigour.text.scripts import is_modern_alphabet, is_dense_script
+from rigour.text.scripts import (
+    can_latinize,
+    codepoint_script,
+    common_scripts,
+    is_dense_script,
+    is_latin,
+    is_modern_alphabet,
+    text_scripts,
+)
 
 
 def test_codepoint_script_basic():

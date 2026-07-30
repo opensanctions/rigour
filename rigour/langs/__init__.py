@@ -16,14 +16,13 @@ Uses data from: https://iso639-3.sil.org/
 See also: https://www.loc.gov/standards/iso639-2/php/code_list.php
 """
 
-from typing import Iterable, Optional, Set
+from collections.abc import Iterable
 
-
-from rigour.data.langs.iso639 import ISO3_ALL, ISO2_MAP, ISO3_MAP
+from rigour.data.langs.iso639 import ISO2_MAP, ISO3_ALL, ISO3_MAP
+from rigour.env import PREFERRED_LANG as PREFERRED_LANG_
 from rigour.langs.synonyms import NON_LANGS, expand_synonyms
 from rigour.langs.text import LangStr
 from rigour.langs.util import normalize_code
-from rigour.env import PREFERRED_LANG as PREFERRED_LANG_
 
 # The world is a cruel and dark place so here we're picking a list of
 # languages that are most widely readable. The bias is towards European
@@ -55,16 +54,16 @@ PREFERRED_LANGS = [
 ]
 
 __all__ = [
-    "LangStr",
     "PREFERRED_LANG",
     "PREFERRED_LANGS",
+    "LangStr",
     "iso_639_alpha2",
     "iso_639_alpha3",
     "list_to_alpha3",
 ]
 
 
-def iso_639_alpha3(code: str) -> Optional[str]:
+def iso_639_alpha3(code: str) -> str | None:
     """Convert a given language identifier into an ISO 639 Part 2 code, such
     as "eng" or "deu". This will accept language codes in the two- or three-
     letter format, some language names, and IETF/BCP 47-style tags with a
@@ -89,7 +88,7 @@ def iso_639_alpha3(code: str) -> Optional[str]:
     return None
 
 
-def iso_639_alpha2(code: str) -> Optional[str]:
+def iso_639_alpha2(code: str) -> str | None:
     """Convert a language identifier to an ISO 639 Part 1 code, such as "en"
     or "de". For languages which do not have a two-letter identifier, or
     invalid language codes, ``None`` will be returned.
@@ -100,7 +99,7 @@ def iso_639_alpha2(code: str) -> Optional[str]:
     return ISO2_MAP.get(alpha3)
 
 
-def list_to_alpha3(languages: Iterable[str], synonyms: bool = True) -> Set[str]:
+def list_to_alpha3(languages: Iterable[str], synonyms: bool = True) -> set[str]:
     """Parse all the language codes in a given list into ISO 639 Part 2 codes
     and optionally expand them with synonyms (i.e. other names for the same
     language).
@@ -108,7 +107,7 @@ def list_to_alpha3(languages: Iterable[str], synonyms: bool = True) -> Set[str]:
     Synonym groups mix in ISO 639-2/B and Tesseract-style codes (e.g. ``ger``,
     ``chi``) which aid input matching but are not valid ISO 639-3 identifiers;
     they are filtered out so the returned set only contains canonical codes."""
-    codes: Set[str] = set()
+    codes: set[str] = set()
     for language in languages:
         code = iso_639_alpha3(language)
         if code is None:

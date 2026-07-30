@@ -1,6 +1,6 @@
 import logging
+from collections.abc import Generator
 from functools import cache, lru_cache
-from typing import Dict, Generator, List, Optional, Tuple
 
 from rigour._core import raw_levenshtein_cutoff, territories_jsonl
 from rigour.data import iter_jsonl_text
@@ -13,10 +13,10 @@ log = logging.getLogger(__name__)
 
 
 @cache
-def _get_identifier_map() -> Dict[str, Territory]:
+def _get_identifier_map() -> dict[str, Territory]:
     """Create a mapping of territory codes and names to Territory objects."""
     index = _get_index()
-    mapping: Dict[str, Territory] = {}
+    mapping: dict[str, Territory] = {}
 
     for territory in index.values():
         mapping[territory.code] = territory
@@ -33,7 +33,7 @@ def _get_identifier_map() -> Dict[str, Territory]:
     return mapping
 
 
-def lookup_by_identifier(identifier: str) -> Optional[Territory]:
+def lookup_by_identifier(identifier: str) -> Territory | None:
     """Lookup a territory by its identifier, which can be a 2- or 3-letter code, or QID.
 
     Args:
@@ -48,7 +48,7 @@ def lookup_by_identifier(identifier: str) -> Optional[Territory]:
 
 
 def _load_territory_names() -> Generator[
-    Tuple[Territory, List[str], List[str]], None, None
+    tuple[Territory, list[str], list[str]], None, None
 ]:
     """Load the mapping of normalized territory names to Territory objects."""
     index = _get_index()
@@ -57,18 +57,18 @@ def _load_territory_names() -> Generator[
         territory = index.get(code)
         if territory is None:  # pragma: no cover
             raise RuntimeError(f"Missing territory for code: {code}")
-        strongs: List[str] = data.get("names_strong", [])
+        strongs: list[str] = data.get("names_strong", [])
         strongs.append(territory.name)
         strongs.append(territory.full_name)
-        weaks: List[str] = data.get("names_weak", [])
+        weaks: list[str] = data.get("names_weak", [])
         yield territory, strongs, weaks
 
 
 @cache
-def _get_territory_names() -> Dict[str, Territory]:
+def _get_territory_names() -> dict[str, Territory]:
     """Get a mapping of names to Territory objects."""
-    mapping: Dict[str, Territory] = {}
-    weaks: Dict[Territory, List[str]] = {}
+    mapping: dict[str, Territory] = {}
+    weaks: dict[Territory, list[str]] = {}
     for territory, strongs, weaks_ in _load_territory_names():
         weaks[territory] = weaks_
         for name in strongs:
@@ -82,7 +82,7 @@ def _get_territory_names() -> Dict[str, Territory]:
                 )
             mapping[nname] = territory
 
-    weak_mapping: Dict[str, Territory] = {}
+    weak_mapping: dict[str, Territory] = {}
     for territory, names_weak in weaks.items():
         for name in names_weak:
             nname = normalize_territory_name(name)
@@ -102,8 +102,8 @@ def _get_territory_names() -> Dict[str, Territory]:
     return mapping
 
 
-def _fuzzy_search(name: str) -> Optional[Territory]:
-    best_territory: Optional[Territory] = None
+def _fuzzy_search(name: str) -> Territory | None:
+    best_territory: Territory | None = None
     cutoff = int(len(name) * 0.3)
     best_distance = cutoff + 1
     with resource_lock:
@@ -127,7 +127,7 @@ def _fuzzy_search(name: str) -> Optional[Territory]:
 
 
 @lru_cache(maxsize=MEMO_MEDIUM)
-def lookup_territory(text: str, fuzzy: bool = False) -> Optional[Territory]:
+def lookup_territory(text: str, fuzzy: bool = False) -> Territory | None:
     """Lookup a territory by various codes and names.
 
     Args:

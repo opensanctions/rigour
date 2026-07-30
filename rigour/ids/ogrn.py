@@ -1,5 +1,4 @@
 import re
-from typing import Optional
 
 from rigour.ids.common import IdentifierFormat
 
@@ -30,7 +29,7 @@ class OGRN(IdentifierFormat):
         return control_digit == cls.calculate_control_digit(text)
 
     @classmethod
-    def normalize(cls, text: str) -> Optional[str]:
+    def normalize(cls, text: str) -> str | None:
         """Normalize the given string to a valid OGRN."""
         match = OGRN_RE.search(text)
         if match is None:
@@ -41,7 +40,7 @@ class OGRN(IdentifierFormat):
         return None
 
     @classmethod
-    def calculate_control_digit(cls, grn: str) -> Optional[int]:
+    def calculate_control_digit(cls, grn: str) -> int | None:
         if len(grn) == 13:
             number = int(grn[:12])
             mod_result = number % 11

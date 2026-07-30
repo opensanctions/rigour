@@ -1,4 +1,3 @@
-from typing import Optional
 
 from normality import ascii_text
 
@@ -18,7 +17,7 @@ class StrictFormat(IdentifierFormat):
         return norm is not None and len(norm) > 2
 
     @classmethod
-    def normalize(cls, value: str) -> Optional[str]:
+    def normalize(cls, value: str) -> str | None:
         ascii = ascii_text(value)
         if len(ascii) < 2:
             return None

@@ -1,7 +1,8 @@
-import orjson
+from collections.abc import Generator
 from pathlib import Path
-from typing import Any, Generator
+from typing import Any
 
+import orjson
 
 DATA_PATH = Path(__file__).resolve().parent
 

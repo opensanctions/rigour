@@ -1,8 +1,6 @@
 import gc
 import sys
-from typing import List
 from threading import RLock
-
 
 MEMO_TINY = 128
 MEMO_SMALL = 2000
@@ -31,10 +29,10 @@ def gettext(text: str) -> str:
     return text
 
 
-def list_intersection(left: List[str], right: List[str]) -> List[str]:
+def list_intersection(left: list[str], right: list[str]) -> list[str]:
     """Return the number of elements in the intersection of two lists, accounting
     properly for duplicates."""
-    overlap: List[str] = []
+    overlap: list[str] = []
     remainder = list(right)
     for elem in left:
         try:

@@ -1,5 +1,7 @@
+from typing import Any
+
 import yaml
-from typing import Any, Dict, List
+
 from genscripts.util import (
     RESOURCES_PATH,
     RUST_DATA_PATH,
@@ -8,7 +10,7 @@ from genscripts.util import (
 )
 
 
-def _sorted_unique_norm(values: List[str]) -> List[str]:
+def _sorted_unique_norm(values: list[str]) -> list[str]:
     """Normalise, dedupe, and sort a flat string list — stable JSON out."""
     return sorted({norm_string(v) for v in values if norm_string(v)})
 
@@ -20,9 +22,9 @@ def generate_ordinals() -> None:
     tagger build path via `include_str!`."""
     ordinals_path = RESOURCES_PATH / "text" / "ordinals.yml"
     with open(ordinals_path, "r", encoding="utf-8") as ufh:
-        ordinals_mapping: Dict[str, Dict[int, List[str]]] = yaml.safe_load(ufh.read())
+        ordinals_mapping: dict[str, dict[int, list[str]]] = yaml.safe_load(ufh.read())
 
-    records: List[Dict[str, Any]] = []
+    records: list[dict[str, Any]] = []
     for number, forms in sorted(ordinals_mapping["ordinals"].items()):
         assert number is not None
         sorted_forms = _sorted_unique_norm(forms)
@@ -40,9 +42,9 @@ def generate_stopwords() -> None:
     / `nullwords_list` / `nullplaces_list` accessors."""
     stopwords_path = RESOURCES_PATH / "text" / "stopwords.yml"
     with open(stopwords_path, "r", encoding="utf-8") as ufh:
-        stopword_lists: Dict[str, List[str]] = yaml.safe_load(ufh.read())
+        stopword_lists: dict[str, list[str]] = yaml.safe_load(ufh.read())
 
-    out_data: Dict[str, List[str]] = {}
+    out_data: dict[str, list[str]] = {}
     for key, value in stopword_lists.items():
         # YAML section names arrive as UPPERCASE_WORDS. Lower-case them
         # for the JSON field names — the Rust side spells them

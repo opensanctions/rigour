@@ -22,7 +22,7 @@ sequence. The tokens of the value don't need to be adjacent in the
 name, just present in order.
 """
 
-from typing import Mapping, Optional, Sequence, Set
+from collections.abc import Mapping, Sequence
 
 from rigour._core import analyze_names as _analyze_names
 from rigour.names.name import Name
@@ -34,7 +34,7 @@ __all__ = ["analyze_names"]
 def analyze_names(
     type_tag: NameTypeTag,
     names: Sequence[str],
-    part_tags: Optional[Mapping[NamePartTag, Sequence[str]]] = None,
+    part_tags: Mapping[NamePartTag, Sequence[str]] | None = None,
     *,
     infer_initials: bool = False,
     symbols: bool = True,
@@ -42,7 +42,7 @@ def analyze_names(
     numerics: bool = True,
     consolidate: bool = True,
     rewrite: bool = True,
-) -> Set[Name]:
+) -> set[Name]:
     """Build a set of tagged [Name][rigour.names.Name] objects from raw strings.
 
     Args:

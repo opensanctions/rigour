@@ -1,6 +1,5 @@
-from rigour.text.distance import levenshtein
-
 from rigour.reset import reset_caches
+from rigour.text.distance import levenshtein
 
 
 def test_reset_caches():

@@ -19,8 +19,7 @@ works for the nested-access pattern used across the OpenSanctions
 stack.
 """
 
-from rigour._core import Symbol, SymbolCategory
-from rigour._core import pair_symbols
+from rigour._core import Symbol, SymbolCategory, pair_symbols
 
 Symbol.Category = SymbolCategory
 

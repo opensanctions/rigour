@@ -1,5 +1,5 @@
-from rigour.mime.filename import normalize_extension
 from rigour.mime.filename import mimetype_extension as mime_ext
+from rigour.mime.filename import normalize_extension
 
 
 def test_normalize():
