@@ -1,7 +1,8 @@
+from datetime import date, datetime, timedelta, timezone
+
 import pytest
-from datetime import datetime, timezone, date
-from rigour.time import utc_now, naive_now, utc_date
-from rigour.time import iso_datetime, datetime_iso
+
+from rigour.time import datetime_iso, iso_datetime, naive_now, utc_date, utc_now
 
 
 def test_utc_now():
@@ -45,7 +46,44 @@ def test_iso_datetime():
     with pytest.raises(ValueError):
         iso_datetime("2023-10-01 12:00:")
 
-    # assert datetime_iso(None) is None
-    # assert datetime_iso("2023-10-01T12:00:00") == "2023-10-01T12:00:00"
-    # assert datetime_iso("2023-10-01 12:00:00") == "2023-10-01T12:00:00"
-    assert datetime_iso(example) == "2023-10-01T12:00:00+00:00"
+    # Offsets are ignored on input, as they were never in the wire format:
+    offset = iso_datetime("2023-10-01T12:00:00+05:30")
+    assert offset == example
+
+
+def test_datetime_iso():
+    example = datetime(2023, 10, 1, 12, 0, 0, tzinfo=timezone.utc)
+    assert datetime_iso(example) == "2023-10-01T12:00:00"
+
+    # Naive datetimes are UTC by convention, not local time:
+    assert datetime_iso(example.replace(tzinfo=None)) == "2023-10-01T12:00:00"
+
+    # Microseconds are dropped, so the output round-trips:
+    assert datetime_iso(example.replace(microsecond=123456)) == "2023-10-01T12:00:00"
+
+    # A foreign timezone is converted, not just stripped:
+    other = datetime(
+        2023, 10, 1, 17, 30, 0, tzinfo=timezone(timedelta(hours=5, minutes=30))
+    )
+    with pytest.warns(UserWarning):
+        assert datetime_iso(other) == "2023-10-01T12:00:00"
+
+    with pytest.warns(UserWarning):
+        assert datetime_iso("2023-10-01 12:00:00") == "2023-10-01T12:00:00"
+
+    with pytest.warns(UserWarning):
+        assert datetime_iso("2023-10-01T12:00:00+00:00") == "2023-10-01T12:00:00"
+
+    assert datetime_iso(None) is None
+
+
+def test_datetime_iso_roundtrip():
+    for text in (
+        "2023-10-01T12:00:00",
+        "2023-10-01T00:00:00",
+        "2026-07-29T08:54:49",
+    ):
+        assert datetime_iso(iso_datetime(text)) == text
+
+    now = utc_now()
+    assert iso_datetime(datetime_iso(now)) == now.replace(microsecond=0)
