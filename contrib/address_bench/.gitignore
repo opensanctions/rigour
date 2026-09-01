@@ -1,0 +1,8 @@
+candidates.csv
+.cache.jsonl
+.envrc
+.mypy_cache/
+# qsv stats cache
+*.stats.csv
+*.stats.csv.json
+*.stats.csv.data.jsonl
