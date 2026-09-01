@@ -23,7 +23,7 @@ use crate::text::scripts::text_scripts;
 // requests. `None` results (empty/punctuation-only input) are
 // cached too. Guarded by a Mutex: callers currently hold the GIL,
 // so stock CPython never contends on it; revisit if a future
-// `allow_threads` entry point shows contention.
+// `detach`-based entry point shows contention.
 static ANALYZE_CACHE: LazyLock<Mutex<LruCache<String, Option<Arc<Address>>>>> =
     LazyLock::new(|| Mutex::new(LruCache::new(NonZeroUsize::new(MEMO_MEDIUM).unwrap())));
 

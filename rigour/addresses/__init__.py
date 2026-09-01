@@ -1,7 +1,26 @@
 """
 This module provides a set of tools for handling postal/geographic addresses. It includes functions
-for normalising addresses for comparison purposes, and for formatting addresses given in parts for
+for comparing addresses, normalising them, and for formatting addresses given in parts for
 display as a single string.
+
+## Address comparison
+
+Score whether two address strings (or two sets of them) denote the
+same place:
+
+```python
+from rigour.addresses import compare_address, compare_address_many
+
+score = compare_address("Bahnhofstr. 10, Augsburg", "Bahnhofstrasse 10, 86150 Augsburg")
+best = compare_address_many(
+    ["Bahnhofstr. 10, Augsburg"],
+    ["Bahnhofstrasse 10, 86150 Augsburg", "P.O. Box 71, Augsburg"],
+)
+```
+
+The comparison runs in native code over analyzed tokens — see
+[compare_address][rigour.addresses.compare.compare_address] for the
+mechanics and score semantics.
 
 ## Postal address formatting
 
@@ -31,6 +50,7 @@ format addresses according to customs in the country that is been encoded.
 """
 
 from rigour.addresses.cleaning import clean_address
+from rigour.addresses.compare import compare_address, compare_address_many
 from rigour.addresses.format import format_address, format_address_line
 from rigour.addresses.normalize import (
     normalize_address,
@@ -40,6 +60,8 @@ from rigour.addresses.normalize import (
 
 __all__ = [
     "clean_address",
+    "compare_address",
+    "compare_address_many",
     "format_address",
     "format_address_line",
     "normalize_address",

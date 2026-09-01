@@ -36,6 +36,28 @@ pub fn compare(query: &str, result: &str) -> f64 {
     align_tokens(&qry.tokens, &res.tokens)
 }
 
+/// Compare every query address against every result address and
+/// return the highest pairwise score. Each string is analyzed once
+/// (through the LRU), so the list×list loop costs analysis per
+/// distinct string plus one alignment per pair.
+pub fn compare_many(queries: &[String], results: &[String]) -> f64 {
+    let qry: Vec<_> = queries.iter().filter_map(|s| analyze_cached(s)).collect();
+    let res: Vec<_> = results.iter().filter_map(|s| analyze_cached(s)).collect();
+    let mut best: f64 = 0.0;
+    for q in &qry {
+        for r in &res {
+            let score = align_tokens(&q.tokens, &r.tokens);
+            if score > best {
+                best = score;
+                if best >= 1.0 {
+                    return best;
+                }
+            }
+        }
+    }
+    best
+}
+
 /// Similarity of two tokens in [0.0, 1.0]. Two Number tokens match
 /// exactly or not at all — compared on their canonical digit
 /// strings (leading-zero-faithful, script-independent), with no
@@ -256,6 +278,22 @@ mod tests {
     fn digit_scripts_fold_for_number_match() {
         let score = compare("شارع الملك فهد ١٧", "شارع الملك فهد 17");
         assert_eq!(score, 1.0);
+    }
+
+    #[test]
+    fn compare_many_returns_best_pair() {
+        let queries = vec![
+            "Calle Mayor 3, Madrid".to_string(),
+            "Bahnhofstr. 12, Berlin".to_string(),
+        ];
+        let results = vec![
+            "10115 Berlin, Bahnhofstrasse 12".to_string(),
+            "Bahnhofstr. 12, Berlin".to_string(),
+        ];
+        assert_eq!(compare_many(&queries, &results), 1.0);
+        assert_eq!(compare_many(&queries, &[]), 0.0);
+        assert_eq!(compare_many(&[], &results), 0.0);
+        assert_eq!(compare_many(&["...".to_string()], &results), 0.0);
     }
 
     #[test]
