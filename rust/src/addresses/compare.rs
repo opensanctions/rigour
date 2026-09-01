@@ -12,7 +12,7 @@ use crate::text::numbers::fold_digits;
 
 /// Edit budget as a fraction of the shorter token's length (in
 /// codepoints); token pairs beyond the budget don't align.
-const MAX_EDITS_PCT: f64 = 0.2;
+const MAX_EDITS_PCT: f64 = 0.30;
 
 /// Similarity credited to two tokens equivalent through their class
 /// payload without being literally equal — Keywords sharing a

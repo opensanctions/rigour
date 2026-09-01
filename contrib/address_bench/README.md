@@ -166,6 +166,7 @@ One row per increment; a rule stays only if the numbers justify it.
 | v4: keyword canonical match | 0.8920 | 0.9372 | 85.87% | Keyword×Keyword with equal canonical aligns at 0.9 (boulevard↔blvd; 1.0 for literal identity — the discount is AUC-neutral, kept for ranking semantics); abbreviation avg match score 0.776→0.827 |
 | v5: territory code match | 0.8981 | 0.9431 | 86.21% | Territory×Territory with intersecting code sets aligns at 0.9 (syria↔syrian arab republic); translation err 12.5→10.7%, translation_cjk 13.7→13.0% |
 | v6: weak territory names | 0.9057 | 0.9492 | 86.71% | tagger also tags names_weak (CLDR translations: Syrie, Сирия, シリア); translation err →5.4%, translation_cjk →9.8%, no visible FP cost |
+| v7: edit budget 0.2→0.3 | 0.9066 | 0.9498 | 86.89% | absorbs ICU-vs-conventional romanization drift (mjasnickaja/myasnitskaya); translit_cyrillic err 12.0→6.4%, different_street err also improves (20.0→19.1%); swept 0.2–0.4, peak at 0.3 |
 
 ## Regenerating
 
