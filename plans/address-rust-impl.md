@@ -98,34 +98,65 @@ tests need.
 - **Gate**: `cargo test` green; `cargo clippy --all-targets`
   (± `--features python`) clean; `make build` idempotent.
 
-## Phase 2: scorer
+## Phase 2: scorer, grown iteratively against the benchmark
 
-`rust/src/addresses/compare.rs`, implementing D6 exactly:
+Course correction: the earlier channel/gate prescription piled up
+heuristics with no evidence any individual one pays. Instead the
+scorer starts as the simplest possible mechanism running end-to-end
+against `cases.csv`, and every rule after that is introduced alone
+and justified by a measured delta. The channel design below survives
+only as a hypothesis backlog.
 
-- Channel functions: `align_numbers` (value multiset + postcode
-  prefix rule), `compare_territories` (code overlap with hierarchy
-  containment + free-text fallback for unmatched territory tokens),
-  `align_text` (greedy best-pair over `comparable()` forms, cutoff
-  Damerau-Levenshtein, length-weighted residue penalty). Keyword
-  tokens that find no keyword-channel counterpart fall back into the
-  free-text channel on their surface (alias) form at ~zero keyword
-  weight — the fuzzy match adds no evidence but absorbs the
-  counterpart token so it doesn't count as penalized residue.
-- Combination: class-weighted additive base score; multiplicative
-  gates for number conflict (hard) and territory conflict (moderate);
-  subset cap ~0.9; cross-script cap when only script-independent
-  evidence exists.
-- `MatchType` enum (`Exact`, `Subset`, `Fuzzy`, `NumberConflict`,
-  `TerritoryConflict`, `NumericOnly`, `NoEvidence`) and explanation
-  string assembly.
-- **All tunables in one `params.rs`** (class weights, gate factors,
-  caps, fuzz cutoffs) so Phase 4 tuning touches one file.
-- **Gate**: unit tests over hand-picked corpus rows covering each
-  match_type; no tuning yet.
+**v0 (done)**: `rust/src/addresses/compare.rs::compare` — normalize
+both sides with `CASEFOLD | ADDRESS`, whole-string Levenshtein
+similarity with a 20%-of-shorter-side edit budget. Exposed as
+`rigour._core.compare_address` (singular — `compare_addresses` is
+reserved for a possible list×list entry point); `SCORER=rust` in the
+bench. AUC 0.5505 — parity with the ftm baseline confirms the wiring.
+
+**Iteration protocol**, one rule at a time:
+
+1. Implement the single change in `compare.rs`.
+2. `make develop` (release build — debug is ~100× slower through
+   ICU), then `make -C contrib/address_bench evaluate SCORER=rust`.
+3. Record overall AUC, STRONG-only AUC, best-threshold accuracy and
+   the targeted slice in the results table in
+   `contrib/address_bench/README.md`.
+4. Keep if overall AUC or the targeted slice improves without
+   materially hurting the rest; revert if it doesn't pay. One commit
+   per kept increment, numbers in the commit message.
+
+Tunable constants stay inline in `compare.rs` until enough survive
+to justify a `params.rs`.
+
+**Increment ladder** (hypotheses, reorder/drop on evidence):
+
+1. Token alignment: greedy best-pair over `analyze()` tokens'
+   `comparable()` forms, score = matched/total weight, weight ∝
+   token length (`reordered_fields`, `translit_cyrillic`).
+2. Number strictness: Number tokens match only on exact ASCII-folded
+   surface digit strings (`fold_digits` beside `string_number`;
+   per-char `to_digit(10)` — f64 round-trip erases leading zeros);
+   penalty when both sides hold unmatched numbers
+   (`house_number_differs`, `unit_differs`).
+3. Keyword canonical matching: canonical-to-canonical at full
+   credit; unmatched keywords fuzzy on surface at reduced weight
+   (`abbreviation`).
+4. Territory code matching: overlap on code sets (`different_city`).
+
+**Backlog** — only if a slice's failures demand it: postcode prefix
+rule, territory name-variant fallback (incl. weak names), subset cap,
+parent-hierarchy containment, stopword class, translation terms,
+unmatched-number-pair penalty tuning, MatchType/explanation surface.
 
 ## Phase 3: PyO3 surface + Python wrappers
 
-- `lib.rs`: `compare_addresses(query: &str, result: &str)` →
+Starts once the Phase 2 ladder converges. The minimal
+`_core.compare_address` float entry point already exists for the
+bench; this phase builds the public surface on whatever the scorer
+turned out to need.
+
+- `lib.rs`: `compare_address(query: &str, result: &str)` →
   result pyclass; `address_fingerprint(text: &str)` →
   `Option<String>`. Both run analysis + scoring under
   `py.allow_threads`; analyzed `Address` memoized in a concurrent
@@ -143,10 +174,11 @@ tests need.
 - **Gate**: `pytest --cov rigour` and `mypy --strict rigour` green
   after `make develop`; docs build clean.
 
-## Phase 4: tuning and evaluation
+## Phase 4: final evaluation
 
-- Wire the new function into `evaluate.py` as a third scorer.
-- Tune `params.rs` against the slices. Acceptance targets:
+Mostly subsumed by the Phase 2 iteration protocol — the scorer is
+tuned as it grows. What remains here is the acceptance snapshot and
+fingerprint work. Targets:
   - overall AUC beats both baselines;
   - large FP reduction on `house_number_differs` / `unit_differs` /
     `different_street` vs the nomenklatura baseline;

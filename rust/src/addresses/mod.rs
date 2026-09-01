@@ -1,8 +1,8 @@
-// Address analysis for the comparison pipeline — tokenize and
-// classify address strings into `Address { tokens, scripts }`.
-// Rust-internal for now: the PyO3 comparison surface lands with
-// the scorer.
+// Address analysis and comparison — tokenize and classify address
+// strings into `Address { tokens, scripts }`, and score string
+// pairs for similarity.
 
 pub mod analyze;
+pub mod compare;
 pub mod tagger;
 pub mod token;

@@ -109,6 +109,18 @@ fn py_raw_jaro_winkler(a: &str, b: &str) -> f64 {
     text::distance::jaro_winkler_similarity(a, b)
 }
 
+// Pairwise address comparison — singular name; `compare_addresses`
+// stays reserved for a possible list×list entry point. Bare float
+// score for now: a richer result surface (match type, explanation)
+// lands once the scorer design has converged against the
+// address_bench corpus.
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "compare_address")]
+fn py_compare_address(query: &str, result: &str) -> f64 {
+    addresses::compare::compare(query, result)
+}
+
 #[cfg(feature = "python")]
 #[pyfunction]
 #[pyo3(name = "pick_name")]
@@ -284,6 +296,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_raw_levenshtein_cutoff, m)?)?;
     m.add_function(wrap_pyfunction!(py_raw_jaro, m)?)?;
     m.add_function(wrap_pyfunction!(py_raw_jaro_winkler, m)?)?;
+    m.add_function(wrap_pyfunction!(py_compare_address, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_name, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_case, m)?)?;
     m.add_function(wrap_pyfunction!(py_reduce_names, m)?)?;

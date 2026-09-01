@@ -146,7 +146,20 @@ threshold, per-quality and per-category slices, and the worst
 individual failures. The scorers in `evaluate.py` are local
 reimplementations of the downstream comparison logic over raw string
 pairs, so the bench has no dependency on nomenklatura or
-followthemoney.
+followthemoney. `SCORER=rust` runs `rigour._core.compare_address`,
+the Rust scorer under iterative development — rebuild with
+`make develop` (release; ICU paths are ~100× slower in debug builds)
+before evaluating it.
+
+### Rust scorer iteration log
+
+One row per increment; a rule stays only if the numbers justify it.
+
+| increment | AUC | AUC (STRONG) | best-t accuracy | notes |
+|---|---|---|---|---|
+| baseline: nomenklatura | 0.7198 | 0.7742 | 73.72% | token overlap + fuzzy remainder |
+| baseline: ftm | 0.5509 | 0.5836 | 54.01% | normalize + levenshtein |
+| v0: whole-string levenshtein | 0.5505 | 0.5832 | 53.91% | `CASEFOLD\|ADDRESS` normalize; parity with ftm confirms wiring |
 
 ## Regenerating
 

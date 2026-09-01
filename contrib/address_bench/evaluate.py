@@ -18,6 +18,7 @@ import click
 from rich.console import Console
 from rich.table import Table
 
+from rigour._core import compare_address
 from rigour.addresses import normalize_address, remove_address_keywords
 from rigour.text import levenshtein_similarity
 
@@ -92,9 +93,15 @@ def score_ftm(addr1: str, addr2: str) -> float:
     return levenshtein_similarity(norm1, norm2, max_edits=max_edits)
 
 
+def score_rust(addr1: str, addr2: str) -> float:
+    """The Rust scorer under iterative development (rigour._core)."""
+    return compare_address(addr1, addr2)
+
+
 SCORERS: dict[str, Scorer] = {
     "nomenklatura": score_nomenklatura,
     "ftm": score_ftm,
+    "rust": score_rust,
 }
 
 
