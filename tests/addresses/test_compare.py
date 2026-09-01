@@ -1,4 +1,8 @@
-from rigour.addresses import compare_address, compare_address_many
+from rigour.addresses import (
+    address_fingerprint,
+    compare_address,
+    compare_address_many,
+)
 
 
 def test_compare_address_identical() -> None:
@@ -44,3 +48,31 @@ def test_compare_address_many_empty() -> None:
     assert compare_address_many(["Bahnhofstr. 12"], []) == 0.0
     assert compare_address_many([], []) == 0.0
     assert compare_address_many(["..."], ["Bahnhofstr. 12"]) == 0.0
+
+
+def test_address_fingerprint_canonical_forms() -> None:
+    key = address_fingerprint("Main Boulevard 5, Syrian Arab Republic")
+    assert key == "main blvd 5 sy"
+    assert address_fingerprint("Main Blvd. 5, Syria") == key
+
+
+def test_address_fingerprint_transliterates() -> None:
+    key = address_fingerprint("Воткинское шоссе, д. 170")
+    assert key == "votkinskoe hwy d 170"
+
+
+def test_address_fingerprint_order_preserved() -> None:
+    one = address_fingerprint("Д. 17 СТР. 1, Москва")
+    other = address_fingerprint("Д. 1 СТР. 17, Москва")
+    assert one is not None
+    assert one != other
+
+
+def test_address_fingerprint_native_script_passthrough() -> None:
+    key = address_fingerprint("北京市 100022")
+    assert key == "北京市 100022"
+
+
+def test_address_fingerprint_empty() -> None:
+    assert address_fingerprint("") is None
+    assert address_fingerprint(" ,,, --- ") is None

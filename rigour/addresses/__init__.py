@@ -22,6 +22,18 @@ The comparison runs in native code over analyzed tokens — see
 [compare_address][rigour.addresses.compare.compare_address] for the
 mechanics and score semantics.
 
+The same analysis backs a keying surface: use
+[address_fingerprint][rigour.addresses.compare.address_fingerprint]
+to reduce equivalent renderings of an address to one deterministic
+string for deduplication or graph node identity:
+
+```python
+from rigour.addresses import address_fingerprint
+
+key = address_fingerprint("Main Boulevard 5, Syrian Arab Republic")
+# "main blvd 5 sy" — same key as for "Main Blvd. 5, Syria"
+```
+
 ## Postal address formatting
 
 This set of helpers is designed to help with the processing of real-world
@@ -50,7 +62,11 @@ format addresses according to customs in the country that is been encoded.
 """
 
 from rigour.addresses.cleaning import clean_address
-from rigour.addresses.compare import compare_address, compare_address_many
+from rigour.addresses.compare import (
+    address_fingerprint,
+    compare_address,
+    compare_address_many,
+)
 from rigour.addresses.format import format_address, format_address_line
 from rigour.addresses.normalize import (
     normalize_address,
@@ -59,6 +75,7 @@ from rigour.addresses.normalize import (
 )
 
 __all__ = [
+    "address_fingerprint",
     "clean_address",
     "compare_address",
     "compare_address_many",
