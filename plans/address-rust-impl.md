@@ -29,15 +29,15 @@ Phase 0–1 start:
 - **Tokenizer**: resolved — a dedicated `tokenize_address` with its
   own category table (exposed as `Normalize::ADDRESS`), deliberately
   duplicated from `tokenize_name` since the two are expected to
-  diverge. Initial deltas match the Python address normalizer: Mc
-  separates, `&` and `№` are kept as token content (making both live
-  keyword needles). Any further tokenizer expansion (e.g. a
-  "separate into own token" action so glued `№17` splits and the `№`
-  needle fires) waits until the Rust scorer runs end-to-end in the
-  Phase 4 eval — change the table only against a benchmark delta.
-- **Territory names in the tagger**: strong names only at first (the
-  Python keyword table already skips weak names for FP reasons); weak
-  names only if the corpus shows recall left on the table.
+  diverge. Deltas vs the Python address normalizer: Mc separates,
+  `&` and `№` are kept as token content (making both live keyword
+  needles), and digit runs are emitted as their own tokens ("д39" →
+  "д 39") — landed with the ordinal-tagging increment against a
+  +0.03 AUC benchmark delta.
+- **Territory names in the tagger**: resolved — strong and weak
+  names both tag (weak names measured +0.008 AUC on the translation
+  slices with no FP cost, since disjoint codes carry no negative
+  evidence).
 - **Compound numbers**: split "17/1" into components vs keep
   structured. Start by splitting; the `unit_differs` slice arbitrates.
 - **Cache crate**: a mutex-wrapped `lru` vs `quick_cache`/sharded.

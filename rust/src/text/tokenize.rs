@@ -161,23 +161,43 @@ fn category_action_address(cat: GeneralCategory) -> CharAction {
 /// Same single-pass shape as [`tokenize_name`] over a separate
 /// category table: spacing marks (Mc) separate tokens, and the
 /// address signifier symbols `&` and `№` are kept as token content
-/// instead of splitting on them.
+/// instead of splitting on them. Decimal-digit runs are emitted as
+/// their own tokens ("д39" → "д 39", "30th" → "30 th") so glued
+/// house numbers become comparable — the ordinal needles in the
+/// address tagger re-capture split pairs like "30 th".
 pub fn tokenize_address(text: &str, token_min_length: usize) -> Vec<String> {
     let gc = CodePointMapData::<GeneralCategory>::new();
     let mut buf = String::with_capacity(text.len());
+    // Digitness of the last kept char; None at a token boundary.
+    // Deleted chars don't reset it, matching how they join runs.
+    let mut prev_digit: Option<bool> = None;
 
     for ch in text.chars() {
         if SKIP_CHARS.contains(&ch) {
             continue;
         }
-        if KEEP_CHARS.contains(&ch) || ADDRESS_KEEP_CHARS.contains(&ch) {
-            buf.push(ch);
-            continue;
-        }
-        match category_action_address(gc.get(ch)) {
-            CharAction::Keep => buf.push(ch),
+        let (action, digit) = if KEEP_CHARS.contains(&ch) || ADDRESS_KEEP_CHARS.contains(&ch) {
+            (CharAction::Keep, false)
+        } else {
+            let cat = gc.get(ch);
+            (
+                category_action_address(cat),
+                cat == GeneralCategory::DecimalNumber,
+            )
+        };
+        match action {
+            CharAction::Keep => {
+                if prev_digit == Some(!digit) {
+                    buf.push(' ');
+                }
+                buf.push(ch);
+                prev_digit = Some(digit);
+            }
             CharAction::Delete => {}
-            CharAction::Whitespace => buf.push(' '),
+            CharAction::Whitespace => {
+                buf.push(' ');
+                prev_digit = None;
+            }
         }
     }
 
@@ -309,7 +329,7 @@ mod tests {
     fn address_basic() {
         assert_eq!(
             tok_addr("2221 30th Ave S, Fargo"),
-            vec!["2221", "30th", "Ave", "S", "Fargo"]
+            vec!["2221", "30", "th", "Ave", "S", "Fargo"]
         );
         assert_eq!(tok_addr("17/1"), vec!["17", "1"]);
         assert_eq!(tok_addr("58103-5872"), vec!["58103", "5872"]);
@@ -317,16 +337,28 @@ mod tests {
     }
 
     #[test]
+    fn address_digit_runs_split_out() {
+        assert_eq!(tok_addr("д.39 К.1"), vec!["д", "39", "К", "1"]);
+        assert_eq!(tok_addr("16V"), vec!["16", "V"]);
+        // Deleted chars don't merge distinct digit runs across a
+        // letter: "стр.3" keeps its shape.
+        assert_eq!(tok_addr("стр.3"), vec!["стр", "3"]);
+        // Non-decimal numerals (Nl, CJK) are not digit runs and stay
+        // attached per their category.
+        assert_eq!(tok_addr("1号楼"), vec!["1", "号楼"]);
+    }
+
+    #[test]
     fn address_keeps_numero_sign() {
         assert_eq!(tok_addr("д. № 17"), vec!["д", "№", "17"]);
-        // Glued numero stays inside the token — same as the Python
-        // address normalizer's CHARS_ALLOWED behaviour.
-        assert_eq!(tok_addr("№17"), vec!["№17"]);
+        // Glued numero splits at the digit boundary, making both the
+        // "№" needle and the number visible.
+        assert_eq!(tok_addr("№17"), vec!["№", "17"]);
     }
 
     #[test]
     fn address_keeps_ampersand() {
-        assert_eq!(tok_addr("5th & Main"), vec!["5th", "&", "Main"]);
+        assert_eq!(tok_addr("5th & Main"), vec!["5", "th", "&", "Main"]);
     }
 
     #[test]

@@ -586,7 +586,7 @@ mod tests {
     fn address_flag_uses_address_tokenizer() {
         assert_eq!(
             normalize("Пр. № 17, 5th & Main", Normalize::ADDRESS, Cleanup::Noop),
-            Some("Пр № 17 5th & Main".to_string())
+            Some("Пр № 17 5 th & Main".to_string())
         );
         // NAME wins when both are set — "№" and "&" separate.
         assert_eq!(

@@ -98,7 +98,7 @@ pub fn fold_digits(text: &str) -> String {
 /// Numeric value of a single char, or `None` if it has no Unicode
 /// Numeric_Value (or isn't in the covered ranges). Mirrors Python's
 /// `unicodedata.numeric(c)` for the subset of characters we care about.
-fn numeric_value(c: char) -> Option<f64> {
+pub(crate) fn numeric_value(c: char) -> Option<f64> {
     // ASCII 0–9 (also hit via the fast path on whole-string parse, but
     // this is needed for per-char multi-digit scans like "42" where the
     // fast path already succeeded, and for mixed-script inputs).

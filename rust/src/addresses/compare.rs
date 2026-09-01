@@ -8,7 +8,6 @@
 use crate::addresses::analyze::analyze;
 use crate::addresses::token::{AddressToken, TokenClass};
 use crate::text::distance::levenshtein_cutoff;
-use crate::text::numbers::fold_digits;
 
 /// Edit budget as a fraction of the shorter token's length (in
 /// codepoints); token pairs beyond the budget don't align.
@@ -38,13 +37,13 @@ pub fn compare(query: &str, result: &str) -> f64 {
 }
 
 /// Similarity of two tokens in [0.0, 1.0]. Two Number tokens match
-/// exactly or not at all — compared on their digit-folded surface
-/// (leading-zero-faithful, script-independent), with no fuzzy
-/// credit between differing numbers. Everything else is fuzzy.
+/// exactly or not at all — compared on their canonical digit
+/// strings (leading-zero-faithful, script-independent), with no
+/// fuzzy credit between differing numbers. Everything else is fuzzy.
 fn pair_similarity(a: &AddressToken, b: &AddressToken) -> f64 {
     match (&a.class, &b.class) {
-        (TokenClass::Number { .. }, TokenClass::Number { .. }) => {
-            if fold_digits(a.comparable()) == fold_digits(b.comparable()) {
+        (TokenClass::Number { digits: da }, TokenClass::Number { digits: db }) => {
+            if da == db {
                 1.0
             } else {
                 0.0
@@ -236,6 +235,20 @@ mod tests {
             "PO Box 7155, Damascus, Syria",
             "PO Box 7155, Damascus, Syrian Arab Republic",
         );
+        assert!(score > 0.9, "got {score}");
+    }
+
+    #[test]
+    fn glued_house_numbers_align() {
+        // "Д.17" used to stay one Text token, turning the shared
+        // house number into a penalized mismatch.
+        let score = compare("Тверская Д.17, Москва", "Tverskaya 17, Moskva");
+        assert!(score > 0.7, "got {score}");
+    }
+
+    #[test]
+    fn ordinal_aligns_with_plain_number() {
+        let score = compare("30th Ave, Fargo", "30 Ave, Fargo");
         assert!(score > 0.9, "got {score}");
     }
 

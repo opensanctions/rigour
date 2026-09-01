@@ -13,6 +13,8 @@ use std::sync::LazyLock;
 use crate::territories;
 use crate::text::matcher::{Match, Needles};
 use crate::text::normalize::{Cleanup, Normalize, normalize};
+use crate::text::numbers::numeric_value;
+use crate::text::ordinals::ordinals;
 
 /// Normalization applied to needles at build time and expected of
 /// the haystack at match time: casefold, then address-tokenize and
@@ -24,14 +26,17 @@ pub const TAGGER_FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::ADDRESS
 pub enum Tag {
     /// Keyword signifier; payload is the canonical short form.
     Keyword(String),
+    /// Ordinal form ("30 th", "1 й", "№ 17"); payload is the number.
+    Ordinal(u32),
     /// Territory name; payload is every code the name maps to.
     Territory(Vec<String>),
 }
 
-/// Accumulates both sources per phrase before precedence resolution.
+/// Accumulates all sources per phrase before precedence resolution.
 #[derive(Default)]
 struct Entry {
     keyword: Option<String>,
+    ordinal: Option<u32>,
     codes: Vec<String>,
 }
 
@@ -63,6 +68,22 @@ impl Builder {
         }
     }
 
+    /// Only ordinal forms carrying a numeric character are admitted
+    /// ("1st", "1-й", "第一"); pure word forms ("First", "один",
+    /// "I.") are false-positive-prone as bare tokens.
+    fn add_ordinal(&mut self, form: &str, number: u32) {
+        if !form.chars().any(|c| numeric_value(c).is_some()) {
+            return;
+        }
+        let Some(key) = Self::norm(form) else {
+            return;
+        };
+        let entry = self.mapping.entry(key).or_default();
+        if entry.ordinal.is_none() {
+            entry.ordinal = Some(number);
+        }
+    }
+
     fn add_territory(&mut self, name: &str, code: &str) {
         let Some(key) = Self::norm(name) else {
             return;
@@ -73,14 +94,16 @@ impl Builder {
         }
     }
 
-    /// A phrase claimed by both sources resolves to the keyword:
-    /// signifier readings ("st") are locally more reliable than a
-    /// territory name coinciding with one.
+    /// A phrase claimed by several sources resolves keyword, then
+    /// ordinal, then territory: signifier readings ("st") are
+    /// locally more reliable than an ordinal or territory name
+    /// coinciding with one.
     fn finish(self) -> AddressTagger {
         let entries = self.mapping.into_iter().map(|(phrase, entry)| {
-            let tag = match entry.keyword {
-                Some(canonical) => Tag::Keyword(canonical),
-                None => Tag::Territory(entry.codes),
+            let tag = match (entry.keyword, entry.ordinal) {
+                (Some(canonical), _) => Tag::Keyword(canonical),
+                (None, Some(number)) => Tag::Ordinal(number),
+                (None, None) => Tag::Territory(entry.codes),
             };
             (phrase, tag)
         });
@@ -116,6 +139,15 @@ fn build_tagger() -> AddressTagger {
         b.add_keyword(canonical, canonical);
         for alias in aliases {
             b.add_keyword(alias, canonical);
+        }
+    }
+
+    // Ordinal forms: multi-token after normalization where the
+    // tokenizer splits digits out ("30th" → "30 th", "№1" → "№ 1"),
+    // so a match re-collapses exactly what the split separated.
+    for spec in ordinals() {
+        for form in &spec.forms {
+            b.add_ordinal(form, spec.number);
         }
     }
 

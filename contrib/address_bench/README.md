@@ -167,6 +167,7 @@ One row per increment; a rule stays only if the numbers justify it.
 | v5: territory code match | 0.8981 | 0.9431 | 86.21% | Territory×Territory with intersecting code sets aligns at 0.9 (syria↔syrian arab republic); translation err 12.5→10.7%, translation_cjk 13.7→13.0% |
 | v6: weak territory names | 0.9057 | 0.9492 | 86.71% | tagger also tags names_weak (CLDR translations: Syrie, Сирия, シリア); translation err →5.4%, translation_cjk →9.8%, no visible FP cost |
 | v7: edit budget 0.2→0.3 | 0.9066 | 0.9498 | 86.89% | absorbs ICU-vs-conventional romanization drift (mjasnickaja/myasnitskaya); translit_cyrillic err 12.0→6.4%, different_street err also improves (20.0→19.1%); swept 0.2–0.4, peak at 0.3 |
+| v8: digit-run split + ordinal tagging | 0.9362 | 0.9761 | 91.85% | tokenizer emits digit runs as own tokens (д39→д 39); ordinals (1st, 1-й, №17, digit-bearing forms only) tag as Numbers; glued numbers now match AND hidden conflicts surface: different_street err →8.4%, house_number →15.9%, unit →9.9%, translit →5.2% |
 
 ## Regenerating
 

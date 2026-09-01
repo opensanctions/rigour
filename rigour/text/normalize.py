@@ -162,10 +162,12 @@ class Normalize(IntFlag):
             as the final pipeline step, so it also subsumes
             whitespace squashing.
         ADDRESS: Like `NAME`, but tokenizes with the address-specific
-            category table: spacing marks (Mc) separate tokens, and
-            the signifier symbols ``&`` and ``№`` are kept as token
-            content. Mutually exclusive with `NAME`, which wins when
-            both are set.
+            category table: spacing marks (Mc) separate tokens, the
+            signifier symbols ``&`` and ``№`` are kept as token
+            content, and decimal-digit runs are emitted as their own
+            tokens (``д39`` → ``д 39``, ``30th`` → ``30 th``).
+            Mutually exclusive with `NAME`, which wins when both are
+            set.
     """
 
     # Bit values MUST match rust/src/text/normalize.rs `bitflags! Normalize`.

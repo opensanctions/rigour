@@ -10,11 +10,12 @@ use crate::text::translit::maybe_ascii;
 /// Classification of an address token, carrying its canonical form.
 #[derive(Debug, Clone, PartialEq)]
 pub enum TokenClass {
-    /// Numeric token; `value` is the parsed value via
-    /// `text::numbers::string_number`, so "17" and "１７" compare
-    /// equal. Surface fidelity (leading zeros, postcode shape)
-    /// lives on the token's `surface`.
-    Number { value: f64 },
+    /// Numeric token; `digits` is the canonical ASCII digit string
+    /// derived at analysis time — folded surface digits for parsed
+    /// numbers (leading zeros preserved: "007" stays "007", "１７"
+    /// becomes "17"), the ordinal's value for tagged ordinal
+    /// phrases ("30 th" → "30").
+    Number { digits: String },
     /// Address signifier recognised from the keyword forms table;
     /// `canonical` is the short form key ("blvd" for "boulevard").
     Keyword { canonical: String },
@@ -97,8 +98,18 @@ mod tests {
 
     #[test]
     fn number_payload_keeps_surface() {
-        let tok = AddressToken::new("007".to_string(), TokenClass::Number { value: 7.0 });
+        let tok = AddressToken::new(
+            "007".to_string(),
+            TokenClass::Number {
+                digits: "007".to_string(),
+            },
+        );
         assert_eq!(tok.surface, "007");
-        assert_eq!(tok.class, TokenClass::Number { value: 7.0 });
+        assert_eq!(
+            tok.class,
+            TokenClass::Number {
+                digits: "007".to_string()
+            }
+        );
     }
 }
