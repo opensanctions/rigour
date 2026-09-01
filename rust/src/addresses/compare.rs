@@ -14,6 +14,11 @@ use crate::text::numbers::fold_digits;
 /// codepoints); token pairs beyond the budget don't align.
 const MAX_EDITS_PCT: f64 = 0.2;
 
+/// Similarity credited to two Keyword tokens that share a canonical
+/// form without being literally equal (boulevard/blvd): alias-level
+/// equivalence, slightly weaker evidence than identity.
+const KEYWORD_ALIAS_SIM: f64 = 0.90;
+
 /// Score deduction per cross-pair of unmatched numbers: both sides
 /// asserting a number the other lacks is stronger negative signal
 /// than the plain residue weight of two short tokens.
@@ -41,6 +46,15 @@ fn pair_similarity(a: &AddressToken, b: &AddressToken) -> f64 {
                 1.0
             } else {
                 0.0
+            }
+        }
+        (TokenClass::Keyword { canonical: ca }, TokenClass::Keyword { canonical: cb })
+            if ca == cb =>
+        {
+            if a.comparable() == b.comparable() {
+                1.0
+            } else {
+                KEYWORD_ALIAS_SIM
             }
         }
         _ => token_similarity(a.comparable(), b.comparable()),
@@ -189,6 +203,18 @@ mod tests {
             subset > mismatch + 0.3,
             "subset={subset} mismatch={mismatch}"
         );
+    }
+
+    #[test]
+    fn keyword_matches_across_alias_forms() {
+        // "boulevard" vs "blvd" is far beyond the edit budget; the
+        // shared canonical form aligns them — slightly below the
+        // literal-identity score.
+        let score = compare(
+            "Sunset Boulevard 12, Los Angeles",
+            "Sunset Blvd 12, Los Angeles",
+        );
+        assert!(score > 0.95 && score < 1.0, "got {score}");
     }
 
     #[test]
