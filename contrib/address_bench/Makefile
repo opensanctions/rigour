@@ -13,5 +13,10 @@ stats:
 	qsv frequency -s case_group,is_match,quality cases.csv | qsv table
 	qsv frequency -s category --limit 30 cases.csv | qsv table
 
+SCORER ?= nomenklatura
+
+evaluate:
+	python evaluate.py --scorer $(SCORER)
+
 typecheck:
-	mypy --strict generate.py adjudicate.py
+	mypy --strict generate.py adjudicate.py evaluate.py

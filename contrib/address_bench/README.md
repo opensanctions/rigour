@@ -138,6 +138,16 @@ target under the quota, a second relaxed pass tops it up. A stratum
 drawn from a single-script population is therefore allowed to stay that
 way rather than come up short.
 
+## Evaluating
+
+`make evaluate SCORER=nomenklatura` (or `ftm`) runs a scorer over every
+pair in `cases.csv` and reports AUC, accuracy at the best fixed
+threshold, per-quality and per-category slices, and the worst
+individual failures. The scorers in `evaluate.py` are local
+reimplementations of the downstream comparison logic over raw string
+pairs, so the bench has no dependency on nomenklatura or
+followthemoney.
+
 ## Regenerating
 
 Two stages. Neither overwrites `cases.csv`; the second appends only rows
