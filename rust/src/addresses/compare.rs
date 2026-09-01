@@ -6,8 +6,9 @@
 // length-weighted edit-distance similarity.
 
 use crate::addresses::analyze::analyze;
-use crate::addresses::token::AddressToken;
+use crate::addresses::token::{AddressToken, TokenClass};
 use crate::text::distance::levenshtein_cutoff;
+use crate::text::numbers::fold_digits;
 
 /// Edit budget as a fraction of the shorter token's length (in
 /// codepoints); token pairs beyond the budget don't align.
@@ -22,6 +23,23 @@ pub fn compare(query: &str, result: &str) -> f64 {
         return 0.0;
     };
     align_tokens(&qry.tokens, &res.tokens)
+}
+
+/// Similarity of two tokens in [0.0, 1.0]. Two Number tokens match
+/// exactly or not at all — compared on their digit-folded surface
+/// (leading-zero-faithful, script-independent), with no fuzzy
+/// credit between differing numbers. Everything else is fuzzy.
+fn pair_similarity(a: &AddressToken, b: &AddressToken) -> f64 {
+    match (&a.class, &b.class) {
+        (TokenClass::Number { .. }, TokenClass::Number { .. }) => {
+            if fold_digits(a.comparable()) == fold_digits(b.comparable()) {
+                1.0
+            } else {
+                0.0
+            }
+        }
+        _ => token_similarity(a.comparable(), b.comparable()),
+    }
 }
 
 /// Similarity of two token forms in [0.0, 1.0]: 1.0 for identical,
@@ -57,7 +75,7 @@ fn align_tokens(qry: &[AddressToken], res: &[AddressToken]) -> f64 {
     let mut pairs: Vec<(f64, usize, usize)> = Vec::new();
     for (qi, qt) in qry.iter().enumerate() {
         for (ri, rt) in res.iter().enumerate() {
-            let sim = token_similarity(qt.comparable(), rt.comparable());
+            let sim = pair_similarity(qt, rt);
             if sim > 0.0 {
                 pairs.push((sim, qi, ri));
             }
@@ -127,6 +145,19 @@ mod tests {
     fn dissimilar_scores_low() {
         let score = compare("Bahnhofstr. 12, Berlin", "Calle Mayor 3, Madrid");
         assert!(score < 0.2, "got {score}");
+    }
+
+    #[test]
+    fn differing_numbers_earn_no_fuzzy_credit() {
+        let close = compare("Bahnhofstr. 12, Berlin", "Bahnhofstr. 14, Berlin");
+        let same = compare("Bahnhofstr. 12, Berlin", "Bahnhofstr. 12, Berlin");
+        assert!(same == 1.0 && close < 0.95, "close={close}");
+    }
+
+    #[test]
+    fn digit_scripts_fold_for_number_match() {
+        let score = compare("شارع الملك فهد ١٧", "شارع الملك فهد 17");
+        assert_eq!(score, 1.0);
     }
 
     #[test]

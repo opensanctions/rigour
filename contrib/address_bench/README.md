@@ -161,6 +161,7 @@ One row per increment; a rule stays only if the numbers justify it.
 | baseline: ftm | 0.5509 | 0.5836 | 54.01% | normalize + levenshtein |
 | v0: whole-string levenshtein | 0.5505 | 0.5832 | 53.91% | `CASEFOLD\|ADDRESS` normalize; parity with ftm confirms wiring |
 | v1: token alignment | 0.6904 | 0.7538 | 66.20% | greedy best-pair over analyzed tokens, length-weighted; reordered_fields err 12.3%, translit_cyrillic err 76.6% |
+| v2: number strictness | 0.6977 | 0.7601 | 66.64% | Number×Number pairs match exactly on digit-folded surface or not at all; house_number err 59.2→57.5%, unit 66.1→64.1% |
 
 ## Regenerating
 
