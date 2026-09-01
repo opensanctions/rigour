@@ -26,10 +26,12 @@ Phase 0–1 start:
   (`score`, `match_type`, `explanation` attributes) — mirrors how the
   name pipeline returns evidence objects and reads better at the
   nomenklatura call site.
-- **Tokenizer**: reuse existing Rust `normalize`/`tokenize` primitives
-  vs porting `TOKEN_SEP_CATEGORIES` from the Python normalizer. Parity
-  is a non-goal; start from the existing primitives and let the corpus
-  veto.
+- **Tokenizer**: resolved — a dedicated `tokenize_address` with its
+  own category table (exposed as `Normalize::ADDRESS`), deliberately
+  duplicated from `tokenize_name` since the two are expected to
+  diverge. Initial deltas match the Python address normalizer: Mc
+  separates, `&` and `№` are kept as token content (making both live
+  keyword needles). Further divergence is corpus-driven.
 - **Territory names in the tagger**: strong names only at first (the
   Python keyword table already skips weak names for FP reasons); weak
   names only if the corpus shows recall left on the table.

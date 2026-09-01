@@ -15,9 +15,9 @@ use crate::text::matcher::{Match, Needles};
 use crate::text::normalize::{Cleanup, Normalize, normalize};
 
 /// Normalization applied to needles at build time and expected of
-/// the haystack at match time: casefold, then tokenize and re-join
-/// with single spaces.
-pub const TAGGER_FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::NAME);
+/// the haystack at match time: casefold, then address-tokenize and
+/// re-join with single spaces.
+pub const TAGGER_FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::ADDRESS);
 
 /// Classification payload of a matched phrase.
 #[derive(Debug, Clone, PartialEq)]
@@ -216,9 +216,10 @@ mod tests {
     }
 
     #[test]
-    fn unnormalizable_needle_dropped() {
-        // "№" tokenizes to nothing; the alias must not become an
-        // empty needle.
-        assert!(Builder::norm("№").is_none());
+    fn symbol_signifiers_are_needles() {
+        // The address tokenizer keeps "№" and "&" as token content,
+        // so their forms.yml entries become live needles.
+        assert_eq!(find_one("№"), Some(Tag::Keyword("no".to_string())));
+        assert_eq!(find_one("&"), Some(Tag::Keyword("&".to_string())));
     }
 }
