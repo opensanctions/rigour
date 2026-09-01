@@ -18,6 +18,9 @@
   ],
   "apt": [
     "apartment",
+    "daire",
+    "apartmani",
+    "apartmanı",
     "apartamento",
     "appartement",
     "appartamento",
@@ -36,9 +39,14 @@
   ],
   "av": [
     "avenue",
+    "cad",
+    "cadde",
+    "caddesi",
     "ave",
     "avenida",
     "avinguda",
+    "viale",
+    "avda",
     "авеню"
   ],
   "b": [
@@ -84,12 +92,22 @@
   ],
   "blk": [
     "block",
-    "блок"
+    "blocks",
+    "блок",
+    "blok",
+    "bloque",
+    "bloc"
   ],
   "blvd": [
     "boulevard",
+    "boulevards",
+    "bulvar",
+    "bulvari",
+    "bulvarı",
     "bulevar",
-    "бульвар"
+    "бульвар",
+    "bld",
+    "大道"
   ],
   "bnglw": [
     "bungalow",
@@ -127,6 +145,18 @@
     "гор",
     "城市"
   ],
+  "cmne": [
+    "commune",
+    "communes",
+    "comuna",
+    "коммуна",
+    "公社"
+  ],
+  "cmpd": [
+    "compound",
+    "compounds",
+    "大院"
+  ],
   "cmrc": [
     "commercial",
     "коммерция",
@@ -162,6 +192,7 @@
   ],
   "cplx": [
     "complex",
+    "sitesi",
     "complejo",
     "complexe",
     "комплекс",
@@ -173,7 +204,12 @@
   "ctr": [
     "center",
     "centre",
-    "central"
+    "central",
+    "centro",
+    "centrum",
+    "zentrum",
+    "центр",
+    "中心"
   ],
   "cty": [
     "county",
@@ -205,6 +241,18 @@
   "e": [
     "east"
   ],
+  "entr": [
+    "entrance",
+    "kapi",
+    "kapı",
+    "entrances",
+    "entry",
+    "entrada",
+    "entrée",
+    "подъезд",
+    "вход",
+    "入口"
+  ],
   "est": [
     "estate",
     "estates"
@@ -218,6 +266,7 @@
   "fl": [
     "floor",
     "flr",
+    "kat",
     "story",
     "storey",
     "level",
@@ -240,11 +289,38 @@
   ],
   "gd": [
     "garden",
-    "gardens"
+    "gardens",
+    "bagh",
+    "taman",
+    "jardin",
+    "jardín",
+    "giardino",
+    "сад",
+    "花园"
+  ],
+  "gvnr": [
+    "governorate",
+    "governorates",
+    "gobernación",
+    "gouvernorat",
+    "губерния",
+    "محافظة"
+  ],
+  "hbr": [
+    "harbor",
+    "harbour",
+    "harbors",
+    "harbours",
+    "гавань",
+    "港口"
   ],
   "hl": [
     "hill",
     "hills",
+    "bukit",
+    "colina",
+    "colline",
+    "холм",
     "heuvel",
     "heuvels",
     "hügel"
@@ -267,7 +343,8 @@
     "шосе"
   ],
   "ind": [
-    "industrial"
+    "industrial",
+    "sanayi"
   ],
   "int": [
     "international"
@@ -282,7 +359,9 @@
   ],
   "k": [
     "корпус",
-    "korpus"
+    "korpus",
+    "korp",
+    "корп"
   ],
   "kab": [
     "cabinet",
@@ -290,6 +369,9 @@
   ],
   "kv": [
     "area",
+    "mah",
+    "mahalle",
+    "mahallesi",
     "район",
     "neighborhood",
     "nachbarschaft",
@@ -322,7 +404,10 @@
   ],
   "ln": [
     "lane",
+    "lanes",
     "laan",
+    "chemin",
+    "chemins",
     "переулок",
     "pereulok",
     "per",
@@ -337,6 +422,25 @@
     "studio",
     "studios",
     "penthouse"
+  ],
+  "lwr": [
+    "lower",
+    "inferior",
+    "inférieur"
+  ],
+  "mans": [
+    "mansion",
+    "mansions",
+    "mansión",
+    "manoir",
+    "особняк"
+  ],
+  "metro": [
+    "metro",
+    "métro",
+    "метро",
+    "subway",
+    "地铁"
   ],
   "mk": [
     "mikrorayon",
@@ -440,6 +544,8 @@
     "box"
   ],
   "pom": [
+    "premises",
+    "premise",
     "pomeshch",
     "pomeshchenie",
     "pomeshtenie",
@@ -471,7 +577,9 @@
   ],
   "rd": [
     "road",
-    "marg"
+    "marg",
+    "yol",
+    "yolu"
   ],
   "rep": [
     "republic",
@@ -515,7 +623,12 @@
   ],
   "sec": [
     "section",
-    "сектор"
+    "sections",
+    "сектор",
+    "sector",
+    "sektor",
+    "sección",
+    "secteur"
   ],
   "shop": [
     "shop",
@@ -525,8 +638,20 @@
     "магазин",
     "商店"
   ],
+  "shpg": [
+    "shopping",
+    "shopping centre",
+    "shopping center",
+    "shopping mall",
+    "centro comercial",
+    "centre commercial",
+    "торговый центр",
+    "购物中心"
+  ],
   "sq": [
     "square",
+    "squares",
+    "chowk",
     "platz",
     "plaza",
     "place",
@@ -543,6 +668,10 @@
   ],
   "st": [
     "strasse",
+    "sokak",
+    "sok",
+    "sokagi",
+    "sokağı",
     "straße",
     "strase",
     "street",
@@ -605,6 +734,9 @@
   ],
   "town": [
     "town",
+    "towns",
+    "settlement",
+    "settlements",
     "pueblo",
     "bourg",
     "посёлок",
@@ -627,6 +759,8 @@
   ],
   "ul": [
     "ulitsa",
+    "ulica",
+    "ulice",
     "улица",
     "вул",
     "ул"
@@ -634,12 +768,23 @@
   "unt": [
     "unit"
   ],
+  "upr": [
+    "upper",
+    "superior",
+    "supérieur"
+  ],
   "vl": [
     "villa"
   ],
   "vlg": [
     "village",
+    "villages",
     "hamlet",
+    "desa",
+    "aldeia",
+    "villaggio",
+    "dorf",
+    "村庄",
     "aldea",
     "hameau",
     "деревня",
@@ -650,6 +795,12 @@
     "west",
     "westward"
   ],
+  "ward": [
+    "ward",
+    "wards",
+    "phuong",
+    "phường"
+  ],
   "way": [
     "way",
     "voie"
@@ -659,6 +810,9 @@
   ],
   "yd": [
     "courtyard",
+    "courtyards",
+    "yard",
+    "yards",
     "patio",
     "cour",
     "двор"

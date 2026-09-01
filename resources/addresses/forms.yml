@@ -1,19 +1,29 @@
 forms:
   apt:
     - apartment
+    - daire
+    - apartmani
+    - apartmanı
     - apartamento
     - appartement
     - appartamento
     - flat
   av:
     - avenue
+    - cad
+    - cadde
+    - caddesi
     - ave
     - avenida
     - avinguda
+    - viale
+    - avda
     - авеню
   rd:
     - road
     - marg
+    - yol
+    - yolu
   "no":
     - number
     - num
@@ -79,6 +89,9 @@ forms:
     - зона
   kv:
     - area
+    - mah
+    - mahalle
+    - mahallesi
     - район
     - neighborhood
     - nachbarschaft
@@ -104,7 +117,11 @@ forms:
     - пляж
   blk:
     - block
+    - blocks
     - блок
+    - blok
+    - bloque
+    - bloc
   nat:
     - national
   fed:
@@ -120,15 +137,30 @@ forms:
     - international
   sec:
     - section
+    - sections
     - сектор
+    - sector
+    - sektor
+    - sección
+    - secteur
   wing:
     - крыло
   blvd:
     - boulevard
+    - boulevards
+    - bulvar
+    - bulvari
+    - bulvarı
     - bulevar
     - бульвар
+    - bld
+    - 大道
   st:
     - strasse
+    - sokak
+    - sok
+    - sokagi
+    - sokağı
     - straße
     - strase # to capture misspellings of strasse
     - street
@@ -152,12 +184,16 @@ forms:
     - проспект
   ul:
     - ulitsa
+    - ulica
+    - ulice
     - улица
     - вул
     - ул
   k:
     - корпус
     - korpus
+    - korp
+    - корп
   mk:
     - mikrorayon
     - микрорайон
@@ -166,7 +202,10 @@ forms:
     - drive
   ln:
     - lane
+    - lanes
     - laan
+    - chemin
+    - chemins
     - переулок
     - pereulok
     - per
@@ -220,6 +259,8 @@ forms:
     - пров
   sq:
     - square
+    - squares
+    - chowk
     - platz
     - plaza
     - place
@@ -254,6 +295,10 @@ forms:
   hl:
     - hill
     - hills
+    - bukit
+    - colina
+    - colline
+    - холм
     - heuvel
     - heuvels
     - hügel
@@ -266,6 +311,11 @@ forms:
     - center
     - centre
     - central
+    - centro
+    - centrum
+    - zentrum
+    - центр
+    - 中心
   pk:
     - park
     - parc
@@ -274,6 +324,13 @@ forms:
   gd:
     - garden
     - gardens
+    - bagh
+    - taman
+    - jardin
+    - jardín
+    - giardino
+    - сад
+    - 花园
   rep:
     - republic
     - republik
@@ -369,6 +426,7 @@ forms:
   #   - गोदाम
   ind:
     - industrial
+    - sanayi
   cmrc:
     - commercial
     - коммерция
@@ -411,6 +469,7 @@ forms:
   fl:
     - floor
     - flr
+    - kat
     - story
     - storey
     - level
@@ -479,6 +538,8 @@ forms:
     - cabinet
     - Kabinet
   pom:
+    - premises
+    - premise
     - pomeshch
     - pomeshchenie
     - pomeshtenie
@@ -564,6 +625,9 @@ forms:
     - 城市
   town:
     - town
+    - towns
+    - settlement
+    - settlements
     - pueblo
     - bourg
     - посёлок
@@ -571,7 +635,13 @@ forms:
     - пос
   vlg:
     - village
+    - villages
     - hamlet
+    - desa
+    - aldeia
+    - villaggio
+    - dorf
+    - 村庄
     - aldea
     - hameau
     - деревня
@@ -603,6 +673,7 @@ forms:
     - 自治
   cplx:
     - complex
+    - sitesi
     - complejo
     - complexe
     - комплекс
@@ -613,6 +684,9 @@ forms:
     - фаза
   yd:
     - courtyard
+    - courtyards
+    - yard
+    - yards
     - patio
     - cour
     - двор
@@ -632,3 +706,72 @@ forms:
     - boutique
     - магазин
     - 商店
+  ward:
+    - ward
+    - wards
+    - phuong
+    - phường
+  mans:
+    - mansion
+    - mansions
+    - mansión
+    - manoir
+    - особняк
+  shpg:
+    - shopping
+    - shopping centre
+    - shopping center
+    - shopping mall
+    - centro comercial
+    - centre commercial
+    - торговый центр
+    - 购物中心
+  cmpd:
+    - compound
+    - compounds
+    - 大院
+  gvnr:
+    - governorate
+    - governorates
+    - gobernación
+    - gouvernorat
+    - губерния
+    - محافظة
+  cmne:
+    - commune
+    - communes
+    - comuna
+    - коммуна
+    - 公社
+  entr:
+    - entrance
+    - kapi
+    - kapı
+    - entrances
+    - entry
+    - entrada
+    - entrée
+    - подъезд
+    - вход
+    - 入口
+  hbr:
+    - harbor
+    - harbour
+    - harbors
+    - harbours
+    - гавань
+    - 港口
+  metro:
+    - metro
+    - métro
+    - метро
+    - subway
+    - 地铁
+  upr:
+    - upper
+    - superior
+    - supérieur
+  lwr:
+    - lower
+    - inferior
+    - inférieur
