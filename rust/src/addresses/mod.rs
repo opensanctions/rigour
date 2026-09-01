@@ -4,5 +4,6 @@
 
 pub mod analyze;
 pub mod compare;
+pub mod fingerprint;
 pub mod tagger;
 pub mod token;

@@ -130,6 +130,13 @@ fn py_compare_address_many(py: Python<'_>, queries: Vec<String>, results: Vec<St
 
 #[cfg(feature = "python")]
 #[pyfunction]
+#[pyo3(name = "address_fingerprint")]
+fn py_address_fingerprint(py: Python<'_>, text: &str) -> Option<String> {
+    py.detach(|| addresses::fingerprint::fingerprint(text))
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
 #[pyo3(name = "pick_name")]
 fn py_pick_name(names: Vec<String>) -> Option<String> {
     let refs: Vec<&str> = names.iter().map(String::as_str).collect();
@@ -305,6 +312,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_raw_jaro_winkler, m)?)?;
     m.add_function(wrap_pyfunction!(py_compare_address, m)?)?;
     m.add_function(wrap_pyfunction!(py_compare_address_many, m)?)?;
+    m.add_function(wrap_pyfunction!(py_address_fingerprint, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_name, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_case, m)?)?;
     m.add_function(wrap_pyfunction!(py_reduce_names, m)?)?;

@@ -184,11 +184,28 @@ fingerprint is safe as a graph node key.
 |---|---|---|---|---|
 | baseline: slugify (zavod `_make_id`) | 1.9% (100/5285) | 0.00% (0/4682) | 0.0% | ICU ascii_text transliterates everything, incl. CJK |
 | baseline: ftm (`node_id`: normalize + slugify) | 1.9% (100/5285) | 0.00% (0/4682) | 0.0% | identical collapse set to bare slugify on this corpus |
+| rust: `rigour._core.address_fingerprint` | 7.3% (388/5285) | 0.00% (0/4682) | 0.0% | pinned policy: order-preserving, keyword canonicals kept, code only for unambiguous territory names; slice gains: abbreviation 21.2%, punctuation_only 11.1%, translation_cjk 8.8%, city_only 10.6% |
 
 Baseline true collapses sit almost entirely in `punctuation_only`
 (5.2%); every variation category (translit, abbreviation, reordering)
 collapses at ~0%. That headroom is the case for hard normalization;
 the zero false-collapse rate is the bar it must not regress.
+
+Policy sweep for the Rust fingerprint (all knobs removed after the
+assessment; the pinned row above is the survivor):
+
+- **sorted tokens** — rejected: 14.3% true but 1.15% false collapse
+  (54 pairs); with dedup 24.2% / 3.33%; additionally dropping
+  keywords 27.6% / 3.52%. The false collapses are precisely the
+  neardupe transpositions (`Д.17 СТР.1` ↔ `Д. 1 СТР. 17`, `2/4` ↔
+  `4/2`) a graph node key must keep distinct.
+- **dropping keyword tokens** (order kept) — rejected: 10.1% true
+  but 0.21% false collapse (10 pairs); the keyword canonicals carry
+  discriminating signal and their alias-folding already delivers the
+  abbreviation gains.
+- **serializing ambiguous territory names as their full code set** —
+  no-op on the corpus (identical numbers); kept the simpler rule of
+  code-for-unambiguous-names-only, surface otherwise.
 
 ### Performance
 

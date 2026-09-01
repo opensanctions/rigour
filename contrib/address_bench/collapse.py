@@ -21,6 +21,7 @@ from rich.console import Console
 from rich.table import Table
 
 from evaluate import MIN_CATEGORY, Case, load_cases
+from rigour._core import address_fingerprint
 from rigour.addresses import normalize_address
 
 #: Worst false collapses to list.
@@ -47,6 +48,7 @@ def fp_ftm(addr: str) -> str | None:
 FINGERPRINTERS: dict[str, Fingerprinter] = {
     "slugify": fp_slugify,
     "ftm": fp_ftm,
+    "rust": address_fingerprint,
 }
 
 
