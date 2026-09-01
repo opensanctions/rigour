@@ -14,10 +14,12 @@ use crate::text::numbers::fold_digits;
 /// codepoints); token pairs beyond the budget don't align.
 const MAX_EDITS_PCT: f64 = 0.2;
 
-/// Similarity credited to two Keyword tokens that share a canonical
-/// form without being literally equal (boulevard/blvd): alias-level
-/// equivalence, slightly weaker evidence than identity.
-const KEYWORD_ALIAS_SIM: f64 = 0.90;
+/// Similarity credited to two tokens equivalent through their class
+/// payload without being literally equal — Keywords sharing a
+/// canonical form (boulevard/blvd), Territories sharing a code
+/// (syria/syrian arab republic): slightly weaker evidence than
+/// identity.
+const ALIAS_SIM: f64 = 0.90;
 
 /// Score deduction per cross-pair of unmatched numbers: both sides
 /// asserting a number the other lacks is stronger negative signal
@@ -54,7 +56,16 @@ fn pair_similarity(a: &AddressToken, b: &AddressToken) -> f64 {
             if a.comparable() == b.comparable() {
                 1.0
             } else {
-                KEYWORD_ALIAS_SIM
+                ALIAS_SIM
+            }
+        }
+        (TokenClass::Territory { codes: ca }, TokenClass::Territory { codes: cb })
+            if ca.iter().any(|c| cb.contains(c)) =>
+        {
+            if a.comparable() == b.comparable() {
+                1.0
+            } else {
+                ALIAS_SIM
             }
         }
         _ => token_similarity(a.comparable(), b.comparable()),
@@ -215,6 +226,17 @@ mod tests {
             "Sunset Blvd 12, Los Angeles",
         );
         assert!(score > 0.95 && score < 1.0, "got {score}");
+    }
+
+    #[test]
+    fn territories_match_on_shared_code() {
+        // "syria" and "syrian arab republic" share no edit-distance
+        // proximity; the shared territory code aligns them.
+        let score = compare(
+            "PO Box 7155, Damascus, Syria",
+            "PO Box 7155, Damascus, Syrian Arab Republic",
+        );
+        assert!(score > 0.9, "got {score}");
     }
 
     #[test]
