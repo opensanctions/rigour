@@ -18,5 +18,8 @@ SCORER ?= nomenklatura
 evaluate:
 	python evaluate.py --scorer $(SCORER)
 
+perf:
+	python perf.py
+
 typecheck:
-	mypy --strict generate.py adjudicate.py evaluate.py
+	mypy --strict generate.py adjudicate.py evaluate.py perf.py
