@@ -1,0 +1,570 @@
+{
+  "&": [
+    "and",
+    "or",
+    "und",
+    "et"
+  ],
+  "ae": [
+    "uae"
+  ],
+  "alley": [
+    "alley",
+    "allée",
+    "аллея",
+    "проезд",
+    "проїзд",
+    "proezd"
+  ],
+  "apt": [
+    "apartment",
+    "apartamento",
+    "appartement",
+    "appartamento",
+    "flat"
+  ],
+  "av": [
+    "avenue",
+    "ave",
+    "avenida",
+    "avinguda",
+    "авеню"
+  ],
+  "b": [
+    "bureau",
+    "bureaux",
+    "büro"
+  ],
+  "basement": [
+    "basement",
+    "cellar",
+    "kelder",
+    "keller",
+    "seminterrato",
+    "sous-sol",
+    "souterrain",
+    "sótano",
+    "subsol",
+    "подвал",
+    "подвальное"
+  ],
+  "bat": [
+    "bâtiment"
+  ],
+  "bch": [
+    "beach",
+    "пляж"
+  ],
+  "bldg": [
+    "building",
+    "будинок",
+    "буд",
+    "зд",
+    "здание",
+    "строение",
+    "edificio",
+    "edifice",
+    "édifice",
+    "edificio",
+    "Gebäude",
+    "buildings",
+    "gebouw"
+  ],
+  "blk": [
+    "block",
+    "блок"
+  ],
+  "blvd": [
+    "boulevard",
+    "bulevar",
+    "бульвар"
+  ],
+  "bnglw": [
+    "bungalow",
+    "bungalo",
+    "bangalô",
+    "bungaló",
+    "bungalas",
+    "bunglow",
+    "μπαγκάλοου",
+    "бунгало",
+    "बंगला",
+    "بُنْغَلُو",
+    "방갈로",
+    "バンガロー",
+    "平房"
+  ],
+  "br": [
+    "branch"
+  ],
+  "brgh": [
+    "borough"
+  ],
+  "c": [
+    "calle"
+  ],
+  "cir": [
+    "circle"
+  ],
+  "cmrc": [
+    "commercial",
+    "коммерция",
+    "коммерческая",
+    "коммерческие",
+    "коммерческих",
+    "коммерческого",
+    "коммерческой",
+    "комерційний"
+  ],
+  "cnr": [
+    "corner"
+  ],
+  "co": [
+    "c o",
+    "c/o",
+    "care of",
+    "℅"
+  ],
+  "condo": [
+    "condominium",
+    "condominio",
+    "condomínio",
+    "kondominium"
+  ],
+  "ct": [
+    "court"
+  ],
+  "ctr": [
+    "center",
+    "centre",
+    "central"
+  ],
+  "cty": [
+    "county",
+    "counties",
+    "Okrug",
+    "okr"
+  ],
+  "d": [
+    "dom",
+    "дом",
+    "house",
+    "hse"
+  ],
+  "dept": [
+    "department"
+  ],
+  "dr": [
+    "drive"
+  ],
+  "e": [
+    "east"
+  ],
+  "est": [
+    "estate",
+    "estates"
+  ],
+  "expy": [
+    "expressway"
+  ],
+  "fed": [
+    "federal"
+  ],
+  "fl": [
+    "floor",
+    "flr",
+    "story",
+    "storey",
+    "level",
+    "lvl",
+    "andar",
+    "aukštas",
+    "étage",
+    "etazh",
+    "piso",
+    "verdieping",
+    "поверх",
+    "этаж",
+    "階"
+  ],
+  "ft": [
+    "fort"
+  ],
+  "fwy": [
+    "freeway"
+  ],
+  "gd": [
+    "garden",
+    "gardens"
+  ],
+  "hl": [
+    "hill",
+    "hills",
+    "heuvel",
+    "heuvels",
+    "hügel"
+  ],
+  "hq": [
+    "headquarters",
+    "head office",
+    "headquarter",
+    "главный офис",
+    "головний офіс"
+  ],
+  "hts": [
+    "hgts",
+    "heights"
+  ],
+  "hwy": [
+    "highway",
+    "shosse",
+    "шоссе",
+    "шосе"
+  ],
+  "ind": [
+    "industrial"
+  ],
+  "int": [
+    "international"
+  ],
+  "ir": [
+    "irn"
+  ],
+  "jct": [
+    "junction",
+    "jctn",
+    "junctn"
+  ],
+  "k": [
+    "корпус",
+    "korpus"
+  ],
+  "kab": [
+    "cabinet",
+    "Kabinet"
+  ],
+  "kv": [
+    "area",
+    "район",
+    "neighborhood",
+    "nachbarschaft",
+    "neighbourhood",
+    "quartier",
+    "vecindario",
+    "райончик",
+    "district",
+    "bezirk",
+    "distrikt",
+    "barrio",
+    "quarter",
+    "quartier",
+    "quartiere",
+    "kvartal",
+    "квартал",
+    "kvartira",
+    "квартира",
+    "кв"
+  ],
+  "lit": [
+    "letter",
+    "liter",
+    "litera",
+    "літер",
+    "лит",
+    "литера",
+    "літера",
+    "литер"
+  ],
+  "ln": [
+    "lane",
+    "laan",
+    "переулок",
+    "pereulok",
+    "per",
+    "пер"
+  ],
+  "loft": [
+    "attic",
+    "ática",
+    "ático",
+    "dachboden",
+    "grenier",
+    "studio",
+    "studios",
+    "penthouse"
+  ],
+  "mk": [
+    "mikrorayon",
+    "микрорайон",
+    "мкр"
+  ],
+  "mt": [
+    "mount",
+    "montaña",
+    "mountain",
+    "montagna",
+    "montagne",
+    "montanha"
+  ],
+  "muni": [
+    "municipal",
+    "municipality",
+    "munitsipal'nyi"
+  ],
+  "n": [
+    "north"
+  ],
+  "nab": [
+    "naberezhnaya",
+    "naberezhnye",
+    "nab.",
+    "набережная",
+    "набережн",
+    "embankment",
+    "embankments"
+  ],
+  "nat": [
+    "national"
+  ],
+  "ne": [
+    "northeast",
+    "north east",
+    "northeastern"
+  ],
+  "no": [
+    "number",
+    "num",
+    "nr",
+    "nr",
+    "№",
+    "număr",
+    "nummer",
+    "numero",
+    "numéro",
+    "número",
+    "номер"
+  ],
+  "nw": [
+    "northwest",
+    "north west",
+    "northwestern"
+  ],
+  "of": [
+    "office",
+    "oficina",
+    "KOM./OFFICE",
+    "ufficio",
+    "офис",
+    "ofis",
+    "офіс"
+  ],
+  "pk": [
+    "park",
+    "parc",
+    "parco",
+    "parque"
+  ],
+  "pky": [
+    "parkway",
+    "pkwy"
+  ],
+  "pl": [
+    "platz",
+    "plaza",
+    "place",
+    "plot"
+  ],
+  "pobox": [
+    "po box",
+    "p o box",
+    "p.o. box",
+    "p.o.box",
+    "post office box",
+    "post box",
+    "postbox",
+    "apartado postal",
+    "boîte postale",
+    "caixa postal",
+    "postbus",
+    "postfach",
+    "почтовый ящик"
+  ],
+  "pom": [
+    "pomeshch",
+    "pomeshchenie",
+    "pomeshtenie",
+    "pomeshcheniye",
+    "floor/pomeshch.",
+    "Помещ",
+    "Пом"
+  ],
+  "pr": [
+    "pr-kt",
+    "prospekt",
+    "prospect",
+    "просп",
+    "проспект"
+  ],
+  "prov": [
+    "province",
+    "пров"
+  ],
+  "pt": [
+    "point"
+  ],
+  "pza": [
+    "piazza"
+  ],
+  "rd": [
+    "road"
+  ],
+  "rep": [
+    "republic",
+    "republik",
+    "republique",
+    "repubblica",
+    "республіки"
+  ],
+  "res": [
+    "residential"
+  ],
+  "rm": [
+    "room",
+    "Komnata",
+    "kom",
+    "кімната",
+    "кімн"
+  ],
+  "rn": [
+    "region",
+    "регіон",
+    "обл",
+    "область",
+    "oblast"
+  ],
+  "rte": [
+    "route"
+  ],
+  "s": [
+    "south"
+  ],
+  "se": [
+    "southeast",
+    "south east",
+    "southeastern"
+  ],
+  "sec": [
+    "section",
+    "сектор"
+  ],
+  "sq": [
+    "square"
+  ],
+  "st": [
+    "strasse",
+    "straße",
+    "strase",
+    "street",
+    "straat",
+    "strada",
+    "stradă",
+    "str",
+    "rue",
+    "стр",
+    "saint"
+  ],
+  "ste": [
+    "suite",
+    "suit"
+  ],
+  "stn": [
+    "stazione",
+    "station",
+    "gare",
+    "estación",
+    "bahnhof",
+    "hauptbahnhof",
+    "hbf",
+    "станция",
+    "станція",
+    "станц",
+    "станц.",
+    "вокзал",
+    "车站"
+  ],
+  "street_level": [
+    "grnd",
+    "ground",
+    "ground floor",
+    "grnd floor",
+    "g floor",
+    "street level",
+    "begane grond",
+    "erdgeschoss",
+    "pianterreno",
+    "planta baja",
+    "rez-de-chaussée",
+    "rdc",
+    "Первый этаж"
+  ],
+  "sub": [
+    "subdivision"
+  ],
+  "sw": [
+    "southwest",
+    "south west",
+    "southwestern"
+  ],
+  "ter": [
+    "terr",
+    "terrace"
+  ],
+  "tpke": [
+    "turnpike"
+  ],
+  "twr": [
+    "tower",
+    "towers",
+    "toren",
+    "torre",
+    "torres",
+    "torre"
+  ],
+  "ul": [
+    "ulitsa",
+    "улица",
+    "вул",
+    "ул"
+  ],
+  "unt": [
+    "unit"
+  ],
+  "vl": [
+    "villa"
+  ],
+  "w": [
+    "west",
+    "westward"
+  ],
+  "wing": [
+    "крыло"
+  ],
+  "zip": [
+    "zipcode",
+    "zip code",
+    "postal code",
+    "postcode",
+    "plz",
+    "postleitzahl",
+    "post code"
+  ],
+  "zone": [
+    "zone",
+    "sone",
+    "zona",
+    "zone",
+    "zóna",
+    "ζώνη",
+    "зона"
+  ]
+}
