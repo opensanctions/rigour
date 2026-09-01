@@ -5,7 +5,7 @@
 // greedy best-pair token alignment over analyzed tokens, scored by
 // length-weighted edit-distance similarity.
 
-use crate::addresses::analyze::analyze;
+use crate::addresses::analyze::analyze_cached;
 use crate::addresses::token::{AddressToken, TokenClass};
 use crate::text::distance::levenshtein_cutoff;
 
@@ -27,10 +27,10 @@ const NUMBER_MISMATCH_PENALTY: f64 = 0.7;
 
 /// Compare two address strings, returning a similarity in [0.0, 1.0].
 pub fn compare(query: &str, result: &str) -> f64 {
-    let Some(qry) = analyze(query) else {
+    let Some(qry) = analyze_cached(query) else {
         return 0.0;
     };
-    let Some(res) = analyze(result) else {
+    let Some(res) = analyze_cached(result) else {
         return 0.0;
     };
     align_tokens(&qry.tokens, &res.tokens)

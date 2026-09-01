@@ -2,11 +2,30 @@
 // Produces the `Address` consumed by the comparison scorer. No
 // PyO3 surface — the Python entry points arrive with the scorer.
 
+use std::num::NonZeroUsize;
+use std::sync::{Arc, LazyLock, Mutex};
+
+use lru::LruCache;
+
 use crate::addresses::tagger::{TAGGER_FLAGS, Tag, tagger};
 use crate::addresses::token::{AddressToken, TokenClass};
+use crate::constants::MEMO_MEDIUM;
 use crate::text::normalize::{Cleanup, normalize};
 use crate::text::numbers::{fold_digits, string_number};
 use crate::text::scripts::text_scripts;
+
+// Process-wide memo of analyzed addresses, keyed on the raw input
+// string so a hit skips the whole pipeline (normalize, AC tagging,
+// classification). The comparison call patterns repeat strings
+// heavily — one query against many candidates, every address of one
+// entity against every address of another — and hot addresses
+// (registered-agent buildings, plain city names) recur across
+// requests. `None` results (empty/punctuation-only input) are
+// cached too. Guarded by a Mutex: callers currently hold the GIL,
+// so stock CPython never contends on it; revisit if a future
+// `allow_threads` entry point shows contention.
+static ANALYZE_CACHE: LazyLock<Mutex<LruCache<String, Option<Arc<Address>>>>> =
+    LazyLock::new(|| Mutex::new(LruCache::new(NonZeroUsize::new(MEMO_MEDIUM).unwrap())));
 
 /// Canonical digit string for a parsed number token: the folded
 /// surface digits (leading zeros preserved) when the surface has
@@ -36,6 +55,23 @@ pub struct Address {
     /// Distinguishing scripts of the normalized text, in first-
     /// appearance order.
     pub scripts: Vec<&'static str>,
+}
+
+/// Analyze a raw address string through the process-wide LRU: a
+/// cache hit returns a shared handle to the previously analyzed
+/// `Address` without re-running the pipeline. The entry point for
+/// comparison-shaped callers; use [`analyze`] for a guaranteed
+/// fresh, unshared value.
+pub fn analyze_cached(text: &str) -> Option<Arc<Address>> {
+    if let Some(hit) = ANALYZE_CACHE.lock().unwrap().get(text) {
+        return hit.clone();
+    }
+    let fresh = analyze(text).map(Arc::new);
+    ANALYZE_CACHE
+        .lock()
+        .unwrap()
+        .put(text.to_string(), fresh.clone());
+    fresh
 }
 
 /// Analyze a raw address string into classed tokens.
@@ -119,6 +155,16 @@ mod tests {
     fn empty_and_punctuation_only() {
         assert_eq!(analyze(""), None);
         assert_eq!(analyze("  ,,, --- "), None);
+    }
+
+    #[test]
+    fn cached_analysis_shares_the_value() {
+        let first = analyze_cached("Bahnhofstr. 12, 10115 Berlin").unwrap();
+        let second = analyze_cached("Bahnhofstr. 12, 10115 Berlin").unwrap();
+        assert!(Arc::ptr_eq(&first, &second));
+        assert_eq!(*first, analyze("Bahnhofstr. 12, 10115 Berlin").unwrap());
+        assert_eq!(analyze_cached(""), None);
+        assert_eq!(analyze_cached(""), None);
     }
 
     fn num(digits: &str) -> TokenClass {

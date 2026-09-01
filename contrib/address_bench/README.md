@@ -172,13 +172,14 @@ One row per increment; a rule stays only if the numbers justify it.
 ### Performance
 
 `make perf` times `compare_address` over the corpus (release build
-required — `make develop`). At v8 on an M-series laptop, 100 passes
-(~1M calls): **13.4 µs/call (~75k calls/s)**, p50 11.6 µs, p99
-41 µs, max ~100 µs; one query × 1,000 candidates in 9.5 ms. The
-one-time tagger build on first call costs ~110 ms. No caching
-anywhere — every call re-analyzes both strings — so these numbers
-are the worst case for the 1×N pattern, and comfortably inner-loop
-without an analysis LRU.
+required — `make develop`). At v8 + the analysis LRU (20k entries,
+keyed on the raw string) on an M-series laptop, 100 passes (~1M
+calls): cold pass **34.7 µs/call** (analysis + cache fill), warm
+**5.4 µs/call (~184k calls/s)**, p50 4.0 µs, p99 24 µs; one query ×
+1,000 candidates in 3.1 ms. The one-time tagger build on first call
+costs ~110 ms. Pre-LRU reference: 13.4 µs/call flat (translit-warm),
+1×1,000 in 9.5 ms. Python baselines on the same pairs: nomenklatura
+452.8 µs cold / 1.0 µs lru-warm; ftm 9.4 µs cold / 0.7 µs warm.
 
 Rejected: scoping the number-mismatch penalty by digit length
 (postcodes-are-metadata). Full exemption for 5+-digit numbers: AUC

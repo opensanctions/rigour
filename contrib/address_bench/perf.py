@@ -37,13 +37,19 @@ def perf(repeat: int) -> None:
     compare_address(pairs[0][0], pairs[0][1])
     warmup = time.perf_counter() - t0
 
-    # Bulk throughput: chunk-timed to keep timer overhead out.
+    # Bulk throughput, chunk-timed to keep timer overhead out. The
+    # first pass runs with a cold analysis cache; later passes rerun
+    # the same strings and show the cache-hot cost.
     t0 = time.perf_counter()
-    for _ in range(repeat):
+    for a, b in pairs:
+        compare_address(a, b)
+    cold = time.perf_counter() - t0
+    t0 = time.perf_counter()
+    for _ in range(repeat - 1):
         for a, b in pairs:
             compare_address(a, b)
     elapsed = time.perf_counter() - t0
-    calls = repeat * len(pairs)
+    calls = (repeat - 1) * len(pairs)
 
     # Per-pair latency profile from one individually-timed pass.
     laps: list[float] = []
@@ -56,11 +62,14 @@ def perf(repeat: int) -> None:
     def pct(p: float) -> float:
         return laps[min(int(len(laps) * p), len(laps) - 1)] * 1e6
 
-    click.echo(f"pairs: {len(pairs)}  repeats: {repeat}  calls: {calls}")
+    click.echo(f"pairs: {len(pairs)}  repeats: {repeat}  warm calls: {calls}")
     click.echo(f"first call (tagger build): {warmup * 1e3:.1f} ms")
-    click.echo(f"bulk: {elapsed:.2f} s  {elapsed / calls * 1e6:.1f} us/call  {calls / elapsed:,.0f} calls/s")
+    click.echo(f"cold pass: {cold:.2f} s  {cold / len(pairs) * 1e6:.1f} us/call")
     click.echo(
-        f"per-call: mean {mean(laps) * 1e6:.1f} us  "
+        f"warm bulk: {elapsed:.2f} s  {elapsed / calls * 1e6:.1f} us/call  {calls / elapsed:,.0f} calls/s"
+    )
+    click.echo(
+        f"warm per-call: mean {mean(laps) * 1e6:.1f} us  "
         f"p50 {pct(0.50):.1f}  p90 {pct(0.90):.1f}  p99 {pct(0.99):.1f}  "
         f"max {laps[-1] * 1e6:.1f} us"
     )
