@@ -119,14 +119,20 @@ fn build_tagger() -> AddressTagger {
         }
     }
 
-    // Territory strong names only — weak names (translations and
-    // transliterations) are known false-positive generators.
+    // Strong and weak territory names both tag: weak names
+    // (translations/transliterations) measurably improve the
+    // address_bench translation slices, and the code-overlap
+    // scorer only rewards agreement, so a stray weak-name tag
+    // costs little.
     for record in territories::records() {
         b.add_territory(&record.name, &record.code);
         if let Some(full) = &record.full_name {
             b.add_territory(full, &record.code);
         }
         for name in &record.names_strong {
+            b.add_territory(name, &record.code);
+        }
+        for name in &record.names_weak {
             b.add_territory(name, &record.code);
         }
     }

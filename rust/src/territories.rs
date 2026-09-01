@@ -39,10 +39,13 @@ pub struct TerritoryRecord {
     /// Code of the containing territory, e.g. `ru` for `ru-mow`.
     pub parent: Option<String>,
     /// Unambiguous name aliases, safe for high-precision tagging.
-    /// Weak names (translations/transliterations prone to false
-    /// positives) are deliberately not deserialised.
     #[serde(default)]
     pub names_strong: Vec<String>,
+    /// Translations and transliterations (CLDR-derived) — broad
+    /// recall, more false-positive-prone than `names_strong`;
+    /// consumers choose per use case.
+    #[serde(default)]
+    pub names_weak: Vec<String>,
 }
 
 /// Parse the full territory database into records, skipping
