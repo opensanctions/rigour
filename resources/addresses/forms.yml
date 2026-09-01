@@ -13,6 +13,7 @@ forms:
     - авеню
   rd:
     - road
+    - marg
   "no":
     - number
     - num
@@ -28,6 +29,7 @@ forms:
   d:
     - dom
     - дом
+    - д
     - house
     - hse
   condo:
@@ -66,6 +68,7 @@ forms:
     - Gebäude
     - buildings
     - gebouw
+    - будова
   zone:
     - zone
     - sone
@@ -137,8 +140,12 @@ forms:
     - стр
     # Whole other meaning
     - saint
+    - via
+    - jalan
+    - jln
   pr:
     - pr-kt
+    - пр-кт
     - prospekt
     - prospect
     - просп
@@ -200,21 +207,32 @@ forms:
     - studio
     - studios
     - penthouse
-  pl:
-    - platz
-    - plaza
-    - place
-    - plot # note: does not mean exactly the same as place
+  plot:
+    - plot
   cty:
     - county
     - counties
     - Okrug
     - okr
+    - округ
   prov:
     - province
     - пров
   sq:
     - square
+    - platz
+    - plaza
+    - place
+    - piazza
+    - plaza de
+    - plazuela
+    - praça
+    - plein
+    - площадь
+    - площ
+    - пл
+    - площа
+    - 广场
   cnr:
     - corner
   sub:
@@ -244,8 +262,6 @@ forms:
     - c/o
     - care of
     - ℅ # unicode U+2105
-  pza:
-    - piazza
   ctr:
     - center
     - centre
@@ -264,6 +280,8 @@ forms:
     - republique
     - repubblica
     - республіки
+    - республика
+    - республіка
   est:
     - estate
     - estates
@@ -474,6 +492,7 @@ forms:
     - nab.
     - набережная
     - набережн
+    - наб
     - embankment
     - embankments
   muni:
@@ -503,6 +522,8 @@ forms:
     - postbus
     - postfach
     - почтовый ящик
+    - pob
+    - box
   zip:
     - zipcode
     - zip code
@@ -526,7 +547,88 @@ forms:
     - обл
     - область
     - oblast
+    - край
+    - krai
+    - kray
   ir:
     - irn
   ae:
     - uae
+  city:
+    - city
+    - ciudad
+    - ville
+    - cité
+    - город
+    - гор
+    - 城市
+  town:
+    - town
+    - pueblo
+    - bourg
+    - посёлок
+    - поселок
+    - пос
+  vlg:
+    - village
+    - hamlet
+    - aldea
+    - hameau
+    - деревня
+    - дер
+    - село
+  twp:
+    - township
+  pref:
+    - prefecture
+    - prefectura
+    - préfecture
+    - префектура
+  comm:
+    - community
+    - comunidad
+    - communauté
+    - община
+    - сообщество
+    - 社区
+  auton:
+    - autonomous
+    - autónoma
+    - autónomo
+    - autonome
+    - автономный
+    - автономная
+    - автономного
+    - авт
+    - 自治
+  cplx:
+    - complex
+    - complejo
+    - complexe
+    - комплекс
+    - 综合楼
+  phase:
+    - phase
+    - fase
+    - фаза
+  yd:
+    - courtyard
+    - patio
+    - cour
+    - двор
+  way:
+    - way
+    - voie
+  dev:
+    - development
+    - desarrollo
+    - développement
+    - развитие
+    - 开发
+  shop:
+    - shop
+    - tienda
+    - magasin
+    - boutique
+    - магазин
+    - 商店

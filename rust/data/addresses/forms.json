@@ -23,6 +23,17 @@
     "appartamento",
     "flat"
   ],
+  "auton": [
+    "autonomous",
+    "autónoma",
+    "autónomo",
+    "autonome",
+    "автономный",
+    "автономная",
+    "автономного",
+    "авт",
+    "自治"
+  ],
   "av": [
     "avenue",
     "ave",
@@ -68,7 +79,8 @@
     "edificio",
     "Gebäude",
     "buildings",
-    "gebouw"
+    "gebouw",
+    "будова"
   ],
   "blk": [
     "block",
@@ -106,6 +118,15 @@
   "cir": [
     "circle"
   ],
+  "city": [
+    "city",
+    "ciudad",
+    "ville",
+    "cité",
+    "город",
+    "гор",
+    "城市"
+  ],
   "cmrc": [
     "commercial",
     "коммерция",
@@ -125,11 +146,26 @@
     "care of",
     "℅"
   ],
+  "comm": [
+    "community",
+    "comunidad",
+    "communauté",
+    "община",
+    "сообщество",
+    "社区"
+  ],
   "condo": [
     "condominium",
     "condominio",
     "condomínio",
     "kondominium"
+  ],
+  "cplx": [
+    "complex",
+    "complejo",
+    "complexe",
+    "комплекс",
+    "综合楼"
   ],
   "ct": [
     "court"
@@ -143,16 +179,25 @@
     "county",
     "counties",
     "Okrug",
-    "okr"
+    "okr",
+    "округ"
   ],
   "d": [
     "dom",
     "дом",
+    "д",
     "house",
     "hse"
   ],
   "dept": [
     "department"
+  ],
+  "dev": [
+    "development",
+    "desarrollo",
+    "développement",
+    "развитие",
+    "开发"
   ],
   "dr": [
     "drive"
@@ -320,6 +365,7 @@
     "nab.",
     "набережная",
     "набережн",
+    "наб",
     "embankment",
     "embankments"
   ],
@@ -358,6 +404,11 @@
     "ofis",
     "офіс"
   ],
+  "phase": [
+    "phase",
+    "fase",
+    "фаза"
+  ],
   "pk": [
     "park",
     "parc",
@@ -368,10 +419,7 @@
     "parkway",
     "pkwy"
   ],
-  "pl": [
-    "platz",
-    "plaza",
-    "place",
+  "plot": [
     "plot"
   ],
   "pobox": [
@@ -387,7 +435,9 @@
     "caixa postal",
     "postbus",
     "postfach",
-    "почтовый ящик"
+    "почтовый ящик",
+    "pob",
+    "box"
   ],
   "pom": [
     "pomeshch",
@@ -400,10 +450,17 @@
   ],
   "pr": [
     "pr-kt",
+    "пр-кт",
     "prospekt",
     "prospect",
     "просп",
     "проспект"
+  ],
+  "pref": [
+    "prefecture",
+    "prefectura",
+    "préfecture",
+    "префектура"
   ],
   "prov": [
     "province",
@@ -412,18 +469,18 @@
   "pt": [
     "point"
   ],
-  "pza": [
-    "piazza"
-  ],
   "rd": [
-    "road"
+    "road",
+    "marg"
   ],
   "rep": [
     "republic",
     "republik",
     "republique",
     "repubblica",
-    "республіки"
+    "республіки",
+    "республика",
+    "республіка"
   ],
   "res": [
     "residential"
@@ -440,7 +497,10 @@
     "регіон",
     "обл",
     "область",
-    "oblast"
+    "oblast",
+    "край",
+    "krai",
+    "kray"
   ],
   "rte": [
     "route"
@@ -457,8 +517,29 @@
     "section",
     "сектор"
   ],
+  "shop": [
+    "shop",
+    "tienda",
+    "magasin",
+    "boutique",
+    "магазин",
+    "商店"
+  ],
   "sq": [
-    "square"
+    "square",
+    "platz",
+    "plaza",
+    "place",
+    "piazza",
+    "plaza de",
+    "plazuela",
+    "praça",
+    "plein",
+    "площадь",
+    "площ",
+    "пл",
+    "площа",
+    "广场"
   ],
   "st": [
     "strasse",
@@ -471,7 +552,10 @@
     "str",
     "rue",
     "стр",
-    "saint"
+    "saint",
+    "via",
+    "jalan",
+    "jln"
   ],
   "ste": [
     "suite",
@@ -519,8 +603,19 @@
     "terr",
     "terrace"
   ],
+  "town": [
+    "town",
+    "pueblo",
+    "bourg",
+    "посёлок",
+    "поселок",
+    "пос"
+  ],
   "tpke": [
     "turnpike"
+  ],
+  "twp": [
+    "township"
   ],
   "twr": [
     "tower",
@@ -542,12 +637,31 @@
   "vl": [
     "villa"
   ],
+  "vlg": [
+    "village",
+    "hamlet",
+    "aldea",
+    "hameau",
+    "деревня",
+    "дер",
+    "село"
+  ],
   "w": [
     "west",
     "westward"
   ],
+  "way": [
+    "way",
+    "voie"
+  ],
   "wing": [
     "крыло"
+  ],
+  "yd": [
+    "courtyard",
+    "patio",
+    "cour",
+    "двор"
   ],
   "zip": [
     "zipcode",
