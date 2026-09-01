@@ -31,7 +31,10 @@ Phase 0–1 start:
   duplicated from `tokenize_name` since the two are expected to
   diverge. Initial deltas match the Python address normalizer: Mc
   separates, `&` and `№` are kept as token content (making both live
-  keyword needles). Further divergence is corpus-driven.
+  keyword needles). Any further tokenizer expansion (e.g. a
+  "separate into own token" action so glued `№17` splits and the `№`
+  needle fires) waits until the Rust scorer runs end-to-end in the
+  Phase 4 eval — change the table only against a benchmark delta.
 - **Territory names in the tagger**: strong names only at first (the
   Python keyword table already skips weak names for FP reasons); weak
   names only if the corpus shows recall left on the table.
