@@ -2,6 +2,7 @@
 // character-level routines that feed into `rigour.text` end up here.
 
 pub mod distance;
+pub mod matcher;
 pub mod normalize;
 pub mod numbers;
 pub mod ordinals;
