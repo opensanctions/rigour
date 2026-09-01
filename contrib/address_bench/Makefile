@@ -13,5 +13,21 @@ stats:
 	qsv frequency -s case_group,is_match,quality cases.csv | qsv table
 	qsv frequency -s category --limit 30 cases.csv | qsv table
 
+SCORER ?= nomenklatura
+
+evaluate:
+	python evaluate.py --scorer $(SCORER)
+
+FINGERPRINT ?= ftm
+
+collapse:
+	python collapse.py --fingerprint $(FINGERPRINT)
+
+perf:
+	python perf.py
+
+perf-fingerprint:
+	python perf_fingerprint.py
+
 typecheck:
-	mypy --strict generate.py adjudicate.py
+	mypy --strict generate.py adjudicate.py evaluate.py collapse.py perf.py perf_fingerprint.py

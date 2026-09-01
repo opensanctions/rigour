@@ -6,7 +6,7 @@
 // zstd-compresses it into OUT_DIR and this module decodes on first
 // use. Exposes the four public org-type functions: replace_compare,
 // replace_display, remove, extract. All four go through the shared
-// `names::matcher::Needles<T>` substrate (Aho-Corasick + Python-style
+// `text::matcher::Needles<T>` substrate (Aho-Corasick + Python-style
 // `(?<!\w)X(?!\w)` boundaries); differences live in which mapping
 // the Replacer is built from.
 //
@@ -38,7 +38,7 @@ use serde::Deserialize;
 use std::collections::{HashMap, HashSet};
 use std::sync::{Arc, LazyLock, RwLock};
 
-use crate::names::matcher::Needles;
+use crate::text::matcher::Needles;
 use crate::text::normalize::{Cleanup, Normalize, SquashAction, normalize, squash_action};
 
 #[derive(Debug, Deserialize)]

@@ -1,11 +1,18 @@
-// `tokenize_name` — splits a name string into tokens using Unicode
-// General Category as the separator rule. Exposed to Python as
-// `rigour.names.tokenize.tokenize_name`. Each char's category is
-// consulted directly via ICU's `CodePointMapData` — compiled_data is
-// in-memory, look-ups are O(1), and a single pass over the string is
-// fast enough that a per-codepoint cache would only add overhead.
+// `tokenize_name` and `tokenize_address` — split a string into
+// tokens using Unicode General Category as the separator rule.
+// `tokenize_name` is exposed to Python as
+// `rigour.names.tokenize.tokenize_name`; `tokenize_address` backs
+// the address analysis pass (via `Normalize::ADDRESS`). Each char's
+// category is consulted directly via ICU's `CodePointMapData` —
+// compiled_data is in-memory, look-ups are O(1), and a single pass
+// over the string is fast enough that a per-codepoint cache would
+// only add overhead.
 //
-// Category mapping:
+// The two tokenizers carry deliberately separate category tables —
+// they are expected to diverge as address matching tunes against
+// its corpus, so no shared-config machinery.
+//
+// Name category mapping:
 //
 //   Whitespace (token separator): Cc, Zs, Zl, Zp, Pc, Pd, Ps, Pe,
 //                                 Pi, Pf, Po, Sm, So
@@ -100,6 +107,97 @@ pub fn tokenize_name(text: &str, token_min_length: usize) -> Vec<String> {
             CharAction::Keep => buf.push(ch),
             CharAction::Delete => {}
             CharAction::Whitespace => buf.push(' '),
+        }
+    }
+
+    buf.split_whitespace()
+        .filter(|t| t.chars().count() >= token_min_length)
+        .map(|s| s.to_string())
+        .collect()
+}
+
+// Symbols the address tokenizer keeps as token content — they act
+// as signifiers in addresses ("№" marks a house/unit number, "&"
+// joins building or street names) and are needles in the keyword
+// forms table. Mirrors `CHARS_ALLOWED` in rigour/addresses/normalize.py.
+const ADDRESS_KEEP_CHARS: &[char] = &[
+    '&',        // U+0026 AMPERSAND (Po)
+    '\u{2116}', // NUMERO SIGN № (So)
+];
+
+// Address category mapping. Differs from the name table in two
+// places: Mc (spacing marks) separates instead of being kept —
+// matching `TOKEN_SEP_CATEGORIES` in the Python address normalizer —
+// and ADDRESS_KEEP_CHARS overrides two symbol codepoints in the
+// caller before this lookup.
+fn category_action_address(cat: GeneralCategory) -> CharAction {
+    use GeneralCategory::*;
+    match cat {
+        // Whitespace / token separator
+        Control => CharAction::Whitespace,     // Cc
+        SpacingMark => CharAction::Whitespace, // Mc
+        SpaceSeparator | LineSeparator | ParagraphSeparator => CharAction::Whitespace, // Zs/Zl/Zp
+        ConnectorPunctuation | DashPunctuation | OpenPunctuation | ClosePunctuation
+        | InitialPunctuation | FinalPunctuation | OtherPunctuation => CharAction::Whitespace, // Pc/Pd/Ps/Pe/Pi/Pf/Po
+        MathSymbol | OtherSymbol => CharAction::Whitespace, // Sm/So
+
+        // Delete — invisible/format chars, combining marks, modifier
+        // letters (KEEP_CHARS override applied in the caller), other
+        // numbers, currency and modifier symbols.
+        Format | PrivateUse | Unassigned => CharAction::Delete, // Cf/Co/Cn
+        ModifierLetter => CharAction::Delete,                   // Lm
+        NonspacingMark | EnclosingMark => CharAction::Delete,   // Mn/Me
+        OtherNumber => CharAction::Delete,                      // No
+        CurrencySymbol | ModifierSymbol => CharAction::Delete,  // Sc/Sk
+
+        // Keep: L* (Ll/Lu/Lt/Lo), Nd, Nl.
+        _ => CharAction::Keep,
+    }
+}
+
+/// Split `text` into address tokens using Unicode category-based
+/// separation. `token_min_length` counts codepoints, not bytes.
+///
+/// Same single-pass shape as [`tokenize_name`] over a separate
+/// category table: spacing marks (Mc) separate tokens, and the
+/// address signifier symbols `&` and `№` are kept as token content
+/// instead of splitting on them. Decimal-digit runs are emitted as
+/// their own tokens ("д39" → "д 39", "30th" → "30 th") so glued
+/// house numbers become comparable — the ordinal needles in the
+/// address tagger re-capture split pairs like "30 th".
+pub fn tokenize_address(text: &str, token_min_length: usize) -> Vec<String> {
+    let gc = CodePointMapData::<GeneralCategory>::new();
+    let mut buf = String::with_capacity(text.len());
+    // Digitness of the last kept char; None at a token boundary.
+    // Deleted chars don't reset it, matching how they join runs.
+    let mut prev_digit: Option<bool> = None;
+
+    for ch in text.chars() {
+        if SKIP_CHARS.contains(&ch) {
+            continue;
+        }
+        let (action, digit) = if KEEP_CHARS.contains(&ch) || ADDRESS_KEEP_CHARS.contains(&ch) {
+            (CharAction::Keep, false)
+        } else {
+            let cat = gc.get(ch);
+            (
+                category_action_address(cat),
+                cat == GeneralCategory::DecimalNumber,
+            )
+        };
+        match action {
+            CharAction::Keep => {
+                if prev_digit == Some(!digit) {
+                    buf.push(' ');
+                }
+                buf.push(ch);
+                prev_digit = Some(digit);
+            }
+            CharAction::Delete => {}
+            CharAction::Whitespace => {
+                buf.push(' ');
+                prev_digit = None;
+            }
         }
     }
 
@@ -221,5 +319,59 @@ mod tests {
         // Burmese: Mc (vowel signs) kept, Mn (asat etc.) deleted.
         // Matches the Python test's current behaviour.
         assert_eq!(tok("အောင်ဆန်းစုကြည်"), vec!["အောငဆနးစကြည"]);
+    }
+
+    fn tok_addr(s: &str) -> Vec<String> {
+        tokenize_address(s, 1)
+    }
+
+    #[test]
+    fn address_basic() {
+        assert_eq!(
+            tok_addr("2221 30th Ave S, Fargo"),
+            vec!["2221", "30", "th", "Ave", "S", "Fargo"]
+        );
+        assert_eq!(tok_addr("17/1"), vec!["17", "1"]);
+        assert_eq!(tok_addr("58103-5872"), vec!["58103", "5872"]);
+        assert_eq!(tok_addr("P.O. Box 7155"), vec!["PO", "Box", "7155"]);
+    }
+
+    #[test]
+    fn address_digit_runs_split_out() {
+        assert_eq!(tok_addr("д.39 К.1"), vec!["д", "39", "К", "1"]);
+        assert_eq!(tok_addr("16V"), vec!["16", "V"]);
+        // Deleted chars don't merge distinct digit runs across a
+        // letter: "стр.3" keeps its shape.
+        assert_eq!(tok_addr("стр.3"), vec!["стр", "3"]);
+        // Non-decimal numerals (Nl, CJK) are not digit runs and stay
+        // attached per their category.
+        assert_eq!(tok_addr("1号楼"), vec!["1", "号楼"]);
+    }
+
+    #[test]
+    fn address_keeps_numero_sign() {
+        assert_eq!(tok_addr("д. № 17"), vec!["д", "№", "17"]);
+        // Glued numero splits at the digit boundary, making both the
+        // "№" needle and the number visible.
+        assert_eq!(tok_addr("№17"), vec!["№", "17"]);
+    }
+
+    #[test]
+    fn address_keeps_ampersand() {
+        assert_eq!(tok_addr("5th & Main"), vec!["5", "th", "&", "Main"]);
+    }
+
+    #[test]
+    fn address_mc_separates() {
+        // U+0940 DEVANAGARI VOWEL SIGN II is Mc: token content for
+        // names, a separator for addresses.
+        assert_eq!(tok("की"), vec!["की"]);
+        assert_eq!(tok_addr("की"), vec!["क"]);
+    }
+
+    #[test]
+    fn address_empty_and_punctuation() {
+        assert_eq!(tok_addr(""), Vec::<String>::new());
+        assert_eq!(tok_addr(" ,,, --- "), Vec::<String>::new());
     }
 }

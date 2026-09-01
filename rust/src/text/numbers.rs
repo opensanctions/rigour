@@ -79,10 +79,26 @@ pub fn string_number(text: &str) -> Option<f64> {
     raw.filter(|v| v.is_finite())
 }
 
+/// Fold every single-digit character in `text` to its ASCII form,
+/// passing all other characters through unchanged: `"١٧"` → `"17"`,
+/// `"三号"` → `"3号"`. Unlike [`string_number`] this preserves the
+/// string shape (leading zeros, embedded letters), so it is the
+/// right form for digit-faithful equality comparison.
+pub fn fold_digits(text: &str) -> String {
+    text.chars()
+        .map(|c| match numeric_value(c) {
+            Some(v) if v.fract() == 0.0 && (0.0..10.0).contains(&v) => {
+                char::from_digit(v as u32, 10).unwrap_or(c)
+            }
+            _ => c,
+        })
+        .collect()
+}
+
 /// Numeric value of a single char, or `None` if it has no Unicode
 /// Numeric_Value (or isn't in the covered ranges). Mirrors Python's
 /// `unicodedata.numeric(c)` for the subset of characters we care about.
-fn numeric_value(c: char) -> Option<f64> {
+pub(crate) fn numeric_value(c: char) -> Option<f64> {
     // ASCII 0–9 (also hit via the fast path on whole-string parse, but
     // this is needed for per-char multi-digit scans like "42" where the
     // fast path already succeeded, and for mixed-script inputs).
@@ -238,6 +254,28 @@ const ND_ZEROES: &[u32] = &[
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn fold_digits_ascii_passthrough() {
+        assert_eq!(fold_digits("17a"), "17a");
+        assert_eq!(fold_digits("058103"), "058103");
+        assert_eq!(fold_digits(""), "");
+    }
+
+    #[test]
+    fn fold_digits_unicode_digits() {
+        assert_eq!(fold_digits("١٧"), "17");
+        assert_eq!(fold_digits("１２３"), "123");
+        assert_eq!(fold_digits("३"), "3");
+        assert_eq!(fold_digits("三号"), "3号");
+    }
+
+    #[test]
+    fn fold_digits_multi_digit_values_untouched() {
+        // 十 (10) and Ⅻ (12) are not single digits — they pass through.
+        assert_eq!(fold_digits("十"), "十");
+        assert_eq!(fold_digits("Ⅻ"), "Ⅻ");
+    }
 
     #[test]
     fn ascii_ints_and_floats() {

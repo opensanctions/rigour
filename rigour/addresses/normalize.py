@@ -2,6 +2,7 @@ import logging
 import re
 import string
 import unicodedata
+import warnings
 from functools import cache
 
 from normality import ascii_text
@@ -182,6 +183,11 @@ def remove_address_keywords(
 ) -> str | None:
     """Strip common address keywords from a normalised address.
 
+    Deprecated:
+        Use [compare_address][rigour.addresses.compare.compare_address]
+        to compare addresses instead of comparing keyword-stripped
+        strings. This function will be removed in a future version.
+
     Removes recognised forms (`"street"`, `"road"`, `"south"`,
     territory names, ordinals, …) by substituting each match with
     `replacement`. Consecutive matches produce consecutive
@@ -204,6 +210,12 @@ def remove_address_keywords(
     Returns:
         The address with recognised keywords removed.
     """
+    warnings.warn(
+        "rigour.addresses.remove_address_keywords is deprecated, "
+        "use rigour.addresses.compare_address instead",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     with resource_lock:
         pattern, _ = _address_replacer(latinize=latinize)
     return pattern.sub(replacement, address)
@@ -211,6 +223,12 @@ def remove_address_keywords(
 
 def shorten_address_keywords(address: str, latinize: bool = False) -> str | None:
     """Shorten common address keywords in a normalised address.
+
+    Deprecated:
+        Use [address_fingerprint][rigour.addresses.compare.address_fingerprint],
+        which reduces keywords to the same canonical short forms as
+        part of a full keying serialization. This function will be
+        removed in a future version.
 
     Replaces recognised forms with their canonical short form
     (`"street"` → `"st"`, `"avenue"` → `"av"`, `"united arab
@@ -231,6 +249,12 @@ def shorten_address_keywords(address: str, latinize: bool = False) -> str | None
         The address with recognised keywords shortened. Tokens
         that don't match any alias pass through unchanged.
     """
+    warnings.warn(
+        "rigour.addresses.shorten_address_keywords is deprecated, "
+        "use rigour.addresses.address_fingerprint instead",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     pattern, mapping = _address_replacer(latinize=latinize)
 
     def _sub(match: re.Match[str]) -> str:

@@ -4,3 +4,4 @@
 // memo footprints stay comparable across the crate.
 
 pub const MEMO_LARGE: usize = 200_000;
+pub const MEMO_MEDIUM: usize = 20_000;

@@ -10,7 +10,8 @@
 //   4. category_replace    — runs when `cleanup != Cleanup::Noop`
 //   5. SQUASH_SPACES       — delete invisible format chars, collapse
 //                            runs of whitespace, trim ends
-//   6. NAME                — tokenize_name then join with a single space
+//   6. NAME / ADDRESS      — tokenize_name / tokenize_address then join
+//                            with a single space (NAME wins if both set)
 //
 // Transliteration is NOT part of this pipeline — rigour's public
 // surface is `text::translit::maybe_ascii` (narrow, opportunistic).
@@ -23,7 +24,7 @@ use icu::casemap::CaseMapper;
 use icu::normalizer::{ComposingNormalizerBorrowed, DecomposingNormalizerBorrowed};
 use icu::properties::{CodePointMapData, props::GeneralCategory};
 
-use crate::text::tokenize::tokenize_name;
+use crate::text::tokenize::{tokenize_address, tokenize_name};
 
 bitflags! {
     // Hash lets `Normalize` be used as part of a HashMap key — see
@@ -40,6 +41,10 @@ bitflags! {
         // tokens with a single ASCII space. Supersedes the legacy
         // `normalize_name` composition (casefold + tokenize + ' '.join).
         const NAME          = 1 << 6;
+        // Like NAME, but tokenizes with tokenize_address — the
+        // address-specific category table. Mutually exclusive with
+        // NAME in practice; NAME wins when both are set.
+        const ADDRESS       = 1 << 7;
     }
 }
 
@@ -230,6 +235,8 @@ pub fn normalize(text: &str, flags: Normalize, cleanup: Cleanup) -> Option<Strin
         // inside the tokenizer already collapses runs and trims edges,
         // so SQUASH_SPACES plus NAME is harmless overlap, not a bug.
         s = tokenize_name(&s, 1).join(" ");
+    } else if flags.contains(Normalize::ADDRESS) {
+        s = tokenize_address(&s, 1).join(" ");
     }
 
     if s.is_empty() { None } else { Some(s) }
@@ -573,6 +580,23 @@ mod tests {
         let name_only = normalize("  Hello   World  ", Normalize::NAME, Cleanup::Noop);
         assert_eq!(with_both, Some("Hello World".to_string()));
         assert_eq!(with_both, name_only);
+    }
+
+    #[test]
+    fn address_flag_uses_address_tokenizer() {
+        assert_eq!(
+            normalize("Пр. № 17, 5th & Main", Normalize::ADDRESS, Cleanup::Noop),
+            Some("Пр № 17 5 th & Main".to_string())
+        );
+        // NAME wins when both are set — "№" and "&" separate.
+        assert_eq!(
+            normalize(
+                "№ 17 & A",
+                Normalize::NAME | Normalize::ADDRESS,
+                Cleanup::Noop
+            ),
+            Some("17 A".to_string())
+        );
     }
 
     // --- empty result ---

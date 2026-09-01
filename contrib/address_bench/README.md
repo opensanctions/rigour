@@ -138,6 +138,103 @@ target under the quota, a second relaxed pass tops it up. A stratum
 drawn from a single-script population is therefore allowed to stay that
 way rather than come up short.
 
+## Evaluating
+
+`make evaluate SCORER=nomenklatura` (or `ftm`) runs a scorer over every
+pair in `cases.csv` and reports AUC, accuracy at the best fixed
+threshold, per-quality and per-category slices, and the worst
+individual failures. The scorers in `evaluate.py` are local
+reimplementations of the downstream comparison logic over raw string
+pairs, so the bench has no dependency on nomenklatura or
+followthemoney. `SCORER=rust` runs `rigour._core.compare_address`,
+the Rust scorer under iterative development — rebuild with
+`make develop` (release; ICU paths are ~100× slower in debug builds)
+before evaluating it.
+
+### Rust scorer iteration log
+
+One row per increment; a rule stays only if the numbers justify it.
+
+| increment | AUC | AUC (STRONG) | best-t accuracy | notes |
+|---|---|---|---|---|
+| baseline: nomenklatura | 0.7198 | 0.7742 | 73.72% | token overlap + fuzzy remainder |
+| baseline: ftm | 0.5509 | 0.5836 | 54.01% | normalize + levenshtein |
+| v0: whole-string levenshtein | 0.5505 | 0.5832 | 53.91% | `CASEFOLD\|ADDRESS` normalize; parity with ftm confirms wiring |
+| v1: token alignment | 0.6904 | 0.7538 | 66.20% | greedy best-pair over analyzed tokens, length-weighted; reordered_fields err 12.3%, translit_cyrillic err 76.6% |
+| v2: number strictness | 0.6977 | 0.7601 | 66.64% | Number×Number pairs match exactly on digit-folded surface or not at all; house_number err 59.2→57.5%, unit 66.1→64.1% |
+| v3: number-mismatch penalty | 0.8904 | 0.9356 | 85.75% | −0.7 per cross-pair of unmatched numbers (swept 0.05–1.5, flat past 0.7; ≥1.0 = hard kill, +0.003 AUC, rejected for calibration); house_number err →29.9%, unit →18.8% |
+| v4: keyword canonical match | 0.8920 | 0.9372 | 85.87% | Keyword×Keyword with equal canonical aligns at 0.9 (boulevard↔blvd; 1.0 for literal identity — the discount is AUC-neutral, kept for ranking semantics); abbreviation avg match score 0.776→0.827 |
+| v5: territory code match | 0.8981 | 0.9431 | 86.21% | Territory×Territory with intersecting code sets aligns at 0.9 (syria↔syrian arab republic); translation err 12.5→10.7%, translation_cjk 13.7→13.0% |
+| v6: weak territory names | 0.9057 | 0.9492 | 86.71% | tagger also tags names_weak (CLDR translations: Syrie, Сирия, シリア); translation err →5.4%, translation_cjk →9.8%, no visible FP cost |
+| v7: edit budget 0.2→0.3 | 0.9066 | 0.9498 | 86.89% | absorbs ICU-vs-conventional romanization drift (mjasnickaja/myasnitskaya); translit_cyrillic err 12.0→6.4%, different_street err also improves (20.0→19.1%); swept 0.2–0.4, peak at 0.3 |
+| v8: digit-run split + ordinal tagging | 0.9362 | 0.9761 | 91.85% | tokenizer emits digit runs as own tokens (д39→д 39); ordinals (1st, 1-й, №17, digit-bearing forms only) tag as Numbers; glued numbers now match AND hidden conflicts surface: different_street err →8.4%, house_number →15.9%, unit →9.9%, translit →5.2% |
+
+### Fingerprint collapse log
+
+`make collapse FINGERPRINT=ftm` (or `slugify`) runs a fingerprinter —
+one address string in, one stable key or None out — over both sides
+of every pair and reports collapse rates: a pair collapses when both
+keys exist and are equal. True collapses (matching pairs keyed
+identically) measure exact-keying recall; false collapses
+(non-matching pairs keyed identically) are merges of distinct
+addresses and the metric that decides whether a hard-normalizing
+fingerprint is safe as a graph node key.
+
+| fingerprinter | true collapse | false collapse | none | notes |
+|---|---|---|---|---|
+| baseline: slugify (zavod `_make_id`) | 1.9% (100/5285) | 0.00% (0/4682) | 0.0% | ICU ascii_text transliterates everything, incl. CJK |
+| baseline: ftm (`node_id`: normalize + slugify) | 1.9% (100/5285) | 0.00% (0/4682) | 0.0% | identical collapse set to bare slugify on this corpus |
+| rust: `rigour._core.address_fingerprint` | 7.3% (388/5285) | 0.00% (0/4682) | 0.0% | pinned policy: order-preserving, keyword canonicals kept, code only for unambiguous territory names; slice gains: abbreviation 21.2%, punctuation_only 11.1%, translation_cjk 8.8%, city_only 10.6% |
+
+Baseline true collapses sit almost entirely in `punctuation_only`
+(5.2%); every variation category (translit, abbreviation, reordering)
+collapses at ~0%. That headroom is the case for hard normalization;
+the zero false-collapse rate is the bar it must not regress.
+
+Policy sweep for the Rust fingerprint (all knobs removed after the
+assessment; the pinned row above is the survivor):
+
+- **sorted tokens** — rejected: 14.3% true but 1.15% false collapse
+  (54 pairs); with dedup 24.2% / 3.33%; additionally dropping
+  keywords 27.6% / 3.52%. The false collapses are precisely the
+  neardupe transpositions (`Д.17 СТР.1` ↔ `Д. 1 СТР. 17`, `2/4` ↔
+  `4/2`) a graph node key must keep distinct.
+- **dropping keyword tokens** (order kept) — rejected: 10.1% true
+  but 0.21% false collapse (10 pairs); the keyword canonicals carry
+  discriminating signal and their alias-folding already delivers the
+  abbreviation gains.
+- **serializing ambiguous territory names as their full code set** —
+  no-op on the corpus (identical numbers); kept the simpler rule of
+  code-for-unambiguous-names-only, surface otherwise.
+
+`make perf-fingerprint` times the keying functions over the 14,381
+distinct corpus addresses (release build required; the bench-local
+lru_cache is stripped from the Python baselines since the downstream
+keying call sites run them bare). On an M-series laptop, 10 warm
+passes: slugify 15.5 µs/call cold / 4.9 warm; ftm (normalize +
+slugify) 16.7 / 10.7; `address_fingerprint` 20.1 cold / **0.4 µs
+warm (~2.3M calls/s)** through the shared analysis LRU, after a
+one-time ~110 ms tagger build. Cold-path cost is on par with the
+Python keying it replaces; repeated strings are ~25x cheaper.
+
+### Performance
+
+`make perf` times `compare_address` over the corpus (release build
+required — `make develop`). At v8 + the analysis LRU (20k entries,
+keyed on the raw string) on an M-series laptop, 100 passes (~1M
+calls): cold pass **34.7 µs/call** (analysis + cache fill), warm
+**5.4 µs/call (~184k calls/s)**, p50 4.0 µs, p99 24 µs; one query ×
+1,000 candidates in 3.1 ms. The one-time tagger build on first call
+costs ~110 ms. Pre-LRU reference: 13.4 µs/call flat (translit-warm),
+1×1,000 in 9.5 ms. Python baselines on the same pairs: nomenklatura
+452.8 µs cold / 1.0 µs lru-warm; ftm 9.4 µs cold / 0.7 µs warm.
+
+Rejected: scoping the number-mismatch penalty by digit length
+(postcodes-are-metadata). Full exemption for 5+-digit numbers: AUC
+0.9389 but unit_differs err 9.9→15.9%; tiered penalty (0.7 short /
+0.3 long): AUC 0.9399, STRONG 0.9767 — a real but small gain, not
+worth a second knob and a digit-length taxonomy in the rule set.
+
 ## Regenerating
 
 Two stages. Neither overwrites `cases.csv`; the second appends only rows

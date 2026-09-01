@@ -43,9 +43,11 @@ value:
     4. Cleanup              — category_replace, unless Cleanup.Noop
     5. SQUASH_SPACES        — delete invisible format characters,
                               collapse whitespace runs, trim ends
-    6. NAME                 — tokenize via
+    6. NAME / ADDRESS       — tokenize via
                               [tokenize_name][rigour.names.tokenize.tokenize_name]
-                              and rejoin with a single ASCII space
+                              (or its address-specific sibling) and
+                              rejoin with a single ASCII space; NAME
+                              wins if both are set
 
 Transliteration is NOT part of this pipeline. rigour's public
 transliteration surface is [rigour.text.translit][] — opportunistic,
@@ -159,6 +161,13 @@ class Normalize(IntFlag):
             and rejoin the tokens with a single ASCII space. Runs
             as the final pipeline step, so it also subsumes
             whitespace squashing.
+        ADDRESS: Like `NAME`, but tokenizes with the address-specific
+            category table: spacing marks (Mc) separate tokens, the
+            signifier symbols ``&`` and ``№`` are kept as token
+            content, and decimal-digit runs are emitted as their own
+            tokens (``д39`` → ``д 39``, ``30th`` → ``30 th``).
+            Mutually exclusive with `NAME`, which wins when both are
+            set.
     """
 
     # Bit values MUST match rust/src/text/normalize.rs `bitflags! Normalize`.
@@ -169,6 +178,7 @@ class Normalize(IntFlag):
     NFKC = 1 << 4
     NFKD = 1 << 5
     NAME = 1 << 6
+    ADDRESS = 1 << 7
 
 
 class Cleanup(IntEnum):

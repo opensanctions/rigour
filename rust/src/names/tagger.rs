@@ -24,14 +24,12 @@
 use std::collections::{HashMap, HashSet};
 use std::sync::{Arc, LazyLock, RwLock};
 
-use serde::Deserialize;
-
-use crate::names::matcher::Needles;
 use crate::names::org_types;
 use crate::names::person_names;
 use crate::names::symbol::{Symbol, SymbolCategory};
 use crate::names::symbols as name_symbols;
 use crate::territories;
+use crate::text::matcher::Needles;
 use crate::text::normalize::{Cleanup, Normalize, normalize};
 use crate::text::ordinals;
 
@@ -126,18 +124,6 @@ impl Builder {
     }
 }
 
-/// Fields from the territory JSONL that the tagger actually reads —
-/// everything else is consumed by `rigour.territories.*` on the
-/// Python side and ignored here.
-#[derive(Debug, Deserialize)]
-struct TerritoryRecord {
-    code: String,
-    name: String,
-    full_name: Option<String>,
-    #[serde(default)]
-    names_strong: Vec<String>,
-}
-
 fn add_common_symbols(b: &mut Builder) {
     // Ordinals: NUMERIC id is the integer directly (stringified via
     // Symbol::from_u32).
@@ -169,19 +155,8 @@ fn build_org_tagger(flags: Normalize) -> Tagger {
         }
     }
 
-    // Territories → LOCATION symbols. Walk the JSONL line by line;
-    // serde parses only the tagger-relevant fields. `corpus` is
-    // scoped to this loop — same rationale as the person-names
-    // block below.
-    let corpus = territories::decompressed();
-    for line in corpus.lines() {
-        if line.is_empty() {
-            continue;
-        }
-        let record: TerritoryRecord = match serde_json::from_str(line) {
-            Ok(r) => r,
-            Err(_) => continue, // skip malformed lines defensively
-        };
+    // Territories → LOCATION symbols, strong names only.
+    for record in territories::records() {
         let sym = Symbol::from_str(SymbolCategory::LOCATION, &record.code);
         b.add(&record.name, &sym);
         if let Some(full) = &record.full_name {

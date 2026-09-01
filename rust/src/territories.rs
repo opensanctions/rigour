@@ -18,10 +18,48 @@
 // A persistent Rust-side copy would just duplicate what's already in
 // Python's cached PyString / the tagger's AC automaton.
 
+use serde::Deserialize;
+
 /// The compressed blob — produced by `build.rs` from
 /// `rust/data/territories/data.jsonl` (build fails if the source
 /// file is missing).
 const COMPRESSED: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/territories.jsonl.zst"));
+
+/// Fields from the territory JSONL that Rust-side consumers read —
+/// everything else is consumed by `rigour.territories.*` on the
+/// Python side and ignored here.
+#[derive(Debug, Deserialize)]
+pub struct TerritoryRecord {
+    /// Lower-case territory code, e.g. `ru`, `us-nd`.
+    pub code: String,
+    /// Canonical display name.
+    pub name: String,
+    /// Disambiguated long name, e.g. "Moscow (Russia)".
+    pub full_name: Option<String>,
+    /// Code of the containing territory, e.g. `ru` for `ru-mow`.
+    pub parent: Option<String>,
+    /// Unambiguous name aliases, safe for high-precision tagging.
+    #[serde(default)]
+    pub names_strong: Vec<String>,
+    /// Translations and transliterations (CLDR-derived) — broad
+    /// recall, more false-positive-prone than `names_strong`;
+    /// consumers choose per use case.
+    #[serde(default)]
+    pub names_weak: Vec<String>,
+}
+
+/// Parse the full territory database into records, skipping
+/// malformed lines defensively. Allocates fresh on every call —
+/// consumers are one-shot builders (see the no-cache note above),
+/// and the decompressed corpus drops before this returns.
+pub fn records() -> Vec<TerritoryRecord> {
+    let corpus = decompressed();
+    corpus
+        .lines()
+        .filter(|line| !line.is_empty())
+        .filter_map(|line| serde_json::from_str(line).ok())
+        .collect()
+}
 
 /// Decompress the JSONL into a fresh `String`. Caller owns the
 /// allocation — do not stash the result in a static. PyO3 boundary:

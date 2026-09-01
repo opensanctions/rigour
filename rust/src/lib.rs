@@ -1,3 +1,4 @@
+pub mod addresses;
 pub mod constants;
 pub mod names;
 pub mod territories;
@@ -106,6 +107,32 @@ fn py_raw_jaro(a: &str, b: &str) -> f64 {
 #[pyo3(name = "raw_jaro_winkler")]
 fn py_raw_jaro_winkler(a: &str, b: &str) -> f64 {
     text::distance::jaro_winkler_similarity(a, b)
+}
+
+// Address comparison. Bare float scores — a richer result surface
+// (match type, explanation) can land as a separate entry point if
+// downstream needs it. Both functions run without the GIL: the
+// Rust side touches no Python objects, and the internal caches are
+// Mutex-guarded.
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "compare_address")]
+fn py_compare_address(py: Python<'_>, query: &str, result: &str) -> f64 {
+    py.detach(|| addresses::compare::compare(query, result))
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "compare_address_many")]
+fn py_compare_address_many(py: Python<'_>, queries: Vec<String>, results: Vec<String>) -> f64 {
+    py.detach(|| addresses::compare::compare_many(&queries, &results))
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
+#[pyo3(name = "address_fingerprint")]
+fn py_address_fingerprint(py: Python<'_>, text: &str) -> Option<String> {
+    py.detach(|| addresses::fingerprint::fingerprint(text))
 }
 
 #[cfg(feature = "python")]
@@ -283,6 +310,9 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_raw_levenshtein_cutoff, m)?)?;
     m.add_function(wrap_pyfunction!(py_raw_jaro, m)?)?;
     m.add_function(wrap_pyfunction!(py_raw_jaro_winkler, m)?)?;
+    m.add_function(wrap_pyfunction!(py_compare_address, m)?)?;
+    m.add_function(wrap_pyfunction!(py_compare_address_many, m)?)?;
+    m.add_function(wrap_pyfunction!(py_address_fingerprint, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_name, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_case, m)?)?;
     m.add_function(wrap_pyfunction!(py_reduce_names, m)?)?;
