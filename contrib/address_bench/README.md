@@ -207,6 +207,16 @@ assessment; the pinned row above is the survivor):
   no-op on the corpus (identical numbers); kept the simpler rule of
   code-for-unambiguous-names-only, surface otherwise.
 
+`make perf-fingerprint` times the keying functions over the 14,381
+distinct corpus addresses (release build required; the bench-local
+lru_cache is stripped from the Python baselines since the downstream
+keying call sites run them bare). On an M-series laptop, 10 warm
+passes: slugify 15.5 µs/call cold / 4.9 warm; ftm (normalize +
+slugify) 16.7 / 10.7; `address_fingerprint` 20.1 cold / **0.4 µs
+warm (~2.3M calls/s)** through the shared analysis LRU, after a
+one-time ~110 ms tagger build. Cold-path cost is on par with the
+Python keying it replaces; repeated strings are ~25x cheaper.
+
 ### Performance
 
 `make perf` times `compare_address` over the corpus (release build

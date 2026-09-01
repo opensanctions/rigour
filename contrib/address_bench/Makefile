@@ -26,5 +26,8 @@ collapse:
 perf:
 	python perf.py
 
+perf-fingerprint:
+	python perf_fingerprint.py
+
 typecheck:
-	mypy --strict generate.py adjudicate.py evaluate.py collapse.py perf.py
+	mypy --strict generate.py adjudicate.py evaluate.py collapse.py perf.py perf_fingerprint.py
