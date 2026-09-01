@@ -160,6 +160,7 @@ One row per increment; a rule stays only if the numbers justify it.
 | baseline: nomenklatura | 0.7198 | 0.7742 | 73.72% | token overlap + fuzzy remainder |
 | baseline: ftm | 0.5509 | 0.5836 | 54.01% | normalize + levenshtein |
 | v0: whole-string levenshtein | 0.5505 | 0.5832 | 53.91% | `CASEFOLD\|ADDRESS` normalize; parity with ftm confirms wiring |
+| v1: token alignment | 0.6904 | 0.7538 | 66.20% | greedy best-pair over analyzed tokens, length-weighted; reordered_fields err 12.3%, translit_cyrillic err 76.6% |
 
 ## Regenerating
 
