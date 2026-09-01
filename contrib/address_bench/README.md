@@ -169,6 +169,12 @@ One row per increment; a rule stays only if the numbers justify it.
 | v7: edit budget 0.2→0.3 | 0.9066 | 0.9498 | 86.89% | absorbs ICU-vs-conventional romanization drift (mjasnickaja/myasnitskaya); translit_cyrillic err 12.0→6.4%, different_street err also improves (20.0→19.1%); swept 0.2–0.4, peak at 0.3 |
 | v8: digit-run split + ordinal tagging | 0.9362 | 0.9761 | 91.85% | tokenizer emits digit runs as own tokens (д39→д 39); ordinals (1st, 1-й, №17, digit-bearing forms only) tag as Numbers; glued numbers now match AND hidden conflicts surface: different_street err →8.4%, house_number →15.9%, unit →9.9%, translit →5.2% |
 
+Rejected: scoping the number-mismatch penalty by digit length
+(postcodes-are-metadata). Full exemption for 5+-digit numbers: AUC
+0.9389 but unit_differs err 9.9→15.9%; tiered penalty (0.7 short /
+0.3 long): AUC 0.9399, STRONG 0.9767 — a real but small gain, not
+worth a second knob and a digit-length taxonomy in the rule set.
+
 ## Regenerating
 
 Two stages. Neither overwrites `cases.csv`; the second appends only rows
