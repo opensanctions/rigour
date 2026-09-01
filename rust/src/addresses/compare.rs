@@ -14,6 +14,11 @@ use crate::text::numbers::fold_digits;
 /// codepoints); token pairs beyond the budget don't align.
 const MAX_EDITS_PCT: f64 = 0.2;
 
+/// Score deduction per cross-pair of unmatched numbers: both sides
+/// asserting a number the other lacks is stronger negative signal
+/// than the plain residue weight of two short tokens.
+const NUMBER_MISMATCH_PENALTY: f64 = 0.7;
+
 /// Compare two address strings, returning a similarity in [0.0, 1.0].
 pub fn compare(query: &str, result: &str) -> f64 {
     let Some(qry) = analyze(query) else {
@@ -95,7 +100,26 @@ fn align_tokens(qry: &[AddressToken], res: &[AddressToken]) -> f64 {
         let weight = qry[qi].comparable().chars().count() + res[ri].comparable().chars().count();
         matched += sim * weight as f64;
     }
-    matched / total as f64
+
+    let penalty = NUMBER_MISMATCH_PENALTY * unmatched_pairs(qry, &qry_used, res, &res_used);
+    (matched / total as f64 - penalty).max(0.0)
+}
+
+/// Number of cross-pairs of unmatched Number tokens — the smaller
+/// side's count, so one-sided extras (subset relations) don't count.
+fn unmatched_pairs(
+    qry: &[AddressToken],
+    qry_used: &[bool],
+    res: &[AddressToken],
+    res_used: &[bool],
+) -> f64 {
+    let count = |toks: &[AddressToken], used: &[bool]| {
+        toks.iter()
+            .zip(used)
+            .filter(|(t, u)| !**u && matches!(t.class, TokenClass::Number { .. }))
+            .count()
+    };
+    count(qry, qry_used).min(count(res, res_used)) as f64
 }
 
 #[cfg(test)]
@@ -152,6 +176,19 @@ mod tests {
         let close = compare("Bahnhofstr. 12, Berlin", "Bahnhofstr. 14, Berlin");
         let same = compare("Bahnhofstr. 12, Berlin", "Bahnhofstr. 12, Berlin");
         assert!(same == 1.0 && close < 0.95, "close={close}");
+    }
+
+    #[test]
+    fn number_mismatch_penalized_but_one_sided_extra_is_not() {
+        // Both sides asserting a number the other lacks: penalty.
+        let mismatch = compare("Hauptstr. 5, 10115 Berlin", "Hauptstr. 7, 10115 Berlin");
+        // One side simply lacking the number: plain residue, no penalty.
+        let subset = compare("Hauptstr. 5, 10115 Berlin", "Hauptstr., 10115 Berlin");
+        assert!(mismatch < 0.5, "mismatch={mismatch}");
+        assert!(
+            subset > mismatch + 0.3,
+            "subset={subset} mismatch={mismatch}"
+        );
     }
 
     #[test]
