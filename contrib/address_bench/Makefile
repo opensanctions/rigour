@@ -18,8 +18,13 @@ SCORER ?= nomenklatura
 evaluate:
 	python evaluate.py --scorer $(SCORER)
 
+FINGERPRINT ?= ftm
+
+collapse:
+	python collapse.py --fingerprint $(FINGERPRINT)
+
 perf:
 	python perf.py
 
 typecheck:
-	mypy --strict generate.py adjudicate.py evaluate.py perf.py
+	mypy --strict generate.py adjudicate.py evaluate.py collapse.py perf.py

@@ -169,6 +169,27 @@ One row per increment; a rule stays only if the numbers justify it.
 | v7: edit budget 0.2→0.3 | 0.9066 | 0.9498 | 86.89% | absorbs ICU-vs-conventional romanization drift (mjasnickaja/myasnitskaya); translit_cyrillic err 12.0→6.4%, different_street err also improves (20.0→19.1%); swept 0.2–0.4, peak at 0.3 |
 | v8: digit-run split + ordinal tagging | 0.9362 | 0.9761 | 91.85% | tokenizer emits digit runs as own tokens (д39→д 39); ordinals (1st, 1-й, №17, digit-bearing forms only) tag as Numbers; glued numbers now match AND hidden conflicts surface: different_street err →8.4%, house_number →15.9%, unit →9.9%, translit →5.2% |
 
+### Fingerprint collapse log
+
+`make collapse FINGERPRINT=ftm` (or `slugify`) runs a fingerprinter —
+one address string in, one stable key or None out — over both sides
+of every pair and reports collapse rates: a pair collapses when both
+keys exist and are equal. True collapses (matching pairs keyed
+identically) measure exact-keying recall; false collapses
+(non-matching pairs keyed identically) are merges of distinct
+addresses and the metric that decides whether a hard-normalizing
+fingerprint is safe as a graph node key.
+
+| fingerprinter | true collapse | false collapse | none | notes |
+|---|---|---|---|---|
+| baseline: slugify (zavod `_make_id`) | 1.9% (100/5285) | 0.00% (0/4682) | 0.0% | ICU ascii_text transliterates everything, incl. CJK |
+| baseline: ftm (`node_id`: normalize + slugify) | 1.9% (100/5285) | 0.00% (0/4682) | 0.0% | identical collapse set to bare slugify on this corpus |
+
+Baseline true collapses sit almost entirely in `punctuation_only`
+(5.2%); every variation category (translit, abbreviation, reordering)
+collapses at ~0%. That headroom is the case for hard normalization;
+the zero false-collapse rate is the bar it must not regress.
+
 ### Performance
 
 `make perf` times `compare_address` over the corpus (release build
