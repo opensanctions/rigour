@@ -1,4 +1,3 @@
-
 from typing import TypeVar
 
 from rigour.data.langs.iso639 import ISO3_ALL
@@ -7,9 +6,30 @@ LangStrT = TypeVar("LangStrT", bound="LangStr")
 
 
 class LangStr(str):
-    """A type of string that include language metadata. This is useful for handling multilingual content.
+    """A string carrying an optional language tag.
 
-    The class does not override any operators and functions, which means they will behave like a regular string.
+    Use this to keep track of which language a piece of multilingual
+    content is written in while still passing it around as a `str`.
+
+    The language tag is part of the value's identity:
+
+    * With no tag (`lang is None`), a `LangStr` is indistinguishable from
+      its content string: it compares equal to the plain `str`, hashes the
+      same, and deduplicates against it in sets and dict keys.
+    * With a tag, a `LangStr` is a distinct value identified by the pair
+      `(content, lang)`. It is not equal to the bare content string, nor
+      to a `LangStr` with a different or missing tag, and it never
+      deduplicates against them.
+
+    Ordinary `str` methods (`.upper()`, slicing, concatenation, …) return
+    plain `str` and drop the tag.
+
+    Args:
+        content: The text.
+        lang: An ISO 639-3 language code, or `None` for untagged text.
+
+    Raises:
+        ValueError: If `lang` is not a known ISO 639-3 code.
     """
 
     __slots__ = ("lang",)
@@ -30,13 +50,18 @@ class LangStr(str):
         return super().__repr__()
 
     def __hash__(self) -> int:
+        if self.lang is None:
+            return super().__hash__()
         return hash((super().__str__(), self.lang))
 
     def __eq__(self, value: object) -> bool:
-        try:
-            return super().__eq__(value) and self.lang == value.lang  # type: ignore
-        except AttributeError:
-            return super().__eq__(value)
+        if not isinstance(value, str):
+            return NotImplemented
+        other_lang = value.lang if isinstance(value, LangStr) else None
+        return super().__eq__(value) and self.lang == other_lang
 
     def __ne__(self, value: object) -> bool:
-        return not self.__eq__(value)
+        equal = self.__eq__(value)
+        if equal is NotImplemented:
+            return NotImplemented
+        return not equal
