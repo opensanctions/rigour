@@ -1,7 +1,9 @@
 from rigour.addresses import (
+    AddressMatch,
     address_fingerprint,
     compare_address,
     compare_address_many,
+    match_addresses,
 )
 
 
@@ -76,3 +78,39 @@ def test_address_fingerprint_native_script_passthrough() -> None:
 def test_address_fingerprint_empty() -> None:
     assert address_fingerprint("") is None
     assert address_fingerprint(" ,,, --- ") is None
+
+
+def test_match_addresses_returns_winning_pair() -> None:
+    queries = ["Calle Mayor 3, Madrid", "Bahnhofstr. 12, Berlin"]
+    results = ["10115 Berlin, Bahnhofstrasse 12", "Bahnhofstr. 12, Berlin"]
+    match = match_addresses(queries, results)
+    assert match is not None
+    assert isinstance(match, AddressMatch)
+    assert match.score == 1.0
+    assert match.query == "Bahnhofstr. 12, Berlin"
+    assert match.result == "Bahnhofstr. 12, Berlin"
+    assert match.detail == "bahnhofstr 12 berlin"
+    assert match.score == compare_address_many(queries, results)
+    assert repr(match).startswith("AddressMatch(score=1.000, ")
+
+
+def test_match_addresses_detail_grammar() -> None:
+    match = match_addresses(["Sunset Boulevard 12, Los Angeles"], ["Sunset Blvd 12, LA"])
+    assert match is not None
+    assert match.detail == "sunset boulevard~blvd 12 -los -angeles +la"
+    match = match_addresses(["Bahnhofstrasse 12, Berlin"], ["Bahnhofstrase 12, Berlin"])
+    assert match is not None
+    assert match.detail == "bahnhofstrasse~bahnhofstrase 12 berlin"
+    match = match_addresses(["Hauptstr. 5, 10115 Berlin"], ["Hauptstr. 7, 10115 Berlin"])
+    assert match is not None
+    assert match.detail == "hauptstr 10115 berlin -5 +7"
+
+
+def test_match_addresses_none_and_zero() -> None:
+    assert match_addresses([], ["Bahnhofstr. 12"]) is None
+    assert match_addresses(["Bahnhofstr. 12"], []) is None
+    assert match_addresses(["..."], ["Bahnhofstr. 12"]) is None
+    match = match_addresses(["Bahnhofstr. 12, Berlin"], ["Calle Mayor 3, Madrid"])
+    assert match is not None
+    assert match.score < 0.2
+    assert match.detail.startswith("-")

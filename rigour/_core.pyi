@@ -13,6 +13,7 @@ def raw_jaro(a: str, b: str) -> float: ...
 def raw_jaro_winkler(a: str, b: str) -> float: ...
 def compare_address(query: str, result: str) -> float: ...
 def compare_address_many(queries: list[str], results: list[str]) -> float: ...
+def match_addresses(queries: list[str], results: list[str]) -> AddressMatch | None: ...
 def address_fingerprint(text: str) -> str | None: ...
 def pick_name(names: list[str]) -> str | None: ...
 def pick_case(names: list[str]) -> str | None: ...
@@ -40,6 +41,26 @@ def territories_jsonl() -> str: ...
 
 MAX_NAME_LENGTH: int
 
+
+class AddressMatch:
+    """The best pair out of a list×list address comparison, with the
+    evidence that produced it. Frozen; all attributes are read-only.
+    """
+
+    score: float
+    """Similarity of the winning pair in [0.0, 1.0]."""
+    query: str
+    """Query-side address of the winning pair, as supplied."""
+    result: str
+    """Result-side address of the winning pair, as supplied."""
+    detail: str
+    """One-line alignment summary over comparable token forms:
+    aligned tokens in query order (`berlin` when identical,
+    `boulevard~blvd` when aligned by edit distance or class
+    equivalence), then `-tok` for query-only and `+tok` for
+    result-only tokens."""
+
+    def __repr__(self) -> str: ...
 
 class SymbolCategory:
     """Sealed enum of symbol categories. See

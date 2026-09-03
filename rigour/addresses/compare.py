@@ -1,10 +1,18 @@
 """Compare postal address strings for referring to the same place."""
 
+from rigour._core import AddressMatch
 from rigour._core import address_fingerprint as _address_fingerprint
 from rigour._core import compare_address as _compare_address
 from rigour._core import compare_address_many as _compare_address_many
+from rigour._core import match_addresses as _match_addresses
 
-__all__ = ["address_fingerprint", "compare_address", "compare_address_many"]
+__all__ = [
+    "AddressMatch",
+    "address_fingerprint",
+    "compare_address",
+    "compare_address_many",
+    "match_addresses",
+]
 
 
 def compare_address(query: str, result: str) -> float:
@@ -51,12 +59,9 @@ def compare_address_many(queries: list[str], results: list[str]) -> float:
     """Compare two sets of address strings and return the best
     pairwise score.
 
-    Scores every query against every result with
-    [compare_address][rigour.addresses.compare.compare_address] and
-    returns the maximum — the natural shape for matching two
-    entities that each carry several address renderings. Each
-    distinct string is analyzed only once, so the list×list loop is
-    substantially cheaper than the equivalent pairwise calls.
+    The score-only form of
+    [match_addresses][rigour.addresses.compare.match_addresses]:
+    same pairing, same analysis cache, without the match object.
 
     Args:
         queries: Addresses of one entity, each as one full string.
@@ -68,6 +73,47 @@ def compare_address_many(queries: list[str], results: list[str]) -> float:
         0.0 when either list is empty or nothing is comparable.
     """
     return _compare_address_many(queries, results)
+
+
+def match_addresses(queries: list[str], results: list[str]) -> AddressMatch | None:
+    """Compare two sets of address strings and return the best
+    pairwise match with the evidence behind it.
+
+    Scores every query against every result with
+    [compare_address][rigour.addresses.compare.compare_address] and
+    returns the winning pair as an
+    [AddressMatch][rigour._core.AddressMatch]: its `score`, the two
+    input strings that produced it (`query`, `result`), and a
+    one-line `detail` describing how the tokens aligned. Each
+    distinct string is analyzed only once, so the list×list loop is
+    substantially cheaper than the equivalent pairwise calls.
+
+    The `detail` line lists analyzed tokens (lowercased, narrowly
+    transliterated) separated by spaces: aligned tokens first, in
+    query order, then the leftovers of each side.
+
+    | form | meaning |
+    |---|---|
+    | `berlin` | aligned, identical on both sides |
+    | `boulevard~blvd` | aligned by edit distance, keyword alias or territory code (query left, result right) |
+    | `-10115` | only in the query address |
+    | `+la` | only in the result address |
+
+    A line without `~`, `-` or `+` is an exact match; leftovers on
+    one side only mark a subset relation; a `-5 +7` pair of numbers
+    is the penalized house- or unit-number conflict.
+
+    Args:
+        queries: Addresses of one entity, each as one full string.
+        results: Addresses of the other entity, each as one full
+            string.
+
+    Returns:
+        The best-scoring pair, or `None` when either list is empty or
+        contains nothing analyzable (only punctuation). A pair with
+        nothing in common is still returned, with a score of 0.0.
+    """
+    return _match_addresses(queries, results)
 
 
 def address_fingerprint(text: str) -> str | None:

@@ -130,6 +130,17 @@ fn py_compare_address_many(py: Python<'_>, queries: Vec<String>, results: Vec<St
 
 #[cfg(feature = "python")]
 #[pyfunction]
+#[pyo3(name = "match_addresses")]
+fn py_match_addresses(
+    py: Python<'_>,
+    queries: Vec<String>,
+    results: Vec<String>,
+) -> Option<addresses::compare::AddressMatch> {
+    py.detach(|| addresses::compare::match_many(&queries, &results))
+}
+
+#[cfg(feature = "python")]
+#[pyfunction]
 #[pyo3(name = "address_fingerprint")]
 fn py_address_fingerprint(py: Python<'_>, text: &str) -> Option<String> {
     py.detach(|| addresses::fingerprint::fingerprint(text))
@@ -312,6 +323,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(py_raw_jaro_winkler, m)?)?;
     m.add_function(wrap_pyfunction!(py_compare_address, m)?)?;
     m.add_function(wrap_pyfunction!(py_compare_address_many, m)?)?;
+    m.add_function(wrap_pyfunction!(py_match_addresses, m)?)?;
     m.add_function(wrap_pyfunction!(py_address_fingerprint, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_name, m)?)?;
     m.add_function(wrap_pyfunction!(py_pick_case, m)?)?;
@@ -337,6 +349,7 @@ fn _core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     )?)?;
     m.add_function(wrap_pyfunction!(names::pairing::py_pair_symbols, m)?)?;
     m.add_function(wrap_pyfunction!(names::compare::py_compare_parts, m)?)?;
+    m.add_class::<addresses::compare::AddressMatch>()?;
     m.add_class::<names::compare::CompareConfig>()?;
     m.add_class::<names::alignment::Alignment>()?;
     m.add_class::<names::symbol::Symbol>()?;
