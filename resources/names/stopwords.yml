@@ -174,6 +174,25 @@ ORG_NAME_PREFIXES:
   - The
   - Le
   - La
+ORG_NAME_AWARDS: 
+# These awards sometimes appear in variants of the names of sanctioned entities.
+  - "Ордена Красного Знамени" # (Order of the Red Banner)
+  - "Ордена Ленина" # (Order of Lenin)
+  - "Ордена Октябрьской Революции" # (Order of the October Revolution)
+  - "Ордена Суворова" # (Order of Suvorov)
+  - "Ордена Ушакова" # (Order of Ushakov)
+  - "Ордена Кутузова" # (Order of Kutuzov)
+  - "Ордена Нахимова" # (Order of Nakhimov)
+  - "Ордена Красной Звезды" # (Order of the Red Star)
+  - "Ордена Отечественной войны" # (Order of the Patriotic War)
+  - "Ордена Александра Невского" # (Order of Alexander Nevsky)
+  - "Ордена Богдана Хмельницкого" # (Order of Bogdan Khmelnitsky)
+  - "Ордена Трудового Красного Знамени" # (Order of the Red Banner of Labour)
+  - "Ордена Дружбы народов" # (Order of Friendship of Peoples)
+  - "Ордена Знака Почёта" # (Order of the Badge of Honour)
+  - "Ордена Почёта" # (Order of Honour)
+  - "Ордена Жукова" # (Order of Zhukov)
+  - "Ордена «За заслуги перед Отечеством»" # (Order of Merit for the Fatherland)
 OBJ_NAME_PREFIXES:
   - The
   - MV
