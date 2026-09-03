@@ -19,7 +19,7 @@ def generate_ordinals() -> None:
     """Emit `rust/data/text/ordinals.json` — array of `{number, forms}`
     records, sorted by number. Consumed by the Rust-side
     `ordinals_dict()` accessor (Python consumers) and by the Rust
-    tagger build path via `include_str!`."""
+    tagger build path."""
     ordinals_path = RESOURCES_PATH / "text" / "ordinals.yml"
     with open(ordinals_path, "r", encoding="utf-8") as ufh:
         ordinals_mapping: dict[str, dict[int, list[str]]] = yaml.safe_load(ufh.read())

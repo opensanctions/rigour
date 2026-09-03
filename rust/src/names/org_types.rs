@@ -55,10 +55,12 @@ pub(crate) struct OrgTypeSpec {
 
 const ORG_TYPES_ZST: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/org_types.json.zst"));
 
-pub(crate) static ORG_TYPE_SPECS: LazyLock<Vec<OrgTypeSpec>> = LazyLock::new(|| {
+/// Decode the spec list into a fresh, caller-owned Vec. Every reader
+/// is a replacer/tagger build cached upstream — do not stash this.
+pub(crate) fn org_type_specs() -> Vec<OrgTypeSpec> {
     let bytes = zstd::decode_all(ORG_TYPES_ZST).expect("zstd decode org_types.json.zst");
     serde_json::from_slice(&bytes).expect("org_types.json parses")
-});
+}
 
 /// Selects which mapping (alias → target) the Replacer is built from.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -124,7 +126,7 @@ fn build_compare(flags: Normalize, cleanup: Cleanup) -> Replacer {
     let norm = norm_fn(flags, cleanup);
     let mut mapping: HashMap<String, String> = HashMap::new();
 
-    for spec in ORG_TYPE_SPECS.iter() {
+    for spec in org_type_specs() {
         let display_norm = spec.display.as_deref().and_then(&norm);
         // `compare: ""` means "remove this org type" — an intentional
         // empty target. Absent `compare` falls back to display.
@@ -163,7 +165,7 @@ fn build_generic(flags: Normalize, cleanup: Cleanup) -> Replacer {
     let norm = norm_fn(flags, cleanup);
     let mut mapping: HashMap<String, String> = HashMap::new();
 
-    for spec in ORG_TYPE_SPECS.iter() {
+    for spec in org_type_specs() {
         let Some(generic_norm) = spec.generic.as_deref().and_then(&norm) else {
             continue;
         };
@@ -205,7 +207,7 @@ fn build_display(flags: Normalize, cleanup: Cleanup) -> Replacer {
     let mut seen_targets: HashMap<String, String> = HashMap::new();
     let mut clashes: HashSet<String> = HashSet::new();
 
-    for spec in ORG_TYPE_SPECS.iter() {
+    for spec in org_type_specs() {
         if spec.display.as_deref().and_then(&norm).is_none() {
             continue; // display doesn't survive key normalisation
         }

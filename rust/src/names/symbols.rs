@@ -6,13 +6,12 @@
 // the tagger) and the aliases become needles in the AC automaton.
 //
 // The JSON is indented on disk for reviewability; build.rs
-// zstd-compresses it into OUT_DIR and this module decodes on first
-// use. Internal to the Rust crate — no PyO3 surface. Consumed by
-// `names::tagger::build_{org,person}_tagger`.
+// zstd-compresses it into OUT_DIR. No resident static: the only
+// consumers, `names::tagger::build_{org,person}_tagger`, are cached
+// in `TAGGER_CACHE`. Internal to the crate — no PyO3 surface.
 
 use serde::Deserialize;
 use std::collections::HashMap;
-use std::sync::LazyLock;
 
 const SYMBOLS_ZST: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/symbols.json.zst"));
 
@@ -25,13 +24,10 @@ pub struct NameSymbols {
     pub person_name_parts: HashMap<String, Vec<String>>,
 }
 
-static DATA: LazyLock<NameSymbols> = LazyLock::new(|| {
+/// Decode the symbol tables into a fresh, caller-owned value.
+pub fn data() -> NameSymbols {
     let bytes = zstd::decode_all(SYMBOLS_ZST).expect("zstd decode symbols.json.zst");
     serde_json::from_slice(&bytes).expect("symbols.json parses")
-});
-
-pub fn data() -> &'static NameSymbols {
-    &DATA
 }
 
 #[cfg(test)]

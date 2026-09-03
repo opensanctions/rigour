@@ -4,13 +4,12 @@
 // `rigour.addresses.normalize` and the Rust tagger build path.
 //
 // The JSON on disk is an array of `{number, forms}` records (see
-// `genscripts/generate_text.py::generate_ordinals`); we deserialise
-// to a Vec and materialise the HashMap on each accessor call since
-// Python takes ownership.
+// `genscripts/generate_text.py::generate_ordinals`), zstd-compressed
+// into OUT_DIR by `build.rs`. No resident static: every consumer
+// caches downstream (tagger builds, the Python dict).
 
 use serde::Deserialize;
 use std::collections::HashMap;
-use std::sync::LazyLock;
 
 #[derive(Debug, Deserialize)]
 pub struct OrdinalSpec {
@@ -18,21 +17,22 @@ pub struct OrdinalSpec {
     pub forms: Vec<String>,
 }
 
-const JSON: &str = include_str!("../../data/text/ordinals.json");
+const ORDINALS_ZST: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/ordinals.json.zst"));
 
-static DATA: LazyLock<Vec<OrdinalSpec>> =
-    LazyLock::new(|| serde_json::from_str(JSON).expect("rust/data/text/ordinals.json parses"));
+/// Decode the spec list into a fresh, caller-owned Vec — do not
+/// stash the result in a static.
+pub fn ordinals() -> Vec<OrdinalSpec> {
+    let bytes = zstd::decode_all(ORDINALS_ZST).expect("zstd decode ordinals.json.zst");
+    serde_json::from_slice(&bytes).expect("ordinals.json parses")
+}
 
 /// Ordinals as a `{number: [forms...]}` map — matches the Python
 /// consumer's `ORDINALS.items()` iteration pattern.
 pub fn ordinals_dict() -> HashMap<u32, Vec<String>> {
-    DATA.iter().map(|o| (o.number, o.forms.clone())).collect()
-}
-
-/// Pure-Rust accessor for the raw spec list. Used by the Rust
-/// tagger build path, which iterates without needing a HashMap.
-pub fn ordinals() -> &'static [OrdinalSpec] {
-    &DATA
+    ordinals()
+        .into_iter()
+        .map(|o| (o.number, o.forms))
+        .collect()
 }
 
 #[cfg(test)]

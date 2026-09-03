@@ -169,7 +169,7 @@ fn build_org_tagger(flags: Normalize) -> Tagger {
 
     // Org types → ORG_CLASS symbols keyed on the `generic` field.
     let mut class_syms: HashMap<String, Symbol> = HashMap::new();
-    for spec in org_types::ORG_TYPE_SPECS.iter() {
+    for spec in org_types::org_type_specs() {
         let Some(generic) = spec.generic.as_deref() else {
             continue;
         };
