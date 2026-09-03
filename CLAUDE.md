@@ -43,10 +43,10 @@ Source of truth lives under `resources/` (YAML + a few text blobs).
 `genscripts/` regenerates per-consumer artifacts under `rust/data/`
 (e.g. `rust/data/names/stopwords.json`,
 `rust/data/territories/data.jsonl`,
-`rust/data/names/person_names.txt`) — these are committed. Large
-blobs (person-names corpus, territories JSONL) get zstd-compressed
-at crate-build time by `rust/build.rs` and embedded into the binary
-via `include_bytes!`.
+`rust/data/names/person_names.txt`) — these are committed. All but
+the few-KB tables get zstd-compressed by `rust/build.rs` and embedded
+via `include_bytes!`; build-only inputs are decoded into caller-owned
+values, never stashed in a static.
 
 The **Python-side** `rigour/data/` directory is mostly drained: the
 wordlist / stopword / ordinals / names / territories / org-types

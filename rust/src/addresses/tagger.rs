@@ -126,15 +126,16 @@ impl AddressTagger {
     }
 }
 
-const FORMS_JSON: &str = include_str!("../../data/addresses/forms.json");
+const FORMS_ZST: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/address_forms.json.zst"));
 
 fn build_tagger() -> AddressTagger {
     let mut b = Builder::new();
 
     // Keyword forms: every alias and the canonical key itself map
     // to the canonical form, so "blvd" in text tags as blvd too.
+    let forms_json = zstd::decode_all(FORMS_ZST).expect("zstd decode address_forms.json.zst");
     let forms: BTreeMap<String, Vec<String>> =
-        serde_json::from_str(FORMS_JSON).expect("rust/data/addresses/forms.json parses");
+        serde_json::from_slice(&forms_json).expect("forms.json parses");
     for (canonical, aliases) in &forms {
         b.add_keyword(canonical, canonical);
         for alias in aliases {

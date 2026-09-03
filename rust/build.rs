@@ -3,12 +3,6 @@
 // UTF-8) for diffability; `build.rs` compresses each into `OUT_DIR`
 // and the corresponding Rust module picks it up via `include_bytes!`.
 //
-// Current files:
-//   - `data/names/person_names.txt`        (~8.1 MB → ~2.7 MB)
-//   - `data/names/symbols.json`            (~85 KiB → ~12 KiB)
-//   - `data/names/org_types.json`          (~125 KiB → ~15 KiB)
-//   - `data/territories/data.jsonl`        (~783 KiB → ~214 KiB)
-//
 // All source files are committed, so a missing one means a broken
 // checkout — fail the build rather than embed an empty blob that
 // would ship as a silently non-functional wheel (empty tagger, zero
@@ -48,6 +42,18 @@ const FILES: &[Compress] = &[
         dst: "org_types.json.zst",
         missing: "rust/data/names/org_types.json not found. Run \
                   `make build-names` to regenerate.",
+    },
+    Compress {
+        src: "data/text/ordinals.json",
+        dst: "ordinals.json.zst",
+        missing: "rust/data/text/ordinals.json not found. Run \
+                  `make build-text` to regenerate.",
+    },
+    Compress {
+        src: "data/addresses/forms.json",
+        dst: "address_forms.json.zst",
+        missing: "rust/data/addresses/forms.json not found. Run \
+                  `make build-addresses` to regenerate.",
     },
 ];
 

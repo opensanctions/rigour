@@ -66,18 +66,15 @@ aho-corasick = "1"
 # LazyLock.
 regex = "1"
 
-# Serde + serde_json for reading committed JSON data artifacts like
-# rust/data/names/org_types.json inside a LazyLock at first use.
+# Serde + serde_json for reading the committed JSON data artifacts
+# under rust/data/ (org types, symbols, ordinals, stopwords, …).
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
-# zstd — compile-time compression of the person-names corpus
-# (`rust/data/names/person_names.txt`) into compressed bytes baked
-# into the binary via OUT_DIR. Runtime decodes on first access in
-# `names::person_names`. See `build.rs` for the compression step
-# and `plans/arch-rust-core.md` for the three-tier data-embedding
-# strategy. Listed in both [dependencies] (runtime decode) and
-# [build-dependencies] (build.rs uses the same crate for encoding).
+# zstd — compile-time compression of the larger committed data files
+# (see the FILES table in `build.rs`); consumers `include_bytes!` the
+# OUT_DIR artifact and decode on use. Listed in both [dependencies]
+# (decode) and [build-dependencies] (build.rs encodes).
 zstd = "0.13"
 
 [build-dependencies]

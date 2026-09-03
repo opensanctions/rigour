@@ -6,17 +6,13 @@
 // names_strong, names_weak, ...}`. Authoritative emission is
 // `genscripts/generate_territories.py::update_data`.
 //
-// The JSONL ships as plain UTF-8 in git (~783 KiB, diff-friendly when
-// the generator regenerates) and gets zstd-compressed at crate-build
-// time by `build.rs` (~214 KiB).
+// The JSONL ships as plain UTF-8 in git (diff-friendly when the
+// generator regenerates) and is zstd-compressed by `build.rs`.
 //
 // No static `LazyLock<String>` cache — each `decompressed()` call
-// returns a fresh owned `String`. Both consumers are one-shot:
-// Python's `rigour.territories.*` reads via `@cache`-decorated index
-// builders (so exactly one FFI hop per process), and the Rust tagger
-// walks the lines once per `(TaggerKind, flags, cleanup)` cache miss.
-// A persistent Rust-side copy would just duplicate what's already in
-// Python's cached PyString / the tagger's AC automaton.
+// returns a fresh owned `String`; all consumers are one-shot reads
+// behind their own caches (Python's `@cache`-decorated index
+// builders, the Rust tagger builds).
 
 use serde::Deserialize;
 
