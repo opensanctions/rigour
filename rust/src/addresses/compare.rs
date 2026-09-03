@@ -5,7 +5,13 @@
 // greedy best-pair token alignment over analyzed tokens, scored by
 // length-weighted edit-distance similarity.
 
-use crate::addresses::analyze::analyze_cached;
+use std::mem;
+use std::sync::Arc;
+
+#[cfg(feature = "python")]
+use pyo3::prelude::*;
+
+use crate::addresses::analyze::{Address, analyze_cached};
 use crate::addresses::token::{AddressToken, TokenClass};
 use crate::text::distance::levenshtein_cutoff;
 
@@ -25,37 +31,161 @@ const ALIAS_SIM: f64 = 0.90;
 /// than the plain residue weight of two short tokens.
 const NUMBER_MISMATCH_PENALTY: f64 = 0.7;
 
+/// One accepted token alignment: query index, result index,
+/// similarity.
+type Bound = (usize, usize, f64);
+
+/// The best pair out of a list×list address comparison, with the
+/// evidence that produced it.
+#[cfg_attr(
+    feature = "python",
+    pyclass(frozen, get_all, skip_from_py_object, module = "rigour._core")
+)]
+#[derive(Debug, Clone, PartialEq)]
+pub struct AddressMatch {
+    /// Similarity of the winning pair in [0.0, 1.0].
+    pub score: f64,
+    /// Query-side address of the winning pair, as supplied.
+    pub query: String,
+    /// Result-side address of the winning pair, as supplied.
+    pub result: String,
+    /// One-line alignment summary over comparable token forms:
+    /// aligned tokens in query order (`berlin` when identical,
+    /// `boulevard~blvd` when aligned by edit distance or class
+    /// equivalence), then `-tok` for query-only and `+tok` for
+    /// result-only tokens.
+    pub detail: String,
+}
+
+#[cfg(feature = "python")]
+#[pymethods]
+impl AddressMatch {
+    fn __repr__(&self) -> String {
+        format!(
+            "AddressMatch(score={:.3}, query={:?}, result={:?}, detail={:?})",
+            self.score, self.query, self.result, self.detail
+        )
+    }
+}
+
 /// Compare two address strings, returning a similarity in [0.0, 1.0].
 pub fn compare(query: &str, result: &str) -> f64 {
-    let Some(qry) = analyze_cached(query) else {
-        return 0.0;
-    };
-    let Some(res) = analyze_cached(result) else {
-        return 0.0;
-    };
-    align_tokens(&qry.tokens, &res.tokens)
+    compare_many(&[query], &[result])
 }
 
 /// Compare every query address against every result address and
 /// return the highest pairwise score. Each string is analyzed once
 /// (through the LRU), so the list×list loop costs analysis per
 /// distinct string plus one alignment per pair.
-pub fn compare_many(queries: &[String], results: &[String]) -> f64 {
-    let qry: Vec<_> = queries.iter().filter_map(|s| analyze_cached(s)).collect();
-    let res: Vec<_> = results.iter().filter_map(|s| analyze_cached(s)).collect();
-    let mut best: f64 = 0.0;
-    for q in &qry {
-        for r in &res {
-            let score = align_tokens(&q.tokens, &r.tokens);
-            if score > best {
-                best = score;
-                if best >= 1.0 {
-                    return best;
+pub fn compare_many<S: AsRef<str>>(queries: &[S], results: &[S]) -> f64 {
+    let qry = analyze_all(queries);
+    let res = analyze_all(results);
+    best_pair(&qry, &res).map_or(0.0, |b| b.score)
+}
+
+/// Compare every query address against every result address and
+/// return the best pair with its alignment detail, or `None` when
+/// either side holds nothing analyzable.
+pub fn match_many<S: AsRef<str>>(queries: &[S], results: &[S]) -> Option<AddressMatch> {
+    let qry = analyze_all(queries);
+    let res = analyze_all(results);
+    let best = best_pair(&qry, &res)?;
+    let (query, qaddr) = &qry[best.qi];
+    let (result, raddr) = &res[best.ri];
+    Some(AddressMatch {
+        score: best.score,
+        query: query.to_string(),
+        result: result.to_string(),
+        detail: describe(&qaddr.tokens, &raddr.tokens, &best.bound),
+    })
+}
+
+/// Winning pair of a list×list comparison.
+struct Best {
+    score: f64,
+    qi: usize,
+    ri: usize,
+    bound: Vec<Bound>,
+}
+
+fn analyze_all<S: AsRef<str>>(texts: &[S]) -> Vec<(&str, Arc<Address>)> {
+    texts
+        .iter()
+        .map(AsRef::as_ref)
+        .filter_map(|s| analyze_cached(s).map(|a| (s, a)))
+        .collect()
+}
+
+/// Score every pair and keep the best. The alignment writes its
+/// bound pairs into one scratch buffer that is swapped into the
+/// winner's slot on improvement, so the loop allocates nothing per
+/// pair beyond the alignment's own candidate list.
+fn best_pair(qry: &[(&str, Arc<Address>)], res: &[(&str, Arc<Address>)]) -> Option<Best> {
+    let mut best: Option<Best> = None;
+    let mut scratch: Vec<Bound> = Vec::new();
+    for (qi, (_, q)) in qry.iter().enumerate() {
+        for (ri, (_, r)) in res.iter().enumerate() {
+            let score = align_tokens(&q.tokens, &r.tokens, &mut scratch);
+            let improved = best.as_ref().is_none_or(|b| score > b.score);
+            if !improved {
+                continue;
+            }
+            match best.as_mut() {
+                Some(b) => {
+                    b.score = score;
+                    b.qi = qi;
+                    b.ri = ri;
+                    mem::swap(&mut b.bound, &mut scratch);
                 }
+                None => {
+                    best = Some(Best {
+                        score,
+                        qi,
+                        ri,
+                        bound: mem::take(&mut scratch),
+                    });
+                }
+            }
+            if score >= 1.0 {
+                return best;
             }
         }
     }
     best
+}
+
+/// Render the alignment as one line: aligned tokens in query order
+/// (`tok` when both comparable forms agree, `q~r` otherwise), then
+/// `-tok` for unmatched query tokens and `+tok` for unmatched result
+/// tokens.
+fn describe(qry: &[AddressToken], res: &[AddressToken], bound: &[Bound]) -> String {
+    let mut ordered: Vec<&Bound> = bound.iter().collect();
+    ordered.sort_by_key(|b| b.0);
+    let mut qry_used = vec![false; qry.len()];
+    let mut res_used = vec![false; res.len()];
+    let mut parts: Vec<String> = Vec::with_capacity(qry.len() + res.len());
+    for &&(qi, ri, _) in &ordered {
+        qry_used[qi] = true;
+        res_used[ri] = true;
+        let q = qry[qi].comparable();
+        let r = res[ri].comparable();
+        if q == r {
+            parts.push(q.to_string());
+        } else {
+            parts.push(format!("{q}~{r}"));
+        }
+    }
+    for (tok, used) in qry.iter().zip(&qry_used) {
+        if !used {
+            parts.push(format!("-{}", tok.comparable()));
+        }
+    }
+    for (tok, used) in res.iter().zip(&res_used) {
+        if !used {
+            parts.push(format!("+{}", tok.comparable()));
+        }
+    }
+    parts.join(" ")
 }
 
 /// Similarity of two tokens in [0.0, 1.0]. Two Number tokens match
@@ -112,8 +242,10 @@ fn token_similarity(a: &str, b: &str) -> f64 {
 /// Greedy best-pair alignment: the highest-similarity pair binds
 /// first, each token aligns at most once. The score is the
 /// similarity-discounted matched weight over the total weight of
-/// both sides, with token weight proportional to length.
-fn align_tokens(qry: &[AddressToken], res: &[AddressToken]) -> f64 {
+/// both sides, with token weight proportional to length. The
+/// accepted pairs are written to `bound` (cleared first).
+fn align_tokens(qry: &[AddressToken], res: &[AddressToken], bound: &mut Vec<Bound>) -> f64 {
+    bound.clear();
     let total: usize = qry
         .iter()
         .chain(res.iter())
@@ -143,6 +275,7 @@ fn align_tokens(qry: &[AddressToken], res: &[AddressToken]) -> f64 {
         }
         qry_used[qi] = true;
         res_used[ri] = true;
+        bound.push((qi, ri, sim));
         let weight = qry[qi].comparable().chars().count() + res[ri].comparable().chars().count();
         matched += sim * weight as f64;
     }
@@ -171,6 +304,10 @@ fn unmatched_pairs(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn detail(query: &str, result: &str) -> String {
+        match_many(&[query], &[result]).unwrap().detail
+    }
 
     #[test]
     fn identical_scores_one() {
@@ -301,5 +438,67 @@ mod tests {
         assert_eq!(compare("", "Bahnhofstr. 12"), 0.0);
         assert_eq!(compare("...", "Bahnhofstr. 12"), 0.0);
         assert_eq!(compare("", ""), 0.0);
+    }
+
+    #[test]
+    fn match_many_returns_winning_raw_pair() {
+        let queries = ["Calle Mayor 3, Madrid", "Bahnhofstr. 12, Berlin"];
+        let results = ["10115 Berlin, Bahnhofstrasse 12", "Bahnhofstr. 12, Berlin"];
+        let m = match_many(&queries, &results).unwrap();
+        assert_eq!(m.score, 1.0);
+        assert_eq!(m.query, "Bahnhofstr. 12, Berlin");
+        assert_eq!(m.result, "Bahnhofstr. 12, Berlin");
+        assert_eq!(m.detail, "bahnhofstr 12 berlin");
+        assert_eq!(m.score, compare_many(&queries, &results));
+    }
+
+    #[test]
+    fn match_many_none_without_analyzable_side() {
+        assert!(match_many(&["Bahnhofstr. 12"], &[]).is_none());
+        assert!(match_many::<&str>(&[], &[]).is_none());
+        assert!(match_many(&["..."], &["Bahnhofstr. 12"]).is_none());
+    }
+
+    #[test]
+    fn match_many_zero_score_still_reports_pair() {
+        let m = match_many(&["Bahnhofstr. 12, Berlin"], &["Calle Mayor 3, Madrid"]).unwrap();
+        assert!(m.score < 0.2, "got {}", m.score);
+        assert!(m.detail.starts_with('-'), "got {}", m.detail);
+        assert!(m.detail.contains("+calle"), "got {}", m.detail);
+    }
+
+    #[test]
+    fn detail_marks_alias_and_residue() {
+        assert_eq!(
+            detail("Sunset Boulevard 12, Los Angeles", "Sunset Blvd 12, LA"),
+            "sunset boulevard~blvd 12 -los -angeles +la"
+        );
+    }
+
+    #[test]
+    fn detail_marks_fuzzy_pair() {
+        assert_eq!(
+            detail("Bahnhofstrasse 12, Berlin", "Bahnhofstrase 12, Berlin"),
+            "bahnhofstrasse~bahnhofstrase 12 berlin"
+        );
+    }
+
+    #[test]
+    fn detail_shows_number_conflict_as_residue() {
+        assert_eq!(
+            detail("Hauptstr. 5, 10115 Berlin", "Hauptstr. 7, 10115 Berlin"),
+            "hauptstr 10115 berlin -5 +7"
+        );
+    }
+
+    #[test]
+    fn detail_orders_aligned_by_query() {
+        assert_eq!(
+            detail(
+                "Bahnhofstr. 12, 10115 Berlin",
+                "10115 Berlin, Bahnhofstr. 12"
+            ),
+            "bahnhofstr 12 10115 berlin"
+        );
     }
 }

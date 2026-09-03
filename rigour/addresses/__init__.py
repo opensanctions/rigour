@@ -9,14 +9,19 @@ Score whether two address strings (or two sets of them) denote the
 same place:
 
 ```python
-from rigour.addresses import compare_address, compare_address_many
+from rigour.addresses import compare_address, match_addresses
 
 score = compare_address("Bahnhofstr. 10, Augsburg", "Bahnhofstrasse 10, 86150 Augsburg")
-best = compare_address_many(
-    ["Bahnhofstr. 10, Augsburg"],
-    ["Bahnhofstrasse 10, 86150 Augsburg", "P.O. Box 71, Augsburg"],
+match = match_addresses(
+    ["Bahnhofstrasse 10, Augsburg"],
+    ["Bahnhofstrase 10, 86150 Augsburg", "P.O. Box 71, Augsburg"],
 )
+# match.result == "Bahnhofstrase 10, 86150 Augsburg"
+# match.detail == "bahnhofstrasse~bahnhofstrase 10 augsburg +86150"
 ```
+
+[compare_address_many][rigour.addresses.compare.compare_address_many]
+is the same pairing returning only the score.
 
 The comparison runs in native code over analyzed tokens — see
 [compare_address][rigour.addresses.compare.compare_address] for the
@@ -63,9 +68,11 @@ format addresses according to customs in the country that is been encoded.
 
 from rigour.addresses.cleaning import clean_address
 from rigour.addresses.compare import (
+    AddressMatch,
     address_fingerprint,
     compare_address,
     compare_address_many,
+    match_addresses,
 )
 from rigour.addresses.format import format_address, format_address_line
 from rigour.addresses.normalize import (
@@ -75,12 +82,14 @@ from rigour.addresses.normalize import (
 )
 
 __all__ = [
+    "AddressMatch",
     "address_fingerprint",
     "clean_address",
     "compare_address",
     "compare_address_many",
     "format_address",
     "format_address_line",
+    "match_addresses",
     "normalize_address",
     "remove_address_keywords",
     "shorten_address_keywords",
