@@ -4,7 +4,7 @@ from rigour.territories import (
     get_territory,
     get_territory_by_qid,
 )
-from rigour.territories.util import clean_codes
+from rigour.territories.util import clean_codes, normalize_territory_name
 
 
 def test_world_real():
@@ -126,3 +126,11 @@ def test_clean_code():
     assert clean_codes(["GB", "US", "FR"]) == ["gb", "us", "fr"]
     assert clean_codes(["GB_NIR"]) == ["gb-nir"]
     assert clean_codes([""]) == []
+
+
+def test_normalize_territory_name():
+    assert normalize_territory_name("São Tomé and Príncipe") == "sao tome and principe"
+    assert normalize_territory_name("Åland") == "aland"
+    assert normalize_territory_name("Россия") == "rossia"
+    # Vowel signs in scripts we do not latinize must survive intact.
+    assert normalize_territory_name("हिन्दुस्तान") == "हिन्दुस्तान"
