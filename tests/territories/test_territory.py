@@ -31,6 +31,19 @@ def test_world_real():
     assert get_territory("gb-nirvana") is None
     assert get_territory_by_qid("Q232323312") is None
 
+
+def test_uae_emirates_resolve_emirate_and_city_qids():
+    for code, emirate, city in [
+        ("ae-sh", "Q188810", "Q289693"),
+        ("ae-fu", "Q4091", "Q4045"),
+        ("ae-aj", "Q159477", "Q530171"),
+    ]:
+        terr = get_territory(code)
+        assert terr is not None
+        assert terr.qid == emirate
+        assert get_territory_by_qid(emirate) == terr
+        assert get_territory_by_qid(city) == terr
+
     cq = get_territory("cq")
     srk = get_territory("gg-srk")
     assert cq is not None
