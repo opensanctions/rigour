@@ -20,12 +20,12 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Russia
 names_strong:
   - Rossiya
-  - РФ
-  - Российская Федерация
-  - Российская Федераци
-  - Российская Федерациѐ
+  - РФ                   # RF
+  - Российская Федерация # Rossijskaâ Federaciâ
+  - Российская Федераци  # Rossijskaâ Federaci
+  - Российская Федерациѐ # Rossijskaâ Federaciè
   - russian
-  - россия
+  - россия               # rossiâ
 names_weak:
   - Русија # Rusiǰa
   - ᏲᏂᎢ    # RF

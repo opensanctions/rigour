@@ -114,3 +114,10 @@ def test_match_addresses_none_and_zero() -> None:
     assert match is not None
     assert match.score < 0.2
     assert match.detail.startswith("-")
+
+
+def test_address_fingerprint_keeps_places() -> None:
+    # Cities listed under a territory's `places` are country-field
+    # evidence only; in an address they stay distinct from the country.
+    assert address_fingerprint("Teheran, Iran") == "teheran ir"
+    assert address_fingerprint("London, United Kingdom") == "london gb"

@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Вінницька область
-  - Винницкая область
+  - Вінницька область # Vínnicʹka oblastʹ
+  - Винницкая область # Vinnickaâ oblastʹ
 names_weak:
   - Vinnytsia # Vínnicʹka oblastʹ
   - Vinnitsa # Vinnickaâ oblastʹ

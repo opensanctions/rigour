@@ -21,7 +21,7 @@ names_strong:
   - إيران
   - Al-Jumhūrīyah al-‘Islāmīyah al-Irániyah
   - Al-Irān
-  - исламистская республика иран
+  - исламистская республика иран  # islamistskaâ respublika iran
 names_weak:
   - Iran nutome
   - ഇറാൻ
@@ -31,7 +31,6 @@ names_weak:
   - Irani
   - ئێران        # islamistskaâ respublika iran
   - Ʉajéemi
-  - Tehran
   - Eron
   - อิหร่าน
   - Èlân
@@ -58,7 +57,6 @@ names_weak:
   - ਈਰਾਨ
   - ઈરાન
   - אירן
-  - Teheran
   - ირანი (ისლამურირესპუბლიკა) # irani (islamurirespʼublikʼa)
   - Iraan
   - Irán
@@ -114,5 +112,8 @@ names_weak:
   - iráŋ
   - ირანი (ისლამური რესპუბლიკა) # irani (islamuri respʼublikʼa)
   - ايران
+places:
+  - Tehran
+  - Teheran
 langs:
   - fas

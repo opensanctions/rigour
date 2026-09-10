@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Одеська область
-  - Одесская область
+  - Одеська область  # Odesʹka oblastʹ
+  - Одесская область # Odesskaâ oblastʹ
 names_weak:
   - Odesa  # Odesʹka oblastʹ
   - Odessa # Odesskaâ oblastʹ

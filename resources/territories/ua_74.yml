@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Чернігівська область
-  - Черниговская область
+  - Чернігівська область # Černígívsʹka oblastʹ
+  - Черниговская область # Černigovskaâ oblastʹ
 names_weak:
   - Chernihiv # Černígívsʹka oblastʹ
   - Chernigov # Černigovskaâ oblastʹ

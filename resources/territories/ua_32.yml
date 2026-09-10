@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Київська область
-  - Киевская область
+  - Київська область # Kií̈vsʹka oblastʹ
+  - Киевская область # Kievskaâ oblastʹ
 names_weak:
   - Kiev Oblast # Kií̈vsʹka oblastʹ
   - Kyiv region # Kievskaâ oblastʹ

@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Харківська область
-  - Харьковская область
+  - Харківська область  # Harkívsʹka oblastʹ
+  - Харьковская область # Harʹkovskaâ oblastʹ
 names_weak:
   - Kharkiv # Harkívsʹka oblastʹ
   - Kharkov # Harʹkovskaâ oblastʹ

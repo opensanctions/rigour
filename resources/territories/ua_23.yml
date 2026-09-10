@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Запорізька область
-  - Запорожская область
+  - Запорізька область  # Zaporízʹka oblastʹ
+  - Запорожская область # Zaporožskaâ oblastʹ
 names_weak:
   - Zaporizhzhia # Zaporízʹka oblastʹ
   - Zaporozhye # Zaporožskaâ oblastʹ

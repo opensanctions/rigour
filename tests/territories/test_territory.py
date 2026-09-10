@@ -147,3 +147,14 @@ def test_normalize_territory_name():
     assert normalize_territory_name("Россия") == "rossia"
     # Vowel signs in scripts we do not latinize must survive intact.
     assert normalize_territory_name("हिन्दुस्तान") == "हिन्दुस्तान"
+
+
+def test_places():
+    ir = get_territory("ir")
+    assert ir is not None
+    assert "Tehran" in ir.places
+    assert "Tehran" not in ir.to_dict()
+
+    gb = get_territory("gb")
+    assert gb is not None
+    assert gb.places == []

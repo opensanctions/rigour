@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Дніпропетровська область
-  - Днепропетровская область
+  - Дніпропетровська область # Dnípropetrovsʹka oblastʹ
+  - Днепропетровская область # Dnepropetrovskaâ oblastʹ
 names_weak:
   - Dnipropetrovsk # Dnípropetrovsʹka oblastʹ
   - Dnepropetrovsk # Dnepropetrovskaâ oblastʹ

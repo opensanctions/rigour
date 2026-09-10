@@ -7,10 +7,10 @@ name: Altai Republic
 parent: ru
 qid: Q5971
 names_strong:
-  - Республика Алтай # Respublika Altaj
-  - Республика Алтай (Россия) # Respublika Altaj (Rossija)
-  - Алтайская Республика # Altaiskaja Respublika
-  - Алтайская Республика (Россия) # Altaiskaja Respublika (Rossija)
+  - Республика Алтай          # Respublika Altaj
+  - Республика Алтай (Россия) # Respublika Altaj (Rossiâ)
+  - Алтайская Республика      # Altajskaâ Respublika
+  - Алтайская Республика (Россия) # Altajskaâ Respublika (Rossiâ)
 names_weak: []
 langs:
   - alt

@@ -24,11 +24,11 @@ summary: >-
 names_strong:
   - Donetsk
   - Donetsk People's Republic
-  - Донецк # Doneck
+  - Донецк   # Doneck
   - Донецька # Donecʹka
   - Донецкая Народная Республика # Doneckaâ Narodnaâ Respublika
 names_weak:
   - DPR
-  - ДНР # DNR
+  - ДНР  # DNR
 langs:
   - rus

@@ -112,3 +112,15 @@ def test_lookup_accent_folding():
 
     terr = lookup_territory("Sao Tome and Principe")
     assert terr and terr.code == "st"
+
+
+def test_places_lookup():
+    terr = lookup_territory("Teheran")
+    assert terr and terr.code == "ir"
+
+    terr = lookup_territory("London, United Kingdom")
+    assert terr and terr.code == "gb-eng"
+
+    # A place never shadows a territory's own name.
+    terr = lookup_territory("Iran")
+    assert terr and terr.code == "ir"

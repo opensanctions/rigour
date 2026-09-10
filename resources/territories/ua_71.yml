@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Черкаська область
-  - Черкасская область
+  - Черкаська область  # Čerkasʹka oblastʹ
+  - Черкасская область # Čerkasskaâ oblastʹ
 names_weak:
   - Cherkasy  # Čerkasʹka oblastʹ
   - Cherkassy # Čerkasskaâ oblastʹ

@@ -24,10 +24,11 @@ names_weak:
   - English
   - Englishman
   - Englishwoman
+  - Англія # Anglíâ
+  - Англия # Angliâ
+places:
   - London
   - London, United Kingdom
   - Greater London
-  - Англія # Anglíâ
-  - Англия # Angliâ
 langs:
   - eng

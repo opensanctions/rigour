@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Херсонська область
-  - Херсонская область
+  - Херсонська область # Hersonsʹka oblastʹ
+  - Херсонская область # Hersonskaâ oblastʹ
 names_weak:
   - Kherson        # Hersonsʹka oblastʹ
   - Kherson region # Hersonskaâ oblastʹ

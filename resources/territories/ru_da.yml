@@ -8,10 +8,10 @@ parent: ru
 qid: Q5118
 names_strong:
   - DAGHESTAN, RUSSIA
-  - Дагестан # Dagestan
-  - Дагестанская Республика # Dagestanskaya Respublika
+  - Дагестан                # Dagestan
+  - Дагестанская Республика # Dagestanskaâ Respublika
 names_weak:
-  - Дагестан (Россия) # Dagestan (Rossiâ)
+  - Дагестан (Россия)  # Dagestan (Rossiâ)
 langs:
   - ava
   - rus

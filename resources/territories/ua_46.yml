@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Львівська область
-  - Львовская область
+  - Львівська область # Lʹvívsʹka oblastʹ
+  - Львовская область # Lʹvovskaâ oblastʹ
 names_weak:
   - Lviv # Lʹvívsʹka oblastʹ
   - Lvov # Lʹvovskaâ oblastʹ

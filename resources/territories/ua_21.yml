@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Закарпатська область
-  - Закарпатская область
+  - Закарпатська область # Zakarpatsʹka oblastʹ
+  - Закарпатская область # Zakarpatskaâ oblastʹ
 names_weak:
   - Zakarpattia    # Zakarpatsʹka oblastʹ
   - Transcarpathia # Zakarpatskaâ oblastʹ

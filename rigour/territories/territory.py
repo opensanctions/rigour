@@ -8,7 +8,26 @@ from rigour.data import iter_jsonl_text
 
 @total_ordering
 class Territory:
-    """A territory - country, sub-national, historic, or supranational."""
+    """A territory - country, sub-national, historic, or supranational.
+
+    Attributes:
+        code: Lower-case territory code, e.g. `ru` or `us-nd`.
+        name: Canonical short display name.
+        full_name: Disambiguated long name, e.g. "Moscow (Russia)".
+        alpha3: ISO 3166-1 alpha-3 code where one exists.
+        is_country: Whether the territory is an independent country.
+        is_ftm: Whether the territory is a FollowTheMoney country code.
+        is_jurisdiction: Whether the territory is a legal jurisdiction.
+        is_historical: Whether the territory no longer exists.
+        qid: Wikidata QID of the territory.
+        other_qids: Wikidata QIDs of similar or predecessor items.
+        other_codes: Alternate codes that resolve to this territory.
+        places: Names of cities and other places inside the territory that
+            identify it in a free-text country field (e.g. "Tehran" for
+            `ir`). Used by [lookup_territory][rigour.territories.lookup.lookup_territory]
+            as the lowest-precedence name tier; not used for address
+            normalisation, where a city must stay distinct from its country.
+    """
 
     def __init__(
         self, index: dict[str, "Territory"], code: str, data: dict[str, Any]
@@ -28,6 +47,7 @@ class Territory:
         self.qid: str = str(data.get("qid"))
         self.other_qids: list[str] = data.get("other_qids", [])
         self.other_codes: list[str] = data.get("other_codes", [])
+        self.places: list[str] = data.get("places", [])
         self._successors: list[str] = data.get("successors", [])
         self._parent: str | None = data.get("parent")
         self._claims: list[str] = data.get("claims", [])
