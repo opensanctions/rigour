@@ -21,7 +21,8 @@ TOKEN_SEP_CATEGORIES: Categories = {
     "Cn": None,
     "Lm": None,
     "Mn": None,
-    "Mc": WS,
+    # Mc (spacing marks, e.g. Devanagari vowel signs) is deliberately
+    # absent: it is part of the syllable and must not split the token.
     "Me": None,
     "No": None,
     "Zs": WS,

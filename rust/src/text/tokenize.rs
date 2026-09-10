@@ -125,17 +125,16 @@ const ADDRESS_KEEP_CHARS: &[char] = &[
     '\u{2116}', // NUMERO SIGN № (So)
 ];
 
-// Address category mapping. Differs from the name table in two
-// places: Mc (spacing marks) separates instead of being kept —
-// matching `TOKEN_SEP_CATEGORIES` in the Python address normalizer —
-// and ADDRESS_KEEP_CHARS overrides two symbol codepoints in the
-// caller before this lookup.
+// Address category mapping. Differs from the name table only in
+// ADDRESS_KEEP_CHARS, which overrides two symbol codepoints in the
+// caller before this lookup. Mc (spacing marks) is kept here as in the
+// name table: Brahmic vowel signs are part of their syllable, and
+// splitting on them fragments Indic addresses into consonant runs.
 fn category_action_address(cat: GeneralCategory) -> CharAction {
     use GeneralCategory::*;
     match cat {
         // Whitespace / token separator
-        Control => CharAction::Whitespace,     // Cc
-        SpacingMark => CharAction::Whitespace, // Mc
+        Control => CharAction::Whitespace, // Cc
         SpaceSeparator | LineSeparator | ParagraphSeparator => CharAction::Whitespace, // Zs/Zl/Zp
         ConnectorPunctuation | DashPunctuation | OpenPunctuation | ClosePunctuation
         | InitialPunctuation | FinalPunctuation | OtherPunctuation => CharAction::Whitespace, // Pc/Pd/Ps/Pe/Pi/Pf/Po
@@ -159,9 +158,8 @@ fn category_action_address(cat: GeneralCategory) -> CharAction {
 /// separation. `token_min_length` counts codepoints, not bytes.
 ///
 /// Same single-pass shape as [`tokenize_name`] over a separate
-/// category table: spacing marks (Mc) separate tokens, and the
-/// address signifier symbols `&` and `№` are kept as token content
-/// instead of splitting on them. Decimal-digit runs are emitted as
+/// category table: the address signifier symbols `&` and `№` are
+/// kept as token content instead of splitting on them. Decimal-digit runs are emitted as
 /// their own tokens ("д39" → "д 39", "30th" → "30 th") so glued
 /// house numbers become comparable — the ordinal needles in the
 /// address tagger re-capture split pairs like "30 th".
@@ -362,11 +360,12 @@ mod tests {
     }
 
     #[test]
-    fn address_mc_separates() {
+    fn address_mc_kept() {
         // U+0940 DEVANAGARI VOWEL SIGN II is Mc: token content for
-        // names, a separator for addresses.
+        // both names and addresses.
         assert_eq!(tok("की"), vec!["की"]);
-        assert_eq!(tok_addr("की"), vec!["क"]);
+        assert_eq!(tok_addr("की"), vec!["की"]);
+        assert_eq!(tok_addr("हिन्दुस्तान"), vec!["हिनदसतान"]);
     }
 
     #[test]

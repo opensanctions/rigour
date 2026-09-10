@@ -175,3 +175,9 @@ def test_remove_address_keywords_does_not_collapse_whitespace():
     # Three consecutive matched forms → multiple whitespace runs.
     # Non-collapsed whitespace will produce >1 consecutive space.
     assert "  " in removed
+
+
+def test_normalize_address_keeps_spacing_marks():
+    # Devanagari vowel signs (Mc) stay attached; the virama (Mn) is dropped.
+    assert normalize_address("हिन्दुस्तान") == "हिनदसतान"
+    assert normalize_address("नई दिल्ली, भारत") == "नई दिलली भारत"

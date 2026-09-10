@@ -234,3 +234,8 @@ _STOPWORD_KEY_CASES = [
 @pytest.mark.parametrize("inp,expected", _STOPWORD_KEY_CASES)
 def test_stopword_key_pipeline(inp: str, expected: str | None) -> None:
     assert normalize(inp, _STOPWORD_KEY_FLAGS, _STOPWORD_KEY_CLEANUP) == expected
+
+
+def test_cleanup_keeps_spacing_marks() -> None:
+    assert normalize("हिन्दी", Normalize(0), Cleanup.Strong) == "हिनदी"
+    assert normalize("हिन्दी", Normalize(0), Cleanup.Slug) == "हिन्दी"
