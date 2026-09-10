@@ -1,6 +1,7 @@
 ordinals:
   # Ordinal numbers
   # Languages covered at least in part: de, en, es, fr, ga, it, nl, pt, ru, sv
+  # Digit-suffix forms (1st, 1er, 1ère, 2ème, 1ste, 2de, 1:a, 2:e, 1-й, 1-е, No1, №1, #1) are systematic across 1–100.
   # Also covers Roman Numerals e.g. VIIIth (for 8th).
   # Covers certain variants e.g. IIIIth as well as IVth for 4th.
   # Ordinals of the form 1a, 2a etc have been left out as these could be flat/apartment numbers etc.
@@ -42,9 +43,11 @@ ordinals:
     # - "un" # es (number) [can be other things]
     - "один" # ru (number)
     - "1st"
+    - "1ste" # nl
+    - "1ère" # fr
     - "1-й"
     - "1-я"
-    - "1-e"
+    - "1-е"
     - "1:a"
     - "1."
     - "1.ª"
@@ -88,9 +91,12 @@ ordinals:
     # - "dos" # es (number)
     - "два" # ru (number)
     - "2nd"
+    - "2de" # nl
+    - "2ème" # fr
+    - "2eme" # fr
     - "2-й"
     - "2-я"
-    - "2-e"
+    - "2-е"
     - "2:a"
     - "2."
     - "2da" # es (feminine, informal)
@@ -135,9 +141,12 @@ ordinals:
     # - "tres" # es (number) [can be other things]
     - "три" # ru (number)
     - "3rd"
+    - "3de" # nl
+    - "3ème" # fr
+    - "3eme" # fr
     - "3-й"
     - "3-я"
-    - "3-e"
+    - "3-е"
     - "3:e"
     - "3."
     - "3er" # es (masculine, more formal)
@@ -180,9 +189,12 @@ ordinals:
     - "cuarta" # es (feminine)
     - "четыре" # ru (number)
     - "4th"
+    - "4de" # nl
+    - "4ème" # fr
+    - "4eme" # fr
     - "4-й"
     - "4-я"
-    - "4-e"
+    - "4-е"
     - "4:e"
     - "4."
     - "4to" # es (masculine, informal)
@@ -226,9 +238,12 @@ ordinals:
     - "cinco" # es (number)
     - "пять" # ru (number)
     - "5th"
+    - "5de" # nl
+    - "5ème" # fr
+    - "5eme" # fr
     - "5-й"
     - "5-я"
-    - "5-e"
+    - "5-е"
     - "5:e"
     - "5."
     - "5to" # es (masculine, informal)
@@ -270,9 +285,12 @@ ordinals:
     - "seis" # es (number)
     - "шесть" # ru (number)
     - "6th"
+    - "6de" # nl
+    - "6ème" # fr
+    - "6eme" # fr
     - "6-й"
     - "6-я"
-    - "6-e"
+    - "6-е"
     - "6:e"
     - "6."
     - "6to" # es (masculine, informal)
@@ -314,9 +332,12 @@ ordinals:
     - "siete" # es (number)
     - "семь" # ru (number)
     - "7th"
+    - "7de" # nl
+    - "7ème" # fr
+    - "7eme" # fr
     - "7-й"
     - "7-я"
-    - "7-e"
+    - "7-е"
     - "7:e"
     - "7."
     - "7mo" # es (masculine, informal)
@@ -358,9 +379,12 @@ ordinals:
     - "ocho" # es (number)
     - "восемь" # ru (number)
     - "8th"
+    - "8ste" # nl
+    - "8ème" # fr
+    - "8eme" # fr
     - "8-й"
     - "8-я"
-    - "8-e"
+    - "8-е"
     - "8:e"
     - "8."
     - "8vo" # es (masculine, informal)
@@ -402,9 +426,12 @@ ordinals:
     - "nueve" # es (number)
     - "девять" # ru (number)
     - "9th"
+    - "9de" # nl
+    - "9ème" # fr
+    - "9eme" # fr
     - "9-й"
     - "9-я"
-    - "9-e"
+    - "9-е"
     - "9:e"
     - "9."
     - "9no" # es (masculine, informal)
@@ -447,9 +474,12 @@ ordinals:
     - "diez" # es (number)
     - "десять" # ru (number)
     - "10th"
+    - "10de" # nl
+    - "10ème" # fr
+    - "10eme" # fr
     - "10-й"
     - "10-я"
-    - "10-e"
+    - "10-е"
     - "10:e"
     - "10."
     - "10mo" # es (masculine, informal)
@@ -466,6 +496,7 @@ ordinals:
     - "⒑" # Unicode symbol for number plus full stop
     - "⑽" # Unicode symbol for parenthesized number
     - "(10)"
+    - "１０" # fullwidth characters sometimes used in China and Japan
     - "#10"
     - "Number 10"
     - "No10"
@@ -491,9 +522,12 @@ ordinals:
     - "одиннадцать" # ru (number)
     # - "once" # es (number) [can be other things e.g. en word "once"]
     - "11th"
+    - "11de" # nl
+    - "11ème" # fr
+    - "11eme" # fr
     - "11-й"
     - "11-я"
-    - "11-e"
+    - "11-е"
     - "11:e"
     - "11."
     - "11mo" # es (masculine, informal)
@@ -536,9 +570,12 @@ ordinals:
     - "двенадцать" # ru (number)
     - "doce" # es (number)
     - "12th"
+    - "12de" # nl
+    - "12ème" # fr
+    - "12eme" # fr
     - "12-й"
     - "12-я"
-    - "12-e"
+    - "12-е"
     - "12:e"
     - "12."
     - "12mo" # es (masculine, informal)
@@ -581,9 +618,12 @@ ordinals:
     - "trece" # es (number)
     - "тринадцать" # ru (number)
     - "13th"
+    - "13de" # nl
+    - "13ème" # fr
+    - "13eme" # fr
     - "13-й"
     - "13-я"
-    - "13-e"
+    - "13-е"
     - "13:e"
     - "13."
     - "13er" # es (masculine, informal)
@@ -625,9 +665,12 @@ ordinals:
     - "catorce" # es (number)
     - "четырнадцать" # ru (number)
     - "14th"
+    - "14de" # nl
+    - "14ème" # fr
+    - "14eme" # fr
     - "14-й"
     - "14-я"
-    - "14-e"
+    - "14-е"
     - "14:e"
     - "14."
     - "14to" # es (masculine, informal)
@@ -669,9 +712,12 @@ ordinals:
     - "quince" # es (number)
     - "пятнадцать" # ru (number)
     - "15th"
+    - "15de" # nl
+    - "15ème" # fr
+    - "15eme" # fr
     - "15-й"
     - "15-я"
-    - "15-e"
+    - "15-е"
     - "15:e"
     - "15."
     - "15to" # es (masculine, informal)
@@ -713,9 +759,12 @@ ordinals:
     - "diez y seis" # es (number, old non-standard)
     - "шестнадцать" # ru (number)
     - "16th"
+    - "16de" # nl
+    - "16ème" # fr
+    - "16eme" # fr
     - "16-й"
     - "16-я"
-    - "16-e"
+    - "16-е"
     - "16:e"
     - "16."
     - "16to" # es (masculine, informal)
@@ -757,9 +806,12 @@ ordinals:
     - "diez y siete" # es (number, old non-standard)
     - "семнадцать" # ru (number)
     - "17th"
+    - "17de" # nl
+    - "17ème" # fr
+    - "17eme" # fr
     - "17-й"
     - "17-я"
-    - "17-e"
+    - "17-е"
     - "17:e"
     - "17."
     - "17mo" # es (masculine, informal)
@@ -801,9 +853,12 @@ ordinals:
     - "diez y ocho" # es (number, old non-standard)
     - "восемнадцать" # ru (number)
     - "18th"
+    - "18de" # nl
+    - "18ème" # fr
+    - "18eme" # fr
     - "18-й"
     - "18-я"
-    - "18-e"
+    - "18-е"
     - "18:e"
     - "18."
     - "18vo" # es (masculine, informal)
@@ -845,9 +900,12 @@ ordinals:
     - "diez y nueve" # es (number, old non-standard)
     - "девятнадцать" # ru (number)
     - "19th"
+    - "19de" # nl
+    - "19ème" # fr
+    - "19eme" # fr
     - "19-й"
     - "19-я"
-    - "19-e"
+    - "19-е"
     - "19:e"
     - "19."
     - "19no" # es (masculine, informal)
@@ -889,9 +947,12 @@ ordinals:
     - "veinte" # es (number)
     - "двадцать" # ru (number)
     - "20th"
+    - "20ste" # nl
+    - "20ème" # fr
+    - "20eme" # fr
     - "20-й"
     - "20-я"
-    - "20-e"
+    - "20-е"
     - "20:e"
     - "20."
     - "20mo" # es (masculine, informal)
@@ -943,9 +1004,12 @@ ordinals:
     - "veinte y uno" # es (number, old non-standard)
     - "двадцать один" # ru (number)
     - "21st"
+    - "21ste" # nl
+    - "21ème" # fr
+    - "21eme" # fr
     - "21-й"
     - "21-я"
-    - "21-e"
+    - "21-е"
     - "21:a"
     - "21."
     - "21ro" # es (masculine, informal)
@@ -993,9 +1057,12 @@ ordinals:
     - "veinte y dos" # es (number, old non-standard)
     - "двадцать два" # ru (number)
     - "22nd"
+    - "22ste" # nl
+    - "22ème" # fr
+    - "22eme" # fr
     - "22-й"
     - "22-я"
-    - "22-e"
+    - "22-е"
     - "22:a"
     - "22."
     - "22do" # es (masculine, informal)
@@ -1043,9 +1110,12 @@ ordinals:
     - "veinte y tres" # es (number, old non-standard)
     - "двадцать три" # ru (number)
     - "23rd"
+    - "23ste" # nl
+    - "23ème" # fr
+    - "23eme" # fr
     - "23-й"
     - "23-я"
-    - "23-e"
+    - "23-е"
     - "23:e"
     - "23."
     - "23ro" # es (masculine, informal)
@@ -1091,9 +1161,12 @@ ordinals:
     - "veinte y cuatro" # es (number, old non-standard)
     - "двадцать четыре" # ru (number)
     - "24th"
+    - "24ste" # nl
+    - "24ème" # fr
+    - "24eme" # fr
     - "24-й"
     - "24-я"
-    - "24-e"
+    - "24-е"
     - "24:e"
     - "24."
     - "24to" # es (masculine, informal)
@@ -1138,9 +1211,12 @@ ordinals:
     - "veinte y cinco" # es (number, old non-standard)
     - "двадцать пять" # ru (number)
     - "25th"
+    - "25ste" # nl
+    - "25ème" # fr
+    - "25eme" # fr
     - "25-й"
     - "25-я"
-    - "25-e"
+    - "25-е"
     - "25:e"
     - "25."
     - "25to" # es (masculine, informal)
@@ -1184,9 +1260,12 @@ ordinals:
     - "veinte y seis" # es (number, old non-standard)
     - "двадцать шесть" # ru (number)
     - "26th"
+    - "26ste" # nl
+    - "26ème" # fr
+    - "26eme" # fr
     - "26-й"
     - "26-я"
-    - "26-e"
+    - "26-е"
     - "26:e"
     - "26."
     - "26to" # es (masculine, informal)
@@ -1230,9 +1309,12 @@ ordinals:
     - "veinte y siete" # es (number, old non-standard)
     - "двадцать семь" # ru (number)
     - "27th"
+    - "27ste" # nl
+    - "27ème" # fr
+    - "27eme" # fr
     - "27-й"
     - "27-я"
-    - "27-e"
+    - "27-е"
     - "27:e"
     - "27."
     - "27mo" # es (masculine, informal)
@@ -1276,9 +1358,12 @@ ordinals:
     - "veinte y ocho" # es (number, old non-standard)
     - "двадцать восемь" # ru (number)
     - "28th"
+    - "28ste" # nl
+    - "28ème" # fr
+    - "28eme" # fr
     - "28-й"
     - "28-я"
-    - "28-e"
+    - "28-е"
     - "28:e"
     - "28."
     - "28vo" # es (masculine, informal)
@@ -1322,9 +1407,12 @@ ordinals:
     - "veinte y nueve" # es (number, old non-standard)
     - "двадцать девять" # ru (number)
     - "29th"
+    - "29ste" # nl
+    - "29ème" # fr
+    - "29eme" # fr
     - "29-й"
     - "29-я"
-    - "29-e"
+    - "29-е"
     - "29:e"
     - "29."
     - "29no" # es (masculine, informal)
@@ -1364,9 +1452,12 @@ ordinals:
     - "treinta" # es (number)
     - "тридцать" # ru (number)
     - "30th"
+    - "30ste" # nl
+    - "30ème" # fr
+    - "30eme" # fr
     - "30-й"
     - "30-я"
-    - "30-e"
+    - "30-е"
     - "30:e"
     - "30."
     - "30mo" # es (masculine, informal)
@@ -1413,9 +1504,12 @@ ordinals:
     - "treinta y un" # es (number, masculine, shortened form)
     - "тридцать один" # ru (number)
     - "31st"
+    - "31ste" # nl
+    - "31ème" # fr
+    - "31eme" # fr
     - "31-й"
     - "31-я"
-    - "31-e"
+    - "31-е"
     - "31:a"
     - "31."
     - "31ro" # es (masculine, informal)
@@ -1436,6 +1530,8 @@ ordinals:
     - "No 31"
     - "No.31"
     - "No. 31"
+    - "№31"
+    - "№ 31"
     - "三十一" # zh (number, simple)
     - "第三十一" # zh (simple)
     - "叁拾壹" # zh (number, financial)
@@ -1456,9 +1552,12 @@ ordinals:
     - "treinta y dos" # es (number)
     - "тридцать два" # ru (number)
     - "32nd"
+    - "32ste" # nl
+    - "32ème" # fr
+    - "32eme" # fr
     - "32-й"
     - "32-я"
-    - "32-e"
+    - "32-е"
     - "32:a"
     - "32."
     - "32do" # es (masculine, informal)
@@ -1479,6 +1578,8 @@ ordinals:
     - "No 32"
     - "No.32"
     - "No. 32"
+    - "№32"
+    - "№ 32"
     - "三十二" # zh (number, simple)
     - "第三十二" # zh (simple)
     - "叁拾贰" # zh (number, financial)
@@ -1499,9 +1600,12 @@ ordinals:
     - "treinta y tres" # es (number)
     - "тридцать три" # ru (number)
     - "33rd"
+    - "33ste" # nl
+    - "33ème" # fr
+    - "33eme" # fr
     - "33-й"
     - "33-я"
-    - "33-e"
+    - "33-е"
     - "33:e"
     - "33."
     - "33ro" # es (masculine, informal)
@@ -1522,6 +1626,8 @@ ordinals:
     - "No 33"
     - "No.33"
     - "No. 33"
+    - "№33"
+    - "№ 33"
     - "三十三" # zh (number, simple)
     - "第三十三" # zh (simple)
     - "叁拾叁" # zh (number, financial)
@@ -1542,9 +1648,12 @@ ordinals:
     - "treinta y cuatro" # es (number)
     - "тридцать четыре" # ru (number)
     - "34th"
+    - "34ste" # nl
+    - "34ème" # fr
+    - "34eme" # fr
     - "34-й"
     - "34-я"
-    - "34-e"
+    - "34-е"
     - "34:e"
     - "34."
     - "34to" # es (masculine, informal)
@@ -1565,6 +1674,8 @@ ordinals:
     - "No 34"
     - "No.34"
     - "No. 34"
+    - "№34"
+    - "№ 34"
     - "三十四" # zh (number, simple)
     - "第三十四" # zh (simple)
     - "叁拾肆" # zh (number, financial)
@@ -1583,9 +1694,12 @@ ordinals:
     - "treinta y cinco" # es (number)
     - "тридцать пять" # ru (number)
     - "35th"
+    - "35ste" # nl
+    - "35ème" # fr
+    - "35eme" # fr
     - "35-й"
     - "35-я"
-    - "35-e"
+    - "35-е"
     - "35:e"
     - "35."
     - "35to" # es (masculine, informal)
@@ -1606,6 +1720,8 @@ ordinals:
     - "No 35"
     - "No.35"
     - "No. 35"
+    - "№35"
+    - "№ 35"
     - "三十五" # zh (number, simple)
     - "第三十五" # zh (simple)
     - "叁拾伍" # zh (number, financial)
@@ -1625,6 +1741,9 @@ ordinals:
     - "treinta y seis" # es (number)
     - "тридцать шесть" # ru (number)
     - "36th"
+    - "36ste" # nl
+    - "36ème" # fr
+    - "36eme" # fr
     - "36e"
     - "36ú"
     - "36º"
@@ -1639,7 +1758,7 @@ ordinals:
     - "36ta" # es (feminine, informal)
     - "36-й"
     - "36-я"
-    - "36-e"
+    - "36-е"
     - "36:e"
     - "３６" #  fullwidth characters sometimes used in China and Japan
     - "(36)"
@@ -1673,6 +1792,9 @@ ordinals:
     - "treinta y siete" # es (number)
     - "тридцать семь" # ru (number)
     - "37th"
+    - "37ste" # nl
+    - "37ème" # fr
+    - "37eme" # fr
     - "37e"
     - "37ú"
     - "37º"
@@ -1687,7 +1809,7 @@ ordinals:
     - "37ma" # es (feminine, informal)
     - "37-й"
     - "37-я"
-    - "37-e"
+    - "37-е"
     - "37:e"
     - "３７" #  fullwidth characters sometimes used in China and Japan
     - "(37)"
@@ -1721,6 +1843,9 @@ ordinals:
     - "treinta y ocho" # es (number)
     - "тридцать восемь" # ru (number)
     - "38th"
+    - "38ste" # nl
+    - "38ème" # fr
+    - "38eme" # fr
     - "38e"
     - "38ú"
     - "38º"
@@ -1735,7 +1860,7 @@ ordinals:
     - "38va" # es (feminine, informal)
     - "38-й"
     - "38-я"
-    - "38-e"
+    - "38-е"
     - "38:e"
     - "３８" #  fullwidth characters sometimes used in China and Japan
     - "(38)"
@@ -1769,6 +1894,9 @@ ordinals:
     - "treinta y nueve" # es (number)
     - "тридцать девять" # ru (number)
     - "39th"
+    - "39ste" # nl
+    - "39ème" # fr
+    - "39eme" # fr
     - "39e"
     - "39ú"
     - "39º"
@@ -1783,7 +1911,7 @@ ordinals:
     - "39na" # es (feminine, informal)
     - "39-й"
     - "39-я"
-    - "39-e"
+    - "39-е"
     - "39:e"
     - "３９" #  fullwidth characters sometimes used in China and Japan
     - "(39)"
@@ -1815,9 +1943,12 @@ ordinals:
     - "cuarenta" # es (number)
     - "сорок" # ru (number)
     - "40th"
+    - "40ste" # nl
+    - "40ème" # fr
+    - "40eme" # fr
     - "40-й"
     - "40-я"
-    - "40-e"
+    - "40-е"
     - "40:e"
     - "40."
     - "40mo" # es (masculine, informal)
@@ -1867,10 +1998,13 @@ ordinals:
     - "cuarenta y un" # es (number, masculine, shortened form)
     - "сорок один" # ru (number)
     - "41st"
+    - "41ste" # nl
+    - "41ème" # fr
+    - "41eme" # fr
     - "41-й"
     - "41-я"
-    - "41-e"
-    - "41:e"
+    - "41-е"
+    - "41:a"
     - "41."
     - "41ro" # es (masculine, informal)
     - "41ra" # es (feminine, informal)
@@ -1890,6 +2024,8 @@ ordinals:
     - "No 41"
     - "No.41"
     - "No. 41"
+    - "№41"
+    - "№ 41"
     - "四十一" # zh (number, simple)
     - "第四十一" # zh (simple)
     - "肆拾壹" # zh (number, financial)
@@ -1909,6 +2045,9 @@ ordinals:
     - "cuarenta y dos" # es (number)
     - "сорок два" # ru (number)
     - "42nd"
+    - "42ste" # nl
+    - "42ème" # fr
+    - "42eme" # fr
     - "42e"
     - "42ú"
     - "42º"
@@ -1923,8 +2062,8 @@ ordinals:
     - "42da" # es (feminine, informal)
     - "42-й"
     - "42-я"
-    - "42-e"
-    - "42:e"
+    - "42-е"
+    - "42:a"
     - "４２" #  fullwidth characters sometimes used in China and Japan
     - "(42)"
     - "#42"
@@ -1957,6 +2096,9 @@ ordinals:
     - "cuarenta y tres" # es (number)
     - "сорок три" # ru (number)
     - "43rd"
+    - "43ste" # nl
+    - "43ème" # fr
+    - "43eme" # fr
     - "43e"
     - "43ú"
     - "43º"
@@ -1971,7 +2113,7 @@ ordinals:
     - "43ra" # es (feminine, informal)
     - "43-й"
     - "43-я"
-    - "43-e"
+    - "43-е"
     - "43:e"
     - "４３" #  fullwidth characters sometimes used in China and Japan
     - "(43)"
@@ -2012,10 +2154,13 @@ ordinals:
     - "cuarenta y cuatro" # es (number)
     - "сорок четыре" # ru (number)
     - "44th"
+    - "44ste" # nl
+    - "44ème" # fr
+    - "44eme" # fr
     - "44"
     - "44-й"
     - "44-я"
-    - "44-e"
+    - "44-е"
     - "44:e"
     - "44."
     - "44to" # es (masculine, informal)
@@ -2036,6 +2181,8 @@ ordinals:
     - "No 44"
     - "No.44"
     - "No. 44"
+    - "№44"
+    - "№ 44"
     - "四十四" # zh (number, simple)
     - "第四十四" # zh (simple)
     - "肆拾肆" # zh (number, financial)
@@ -2055,6 +2202,9 @@ ordinals:
     - "cuarenta y cinco" # es (number)
     - "сорок пять" # ru (number)
     - "45th"
+    - "45ste" # nl
+    - "45ème" # fr
+    - "45eme" # fr
     - "45e"
     - "45ú"
     - "45º"
@@ -2069,7 +2219,7 @@ ordinals:
     - "45ta" # es (feminine, informal)
     - "45-й"
     - "45-я"
-    - "45-e"
+    - "45-е"
     - "45:e"
     - "４５" #  fullwidth characters sometimes used in China and Japan
     - "(45)"
@@ -2101,6 +2251,9 @@ ordinals:
     - "cuarenta y seis" # es (number)
     - "сорок шесть" # ru (number)
     - "46th"
+    - "46ste" # nl
+    - "46ème" # fr
+    - "46eme" # fr
     - "46e"
     - "46ú"
     - "46º"
@@ -2115,7 +2268,7 @@ ordinals:
     - "46ta" # es (feminine, informal)
     - "46-й"
     - "46-я"
-    - "46-e"
+    - "46-е"
     - "46:e"
     - "４６" #  fullwidth characters sometimes used in China and Japan
     - "(46)"
@@ -2149,6 +2302,9 @@ ordinals:
     - "cuarenta y siete" # es (number)
     - "сорок семь" # ru (number)
     - "47th"
+    - "47ste" # nl
+    - "47ème" # fr
+    - "47eme" # fr
     - "47e"
     - "47ú"
     - "47º"
@@ -2163,7 +2319,7 @@ ordinals:
     - "47ma" # es (feminine, informal)
     - "47-й"
     - "47-я"
-    - "47-e"
+    - "47-е"
     - "47:e"
     - "４７" #  fullwidth characters sometimes used in China and Japan
     - "(47)"
@@ -2197,6 +2353,9 @@ ordinals:
     - "cuarenta y ocho" # es (number)
     - "сорок восемь" # ru (number)
     - "48th"
+    - "48ste" # nl
+    - "48ème" # fr
+    - "48eme" # fr
     - "48e"
     - "48ú"
     - "48º"
@@ -2211,7 +2370,7 @@ ordinals:
     - "48va" # es (feminine, informal)
     - "48-й"
     - "48-я"
-    - "48-e"
+    - "48-е"
     - "48:e"
     - "４８" #  fullwidth characters sometimes used in China and Japan
     - "(48)"
@@ -2245,6 +2404,9 @@ ordinals:
     - "cuarenta y nueve" # es (number)
     - "сорок девять" # ru (number)
     - "49th"
+    - "49ste" # nl
+    - "49ème" # fr
+    - "49eme" # fr
     - "49e"
     - "49ú"
     - "49º"
@@ -2259,7 +2421,7 @@ ordinals:
     - "49na" # es (feminine, informal)
     - "49-й"
     - "49-я"
-    - "49-e"
+    - "49-е"
     - "49:e"
     - "４９" #  fullwidth characters sometimes used in China and Japan
     - "(49)"
@@ -2291,9 +2453,12 @@ ordinals:
     - "cincuenta" # es (number)
     - "пятьдесят" # ru (number)
     - "50th"
+    - "50ste" # nl
+    - "50ème" # fr
+    - "50eme" # fr
     - "50-й"
     - "50-я"
-    - "50-e"
+    - "50-е"
     - "50:e"
     - "50."
     - "50mo" # es (masculine, informal)
@@ -2337,6 +2502,9 @@ ordinals:
     - "cincuenta y un" # es (number, masculine, shortened form)
     - "пятьдесят один" # ru (number)
     - "51st"
+    - "51ste" # nl
+    - "51ème" # fr
+    - "51eme" # fr
     - "51e"
     - "51ú"
     - "51º"
@@ -2351,7 +2519,7 @@ ordinals:
     - "51ra" # es (feminine, informal)
     - "51-й"
     - "51-я"
-    - "51-e"
+    - "51-е"
     - "51:a"
     - "５１" #  fullwidth characters sometimes used in China and Japan
     - "(51)"
@@ -2383,6 +2551,9 @@ ordinals:
     - "cincuenta y dos" # es (number)
     - "пятьдесят два" # ru (number)
     - "52nd"
+    - "52ste" # nl
+    - "52ème" # fr
+    - "52eme" # fr
     - "52e"
     - "52ú"
     - "52º"
@@ -2397,8 +2568,8 @@ ordinals:
     - "52da" # es (feminine, informal)
     - "52-й"
     - "52-я"
-    - "52-e"
-    - "52:e"
+    - "52-е"
+    - "52:a"
     - "５２" #  fullwidth characters sometimes used in China and Japan
     - "(52)"
     - "#52"
@@ -2429,6 +2600,9 @@ ordinals:
     - "cincuenta y tres" # es (number)
     - "пятьдесят три" # ru (number)
     - "53rd"
+    - "53ste" # nl
+    - "53ème" # fr
+    - "53eme" # fr
     - "53e"
     - "53ú"
     - "53º"
@@ -2443,7 +2617,7 @@ ordinals:
     - "53ra" # es (feminine, informal)
     - "53-й"
     - "53-я"
-    - "53-e"
+    - "53-е"
     - "53:e"
     - "５３" #  fullwidth characters sometimes used in China and Japan
     - "(53)"
@@ -2477,6 +2651,9 @@ ordinals:
     - "cincuenta y cuatro" # es (number)
     - "пятьдесят четыре" # ru (number)
     - "54th"
+    - "54ste" # nl
+    - "54ème" # fr
+    - "54eme" # fr
     - "54e"
     - "54ú"
     - "54º"
@@ -2491,7 +2668,7 @@ ordinals:
     - "54ta" # es (feminine, informal)
     - "54-й"
     - "54-я"
-    - "54-e"
+    - "54-е"
     - "54:e"
     - "５４" #  fullwidth characters sometimes used in China and Japan
     - "(54)"
@@ -2523,6 +2700,9 @@ ordinals:
     - "cincuenta y cinco" # es (number)
     - "пятьдесят пять" # ru (number)
     - "55th"
+    - "55ste" # nl
+    - "55ème" # fr
+    - "55eme" # fr
     - "55e"
     - "55ú"
     - "55º"
@@ -2537,7 +2717,7 @@ ordinals:
     - "55ta" # es (feminine, informal)
     - "55-й"
     - "55-я"
-    - "55-e"
+    - "55-е"
     - "55:e"
     - "５５" #  fullwidth characters sometimes used in China and Japan
     - "(55)"
@@ -2569,6 +2749,9 @@ ordinals:
     - "cincuenta y seis" # es (number)
     - "пятьдесят шесть" # ru (number)
     - "56th"
+    - "56ste" # nl
+    - "56ème" # fr
+    - "56eme" # fr
     - "56e"
     - "56ú"
     - "56º"
@@ -2583,7 +2766,7 @@ ordinals:
     - "56ta" # es (feminine, informal)
     - "56-й"
     - "56-я"
-    - "56-e"
+    - "56-е"
     - "56:e"
     - "５６" #  fullwidth characters sometimes used in China and Japan
     - "(56)"
@@ -2615,6 +2798,9 @@ ordinals:
     - "cincuenta y siete" # es (number)
     - "пятьдесят семь" # ru (number)
     - "57th"
+    - "57ste" # nl
+    - "57ème" # fr
+    - "57eme" # fr
     - "57e"
     - "57ú"
     - "57º"
@@ -2629,7 +2815,7 @@ ordinals:
     - "57ma" # es (feminine, informal)
     - "57-й"
     - "57-я"
-    - "57-e"
+    - "57-е"
     - "57:e"
     - "５７" #  fullwidth characters sometimes used in China and Japan
     - "(57)"
@@ -2663,6 +2849,9 @@ ordinals:
     - "cincuenta y ocho" # es (number)
     - "пятьдесят восемь" # ru (number)
     - "58th"
+    - "58ste" # nl
+    - "58ème" # fr
+    - "58eme" # fr
     - "58e"
     - "58ú"
     - "58º"
@@ -2677,7 +2866,7 @@ ordinals:
     - "58va" # es (feminine, informal)
     - "58-й"
     - "58-я"
-    - "58-e"
+    - "58-е"
     - "58:e"
     - "５８" #  fullwidth characters sometimes used in China and Japan
     - "(58)"
@@ -2711,6 +2900,9 @@ ordinals:
     - "cincuenta y nueve" # es (number)
     - "пятьдесят девять" # ru (number)
     - "59th"
+    - "59ste" # nl
+    - "59ème" # fr
+    - "59eme" # fr
     - "59e"
     - "59ú"
     - "59º"
@@ -2725,7 +2917,7 @@ ordinals:
     - "59na" # es (feminine, informal)
     - "59-й"
     - "59-я"
-    - "59-e"
+    - "59-е"
     - "59:e"
     - "５９" #  fullwidth characters sometimes used in China and Japan
     - "(59)"
@@ -2751,6 +2943,9 @@ ordinals:
     - "sesenta" # es (number)
     - "шестьдесят" # ru (number)
     - "60th"
+    - "60ste" # nl
+    - "60ème" # fr
+    - "60eme" # fr
     - "60e"
     - "60ú"
     - "60º"
@@ -2765,7 +2960,7 @@ ordinals:
     - "60ma" # es (feminine, informal)
     - "60-й"
     - "60-я"
-    - "60-e"
+    - "60-е"
     - "60:e"
     - "６０" #  fullwidth characters sometimes used in China and Japan
     - "(60)"
@@ -2799,6 +2994,9 @@ ordinals:
     - "sesenta y un" # es (number, masculine, shortened form)
     - "шестьдесят один" # ru (number)
     - "61st"
+    - "61ste" # nl
+    - "61ème" # fr
+    - "61eme" # fr
     - "61e"
     - "61ú"
     - "61º"
@@ -2813,7 +3011,7 @@ ordinals:
     - "61ra" # es (feminine, informal)
     - "61-й"
     - "61-я"
-    - "61-e"
+    - "61-е"
     - "61:a"
     - "６１" #  fullwidth characters sometimes used in China and Japan
     - "(61)"
@@ -2845,6 +3043,9 @@ ordinals:
     - "sesenta y dos" # es (number)
     - "шестьдесят два" # ru (number)
     - "62nd"
+    - "62ste" # nl
+    - "62ème" # fr
+    - "62eme" # fr
     - "62e"
     - "62ú"
     - "62º"
@@ -2859,8 +3060,8 @@ ordinals:
     - "62da" # es (feminine, informal)
     - "62-й"
     - "62-я"
-    - "62-e"
-    - "62:e"
+    - "62-е"
+    - "62:a"
     - "６２" #  fullwidth characters sometimes used in China and Japan
     - "(62)"
     - "#62"
@@ -2893,6 +3094,9 @@ ordinals:
     - "sesenta y tres" # es (number)
     - "шестьдесят три" # ru (number)
     - "63rd"
+    - "63ste" # nl
+    - "63ème" # fr
+    - "63eme" # fr
     - "63e"
     - "63ú"
     - "63º"
@@ -2907,7 +3111,7 @@ ordinals:
     - "63ra" # es (feminine, informal)
     - "63-й"
     - "63-я"
-    - "63-e"
+    - "63-е"
     - "63:e"
     - "６３" #  fullwidth characters sometimes used in China and Japan
     - "(63)"
@@ -2941,6 +3145,9 @@ ordinals:
     - "sesenta y cuatro" # es (number)
     - "шестьдесят четыре" # ru (number)
     - "64th"
+    - "64ste" # nl
+    - "64ème" # fr
+    - "64eme" # fr
     - "64e"
     - "64ú"
     - "64º"
@@ -2955,7 +3162,7 @@ ordinals:
     - "64ta" # es (feminine, informal)
     - "64-й"
     - "64-я"
-    - "64-e"
+    - "64-е"
     - "64:e"
     - "６４" #  fullwidth characters sometimes used in China and Japan
     - "(64)"
@@ -2989,6 +3196,9 @@ ordinals:
     - "sesenta y cinco" # es (number)
     - "шестьдесят пять" # ru (number)
     - "65th"
+    - "65ste" # nl
+    - "65ème" # fr
+    - "65eme" # fr
     - "65e"
     - "65ú"
     - "65º"
@@ -3003,7 +3213,7 @@ ordinals:
     - "65ta" # es (feminine, informal)
     - "65-й"
     - "65-я"
-    - "65-e"
+    - "65-е"
     - "65:e"
     - "６５" #  fullwidth characters sometimes used in China and Japan
     - "(65)"
@@ -3035,6 +3245,9 @@ ordinals:
     - "sesenta y seis" # es (number)
     - "шестьдесят шесть" # ru (number)
     - "66th"
+    - "66ste" # nl
+    - "66ème" # fr
+    - "66eme" # fr
     - "66e"
     - "66ú"
     - "66º"
@@ -3049,7 +3262,7 @@ ordinals:
     - "66ta" # es (feminine, informal)
     - "66-й"
     - "66-я"
-    - "66-e"
+    - "66-е"
     - "66:e"
     - "６６" #  fullwidth characters sometimes used in China and Japan
     - "(66)"
@@ -3083,6 +3296,9 @@ ordinals:
     - "sesenta y siete" # es (number)
     - "шестьдесят семь" # ru (number)
     - "67th"
+    - "67ste" # nl
+    - "67ème" # fr
+    - "67eme" # fr
     - "67e"
     - "67ú"
     - "67º"
@@ -3097,7 +3313,7 @@ ordinals:
     - "67ma" # es (feminine, informal)
     - "67-й"
     - "67-я"
-    - "67-e"
+    - "67-е"
     - "67:e"
     - "６７" #  fullwidth characters sometimes used in China and Japan
     - "(67)"
@@ -3131,6 +3347,9 @@ ordinals:
     - "sesenta y ocho" # es (number)
     - "шестьдесят восемь" # ru (number)
     - "68th"
+    - "68ste" # nl
+    - "68ème" # fr
+    - "68eme" # fr
     - "68e"
     - "68ú"
     - "68º"
@@ -3145,7 +3364,7 @@ ordinals:
     - "68va" # es (feminine, informal)
     - "68-й"
     - "68-я"
-    - "68-e"
+    - "68-е"
     - "68:e"
     - "６８" #  fullwidth characters sometimes used in China and Japan
     - "(68)"
@@ -3179,6 +3398,9 @@ ordinals:
     - "sesenta y nueve" # es (number)
     - "шестьдесят девять" # ru (number)
     - "69th"
+    - "69ste" # nl
+    - "69ème" # fr
+    - "69eme" # fr
     - "69e"
     - "69ú"
     - "69º"
@@ -3193,7 +3415,7 @@ ordinals:
     - "69na" # es (feminine, informal)
     - "69-й"
     - "69-я"
-    - "69-e"
+    - "69-е"
     - "69:e"
     - "６９" #  fullwidth characters sometimes used in China and Japan
     - "(69)"
@@ -3221,6 +3443,9 @@ ordinals:
     - "setenta" # es (number)
     - "семьдесят" # ru (number)
     - "70th"
+    - "70ste" # nl
+    - "70ème" # fr
+    - "70eme" # fr
     - "70e"
     - "70ú"
     - "70º"
@@ -3235,7 +3460,7 @@ ordinals:
     - "70ma" # es (feminine, informal)
     - "70-й"
     - "70-я"
-    - "70-e"
+    - "70-е"
     - "70:e"
     - "７０" #  fullwidth characters sometimes used in China and Japan
     - "(70)"
@@ -3269,6 +3494,9 @@ ordinals:
     - "setenta y un" # es (number, masculine, shortened form)
     - "семьдесят один" # ru (number)
     - "71st"
+    - "71ste" # nl
+    - "71ème" # fr
+    - "71eme" # fr
     - "71e"
     - "71ú"
     - "71º"
@@ -3283,7 +3511,7 @@ ordinals:
     - "71ra" # es (feminine, informal)
     - "71-й"
     - "71-я"
-    - "71-e"
+    - "71-е"
     - "71:a"
     - "７１" #  fullwidth characters sometimes used in China and Japan
     - "(71)"
@@ -3317,6 +3545,9 @@ ordinals:
     - "setenta y dos" # es (number)
     - "семьдесят два" # ru (number)
     - "72nd"
+    - "72ste" # nl
+    - "72ème" # fr
+    - "72eme" # fr
     - "72e"
     - "72ú"
     - "72º"
@@ -3331,8 +3562,8 @@ ordinals:
     - "72da" # es (feminine, informal)
     - "72-й"
     - "72-я"
-    - "72-e"
-    - "72:e"
+    - "72-е"
+    - "72:a"
     - "７２" #  fullwidth characters sometimes used in China and Japan
     - "(72)"
     - "#72"
@@ -3365,6 +3596,9 @@ ordinals:
     - "setenta y tres" # es (number)
     - "семьдесят три" # ru (number)
     - "73rd"
+    - "73ste" # nl
+    - "73ème" # fr
+    - "73eme" # fr
     - "73e"
     - "73ú"
     - "73º"
@@ -3379,7 +3613,7 @@ ordinals:
     - "73ra" # es (feminine, informal)
     - "73-й"
     - "73-я"
-    - "73-e"
+    - "73-е"
     - "73:e"
     - "７３" #  fullwidth characters sometimes used in China and Japan
     - "(73)"
@@ -3413,6 +3647,9 @@ ordinals:
     - "setenta y cuatro" # es (number)
     - "семьдесят четыре" # ru (number)
     - "74th"
+    - "74ste" # nl
+    - "74ème" # fr
+    - "74eme" # fr
     - "74e"
     - "74ú"
     - "74º"
@@ -3427,7 +3664,7 @@ ordinals:
     - "74ta" # es (feminine, informal)
     - "74-й"
     - "74-я"
-    - "74-e"
+    - "74-е"
     - "74:e"
     - "７４" #  fullwidth characters sometimes used in China and Japan
     - "(74)"
@@ -3461,6 +3698,9 @@ ordinals:
     - "setenta y cinco" # es (number)
     - "семьдесят пять" # ru (number)
     - "75th"
+    - "75ste" # nl
+    - "75ème" # fr
+    - "75eme" # fr
     - "75e"
     - "75ú"
     - "75º"
@@ -3475,7 +3715,7 @@ ordinals:
     - "75ta" # es (feminine, informal)
     - "75-й"
     - "75-я"
-    - "75-e"
+    - "75-е"
     - "75:e"
     - "７５" #  fullwidth characters sometimes used in China and Japan
     - "(75)"
@@ -3509,6 +3749,9 @@ ordinals:
     - "setenta y seis" # es (number)
     - "семьдесят шесть" # ru (number)
     - "76th"
+    - "76ste" # nl
+    - "76ème" # fr
+    - "76eme" # fr
     - "76e"
     - "76ú"
     - "76º"
@@ -3523,7 +3766,7 @@ ordinals:
     - "76ta" # es (feminine, informal)
     - "76-й"
     - "76-я"
-    - "76-e"
+    - "76-е"
     - "76:e"
     - "７６" #  fullwidth characters sometimes used in China and Japan
     - "(76)"
@@ -3557,6 +3800,9 @@ ordinals:
     - "setenta y siete" # es (number)
     - "семьдесят семь" # ru (number)
     - "77th"
+    - "77ste" # nl
+    - "77ème" # fr
+    - "77eme" # fr
     - "77e"
     - "77ú"
     - "77º"
@@ -3571,7 +3817,7 @@ ordinals:
     - "77ma" # es (feminine, informal)
     - "77-й"
     - "77-я"
-    - "77-e"
+    - "77-е"
     - "77:e"
     - "７７" #  fullwidth characters sometimes used in China and Japan
     - "(77)"
@@ -3605,6 +3851,9 @@ ordinals:
     - "setenta y ocho" # es (number)
     - "семьдесят восемь" # ru (number)
     - "78th"
+    - "78ste" # nl
+    - "78ème" # fr
+    - "78eme" # fr
     - "78e"
     - "78ú"
     - "78º"
@@ -3619,7 +3868,7 @@ ordinals:
     - "78va" # es (feminine, informal)
     - "78-й"
     - "78-я"
-    - "78-e"
+    - "78-е"
     - "78:e"
     - "７８" #  fullwidth characters sometimes used in China and Japan
     - "(78)"
@@ -3653,6 +3902,9 @@ ordinals:
     - "setenta y nueve" # es (number)
     - "семьдесят девять" # ru (number)
     - "79th"
+    - "79ste" # nl
+    - "79ème" # fr
+    - "79eme" # fr
     - "79e"
     - "79ú"
     - "79º"
@@ -3667,7 +3919,7 @@ ordinals:
     - "79na" # es (feminine, informal)
     - "79-й"
     - "79-я"
-    - "79-e"
+    - "79-е"
     - "79:e"
     - "７９" #  fullwidth characters sometimes used in China and Japan
     - "(79)"
@@ -3695,6 +3947,9 @@ ordinals:
     - "ochenta" # es (number)
     - "восемьдесят" # ru (number)
     - "80th"
+    - "80ste" # nl
+    - "80ème" # fr
+    - "80eme" # fr
     - "80e"
     - "80ú"
     - "80º"
@@ -3709,9 +3964,10 @@ ordinals:
     - "80ma" # es (feminine, informal)
     - "80-й"
     - "80-я"
-    - "80-e"
+    - "80-е"
     - "80:e"
-    - "８０" #  fullwidth characters sometimes used in China and Japan
+    - "８０"
+    - "#80" #  fullwidth characters sometimes used in China and Japan
     - "(80)"
     - "80"
     - "Number 80"
@@ -3745,6 +4001,9 @@ ordinals:
     - "ochenta y un" # es (number, masculine, shortened form)
     - "восемьдесят один" # ru (number)
     - "81st"
+    - "81ste" # nl
+    - "81ème" # fr
+    - "81eme" # fr
     - "81e"
     - "81ú"
     - "81º"
@@ -3759,7 +4018,7 @@ ordinals:
     - "81ra" # es (feminine, informal)
     - "81-й"
     - "81-я"
-    - "81-e"
+    - "81-е"
     - "81:a"
     - "８１" #  fullwidth characters sometimes used in China and Japan
     - "(81)"
@@ -3793,6 +4052,9 @@ ordinals:
     - "ochenta y dos" # es (number)
     - "восемьдесят два" # ru (number)
     - "82nd"
+    - "82ste" # nl
+    - "82ème" # fr
+    - "82eme" # fr
     - "82e"
     - "82ú"
     - "82º"
@@ -3807,8 +4069,8 @@ ordinals:
     - "82da" # es (feminine, informal)
     - "82-й"
     - "82-я"
-    - "82-e"
-    - "82:e"
+    - "82-е"
+    - "82:a"
     - "８２" #  fullwidth characters sometimes used in China and Japan
     - "(82)"
     - "#82"
@@ -3841,6 +4103,9 @@ ordinals:
     - "ochenta y tres" # es (number)
     - "восемьдесят три" # ru (number)
     - "83rd"
+    - "83ste" # nl
+    - "83ème" # fr
+    - "83eme" # fr
     - "83e"
     - "83ú"
     - "83º"
@@ -3855,7 +4120,7 @@ ordinals:
     - "83ra" # es (feminine, informal)
     - "83-й"
     - "83-я"
-    - "83-e"
+    - "83-е"
     - "83:e"
     - "８３" #  fullwidth characters sometimes used in China and Japan
     - "(83)"
@@ -3889,6 +4154,9 @@ ordinals:
     - "ochenta y cuatro" # es (number)
     - "восемьдесят четыре" # ru (number)
     - "84th"
+    - "84ste" # nl
+    - "84ème" # fr
+    - "84eme" # fr
     - "84e"
     - "84ú"
     - "84º"
@@ -3903,7 +4171,7 @@ ordinals:
     - "84ta" # es (feminine, informal)
     - "84-й"
     - "84-я"
-    - "84-e"
+    - "84-е"
     - "84:e"
     - "８４" #  fullwidth characters sometimes used in China and Japan
     - "(84)"
@@ -3937,6 +4205,9 @@ ordinals:
     - "ochenta y cinco" # es (number)
     - "восемьдесят пять" # ru (number)
     - "85th"
+    - "85ste" # nl
+    - "85ème" # fr
+    - "85eme" # fr
     - "85e"
     - "85ú"
     - "85º"
@@ -3951,7 +4222,7 @@ ordinals:
     - "85ta" # es (feminine, informal)
     - "85-й"
     - "85-я"
-    - "85-e"
+    - "85-е"
     - "85:e"
     - "８５" #  fullwidth characters sometimes used in China and Japan
     - "(85)"
@@ -3985,6 +4256,9 @@ ordinals:
     - "ochenta y seis" # es (number)
     - "восемьдесят шесть" # ru (number)
     - "86th"
+    - "86ste" # nl
+    - "86ème" # fr
+    - "86eme" # fr
     - "86e"
     - "86ú"
     - "86º"
@@ -3999,7 +4273,7 @@ ordinals:
     - "86ta" # es (feminine, informal)
     - "86-й"
     - "86-я"
-    - "86-e"
+    - "86-е"
     - "86:e"
     - "８６" #  fullwidth characters sometimes used in China and Japan
     - "(86)"
@@ -4033,6 +4307,9 @@ ordinals:
     - "ochenta y siete" # es (number)
     - "восемьдесят семь" # ru (number)
     - "87th"
+    - "87ste" # nl
+    - "87ème" # fr
+    - "87eme" # fr
     - "87e"
     - "87ú"
     - "87º"
@@ -4047,7 +4324,7 @@ ordinals:
     - "87ma" # es (feminine, informal)
     - "87-й"
     - "87-я"
-    - "87-e"
+    - "87-е"
     - "87:e"
     - "８７" #  fullwidth characters sometimes used in China and Japan
     - "(87)"
@@ -4081,6 +4358,9 @@ ordinals:
     - "ochenta y ocho" # es (number)
     - "восемьдесят восемь" # ru (number)
     - "88th"
+    - "88ste" # nl
+    - "88ème" # fr
+    - "88eme" # fr
     - "88e"
     - "88ú"
     - "88º"
@@ -4095,7 +4375,7 @@ ordinals:
     - "88va" # es (feminine, informal)
     - "88-й"
     - "88-я"
-    - "88-e"
+    - "88-е"
     - "88:e"
     - "８８" #  fullwidth characters sometimes used in China and Japan
     - "(88)"
@@ -4129,6 +4409,9 @@ ordinals:
     - "ochenta y nueve" # es (number)
     - "восемьдесят девять" # ru (number)
     - "89th"
+    - "89ste" # nl
+    - "89ème" # fr
+    - "89eme" # fr
     - "89e"
     - "89ú"
     - "89º"
@@ -4143,7 +4426,7 @@ ordinals:
     - "89na" # es (feminine, informal)
     - "89-й"
     - "89-я"
-    - "89-e"
+    - "89-е"
     - "89:e"
     - "８９" #  fullwidth characters sometimes used in China and Japan
     - "(89)"
@@ -4171,6 +4454,9 @@ ordinals:
     - "noventa" # es (number)
     - "девяносто" # ru (number)
     - "90th"
+    - "90ste" # nl
+    - "90ème" # fr
+    - "90eme" # fr
     - "90e"
     - "90ú"
     - "90º"
@@ -4185,7 +4471,7 @@ ordinals:
     - "90ma" # es (feminine, informal)
     - "90-й"
     - "90-я"
-    - "90-e"
+    - "90-е"
     - "90:e"
     - "９０" #  fullwidth characters sometimes used in China and Japan
     - "(90)"
@@ -4219,6 +4505,9 @@ ordinals:
     - "noventa y un" # es (number, masculine, shortened form)
     - "девяносто один" # ru (number)
     - "91st"
+    - "91ste" # nl
+    - "91ème" # fr
+    - "91eme" # fr
     - "91e"
     - "91ú"
     - "91º"
@@ -4233,7 +4522,7 @@ ordinals:
     - "91ra" # es (feminine, informal)
     - "91-й"
     - "91-я"
-    - "91-e"
+    - "91-е"
     - "91:a"
     - "９１" #  fullwidth characters sometimes used in China and Japan
     - "(91)"
@@ -4265,6 +4554,9 @@ ordinals:
     - "noventa y dos" # es (number)
     - "девяносто два" # ru (number)
     - "92nd"
+    - "92ste" # nl
+    - "92ème" # fr
+    - "92eme" # fr
     - "92e"
     - "92ú"
     - "92º"
@@ -4279,8 +4571,8 @@ ordinals:
     - "92da" # es (feminine, informal)
     - "92-й"
     - "92-я"
-    - "92-e"
-    - "92:e"
+    - "92-е"
+    - "92:a"
     - "９２" #  fullwidth characters sometimes used in China and Japan
     - "(92)"
     - "#92"
@@ -4313,6 +4605,9 @@ ordinals:
     - "noventa y tres" # es (number)
     - "девяносто три" # ru (number)
     - "93rd"
+    - "93ste" # nl
+    - "93ème" # fr
+    - "93eme" # fr
     - "93e"
     - "93ú"
     - "93º"
@@ -4327,7 +4622,7 @@ ordinals:
     - "93ra" # es (feminine, informal)
     - "93-й"
     - "93-я"
-    - "93-e"
+    - "93-е"
     - "93:e"
     - "９３" #  fullwidth characters sometimes used in China and Japan
     - "(93)"
@@ -4361,6 +4656,9 @@ ordinals:
     - "noventa y cuatro" # es (number)
     - "девяносто четыре" # ru (number)
     - "94th"
+    - "94ste" # nl
+    - "94ème" # fr
+    - "94eme" # fr
     - "94e"
     - "94ú"
     - "94º"
@@ -4375,7 +4673,7 @@ ordinals:
     - "94ta" # es (feminine, informal)
     - "94-й"
     - "94-я"
-    - "94-e"
+    - "94-е"
     - "94:e"
     - "９４" #  fullwidth characters sometimes used in China and Japan
     - "(94)"
@@ -4409,6 +4707,9 @@ ordinals:
     - "noventa y cinco" # es (number)
     - "девяносто пять" # ru (number)
     - "95th"
+    - "95ste" # nl
+    - "95ème" # fr
+    - "95eme" # fr
     - "95e"
     - "95ú"
     - "95º"
@@ -4423,7 +4724,7 @@ ordinals:
     - "95ta" # es (feminine, informal)
     - "95-й"
     - "95-я"
-    - "95-e"
+    - "95-е"
     - "95:e"
     - "９５" #  fullwidth characters sometimes used in China and Japan
     - "(95)"
@@ -4455,6 +4756,9 @@ ordinals:
     - "noventa y seis" # es (number)
     - "девяносто шесть" # ru (number)
     - "96th"
+    - "96ste" # nl
+    - "96ème" # fr
+    - "96eme" # fr
     - "96e"
     - "96ú"
     - "96º"
@@ -4469,7 +4773,7 @@ ordinals:
     - "96ta" # es (feminine, informal)
     - "96-й"
     - "96-я"
-    - "96-e"
+    - "96-е"
     - "96:e"
     - "９６" #  fullwidth characters sometimes used in China and Japan
     - "(96)"
@@ -4503,6 +4807,9 @@ ordinals:
     - "noventa y siete" # es (number)
     - "девяносто семь" # ru (number)
     - "97th"
+    - "97ste" # nl
+    - "97ème" # fr
+    - "97eme" # fr
     - "97e"
     - "97ú"
     - "97º"
@@ -4517,7 +4824,7 @@ ordinals:
     - "97ma" # es (feminine, informal)
     - "97-й"
     - "97-я"
-    - "97-e"
+    - "97-е"
     - "97:e"
     - "９７" #  fullwidth characters sometimes used in China and Japan
     - "(97)"
@@ -4551,6 +4858,9 @@ ordinals:
     - "noventa y ocho" # es (number)
     - "девяносто восемь" # ru (number)
     - "98th"
+    - "98ste" # nl
+    - "98ème" # fr
+    - "98eme" # fr
     - "98e"
     - "98ú"
     - "98º"
@@ -4565,7 +4875,7 @@ ordinals:
     - "98va" # es (feminine, informal)
     - "98-й"
     - "98-я"
-    - "98-e"
+    - "98-е"
     - "98:e"
     - "９８" #  fullwidth characters sometimes used in China and Japan
     - "(98)"
@@ -4599,6 +4909,9 @@ ordinals:
     - "noventa y nueve" # es (number)
     - "девяносто девять" # ru (number)
     - "99th"
+    - "99ste" # nl
+    - "99ème" # fr
+    - "99eme" # fr
     - "99e"
     - "99ú"
     - "99º"
@@ -4613,7 +4926,7 @@ ordinals:
     - "99na" # es (feminine, informal)
     - "99-й"
     - "99-я"
-    - "99-e"
+    - "99-е"
     - "99:e"
     - "９９" #  fullwidth characters sometimes used in China and Japan
     - "(99)"
@@ -4642,6 +4955,9 @@ ordinals:
     - "cien" # es (number, short form)
     - "сто" # ru (number)
     - "100th"
+    - "100ste" # nl
+    - "100ème" # fr
+    - "100eme" # fr
     - "100e"
     - "100ú"
     - "100º"
@@ -4656,7 +4972,7 @@ ordinals:
     - "100ma" # es (feminine, informal)
     - "100-й"
     - "100-я"
-    - "100-e"
+    - "100-е"
     - "100:e"
     - "１００" #  fullwidth characters sometimes used in China and Japan
     - "(100)"

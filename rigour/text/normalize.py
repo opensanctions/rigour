@@ -164,8 +164,10 @@ class Normalize(IntFlag):
         ADDRESS: Like `NAME`, but tokenizes with the address-specific
             category table: spacing marks (Mc) separate tokens, the
             signifier symbols ``&`` and ``№`` are kept as token
-            content, and decimal-digit runs are emitted as their own
-            tokens (``д39`` → ``д 39``, ``30th`` → ``30 th``).
+            content, and the full stop separates tokens instead of
+            being deleted (``д.39`` → ``д 39``). Letter/digit
+            transitions inside a token never split, so alphanumeric
+            postcodes (``SW1A``) and unit letters (``3A``) stay whole.
             Mutually exclusive with `NAME`, which wins when both are
             set.
     """

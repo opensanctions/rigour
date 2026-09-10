@@ -10,11 +10,12 @@ use crate::text::translit::maybe_ascii;
 /// Classification of an address token, carrying its canonical form.
 #[derive(Debug, Clone, PartialEq)]
 pub enum TokenClass {
-    /// Numeric token; `digits` is the canonical ASCII digit string
-    /// derived at analysis time — folded surface digits for parsed
-    /// numbers (leading zeros preserved: "007" stays "007", "１７"
-    /// becomes "17"), the ordinal's value for tagged ordinal
-    /// phrases ("30 th" → "30").
+    /// Numeric token; `digits` is the canonical ASCII form derived
+    /// at analysis time — folded surface digits for parsed numbers
+    /// (leading zeros preserved: "007" stays "007", "１７" becomes
+    /// "17"), the ordinal's value for tagged ordinal forms ("30th"
+    /// → "30"), and digits plus one lowercase ASCII letter for
+    /// suffixed house/unit numbers ("16В" → "16v").
     Number { digits: String },
     /// Address signifier recognised from the keyword forms table;
     /// `canonical` is the short form key ("blvd" for "boulevard").

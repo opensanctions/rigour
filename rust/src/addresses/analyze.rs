@@ -13,6 +13,7 @@ use crate::constants::MEMO_MEDIUM;
 use crate::text::normalize::{Cleanup, normalize};
 use crate::text::numbers::{fold_digits, string_number};
 use crate::text::scripts::text_scripts;
+use crate::text::translit::maybe_ascii;
 
 // Process-wide memo of analyzed addresses, keyed on the raw input
 // string so a hit skips the whole pipeline (normalize, AC tagging,
@@ -42,6 +43,40 @@ fn number_digits(surface: &str, value: f64) -> String {
         format!("{}", value as u64)
     } else {
         value.to_string()
+    }
+}
+
+/// Canonical form of a token that reads as a number: parsed numbers
+/// yield their digit string; a digit run with exactly one trailing
+/// letter — the house/unit-number convention across scripts ("12a",
+/// "16В", "330N") — yields the folded digits plus the letter in
+/// narrow-ASCII lowercase, so "1а" and "1a" agree while "1a" and
+/// "1" stay distinct. Anything else (postcodes like "sw1a" or
+/// "2aa", CJK counters like "1号") is not a number.
+fn number_class(surface: &str) -> Option<String> {
+    if let Some(value) = string_number(surface) {
+        return Some(number_digits(surface, value));
+    }
+    let mut chars = surface.chars();
+    let last = chars.next_back()?;
+    let head = chars.as_str();
+    if head.is_empty() || !head.chars().all(|c| c.is_numeric()) {
+        return None;
+    }
+    let suffix = maybe_ascii(&last.to_string(), true);
+    let mut suffix_chars = suffix.chars();
+    match (suffix_chars.next(), suffix_chars.next()) {
+        (Some(c), None) if c.is_ascii_alphabetic() => {
+            let digits: String = fold_digits(head)
+                .chars()
+                .filter(char::is_ascii_digit)
+                .collect();
+            if digits.is_empty() {
+                return None;
+            }
+            Some(format!("{digits}{}", c.to_ascii_lowercase()))
+        }
+        _ => None,
     }
 }
 
@@ -127,10 +162,8 @@ pub fn analyze(text: &str) -> Option<Address> {
             mi += 1;
         }
         let surface = &norm[start..end];
-        let class = match string_number(surface) {
-            Some(value) => TokenClass::Number {
-                digits: number_digits(surface, value),
-            },
+        let class = match number_class(surface) {
+            Some(digits) => TokenClass::Number { digits },
             None => TokenClass::Text,
         };
         tokens.push(AddressToken::new(surface.to_string(), class));
@@ -178,8 +211,8 @@ mod tests {
         let addr = analyze("2221 30th Ave S Fargo, ND 58103-5872").unwrap();
         let got = classes(&addr);
         assert_eq!(got[0], ("2221", &num("2221")));
-        // The ordinal needle re-captures the digit-split "30 th".
-        assert_eq!(got[1], ("30 th", &num("30")));
+        // The ordinal needle tags the whole "30th" token.
+        assert_eq!(got[1], ("30th", &num("30")));
         assert_eq!(
             got[2],
             (
@@ -199,11 +232,35 @@ mod tests {
     }
 
     #[test]
-    fn glued_digits_split_and_classify() {
+    fn dotted_signifiers_release_their_numbers() {
         let addr = analyze("УЛ. МЯСНИЦКАЯ Д.39 К.1").unwrap();
         let got = classes(&addr);
         assert_eq!(got[3], ("39", &num("39")));
         assert_eq!(got[5], ("1", &num("1")));
+    }
+
+    #[test]
+    fn letter_suffixed_numbers_classify_with_suffix() {
+        let addr = analyze("УЛ. СОВЕТСКАЯ Д.21А, кв. 5б").unwrap();
+        let got = classes(&addr);
+        assert_eq!(got[3], ("21а", &num("21a")));
+        assert_eq!(got[5], ("5б", &num("5b")));
+        let addr = analyze("Flat 3A, Unit 330N").unwrap();
+        let got = classes(&addr);
+        assert_eq!(got[1], ("3a", &num("3a")));
+        assert_eq!(got[3], ("330n", &num("330n")));
+    }
+
+    #[test]
+    fn alphanumeric_postcodes_stay_text() {
+        let addr = analyze("London SW1A 2AA, Toronto M5H 2N2, Dublin D02 X285").unwrap();
+        for tok in &addr.tokens {
+            if matches!(tok.class, TokenClass::Number { .. }) {
+                panic!("postcode fragment classified as number: {:?}", tok.surface);
+            }
+        }
+        let addr = analyze("1号楼").unwrap();
+        assert_eq!(classes(&addr)[0], ("1号楼", &TokenClass::Text));
     }
 
     #[test]
@@ -214,7 +271,8 @@ mod tests {
 
         let addr = analyze("д. №17").unwrap();
         let got = classes(&addr);
-        assert_eq!(got[1], ("№ 17", &num("17")));
+        assert_eq!(got[1], ("№17", &num("17")));
+        assert_eq!(analyze("д. № 17").unwrap().tokens[1].class, num("17"));
     }
 
     #[test]
