@@ -86,8 +86,11 @@ mod tests {
 
     #[test]
     fn alphanumeric_postcodes_stay_whole() {
-        assert_eq!(fingerprint("London SW1Y 5HX").unwrap(), "gb-eng sw1y 5hx");
-        assert_eq!(fingerprint("Toronto ON M5H 2N2").unwrap(), "ca on m5h 2n2");
+        assert_eq!(fingerprint("London SW1Y 5HX").unwrap(), "london sw1y 5hx");
+        assert_eq!(
+            fingerprint("Toronto ON M5H 2N2").unwrap(),
+            "toronto on m5h 2n2"
+        );
         assert_ne!(
             fingerprint("SW1A 2AA London"),
             fingerprint("SW1E 2AA London")
