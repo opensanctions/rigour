@@ -104,3 +104,11 @@ def test_britain():
     assert terr and terr.code == "gb"
     terr = lookup_territory(misspelled, fuzzy=False)
     assert terr is None
+
+
+def test_lookup_accent_folding():
+    terr = lookup_territory("Aland")
+    assert terr and terr.code == "ax"
+
+    terr = lookup_territory("Sao Tome and Principe")
+    assert terr and terr.code == "st"
