@@ -66,14 +66,15 @@ pub enum CharAction {
     Whitespace,
 }
 
-// Strong — aggressive cleanup, matches normality.constants.UNICODE_CATEGORIES.
+// Strong — aggressive cleanup, matches normality.constants.UNICODE_CATEGORIES
+// except that Mc (spacing marks) is kept: Brahmic vowel signs belong to
+// their syllable, and turning them into whitespace splits words.
 fn action_strong(cat: GeneralCategory) -> CharAction {
     use GeneralCategory::*;
     match cat {
         Control => CharAction::Whitespace, // Cc
         Format | Surrogate | PrivateUse | Unassigned => CharAction::Delete, // Cf/Cs/Co/Cn
         ModifierLetter | NonspacingMark | EnclosingMark => CharAction::Delete, // Lm/Mn/Me
-        SpacingMark => CharAction::Whitespace, // Mc
         OtherNumber => CharAction::Delete, // No
         SpaceSeparator | LineSeparator | ParagraphSeparator => CharAction::Whitespace, // Zs/Zl/Zp
         ConnectorPunctuation | DashPunctuation | OpenPunctuation | ClosePunctuation
@@ -85,17 +86,16 @@ fn action_strong(cat: GeneralCategory) -> CharAction {
     }
 }
 
-// Slug — matches normality.constants.SLUG_CATEGORIES.
-// Differences from Strong: Lm & Mn are kept (not deleted); Cc is deleted
-// (not replaced with WS).
+// Slug — matches normality.constants.SLUG_CATEGORIES, with Mc kept as
+// in Strong. Differences from Strong: Lm & Mn are kept (not deleted);
+// Cc is deleted (not replaced with WS).
 fn action_slug(cat: GeneralCategory) -> CharAction {
     use GeneralCategory::*;
     match cat {
         Control | Format | Surrogate | PrivateUse | Unassigned => CharAction::Delete, // Cc/Cf/Cs/Co/Cn
         // Lm (ModifierLetter) and Mn (NonspacingMark) fall through to Keep.
-        EnclosingMark => CharAction::Delete,   // Me
-        SpacingMark => CharAction::Whitespace, // Mc
-        OtherNumber => CharAction::Delete,     // No
+        EnclosingMark => CharAction::Delete, // Me
+        OtherNumber => CharAction::Delete,   // No
         SpaceSeparator | LineSeparator | ParagraphSeparator => CharAction::Whitespace,
         ConnectorPunctuation | DashPunctuation | OpenPunctuation | ClosePunctuation
         | InitialPunctuation | FinalPunctuation | OtherPunctuation => CharAction::Whitespace,
@@ -450,6 +450,20 @@ mod tests {
         assert_eq!(
             normalize("!!!", Normalize::SQUASH_SPACES, Cleanup::Strong),
             None
+        );
+    }
+
+    #[test]
+    fn cleanup_keeps_spacing_marks() {
+        // U+0940 DEVANAGARI VOWEL SIGN II (Mc) stays attached under both
+        // profiles; U+094D VIRAMA (Mn) is deleted by Strong only.
+        assert_eq!(
+            normalize("हिन्दी", Normalize::empty(), Cleanup::Strong),
+            Some("हिनदी".to_string())
+        );
+        assert_eq!(
+            normalize("हिन्दी", Normalize::empty(), Cleanup::Slug),
+            Some("हिन्दी".to_string())
         );
     }
 
