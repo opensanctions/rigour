@@ -62,7 +62,6 @@ names_weak:
   - ইজরায়েল
   - ఇజ్రాయిల్
   - Orílɛ́ède Iserɛli
-  - Tel Avivi
   - Iziraʼila
   - Israel nutome
   - ísilayɛ́l
@@ -123,6 +122,7 @@ names_weak:
 places:
   - Tel Aviv
   - Jerusalem
+  - Tel Avivi
 langs:
   - heb
   - eng

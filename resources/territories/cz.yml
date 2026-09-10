@@ -65,7 +65,6 @@ names_weak:
   - Republica Cehă
   - Çek Cumhuriyeti
   - ꗿꕃ ꕸꖃꔀ
-  - Praguer
   - Kekkia
   - Tšehhi
   - Чехия Республикаси # Čehiâ Respublikasi
@@ -170,5 +169,6 @@ names_weak:
   - Çekya
 places:
   - Prague
+  - Praguer
 langs:
   - ces

@@ -79,7 +79,6 @@ names_weak:
   - Gruusia
   - Грузия            # Gruziâ
   - Gyogya
-  - Tbilisian
   - ဂျော်ဂျီယာ
   - گورجستان
   - Грузія            # Gruzíâ
@@ -142,6 +141,7 @@ names_weak:
 places:
   - Tbilisi, Georgia
   - Tbilisi
+  - Tbilisian
 langs:
   - abk
   - kat
