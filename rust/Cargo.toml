@@ -26,7 +26,7 @@ pyo3 = { version = "0.29", optional = true }
 # Phonetic algorithms (metaphone, soundex). Port of Apache commons-codec, pure
 # Rust. The upstream jellyfish Rust crate can't be used directly because it
 # hard-depends on pyo3 and is published as cdylib-only.
-rphonetic = "3"
+rphonetic = "4"
 
 # Unicode properties (Script, GeneralCategory) for codepoint_script /
 # text_scripts, plus transliteration (experimental::transliterate, gated
