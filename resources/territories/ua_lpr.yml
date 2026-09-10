@@ -34,5 +34,7 @@ names_strong:
 names_weak:
   - ЛНР  # LNR
   - LPR
+places:
+  - Luhansk City
 langs:
   - rus

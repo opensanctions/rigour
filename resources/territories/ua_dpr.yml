@@ -32,5 +32,7 @@ names_strong:
 names_weak:
   - DPR
   - ДНР  # DNR
+places:
+  - Donetsk City
 langs:
   - rus

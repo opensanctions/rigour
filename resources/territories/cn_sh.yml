@@ -1,0 +1,12 @@
+full_name: Shanghai (China)
+is_country: false
+is_ftm: false
+is_historical: false
+is_jurisdiction: true
+name: Shanghai
+parent: cn
+qid: Q8686
+names_strong:
+  - 上海 # Shànghǎi
+  - Shanghai Municipality
+names_weak: []

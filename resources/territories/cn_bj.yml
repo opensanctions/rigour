@@ -1,0 +1,13 @@
+full_name: Beijing (China)
+is_country: false
+is_ftm: false
+is_historical: false
+is_jurisdiction: true
+name: Beijing
+parent: cn
+qid: Q956
+names_strong:
+  - 北京 # Běijīng
+  - Beijing Municipality
+  - Peking
+names_weak: []
