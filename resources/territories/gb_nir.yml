@@ -23,21 +23,22 @@ names_strong:
   - Tuaisceart Éireann
 names_weak:
   - N.Ireland
-  - Derry
   - Ulster
   - Northern Irish
-  - Fermanagh
-  - Tyrone
   - Norlin Airlann
-  - Armagh
   - N Irish
-  - Belfast
-  - Antrim
   - Irlanda del Norte
-  - Down
-  - Londonderry
   - GBNIR
   - Ulsterman
+places:
+  - Derry
+  - Fermanagh
+  - Tyrone
+  - Armagh
+  - Belfast
+  - Antrim
+  - Down
+  - Londonderry
 langs:
   - eng
   - gle

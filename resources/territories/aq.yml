@@ -26,7 +26,6 @@ names_weak:
   - འཛམ་གླིང་ལྷོ་མཐའི་ཁྱགས་གླིང
   - แอนตาร์กติกา
   - אנטארקטיקה
-  - Rothera
   - అంటార్కటికా
   - Antárktis
   - ਅੰਟਾਰਕਟਿਕਾ
@@ -36,7 +35,6 @@ names_weak:
   - أنتاركتيكا
   - جنوبگان
   - der Södpol
-  - BAT
   - ແອນຕາດຕິກາ
   - अंटार्कटिका
   - Antarktis
@@ -78,8 +76,11 @@ names_weak:
   - 남극 대륙 # namgeug daelyug
   - Antartic
   - جنوبی یخبزه قطب
-  - British Antarctic Territory
   - i -Antarctica
   - அண்டார்டிகா
   - 南極
   - Антарктида # Antarktida
+places:
+  - Rothera
+  - BAT
+  - British Antarctic Territory

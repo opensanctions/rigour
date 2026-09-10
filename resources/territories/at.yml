@@ -72,7 +72,6 @@ names_weak:
   - ཨཱོས་ཊྲི་ཡ
   - Otris
   - עסטרייך
-  - Vienna
   - Osituria
   - Австрия # Avstriâ
   - Austrija
@@ -140,6 +139,8 @@ names_weak:
   - آسٹِیا
   - Eysturríki
   - 奧地利
+places:
+  - Vienna
 langs:
   - deu
   - asq

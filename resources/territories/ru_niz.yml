@@ -6,10 +6,10 @@ is_jurisdiction: true
 name: Nizhny Novgorod Oblast
 parent: ru
 qid: Q2246
-names_strong: []
-names_weak:
+names_strong:
   - Nizhny Novgorod
   - Нижний Новгород  # Nižnij Novgorod
   - Nizhniy Novgorod
-  - Nizhny Novgorod, Russia
   - Нижний Новгород (Россия) # Nižnij Novgorod (Rossiâ)
+  - Nizhny Novgorod, Russia
+names_weak: []

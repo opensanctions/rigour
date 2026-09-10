@@ -31,65 +31,48 @@ names_weak:
   - Irəlándə
   - Ireland (Republic Of)
   - ʻIlelani
-  - Carlow
-  - Kildare
-  - Meath
-  - Offaly
   - အိုင်ယာလန်
-  - Tipperary
   - آیرلند
-  - Kerry
   - Irlando
   - Ai -len
   - i -Ireland
   - Ірландія  # Írlandíâ
-  - Roscommon
   - Aelandi
   - אירלאַנד
   - ไอร์แลนด์
   - Irlandiya
-  - Galway
   - ఐర్లాండ్
   - Irska
   - આયર્લેન્ડ
   - IRELEND
   - Orílɛ́ède Ailandi
   - Iirimaa
-  - Dublin
   - Ayalan
   - Irlanḍa
   - אירלנד
   - Ayalandi
-  - Wicklow
   - Իռլանդիա # Iṙlandia
   - Uayalandi
   - Sǝr Ireland
-  - Wexford
   - IRELANND
   - ایرلند
   - அயர்லாந்து
   - അയർലാൻഡ്
   - ໄອຣ໌ແລນ
-  - Louth
   - Irish
-  - Limerick
   - Írország
   - Huayalandi
   - ಐರ್ಲೆಂಡ್
   - ئیرلەند
   - Eire
   - 愛爾蘭
-  - Waterford
   - Iwerddon
-  - Sligo
   - ᎠᎢᎴᏂᏗ
   - Ireland nutome
   - İrlanda
   - Éire-Irlande
-  - Monaghan
   - IRISH REPUBLIC
   - ਆਇਰਲੈਂਡ
-  - Longford
   - Aelɨ̀lân
   - Iwerzhon
   - ʻAealani
@@ -99,7 +82,6 @@ names_weak:
   - Ierland
   - អៀរឡង់
   - Irlandi
-  - Donegal
   - আয়ারল্যান্ড
   - Ierlân
   - Emetab Ireland
@@ -108,7 +90,6 @@ names_weak:
   - Irlanda
   - Ayaláandi
   - IRELD
-  - Clare
   - Irelandɛ
   - Irishwoman
   - Irlánda
@@ -127,30 +108,24 @@ names_weak:
   - आयरलैंड
   - አየርላንድ
   - ཨ་ཡར་ལནཌ།
-  - Kilkenny
   - Irlandë
   - Ірландыя # Írlandyâ
   - Ìrlând
   - Irlanti
   - 아일랜드 # aillaendeu
   - ⵉⵔⵍⴰⵏⴷⴰ
-  - Laois
   - ililánd
   - Īrija
   - Áre Lumaã
-  - Mayo
   - Ирска # Irska
   - Orílẹ́ède Ailandi
-  - Westmeath
   - THE REPUBLI C OF IRELAND
   - Irlânde
-  - Cavan
   - Éire-Ireland
   - ირლანდია # irlandia
-  - Leitrim
   - Ирланди # Irlandi
   - Èirinn
-  - Ирланд # Irland
+  - Ирланд  # Irland
   - ଆୟରଲ୍ୟାଣ୍ଡ
   - Irlandu
   - Aereland
@@ -163,6 +138,32 @@ names_weak:
   - آئرلینڈ
   - Irrland
   - Írsko
+places:
+  - Carlow
+  - Kildare
+  - Meath
+  - Offaly
+  - Tipperary
+  - Kerry
+  - Roscommon
+  - Galway
+  - Dublin
+  - Wicklow
+  - Wexford
+  - Louth
+  - Limerick
+  - Waterford
+  - Sligo
+  - Monaghan
+  - Longford
+  - Donegal
+  - Clare
+  - Kilkenny
+  - Laois
+  - Mayo
+  - Westmeath
+  - Cavan
+  - Leitrim
 langs:
   - eng
   - gle

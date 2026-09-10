@@ -46,7 +46,6 @@ names_weak:
   - ꖶꕟꕯꕜ
   - Hugrenada
   - گرٛنیڑا
-  - St. George's
   - Grenado
   - Grenady
   - เกรเนดา
@@ -100,10 +99,12 @@ names_weak:
   - Γρενάδα # Grenáda
   - گىرېنادا
   - Grenāda
-  - st georges
   - གྷ་རི་ན་ཌ།
   - ⵖⵔⵏⴰⵟⴰ
   - グレナダ
+places:
+  - St. George's
+  - st georges
 langs:
   - gcl
   - eng

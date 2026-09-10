@@ -125,5 +125,7 @@ names_weak:
   - Suriye
   - сириец # siriec
   - SURİYE
+places:
+  - Damascus
 langs:
   - ara

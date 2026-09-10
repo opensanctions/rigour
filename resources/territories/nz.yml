@@ -150,6 +150,8 @@ names_weak:
   - Nova Zelandija
   - Nýja-Sjáland
   - Nouvelle-Zélande
+places:
+  - Wellington
 langs:
   - eng
   - nzs

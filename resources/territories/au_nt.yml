@@ -6,7 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: au
 names_strong: []
-names_weak:
+names_weak: []
+places:
   - Darwin
 langs:
   - eng

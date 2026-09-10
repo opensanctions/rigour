@@ -36,7 +36,6 @@ names_weak:
   - ఫాక్ల్యాండ్ దీవులు
   - Na h -Eileanan Fàclannach
   - Фолклендан гӀайренаш # Folklendan gӀajrenaš
-  - East Falkland
   - Фолклендские о -ва # Folklendskie o -va
   - ꕘꔷꕃ ꖨꕮ ꔳꘋꗣ
   - i -Falkland Islands
@@ -45,7 +44,7 @@ names_weak:
   - Falkland Islands (Malvinas)
   - Falkland Adaları
   - หมู่เกาะฟอล์กแลนด์
-  - 포클랜드 제도 # pokeullaendeu jedo
+  - 포클랜드 제도            # pokeullaendeu jedo
   - ਫ਼ਾਕਲੈਂਡ ਟਾਪੂ
   - ஃபாக்லாந்து தீவுகள்
   - ຫມູ່ເກາະຟອກແລນ
@@ -111,7 +110,6 @@ names_weak:
   - Folklando Salos
   - Фолкленд аралдары    # Folklend araldary
   - Falklandinslä
-  - Stanley
   - جزایر فالکلند
   - የፎክላንድ ደሴቶች
   - Folklend Adaları
@@ -157,7 +155,6 @@ names_weak:
   - ଫଲ୍କଲ୍ୟାଣ୍ଡ ଦ୍ବୀପପୁଞ୍ଜ
   - ᏩᎩ ᏚᎦᏚᏛᎢ
   - Visíiwa vya Fakulandi
-  - West Falkland
   - ෆෝක්ලන්ත දූපත්
   - Folklandska Ostrva
   - Maŋ má Falkland
@@ -166,5 +163,9 @@ names_weak:
   - ফকল্যান্ড দ্বীপপুঞ্জ
   - Falkland Islands (UK) (Malvinas)
   - Фолклендские острова # Folklendskie ostrova
+places:
+  - Stanley
+  - East Falkland
+  - West Falkland
 langs:
   - eng

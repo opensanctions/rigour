@@ -40,7 +40,6 @@ names_weak:
   - Àrgàŋtinà
   - ᎠᏥᏂᏘᏂᎠ
   - Arjantiin
-  - Buenos Aires
   - ئارجەنتینا
   - Argentine
   - Àdzɛ̀ntinà
@@ -117,5 +116,7 @@ names_weak:
   - Huajendina
   - Ajjentiinije
   - अर्जेन्टिना
+places:
+  - Buenos Aires
 langs:
   - spa

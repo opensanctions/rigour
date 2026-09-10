@@ -149,7 +149,6 @@ names_weak:
   - Өмнөд Африк тив            # Ömnöd Afrik tiv
   - दक्षिण अफ़्रीका
   - Оңтүстік Африка Республикасы # Oňtüstík Afrika Respublikasy
-  - Johannesburg
   - Afirika Kɔi Leŋŋɛ Lɔ
   - Հարավաֆրիկյան Հանրապետություն # Haravafrikyan Hanrapetutʻyun
   - Afrika du Sulu
@@ -166,6 +165,9 @@ names_weak:
   - De Affrica
   - Suður-Afríka
   - Южно-Африканская Республика # Ûžno-Afrikanskaâ Respublika
+places:
+  - Johannesburg
+  - Pretoria
 langs:
   - sfs
   - zul

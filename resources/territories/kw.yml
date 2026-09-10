@@ -43,7 +43,6 @@ names_weak:
   - Koweti
   - Orílɛ́ède Kuweti
   - Kowɛ́d
-  - Kuwait City
   - Кувајт # Kuvaǰt
   - Kueiti
   - Kuweiti
@@ -106,5 +105,7 @@ names_weak:
   - Кувейт # Kuvejt
   - ᎫᏪᎢᏘ
   - クウェート
+places:
+  - Kuwait City
 langs:
   - ara

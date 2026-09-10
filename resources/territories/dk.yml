@@ -76,7 +76,6 @@ names_weak:
   - Denemarke
   - Københavner
   - ඩෙන්මාර්කය
-  - Copenhagen
   - Danija
   - Danimariki
   - ડેનમાર્ક
@@ -128,6 +127,8 @@ names_weak:
   - Daŋmark
   - Danemêrke
   - DANİMARKA
+places:
+  - Copenhagen
 langs:
   - fao
   - kal

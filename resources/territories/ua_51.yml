@@ -12,9 +12,10 @@ names_weak:
   - Odesa  # Odesʹka oblastʹ
   - Odessa # Odesskaâ oblastʹ
   - Odessa Oblast
-  - Odessa, Ukraine
   - Odesa region
   - Odessa region
+places:
+  - Odessa, Ukraine
 langs:
   - ukr
   - rus

@@ -39,7 +39,6 @@ names_weak:
   - Indoneezi
   - Индонези # Indonezi
   - 인도네시아 # indonesia
-  - Jakarta
   - An Indinéis
   - इन्डोनेशिया
   - Índonisiya
@@ -121,5 +120,7 @@ names_weak:
   - Indonezio
   - Indónesía
   - ઇન્ડોનેશિયા
+places:
+  - Jakarta
 langs:
   - ind

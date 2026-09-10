@@ -22,7 +22,6 @@ names_weak:
   - Orílɛ́ède Mali
   - Մալի  # Mali
   - Māli
-  - Malè
   - マリ共和国
   - 말리    # malli
   - Malio
@@ -73,6 +72,8 @@ names_weak:
   - Малі # Malí
   - ମାଳୀ
   - מאלי
+places:
+  - Bamako
 langs:
   - taq
   - bam

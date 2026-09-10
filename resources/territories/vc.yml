@@ -162,5 +162,7 @@ names_weak:
   - 圣文森特和格林纳丁斯
   - Saint-Vincent-et-les-Grenadines
   - Сент-Винсент и Гренадины     # Sent-Vinsent i Grenadiny
+places:
+  - Kingstown
 langs:
   - eng

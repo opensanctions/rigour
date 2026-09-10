@@ -8,5 +8,6 @@ parent: cn
 qid: Q45208
 names_strong:
   - 吉林 # Jílín
-  - 长春 # Chángchūn
 names_weak: []
+places:
+  - 长春 # Chángchūn

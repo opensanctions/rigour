@@ -8,5 +8,6 @@ parent: cn
 qid: Q46913
 names_strong:
   - 山西 # Shānxī
-  - 太原 # Tàiyuán
 names_weak: []
+places:
+  - 太原 # Tàiyuán

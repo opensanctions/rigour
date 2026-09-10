@@ -114,5 +114,7 @@ names_weak:
   - Tazikisita
   - Тожикистон  # Tožikiston
   - TACİKİSTAN
+places:
+  - Dushanbe
 langs:
   - tgk

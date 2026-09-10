@@ -21,7 +21,6 @@ names_strong:
 names_weak:
   - Pakištan
   - Pakistani
-  - Balochistan
   - Emetab Pakistan
   - Pakisitáani
   - ប៉ាគីស្ថាន
@@ -88,7 +87,6 @@ names_weak:
   - ⴱⴰⴽⵉⵙⵜⴰⵏ
   - Pakischtan
   - Pakistán
-  - Karachi, Pakistan
   - Пәкістан # Pəkístan
   - پاکِستان
   - פקיסטן
@@ -104,6 +102,10 @@ names_weak:
   - Orílɛ́ède Pakisitan
   - པཀི་སྟཱན།
   - Pakisətán
+places:
+  - Balochistan
+  - Karachi, Pakistan
+  - Islamabad
 langs:
   - urd
   - eng

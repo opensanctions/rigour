@@ -8,7 +8,8 @@ parent: br
 names_strong:
   - Parana
   - Estado do Paraná
-names_weak:
+names_weak: []
+places:
   - Curitiba
 langs:
   - por

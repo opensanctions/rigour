@@ -32,7 +32,6 @@ names_weak:
   - ソマリア
   - Somaalije
   - סאמאַליע
-  - Могадишу, Сомалия # Mogadišu, Somaliâ
   - Ṣumal
   - Somaali
   - Sòmalìà
@@ -58,7 +57,6 @@ names_weak:
   - 索马里
   - Husomalia
   - Somaalia
-  - Mogadishu, Somalia
   - Somalïi
   - صومالیہ
   - সোমালিয়া
@@ -107,6 +105,10 @@ names_weak:
   - i -Somalia
   - Somali Democratic Republic
   - Сомалия # Somaliâ
+places:
+  - Mogadishu
+  - Mogadishu, Somalia
+  - Могадишу, Сомалия  # Mogadišu, Somaliâ
 langs:
   - som
   - ara

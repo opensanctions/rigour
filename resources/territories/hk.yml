@@ -27,8 +27,6 @@ names_strong:
 names_weak:
   - हाँगकाँग एसएआर चीन
   - Hong Kong AEB Txina
-  - Tai Po
-  - Sha Tin
   - Қытай Халық Республикасының Гонг -Конг арнайы әкімшілік ауданы # Kˌytaj Halykˌ Respublikasynyň Gong -Kong arnajy əkímšílík audany
   - Hongkong – Kiinan e.h.a.                                       # hong kong
   - हाँगकाँग विशेष प्रशासनिक क्षेत्र चीन
@@ -42,9 +40,7 @@ names_weak:
   - Hongkong SAR
   - ہانٛگ کانٛگ ایس اے آر چیٖن
   - Hongi Kongi SAR Siaina
-  - Yau Tsim Mong
   - Hēunggóng
-  - Yuen Long
   - ຮອງກົງ ເຂດປົກຄອງພິເສດ ຈີນ
   - S.R.R. na Síne Hong Cong
   - 中国香港特别行政区
@@ -60,9 +56,7 @@ names_weak:
   - Hong Kong RMD Sina
   - Honkonga
   - Հոնկոնգի ՀՎՇ                                                   # Honkongi HVŠ
-  - Tsuen Wan
   - Hong Kong, China
-  - Tuen Mun
   - Ypatingasis Administracinis Kinijos Regionas Honkongas
   - Hong Kong (RAE)
   - ஹாங்காங் எஸ்ஏஆர் சீனா
@@ -73,7 +67,6 @@ names_weak:
   - တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ ဟောင်ကောင်
   - Хонконг, САР на Китай                     # Honkong, SAR na Kitaj
   - БНХАУ -ын Тусгай захиргааны бүс Хонг Конг # BNHAU -yn Tusgaj zahirgaany büs Hong Kong
-  - Wong Tai Sin
   - Гонконг (ша -къаьстина кӀошт)             # Gonkong (ša -kʺaʹstina kӀošt)
   - Hongkong, S.A.R. Kina
   - Hɔng Kɔng SAR Tsaina nutome
@@ -84,8 +77,6 @@ names_weak:
   - Honq Konq Xüsusi İnzibati Ərazi Çin
   - Специальный административный район Гонконг Китайской Народной Республики # Specialʹnyj administrativnyj rajon Gonkong Kitajskoj Narodnoj Respubliki
   - British Hong Kong
-  - Wan Chai
-  - Kowloon City
   - Hongkong SAR Kína
   - హాంకాంగ్ ఎస్ఏఆర్ చైనా
   - ARE China de Ḥong Kong
@@ -95,7 +86,6 @@ names_weak:
   - Hong Kong SAR China
   - RAS di Hong Kong
   - Hong Kong SAR Kina
-  - Sham Shui Po
   - Χονγκ Κονγκ ΕΔΠ Κίνας                     # Chon'nk Kon'nk EDP Kínas
   - Hong Kong RhGA Tsieina
   - RAE de Hong Kong (China)
@@ -117,7 +107,6 @@ names_weak:
   - Гонконг, О.А.Р. Китаю                     # Gonkong, O.A.R. Kitaû
   - RVAK i Hong Kongut
   - Хонг Конг С. А. Р. Кина                   # Hong Kong S. A. R. Kina
-  - Kwun Tong
   - හොංකොං චීන විශේෂ පරිපාලන කලාපය
   - Hongkongish
   - هنگکنگ، ناحیهٔ ویژهٔ حکومتی چین
@@ -148,13 +137,25 @@ names_weak:
   - China, Hong Kong Special Administrative Region
   - Regiun d’administraziun speziala da Hongkong, China
   - Хонг Конг С.А.Р Кина # Hong Kong S.A.R Kina
-  - Kwai Tsing
   - Sonderverwaltigszona Hongkong
-  - Sai Kung
   - HONG KONG S.A.R.
   - Hongkong – OAO Číny
   - હોંગકોંગ SAR ચીન
   - Hongkong SAR van Sina
+places:
+  - Tai Po
+  - Sha Tin
+  - Yau Tsim Mong
+  - Yuen Long
+  - Tsuen Wan
+  - Tuen Mun
+  - Wong Tai Sin
+  - Wan Chai
+  - Kowloon City
+  - Sham Shui Po
+  - Kwun Tong
+  - Kwai Tsing
+  - Sai Kung
 langs:
   - cmn
   - zho

@@ -8,5 +8,6 @@ parent: cn
 qid: Q57052
 names_strong:
   - 江西 # Jiāngxī
-  - 南昌 # Nánchāng
 names_weak: []
+places:
+  - 南昌 # Nánchāng

@@ -18,6 +18,13 @@ names_strong:
   - Cymreig
   - Cymru
 names_weak:
+  - Welshwoman
+  - Cymro
+  - Welsh
+  - Gales
+  - Cymry
+  - GBWLS
+places:
   - Bcshire
   - Cthen
   - Caernarfonshire
@@ -26,7 +33,6 @@ names_weak:
   - Flints
   - Brecknockshire
   - Denbighshire
-  - Welshwoman
   - Carn
   - Monshire
   - Carms
@@ -38,7 +44,6 @@ names_weak:
   - Dyfed
   - Gwynedd
   - Carmarthenshire
-  - Cymro
   - Brecknock
   - Carnarvonshire
   - Merionethshire
@@ -46,12 +51,10 @@ names_weak:
   - Radnor
   - Brecon
   - Montgomery
-  - Welsh
   - Caernarvon
   - Pembrokeshire
   - Merioneth
   - Cardiganshire
-  - Gales
   - Carnarvon
   - Mid Glamorgan
   - Carmarthen
@@ -62,14 +65,13 @@ names_weak:
   - Clwyd
   - Anglesey
   - Wrexham
-  - Cymry
   - Cardigan
   - Brecks
   - Card's
   - Pembroke
-  - GBWLS
   - Cards
   - Glamorganshire
+  - Cardiff
 langs:
   - eng
   - cym

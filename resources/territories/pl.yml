@@ -138,5 +138,7 @@ names_weak:
   - Полша             # Polša
   - Polonja
   - Upolandi
+places:
+  - Warsaw
 langs:
   - pol

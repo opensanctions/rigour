@@ -85,14 +85,12 @@ names_weak:
   - Bearmùda
   - de Bermudas
   - ເບີມິວດາ
-  - Main Island
   - בערמודע
   - Bɛ̀rmudà
   - बर्मुडा
   - 버뮤다    # beomyuda
   - Bɛrəmúd
   - Βερμούδες # Bermoúdes
-  - Hamilton
   - බර්මියුඩා
   - Bamuda
   - ⴱⵔⵎⵓⴷⴰ
@@ -108,5 +106,8 @@ names_weak:
   - Belimuda
   - Бермуда # Bermuda
   - Bermuda (GB)
+places:
+  - Main Island
+  - Hamilton
 langs:
   - eng

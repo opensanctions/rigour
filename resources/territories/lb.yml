@@ -20,15 +20,14 @@ names_weak:
   - Líbanu
   - Libanus
   - Li -băng
-  - بيروت # Bayrūt
   - ꔒꕑꗟꘋ
   - لٮ۪بنان
-  - Ливан # Livan
+  - Ливан  # Livan
   - לבנון
   - លីបង់
   - లెబనాన్
   - ලෙබනනය
-  - 레바논   # lebanon
+  - 레바논 # lebanon
   - Lebhanoni
   - ເລບານອນ
   - Libùaan
@@ -39,7 +38,6 @@ names_weak:
   - Либан # Liban
   - An Liobáin
   - Lebanɔn nutome
-  - Beirut
   - ლიბანი # libani
   - Lepanoni
   - Labanan
@@ -102,6 +100,9 @@ names_weak:
   - ᎴᏆᎾᏂ
   - Libanon
   - Ulebanoni
+places:
+  - Beirut
+  - بيروت # Bayrūt
 langs:
   - ara
   - fra

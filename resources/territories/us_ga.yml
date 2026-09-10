@@ -12,9 +12,10 @@ names_strong:
   - Georgia, US
   - Georgia, GA
 names_weak:
-  - Atlanta, GA
   - Georgia, United States of America
   - Джорджия       # Džordžiâ
   - Джорджия (США) # Džordžiâ (SŠA)
   - Géorgie (États-Unis)
   - Georgia (Estados Unidos)
+places:
+  - Atlanta, GA

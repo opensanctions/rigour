@@ -8,7 +8,8 @@ parent: au
 names_strong:
   - State of Victoria
   - Victoria, Australia
-names_weak:
+names_weak: []
+places:
   - Melbourne
 langs:
   - eng

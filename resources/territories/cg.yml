@@ -15,8 +15,7 @@ summary: >-
   southeast by the Democratic Republic of the Congo, to its south by the Angolan exclave
   of Cabinda and to its southwest by the Atlantic Ocean.
 wikipedia_url: https://en.wikipedia.org/wiki/Congo_-_Brazzaville
-names_strong:
-  - Brazzaville
+names_strong: []
 names_weak:
   - ਕਾਂਗੋ - ਬ੍ਰਾਜ਼ਾਵਿਲੇ
   - Kungu
@@ -126,5 +125,7 @@ names_weak:
   - Kongó-Brazzaville
   - République du Congo
   - Kongo Cumhuriyeti
+places:
+  - Brazzaville
 langs:
   - fra

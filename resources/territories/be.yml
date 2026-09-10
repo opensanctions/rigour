@@ -123,14 +123,15 @@ names_weak:
   - Βέλγιο # Bélgio
   - Beljika
   - Belgiya
-  - Brussels
-  - Brussels, Belgium
   - بلژیک
   - Beljik
   - बेल्जियम
   - ବେଲଜିୟମ୍
   - Belǧik
   - BELÇİKA
+places:
+  - Brussels
+  - Brussels, Belgium
 langs:
   - fra
   - deu

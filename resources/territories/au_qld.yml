@@ -8,7 +8,8 @@ parent: au
 names_strong:
   - QLD
   - State of Queensland
-names_weak:
+names_weak: []
+places:
   - Brisbane
 langs:
   - eng

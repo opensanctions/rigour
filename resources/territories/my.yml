@@ -28,7 +28,6 @@ names_weak:
   - ਮਲੇਸ਼ੀਆ
   - Malaidhsea
   - మలేషియా
-  - KUALA LUMPUR
   - Malaysiab
   - ମାଲେସିଆ
   - Malaisiya
@@ -52,7 +51,6 @@ names_weak:
   - ᎹᎴᏏᎢᎠ
   - Malizya
   - مالايشىيا
-  - MELAKA
   - ម៉ាឡេស៊ី
   - مالزی
   - Малайзія # Malajzíâ
@@ -120,5 +118,8 @@ names_weak:
   - მალაიზია # malaizia
   - Malaisia
   - מאלזיה
+places:
+  - KUALA LUMPUR
+  - MELAKA
 langs:
   - msa

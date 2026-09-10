@@ -12,8 +12,9 @@ names_weak:
   - Dnipropetrovsk # Dnípropetrovsʹka oblastʹ
   - Dnepropetrovsk # Dnepropetrovskaâ oblastʹ
   - Dnepropetrovsk Oblast
-  - Dnipro
   - Dnipropetrovsk region
+places:
+  - Dnipro
 langs:
   - ukr
   - rus

@@ -102,6 +102,8 @@ names_weak:
   - Fijisullot
   - Фиџи # Fid̂i
   - Fídjieyjar
+places:
+  - Suva
 langs:
   - eng
   - fij

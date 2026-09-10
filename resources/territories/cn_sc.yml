@@ -8,5 +8,6 @@ parent: cn
 qid: Q19770
 names_strong:
   - 四川 # Sìchuān
-  - 成都 # Chéngdū
 names_weak: []
+places:
+  - 成都 # Chéngdū

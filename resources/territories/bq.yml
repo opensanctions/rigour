@@ -19,7 +19,6 @@ names_weak:
   - 荷兰加勒比区
   - Pays -Bas caribéens
   - Karibiese Nederland
-  - saba
   - Caribe neerlandés
   - Karipska Holandija
   - კარიბის ნიდერლანდები  # kʼaribis niderlandebi
@@ -56,7 +55,6 @@ names_weak:
   - Insulele Caraibe Olandeze
   - Na Tìrean Ìsle Caraibeach
   - කැරිබියානු නෙදර්ලන්තය
-  - Sint Eustatius
   - Caraibi Olandesi
   - Кариб Нидерландияси # Karib Niderlandiâsi
   - Karibbeatɔwo ƒe Nedalanɖs nutome
@@ -91,7 +89,6 @@ names_weak:
   - كارىب دېڭىزى گوللاندىيە
   - Карыбскія Нідэрланды # Karybskíâ Nídérlandy
   - An Ísiltír Chairibeach
-  - Bonaire
   - Karibescht Holland
   - Caribbean Netherlands
   - Кариб Нидерландысы # Karib Niderlandysy
@@ -106,6 +103,10 @@ names_weak:
   - Kalipiane fakahōlani
   - 荷蘭加勒比區
   - Кариб Нидерланддары # Karib Niderlanddary
+places:
+  - saba
+  - Sint Eustatius
+  - Bonaire
 langs:
   - eng
   - pap

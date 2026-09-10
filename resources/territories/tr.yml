@@ -107,7 +107,6 @@ names_weak:
   - Törökország
   - Turukiya
   - Tierkei
-  - Istanbul
   - תורכיה
   - TURKISH REPUBLIC OF NORTH
   - Toake
@@ -150,5 +149,8 @@ names_weak:
   - ତୁର୍କୀ
   - ቱርክ
   - Orílẹ́ède Tọọki
+places:
+  - Ankara
+  - Istanbul
 langs:
   - tur

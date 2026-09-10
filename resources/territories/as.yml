@@ -19,11 +19,9 @@ names_weak:
   - Amerikan Samoası
   - ⵙⴰⵎⵡⴰ ⵜⴰⵎⵉⵔⵉⴽⴰⵏⵉⵜ
   - Samoa américaines
-  - Manuʻa islands
   - Samowa Ameerika
   - ساموا الأمريكية
   - અમેરીકન સમોઆ
-  - Rose Atoll
   - samwa tamirikanit
   - Sámóánì ti Orílɛ́ède Àméríkà
   - Samoa m ́Amɛ́rka
@@ -145,8 +143,6 @@ names_weak:
   - ꕶꕱ ꕢꕹꕎ
   - அமெரிக்க சமோவா
   - Samó Meiriceánach
-  - tutuila
-  - Swains Island
   - Husamoa ya Humalekani
   - Thamoa ya Marekani
   - Samoa Nord -americana
@@ -154,6 +150,11 @@ names_weak:
   - Американдық Самоа # Amerikandykˌ Samoa
   - Samoya ya Malekani
   - Samowa ya Amerika
+places:
+  - Manuʻa islands
+  - Rose Atoll
+  - tutuila
+  - Swains Island
 langs:
   - eng
   - smo

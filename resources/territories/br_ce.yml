@@ -8,7 +8,8 @@ parent: br
 names_strong:
   - Ceara
   - Estado do Ceará
-names_weak:
+names_weak: []
+places:
   - Fortaleza
 langs:
   - por

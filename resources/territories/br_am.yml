@@ -7,7 +7,8 @@ is_jurisdiction: true
 parent: br
 names_strong:
   - Estado do Amazonas
-names_weak:
+names_weak: []
+places:
   - Manaus
 langs:
   - por

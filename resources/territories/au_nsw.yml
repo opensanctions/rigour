@@ -8,7 +8,8 @@ parent: au
 names_strong:
   - NSW
   - State of New South Wales
-names_weak:
+names_weak: []
+places:
   - Sydney
 langs:
   - eng

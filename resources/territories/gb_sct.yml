@@ -16,21 +16,27 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Scotland
 names_strong: []
 names_weak:
-  - Nairnshire
   - Scottland
-  - Shetland
   - Шотландія  # Šotlandíâ
+  - Scottish
+  - Escocia
+  - Scotswoman
+  - GBSCT
+  - Kingdom of Scotland
+  - alba
+  - Scotish
+  - Scotsman
+places:
+  - Nairnshire
+  - Shetland
   - Kincardineshire♠
   - Kirkcudbrightshire♠
   - Midlothian
   - Dunbartonshire
-  - Scottish
   - Haddingtonshire
   - Renfrewshire
   - Wigtownshire
-  - Escocia
   - Lanarkshire
-  - Scotswoman
   - Selkirkshire
   - Linlithgowshire
   - Aberdeenshire
@@ -43,7 +49,6 @@ names_weak:
   - Glasgow
   - Perthshire
   - Stirlingshire
-  - GBSCT
   - Orkney
   - Zetland
   - Inverness
@@ -51,18 +56,14 @@ names_weak:
   - Angus
   - Banffshire
   - Lothian
-  - Kingdom of Scotland
   - Kinross-shire
-  - alba
   - Ross and Cromarty
   - Ross-shire
   - Roxburghshire
   - Elginshire
   - Cromartyshire
   - Peeblesshire
-  - Scotish
   - Sutherland
-  - Scotsman
   - Fife
   - Dumbarton
   - Ayrshire

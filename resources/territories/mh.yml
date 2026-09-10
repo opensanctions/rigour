@@ -111,7 +111,6 @@ names_weak:
   - Marshallsullot
   - Isole Marshall
   - მარშალის კუნძულები # marshalis kʼundzulebi
-  - Majuro
   - Islles Marshall
   - Ebizinga bya Marshaa
   - Tsibiran Marshal
@@ -162,6 +161,8 @@ names_weak:
   - Orílɛ́ède Etikun Máshali
   - Marshallinselen
   - Orílẹ́ède Etikun Máṣali
+places:
+  - Majuro
 langs:
   - eng
   - mah

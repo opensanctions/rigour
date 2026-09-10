@@ -9,7 +9,7 @@ qid: Q5824
 names_strong:
   - Тюменская область          # Tûmenskaâ oblastʹ
   - Тюменская область (Россия) # Tûmenskaâ oblastʹ (Rossiâ)
-names_weak:
   - Tyumen        # Tûmenskaâ oblastʹ
-  - Tyumen Region # Tûmenskaâ oblastʹ (Rossiâ)
   - Тюмень        # Tûmenʹ
+names_weak:
+  - Tyumen Region # Tûmenskaâ oblastʹ (Rossiâ)

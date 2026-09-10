@@ -108,5 +108,7 @@ names_weak:
   - Monqoliya
   - Mɔngɔ́lia
   - Монгол # Mongol
+places:
+  - Ulaanbaatar
 langs:
   - mon

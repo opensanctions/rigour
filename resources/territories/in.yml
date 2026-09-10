@@ -60,7 +60,6 @@ names_weak:
   - ھىندىستان
   - بھارت
   - ህንድ
-  - Pondicherry
   - Índiya
   - Ênnde
   - Hind
@@ -124,6 +123,9 @@ names_weak:
   - і҆́ндїа # í҆́ndí̈a
   - Indija
   - Ấn Độ
+places:
+  - Pondicherry
+  - New Delhi
 langs:
   - hin
   - eng

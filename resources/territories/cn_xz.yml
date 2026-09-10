@@ -17,7 +17,6 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Tibet
 names_strong:
   - 西藏 # Xīzàng
-  - 拉萨 # Lāsà
 names_weak:
   - Hongqiao
   - Binhai
@@ -38,6 +37,8 @@ names_weak:
   - Ninghe
   - Tibetan
   - Tientsin
+places:
+  - 拉萨 # Lāsà
 langs:
   - bod
   - zho

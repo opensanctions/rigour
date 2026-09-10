@@ -26,7 +26,6 @@ names_weak:
   - Georgian
   - Géorgie ( Rép. )
   - Gürcüstan
-  - Tbilisi, Georgia
   - జార్జియా
   - גאורגיה
   - ᏣᎠᏥᎢ
@@ -42,7 +41,6 @@ names_weak:
   - Jeorgii
   - Jiyurji
   - Гуырдзыстон # Guyrdzyston
-  - Tbilisi
   - A’ Chairtbheil
   - Orílẹ́ède Gọgia
   - jurjya
@@ -141,6 +139,9 @@ names_weak:
   - Jójia
   - Géorgie
   - জর্জিয়া
+places:
+  - Tbilisi, Georgia
+  - Tbilisi
 langs:
   - abk
   - kat

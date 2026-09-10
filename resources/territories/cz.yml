@@ -141,7 +141,6 @@ names_weak:
   - i -Czech Republic
   - චෙක් ජනරජය
   - চেক প্রজাতন্ত্র
-  - Prague
   - Jamhuli ya Cheki
   - Repibiki Tsekɛ
   - Orílẹ́ède ṣẹ́ẹ́kì
@@ -169,5 +168,7 @@ names_weak:
   - செக் குடியரசு
   - Tchéquie
   - Çekya
+places:
+  - Prague
 langs:
   - ces

@@ -130,6 +130,8 @@ names_weak:
   - มัลดีฟส์
   - Мальдиваш           # Malʹdivaš
   - მალდივის რესპუბლიკა # maldivis respʼublikʼa
+places:
+  - Malé
 langs:
   - div
   - eng

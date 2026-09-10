@@ -130,7 +130,6 @@ names_weak:
   - АКШнын сырткы аралдары             # AKŠnyn syrtky araldary
   - Ilhas Menores Afastadas dos EUA
   - USAs ytre småøyar
-  - Wake Island
   - సంయుక్త రాజ్య అమెరికా బయట ఉన్న దీవులు
   - Isulis periferichis minôrs dai Stâts Unîts
   - யூ.எஸ். வெளிப்புற தீவுகள்
@@ -151,5 +150,7 @@ names_weak:
   - સંયુક્ત રાજ્ય આઉટલાઇંગ આયલેન્ડ્સ
   - AQSH yondosh orollari
   - Illes Perifèriques Menors dels EUA
+places:
+  - Wake Island
 langs:
   - eng

@@ -29,7 +29,6 @@ names_weak:
   - ბაჰამის კუნძულები # bahamis kʼundzulebi
   - Bahamas nutome
   - Багамы # Bagamy
-  - Nassau
   - ꕑꕌꕮꔻ
   - Bahamasɛ
   - Bhahamas
@@ -55,11 +54,9 @@ names_weak:
   - Emetab Bahamas
   - Pahama
   - Hubahama
-  - New Providence
   - Bahamian
   - Багама ороллари # Bagama orollari
   - बहामा
-  - New Providence Island
   - Baamas
   - بَہامَس
   - ⴱⴰⵀⴰⵎⴰⵙ
@@ -114,5 +111,9 @@ names_weak:
   - de Bahamas
   - ബഹാമാസ്
   - Багам аралдары # Bagam araldary
+places:
+  - Nassau
+  - New Providence
+  - New Providence Island
 langs:
   - eng

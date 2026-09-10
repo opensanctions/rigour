@@ -8,5 +8,6 @@ parent: cn
 qid: Q21208
 names_strong:
   - 河北 # Héběi
-  - 石家庄 # Shíjiāzhuāng
 names_weak: []
+places:
+  - 石家庄 # Shíjiāzhuāng

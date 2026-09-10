@@ -19,7 +19,6 @@ names_strong:
 names_weak:
   - Selusī
   - ජර්සි
-  - saint aubin
   - Džērsija
   - জার্সি
   - Džersi
@@ -36,9 +35,7 @@ names_weak:
   - 泽西岛
   - 澤西島
   - जर्सी
-  - st helier
   - ဂျာစီ
-  - St. Mary
   - جېرسېي
   - Jersi
   - جيرسي
@@ -47,11 +44,8 @@ names_weak:
   - Ջերսի  # J̌ersi
   - Τζέρζι # Tzérzi
   - جٔرسی
-  - saint john
   - Dschörsi
   - ଜର୍ସି
-  - st john
-  - gorey
   - Dzɛse nutome
   - ג׳רסי
   - JARSEY
@@ -63,16 +57,13 @@ names_weak:
   - Джърси # Džʺrsi
   - ジャージー
   - Bailliage de Jersey
-  - saint mary
   - ಜೆರ್ಸಿ
   - 저지     # jeoji
   - เจอร์ซีย์
   - ጀርሲ
   - דזשערזי
-  - st aubin
   - Džersis
   - జెర్సీ
-  - Saint Helier
   - Востраў Джэрсі # Vostraŭ Džérsí
   - Bailliage dé Jèrri
   - ជឺស៊ី
@@ -80,5 +71,15 @@ names_weak:
   - Джерсі # Džersí
   - Jööseh
   - ເຈີຊີ
+places:
+  - saint aubin
+  - st aubin
+  - Saint Helier
+  - st helier
+  - saint john
+  - st john
+  - saint mary
+  - St. Mary
+  - gorey
 langs:
   - eng

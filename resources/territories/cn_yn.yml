@@ -8,5 +8,6 @@ parent: cn
 qid: Q43194
 names_strong:
   - 云南 # Yúnnán
-  - 昆明 # Kūnmíng
 names_weak: []
+places:
+  - 昆明 # Kūnmíng

@@ -10,7 +10,8 @@ names_strong:
   - Tessin
   - Ticino (Svizzera)
   - Ticino (Schweiz)
-names_weak:
+names_weak: []
+places:
   - Lugano
 langs:
   - ita

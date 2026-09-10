@@ -15,6 +15,7 @@ wikipedia_url: https://en.wikipedia.org/wiki/Cape_Verde
 names_strong:
   - Cabo Verde
   - República de Cabo Verde
+  - Republic of Cape Verde
 names_weak:
   - Zelenortski otoki
   - कैप वेर्दे
@@ -88,14 +89,12 @@ names_weak:
   - ኬፕ ቬርዴ
   - Kapp Verde
   - Капе Верде  # Kape Verde
-  - Ilha Do Sal
   - An Ceap Uaine
   - Capul Verde
   - Azûâ tî Kâpo -Vêre
   - 카보베르데       # kabobeleude
   - కేప్ వెర్డే
   - Ikwembeyotab Cape Verde
-  - Republic of Cape Verde
   - Cape Verdian
   - کەیپڤەرد
   - Ebizinga bya Kepuvade
@@ -121,7 +120,6 @@ names_weak:
   - کیپ ورڈی
   - Kap Verde
   - Կաբո Վերդե  # Kabo Verde
-  - Island Of Sal
   - केप भर्डे
   - Minlán Mí Káb Vɛr
   - Kaap Verde
@@ -139,6 +137,10 @@ names_weak:
   - Cap-Vert
   - Кабо-Верде  # Kabo-Verde
   - Yeşil Burun Adaları
+places:
+  - Ilha Do Sal
+  - Island Of Sal
+  - Praia
 langs:
   - kea
   - por

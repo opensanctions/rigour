@@ -24,7 +24,6 @@ names_weak:
   - Mosambiik
   - Muzambiq
   - Mosambiek
-  - Maputo
   - મોઝામ્બિક
   - Umozambiki
   - മൊസാംബിക്ക്
@@ -105,5 +104,7 @@ names_weak:
   - Мазамбік  # Mazambík
   - 莫三比克
   - Մոզամբիկ  # Mozambik
+places:
+  - Maputo
 langs:
   - por

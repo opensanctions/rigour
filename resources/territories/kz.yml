@@ -122,6 +122,8 @@ names_weak:
   - Kazaxistan
   - ကာဇက်စတန်
   - Казахстан   # Kazahstan
+places:
+  - Astana
 langs:
   - rus
   - kaz

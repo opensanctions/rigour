@@ -20,18 +20,15 @@ names_strong:
   - Macau
   - 澳門 # Àomén
 names_weak:
-  - Nossa Senhora de Fátima
   - ມາເກົ້າ ເຂດປົກຄອງພິເສດ ຈີນ
   - ماکائو، ناحیهٔ ویژهٔ حکومتی چین
   - 中華人民共和国マカオ特別行政区
   - Makáo
-  - São Francisco Xavier
   - တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ မကာအို
   - مكاو الصينية (منطقة إدارية خاصة)
   - ماکاو
   - Macau (RAE Xina)
   - ᎹᎧᎣ (ᎤᏓᏤᎵᏓ ᏧᏂᎸᏫᏍᏓᏁᏗ ᎢᎬᎾᏕᎾ) ᏣᎢ
-  - Nossa Senhora do Carmo
   - 마카오(중국 특별행정구)  # makao(jung-gug teugbyeolhaengjeong-gu)
   - 中華人民共和國澳門特別行政區
   - Macao, S.A.R. Kina
@@ -40,11 +37,9 @@ names_weak:
   - Wosebita zarjadniska cona Macao
   - Қытай Халық Республикасының Макао арнайы әкімшілік ауданы # Kˌytaj Halykˌ Respublikasynyň Makao arnajy əkímšílík audany
   - Macao – ZAO Číny
-  - Santo António
   - ಮಖಾವ್ (SAR) ಚೈನಾ
   - Makao SAR Kina
   - Região Administrativa Especial de Macau da República Popular da China
-  - Zona do Aterro de Cotai
   - Makaó SAR Kína
   - Región Administrativa Especial de Macao de la República Popular China
   - เขตปกครองพิเศษมาเก๊าแห่งสาธารณรัฐประชาชนจีน
@@ -77,7 +72,6 @@ names_weak:
   - БНХАУ -ын Тусгай захиргааны бүс Макао # BNHAU -yn Tusgaj zahirgaany büs Makao
   - మాకావ్ ఎస్ఏఆర్ చైనా
   - China, Macao Special Administrative Region
-  - São Lázaro
   - ମାକାଉ SAR ଚିନ୍
   - මකාවු චීන විශේෂ පරිපාලන කලාපය
   - i -Macau SAR China
@@ -124,7 +118,6 @@ names_weak:
   - SRA Makau (Chiny)
   - Макао, О.А.Р Китаю  # Makao, O.A.R Kitaû
   - Makao Xüsusi İnzibati Ərazi Çin
-  - São Lourenço
   - Ypatingasis Administracinis Kinijos Regionas Makao
   - RVAK i Makaos
   - RAS di Macao
@@ -141,6 +134,14 @@ names_weak:
   - Makau SAR China
   - Macau SAR China
   - SAR Makao (Kina)
+places:
+  - Nossa Senhora de Fátima
+  - São Francisco Xavier
+  - Nossa Senhora do Carmo
+  - Santo António
+  - Zona do Aterro de Cotai
+  - São Lázaro
+  - São Lourenço
 langs:
   - cmn
   - zho

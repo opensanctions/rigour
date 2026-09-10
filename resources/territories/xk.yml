@@ -34,6 +34,8 @@ names_weak:
   - Republic of Kosova
   - Kósóvó
   - Косово            # Kosovo
+places:
+  - Pristina
 langs:
   - sqi
   - srp

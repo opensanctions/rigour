@@ -81,7 +81,6 @@ names_weak:
   - ניגעריע
   - نىگېرىيە
   - nisélia
-  - Oyo State
   - Нігерія # Nígeríâ
   - An Nigéir
   - Нігерыя # Nígeryâ
@@ -122,5 +121,8 @@ names_weak:
   - Nayijerya
   - Naĩjiriya
   - নাইজেরিয়া
+places:
+  - Oyo State
+  - Abuja
 langs:
   - eng

@@ -9,9 +9,10 @@ names_strong:
   - Bayern
   - Freistaat Bayern
 names_weak:
-  - München
-  - Munich
   - Baviera
   - Bavière
+places:
+  - München
+  - Munich
 langs:
   - deu

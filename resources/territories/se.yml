@@ -108,7 +108,6 @@ names_weak:
   - Iswidhan
   - Suwedan
   - Stockholmer
-  - Stockholm
   - Emetab Sweden
   - Sǝr Sued
   - سویدن
@@ -137,5 +136,7 @@ names_weak:
   - An tSualainn
   - Uswíidi
   - Suwedi
+places:
+  - Stockholm
 langs:
   - swe
