@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Миколаївська область
-  - Николаевская область
+  - Миколаївська область # Mikolaí̈vsʹka oblastʹ
+  - Николаевская область # Nikolaevskaâ oblastʹ
 names_weak:
   - Mykolaiv # Mikolaí̈vsʹka oblastʹ
   - Nikolaev # Nikolaevskaâ oblastʹ

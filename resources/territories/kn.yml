@@ -17,12 +17,11 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/St._Kitts_&_Nevis
 names_strong:
   - Saint Kitts-Nevis
-  - Федерация Сент-Китс и Невис
+  - Федерация Сент-Китс и Невис  # Federaciâ Sent-Kits i Nevis
 names_weak:
   - St. Kitts và Nevis
   - Saint Kitts na Nevis  # Federaciâ Sent-Kits i Nevis
   - Sent Kits i Nevis
-  - Saint Paul Charlestown
   - Naomh Crìstean is Nibheis
   - Kristɔfo -Senu -ni -Ɲevɛs
   - سەینت کیتس و نیڤیس
@@ -37,7 +36,7 @@ names_weak:
   - kitts
   - Saint Kitts en Nevis
   - Orílẹ́ède Kiiti ati Neefi
-  - 세인트키츠 네비스 # seinteukicheu nebiseu
+  - 세인트키츠 네비스             # seinteukicheu nebiseu
   - Saint Kitts dan Nevis
   - Saint Kitts ha Nevis
   - Saint Kitis kple Nevis nutome
@@ -47,11 +46,11 @@ names_weak:
   - Saint -Christophe -ek -Niévès
   - St. Kitts und Niuwis
   - St. Kitts an Nevis
-  - Сент -Кітс і Невіс # Sent -Kíts í Nevís
+  - Сент -Кітс і Невіс    # Sent -Kíts í Nevís
   - San Cristóbal y Nieves
   - São Cristovão e Nevis
   - Thantakitdhi na Nevith
-  - Սենթ Քիթս և Նեվիս # Sentʻ Kʻitʻs ev Nevis
+  - Սենթ Քիթս և Նեվիս     # Sentʻ Kʻitʻs ev Nevis
   - ꔻꘋ ꕃꔳꔻ ꗪ ꔕꔲꔻ
   - ST KITTS-NEVIS
   - Senti Kittis na Nevisi
@@ -63,9 +62,9 @@ names_weak:
   - Saint Kitts i Nevis
   - Usantakitzi na Nevis
   - সেন্ট কিটস ও নেভিস
-  - სეინტ კიტს და ნევისი # seintʼ kʼitʼs da nevisi
+  - სეინტ კიტს და ნევისი  # seintʼ kʼitʼs da nevisi
   - 聖克里斯多福及尼維斯
-  - სენტკიტსი და ნევისი # sentʼkʼitʼsi da nevisi
+  - სენტკიტსი და ნევისი   # sentʼkʼitʼsi da nevisi
   - Seŋ Kitts nda Nevis
   - Svätý Krištof a Nevis
   - ST KITTS AND NEVIS
@@ -84,7 +83,6 @@ names_weak:
   - S:t Kitts och Nevis
   - Saint Kitts ve Nevis
   - ເຊນ ຄິດ ແລະ ເນວິສ
-  - sandy point town
   - စိန့်ကစ်နှင့်နီဗီစ်
   - Emetab Saint Kitts ak Nevis
   - Сент -Киттс ба Невис        # Sent -Kitts ba Nevis
@@ -111,7 +109,6 @@ names_weak:
   - Nûmpubi Kîts nì Nevìs
   - Сейнт Китс и Невис          # Sejnt Kits i Nevis
   - 聖基茨和尼維斯
-  - Charlestown
   - Saint Kitts ne Nɛves
   - ቅዱስ ኪትስ እና ኔቪስ
   - Sent -Kits va Nevis
@@ -131,10 +128,8 @@ names_weak:
   - 圣基茨和尼维斯
   - Сент -Китс и Невис          # Sent -Kits i Nevis
   - Saint Kitts og Nevis
-  - Basseterre
   - Sɛ̀n Kî à Nevì
   - St. Christopher og Nevis
-  - st Paul Charlestown
   - Saint Kitts ja Nevis
   - سانت كيتس - نافيس
   - სენტკიტსი დანევისი          # sentʼkʼitʼsi danevisi
@@ -153,7 +148,6 @@ names_weak:
   - セントクリストファー・ネイビス
   - سانت كيتس ونيفيس
   - Сент -Китс жана Невис       # Sent -Kits žana Nevis
-  - Charlestown, nevis
   - செயின்ட் கிட்ஸ் & நெவிஸ்
   - Santakitzi na Nevis
   - Saint Kitts gi Nevis
@@ -174,5 +168,8 @@ names_weak:
   - Sankti Kristófer og Nevis
   - Saint-Christophe-et-Niévès
   - Сент-Китс и Невис           # Sent-Kits i Nevis
+places:
+  - Basseterre
+  - sandy point town
 langs:
   - eng

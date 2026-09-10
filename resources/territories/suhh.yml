@@ -46,11 +46,11 @@ summary: >-
   of birth of a number of designated persons.
 names_strong:
   - USSR
-  - СССР # SSSR
-  - Советский Союз # Sovétskij Soûz
-  - Союз Советских Социалистических Республик # Soûz Sovétskih Socialistíčeskih Respúblik
+  - СССР           # SSSR
+  - Советский Союз # Sovetskij Soûz
+  - Союз Советских Социалистических Республик # Soûz Sovetskih Socialističeskih Respublik
 names_weak:
-  - Сою́з ССР # Soû́z SSR
+  - Сою́з ССР        # Soû́z SSR
   - Сове́тский Сою́з # Sovétskij Soû́z
   - UdSSR     # Sovetskij Soûz
   - Soviet    # Soûz Sovetskih Socialističeskih Respublik

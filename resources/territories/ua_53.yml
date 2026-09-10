@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Полтавська область
-  - Полтавская область
+  - Полтавська область # Poltavsʹka oblastʹ
+  - Полтавская область # Poltavskaâ oblastʹ
 names_weak:
   - Poltava        # Poltavsʹka oblastʹ
   - Poltava region # Poltavskaâ oblastʹ

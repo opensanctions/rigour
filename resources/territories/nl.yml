@@ -21,16 +21,14 @@ wikipedia_url: https://en.wikipedia.org/wiki/Netherlands
 names_strong:
   - Nederlands
   - Holland
-  - КОРОЛЕВСТВО НИДЕРЛАНДЫ
+  - КОРОЛЕВСТВО НИДЕРЛАНДЫ  # KOROLEVSTVO NIDERLANDY
   - Koninkrijk der Nederlanden
 names_weak:
   - Нидерланддар # Niderlanddar
-  - BREDA # KOROLEVSTVO NIDERLANDY
   - هالېنډ # KOROLEVSTVO NIDERLANDY
   - Hoorandi
   - Nīderlande
   - ନେଦରଲ୍ୟାଣ୍ଡ
-  - WEST-BRABANT
   - Orílɛ́ède Nedalandi
   - ਨੀਦਰਲੈਂਡ
   - هولندا
@@ -159,5 +157,9 @@ names_weak:
   - هلند
   - Nidɔlɛŋ
   - Pays-Bas
+places:
+  - BREDA
+  - WEST-BRABANT
+  - Amsterdam
 langs:
   - nld

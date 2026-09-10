@@ -16,7 +16,7 @@ wikipedia_url: https://en.wikipedia.org/wiki/Côte_d’Ivoire
 names_strong:
   - Ivory Coast
   - COTE D'IVOIRE (IVORY COAST)
-  - Республика Кот-д`Ивуар
+  - Республика Кот-д`Ивуар  # Respublika Kot-d`Ivuar
 names_weak:
   - Elfebäiküschte
   - Kote d’Ivoire nutome
@@ -26,17 +26,17 @@ names_weak:
   - Slonokoščena obala
   - ⴽⵓⵜ ⴷⵉⴼⵡⴰⵔ
   - Côte d’Ivoire
-  - Кот д’Ивоар # Kot d’Ivoar
+  - Кот д’Ивоар       # Kot d’Ivoar
   - Costa de Marfil
   - كوتې دې ئىۋوئىر
   - Kɔ́t Ndivwâ
-  - Обала Слоноваче # Obala Slonovače
+  - Обала Слоноваче   # Obala Slonovače
   - Costa do Marfim
   - An Cósta Eabhair
   - आइभरी कोस्ट
   - កូដឌីវ័រ
   - Côte d
-  - Кот -д -Ивуар # Kot -d -Ivuar
+  - Кот -д -Ивуар     # Kot -d -Ivuar
   - کوٹ ڈی آئیوری
   - ᎢᏬᎵ ᎾᎿ ᎠᎹᏳᎶᏗ
   - Aibari Kwas
@@ -82,10 +82,10 @@ names_weak:
   - ساحل عاج
   - Kosta di Marfin
   - Bờ Biển Ngà
-  - Կոտ Դ՛իվուար # Kot D՛ivuar
+  - Կոտ Դ՛իվուար      # Kot D՛ivuar
   - ਕੋਟ ਡੀਵੋਆਰ
   - Kôdivüära
-  - Кот -д’Івуар # Kot -d’Ívuar
+  - Кот -д’Івуар      # Kot -d’Ívuar
   - Taɣazut n Uszer
   - आईवरी कोस्ट
   - Boli Kosta
@@ -97,21 +97,21 @@ names_weak:
   - ଆଇବରୀ କୋଷ୍ଟ
   - ఐవరీ కోస్ట్
   - Fil Dişi Sahili
-  - 코트디부아르 # koteudibualeu
+  - 코트디부아르            # koteudibualeu
   - Fildişi Sahili
   - Elfenbenariddu
   - Kodiwari
   - Kótifualɛ
   - Cote d&#8217;Ivoire
   - Kodivaa
-  - კოტ -დივუარი # kʼotʼ -divuari
+  - კოტ -დივუარი      # kʼotʼ -divuari
   - Matafonua ʻAivolī
   - Kodduwaar
   - Fílabeinsstrondin
   - Aod an Olifant
   - ser Ivoiriya
   - Kotídivualɛ
-  - Кот -д’Ивуар # Kot -d’Ivuar
+  - Кот -д’Ивуар      # Kot -d’Ivuar
   - കോട്ട് ഡി വാർ
   - කෝට් දි අයිවරි
   - Republic of Côte d'Ivoire
@@ -127,7 +127,7 @@ names_weak:
   - 象牙海岸
   - ཀོ་ཊེ་ཌི། ཨི་ཝོ་རེ།
   - အိုင်ဗရီကိုစ့်
-  - Кот д’Ивуар # Kot d’Ivuar
+  - Кот д’Ивуар       # Kot d’Ivuar
   - Koddiwar
   - Elfebeiküšta
   - Aivore Kositi
@@ -138,7 +138,7 @@ names_weak:
   - Kuṭ Divwar
   - کوت داوواغ
   - Kódivówa
-  - კოტდივუარი # kʼotʼdivuari
+  - კოტდივუარი        # kʼotʼdivuari
   - கோட் தி’வாயர்
   - कोट डी आइवर
   - Kotedivuware
@@ -150,6 +150,8 @@ names_weak:
   - Dramblio Kaulo Krantas
   - Orílẹ́ède Kóútè forà
   - Cote d Ivoire
-  - Кот-д'Ивуар # Kot-d'Ivuar
+  - Кот-д'Ивуар       # Kot-d'Ivuar
+places:
+  - Yamoussoukro
 langs:
   - fra

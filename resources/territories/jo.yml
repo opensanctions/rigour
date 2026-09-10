@@ -20,7 +20,7 @@ names_strong:
   - Jordánie
   - Jordania
   - Jordánia
-  - Јорданија # Jordânia
+  - Јорданија # J̌ordaniǰa
   - الأردن # Al-Urdunn
 names_weak:
   - Orílẹ́ède Jọdani
@@ -128,5 +128,7 @@ names_weak:
   - ဂျော်ဒန်
   - იორდანია  # iordania
   - Jordanni
+places:
+  - Amman
 langs:
   - ara

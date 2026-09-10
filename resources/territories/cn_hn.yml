@@ -8,5 +8,6 @@ parent: cn
 qid: Q45761
 names_strong:
   - 湖南 # Húnán
-  - 长沙 # Chángshā
 names_weak: []
+places:
+  - 长沙 # Chángshā

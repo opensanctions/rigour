@@ -6,10 +6,11 @@ is_jurisdiction: true
 name: Volgograd Oblast
 parent: ru
 qid: Q3819
-names_strong: []
-names_weak:
+names_strong:
   - Volgograd
   - Волгоград  # Volgograd
-  - Stalingrad
   - Volgograd, Russia
   - Волгоград (Россия) # Volgograd (Rossiâ)
+names_weak: []
+places:
+  - Stalingrad

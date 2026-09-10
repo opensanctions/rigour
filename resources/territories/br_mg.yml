@@ -8,7 +8,8 @@ parent: br
 names_strong:
   - Estado de Minas Gerais
 names_weak:
-  - Belo Horizonte
   - Mineiro
+places:
+  - Belo Horizonte
 langs:
   - por

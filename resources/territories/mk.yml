@@ -16,7 +16,7 @@ summary: >-
   to the north, Bulgaria to the east, Greece to the south, and Albania to the west.
 wikipedia_url: https://en.wikipedia.org/wiki/North_Macedonia
 names_strong:
-  - Республика Северная Македония
+  - Республика Северная Македония  # Respublika Severnaâ Makedoniâ
 names_weak:
   - Македония  # Makedoniâ
   - Makedonia nutome
@@ -143,6 +143,8 @@ names_weak:
   - Norður-Makedónía
   - Macédoine du Nord
   - Kuzey Makedonya
+places:
+  - Skopje
 langs:
   - sqi
   - mkd

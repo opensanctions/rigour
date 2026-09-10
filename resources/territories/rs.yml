@@ -17,8 +17,8 @@ wikipedia_url: https://en.wikipedia.org/wiki/Serbia
 names_strong:
   - Republika Srbija
   - Republika Serbija
-  - Сербия # Serbiâ
-  - Република Србија # Republika Srbiâ
+  - Сербия           # Serbiâ
+  - Република Србија # Republika Srbiǰa
 names_weak:
   - ସର୍ବିଆ
   - Serbiya
@@ -36,9 +36,6 @@ names_weak:
   - Serbía
   - ሰርብያ
   - సెర్బియా
-  - Belgrade
-  - Belgrad, Serbia
-  - Belgrad
   - Särbie
   - سَربِیا
   - ᏒᏈᏯ
@@ -88,5 +85,9 @@ names_weak:
   - 塞尔维亚
   - སེར་བི་ཡ།
   - serbisch
+places:
+  - Belgrade
+  - Belgrad, Serbia
+  - Belgrad
 langs:
   - srp

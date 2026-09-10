@@ -48,9 +48,9 @@ def lookup_by_identifier(identifier: str) -> Territory | None:
 
 
 def _load_territory_names() -> Generator[
-    tuple[Territory, list[str], list[str]], None, None
+    tuple[Territory, list[str], list[str], list[str]], None, None
 ]:
-    """Load the mapping of normalized territory names to Territory objects."""
+    """Yield each territory with its strong names, weak names and places."""
     index = _get_index()
     for data in iter_jsonl_text(territories_jsonl()):
         code = data["code"]
@@ -61,7 +61,8 @@ def _load_territory_names() -> Generator[
         strongs.append(territory.name)
         strongs.append(territory.full_name)
         weaks: list[str] = data.get("names_weak", [])
-        yield territory, strongs, weaks
+        places: list[str] = data.get("places", [])
+        yield territory, strongs, weaks, places
 
 
 @cache
@@ -69,8 +70,10 @@ def _get_territory_names() -> dict[str, Territory]:
     """Get a mapping of names to Territory objects."""
     mapping: dict[str, Territory] = {}
     weaks: dict[Territory, list[str]] = {}
-    for territory, strongs, weaks_ in _load_territory_names():
+    places: dict[Territory, list[str]] = {}
+    for territory, strongs, weaks_, places_ in _load_territory_names():
         weaks[territory] = weaks_
+        places[territory] = places_
         for name in strongs:
             nname = normalize_territory_name(name)
             if nname in mapping and mapping[nname] != territory:  # pragma: no cover
@@ -99,6 +102,24 @@ def _get_territory_names() -> dict[str, Territory]:
                 )
             weak_mapping[nname] = territory
     mapping.update(weak_mapping)
+
+    place_mapping: dict[str, Territory] = {}
+    for territory, places_ in places.items():
+        for name in places_:
+            nname = normalize_territory_name(name)
+            if nname in mapping:
+                continue
+            if (
+                nname in place_mapping and place_mapping[nname] != territory
+            ):  # pragma: no cover
+                log.warning(
+                    "Duplicate place found: %r for %s and %s",
+                    name,
+                    place_mapping.get(nname, territory).name,
+                    territory.name,
+                )
+            place_mapping[nname] = territory
+    mapping.update(place_mapping)
     return mapping
 
 

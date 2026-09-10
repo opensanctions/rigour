@@ -81,6 +81,8 @@ names_weak:
   - Tuváalu
   - Tuválu
   - Hutuvalu
+places:
+  - Funafuti
 langs:
   - eng
   - tvl

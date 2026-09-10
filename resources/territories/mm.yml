@@ -20,7 +20,7 @@ summary: >-
   to its south and southwest.
 wikipedia_url: https://en.wikipedia.org/wiki/Myanmar
 names_strong:
-  - Республика Союза Мьянма
+  - Республика Союза Мьянма  # Respublika Soûza Mʹânma
   - Burma
 names_weak:
   - မြန်မာ         # Respublika Soûza Mʹânma
@@ -129,5 +129,7 @@ names_weak:
   - Mjanmar (Búrma)
   - Burma, Miyamar
   - Muyama
+places:
+  - Naypyidaw
 langs:
   - mya

@@ -39,7 +39,6 @@ names_weak:
   - Illas Virxes Británicas
   - Angilɛ ka Sungurunnin Gun
   - Burutic dhuɔ̱ɔ̱l be̱rgin
-  - Jost Van Dyke
   - ńnam Minlán ɛ́ngəlís
   - ಬ್ರಿಟಿಷ್ ವರ್ಜಿನ್ ದ್ವೀಪಗಳು
   - Ins. Virgine Britanice
@@ -96,12 +95,10 @@ names_weak:
   - Brit Virgin -szigetek
   - Chwɨlà m̀ Vidzinyìa m̀ Bɨ̀letì mò
   - Bisanga bya Vierzi ya Angɛlɛtɛ́lɛ
-  - tortola
   - ବ୍ରିଟିଶ୍ ଭର୍ଜିନ୍ ଦ୍ବୀପପୁଞ୍ଜ
   - بریتانیای ویرجین
   - Britaniya Vircin Adaları
   - Ynysoedd Gwyryf Prydain
-  - Anegada
   - Orílẹ́ède Etíkun Fágínì ti ìlú Bírítísì
   - tigzirin timgad n nngliz
   - THE VIRGIN ISLANDS
@@ -122,7 +119,6 @@ names_weak:
   - ვირჯინიის კუნძულები (ბრიტ ) # virjiniis kʼundzulebi (britʼ )
   - Bìòn bi kɔnji bi Ŋgisì
   - Tigzirin (Virgin) Tibṛiṭaniyin
-  - road town
   - የእንግሊዝ ድንግል ደሴቶች
   - b virgin islands
   - Visíiwa vya Vigíini vya Ʉɨngeréesa
@@ -155,7 +151,6 @@ names_weak:
   - Oileáin Bhriotanacha na Maighdean
   - Britse Maagdeneilannen
   - பிரிட்டீஷ் கன்னித் தீவுகள்
-  - Virgin Gorda
   - Britiši Virgin gungey
   - Բրիտանական Վիրջինյան կղզիներ  # Britanakan Virǰinyan kġziner
   - Kepulauan Virgin Inggris
@@ -180,5 +175,11 @@ names_weak:
   - Britesch Joffereninselen
   - Visiwa vya Vilgin vya Uingeeza
   - איי הבתולה הבריטיים
+places:
+  - Jost Van Dyke
+  - tortola
+  - Anegada
+  - road town
+  - Virgin Gorda
 langs:
   - eng

@@ -7,9 +7,9 @@ name: Tyumen Oblast
 parent: ru
 qid: Q5824
 names_strong:
-  - Тюменская область # Tjumenskaja oblastʹ
-  - Тюменская область (Россия) # Tjumenskaja oblastʹ (Rossija)
-names_weak:
+  - Тюменская область          # Tûmenskaâ oblastʹ
+  - Тюменская область (Россия) # Tûmenskaâ oblastʹ (Rossiâ)
   - Tyumen        # Tûmenskaâ oblastʹ
-  - Tyumen Region # Tûmenskaâ oblastʹ (Rossiâ)
   - Тюмень        # Tûmenʹ
+names_weak:
+  - Tyumen Region # Tûmenskaâ oblastʹ (Rossiâ)

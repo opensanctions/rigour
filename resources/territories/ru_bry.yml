@@ -7,9 +7,9 @@ name: Bryansk Oblast
 parent: ru
 qid: Q2810
 names_strong:
-  - Брянская область # Brjanskaja oblastʹ
-  - Брянская область (Россия) # Brjanskaja oblastʹ (Rossija)
-names_weak:
-  - Bryansk Region # Brânskaâ oblastʹ
+  - Брянская область          # Brânskaâ oblastʹ
+  - Брянская область (Россия) # Brânskaâ oblastʹ (Rossiâ)
   - Bryansk # Brânskaâ oblastʹ (Rossiâ)
   - Брянск  # Brânsk
+names_weak:
+  - Bryansk Region # Brânskaâ oblastʹ

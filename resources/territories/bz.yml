@@ -35,9 +35,7 @@ names_weak:
   - เบลีซ
   - बेलिज
   - Belizean
-  - san ignacio
   - Belize nutome
-  - belize city
   - Bèlîs
   - بليز
   - Beliizi
@@ -63,7 +61,6 @@ names_weak:
   - Belîzi
   - 貝里斯
   - Hubelize
-  - belmopan
   - Bɛliz
   - Orílẹ́ède Bèlísẹ̀
   - Beliz
@@ -102,5 +99,9 @@ names_weak:
   - Beliise
   - Orílɛ́ède Bèlísɛ̀
   - Bheliz
+places:
+  - san ignacio
+  - belize city
+  - belmopan
 langs:
   - eng

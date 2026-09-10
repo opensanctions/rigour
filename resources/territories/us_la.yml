@@ -11,9 +11,6 @@ names_strong:
   - Louisiana, LA
 names_weak:
   - Louisiana, USA
-  - New Orleans
-  - New Orleans, USA
-  - New Orleans (USA)
   - Louisiana, United States of America
   - Луизиана       # Luiziana
   - Луизиана (США) # Luiziana (SŠA)
@@ -21,3 +18,7 @@ names_weak:
   - Louisiane (États-Unis)
   - Luisiana
   - Luisiana (Estados Unidos)
+places:
+  - New Orleans
+  - New Orleans, USA
+  - New Orleans (USA)

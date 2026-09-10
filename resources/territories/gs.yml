@@ -93,7 +93,6 @@ names_weak:
   - Pódpołdnjowa Georgiska a Pódpołdnjowe Sandwichowe kupy
   - Lulli Georgia ja Lulli Sandwich -sullot
   - Jeórjia di Sul i Ilhas di Sanduixi di Sul
-  - King Edward Point
   - Паўднёвая Джорджыя і Паўднёвыя Сандвічавы астравы # Paŭdnëvaâ Džordžyâ í Paŭdnëvyâ Sandvíčavy astravy
   - جنوبی جورجیا و جنوبی ساندویچ جزایر
   - ਦੱਖਣੀ ਜਾਰਜੀਆ ਅਤੇ ਦੱਖਣੀ ਸੈਂਡਵਿਚ ਟਾਪੂ
@@ -130,5 +129,7 @@ names_weak:
   - Suður-Georgía og Suður-Sandvíkureyjar
   - Géorgie du Sud-et-les Îles Sandwich du Sud
   - Южная Георгия и Южные Сандвичевы острова # Ûžnaâ Georgiâ i Ûžnye Sandvičevy ostrova
+places:
+  - King Edward Point
 langs:
   - eng

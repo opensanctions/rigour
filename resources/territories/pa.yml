@@ -18,15 +18,15 @@ wikipedia_url: https://en.wikipedia.org/wiki/Panama
 names_strong:
   - Panamá
   - República de Panamá
-  - Панама # Panama
+  - Панама  # Panama
 names_weak:
   - Emetab Panama
   - ಪನಾಮಾ
   - Orílɛ́ède Panama  # Panama
   - ⴱⴰⵏⴰⵎⴰ
-  - Պանամա # Panama
+  - Պանամա            # Panama
   - ပနားမား
-  - Παναμάς # Panamás
+  - Παναμάς           # Panamás
   - Kpanàma
   - ପାନାମା
   - Upanama
@@ -37,7 +37,7 @@ names_weak:
   - പനാമ
   - Panam
   - 巴拿馬
-  - 파나마 # panama
+  - 파나마               # panama
   - 巴拿马
   - PAMANA
   - পানামা
@@ -69,14 +69,15 @@ names_weak:
   - పనామా
   - Panamà
   - Panama nutome
-  - Panama City
   - பனாமா
-  - Панам # Panam
+  - Панам             # Panam
   - Hupanama
   - ພານາມາ
   - ਪਨਾਮਾ
   - पनामा
   - ፓናማ
-  - პანამა # pʼanama
+  - პანამა            # pʼanama
+places:
+  - Panama City
 langs:
   - spa

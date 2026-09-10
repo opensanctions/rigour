@@ -16,7 +16,7 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Luxembourg
 names_strong:
   - Luxemburg
-  - Луксембург # Luksemburg
+  - Луксембург  # Luksemburg
 names_weak:
   - Likisambulu
   - ལག་ཛམ་བོརྒ  # Luksemburg
@@ -96,7 +96,6 @@ names_weak:
   - luksɛmbúr
   - Luksamburg
   - Grand Duchy of Luxembourg
-  - luxemburg city
   - Lukusamburu
   - ᎸᎧᏎᏋᎩ
   - ලක්ශම්බර්ග්
@@ -125,6 +124,8 @@ names_weak:
   - Luxeburg
   - لوکزامبورگ
   - Lussemburc
+places:
+  - luxemburg city
 langs:
   - fra
   - deu

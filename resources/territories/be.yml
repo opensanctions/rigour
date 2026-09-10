@@ -49,7 +49,6 @@ names_weak:
   - ბელგია # belgia
   - བེལ་ཇི་ཡམ།
   - Bellje
-  - Bruxellois
   - Belejiki
   - බෙල්ජියම
   - བྷེལ་ཇམ
@@ -123,14 +122,16 @@ names_weak:
   - Βέλγιο # Bélgio
   - Beljika
   - Belgiya
-  - Brussels
-  - Brussels, Belgium
   - بلژیک
   - Beljik
   - बेल्जियम
   - ବେଲଜିୟମ୍
   - Belǧik
   - BELÇİKA
+places:
+  - Brussels
+  - Brussels, Belgium
+  - Bruxellois
 langs:
   - fra
   - deu

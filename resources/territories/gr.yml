@@ -159,5 +159,7 @@ names_weak:
   - Görögország
   - Yunan
   - Grecja
+places:
+  - Athens
 langs:
   - ell

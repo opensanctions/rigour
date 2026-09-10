@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Чернівецька область
-  - Черновицкая область
+  - Чернівецька область # Černívecʹka oblastʹ
+  - Черновицкая область # Černovickaâ oblastʹ
 names_weak:
   - Chernivtsi # Černívecʹka oblastʹ
   - Chernovtsy # Černovickaâ oblastʹ

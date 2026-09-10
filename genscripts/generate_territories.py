@@ -14,7 +14,7 @@ from genscripts.util import RESOURCES_PATH, RUST_DATA_PATH, norm_string, write_j
 from rigour.ids.wikidata import is_qid
 from rigour.langs import iso_639_alpha3
 from rigour.territories.territory import Territory
-from rigour.territories.util import clean_code, clean_codes
+from rigour.territories.util import clean_code, clean_codes, normalize_territory_name
 from rigour.text.scripts import can_latinize, is_latin
 
 log = logging.getLogger(__name__)
@@ -24,10 +24,6 @@ yaml.indent(mapping=2, sequence=2, offset=2)
 
 
 TERRITORIES_DIR = RESOURCES_PATH / "territories"
-TEMPLATE = """from typing import Dict, Any
-
-TERRITORIES: Dict[str, Any] = %r
-"""
 
 
 def territory_files() -> Generator[Path, None, None]:
@@ -47,7 +43,36 @@ def loc_norm(text: str) -> str:
     return squash_spaces(text.lower())
 
 
-def rewrite_territory(global_names: dict[str, set[str]], file_path: Path) -> None:
+NAME_KEYS = ("names_strong", "names_weak", "places")
+
+
+def _clean_names(terr: Any, key: str, used_names: set[str], create: bool) -> None:
+    """Dedupe one name list in place against names already used by the territory.
+
+    Entries whose local normalisation is already in `used_names` are dropped;
+    surviving non-Latin entries get a latinised end-of-line comment.
+    """
+    if key not in terr:
+        if not create:
+            return
+        terr[key] = CommentedSeq()
+    names = terr[key]
+    for name in list(names):
+        name_norm = loc_norm(str(name))
+        if name_norm in used_names:
+            print("Remove", key, name)
+            names.remove(name)
+            continue
+        used_names.add(name_norm)
+    for i, name in enumerate(names):
+        if is_latin(name):
+            continue
+        if can_latinize(name):
+            latin = latinize_text(name)
+            names.yaml_add_eol_comment(latin, i)
+
+
+def rewrite_territory(file_path: Path) -> None:
     cc = clean_code(file_path.stem).upper()
     with open(file_path, "r", encoding="utf-8") as f:
         terr = yaml.load(f)
@@ -56,100 +81,61 @@ def rewrite_territory(global_names: dict[str, set[str]], file_path: Path) -> Non
     if "parent" in terr and terr["parent"] == "no":
         terr["parent"] = DoubleQuotedScalarString(terr.get("parent"))
 
-    labels = set()
-
-    # Process the territory data as needed
     used_names = {loc_norm(cc)}
     name = terr.get("name")
-    if name in labels:
-        labels.remove(name)
     if name is not None:
         used_names.add(loc_norm(name))
     full_name = terr.get("full_name")
-    if full_name in labels:
-        labels.remove(full_name)
     if full_name is not None:
         used_names.add(loc_norm(full_name))
     iso3 = terr.get("alpha3")
     if iso3 is not None:
         used_names.add(loc_norm(iso3))
-    if "names_strong" in terr:
-        strong = terr["names_strong"]
-        for name in strong:
-            name = str(name)
-            if name in labels:
-                labels.remove(name)
-    else:
+    if "names_strong" not in terr:
         terr["names_strong"] = CommentedSeq()
         terr["names_strong"].append(name)
-    for name in terr["names_strong"]:
-        name_norm = loc_norm(name)
-        if name_norm in used_names:
-            terr["names_strong"].remove(name)
-        used_names.add(name_norm)
-    for i, name in enumerate(terr["names_strong"]):
-        if is_latin(name):
-            continue
-        if can_latinize(name):
-            latin = latinize_text(name)
-            terr["names_weak"].yaml_add_eol_comment(latin, i)
-
-    if "names_weak" in terr:
-        weak = terr["names_weak"]
-        for name in weak:
-            name = str(name)
-            if name in labels:
-                labels.remove(name)
-    else:
-        terr["names_weak"] = CommentedSeq()
-    for label in labels:
-        terr["names_weak"].append(label)
-    for name in terr["names_weak"]:
-        norm_name = loc_norm(name)
-        if norm_name in used_names:
-            print("Remove", name)
-            terr["names_weak"].remove(name)
-        used_names.add(norm_name)
-    for i, name in enumerate(terr["names_weak"]):
-        if is_latin(name):
-            continue
-        if can_latinize(name):
-            latin = latinize_text(name)
-            terr["names_weak"].yaml_add_eol_comment(latin, i)
-
-    all_labels = set()
-    all_labels.add(terr.get("name"))
-    all_labels.add(terr.get("full_name"))
-    all_labels.update([str(n) for n in terr["names_strong"]])
-    all_labels.update([str(n) for n in terr["names_weak"]])
-    for gname in all_labels:
-        if gname is None:
-            continue
-        normed = squash_spaces(gname.casefold())
-        if normed is None:
-            continue
-        if normed not in global_names:
-            global_names[normed] = set()
-        global_names[normed].add(cc)
+    _clean_names(terr, "names_strong", used_names, create=True)
+    _clean_names(terr, "names_weak", used_names, create=True)
+    _clean_names(terr, "places", used_names, create=False)
 
     with open(file_path, "w", encoding="utf-8") as f:
         yaml.dump(terr, f)
 
 
-def rewrite_territories():
-    global_names: dict[str, set[str]] = {}
+def rewrite_territories() -> None:
     for file_path in territory_files():
-        rewrite_territory(global_names, file_path)
-    for normed, codes in global_names.items():
+        rewrite_territory(file_path)
+
+
+def check_name_collisions(claims: dict[str, set[tuple[str, str]]]) -> None:
+    """Fail when a normalised name is claimed by more than one territory.
+
+    The lookup in `rigour.territories.lookup` resolves a name to exactly one
+    territory, so a shared name would silently pick a winner.
+
+    Args:
+        claims: Normalised name mapped to the `(code, kind)` pairs claiming it,
+            where `kind` is the YAML key the name came from.
+
+    Raises:
+        RuntimeError: If any name is claimed by two or more territory codes.
+    """
+    conflicts = 0
+    for normed, owners in sorted(claims.items()):
+        codes = {code for code, _ in owners}
         if len(codes) < 2:
             continue
-        codes = sorted(codes)
-        print(f"{normed} => {', '.join(codes)}")
+        conflicts += 1
+        detail = ", ".join(f"{code} ({kind})" for code, kind in sorted(owners))
+        print(f"Name collision: {normed!r} => {detail}")
+    if conflicts > 0:
+        raise RuntimeError(f"{conflicts} territory name collisions found")
 
 
 def update_data() -> None:
     raw_territories: dict[str, Any] = {}
     territories: dict[str, Territory] = {}
+    claims: dict[str, set[tuple[str, str]]] = {}
     seen_codes: set[str] = set()
     for source_file in territory_files():
         filename = os.path.basename(source_file)
@@ -173,9 +159,10 @@ def update_data() -> None:
             if "names_strong" in data:
                 names = {norm_string(name) for name in data["names_strong"]}
                 data["names_strong"] = sorted(names)
-            if "names_weak" in data:
-                names = {norm_string(name) for name in data["names_weak"]}
-                data["names_weak"] = sorted(names)
+            for key in NAME_KEYS:
+                if key in data:
+                    names = {norm_string(name) for name in data[key]}
+                    data[key] = sorted(names)
             data["other_codes"] = clean_codes(data.get("other_codes", []))
             for other in data["other_codes"]:
                 if other in territories:
@@ -205,6 +192,18 @@ def update_data() -> None:
                 data["langs"] = sorted(langs)
             raw_territories[code] = data
             territories[code] = Territory(territories, code, data)
+            labelled = [("name", data["name"]), ("full_name", data.get("full_name"))]
+            for key in NAME_KEYS:
+                labelled.extend((key, name) for name in data.get(key, []))
+            for kind, label in labelled:
+                if label is None:
+                    continue
+                normed = normalize_territory_name(label)
+                if len(normed) == 0:
+                    continue
+                claims.setdefault(normed, set()).add((code, kind))
+
+    check_name_collisions(claims)
 
     for terr in territories.values():
         assert terr.name is not None, f"Must have a name: {terr.code}"

@@ -9,15 +9,15 @@ qid: Q656
 names_strong:
   - St. Petersburg
   - St. Petersburg, Russia
-  - Санкт-Петербург # Sankt-Peterburg
+  - Санкт-Петербург         # Sankt-Peterburg
   - Санкт-Петербург, Россия # Sankt-Peterburg, Rossiâ
   - Санкт-Петербург (Россия) # Sankt-Peterburg (Rossiâ)
-  - Санкт-Петербург, Росія # Sankt-Peterburg, Rosíâ
+  - Санкт-Петербург, Росія  # Sankt-Peterburg, Rosíâ
   - Санкт-Петербург (Росія) # Sankt-Peterburg (Rosíâ)
-  - Г.Санкт-Петербург # Gorod Sankt-Peterburg
-  - Г. Санкт-Петербург # Gorod Sankt-Peterburg
+  - Г.Санкт-Петербург       # G.Sankt-Peterburg
+  - Г. Санкт-Петербург      # G. Sankt-Peterburg
   - Leningrad
-  - Ленинград # Leningrad
+  - Ленинград          # Leningrad
   - Ленинград (Россия) # Leningrad (Rossiâ)
-  - Ленинград (Росія) # Leningrad (Rosíâ)
+  - Ленинград (Росія)  # Leningrad (Rosíâ)
 names_weak: []

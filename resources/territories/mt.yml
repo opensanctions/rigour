@@ -16,8 +16,7 @@ summary: >-
   located in the Mediterranean Sea. It consists of an archipelago between Italy and
   Libya.
 wikipedia_url: https://en.wikipedia.org/wiki/Malta
-names_strong:
-  - Valletta, Malta
+names_strong: []
 names_weak:
   - 马耳他
   - ມອນທາ
@@ -88,6 +87,8 @@ names_weak:
   - ماڵتا
   - Mâlta
   - Orílɛ́ède Malata
+places:
+  - Valletta, Malta
 langs:
   - eng
   - mlt

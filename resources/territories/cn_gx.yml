@@ -1,0 +1,15 @@
+full_name: Guangxi (China)
+is_country: false
+is_ftm: false
+is_historical: false
+is_jurisdiction: true
+name: Guangxi
+parent: cn
+qid: Q15176
+names_strong:
+  - 广西 # Guǎngxī
+  - Guangxi Zhuang Autonomous Region
+  - Kwangsi
+names_weak: []
+places:
+  - 南宁 # Nánníng

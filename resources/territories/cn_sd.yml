@@ -8,5 +8,6 @@ parent: cn
 qid: Q43407
 names_strong:
   - 山东 # Shāndōng
-  - 济南 # Jǐnán
 names_weak: []
+places:
+  - 济南 # Jǐnán

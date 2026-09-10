@@ -24,7 +24,7 @@ summary: >-
   2014, the peninsula was illegally occupied and annexed by Russia.
 names_strong:
   - Crimea
-  - Крим # Krim
+  - Крим  # Krim
   - Krim
   - Qırım
 names_weak:
@@ -35,10 +35,11 @@ names_weak:
   - Qırım Muhtar Cumhuriyeti
   - crimea (occupied)
   - Автономная Республика Крым # Avtonomnaâ Respublika Krym
+  - Крым        # Krym
+places:
   - Sevastopol, Crimea
   - Севастополь, Крым # Sevastopolʹ, Krym
   - Севастополь # Sevastopolʹ
-  - Крым        # Krym
 langs:
   - crh
   - rus

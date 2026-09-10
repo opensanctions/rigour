@@ -98,7 +98,6 @@ names_weak:
   - Taiwanese
   - តៃវ៉ាន់
   - Taywaan
-  - Taipei,China
   - ထိုင်ဝမ်
   - Тајван # Taǰvan
   - تايوان
@@ -107,6 +106,8 @@ names_weak:
   - Taiwáani
   - Đài Loan
   - Taiwani
+places:
+  - Taipei,China
   - Taipei
 langs:
   - zho

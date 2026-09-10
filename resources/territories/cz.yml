@@ -17,7 +17,7 @@ wikipedia_url: https://en.wikipedia.org/wiki/Czech_Republic
 names_strong:
   - Česká republika
   - Česko
-  - Чехия # Čehíâ
+  - Чехия  # Čehiâ
 names_weak:
   - Ijamhuri ya Cheki
   - 捷克共和國
@@ -65,7 +65,6 @@ names_weak:
   - Republica Cehă
   - Çek Cumhuriyeti
   - ꗿꕃ ꕸꖃꔀ
-  - Praguer
   - Kekkia
   - Tšehhi
   - Чехия Республикаси # Čehiâ Respublikasi
@@ -77,7 +76,7 @@ names_weak:
   - Чех Республикасы # Čeh Respublikasy
   - Czech
   - Tsjechje
-  - Чехи # Čehi
+  - Чехи            # Čehi
   - cɛ́k
   - Чешка # Češka
   - Չեխիա # Čʻexia
@@ -141,7 +140,6 @@ names_weak:
   - i -Czech Republic
   - චෙක් ජනරජය
   - চেক প্রজাতন্ত্র
-  - Prague
   - Jamhuli ya Cheki
   - Repibiki Tsekɛ
   - Orílẹ́ède ṣẹ́ẹ́kì
@@ -169,5 +167,8 @@ names_weak:
   - செக் குடியரசு
   - Tchéquie
   - Çekya
+places:
+  - Prague
+  - Praguer
 langs:
   - ces

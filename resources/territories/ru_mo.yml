@@ -7,9 +7,9 @@ name: Mordovia
 parent: ru
 qid: Q5340
 names_strong:
-  - Мордовия # Mordoviâ
+  - Мордовия            # Mordoviâ
   - Республика Мордовия # Respublika Mordoviâ
-  - Республика Мордовия (Россия) # Respublika Mordoviâ (Rossija)
+  - Республика Мордовия (Россия) # Respublika Mordoviâ (Rossiâ)
 names_weak: []
 langs:
   - mdf

@@ -63,7 +63,6 @@ names_weak:
   - Ḍuminika
   - Dominique
   - ドミニカ国
-  - Roseau
   - ഡൊമിനിക്ക
   - Orílẹ́ède Dòmíníkà
   - Domínica
@@ -95,5 +94,7 @@ names_weak:
   - Doiminicea
   - ಡೊಮಿನಿಕಾ
   - ⴷⵓⵎⵉⵏⵉⴽ
+places:
+  - Roseau
 langs:
   - eng

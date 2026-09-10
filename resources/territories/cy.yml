@@ -18,13 +18,12 @@ summary: >-
   but is culturally and geopolitically Southeast European.
 wikipedia_url: https://en.wikipedia.org/wiki/Cyprus
 names_strong:
-  - РЕСПУБЛИКА КИПР
-  - Кипр
+  - РЕСПУБЛИКА КИПР # RESPUBLIKA KIPR
+  - Кипр # Kipr
 names_weak:
   - Kıbrıs Cumhuriyeti # RESPUBLIKA KIPR
   - CYPRS # Kipr
   - Emetab Cyprus # Kipr
-  - Λευκωσία      # Leukōsía
   - Кипар         # Kipar
   - Kýpur
   - Siipar
@@ -32,8 +31,6 @@ names_weak:
   - ⵇⵓⴱⵔⵓⵙ
   - Cipru
   - síplɛ
-  - Lefkosía
-  - nicosia
   - Kipra
   - Saekpùlù
   - 키프로스          # kipeuloseu
@@ -105,7 +102,6 @@ names_weak:
   - Saiprus nutome
   - Ciprus
   - Síp
-  - Nicosian
   - சைப்ரஸ்
   - Zypern
   - Kiprenez
@@ -141,7 +137,6 @@ names_weak:
   - Sipuriya
   - Kypros
   - Ciper
-  - Lefkoşa
   - ꕢꗡꖛꗐꔻ
   - Šiipur
   - Kýpros
@@ -150,6 +145,12 @@ names_weak:
   - Zypre
   - Cyrpus
   - Kıbrıs
+places:
+  - Λευκωσία  # Leukōsía
+  - Lefkosía
+  - nicosia
+  - Lefkoşa
+  - Nicosian
 langs:
   - tur
   - ell

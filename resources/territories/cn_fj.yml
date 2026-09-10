@@ -8,5 +8,6 @@ parent: cn
 qid: Q41705
 names_strong:
   - 福建 # Fújiàn
-  - 福州 # Fúzhōu
 names_weak: []
+places:
+  - 福州 # Fúzhōu

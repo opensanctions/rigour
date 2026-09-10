@@ -138,7 +138,6 @@ names_weak:
   - Territoriu Británicu del Océanu Índicu
   - Brita Hindoceana Teritorio
   - Teritori britanic dal Ocean Indian
-  - Camp Justice
   - Үнді мұхитындағы Британ аймағы          # Ündí mūhityndaġy Britan ajmaġy
   - Potu fonua moana ʻInitia fakapilitānia
   - Lutanda lwa Angeletele ku mbu wa Indiya
@@ -163,5 +162,7 @@ names_weak:
   - Британская территория в Индийском океане # Britanskaâ territoriâ v Indijskom okeane
   - Британські території в Індійському океані # Britansʹkí teritoríí̈ v Índíjsʹkomu okeaní
   - Britské indickooceánske územie
+places:
+  - Camp Justice
 langs:
   - eng

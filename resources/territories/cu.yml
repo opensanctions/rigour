@@ -17,7 +17,7 @@ wikipedia_url: https://en.wikipedia.org/wiki/Cuba
 names_strong:
   - República de Cuba
   - Kúba
-  - Куба
+  - Куба  # Kuba
 names_weak:
   - ಕ್ಯೂಬಾ
   - Kubë
@@ -86,5 +86,8 @@ names_weak:
   - ኩባ
   - Ukuba
   - Cúba
+places:
+  - Havana
+  - Havanna
 langs:
   - spa

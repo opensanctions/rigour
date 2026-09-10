@@ -32,7 +32,6 @@ names_weak:
   - Lincenstayn
   - Liechtensteiner
   - लिक्टेनस्टाइन
-  - Vaduz, Liechtenstein
   - ליכטנשטיין
   - ལེག་ཏེན་ཚིན།
   - லிச்செண்ஸ்டெய்ன்
@@ -49,7 +48,6 @@ names_weak:
   - Licansitan
   - Lishɛteni
   - Lichtenštajnsko
-  - Vaduz
   - لِکٹیٛسٹیٖن
   - ꔷꗿꘋꔻꗳꘋ
   - Listenstaine
@@ -110,10 +108,13 @@ names_weak:
   - Lishentéeni
   - Orílẹ́ède Lẹṣitẹnisiteni
   - लिक्टैनस्टाईन
-  - Schaan
   - लिएखटेन्स्टाइन
   - Լիխտենշտեյն # Lixtenšteyn
   - 列支敦斯登
   - Lihtenştayn
+places:
+  - Vaduz
+  - Vaduz, Liechtenstein
+  - Schaan
 langs:
   - deu

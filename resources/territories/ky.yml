@@ -31,7 +31,6 @@ names_weak:
   - Aĩrandi cia Kayman
   - Ilhas Caiman
   - Caymanøerne
-  - George Town
   - Kajmanske kupy
   - Ishujt Kajmanë
   - Tigzirin n Kayman
@@ -40,7 +39,6 @@ names_weak:
   - Кайман гӀайренаш # Kajman gӀajrenaš
   - ケイマン諸島
   - Кайман ороллари # Kajman orollari
-  - Cayman Brac
   - Isole Cayman
   - جزر الكايمن
   - Cayman qeqertaq
@@ -144,7 +142,6 @@ names_weak:
   - Кайманавы астравы # Kajmanavy astravy
   - i -Cayman Islands
   - Ebizinga bya Kayimani
-  - Grand Cayman
   - केमैन द्वीपसमूह
   - Kaimaninselen
   - de Kaiman -Enselle
@@ -166,8 +163,12 @@ names_weak:
   - Bìòn bi Kaymàn
   - Illas Caimán
   - ကေမန် ကျွန်းစု
-  - Little Cayman
   - Kaimaninseln
   - Cayman Islands (GB)
+places:
+  - George Town
+  - Grand Cayman
+  - Cayman Brac
+  - Little Cayman
 langs:
   - eng

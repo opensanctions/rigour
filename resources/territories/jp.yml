@@ -24,17 +24,11 @@ names_strong:
   - 日本国 # Nihon-koku
   - Жапония # Žaponiâ
 names_weak:
-  - Fukuoka
   - جاپان
-  - Tochigi
   - Dzàkpân
-  - Yamaguchi
-  - Shimane
-  - Wakayama # Žaponiâ
   - japɔ́ŋ  # Žaponiâ
   - Gyapan
   - Zapon
-  - Sakai
   - Ubuyapani
   - Japu
   - Japańska
@@ -42,36 +36,26 @@ names_weak:
   - Japonia
   - Jaapoŋ
   - lyaban
-  - Chiba
-  - Kitakyushu
   - जपान
-  - Kyoto
   - Japānija
   - Hujapani
   - ជប៉ុន
-  - Iwate
   - ياپونىيە
   - Jappu
   - Jepun
   - Jabaan
-  - Saitama
   - జపాన్
   - Dyapani
   - Ιαπωνία # Iapōnía
   - Il -Ġappun
-  - Kanagawa
   - Iāpana
   - ජපානය
   - Япония  # Âponiâ
   - Japoni
   - Japaŋ
-  - Mie
   - იაპონია # iapʼonia
-  - Aichi
   - ژاپن
-  - Miyagi
   - ജപ്പാൻ
-  - Akita
   - জাপান
   - Yaponiya
   - Japanujo
@@ -79,16 +63,10 @@ names_weak:
   - Jepang
   - Kisúŋla Makȟóčhe
   - Empire of Japan
-  - Sapporo
   - ᏣᏩᏂᏏ
-  - Fukushima
   - Япони   # Âponi
-  - Ehime
-  - Osaka
   - Ujapani
-  - Kagoshima
   - ꔛꗨꗢ
-  - Kyōto
   - جاپون
   - Японія  # Âponíâ
   - Japana
@@ -104,14 +82,9 @@ names_weak:
   - 일본      # ilbon
   - ဂျပန်
   - Јапонија # J̌aponiǰa
-  - Sagamihara
   - Japanni
-  - Ishikawa
   - Njabani
-  - Gunma
-  - Tokushima
   - Gjapon
-  - Shizuoka
   - sapɔ́ɔŋ
   - Emetab Japan
   - ژاپۆن
@@ -120,82 +93,110 @@ names_weak:
   - Japána
   - Japanska
   - Jaapan
-  - Nara
   - Јапан   # J̌apan
   - Japãu
-  - Toyama
-  - Kumamoto
   - Dzapan nutome
   - جاپوٙن
   - ਜਪਾਨ
   - Ճապոնիա # Čaponia
-  - Nagano
   - An t -Seapan
-  - Kawasaki
   - Nhật Bản
   - ⵍⵢⴰⴱⴰⵏ
-  - Kōchi
   - Japonija
   - ꏝꀪ
-  - Tokyo
   - ຍີ່ປຸ່ນ
   - Japón
   - ಜಪಾನ್
-  - Ōita
   - Japáani
   - ཉི་ཧོང་
   - Japanese
   - Japani
-  - Fukui
-  - Kagawa
   - Japɔ̂n
-  - Yamagata
   - Hapɔ́n
-  - Saga
-  - Yamanashi
   - Ýaponiýa
   - Siapani
   - જાપાન
-  - Hokkaidō
-  - Gifu
   - ஜப்பான்
   - اليابان
   - ꙗ҆пѡ́нїа # ꙗ҆pѡ́ní̈a
   - Zapɔ
   - Orílẹ́ède Japani
-  - Ōsaka
   - Japonsko
   - Giappone
+  - Gyapaani
+  - Zapɔn
+  - जापान
+  - יאַפּאַן
+  - Giapun
+  - ጃፓን
+  - ଜାପାନ୍
+  - Japɔn
+  - Japonska
+  - ญี่ปุ่น
+  - Япон    # Âpon
+  - Japán
+  - Xapón
+  - Japāna
+places:
+  - Fukuoka
+  - Tochigi
+  - Yamaguchi
+  - Shimane
+  - Wakayama # Žaponiâ
+  - Sakai
+  - Chiba
+  - Kitakyushu
+  - Kyoto
+  - Iwate
+  - Saitama
+  - Kanagawa
+  - Mie
+  - Aichi
+  - Miyagi
+  - Akita
+  - Sapporo
+  - Fukushima
+  - Ehime
+  - Osaka
+  - Kagoshima
+  - Kyōto
+  - Sagamihara
+  - Ishikawa
+  - Gunma
+  - Tokushima
+  - Shizuoka
+  - Nara
+  - Toyama
+  - Kumamoto
+  - Nagano
+  - Kawasaki
+  - Kōchi
+  - Tokyo
+  - Ōita
+  - Fukui
+  - Kagawa
+  - Yamagata
+  - Saga
+  - Yamanashi
+  - Hokkaidō
+  - Gifu
+  - Ōsaka
   - Aomori
   - Ibaraki
   - Hamamatsu
   - Okayama
-  - Gyapaani
-  - Zapɔn
-  - जापान
   - Yokohama
   - Hiroshima
-  - יאַפּאַן
   - Hyōgo
   - Sendai
-  - Giapun
-  - ጃፓን
   - Kobe
   - Miyazaki
-  - ଜାପାନ୍
   - Tōkyō
-  - Japɔn
-  - Japonska
   - Niigata
-  - ญี่ปุ่น
   - Nagasaki
   - Shiga
   - Nagoya
-  - Япон    # Âpon
-  - Japán
   - Okinawa
-  - Xapón
-  - Japāna
   - Tottori
 langs:
   - jpn

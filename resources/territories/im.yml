@@ -19,15 +19,12 @@ names_strong:
   - Mann
 names_weak:
   - Île de Man
-  - ramsey bay
-  - Onchan
   - i -Isle of Man
   - جزيرة مان
   - ഐൽ ഓഫ് മാൻ
   - ILSE OF MAN
   - Мэн аралы  # Mén araly
   - ཨ་ཡུལ་ ཨོཕ་ མཱན
-  - Santon
   - Pulau Man
   - Eilean Mhanainn
   - Aisle of Man nutome
@@ -41,20 +38,15 @@ names_weak:
   - о -в Мэн  # o -v Mén
   - เกาะแมน
   - მენის კუნძული # menis kʼundzuli
-  - ramsey
   - Isla de Man
-  - Braddan
   - আইল অফ ম্যান
   - Mann -sullot
   - Isola di Man
-  - Douglas, Isle of Man
   - Insla da Man
   - អែលអុហ្វមែន
   - 맨 섬       # maen seom
   - ਆਇਲ ਆਫ ਮੈਨ
   - Мэн ороли # Mén oroli
-  - Douglas
-  - Malew
   - Մեն կղզի  # Men kġzi
   - आइल ऑफ़ मैन
   - Mani saar
@@ -99,7 +91,6 @@ names_weak:
   - Ramsey Island
   - Ellan Vannin
   - आईल ऑफ़ मैन
-  - Ramsey, Isle of Man
   - Illa de Man
   - Man, Isle of
   - 曼島
@@ -107,7 +98,6 @@ names_weak:
   - Motu Mani
   - Oileán Mhanann
   - Востраў Мэн # Vostraŭ Mén
-  - Port St Mary
   - Ostrov Man
   - Ilha de Man
   - Insle vo Män
@@ -121,6 +111,17 @@ names_weak:
   - አይል ኦፍ ማን
   - האי מאן
   - Isle of Man (GB)
+places:
+  - ramsey bay
+  - Onchan
+  - Santon
+  - ramsey
+  - Braddan
+  - Douglas, Isle of Man
+  - Douglas
+  - Malew
+  - Ramsey, Isle of Man
+  - Port St Mary
 langs:
   - glv
   - eng

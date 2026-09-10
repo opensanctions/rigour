@@ -8,5 +8,6 @@ parent: cn
 qid: Q47974
 names_strong:
   - 陕西 # Shǎnxī
-  - 西安 # Xī'ān
 names_weak: []
+places:
+  - 西安 # Xī'ān

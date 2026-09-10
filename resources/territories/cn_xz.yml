@@ -17,27 +17,11 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Tibet
 names_strong:
   - 西藏 # Xīzàng
-  - 拉萨 # Lāsà
 names_weak:
-  - Hongqiao
-  - Binhai
-  - Hedong
-  - Tianjin
-  - Heping
   - Tibet Autonomous Region
-  - Baodi
-  - Jinnan
-  - Wuqing
-  - Dongli
-  - Xiqing
-  - Jinghai
-  - Nankai
-  - Jizhou
-  - Hexi
-  - Beichen
-  - Ninghe
   - Tibetan
-  - Tientsin
+places:
+  - 拉萨 # Lāsà
 langs:
   - bod
   - zho

@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Київ
-  - Киев
+  - Київ # Kií̈v
+  - Киев # Kiev
 names_weak:
   - Kiev      # Kií̈v
   - Kyiv City # Kiev

@@ -20,5 +20,7 @@ names_weak:
   - Ras Al Khaimah, UAE
   - Раш-аль-Хайма       # Raš-alʹ-Hajma
   - Раш-аль-Хайма (ОАЭ) # Raš-alʹ-Hajma (OAÉ)
+places:
+  - RAK
 langs:
   - ara

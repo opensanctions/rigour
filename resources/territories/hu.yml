@@ -46,7 +46,6 @@ names_weak:
   - hnɣarya
   - הונגריה
   - Hangari
-  - Budapest
   - ۋېنگىرىيە
   - Hangarĩ
   - Hɔ́ngare
@@ -85,7 +84,6 @@ names_weak:
   - Vengrija
   - Ουγγαρία # Oungaría
   - Ongirí
-  - Budapesti
   - Hongria
   - Ongri
   - Hungriya
@@ -142,5 +140,8 @@ names_weak:
   - Hongareieb
   - Венгрия # Vengriâ
   - Унгария # Ungariâ
+places:
+  - Budapest
+  - Budapesti
 langs:
   - hun

@@ -14,7 +14,7 @@ summary: >-
   to the east, and Iran and the Azerbaijani exclave of Nakhchivan to the south.
 wikipedia_url: https://en.wikipedia.org/wiki/Armenia
 names_strong:
-  - Հայաստան # Hayastan
+  - Հայաստան  # Hayastan
 names_weak:
   - Armènia  # Hayastan
   - Armenië  # Hayastan
@@ -123,5 +123,7 @@ names_weak:
   - Armēnija
   - Armeniya
   - اَرمانِیا
+places:
+  - Yerevan
 langs:
   - hye

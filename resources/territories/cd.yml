@@ -125,7 +125,6 @@ names_weak:
   - Kongo -Kinšasa
   - Ditunga wa Kongu
   - Temokraatischi Republik Kongo
-  - Kinshasa
   - コンゴ民主共和国
   - Kongo (Zair)
   - ኮንጎ
@@ -151,5 +150,7 @@ names_weak:
   - Kongó-Kinshasa
   - Демократическая Республика Конго # Demokratičeskaâ Respublika Kongo
   - Kongo Demokratik Cumhuriyeti
+places:
+  - Kinshasa
 langs:
   - fra

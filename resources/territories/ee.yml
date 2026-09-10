@@ -119,5 +119,7 @@ names_weak:
   - Эстони # Éstoni
   - ಎಸ್ಟೋನಿಯಾ
   - Estlân
+places:
+  - Tallinn
 langs:
   - est

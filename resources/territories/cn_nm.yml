@@ -1,0 +1,15 @@
+full_name: Inner Mongolia (China)
+is_country: false
+is_ftm: false
+is_historical: false
+is_jurisdiction: true
+name: Inner Mongolia
+parent: cn
+qid: Q41079
+names_strong:
+  - 内蒙古 # Nèi Měnggǔ
+  - Inner Mongolia Autonomous Region
+  - Nei Mongol
+names_weak: []
+places:
+  - 呼和浩特 # Hūhéhàotè

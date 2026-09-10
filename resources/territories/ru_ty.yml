@@ -7,9 +7,9 @@ name: Tuva
 parent: ru
 qid: Q960
 names_strong:
-  - Тува
-  - Республика Тыва
-  - Республика Тыва (Россия) # Respublika Tyva (Rossija)
+  - Тува            # Tuva
+  - Республика Тыва # Respublika Tyva
+  - Республика Тыва (Россия) # Respublika Tyva (Rossiâ)
 names_weak: []
 langs:
   - tyv

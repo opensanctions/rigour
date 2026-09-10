@@ -1,0 +1,29 @@
+full_name: Tianjin (China)
+is_country: false
+is_ftm: false
+is_historical: false
+is_jurisdiction: true
+name: Tianjin
+parent: cn
+qid: Q11736
+names_strong:
+  - 天津 # Tiānjīn
+  - Tianjin Municipality
+  - Tientsin
+names_weak: []
+places:
+  - Hongqiao
+  - Binhai
+  - Hedong
+  - Heping
+  - Baodi
+  - Jinnan
+  - Wuqing
+  - Dongli
+  - Xiqing
+  - Jinghai
+  - Nankai
+  - Jizhou
+  - Hexi
+  - Beichen
+  - Ninghe

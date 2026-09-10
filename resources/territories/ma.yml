@@ -105,6 +105,8 @@ names_weak:
   - Fas
   - Marok
   - Moloko
+places:
+  - Rabat
 langs:
   - zgh
   - ara

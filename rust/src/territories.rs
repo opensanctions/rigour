@@ -3,7 +3,7 @@
 // `rust/data/territories/data.jsonl` is the full territory database:
 // one JSON record per line, fields `{code, name, full_name, alpha3,
 // qid, parent, is_country, is_jurisdiction, is_historical, langs,
-// names_strong, names_weak, ...}`. Authoritative emission is
+// names_strong, names_weak, places, ...}`. Authoritative emission is
 // `genscripts/generate_territories.py::update_data`.
 //
 // The JSONL ships as plain UTF-8 in git (diff-friendly when the
@@ -23,7 +23,10 @@ const COMPRESSED: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/territories.
 
 /// Fields from the territory JSONL that Rust-side consumers read —
 /// everything else is consumed by `rigour.territories.*` on the
-/// Python side and ignored here.
+/// Python side and ignored here. `places` (cities inside the
+/// territory) is ignored on purpose: it is country-field evidence
+/// only, and tagging it would collapse a city token to its country
+/// code in address comparison.
 #[derive(Debug, Deserialize)]
 pub struct TerritoryRecord {
     /// Lower-case territory code, e.g. `ru`, `us-nd`.

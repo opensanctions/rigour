@@ -9,3 +9,6 @@ names_strong: []
 names_weak:
   - ONTARIO, CANADA
   - Ontarie
+places:
+  - Toronto
+  - Ottawa

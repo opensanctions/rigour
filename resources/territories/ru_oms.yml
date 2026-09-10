@@ -10,9 +10,9 @@ names_strong:
   - Omskaya Oblast
   - Omskaya oblast'
   - Omskaya oblastʹ
-  - Омская область
-names_weak:
+  - Омская область  # Omskaâ oblastʹ
   - Omsk
-  - Омск  # Omsk
+  - Омск # Omsk
   - Omsk, Russia
   - Омск (Россия) # Omsk (Rossiâ)
+names_weak: []

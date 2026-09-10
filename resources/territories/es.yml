@@ -23,7 +23,6 @@ names_weak:
   - Esipanye
   - i -Spain
   - Spanja
-  - Basque Country
   - स्पेन
   - ꕐꘊꔧ
   - Espânye
@@ -53,8 +52,6 @@ names_weak:
   - Paŋá
   - 西班牙
   - Ɛspániya
-  - Andalusia
-  - TENERIFE
   - Hisipánia
   - ਸਪੇਨ
   - panyá
@@ -106,14 +103,11 @@ names_weak:
   - España
   - スペイン
   - Spĩni
-  - Barcelona
   - Kingdom of Spain
   - Spanya
   - سٕپین
   - Špańska
-  - Calatayud
   - Espaina
-  - Catalonia
   - ספרד
   - ئىسپانىيە
   - Sɨ̀kpɛ̂n
@@ -149,10 +143,18 @@ names_weak:
   - ესპანეთი # espʼaneti
   - An Spáinn
   - Esipaɲi
+  - Espanya
+places:
+  - Basque Country
+  - TENERIFE
+  - Andalusia
+  - Barcelona
+  - Catalonia
+  - Calatayud
   - Lanzarote
   - Santa Cruz de Tenerife
-  - Espanya
   - Ibiza
   - Mallorca
+  - Madrid
 langs:
   - spa

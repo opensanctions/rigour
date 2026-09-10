@@ -10,5 +10,7 @@ names_strong:
   - Zurich
 names_weak:
   - Zurich, Switzerland
+places:
+  - Zuricher
 langs:
   - deu

@@ -1,0 +1,14 @@
+full_name: Ningxia (China)
+is_country: false
+is_ftm: false
+is_historical: false
+is_jurisdiction: true
+name: Ningxia
+parent: cn
+qid: Q57448
+names_strong:
+  - 宁夏 # Níngxià
+  - Ningxia Hui Autonomous Region
+names_weak: []
+places:
+  - 银川 # Yínchuān

@@ -8,5 +8,6 @@ parent: cn
 qid: Q45833
 names_strong:
   - 青海 # Qīnghǎi
-  - 西宁 # Xīníng
 names_weak: []
+places:
+  - 西宁 # Xīníng

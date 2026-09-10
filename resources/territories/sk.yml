@@ -58,7 +58,6 @@ names_weak:
   - Silōvakia
   - Slovacchia
   - Slovachia
-  - Bratislavan
   - ස්ලෝවැකියාව
   - اسلواکی
   - Slovaki
@@ -126,10 +125,12 @@ names_weak:
   - สโลวะเกีย
   - SLOVAKIA (Slovak Republic)
   - Slovakkja
-  - Bratislava
   - Sirovakya
   - سىلوۋاكىيە
   - Slovaaki
   - ⵙⵍⵓⴼⴰⴽⵢⴰ
+places:
+  - Bratislava
+  - Bratislavan
 langs:
   - slk

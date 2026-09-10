@@ -77,7 +77,6 @@ names_weak:
   - Romanians
   - Roumanie
   - Румъния # Rumʺniâ
-  - Bucharest
   - ਰੋਮਾਨੀਆ
   - rumanya
   - रोमानिया
@@ -121,7 +120,6 @@ names_weak:
   - Руминия  # Ruminiâ
   - ରୋମାନିଆ
   - Румын    # Rumyn
-  - Transylvania
   - Romàinia
   - רומניה
   - Romani
@@ -138,5 +136,8 @@ names_weak:
   - Errumania
   - Romanian
   - ulumaní
+places:
+  - Bucharest
+  - Transylvania
 langs:
   - ron

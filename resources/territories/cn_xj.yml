@@ -15,8 +15,9 @@ names_strong:
   - Sinkiang Uyghur Autonomous Region
   - Xinjiang Uygur Autonomous Region
   - 新疆 # Xīnjiāng
-  - 乌鲁木齐 # Wūlǔmùqí
 names_weak: []
+places:
+  - 乌鲁木齐 # Wūlǔmùqí
 langs:
   - uig
   - zho

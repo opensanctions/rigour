@@ -94,5 +94,7 @@ names_weak:
   - Zambio
   - ზამბია # zambia
   - saambíi
+places:
+  - Lusaka
 langs:
   - eng

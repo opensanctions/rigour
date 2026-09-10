@@ -28,10 +28,7 @@ names_strong:
   - Palestinian Autonomous Territories
   - Palestinian Autonomous Areas
   - Palestinian Autonomous Region
-  - Государство Палестина
-  - Gaza Strip
-  - West Bank
-  - Gaza
+  - Государство Палестина  # Gosudarstvo Palestina
   - ÉTAT DE PALESTINE
 names_weak:
   - GZ
@@ -182,7 +179,6 @@ names_weak:
   - Sǝr Palestiniya
   - Filistin Bölgeleri
   - Palestinsk territorium
-  - 'Region: Gaza'
   - Territori palestinesi
   - Palestinsko Područje
   - प्यालेस्टनी भू -भागहरु
@@ -193,7 +189,12 @@ names_weak:
   - Tiriadoù Palestina
   - Palestina, State of
   - पॅलेस्टिनियन प्रदेश
+places:
+  - Gaza Strip
+  - West Bank
+  - Gaza
   - Judea and Samaria Region
   - Judea and Samaria
+  - 'Region: Gaza'
 langs:
   - ara

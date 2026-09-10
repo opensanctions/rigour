@@ -19,7 +19,6 @@ names_strong:
   - Moldovan Republic
 names_weak:
   - Moldavìà
-  - Chisinau
   - ᎹᎵᏙᏫᎠ
   - Μολδαβία # Moldabía
   - Молдова # Moldova
@@ -122,6 +121,8 @@ names_weak:
   - مولڑاوِیا
   - mɔldaví
   - Молдавия # Moldaviâ
+places:
+  - Chisinau
 langs:
   - ron
   - rus

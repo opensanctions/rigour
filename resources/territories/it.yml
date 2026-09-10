@@ -90,7 +90,6 @@ names_weak:
   - ꑴꄊꆺ
   - İtalya
   - Italija
-  - Sardinian
   - ਇਟਲੀ
   - إيطاليا
   - 義大利
@@ -102,14 +101,12 @@ names_weak:
   - ئیتالیا
   - İtaliya
   - ཨི་ཊ་ལི
-  - Sardinia
   - ઇટાલી
   - Orílẹ́ède Italiyi
   - ອິຕາລີ
   - Italiýa
   - Orílɛ́ède Italiyi
   - An Iodáil
-  - Sicilian
   - ᏲᎶ
   - Италия # Italiâ
   - Itália
@@ -122,9 +119,12 @@ names_weak:
   - Италија # Italiǰa
   - 이탈리아 # itallia
   - Wālkija
-  - Sicily
   - Ιταλία   # Italía
   - і҆та́лїа # í҆tálí̈a
   - இத்தாலி
+places:
+  - Rome
+  - Sicily
+  - Sardinia
 langs:
   - ita

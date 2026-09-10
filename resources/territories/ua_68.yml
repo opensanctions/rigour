@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Хмельницька область
-  - Хмельницкая область
+  - Хмельницька область # Hmelʹnicʹka oblastʹ
+  - Хмельницкая область # Hmelʹnickaâ oblastʹ
 names_weak:
   - Khmelnytskyi # Hmelʹnicʹka oblastʹ
   - Khmelnitsky # Hmelʹnickaâ oblastʹ

@@ -17,7 +17,7 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Uzbekistan
 names_strong:
   - Oʻzbekiston Respublikasi
-  - Ўзбекистон Республикаси
+  - Ўзбекистон Республикаси  # Ŭzbekiston Respublikasi
 names_weak:
   - Ўзбекистон # Ŭzbekiston
   - Uzbek      # Ŭzbekiston Respublikasi
@@ -127,6 +127,7 @@ names_weak:
   - Özbekistan
   - Uzubekistan
   - ÖZBEKİSTAN
+places:
   - Tashkent
 langs:
   - uzb

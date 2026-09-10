@@ -12,17 +12,17 @@ summary: >-
   Eastern Europe.
 wikipedia_url: https://en.wikipedia.org/wiki/Kazakhstan
 names_strong:
-  - Қазақстан # Qazaqstan
+  - Қазақстан # Kˌazakˌstan
   - Казакстан # Kazakstan
-  - Қазақстан Республикасы # Qazaqstan Respúblıkası
+  - Қазақстан Республикасы # Kˌazakˌstan Respublikasy
   - Qazaqstan Respublikasy
   - Qazaqstan
-  - Республика Казахстан
+  - Республика Казахстан # Respublika Kazahstan
 names_weak:
   - Kazakistãu # Kˌazakˌstan
   - Kazakstán # Kazakstan
   - An Chasacstáin # Kˌazakˌstan Respublikasy
-  - Қозоғистон # Kˌozoġiston
+  - Қозоғистон     # Kˌozoġiston
   - قزاخستان
   - കസാഖിസ്ഥാൻ # Respublika Kazahstan
   - Kasakstaan
@@ -122,6 +122,8 @@ names_weak:
   - Kazaxistan
   - ကာဇက်စတန်
   - Казахстан   # Kazahstan
+places:
+  - Astana
 langs:
   - rus
   - kaz

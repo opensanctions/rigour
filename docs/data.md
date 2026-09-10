@@ -20,6 +20,7 @@ For name matching, we produce four classes of data assets:
 The [database of territories](https://github.com/opensanctions/rigour/tree/main/resources/territories) includes countries, sub-country jurisdictions (think: `Delaware`, `Dubai`), some historical jurisdictions (eg: `Yugoslavia`, `USSR`) and disputed territories (eg: `Transnistria`, `Crimea`, `Somaliland`). Metadata for each jurisidiction includes:
 
 * Territory names in short and long form, name of region and subregion.
+* Name aliases in three tiers: `names_strong` (unambiguous aliases, safe for tagging in any text), `names_weak` (translations, transliterations and demonyms with more collision risk), and `places` (cities and other locations inside the territory, like `Tehran` for Iran, which identify the territory in a country field but must not be equated with it in an address).
 * Corresponding [Wikidata QID](https://www.wikidata.org/wiki/Wikidata:Identifiers), and alternate Wikidata QIDs for similar items.
 * Relationship to other territories (parent/child, successor/predecessor, see also).
 * ISO 3166-2 codes where applicable, including previous codes and custom country codes for unrecognized territories.

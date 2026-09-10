@@ -21,5 +21,7 @@ names_weak:
   - دُبَيّ # Dubaï
   - Emirate Of Dubai, U.A.E
   - Дубай, ОАЕ # Dubaj, OAE
+places:
+  - JEBEL ALI FREE ZONE
 langs:
   - ara

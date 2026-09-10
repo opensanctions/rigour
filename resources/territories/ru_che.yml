@@ -7,10 +7,10 @@ name: Chelyabinsk Oblast
 parent: ru
 qid: Q5714
 names_strong:
-  - Челябинская область # Čeljabinskaja oblastʹ
-  - Челябинская область (Россия) # Čeljabinskaja oblastʹ (Rossija)
-names_weak:
+  - Челябинская область          # Čelâbinskaâ oblastʹ
+  - Челябинская область (Россия) # Čelâbinskaâ oblastʹ (Rossiâ)
   - Chelyabinsk # Čelâbinskaâ oblastʹ
-  - Челябинск # Čelâbinsk
+  - Челябинск   # Čelâbinsk
   - Chelyabinsk, Russia
   - Челябинск (Россия) # Čelâbinsk (Rossiâ)
+names_weak: []

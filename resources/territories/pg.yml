@@ -14,7 +14,7 @@ summary: >-
 wikipedia_url: https://en.wikipedia.org/wiki/Papua_New_Guinea
 names_strong:
   - Papua Nugini
-  - РЕСПУБЛИКА ПАРАГВАЙ
+  - РЕСПУБЛИКА ПАРАГВАЙ  # RESPUBLIKA PARAGVAJ
 names_weak:
   - Papua
   - Papuwa Nugini  # RESPUBLIKA PARAGVAJ
@@ -147,6 +147,8 @@ names_weak:
   - Papúa Nýja-Gínea
   - Papouasie-Nouvelle-Guinée
   - Папуа — Новая Гвинея # Papua — Novaâ Gvineâ
+places:
+  - Port Moresby
 langs:
   - pgz
   - eng

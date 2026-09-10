@@ -16,7 +16,7 @@ wikipedia_url: https://en.wikipedia.org/wiki/Nicaragua
 names_strong:
   - República de Nicaragua
   - República de Nicaraguá
-  - Никарагуа
+  - Никарагуа  # Nikaragua
 names_weak:
   - Hunikaragwa
   - 尼加拉瓜
@@ -89,5 +89,7 @@ names_weak:
   - نیکاراگوئه
   - Nicaraguab
   - Niocaragua
+places:
+  - Managua
 langs:
   - spa
