@@ -75,10 +75,10 @@ serde_json = "1"
 # (see the FILES table in `build.rs`); consumers `include_bytes!` the
 # OUT_DIR artifact and decode on use. Listed in both [dependencies]
 # (decode) and [build-dependencies] (build.rs encodes).
-zstd = "0.13"
+zstd = "0.14"
 
 [build-dependencies]
-zstd = "0.13"
+zstd = "0.14"
 
 # NOTE: no [profile.release] overrides. Defaults are fine; revisit if benchmarks
 # show measurable headroom from LTO / codegen-units=1.
