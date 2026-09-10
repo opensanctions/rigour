@@ -1,12 +1,20 @@
 name: Fujairah
 full_name: Fujairah (United Arab Emirates)
-qid: Q4045
+qid: Q4091
+other_qids:
+  - Q4045
 is_country: false
 is_ftm: false
 is_jurisdiction: true
 parent: ae
 names_strong: []
 names_weak:
+  - الفجيرة
+  - إمارة الفجيرة
+  - Fujairah (Emirate)
+  - Emirate of Fujairah
+  - Emirato de Fuyaira
+  - Fujairah, UAE
   - FUJAIRAH MEDIA FREE ZONE
 langs:
   - ara

@@ -5,6 +5,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ae
 qid: Q159477
+other_qids:
+  - Q530171
 names_strong:
   - AJMAN FREE ZONE
   - Ajman
