@@ -168,6 +168,7 @@ One row per increment; a rule stays only if the numbers justify it.
 | v6: weak territory names | 0.9057 | 0.9492 | 86.71% | tagger also tags names_weak (CLDR translations: Syrie, Сирия, シリア); translation err →5.4%, translation_cjk →9.8%, no visible FP cost |
 | v7: edit budget 0.2→0.3 | 0.9066 | 0.9498 | 86.89% | absorbs ICU-vs-conventional romanization drift (mjasnickaja/myasnitskaya); translit_cyrillic err 12.0→6.4%, different_street err also improves (20.0→19.1%); swept 0.2–0.4, peak at 0.3 |
 | v8: digit-run split + ordinal tagging | 0.9362 | 0.9761 | 91.85% | tokenizer emits digit runs as own tokens (д39→д 39); ordinals (1st, 1-й, №17, digit-bearing forms only) tag as Numbers; glued numbers now match AND hidden conflicts surface: different_street err →8.4%, house_number →15.9%, unit →9.9%, translit →5.2% |
+| v9: whole alphanumeric tokens | 0.9337 | 0.9737 | 91.40% | tokenizer no longer splits letter/digit transitions (postcodes SW1Y, M5H, unit letters 3A stay whole) and the full stop separates (д.39→д 39, the case the split was compensating for); digits + one trailing letter classify as Number keeping the suffix (16В→16v) so the mismatch penalty still fires; ordinal forms normalising to digits + one Latin letter (1ª, 10e) no longer tag; fixes fingerprint shredding (#279) and the SW1A/SW1E, Flat 1A/Flat 1 false collapses at −0.003 AUC |
 
 ### Fingerprint collapse log
 
@@ -184,7 +185,7 @@ fingerprint is safe as a graph node key.
 |---|---|---|---|---|
 | baseline: slugify (zavod `_make_id`) | 1.9% (100/5285) | 0.00% (0/4682) | 0.0% | ICU ascii_text transliterates everything, incl. CJK |
 | baseline: ftm (`node_id`: normalize + slugify) | 1.9% (100/5285) | 0.00% (0/4682) | 0.0% | identical collapse set to bare slugify on this corpus |
-| rust: `rigour._core.address_fingerprint` | 7.3% (388/5285) | 0.00% (0/4682) | 0.0% | pinned policy: order-preserving, keyword canonicals kept, code only for unambiguous territory names; slice gains: abbreviation 21.2%, punctuation_only 11.1%, translation_cjk 8.8%, city_only 10.6% |
+| rust: `rigour._core.address_fingerprint` | 7.2% (382/5285) | 0.00% (0/4682) | 0.0% | pinned policy: order-preserving, keyword canonicals kept, code only for unambiguous territory names; slice gains: abbreviation 21.2%, punctuation_only 11.1%, translation_cjk 8.8%, city_only 10.6% |
 
 Baseline true collapses sit almost entirely in `punctuation_only`
 (5.2%); every variation category (translit, abbreviation, reordering)

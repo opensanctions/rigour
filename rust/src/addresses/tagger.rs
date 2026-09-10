@@ -26,7 +26,7 @@ pub const TAGGER_FLAGS: Normalize = Normalize::CASEFOLD.union(Normalize::ADDRESS
 pub enum Tag {
     /// Keyword signifier; payload is the canonical short form.
     Keyword(String),
-    /// Ordinal form ("30 th", "1 й", "№ 17"); payload is the number.
+    /// Ordinal form ("30th", "1 й", "№ 17"); payload is the number.
     Ordinal(u32),
     /// Territory name; payload is every code the name maps to.
     Territory(Vec<String>),
@@ -70,7 +70,10 @@ impl Builder {
 
     /// Only ordinal forms carrying a numeric character are admitted
     /// ("1st", "1-й", "第一"); pure word forms ("First", "один",
-    /// "I.") are false-positive-prone as bare tokens.
+    /// "I.") are false-positive-prone as bare tokens. Forms that
+    /// normalise to digits plus one Latin letter ("1ª" → "1a",
+    /// "1:a", "10e") are rejected too: that shape is a unit letter
+    /// or a postcode district far more often than an ordinal.
     fn add_ordinal(&mut self, form: &str, number: u32) {
         if !form.chars().any(|c| numeric_value(c).is_some()) {
             return;
@@ -78,9 +81,24 @@ impl Builder {
         let Some(key) = Self::norm(form) else {
             return;
         };
+        if Self::is_digits_plus_letter(&key) {
+            return;
+        }
         let entry = self.mapping.entry(key).or_default();
         if entry.ordinal.is_none() {
             entry.ordinal = Some(number);
+        }
+    }
+
+    fn is_digits_plus_letter(key: &str) -> bool {
+        let compact: Vec<char> = key.chars().filter(|c| *c != ' ').collect();
+        match compact.split_last() {
+            Some((last, digits)) => {
+                last.is_ascii_lowercase()
+                    && !digits.is_empty()
+                    && digits.iter().all(char::is_ascii_digit)
+            }
+            None => false,
         }
     }
 
@@ -143,9 +161,8 @@ fn build_tagger() -> AddressTagger {
         }
     }
 
-    // Ordinal forms: multi-token after normalization where the
-    // tokenizer splits digits out ("30th" → "30 th", "№1" → "№ 1"),
-    // so a match re-collapses exactly what the split separated.
+    // Ordinal forms: whole tokens ("30th", "№17") or short phrases
+    // where punctuation separates ("1-й" → "1 й", "№ 17").
     for spec in ordinals() {
         for form in &spec.forms {
             b.add_ordinal(form, spec.number);

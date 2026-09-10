@@ -31,9 +31,10 @@ Phase 0–1 start:
   duplicated from `tokenize_name` since the two are expected to
   diverge. Deltas vs the Python address normalizer: Mc separates,
   `&` and `№` are kept as token content (making both live keyword
-  needles), and digit runs are emitted as their own tokens ("д39" →
-  "д 39") — landed with the ordinal-tagging increment against a
-  +0.03 AUC benchmark delta.
+  needles), and the full stop separates so dotted signifiers release
+  their number ("д.39" → "д 39"). Letter/digit transitions never
+  split: alphanumeric postcodes stay whole, and digits + one trailing
+  letter classify as a suffixed house number.
 - **Territory names in the tagger**: resolved — strong and weak
   names both tag (weak names measured +0.008 AUC on the translation
   slices with no FP cost, since disjoint codes carry no negative

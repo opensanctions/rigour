@@ -85,6 +85,25 @@ mod tests {
     }
 
     #[test]
+    fn alphanumeric_postcodes_stay_whole() {
+        assert_eq!(fingerprint("London SW1Y 5HX").unwrap(), "gb-eng sw1y 5hx");
+        assert_eq!(fingerprint("Toronto ON M5H 2N2").unwrap(), "ca on m5h 2n2");
+        assert_ne!(
+            fingerprint("SW1A 2AA London"),
+            fingerprint("SW1E 2AA London")
+        );
+    }
+
+    #[test]
+    fn unit_letters_stay_distinct() {
+        assert_ne!(
+            fingerprint("Flat 1A, 22 Baker Street"),
+            fingerprint("Flat 1, 22 Baker Street")
+        );
+        assert_eq!(fingerprint("д. 16В"), fingerprint("d 16v"));
+    }
+
+    #[test]
     fn cyrillic_transliterates_to_ascii() {
         let fp = fingerprint("Воткинское шоссе, д. 170").unwrap();
         assert!(fp.is_ascii());
