@@ -592,12 +592,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "lazy_static"
-version = "1.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
-
-[[package]]
 name = "libc"
 version = "0.2.185"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -848,14 +842,13 @@ dependencies = [
 
 [[package]]
 name = "rphonetic"
-version = "3.1.0"
+version = "4.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a5908062cb5f4bef7e5b4492ec0704f04d65914a876a854096f64fe4fb2bc270"
+checksum = "ff25b017e5fc22fd7b340d08779112a2a2fe2f448a9fb53cb629258f342ee018"
 dependencies = [
  "document-features",
  "either",
  "enum-iterator",
- "lazy_static",
  "nom",
  "regex",
  "serde",
