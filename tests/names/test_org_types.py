@@ -172,3 +172,24 @@ def test_production_default_flags_are_casefold_only():
     # That path must work out of the box with the new default.
     casefolded = "siemens aktiengesellschaft"
     assert replace_compare(casefolded) == "siemens ag"
+
+
+def test_cjk_legal_forms():
+    # Han, Hangul and Katakana legal forms all reduce to their
+    # compare target. Written with separators because the tagger's
+    # word-boundary predicate cannot reach inside an unspaced CJK
+    # run — see test_cjk_word_boundary.
+    assert extract_org_types("招商银行 有限责任公司", _COMPARE_FLAGS) == [
+        ("有限责任公司", "llc")
+    ]
+    assert extract_org_types("招商銀行 有限責任公司", _COMPARE_FLAGS) == [
+        ("有限責任公司", "llc")
+    ]
+    assert extract_org_types("삼성 유한공사", _COMPARE_FLAGS) == [("유한공사", "ltd")]
+    assert extract_org_types("을지봉 합작회사", _COMPARE_FLAGS) == [("합작회사", "jv")]
+    assert (
+        remove_org_types(
+            "招商银行 有限责任公司", normalize_flags=_COMPARE_FLAGS
+        ).strip()
+        == "招商银行"
+    )

@@ -677,6 +677,61 @@ def test_raw_org_cjk_pass_through():
     assert Symbol(Symbol.Category.ORG_CLASS, "LLC") not in name.symbols
 
 
+def test_raw_org_han_generic_components():
+    # Chinese company names are built from generic components —
+    # 集团 (group), 工程 (engineering), 商贸 (trading), 开发
+    # (development) — which carry SYMBOL / DOMAIN evidence once a
+    # separator lets the boundary check reach them.
+    result = analyze_names(
+        NameTypeTag.ORG, ["河北建设 集团 股份有限公司"], rewrite=False
+    )
+    name = _only(result)
+    assert Symbol(Symbol.Category.SYMBOL, "GRP") in name.symbols
+    assert Symbol(Symbol.Category.ORG_CLASS, "JSC") in name.symbols
+
+    result = analyze_names(
+        NameTypeTag.ORG, ["赣州集达 建筑 工程 有限公司"], rewrite=False
+    )
+    name = _only(result)
+    assert Symbol(Symbol.Category.DOMAIN, "ENG") in name.symbols
+    assert Symbol(Symbol.Category.DOMAIN, "CONSTRUCTION") in name.symbols
+
+    result = analyze_names(
+        NameTypeTag.ORG, ["阿克苏 恒嘉 商贸 有限公司"], rewrite=False
+    )
+    name = _only(result)
+    assert Symbol(Symbol.Category.SYMBOL, "TRADE") in name.symbols
+
+    result = analyze_names(
+        NameTypeTag.ORG, ["哈密 万佳 房地产 开发 有限责任公司"], rewrite=False
+    )
+    name = _only(result)
+    assert Symbol(Symbol.Category.SYMBOL, "DEV") in name.symbols
+    assert Symbol(Symbol.Category.ORG_CLASS, "LLC") in name.symbols
+
+
+def test_raw_org_cjk_legal_form_classes():
+    # Japanese and Korean legal forms map to their ORG_CLASS.
+    for text, generic in [
+        ("日立 有限責任会社", "LLC"),
+        ("三井住友トラスト ホールディングス 株式会社", "JSC"),
+        ("삼성 유한공사", "LLC"),
+    ]:
+        name = _only(analyze_names(NameTypeTag.ORG, [text], rewrite=False))
+        assert Symbol(Symbol.Category.ORG_CLASS, generic) in name.symbols
+    # 무역 (trade) and ホールディングス (holdings) are generic symbols.
+    name = _only(analyze_names(NameTypeTag.ORG, ["합장강 무역 회사"], rewrite=False))
+    assert Symbol(Symbol.Category.SYMBOL, "TRADE") in name.symbols
+    name = _only(
+        analyze_names(
+            NameTypeTag.ORG,
+            ["三井住友トラスト ホールディングス 株式会社"],
+            rewrite=False,
+        )
+    )
+    assert Symbol(Symbol.Category.SYMBOL, "HOLDING") in name.symbols
+
+
 def test_raw_org_arabic_tags_alias():
     # Arabic company name must not crash, and المحدودة — an alias of
     # a compare="Ltd" spec — carries ORG_CLASS:LLC evidence even on

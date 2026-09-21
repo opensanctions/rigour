@@ -66,6 +66,7 @@ org_symbols:
     - 企业
     - कंपनी
     - 회사
+    - カンパニー # Japanese
   org:
     - organization
     - organisation
@@ -144,6 +145,8 @@ org_symbols:
     - 生活協同組合
     - 合作社
     - corpn
+    - コーポレーション # Japanese
+    - 공사 # Korean
   coop:
     - co-op
     - coop
@@ -324,6 +327,8 @@ org_symbols:
     - центров
     - مركز
     - ctr
+    - 中心 # Chinese (simplified & traditional)
+    - センター # Japanese
   holding:
     - holding
     - holdings
@@ -353,6 +358,8 @@ org_symbols:
     - споживча кооперація
     - hldg
     - hldgs
+    - ホールディング # Japanese
+    - ホールディングス # Japanese
   business:
     - business
     - businesses
@@ -413,6 +420,8 @@ org_symbols:
     - услуг
     - обслуживания
     - svcs
+    - 服务 # Chinese (simplified)
+    - 服務 # Chinese (traditional)
   dept:
     - department
     - dept.
@@ -528,6 +537,10 @@ org_symbols:
     - 团体
     - 团
     - 集体
+    - 集团 # Chinese (simplified)
+    - 集團 # Chinese (traditional)
+    - 集团公司 # Chinese (simplified)
+    - 集團公司 # Chinese (traditional)
   mgmt:
     - management
     - мanagement
@@ -684,6 +697,8 @@ org_symbols:
     - 研究所
     - 学院
     - inst
+    - 研究院 # Chinese (simplified & traditional)
+    - 연구소 # Korean
   club:
     - club
     - clube
@@ -794,6 +809,16 @@ org_symbols:
     - 業界
     - inds
     - indust
+    - 实业 # Chinese (simplified)
+    - 實業 # Chinese (traditional)
+    - 工业 # Chinese (simplified)
+    - 工業 # Chinese (traditional)
+    - 产业 # Chinese (simplified)
+    - 產業 # Chinese (traditional)
+    - インダストリー # Japanese
+    - インダストリーズ # Japanese
+    - 산업 # Korean
+    - 공업 # Korean
   associates:
     - associates
     - ассоциированные
@@ -804,6 +829,8 @@ org_symbols:
     - сетевой
     - сетевые
     - сетевое
+    - 网络 # Chinese (simplified)
+    - 網絡 # Chinese (traditional)
   dev:
     - development
     - dev
@@ -814,6 +841,11 @@ org_symbols:
     - развития
     - развитию
     - ανάπτυξης
+    - 发展 # Chinese (simplified)
+    - 發展 # Chinese (traditional)
+    - 开发 # Chinese (simplified)
+    - 開發 # Chinese (traditional)
+    - 개발 # Korean
   enterprise:
     - enterprise
     - enterprises
@@ -848,6 +880,8 @@ org_symbols:
     - комітети
     - комитету
     - cmte
+    - 委员会 # Chinese (simplified)
+    - 委員會 # Chinese (traditional)
   kombinat:
     - kombinat
     - комбинат
@@ -874,6 +908,9 @@ org_symbols:
     - генерального
     - генеральной
     - генеральных
+    - 总公司 # Chinese (simplified)
+    - 總公司 # Chinese (traditional)
+    - 총회사 # Korean
   base:
     - base
     - bases
@@ -944,6 +981,8 @@ org_symbols:
     - коммерческого
     - коммерческой
     - комерційний
+    - 商务 # Chinese (simplified)
+    - 商務 # Chinese (traditional)
   commercial:
     - commercial
     - коммерческий
@@ -972,6 +1011,7 @@ org_symbols:
     - 商业的
     - coml
     - comml
+    - 상업 # Korean
   municipal:
     - municipal
     - municipality
@@ -1028,6 +1068,8 @@ org_symbols:
     - oficinas
     - bureau
     - bureaux
+    - 事务所 # Chinese (simplified)
+    - 事務所 # Chinese (traditional)
   bureau:
     - bureau
     - бюро
@@ -1230,6 +1272,16 @@ org_symbols:
     - 商行
     - 贸易公司
     - trdg
+    - 商贸 # Chinese (simplified)
+    - 商貿 # Chinese (traditional)
+    - 经贸 # Chinese (simplified)
+    - 經貿 # Chinese (traditional)
+    - 工贸 # Chinese (simplified)
+    - 工貿 # Chinese (traditional)
+    - 进出口 # Chinese (simplified)
+    - 進出口 # Chinese (traditional)
+    - トレーディング # Japanese
+    - 무역 # Korean
   solution:
     - solution
     - solutions
@@ -1327,6 +1379,7 @@ org_symbols:
     - кредитний
     - кредитна
     - кредитне
+    - 신용 # Korean
   asset:
     - asset
     - assets
@@ -1335,6 +1388,8 @@ org_symbols:
     - активов
     - активи
     - активів
+    - 资产 # Chinese (simplified)
+    - 資產 # Chinese (traditional)
   trust:
     - trust
     - trusts
@@ -1444,6 +1499,9 @@ org_symbols:
     - Br Off
     - Subsidiary Branch
     - Sub. Branch
+    - 分公司 # Chinese (simplified & traditional)
+    - 分行 # Chinese (simplified & traditional)
+    - 支行 # Chinese (simplified & traditional)
 
 # Domains are a sibling category to symbols: common term groups with translations, abbreviations, and variations.
 # While symbols describe extremely common and non-meaningful words (like "company" or "group"), domains are
@@ -1477,6 +1535,8 @@ org_domains:
     - 供应 # Chinese (simplified)
     - 供給 # Chinese (traditional)
     - 供应商 # Chinese (simplified)
+    - 物资 # Chinese (simplified)
+    - 物資 # Chinese (traditional)
   culture:
     - culture
     - kultura
@@ -1601,6 +1661,9 @@ org_domains:
     - 科技 # Chinese (simplified & traditional)
     - 技術 # Chinese (traditional)
     - tech
+    - テクノロジー # Japanese
+    - テクノロジーズ # Japanese
+    - 기술 # Korean
   insurance:
     - insurance
     - insurans
@@ -1622,6 +1685,7 @@ org_domains:
     - 保險 # Chinese (traditional)
     - 保险公司 # Chinese (simplified)
     - ins
+    - 보험 # Korean
   intel:
     - intel # en (abbreviation)
     - intelligence # en
@@ -1680,6 +1744,8 @@ org_domains:
     - 房地產 # Chinese (traditional)
     - 不动产 # Chinese (simplified)
     - 不動產 # Chinese (traditional)
+    - 置业 # Chinese (simplified)
+    - 置業 # Chinese (traditional)
   jail:
     # may want to combine with prison below
     - jail
@@ -2064,6 +2130,8 @@ org_domains:
     - automobilelor
     - automobilů
     - automobilův
+    - 汽车 # Chinese (simplified)
+    - 汽車 # Chinese (traditional)
   nuclear:
     - nuclear # en, es, pt
     - branduolinis # lt (masculine)
@@ -2254,6 +2322,12 @@ org_domains:
     # - 採礦 # Chinese (traditional) - verb "to mine"
     - 矿业 # Chinese (simplified)
     - 礦業 # Chinese (traditional)
+    - 煤矿 # Chinese (simplified)
+    - 煤礦 # Chinese (traditional)
+    - 煤业 # Chinese (simplified)
+    - 煤業 # Chinese (traditional)
+    - 矿产 # Chinese (simplified)
+    - 礦產 # Chinese (traditional)
   factory:
     - factory
     - factories
@@ -2394,6 +2468,7 @@ org_domains:
     - engg
     - engrg
     - engr
+    - 工程 # Chinese (simplified & traditional)
   scientific:
     - scientific
     - science
@@ -2430,6 +2505,8 @@ org_domains:
     - pharm
     - pharmaceutical
     - pharmaceuticals
+    - 医药 # Chinese (simplified)
+    - 醫藥 # Chinese (traditional)
   machine:
     - machine
     - machines
@@ -2443,6 +2520,8 @@ org_domains:
     - машиностроительного
     - машиностроительной
     - машиностроения
+    - 机械 # Chinese (simplified)
+    - 機械 # Chinese (traditional)
   investment:
     - investment
     - investmet
@@ -2476,6 +2555,7 @@ org_domains:
     - invesment
     - invesmenti
     - invt
+    - 投资 # Chinese (simplified)
   casino:
     - casino
     - cazinou
@@ -2492,6 +2572,8 @@ org_domains:
     - лизинг
     - лизинговая
     - лизинговые
+    - 租赁 # Chinese (simplified)
+    - 租賃 # Chinese (traditional)
   education:
     - education
     - educational
@@ -2500,6 +2582,7 @@ org_domains:
     - образовательное
     - образовательная
     - общеобразовательное
+    - 教育 # Chinese (simplified & traditional) / Japanese
   islamic:
     - islamic
     - исламский
@@ -2576,6 +2659,8 @@ org_domains:
     - судноплавного
     - судноплавной
     - судноплавства
+    - 해운 # Korean
+    - 선박 # Korean
   agriculture:
     - agriculture
     - agricultural
@@ -2596,6 +2681,8 @@ org_domains:
     - agri
     - agric
     - agro
+    - 农业 # Chinese (simplified)
+    - 農業 # Chinese (traditional)
   shipbuilding:
     - shipbuilding
     - shipyard
@@ -2614,6 +2701,8 @@ org_domains:
     - производственное
     - производственно
     - prodn
+    - 生产 # Chinese (simplified)
+    - 生產 # Chinese (traditional)
   construction:
     - construction
     - строительство
@@ -2635,6 +2724,8 @@ org_domains:
     - 建築 # Chinese (traditional)
     - constr
     - constrn
+    - 建工 # Chinese (simplified & traditional)
+    - 건설 # Korean
   building:
     - building
     - buildings
@@ -2654,6 +2745,7 @@ org_domains:
     - yapı # Turkish
     - bldg
     - bldgs
+    - 建材 # Chinese (simplified & traditional)
   consulting:
     - consulting
     - консалтинг
@@ -2845,6 +2937,10 @@ org_domains:
     - 交通 # Chinese (simplified & traditional)
     - 运输公司 # Chinese (simplified)
     - transp
+    - 客运 # Chinese (simplified)
+    - 客運 # Chinese (traditional)
+    - 货运 # Chinese (simplified)
+    - 貨運 # Chinese (traditional)
   financial:
     - financial
     - finance
@@ -3040,6 +3136,8 @@ org_domains:
     - 动力 # Chinese (simplified)
     - 動力 # Chinese (traditional)
     - pwr
+    - 发电 # Chinese (simplified)
+    - 發電 # Chinese (traditional)
   chemical:
     - chemical
     - chemicals
@@ -3058,6 +3156,7 @@ org_domains:
     - 化學 # Chinese (traditional)
     - 化工 # Chinese (simplified & traditional)
     - chem
+    - 화학 # Korean
   museum:
     - museum
     - museums
@@ -3128,6 +3227,8 @@ org_domains:
     - 營銷 # Chinese (traditional)
     - 市场营销 # Chinese (simplified)
     - 市場營銷 # Chinese (traditional)
+    - 销售 # Chinese (simplified)
+    - 銷售 # Chinese (traditional)
   bank:
     - bank
     - banking
