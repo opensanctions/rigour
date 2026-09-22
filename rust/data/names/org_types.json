@@ -40,7 +40,8 @@
   {
     "aliases": [
       "ሃላፊነቱ የተወሰነ የግል ማህበር",
-      "股份有限公司"
+      "股份有限公司",
+      "股份公司"
     ],
     "generic": "JSC"
   },
@@ -1149,6 +1150,7 @@
       "public stock company (PJSC)",
       "Public Joint-Stock Company",
       "Public joint stock company",
+      "公共株式会社",
       "Sociedade pública por ações",
       "Kumpanija b’ishma konġunti pubbliċi",
       "Javno dioničko društvo",
@@ -1162,6 +1164,7 @@
   {
     "aliases": [
       "otwarta spółka akcyjna",
+      "公開株式会社",
       "Open Joint-Stock Company",
       "openbare aandelenvennootschap",
       "Публично акционерно дружество",
@@ -1859,7 +1862,9 @@
   },
   {
     "aliases": [
-      "joint venture"
+      "joint venture",
+      "합작회사",
+      "합영회사"
     ],
     "display": "jv"
   },
@@ -2037,7 +2042,10 @@
       "Ltd Liab Company",
       "Limitd Liability Co",
       "Limted Liability Co",
-      "private limited liability company"
+      "private limited liability company",
+      "有限责任公司",
+      "有限責任公司",
+      "有限責任会社"
     ],
     "display": "LLC",
     "generic": "LLC"
@@ -2095,6 +2103,7 @@
       "בע\"מ",
       "有限公司",
       "有限",
+      "유한공사",
       "المحدودة",
       "المساهمة المحدودة"
     ],

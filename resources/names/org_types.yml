@@ -47,6 +47,7 @@ types:
     aliases:
       - ሃላፊነቱ የተወሰነ የግል ማህበር
       - 股份有限公司
+      - 股份公司 # Chinese (simplified)
   - display: Sh.p.k.
     compare: Shpk
     generic: LLC
@@ -879,6 +880,7 @@ types:
       - public stock company (PJSC)
       - Public Joint-Stock Company
       - Public joint stock company
+      - 公共株式会社 # Japanese
       - Sociedade pública por ações
       - Kumpanija b’ishma konġunti pubbliċi
       - Javno dioničko društvo
@@ -889,6 +891,7 @@ types:
     generic: JSC
     aliases:
       - otwarta spółka akcyjna
+      - 公開株式会社 # Japanese
       - Open Joint-Stock Company
       - openbare aandelenvennootschap
       - Публично акционерно дружество
@@ -1365,6 +1368,8 @@ types:
   - display: jv
     aliases:
       - joint venture
+      - 합작회사 # Korean
+      - 합영회사 # Korean
   - display: kb
     generic: LP
     aliases:
@@ -1490,6 +1495,9 @@ types:
       - Limitd Liability Co
       - Limted Liability Co
       - private limited liability company
+      - 有限责任公司 # Chinese (simplified)
+      - 有限責任公司 # Chinese (traditional)
+      - 有限責任会社 # Japanese
   - display: Ltd
     generic: LLC
     aliases:
@@ -1538,6 +1546,7 @@ types:
       - בע"מ
       - 有限公司
       - 有限
+      - 유한공사 # Korean
       - المحدودة
       - المساهمة المحدودة
   - display: Ltd Sti
