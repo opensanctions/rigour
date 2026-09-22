@@ -10,7 +10,7 @@ from rigour.text.scripts import is_latin
 log = logging.getLogger(__name__)
 
 
-def block_groups():
+def block_groups() -> None:
     with engine.begin() as conn:
         for group in GROUPS:
             stmt = update(mapping_table)
@@ -19,7 +19,7 @@ def block_groups():
             conn.execute(stmt)
 
 
-def block_phrases():
+def block_phrases() -> None:
     with engine.begin() as conn:
         for phrase in CONTAINS:
             stmt = update(mapping_table)
@@ -38,7 +38,7 @@ def block_phrases():
             conn.execute(stmt)
 
 
-def block_forms():
+def block_forms() -> None:
     with engine.begin() as conn:
         q = select(mapping_table.c.id, mapping_table.c.form)
         q = q.where(mapping_table.c.skip.is_(False))
@@ -58,7 +58,7 @@ def block_forms():
                     # conn.execute(stmt)
 
 
-def bad_candidates():
+def bad_candidates() -> None:
     stmt = select(mapping_table)
     stmt = stmt.where(mapping_table.c.skip.is_(False))
     stmt = stmt.order_by(func.length(mapping_table.c.form).desc())

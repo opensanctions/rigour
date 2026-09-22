@@ -1,3 +1,5 @@
+import json
+import os
 from collections.abc import Generator
 from datetime import datetime, timezone
 from itertools import count
@@ -21,13 +23,24 @@ from sqlalchemy import (
 from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 
 from namesdb.util import clean_form
+from rigour.text.scripts import text_scripts
 
 RUN_TIME = datetime.now(timezone.utc)
 DATA_PATH = Path(__file__).parent.parent / "data"
 DATA_PATH.mkdir(exist_ok=True)
-DB_FILE = DATA_PATH / "names.db"
+DB_FILE = Path(os.environ.get("NAMESDB_PATH", DATA_PATH / "names.db"))
 DB_URL = f"sqlite:///{DB_FILE.resolve().as_posix()}"
 engine = create_engine(DB_URL)
+
+# Bit flags recording where a form was seen on a Wikidata item; OR-ed
+# together when the same (form, lang) arrives via several routes.
+SOURCE_LABEL = 1
+SOURCE_ALIAS = 2
+SOURCE_NATIVE = 4  # P1705 native label
+SOURCE_TRANSLIT = 8  # P2440 transliteration or transcription
+
+# JSON shape of `item.names`: form -> raw Wikidata language code -> source bits.
+ItemNames = dict[str, dict[str, int]]
 
 metadata = MetaData()
 mapping_table = Table(
@@ -41,7 +54,25 @@ mapping_table = Table(
     Column("last_seen", DateTime, nullable=True),
     UniqueConstraint("form", "group", name="uq_mapping_form_group"),
 )
+item_table = Table(
+    "item",
+    metadata,
+    Column("group", Unicode(255), primary_key=True),
+    Column("classes", Unicode(500), nullable=False),
+    Column("names", Unicode, nullable=False),
+    Column("schemes", Unicode, nullable=False),
+    Column("first_seen", DateTime, nullable=False),
+    Column("last_seen", DateTime, nullable=False),
+)
 metadata.create_all(bind=engine)
+
+
+def form_script(form: str) -> str | None:
+    """Return the script of a form when it is written in exactly one script."""
+    scripts = text_scripts(form)
+    if len(scripts) != 1:
+        return None
+    return scripts.pop()
 
 
 def store_mapping(conn: Connection, form: str, group: str) -> None:
@@ -59,11 +90,62 @@ def store_mapping(conn: Connection, form: str, group: str) -> None:
     ilstmt = sqlite_insert(mapping_table).values(data)
     lstmt = ilstmt.on_conflict_do_update(
         index_elements=["form", "group"],
-        set_=dict(
-            last_seen=ilstmt.excluded.last_seen,
-        ),
+        set_={"last_seen": ilstmt.excluded.last_seen},
     )
     conn.execute(lstmt)
+
+
+def store_item(
+    conn: Connection,
+    group: str,
+    classes: list[str],
+    names: ItemNames,
+    schemes: dict[str, str],
+    seen_at: datetime = RUN_TIME,
+) -> None:
+    """Store the name extraction of one Wikidata item, replacing any older one.
+
+    An existing row is only overwritten by a newer observation, so a
+    backfill stamped with cache timestamps never clobbers a fresh crawl.
+    """
+    data = {
+        "group": group,
+        "classes": " ".join(sorted(classes)),
+        "names": json.dumps(names, ensure_ascii=False, sort_keys=True),
+        "schemes": json.dumps(schemes, ensure_ascii=False, sort_keys=True),
+        "first_seen": seen_at,
+        "last_seen": seen_at,
+    }
+    istmt = sqlite_insert(item_table).values(data)
+    stmt = istmt.on_conflict_do_update(
+        index_elements=["group"],
+        set_={
+            "classes": istmt.excluded.classes,
+            "names": istmt.excluded.names,
+            "schemes": istmt.excluded.schemes,
+            "last_seen": istmt.excluded.last_seen,
+        },
+        where=istmt.excluded.last_seen >= item_table.c.last_seen,
+    )
+    conn.execute(stmt)
+
+
+def iter_items(
+    conn: Connection,
+) -> Generator[tuple[str, list[str], ItemNames, dict[str, str]], None, None]:
+    """Yield (group, classes, names, schemes) for every stored item."""
+    stmt = select(item_table).order_by(item_table.c.group.asc())
+    for row in conn.execute(stmt).yield_per(10000):
+        m = row._mapping
+        classes = m["classes"].split() if len(m["classes"]) else []
+        yield (m["group"], classes, json.loads(m["names"]), json.loads(m["schemes"]))
+
+
+def skipped_pairs(conn: Connection) -> set[tuple[str, str]]:
+    """Return the (form, group) pairs marked as skipped in the mapping table."""
+    stmt = select(mapping_table.c.form, mapping_table.c.group)
+    stmt = stmt.where(mapping_table.c.skip.is_(True))
+    return {(row._mapping["form"], row._mapping["group"]) for row in conn.execute(stmt)}
 
 
 def skip_mapping(conn: Connection, mapping_id: int) -> None:
