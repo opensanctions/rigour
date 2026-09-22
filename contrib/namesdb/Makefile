@@ -17,5 +17,11 @@ get:
 wikidata:
 	python namesdb/wikidata.py
 
+backfill:
+	ndb backfill
+
+csv:
+	ndb export-csv data/name_forms.csv
+
 dump:
 	ndb dump ../../rust/data/names/person_names.txt

@@ -15,13 +15,13 @@ from namesdb.db import (
     skip_mapping,
     store_mapping,
 )
-from namesdb.export import generate_export_lines
+from namesdb.export import generate_export_lines, write_csv
 
 log = logging.getLogger(__name__)
 
 
 @click.group()
-def cli():
+def cli() -> None:
     """NamesDB CLI for managing name mappings."""
     logging.basicConfig(level=logging.INFO)
 
@@ -75,9 +75,11 @@ def lookup_form(form: str) -> None:
         table.add_column("Latinized", style="yellow")
         table.add_column("Skip", style="red")
         for group in sorted(get_groups(conn, form)):
-            for mapping_id, form, skip in sorted(get_forms(conn, group)):
+            for mapping_id, gform, skip in sorted(get_forms(conn, group)):
                 status = "skip" if skip else ""
-                table.add_row(group, str(mapping_id), form, latinize_text(form), status)
+                table.add_row(
+                    group, str(mapping_id), gform, latinize_text(gform), status
+                )
         Console().print(table)
 
 
@@ -112,6 +114,24 @@ def load_file(path: Path) -> None:
                     form = form.strip()
                     store_mapping(conn, form, group)
         conn.commit()
+
+
+@cli.command("backfill")
+def backfill() -> None:
+    """Store item extractions from cached Wikidata responses."""
+    from namesdb.wikidata import backfill_from_cache
+
+    backfill_from_cache()
+
+
+@cli.command("export-csv")
+@click.argument("path", type=click.Path(dir_okay=False, writable=True))
+def export_csv(path: Path) -> None:
+    """Write the per-form training CSV with language and script metadata."""
+    log.info("Exporting namesdb training CSV to %r", path)
+    with open(path, "w", encoding="utf-8", newline="") as fh:
+        items, rows = write_csv(fh)
+    log.info("Wrote %d rows for %d items to %r", rows, items, path)
 
 
 @cli.command("dump")

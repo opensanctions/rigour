@@ -1,13 +1,25 @@
+import csv
 import logging
 import unicodedata
 from collections import defaultdict
 from collections.abc import Generator, Iterable
+from typing import IO
 
 from normality import ascii_text
 from normality.cleaning import remove_unsafe_chars
 
 from namesdb.cleanup import block_forms, block_groups, block_phrases
-from namesdb.db import all_mappings, engine
+from namesdb.db import (
+    SOURCE_ALIAS,
+    SOURCE_LABEL,
+    SOURCE_NATIVE,
+    SOURCE_TRANSLIT,
+    all_mappings,
+    engine,
+    form_script,
+    iter_items,
+    skipped_pairs,
+)
 from rigour.text.scripts import can_latinize
 
 log = logging.getLogger(__name__)
@@ -73,3 +85,70 @@ def generate_export_lines() -> Generator[tuple[str, int], None, None]:
             forms_written += len(forms)
             fstr = ", ".join(sorted(forms))
             yield f"{fstr} => {group}\n", len(forms)
+
+
+CSV_COLUMNS = [
+    "group",
+    "classes",
+    "native_langs",
+    "form",
+    "script",
+    "langs",
+    "source",
+    "scheme",
+]
+SOURCE_LETTERS = [
+    (SOURCE_LABEL, "L"),
+    (SOURCE_ALIAS, "A"),
+    (SOURCE_NATIVE, "N"),
+    (SOURCE_TRANSLIT, "T"),
+]
+
+
+def source_letters(source: int) -> str:
+    return "".join(letter for flag, letter in SOURCE_LETTERS if source & flag)
+
+
+def write_csv(fh: IO[str]) -> tuple[int, int]:
+    """Write the per-form training CSV; return (items, rows) written.
+
+    One row per stored item and form, with the raw Wikidata language
+    codes the form appears under as a space-joined list. Forms skipped in
+    the mapping table and blocklisted groups and phrases are left out;
+    no further deduplication happens here.
+    """
+    block_groups()
+    block_phrases()
+    items = 0
+    rows = 0
+    writer = csv.writer(fh)
+    writer.writerow(CSV_COLUMNS)
+    with engine.begin() as conn:
+        skipped = skipped_pairs(conn)
+        for group, classes, names, schemes in iter_items(conn):
+            items += 1
+            native_langs: set[str] = set()
+            for langs in names.values():
+                native_langs.update(
+                    lang for lang, bits in langs.items() if bits & SOURCE_NATIVE
+                )
+            for form, langs in sorted(names.items()):
+                if (form, group) in skipped:
+                    continue
+                source = 0
+                for bits in langs.values():
+                    source |= bits
+                writer.writerow(
+                    [
+                        group,
+                        " ".join(classes),
+                        " ".join(sorted(native_langs)),
+                        form,
+                        form_script(form) or "",
+                        " ".join(sorted(langs)),
+                        source_letters(source),
+                        schemes.get(form, ""),
+                    ]
+                )
+                rows += 1
+    return items, rows
