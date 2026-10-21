@@ -27,9 +27,19 @@ def test_alpha3():
     assert iso_639_alpha3("ger") == "deu"
     assert iso_639_alpha3("yu") is None
     assert iso_639_alpha3("und") is None
-    assert iso_639_alpha3("mul") == MULTI_LANG
+    assert iso_639_alpha3("mis") is None
+
+
+def test_multi_lang():
+    assert iso_639_alpha3(MULTI_LANG) == MULTI_LANG
+    assert iso_639_alpha3("MUL ") == MULTI_LANG
+    assert iso_639_alpha3("multiple languages") == MULTI_LANG
+    assert iso_639_alpha3("multiple") == MULTI_LANG
+    assert iso_639_alpha3("various") == MULTI_LANG
     assert iso_639_alpha3("multilingual") == MULTI_LANG
-    assert iso_639_alpha2("mul") is None
+    assert iso_639_alpha3("mul-x-foo") == MULTI_LANG
+    assert iso_639_alpha2(MULTI_LANG) is None
+    assert list_to_alpha3([MULTI_LANG]) == {MULTI_LANG}
 
 
 def test_alpha3_subtags():
