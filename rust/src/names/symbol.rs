@@ -8,13 +8,11 @@ use pyo3::prelude::*;
 use std::collections::HashMap;
 use std::sync::{Arc, LazyLock, RwLock};
 
-/// The kind of semantic annotation a [`Symbol`] carries. Drives how
-/// strongly a symbol match counts during scoring — an `ORG_CLASS`
-/// match is a strong corporate-form signal, an `INITIAL` match is
-/// weak evidence that needs token-level corroboration.
-// Variants use SCREAMING_SNAKE_CASE so the Python-facing attribute
-// names (via `#[pyclass]`) match without individual `#[pyo3(name = …)]`
-// renames; the latter don't play well with `cfg_attr` gating.
+/// The kind of semantic annotation a [`Symbol`] carries. Scorers
+/// weight matches by category: `ORG_CLASS` is strong evidence,
+/// `INITIAL` needs token-level corroboration.
+// SCREAMING_SNAKE_CASE variants give the Python attribute names
+// directly; `#[pyo3(name = …)]` renames don't work under `cfg_attr`.
 #[allow(non_camel_case_types)]
 #[cfg_attr(
     feature = "python",
@@ -29,12 +27,10 @@ pub enum SymbolCategory {
     SYMBOL,
     /// Industry or sector domain (e.g. `ENERGY`, `BANKING`).
     DOMAIN,
-    /// Single-letter initial standing in for a given name (`j` for
-    /// "John"); attached to single-character latin name parts.
+    /// First letter of a latin name part (`j` for "John").
     INITIAL,
-    /// A known personal name from the reference corpus; id is the
-    /// Wikidata QID (e.g. `Q4925477` for "John") or an `X`-prefixed
-    /// manual-override id.
+    /// Known personal name; id is a Wikidata QID (`Q4925477`) or an
+    /// `X`-prefixed manual id.
     NAME,
     /// Nickname or weak alias attached to a name part.
     NICK,
@@ -47,9 +43,9 @@ pub enum SymbolCategory {
 }
 
 impl SymbolCategory {
-    /// Short stable key used for downstream serialisation — yente's
-    /// flat symbol index field uses `f"{category.value}:{id}"`, for
-    /// example, and logs / exports expect the same strings.
+    /// Return the stable short key used in serialised symbols (e.g.
+    /// yente's `f"{category.value}:{id}"` index field). Changing these
+    /// strings breaks existing indexes.
     pub fn value(&self) -> &'static str {
         match self {
             SymbolCategory::ORG_CLASS => "ORGCLS",
@@ -77,25 +73,15 @@ impl SymbolCategory {
 type Interner = RwLock<HashMap<Box<str>, Arc<str>>>;
 static INTERNER: LazyLock<Interner> = LazyLock::new(|| RwLock::new(HashMap::new()));
 
-/// Dedup id strings across the process so that logically-equal
-/// symbols share one heap allocation.
+/// Return a process-wide shared `Arc<str>` for `s`.
 ///
-/// Tagger runs emit millions of [`Symbol`]s over a small set of
-/// distinct ids (a few thousand Wikidata QIDs, the LLC/GmbH/etc.
-/// vocabulary, territory codes). Sharing an `Arc<str>` per distinct
-/// id keeps the working set in the low MBs instead of the GBs a
-/// naïve `String`-per-symbol layout would take. The interner never
-/// shrinks — entries live for the process lifetime, which is fine
-/// given the bounded set.
+/// Entries are never evicted, so only intern strings from a bounded
+/// vocabulary.
 pub fn intern(s: &str) -> Arc<str> {
-    // Fast path: read lock — the common case after the tagger has
-    // populated the interner on first use.
     if let Some(a) = INTERNER.read().unwrap().get(s) {
         return a.clone();
     }
-    // Slow path: another thread may have inserted between
-    // read-release and write-acquire, so check again before creating
-    // a fresh `Arc`.
+    // Another thread may have inserted between the read and write locks.
     let mut w = INTERNER.write().unwrap();
     if let Some(a) = w.get(s) {
         return a.clone();
@@ -105,18 +91,11 @@ pub fn intern(s: &str) -> Arc<str> {
     arc
 }
 
-/// A semantic interpretation applied to one or more parts of a name.
+/// A semantic annotation on one or more parts of a name, compared
+/// between names as match evidence and flattened into search indexes.
 ///
-/// Carries a [`SymbolCategory`] and an id. Tagger pipelines emit
-/// Symbols during name analysis; matchers compare them between
-/// names as a coarse compatibility signal, and indexers flatten
-/// them into searchable fields. Equality and hashing are
-/// structural over `(category, id)`.
-///
-/// Ids are always `str` — integer-sourced ids (Wikidata QIDs,
-/// ordinals, initial codepoints) are decimal-stringified at
-/// construction. Distinct `Symbol`s with equal ids share one
-/// [`Arc<str>`] heap allocation via [`intern`].
+/// Ids are always strings; integer ids are stored in decimal form, so
+/// `(NUMERIC, 5)` and `(NUMERIC, "5")` are the same symbol.
 #[cfg_attr(
     feature = "python",
     pyclass(eq, hash, frozen, from_py_object, module = "rigour._core")
@@ -128,38 +107,28 @@ pub struct Symbol {
 }
 
 impl Symbol {
-    /// Build a `Symbol` from an integer id. Used by data-load paths
-    /// that source ids as integers (Wikidata Q-numbers, ordinals,
-    /// `INITIAL` codepoints). The integer is decimal-stringified and
-    /// interned, so `Symbol::from_u32(NUMERIC, 5)` and
-    /// `Symbol::from_str(NUMERIC, "5")` are equal and share one
-    /// allocation.
+    /// Build a `Symbol` from an integer id.
     pub fn from_u32(category: SymbolCategory, n: u32) -> Self {
-        Symbol {
-            category,
-            id: intern(&n.to_string()),
-        }
+        Self::from_str(category, &n.to_string())
     }
 
-    /// Build a `Symbol` from a wide integer id. Numeric name parts
-    /// parse into `i64` — registry numbers like Russian INN/OGRN
-    /// run 10–13 digits, far beyond `u32` — and the id must carry
-    /// the full value: truncation would collide distinct numbers
-    /// into shared match evidence.
+    /// Build a `Symbol` from a wide integer id, such as a 13-digit
+    /// registry number parsed from a name part.
     pub fn from_i64(category: SymbolCategory, n: i64) -> Self {
-        Symbol {
-            category,
-            id: intern(&n.to_string()),
-        }
+        Self::from_str(category, &n.to_string())
     }
 
-    /// Build a `Symbol` from a string id. Used by the tagger when
-    /// attaching symbols with text-shaped ids (`ORG_CLASS:LLC`,
-    /// territory codes, Wikidata QIDs with the `Q` prefix).
+    /// Build a `Symbol` from a string id.
     pub fn from_str(category: SymbolCategory, s: &str) -> Self {
         Symbol {
             category,
-            id: intern(s),
+            // Numeric ids come from arbitrary input text; interning them
+            // would retain every distinct number for the process lifetime.
+            id: if category == SymbolCategory::NUMERIC {
+                Arc::from(s)
+            } else {
+                intern(s)
+            },
         }
     }
 }
@@ -167,23 +136,20 @@ impl Symbol {
 #[cfg(feature = "python")]
 #[pymethods]
 impl Symbol {
-    /// Construct a `Symbol` from Python. `id` accepts `str` or
-    /// `int`; integer ids are decimal-stringified and interned, so
-    /// `Symbol(cat, 5)` and `Symbol(cat, "5")` compare equal and
-    /// share one heap allocation.
+    /// Construct a `Symbol`; `Symbol(cat, 5)` equals `Symbol(cat, "5")`.
+    ///
+    /// Args:
+    ///     category: Kind of semantic annotation.
+    ///     id: String or integer identifier within the category.
     #[new]
     fn py_new(category: SymbolCategory, id: &Bound<'_, PyAny>) -> PyResult<Self> {
-        let id_arc = if let Ok(s) = id.extract::<&str>() {
-            intern(s)
+        if let Ok(s) = id.extract::<&str>() {
+            Ok(Self::from_str(category, s))
         } else if let Ok(n) = id.extract::<i64>() {
-            intern(&n.to_string())
+            Ok(Self::from_i64(category, n))
         } else {
-            return Err(PyTypeError::new_err("Symbol id must be str or int"));
-        };
-        Ok(Symbol {
-            category,
-            id: id_arc,
-        })
+            Err(PyTypeError::new_err("Symbol id must be str or int"))
+        }
     }
 
     #[getter]
@@ -191,15 +157,13 @@ impl Symbol {
         self.category
     }
 
-    /// The interned id string. Always `str` on the Python side —
-    /// ids originally passed as `int` return as their decimal form.
+    /// The id string; integer ids come back in decimal form.
     #[getter]
     fn id(&self) -> &str {
         &self.id
     }
 
-    /// Compact human-readable form used in logs and debug output,
-    /// e.g. `[ORGCLS:LLC]`.
+    /// Compact form for logs, e.g. `[ORGCLS:LLC]`.
     fn __str__(&self) -> String {
         format!("[{}:{}]", self.category.value(), self.id)
     }
@@ -236,6 +200,7 @@ mod tests {
         let a = Symbol::from_str(SymbolCategory::ORG_CLASS, "LLC");
         let b = Symbol::from_str(SymbolCategory::ORG_CLASS, "LLC");
         assert_eq!(a, b);
+        assert!(Arc::ptr_eq(&a.id, &b.id));
     }
 
     #[test]
@@ -253,27 +218,33 @@ mod tests {
     }
 
     #[test]
+    fn numeric_ids_bypass_interner() {
+        let a = Symbol::from_i64(SymbolCategory::NUMERIC, 5077746887312);
+        let id = Arc::downgrade(&a.id);
+        drop(a);
+        assert!(id.upgrade().is_none());
+    }
+
+    #[test]
     fn int_and_str_constructors_converge() {
         let a = Symbol::from_u32(SymbolCategory::NUMERIC, 5);
         let b = Symbol::from_str(SymbolCategory::NUMERIC, "5");
+        let c = Symbol::from_i64(SymbolCategory::NUMERIC, 5);
         assert_eq!(a, b);
-        assert!(Arc::ptr_eq(&a.id, &b.id));
+        assert_eq!(a, c);
     }
 
     #[test]
     fn from_i64_preserves_wide_values() {
-        // OGRN-sized (13-digit) ids must survive intact — a u32
-        // cast used to wrap 5077746887312 into 1095543440,
-        // colliding distinct registry numbers (issue #226).
+        // Truncating to u32 would collide distinct registry numbers.
         let a = Symbol::from_i64(SymbolCategory::NUMERIC, 5077746887312);
         assert_eq!(a.id.as_ref(), "5077746887312");
         let b = Symbol::from_str(SymbolCategory::NUMERIC, "5077746887312");
         assert_eq!(a, b);
-        assert!(Arc::ptr_eq(&a.id, &b.id));
     }
 
     #[test]
-    fn category_value_preserves_pre_port_strings() {
+    fn category_values_are_stable() {
         // Downstream consumers (yente's index_symbol, log output)
         // depend on these exact strings.
         assert_eq!(SymbolCategory::ORG_CLASS.value(), "ORGCLS");
