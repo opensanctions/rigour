@@ -77,16 +77,17 @@ impl SymbolCategory {
 type Interner = RwLock<HashMap<Box<str>, Arc<str>>>;
 static INTERNER: LazyLock<Interner> = LazyLock::new(|| RwLock::new(HashMap::new()));
 
-/// Dedup id strings across the process so that logically-equal
-/// symbols share one heap allocation.
+/// Dedup bounded-vocabulary id strings across the process so that
+/// logically-equal symbols share one heap allocation.
 ///
 /// Tagger runs emit millions of [`Symbol`]s over a small set of
 /// distinct ids (a few thousand Wikidata QIDs, the LLC/GmbH/etc.
 /// vocabulary, territory codes). Sharing an `Arc<str>` per distinct
 /// id keeps the working set in the low MBs instead of the GBs a
 /// naïve `String`-per-symbol layout would take. The interner never
-/// shrinks — entries live for the process lifetime, which is fine
-/// given the bounded set.
+/// shrinks — entries live for the process lifetime. Data-driven
+/// numeric ids bypass it so arbitrary numeric input does not grow
+/// this set.
 pub fn intern(s: &str) -> Arc<str> {
     // Fast path: read lock — the common case after the tagger has
     // populated the interner on first use.
@@ -115,8 +116,10 @@ pub fn intern(s: &str) -> Arc<str> {
 ///
 /// Ids are always `str` — integer-sourced ids (Wikidata QIDs,
 /// ordinals, initial codepoints) are decimal-stringified at
-/// construction. Distinct `Symbol`s with equal ids share one
-/// [`Arc<str>`] heap allocation via [`intern`].
+/// construction. Ids outside the `NUMERIC` category share one
+/// [`Arc<str>`] heap allocation via [`intern`]. Numeric ids are owned
+/// by the symbols that use them and are freed when the last clone
+/// is dropped.
 #[cfg_attr(
     feature = "python",
     pyclass(eq, hash, frozen, from_py_object, module = "rigour._core")
@@ -130,15 +133,11 @@ pub struct Symbol {
 impl Symbol {
     /// Build a `Symbol` from an integer id. Used by data-load paths
     /// that source ids as integers (Wikidata Q-numbers, ordinals,
-    /// `INITIAL` codepoints). The integer is decimal-stringified and
-    /// interned, so `Symbol::from_u32(NUMERIC, 5)` and
-    /// `Symbol::from_str(NUMERIC, "5")` are equal and share one
-    /// allocation.
+    /// `INITIAL` codepoints). The integer is decimal-stringified, so
+    /// `Symbol::from_u32(NUMERIC, 5)` and
+    /// `Symbol::from_str(NUMERIC, "5")` are equal.
     pub fn from_u32(category: SymbolCategory, n: u32) -> Self {
-        Symbol {
-            category,
-            id: intern(&n.to_string()),
-        }
+        Self::from_str(category, &n.to_string())
     }
 
     /// Build a `Symbol` from a wide integer id. Numeric name parts
@@ -147,10 +146,7 @@ impl Symbol {
     /// the full value: truncation would collide distinct numbers
     /// into shared match evidence.
     pub fn from_i64(category: SymbolCategory, n: i64) -> Self {
-        Symbol {
-            category,
-            id: intern(&n.to_string()),
-        }
+        Self::from_str(category, &n.to_string())
     }
 
     /// Build a `Symbol` from a string id. Used by the tagger when
@@ -159,7 +155,11 @@ impl Symbol {
     pub fn from_str(category: SymbolCategory, s: &str) -> Self {
         Symbol {
             category,
-            id: intern(s),
+            id: if category == SymbolCategory::NUMERIC {
+                Arc::from(s)
+            } else {
+                intern(s)
+            },
         }
     }
 }
@@ -168,22 +168,22 @@ impl Symbol {
 #[pymethods]
 impl Symbol {
     /// Construct a `Symbol` from Python. `id` accepts `str` or
-    /// `int`; integer ids are decimal-stringified and interned, so
-    /// `Symbol(cat, 5)` and `Symbol(cat, "5")` compare equal and
-    /// share one heap allocation.
+    /// `int`; integer ids are decimal-stringified, so
+    /// `Symbol(cat, 5)` and `Symbol(cat, "5")` compare equal.
+    /// Numeric ids are not retained in the process-wide interner.
+    ///
+    /// Args:
+    ///     category: Kind of semantic annotation.
+    ///     id: String or integer identifier within the category.
     #[new]
     fn py_new(category: SymbolCategory, id: &Bound<'_, PyAny>) -> PyResult<Self> {
-        let id_arc = if let Ok(s) = id.extract::<&str>() {
-            intern(s)
+        if let Ok(s) = id.extract::<&str>() {
+            Ok(Self::from_str(category, s))
         } else if let Ok(n) = id.extract::<i64>() {
-            intern(&n.to_string())
+            Ok(Self::from_i64(category, n))
         } else {
-            return Err(PyTypeError::new_err("Symbol id must be str or int"));
-        };
-        Ok(Symbol {
-            category,
-            id: id_arc,
-        })
+            Err(PyTypeError::new_err("Symbol id must be str or int"))
+        }
     }
 
     #[getter]
@@ -191,7 +191,7 @@ impl Symbol {
         self.category
     }
 
-    /// The interned id string. Always `str` on the Python side —
+    /// The id string. Always `str` on the Python side —
     /// ids originally passed as `int` return as their decimal form.
     #[getter]
     fn id(&self) -> &str {
@@ -236,6 +236,7 @@ mod tests {
         let a = Symbol::from_str(SymbolCategory::ORG_CLASS, "LLC");
         let b = Symbol::from_str(SymbolCategory::ORG_CLASS, "LLC");
         assert_eq!(a, b);
+        assert!(Arc::ptr_eq(&a.id, &b.id));
     }
 
     #[test]
@@ -252,12 +253,45 @@ mod tests {
         assert_ne!(a, b);
     }
 
+    fn assert_id_released(symbol: Symbol) {
+        let id = Arc::downgrade(&symbol.id);
+        let clone = symbol.clone();
+        drop(symbol);
+        assert!(id.upgrade().is_some(), "a live clone must retain the id");
+        drop(clone);
+        assert!(
+            id.upgrade().is_none(),
+            "numeric ids must not be retained globally"
+        );
+    }
+
+    #[test]
+    fn numeric_ids_are_released() {
+        assert_id_released(Symbol::from_str(SymbolCategory::NUMERIC, "5077746887312"));
+        assert_id_released(Symbol::from_u32(SymbolCategory::NUMERIC, 123456789));
+        assert_id_released(Symbol::from_i64(SymbolCategory::NUMERIC, -5077746887312));
+    }
+
+    #[cfg(feature = "python")]
+    #[test]
+    fn python_numeric_ids_are_released() {
+        Python::initialize();
+        Python::attach(|py| {
+            let text = "5077746887312".into_pyobject(py).unwrap().into_any();
+            let number = 5077746887312_i64.into_pyobject(py).unwrap().into_any();
+            assert_id_released(Symbol::py_new(SymbolCategory::NUMERIC, &text).unwrap());
+            assert_id_released(Symbol::py_new(SymbolCategory::NUMERIC, &number).unwrap());
+        });
+    }
+
     #[test]
     fn int_and_str_constructors_converge() {
         let a = Symbol::from_u32(SymbolCategory::NUMERIC, 5);
         let b = Symbol::from_str(SymbolCategory::NUMERIC, "5");
         assert_eq!(a, b);
-        assert!(Arc::ptr_eq(&a.id, &b.id));
+        let c = Symbol::from_i64(SymbolCategory::NUMERIC, 5);
+        let symbols = std::collections::HashSet::from([a, b, c]);
+        assert_eq!(symbols.len(), 1);
     }
 
     #[test]
@@ -269,7 +303,6 @@ mod tests {
         assert_eq!(a.id.as_ref(), "5077746887312");
         let b = Symbol::from_str(SymbolCategory::NUMERIC, "5077746887312");
         assert_eq!(a, b);
-        assert!(Arc::ptr_eq(&a.id, &b.id));
     }
 
     #[test]
