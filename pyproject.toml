@@ -45,7 +45,7 @@ dev = [
     # releases, so an unpinned range would change what `ruff check` reports
     # without any change to this repo. genscripts/util.py also formats the
     # generated data tables with it, so a bump can shift those files too.
-    "ruff >= 0.16.0, < 0.17.0",
+    "ruff >= 0.16.0, < 0.18.0",
     "build",
     "twine",
     "mypy",
