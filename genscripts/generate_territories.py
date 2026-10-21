@@ -4,7 +4,7 @@ from collections.abc import Generator
 from pathlib import Path
 from typing import Any
 
-from normality import latinize_text, squash_spaces
+from normality import squash_spaces
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedSeq
 from ruamel.yaml.scalarstring import DoubleQuotedScalarString, FoldedScalarString
@@ -16,6 +16,7 @@ from rigour.langs import iso_639_alpha3
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes, normalize_territory_name
 from rigour.text.scripts import can_latinize, is_latin
+from rigour.text.translit import ascii_text
 
 log = logging.getLogger(__name__)
 yaml = YAML()
@@ -68,7 +69,7 @@ def _clean_names(terr: Any, key: str, used_names: set[str], create: bool) -> Non
         if is_latin(name):
             continue
         if can_latinize(name):
-            latin = latinize_text(name)
+            latin = ascii_text(name)
             names.yaml_add_eol_comment(latin, i)
 
 

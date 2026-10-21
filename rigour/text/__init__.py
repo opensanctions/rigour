@@ -8,8 +8,10 @@ from rigour.text.distance import (
 )
 from rigour.text.phonetics import metaphone, soundex
 from rigour.text.stopwords import is_nullplace, is_nullword, is_stopword
+from rigour.text.translit import ascii_text
 
 __all__ = [
+    "ascii_text",
     "is_levenshtein_plausible",
     "is_nullplace",
     "is_nullword",

@@ -144,7 +144,7 @@ def test_clean_code():
 def test_normalize_territory_name():
     assert normalize_territory_name("São Tomé and Príncipe") == "sao tome and principe"
     assert normalize_territory_name("Åland") == "aland"
-    assert normalize_territory_name("Россия") == "rossia"
+    assert normalize_territory_name("Россия") == "rossiya"
     # Vowel signs in scripts we do not latinize must survive intact.
     assert normalize_territory_name("हिन्दुस्तान") == "हिन्दुस्तान"
 

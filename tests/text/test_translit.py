@@ -10,7 +10,7 @@ lives on the Rust side; this file is the Python contract check.
 
 import pytest
 
-from rigour.text.translit import maybe_ascii, should_ascii
+from rigour.text.translit import ascii_text, maybe_ascii, should_ascii
 
 # --- should_ascii ---
 
@@ -162,3 +162,12 @@ def test_round_trip_should_ascii_implies_ascii_output(text: str):
             f"should_ascii({text!r}) is True "
             f"but maybe_ascii({text!r}) = {maybe_ascii(text)!r} is not ASCII"
         )
+
+
+def test_ascii_text():
+    assert ascii_text("Шевченко") == "Shevchenko"
+    assert ascii_text("Škoda") == "Skoda"
+    assert ascii_text("北京") == "bei jing"
+    assert ascii_text("€100 Kč") == "100 Kc"
+    # Mixed with a non-admitted script: all of it goes through normality.
+    assert ascii_text("Шевченко 李") == "Sevcenko li"
