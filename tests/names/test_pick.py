@@ -159,6 +159,14 @@ def test_pick_lang_name():
     ]
     assert pick_lang_name(local_latin) == "Gordon Brown"
 
+    mul_latin = [
+        LangStr("گوردون براون", lang="fas"),
+        LangStr("Гордон Браун", lang="srp"),
+        LangStr("Gordon Brown", lang="mul"),
+        LangStr("Gordons Brauns", lang="lav"),
+    ]
+    assert pick_lang_name(mul_latin) == "Gordon Brown"
+
 
 def test_pick_case():
     cases = [
