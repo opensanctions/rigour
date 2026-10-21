@@ -37,10 +37,7 @@ type Bound = (usize, usize, f64);
 
 /// The best pair out of a list×list address comparison, with the
 /// evidence that produced it.
-#[cfg_attr(
-    feature = "python",
-    pyclass(frozen, get_all, skip_from_py_object, module = "rigour._core")
-)]
+#[cfg_attr(feature = "python", pyclass(frozen, get_all, module = "rigour._core"))]
 #[derive(Debug, Clone, PartialEq)]
 pub struct AddressMatch {
     /// Similarity of the winning pair in [0.0, 1.0].

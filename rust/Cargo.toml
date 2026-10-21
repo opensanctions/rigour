@@ -21,7 +21,7 @@ python = ["dep:pyo3"]
 # deliberately NOT set here — they live in `[tool.maturin].features` in
 # pyproject.toml. Keeping them out of the crate lets `cargo test
 # --features python` link a standalone test binary against libpython.
-pyo3 = { version = "0.29", optional = true }
+pyo3 = { version = "0.30", optional = true }
 
 # Phonetic algorithms (metaphone, soundex). Port of Apache commons-codec, pure
 # Rust. The upstream jellyfish Rust crate can't be used directly because it
