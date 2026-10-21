@@ -164,8 +164,6 @@ class NamePart:
         phonetics: bool = True,
     ) -> None: ...
 
-    def __len__(self) -> int: ...
-
     @classmethod
     def tag_sort(cls, parts: list[NamePart]) -> list[NamePart]: ...
 
@@ -178,8 +176,6 @@ class Span:
     comparable: str
 
     def __init__(self, parts: list[NamePart], symbol: Symbol) -> None: ...
-
-    def __len__(self) -> int: ...
 
 
 class Name:

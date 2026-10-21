@@ -2,6 +2,7 @@ from rigour.text.checksum import text_hash
 from rigour.text.cleaning import remove_bracketed_text, remove_emoji
 from rigour.text.distance import (
     is_levenshtein_plausible,
+    jaro,
     jaro_winkler,
     levenshtein,
     levenshtein_similarity,
@@ -16,6 +17,7 @@ __all__ = [
     "is_nullplace",
     "is_nullword",
     "is_stopword",
+    "jaro",
     "jaro_winkler",
     "levenshtein",
     "levenshtein_similarity",
