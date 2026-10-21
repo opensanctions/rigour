@@ -178,6 +178,13 @@ OBJ_NAME_PREFIXES:
   - The
   - MV
   - M/V
+  - M.V
+  - M V
+  - MT
+  - M/T
+  - M.T
+  - M T
+  - SS
 # Terms used to indicate the need for splitting a name, e.g. when multiple names are in a single string.
 NAME_SPLIT_PHRASES:
   # aliases/alternative names including old names

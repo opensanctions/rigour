@@ -87,5 +87,16 @@ mod tests {
     #[test]
     fn obj_prefix_dropped() {
         assert_eq!(remove_obj_prefixes("M/V Oceanic"), "Oceanic");
+        assert_eq!(remove_obj_prefixes("M.V. Oceanic"), "Oceanic");
+        assert_eq!(remove_obj_prefixes("m v oceanic"), "oceanic");
+        assert_eq!(remove_obj_prefixes("M/T Oceanic"), "Oceanic");
+        assert_eq!(remove_obj_prefixes("mt oceanic"), "oceanic");
+        assert_eq!(remove_obj_prefixes("SS Oceanic"), "Oceanic");
+    }
+
+    #[test]
+    fn obj_prefix_needs_word_boundary() {
+        assert_eq!(remove_obj_prefixes("Mtwara Dawn"), "Mtwara Dawn");
+        assert_eq!(remove_obj_prefixes("Ssangyong Star"), "Ssangyong Star");
     }
 }
