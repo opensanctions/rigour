@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Кіровоградська область # Kírovogradsʹka oblastʹ
-  - Кировоградская область # Kirovogradskaâ oblastʹ
+  - Кіровоградська область # Kirovohradska oblast
+  - Кировоградская область # Kirovogradskaya oblast
 names_weak:
   - Kirovohrad # Kírovogradsʹka oblastʹ
   - Kirovograd # Kirovogradskaâ oblastʹ

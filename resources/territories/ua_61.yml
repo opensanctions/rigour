@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Тернопільська область # Ternopílʹsʹka oblastʹ
-  - Тернопольская область # Ternopolʹskaâ oblastʹ
+  - Тернопільська область # Ternopilska oblast
+  - Тернопольская область # Ternopolskaya oblast
 names_weak:
   - Ternopil # Ternopílʹsʹka oblastʹ
   - Ternopol # Ternopolʹskaâ oblastʹ

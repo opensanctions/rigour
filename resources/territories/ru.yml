@@ -21,13 +21,13 @@ wikipedia_url: https://en.wikipedia.org/wiki/Russia
 names_strong:
   - Rossiya
   - РФ                   # RF
-  - Российская Федерация # Rossijskaâ Federaciâ
-  - Российская Федераци  # Rossijskaâ Federaci
-  - Российская Федерациѐ # Rossijskaâ Federaciè
+  - Российская Федерация # Rossiiskaya Federatsiya
+  - Российская Федераци  # Rossiiskaya Federatsi
+  - Российская Федерациѐ # Rossiiskaya Federatsie
   - russian
-  - россия               # rossiâ
+  - россия               # rossiya
 names_weak:
-  - Русија # Rusiǰa
+  - Русија # Rusija
   - ᏲᏂᎢ    # RF
   - روس    # Rossijskaâ Federaciâ
   - Rusija # Rossijskaâ Federaci
@@ -40,7 +40,7 @@ names_weak:
   - Federația Rusă
   - Krievijas Federācija
   - Ruska
-  - Росія  # Rosíâ
+  - Росія  # Rosiya
   - Russian Republic
   - Rɔhyea
   - Rússland
@@ -51,14 +51,14 @@ names_weak:
   - რუსეთის ფედერაც # rusetis pederats
   - Руснак # Rusnak
   - Orílẹ́ède Rọṣia
-  - Расія  # Rasíâ
+  - Расія  # Rasiya
   - ရုရှ
-  - Ρωσία  # Rōsía
+  - Ρωσία  # Rosia
   - Chechen Republic of Ichkeria
   - Russiya
   - Ruslân
   - An Ruis
-  - Ресей  # Resej
+  - Ресей  # Resei
   - Huulusi
   - Russland
   - An Rúis
@@ -79,11 +79,11 @@ names_weak:
   - რუსეთი # ruseti
   - Russia nutome
   - ꊉꇆꌦ
-  - Уӕрӕсе # Uæræse
+  - Уӕрӕсе # Uaeraese
   - Rúsia
   - Russie
   - ራሽያ
-  - Російська Федерація # Rosíjsʹka Federacíâ
+  - Російська Федерація # Rosiiska Federatsiya
   - ರಷ್ಯಾ
   - روٗس
   - რუსეთის # rusetis
@@ -99,7 +99,7 @@ names_weak:
   - Rrus
   - రష్యా
   - روسیه
-  - Арассыыйа # Arassyyja
+  - Арассыыйа # Arassyyia
   - ରୁଷିଆ
   - ロシア
   - Urusi
@@ -137,7 +137,7 @@ names_weak:
   - Rusi
   - Rússia
   - Venäjä
-  - рѡссі́а # rѡssí́a
+  - рѡссі́а # rossia
   - روٙسیە
   - Rasha
   - Rusland
@@ -147,10 +147,10 @@ names_weak:
   - Rosja
   - ራሺያ
   - Ulusi
-  - Ռուսաստան # Ṙusastan
+  - Ռուսաստան # Rusastan
   - Urúusi
   - Ryssland
-  - Русия  # Rusiâ
+  - Русия  # Rusiya
   - रूस
   - ཨུ་རུ་སུ
   - Rusujo

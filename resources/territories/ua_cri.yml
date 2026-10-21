@@ -29,17 +29,17 @@ names_strong:
   - Qırım
 names_weak:
   - Autonomous Republic of Crimea
-  - тимчасово окупована територія Автономної Республіки Крим # timčasovo okupovana teritoríâ Avtonomnoí̈ Respublíki Krim
-  - Автономна Республіка Крим # Avtonomna Respublíka Krim
+  - тимчасово окупована територія Автономної Республіки Крим # timchasovo okupovana terytoriya Avtonomnoi Respubliky Krim
+  - Автономна Республіка Крим # Avtonomna Respublika Krim
   - Republic of Crimea
   - Qırım Muhtar Cumhuriyeti
   - crimea (occupied)
-  - Автономная Республика Крым # Avtonomnaâ Respublika Krym
+  - Автономная Республика Крым # Avtonomnaya Respublika Krym
   - Крым        # Krym
 places:
   - Sevastopol, Crimea
-  - Севастополь, Крым # Sevastopolʹ, Krym
-  - Севастополь # Sevastopolʹ
+  - Севастополь, Крым # Sevastopol, Krym
+  - Севастополь # Sevastopol
 langs:
   - crh
   - rus

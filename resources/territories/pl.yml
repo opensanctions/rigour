@@ -38,8 +38,8 @@ names_weak:
   - पोलैण्ड
   - Lengyelország
   - بولندا
-  - Польшча             # Polʹšča
-  - Польская Республика # Polʹskaâ Respublika
+  - Польшча             # Polshcha
+  - Польская Республика # Polskaya Respublika
   - Pölôni
   - Poorandi
   - Pollando
@@ -49,14 +49,14 @@ names_weak:
   - ပိုလန်
   - Polşa
   - Polan
-  - Пољска              # Pol̂ska
+  - Пољска              # Poljska
   - པོ་ལནྜ།
   - 波蘭
   - Полска              # Polska
   - पोलैंड
   - i -Poland
   - Pólska
-  - Польша              # Polʹša
+  - Польша              # Polsha
   - پولند
   - Polandia
   - Orílɛ́ède Polandi
@@ -65,7 +65,7 @@ names_weak:
   - Pholandi
   - پۆڵەندا
   - Gwlad Pwyl
-  - Польща              # Polʹŝa
+  - Польща              # Polshcha
   - لهستون
   - Լեհաստան            # Lehastan
   - Pulunya
@@ -78,9 +78,9 @@ names_weak:
   - polɔ́n
   - ポーランド
   - পোল্যান্ড
-  - პოლონეთი          # pʼoloneti
-  - Республіка Польща # Respublíka Polʹŝa
-  - Польш             # Polʹš
+  - პოლონეთი          # poloneti
+  - Республіка Польща # Respublika Polshcha
+  - Польш             # Polsh
   - Poole
   - Poleni
   - ପୋଲାଣ୍ଡ
@@ -131,11 +131,11 @@ names_weak:
   - ꕶꗷꘋ
   - Poloñ
   - bulunya
-  - Πολωνία           # Polōnía
+  - Πολωνία           # Polonia
   - पोलंड
   - Poloɲe
   - Pologŋ
-  - Полша             # Polša
+  - Полша             # Polsha
   - Polonja
   - Upolandi
 places:

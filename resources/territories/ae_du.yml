@@ -10,7 +10,7 @@ parent: ae
 names_strong:
   - Emirate of Dubai
   - Dubai, UAE
-  - Дубай # Dubaj
+  - Дубай # Dubai
   - Дубаи # Dubai
 names_weak:
   - دبي
@@ -20,7 +20,7 @@ names_weak:
   - Dubayy
   - دُبَيّ # Dubaï
   - Emirate Of Dubai, U.A.E
-  - Дубай, ОАЕ # Dubaj, OAE
+  - Дубай, ОАЕ # Dubai, OAE
 places:
   - JEBEL ALI FREE ZONE
 langs:

@@ -10,14 +10,14 @@ names_strong:
   - St. Petersburg
   - St. Petersburg, Russia
   - Санкт-Петербург         # Sankt-Peterburg
-  - Санкт-Петербург, Россия # Sankt-Peterburg, Rossiâ
-  - Санкт-Петербург (Россия) # Sankt-Peterburg (Rossiâ)
-  - Санкт-Петербург, Росія  # Sankt-Peterburg, Rosíâ
-  - Санкт-Петербург (Росія) # Sankt-Peterburg (Rosíâ)
+  - Санкт-Петербург, Россия # Sankt-Peterburg, Rossiya
+  - Санкт-Петербург (Россия) # Sankt-Peterburg (Rossiya)
+  - Санкт-Петербург, Росія  # Sankt-Peterburg, Rosiya
+  - Санкт-Петербург (Росія) # Sankt-Peterburg (Rosiya)
   - Г.Санкт-Петербург       # G.Sankt-Peterburg
   - Г. Санкт-Петербург      # G. Sankt-Peterburg
   - Leningrad
   - Ленинград          # Leningrad
-  - Ленинград (Россия) # Leningrad (Rossiâ)
-  - Ленинград (Росія)  # Leningrad (Rosíâ)
+  - Ленинград (Россия) # Leningrad (Rossiya)
+  - Ленинград (Росія)  # Leningrad (Rosiya)
 names_weak: []

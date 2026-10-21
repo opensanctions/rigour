@@ -20,7 +20,7 @@ names_strong:
   - 조선민주주의인민공화국  # joseonminjujuuiinmingonghwagug
   - Best Korea
 names_weak:
-  - Паўночная Карэя # Paŭnočnaâ Karéâ
+  - Паўночная Карэя # Paunochnaya Kareya
   - Sjeverna Koreja # joseonminjujuuiinmingonghwagug
   - korɛanɔ́r
   - Nord -Koreo
@@ -28,7 +28,7 @@ names_weak:
   - République populaire démocratique de Corée (RPDC)
   - République populaire démocratique de Corée
   - ଉତ୍ତର କୋରିଆ
-  - Хойд Солонгос   # Hojd Solongos
+  - Хойд Солонгос   # Hoid Solongos
   - Pohjois -Korea
   - Corea do Norte
   - Հյուսիսային Կորեա # Hyusisayin Korea
@@ -42,7 +42,7 @@ names_weak:
   - Dziehe Korea nutome
   - Kɛɲɛka Kore
   - شمالی کوریا
-  - Северна Корея   # Severna Koreâ
+  - Северна Корея   # Severna Koreya
   - Orílẹ́ède Guusu Kọria
   - Kuzey Kore
   - i -North Korea
@@ -52,11 +52,11 @@ names_weak:
   - ઉત્તર કોરિયા
   - Koreja e Veriut
   - Korea Avannarleq
-  - Оңтүстік Корея  # Oňtüstík Koreâ
+  - Оңтүстік Корея  # Ontustik Koreya
   - Corea dal Nord
   - RPDC
   - شُمٲلی کورِیا
-  - კორეის სახალხო დემოკრატიული რესპუბლიკა # kʼoreis sakhalkho demokʼratʼiuli respʼublikʼa
+  - კორეის სახალხო დემოკრატიული რესპუბლიკა # koreis sakhalkho demokratiuli respublika
   - Koreya y’amajaruguru
   - उत्तर कोरिया
   - བྱང་ ཀོ་རི་ཡ
@@ -66,10 +66,10 @@ names_weak:
   - 北朝鮮
   - kɔlé u muɛnɛ́
   - Ukorea Kaskazini
-  - ჩრდილოეთი კორეა # chrdiloeti kʼorea
+  - ჩრდილოეთი კორეა # chrdiloeti korea
   - Korea Utara
-  - Түндүк Корея  # Tündük Koreâ
-  - Шимолий Корея # Šimolij Koreâ
+  - Түндүк Корея  # Tunduk Koreya
+  - Шимолий Корея # Shimoly Koreya
   - Kɔ̀re ì Ŋ̀ɔmbɔk
   - ເກົາຫລີເໜືອ
   - Norðurkorea
@@ -81,7 +81,7 @@ names_weak:
   - Triều Tiên
   - เกาหลีเหนือ
   - Észak -Korea
-  - Къилбаседа Корей # Kʺilbaseda Korej
+  - Къилбаседа Корей # Kilbaseda Korei
   - Severní Korea
   - Coreea de Nord
   - 北韓
@@ -104,14 +104,14 @@ names_weak:
   - Severná Kórea
   - Koré yí bvuɔ
   - КНДР                           # KNDR
-  - კორეის სახალხო დემოკრატიული რე # kʼoreis sakhalkho demokʼratʼiuli re
+  - კორეის სახალხო დემოკრატიული რე # koreis sakhalkho demokratiuli re
   - ఉత్తర కొరియా
   - កូរ៉េខាងជើង
   - Korea, North
   - Democratic People`s Republic of Korea
   - Norður -Kórea
   - DPR Korea
-  - Корейская Народно-Демократическая Республика # Korejskaâ Narodno-Demokratičeskaâ Respublika
+  - Корейская Народно-Демократическая Республика # Koreiskaya Narodno-Demokraticheskaya Respublika
   - வட கொரியா
   - ഉത്തരകൊറിയ
   - Coree dal nord
@@ -132,7 +132,7 @@ names_weak:
   - Koreja ta’ Fuq
   - ᏧᏴᏢ ᎪᎵᎠ
   - Corea del Norte
-  - კორეის სახალხოდემოკრატიული რე  # kʼoreis sakhalkhodemokʼratʼiuli re
+  - კორეის სახალხოდემოკრატიული რე  # koreis sakhalkhodemokratiuli re
   - Koreya ey’omumambuka
   - ਉੱਤਰੀ ਕੋਰੀਆ
   - Korɛ ya nɔ́rdi
@@ -143,12 +143,12 @@ names_weak:
   - Emetab Korea nebo murot katam
   - شمالی کُره
   - ಉತ್ತರ ಕೋರಿಯಾ
-  - Βόρεια Κορέα                   # Bóreia Koréa
+  - Βόρεια Κορέα                   # Voreia Korea
   - Koreab, Noord
   - Noord -Korea
   - Shimoliy Koreya
   - Korea Avaratra
-  - Северна Кореја                 # Severna Koreǰa
+  - Северна Кореја                 # Severna Koreja
   - ሰሜን ኮሪያ
   - Kore wa muulu
   - ꖏꔸꕩ ꗛꔤ ꕪꘋꗒ
@@ -167,8 +167,8 @@ names_weak:
   - Põhja -Korea
   - Koreia di Norti
   - Corée du Nord
-  - Северная Корея # Severnaâ Koreâ
-  - Північна Корея # Pívníčna Koreâ
+  - Северная Корея # Severnaya Koreya
+  - Північна Корея # Pivnichna Koreya
   - Kooree, Gurma
   - North Korean
   - Sǝr Kore fah sǝŋ

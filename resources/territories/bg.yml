@@ -15,9 +15,9 @@ summary: >-
   Bulgaria, officially the Republic of Bulgaria, is a country in Southeast Europe.
 wikipedia_url: https://en.wikipedia.org/wiki/Bulgaria
 names_strong:
-  - България           # Bʺlgariâ
-  - Република България # Republika Bʺlgariâ
-  - Българска          # Bʺlgarska
+  - България           # Blgariya
+  - Република България # Republika Blgariya
+  - Българска          # Blgarska
 names_weak:
   - Bulgarie # Bʺlgariâ
   - Болгар   # Bolgar
@@ -77,7 +77,7 @@ names_weak:
   - Biolgaria
   - בולגריה
   - بلغاریا
-  - Болгарія # Bolgaríâ
+  - Болгарія # Bolhariya
   - బల్గేరియా
   - Bulljaarije
   - Bùlgarìà
@@ -115,20 +115,20 @@ names_weak:
   - Бугарска # Bugarska
   - Buləgarí
   - Bulgārija
-  - Бугарија # Bugariǰa
-  - Балгарыя # Balgaryâ
+  - Бугарија # Bugarija
+  - Балгарыя # Balgaryya
   - Buligariya
   - بلغاریه
   - Bulgaria nutome
-  - Болгария  # Bolgariâ
-  - Բուլղարիա # Bulġaria
+  - Болгария  # Bolgariya
+  - Բուլղարիա # Bulgharia
   - Búlgaría
   - Bhulgariya
   - Hubulgaria
   - Buligaliya
   - Bulga̱a̱ria
   - بلغارستان
-  - Βουλγαρία # Boulgaría
+  - Βουλγαρία # Voulgaria
   - Bulgarii
   - Bùugɛlìa
 places:

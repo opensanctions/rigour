@@ -27,13 +27,13 @@ names_strong:
 names_weak:
   - हाँगकाँग एसएआर चीन
   - Hong Kong AEB Txina
-  - Қытай Халық Республикасының Гонг -Конг арнайы әкімшілік ауданы # Kˌytaj Halykˌ Respublikasynyň Gong -Kong arnajy əkímšílík audany
+  - Қытай Халық Республикасының Гонг -Конг арнайы әкімшілік ауданы # Qytai Halyq Respublikasynyn Gong -Kong arnaiy akimshilik audany
   - Hongkong – Kiinan e.h.a.                                       # hong kong
   - हाँगकाँग विशेष प्रशासनिक क्षेत्र चीन
   - हाँग काँग (चीन विशेष प्रशासनिक क्षेत्र)
   - הונג קונג - מחוז מנהלי מיוחד של סין
   - R.A.S. Hong Kong a Chinei
-  - Специальный административный регион Китая Гонконг              # Specialʹnyj administrativnyj region Kitaâ Gonkong
+  - Специальный административный регион Китая Гонконг              # Spetsialny administrativny region Kitaya Gonkong
   - ហុងកុង
   - HKSAR
   - هنگ کنگ
@@ -45,7 +45,7 @@ names_weak:
   - S.R.R. na Síne Hong Cong
   - 中国香港特别行政区
   - ಹಾಂಗ್ ಕಾಂಗ್ SAR ಚೈನಾ
-  - ჰონკონგის სპეციალური ადმინისტრაციული რეგიონი ჩინეთი            # honkʼongis spʼetsialuri administʼratsiuli regioni chineti
+  - ჰონკონგის სპეციალური ადმინისტრაციული რეგიონი ჩინეთი            # honkongis spetsialuri administratsiuli regioni chineti
   - Hong Kong SAR na Sìne
   - Hong Kong RAE de China
   - Sonderverwaltungszone Hongkong
@@ -55,19 +55,19 @@ names_weak:
   - Regjon aministrative speciâl de Cine di Hong Kong
   - Hong Kong RMD Sina
   - Honkonga
-  - Հոնկոնգի ՀՎՇ                                                   # Honkongi HVŠ
+  - Հոնկոնգի ՀՎՇ                                                   # Honkongi HVSH
   - Hong Kong, China
   - Ypatingasis Administracinis Kinijos Regionas Honkongas
   - Hong Kong (RAE)
   - ஹாங்காங் எஸ்ஏஆர் சீனா
   - شياڭگاڭ ئالاھىدە مەمۇرىي رايونى (جۇڭگو)
-  - ჰონკონგი                                                       # honkʼongi
+  - ჰონკონგი                                                       # honkongi
   - Región Administrativa Especial de Hong Kong de la República Popular China
   - Sjálfstjórnarsvæðið Hong Kong
   - တရုတ်၏ အထူးအုပ်ချုပ်ခွင့်ရ ဟောင်ကောင်
-  - Хонконг, САР на Китай                     # Honkong, SAR na Kitaj
-  - БНХАУ -ын Тусгай захиргааны бүс Хонг Конг # BNHAU -yn Tusgaj zahirgaany büs Hong Kong
-  - Гонконг (ша -къаьстина кӀошт)             # Gonkong (ša -kʺaʹstina kӀošt)
+  - Хонконг, САР на Китай                     # Honkong, SAR na Kitai
+  - БНХАУ -ын Тусгай захиргааны бүс Хонг Конг # BNHAU -yn Tusgai zahirgaany bus Hong Kong
+  - Гонконг (ша -къаьстина кӀошт)             # Gonkong (sha -kastina kosht)
   - Hongkong, S.A.R. Kina
   - Hɔng Kɔng SAR Tsaina nutome
   - Hongkong S.A.R. Kina
@@ -75,7 +75,7 @@ names_weak:
   - 홍콩(중국 특별행정구)                              # hongkong(jung-gug teugbyeolhaengjeong-gu)
   - ᎰᏂᎩ ᎪᏂᎩ
   - Honq Konq Xüsusi İnzibati Ərazi Çin
-  - Специальный административный район Гонконг Китайской Народной Республики # Specialʹnyj administrativnyj rajon Gonkong Kitajskoj Narodnoj Respubliki
+  - Специальный административный район Гонконг Китайской Народной Республики # Spetsialny administrativny raion Gonkong Kitaiskoi Narodnoi Respubliki
   - British Hong Kong
   - Hongkong SAR Kína
   - హాంకాంగ్ ఎస్ఏఆర్ చైనా
@@ -86,7 +86,7 @@ names_weak:
   - Hong Kong SAR China
   - RAS di Hong Kong
   - Hong Kong SAR Kina
-  - Χονγκ Κονγκ ΕΔΠ Κίνας                     # Chon'nk Kon'nk EDP Kínas
+  - Χονγκ Κονγκ ΕΔΠ Κίνας                     # Chonng Konng EDP Kinas
   - Hong Kong RhGA Tsieina
   - RAE de Hong Kong (China)
   - R.A.S. chinoise de Hong Kong
@@ -104,7 +104,7 @@ names_weak:
   - Ķīnas īpašās pārvaldes apgabals Honkonga
   - SAR Hongkong (Kina)
   - SRA Hongkong (Chiny)
-  - Гонконг, О.А.Р. Китаю                     # Gonkong, O.A.R. Kitaû
+  - Гонконг, О.А.Р. Китаю                     # Gonkong, O.A.R. Kitayu
   - RVAK i Hong Kongut
   - Хонг Конг С. А. Р. Кина                   # Hong Kong S. A. R. Kina
   - හොංකොං චීන විශේෂ පරිපාලන කලාපය
@@ -114,21 +114,21 @@ names_weak:
   - Gonkong (Xitoy MMH)
   - Hongkongi erihalduspiirkond
   - Hong Kong, RAE da China
-  - Гонконг Хитой ММҲ   # Gonkong Hitoj MMҲ
+  - Гонконг Хитой ММҲ   # Gonkong Hitoi MMH
   - САР Хонгконг (Кина) # SAR Hongkong (Kina)
   - Hồng Kông, Trung Quốc
   - Rejiãu Administrativu Special di Hong Kong
   - 中華人民共和國香港特別行政區
   - Hongkong – ZAO Číny
-  - Гонконг Кытай ААА   # Gonkong Kytaj AAA
+  - Гонконг Кытай ААА   # Gonkong Kytai AAA
   - هونغ كونغ الصينية
   - हङकङ चिनिया समाजवादी स्वायत्त क्षेत्र
   - Wosebita zarjadniska cona Hongkong
   - ہانگ کانگ SAR چین
   - Spezialverwaltungszon Hong Kong
-  - Гонконг (специальный административный район) # Gonkong (specialʹnyj administrativnyj rajon)
+  - Гонконг (специальный административный район) # Gonkong (spetsialny administrativny raion)
   - হংকং এসএআর চীনা
-  - Ганконг, САР (Кітай) # Gankong, SAR (Kítaj)
+  - Ганконг, САР (Кітай) # Gankong, SAR (Kitai)
   - ହଂକଂ ବିଶେଷ ପ୍ରଶାସନିକ କ୍ଷେତ୍ର ଚୀନ୍
   - Hong Kong Special Administrative Region of China
   - Hong Kong PUP Kina

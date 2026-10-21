@@ -38,7 +38,7 @@ names_weak:
   - Gine -Bisaawo
   - 幾內亞比紹
   - גינע־ביסאַו
-  - Гвинеја -Бисао  # Gvineǰa -Bisao
+  - Гвинеја -Бисао  # Gvineja -Bisao
   - غينيا بيساو
   - Գվինեա -Բիսաու # Gvinea -Bisau
   - Guinea -Bisáu
@@ -59,7 +59,7 @@ names_weak:
   - گینێ بیساو
   - ginɛ́ bisɔ́
   - 几内亚比绍
-  - Γουινέα Μπισάου # Gouinéa Mpisáou
+  - Γουινέα Μπισάου # Gouinea Bisaou
   - Uginebisau
   - Guine Bisso
   - گینیا بیسائو
@@ -76,7 +76,7 @@ names_weak:
   - Gwinea Bissau
   - Ginɛbisau
   - กินี -บิสเซา
-  - Гвінея -Бісау # Gvíneâ -Bísau
+  - Гвінея -Бісау # Hvineya -Bisau
   - ギニアビサウ
   - Guine ma Bissao
   - Giné Bisaó
@@ -104,19 +104,19 @@ names_weak:
   - Ginebisau
   - ꕅꔤꕇ ꔫꕢꕴ
   - Guine -Bisau
-  - Гвинеја -Бисау # Gvineǰa -Bisau
+  - Гвинеја -Бисау # Gvineja -Bisau
   - Ŋginɛ̂ Mbisáwu
   - Ginea -Bissau
   - Nginebisau
   - ቢሳዎ
   - ගිනි බිසව්
-  - Гвинея -Бисау # Gvineâ -Bisau
+  - Гвинея -Бисау # Gvineya -Bisau
   - 기니비사우 # ginibisau
   - Guinea Bissau
   - Gine -Bisso
   - Gini -Bisawu
   - Gvineja -Bisava
-  - Гвиней -Бисау # Gvinej -Bisau
+  - Гвиней -Бисау # Gvinei -Bisau
   - Guinea-Bissua
   - Gine -Bisau
   - Gini Bisaw
@@ -132,7 +132,7 @@ names_weak:
   - Citizen Of Guinea-Bissau
   - Gínea-Bissá
   - Guinée-Bissau
-  - Гвинея-Бисау # Gvineâ-Bisau
+  - Гвинея-Бисау # Gvineya-Bisau
   - Gine-Bissau
 places:
   - Bissau

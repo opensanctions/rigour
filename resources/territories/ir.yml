@@ -21,11 +21,11 @@ names_strong:
   - إيران
   - Al-Jumhūrīyah al-‘Islāmīyah al-Irániyah
   - Al-Irān
-  - исламистская республика иран  # islamistskaâ respublika iran
+  - исламистская республика иран  # islamistskaya respublika iran
 names_weak:
   - Iran nutome
   - ഇറാൻ
-  - ГӀажарийчоь  # GӀažarijčoʹ
+  - ГӀажарийчоь  # Gazhariicho
   - Irano
   - Ìrâŋ
   - Irani
@@ -34,7 +34,7 @@ names_weak:
   - Eron
   - อิหร่าน
   - Èlân
-  - ირანი(ისლამური რესპუბლიკა) # irani(islamuri respʼublikʼa)
+  - ირანი(ისლამური რესპუბლიკა) # irani(islamuri respublika)
   - ইরান
   - ʻIlaani
   - ඉරානය
@@ -57,10 +57,10 @@ names_weak:
   - ਈਰਾਨ
   - ઈરાન
   - אירן
-  - ირანი (ისლამურირესპუბლიკა) # irani (islamurirespʼublikʼa)
+  - ირანი (ისლამურირესპუბლიკა) # irani (islamurirespublika)
   - Iraan
   - Irán
-  - Іран         # Íran
+  - Іран         # Iran
   - Orílɛ́ède Irani
   - i -Iran
   - အီရန်
@@ -82,11 +82,11 @@ names_weak:
   - ఇరాన్
   - ஈரான்
   - ອີຣ່ານ
-  - Иран (Исламская Республика) # Iran (Islamskaâ Respublika)
+  - Иран (Исламская Республика) # Iran (Islamskaya Respublika)
   - An Iaráin
   - इरान
   - ଇରାନ୍
-  - Ιράν         # Irán
+  - Ιράν         # Iran
   - איראן
   - İran
   - Iranian
@@ -94,7 +94,7 @@ names_weak:
   - Iraŋ
   - ಇರಾನ್
   - Irâ
-  - Эрон         # Éron
+  - Эрон         # Eron
   - ایٖران
   - इराण
   - Orílẹ́ède Irani
@@ -110,7 +110,7 @@ names_weak:
   - Իրան         # Iran
   - Yiraani
   - iráŋ
-  - ირანი (ისლამური რესპუბლიკა) # irani (islamuri respʼublikʼa)
+  - ირანი (ისლამური რესპუბლიკა) # irani (islamuri respublika)
   - ايران
 places:
   - Tehran

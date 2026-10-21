@@ -6,9 +6,9 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Рівненська область # Rívnensʹka oblastʹ
-  - Ровненская область # Rovnenskaâ oblastʹ
-  - Ровенская область  # Rovenskaâ oblastʹ
+  - Рівненська область # Rivnenska oblast
+  - Ровненская область # Rovnenskaya oblast
+  - Ровенская область  # Rovenskaya oblast
 names_weak:
   - Rivne # Rívnensʹka oblastʹ
   - Rovno # Rovnenskaâ oblastʹ

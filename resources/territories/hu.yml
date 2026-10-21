@@ -37,7 +37,7 @@ names_weak:
   - Hungarian
   - Венгри  # Vengri
   - ಹಂಗಾರಿ
-  - Венгрыя # Vengryâ
+  - Венгрыя # Vengryya
   - Uhungaria
   - ہَنٛگری
   - Vengriya
@@ -54,7 +54,7 @@ names_weak:
   - Hungarujo
   - ⵀⵏⵖⴰⵔⵢⴰ
   - Węgry
-  - Угорщина # Ugorŝina
+  - Угорщина # Ugorshchina
   - Henɣarya
   - ہنگری
   - Ungheria
@@ -82,7 +82,7 @@ names_weak:
   - Ɔ̀ŋgriì
   - ᎲᏂᎦᎵ
   - Vengrija
-  - Ουγγαρία # Oungaría
+  - Ουγγαρία # Oungaria
   - Ongirí
   - Hongria
   - Ongri
@@ -95,7 +95,7 @@ names_weak:
   - Ongili
   - People's Republic of Hungary
   - হাঙ্গেরি
-  - Унгарија # Ungariǰa
+  - Унгарија # Ungarija
   - Orílɛ́ède Hungari
   - Orílẹ́ède Hungari
   - ஹங்கேரி
@@ -124,7 +124,7 @@ names_weak:
   - Unjann
   - ហុងគ្រី
   - i -Hungary
-  - Мађарска # Mađarska
+  - Мађарска # Madjarska
   - An Ungair
   - Hungária
   - हंगरी
@@ -138,8 +138,8 @@ names_weak:
   - Huhungalia
   - హంగేరీ
   - Hongareieb
-  - Венгрия # Vengriâ
-  - Унгария # Ungariâ
+  - Венгрия # Vengriya
+  - Унгария # Ungariya
 places:
   - Budapest
   - Budapesti

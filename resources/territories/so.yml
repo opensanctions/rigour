@@ -21,7 +21,7 @@ names_weak:
   - Somaliab
   - Somàlia
   - Somaariya
-  - Федеративная Республика Сомали  # Federativnaâ Respublika Somali
+  - Федеративная Республика Сомали  # Federativnaya Respublika Somali
   - سومالی
   - سۆمالیا
   - Somália
@@ -41,18 +41,18 @@ names_weak:
   - Somālija
   - Somaalie
   - సోమాలియా
-  - Сомалија # Somaliǰa
+  - Сомалија # Somalija
   - Somàilia
   - Somálsko
   - Orílɛ́ède Somalia
-  - Σομαλία # Somalía
+  - Σομαλία # Somalia
   - ⵚⵚⵓⵎⴰⵍ
-  - Самалі # Samalí
+  - Самалі # Samali
   - سومالِیا
   - โซมาเลีย
   - Somalia nutome
   - ሱማሌ
-  - Сомалец # Somalec
+  - Сомалец # Somalets
   - სომალი # somali
   - 索马里
   - Husomalia
@@ -74,7 +74,7 @@ names_weak:
   - སོ་མཱལི་ཡ།
   - 소말리아   # somallia
   - Somalii
-  - Сомалі # Somalí
+  - Сомалі # Somali
   - somalí
   - الصومال
   - ಸೊಮಾಲಿಯಾ
@@ -104,11 +104,11 @@ names_weak:
   - Սոմալի # Somali
   - i -Somalia
   - Somali Democratic Republic
-  - Сомалия # Somaliâ
+  - Сомалия # Somaliya
 places:
   - Mogadishu
   - Mogadishu, Somalia
-  - Могадишу, Сомалия  # Mogadišu, Somaliâ
+  - Могадишу, Сомалия  # Mogadishu, Somaliya
 langs:
   - som
   - ara

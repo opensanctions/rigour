@@ -18,7 +18,7 @@ names_strong:
   - U.S.
   - Estados Unidos
   - Estados Unidos de América
-  - США  # SŠA
+  - США  # SSHA
   - u.s. of a
   - america
 names_weak:
@@ -114,27 +114,27 @@ names_weak:
   - Združene države Amerike
   - Zjadnośone staty Ameriki
   - Zjednoćene staty Ameriki
-  - Ηνωμένες Πολιτείες # Ēnōménes Politeíes
-  - АИШ # AIŠ
-  - АҚШ # AKˌŠ
-  - Америка Бирләшмиш Штатлары # Amerika Birləšmiš Štatlary
-  - Америка Кошмо Штаттары # Amerika Košmo Štattary
-  - Америкийн Нэгдсэн Улс # Amerikijn Négdsén Uls
-  - а҆мерїка̑нскїѧ соедине̑нныѧ держа̑вы # a҆merí̈kȃnskí̈ѧ soedinȇnnyѧ deržȃvy
-  - Злучаныя Штаты Амерыкі # Zlučanyâ Štaty Amerykí
-  - Қўшма Штатлар # Kˌŭšma Štatlar
-  - Сједињене Америчке Државе # Sǰedin̂ene Američke Države
-  - Соединенные Штаты # Soedinennye Štaty
-  - Соединети Американски Држави # Soedineti Amerikanski Državi
-  - Сполучені Штати Америки # Spolučení Štati Ameriki
-  - Съединени щати # Sʺedineni ŝati
-  - Цхьанатоьхна Штаташ # Chʹanatoʹhna Štataš
+  - Ηνωμένες Πολιτείες # Inomenes Politeies
+  - АИШ # AISH
+  - АҚШ # AQSH
+  - Америка Бирләшмиш Штатлары # Amerika Birlashmish Shtatlary
+  - Америка Кошмо Штаттары # Amerika Koshmo Shtattary
+  - Америкийн Нэгдсэн Улс # Amerikiin Negdsen Uls
+  - а҆мерїка̑нскїѧ соедине̑нныѧ держа̑вы # amerikanskiya soedinennyya derzhavy
+  - Злучаныя Штаты Амерыкі # Zluchanyya Shtaty Ameryki
+  - Қўшма Штатлар # Qushma Shtatlar
+  - Сједињене Америчке Државе # Sjedinjene Americhke Drzhave
+  - Соединенные Штаты # Soedinennye Shtaty
+  - Соединети Американски Држави # Soedineti Amerikanski Drzhavi
+  - Сполучені Штати Америки # Spolucheni Shtati Ameriki
+  - Съединени щати # Sedineni shchati
+  - Цхьанатоьхна Штаташ # Tshanatohna Shtatash
   - ა შ შ # a sh sh
-  - ა შ შ (USA) # a sh sh (USA)
-  - ამერიკის შეერთებული შტატები # amerikʼis sheertebuli shtʼatʼebi
+  - ა შ შ (USA) # a sh sh (usa)
+  - ამერიკის შეერთებული შტატები # amerikis sheertebuli shtatebi
   - აშშ # ashsh
-  - დელავერის შტატი # delaveris shtʼatʼi
-  - Ամերիկայի Միացյալ Նահանգներ # Amerikayi Miacʻyal Nahangner
+  - დელავერის შტატი # delaveris shtati
+  - Ամերիկայի Միացյալ Նահանգներ # Amerikayi Miatsyal Nahangner
   - ארצות הברית
   - פֿאַראייניגטע שטאַטן
   - أمريكا
@@ -181,7 +181,7 @@ names_weak:
   - SUA
   - Us Citizen
   - États-Unis
-  - Соединённые Штаты # Soedinënnye Štaty
+  - Соединённые Штаты # Soedinyonnye Shtaty
   - Amerika Birleşik Devletleri
 langs:
   - eng
