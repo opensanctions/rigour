@@ -3,6 +3,7 @@ from functools import lru_cache
 
 from rigour import env
 from rigour._core import (
+    raw_jaro,
     raw_jaro_winkler,
     raw_levenshtein,
     raw_levenshtein_cutoff,
@@ -101,15 +102,51 @@ def is_levenshtein_plausible(
 
 
 @lru_cache(maxsize=MEMO_SMALL)
-def jaro_winkler(left: str, right: str, max_length: int = env.MAX_NAME_LENGTH) -> float:
+def jaro(
+    left: str,
+    right: str,
+    max_length: int = env.MAX_NAME_LENGTH,
+    cutoff: float = 0.6,
+) -> float:
+    """Compute the Jaro similarity of two strings.
+
+    Use this over [jaro_winkler][rigour.text.distance.jaro_winkler] when
+    the caller applies its own prefix weighting, or none at all.
+
+    Args:
+        left: A string.
+        right: A string.
+        max_length: Truncate both strings to this many characters before
+            comparing.
+        cutoff: Scores at or below this value are returned as 0.0. Pass
+            0.0 to get the unaltered score.
+
+    Returns:
+        A float between 0.0 and 1.0.
+    """
+    score = raw_jaro(left[:max_length], right[:max_length])
+    return score if score > cutoff else 0.0
+
+
+@lru_cache(maxsize=MEMO_SMALL)
+def jaro_winkler(
+    left: str,
+    right: str,
+    max_length: int = env.MAX_NAME_LENGTH,
+    cutoff: float = 0.6,
+) -> float:
     """Compute the Jaro-Winkler similarity of two strings.
 
     Args:
         left: A string.
         right: A string.
+        max_length: Truncate both strings to this many characters before
+            comparing.
+        cutoff: Scores at or below this value are returned as 0.0. Pass
+            0.0 to get the unaltered score.
 
     Returns:
         A float between 0.0 and 1.0.
     """
     score = raw_jaro_winkler(left[:max_length], right[:max_length])
-    return score if score > 0.6 else 0.0
+    return score if score > cutoff else 0.0

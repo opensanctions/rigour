@@ -1,5 +1,6 @@
 from rigour.text.distance import (
     is_levenshtein_plausible,
+    jaro,
     jaro_winkler,
     levenshtein,
     levenshtein_similarity,
@@ -18,6 +19,19 @@ def test_jaro_winkler():
     assert jaro_winkler("foo", "foo") == 1.0
     assert jaro_winkler("foo", "foox") > 0.9
     assert jaro_winkler("foo", "foox") < 1.0
+    assert jaro_winkler("abc", "xyz") == 0.0
+    low = jaro_winkler("bush", "haswani", cutoff=0.0)
+    assert 0.0 < low <= 0.6
+    assert jaro_winkler("bush", "haswani") == 0.0
+
+
+def test_jaro():
+    assert jaro("foo", "foo") == 1.0
+    assert jaro("martha", "marhta") < jaro_winkler("martha", "marhta")
+    assert jaro("abc", "xyz") == 0.0
+    low = jaro("bush", "haswani", cutoff=0.0)
+    assert 0.0 < low <= 0.6
+    assert jaro("bush", "haswani") == 0.0
 
 
 def test_levenshtein_similarity():
