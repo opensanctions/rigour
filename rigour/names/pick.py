@@ -2,7 +2,7 @@
 from rigour._core import pick_case as _pick_case
 from rigour._core import pick_name as pick_name
 from rigour._core import reduce_names as reduce_names
-from rigour.langs import PREFERRED_LANG, PREFERRED_LANGS, LangStr
+from rigour.langs import MULTI_LANG, PREFERRED_LANG, PREFERRED_LANGS, LangStr
 from rigour.text import levenshtein
 
 
@@ -22,11 +22,18 @@ def pick_lang_name(names: list[LangStr]) -> str | None:
         picked = pick_name(preferred)
         if picked is not None:
             return picked
-    preferred = [str(n) for n in names if n.lang in PREFERRED_LANGS]
+    # Untagged and "mul" names compete here: most sources state no language,
+    # Wikidata's default labels are "mul", and pick_name already favours Latin.
+    preferred = [
+        str(n)
+        for n in names
+        if n.lang is None or n.lang == MULTI_LANG or n.lang in PREFERRED_LANGS
+    ]
     if len(preferred) > 0:
         picked = pick_name(preferred)
         if picked is not None:
             return picked
+    # Only reached when every name is tagged with a language outside PREFERRED_LANGS.
     return pick_name([str(n) for n in names])
 
 
