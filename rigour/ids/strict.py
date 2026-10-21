@@ -1,5 +1,5 @@
 
-from normality import ascii_text
+from rigour.text.translit import ascii_text
 
 from rigour.ids.common import IdentifierFormat
 

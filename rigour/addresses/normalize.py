@@ -5,11 +5,11 @@ import unicodedata
 import warnings
 from functools import cache
 
-from normality import ascii_text
 from normality.constants import WS
 from normality.util import Categories
 
 from rigour.territories.lookup import _load_territory_names
+from rigour.text.translit import ascii_text
 from rigour.util import resource_lock, unload_module
 
 CHARS_ALLOWED = "&№" + string.ascii_letters + string.digits
@@ -59,7 +59,7 @@ def normalize_address(
     Args:
         address: The address to normalise.
         latinize: When `True`, transliterate non-ASCII tokens to
-            ASCII via `normality.ascii_text`. Default `False`
+            ASCII via [ascii_text][rigour.text.translit.ascii_text]. Default `False`
             preserves the original script.
         min_length: Reject the result as `None` if it would be
             shorter than this many characters. Defaults to 4 to

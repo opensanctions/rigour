@@ -566,7 +566,10 @@ pub fn maybe_ascii(text: &str, drop: bool) -> String {
             text.to_string()
         };
     }
-    let mut result = text.to_string();
+    // Pre-pass keys are composed letters (`й`, not `и` + breve).
+    let mut result = ComposingNormalizerBorrowed::new_nfc()
+        .normalize(text)
+        .into_owned();
     for script in scripts {
         if script == "Latin" {
             continue;
@@ -710,6 +713,17 @@ mod tests {
         assert_eq!(maybe_ascii("Җәлил", false), "Jalil");
         assert_eq!(maybe_ascii("Нохчӏийчоь", false), "Nohchiicho");
         assert_eq!(maybe_ascii("Ѳеодоръ", false), "Feodor");
+    }
+
+    #[test]
+    fn maybe_ascii_decomposed_input() {
+        let nfd = |s: &str| {
+            DecomposingNormalizerBorrowed::new_nfd()
+                .normalize(s)
+                .into_owned()
+        };
+        assert_eq!(maybe_ascii(&nfd("Зеленский"), false), "Zelensky");
+        assert_eq!(maybe_ascii(&nfd("Ёлкин"), false), "Yolkin");
     }
 
     #[test]

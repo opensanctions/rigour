@@ -7,10 +7,10 @@ name: Adygea
 parent: ru
 qid: Q3734
 names_strong:
-  - Адыгея          # Adygeâ
-  - Адыгея (Россия) # Adygeâ (Rossiâ)
-  - Республика Адыгея # Respublika Adygeâ
-  - Республика Адыгея (Россия) # Respublika Adygeâ (Rossiâ)
+  - Адыгея          # Adygeya
+  - Адыгея (Россия) # Adygeya (Rossiya)
+  - Республика Адыгея # Respublika Adygeya
+  - Республика Адыгея (Россия) # Respublika Adygeya (Rossiya)
 names_weak: []
 langs:
   - ady

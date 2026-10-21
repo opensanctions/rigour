@@ -44,7 +44,7 @@ def test_normalize_address():
     )
     assert (
         normalize_address("Д.127, АМУРСКАЯ, АМУРСКАЯ, 675000", latinize=True)
-        == "d 127 amurskaa amurskaa 675000"
+        == "d 127 amurskaya amurskaya 675000"
     )
 
 

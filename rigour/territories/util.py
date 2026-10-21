@@ -1,8 +1,9 @@
 import unicodedata
 
-from normality import latinize_text, squash_spaces
+from normality import squash_spaces
 
 from rigour.text.scripts import can_latinize
+from rigour.text.translit import ascii_text
 
 SKIP_CHARACTERS = ".()[],;:_-/ʻ'’"
 
@@ -20,9 +21,10 @@ def clean_codes(codes: list[str]) -> list[str]:
 def normalize_territory_name(name: str) -> str:
     """Normalize a territory name for lookup.
 
-    Casefolds, drops punctuation, folds accents on Latin, Cyrillic and Greek
-    text, and squashes whitespace, so that `São Tomé`, `Sao Tome` and
-    `SAO TOME` all key identically.
+    Transliterates the scripts [ascii_text][rigour.text.translit.ascii_text]
+    handles natively to ASCII, casefolds, drops punctuation and squashes
+    whitespace, so that `São Tomé`, `Sao Tome` and `SAO TOME` all key
+    identically. Other scripts keep their letters and marks.
 
     Args:
         name: A territory name or alias in any script.
@@ -30,29 +32,17 @@ def normalize_territory_name(name: str) -> str:
     Returns:
         The normalized lookup key.
     """
-    name = unicodedata.normalize("NFKD", name).casefold()
+    if can_latinize(name):
+        name = ascii_text(name)
+    name = unicodedata.normalize("NFKC", name).casefold()
     filtered: list[str] = []
     for char in name:
         if char in SKIP_CHARACTERS:
             continue
-        # NFKD splits accents and vowel signs into combining marks, which are
-        # not alphanumeric; they must stay attached to their base letter so
-        # latinization can fold them instead of a space splitting the word.
+        # Combining marks carry vowels in e.g. Devanagari; turning them into
+        # spaces would split the word.
         if not char.isalnum() and not unicodedata.category(char).startswith("M"):
             filtered.append(" ")
             continue
         filtered.append(char)
-    normalized = "".join(filtered)
-    if can_latinize(normalized):
-        # Latinized output keeps diacritics (são, rossiâ); fold them so that
-        # accented and plain spellings share a key. Scripts that are not
-        # latinized keep their marks, which carry vowels in e.g. Devanagari.
-        normalized = unicodedata.normalize("NFKD", latinize_text(normalized))
-        normalized = "".join(
-            char
-            for char in normalized
-            if not unicodedata.category(char).startswith("M")
-        )
-    normalized = unicodedata.normalize("NFKC", normalized)
-    normalized = squash_spaces(normalized)
-    return normalized
+    return squash_spaces("".join(filtered))

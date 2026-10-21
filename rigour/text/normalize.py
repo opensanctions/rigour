@@ -50,10 +50,9 @@ value:
                               wins if both are set
 
 Transliteration is NOT part of this pipeline. rigour's public
-transliteration surface is [rigour.text.translit][] — opportunistic,
-limited to Latin/Cyrillic/Greek/Armenian/Georgian/Hangul. For
-broader-script lossy romanisation use
-`normality.ascii_text` / `normality.latinize_text`.
+transliteration surface is [rigour.text.translit][]: `maybe_ascii` for
+Latin/Cyrillic/Greek/Armenian/Georgian/Hangul, and
+[ascii_text][rigour.text.translit.ascii_text] for any script.
 
 Empty output is coalesced to ``None``, matching the contract of the
 pre-flags `Optional[str]` normalisers.

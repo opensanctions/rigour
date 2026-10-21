@@ -6,8 +6,8 @@ is_ftm: false
 is_jurisdiction: true
 parent: ua
 names_strong:
-  - Волинська область # Volinsʹka oblastʹ
-  - Волынская область # Volynskaâ oblastʹ
+  - Волинська область # Volinska oblast
+  - Волынская область # Volynskaya oblast
 names_weak:
   - Volyn        # Volinsʹka oblastʹ
   - Volyn region # Volynskaâ oblastʹ

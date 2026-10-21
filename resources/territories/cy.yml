@@ -46,21 +46,21 @@ names_weak:
   - Güney Kıbrıs Rum Kesimi
   - Sypra
   - Kipr
-  - Кипър         # Kipʺr
+  - Кипър         # Kipr
   - Sifurus
   - Zypere
   - Chypre
   - ဆိုက်ပရက်စ်
   - قبرص
   - Izinga rya Shipure
-  - Κυπριακή Δημοκρατία # Kypriakḗ Dēmokratía
+  - Κυπριακή Δημοκρατία # Kypriaki Dimokratia
   - An Chipir
   - సైప్రస్
   - Caipurasi
   - Xipri
   - Greek Cypriot
   - Syipriya
-  - Республіка Кіпр # Respublíka Kípr
+  - Республіка Кіпр # Respublika Kipr
   - CYPS
   - सायप्रस
   - سایفرٛس
@@ -92,7 +92,7 @@ names_weak:
   - Cipri
   - Saeprɔs
   - Kupuróosi
-  - კვიპროსი      # kʼvipʼrosi
+  - კვიპროსი      # kviprosi
   - Saipalesi
   - Ċipru
   - Kypr
@@ -110,10 +110,10 @@ names_weak:
   - British Cyprus
   - Ukuprosi
   - キプロス
-  - Кіпр          # Kípr
+  - Кіпр          # Kipr
   - Kuprothi
   - സൈപ്രസ്
-  - Κύπρος        # Kýpros
+  - Κύπρος        # Kypros
   - Sipria
   - ໄຊປຣັສ
   - i -Cyprus
@@ -146,7 +146,7 @@ names_weak:
   - Cyrpus
   - Kıbrıs
 places:
-  - Λευκωσία  # Leukōsía
+  - Λευκωσία  # Levkosia
   - Lefkosía
   - nicosia
   - Lefkoşa
@@ -154,7 +154,7 @@ places:
   - Limassol
   - Limasol
   - Lemesos
-  - Λεμεσός # Lemesós
+  - Λεμεσός # Lemesos
 langs:
   - tur
   - ell

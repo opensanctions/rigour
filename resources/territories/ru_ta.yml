@@ -9,14 +9,14 @@ qid: Q5481
 names_strong:
   - Татарстан            # Tatarstan
   - Республика Татарстан # Respublika Tatarstan
-  - Республика Татарстан (Россия) # Respublika Tatarstan (Rossiâ)
+  - Республика Татарстан (Россия) # Respublika Tatarstan (Rossiya)
   - Republic of Tatarstan
 names_weak: []
 places:
   - Kazan  # Tatarstan
-  - Казань # Kazanʹ
+  - Казань # Kazan
   - Kazan, Russia # Respublika Tatarstan (Rossiâ)
-  - Казань (Россия) # Kazanʹ (Rossiâ)
+  - Казань (Россия) # Kazan (Rossiya)
 langs:
   - tat
   - rus

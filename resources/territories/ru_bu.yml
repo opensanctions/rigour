@@ -7,9 +7,9 @@ name: Buryatia
 parent: ru
 qid: Q6809
 names_strong:
-  - Бурятия            # Burâtiâ
-  - Республика Бурятия # Respublika Burâtiâ
-  - Республика Бурятия (Россия) # Respublika Burâtiâ (Rossiâ)
+  - Бурятия            # Buryatiya
+  - Республика Бурятия # Respublika Buryatiya
+  - Республика Бурятия (Россия) # Respublika Buryatiya (Rossiya)
 names_weak: []
 langs:
   - bua

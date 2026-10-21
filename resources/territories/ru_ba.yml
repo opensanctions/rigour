@@ -7,10 +7,10 @@ name: Bashkortostan
 parent: ru
 qid: Q5710
 names_strong:
-  - Башкортостан          # Baškortostan
-  - Башкортостан (Россия) # Baškortostan (Rossiâ)
-  - Республика Башкортостан # Respublika Baškortostan
-  - Республика Башкортостан (Россия) # Respublika Baškortostan (Rossiâ)
+  - Башкортостан          # Bashkortostan
+  - Башкортостан (Россия) # Bashkortostan (Rossiya)
+  - Республика Башкортостан # Respublika Bashkortostan
+  - Республика Башкортостан (Россия) # Respublika Bashkortostan (Rossiya)
 names_weak: []
 langs:
   - bak

@@ -7,8 +7,8 @@ name: Udmurtia
 parent: ru
 qid: Q5422
 names_strong:
-  - Удмуртская Республика          # Udmurtskaâ Respublika
-  - Удмуртская Республика (Россия) # Udmurtskaâ Respublika (Rossiâ)
+  - Удмуртская Республика          # Udmurtskaya Respublika
+  - Удмуртская Республика (Россия) # Udmurtskaya Respublika (Rossiya)
 names_weak: []
 langs:
   - udm
