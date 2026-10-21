@@ -86,8 +86,8 @@ mod tests {
     #[test]
     fn ascii_filled_for_cyrillic() {
         let tok = AddressToken::new("шоссе".to_string(), TokenClass::Text);
-        assert_eq!(tok.ascii.as_deref(), Some("sosse"));
-        assert_eq!(tok.comparable(), "sosse");
+        assert_eq!(tok.ascii.as_deref(), Some("shosse"));
+        assert_eq!(tok.comparable(), "shosse");
     }
 
     #[test]

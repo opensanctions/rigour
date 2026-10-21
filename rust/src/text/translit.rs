@@ -11,7 +11,7 @@
 
 use icu::experimental::transliterate::Transliterator;
 use icu::locale::Locale;
-use icu::normalizer::DecomposingNormalizerBorrowed;
+use icu::normalizer::{ComposingNormalizerBorrowed, DecomposingNormalizerBorrowed};
 use icu::properties::{CodePointMapData, props::GeneralCategory};
 use lru::LruCache;
 use std::cell::RefCell;
@@ -141,10 +141,10 @@ const ASCII_FALLBACK: &[(char, &str)] = &[
     // for the authoritative source of this list.
     ('Ƅ', "B"),
     ('ƅ', "b"), // tone six
-    ('Ɔ', "O"), // open O (uppercase; ɔ → o is CLDR)
+    ('Ɔ', "O"), // open O
     ('ƍ', "d"), // turned delta
     ('Ǝ', "E"), // turned E (uppercase; ǝ already below)
-    ('Ɣ', "G"), // gamma (uppercase; ɣ handled by CLDR)
+    ('Ɣ', "G"), // gamma
     ('ƛ', "l"), // lambda with stroke
     ('Ɯ', "M"), // turned M (uppercase)
     ('Ɵ', "O"), // barred O (uppercase)
@@ -182,7 +182,287 @@ const ASCII_FALLBACK: &[(char, &str)] = &[
     ('Ɋ', "Q"),
     ('ɋ', "q"), // Q with hook tail
     ('ẟ', "d"), // small Latin delta (Latin Extended Additional)
+    // --- IPA Extensions letters that occur in names.
+    ('ɔ', "o"), // open o (Akan, Ewe)
+    ('ɣ', "g"), // gamma
+    ('ʕ', ""),  // ʿayin in Arabic romanizations
 ];
+
+// Letters substituted before a script's ICU4X pass, where the source
+// letter is still known. ISO-9 style output (`ш → š`, `я → â`) would
+// otherwise strip to a bare letter that no common ASCII spelling uses,
+// and fixing it after the pass would also hit native Latin `š` (Czech
+// `Škoda`). Keys are lowercase; `apply_prepass` restores case.
+#[derive(Clone, Copy, PartialEq)]
+enum At {
+    Any,
+    WordStart,
+    WordEnd,
+}
+
+type Rules = &'static [(&'static str, At, &'static str)];
+
+struct PrePass {
+    // The first matching rule wins, so positional rules must precede
+    // `At::Any` rules for the same key.
+    rules: Rules,
+    // Language-specific rules for words containing any of the marker
+    // letters, taking precedence over `rules`.
+    variants: &'static [(&'static str, Rules)],
+    // Drop accents (but not the diaeresis) before matching, so `ή`
+    // matches the `η` rule.
+    strip_accents: bool,
+    // Emit every letter lowercased, for scripts whose ICU4X
+    // transliterator only knows the lowercase forms.
+    fold_case: bool,
+}
+
+// `х → kh`, `є → ye` and `ї → yi` match fewer real spellings than the
+// ICU4X output, so they are left out. `ь`/`ъ` would surface as `'`/`"`;
+// the letters from `қ` on have no ASCII rendering in the ICU4X output.
+const CYRILLIC_PREPASS: PrePass = PrePass {
+    rules: &[
+        ("ш", At::Any, "sh"),
+        ("ч", At::Any, "ch"),
+        ("щ", At::Any, "shch"),
+        ("ж", At::Any, "zh"),
+        ("ц", At::Any, "ts"),
+        ("я", At::Any, "ya"),
+        ("ю", At::Any, "yu"),
+        ("ё", At::Any, "yo"),
+        ("й", At::Any, "i"),
+        ("ий", At::WordEnd, "y"),
+        ("ый", At::WordEnd, "y"),
+        ("ь", At::Any, ""),
+        ("ъ", At::Any, ""),
+        ("ђ", At::Any, "dj"),
+        ("џ", At::Any, "dz"),
+        ("љ", At::Any, "lj"),
+        ("њ", At::Any, "nj"),
+        ("ѓ", At::Any, "gj"),
+        ("қ", At::Any, "q"),
+        ("ҳ", At::Any, "h"),
+        ("ҷ", At::Any, "j"),
+        ("җ", At::Any, "j"),
+        ("ҡ", At::Any, "k"),
+        ("ӏ", At::Any, ""),
+        ("ӡ", At::Any, "dz"),
+        ("ҭ", At::Any, "t"),
+        ("ҫ", At::Any, "s"),
+        ("ӷ", At::Any, "g"),
+        ("ӿ", At::Any, "h"),
+        ("ѣ", At::Any, "e"),
+        ("ѳ", At::Any, "f"),
+        ("ѵ", At::Any, "i"),
+        ("ѹ", At::Any, "u"),
+        ("ѧ", At::Any, "ya"),
+        ("ѡ", At::Any, "o"),
+    ],
+    variants: &[
+        // Serbian / Macedonian: ASCII spellings follow the Latin
+        // orthography with its diacritics dropped (`Milošević`).
+        (
+            "ђћџљњјѓќѕ",
+            &[
+                ("ш", At::Any, "s"),
+                ("ч", At::Any, "c"),
+                ("ж", At::Any, "z"),
+                ("ц", At::Any, "c"),
+            ],
+        ),
+        // Ukrainian / Belarusian.
+        ("іїєґў", &[("г", At::Any, "h"), ("и", At::Any, "y")]),
+    ],
+    strip_accents: false,
+    fold_case: false,
+};
+
+// Modern (ELOT 743) spellings where CLDR gives the classical ones
+// (`β → b`, `η → ē`, `φ → ph`).
+const GREEK_PREPASS: PrePass = PrePass {
+    rules: &[
+        ("β", At::Any, "v"),
+        ("η", At::Any, "i"),
+        ("φ", At::Any, "f"),
+        ("μπ", At::WordStart, "b"),
+        ("ντ", At::WordStart, "d"),
+        ("γκ", At::WordStart, "g"),
+        ("μπ", At::Any, "mb"),
+        ("γκ", At::Any, "ng"),
+        ("αυ", At::Any, "av"),
+        ("ευ", At::Any, "ev"),
+    ],
+    variants: &[],
+    strip_accents: true,
+    fold_case: false,
+};
+
+// CLDR marks ejectives with an apostrophe (`კ → kʼ`) that ASCII
+// spellings drop. Mtavruli capitals (`Კ`) fold to Mkhedruli, which is
+// all the ICU4X transliterator covers.
+const GEORGIAN_PREPASS: PrePass = PrePass {
+    rules: &[
+        ("კ", At::Any, "k"),
+        ("პ", At::Any, "p"),
+        ("ტ", At::Any, "t"),
+        ("წ", At::Any, "ts"),
+        ("ჭ", At::Any, "ch"),
+        ("ყ", At::Any, "k"),
+    ],
+    variants: &[],
+    strip_accents: false,
+    fold_case: true,
+};
+
+// CLDR marks aspirates with `ʻ` (`թ → tʻ`), which surfaces as `'`.
+const ARMENIAN_PREPASS: PrePass = PrePass {
+    rules: &[
+        ("շ", At::Any, "sh"),
+        ("չ", At::Any, "ch"),
+        ("ճ", At::Any, "ch"),
+        ("ժ", At::Any, "zh"),
+        ("խ", At::Any, "kh"),
+        ("ց", At::Any, "ts"),
+        ("ծ", At::Any, "ts"),
+        ("ղ", At::Any, "gh"),
+        ("ձ", At::Any, "dz"),
+        ("թ", At::Any, "t"),
+        ("ք", At::Any, "k"),
+        ("փ", At::Any, "p"),
+        ("ՙ", At::Any, ""),
+    ],
+    variants: &[],
+    strip_accents: false,
+    fold_case: false,
+};
+
+fn prepass_for_script(script: &str) -> Option<&'static PrePass> {
+    match script {
+        "Cyrillic" => Some(&CYRILLIC_PREPASS),
+        "Greek" => Some(&GREEK_PREPASS),
+        "Georgian" => Some(&GEORGIAN_PREPASS),
+        "Armenian" => Some(&ARMENIAN_PREPASS),
+        _ => None,
+    }
+}
+
+fn to_lower(c: char) -> char {
+    let mut lower = c.to_lowercase();
+    match (lower.next(), lower.next()) {
+        (Some(l), None) => l,
+        _ => c,
+    }
+}
+
+fn strip_accents(input: &str) -> String {
+    let gc = CodePointMapData::<GeneralCategory>::new();
+    let decomposed: String = DecomposingNormalizerBorrowed::new_nfd()
+        .normalize(input)
+        .chars()
+        .filter(|c| *c == '\u{0308}' || gc.get(*c) != GeneralCategory::NonspacingMark)
+        .collect();
+    ComposingNormalizerBorrowed::new_nfc()
+        .normalize(&decomposed)
+        .into_owned()
+}
+
+fn match_rule(
+    rules: Rules,
+    low: &[char],
+    i: usize,
+    word: (usize, usize),
+) -> Option<(usize, &'static str)> {
+    rules.iter().find_map(|(key, at, repl)| {
+        let n = key.chars().count();
+        let fits = i + n <= word.1
+            && key.chars().eq(low[i..i + n].iter().copied())
+            && match at {
+                At::Any => true,
+                At::WordStart => i == word.0,
+                At::WordEnd => i + n == word.1,
+            };
+        fits.then_some((n, *repl))
+    })
+}
+
+// Case a replacement after the source span `chars[start..start + len]`:
+// all caps when the neighbouring letter (the next one, or the previous
+// one at a word end) is uppercase, so `ШЕВЧЕНКО → SHEVCHENKO`; title
+// case otherwise, so `Шевченко → Shevchenko`.
+fn push_cased(out: &mut String, repl: &str, chars: &[char], start: usize, len: usize) {
+    if !chars[start].is_uppercase() {
+        out.push_str(repl);
+        return;
+    }
+    let neighbour = chars
+        .get(start + len)
+        .filter(|c| c.is_alphabetic())
+        .or_else(|| {
+            start
+                .checked_sub(1)
+                .and_then(|p| chars.get(p))
+                .filter(|c| c.is_alphabetic())
+        });
+    if neighbour.is_some_and(|c| c.is_uppercase()) {
+        out.push_str(&repl.to_ascii_uppercase());
+        return;
+    }
+    let mut rest = repl.chars();
+    if let Some(first) = rest.next() {
+        out.push(first.to_ascii_uppercase());
+        out.push_str(rest.as_str());
+    }
+}
+
+fn apply_prepass(input: &str, pass: &PrePass) -> String {
+    let stripped;
+    let input = if pass.strip_accents {
+        stripped = strip_accents(input);
+        stripped.as_str()
+    } else {
+        input
+    };
+    let low: Vec<char> = input.chars().map(to_lower).collect();
+    let chars: Vec<char> = if pass.fold_case {
+        low.clone()
+    } else {
+        input.chars().collect()
+    };
+    let mut out = String::with_capacity(input.len() + 8);
+    let mut i = 0;
+    while i < chars.len() {
+        if !chars[i].is_alphabetic() {
+            out.push(chars[i]);
+            i += 1;
+            continue;
+        }
+        let start = i;
+        let end = (i..chars.len())
+            .find(|j| !chars[*j].is_alphabetic())
+            .unwrap_or(chars.len());
+        let variant = pass
+            .variants
+            .iter()
+            .find(|(markers, _)| low[start..end].iter().any(|c| markers.contains(*c)))
+            .map(|(_, rules)| *rules);
+        while i < end {
+            let found = variant
+                .and_then(|rules| match_rule(rules, &low, i, (start, end)))
+                .or_else(|| match_rule(pass.rules, &low, i, (start, end)));
+            match found {
+                Some((n, repl)) => {
+                    push_cased(&mut out, repl, &chars, i, n);
+                    i += n;
+                }
+                None => {
+                    out.push(chars[i]);
+                    i += 1;
+                }
+            }
+        }
+    }
+    out
+}
 
 fn ascii_fallback(input: &str) -> String {
     if input.is_ascii() {
@@ -240,7 +520,10 @@ static MAYBE_ASCII_CACHE: LazyLock<Mutex<LruCache<String, Option<String>>>> =
 ///
 /// 1. **Per-script pass** (Cyrillic → Latin, Greek → Latin, etc.) —
 ///    non-Latin scripts go through their ICU4X transliterator to
-///    produce Latin output. Latin input skips this step.
+///    produce Latin output. Latin input skips this step. A per-script
+///    pre-pass first substitutes common ASCII spellings for letters
+///    ICU4X renders in a scholarly form (`Шевченко → Shevchenko`, not
+///    `Sevcenko`); native Latin diacritics still fold (`Škoda → Skoda`).
 /// 2. **NFKD + nonspacing-mark strip** — decomposes base+combiner
 ///    sequences (é → e + acute → e) and resolves compatibility
 ///    variants (modifier letter ʱ → ɦ, superscript ᵋ → ɛ).
@@ -287,6 +570,9 @@ pub fn maybe_ascii(text: &str, drop: bool) -> String {
     for script in scripts {
         if script == "Latin" {
             continue;
+        }
+        if let Some(pass) = prepass_for_script(script) {
+            result = apply_prepass(&result, pass);
         }
         if let Some(locale_id) = locale_for_script(script) {
             result = transliterate_with(locale_id, result);
@@ -364,6 +650,12 @@ mod tests {
         assert_eq!(maybe_ascii("café", false), "cafe");
         assert_eq!(maybe_ascii("naïve", false), "naive");
         assert_eq!(maybe_ascii("Zürich", false), "Zurich");
+        // No digraphs for native Latin diacritics.
+        assert_eq!(maybe_ascii("Škoda", false), "Skoda");
+        assert_eq!(maybe_ascii("Milošević", false), "Milosevic");
+        assert_eq!(maybe_ascii("Şahin", false), "Sahin");
+        assert_eq!(maybe_ascii("Ștefan", false), "Stefan");
+        assert_eq!(maybe_ascii("Țiriac", false), "Tiriac");
     }
 
     #[test]
@@ -371,6 +663,9 @@ mod tests {
         assert_eq!(maybe_ascii("Lars Løkke", false), "Lars Lokke");
         assert_eq!(maybe_ascii("weißbier", false), "weissbier");
         assert_eq!(maybe_ascii("Əhməd", false), "Ahmad");
+        assert_eq!(maybe_ascii("Kɔfi", false), "Kofi");
+        assert_eq!(maybe_ascii("aɣa", false), "aga");
+        assert_eq!(maybe_ascii("ʕAli", false), "Ali");
     }
 
     #[test]
@@ -394,27 +689,66 @@ mod tests {
 
     #[test]
     fn maybe_ascii_cyrillic() {
-        let out = maybe_ascii("Владимир", false);
-        assert!(out.is_ascii(), "{out}");
-        assert!(out.to_lowercase().contains("vladimir"), "{out}");
+        assert_eq!(maybe_ascii("Владимир", false), "Vladimir");
+        assert_eq!(maybe_ascii("Шевченко", false), "Shevchenko");
+        assert_eq!(maybe_ascii("Щукин", false), "Shchukin");
+        assert_eq!(maybe_ascii("Жуков", false), "Zhukov");
+        assert_eq!(maybe_ascii("Цой", false), "Tsoi");
+        assert_eq!(maybe_ascii("Яценюк", false), "Yatsenyuk");
+        assert_eq!(maybe_ascii("Зеленский", false), "Zelensky");
+        assert_eq!(maybe_ascii("Ґудзь", false), "Gudz");
+    }
+
+    #[test]
+    fn maybe_ascii_cyrillic_languages() {
+        assert_eq!(maybe_ascii("Гіркін", false), "Hirkin");
+        assert_eq!(maybe_ascii("Милошевић", false), "Milosevic");
+        assert_eq!(maybe_ascii("Љубљана", false), "Ljubljana");
+        assert_eq!(maybe_ascii("Ђоковић", false), "Djokovic");
+        assert_eq!(maybe_ascii("Џеко", false), "Dzeko");
+        assert_eq!(maybe_ascii("Қазақстан", false), "Qazaqstan");
+        assert_eq!(maybe_ascii("Җәлил", false), "Jalil");
+        assert_eq!(maybe_ascii("Нохчӏийчоь", false), "Nohchiicho");
+        assert_eq!(maybe_ascii("Ѳеодоръ", false), "Feodor");
+    }
+
+    #[test]
+    fn maybe_ascii_prepass_case() {
+        assert_eq!(maybe_ascii("ШЕВЧЕНКО", false), "SHEVCHENKO");
+        assert_eq!(maybe_ascii("ЗЕЛЕНСКИЙ", false), "ZELENSKY");
+        assert_eq!(maybe_ascii("ЦОЙ", false), "TSOI");
+        assert_eq!(maybe_ascii("Ж. Ш.", false), "Zh. Sh.");
+        assert_eq!(maybe_ascii("ΜΠΑΛΤΑΣ", false), "BALTAS");
     }
 
     #[test]
     fn maybe_ascii_greek() {
-        let out = maybe_ascii("Αθήνα", false);
-        assert!(out.is_ascii(), "{out}");
+        assert_eq!(maybe_ascii("Αθήνα", false), "Athina");
+        assert_eq!(maybe_ascii("Βασίλης", false), "Vasilis");
+        assert_eq!(maybe_ascii("Φίλιππος", false), "Filippos");
+        assert_eq!(maybe_ascii("Μπαλτάς", false), "Baltas");
+        assert_eq!(maybe_ascii("Λάμπρος", false), "Lambros");
+        assert_eq!(maybe_ascii("Ντόρα", false), "Dora");
+        assert_eq!(maybe_ascii("Γκίκας", false), "Gikas");
+        assert_eq!(maybe_ascii("Ευάγγελος", false), "Evangelos");
     }
 
     #[test]
     fn maybe_ascii_armenian() {
-        let out = maybe_ascii("Միթչել", false);
-        assert!(out.is_ascii(), "{out}");
+        assert_eq!(maybe_ascii("Միթչել", false), "Mitchel");
+        assert_eq!(maybe_ascii("Ղուկասյան", false), "Ghukasyan");
+        assert_eq!(maybe_ascii("Քոչարյան", false), "Kocharyan");
+        assert_eq!(maybe_ascii("Փաշինյան", false), "Pashinyan");
     }
 
     #[test]
     fn maybe_ascii_georgian() {
-        let out = maybe_ascii("ნინო", false);
-        assert!(out.is_ascii(), "{out}");
+        assert_eq!(maybe_ascii("ნინო", false), "nino");
+        assert_eq!(maybe_ascii("კედელაშვილი", false), "kedelashvili");
+        assert_eq!(maybe_ascii("წერეთელი", false), "tsereteli");
+        assert_eq!(maybe_ascii("ჭავჭავაძე", false), "chavchavadze");
+        assert_eq!(maybe_ascii("ყიფიანი", false), "kipiani");
+        assert_eq!(maybe_ascii("ᲙᲔᲓᲔᲚᲐᲨᲕᲘᲚᲘ", false), "kedelashvili");
     }
 
     #[test]
@@ -562,5 +896,34 @@ mod tests {
             }
             panic!("Latin-ASCII round-trip coverage incomplete");
         }
+    }
+
+    #[test]
+    fn maybe_ascii_non_latin_roundtrip() {
+        // Every letter of the admitted non-Latin alphabets, plus the
+        // regional Cyrillic letters the pre-pass handles, must come out
+        // as ASCII letters. `ь`/`ъ`, palochka and the Armenian modifier
+        // `ՙ` are dropped on purpose.
+        const RANGES: &[(char, char)] = &[
+            ('\u{0410}', '\u{044F}'), // Russian А–я
+            ('\u{0391}', '\u{03A1}'), // Greek Α–Ρ
+            ('\u{03A3}', '\u{03A9}'), // Greek Σ–Ω
+            ('\u{03B1}', '\u{03C9}'), // Greek α–ω
+            ('\u{0531}', '\u{0556}'), // Armenian capitals
+            ('\u{0561}', '\u{0586}'), // Armenian small
+            ('\u{10D0}', '\u{10F0}'), // Georgian Mkhedruli
+            ('\u{1C90}', '\u{1CB0}'), // Georgian Mtavruli
+        ];
+        const EXTRA: &str = "ёЁіІїЇєЄґҐўЎђЂћЋџЏљЉњЊјЈѓЃќЌѕЅқҚҳҲҷҶҗҖҡҠӡӠҭҬҫҪӷӶӿӾѣѢѳѲѵѴѹѸѧѦѡѠ";
+        const DROPPED: &[char] = &['ь', 'Ь', 'ъ', 'Ъ', 'ӏ', 'Ӏ', 'ՙ'];
+        let misses: Vec<(char, String)> = RANGES
+            .iter()
+            .flat_map(|(lo, hi)| *lo..=*hi)
+            .chain(EXTRA.chars())
+            .filter(|c| !DROPPED.contains(c))
+            .map(|c| (c, maybe_ascii(&c.to_string(), false)))
+            .filter(|(_, out)| out.is_empty() || !out.chars().all(|o| o.is_ascii_alphanumeric()))
+            .collect();
+        assert!(misses.is_empty(), "non-letter output: {misses:?}");
     }
 }

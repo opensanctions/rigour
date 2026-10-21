@@ -70,6 +70,14 @@ def test_maybe_ascii_latin_diacritics():
     assert maybe_ascii("Zürich") == "Zurich"
 
 
+def test_maybe_ascii_common_spellings():
+    assert maybe_ascii("Шевченко") == "Shevchenko"
+    assert maybe_ascii("ШЕВЧЕНКО") == "SHEVCHENKO"
+    assert maybe_ascii("Милошевић") == "Milosevic"
+    assert maybe_ascii("Βασίλης") == "Vasilis"
+    assert maybe_ascii("Škoda") == "Skoda"
+
+
 def test_maybe_ascii_latin_extended_fallback():
     # Cases that hit the fallback table / CLDR Latin-ASCII pass.
     assert maybe_ascii("weißbier") == "weissbier"
