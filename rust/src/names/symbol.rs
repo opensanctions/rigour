@@ -18,7 +18,7 @@ use std::sync::{Arc, LazyLock, RwLock};
 #[allow(non_camel_case_types)]
 #[cfg_attr(
     feature = "python",
-    pyclass(eq, hash, frozen, from_py_object, module = "rigour._core")
+    pyclass(eq, hash, frozen, skip_from_py_object, module = "rigour._core")
 )]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub enum SymbolCategory {
@@ -44,6 +44,16 @@ pub enum SymbolCategory {
     LOCATION,
     /// Phonetic bucket key used for fuzzy grouping across names.
     PHONETIC,
+}
+
+// Copy enum values instead of using PyO3's clone-based extraction.
+#[cfg(feature = "python")]
+impl<'a, 'py> FromPyObject<'a, 'py> for SymbolCategory {
+    type Error = pyo3::pyclass::PyClassGuardError<'a, 'py>;
+
+    fn extract(obj: Borrowed<'a, 'py, PyAny>) -> Result<Self, Self::Error> {
+        Ok(*obj.extract::<PyClassGuard<'_, Self>>()?)
+    }
 }
 
 impl SymbolCategory {

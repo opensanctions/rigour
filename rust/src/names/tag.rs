@@ -16,7 +16,7 @@ use pyo3::prelude::*;
 #[allow(non_camel_case_types)]
 #[cfg_attr(
     feature = "python",
-    pyclass(eq, hash, frozen, from_py_object, module = "rigour._core")
+    pyclass(eq, hash, frozen, skip_from_py_object, module = "rigour._core")
 )]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 pub enum NameTypeTag {
@@ -35,6 +35,16 @@ pub enum NameTypeTag {
     /// Object (vessel, security, aircraft, …). Name is constructed
     /// but no tagger pass runs.
     OBJ,
+}
+
+// Copy enum values instead of using PyO3's clone-based extraction.
+#[cfg(feature = "python")]
+impl<'a, 'py> FromPyObject<'a, 'py> for NameTypeTag {
+    type Error = pyo3::pyclass::PyClassGuardError<'a, 'py>;
+
+    fn extract(obj: Borrowed<'a, 'py, PyAny>) -> Result<Self, Self::Error> {
+        Ok(*obj.extract::<PyClassGuard<'_, Self>>()?)
+    }
 }
 
 impl NameTypeTag {
@@ -67,7 +77,7 @@ impl NameTypeTag {
 #[allow(non_camel_case_types)]
 #[cfg_attr(
     feature = "python",
-    pyclass(eq, hash, frozen, from_py_object, module = "rigour._core")
+    pyclass(eq, hash, frozen, skip_from_py_object, module = "rigour._core")
 )]
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 pub enum NamePartTag {
@@ -111,6 +121,15 @@ pub enum NamePartTag {
     NUM,
     /// Legal-form component of an organisation name (LLC, Inc, …).
     LEGAL,
+}
+
+#[cfg(feature = "python")]
+impl<'a, 'py> FromPyObject<'a, 'py> for NamePartTag {
+    type Error = pyo3::pyclass::PyClassGuardError<'a, 'py>;
+
+    fn extract(obj: Borrowed<'a, 'py, PyAny>) -> Result<Self, Self::Error> {
+        Ok(*obj.extract::<PyClassGuard<'_, Self>>()?)
+    }
 }
 
 /// Tags that match anything under [`NamePartTag::can_match`] —
