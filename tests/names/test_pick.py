@@ -143,6 +143,22 @@ def test_pick_lang_name():
     no_langs = [LangStr(" ", lang=None)]
     assert pick_lang_name(no_langs) is None
 
+    untagged_latin = [
+        LangStr("مضر رفعت الأسد", lang="ara"),
+        LangStr("Mudar Rifaat Al-Assad", lang=None),
+        LangStr("Mudar Rifaat AL-ASAD", lang=None),
+    ]
+    assert pick_lang_name(untagged_latin) == "Mudar Rifaat AL-ASAD"
+
+    local_latin = [
+        LangStr("گوردون براون", lang="fas"),
+        LangStr("Гордон Браун", lang="srp"),
+        LangStr("Gordon Brown", lang=None),
+        LangStr("Gordons Brauns", lang="lav"),
+        LangStr("Qordon Braun", lang="aze"),
+    ]
+    assert pick_lang_name(local_latin) == "Gordon Brown"
+
 
 def test_pick_case():
     cases = [
