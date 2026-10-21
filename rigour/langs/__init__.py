@@ -52,8 +52,12 @@ PREFERRED_LANGS = [
     "urd",
     "zho",
 ]
+# ISO 639 special code for content in multiple languages. It has no two-letter
+# form, so `iso_639_alpha2` returns `None` for it.
+MULTI_LANG = "mul"
 
 __all__ = [
+    "MULTI_LANG",
     "PREFERRED_LANG",
     "PREFERRED_LANGS",
     "LangStr",
