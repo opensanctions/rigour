@@ -1,5 +1,6 @@
 from rigour.data.langs.iso639 import ISO3_ALL
 from rigour.langs import (
+    MULTI_LANG,
     PREFERRED_LANG,
     PREFERRED_LANGS,
     is_lang_better,
@@ -25,8 +26,20 @@ def test_alpha3():
     assert iso_639_alpha3("de") == "deu"
     assert iso_639_alpha3("ger") == "deu"
     assert iso_639_alpha3("yu") is None
-    assert iso_639_alpha3("mul") is None
-    assert iso_639_alpha3("mul") is None
+    assert iso_639_alpha3("und") is None
+    assert iso_639_alpha3("mis") is None
+
+
+def test_multi_lang():
+    assert iso_639_alpha3(MULTI_LANG) == MULTI_LANG
+    assert iso_639_alpha3("MUL ") == MULTI_LANG
+    assert iso_639_alpha3("multiple languages") == MULTI_LANG
+    assert iso_639_alpha3("multiple") == MULTI_LANG
+    assert iso_639_alpha3("various") == MULTI_LANG
+    assert iso_639_alpha3("multilingual") == MULTI_LANG
+    assert iso_639_alpha3("mul-x-foo") == MULTI_LANG
+    assert iso_639_alpha2(MULTI_LANG) is None
+    assert list_to_alpha3([MULTI_LANG]) == {MULTI_LANG}
 
 
 def test_alpha3_subtags():
@@ -44,7 +57,7 @@ def test_alpha3_subtags():
     assert iso_639_alpha3("aze_cyrl") == "aze"
     # Collective and non-language primary subtags still fail:
     assert iso_639_alpha3("roa-tara") is None
-    assert iso_639_alpha3("mul-x-foo") is None
+    assert iso_639_alpha3("und-x-foo") is None
     assert iso_639_alpha2("pt-BR") == "pt"
 
 

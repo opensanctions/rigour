@@ -30,8 +30,9 @@ LANG_SYNONYMS = [
 ]
 
 # "zxx" is the ISO 639-3 code for "no linguistic content"; "xzz" is a
-# non-standard code kept for legacy compatibility.
-NON_LANGS = {"mis", "mul", "und", "zxx", "xzz"}
+# non-standard code kept for legacy compatibility. The ISO special code "mul"
+# ("multiple languages") is deliberately absent: it is a valid content tag.
+NON_LANGS = {"mis", "und", "zxx", "xzz"}
 
 
 @cache
