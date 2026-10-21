@@ -222,10 +222,6 @@ impl NamePart {
         self.hash
     }
 
-    fn __len__(&self) -> usize {
-        self.form_str.chars().count()
-    }
-
     fn __repr__(&self) -> String {
         format!(
             "<NamePart('{}', {}, '{}')>",
@@ -357,27 +353,6 @@ impl Span {
             comparable: comparable_py,
             hash,
         })
-    }
-
-    /// Total character length of the covered parts' surface forms.
-    ///
-    /// Computed on demand by walking `parts` rather than cached at
-    /// construction, so building a `Span` nobody measures costs
-    /// nothing. Sums `form` char counts (join spaces excluded), matching
-    /// the pre-cache semantics.
-    fn __len__(&self, py: Python<'_>) -> usize {
-        self.parts
-            .bind(py)
-            .iter()
-            .map(|part| {
-                part.cast::<NamePart>()
-                    .expect("Span.parts holds NamePart")
-                    .borrow()
-                    .form_str
-                    .chars()
-                    .count()
-            })
-            .sum()
     }
 
     fn __hash__(&self) -> isize {

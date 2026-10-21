@@ -10,7 +10,7 @@ def test_name_part():
     assert john.metaphone == "JN"
     assert john.latinize is True
     assert john.numeric is False
-    assert len(john) == 4
+    assert len(john.form) == 4
     # Hash is consistent across equivalent constructions; the exact
     # numeric value is an implementation detail (Rust-side SipHash).
     assert hash(john) == hash(NamePart("john", 0))
