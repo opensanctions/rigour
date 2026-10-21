@@ -51,8 +51,15 @@
     "trading as"
   ],
   "obj_name_prefixes": [
+    "M T",
+    "M V",
+    "M.T",
+    "M.V",
+    "M/T",
     "M/V",
+    "MT",
     "MV",
+    "SS",
     "The"
   ],
   "org_name_prefixes": [
