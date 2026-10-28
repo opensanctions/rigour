@@ -45,6 +45,13 @@ def test_name_part():
     assert numeric.numeric is True
 
 
+def test_name_part_homoglyphs():
+    # Cyrillic р in a mostly Latin token reads as p, not r.
+    assert NamePart("comрlejo", 0).comparable == "complejo"
+    assert NamePart("рома", 0).comparable == "roma"
+    assert NamePart("dмитрий", 0).comparable == "dmitry"
+
+
 def test_name_part_empty():
     # Should never exist
     empty = NamePart("", 0)

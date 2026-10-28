@@ -20,7 +20,7 @@ use std::num::NonZeroUsize;
 use std::sync::{LazyLock, Mutex};
 
 use crate::constants::MEMO_LARGE;
-use crate::text::scripts::text_scripts;
+use crate::text::scripts::{codepoint_script, text_scripts};
 
 // Script long names admitted by `should_ascii`. Single source of
 // truth for the admission policy — the Python side has no mirror;
@@ -492,6 +492,72 @@ fn nfkd_strip_marks(input: &str) -> String {
         .collect()
 }
 
+// Non-Latin letters that look like a Latin letter. In a mostly Latin
+// token they are evasion or OCR noise, and the look-alike is the
+// intended letter, which transliteration often gets wrong (`р → r`).
+// Keys are lowercase: name parts arrive casefolded, so a key stands
+// for its uppercase form where the two look different (`в` for `В`).
+const HOMOGLYPHS: &[(char, char)] = &[
+    // --- Cyrillic
+    ('а', 'a'),
+    ('в', 'b'),
+    ('с', 'c'),
+    ('ԁ', 'd'),
+    ('е', 'e'),
+    ('һ', 'h'),
+    ('н', 'h'),
+    ('і', 'i'),
+    ('ӏ', 'i'), // palochka
+    ('ј', 'j'),
+    ('к', 'k'),
+    ('м', 'm'),
+    ('о', 'o'),
+    ('р', 'p'),
+    ('ԛ', 'q'),
+    ('ѕ', 's'),
+    ('т', 't'),
+    ('ԝ', 'w'),
+    ('х', 'x'),
+    ('у', 'y'),
+    ('ү', 'y'),
+    // --- Greek
+    ('κ', 'k'),
+    ('ο', 'o'),
+    ('ρ', 'p'),
+    ('χ', 'x'),
+];
+
+// Minimum share of Latin among the letters of a token for it to count
+// as a Latin token with look-alikes.
+const HOMOGLYPH_MIN_LATIN_SHARE: f64 = 0.6;
+
+/// Replace look-alike letters in a mostly Latin token with their Latin
+/// counterparts. Returns `None` if the token has no non-Latin letters,
+/// or too few Latin letters to be read as Latin; such tokens are left
+/// to `maybe_ascii`.
+pub fn fold_homoglyphs(token: &str) -> Option<String> {
+    let (mut latin, mut other) = (0usize, 0usize);
+    for c in token.chars().filter(|c| c.is_alphabetic()) {
+        match codepoint_script(c as u32) {
+            Some("Latin") => latin += 1,
+            _ => other += 1,
+        }
+    }
+    if other == 0 || (latin as f64) <= HOMOGLYPH_MIN_LATIN_SHARE * (latin + other) as f64 {
+        return None;
+    }
+    let folded = token
+        .chars()
+        .map(|c| {
+            HOMOGLYPHS
+                .iter()
+                .find(|(k, _)| *k == c)
+                .map_or(c, |(_, v)| *v)
+        })
+        .collect();
+    Some(folded)
+}
+
 /// True iff every distinguishing script in `text` is in
 /// `LATINIZE_SCRIPTS` (Latin, Cyrillic, Greek, Armenian, Georgian,
 /// Hangul). Pure-punct / pure-digit / empty inputs return true
@@ -713,6 +779,23 @@ mod tests {
         assert_eq!(maybe_ascii("Җәлил", false), "Jalil");
         assert_eq!(maybe_ascii("Нохчӏийчоь", false), "Nohchiicho");
         assert_eq!(maybe_ascii("Ѳеодоръ", false), "Feodor");
+    }
+
+    #[test]
+    fn fold_homoglyphs_mostly_latin() {
+        assert_eq!(fold_homoglyphs("comрlejo").as_deref(), Some("complejo"));
+        assert_eq!(fold_homoglyphs("воuchoucha").as_deref(), Some("bouchoucha"));
+        assert_eq!(fold_homoglyphs("c0mрl3j0").as_deref(), Some("c0mpl3j0"));
+        assert_eq!(fold_homoglyphs("ρutin").as_deref(), Some("putin"));
+    }
+
+    #[test]
+    fn fold_homoglyphs_leaves_cyrillic() {
+        assert_eq!(fold_homoglyphs("company"), None);
+        assert_eq!(fold_homoglyphs("рома"), None);
+        assert_eq!(fold_homoglyphs("dмитрий"), None);
+        // 3 of 5 letters Latin is not above the 60% share.
+        assert_eq!(fold_homoglyphs("adрсx"), None);
     }
 
     #[test]

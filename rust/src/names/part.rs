@@ -12,7 +12,7 @@ use pyo3::types::PyString;
 use crate::names::tag::NamePartTag;
 use crate::text::numbers::string_number;
 use crate::text::phonetics::metaphone;
-use crate::text::translit::{maybe_ascii, should_ascii};
+use crate::text::translit::{fold_homoglyphs, maybe_ascii, should_ascii};
 
 fn strip_nonalnum(text: &str) -> Option<String> {
     let out: String = text.chars().filter(|c| c.is_alphanumeric()).collect();
@@ -34,7 +34,10 @@ fn compute_ascii(
     if form.is_ascii() {
         return strip_nonalnum(form);
     }
-    let translit = maybe_ascii(form, false);
+    // Fold look-alikes first: transliteration would read a stray
+    // Cyrillic `р` in a Latin token as `r` instead of `p`.
+    let folded = fold_homoglyphs(form);
+    let translit = maybe_ascii(folded.as_deref().unwrap_or(form), false);
     strip_nonalnum(&translit)
 }
 
