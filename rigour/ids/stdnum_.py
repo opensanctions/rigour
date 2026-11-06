@@ -1,10 +1,9 @@
-
 from stdnum import bic, figi, iban, isin, lei
 from stdnum.br import cnpj, cpf
 from stdnum.cn import uscc
 from stdnum.exceptions import ValidationError
 from stdnum.ru import inn
-from stdnum.us import ssn
+from stdnum.us import ein, ssn
 
 from rigour.ids.common import IdentifierFormat
 
@@ -158,6 +157,33 @@ class SSN(IdentifierFormat):
     @classmethod
     def format(cls, value: str) -> str:
         return ssn.format(value)
+
+
+class EIN(IdentifierFormat):
+    """US Employer Identification Number, the IRS tax ID of businesses and other entities"""
+
+    NAME = "ein"
+    TITLE = "EIN"
+    STRONG = False
+
+    @classmethod
+    def is_valid(cls, value: str) -> bool:
+        return cls.normalize(value) is not None
+
+    @classmethod
+    def normalize(cls, value: str) -> str | None:
+        try:
+            number = ein.compact(ein.validate(value))
+        except ValidationError:
+            return None
+        # Placeholders such as 999999999 or 111111111 carry issued prefixes.
+        if len(set(number)) == 1:
+            return None
+        return number
+
+    @classmethod
+    def format(cls, value: str) -> str:
+        return ein.format(value)
 
 
 class CPF(IdentifierFormat):
