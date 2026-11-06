@@ -38,7 +38,7 @@ Issues = "https://github.com/opensanctions/rigour/issues"
 [project.optional-dependencies]
 dev = [
     "pip>=10.0.0",
-    "bump2version",
+    "bump-my-version",
     "wheel>=0.29.0",
     "ruamel.yaml",
     # Bounded on purpose: ruff's default rule selection moves between minor
@@ -62,6 +62,30 @@ docs = [
     "mkdocstrings[python]",
     "mkdocs-material",
 ]
+
+[tool.bumpversion]
+current_version = "2.6.1"
+commit = true
+tag = true
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "rust/Cargo.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "rust/Cargo.lock"
+search = '''
+name = "rigour-core"
+version = "{current_version}"'''
+replace = '''
+name = "rigour-core"
+version = "{new_version}"'''
 
 [tool.maturin]
 # pyo3/generate-import-lib lets the Windows wheel job link without a
