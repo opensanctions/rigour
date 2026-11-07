@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "rigour"
-version = "2.6.1"
+version = "2.6.2"
 description = "Financial crime domain data validation and normalization library."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -64,7 +64,7 @@ docs = [
 ]
 
 [tool.bumpversion]
-current_version = "2.6.1"
+current_version = "2.6.2"
 commit = true
 tag = true
 
