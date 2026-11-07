@@ -16,7 +16,19 @@ from rigour.ids.common import IdentifierFormat
 from rigour.ids.imo import IMO
 from rigour.ids.npi import NPI
 from rigour.ids.ogrn import OGRN
-from rigour.ids.stdnum_ import BIC, CNPJ, CPF, FIGI, IBAN, INN, ISIN, LEI, SSN, USCC
+from rigour.ids.stdnum_ import (
+    BIC,
+    CNPJ,
+    CPF,
+    EIN,
+    FIGI,
+    IBAN,
+    INN,
+    ISIN,
+    LEI,
+    SSN,
+    USCC,
+)
 from rigour.ids.strict import StrictFormat
 from rigour.ids.uei import UEI
 from rigour.ids.wikidata import WikidataQID
@@ -36,6 +48,7 @@ _FORMATS: tuple[FormatType, ...] = (
     LEI,
     UEI,
     SSN,
+    EIN,
     CPF,
     CNPJ,
     USCC,
@@ -100,6 +113,7 @@ __all__ = [
     "BIC",
     "CNPJ",
     "CPF",
+    "EIN",
     "FIGI",
     "IBAN",
     "IMO",

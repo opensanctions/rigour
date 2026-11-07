@@ -1,4 +1,4 @@
-from rigour.ids import BIC, CNPJ, CPF, FIGI, IBAN, INN, ISIN, LEI, SSN, USCC
+from rigour.ids import BIC, CNPJ, CPF, EIN, FIGI, IBAN, INN, ISIN, LEI, SSN, USCC
 
 
 def test_isin():
@@ -96,6 +96,18 @@ def test_ssn():
     assert SSN.normalize("123-45-6789  ") == "123456789"
     assert SSN.normalize("SOCIAL") is None
     assert SSN.format("123456789") == "123-45-6789"
+
+
+def test_ein():
+    assert EIN.is_valid("942404110")
+    assert EIN.normalize("94-2404110 ") == "942404110"
+    assert EIN.format("942404110") == "94-2404110"
+    assert EIN.normalize("002404110") is None
+    assert EIN.normalize("74220940") is None
+    assert EIN.normalize("000000000") is None
+    assert EIN.normalize("999999999") is None
+    assert EIN.normalize("111111111") is None
+    assert not EIN.is_valid("SOCIAL")
 
 
 def test_cnpj():
