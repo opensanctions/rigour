@@ -6,6 +6,7 @@ qid: Q22
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: regional
 parent: gb
 see:
   - gb

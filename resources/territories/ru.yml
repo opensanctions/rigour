@@ -13,6 +13,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Russia, or the Russian Federation, is a country spanning Eastern Europe and Northern
   Asia. It is the largest country in the world by area, extends across eleven time

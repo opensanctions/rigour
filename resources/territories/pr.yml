@@ -9,6 +9,7 @@ other_codes:
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: regional
 parent: us
 summary: >-
   Puerto Rico, officially the Commonwealth of Puerto Rico, is a Caribbean island and

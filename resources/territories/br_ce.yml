@@ -4,6 +4,7 @@ qid: Q40123
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: br
 names_strong:
   - Ceara

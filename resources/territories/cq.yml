@@ -8,6 +8,7 @@ other_codes:
   - gg-srk
 is_country: false
 is_ftm: true
+level: regional
 parent: gg
 see:
   - gg

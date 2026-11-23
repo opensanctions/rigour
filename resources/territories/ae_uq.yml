@@ -6,6 +6,7 @@ other_qids:
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: ae
 names_strong:
   - Umm al-Quwain

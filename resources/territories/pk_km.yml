@@ -6,6 +6,7 @@ qid: Q43100
 is_country: false
 is_ftm: true
 is_jurisdiction: false
+level: regional
 claims:
   - in
   - pk

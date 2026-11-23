@@ -4,6 +4,7 @@ qid: Q25263
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: pt
 names_strong:
   - Açores

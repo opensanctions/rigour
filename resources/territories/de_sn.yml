@@ -4,6 +4,7 @@ qid: Q1202
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: de
 names_strong:
   - Sachsen

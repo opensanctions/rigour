@@ -4,6 +4,7 @@ qid: Q1397
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: us
 names_strong:
   - OHIO, U.S.A.

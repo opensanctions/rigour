@@ -6,6 +6,7 @@ qid: Q907112
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: national
 parent: md
 claims:
   - ru

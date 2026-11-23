@@ -8,6 +8,7 @@ qid: Q129003
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: regional
 parent: fr
 see:
   - fr

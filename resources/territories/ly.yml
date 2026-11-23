@@ -9,6 +9,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Libya, officially the State of Libya, is a country in the Maghreb region of North
   Africa. It is bordered by the Mediterranean Sea to the north, Egypt to the east,

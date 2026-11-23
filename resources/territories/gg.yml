@@ -7,6 +7,7 @@ qid: Q25230
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 see:
   - gb
   - cq

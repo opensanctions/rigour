@@ -11,6 +11,7 @@ other_codes:
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: regional
 summary: >-
   Svalbard and Jan Mayen is a statistical designation defined by ISO 3166-1 for a
   collective grouping of two remote jurisdictions of Norway: Svalbard and Jan Mayen.

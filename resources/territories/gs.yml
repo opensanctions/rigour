@@ -8,6 +8,7 @@ qid: Q35086
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 claims:
   - ar
 summary: >-

@@ -4,6 +4,7 @@ qid: Q816
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: us
 names_strong:
   - ARIZONA, U.S.A.

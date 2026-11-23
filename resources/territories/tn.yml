@@ -9,6 +9,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Tunisia, officially the Republic of Tunisia, is the northernmost country in Africa.
   It is a part of the Maghreb region of North Africa, bordered by Algeria to the west

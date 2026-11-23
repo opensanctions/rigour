@@ -1,4 +1,10 @@
 from rigour.territories import (
+    INTERNATIONAL,
+    LEVELS,
+    MUNICIPAL,
+    NATIONAL,
+    REGIONAL,
+    SUPRANATIONAL,
     get_ftm_countries,
     get_territories,
     get_territory,
@@ -158,3 +164,32 @@ def test_places():
     gb = get_territory("gb")
     assert gb is not None
     assert gb.places == []
+
+
+def test_territory_level():
+    expected = {
+        "zz": INTERNATIONAL,
+        "un": INTERNATIONAL,
+        "eu": SUPRANATIONAL,
+        "de": NATIONAL,
+        "je": NATIONAL,
+        "hk": NATIONAL,
+        "md-pmr": NATIONAL,
+        "gb-sct": REGIONAL,
+        "de-be": REGIONAL,
+        "pr": REGIONAL,
+        "vi": REGIONAL,
+        "bq": MUNICIPAL,
+        "ip": INTERNATIONAL,
+        "aq": INTERNATIONAL,
+        "pk-km": REGIONAL,
+    }
+    for code, level in expected.items():
+        territory = get_territory(code)
+        assert territory is not None, code
+        assert territory.level == level, code
+    for territory in get_territories():
+        assert territory.level in LEVELS
+    gb = get_territory("gb")
+    assert gb is not None
+    assert gb.to_dict()["level"] == NATIONAL

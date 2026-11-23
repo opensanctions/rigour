@@ -4,6 +4,7 @@ qid: Q1527
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: us
 names_strong:
   - MINNESOTA, U.S.A.

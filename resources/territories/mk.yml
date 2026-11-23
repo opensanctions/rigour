@@ -10,6 +10,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   North Macedonia, officially the Republic of North Macedonia, is a landlocked country
   in Southeast Europe. It shares land borders with Kosovo to the northwest, Serbia

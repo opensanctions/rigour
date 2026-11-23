@@ -13,6 +13,7 @@ from yaml import safe_load as yaml_load
 from genscripts.util import RESOURCES_PATH, RUST_DATA_PATH, norm_string, write_jsonl
 from rigour.ids.wikidata import is_qid
 from rigour.langs import iso_639_alpha3
+from rigour.territories.levels import LEVELS
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes, normalize_territory_name
 from rigour.text.scripts import can_latinize, is_latin
@@ -148,6 +149,9 @@ def update_data() -> None:
         with open(source_file, "r", encoding="utf-8") as ufh:
             data = yaml_load(ufh.read())
             data["code"] = norm_string(code)
+            if data.get("level") not in LEVELS:
+                msg = f"Invalid level: {data.get('level')!r} (country: {code!r})"
+                raise RuntimeError(msg)
             data["name"] = norm_string(data["name"])
             if "full_name" in data:
                 data["full_name"] = norm_string(data["full_name"])

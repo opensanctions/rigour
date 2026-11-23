@@ -6,6 +6,7 @@ alpha3: reu
 qid: Q17070
 is_country: false
 is_ftm: true
+level: regional
 parent: fr
 see:
   - fr

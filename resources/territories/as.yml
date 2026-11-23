@@ -9,6 +9,7 @@ other_codes:
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: regional
 parent: us
 summary: >-
   American Samoa is an unincorporated territory of the United States located in the

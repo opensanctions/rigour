@@ -19,6 +19,8 @@ class Territory:
         is_ftm: Whether the territory is a FollowTheMoney country code.
         is_jurisdiction: Whether the territory is a legal jurisdiction.
         is_historical: Whether the territory no longer exists.
+        level: Widest level of government of the territory, one of
+            [rigour.territories.levels][rigour.territories.levels].
         qid: Wikidata QID of the territory.
         other_qids: Wikidata QIDs of similar or predecessor items.
         other_codes: Alternate codes that resolve to this territory.
@@ -33,18 +35,19 @@ class Territory:
         self, index: dict[str, "Territory"], code: str, data: dict[str, Any]
     ) -> None:
         self.index = index
-        self.code = code
-        self.name: str = data["name"]
+        self.code = sys.intern(code)
+        self.name: str = sys.intern(data["name"])
         self.full_name: str = data.get("full_name", self.name)
         self.alpha3: str | None = data.get("alpha3")
         self.is_country: bool = data.get("is_country", False)
         self.is_ftm: bool = data.get("is_ftm", False)
         self.is_jurisdiction: bool = data.get("is_jurisdiction", self.is_country)
         self.is_historical: bool = data.get("is_historical", False)
+        self.level: str = sys.intern(str(data.get("level")))
         self._region: str | None = data.get("region", None)
         self._subregion: str | None = data.get("subregion", None)
         self._in_sentence: str | None = data.get("in_sentence", None)
-        self.qid: str = str(data.get("qid"))
+        self.qid: str = sys.intern(str(data.get("qid")))
         self.other_qids: list[str] = data.get("other_qids", [])
         self.other_codes: list[str] = data.get("other_codes", [])
         self.places: list[str] = data.get("places", [])
@@ -147,6 +150,7 @@ class Territory:
             "ftm_country": self.ftm_country,
             "is_jurisdiction": self.is_jurisdiction,
             "is_historical": self.is_historical,
+            "level": self.level,
             "qid": self.qid,
             "qids": list(self.qids),
             "codes": list(self.codes),

@@ -9,6 +9,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Mexico, officially the United Mexican States, is a country in the southern portion
   of North America. It is bordered to the north by the United States; to the south

@@ -7,6 +7,7 @@ qid: Q51
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: international
 other_codes:
   - nq
 names_strong: []

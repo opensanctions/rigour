@@ -9,6 +9,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   South Africa, officially the Republic of South Africa, is the southernmost country
   in Africa. It is bounded to the south by 2,798 kilometres of coastline that stretches

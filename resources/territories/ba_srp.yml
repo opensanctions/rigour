@@ -9,6 +9,7 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 is_historical: false
+level: regional
 qid: Q11196
 other_qids:
   - Q16761250

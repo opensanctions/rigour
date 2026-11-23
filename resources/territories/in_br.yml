@@ -3,6 +3,7 @@ is_country: false
 is_ftm: false
 is_historical: false
 is_jurisdiction: true
+level: regional
 name: Bihar
 parent: in
 qid: Q1165

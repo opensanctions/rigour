@@ -10,6 +10,7 @@ other_codes:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Åland (Finnish: Ahvenanmaa) is an autonomous and demilitarised region of Finland.
   Receiving its autonomy by a 1920 decision of the League of Nations, it is the smallest

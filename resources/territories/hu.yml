@@ -7,6 +7,7 @@ qid: Q28
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 see:
   - eu
 summary: >-

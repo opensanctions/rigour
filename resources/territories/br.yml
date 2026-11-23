@@ -10,6 +10,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Brazil, officially the Federative Republic of Brazil, is the largest country in
   South America and in Latin America. Brazil is the world's fifth-largest country
