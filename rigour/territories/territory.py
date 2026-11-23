@@ -4,7 +4,6 @@ from typing import Any, Optional
 
 from rigour._core import territories_jsonl
 from rigour.data import iter_jsonl_text
-from rigour.territories.levels import LEVELS
 
 
 @total_ordering
@@ -36,22 +35,19 @@ class Territory:
         self, index: dict[str, "Territory"], code: str, data: dict[str, Any]
     ) -> None:
         self.index = index
-        self.code = code
-        self.name: str = data["name"]
+        self.code = sys.intern(code)
+        self.name: str = sys.intern(data["name"])
         self.full_name: str = data.get("full_name", self.name)
         self.alpha3: str | None = data.get("alpha3")
         self.is_country: bool = data.get("is_country", False)
         self.is_ftm: bool = data.get("is_ftm", False)
         self.is_jurisdiction: bool = data.get("is_jurisdiction", self.is_country)
         self.is_historical: bool = data.get("is_historical", False)
-        level = data.get("level")
-        if level not in LEVELS:
-            raise ValueError(f"Invalid level: {level!r} (territory: {code!r})")
-        self.level: str = sys.intern(level)
+        self.level: str = sys.intern(str(data.get("level")))
         self._region: str | None = data.get("region", None)
         self._subregion: str | None = data.get("subregion", None)
         self._in_sentence: str | None = data.get("in_sentence", None)
-        self.qid: str = str(data.get("qid"))
+        self.qid: str = sys.intern(str(data.get("qid")))
         self.other_qids: list[str] = data.get("other_qids", [])
         self.other_codes: list[str] = data.get("other_codes", [])
         self.places: list[str] = data.get("places", [])
