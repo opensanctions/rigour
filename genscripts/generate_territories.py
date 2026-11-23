@@ -13,6 +13,7 @@ from yaml import safe_load as yaml_load
 from genscripts.util import RESOURCES_PATH, RUST_DATA_PATH, norm_string, write_jsonl
 from rigour.ids.wikidata import is_qid
 from rigour.langs import iso_639_alpha3
+from rigour.territories.levels import LEVELS
 from rigour.territories.territory import Territory
 from rigour.territories.util import clean_code, clean_codes, normalize_territory_name
 from rigour.text.scripts import can_latinize, is_latin
@@ -233,6 +234,10 @@ def update_data() -> None:
             if see not in territories:
                 msg = "Invalid see: %s (country: %r)" % (see, terr.code)
                 raise RuntimeError(msg)
+
+        if terr.level not in LEVELS:
+            msg = f"Invalid level: {terr.level} (country: {terr.code!r})"
+            raise RuntimeError(msg)
 
         if terr.is_country and not terr.is_jurisdiction:
             msg = "Country is not a jurisdiction: %r" % terr.code

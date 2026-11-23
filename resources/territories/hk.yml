@@ -12,6 +12,7 @@ other_codes:
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: national
 parent: cn
 summary: >-
   Hong Kong, officially the Hong Kong Special Administrative Region of the People's

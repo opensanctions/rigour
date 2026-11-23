@@ -7,6 +7,7 @@ qid: Q223
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 parent: dk
 summary: >-
   Greenland is a North American autonomous territory of the Kingdom of Denmark. It

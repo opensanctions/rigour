@@ -5,6 +5,7 @@ in_sentence: the United Nations
 is_ftm: true
 is_country: false
 is_jurisdiction: false
+level: international
 qid: Q1065
 other_qids:
   - Q160016

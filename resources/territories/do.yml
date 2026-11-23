@@ -10,6 +10,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   The Dominican Republic is a country located on the island of Hispaniola in the Greater
   Antilles archipelago of the Caribbean region. It occupies the eastern five-eighths

@@ -9,6 +9,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Uzbekistan, officially the Republic of Uzbekistan, is a doubly landlocked country
   located in Central Asia. It is surrounded by five landlocked countries: Kazakhstan

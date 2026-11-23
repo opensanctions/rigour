@@ -9,6 +9,7 @@ other_codes:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 claims:
   - cn
 summary: >-

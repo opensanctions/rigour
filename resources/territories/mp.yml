@@ -9,6 +9,7 @@ other_codes:
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: regional
 parent: us
 summary: >-
   The Northern Mariana Islands, officially the Commonwealth of the Northern Mariana

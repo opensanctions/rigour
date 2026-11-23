@@ -12,6 +12,7 @@ other_codes:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Zimbabwe, officially the Republic of Zimbabwe, is a landlocked country in Southern
   Africa, between the Zambezi and Limpopo Rivers, bordered by South Africa to the

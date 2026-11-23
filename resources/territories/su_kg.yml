@@ -9,6 +9,7 @@ is_country: false
 is_ftm: false
 is_jurisdiction: true
 is_historical: true
+level: regional
 parent: suhh
 successors:
   - kg

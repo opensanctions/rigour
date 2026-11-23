@@ -12,6 +12,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Afghanistan, officially the Islamic Emirate of Afghanistan, is a landlocked country
   located at the crossroads of Central Asia and South Asia.

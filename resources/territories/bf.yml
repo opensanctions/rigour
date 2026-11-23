@@ -9,6 +9,7 @@ other_codes:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Burkina Faso is a landlocked country in West Africa, bordered by Mali to the northwest,
   Niger to the northeast, Benin to the southeast, Togo and Ghana to the south, and

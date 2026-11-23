@@ -4,6 +4,7 @@ qid: Q2003
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: ca
 names_strong: []
 names_weak:

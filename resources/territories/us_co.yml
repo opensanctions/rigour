@@ -4,6 +4,7 @@ qid: Q1261
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: us
 names_strong:
   - COLORADO, U.S.A.

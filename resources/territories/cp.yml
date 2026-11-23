@@ -8,6 +8,7 @@ parent: pf
 is_country: false
 is_ftm: true
 is_jurisdiction: false
+level: regional
 names_strong:
   - Clipperton
 names_weak:

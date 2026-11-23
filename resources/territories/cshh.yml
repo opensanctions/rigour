@@ -11,6 +11,7 @@ other_codes:
 is_country: true
 is_ftm: true
 is_historical: true
+level: national
 see:
   - cz
   - sk

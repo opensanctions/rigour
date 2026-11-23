@@ -4,6 +4,7 @@ qid: Q3235
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: au
 names_strong: []
 names_weak: []

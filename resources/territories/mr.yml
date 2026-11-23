@@ -9,6 +9,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Mauritania, officially the Islamic Republic of Mauritania, is a sovereign country
   in Northwest Africa. It is bordered by the Atlantic Ocean to the west, Western Sahara

@@ -9,6 +9,7 @@ other_codes:
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: regional
 parent: us
 summary: >-
   Guam is an organized, unincorporated territory of the United States in the Micronesia

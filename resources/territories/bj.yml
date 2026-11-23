@@ -9,6 +9,7 @@ other_codes:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Benin, officially the Republic of Benin, and formerly Dahomey, is a country in West
   Africa. It is bordered by Togo to the west, Nigeria to the east, Burkina Faso to

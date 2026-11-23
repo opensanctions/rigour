@@ -13,6 +13,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Syria, officially the Syrian Arab Republic, is a West Asian country located in the
   Eastern Mediterranean and the Levant. It is bounded by the Mediterranean Sea to

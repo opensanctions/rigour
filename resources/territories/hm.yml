@@ -10,6 +10,7 @@ other_codes:
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: regional
 parent: au
 names_strong: []
 names_weak:

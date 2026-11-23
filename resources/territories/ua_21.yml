@@ -4,6 +4,7 @@ qid: Q170213
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: ua
 names_strong:
   - Закарпатська область # Zakarpatska oblast

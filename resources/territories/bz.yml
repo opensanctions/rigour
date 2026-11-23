@@ -9,6 +9,7 @@ other_qids:
 is_country: true
 is_ftm: true
 is_jurisdiction: true
+level: national
 summary: >-
   Belize is a country on the north-eastern coast of Central America. It is bordered
   by Mexico to the north, the Caribbean Sea to the east, and Guatemala to the west

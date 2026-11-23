@@ -6,6 +6,7 @@ in_sentence: the Canary Islands
 is_country: false
 is_ftm: true
 is_jurisdiction: false
+level: regional
 parent: es
 qid: Q5813
 other_qids:

@@ -6,6 +6,7 @@ alpha3: pyf
 is_country: false
 is_ftm: true
 is_jurisdiction: true
+level: regional
 parent: fr
 qid: Q30971
 other_codes:

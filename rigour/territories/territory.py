@@ -19,6 +19,8 @@ class Territory:
         is_ftm: Whether the territory is a FollowTheMoney country code.
         is_jurisdiction: Whether the territory is a legal jurisdiction.
         is_historical: Whether the territory no longer exists.
+        level: Widest level of government of the territory, one of
+            [rigour.territories.levels][rigour.territories.levels].
         qid: Wikidata QID of the territory.
         other_qids: Wikidata QIDs of similar or predecessor items.
         other_codes: Alternate codes that resolve to this territory.
@@ -41,6 +43,7 @@ class Territory:
         self.is_ftm: bool = data.get("is_ftm", False)
         self.is_jurisdiction: bool = data.get("is_jurisdiction", self.is_country)
         self.is_historical: bool = data.get("is_historical", False)
+        self.level: str = data["level"]
         self._region: str | None = data.get("region", None)
         self._subregion: str | None = data.get("subregion", None)
         self._in_sentence: str | None = data.get("in_sentence", None)
@@ -147,6 +150,7 @@ class Territory:
             "ftm_country": self.ftm_country,
             "is_jurisdiction": self.is_jurisdiction,
             "is_historical": self.is_historical,
+            "level": self.level,
             "qid": self.qid,
             "qids": list(self.qids),
             "codes": list(self.codes),

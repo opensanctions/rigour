@@ -12,6 +12,7 @@ other_codes:
   - ua-40
 is_country: false
 is_ftm: true
+level: regional
 parent: ua
 claims:
   - ru

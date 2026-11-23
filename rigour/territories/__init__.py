@@ -12,6 +12,15 @@ to retrieve territories by their codes or QIDs.
 
 from functools import cache
 
+from rigour.territories.levels import (
+    INTERNATIONAL,
+    LEVELS,
+    MUNICIPAL,
+    NATIONAL,
+    REGIONAL,
+    SUBREGIONAL,
+    SUPRANATIONAL,
+)
 from rigour.territories.lookup import lookup_by_identifier, lookup_territory
 from rigour.territories.match import territories_intersect
 from rigour.territories.territory import Territory
@@ -19,6 +28,13 @@ from rigour.territories.territory import get_index as _get_index
 from rigour.territories.util import clean_code
 
 __all__ = [
+    "INTERNATIONAL",
+    "LEVELS",
+    "MUNICIPAL",
+    "NATIONAL",
+    "REGIONAL",
+    "SUBREGIONAL",
+    "SUPRANATIONAL",
     "get_ftm_countries",
     "get_territories",
     "get_territory",

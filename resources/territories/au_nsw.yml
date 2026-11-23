@@ -4,6 +4,7 @@ qid: Q3224
 is_country: false
 is_ftm: false
 is_jurisdiction: true
+level: regional
 parent: au
 names_strong:
   - NSW

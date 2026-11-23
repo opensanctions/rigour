@@ -9,6 +9,7 @@ other_codes:
 is_country: false
 is_ftm: true
 is_jurisdiction: false
+level: regional
 names_strong:
   - Tristan
 names_weak:
