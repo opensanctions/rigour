@@ -4,6 +4,7 @@ from typing import Any, Optional
 
 from rigour._core import territories_jsonl
 from rigour.data import iter_jsonl_text
+from rigour.territories.levels import LEVELS
 
 
 @total_ordering
@@ -43,7 +44,10 @@ class Territory:
         self.is_ftm: bool = data.get("is_ftm", False)
         self.is_jurisdiction: bool = data.get("is_jurisdiction", self.is_country)
         self.is_historical: bool = data.get("is_historical", False)
-        self.level: str = data["level"]
+        level = data.get("level")
+        if level not in LEVELS:
+            raise ValueError(f"Invalid level: {level!r} (territory: {code!r})")
+        self.level: str = sys.intern(level)
         self._region: str | None = data.get("region", None)
         self._subregion: str | None = data.get("subregion", None)
         self._in_sentence: str | None = data.get("in_sentence", None)

@@ -149,6 +149,9 @@ def update_data() -> None:
         with open(source_file, "r", encoding="utf-8") as ufh:
             data = yaml_load(ufh.read())
             data["code"] = norm_string(code)
+            if data.get("level") not in LEVELS:
+                msg = f"Invalid level: {data.get('level')!r} (country: {code!r})"
+                raise RuntimeError(msg)
             data["name"] = norm_string(data["name"])
             if "full_name" in data:
                 data["full_name"] = norm_string(data["full_name"])
@@ -234,10 +237,6 @@ def update_data() -> None:
             if see not in territories:
                 msg = "Invalid see: %s (country: %r)" % (see, terr.code)
                 raise RuntimeError(msg)
-
-        if terr.level not in LEVELS:
-            msg = f"Invalid level: {terr.level} (country: {terr.code!r})"
-            raise RuntimeError(msg)
 
         if terr.is_country and not terr.is_jurisdiction:
             msg = "Country is not a jurisdiction: %r" % terr.code
