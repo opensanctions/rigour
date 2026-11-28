@@ -30,7 +30,7 @@ from rigour.names.prefix import (
     remove_org_prefixes,
     remove_person_prefixes,
 )
-from rigour.names.split_phrases import contains_split_phrase
+from rigour.names.split_phrases import contains_split_phrase, name_split_phrases
 from rigour.names.symbol import Symbol, SymbolCategory, pair_symbols
 from rigour.names.tag import NamePartTag, NameTypeTag
 from rigour.names.tokenize import normalize_name, tokenize_name
@@ -52,6 +52,7 @@ __all__ = [
     "extract_org_types",
     "is_name",
     "is_stopword",
+    "name_split_phrases",
     "normalize_name",
     "pair_symbols",
     "pick_case",
