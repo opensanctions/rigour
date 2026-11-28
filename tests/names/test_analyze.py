@@ -215,6 +215,15 @@ def test_entity_org_class_short_circuits_person_tagger():
     ), name.symbols
 
 
+def test_tagger_spans_cover_adjacent_parts():
+    # The tagger matches phrases on contiguous tokens; the spans it
+    # attaches must cover contiguous part indices too.
+    name = _only(analyze_names(NameTypeTag.PER, ["Maria de Garcia de la Cruz"]))
+    for span in name.spans:
+        idx = [p.index for p in span.parts]
+        assert idx == list(range(idx[0], idx[0] + len(idx))), span
+
+
 def test_apply_phrase_dedups_phrase_symbol_pair():
     # Calling apply_phrase twice with the same (phrase, symbol) on a
     # Name yields the same set of spans as a single call — the dedup

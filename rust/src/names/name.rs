@@ -132,9 +132,11 @@ impl Name {
     /// `GIVEN`; a `lastName` of "Juncker" then marks the remaining
     /// part as `FAMILY`.
     ///
-    /// Walks `self.parts` looking for a contiguous
-    /// (adjacency-insensitive) match of the tokenised `text`. On a
-    /// hit, each matched part's tag is set to `tag`; parts that
+    /// Matches the tokens of `text` in order but may skip parts in
+    /// between: on "Karl-Theodor Maria Nikolaus zu Guttenberg", the
+    /// text "Karl-Theodor Nikolaus" tags both parts and leaves
+    /// "Maria" alone. On a hit, each matched part's tag is set to
+    /// `tag`; parts that
     /// already carry a tag that conflicts under
     /// [`NamePartTag::can_match`] demote to `AMBIGUOUS` instead.
     /// Stops after `max_matches` successful matches.
@@ -146,33 +148,8 @@ impl Name {
         tag: NamePartTag,
         max_matches: u32,
     ) -> PyResult<()> {
-        let folded = casefold(text);
-        let tokens = name_tokenize(&folded);
-        if tokens.is_empty() {
-            return Ok(());
-        }
-
-        let parts_bound = self.parts.bind(py);
-        let mut matches: u32 = 0;
-        let mut matching: Vec<Py<NamePart>> = Vec::with_capacity(tokens.len());
-
-        for item in parts_bound.iter() {
-            let part_py = item.cast::<NamePart>()?.clone().unbind();
-            let next_idx = matching.len();
-            let part_form = part_py.bind(py).borrow().form_str().to_string();
-            if part_form == tokens[next_idx] {
-                matching.push(part_py);
-            }
-            if matching.len() == tokens.len() {
-                apply_tag_to_matching(py, &matching, tag);
-                matches += 1;
-                if matches >= max_matches {
-                    return Ok(());
-                }
-                matching.clear();
-            }
-        }
-        Ok(())
+        let tokens = name_tokenize(&casefold(text));
+        self.tag_tokens(py, &tokens, tag, max_matches)
     }
 
     /// Record that `phrase` in this name carries `symbol`.
@@ -182,7 +159,7 @@ impl Name {
     /// `ORG_CLASS:LLP`), the match is attached as a [`Span`] so
     /// downstream matching and inference can see which tokens the
     /// symbol covers. Every non-overlapping occurrence of `phrase`
-    /// in the name gets its own `Span`.
+    /// as a run of adjacent parts gets its own `Span`.
     ///
     /// Idempotent on `(phrase, symbol)`: if any existing `Span` on
     /// this name already carries the same symbol over the same
@@ -200,22 +177,26 @@ impl Name {
         }
         let parts_bound = self.parts.bind(py);
         let spans_bound = self.spans.bind(py);
-        let mut matching: Vec<Py<NamePart>> = Vec::with_capacity(tokens.len());
+        let mut parts: Vec<Bound<'_, NamePart>> = Vec::with_capacity(parts_bound.len());
         for item in parts_bound.iter() {
-            let part_py = item.cast::<NamePart>()?.clone().unbind();
-            let next_idx = matching.len();
-            let part_form = part_py.bind(py).borrow().form_str().to_string();
-            if part_form == tokens[next_idx] {
-                matching.push(part_py);
+            parts.push(item.cast_into::<NamePart>()?);
+        }
+        let k = tokens.len();
+        let mut i = 0;
+        while i + k <= parts.len() {
+            let window = &parts[i..i + k];
+            let hit = window
+                .iter()
+                .zip(&tokens)
+                .all(|(p, t)| p.borrow().form_str() == *t);
+            if !hit {
+                i += 1;
+                continue;
             }
-            if matching.len() == tokens.len() {
-                let span_parts: Vec<Py<NamePart>> =
-                    matching.iter().map(|p| p.clone_ref(py)).collect();
-                let span = Span::new(py, span_parts, symbol.clone_ref(py))?;
-                let span_py = Py::new(py, span)?;
-                spans_bound.append(span_py)?;
-                matching.clear();
-            }
+            let span_parts: Vec<Py<NamePart>> = window.iter().map(|p| p.clone().unbind()).collect();
+            let span = Span::new(py, span_parts, symbol.clone_ref(py))?;
+            spans_bound.append(Py::new(py, span)?)?;
+            i += k;
         }
         Ok(())
     }
@@ -402,6 +383,39 @@ impl Name {
             out.add(collected[*idx].clone_ref(py))?;
         }
         Ok(out.unbind())
+    }
+}
+
+impl Name {
+    /// [`Name::tag_text`] over already casefolded and tokenised text,
+    /// for callers that apply the same value to many names.
+    pub(crate) fn tag_tokens(
+        &self,
+        py: Python<'_>,
+        tokens: &[String],
+        tag: NamePartTag,
+        max_matches: u32,
+    ) -> PyResult<()> {
+        if tokens.is_empty() {
+            return Ok(());
+        }
+        let mut matches: u32 = 0;
+        let mut matching: Vec<Py<NamePart>> = Vec::with_capacity(tokens.len());
+        for item in self.parts.bind(py).iter() {
+            let part = item.cast_into::<NamePart>()?;
+            if part.borrow().form_str() == tokens[matching.len()] {
+                matching.push(part.unbind());
+            }
+            if matching.len() == tokens.len() {
+                apply_tag_to_matching(py, &matching, tag);
+                matches += 1;
+                if matches >= max_matches {
+                    return Ok(());
+                }
+                matching.clear();
+            }
+        }
+        Ok(())
     }
 }
 

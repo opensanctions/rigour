@@ -44,6 +44,7 @@ use crate::names::tag::{INITIAL_TAGS, NamePartTag, NameTypeTag};
 use crate::names::tagger::{TaggerKind, get_tagger};
 use crate::text::normalize::{Cleanup, Normalize, casefold, normalize};
 use crate::text::stopwords::stopwords_list;
+use crate::text::tokenize::tokenize_name;
 
 /// Normalise-flag combination for the tagger's alias set.
 ///
@@ -121,6 +122,16 @@ pub fn analyze_names(
     consolidate: bool,
     rewrite: bool,
 ) -> PyResult<Py<PySet>> {
+    let part_tags: Vec<(NamePartTag, Vec<Vec<String>>)> = part_tags
+        .into_iter()
+        .map(|(tag, values)| {
+            let tokens = values
+                .iter()
+                .map(|v| tokenize_name(&casefold(v), 1))
+                .collect();
+            (tag, tokens)
+        })
+        .collect();
     let mut seen: HashSet<String> = HashSet::new();
     let mut built: Vec<Py<Name>> = Vec::with_capacity(names.len());
 
@@ -147,12 +158,9 @@ pub fn analyze_names(
         let name_obj = Name::new(py, &working, Some(&form), type_tag, phonetics)?;
         let name_py = Py::new(py, name_obj)?;
 
-        // Apply part_tags — each value is prenormalised then fed to
-        // Name.tag_text, which tokenises + walks parts.
         for (tag, values) in &part_tags {
-            for value in values {
-                let folded = casefold(value);
-                name_py.bind(py).borrow().tag_text(py, &folded, *tag, 1)?;
+            for tokens in values {
+                name_py.bind(py).borrow().tag_tokens(py, tokens, *tag, 1)?;
             }
         }
 
@@ -218,22 +226,15 @@ fn apply_initial_preamble(py: Python<'_>, name: &Py<Name>, infer_initials: bool)
         let Some(first_char) = part.comparable_str().chars().next() else {
             continue;
         };
-        let sym_id = first_char.to_string();
-        let sym = Symbol::from_str(SymbolCategory::INITIAL, &sym_id);
-        let sym_py = Py::new(py, sym)?;
-
-        let form_str = part.form_str().to_string();
-        let tag = part.tag;
+        let apply = (infer_initials && part.form_str().chars().count() == 1)
+            || INITIAL_TAGS.contains(&part.tag);
         drop(part);
-
-        let apply = if infer_initials && form_str.chars().count() == 1 {
-            true
-        } else {
-            INITIAL_TAGS.contains(&tag)
-        };
         if apply {
+            let sym = Symbol::from_str(SymbolCategory::INITIAL, &first_char.to_string());
             let part_ref = part_py.clone().unbind();
-            name.bind(py).borrow().apply_part(py, part_ref, sym_py)?;
+            name.bind(py)
+                .borrow()
+                .apply_part(py, part_ref, Py::new(py, sym)?)?;
         }
     }
     Ok(())
