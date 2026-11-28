@@ -5,10 +5,9 @@
 // object where the group_key becomes the `Symbol.id` (uppercased by
 // the tagger) and the aliases become needles in the AC automaton.
 //
-// The JSON is indented on disk for reviewability; build.rs
-// zstd-compresses it into OUT_DIR. No resident static: the only
-// consumers, `names::tagger::build_{org,person}_tagger`, are cached
-// in `TAGGER_CACHE`. Internal to the crate — no PyO3 surface.
+// No resident static: the only consumers,
+// `names::tagger::build_{org,person}_tagger`, are cached in
+// `TAGGER_CACHE`.
 
 use serde::Deserialize;
 use std::collections::HashMap;

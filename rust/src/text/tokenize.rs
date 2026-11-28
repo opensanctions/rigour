@@ -31,8 +31,7 @@ use crate::text::normalize::CharAction;
 
 // Characters deleted outright — punctuation inside abbreviations
 // ("U.S.A." → "USA") and apostrophe-like marks inside names
-// ("O'Brien" → "OBrien"). Mirrors `SKIP_CHARACTERS` in
-// rigour/names/tokenize.py.
+// ("O'Brien" → "OBrien").
 const SKIP_CHARS: &[char] = &[
     '.',        // U+002E FULL STOP
     '\u{0027}', // APOSTROPHE
@@ -45,8 +44,7 @@ const SKIP_CHARS: &[char] = &[
 ];
 
 // Lm (Modifier Letter) characters that carry meaning in real CJK
-// names and must not be deleted. Mirrors `KEEP_CHARACTERS` in the
-// Python source.
+// names and must not be deleted.
 const KEEP_CHARS: &[char] = &[
     '\u{30FC}', // KATAKANA-HIRAGANA PROLONGED SOUND MARK (ー)
     '\u{FF70}', // HALFWIDTH KATAKANA-HIRAGANA PROLONGED SOUND MARK (ｰ)
@@ -74,8 +72,9 @@ fn category_action(cat: GeneralCategory) -> CharAction {
 
         // Keep: L* (Ll/Lu/Lt/Lo), Nd, Nl, Mc (Brahmic/Indic vowel
         // signs), and anything else ICU might classify outside the
-        // explicit buckets above. Mc is an intentional keep — see the
-        // comment on TOKEN_SEP_CATEGORIES in the Python source.
+        // explicit buckets above. Mc is kept because Brahmic vowel
+        // signs belong to their syllable; splitting on them would
+        // break words into consonant runs.
         _ => CharAction::Keep,
     }
 }

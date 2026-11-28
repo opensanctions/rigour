@@ -9,28 +9,12 @@
 //   weighted Levenshtein centroid (case-insensitive via casefolded
 //   forms + ASCII-norm cross-script reinforcement); surface pick
 //   within the winning form via the three-level rule
-//   `(latin_share DESC, case_error_score ASC, alphabetical ASC)`.
+//   `(latin_share DESC, case_error_score ASC, alphabetical ASC)`,
+//   which makes the result independent of input order.
 //
 // - `pick_case(names)`: from a bag of near-identical names differing
 //   only in case, pick the one with the best case quality. Uses the
-//   same `case_error_score` as `pick_name`'s surface tiebreak so
-//   both paths share a single source of truth.
-//
-// ## Design notes
-//
-// An earlier revision of `pick_name` mirrored Python's title-case
-// "ballot-box" trick — synthetic `name.title()` variants were pushed
-// into the surface bucket to inflate the centroid score of whichever
-// surface matched them. That worked on asymmetric inputs but produced
-// exact ties on balanced ones (`GAZPROM × N + Gazprom × M`), which
-// Python resolved by accidental IEEE-754 rounding order. Replaced
-// here with a principled rule: within a winning form, rank candidates
-// by latin_share first, then case quality, then alphabetical. All
-// three levels are deterministic and reorder-invariant.
-//
-// A custom `title_case` helper existed to feed the ballot box; it's
-// gone. The only remaining caller of casefold here is `casefold` in
-// `text::normalize`, which uses ICU4X directly.
+//   same `case_error_score` as `pick_name`'s surface tiebreak.
 
 use std::collections::{HashMap, HashSet};
 
@@ -92,7 +76,6 @@ pub fn pick_name(names: &[&str]) -> Option<String> {
     let mut norm_cache: HashMap<String, Option<String>> = HashMap::new();
 
     for name in &sorted {
-        // Mirror Python's `name.strip().casefold()`.
         let form = casefold(name.trim());
         if form.is_empty() {
             continue;
@@ -166,9 +149,7 @@ pub fn pick_name(names: &[&str]) -> Option<String> {
 }
 
 /// Pick the best case variant from a bag of names expected to be
-/// identical apart from case. Port of `rigour.names.pick.pick_case`
-/// — returns `None` for empty input (the Python version raises;
-/// `Option` is the idiomatic Rust call).
+/// identical apart from case. Returns `None` for empty input.
 ///
 /// Score per candidate:
 /// - `errors = len`
@@ -270,17 +251,15 @@ fn best_case_candidate(candidates: &[String]) -> Option<&String> {
 }
 
 /// Per-character case-quality penalty, normalised by length. Lower
-/// is better. Direct port of `pick_case`'s inner loop in
-/// `rigour/names/pick.py` — length baseline (biases toward
-/// shorter), word-start-not-upper adds 2, mid-word-upper adds 1.
-/// Non-alphabetic characters reset the word-start flag.
+/// is better: every char costs 1, a word-start char that isn't
+/// uppercase adds 2, a mid-word uppercase char adds 1. Non-alphabetic
+/// characters reset the word-start flag.
 fn case_error_score(s: &str) -> f64 {
     let mut errors: f64 = 0.0;
     let mut total: f64 = 0.0;
     let mut new_word = true;
     for ch in s.chars() {
         total += 1.0;
-        // Length-baseline penalty for every char, matching Python.
         errors += 1.0;
         if !ch.is_alphabetic() {
             new_word = true;
@@ -309,9 +288,8 @@ fn push_unique(bucket: &mut Vec<String>, s: String) {
     }
 }
 
-// Unicode scripts where chars count as 0.3 Latin (close enough for an
-// analyst accustomed to the Latin alphabet). Mirrors
-// `_LATIN_SHARE_PARTIAL` in the Python source.
+// Cyrillic and Greek count as 0.3 Latin: partly readable to an
+// analyst used to the Latin alphabet.
 fn partial_latin_score(script: &str) -> f64 {
     match script {
         "Latin" => 1.0,
@@ -362,11 +340,8 @@ fn add_weight(
 ///
 /// `entries` and `weights` are the parallel arrays built by
 /// `add_weight`, so entries are unique and `weights[i]` is the
-/// accumulated weight of `entries[i]`. Deterministic tiebreak:
-/// first-appearance order (stable sort on the insertion-ordered key
-/// array). We deliberately do NOT reproduce Python's per-position
-/// `combinations(entries, 2)` accumulation order — that's a
-/// float-rounding accident, not a design choice.
+/// accumulated weight of `entries[i]`. Ties keep first-appearance
+/// order (stable sort on the insertion-ordered key array).
 fn levenshtein_pick(entries: &[String], weights: &[f64]) -> Vec<String> {
     if entries.len() < 2 {
         return entries.to_vec();
@@ -383,7 +358,7 @@ fn levenshtein_pick(entries: &[String], weights: &[f64]) -> Vec<String> {
         .map(|(s, weight)| {
             // Cap at MAX_NAME_LENGTH: the pairwise Levenshtein is
             // O(len²) per pair, so an untruncated long entry blows up
-            // the whole O(M²) matrix (issue #230).
+            // the whole O(M²) matrix.
             let mut chars: Vec<char> = s.chars().collect();
             chars.truncate(MAX_NAME_LENGTH);
             let len = chars.len();
@@ -485,9 +460,8 @@ mod tests {
 
     #[test]
     fn balanced_case_prefers_title_case() {
-        // The case the ballot-box hack used to depend on float luck
-        // for. With the case-quality rule, `Gazprom` wins cleanly
-        // regardless of input order.
+        // Balanced case variants: `Gazprom` wins regardless of input
+        // order.
         let a: Vec<&str> = std::iter::repeat_n("GAZPROM", 9)
             .chain(std::iter::repeat_n("Gazprom", 3))
             .collect();

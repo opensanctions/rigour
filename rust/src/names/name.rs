@@ -15,10 +15,6 @@ use crate::names::tag::{NamePartTag, NameTypeTag};
 use crate::text::normalize::casefold;
 use crate::text::tokenize::tokenize_name;
 
-fn name_tokenize(text: &str) -> Vec<String> {
-    tokenize_name(text, 1)
-}
-
 /// A personal, organisational, or object name.
 ///
 /// Equality and hashing are over `form`. A `Name`'s `tag` can change
@@ -83,7 +79,7 @@ impl Name {
             None => casefold(original),
         };
 
-        let tokens = name_tokenize(&form_str);
+        let tokens = tokenize_name(&form_str, 1);
         let mut parts_vec: Vec<Py<NamePart>> = Vec::with_capacity(tokens.len());
         for (i, token) in tokens.into_iter().enumerate() {
             let part = NamePart::new(py, &token, i as u32, NamePartTag::UNSET, phonetics);
@@ -148,7 +144,7 @@ impl Name {
         tag: NamePartTag,
         max_matches: u32,
     ) -> PyResult<()> {
-        let tokens = name_tokenize(&casefold(text));
+        let tokens = tokenize_name(&casefold(text), 1);
         self.tag_tokens(py, &tokens, tag, max_matches)
     }
 

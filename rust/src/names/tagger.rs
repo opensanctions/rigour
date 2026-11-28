@@ -44,21 +44,16 @@ pub struct Tagger {
 }
 
 impl Tagger {
-    /// Match pre-normalised `text` against the tagger's alias set.
-    /// One `(phrase, symbol)` pair per match × symbol in the
-    /// payload — matches today's Python `Tagger.__call__` output
-    /// shape that `tag_*_name` consumes.
+    /// Match pre-normalised `text` against the tagger's alias set,
+    /// returning one `(phrase, symbol)` pair per distinct phrase and
+    /// symbol.
     pub fn tag(&self, text: &str) -> Vec<(String, Symbol)> {
-        // Use overlapping iteration — the tagger wants every
-        // recognised phrase as an independent match, not a
-        // non-overlapping greedy selection. Same semantic as today's
-        // Python tagger calling `ahocorasick-rs` with overlapping=True.
+        // Overlapping iteration: every recognised phrase is an
+        // independent match, not a non-overlapping greedy selection.
         //
-        // Dedupe `(phrase, symbol)` here: a token repeated N times in
-        // the haystack fires N AC hits, each iterating the K-symbol
-        // payload, which would emit N×K identical entries. `apply_phrase`
-        // already walks all token-instances per call, so one entry per
-        // pair is what downstream wants. See issue #197.
+        // Dedupe `(phrase, symbol)`: a token repeated N times fires N
+        // AC hits with the same K-symbol payload, and `apply_phrase`
+        // already spans every occurrence in one call.
         let mut seen: HashSet<(String, Symbol)> = HashSet::new();
         let mut out: Vec<(String, Symbol)> = Vec::new();
         for m in self.needles.find_overlapping(text) {

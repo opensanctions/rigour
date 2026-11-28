@@ -67,15 +67,6 @@ const COST_DEFAULT: f64 = 1.0;
 // cluster squeaks under the cap or fails it.
 
 /// Tunable cost / budget / clustering scalars for [`py_compare_parts`].
-///
-/// Frozen by design: a sweep iteration constructs a fresh
-/// `CompareConfig`, the matcher caches one per request. Mutability
-/// would buy nothing (the values are read once per name pair) and
-/// would cost a runtime borrow check on each Rust-side access.
-///
-/// The default values reproduce the constants this struct replaced;
-/// `compare_parts(qry, res)` with no `config` argument is exactly
-/// equivalent to the pre-`CompareConfig` call.
 #[pyclass(frozen, from_py_object, module = "rigour._core")]
 #[derive(Clone, Debug)]
 pub struct CompareConfig {
@@ -197,9 +188,7 @@ impl CompareConfig {
     }
 }
 
-/// Process-wide default `CompareConfig`, returned to the
-/// `compare_parts(..., config=None)` fast path. One allocation at
-/// startup; reads are zero-cost field accesses thereafter.
+/// The `CompareConfig` used when `compare_parts` gets `config=None`.
 static DEFAULT_CONFIG: LazyLock<CompareConfig> = LazyLock::new(CompareConfig::default);
 
 // --- Cost table -----------------------------------------------------
@@ -463,7 +452,7 @@ fn run_align(
 
     // Build the SEP-joined char vectors for both sides, capped at
     // MAX_NAME_LENGTH each so the O(n·m) alignment matrix can't blow
-    // up on paragraph-length "names" (issue #230). Parts past the cut
+    // up on paragraph-length "names". Parts past the cut
     // get an empty cost stream and fall out as solo clusters, so the
     // "every part appears exactly once" contract still holds.
     let q_text: String = qry_comparable.join(&SEP.to_string());

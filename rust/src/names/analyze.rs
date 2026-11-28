@@ -51,9 +51,8 @@ use crate::text::tokenize::tokenize_name;
 /// Must match the shape of `Name.norm_form` on the haystack side
 /// so the AC automaton's needles line up with the text it's
 /// searching. `NAME` runs `tokenize_name + ' '.join` as the final
-/// pipeline step — this subsumes `SQUASH_SPACES` and the
-/// Unicode-category handling + skip-char deletion the pre-port
-/// tagger used to do in a hardcoded post-pass.
+/// pipeline step, which subsumes `SQUASH_SPACES`, Unicode-category
+/// handling and skip-char deletion.
 ///
 /// No `Cleanup` accepted: `tokenize_name` already handles Unicode
 /// categories, and `Cleanup::Strong` would drop Lm/Mc characters
@@ -298,11 +297,6 @@ fn upgrade_ent_to_org(py: Python<'_>, name: &Py<Name>) -> PyResult<bool> {
 /// `symbols` gates NUMERIC-symbol emission: when `false`, NUM /
 /// STOP / LEGAL part-tag promotions still fire but no new Symbol
 /// is attached. Mutates the Name and its NamePart tags in place.
-///
-/// The ENT→ORG upgrade is no longer made here — it has moved
-/// upstream into the tagger dispatch, where it acts as a routing
-/// gate that decides whether the person tagger runs (see
-/// [`upgrade_ent_to_org`]).
 fn infer_part_tags(py: Python<'_>, name: &Py<Name>, symbols: bool, numerics: bool) -> PyResult<()> {
     // First pass: walk spans, collect numeric-symbol parts, promote
     // ORG_CLASS-covered parts to LEGAL.

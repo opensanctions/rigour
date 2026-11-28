@@ -1,5 +1,5 @@
-// Mirrors the `rigour.text.*` Python submodule layout — phonetic and
-// character-level routines that feed into `rigour.text` end up here.
+// Character-level text routines: normalisation, tokenisation, scripts,
+// transliteration, phonetics and edit distance.
 
 pub mod distance;
 pub mod matcher;
