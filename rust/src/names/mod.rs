@@ -1,5 +1,4 @@
-// Mirrors the `rigour.names.*` Python submodule layout — name parsing,
-// tagging, and the various Replacer/Scanner dictionaries.
+// Name parsing, tagging, symbol pairing and comparison.
 
 #[cfg(feature = "python")]
 pub mod alignment;

@@ -325,7 +325,7 @@ mod tests {
     fn roman_numeral_multi_char_rejected() {
         // "ⅯⅮⅭ" would be 1600 in proper Roman notation, but our rule
         // rejects multi-char Nl runs — 1000, 500, 100 are not 0..10
-        // digits. Python's pre-port impl returned 105100 here.
+        // digits.
         assert_eq!(string_number("\u{216F}\u{216E}\u{216D}"), None);
     }
 
@@ -347,9 +347,9 @@ mod tests {
 
     #[test]
     fn digit_plus_fraction_rejected() {
-        // "3½" — Python pre-port returned 30.5 (3*10 + 0.5). This port
-        // rejects it: the `½` value 0.5 isn't a 0..10 integer, so the
-        // multi-char accumulation short-circuits.
+        // "3½" must not read as 30.5 (3*10 + 0.5): the `½` value 0.5
+        // isn't a 0..10 integer, so the multi-char accumulation
+        // short-circuits.
         assert_eq!(string_number("3\u{00BD}"), None);
         assert_eq!(string_number("1\u{00BD}"), None);
     }

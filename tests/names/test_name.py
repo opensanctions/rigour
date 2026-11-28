@@ -174,6 +174,24 @@ def test_name_symbols():
     assert len(name.symbols) == 1
 
 
+def test_apply_phrase_binds_adjacent_parts():
+    # A multi-token phrase only binds where its tokens are adjacent:
+    # the leading "de" must not pair with the later "la".
+    sym = Symbol(Symbol.Category.NAME, "X")
+    name = Name("de garcia de la cruz")
+    name.apply_phrase("de la", sym)
+    assert [tuple(p.index for p in s.parts) for s in name.spans] == [(2, 3)]
+
+    name = Name("john peter smith")
+    name.apply_phrase("john smith", sym)
+    assert len(name.spans) == 0
+
+    name = Name("de la cruz de la vega")
+    name.apply_phrase("de la", sym)
+    spans = [tuple(p.index for p in s.parts) for s in name.spans]
+    assert spans == [(0, 1), (3, 4)]
+
+
 def test_apply_part_keyed_on_part_identity():
     # The apply_part dedup keys on part identity, not surface form:
     # two same-form parts each get their own span, while a repeat

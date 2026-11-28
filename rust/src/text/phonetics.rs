@@ -1,13 +1,7 @@
-// Metaphone and Soundex wrappers around the `rphonetic` crate (a pure-Rust port
-// of Apache commons-codec's phonetic algorithms). Chosen over vendoring the
-// jellyfish Rust source because rphonetic is actively maintained and the
-// algorithmic outputs are the stated interest, not source lineage.
-//
-// Parity note: rphonetic's output may differ from the Python `jellyfish`
-// package on edge cases (H/W handling in Soundex, silent letters / GH / CIA /
-// SCH in Metaphone). We configure Metaphone with a large max_code_len to avoid
-// rphonetic's default 4-char truncation, but any remaining divergences are
-// accepted as a consequence of the implementation swap.
+// Metaphone and Soundex wrappers around the `rphonetic` crate. Output can
+// differ from the Python `jellyfish` package on edge cases (H/W handling in
+// Soundex; silent letters, GH, CIA, SCH in Metaphone). Metaphone gets a large
+// max_code_len to avoid rphonetic's default 4-char truncation.
 
 use rphonetic::{Encoder, Metaphone, Soundex};
 

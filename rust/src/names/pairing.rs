@@ -290,10 +290,7 @@ fn dedupe_equivalent_edges(edges: &mut Vec<Edge>) {
 /// [`dedupe_equivalent_edges`] no two edges share
 /// `(qmask, rmask, category)`, so this is a total order and the
 /// sorted sequence is independent of the `HashMap` iteration
-/// order in edge construction and dedupe. (Projecting the masks
-/// to `trailing_zeros()` here used to collapse cross-bound
-/// same-symbol edges into identical keys, leaking HashMap order
-/// into the output.)
+/// order in edge construction and dedupe.
 fn edge_sort_key(e: &Edge) -> (u64, u64, SymbolCategory, Arc<str>) {
     (e.qmask, e.rmask, e.symbol.category, e.symbol.id.clone())
 }
@@ -1031,9 +1028,9 @@ mod tests {
     fn coverings_many_disjoint_edges_single_pass() {
         // The common case: pairwise-disjoint edges. Every edge is
         // an isolated conflict component and forced into the one
-        // maximal selection. The pre-rework DFS visited 2^E subsets
-        // here — at E = 40 that was ~10^12 leaf visits; this must
-        // complete instantly with exactly one covering.
+        // maximal selection. A subset DFS would visit 2^E subsets
+        // (~10^12 at E = 40); this must complete instantly with
+        // exactly one covering.
         let edges: Vec<Edge> = (0..40)
             .map(|i| {
                 mk_edge(

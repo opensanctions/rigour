@@ -17,7 +17,6 @@ pub const MAX_PARTS: usize = 64;
 /// Per-side character cap for the character-level edit-distance DP in
 /// [`crate::names::compare`]. The cost matrix is `O(left·right)`, so
 /// an uncapped pair of long strings allocates hundreds of MB and
-/// seconds of CPU on a single call (issue #230). Matches the
-/// Python-side `RR_MAX_NAME_LENGTH` default so both surfaces truncate
-/// alike.
+/// seconds of CPU on a single call. Python reads it as
+/// `rigour.env.MAX_NAME_LENGTH`, so both surfaces truncate alike.
 pub const MAX_NAME_LENGTH: usize = 384;

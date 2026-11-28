@@ -1,4 +1,4 @@
-// Rust port of `rigour.names.org_types.*`.
+// Org-type (legal form) recognition and rewriting.
 //
 // Source data: rust/data/names/org_types.json (generated from
 // resources/names/org_types.yml by genscripts/generate_names.py).
@@ -15,23 +15,20 @@
 // - Compare: alias → compare-form (or display-form if `compare` is
 //   absent). `compare: ""` = removal. The display-form itself is
 //   also added to the mapping so e.g. `replace("LLC")` → target.
-//   Clashes (same alias → different targets) are dropped, matching
-//   the Python `_compare_replacer` behaviour.
+//   On clashes (same alias → different targets) the last spec wins.
 // - Generic: alias → generic-form. Skips specs without a `generic`
 //   field. Display-form added as a lookup too.
 // - Display: alias → display-form. Skips specs without `display`,
 //   skips aliases whose case-preserving form equals their display
 //   form (trivial identity — case variants like "GMBH" → "GmbH" are
 //   NOT identities, they canonicalise case), pops on clash.
-//   Display-form is NOT added as a lookup (matching Python's
-//   `_display_replacer`).
+//   Display-form is NOT added as a lookup.
 //
 // ## Flag-keyed cache
 //
 // Each `(ReplacerKind, Normalize, Cleanup)` combination yields one
 // compiled Replacer. First access pays the build cost; subsequent
-// calls hit the cache. Same lifecycle as Python's `@cache`-decorated
-// replacers.
+// calls hit the cache.
 
 use icu::casemap::CaseMapper;
 use serde::Deserialize;
@@ -76,7 +73,7 @@ pub struct Replacer {
 
 impl Replacer {
     /// Match-and-substitute. Empty result + non-empty input falls
-    /// back to the original text (Python `replacer(name) or name`).
+    /// back to the original text.
     fn replace(&self, text: &str) -> String {
         let mut out = String::with_capacity(text.len());
         let mut cursor = 0;
@@ -93,8 +90,8 @@ impl Replacer {
         }
     }
 
-    /// Match-and-remove. Every match is replaced with `replacement`.
-    /// No fallback — matches Python `replacer.remove(text, replacement)`.
+    /// Match-and-remove. Every match is replaced with `replacement`;
+    /// unlike [`Replacer::replace`], an empty result is returned as is.
     fn remove(&self, text: &str, replacement: &str) -> String {
         let mut out = String::with_capacity(text.len());
         let mut cursor = 0;
@@ -121,7 +118,7 @@ fn norm_fn(flags: Normalize, cleanup: Cleanup) -> impl Fn(&str) -> Option<String
     move |s: &str| normalize(s, flags, cleanup)
 }
 
-/// Build the Compare replacer — mirrors Python `_compare_replacer`.
+/// Build the Compare replacer: alias → compare form.
 fn build_compare(flags: Normalize, cleanup: Cleanup) -> Replacer {
     let norm = norm_fn(flags, cleanup);
     let mut mapping: HashMap<String, String> = HashMap::new();
@@ -160,7 +157,7 @@ fn build_compare(flags: Normalize, cleanup: Cleanup) -> Replacer {
     }
 }
 
-/// Build the Generic replacer — mirrors Python `_generic_replacer`.
+/// Build the Generic replacer: alias → generic form.
 fn build_generic(flags: Normalize, cleanup: Cleanup) -> Replacer {
     let norm = norm_fn(flags, cleanup);
     let mut mapping: HashMap<String, String> = HashMap::new();
@@ -189,8 +186,8 @@ fn build_generic(flags: Normalize, cleanup: Cleanup) -> Replacer {
     }
 }
 
-/// Build the Display replacer — mirrors Python `_display_replacer`,
-/// which POPS clashes (unlike compare/generic).
+/// Build the Display replacer: alias → display form. Aliases that
+/// clash between specs are dropped (unlike compare/generic).
 ///
 /// The `flags` parameter governs how the *alias keys* are normalised —
 /// they need to match the casefolded haystack built in `replace_display`,

@@ -1,5 +1,4 @@
-// Flag-based text normalization. Replaces the `normalizer: Callable[[Optional[str]], Optional[str]]`
-// callback pattern that rigour inherited from the normality library.
+// Flag-based text normalization.
 //
 // `normalize(text, flags, cleanup)` runs the requested steps in a fixed
 // pipeline order independent of bit order:
@@ -16,8 +15,8 @@
 // Transliteration is NOT part of this pipeline — rigour's public
 // surface is `text::translit::maybe_ascii` (narrow, opportunistic).
 //
-// Empty output → None, matching the Optional[str] contract of the legacy
-// Python normalizers.
+// Empty output → None, matching the `Optional[str]` contract of the
+// Python `Normalizer` type.
 
 use bitflags::bitflags;
 use icu::casemap::CaseMapper;
@@ -38,8 +37,7 @@ bitflags! {
         const NFKC          = 1 << 4;
         const NFKD          = 1 << 5;
         // Runs tokenize_name on the intermediate string and rejoins the
-        // tokens with a single ASCII space. Supersedes the legacy
-        // `normalize_name` composition (casefold + tokenize + ' '.join).
+        // tokens with a single ASCII space.
         const NAME          = 1 << 6;
         // Like NAME, but tokenizes with tokenize_address — the
         // address-specific category table. Mutually exclusive with
@@ -481,12 +479,10 @@ mod tests {
         assert_eq!(out, "ab");
     }
 
-    // --- composed pipelines (match legacy normalizers) ---
+    // --- composed pipelines ---
 
     #[test]
-    fn parity_normalize_display() {
-        // normalize_display(text) == squash_spaces(text)
-        // With STRIP | SQUASH_SPACES and Noop:
+    fn display_pipeline() {
         assert_eq!(
             normalize(
                 "  Foo  Bar  ",
@@ -498,8 +494,7 @@ mod tests {
     }
 
     #[test]
-    fn parity_normalize_compare() {
-        // _normalize_compare(text) == squash_spaces(text).casefold()
+    fn compare_pipeline() {
         let out = normalize(
             "  FOO   Bar  ",
             Normalize::STRIP | Normalize::CASEFOLD | Normalize::SQUASH_SPACES,
@@ -510,7 +505,8 @@ mod tests {
 
     #[test]
     fn parity_normalize_text_stopwords() {
-        // Old normalize_text: casefold → category_replace(SLUG) → squash
+        // casefold → category_replace(SLUG) → squash, as in
+        // `rigour.text.stopwords.normalize_text`.
         let out = normalize(
             "Hello, World!",
             Normalize::CASEFOLD | Normalize::SQUASH_SPACES,
@@ -537,9 +533,8 @@ mod tests {
     }
 
     #[test]
-    fn name_casefold_parity_with_legacy_normalize_name() {
-        // Old Python `normalize_name` ≡ prenormalize_name (casefold) +
-        // tokenize_name + ' '.join. Mirror: CASEFOLD | NAME.
+    fn name_casefold_matches_normalize_name() {
+        // `rigour.names.tokenize.normalize_name` is CASEFOLD | NAME.
         let flags = Normalize::CASEFOLD | Normalize::NAME;
         assert_eq!(
             normalize("John DOE", flags, Cleanup::Noop),
